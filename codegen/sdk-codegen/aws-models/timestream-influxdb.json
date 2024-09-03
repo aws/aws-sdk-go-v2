@@ -765,7 +765,7 @@
                     "min": 2,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[^_][^\"]*$"
+                "smithy.api#pattern": "^[^_\"][^\"]*$"
             }
         },
         "com.amazonaws.timestreaminfluxdb#ConflictException": {
@@ -2258,7 +2258,12 @@
             }
         },
         "com.amazonaws.timestreaminfluxdb#NextToken": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.timestreaminfluxdb#Organization": {
             "type": "string",
@@ -2439,6 +2444,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "UPDATING_DEPLOYMENT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING_DEPLOYMENT_TYPE"
+                    }
+                },
+                "UPDATING_INSTANCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING_INSTANCE_TYPE"
                     }
                 }
             }
@@ -2662,6 +2679,18 @@
                     "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The id of the DB parameter group to assign to your DB instance. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB instance type to run InfluxDB on.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.</p>"
                     }
                 }
             },

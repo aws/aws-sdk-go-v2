@@ -251,6 +251,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description that specifies the reason for accepting the specified subscription\n         request.</p>"
                     }
+                },
+                "assetScopes": {
+                    "target": "com.amazonaws.datazone#AcceptedAssetScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset scopes of the accept subscription request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -352,6 +358,34 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.datazone#AcceptedAssetScope": {
+            "type": "structure",
+            "members": {
+                "assetId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset ID of the accepted asset scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterIds": {
+                    "target": "com.amazonaws.datazone#FilterIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter IDs of the accepted asset scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The accepted asset scope.</p>"
+            }
+        },
+        "com.amazonaws.datazone#AcceptedAssetScopes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#AcceptedAssetScope"
             }
         },
         "com.amazonaws.datazone#AccessDeniedException": {
@@ -1223,6 +1257,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.datazone#AssetRevision"
+            }
+        },
+        "com.amazonaws.datazone#AssetScope": {
+            "type": "structure",
+            "members": {
+                "assetId": {
+                    "target": "com.amazonaws.datazone#AssetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset ID of the asset scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filterIds": {
+                    "target": "com.amazonaws.datazone#FilterIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter IDs of the asset scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the asset scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message of the asset scope.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The asset scope.</p>"
             }
         },
         "com.amazonaws.datazone#AssetTargetNameMap": {
@@ -5120,7 +5189,7 @@
                 "domainUnitId": {
                     "target": "com.amazonaws.datazone#DomainUnitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the domain unit. This parameter is not required and if it is not specified, then\n         the project is created at the root domain unit level.</p>"
+                        "smithy.api#documentation": "<p>The ID of the domain unit. This parameter is not required and if it is not specified,\n         then the project is created at the root domain unit level.</p>"
                     }
                 }
             },
@@ -10235,7 +10304,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The grant filter for the domain unit. In the current release of Amazon DataZone, the only\nsupported filter is the <code>allDomainUnitsGrantFilter</code>.</p>"
+                "smithy.api#documentation": "<p>The grant filter for the domain unit. In the current release of Amazon DataZone, the\n         only supported filter is the <code>allDomainUnitsGrantFilter</code>.</p>"
             }
         },
         "com.amazonaws.datazone#DomainUnitGroupProperties": {
@@ -11241,6 +11310,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#FilterIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#FilterId"
             }
         },
         "com.amazonaws.datazone#FilterList": {
@@ -24244,6 +24319,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The failure timestamp included in the details of the asset for which the subscription\n         grant is created.</p>"
                     }
+                },
+                "assetScope": {
+                    "target": "com.amazonaws.datazone#AssetScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset scope of the subscribed asset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24281,6 +24362,12 @@
                     "target": "com.amazonaws.datazone#DetailedGlossaryTerms",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms attached to the published asset for which the subscription grant is\n         created.</p>"
+                    }
+                },
+                "assetScope": {
+                    "target": "com.amazonaws.datazone#AssetScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The asset scope of the subscribed asset listing.</p>"
                     }
                 }
             },

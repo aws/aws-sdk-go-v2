@@ -1797,6 +1797,12 @@
                     "traits": {
                         "smithy.api#jsonName": "maintenance"
                     }
+                },
+                "SourceMonitoringConfig": {
+                    "target": "com.amazonaws.mediaconnect#MonitoringConfig",
+                    "traits": {
+                        "smithy.api#jsonName": "sourceMonitoringConfig"
+                    }
                 }
             },
             "traits": {
@@ -2611,6 +2617,73 @@
                     "target": "com.amazonaws.mediaconnect#TransportMediaInfo",
                     "traits": {
                         "smithy.api#jsonName": "transportMediaInfo"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mediaconnect#DescribeFlowSourceThumbnail": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediaconnect#DescribeFlowSourceThumbnailRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediaconnect#DescribeFlowSourceThumbnailResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediaconnect#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconnect#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Displays the thumbnail details of a flow's source stream.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/flows/{FlowArn}/source-thumbnail",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mediaconnect#DescribeFlowSourceThumbnailRequest": {
+            "type": "structure",
+            "members": {
+                "FlowArn": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the flow.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediaconnect#DescribeFlowSourceThumbnailResponse": {
+            "type": "structure",
+            "members": {
+                "ThumbnailDetails": {
+                    "target": "com.amazonaws.mediaconnect#ThumbnailDetails",
+                    "traits": {
+                        "smithy.api#jsonName": "thumbnailDetails"
                     }
                 }
             },
@@ -3434,6 +3507,12 @@
                     "target": "com.amazonaws.mediaconnect#Maintenance",
                     "traits": {
                         "smithy.api#jsonName": "maintenance"
+                    }
+                },
+                "SourceMonitoringConfig": {
+                    "target": "com.amazonaws.mediaconnect#MonitoringConfig",
+                    "traits": {
+                        "smithy.api#jsonName": "sourceMonitoringConfig"
                     }
                 }
             },
@@ -5216,6 +5295,9 @@
                     "target": "com.amazonaws.mediaconnect#DescribeFlowSourceMetadata"
                 },
                 {
+                    "target": "com.amazonaws.mediaconnect#DescribeFlowSourceThumbnail"
+                },
+                {
                     "target": "com.amazonaws.mediaconnect#DescribeGateway"
                 },
                 {
@@ -6495,6 +6577,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Messages that provide the state of the flow."
+            }
+        },
+        "com.amazonaws.mediaconnect#MonitoringConfig": {
+            "type": "structure",
+            "members": {
+                "ThumbnailState": {
+                    "target": "com.amazonaws.mediaconnect#ThumbnailState",
+                    "traits": {
+                        "smithy.api#documentation": "The state of thumbnail monitoring.",
+                        "smithy.api#jsonName": "thumbnailState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The settings for source monitoring."
             }
         },
         "com.amazonaws.mediaconnect#NetworkInterfaceType": {
@@ -8421,6 +8518,70 @@
                 }
             }
         },
+        "com.amazonaws.mediaconnect#ThumbnailDetails": {
+            "type": "structure",
+            "members": {
+                "FlowArn": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The ARN of the flow that DescribeFlowSourceThumbnail was performed on.",
+                        "smithy.api#jsonName": "flowArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Thumbnail": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Thumbnail Base64 string.",
+                        "smithy.api#jsonName": "thumbnail"
+                    }
+                },
+                "ThumbnailMessages": {
+                    "target": "com.amazonaws.mediaconnect#__listOfMessageDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Status code and messages about the flow source thumbnail.",
+                        "smithy.api#jsonName": "thumbnailMessages",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timecode": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Timecode of thumbnail.",
+                        "smithy.api#jsonName": "timecode"
+                    }
+                },
+                "Timestamp": {
+                    "target": "com.amazonaws.mediaconnect#__timestampIso8601",
+                    "traits": {
+                        "smithy.api#documentation": "The timestamp of when thumbnail was generated.",
+                        "smithy.api#jsonName": "timestamp"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The details of the thumbnail, including thumbnail base64 string, timecode and the time when thumbnail was generated."
+            }
+        },
+        "com.amazonaws.mediaconnect#ThumbnailState": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediaconnect#TooManyRequestsException": {
             "type": "structure",
             "members": {
@@ -9811,6 +9972,12 @@
                     "target": "com.amazonaws.mediaconnect#UpdateMaintenance",
                     "traits": {
                         "smithy.api#jsonName": "maintenance"
+                    }
+                },
+                "SourceMonitoringConfig": {
+                    "target": "com.amazonaws.mediaconnect#MonitoringConfig",
+                    "traits": {
+                        "smithy.api#jsonName": "sourceMonitoringConfig"
                     }
                 }
             },

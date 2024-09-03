@@ -13304,6 +13304,13 @@
                         "smithy.api#documentation": "Timecode burn-in settings",
                         "smithy.api#jsonName": "timecodeBurninSettings"
                     }
+                },
+                "MinQp": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max51",
+                    "traits": {
+                        "smithy.api#documentation": "Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will\napply an appropriate value.",
+                        "smithy.api#jsonName": "minQp"
+                    }
                 }
             },
             "traits": {
@@ -14093,6 +14100,13 @@
                     "traits": {
                         "smithy.api#documentation": "Select the tree block size used for encoding. If you enter \"auto\", the encoder will pick the best size. If you are setting up the picture as a tile, you must set this to 32x32. In all other configurations, you typically enter \"auto\".",
                         "smithy.api#jsonName": "treeblockSize"
+                    }
+                },
+                "MinQp": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max51",
+                    "traits": {
+                        "smithy.api#documentation": "Sets the minimum QP. If you aren't familiar with quantization adjustment, leave the field empty. MediaLive will\napply an appropriate value.",
+                        "smithy.api#jsonName": "minQp"
                     }
                 }
             },
@@ -31620,6 +31634,16 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.medialive#__integerMin1Max51": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max51",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 51
                 }
             }
         },

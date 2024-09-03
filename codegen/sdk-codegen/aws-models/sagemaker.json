@@ -600,7 +600,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:algorithm/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#AlgorithmImage": {
@@ -4475,6 +4475,29 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AutoMountHomeEFS": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                },
+                "DEFAULT_AS_DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DefaultAsDomain"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AutoParameter": {
             "type": "structure",
             "members": {
@@ -6760,7 +6783,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 20
+                    "max": 100
                 }
             }
         },
@@ -7503,7 +7526,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:code-repository/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#CodeRepositoryContains": {
@@ -8146,7 +8169,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#EnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>\n         <p>The maximum length of each key and value in the <code>Environment</code> map is\n            1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If\n            you pass multiple containers to a <code>CreateModel</code> request, then the maximum\n            length of all of their maps, combined, is also 32 KB.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Don't include any\n        sensitive data in your environment variables.</p>\n         <p>The maximum length of each key and value in the <code>Environment</code> map is\n            1024 bytes. The maximum length of all keys and values in the map, combined, is 32 KB. If\n            you pass multiple containers to a <code>CreateModel</code> request, then the maximum\n            length of all of their maps, combined, is also 32 KB.</p>"
                     }
                 },
                 "ModelPackageName": {
@@ -13563,7 +13586,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#TransformEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. We support up to 16 key and\n            values entries in the map.</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the Docker container. Don't include any\n            sensitive data in your environment variables. We support up to 16 key and\n            values entries in the map.</p>"
                     }
                 },
                 "TransformInput": {
@@ -32271,7 +32294,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
+                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemaker#ImageBaseImage": {
@@ -46131,7 +46154,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageArnList": {
@@ -46304,7 +46327,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package-group/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ModelPackageGroupSortBy": {
@@ -54213,7 +54236,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-f)?:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:project/[\\S]{1,2048}$"
             }
         },
         "com.amazonaws.sagemaker#ProjectEntityName": {
@@ -62210,7 +62233,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/"
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
             }
         },
         "com.amazonaws.sagemaker#StudioLifecycleConfigContent": {
@@ -70114,6 +70137,12 @@
                     "target": "com.amazonaws.sagemaker#StudioWebPortalSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Studio settings. If these settings are applied on a user level, they take priority over\n      the settings applied on a domain level.</p>"
+                    }
+                },
+                "AutoMountHomeEFS": {
+                    "target": "com.amazonaws.sagemaker#AutoMountHomeEFS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether auto-mounting of an EFS volume is supported for the user profile. The <code>DefaultAsDomain</code> value is only supported for user profiles. Do not use the <code>DefaultAsDomain</code> value when setting this parameter for a domain.</p>"
                     }
                 }
             },

@@ -2224,6 +2224,63 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the attributes for the specified listener.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Describe listener attributes",
+                        "documentation": "This example describes the attributes of the specified listener.",
+                        "input": {
+                            "ListenerArn": "aws:elasticloadbalancing:us-east-1:123456789012:listener/net/my-listener/73e2d6bc24d8a067/d5dc06411fa5bcea"
+                        },
+                        "output": {}
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributesInput": {
+            "type": "structure",
+            "members": {
+                "ListenerArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributesOutput": {
+            "type": "structure",
+            "members": {
+                "Attributes": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the listener attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#DescribeListenerCertificates": {
             "type": "operation",
             "input": {
@@ -3817,6 +3874,9 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#DescribeAccountLimits"
                 },
                 {
+                    "target": "com.amazonaws.elasticloadbalancingv2#DescribeListenerAttributes"
+                },
+                {
                     "target": "com.amazonaws.elasticloadbalancingv2#DescribeListenerCertificates"
                 },
                 {
@@ -3866,6 +3926,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#ModifyListener"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ModifyListenerAttributes"
                 },
                 {
                     "target": "com.amazonaws.elasticloadbalancingv2#ModifyLoadBalancerAttributes"
@@ -5604,6 +5667,45 @@
                 "target": "com.amazonaws.elasticloadbalancingv2#ListenerArn"
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#ListenerAttribute": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerAttributeKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute.</p>\n         <p>The following attribute is supported by Network Load Balancers, and Gateway Load Balancers.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>tcp.idle_timeout.seconds</code> - The tcp idle timeout value, in seconds. The \n          valid range is 60-6000 seconds. The default is 350 seconds.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a listener attribute.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ListenerAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._]+$"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ListenerAttributeValue": {
+            "type": "string"
+        },
+        "com.amazonaws.elasticloadbalancingv2#ListenerAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ListenerAttribute"
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#ListenerNotFoundException": {
             "type": "structure",
             "members": {
@@ -6123,6 +6225,64 @@
                 ]
             }
         },
+        "com.amazonaws.elasticloadbalancingv2#ModifyListenerAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ModifyListenerAttributesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticloadbalancingv2#ModifyListenerAttributesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#InvalidConfigurationRequestException"
+                },
+                {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies the specified attributes of the specified listener.</p>"
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyListenerAttributesInput": {
+            "type": "structure",
+            "members": {
+                "ListenerArn": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the listener.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerAttributes",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The listener attributes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.elasticloadbalancingv2#ModifyListenerAttributesOutput": {
+            "type": "structure",
+            "members": {
+                "Attributes": {
+                    "target": "com.amazonaws.elasticloadbalancingv2#ListenerAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the listener attributes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.elasticloadbalancingv2#ModifyListenerInput": {
             "type": "structure",
             "members": {
@@ -6627,7 +6787,7 @@
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupAttributes",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The attributes.</p>",
+                        "smithy.api#documentation": "<p>The target group attributes.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6642,7 +6802,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.elasticloadbalancingv2#TargetGroupAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the attributes.</p>"
+                        "smithy.api#documentation": "<p>Information about the target group attributes.</p>"
                     }
                 }
             },
