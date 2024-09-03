@@ -1,12 +1,15 @@
 PutBucketAccelerateConfiguration
 	Initialize stack step
+		spanInitializeStart
 		AWSChecksum:SetupInputContext
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		putBucketContext
 		setOperationInput
 		ResolveEndpoint
@@ -23,6 +26,7 @@ PutBucketAccelerateConfiguration
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		ResolveAuthScheme
@@ -32,6 +36,7 @@ PutBucketAccelerateConfiguration
 		AWSChecksum:ComputeInputPayloadChecksum
 		ComputePayloadHash
 		SigV4ContentSHA256Header
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions
