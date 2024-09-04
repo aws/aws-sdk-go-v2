@@ -4635,6 +4635,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ALL"
                     }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFO"
+                    }
+                },
+                "DEBUG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEBUG"
+                    }
                 }
             }
         },
@@ -7017,7 +7029,7 @@
                 "fieldLogLevel": {
                     "target": "com.amazonaws.appsync#FieldLogLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The field logging level. Values can be NONE, ERROR, or ALL.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NONE</b>: No field-level logs are captured.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ERROR</b>: Logs the following information only for the fields that are\n               in error:</p>\n               <ul>\n                  <li>\n                     <p>The error section in the server response.</p>\n                  </li>\n                  <li>\n                     <p>Field-level errors.</p>\n                  </li>\n                  <li>\n                     <p>The generated request/response functions that got resolved for error fields.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>ALL</b>: The following information is logged for all fields in the\n               query:</p>\n               <ul>\n                  <li>\n                     <p>Field-level tracing information.</p>\n                  </li>\n                  <li>\n                     <p>The generated request/response functions that got resolved for each field.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or ALL.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NONE</b>: No field-level logs are captured.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ERROR</b>: Logs the following information\n                  <b>only</b> for the fields that are in the error\n               category:</p>\n               <ul>\n                  <li>\n                     <p>The error section in the server response.</p>\n                  </li>\n                  <li>\n                     <p>Field-level errors.</p>\n                  </li>\n                  <li>\n                     <p>The generated request/response functions that got resolved for error fields.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>INFO</b>: Logs the following information <b>only</b> for the fields that are in the info and error\n               categories:</p>\n               <ul>\n                  <li>\n                     <p>Info-level messages.</p>\n                  </li>\n                  <li>\n                     <p>The user messages sent through <code>$util.log.info</code> and\n                        <code>console.log</code>.</p>\n                  </li>\n                  <li>\n                     <p>Field-level tracing and mapping logs are not shown.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>DEBUG</b>: Logs the following information\n                  <b>only</b> for the fields that are in the debug, info,\n               and error categories:</p>\n               <ul>\n                  <li>\n                     <p>Debug-level messages.</p>\n                  </li>\n                  <li>\n                     <p>The user messages sent through <code>$util.log.info</code>,\n                        <code>$util.log.debug</code>, <code>console.log</code>, and\n                        <code>console.debug</code>.</p>\n                  </li>\n                  <li>\n                     <p>Field-level tracing and mapping logs are not shown.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>ALL</b>: The following information is logged for all fields in the\n               query:</p>\n               <ul>\n                  <li>\n                     <p>Field-level tracing information.</p>\n                  </li>\n                  <li>\n                     <p>The generated request/response functions that were resolved for each\n                     field.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

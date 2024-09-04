@@ -130,6 +130,21 @@
         "com.amazonaws.cloudwatchlogs#AccountPolicyDocument": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatchlogs#AllowedActionForAllowVendedLogsDeliveryForResource": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudwatchlogs#AllowedFieldDelimiters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#FieldDelimiter"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#AllowedFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#RecordField"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -536,6 +551,106 @@
                 "smithy.api#pattern": "^\\S{36,128}$"
             }
         },
+        "com.amazonaws.cloudwatchlogs#ConfigurationTemplate": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.cloudwatchlogs#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying which service this configuration template applies to. For more information about supported services see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html\">Enable logging from Amazon Web Services \n        services.</a>.</p>"
+                    }
+                },
+                "logType": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying which log type this configuration template applies to.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying which resource type this configuration template applies to.</p>"
+                    }
+                },
+                "deliveryDestinationType": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string specifying which destination type this configuration template applies to.</p>"
+                    }
+                },
+                "defaultDeliveryConfigValues": {
+                    "target": "com.amazonaws.cloudwatchlogs#ConfigurationTemplateDeliveryConfigValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping that displays the default value of each property within a delivery’s configuration,\n      if it is not specified in the request.</p>"
+                    }
+                },
+                "allowedFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#AllowedFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allowed fields that a caller can use in the <code>recordFields</code> parameter of a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>  or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html\">UpdateDeliveryConfiguration</a> operation.</p>"
+                    }
+                },
+                "allowedOutputFormats": {
+                    "target": "com.amazonaws.cloudwatchlogs#OutputFormats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of delivery destination output formats that are supported by this log source.</p>"
+                    }
+                },
+                "allowedActionForAllowVendedLogsDeliveryForResource": {
+                    "target": "com.amazonaws.cloudwatchlogs#AllowedActionForAllowVendedLogsDeliveryForResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action permissions that a caller needs to have to be able to successfully create a delivery source on the \n      desired resource type when calling <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html\">PutDeliverySource</a>.</p>"
+                    }
+                },
+                "allowedFieldDelimiters": {
+                    "target": "com.amazonaws.cloudwatchlogs#AllowedFieldDelimiters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The valid values that a caller can use as field delimiters when calling <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>  or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html\">UpdateDeliveryConfiguration</a>  \n      on a delivery that delivers in <code>Plain</code>, <code>W3C</code>, or <code>Raw</code> format.</p>"
+                    }
+                },
+                "allowedSuffixPathFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#RecordFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of variable fields that can be used in the suffix path of a delivery that delivers to an S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing information about the deafult settings and available settings that you can use to configure a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Delivery.html\">delivery</a> or a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeliveryDestination.html\">delivery destination</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ConfigurationTemplateDeliveryConfigValues": {
+            "type": "structure",
+            "members": {
+                "recordFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#RecordFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default record fields that will be delivered when a list of record fields is not provided in \n      a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a> operation.</p>"
+                    }
+                },
+                "fieldDelimiter": {
+                    "target": "com.amazonaws.cloudwatchlogs#FieldDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default field delimiter that is used in a  <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a> operation when\n      the field delimiter is not specified in that operation. The field delimiter is used only when \n      the final output delivery is in <code>Plain</code>, <code>W3C</code>, or <code>Raw</code> format.</p>"
+                    }
+                },
+                "s3DeliveryConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delivery parameters that are used when you create a delivery to a delivery destination that is an S3 Bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains the default values that are used for each configuration parameter when you use\n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a> to create a deliver under the current service type, resource type, and log type.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ConfigurationTemplates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#ConfigurationTemplate"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ConflictException": {
             "type": "structure",
             "members": {
@@ -604,6 +719,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the delivery destination to use for this delivery.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "recordFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#RecordFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of record fields to be delivered to the destination, in order. \n      If the delivery’s log source has mandatory fields, they must be included in this list.</p>"
+                    }
+                },
+                "fieldDelimiter": {
+                    "target": "com.amazonaws.cloudwatchlogs#FieldDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field delimiter to use between record fields when the final output format of a delivery\n      is in <code>Plain</code>, <code>W3C</code>, or <code>Raw</code> format.</p>"
+                    }
+                },
+                "s3DeliveryConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains parameters that are valid only when the delivery’s delivery destination is an S3 bucket.</p>"
                     }
                 },
                 "tags": {
@@ -1699,6 +1832,24 @@
                         "smithy.api#documentation": "<p>Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, or Firehose.</p>"
                     }
                 },
+                "recordFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#RecordFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record fields used in this delivery.</p>"
+                    }
+                },
+                "fieldDelimiter": {
+                    "target": "com.amazonaws.cloudwatchlogs#FieldDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field delimiter that is used between record fields when the final output format of a delivery\n      is in <code>Plain</code>, <code>W3C</code>, or <code>Raw</code> format.</p>"
+                    }
+                },
+                "s3DeliveryConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains delivery configurations that apply only when the delivery destination resource is an S3 bucket.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.cloudwatchlogs#Tags",
                     "traits": {
@@ -1811,6 +1962,18 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#DeliveryDestinationTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#DeliveryDestinations": {
             "type": "list",
             "member": {
@@ -1887,6 +2050,15 @@
                 "target": "com.amazonaws.cloudwatchlogs#DeliverySource"
             }
         },
+        "com.amazonaws.cloudwatchlogs#DeliverySuffixPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Descending": {
             "type": "boolean"
         },
@@ -1951,6 +2123,96 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of structures that contain information about the CloudWatch Logs account policies that match \n    the specified filters.</p>"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeConfigurationTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeConfigurationTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeConfigurationTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to return the valid and default values that are used when creating delivery sources, delivery destinations, and deliveries.\n      For more information about deliveries, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "configurationTemplates",
+                    "pageSize": "limit"
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeConfigurationTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.cloudwatchlogs#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to filter the response to include only the \n      configuration templates that apply to the Amazon Web Services service that you specify here.</p>"
+                    }
+                },
+                "logTypes": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to filter the response to include only the \n      configuration templates that apply to the log types that you specify here.</p>"
+                    }
+                },
+                "resourceTypes": {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to filter the response to include only the \n      configuration templates that apply to the resource types that you specify here.</p>"
+                    }
+                },
+                "deliveryDestinationTypes": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryDestinationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to filter the response to include only the \n      configuration templates that apply to the delivery destination types that you specify here.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
+                },
+                "limit": {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to limit the number of configuration templates that are returned\n    in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeConfigurationTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "configurationTemplates": {
+                    "target": "com.amazonaws.cloudwatchlogs#ConfigurationTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, where each object describes one configuration template that matches\n    the filters that you specified in the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
             },
             "traits": {
@@ -3063,18 +3325,18 @@
                 "keyAttributes": {
                     "target": "com.amazonaws.cloudwatchlogs#EntityKeyAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
                     }
                 },
                 "attributes": {
                     "target": "com.amazonaws.cloudwatchlogs#EntityAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                "smithy.api#documentation": "<p>Reserved for internal use.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#EntityAttributes": {
@@ -3468,6 +3730,24 @@
         },
         "com.amazonaws.cloudwatchlogs#Field": {
             "type": "string"
+        },
+        "com.amazonaws.cloudwatchlogs#FieldDelimiter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#FieldHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
         },
         "com.amazonaws.cloudwatchlogs#FilterCount": {
             "type": "integer"
@@ -5258,6 +5538,18 @@
                 "smithy.api#pattern": "^[\\w]*$"
             }
         },
+        "com.amazonaws.cloudwatchlogs#LogTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#LogType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#Logs_20140328": {
             "type": "service",
             "version": "2014-03-28",
@@ -5330,6 +5622,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeAccountPolicies"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeConfigurationTemplates"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeDeliveries"
@@ -5480,6 +5775,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#UpdateAnomaly"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfiguration"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#UpdateLogAnomalyDetector"
@@ -6790,6 +7088,12 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#OutputFormats": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#OutputFormat"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#OutputLogEvent": {
             "type": "structure",
             "members": {
@@ -7516,7 +7820,7 @@
                 "entity": {
                     "target": "com.amazonaws.cloudwatchlogs#Entity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
                     }
                 }
             },
@@ -7542,7 +7846,7 @@
                 "rejectedEntityInfo": {
                     "target": "com.amazonaws.cloudwatchlogs#RejectedEntityInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
                     }
                 }
             },
@@ -8135,19 +8439,51 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#RecordField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloudwatchlogs#FieldHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name to use when specifying this record field in a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>  or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html\">UpdateDeliveryConfiguration</a> operation. </p>"
+                    }
+                },
+                "mandatory": {
+                    "target": "com.amazonaws.cloudwatchlogs#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this is <code>true</code>, the record field must be present in the <code>recordFields</code> parameter provided to a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CreateDelivery.html\">CreateDelivery</a>  or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateDeliveryConfiguration.html\">UpdateDeliveryConfiguration</a> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that represents a valid record field header and whether it is mandatory.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#RecordFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#FieldHeader"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#RejectedEntityInfo": {
             "type": "structure",
             "members": {
                 "errorType": {
                     "target": "com.amazonaws.cloudwatchlogs#EntityRejectionErrorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                "smithy.api#documentation": "<p>Reserved for internal use.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#RejectedLogEventsInfo": {
@@ -8257,6 +8593,28 @@
                 "smithy.api#documentation": "<p>A policy enabling one or more entities to put logs to a log group in this account.</p>"
             }
         },
+        "com.amazonaws.cloudwatchlogs#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\w-_]*$"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#ResourceTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#ResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ResultField": {
             "type": "structure",
             "members": {
@@ -8289,6 +8647,26 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration": {
+            "type": "structure",
+            "members": {
+                "suffixPath": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliverySuffixPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This string allows re-configuring the S3 object prefix to contain either static or variable sections. The valid variables \n      to use in the suffix path will vary by each log source. See ConfigurationTemplate$allowedSuffixPathFields for \n      more info on what values are supported in the suffix path for each log source.</p>"
+                    }
+                },
+                "enableHiveCompatiblePath": {
+                    "target": "com.amazonaws.cloudwatchlogs#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This parameter causes the S3 objects that contain delivered logs to use a prefix structure that allows for integration with Apache Hive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains delivery configurations that apply only when the delivery destination resource is an S3 bucket.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#Scope": {
@@ -8346,7 +8724,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[\\w]*$"
+                "smithy.api#pattern": "^[\\w_-]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#ServiceQuotaExceededException": {
@@ -9484,6 +9862,78 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation to update the configuration of a <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_Delivery.html\">delivery</a> to change either the \n      S3 path pattern or the format of the delivered logs. You can't use this operation to change the\n      source or destination of the delivery.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.cloudwatchlogs#DeliveryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the delivery to be updated by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "recordFields": {
+                    "target": "com.amazonaws.cloudwatchlogs#RecordFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of record fields to be delivered to the destination, in order. \n      If the delivery’s log source has mandatory fields, they must be included in this list.</p>"
+                    }
+                },
+                "fieldDelimiter": {
+                    "target": "com.amazonaws.cloudwatchlogs#FieldDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field delimiter to use between record fields when the final output format of a delivery\n      is in <code>Plain</code>, <code>W3C</code>, or <code>Raw</code> format.</p>"
+                    }
+                },
+                "s3DeliveryConfiguration": {
+                    "target": "com.amazonaws.cloudwatchlogs#S3DeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure contains parameters that are valid only when the delivery’s delivery destination is an S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#UpdateDeliveryConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#UpdateLogAnomalyDetector": {

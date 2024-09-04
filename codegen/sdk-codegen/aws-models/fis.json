@@ -1380,6 +1380,12 @@
                     "traits": {
                         "smithy.api#enumValue": "failed"
                     }
+                },
+                "cancelled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cancelled"
+                    }
                 }
             }
         },
@@ -2326,6 +2332,9 @@
                     "target": "com.amazonaws.fis#GetExperimentTemplate"
                 },
                 {
+                    "target": "com.amazonaws.fis#GetSafetyLever"
+                },
+                {
                     "target": "com.amazonaws.fis#GetTargetAccountConfiguration"
                 },
                 {
@@ -2369,6 +2378,9 @@
                 },
                 {
                     "target": "com.amazonaws.fis#UpdateExperimentTemplate"
+                },
+                {
+                    "target": "com.amazonaws.fis#UpdateSafetyLeverState"
                 },
                 {
                     "target": "com.amazonaws.fis#UpdateTargetAccountConfiguration"
@@ -3297,6 +3309,58 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.fis#GetSafetyLever": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#GetSafetyLeverRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#GetSafetyLeverResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Gets information about the specified safety lever.\n      </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/safetyLevers/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#GetSafetyLeverRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.fis#SafetyLeverId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The ID of the safety lever.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#GetSafetyLeverResponse": {
+            "type": "structure",
+            "members": {
+                "safetyLever": {
+                    "target": "com.amazonaws.fis#SafetyLever",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Information about the safety lever.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.fis#GetTargetAccountConfiguration": {
             "type": "operation",
             "input": {
@@ -4151,6 +4215,105 @@
                 "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
+        "com.amazonaws.fis#SafetyLever": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.fis#SafetyLeverId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the safety lever.\n      </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.fis#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n     The Amazon Resource Name (ARN) of the safety lever.\n      </p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.fis#SafetyLeverState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The state of the safety lever.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Describes a safety lever.\n      </p>"
+            }
+        },
+        "com.amazonaws.fis#SafetyLeverId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.fis#SafetyLeverState": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.fis#SafetyLeverStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The state of the safety lever.\n      </p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.fis#SafetyLeverStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       The reason for the state of the safety lever.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Describes the state of the safety lever.\n      </p>"
+            }
+        },
+        "com.amazonaws.fis#SafetyLeverStatus": {
+            "type": "enum",
+            "members": {
+                "DISENGAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disengaged"
+                    }
+                },
+                "ENGAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "engaged"
+                    }
+                },
+                "ENGAGING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "engaging"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fis#SafetyLeverStatusInput": {
+            "type": "enum",
+            "members": {
+                "DISENGAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disengaged"
+                    }
+                },
+                "ENGAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "engaged"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fis#SafetyLeverStatusReason": {
+            "type": "string"
+        },
         "com.amazonaws.fis#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -4992,6 +5155,93 @@
             },
             "value": {
                 "target": "com.amazonaws.fis#UpdateExperimentTemplateTargetInput"
+            }
+        },
+        "com.amazonaws.fis#UpdateSafetyLeverState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fis#UpdateSafetyLeverStateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fis#UpdateSafetyLeverStateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.fis#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Updates the specified safety lever state.\n      </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/safetyLevers/{id}/state",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.fis#UpdateSafetyLeverStateInput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.fis#SafetyLeverStatusInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       The updated state of the safety lever.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.fis#SafetyLeverStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       The reason for updating the state of the safety lever.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n        Specifies a state for a safety lever.\n      </p>"
+            }
+        },
+        "com.amazonaws.fis#UpdateSafetyLeverStateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.fis#SafetyLeverId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the safety lever.\n      </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.fis#UpdateSafetyLeverStateInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n       The state of the safety lever.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.fis#UpdateSafetyLeverStateResponse": {
+            "type": "structure",
+            "members": {
+                "safetyLever": {
+                    "target": "com.amazonaws.fis#SafetyLever",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Information about the safety lever.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.fis#UpdateTargetAccountConfiguration": {
