@@ -509,6 +509,19 @@ func awsRestxml_deserializeOpDocumentCreateAccessGrantsInstanceOutput(v **Create
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case strings.EqualFold("IdentityCenterApplicationArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IdentityCenterApplicationArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("IdentityCenterArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -520,6 +533,19 @@ func awsRestxml_deserializeOpDocumentCreateAccessGrantsInstanceOutput(v **Create
 			{
 				xtv := string(val)
 				sv.IdentityCenterArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IdentityCenterInstanceArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IdentityCenterInstanceArn = ptr.String(xtv)
 			}
 
 		default:
@@ -3857,6 +3883,19 @@ func awsRestxml_deserializeOpDocumentGetAccessGrantsInstanceOutput(v **GetAccess
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case strings.EqualFold("IdentityCenterApplicationArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IdentityCenterApplicationArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("IdentityCenterArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -3868,6 +3907,19 @@ func awsRestxml_deserializeOpDocumentGetAccessGrantsInstanceOutput(v **GetAccess
 			{
 				xtv := string(val)
 				sv.IdentityCenterArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IdentityCenterInstanceArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IdentityCenterInstanceArn = ptr.String(xtv)
 			}
 
 		default:
@@ -8624,6 +8676,158 @@ func awsRestxml_deserializeOpDocumentListAccessPointsForObjectLambdaOutput(v **L
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentObjectLambdaAccessPointList(&sv.ObjectLambdaAccessPointList, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestxml_deserializeOpListCallerAccessGrants struct {
+}
+
+func (*awsRestxml_deserializeOpListCallerAccessGrants) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpListCallerAccessGrants) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorListCallerAccessGrants(response, &metadata)
+	}
+	output := &ListCallerAccessGrantsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeOpDocumentListCallerAccessGrantsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorListCallerAccessGrants(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody, s3shared.ErrorResponseDeserializerOptions{
+		IsWrappedWithErrorTag: true,
+	})
+	if err != nil {
+		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentListCallerAccessGrantsOutput(v **ListCallerAccessGrantsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *ListCallerAccessGrantsOutput
+	if *v == nil {
+		sv = &ListCallerAccessGrantsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CallerAccessGrantsList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentCallerAccessGrantsList(&sv.CallerAccessGrantsList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("NextToken", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NextToken = ptr.String(xtv)
 			}
 
 		default:
@@ -13460,6 +13664,74 @@ func awsRestxml_deserializeDocumentBucketsUnwrapped(v *[]string, decoder smithyx
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentCallerAccessGrantsList(v *[]types.ListCallerAccessGrantsEntry, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ListCallerAccessGrantsEntry
+	if *v == nil {
+		sv = make([]types.ListCallerAccessGrantsEntry, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("AccessGrant", t.Name.Local):
+			var col types.ListCallerAccessGrantsEntry
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsRestxml_deserializeDocumentListCallerAccessGrantsEntry(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentCallerAccessGrantsListUnwrapped(v *[]types.ListCallerAccessGrantsEntry, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ListCallerAccessGrantsEntry
+	if *v == nil {
+		sv = make([]types.ListCallerAccessGrantsEntry, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ListCallerAccessGrantsEntry
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentListCallerAccessGrantsEntry(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsRestxml_deserializeDocumentCloudWatchMetrics(v **types.CloudWatchMetrics, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16752,6 +17024,19 @@ func awsRestxml_deserializeDocumentListAccessGrantsInstanceEntry(v **types.ListA
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case strings.EqualFold("IdentityCenterApplicationArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IdentityCenterApplicationArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("IdentityCenterArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16763,6 +17048,19 @@ func awsRestxml_deserializeDocumentListAccessGrantsInstanceEntry(v **types.ListA
 			{
 				xtv := string(val)
 				sv.IdentityCenterArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("IdentityCenterInstanceArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.IdentityCenterInstanceArn = ptr.String(xtv)
 			}
 
 		default:
@@ -16868,6 +17166,81 @@ func awsRestxml_deserializeDocumentListAccessGrantsLocationsEntry(v **types.List
 			{
 				xtv := string(val)
 				sv.LocationScope = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentListCallerAccessGrantsEntry(v **types.ListCallerAccessGrantsEntry, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ListCallerAccessGrantsEntry
+	if *v == nil {
+		sv = &types.ListCallerAccessGrantsEntry{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ApplicationArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ApplicationArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("GrantScope", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.GrantScope = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Permission", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Permission = types.Permission(xtv)
 			}
 
 		default:

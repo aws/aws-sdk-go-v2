@@ -2579,6 +2579,41 @@ func validatePromptFlowNodeSourceConfiguration(v types.PromptFlowNodeSourceConfi
 	}
 }
 
+func validatePromptMetadataEntry(v *types.PromptMetadataEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptMetadataEntry"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePromptMetadataList(v []types.PromptMetadataEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromptMetadataList"}
+	for i := range v {
+		if err := validatePromptMetadataEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePromptOverrideConfiguration(v *types.PromptOverrideConfiguration) error {
 	if v == nil {
 		return nil
@@ -2627,6 +2662,11 @@ func validatePromptVariant(v *types.PromptVariant) error {
 	if v.TemplateConfiguration != nil {
 		if err := validatePromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
 			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Metadata != nil {
+		if err := validatePromptMetadataList(v.Metadata); err != nil {
+			invalidParams.AddNested("Metadata", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

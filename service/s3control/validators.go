@@ -1310,6 +1310,26 @@ func (m *validateOpListAccessPoints) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCallerAccessGrants struct {
+}
+
+func (*validateOpListCallerAccessGrants) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCallerAccessGrants) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCallerAccessGrantsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCallerAccessGrantsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListJobs struct {
 }
 
@@ -2108,6 +2128,10 @@ func addOpListAccessPointsForObjectLambdaValidationMiddleware(stack *middleware.
 
 func addOpListAccessPointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPoints{}, middleware.After)
+}
+
+func addOpListCallerAccessGrantsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCallerAccessGrants{}, middleware.After)
 }
 
 func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -4792,6 +4816,21 @@ func validateOpListAccessPointsInput(v *ListAccessPointsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPointsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCallerAccessGrantsInput(v *ListCallerAccessGrantsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCallerAccessGrantsInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}

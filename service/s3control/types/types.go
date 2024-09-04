@@ -89,7 +89,7 @@ type AccessPoint struct {
 	// exists.
 	//
 	// This element is empty if this access point is an Amazon S3 on Outposts access
-	// point that is used by other Amazon Web Services.
+	// point that is used by other Amazon Web Servicesservices.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -486,7 +486,11 @@ type DetailedStatusCodesMetrics struct {
 }
 
 // Specifies encryption-related information for an Amazon S3 bucket that is a
-// destination for replicated objects.
+// destination for replicated objects. If you're specifying a customer managed KMS
+// key, we recommend using a fully qualified KMS key ARN. If you use a KMS key
+// alias instead, then KMS resolves the key within the requester’s account. This
+// behavior can result in data that's encrypted with a KMS key that belongs to the
+// requester, and not the bucket owner.
 //
 // This is not supported by Amazon S3 on Outposts buckets.
 type EncryptionConfiguration struct {
@@ -977,15 +981,18 @@ type JobTimers struct {
 type KeyNameConstraint struct {
 
 	// If provided, the generated manifest includes objects where the specified string
-	// appears at the start of the object key string.
+	// appears at the start of the object key string. Each KeyNameConstraint filter
+	// accepts an array of strings with a length of 1 string.
 	MatchAnyPrefix []string
 
 	// If provided, the generated manifest includes objects where the specified string
-	// appears anywhere within the object key string.
+	// appears anywhere within the object key string. Each KeyNameConstraint filter
+	// accepts an array of strings with a length of 1 string.
 	MatchAnySubstring []string
 
 	// If provided, the generated manifest includes objects where the specified string
-	// appears at the end of the object key string.
+	// appears at the end of the object key string. Each KeyNameConstraint filter
+	// accepts an array of strings with a length of 1 string.
 	MatchAnySuffix []string
 
 	noSmithyDocumentSerde
@@ -1222,7 +1229,26 @@ type ListAccessGrantsInstanceEntry struct {
 	// of the IAM Identity Center instance application; a subresource of the original
 	// Identity Center instance. S3 Access Grants creates this Identity Center
 	// application for the specific S3 Access Grants instance.
+	IdentityCenterApplicationArn *string
+
+	// If you associated your S3 Access Grants instance with an Amazon Web Services
+	// IAM Identity Center instance, this field returns the Amazon Resource Name (ARN)
+	// of the IAM Identity Center instance application; a subresource of the original
+	// Identity Center instance. S3 Access Grants creates this Identity Center
+	// application for the specific S3 Access Grants instance.
+	//
+	// Deprecated: IdentityCenterArn has been deprecated. Use
+	// IdentityCenterInstanceArn or IdentityCenterApplicationArn.
 	IdentityCenterArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center
+	// instance that you are associating with your S3 Access Grants instance. An IAM
+	// Identity Center instance is your corporate identity directory that you added to
+	// the IAM Identity Center. You can use the [ListInstances]API operation to retrieve a list of
+	// your Identity Center instances and their ARNs.
+	//
+	// [ListInstances]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+	IdentityCenterInstanceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1253,6 +1279,33 @@ type ListAccessGrantsLocationsEntry struct {
 	// your S3 buckets. For example, object key names that start with the engineering/
 	// prefix or object key names that start with the marketing/campaigns/ prefix.
 	LocationScope *string
+
+	noSmithyDocumentSerde
+}
+
+// Part of ListCallerAccessGrantsResult . Each entry includes the permission level
+// (READ, WRITE, or READWRITE) and the grant scope of the access grant. If the
+// grant also includes an application ARN, the grantee can only access the S3 data
+// through this application.
+type ListCallerAccessGrantsEntry struct {
+
+	// The Amazon Resource Name (ARN) of an Amazon Web Services IAM Identity Center
+	// application associated with your Identity Center instance. If the grant includes
+	// an application ARN, the grantee can only access the S3 data through this
+	// application.
+	ApplicationArn *string
+
+	// The S3 path of the data to which you have been granted access.
+	GrantScope *string
+
+	// The type of permission granted, which can be one of the following values:
+	//
+	//   - READ - Grants read-only access to the S3 data.
+	//
+	//   - WRITE - Grants write-only access to the S3 data.
+	//
+	//   - READWRITE - Grants both read and write access to the S3 data.
+	Permission Permission
 
 	noSmithyDocumentSerde
 }
@@ -1714,8 +1767,8 @@ type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
 	// in this account. Setting this element to TRUE restricts access to buckets with
-	// public policies to only Amazon Web Service principals and authorized users
-	// within this account.
+	// public policies to only Amazon Web Servicesservice principals and authorized
+	// users within this account.
 	//
 	// Enabling this setting doesn't affect previously stored bucket policies, except
 	// that public and cross-account access within any public bucket policy, including
@@ -2281,7 +2334,7 @@ type S3JobManifestGenerator struct {
 	// This member is required.
 	EnableManifestOutput bool
 
-	// The source bucket used by the ManifestGenerator.
+	// The ARN of the source bucket used by the ManifestGenerator.
 	//
 	// Directory buckets - Directory buckets aren't supported as the source buckets
 	// used by S3JobManifestGenerator to generate the job manifest.

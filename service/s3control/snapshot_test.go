@@ -842,6 +842,18 @@ func TestCheckSnapshot_ListAccessPointsForObjectLambda(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCallerAccessGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCallerAccessGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCallerAccessGrants")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
@@ -1938,6 +1950,18 @@ func TestUpdateSnapshot_ListAccessPointsForObjectLambda(t *testing.T) {
 	_, err := svc.ListAccessPointsForObjectLambda(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAccessPointsForObjectLambda")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCallerAccessGrants(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCallerAccessGrants(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCallerAccessGrants")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

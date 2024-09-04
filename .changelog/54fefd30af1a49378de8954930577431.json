@@ -1,0 +1,8 @@
+{
+    "id": "54fefd30-af1a-4937-8de8-954930577431",
+    "type": "feature",
+    "description": "Update to support new APIs for delivery of logs from AWS services.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

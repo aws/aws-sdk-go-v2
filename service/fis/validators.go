@@ -170,6 +170,26 @@ func (m *validateOpGetExperimentTemplate) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSafetyLever struct {
+}
+
+func (*validateOpGetSafetyLever) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSafetyLever) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSafetyLeverInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSafetyLeverInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTargetAccountConfiguration struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpUpdateExperimentTemplate) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSafetyLeverState struct {
+}
+
+func (*validateOpUpdateSafetyLeverState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSafetyLeverState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSafetyLeverStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSafetyLeverStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTargetAccountConfiguration struct {
 }
 
@@ -442,6 +482,10 @@ func addOpGetExperimentTemplateValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetExperimentTemplate{}, middleware.After)
 }
 
+func addOpGetSafetyLeverValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSafetyLever{}, middleware.After)
+}
+
 func addOpGetTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTargetAccountConfiguration{}, middleware.After)
 }
@@ -484,6 +528,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateExperimentTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExperimentTemplate{}, middleware.After)
+}
+
+func addOpUpdateSafetyLeverStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSafetyLeverState{}, middleware.After)
 }
 
 func addOpUpdateTargetAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -781,6 +829,24 @@ func validateUpdateExperimentTemplateTargetInputMap(v map[string]types.UpdateExp
 	}
 }
 
+func validateUpdateSafetyLeverStateInput(v *types.UpdateSafetyLeverStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSafetyLeverStateInput"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateExperimentTemplateInput(v *CreateExperimentTemplateInput) error {
 	if v == nil {
 		return nil
@@ -933,6 +999,21 @@ func validateOpGetExperimentTemplateInput(v *GetExperimentTemplateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetExperimentTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSafetyLeverInput(v *GetSafetyLeverInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSafetyLeverInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -1123,6 +1204,28 @@ func validateOpUpdateExperimentTemplateInput(v *UpdateExperimentTemplateInput) e
 	if v.LogConfiguration != nil {
 		if err := validateUpdateExperimentTemplateLogConfigurationInput(v.LogConfiguration); err != nil {
 			invalidParams.AddNested("LogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSafetyLeverStateInput(v *UpdateSafetyLeverStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSafetyLeverStateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.State == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	} else if v.State != nil {
+		if err := validateUpdateSafetyLeverStateInput(v.State); err != nil {
+			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -351,6 +351,8 @@ const (
 	FieldLogLevelNone  FieldLogLevel = "NONE"
 	FieldLogLevelError FieldLogLevel = "ERROR"
 	FieldLogLevelAll   FieldLogLevel = "ALL"
+	FieldLogLevelInfo  FieldLogLevel = "INFO"
+	FieldLogLevelDebug FieldLogLevel = "DEBUG"
 )
 
 // Values returns all known values for FieldLogLevel. Note that this can be
@@ -362,6 +364,8 @@ func (FieldLogLevel) Values() []FieldLogLevel {
 		"NONE",
 		"ERROR",
 		"ALL",
+		"INFO",
+		"DEBUG",
 	}
 }
 

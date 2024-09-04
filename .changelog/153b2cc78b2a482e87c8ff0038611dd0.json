@@ -1,0 +1,8 @@
+{
+    "id": "153b2cc7-8b2a-482e-87c8-ff0038611dd0",
+    "type": "feature",
+    "description": "Amazon Simple Storage Service /S3 Access Grants / Features : This release launches new Access Grants API - ListCallerAccessGrants.",
+    "modules": [
+        "service/s3control"
+    ]
+}

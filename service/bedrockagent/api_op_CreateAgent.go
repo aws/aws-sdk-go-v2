@@ -34,8 +34,12 @@ import (
 //     advanced prompts, include a promptOverrideConfiguration object. For more
 //     information, see [Advanced prompts].
 //
-//   - If you agent fails to be created, the response returns a list of
+//   - If your agent fails to be created, the response returns a list of
 //     failureReasons alongside a list of recommendedActions for you to troubleshoot.
+//
+//   - The agent instructions will not be honored if your agent has only one
+//     knowledge base, uses default prompts, has no action group, and user input is
+//     disabled.
 //
 // [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 // [Configure memory]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html

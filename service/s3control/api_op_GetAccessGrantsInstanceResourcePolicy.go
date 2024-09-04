@@ -37,7 +37,7 @@ func (c *Client) GetAccessGrantsInstanceResourcePolicy(ctx context.Context, para
 
 type GetAccessGrantsInstanceResourcePolicyInput struct {
 
-	// The ID of the Amazon Web Services account that is making this request.
+	// The Amazon Web Services account ID of the S3 Access Grants instance.
 	//
 	// This member is required.
 	AccountId *string

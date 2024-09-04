@@ -103,6 +103,7 @@ const (
 	ExperimentStatusStopping   ExperimentStatus = "stopping"
 	ExperimentStatusStopped    ExperimentStatus = "stopped"
 	ExperimentStatusFailed     ExperimentStatus = "failed"
+	ExperimentStatusCancelled  ExperimentStatus = "cancelled"
 )
 
 // Values returns all known values for ExperimentStatus. Note that this can be
@@ -118,5 +119,46 @@ func (ExperimentStatus) Values() []ExperimentStatus {
 		"stopping",
 		"stopped",
 		"failed",
+		"cancelled",
+	}
+}
+
+type SafetyLeverStatus string
+
+// Enum values for SafetyLeverStatus
+const (
+	SafetyLeverStatusDisengaged SafetyLeverStatus = "disengaged"
+	SafetyLeverStatusEngaged    SafetyLeverStatus = "engaged"
+	SafetyLeverStatusEngaging   SafetyLeverStatus = "engaging"
+)
+
+// Values returns all known values for SafetyLeverStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SafetyLeverStatus) Values() []SafetyLeverStatus {
+	return []SafetyLeverStatus{
+		"disengaged",
+		"engaged",
+		"engaging",
+	}
+}
+
+type SafetyLeverStatusInput string
+
+// Enum values for SafetyLeverStatusInput
+const (
+	SafetyLeverStatusInputDisengaged SafetyLeverStatusInput = "disengaged"
+	SafetyLeverStatusInputEngaged    SafetyLeverStatusInput = "engaged"
+)
+
+// Values returns all known values for SafetyLeverStatusInput. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SafetyLeverStatusInput) Values() []SafetyLeverStatusInput {
+	return []SafetyLeverStatusInput{
+		"disengaged",
+		"engaged",
 	}
 }

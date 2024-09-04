@@ -2292,8 +2292,10 @@ type ParameterDetail struct {
 //
 //   - Anthropic Claude 3 Haiku - anthropic.claude-3-haiku-20240307-v1:0
 //
-// You can get the ARN of a model with the action. Standard model usage charges
+// You can get the ARN of a model with the [ListFoundationModels] action. Standard model usage charges
 // apply for the foundation model parsing strategy.
+//
+// [ListFoundationModels]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
 type ParsingConfiguration struct {
 
 	// The parsing strategy for the data source.
@@ -2566,6 +2568,25 @@ type PromptInputVariable struct {
 	noSmithyDocumentSerde
 }
 
+// Contains a key-value pair that defines a metadata tag and value to attach to a
+// prompt variant. For more information, see [Create a prompt using Prompt management].
+//
+// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+type PromptMetadataEntry struct {
+
+	// The key of a metadata tag for a prompt variant.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of a metadata tag for a prompt variant.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains inference configurations related to model inference for a prompt. For
 // more information, see [Inference parameters].
 //
@@ -2700,6 +2721,12 @@ type PromptVariant struct {
 
 	// Contains inference configurations for the prompt variant.
 	InferenceConfiguration PromptInferenceConfiguration
+
+	// An array of objects, each containing a key-value pair that defines a metadata
+	// tag and value to attach to a prompt variant. For more information, see [Create a prompt using Prompt management].
+	//
+	// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
+	Metadata []PromptMetadataEntry
 
 	// The unique identifier of the model with which to run inference on the prompt.
 	ModelId *string

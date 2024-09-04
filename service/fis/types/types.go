@@ -727,6 +727,33 @@ type ResolvedTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a safety lever.
+type SafetyLever struct {
+
+	//  The Amazon Resource Name (ARN) of the safety lever.
+	Arn *string
+
+	//  The ID of the safety lever.
+	Id *string
+
+	//  The state of the safety lever.
+	State *SafetyLeverState
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of the safety lever.
+type SafetyLeverState struct {
+
+	//  The reason for the state of the safety lever.
+	Reason *string
+
+	//  The state of the safety lever.
+	Status SafetyLeverStatus
+
+	noSmithyDocumentSerde
+}
+
 // Specifies experiment options for running an experiment.
 type StartExperimentExperimentOptionsInput struct {
 
@@ -894,6 +921,22 @@ type UpdateExperimentTemplateTargetInput struct {
 
 	// The tags for the target resources.
 	ResourceTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a state for a safety lever.
+type UpdateSafetyLeverStateInput struct {
+
+	//  The reason for updating the state of the safety lever.
+	//
+	// This member is required.
+	Reason *string
+
+	//  The updated state of the safety lever.
+	//
+	// This member is required.
+	Status SafetyLeverStatusInput
 
 	noSmithyDocumentSerde
 }

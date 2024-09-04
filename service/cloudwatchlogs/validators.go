@@ -1110,6 +1110,26 @@ func (m *validateOpUpdateAnomaly) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDeliveryConfiguration struct {
+}
+
+func (*validateOpUpdateDeliveryConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDeliveryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDeliveryConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDeliveryConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLogAnomalyDetector struct {
 }
 
@@ -1348,6 +1368,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAnomalyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAnomaly{}, middleware.After)
+}
+
+func addOpUpdateDeliveryConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDeliveryConfiguration{}, middleware.After)
 }
 
 func addOpUpdateLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -2379,6 +2403,21 @@ func validateOpUpdateAnomalyInput(v *UpdateAnomalyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAnomalyInput"}
 	if v.AnomalyDetectorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnomalyDetectorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDeliveryConfigurationInput(v *UpdateDeliveryConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeliveryConfigurationInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

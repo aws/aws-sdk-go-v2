@@ -74,6 +74,7 @@
         "api_op_ListAccessGrantsLocations.go",
         "api_op_ListAccessPoints.go",
         "api_op_ListAccessPointsForObjectLambda.go",
+        "api_op_ListCallerAccessGrants.go",
         "api_op_ListJobs.go",
         "api_op_ListMultiRegionAccessPoints.go",
         "api_op_ListRegionalBuckets.go",

@@ -158,6 +158,18 @@ func TestCheckSnapshot_GetExperimentTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSafetyLever(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSafetyLever(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSafetyLever")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTargetAccountConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTargetAccountConfiguration(context.Background(), nil, func(o *Options) {
@@ -338,6 +350,18 @@ func TestCheckSnapshot_UpdateExperimentTemplate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateSafetyLeverState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSafetyLeverState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSafetyLeverState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTargetAccountConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTargetAccountConfiguration(context.Background(), nil, func(o *Options) {
@@ -438,6 +462,18 @@ func TestUpdateSnapshot_GetExperimentTemplate(t *testing.T) {
 	_, err := svc.GetExperimentTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetExperimentTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSafetyLever(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSafetyLever(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSafetyLever")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -618,6 +654,18 @@ func TestUpdateSnapshot_UpdateExperimentTemplate(t *testing.T) {
 	_, err := svc.UpdateExperimentTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateExperimentTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSafetyLeverState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSafetyLeverState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSafetyLeverState")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "738730dc-f9e8-4635-839d-1e98eb132de0",
+    "type": "feature",
+    "description": "This release adds safety levers, a new mechanism to stop all running experiments and prevent new experiments from starting.",
+    "modules": [
+        "service/fis"
+    ]
+}

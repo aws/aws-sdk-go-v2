@@ -82,7 +82,7 @@ type PutLogEventsInput struct {
 	// This member is required.
 	LogStreamName *string
 
-	// Reserved for future use.
+	// Reserved for internal use.
 	Entity *types.Entity
 
 	// The sequence token obtained from the response of the previous PutLogEvents call.
@@ -108,7 +108,7 @@ type PutLogEventsOutput struct {
 	// nextSequenceToken value.
 	NextSequenceToken *string
 
-	// Reserved for future use.
+	// Reserved for internal use.
 	RejectedEntityInfo *types.RejectedEntityInfo
 
 	// The rejected events.

@@ -1,0 +1,8 @@
+{
+    "id": "66593f70-e2de-4027-87a1-cca379afd07a",
+    "type": "feature",
+    "description": "Add support for user metadata inside PromptVariant.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

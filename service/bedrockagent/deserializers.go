@@ -17834,6 +17834,89 @@ func awsRestjson1_deserializeDocumentPromptInputVariablesList(v *[]types.PromptI
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPromptMetadataEntry(v **types.PromptMetadataEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PromptMetadataEntry
+	if *v == nil {
+		sv = &types.PromptMetadataEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PromptMetadataKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PromptMetadataValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPromptMetadataList(v *[]types.PromptMetadataEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PromptMetadataEntry
+	if *v == nil {
+		cv = []types.PromptMetadataEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PromptMetadataEntry
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPromptMetadataEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPromptModelInferenceConfiguration(v **types.PromptModelInferenceConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18209,6 +18292,11 @@ func awsRestjson1_deserializeDocumentPromptVariant(v **types.PromptVariant, valu
 		switch key {
 		case "inferenceConfiguration":
 			if err := awsRestjson1_deserializeDocumentPromptInferenceConfiguration(&sv.InferenceConfiguration, value); err != nil {
+				return err
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentPromptMetadataList(&sv.Metadata, value); err != nil {
 				return err
 			}
 

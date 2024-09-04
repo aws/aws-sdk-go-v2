@@ -45,7 +45,7 @@ func (c *Client) CreateAccessGrantsInstance(ctx context.Context, params *CreateA
 
 type CreateAccessGrantsInstanceInput struct {
 
-	// The ID of the Amazon Web Services account that is making this request.
+	// The Amazon Web Services account ID of the S3 Access Grants instance.
 	//
 	// This member is required.
 	AccountId *string
@@ -77,7 +77,13 @@ func (in *CreateAccessGrantsInstanceInput) bindEndpointParams(p *EndpointParamet
 
 type CreateAccessGrantsInstanceOutput struct {
 
-	// The Amazon Resource Name (ARN) of the S3 Access Grants instance.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center
+	// instance that you are associating with your S3 Access Grants instance. An IAM
+	// Identity Center instance is your corporate identity directory that you added to
+	// the IAM Identity Center. You can use the [ListInstances]API operation to retrieve a list of
+	// your Identity Center instances and their ARNs.
+	//
+	// [ListInstances]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
 	AccessGrantsInstanceArn *string
 
 	// The ID of the S3 Access Grants instance. The ID is default . You can have one S3
@@ -90,9 +96,28 @@ type CreateAccessGrantsInstanceOutput struct {
 	// If you associated your S3 Access Grants instance with an Amazon Web Services
 	// IAM Identity Center instance, this field returns the Amazon Resource Name (ARN)
 	// of the IAM Identity Center instance application; a subresource of the original
-	// Identity Center instance passed in the request. S3 Access Grants creates this
-	// Identity Center application for this specific S3 Access Grants instance.
+	// Identity Center instance. S3 Access Grants creates this Identity Center
+	// application for the specific S3 Access Grants instance.
+	IdentityCenterApplicationArn *string
+
+	// If you associated your S3 Access Grants instance with an Amazon Web Services
+	// IAM Identity Center instance, this field returns the Amazon Resource Name (ARN)
+	// of the IAM Identity Center instance application; a subresource of the original
+	// Identity Center instance. S3 Access Grants creates this Identity Center
+	// application for the specific S3 Access Grants instance.
+	//
+	// Deprecated: IdentityCenterArn has been deprecated. Use
+	// IdentityCenterInstanceArn or IdentityCenterApplicationArn.
 	IdentityCenterArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center
+	// instance that you are associating with your S3 Access Grants instance. An IAM
+	// Identity Center instance is your corporate identity directory that you added to
+	// the IAM Identity Center. You can use the [ListInstances]API operation to retrieve a list of
+	// your Identity Center instances and their ARNs.
+	//
+	// [ListInstances]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
+	IdentityCenterInstanceArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

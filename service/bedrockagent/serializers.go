@@ -7102,6 +7102,36 @@ func awsRestjson1_serializeDocumentPromptInputVariablesList(v []types.PromptInpu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPromptMetadataEntry(v *types.PromptMetadataEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptMetadataList(v []types.PromptMetadataEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPromptMetadataEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPromptModelInferenceConfiguration(v *types.PromptModelInferenceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7206,6 +7236,13 @@ func awsRestjson1_serializeDocumentPromptVariant(v *types.PromptVariant, value s
 	if v.InferenceConfiguration != nil {
 		ok := object.Key("inferenceConfiguration")
 		if err := awsRestjson1_serializeDocumentPromptInferenceConfiguration(v.InferenceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentPromptMetadataList(v.Metadata, ok); err != nil {
 			return err
 		}
 	}

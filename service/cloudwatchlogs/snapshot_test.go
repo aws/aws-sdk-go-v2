@@ -338,6 +338,18 @@ func TestCheckSnapshot_DescribeAccountPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeConfigurationTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeConfigurationTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeConfigurationTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDeliveries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDeliveries(context.Background(), nil, func(o *Options) {
@@ -938,6 +950,18 @@ func TestCheckSnapshot_UpdateAnomaly(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDeliveryConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDeliveryConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDeliveryConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateLogAnomalyDetector(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateLogAnomalyDetector(context.Background(), nil, func(o *Options) {
@@ -1218,6 +1242,18 @@ func TestUpdateSnapshot_DescribeAccountPolicies(t *testing.T) {
 	_, err := svc.DescribeAccountPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAccountPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeConfigurationTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeConfigurationTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeConfigurationTemplates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1818,6 +1854,18 @@ func TestUpdateSnapshot_UpdateAnomaly(t *testing.T) {
 	_, err := svc.UpdateAnomaly(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAnomaly")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDeliveryConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDeliveryConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDeliveryConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
