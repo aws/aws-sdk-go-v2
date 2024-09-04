@@ -1,3 +1,7 @@
+# v1.26.6 (2024-09-04)
+
+* **Documentation**: Updates Finspace documentation for smaller instances.
+
 # v1.26.5 (2024-09-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

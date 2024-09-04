@@ -1,3 +1,7 @@
+# v1.36.0 (2024-09-04)
+
+* **Feature**: Adds new logging levels (INFO and DEBUG) for additional log output control
+
 # v1.35.2 (2024-09-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

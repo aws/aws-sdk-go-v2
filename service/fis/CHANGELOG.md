@@ -1,3 +1,7 @@
+# v1.28.0 (2024-09-04)
+
+* **Feature**: This release adds safety levers, a new mechanism to stop all running experiments and prevent new experiments from starting.
+
 # v1.27.2 (2024-09-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

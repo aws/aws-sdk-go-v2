@@ -1,3 +1,7 @@
+# v1.47.0 (2024-09-04)
+
+* **Feature**: Amazon Simple Storage Service /S3 Access Grants / Features : This release launches new Access Grants API - ListCallerAccessGrants.
+
 # v1.46.6 (2024-09-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

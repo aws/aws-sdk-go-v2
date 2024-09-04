@@ -1,3 +1,7 @@
+# v1.18.0 (2024-09-04)
+
+* **Feature**: Add support for user metadata inside PromptVariant.
+
 # v1.17.1 (2024-09-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

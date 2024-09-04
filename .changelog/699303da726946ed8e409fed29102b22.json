@@ -1,8 +1,0 @@
-{
-    "id": "699303da-7269-46ed-8e40-9fed29102b22",
-    "type": "documentation",
-    "description": "Updates Finspace documentation for smaller instances.",
-    "modules": [
-        "service/finspace"
-    ]
-}

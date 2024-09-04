@@ -1,8 +1,0 @@
-{
-    "id": "09109c59-b637-4747-9eb4-66dd04e99195",
-    "type": "feature",
-    "description": "Adds new logging levels (INFO and DEBUG) for additional log output control",
-    "modules": [
-        "service/appsync"
-    ]
-}

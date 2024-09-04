@@ -1,3 +1,22 @@
+# Release (2024-09-04)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.36.0](service/appsync/CHANGELOG.md#v1360-2024-09-04)
+  * **Feature**: Adds new logging levels (INFO and DEBUG) for additional log output control
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.18.0](service/bedrockagent/CHANGELOG.md#v1180-2024-09-04)
+  * **Feature**: Add support for user metadata inside PromptVariant.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.39.0](service/cloudwatchlogs/CHANGELOG.md#v1390-2024-09-04)
+  * **Feature**: Update to support new APIs for delivery of logs from AWS services.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.26.6](service/finspace/CHANGELOG.md#v1266-2024-09-04)
+  * **Documentation**: Updates Finspace documentation for smaller instances.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.28.0](service/fis/CHANGELOG.md#v1280-2024-09-04)
+  * **Feature**: This release adds safety levers, a new mechanism to stop all running experiments and prevent new experiments from starting.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.47.0](service/s3control/CHANGELOG.md#v1470-2024-09-04)
+  * **Feature**: Amazon Simple Storage Service /S3 Access Grants / Features : This release launches new Access Grants API - ListCallerAccessGrants.
+
 # Release (2024-09-03)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.155.1 (2024-09-04)
+
+* No change notes available for this release.
+
 # v1.155.0 (2024-09-03)
 
 * **Feature**: Amazon SageMaker now supports automatic mounting of a user's home folder in the Amazon Elastic File System (EFS) associated with the SageMaker Studio domain to their Studio Spaces to enable users to share data between their own private spaces.

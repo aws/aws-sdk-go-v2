@@ -1,3 +1,7 @@
+# v1.57.1 (2024-09-04)
+
+* No change notes available for this release.
+
 # v1.57.0 (2024-09-03)
 
 * **Feature**: Added MinQP as a Rate Control option for H264 and H265 encodes.

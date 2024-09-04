@@ -1,3 +1,7 @@
+# v1.33.1 (2024-09-04)
+
+* No change notes available for this release.
+
 # v1.33.0 (2024-09-03)
 
 * **Feature**: AWS Elemental MediaConnect introduces thumbnails for Flow source monitoring. Thumbnails provide still image previews of the live content feeding your MediaConnect Flow allowing you to easily verify that your source is operating as expected.

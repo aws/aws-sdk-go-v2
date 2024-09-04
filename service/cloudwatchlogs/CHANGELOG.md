@@ -1,3 +1,7 @@
+# v1.39.0 (2024-09-04)
+
+* **Feature**: Update to support new APIs for delivery of logs from AWS services.
+
 # v1.38.1 (2024-09-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

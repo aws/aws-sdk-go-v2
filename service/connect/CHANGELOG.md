@@ -1,3 +1,7 @@
+# v1.108.1 (2024-09-04)
+
+* No change notes available for this release.
+
 # v1.108.0 (2024-09-03)
 
 * **Feature**: Release ReplicaConfiguration as part of DescribeInstance
