@@ -42,10 +42,7 @@ import (
 //
 // [Debug fleet issues]
 //
-// [Remotely connect to a container fleet]
-//
 // [Remotely connect to fleet instances]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
-// [Remotely connect to a container fleet]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-remote-access.html
 // [Debug fleet issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
 // [Starting a session (CLI)]: https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-sessions-start.html#sessions-start-cli
 func (c *Client) GetComputeAccess(ctx context.Context, params *GetComputeAccessInput, optFns ...func(*Options)) (*GetComputeAccessOutput, error) {

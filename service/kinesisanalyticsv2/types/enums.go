@@ -260,6 +260,7 @@ const (
 	RuntimeEnvironmentZeppelinFlink30 RuntimeEnvironment = "ZEPPELIN-FLINK-3_0"
 	RuntimeEnvironmentFlink118        RuntimeEnvironment = "FLINK-1_18"
 	RuntimeEnvironmentFlink119        RuntimeEnvironment = "FLINK-1_19"
+	RuntimeEnvironmentFlink120        RuntimeEnvironment = "FLINK-1_20"
 )
 
 // Values returns all known values for RuntimeEnvironment. Note that this can be
@@ -279,6 +280,7 @@ func (RuntimeEnvironment) Values() []RuntimeEnvironment {
 		"ZEPPELIN-FLINK-3_0",
 		"FLINK-1_18",
 		"FLINK-1_19",
+		"FLINK-1_20",
 	}
 }
 

@@ -14,6 +14,8 @@ import (
 // Gets a listing of all the webhooks in this Amazon Web Services Region for this
 // account. The output lists all webhooks and includes the webhook URL and ARN and
 // the configuration for each webhook.
+//
+// If a secret token was provided, it will be redacted in the response.
 func (c *Client) ListWebhooks(ctx context.Context, params *ListWebhooksInput, optFns ...func(*Options)) (*ListWebhooksOutput, error) {
 	if params == nil {
 		params = &ListWebhooksInput{}

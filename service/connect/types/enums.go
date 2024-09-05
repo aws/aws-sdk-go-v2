@@ -2745,6 +2745,16 @@ const (
 	VocabularyLanguageCodeZhCn VocabularyLanguageCode = "zh-CN"
 	VocabularyLanguageCodeEnNz VocabularyLanguageCode = "en-NZ"
 	VocabularyLanguageCodeEnZa VocabularyLanguageCode = "en-ZA"
+	VocabularyLanguageCodeCaEs VocabularyLanguageCode = "ca-ES"
+	VocabularyLanguageCodeDaDk VocabularyLanguageCode = "da-DK"
+	VocabularyLanguageCodeFiFi VocabularyLanguageCode = "fi-FI"
+	VocabularyLanguageCodeIdId VocabularyLanguageCode = "id-ID"
+	VocabularyLanguageCodeMsMy VocabularyLanguageCode = "ms-MY"
+	VocabularyLanguageCodeNlNl VocabularyLanguageCode = "nl-NL"
+	VocabularyLanguageCodeNoNo VocabularyLanguageCode = "no-NO"
+	VocabularyLanguageCodePlPl VocabularyLanguageCode = "pl-PL"
+	VocabularyLanguageCodeSvSe VocabularyLanguageCode = "sv-SE"
+	VocabularyLanguageCodeTlPh VocabularyLanguageCode = "tl-PH"
 )
 
 // Values returns all known values for VocabularyLanguageCode. Note that this can
@@ -2776,6 +2786,16 @@ func (VocabularyLanguageCode) Values() []VocabularyLanguageCode {
 		"zh-CN",
 		"en-NZ",
 		"en-ZA",
+		"ca-ES",
+		"da-DK",
+		"fi-FI",
+		"id-ID",
+		"ms-MY",
+		"nl-NL",
+		"no-NO",
+		"pl-PL",
+		"sv-SE",
+		"tl-PH",
 	}
 }
 

@@ -18771,6 +18771,20 @@ func awsAwsjson11_serializeDocumentAnnotationConsolidationConfig(v *types.Annota
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAppLifecycleManagement(v *types.AppLifecycleManagement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleSettings != nil {
+		ok := object.Key("IdleSettings")
+		if err := awsAwsjson11_serializeDocumentIdleSettings(v.IdleSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAppSpecification(v *types.AppSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20343,6 +20357,13 @@ func awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v *types.CodeEditorA
 func awsAwsjson11_serializeDocumentCodeEditorAppSettings(v *types.CodeEditorAppSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppLifecycleManagement != nil {
+		ok := object.Key("AppLifecycleManagement")
+		if err := awsAwsjson11_serializeDocumentAppLifecycleManagement(v.AppLifecycleManagement, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CustomImages != nil {
 		ok := object.Key("CustomImages")
@@ -23294,6 +23315,33 @@ func awsAwsjson11_serializeDocumentIdentityProviderOAuthSettings(v []types.Ident
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIdleSettings(v *types.IdleSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleTimeoutInMinutes != nil {
+		ok := object.Key("IdleTimeoutInMinutes")
+		ok.Integer(*v.IdleTimeoutInMinutes)
+	}
+
+	if len(v.LifecycleManagement) > 0 {
+		ok := object.Key("LifecycleManagement")
+		ok.String(string(v.LifecycleManagement))
+	}
+
+	if v.MaxIdleTimeoutInMinutes != nil {
+		ok := object.Key("MaxIdleTimeoutInMinutes")
+		ok.Integer(*v.MaxIdleTimeoutInMinutes)
+	}
+
+	if v.MinIdleTimeoutInMinutes != nil {
+		ok := object.Key("MinIdleTimeoutInMinutes")
+		ok.Integer(*v.MinIdleTimeoutInMinutes)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentImageClassificationJobConfig(v *types.ImageClassificationJobConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23797,6 +23845,13 @@ func awsAwsjson11_serializeDocumentJupyterLabAppImageConfig(v *types.JupyterLabA
 func awsAwsjson11_serializeDocumentJupyterLabAppSettings(v *types.JupyterLabAppSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppLifecycleManagement != nil {
+		ok := object.Key("AppLifecycleManagement")
+		if err := awsAwsjson11_serializeDocumentAppLifecycleManagement(v.AppLifecycleManagement, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CodeRepositories != nil {
 		ok := object.Key("CodeRepositories")
@@ -28175,9 +28230,30 @@ func awsAwsjson11_serializeDocumentSourceIpConfig(v *types.SourceIpConfig, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSpaceAppLifecycleManagement(v *types.SpaceAppLifecycleManagement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleSettings != nil {
+		ok := object.Key("IdleSettings")
+		if err := awsAwsjson11_serializeDocumentSpaceIdleSettings(v.IdleSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSpaceCodeEditorAppSettings(v *types.SpaceCodeEditorAppSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppLifecycleManagement != nil {
+		ok := object.Key("AppLifecycleManagement")
+		if err := awsAwsjson11_serializeDocumentSpaceAppLifecycleManagement(v.AppLifecycleManagement, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefaultResourceSpec != nil {
 		ok := object.Key("DefaultResourceSpec")
@@ -28189,9 +28265,28 @@ func awsAwsjson11_serializeDocumentSpaceCodeEditorAppSettings(v *types.SpaceCode
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSpaceIdleSettings(v *types.SpaceIdleSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleTimeoutInMinutes != nil {
+		ok := object.Key("IdleTimeoutInMinutes")
+		ok.Integer(*v.IdleTimeoutInMinutes)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSpaceJupyterLabAppSettings(v *types.SpaceJupyterLabAppSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AppLifecycleManagement != nil {
+		ok := object.Key("AppLifecycleManagement")
+		if err := awsAwsjson11_serializeDocumentSpaceAppLifecycleManagement(v.AppLifecycleManagement, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CodeRepositories != nil {
 		ok := object.Key("CodeRepositories")

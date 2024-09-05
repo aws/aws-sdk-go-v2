@@ -255,7 +255,7 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// THe requested resources was not found. The resource was either not created yet
+// The requested resources was not found. The resource was either not created yet
 // or deleted.
 type NotFoundException struct {
 	Message *string

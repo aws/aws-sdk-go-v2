@@ -87,11 +87,13 @@ type RegisterComputeInput struct {
 	DnsName *string
 
 	// The IP address of the compute resource. Amazon GameLift requires either a DNS
-	// name or IP address.
+	// name or IP address. When registering an Anywhere fleet, an IP address is
+	// required.
 	IpAddress *string
 
 	// The name of a custom location to associate with the compute resource being
-	// registered.
+	// registered. This parameter is required when registering a compute for an
+	// Anywhere fleet.
 	Location *string
 
 	noSmithyDocumentSerde

@@ -36213,6 +36213,42 @@ func awsAwsjson11_deserializeDocumentAppImageConfigList(v *[]types.AppImageConfi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAppLifecycleManagement(v **types.AppLifecycleManagement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AppLifecycleManagement
+	if *v == nil {
+		sv = &types.AppLifecycleManagement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IdleSettings":
+			if err := awsAwsjson11_deserializeDocumentIdleSettings(&sv.IdleSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAppList(v *[]types.AppDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41224,7 +41260,7 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
@@ -41954,6 +41990,11 @@ func awsAwsjson11_deserializeDocumentCodeEditorAppSettings(v **types.CodeEditorA
 
 	for key, value := range shape {
 		switch key {
+		case "AppLifecycleManagement":
+			if err := awsAwsjson11_deserializeDocumentAppLifecycleManagement(&sv.AppLifecycleManagement, value); err != nil {
+				return err
+			}
+
 		case "CustomImages":
 			if err := awsAwsjson11_deserializeDocumentCustomImages(&sv.CustomImages, value); err != nil {
 				return err
@@ -54033,6 +54074,85 @@ func awsAwsjson11_deserializeDocumentIdentityProviderOAuthSettings(v *[]types.Id
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIdleSettings(v **types.IdleSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdleSettings
+	if *v == nil {
+		sv = &types.IdleSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IdleTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleTimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "LifecycleManagement":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LifecycleManagement to be of type string, got %T instead", value)
+				}
+				sv.LifecycleManagement = types.LifecycleManagement(jtv)
+			}
+
+		case "MaxIdleTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxIdleTimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "MinIdleTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinIdleTimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -56407,6 +56527,11 @@ func awsAwsjson11_deserializeDocumentJupyterLabAppSettings(v **types.JupyterLabA
 
 	for key, value := range shape {
 		switch key {
+		case "AppLifecycleManagement":
+			if err := awsAwsjson11_deserializeDocumentAppLifecycleManagement(&sv.AppLifecycleManagement, value); err != nil {
+				return err
+			}
+
 		case "CodeRepositories":
 			if err := awsAwsjson11_deserializeDocumentCodeRepositories(&sv.CodeRepositories, value); err != nil {
 				return err
@@ -74695,6 +74820,42 @@ func awsAwsjson11_deserializeDocumentSourceIpConfig(v **types.SourceIpConfig, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSpaceAppLifecycleManagement(v **types.SpaceAppLifecycleManagement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceAppLifecycleManagement
+	if *v == nil {
+		sv = &types.SpaceAppLifecycleManagement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IdleSettings":
+			if err := awsAwsjson11_deserializeDocumentSpaceIdleSettings(&sv.IdleSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSpaceCodeEditorAppSettings(v **types.SpaceCodeEditorAppSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -74717,6 +74878,11 @@ func awsAwsjson11_deserializeDocumentSpaceCodeEditorAppSettings(v **types.SpaceC
 
 	for key, value := range shape {
 		switch key {
+		case "AppLifecycleManagement":
+			if err := awsAwsjson11_deserializeDocumentSpaceAppLifecycleManagement(&sv.AppLifecycleManagement, value); err != nil {
+				return err
+			}
+
 		case "DefaultResourceSpec":
 			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
 				return err
@@ -74845,6 +75011,50 @@ func awsAwsjson11_deserializeDocumentSpaceDetails(v **types.SpaceDetails, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSpaceIdleSettings(v **types.SpaceIdleSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpaceIdleSettings
+	if *v == nil {
+		sv = &types.SpaceIdleSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IdleTimeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IdleTimeoutInMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IdleTimeoutInMinutes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSpaceJupyterLabAppSettings(v **types.SpaceJupyterLabAppSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -74867,6 +75077,11 @@ func awsAwsjson11_deserializeDocumentSpaceJupyterLabAppSettings(v **types.SpaceJ
 
 	for key, value := range shape {
 		switch key {
+		case "AppLifecycleManagement":
+			if err := awsAwsjson11_deserializeDocumentSpaceAppLifecycleManagement(&sv.AppLifecycleManagement, value); err != nil {
+				return err
+			}
+
 		case "CodeRepositories":
 			if err := awsAwsjson11_deserializeDocumentCodeRepositories(&sv.CodeRepositories, value); err != nil {
 				return err

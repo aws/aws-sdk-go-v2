@@ -1255,6 +1255,16 @@ type AppImageConfigDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Settings that are used to configure and manage the lifecycle of Amazon
+// SageMaker Studio applications.
+type AppLifecycleManagement struct {
+
+	// Settings related to idle shutdown of Studio applications.
+	IdleSettings *IdleSettings
+
+	noSmithyDocumentSerde
+}
+
 // Configuration to run a processing job in a specified container image.
 type AppSpecification struct {
 
@@ -3492,6 +3502,10 @@ type CodeEditorAppImageConfig struct {
 //
 // [Get started with Code Editor in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html
 type CodeEditorAppSettings struct {
+
+	// Settings that are used to configure and manage the lifecycle of CodeEditor
+	// applications.
+	AppLifecycleManagement *AppLifecycleManagement
 
 	// A list of custom SageMaker images that are configured to run as a Code Editor
 	// app.
@@ -8606,6 +8620,27 @@ type IdentityProviderOAuthSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Settings related to idle shutdown of Studio applications.
+type IdleSettings struct {
+
+	// The time that SageMaker waits after the application becomes idle before
+	// shutting it down.
+	IdleTimeoutInMinutes *int32
+
+	// Indicates whether idle shutdown is activated for the application type.
+	LifecycleManagement LifecycleManagement
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the
+	// user.
+	MaxIdleTimeoutInMinutes *int32
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the
+	// user.
+	MinIdleTimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // A SageMaker image. A SageMaker image represents a set of container images that
 // are derived from a common base container image. Each of these container images
 // is represented by a SageMaker ImageVersion .
@@ -9519,6 +9554,9 @@ type JupyterLabAppImageConfig struct {
 
 // The settings for the JupyterLab application.
 type JupyterLabAppSettings struct {
+
+	// Indicates whether idle shutdown is activated for JupyterLab applications.
+	AppLifecycleManagement *AppLifecycleManagement
 
 	// A list of Git repositories that SageMaker automatically displays to users for
 	// cloning in the JupyterLab application.
@@ -16541,8 +16579,22 @@ type SourceIpConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Settings that are used to configure and manage the lifecycle of Amazon
+// SageMaker Studio applications in a space.
+type SpaceAppLifecycleManagement struct {
+
+	// Settings related to idle shutdown of Studio applications.
+	IdleSettings *SpaceIdleSettings
+
+	noSmithyDocumentSerde
+}
+
 // The application settings for a Code Editor space.
 type SpaceCodeEditorAppSettings struct {
+
+	// Settings that are used to configure and manage the lifecycle of CodeEditor
+	// applications in a space.
+	AppLifecycleManagement *SpaceAppLifecycleManagement
 
 	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
 	// instance type that the version runs on.
@@ -16584,8 +16636,22 @@ type SpaceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Settings related to idle shutdown of Studio applications in a space.
+type SpaceIdleSettings struct {
+
+	// The time that SageMaker waits after the application becomes idle before
+	// shutting it down.
+	IdleTimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // The settings for the JupyterLab application within a space.
 type SpaceJupyterLabAppSettings struct {
+
+	// Settings that are used to configure and manage the lifecycle of JupyterLab
+	// applications in a space.
+	AppLifecycleManagement *SpaceAppLifecycleManagement
 
 	// A list of Git repositories that SageMaker automatically displays to users for
 	// cloning in the JupyterLab application.

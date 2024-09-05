@@ -28,3 +28,24 @@ func ExampleInterval_outputUsage() {
 
 var _ *types.RollingInterval
 var _ *types.CalendarInterval
+
+func ExampleMonitoredRequestCountMetricDataQueries_outputUsage() {
+	var union types.MonitoredRequestCountMetricDataQueries
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MonitoredRequestCountMetricDataQueriesMemberBadCountMetric:
+		_ = v.Value // Value is []types.MetricDataQuery
+
+	case *types.MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric:
+		_ = v.Value // Value is []types.MetricDataQuery
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.MetricDataQuery

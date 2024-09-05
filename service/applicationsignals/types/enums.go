@@ -6,8 +6,10 @@ type DurationUnit string
 
 // Enum values for DurationUnit
 const (
-	DurationUnitDay   DurationUnit = "DAY"
-	DurationUnitMonth DurationUnit = "MONTH"
+	DurationUnitMinute DurationUnit = "MINUTE"
+	DurationUnitHour   DurationUnit = "HOUR"
+	DurationUnitDay    DurationUnit = "DAY"
+	DurationUnitMonth  DurationUnit = "MONTH"
 )
 
 // Values returns all known values for DurationUnit. Note that this can be
@@ -16,8 +18,29 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DurationUnit) Values() []DurationUnit {
 	return []DurationUnit{
+		"MINUTE",
+		"HOUR",
 		"DAY",
 		"MONTH",
+	}
+}
+
+type EvaluationType string
+
+// Enum values for EvaluationType
+const (
+	EvaluationTypePeriodBased  EvaluationType = "PeriodBased"
+	EvaluationTypeRequestBased EvaluationType = "RequestBased"
+)
+
+// Values returns all known values for EvaluationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationType) Values() []EvaluationType {
+	return []EvaluationType{
+		"PeriodBased",
+		"RequestBased",
 	}
 }
 

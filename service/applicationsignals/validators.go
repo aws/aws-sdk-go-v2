@@ -498,6 +498,71 @@ func validateMetricStat(v *types.MetricStat) error {
 	}
 }
 
+func validateMonitoredRequestCountMetricDataQueries(v types.MonitoredRequestCountMetricDataQueries) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoredRequestCountMetricDataQueries"}
+	switch uv := v.(type) {
+	case *types.MonitoredRequestCountMetricDataQueriesMemberBadCountMetric:
+		if err := validateMetricDataQueries(uv.Value); err != nil {
+			invalidParams.AddNested("[BadCountMetric]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric:
+		if err := validateMetricDataQueries(uv.Value); err != nil {
+			invalidParams.AddNested("[GoodCountMetric]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestBasedServiceLevelIndicatorConfig(v *types.RequestBasedServiceLevelIndicatorConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestBasedServiceLevelIndicatorConfig"}
+	if v.RequestBasedSliMetricConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestBasedSliMetricConfig"))
+	} else if v.RequestBasedSliMetricConfig != nil {
+		if err := validateRequestBasedServiceLevelIndicatorMetricConfig(v.RequestBasedSliMetricConfig); err != nil {
+			invalidParams.AddNested("RequestBasedSliMetricConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestBasedServiceLevelIndicatorMetricConfig(v *types.RequestBasedServiceLevelIndicatorMetricConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestBasedServiceLevelIndicatorMetricConfig"}
+	if v.TotalRequestCountMetric != nil {
+		if err := validateMetricDataQueries(v.TotalRequestCountMetric); err != nil {
+			invalidParams.AddNested("TotalRequestCountMetric", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonitoredRequestCountMetric != nil {
+		if err := validateMonitoredRequestCountMetricDataQueries(v.MonitoredRequestCountMetric); err != nil {
+			invalidParams.AddNested("MonitoredRequestCountMetric", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRollingInterval(v *types.RollingInterval) error {
 	if v == nil {
 		return nil
@@ -619,11 +684,14 @@ func validateOpCreateServiceLevelObjectiveInput(v *CreateServiceLevelObjectiveIn
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.SliConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SliConfig"))
-	} else if v.SliConfig != nil {
+	if v.SliConfig != nil {
 		if err := validateServiceLevelIndicatorConfig(v.SliConfig); err != nil {
 			invalidParams.AddNested("SliConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RequestBasedSliConfig != nil {
+		if err := validateRequestBasedServiceLevelIndicatorConfig(v.RequestBasedSliConfig); err != nil {
+			invalidParams.AddNested("RequestBasedSliConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Goal != nil {
@@ -841,6 +909,11 @@ func validateOpUpdateServiceLevelObjectiveInput(v *UpdateServiceLevelObjectiveIn
 	if v.SliConfig != nil {
 		if err := validateServiceLevelIndicatorConfig(v.SliConfig); err != nil {
 			invalidParams.AddNested("SliConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RequestBasedSliConfig != nil {
+		if err := validateRequestBasedServiceLevelIndicatorConfig(v.RequestBasedSliConfig); err != nil {
+			invalidParams.AddNested("RequestBasedSliConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Goal != nil {

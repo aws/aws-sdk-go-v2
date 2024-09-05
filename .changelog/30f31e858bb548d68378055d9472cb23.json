@@ -1,0 +1,8 @@
+{
+    "id": "30f31e85-8bb5-48d6-8378-055d9472cb23",
+    "type": "feature",
+    "description": "Amazon GameLift provides additional events for tracking the fleet creation process.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

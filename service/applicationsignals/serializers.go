@@ -182,6 +182,13 @@ func awsRestjson1_serializeOpDocumentCreateServiceLevelObjectiveInput(v *CreateS
 		ok.String(*v.Name)
 	}
 
+	if v.RequestBasedSliConfig != nil {
+		ok := object.Key("RequestBasedSliConfig")
+		if err := awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorConfig(v.RequestBasedSliConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SliConfig != nil {
 		ok := object.Key("SliConfig")
 		if err := awsRestjson1_serializeDocumentServiceLevelIndicatorConfig(v.SliConfig, ok); err != nil {
@@ -1242,6 +1249,13 @@ func awsRestjson1_serializeOpDocumentUpdateServiceLevelObjectiveInput(v *UpdateS
 		}
 	}
 
+	if v.RequestBasedSliConfig != nil {
+		ok := object.Key("RequestBasedSliConfig")
+		if err := awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorConfig(v.RequestBasedSliConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SliConfig != nil {
 		ok := object.Key("SliConfig")
 		if err := awsRestjson1_serializeDocumentServiceLevelIndicatorConfig(v.SliConfig, ok); err != nil {
@@ -1494,6 +1508,105 @@ func awsRestjson1_serializeDocumentMetricStat(v *types.MetricStat, value smithyj
 	if len(v.Unit) > 0 {
 		ok := object.Key("Unit")
 		ok.String(string(v.Unit))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMonitoredRequestCountMetricDataQueries(v types.MonitoredRequestCountMetricDataQueries, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.MonitoredRequestCountMetricDataQueriesMemberBadCountMetric:
+		av := object.Key("BadCountMetric")
+		if err := awsRestjson1_serializeDocumentMetricDataQueries(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.MonitoredRequestCountMetricDataQueriesMemberGoodCountMetric:
+		av := object.Key("GoodCountMetric")
+		if err := awsRestjson1_serializeDocumentMetricDataQueries(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorConfig(v *types.RequestBasedServiceLevelIndicatorConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonOperator) > 0 {
+		ok := object.Key("ComparisonOperator")
+		ok.String(string(v.ComparisonOperator))
+	}
+
+	if v.MetricThreshold != nil {
+		ok := object.Key("MetricThreshold")
+		switch {
+		case math.IsNaN(*v.MetricThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MetricThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MetricThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MetricThreshold)
+
+		}
+	}
+
+	if v.RequestBasedSliMetricConfig != nil {
+		ok := object.Key("RequestBasedSliMetricConfig")
+		if err := awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorMetricConfig(v.RequestBasedSliMetricConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRequestBasedServiceLevelIndicatorMetricConfig(v *types.RequestBasedServiceLevelIndicatorMetricConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyAttributes != nil {
+		ok := object.Key("KeyAttributes")
+		if err := awsRestjson1_serializeDocumentAttributes(v.KeyAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MetricType) > 0 {
+		ok := object.Key("MetricType")
+		ok.String(string(v.MetricType))
+	}
+
+	if v.MonitoredRequestCountMetric != nil {
+		ok := object.Key("MonitoredRequestCountMetric")
+		if err := awsRestjson1_serializeDocumentMonitoredRequestCountMetricDataQueries(v.MonitoredRequestCountMetric, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OperationName != nil {
+		ok := object.Key("OperationName")
+		ok.String(*v.OperationName)
+	}
+
+	if v.TotalRequestCountMetric != nil {
+		ok := object.Key("TotalRequestCountMetric")
+		if err := awsRestjson1_serializeDocumentMetricDataQueries(v.TotalRequestCountMetric, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -241,15 +241,16 @@ type CreateFleetInput struct {
 	// [Communicate with other Amazon Web Services resources from your fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
 	InstanceRoleCredentialsProvider types.InstanceRoleCredentialsProvider
 
-	// A set of remote locations to deploy additional instances to and manage as part
-	// of the fleet. This parameter can only be used when creating fleets in Amazon Web
-	// Services Regions that support multiple locations. You can add any Amazon
-	// GameLift-supported Amazon Web Services Region as a remote location, in the form
-	// of an Amazon Web Services Region code, such as us-west-2 or Local Zone code. To
-	// create a fleet with instances in the home Region only, don't set this parameter.
+	// A set of remote locations to deploy additional instances to and manage as a
+	// multi-location fleet. Use this parameter when creating a fleet in Amazon Web
+	// Services Regions that support multiple locations. You can add any Amazon Web
+	// Services Region or Local Zone that's supported by Amazon GameLift. Provide a
+	// list of one or more Amazon Web Services Region codes, such as us-west-2 , or
+	// Local Zone names. When using this parameter, Amazon GameLift requires you to
+	// include your home location in the request. For a list of supported Regions and
+	// Local Zones, see [Amazon GameLift service locations]for managed hosting.
 	//
-	// When using this parameter, Amazon GameLift requires you to include your home
-	// location in the request.
+	// [Amazon GameLift service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 	Locations []types.LocationConfiguration
 
 	//  This parameter is no longer used. To specify where Amazon GameLift should

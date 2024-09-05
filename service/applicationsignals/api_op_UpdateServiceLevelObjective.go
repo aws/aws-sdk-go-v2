@@ -13,6 +13,9 @@ import (
 
 // Updates an existing service level objective (SLO). If you omit parameters, the
 // previous values of those parameters are retained.
+//
+// You cannot change from a period-based SLO to a request-based SLO, or change
+// from a request-based SLO to a period-based SLO.
 func (c *Client) UpdateServiceLevelObjective(ctx context.Context, params *UpdateServiceLevelObjectiveInput, optFns ...func(*Options)) (*UpdateServiceLevelObjectiveOutput, error) {
 	if params == nil {
 		params = &UpdateServiceLevelObjectiveInput{}
@@ -43,8 +46,15 @@ type UpdateServiceLevelObjectiveInput struct {
 	// This includes the time period for evaluation and the attainment threshold.
 	Goal *types.Goal
 
-	// A structure that contains information about what performance metric this SLO
-	// will monitor.
+	// If this SLO is a request-based SLO, this structure defines the information
+	// about what performance metric this SLO will monitor.
+	//
+	// You can't specify both SliConfig and RequestBasedSliConfig in the same
+	// operation.
+	RequestBasedSliConfig *types.RequestBasedServiceLevelIndicatorConfig
+
+	// If this SLO is a period-based SLO, this structure defines the information about
+	// what performance metric this SLO will monitor.
 	SliConfig *types.ServiceLevelIndicatorConfig
 
 	noSmithyDocumentSerde

@@ -15,11 +15,11 @@ import (
 // Use this operation to retrieve one or more service level objective (SLO) budget
 // reports.
 //
-// An error budget is the amount of time in unhealthy periods that your service
-// can accumulate during an interval before your overall SLO budget health is
-// breached and the SLO is considered to be unmet. For example, an SLO with a
-// threshold of 99.95% and a monthly interval translates to an error budget of 21.9
-// minutes of downtime in a 30-day month.
+// An error budget is the amount of time or requests in an unhealthy state that
+// your service can accumulate during an interval before your overall SLO budget
+// health is breached and the SLO is considered to be unmet. For example, an SLO
+// with a threshold of 99.95% and a monthly interval translates to an error budget
+// of 21.9 minutes of downtime in a 30-day month.
 //
 // Budget reports include a health indicator, the attainment value, and remaining
 // budget.

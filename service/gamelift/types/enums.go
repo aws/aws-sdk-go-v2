@@ -651,6 +651,8 @@ const (
 	EventCodeFleetVpcPeeringDeleted                     EventCode = "FLEET_VPC_PEERING_DELETED"
 	EventCodeInstanceInterrupted                        EventCode = "INSTANCE_INTERRUPTED"
 	EventCodeInstanceRecycled                           EventCode = "INSTANCE_RECYCLED"
+	EventCodeFleetCreationCompletedInstaller            EventCode = "FLEET_CREATION_COMPLETED_INSTALLER"
+	EventCodeFleetCreationFailedInstaller               EventCode = "FLEET_CREATION_FAILED_INSTALLER"
 )
 
 // Values returns all known values for EventCode. Note that this can be expanded
@@ -693,6 +695,8 @@ func (EventCode) Values() []EventCode {
 		"FLEET_VPC_PEERING_DELETED",
 		"INSTANCE_INTERRUPTED",
 		"INSTANCE_RECYCLED",
+		"FLEET_CREATION_COMPLETED_INSTALLER",
+		"FLEET_CREATION_FAILED_INSTALLER",
 	}
 }
 

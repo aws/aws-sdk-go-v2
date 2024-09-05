@@ -2051,21 +2051,12 @@ type RuleType struct {
 type RuleTypeId struct {
 
 	// A category defines what kind of rule can be run in the stage, and constrains
-	// the provider type for the rule. Valid categories are limited to one of the
-	// following values.
-	//
-	//   - INVOKE
-	//
-	//   - Approval
-	//
-	//   - Rule
+	// the provider type for the rule. The valid category is Rule .
 	//
 	// This member is required.
 	Category RuleCategory
 
-	// The provider of the service being called by the rule. Valid providers are
-	// determined by the rulecategory. For example, a managed rule in the Rule category
-	// type has an owner of AWS, which would be specified as AWS .
+	// The rule provider, such as the DeploymentWindow rule.
 	//
 	// This member is required.
 	Provider *string
@@ -2465,6 +2456,16 @@ type WebhookAuthConfiguration struct {
 
 	// The property used to configure GitHub authentication. For GITHUB_HMAC, only the
 	// SecretToken property must be set.
+	//
+	// When creating CodePipeline webhooks, do not use your own credentials or reuse
+	// the same secret token across multiple webhooks. For optimal security, generate a
+	// unique secret token for each webhook you create. The secret token is an
+	// arbitrary string that you provide, which GitHub uses to compute and sign the
+	// webhook payloads sent to CodePipeline, for protecting the integrity and
+	// authenticity of the webhook payloads. Using your own credentials or reusing the
+	// same token across multiple webhooks can lead to security vulnerabilities.
+	//
+	// If a secret token was provided, it will be redacted in the response.
 	SecretToken *string
 
 	noSmithyDocumentSerde
@@ -2474,6 +2475,16 @@ type WebhookAuthConfiguration struct {
 type WebhookDefinition struct {
 
 	// Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.
+	//
+	// When creating CodePipeline webhooks, do not use your own credentials or reuse
+	// the same secret token across multiple webhooks. For optimal security, generate a
+	// unique secret token for each webhook you create. The secret token is an
+	// arbitrary string that you provide, which GitHub uses to compute and sign the
+	// webhook payloads sent to CodePipeline, for protecting the integrity and
+	// authenticity of the webhook payloads. Using your own credentials or reusing the
+	// same token across multiple webhooks can lead to security vulnerabilities.
+	//
+	// If a secret token was provided, it will be redacted in the response.
 	//
 	//   - For information about the authentication scheme implemented by GITHUB_HMAC,
 	//   see [Securing your webhooks]on the GitHub Developer website.

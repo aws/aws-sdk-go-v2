@@ -34,6 +34,9 @@ import (
 //
 // [Setting up Amazon GameLift fleets]
 //
+// [Amazon GameLift service locations]for managed hosting
+//
+// [Amazon GameLift service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 // [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DescribeFleetLocationAttributes(ctx context.Context, params *DescribeFleetLocationAttributesInput, optFns ...func(*Options)) (*DescribeFleetLocationAttributesOutput, error) {
 	if params == nil {

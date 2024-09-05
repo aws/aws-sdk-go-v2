@@ -149,6 +149,14 @@ type Build struct {
 
 	// Operating system that the game server binaries are built to run on. This value
 	// determines the type of fleet resources that you can use for this build.
+	//
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
+	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
+	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	//
+	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
+	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// The Amazon GameLift Server SDK version used to develop your game server.
@@ -289,6 +297,14 @@ type Compute struct {
 	Location *string
 
 	// The type of operating system on the compute resource.
+	//
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
+	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
+	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	//
+	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
+	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// The Amazon EC2 instance type that the fleet uses. For registered computes in an
@@ -683,6 +699,14 @@ type ContainerGroupDefinition struct {
 	Name *string
 
 	// The platform required for all containers in the container group definition.
+	//
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
+	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
+	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	//
+	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
+	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem ContainerOperatingSystem
 
 	// The method for deploying the container group across fleet instances. A replica
@@ -875,7 +899,7 @@ type ContainerGroupsConfiguration struct {
 //   - If no desired value is set, Amazon GameLift places the calculated maximum.
 //
 //   - If a desired number is set to a value higher than the calculated maximum,
-//     Amazon GameLift places the calculated maximum.
+//     fleet creation fails..
 //
 //   - If a desired number is set to a value lower than the calculated maximum,
 //     Amazon GameLift places the desired number.
@@ -1121,20 +1145,19 @@ type Event struct {
 	//   NEW . Event messaging includes the fleet ID.
 	//
 	//   - FLEET_STATE_DOWNLOADING -- Fleet status changed from NEW to DOWNLOADING .
-	//   The compressed build has started downloading to a fleet instance for
-	//   installation.
+	//   Amazon GameLift is downloading the compressed build and running install scripts.
 	//
 	//   - FLEET_STATE_VALIDATING -- Fleet status changed from DOWNLOADING to
-	//   VALIDATING . Amazon GameLift has successfully downloaded the build and is now
+	//   VALIDATING . Amazon GameLift has successfully installed build and is now
 	//   validating the build files.
 	//
 	//   - FLEET_STATE_BUILDING -- Fleet status changed from VALIDATING to BUILDING .
-	//   Amazon GameLift has successfully verified the build files and is now running the
-	//   installation scripts.
+	//   Amazon GameLift has successfully verified the build files and is now launching a
+	//   fleet instance.
 	//
 	//   - FLEET_STATE_ACTIVATING -- Fleet status changed from BUILDING to ACTIVATING .
-	//   Amazon GameLift is trying to launch an instance and test the connectivity
-	//   between the build and the Amazon GameLift Service via the Server SDK.
+	//   Amazon GameLift is launching a game server process on the fleet instance and is
+	//   testing its connectivity with the Amazon GameLift service.
 	//
 	//   - FLEET_STATE_ACTIVE -- The fleet's status changed from ACTIVATING to ACTIVE .
 	//   The fleet is now ready to host game sessions.
@@ -1148,18 +1171,25 @@ type Event struct {
 	//   instance.
 	//
 	//   - FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully
-	//   downloaded to an instance, and the build files are now being extracted from the
-	//   uploaded build and saved to an instance. Failure at this stage prevents a fleet
-	//   from moving to ACTIVE status. Logs for this stage display a list of the files
-	//   that are extracted and saved on the instance. Access the logs by using the URL
-	//   in PreSignedLogUrl.
+	//   downloaded to an instance, and Amazon GameLiftis now extracting the build files
+	//   from the uploaded build. Failure at this stage prevents a fleet from moving to
+	//   ACTIVE status. Logs for this stage display a list of the files that are
+	//   extracted and saved on the instance. Access the logs by using the URL in
+	//   PreSignedLogUrl.
 	//
 	//   - FLEET_CREATION_RUNNING_INSTALLER -- The game server build files were
-	//   successfully extracted, and the GameLift is now running the build's install
+	//   successfully extracted, and Amazon GameLift is now running the build's install
 	//   script (if one is included). Failure in this stage prevents a fleet from moving
 	//   to ACTIVE status. Logs for this stage list the installation steps and whether or
 	//   not the install completed successfully. Access the logs by using the URL in
 	//   PreSignedLogUrl.
+	//
+	//   - FLEET_CREATION_COMPLETED_INSTALLER -- The game server build files were
+	//   successfully installed and validation of the installation will begin soon.
+	//
+	//   - FLEET_CREATION_FAILED_INSTALLER -- The installed failed while attempting to
+	//   install the build files. This event indicates that the failure occurred before
+	//   Amazon GameLift could start validation.
 	//
 	//   - FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was
 	//   successful, and the GameLift is now verifying that the game server launch paths,
@@ -1449,6 +1479,14 @@ type FleetAttributes struct {
 	// system is determined by the OS of the build or script that is deployed on this
 	// fleet. This attribute is used with fleets where ComputeType is "EC2" or
 	// "Container".
+	//
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
+	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
+	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	//
+	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
+	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// A policy that puts limits on the number of game sessions that a player can
@@ -1474,7 +1512,7 @@ type FleetAttributes struct {
 	ScriptId *string
 
 	//  This parameter is no longer used. Server launch parameters are now defined
-	// using the fleet's runtime configuration . Requests that use this parameter
+	// using the fleet's runtime configuration. Requests that use this parameter
 	// continue to be valid.
 	ServerLaunchParameters *string
 
@@ -1486,13 +1524,17 @@ type FleetAttributes struct {
 
 	// Current status of the fleet. Possible fleet statuses include the following:
 	//
-	//   - NEW -- A new fleet has been defined and desired instances is set to 1.
+	//   - NEW -- A new fleet resource has been defined and Amazon GameLift has
+	//   started creating the fleet. Desired instances is set to 1.
 	//
-	//   - DOWNLOADING/VALIDATING/BUILDING/ACTIVATING -- Amazon GameLift is setting up
-	//   the new fleet, creating new instances with the game build or Realtime script and
-	//   starting server processes.
+	//   - DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift is download the game
+	//   server build, running install scripts, and then validating the build files. When
+	//   complete, Amazon GameLift launches a fleet instance.
 	//
-	//   - ACTIVE -- Hosts can now accept game sessions.
+	//   - ACTIVATING -- Amazon GameLift is launching a game server process and
+	//   testing its connectivity with the Amazon GameLift service.
+	//
+	//   - ACTIVE -- The fleet is now ready to host game sessions.
 	//
 	//   - ERROR -- An error occurred when downloading, validating, building, or
 	//   activating the fleet.
@@ -2276,6 +2318,14 @@ type Instance struct {
 	Location *string
 
 	// Operating system that is running on this EC2 instance.
+	//
+	// Amazon Linux 2 (AL2) will reach end of support on 6/30/2025. See more details
+	// in the [Amazon Linux 2 FAQs]. For game servers that are hosted on AL2 and use Amazon GameLift server
+	// SDK 4.x., first update the game server build to server SDK 5.x, and then deploy
+	// to AL2023 instances. See [Migrate to Amazon GameLift server SDK version 5.]
+	//
+	// [Amazon Linux 2 FAQs]: https://aws.amazon.com/amazon-linux-2/faqs/
+	// [Migrate to Amazon GameLift server SDK version 5.]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html
 	OperatingSystem OperatingSystem
 
 	// Current status of the instance. Possible statuses include the following:
@@ -2459,7 +2509,10 @@ type LocationAttributes struct {
 // hosting.
 type LocationConfiguration struct {
 
-	// An Amazon Web Services Region code, such as us-west-2 .
+	// An Amazon Web Services Region code, such as us-west-2 . For a list of supported
+	// Regions and Local Zones, see [Amazon GameLift service locations]for managed hosting.
+	//
+	// [Amazon GameLift service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 	//
 	// This member is required.
 	Location *string
@@ -2468,9 +2521,7 @@ type LocationConfiguration struct {
 }
 
 // Properties of a custom location for use in an Amazon GameLift Anywhere fleet.
-// This data type is returned in response to a call to [https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateLocation.html].
-//
-// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateLocation.html]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateLocation.html
+// This data type is returned in response to a call to CreateLocation.
 type LocationModel struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift location
