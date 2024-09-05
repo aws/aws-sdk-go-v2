@@ -1,3 +1,19 @@
+# Release (2024-09-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.4.0](service/applicationsignals/CHANGELOG.md#v140-2024-09-05)
+  * **Feature**: Amazon CloudWatch Application Signals now supports creating Service Level Objectives using a new calculation type. Users can now create SLOs which are configured with request-based SLIs to help meet their specific business requirements.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.31.4](service/codepipeline/CHANGELOG.md#v1314-2024-09-05)
+  * **Documentation**: Updates to add recent notes to APIs and to replace example S3 bucket names globally.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.109.0](service/connect/CHANGELOG.md#v11090-2024-09-05)
+  * **Feature**: Amazon Connect Custom Vocabulary now supports Catalan (Spain), Danish (Denmark), Dutch (Netherlands), Finnish (Finland), Indonesian (Indonesia), Malay (Malaysia), Norwegian Bokmal (Norway), Polish (Poland), Swedish (Sweden), and Tagalog/Filipino (Philippines).
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.34.0](service/gamelift/CHANGELOG.md#v1340-2024-09-05)
+  * **Feature**: Amazon GameLift provides additional events for tracking the fleet creation process.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.29.0](service/kinesisanalyticsv2/CHANGELOG.md#v1290-2024-09-05)
+  * **Feature**: Support for Flink 1.20 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.156.0](service/sagemaker/CHANGELOG.md#v11560-2024-09-05)
+  * **Feature**: Amazon SageMaker now supports idle shutdown of JupyterLab and CodeEditor applications on SageMaker Studio.
+
 # Release (2024-09-04)
 
 ## General Highlights

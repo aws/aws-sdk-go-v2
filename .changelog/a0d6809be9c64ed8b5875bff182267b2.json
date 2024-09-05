@@ -1,8 +1,0 @@
-{
-    "id": "a0d6809b-e9c6-4ed8-b587-5bff182267b2",
-    "type": "documentation",
-    "description": "Updates to add recent notes to APIs and to replace example S3 bucket names globally.",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

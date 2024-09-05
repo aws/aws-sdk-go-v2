@@ -1,3 +1,7 @@
+# v1.29.0 (2024-09-05)
+
+* **Feature**: Support for Flink 1.20 in Managed Service for Apache Flink
+
 # v1.28.5 (2024-09-04)
 
 * No change notes available for this release.

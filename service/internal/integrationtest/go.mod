@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.42.3
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.27.7
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.31.3
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.31.4
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.43.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.48.7
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.26.6
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.42.6
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.33.7
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.32.4
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.33.6
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.24.6
 	github.com/aws/aws-sdk-go-v2/service/glue v1.95.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.26.6

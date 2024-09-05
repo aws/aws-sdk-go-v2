@@ -1,3 +1,7 @@
+# v1.31.4 (2024-09-05)
+
+* **Documentation**: Updates to add recent notes to APIs and to replace example S3 bucket names globally.
+
 # v1.31.3 (2024-09-04)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "ea0d25f1-3a09-44a1-b42e-49cff11d9df6",
-    "type": "feature",
-    "description": "Amazon CloudWatch Application Signals now supports creating Service Level Objectives using a new calculation type. Users can now create SLOs which are configured with request-based SLIs to help meet their specific business requirements.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

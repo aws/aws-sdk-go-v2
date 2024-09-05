@@ -1,3 +1,7 @@
+# v1.34.0 (2024-09-05)
+
+* **Feature**: Amazon GameLift provides additional events for tracking the fleet creation process.
+
 # v1.33.6 (2024-09-04)
 
 * No change notes available for this release.

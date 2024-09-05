@@ -1,3 +1,7 @@
+# v1.109.0 (2024-09-05)
+
+* **Feature**: Amazon Connect Custom Vocabulary now supports Catalan (Spain), Danish (Denmark), Dutch (Netherlands), Finnish (Finland), Indonesian (Indonesia), Malay (Malaysia), Norwegian Bokmal (Norway), Polish (Poland), Swedish (Sweden), and Tagalog/Filipino (Philippines).
+
 # v1.108.1 (2024-09-04)
 
 * No change notes available for this release.

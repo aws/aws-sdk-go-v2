@@ -1,3 +1,7 @@
+# v1.4.0 (2024-09-05)
+
+* **Feature**: Amazon CloudWatch Application Signals now supports creating Service Level Objectives using a new calculation type. Users can now create SLOs which are configured with request-based SLIs to help meet their specific business requirements.
+
 # v1.3.3 (2024-09-04)
 
 * No change notes available for this release.
