@@ -2017,6 +2017,20 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AppLifecycleManagement": {
+            "type": "structure",
+            "members": {
+                "IdleSettings": {
+                    "target": "com.amazonaws.sagemaker#IdleSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings related to idle shutdown of Studio applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio applications.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#AppList": {
             "type": "list",
             "member": {
@@ -6677,7 +6691,7 @@
                     }
                 },
                 "ExecutionRole": {
-                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "target": "com.amazonaws.sagemaker#IAMRoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The execution role for the instance group to assume.</p>"
                     }
@@ -6751,7 +6765,7 @@
                     }
                 },
                 "ExecutionRole": {
-                    "target": "com.amazonaws.sagemaker#RoleArn",
+                    "target": "com.amazonaws.sagemaker#IAMRoleArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies an IAM execution role to be assumed by the instance group.</p>",
@@ -7484,6 +7498,12 @@
                     "target": "com.amazonaws.sagemaker#LifecycleConfigArns",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Code Editor application \n      lifecycle configuration.</p>"
+                    }
+                },
+                "AppLifecycleManagement": {
+                    "target": "com.amazonaws.sagemaker#AppLifecycleManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor applications.</p>\n         <p></p>"
                     }
                 }
             },
@@ -32128,6 +32148,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#IAMRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/[\\w+=,.@-]{1,64}$"
+            }
+        },
         "com.amazonaws.sagemaker#IamIdentity": {
             "type": "structure",
             "members": {
@@ -32218,6 +32248,47 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#IdleSettings": {
+            "type": "structure",
+            "members": {
+                "LifecycleManagement": {
+                    "target": "com.amazonaws.sagemaker#LifecycleManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether idle shutdown is activated for the application type.</p>"
+                    }
+                },
+                "IdleTimeoutInMinutes": {
+                    "target": "com.amazonaws.sagemaker#IdleTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that SageMaker waits after the application becomes idle before shutting it down.</p>"
+                    }
+                },
+                "MinIdleTimeoutInMinutes": {
+                    "target": "com.amazonaws.sagemaker#IdleTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value in minutes that custom idle shutdown can be set to by the user.</p>"
+                    }
+                },
+                "MaxIdleTimeoutInMinutes": {
+                    "target": "com.amazonaws.sagemaker#IdleTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum value in minutes that custom idle shutdown can be set to by the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings related to idle shutdown of Studio applications.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#IdleTimeoutInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 525600
                 }
             }
         },
@@ -35259,6 +35330,12 @@
                         "smithy.api#documentation": "<p>A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.</p>"
                     }
                 },
+                "AppLifecycleManagement": {
+                    "target": "com.amazonaws.sagemaker#AppLifecycleManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether idle shutdown is activated for JupyterLab applications.</p>"
+                    }
+                },
                 "EmrSettings": {
                     "target": "com.amazonaws.sagemaker#EmrSettings",
                     "traits": {
@@ -36045,6 +36122,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.sagemaker#StudioLifecycleConfigArn"
+            }
+        },
+        "com.amazonaws.sagemaker#LifecycleManagement": {
+            "type": "enum",
+            "members": {
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "Disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#LineageEntityParameters": {
@@ -60631,6 +60725,20 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.sagemaker#SpaceAppLifecycleManagement": {
+            "type": "structure",
+            "members": {
+                "IdleSettings": {
+                    "target": "com.amazonaws.sagemaker#SpaceIdleSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings related to idle shutdown of Studio applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of Amazon SageMaker Studio applications in a space.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#SpaceArn": {
             "type": "string",
             "traits": {
@@ -60646,6 +60754,12 @@
             "members": {
                 "DefaultResourceSpec": {
                     "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "AppLifecycleManagement": {
+                    "target": "com.amazonaws.sagemaker#SpaceAppLifecycleManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor applications in a space.</p>"
+                    }
                 }
             },
             "traits": {
@@ -60723,6 +60837,20 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#SpaceIdleSettings": {
+            "type": "structure",
+            "members": {
+                "IdleTimeoutInMinutes": {
+                    "target": "com.amazonaws.sagemaker#IdleTimeoutInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that SageMaker waits after the application becomes idle before shutting it down.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings related to idle shutdown of Studio applications in a space.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#SpaceJupyterLabAppSettings": {
             "type": "structure",
             "members": {
@@ -60733,6 +60861,12 @@
                     "target": "com.amazonaws.sagemaker#CodeRepositories",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterLab application.</p>"
+                    }
+                },
+                "AppLifecycleManagement": {
+                    "target": "com.amazonaws.sagemaker#SpaceAppLifecycleManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space.</p>"
                     }
                 }
             },

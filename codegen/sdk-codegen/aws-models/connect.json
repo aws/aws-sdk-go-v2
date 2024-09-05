@@ -41268,6 +41268,66 @@
                     "traits": {
                         "smithy.api#enumValue": "en-ZA"
                     }
+                },
+                "CA_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-ES"
+                    }
+                },
+                "DA_DK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "da-DK"
+                    }
+                },
+                "FI_FI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fi-FI"
+                    }
+                },
+                "ID_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "id-ID"
+                    }
+                },
+                "MS_MY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ms-MY"
+                    }
+                },
+                "NL_NL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nl-NL"
+                    }
+                },
+                "NO_NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no-NO"
+                    }
+                },
+                "PL_PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pl-PL"
+                    }
+                },
+                "SV_SE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sv-SE"
+                    }
+                },
+                "TL_PH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tl-PH"
+                    }
                 }
             }
         },
