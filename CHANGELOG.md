@@ -1,3 +1,9 @@
+# Release (2024-09-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.1.0](service/qapps/CHANGELOG.md#v110-2024-09-06)
+  * **Feature**: Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.
+
 # Release (2024-09-05)
 
 ## Module Highlights

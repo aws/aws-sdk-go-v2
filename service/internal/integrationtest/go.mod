@@ -35,7 +35,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.45.4
 	github.com/aws/aws-sdk-go-v2/service/efs v1.31.6
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.9
-	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.5
+	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.26.7
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.35.1
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.30.7
@@ -63,7 +63,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.43.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.43.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.25.6
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.30.7
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.30.8
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.61.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.47.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.8

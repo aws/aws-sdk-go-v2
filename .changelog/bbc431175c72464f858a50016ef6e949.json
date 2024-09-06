@@ -1,8 +1,0 @@
-{
-    "id": "bbc43117-5c72-464f-858a-50016ef6e949",
-    "type": "feature",
-    "description": "Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.",
-    "modules": [
-        "service/qapps"
-    ]
-}

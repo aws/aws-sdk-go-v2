@@ -1,3 +1,7 @@
+# v1.1.0 (2024-09-06)
+
+* **Feature**: Adds UpdateLibraryItemMetadata api to change status of app for admin verification feature and returns isVerified field in any api returning the app or library item.
+
 # v1.0.5 (2024-09-04)
 
 * No change notes available for this release.
