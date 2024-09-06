@@ -314,6 +314,18 @@ func TestCheckSnapshot_UpdateLibraryItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLibraryItemMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLibraryItemMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLibraryItemMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateQApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateQApp(context.Background(), nil, func(o *Options) {
@@ -582,6 +594,18 @@ func TestUpdateSnapshot_UpdateLibraryItem(t *testing.T) {
 	_, err := svc.UpdateLibraryItem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLibraryItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLibraryItemMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLibraryItemMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLibraryItemMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

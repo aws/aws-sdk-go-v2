@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Updates the metadata and status of a library item for an Amazon Q App.
+// Updates the library item for an Amazon Q App.
 func (c *Client) UpdateLibraryItem(ctx context.Context, params *UpdateLibraryItemInput, optFns ...func(*Options)) (*UpdateLibraryItemOutput, error) {
 	if params == nil {
 		params = &UpdateLibraryItemInput{}
@@ -93,6 +93,9 @@ type UpdateLibraryItemOutput struct {
 
 	// Whether the current user has rated the library item.
 	IsRatedByUser *bool
+
+	// Indicates whether the library item has been verified.
+	IsVerified *bool
 
 	// The date and time the library item was last updated.
 	UpdatedAt *time.Time

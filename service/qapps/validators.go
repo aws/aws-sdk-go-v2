@@ -430,6 +430,26 @@ func (m *validateOpUpdateLibraryItem) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLibraryItemMetadata struct {
+}
+
+func (*validateOpUpdateLibraryItemMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLibraryItemMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLibraryItemMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLibraryItemMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateQApp struct {
 }
 
@@ -552,6 +572,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLibraryItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLibraryItem{}, middleware.After)
+}
+
+func addOpUpdateLibraryItemMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLibraryItemMetadata{}, middleware.After)
 }
 
 func addOpUpdateQAppValidationMiddleware(stack *middleware.Stack) error {
@@ -1307,6 +1331,24 @@ func validateOpUpdateLibraryItemInput(v *UpdateLibraryItemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLibraryItemInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.LibraryItemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LibraryItemId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLibraryItemMetadataInput(v *UpdateLibraryItemMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLibraryItemMetadataInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}

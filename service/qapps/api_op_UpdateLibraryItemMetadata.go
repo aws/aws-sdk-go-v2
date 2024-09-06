@@ -8,106 +8,62 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Creates a new library item for an Amazon Q App, allowing it to be discovered
-// and used by other allowed users.
-func (c *Client) CreateLibraryItem(ctx context.Context, params *CreateLibraryItemInput, optFns ...func(*Options)) (*CreateLibraryItemOutput, error) {
+// Updates the verification status of a library item for an Amazon Q App.
+func (c *Client) UpdateLibraryItemMetadata(ctx context.Context, params *UpdateLibraryItemMetadataInput, optFns ...func(*Options)) (*UpdateLibraryItemMetadataOutput, error) {
 	if params == nil {
-		params = &CreateLibraryItemInput{}
+		params = &UpdateLibraryItemMetadataInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateLibraryItem", params, optFns, c.addOperationCreateLibraryItemMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateLibraryItemMetadata", params, optFns, c.addOperationUpdateLibraryItemMetadataMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateLibraryItemOutput)
+	out := result.(*UpdateLibraryItemMetadataOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateLibraryItemInput struct {
-
-	// The unique identifier of the Amazon Q App to publish to the library.
-	//
-	// This member is required.
-	AppId *string
-
-	// The version of the Amazon Q App to publish to the library.
-	//
-	// This member is required.
-	AppVersion *int32
-
-	// The categories to associate with the library item for easier discovery.
-	//
-	// This member is required.
-	Categories []string
+type UpdateLibraryItemMetadataInput struct {
 
 	// The unique identifier of the Amazon Q Business application environment instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	noSmithyDocumentSerde
-}
-
-type CreateLibraryItemOutput struct {
-
-	// The date and time the library item was created.
-	//
-	// This member is required.
-	CreatedAt *time.Time
-
-	// The user who created the library item.
-	//
-	// This member is required.
-	CreatedBy *string
-
-	// The unique identifier of the new library item.
+	// The unique identifier of the updated library item.
 	//
 	// This member is required.
 	LibraryItemId *string
 
-	// The number of ratings the library item has received from users.
-	//
-	// This member is required.
-	RatingCount *int32
-
-	// The status of the new library item, such as "Published".
-	//
-	// This member is required.
-	Status *string
-
-	// Indicates whether the library item has been verified.
+	// The verification status of the library item
 	IsVerified *bool
 
-	// The date and time the library item was last updated.
-	UpdatedAt *time.Time
+	noSmithyDocumentSerde
+}
 
-	// The user who last updated the library item.
-	UpdatedBy *string
-
+type UpdateLibraryItemMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateLibraryItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateLibraryItemMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLibraryItem{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLibraryItemMetadata{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLibraryItem{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLibraryItemMetadata{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLibraryItem"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLibraryItemMetadata"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -156,10 +112,10 @@ func (c *Client) addOperationCreateLibraryItemMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateLibraryItemValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateLibraryItemMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLibraryItem(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLibraryItemMetadata(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -180,10 +136,10 @@ func (c *Client) addOperationCreateLibraryItemMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateLibraryItem(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateLibraryItemMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateLibraryItem",
+		OperationName: "UpdateLibraryItemMetadata",
 	}
 }

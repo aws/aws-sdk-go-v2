@@ -444,6 +444,9 @@ type LibraryItemMember struct {
 	// Whether the current user has rated the library item.
 	IsRatedByUser *bool
 
+	// Indicates whether the library item has been verified.
+	IsVerified *bool
+
 	// The date and time the library item was last updated.
 	UpdatedAt *time.Time
 
@@ -736,6 +739,9 @@ type UserAppItem struct {
 
 	// The description of the Q App.
 	Description *string
+
+	// Indicates whether the Q App has been verified.
+	IsVerified bool
 
 	// The status of the user's association with the Q App.
 	Status *string
