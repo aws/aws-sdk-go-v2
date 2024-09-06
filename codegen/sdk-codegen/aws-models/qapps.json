@@ -158,6 +158,9 @@
                     "target": "com.amazonaws.qapps#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.qapps#InternalServerException"
                 },
                 {
@@ -740,6 +743,7 @@
                             "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
                             "updatedAt": "2024-05-21T23:17:27.350Z",
                             "updatedBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
+                            "isVerified": false,
                             "ratingCount": 0
                         }
                     }
@@ -835,6 +839,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of ratings the library item has received from users.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "isVerified": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the library item has been verified.</p>"
                     }
                 }
             },
@@ -1233,6 +1243,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.qapps#InternalServerException"
@@ -1649,6 +1662,7 @@
                             ],
                             "status": "PUBLISHED",
                             "ratingCount": 0,
+                            "isVerified": false,
                             "isRatedByUser": false,
                             "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
                             "createdAt": "2024-05-08T16:09:56.080Z",
@@ -1777,6 +1791,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of users who have associated the Q App with their account.</p>"
+                    }
+                },
+                "isVerified": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the library item has been verified.</p>"
                     }
                 }
             },
@@ -2377,6 +2397,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of users who have the associated Q App.</p>"
                     }
+                },
+                "isVerified": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the library item has been verified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2456,6 +2482,7 @@
                                     "status": "PUBLISHED",
                                     "ratingCount": 3,
                                     "isRatedByUser": true,
+                                    "isVerified": false,
                                     "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
                                     "createdAt": "2024-05-21T23:17:27.350Z",
                                     "updatedBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
@@ -2475,6 +2502,7 @@
                                     "status": "PUBLISHED",
                                     "ratingCount": 5,
                                     "isRatedByUser": false,
+                                    "isVerified": false,
                                     "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
                                     "createdAt": "2024-05-08T16:09:56.080Z",
                                     "updatedBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
@@ -2494,6 +2522,7 @@
                                     "status": "PUBLISHED",
                                     "ratingCount": 8,
                                     "isRatedByUser": false,
+                                    "isVerified": false,
                                     "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
                                     "createdAt": "2024-05-07T22:57:59.327Z",
                                     "updatedBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
@@ -2617,7 +2646,8 @@
                                     "title": "App 1",
                                     "description": "Description 1",
                                     "createdAt": "2024-05-21T04:09:10.401Z",
-                                    "status": "DRAFT"
+                                    "status": "DRAFT",
+                                    "isVerified": false
                                 },
                                 {
                                     "appId": "dd178fd6-ad3d-49b3-a32d-e915cf423e37",
@@ -2625,7 +2655,8 @@
                                     "title": "App 2",
                                     "description": "Description 2",
                                     "createdAt": "2024-05-21T04:09:10.401Z",
-                                    "status": "PUBLISHED"
+                                    "status": "PUBLISHED",
+                                    "isVerified": true
                                 },
                                 {
                                     "appId": "3274b744-1a13-4aad-953f-eda2e4149e6e",
@@ -2633,7 +2664,8 @@
                                     "title": "App 3",
                                     "description": "Description 3",
                                     "createdAt": "2024-05-21T04:09:10.401Z",
-                                    "status": "DRAFT"
+                                    "status": "DRAFT",
+                                    "isVerified": false
                                 }
                             ],
                             "nextToken": "bXlzdGVyaW91c1BhZ2luYXRpb25Ub2tlbg=="
@@ -2654,7 +2686,8 @@
                                     "title": "App 4",
                                     "description": "Description 4",
                                     "createdAt": "2024-05-21T04:09:10.401Z",
-                                    "status": "PUBLISHED"
+                                    "status": "PUBLISHED",
+                                    "isVerified": true
                                 },
                                 {
                                     "appId": "c380a45d-bd77-45b0-a0e5-8a266c1d8bc4",
@@ -2662,7 +2695,8 @@
                                     "title": "App 5",
                                     "description": "Description 5",
                                     "createdAt": "2024-05-21T04:09:10.401Z",
-                                    "status": "PUBLISHED"
+                                    "status": "PUBLISHED",
+                                    "isVerified": false
                                 },
                                 {
                                     "appId": "afc4ee80-9722-4396-85a6-7aeaff52c177",
@@ -2670,7 +2704,8 @@
                                     "title": "App 6",
                                     "description": "Description 6",
                                     "createdAt": "2024-05-21T04:09:10.401Z",
-                                    "status": "PUBLISHED"
+                                    "status": "PUBLISHED",
+                                    "isVerified": false
                                 }
                             ],
                             "nextToken": "YW5vdGhlclRva2VuIQ=="
@@ -3119,6 +3154,9 @@
                     "target": "com.amazonaws.qapps#UpdateLibraryItem"
                 },
                 {
+                    "target": "com.amazonaws.qapps#UpdateLibraryItemMetadata"
+                },
+                {
                     "target": "com.amazonaws.qapps#UpdateQApp"
                 },
                 {
@@ -3135,7 +3173,7 @@
                     "name": "qapps"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Q Apps feature capability within Amazon Q Business allows web experience \n      users to create lightweight, purpose-built AI apps to fulfill specific tasks from \n      within their web experience. For example, users can create an Q Appthat exclusively \n      generates marketing-related content to improve your marketing team's productivity or a \n      Q App for marketing content-generation like writing customer emails and creating \n      promotional content using a certain style of voice, tone, and branding. \n      For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/purpose-built-qapps.html\">Amazon Q App</a> in the \n      <i>Amazon Q Business User Guide</i>. \n      </p>",
+                "smithy.api#documentation": "<p>The Amazon Q Apps feature capability within Amazon Q Business allows web experience \n      users to create lightweight, purpose-built AI apps to fulfill specific tasks from \n      within their web experience. For example, users can create a Q App that exclusively \n      generates marketing-related content to improve your marketing team's productivity or a \n      Q App for writing customer emails and creating promotional content using a certain \n      style of voice, tone, and branding. For more information on the capabilities, see \n      <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html#q-apps-actions\">Amazon Q Apps capabilities</a> in the <i>Amazon Q Business User Guide</i>. \n      </p>\n         <p>For an overview of the Amazon Q App APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_Operations_QApps.html\">Overview of \n      Amazon Q Apps API operations</a>.</p>\n         <p>For information about the IAM access control permissions you need to\n      use the Amazon Q Apps API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html\">\n        IAM role for the Amazon Q Business web experience including Amazon Q Apps</a> in the\n      <i>Amazon Q Business User Guide</i>.</p>",
                 "smithy.api#title": "QApps",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4560,7 +4598,8 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[^{}\\\\\"<>]+$"
             }
         },
         "com.amazonaws.qapps#UUID": {
@@ -4677,6 +4716,9 @@
                     "target": "com.amazonaws.qapps#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.qapps#InternalServerException"
                 },
                 {
@@ -4693,7 +4735,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the metadata and status of a library item for an Amazon Q App.</p>",
+                "smithy.api#documentation": "<p>Updates the library item for an Amazon Q App.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sets the status of a library item to DISABLED",
@@ -4721,6 +4763,7 @@
                                 }
                             ],
                             "status": "DISABLED",
+                            "isVerified": false,
                             "createdAt": "2024-05-21T23:17:27.350Z",
                             "createdBy": "a841e300-40c1-7062-fa34-5b46dadbbaac",
                             "updatedAt": "2024-05-28T19:43:48.577Z",
@@ -4763,6 +4806,85 @@
                     "target": "com.amazonaws.qapps#CategoryIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>The new categories to associate with the library item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#UpdateLibraryItemMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#UpdateLibraryItemMetadataInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the verification status of a library item for an Amazon Q App.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update a library item to be verified",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "libraryItemId": "cb9ecf72-8563-450d-9db9-994f98297316",
+                            "isVerified": true
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/catalog.updateItemMetadata"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qapps#UpdateLibraryItemMetadataInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "libraryItemId": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated library item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isVerified": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification status of the library item</p>"
                     }
                 }
             },
@@ -4851,6 +4973,12 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of users who have the associated Q App.</p>"
+                    }
+                },
+                "isVerified": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the library item has been verified.</p>"
                     }
                 }
             },
@@ -5221,6 +5349,13 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the user's association with the Q App.</p>"
+                    }
+                },
+                "isVerified": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the Q App has been verified.</p>"
                     }
                 }
             },
