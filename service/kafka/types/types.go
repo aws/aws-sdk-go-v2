@@ -1165,6 +1165,16 @@ type ReplicationStateInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for specifying replicated topic names should be the same as their
+// corresponding upstream topics or prefixed with source cluster alias.
+type ReplicationTopicNameConfiguration struct {
+
+	// The type of replicated topic name.
+	Type ReplicationTopicNameConfigurationType
+
+	noSmithyDocumentSerde
+}
+
 // Information about a replicator.
 type ReplicatorSummary struct {
 
@@ -1329,6 +1339,10 @@ type TopicReplication struct {
 	// Configuration for specifying the position in the topics to start replicating
 	// from.
 	StartingPosition *ReplicationStartingPosition
+
+	// Configuration for specifying replicated topic names should be the same as their
+	// corresponding upstream topics or prefixed with source cluster alias.
+	TopicNameConfiguration *ReplicationTopicNameConfiguration
 
 	// List of regular expression patterns indicating the topics that should not be
 	// replicated.

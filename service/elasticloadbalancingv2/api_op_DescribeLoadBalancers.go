@@ -8,7 +8,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
-	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -367,13 +366,8 @@ func loadBalancerAvailableStateRetryable(ctx context.Context, input *DescribeLoa
 	}
 
 	if err != nil {
-		var apiErr smithy.APIError
-		ok := errors.As(err, &apiErr)
-		if !ok {
-			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
-		}
-
-		if "LoadBalancerNotFound" == apiErr.ErrorCode() {
+		var errorType *types.LoadBalancerNotFoundException
+		if errors.As(err, &errorType) {
 			return true, nil
 		}
 	}
@@ -545,13 +539,8 @@ func loadBalancerExistsStateRetryable(ctx context.Context, input *DescribeLoadBa
 	}
 
 	if err != nil {
-		var apiErr smithy.APIError
-		ok := errors.As(err, &apiErr)
-		if !ok {
-			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
-		}
-
-		if "LoadBalancerNotFound" == apiErr.ErrorCode() {
+		var errorType *types.LoadBalancerNotFoundException
+		if errors.As(err, &errorType) {
 			return true, nil
 		}
 	}
@@ -753,13 +742,8 @@ func loadBalancersDeletedStateRetryable(ctx context.Context, input *DescribeLoad
 	}
 
 	if err != nil {
-		var apiErr smithy.APIError
-		ok := errors.As(err, &apiErr)
-		if !ok {
-			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
-		}
-
-		if "LoadBalancerNotFound" == apiErr.ErrorCode() {
+		var errorType *types.LoadBalancerNotFoundException
+		if errors.As(err, &errorType) {
 			return false, nil
 		}
 	}

@@ -7663,6 +7663,40 @@ func validateClusterLifeCycleConfig(v *types.ClusterLifeCycleConfig) error {
 	}
 }
 
+func validateClusterOrchestrator(v *types.ClusterOrchestrator) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestrator"}
+	if v.Eks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Eks"))
+	} else if v.Eks != nil {
+		if err := validateClusterOrchestratorEksConfig(v.Eks); err != nil {
+			invalidParams.AddNested("Eks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterOrchestratorEksConfig(v *types.ClusterOrchestratorEksConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterOrchestratorEksConfig"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeEditorAppSettings(v *types.CodeEditorAppSettings) error {
 	if v == nil {
 		return nil
@@ -13179,6 +13213,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Orchestrator != nil {
+		if err := validateClusterOrchestrator(v.Orchestrator); err != nil {
+			invalidParams.AddNested("Orchestrator", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

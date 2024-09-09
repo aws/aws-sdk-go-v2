@@ -112,6 +112,23 @@ type InvokeEndpointInput struct {
 	// [Capture Data]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
 	InferenceId *string
 
+	// Creates a stateful session or identifies an existing one. You can do one of the
+	// following:
+	//
+	//   - Create a stateful session by specifying the value NEW_SESSION .
+	//
+	//   - Send your request to an existing stateful session by specifying the ID of
+	//   that session.
+	//
+	// With a stateful session, you can send multiple requests to a stateful model.
+	// When you create a session with a stateful model, the model must create the
+	// session ID and set the expiration time. The model must also provide that
+	// information in the response to your request. You can get the ID and timestamp
+	// from the NewSessionId response parameter. For any subsequent request where you
+	// specify that session ID, SageMaker routes the request to the same instance that
+	// supports the session.
+	SessionId *string
+
 	// If the endpoint hosts multiple containers and is configured to use direct
 	// invocation, this parameter specifies the host name of the container to invoke.
 	TargetContainerHostname *string
@@ -148,6 +165,9 @@ type InvokeEndpointOutput struct {
 	// This member is required.
 	Body []byte
 
+	// If you closed a stateful session with your request, the ID of that session.
+	ClosedSessionId *string
+
 	// The MIME type of the inference returned from the model container.
 	ContentType *string
 
@@ -175,6 +195,10 @@ type InvokeEndpointOutput struct {
 
 	// Identifies the production variant that was invoked.
 	InvokedProductionVariant *string
+
+	// If you created a stateful session with your request, the ID and expiration time
+	// that the model assigns to that session.
+	NewSessionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

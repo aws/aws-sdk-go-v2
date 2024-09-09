@@ -11,6 +11,8 @@ import (
 )
 
 // Shuts down and deletes the specified stage (disconnecting all participants).
+// This operation also removes the stageArn from the associated IngestConfiguration, if there are
+// participants using the IngestConfiguration to publish to the stage.
 func (c *Client) DeleteStage(ctx context.Context, params *DeleteStageInput, optFns ...func(*Options)) (*DeleteStageOutput, error) {
 	if params == nil {
 		params = &DeleteStageInput{}

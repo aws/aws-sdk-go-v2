@@ -13723,6 +13723,46 @@ func awsRestjson1_deserializeDocumentReplicationStateInfo(v **types.ReplicationS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentReplicationTopicNameConfiguration(v **types.ReplicationTopicNameConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicationTopicNameConfiguration
+	if *v == nil {
+		sv = &types.ReplicationTopicNameConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicationTopicNameConfigurationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ReplicationTopicNameConfigurationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReplicatorSummary(v **types.ReplicatorSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14362,6 +14402,11 @@ func awsRestjson1_deserializeDocumentTopicReplication(v **types.TopicReplication
 
 		case "startingPosition":
 			if err := awsRestjson1_deserializeDocumentReplicationStartingPosition(&sv.StartingPosition, value); err != nil {
+				return err
+			}
+
+		case "topicNameConfiguration":
+			if err := awsRestjson1_deserializeDocumentReplicationTopicNameConfiguration(&sv.TopicNameConfiguration, value); err != nil {
 				return err
 			}
 

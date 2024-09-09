@@ -39,6 +39,9 @@ type UpdateClusterInput struct {
 	// This member is required.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 
+	// The node recovery mode to be applied to the SageMaker HyperPod cluster.
+	NodeRecovery types.ClusterNodeRecovery
+
 	noSmithyDocumentSerde
 }
 

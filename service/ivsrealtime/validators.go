@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateIngestConfiguration struct {
+}
+
+func (*validateOpCreateIngestConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIngestConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIngestConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIngestConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateParticipantToken struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpDeleteEncoderConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEncoderConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteIngestConfiguration struct {
+}
+
+func (*validateOpDeleteIngestConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIngestConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIngestConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIngestConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -205,6 +245,26 @@ func (m *validateOpGetEncoderConfiguration) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEncoderConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIngestConfiguration struct {
+}
+
+func (*validateOpGetIngestConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIngestConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIngestConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIngestConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +550,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIngestConfiguration struct {
+}
+
+func (*validateOpUpdateIngestConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIngestConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIngestConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIngestConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStage struct {
 }
 
@@ -510,6 +590,10 @@ func (m *validateOpUpdateStage) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateIngestConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIngestConfiguration{}, middleware.After)
+}
+
 func addOpCreateParticipantTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateParticipantToken{}, middleware.After)
 }
@@ -524,6 +608,10 @@ func addOpCreateStorageConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteEncoderConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEncoderConfiguration{}, middleware.After)
+}
+
+func addOpDeleteIngestConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIngestConfiguration{}, middleware.After)
 }
 
 func addOpDeletePublicKeyValidationMiddleware(stack *middleware.Stack) error {
@@ -548,6 +636,10 @@ func addOpGetCompositionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEncoderConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEncoderConfiguration{}, middleware.After)
+}
+
+func addOpGetIngestConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIngestConfiguration{}, middleware.After)
 }
 
 func addOpGetParticipantValidationMiddleware(stack *middleware.Stack) error {
@@ -604,6 +696,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateIngestConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIngestConfiguration{}, middleware.After)
 }
 
 func addOpUpdateStageValidationMiddleware(stack *middleware.Stack) error {
@@ -712,6 +808,21 @@ func validateS3StorageConfiguration(v *types.S3StorageConfiguration) error {
 	}
 }
 
+func validateOpCreateIngestConfigurationInput(v *CreateIngestConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIngestConfigurationInput"}
+	if len(v.IngestProtocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestProtocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateParticipantTokenInput(v *CreateParticipantTokenInput) error {
 	if v == nil {
 		return nil
@@ -768,6 +879,21 @@ func validateOpDeleteEncoderConfigurationInput(v *DeleteEncoderConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteEncoderConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteIngestConfigurationInput(v *DeleteIngestConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIngestConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -861,6 +987,21 @@ func validateOpGetEncoderConfigurationInput(v *GetEncoderConfigurationInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetEncoderConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIngestConfigurationInput(v *GetIngestConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIngestConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -1104,6 +1245,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIngestConfigurationInput(v *UpdateIngestConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIngestConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

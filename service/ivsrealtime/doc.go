@@ -24,7 +24,7 @@
 //
 //   - Composition process — Composites participants of a stage into a single
 //     video and forwards it to a set of outputs (e.g., IVS channels). Composition
-//     endpoints support this process.
+//     operations support this process.
 //
 //   - Composition — Controls the look of the outputs, including how participants
 //     are positioned in the video.
@@ -35,21 +35,21 @@
 //
 // A tag is a metadata label that you assign to an AWS resource. A tag comprises a
 // key and a value, both set by you. For example, you might set a tag as
-// topic:nature to label a particular video category. See [Tagging AWS Resources] for more information,
-// including restrictions that apply to tags and "Tag naming limits and
-// requirements"; Amazon IVS stages has no service-specific constraints beyond what
-// is documented there.
+// topic:nature to label a particular video category. See [Best practices and strategies] in Tagging AWS
+// Resources and Tag Editor for details, including restrictions that apply to tags
+// and "Tag naming limits and requirements"; Amazon IVS stages has no
+// service-specific constraints beyond what is documented there.
 //
 // Tags can help you identify and organize your AWS resources. For example, you
 // can use the same tag for different resources to indicate that they are related.
 // You can also use tags to manage access (see [Access Tags]).
 //
-// The Amazon IVS real-time API has these tag-related endpoints: TagResource, UntagResource, and ListTagsForResource. The
+// The Amazon IVS real-time API has these tag-related operations: TagResource, UntagResource, and ListTagsForResource. The
 // following resource supports tagging: Stage.
 //
 // At most 50 tags can be applied to a resource.
 //
 // [Getting Started with Amazon IVS Real-Time Streaming]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html
-// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 // [Access Tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
 package ivsrealtime

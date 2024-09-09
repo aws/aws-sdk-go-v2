@@ -6,73 +6,63 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import a public key to be used for signing stage participant tokens.
-func (c *Client) ImportPublicKey(ctx context.Context, params *ImportPublicKeyInput, optFns ...func(*Options)) (*ImportPublicKeyOutput, error) {
+// Deletes a specified IngestConfiguration, so it can no longer be used to
+// broadcast. An IngestConfiguration cannot be deleted if the publisher is actively
+// streaming to a stage, unless force is set to true .
+func (c *Client) DeleteIngestConfiguration(ctx context.Context, params *DeleteIngestConfigurationInput, optFns ...func(*Options)) (*DeleteIngestConfigurationOutput, error) {
 	if params == nil {
-		params = &ImportPublicKeyInput{}
+		params = &DeleteIngestConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportPublicKey", params, optFns, c.addOperationImportPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteIngestConfiguration", params, optFns, c.addOperationDeleteIngestConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ImportPublicKeyOutput)
+	out := result.(*DeleteIngestConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ImportPublicKeyInput struct {
+type DeleteIngestConfigurationInput struct {
 
-	// The content of the public key to be imported.
+	// ARN of the IngestConfiguration.
 	//
 	// This member is required.
-	PublicKeyMaterial *string
+	Arn *string
 
-	// Name of the public key to be imported.
-	Name *string
-
-	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
-	// including restrictions that apply to tags and "Tag naming limits and
-	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
-	// there.
-	//
-	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
-	Tags map[string]string
+	// Optional field to force deletion of the IngestConfiguration. If this is set to
+	// true when a participant is actively publishing, the participant is disconnected
+	// from the stage, followed by deletion of the IngestConfiguration. Default: false .
+	Force bool
 
 	noSmithyDocumentSerde
 }
 
-type ImportPublicKeyOutput struct {
-
-	// The public key that was imported.
-	PublicKey *types.PublicKey
-
+type DeleteIngestConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteIngestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPublicKey{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIngestConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPublicKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIngestConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportPublicKey"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIngestConfiguration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -121,10 +111,10 @@ func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpImportPublicKeyValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteIngestConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportPublicKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIngestConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -145,10 +135,10 @@ func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opImportPublicKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteIngestConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ImportPublicKey",
+		OperationName: "DeleteIngestConfiguration",
 	}
 }

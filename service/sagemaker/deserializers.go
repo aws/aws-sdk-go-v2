@@ -41260,7 +41260,7 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
@@ -41290,6 +41290,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 
 		case "LifeCycleConfig":
 			if err := awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(&sv.LifeCycleConfig, value); err != nil {
+				return err
+			}
+
+		case "OnStartDeepHealthChecks":
+			if err := awsAwsjson11_deserializeDocumentOnStartDeepHealthChecks(&sv.OnStartDeepHealthChecks, value); err != nil {
 				return err
 			}
 
@@ -41808,6 +41813,82 @@ func awsAwsjson11_deserializeDocumentClusterNodeSummary(v **types.ClusterNodeSum
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterOrchestrator(v **types.ClusterOrchestrator, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterOrchestrator
+	if *v == nil {
+		sv = &types.ClusterOrchestrator{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Eks":
+			if err := awsAwsjson11_deserializeDocumentClusterOrchestratorEksConfig(&sv.Eks, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterOrchestratorEksConfig(v **types.ClusterOrchestratorEksConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterOrchestratorEksConfig
+	if *v == nil {
+		sv = &types.ClusterOrchestratorEksConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClusterArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EksClusterArn to be of type string, got %T instead", value)
+				}
+				sv.ClusterArn = ptr.String(jtv)
 			}
 
 		default:
@@ -65695,6 +65776,42 @@ func awsAwsjson11_deserializeDocumentOnlineStoreSecurityConfig(v **types.OnlineS
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOnStartDeepHealthChecks(v *[]types.DeepHealthCheckType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DeepHealthCheckType
+	if *v == nil {
+		cv = []types.DeepHealthCheckType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DeepHealthCheckType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DeepHealthCheckType to be of type string, got %T instead", value)
+			}
+			col = types.DeepHealthCheckType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOptimizationConfig(v *types.OptimizationConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -86158,6 +86275,20 @@ func awsAwsjson11_deserializeOpDocumentDescribeClusterOutput(v **DescribeCluster
 
 		case "InstanceGroups":
 			if err := awsAwsjson11_deserializeDocumentClusterInstanceGroupDetailsList(&sv.InstanceGroups, value); err != nil {
+				return err
+			}
+
+		case "NodeRecovery":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterNodeRecovery to be of type string, got %T instead", value)
+				}
+				sv.NodeRecovery = types.ClusterNodeRecovery(jtv)
+			}
+
+		case "Orchestrator":
+			if err := awsAwsjson11_deserializeDocumentClusterOrchestrator(&sv.Orchestrator, value); err != nil {
 				return err
 			}
 

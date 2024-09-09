@@ -61,6 +61,14 @@ const (
 	EventErrorCodeInsufficientCapabilities EventErrorCode = "INSUFFICIENT_CAPABILITIES"
 	EventErrorCodeQuotaExceeded            EventErrorCode = "QUOTA_EXCEEDED"
 	EventErrorCodePublisherNotFound        EventErrorCode = "PUBLISHER_NOT_FOUND"
+	EventErrorCodeBitrateExceeded          EventErrorCode = "BITRATE_EXCEEDED"
+	EventErrorCodeResolutionExceeded       EventErrorCode = "RESOLUTION_EXCEEDED"
+	EventErrorCodeStreamDurationExceeded   EventErrorCode = "STREAM_DURATION_EXCEEDED"
+	EventErrorCodeInvalidAudioCodec        EventErrorCode = "INVALID_AUDIO_CODEC"
+	EventErrorCodeInvalidVideoCodec        EventErrorCode = "INVALID_VIDEO_CODEC"
+	EventErrorCodeInvalidProtocol          EventErrorCode = "INVALID_PROTOCOL"
+	EventErrorCodeInvalidStreamKey         EventErrorCode = "INVALID_STREAM_KEY"
+	EventErrorCodeReuseOfStreamKey         EventErrorCode = "REUSE_OF_STREAM_KEY"
 )
 
 // Values returns all known values for EventErrorCode. Note that this can be
@@ -72,6 +80,14 @@ func (EventErrorCode) Values() []EventErrorCode {
 		"INSUFFICIENT_CAPABILITIES",
 		"QUOTA_EXCEEDED",
 		"PUBLISHER_NOT_FOUND",
+		"BITRATE_EXCEEDED",
+		"RESOLUTION_EXCEEDED",
+		"STREAM_DURATION_EXCEEDED",
+		"INVALID_AUDIO_CODEC",
+		"INVALID_VIDEO_CODEC",
+		"INVALID_PROTOCOL",
+		"INVALID_STREAM_KEY",
+		"REUSE_OF_STREAM_KEY",
 	}
 }
 
@@ -105,6 +121,67 @@ func (EventName) Values() []EventName {
 		"PUBLISH_ERROR",
 		"SUBSCRIBE_ERROR",
 		"JOIN_ERROR",
+	}
+}
+
+type IngestConfigurationState string
+
+// Enum values for IngestConfigurationState
+const (
+	IngestConfigurationStateActive   IngestConfigurationState = "ACTIVE"
+	IngestConfigurationStateInactive IngestConfigurationState = "INACTIVE"
+)
+
+// Values returns all known values for IngestConfigurationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestConfigurationState) Values() []IngestConfigurationState {
+	return []IngestConfigurationState{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
+type IngestProtocol string
+
+// Enum values for IngestProtocol
+const (
+	IngestProtocolRtmp  IngestProtocol = "RTMP"
+	IngestProtocolRtmps IngestProtocol = "RTMPS"
+)
+
+// Values returns all known values for IngestProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IngestProtocol) Values() []IngestProtocol {
+	return []IngestProtocol{
+		"RTMP",
+		"RTMPS",
+	}
+}
+
+type ParticipantProtocol string
+
+// Enum values for ParticipantProtocol
+const (
+	ParticipantProtocolUnknown ParticipantProtocol = "UNKNOWN"
+	ParticipantProtocolWhip    ParticipantProtocol = "WHIP"
+	ParticipantProtocolRtmp    ParticipantProtocol = "RTMP"
+	ParticipantProtocolRtmps   ParticipantProtocol = "RTMPS"
+)
+
+// Values returns all known values for ParticipantProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantProtocol) Values() []ParticipantProtocol {
+	return []ParticipantProtocol{
+		"UNKNOWN",
+		"WHIP",
+		"RTMP",
+		"RTMPS",
 	}
 }
 

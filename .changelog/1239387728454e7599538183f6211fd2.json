@@ -1,0 +1,8 @@
+{
+    "id": "12393877-2845-4e75-9953-8183f6211fd2",
+    "type": "feature",
+    "description": "Add paginators for the ELBv2 DescribeListenerCertificates and DescribeRules APIs. Fix broken waiter for the ELBv2 DescribeLoadBalancers API.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

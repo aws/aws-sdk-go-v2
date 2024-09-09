@@ -11,31 +11,47 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import a public key to be used for signing stage participant tokens.
-func (c *Client) ImportPublicKey(ctx context.Context, params *ImportPublicKeyInput, optFns ...func(*Options)) (*ImportPublicKeyOutput, error) {
+// Creates a new IngestConfiguration resource, used to specify the ingest protocol
+// for a stage.
+func (c *Client) CreateIngestConfiguration(ctx context.Context, params *CreateIngestConfigurationInput, optFns ...func(*Options)) (*CreateIngestConfigurationOutput, error) {
 	if params == nil {
-		params = &ImportPublicKeyInput{}
+		params = &CreateIngestConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportPublicKey", params, optFns, c.addOperationImportPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateIngestConfiguration", params, optFns, c.addOperationCreateIngestConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ImportPublicKeyOutput)
+	out := result.(*CreateIngestConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ImportPublicKeyInput struct {
+type CreateIngestConfigurationInput struct {
 
-	// The content of the public key to be imported.
+	// Type of ingest protocol that the user employs to broadcast. If this is set to
+	// RTMP , insecureIngest must be set to true .
 	//
 	// This member is required.
-	PublicKeyMaterial *string
+	IngestProtocol types.IngestProtocol
 
-	// Name of the public key to be imported.
+	// Application-provided attributes to store in the IngestConfiguration and attach
+	// to a stage. Map keys and values can contain UTF-8 encoded text. The maximum
+	// length of this field is 1 KB total. This field is exposed to all stage
+	// participants and should not be used for personally identifying, confidential, or
+	// sensitive information.
+	Attributes map[string]string
+
+	// Whether the stage allows insecure RTMP ingest. This must be set to true , if
+	// ingestProtocol is set to RTMP . Default: false .
+	InsecureIngest bool
+
+	// Optional name that can be specified for the IngestConfiguration being created.
 	Name *string
+
+	// ARN of the stage with which the IngestConfiguration is associated.
+	StageArn *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
 	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
@@ -46,13 +62,20 @@ type ImportPublicKeyInput struct {
 	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
+	// Customer-assigned name to help identify the participant using the
+	// IngestConfiguration; this can be used to link a participant to a user in the
+	// customer’s own systems. This can be any UTF-8 encoded text. This field is
+	// exposed to all stage participants and should not be used for personally
+	// identifying, confidential, or sensitive information.
+	UserId *string
+
 	noSmithyDocumentSerde
 }
 
-type ImportPublicKeyOutput struct {
+type CreateIngestConfigurationOutput struct {
 
-	// The public key that was imported.
-	PublicKey *types.PublicKey
+	// The IngestConfiguration that was created.
+	IngestConfiguration *types.IngestConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,19 +83,19 @@ type ImportPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateIngestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPublicKey{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIngestConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPublicKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIngestConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportPublicKey"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIngestConfiguration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -121,10 +144,10 @@ func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpImportPublicKeyValidationMiddleware(stack); err != nil {
+	if err = addOpCreateIngestConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportPublicKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIngestConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -145,10 +168,10 @@ func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opImportPublicKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateIngestConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ImportPublicKey",
+		OperationName: "CreateIngestConfiguration",
 	}
 }

@@ -44,6 +44,17 @@ type CreateClusterInput struct {
 	// This member is required.
 	InstanceGroups []types.ClusterInstanceGroupSpecification
 
+	// The node recovery mode for the SageMaker HyperPod cluster. When set to Automatic
+	// , SageMaker HyperPod will automatically reboot or replace faulty nodes when
+	// issues are detected. When set to None , cluster administrators will need to
+	// manually manage any faulty cluster instances.
+	NodeRecovery types.ClusterNodeRecovery
+
+	// The type of orchestrator to use for the SageMaker HyperPod cluster. Currently,
+	// the only supported value is "eks" , which is to use an Amazon Elastic Kubernetes
+	// Service (EKS) cluster as the orchestrator.
+	Orchestrator *types.ClusterOrchestrator
+
 	// Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web
 	// Services resource. You can add tags to your cluster in the same way you add them
 	// in other Amazon Web Services services that support tagging. To learn more about

@@ -11,48 +11,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import a public key to be used for signing stage participant tokens.
-func (c *Client) ImportPublicKey(ctx context.Context, params *ImportPublicKeyInput, optFns ...func(*Options)) (*ImportPublicKeyOutput, error) {
+// Gets information about the specified IngestConfiguration.
+func (c *Client) GetIngestConfiguration(ctx context.Context, params *GetIngestConfigurationInput, optFns ...func(*Options)) (*GetIngestConfigurationOutput, error) {
 	if params == nil {
-		params = &ImportPublicKeyInput{}
+		params = &GetIngestConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ImportPublicKey", params, optFns, c.addOperationImportPublicKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetIngestConfiguration", params, optFns, c.addOperationGetIngestConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ImportPublicKeyOutput)
+	out := result.(*GetIngestConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ImportPublicKeyInput struct {
+type GetIngestConfigurationInput struct {
 
-	// The content of the public key to be imported.
+	// ARN of the ingest for which the information is to be retrieved.
 	//
 	// This member is required.
-	PublicKeyMaterial *string
-
-	// Name of the public key to be imported.
-	Name *string
-
-	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
-	// including restrictions that apply to tags and "Tag naming limits and
-	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
-	// there.
-	//
-	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
-	Tags map[string]string
+	Arn *string
 
 	noSmithyDocumentSerde
 }
 
-type ImportPublicKeyOutput struct {
+type GetIngestConfigurationOutput struct {
 
-	// The public key that was imported.
-	PublicKey *types.PublicKey
+	// The IngestConfiguration that was returned.
+	IngestConfiguration *types.IngestConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,19 +48,19 @@ type ImportPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetIngestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportPublicKey{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIngestConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportPublicKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIngestConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportPublicKey"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIngestConfiguration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -121,10 +109,10 @@ func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpImportPublicKeyValidationMiddleware(stack); err != nil {
+	if err = addOpGetIngestConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportPublicKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIngestConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -145,10 +133,10 @@ func (c *Client) addOperationImportPublicKeyMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opImportPublicKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetIngestConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ImportPublicKey",
+		OperationName: "GetIngestConfiguration",
 	}
 }

@@ -143,6 +143,11 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeEndpointOutput(v *InvokeEndpoin
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
 
+	if headerValues := response.Header.Values("X-Amzn-SageMaker-Closed-Session-Id"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ClosedSessionId = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("Content-Type"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.ContentType = ptr.String(headerValues[0])
@@ -156,6 +161,11 @@ func awsRestjson1_deserializeOpHttpBindingsInvokeEndpointOutput(v *InvokeEndpoin
 	if headerValues := response.Header.Values("x-Amzn-Invoked-Production-Variant"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.InvokedProductionVariant = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Amzn-SageMaker-New-Session-Id"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.NewSessionId = ptr.String(headerValues[0])
 	}
 
 	return nil

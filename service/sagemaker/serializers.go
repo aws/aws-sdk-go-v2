@@ -20261,6 +20261,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 		}
 	}
 
+	if v.OnStartDeepHealthChecks != nil {
+		ok := object.Key("OnStartDeepHealthChecks")
+		if err := awsAwsjson11_serializeDocumentOnStartDeepHealthChecks(v.OnStartDeepHealthChecks, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ThreadsPerCore != nil {
 		ok := object.Key("ThreadsPerCore")
 		ok.Integer(*v.ThreadsPerCore)
@@ -20328,6 +20335,32 @@ func awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v *types.ClusterLifeCy
 	if v.SourceS3Uri != nil {
 		ok := object.Key("SourceS3Uri")
 		ok.String(*v.SourceS3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterOrchestrator(v *types.ClusterOrchestrator, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Eks != nil {
+		ok := object.Key("Eks")
+		if err := awsAwsjson11_serializeDocumentClusterOrchestratorEksConfig(v.Eks, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterOrchestratorEksConfig(v *types.ClusterOrchestratorEksConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterArn != nil {
+		ok := object.Key("ClusterArn")
+		ok.String(*v.ClusterArn)
 	}
 
 	return nil
@@ -25884,6 +25917,17 @@ func awsAwsjson11_serializeDocumentOnlineStoreSecurityConfig(v *types.OnlineStor
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOnStartDeepHealthChecks(v []types.DeepHealthCheckType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOptimizationConfig(v types.OptimizationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30285,6 +30329,18 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 	if v.InstanceGroups != nil {
 		ok := object.Key("InstanceGroups")
 		if err := awsAwsjson11_serializeDocumentClusterInstanceGroupSpecifications(v.InstanceGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NodeRecovery) > 0 {
+		ok := object.Key("NodeRecovery")
+		ok.String(string(v.NodeRecovery))
+	}
+
+	if v.Orchestrator != nil {
+		ok := object.Key("Orchestrator")
+		if err := awsAwsjson11_serializeDocumentClusterOrchestrator(v.Orchestrator, ok); err != nil {
 			return err
 		}
 	}
@@ -39180,6 +39236,11 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		if err := awsAwsjson11_serializeDocumentClusterInstanceGroupSpecifications(v.InstanceGroups, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.NodeRecovery) > 0 {
+		ok := object.Key("NodeRecovery")
+		ok.String(string(v.NodeRecovery))
 	}
 
 	return nil

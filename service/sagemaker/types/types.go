@@ -3245,6 +3245,10 @@ type ClusterInstanceGroupDetails struct {
 	// Details of LifeCycle configuration for the instance group.
 	LifeCycleConfig *ClusterLifeCycleConfig
 
+	// A flag indicating whether deep health checks should be performed when the
+	// cluster instance group is created or updated.
+	OnStartDeepHealthChecks []DeepHealthCheckType
+
 	// The number of instances you specified to add to the instance group of a
 	// SageMaker HyperPod cluster.
 	TargetCount *int32
@@ -3293,6 +3297,10 @@ type ClusterInstanceGroupSpecification struct {
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster instance group.
 	InstanceStorageConfigs []ClusterInstanceStorageConfig
+
+	// A flag indicating whether deep health checks should be performed when the
+	// cluster instance group is created or updated.
+	OnStartDeepHealthChecks []DeepHealthCheckType
 
 	// Specifies the value for Threads per core. For instance types that support
 	// multithreading, you can specify 1 for disabling multithreading and 2 for
@@ -3453,6 +3461,31 @@ type ClusterNodeSummary struct {
 	//
 	// This member is required.
 	LaunchTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The type of orchestrator used for the SageMaker HyperPod cluster.
+type ClusterOrchestrator struct {
+
+	// The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod
+	// cluster.
+	//
+	// This member is required.
+	Eks *ClusterOrchestratorEksConfig
+
+	noSmithyDocumentSerde
+}
+
+// The configuration settings for the Amazon EKS cluster used as the orchestrator
+// for the SageMaker HyperPod cluster.
+type ClusterOrchestratorEksConfig struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EKS cluster associated with the
+	// SageMaker HyperPod cluster.
+	//
+	// This member is required.
+	ClusterArn *string
 
 	noSmithyDocumentSerde
 }

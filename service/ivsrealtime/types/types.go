@@ -79,11 +79,12 @@ type Composition struct {
 	StartTime *time.Time
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -121,11 +122,12 @@ type CompositionSummary struct {
 	StartTime *time.Time
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -225,11 +227,12 @@ type EncoderConfiguration struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	// Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30
@@ -251,11 +254,12 @@ type EncoderConfigurationSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -326,6 +330,111 @@ type GridConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Object specifying an ingest configuration.
+type IngestConfiguration struct {
+
+	// Ingest configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// Type of ingest protocol that the user employs for broadcasting.
+	//
+	// This member is required.
+	IngestProtocol IngestProtocol
+
+	// ID of the participant within the stage.
+	//
+	// This member is required.
+	ParticipantId *string
+
+	// ARN of the stage with which the IngestConfiguration is associated.
+	//
+	// This member is required.
+	StageArn *string
+
+	// State of the ingest configuration. It is ACTIVE if a publisher currently is
+	// publishing to the stage associated with the ingest configuration.
+	//
+	// This member is required.
+	State IngestConfigurationState
+
+	// Ingest-key value for the RTMP(S) protocol.
+	//
+	// This member is required.
+	StreamKey *string
+
+	// Application-provided attributes to to store in the IngestConfiguration and
+	// attach to a stage. Map keys and values can contain UTF-8 encoded text. The
+	// maximum length of this field is 1 KB total. This field is exposed to all stage
+	// participants and should not be used for personally identifying, confidential, or
+	// sensitive information.
+	Attributes map[string]string
+
+	// Ingest name
+	Name *string
+
+	// Tags attached to the resource. Array of maps, each of the form string:string
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	// Customer-assigned name to help identify the participant using the
+	// IngestConfiguration; this can be used to link a participant to a user in the
+	// customer’s own systems. This can be any UTF-8 encoded text. This field is
+	// exposed to all stage participants and should not be used for personally
+	// identifying, confidential, or sensitive information.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an IngestConfiguration.
+type IngestConfigurationSummary struct {
+
+	// Ingest configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// Type of ingest protocol that the user employs for broadcasting.
+	//
+	// This member is required.
+	IngestProtocol IngestProtocol
+
+	// ID of the participant within the stage.
+	//
+	// This member is required.
+	ParticipantId *string
+
+	// ARN of the stage with which the IngestConfiguration is associated.
+	//
+	// This member is required.
+	StageArn *string
+
+	// State of the ingest configuration. It is ACTIVE if a publisher currently is
+	// publishing to the stage associated with the ingest configuration.
+	//
+	// This member is required.
+	State IngestConfigurationState
+
+	// Ingest name.
+	Name *string
+
+	// Customer-assigned name to help identify the participant using the
+	// IngestConfiguration; this can be used to link a participant to a user in the
+	// customer’s own systems. This can be any UTF-8 encoded text. This field is
+	// exposed to all stage participants and should not be used for personally
+	// identifying, confidential, or sensitive information.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information of supported layouts for server-side composition.
 type LayoutConfiguration struct {
 
@@ -368,6 +477,9 @@ type Participant struct {
 
 	// Unique identifier for this participant, assigned by IVS.
 	ParticipantId *string
+
+	// Type of ingest protocol that the participant employs for broadcasting.
+	Protocol ParticipantProtocol
 
 	// Whether the participant ever published to the stage session.
 	Published bool
@@ -558,11 +670,12 @@ type PublicKey struct {
 	PublicKeyMaterial *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -578,11 +691,12 @@ type PublicKeySummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -667,23 +781,32 @@ type Stage struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Summary information about various endpoints for a stage.
+// Summary information about various endpoints for a stage. We recommend that you
+// cache these values at stage creation; the values can be cached for up to 14
+// days.
 type StageEndpoints struct {
 
 	// Events endpoint.
 	Events *string
 
-	// WHIP endpoint.
+	// The endpoint to be used for IVS real-time streaming using the RTMP protocol.
+	Rtmp *string
+
+	// The endpoint to be used for IVS real-time streaming using the RTMPS protocol.
+	Rtmps *string
+
+	// The endpoint to be used for IVS real-time streaming using the WHIP protocol.
 	Whip *string
 
 	noSmithyDocumentSerde
@@ -739,11 +862,12 @@ type StageSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -764,11 +888,12 @@ type StorageConfiguration struct {
 	S3 *S3StorageConfiguration
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -789,11 +914,12 @@ type StorageConfigurationSummary struct {
 	S3 *S3StorageConfiguration
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
-	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
-	// beyond what is documented there.
+	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
+	// including restrictions that apply to tags and "Tag naming limits and
+	// requirements"; Amazon IVS has no constraints on tags beyond what is documented
+	// there.
 	//
-	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

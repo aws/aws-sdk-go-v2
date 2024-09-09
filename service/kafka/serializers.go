@@ -4931,6 +4931,18 @@ func awsRestjson1_serializeDocumentReplicationStartingPosition(v *types.Replicat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentReplicationTopicNameConfiguration(v *types.ReplicationTopicNameConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3(v *types.S3, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5090,6 +5102,13 @@ func awsRestjson1_serializeDocumentTopicReplication(v *types.TopicReplication, v
 	if v.StartingPosition != nil {
 		ok := object.Key("startingPosition")
 		if err := awsRestjson1_serializeDocumentReplicationStartingPosition(v.StartingPosition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TopicNameConfiguration != nil {
+		ok := object.Key("topicNameConfiguration")
+		if err := awsRestjson1_serializeDocumentReplicationTopicNameConfiguration(v.TopicNameConfiguration, ok); err != nil {
 			return err
 		}
 	}

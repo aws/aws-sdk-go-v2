@@ -1531,11 +1531,12 @@ type ClusterInstanceStatus string
 
 // Enum values for ClusterInstanceStatus
 const (
-	ClusterInstanceStatusRunning        ClusterInstanceStatus = "Running"
-	ClusterInstanceStatusFailure        ClusterInstanceStatus = "Failure"
-	ClusterInstanceStatusPending        ClusterInstanceStatus = "Pending"
-	ClusterInstanceStatusShuttingDown   ClusterInstanceStatus = "ShuttingDown"
-	ClusterInstanceStatusSystemUpdating ClusterInstanceStatus = "SystemUpdating"
+	ClusterInstanceStatusRunning                   ClusterInstanceStatus = "Running"
+	ClusterInstanceStatusFailure                   ClusterInstanceStatus = "Failure"
+	ClusterInstanceStatusPending                   ClusterInstanceStatus = "Pending"
+	ClusterInstanceStatusShuttingDown              ClusterInstanceStatus = "ShuttingDown"
+	ClusterInstanceStatusSystemUpdating            ClusterInstanceStatus = "SystemUpdating"
+	ClusterInstanceStatusDeepHealthCheckInProgress ClusterInstanceStatus = "DeepHealthCheckInProgress"
 )
 
 // Values returns all known values for ClusterInstanceStatus. Note that this can
@@ -1549,6 +1550,7 @@ func (ClusterInstanceStatus) Values() []ClusterInstanceStatus {
 		"Pending",
 		"ShuttingDown",
 		"SystemUpdating",
+		"DeepHealthCheckInProgress",
 	}
 }
 
@@ -1640,6 +1642,25 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.t3.large",
 		"ml.t3.xlarge",
 		"ml.t3.2xlarge",
+	}
+}
+
+type ClusterNodeRecovery string
+
+// Enum values for ClusterNodeRecovery
+const (
+	ClusterNodeRecoveryAutomatic ClusterNodeRecovery = "Automatic"
+	ClusterNodeRecoveryNone      ClusterNodeRecovery = "None"
+)
+
+// Values returns all known values for ClusterNodeRecovery. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterNodeRecovery) Values() []ClusterNodeRecovery {
+	return []ClusterNodeRecovery{
+		"Automatic",
+		"None",
 	}
 }
 
@@ -1928,6 +1949,25 @@ func (DataSourceName) Values() []DataSourceName {
 	return []DataSourceName{
 		"SalesforceGenie",
 		"Snowflake",
+	}
+}
+
+type DeepHealthCheckType string
+
+// Enum values for DeepHealthCheckType
+const (
+	DeepHealthCheckTypeInstanceStress       DeepHealthCheckType = "InstanceStress"
+	DeepHealthCheckTypeInstanceConnectivity DeepHealthCheckType = "InstanceConnectivity"
+)
+
+// Values returns all known values for DeepHealthCheckType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeepHealthCheckType) Values() []DeepHealthCheckType {
+	return []DeepHealthCheckType{
+		"InstanceStress",
+		"InstanceConnectivity",
 	}
 }
 

@@ -211,6 +211,26 @@ func (ReplicationStartingPositionType) Values() []ReplicationStartingPositionTyp
 	}
 }
 
+type ReplicationTopicNameConfigurationType string
+
+// Enum values for ReplicationTopicNameConfigurationType
+const (
+	ReplicationTopicNameConfigurationTypePrefixedWithSourceClusterAlias ReplicationTopicNameConfigurationType = "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS"
+	ReplicationTopicNameConfigurationTypeIdentical                      ReplicationTopicNameConfigurationType = "IDENTICAL"
+)
+
+// Values returns all known values for ReplicationTopicNameConfigurationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationTopicNameConfigurationType) Values() []ReplicationTopicNameConfigurationType {
+	return []ReplicationTopicNameConfigurationType{
+		"PREFIXED_WITH_SOURCE_CLUSTER_ALIAS",
+		"IDENTICAL",
+	}
+}
+
 type ReplicatorState string
 
 // Enum values for ReplicatorState
