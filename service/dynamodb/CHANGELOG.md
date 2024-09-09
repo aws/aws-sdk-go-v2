@@ -1,3 +1,7 @@
+# v1.34.9 (2024-09-09)
+
+* **Documentation**: Doc-only update for DynamoDB. Added information about async behavior for TagResource and UntagResource APIs and updated the description of ResourceInUseException.
+
 # v1.34.8 (2024-09-04)
 
 * No change notes available for this release.

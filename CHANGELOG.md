@@ -1,3 +1,22 @@
+# Release (2024-09-09)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.34.9](service/dynamodb/CHANGELOG.md#v1349-2024-09-09)
+  * **Documentation**: Doc-only update for DynamoDB. Added information about async behavior for TagResource and UntagResource APIs and updated the description of ResourceInUseException.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.36.0](service/elasticloadbalancingv2/CHANGELOG.md#v1360-2024-09-09)
+  * **Feature**: Add paginators for the ELBv2 DescribeListenerCertificates and DescribeRules APIs. Fix broken waiter for the ELBv2 DescribeLoadBalancers API.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.17.0](service/ivsrealtime/CHANGELOG.md#v1170-2024-09-09)
+  * **Feature**: IVS Real-Time now offers customers the ability to broadcast to Stages using RTMP(S).
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.36.0](service/kafka/CHANGELOG.md#v1360-2024-09-09)
+  * **Feature**: Amazon MSK Replicator can now replicate data to identically named topics between MSK clusters within the same AWS Region or across different AWS Regions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.157.0](service/sagemaker/CHANGELOG.md#v11570-2024-09-09)
+  * **Feature**: Amazon Sagemaker supports orchestrating SageMaker HyperPod clusters with Amazon EKS
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.30.0](service/sagemakerruntime/CHANGELOG.md#v1300-2024-09-09)
+  * **Feature**: AWS SageMaker Runtime feature: Add sticky routing to support stateful inference models.
+
 # Release (2024-09-06)
 
 ## Module Highlights

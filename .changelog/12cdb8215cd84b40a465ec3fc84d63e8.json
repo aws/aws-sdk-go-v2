@@ -1,8 +1,0 @@
-{
-    "id": "12cdb821-5cd8-4b40-a465-ec3fc84d63e8",
-    "type": "documentation",
-    "description": "Doc-only update for DynamoDB. Added information about async behavior for TagResource and UntagResource APIs and updated the description of ResourceInUseException.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

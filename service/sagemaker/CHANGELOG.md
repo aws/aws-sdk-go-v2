@@ -1,3 +1,7 @@
+# v1.157.0 (2024-09-09)
+
+* **Feature**: Amazon Sagemaker supports orchestrating SageMaker HyperPod clusters with Amazon EKS
+
 # v1.156.0 (2024-09-05)
 
 * **Feature**: Amazon SageMaker now supports idle shutdown of JupyterLab and CodeEditor applications on SageMaker Studio.

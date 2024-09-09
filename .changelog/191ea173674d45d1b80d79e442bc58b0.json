@@ -1,8 +1,0 @@
-{
-    "id": "191ea173-674d-45d1-b80d-79e442bc58b0",
-    "type": "feature",
-    "description": "IVS Real-Time now offers customers the ability to broadcast to Stages using RTMP(S).",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

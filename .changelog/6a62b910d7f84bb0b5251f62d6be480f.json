@@ -1,8 +1,0 @@
-{
-    "id": "6a62b910-d7f8-4bb0-b525-1f62d6be480f",
-    "type": "feature",
-    "description": "AWS SageMaker Runtime feature: Add sticky routing to support stateful inference models.",
-    "modules": [
-        "service/sagemakerruntime"
-    ]
-}

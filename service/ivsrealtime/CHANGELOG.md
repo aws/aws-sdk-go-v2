@@ -1,3 +1,7 @@
+# v1.17.0 (2024-09-09)
+
+* **Feature**: IVS Real-Time now offers customers the ability to broadcast to Stages using RTMP(S).
+
 # v1.16.6 (2024-09-04)
 
 * No change notes available for this release.
