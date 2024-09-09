@@ -3579,7 +3579,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A list of brokers that a client application can use to bootstrap.</p>",
+                "smithy.api#documentation": "<p>A list of brokers that a client application can use to bootstrap. This list doesn't necessarily include all of the brokers in the cluster. The following Python 3.6 example shows how you can use the Amazon Resource Name (ARN) of a cluster to get its bootstrap brokers. If you don't know the ARN of your cluster, you can use the <code>ListClusters</code> operation to get the ARNs of all the clusters in this account and Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/clusters/{ClusterArn}/bootstrap-brokers",
@@ -4066,6 +4066,9 @@
                     "name": "kafka"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
                 "smithy.api#documentation": "<p>The operations for managing an Amazon MSK cluster.</p>",
                 "smithy.api#title": "Managed Streaming for Kafka",
                 "smithy.rules#endpointRuleSet": {
@@ -7253,6 +7256,41 @@
                 "smithy.api#documentation": "Details about the state of a replicator"
             }
         },
+        "com.amazonaws.kafka#ReplicationTopicNameConfiguration": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.kafka#ReplicationTopicNameConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of replicated topic name.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicationTopicNameConfigurationType": {
+            "type": "enum",
+            "members": {
+                "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS"
+                    }
+                },
+                "IDENTICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTICAL"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of replicated topic name.</p>"
+            }
+        },
         "com.amazonaws.kafka#ReplicatorState": {
             "type": "enum",
             "members": {
@@ -7744,6 +7782,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for specifying the position in the topics to start replicating from.</p>",
                         "smithy.api#jsonName": "startingPosition"
+                    }
+                },
+                "TopicNameConfiguration": {
+                    "target": "com.amazonaws.kafka#ReplicationTopicNameConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.</p>",
+                        "smithy.api#jsonName": "topicNameConfiguration"
                     }
                 },
                 "TopicsToExclude": {

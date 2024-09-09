@@ -25,6 +25,14 @@
             {
                 "id": "Service",
                 "namespace": "*"
+            },
+            {
+                "id": "RuleSetAwsBuiltIn.AWS::Auth::AccountIdEndpointMode",
+                "namespace": "*"
+            },
+            {
+                "id": "RuleSetAwsBuiltIn.AWS::Auth::AccountId",
+                "namespace": "*"
             }
         ]
     },
@@ -9620,7 +9628,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The operation conflicts with the resource's availability. For example, you\n            attempted to recreate an existing table, or tried to delete a table currently in the\n                <code>CREATING</code> state.</p>",
+                "smithy.api#documentation": "<p>The operation conflicts with the resource's availability. For example:</p>\n         <ul>\n            <li>\n               <p>You attempted to recreate an existing table.</p>\n            </li>\n            <li>\n               <p>You tried to delete a table currently in the <code>CREATING</code> state.</p>\n            </li>\n            <li>\n               <p>You tried to update a resource that was already being updated.</p>\n            </li>\n         </ul>\n         <p>When appropriate, wait for the ongoing update to complete and attempt the request again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -11142,7 +11150,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these\n            user-defined tags so that they appear on the Billing and Cost Management console for\n            cost allocation tracking. You can call TagResource up to five times per second, per\n            account. </p>\n         <p>For an overview on tagging DynamoDB resources, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n            in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these\n            user-defined tags so that they appear on the Billing and Cost Management console for\n            cost allocation tracking. You can call TagResource up to five times per second, per\n            account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>TagResource</code> is an asynchronous operation. If you issue a <a>ListTagsOfResource</a> request immediately after a <code>TagResource</code> request, DynamoDB might return your previous tag set, if there was one, or an empty tag set. This is because <code>ListTagsOfResource</code> uses an eventually consistent query, and the metadata for your tags or table might not be available at that moment. Wait for a few seconds, and then try the <code>ListTagsOfResource</code> request again.</p>\n            </li>\n            <li>\n               <p>The application or removal of tags using <code>TagResource</code> and <code>UntagResource</code> APIs is eventually consistent. <code>ListTagsOfResource</code> API will only reflect the changes after a few seconds.</p>\n            </li>\n         </ul>\n         <p>For an overview on tagging DynamoDB resources, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n            in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.dynamodb#TagResourceInput": {
@@ -11575,7 +11583,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Removes the association of tags from an Amazon DynamoDB resource. You can call\n                <code>UntagResource</code> up to five times per second, per account. </p>\n         <p>For an overview on tagging DynamoDB resources, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n            in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Removes the association of tags from an Amazon DynamoDB resource. You can call\n                <code>UntagResource</code> up to five times per second, per account. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>UntagResource</code> is an asynchronous operation. If you issue a <a>ListTagsOfResource</a> request immediately after an <code>UntagResource</code> request, DynamoDB might return your previous tag set, if there was one, or an empty tag set. This is because <code>ListTagsOfResource</code> uses an eventually consistent query, and the metadata for your tags or table might not be available at that moment. Wait for a few seconds, and then try the <code>ListTagsOfResource</code> request again.</p>\n            </li>\n            <li>\n               <p>The application or removal of tags using <code>TagResource</code> and <code>UntagResource</code> APIs is eventually consistent. <code>ListTagsOfResource</code> API will only reflect the changes after a few seconds.</p>\n            </li>\n         </ul>\n         <p>For an overview on tagging DynamoDB resources, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n            in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.dynamodb#UntagResourceInput": {

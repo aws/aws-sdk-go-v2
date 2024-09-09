@@ -6691,7 +6691,7 @@
                     }
                 },
                 "ExecutionRole": {
-                    "target": "com.amazonaws.sagemaker#IAMRoleArn",
+                    "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The execution role for the instance group to assume.</p>"
                     }
@@ -6706,6 +6706,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
                     "traits": {
                         "smithy.api#documentation": "<p>The additional storage configurations for the instances in the SageMaker HyperPod cluster instance\n         group.</p>"
+                    }
+                },
+                "OnStartDeepHealthChecks": {
+                    "target": "com.amazonaws.sagemaker#OnStartDeepHealthChecks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster instance group is created or updated.</p>"
                     }
                 }
             },
@@ -6765,7 +6771,7 @@
                     }
                 },
                 "ExecutionRole": {
-                    "target": "com.amazonaws.sagemaker#IAMRoleArn",
+                    "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies an IAM execution role to be assumed by the instance group.</p>",
@@ -6782,6 +6788,12 @@
                     "target": "com.amazonaws.sagemaker#ClusterInstanceStorageConfigs",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the additional storage configurations for the instances in the SageMaker HyperPod cluster\n         instance group.</p>"
+                    }
+                },
+                "OnStartDeepHealthChecks": {
+                    "target": "com.amazonaws.sagemaker#OnStartDeepHealthChecks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster instance group is created or updated.</p>"
                     }
                 }
             },
@@ -6852,6 +6864,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SystemUpdating"
+                    }
+                },
+                "DEEP_HEALTH_CHECK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeepHealthCheckInProgress"
                     }
                 }
             }
@@ -7275,6 +7293,23 @@
                 "smithy.api#pattern": "^i-[a-f0-9]{8}(?:[a-f0-9]{9})?$"
             }
         },
+        "com.amazonaws.sagemaker#ClusterNodeRecovery": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Automatic"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClusterNodeSummaries": {
             "type": "list",
             "member": {
@@ -7335,6 +7370,38 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOrchestrator": {
+            "type": "structure",
+            "members": {
+                "Eks": {
+                    "target": "com.amazonaws.sagemaker#ClusterOrchestratorEksConfig",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of orchestrator used for the SageMaker HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ClusterOrchestratorEksConfig": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#EksClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EKS cluster associated with the SageMaker HyperPod cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration settings for the Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterPrivateDnsHostname": {
@@ -7503,7 +7570,7 @@
                 "AppLifecycleManagement": {
                     "target": "com.amazonaws.sagemaker#AppLifecycleManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor applications.</p>\n         <p></p>"
+                        "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor applications.</p>"
                     }
                 }
             },
@@ -9243,6 +9310,18 @@
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web Services resource. You can\n         add tags to your cluster in the same way you add them in other Amazon Web Services services\n         that support tagging. To learn more about tagging Amazon Web Services resources in general,\n         see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging\n               Amazon Web Services Resources User Guide</a>.</p>"
+                    }
+                },
+                "Orchestrator": {
+                    "target": "com.amazonaws.sagemaker#ClusterOrchestrator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of orchestrator to use for the SageMaker HyperPod cluster. Currently, the only supported\n         value is <code>\"eks\"</code>, which is to use an Amazon Elastic Kubernetes Service (EKS)\n         cluster as the orchestrator.</p>"
+                    }
+                },
+                "NodeRecovery": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node recovery mode for the SageMaker HyperPod cluster. When set to <code>Automatic</code>,\n         SageMaker HyperPod will automatically reboot or replace faulty nodes when issues are detected. When set\n         to <code>None</code>, cluster administrators will need to manually manage any faulty\n         cluster instances.</p>"
                     }
                 }
             },
@@ -14858,6 +14937,23 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#DeepHealthCheckType": {
+            "type": "enum",
+            "members": {
+                "INSTANCE_STRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceStress"
+                    }
+                },
+                "INSTANCE_CONNECTIVITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceConnectivity"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#DefaultEbsStorageSettings": {
             "type": "structure",
             "members": {
@@ -18321,6 +18417,18 @@
                 },
                 "VpcConfig": {
                     "target": "com.amazonaws.sagemaker#VpcConfig"
+                },
+                "Orchestrator": {
+                    "target": "com.amazonaws.sagemaker#ClusterOrchestrator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of orchestrator used for the SageMaker HyperPod cluster. </p>"
+                    }
+                },
+                "NodeRecovery": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node recovery mode configured for the SageMaker HyperPod cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27232,6 +27340,16 @@
                 "smithy.api#pattern": "^\\d+$"
             }
         },
+        "com.amazonaws.sagemaker#EksClusterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:eks:[a-z0-9\\-]*:[0-9]{12}:cluster\\/[0-9A-Za-z][A-Za-z0-9\\-_]{0,99}$"
+            }
+        },
         "com.amazonaws.sagemaker#EmrServerlessComputeConfig": {
             "type": "structure",
             "members": {
@@ -32146,16 +32264,6 @@
                 "smithy.api#range": {
                     "min": 1
                 }
-            }
-        },
-        "com.amazonaws.sagemaker#IAMRoleArn": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 20,
-                    "max": 2048
-                },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/[\\w+=,.@-]{1,64}$"
             }
         },
         "com.amazonaws.sagemaker#IamIdentity": {
@@ -49393,6 +49501,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of user groups that exist in your OIDC Identity Provider (IdP). \n            One to ten groups can be used to create a single private work team. \n            When you add a user group to the list of <code>Groups</code>, you can add that user group to one or more\n            private work teams. If you add a user group to a private work team, all workers in that user group \n            are added to the work team.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OnStartDeepHealthChecks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#DeepHealthCheckType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
             }
         },
         "com.amazonaws.sagemaker#OnlineStoreConfig": {
@@ -67537,6 +67657,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specify the instance groups to update.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "NodeRecovery": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeRecovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node recovery mode to be applied to the SageMaker HyperPod cluster.</p>"
                     }
                 }
             },

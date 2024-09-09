@@ -1449,6 +1449,13 @@
                         "smithy.api#documentation": "<p>If the endpoint hosts one or more inference components, this parameter specifies the\n            name of inference component to invoke.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Inference-Component"
                     }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.sagemakerruntime#SessionIdOrNewSessionConstantHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Creates a stateful session or identifies an existing one. You can do one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>Create a stateful session by specifying the value\n                    <code>NEW_SESSION</code>.</p>\n            </li>\n            <li>\n               <p>Send your request to an existing stateful session by specifying the ID of that\n                    session.</p>\n            </li>\n         </ul>\n         <p>With a stateful session, you can send multiple requests to a stateful model. When you\n            create a session with a stateful model, the model must create the session ID and set the\n            expiration time. The model must also provide that information in the response to your\n            request. You can get the ID and timestamp from the <code>NewSessionId</code> response\n            parameter. For any subsequent request where you specify that session ID, SageMaker routes the request to the same instance that supports the session.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Session-Id"
+                    }
                 }
             },
             "traits": {
@@ -1486,6 +1493,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides additional information in the response about the inference returned by a\n        model hosted at an Amazon SageMaker endpoint. The information is an opaque value that is\n        forwarded verbatim. You could use this value, for example, to return an ID received in\n        the <code>CustomAttributes</code> header of a request or other metadata that a service\n        endpoint was programmed to produce. The value must consist of no more than 1024 visible\n        US-ASCII characters as specified in <a href=\"https://tools.ietf.org/html/rfc7230#section-3.2.6\">Section 3.3.6. Field Value\n            Components</a> of the Hypertext Transfer Protocol (HTTP/1.1). If the customer\n        wants the custom attribute returned, the model must set the custom attribute to be\n        included on the way back. </p>\n         <p>The code in your model is responsible for setting or updating any custom attributes in\n        the response. If your code does not set this value in the response, an empty value is\n        returned. For example, if a custom attribute represents the trace ID, your model can\n        prepend the custom attribute with <code>Trace ID:</code> in your post-processing\n        function.</p>\n         <p>This feature is currently supported in the Amazon Web Services SDKs but not in the Amazon SageMaker\n        Python SDK.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Custom-Attributes"
+                    }
+                },
+                "NewSessionId": {
+                    "target": "com.amazonaws.sagemakerruntime#NewSessionResponseHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you created a stateful session with your request, the ID and expiration time that\n            the model assigns to that session.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-New-Session-Id"
+                    }
+                },
+                "ClosedSessionId": {
+                    "target": "com.amazonaws.sagemakerruntime#SessionIdHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you closed a stateful session with your request, the ID of that session.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Closed-Session-Id"
                     }
                 }
             },
@@ -1597,6 +1618,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the endpoint hosts one or more inference components, this parameter specifies the\n            name of inference component to invoke for a streaming response.</p>",
                         "smithy.api#httpHeader": "X-Amzn-SageMaker-Inference-Component"
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.sagemakerruntime#SessionIdHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a stateful session to handle your request.</p>\n         <p>You can't create a stateful session by using the\n                <code>InvokeEndpointWithResponseStream</code> action. Instead, you can create one by\n            using the <code>\n               <a>InvokeEndpoint</a>\n            </code> action. In your request, you\n            specify <code>NEW_SESSION</code> for the <code>SessionId</code> request parameter. The\n            response to that request provides the session ID for the <code>NewSessionId</code>\n            response parameter.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Session-Id"
                     }
                 }
             },
@@ -1718,6 +1746,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.sagemakerruntime#NewSessionResponseHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*;\\sExpires=[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+            }
+        },
         "com.amazonaws.sagemakerruntime#PartBlob": {
             "type": "blob",
             "traits": {
@@ -1786,6 +1824,26 @@
                 "smithy.api#documentation": "<p> The service is unavailable. Try your call again. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.sagemakerruntime#SessionIdHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.sagemakerruntime#SessionIdOrNewSessionConstantHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(NEW_SESSION)$|^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemakerruntime#StatusCode": {

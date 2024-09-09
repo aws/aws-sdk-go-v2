@@ -25,6 +25,9 @@
                     "target": "com.amazonaws.ivsrealtime#CreateEncoderConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.ivsrealtime#CreateIngestConfiguration"
+                },
+                {
                     "target": "com.amazonaws.ivsrealtime#CreateParticipantToken"
                 },
                 {
@@ -35,6 +38,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#DeleteEncoderConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#DeleteIngestConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#DeletePublicKey"
@@ -53,6 +59,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#GetEncoderConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#GetIngestConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#GetParticipant"
@@ -77,6 +86,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#ListEncoderConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ListIngestConfigurations"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#ListParticipantEvents"
@@ -110,6 +122,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#UpdateIngestConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#UpdateStage"
@@ -146,7 +161,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>\n            <b>Key Concepts</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A virtual space where participants can exchange video in real time.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant object</b> — Represents participants (people) in the stage and\n            contains information about them. When a token is created, it includes a participant ID;\n            when a participant uses that token to join a stage, the participant is associated with\n            that participant ID. There is a 1:1 mapping between participant tokens and\n            participants.</p>\n            </li>\n         </ul>\n         <p>For server-side composition:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Composition process</b> — Composites participants\n            of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels).\n            Composition endpoints support this process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Composition</b> — Controls the look of the outputs,\n            including how participants are positioned in the video.</p>\n            </li>\n         </ul>\n         <p>For more information about your IVS live stream, also see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html\">Getting Started with Amazon IVS Real-Time Streaming</a>.</p>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a> for more information, including restrictions that apply to\n      tags and \"Tag naming limits and requirements\"; Amazon IVS stages has no service-specific\n      constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS real-time API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>",
+                "smithy.api#documentation": "<p>The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>\n            <b>Key Concepts</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A virtual space where participants can exchange video in real time.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant token</b> — A token that authenticates a participant when they join a stage.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Participant object</b> — Represents participants (people) in the stage and\n            contains information about them. When a token is created, it includes a participant ID;\n            when a participant uses that token to join a stage, the participant is associated with\n            that participant ID. There is a 1:1 mapping between participant tokens and\n            participants.</p>\n            </li>\n         </ul>\n         <p>For server-side composition:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Composition process</b> — Composites participants\n            of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels).\n            Composition operations support this process.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Composition</b> — Controls the look of the outputs,\n            including how participants are positioned in the video.</p>\n            </li>\n         </ul>\n         <p>For more information about your IVS live stream, also see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started.html\">Getting Started with Amazon IVS Real-Time Streaming</a>.</p>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n      in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n      limits and requirements\"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS real-time API has these tag-related operations: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>",
                 "smithy.api#title": "Amazon Interactive Video Service RealTime",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -864,6 +879,12 @@
                 }
             }
         },
+        "com.amazonaws.ivsrealtime#Boolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.ivsrealtime#ChannelArn": {
             "type": "string",
             "traits": {
@@ -936,7 +957,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 },
                 "startTime": {
@@ -1037,7 +1058,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 },
                 "startTime": {
@@ -1136,7 +1157,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -1151,6 +1172,102 @@
                     "target": "com.amazonaws.ivsrealtime#EncoderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The EncoderConfiguration that was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateIngestConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#CreateIngestConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#CreateIngestConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new IngestConfiguration resource, used to specify the ingest protocol for a stage.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateIngestConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateIngestConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional name that can be specified for the IngestConfiguration being created.</p>"
+                    }
+                },
+                "stageArn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationStageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage with which the IngestConfiguration is associated.</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "ingestProtocol": {
+                    "target": "com.amazonaws.ivsrealtime#IngestProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of ingest protocol that the user employs to broadcast. If this is set to <code>RTMP</code>, <code>insecureIngest</code> must be set to <code>true</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "insecureIngest": {
+                    "target": "com.amazonaws.ivsrealtime#InsecureIngest",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the stage allows insecure RTMP ingest. This must be set to <code>true</code>, if <code>ingestProtocol</code> is set to <code>RTMP</code>. Default: <code>false</code>. </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n\t there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateIngestConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ingestConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IngestConfiguration that was created.</p>"
                     }
                 }
             },
@@ -1286,7 +1403,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there. </p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there. </p>"
                     }
                 },
                 "autoParticipantRecordingConfiguration": {
@@ -1372,7 +1489,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n\t in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -1446,6 +1563,68 @@
             }
         },
         "com.amazonaws.ivsrealtime#DeleteEncoderConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeleteIngestConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#DeleteIngestConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#DeleteIngestConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specified IngestConfiguration, so it can no longer be used to broadcast. An IngestConfiguration cannot be deleted if the publisher is actively streaming to a stage, unless <code>force</code> is set to <code>true</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteIngestConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeleteIngestConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the IngestConfiguration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "force": {
+                    "target": "com.amazonaws.ivsrealtime#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Optional field to force deletion of the IngestConfiguration. If this is set to <code>true</code> when a participant is actively publishing, the participant is disconnected from the stage, followed by deletion of the IngestConfiguration. Default: <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeleteIngestConfigurationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -1533,7 +1712,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Shuts down and deletes the specified stage (disconnecting all participants).</p>",
+                "smithy.api#documentation": "<p>Shuts down and deletes the specified stage (disconnecting all participants). This operation also\n            removes the <code>stageArn</code> from the associated <a>IngestConfiguration</a>, if there are participants\n\t    using the IngestConfiguration to publish to the stage.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteStage"
@@ -1838,7 +2017,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disconnects a specified participant and revokes the participant permanently from a\n         specified stage.</p>",
+                "smithy.api#documentation": "<p>Disconnects a specified participant from a specified stage. If the participant is publishing using\n            an <a>IngestConfiguration</a>, DisconnectParticipant also updates the <code>stageArn</code>\n\t    in the IngestConfiguration to be an empty string.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DisconnectParticipant"
@@ -1867,7 +2046,7 @@
                 "participantId": {
                     "target": "com.amazonaws.ivsrealtime#ParticipantTokenId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifier of the participant to be disconnected. This is assigned by IVS and returned\n         by <a>CreateParticipantToken</a>.</p>",
+                        "smithy.api#documentation": "<p>Identifier of the participant to be disconnected. IVS assigns this; it is returned\n            by <a>CreateParticipantToken</a> (for streams using WebRTC ingest) or <a>CreateIngestConfiguration</a> (for\n\t    streams using RTMP ingest).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1908,7 +2087,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -1967,7 +2146,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -2020,22 +2199,74 @@
             }
         },
         "com.amazonaws.ivsrealtime#EventErrorCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INSUFFICIENT_CAPABILITIES",
-                        "name": "INSUFFICIENT_CAPABILITIES"
-                    },
-                    {
-                        "value": "QUOTA_EXCEEDED",
-                        "name": "QUOTA_EXCEEDED"
-                    },
-                    {
-                        "value": "PUBLISHER_NOT_FOUND",
-                        "name": "PUBLISHER_NOT_FOUND"
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_CAPABILITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CAPABILITIES"
                     }
-                ]
+                },
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "PUBLISHER_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHER_NOT_FOUND"
+                    }
+                },
+                "BITRATE_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BITRATE_EXCEEDED"
+                    }
+                },
+                "RESOLUTION_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLUTION_EXCEEDED"
+                    }
+                },
+                "STREAM_DURATION_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAM_DURATION_EXCEEDED"
+                    }
+                },
+                "INVALID_AUDIO_CODEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_AUDIO_CODEC"
+                    }
+                },
+                "INVALID_VIDEO_CODEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_VIDEO_CODEC"
+                    }
+                },
+                "INVALID_PROTOCOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PROTOCOL"
+                    }
+                },
+                "INVALID_STREAM_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_STREAM_KEY"
+                    }
+                },
+                "REUSE_OF_STREAM_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REUSE_OF_STREAM_KEY"
+                    }
+                }
             }
         },
         "com.amazonaws.ivsrealtime#EventList": {
@@ -2221,6 +2452,63 @@
                     "target": "com.amazonaws.ivsrealtime#EncoderConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The EncoderConfiguration that was returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetIngestConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#GetIngestConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#GetIngestConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified IngestConfiguration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetIngestConfiguration"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetIngestConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the ingest for which the information is to be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetIngestConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ingestConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IngestConfiguration that was returned.</p>"
                     }
                 }
             },
@@ -2648,7 +2936,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -2668,6 +2956,209 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfiguration": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ingest name</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ingest configuration ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ingestProtocol": {
+                    "target": "com.amazonaws.ivsrealtime#IngestProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of ingest protocol that the user employs for broadcasting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "streamKey": {
+                    "target": "com.amazonaws.ivsrealtime#StreamKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ingest-key value for the RTMP(S) protocol.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stageArn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationStageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage with which the IngestConfiguration is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the participant within the stage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to to store in the IngestConfiguration and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying an ingest configuration.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:ingest-configuration/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#IngestConfigurationSummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfigurationStageArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfigurationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ingest name.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ingest configuration ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ingestProtocol": {
+                    "target": "com.amazonaws.ivsrealtime#IngestProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of ingest protocol that the user employs for broadcasting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stageArn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationStageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage with which the IngestConfiguration is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the participant within the stage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>State of the ingest configuration. It is <code>ACTIVE</code> if a publisher currently is publishing to the stage associated with the ingest configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text.\n      <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about an IngestConfiguration.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#IngestProtocol": {
+            "type": "enum",
+            "members": {
+                "RTMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTMP"
+                    }
+                },
+                "RTMPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTMPS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#InsecureIngest": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.ivsrealtime#InternalServerException": {
@@ -2871,6 +3362,90 @@
                     "target": "com.amazonaws.ivsrealtime#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If there are more encoder configurations than <code>maxResults</code>, use\n            <code>nextToken</code> in the request to get the next set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListIngestConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#ListIngestConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#ListIngestConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all IngestConfigurations in your account, in the AWS region where the API request is processed.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListIngestConfigurations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "ingestConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListIngestConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "filterByStageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the response list to match the specified stage ARN. Only one filter (by stage ARN or by state) can be used at a time.</p>"
+                    }
+                },
+                "filterByState": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the response list to match the specified state. Only one filter (by stage ARN or by state) can be used at a time.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first IngestConfiguration to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ivsrealtime#MaxIngestConfigurationResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return. Default: 50.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListIngestConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "ingestConfigurations": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the matching ingest configurations (summary information only).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more IngestConfigurations than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>"
                     }
                 }
             },
@@ -3449,6 +4024,15 @@
                 }
             }
         },
+        "com.amazonaws.ivsrealtime#MaxIngestConfigurationResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.ivsrealtime#MaxParticipantEventResults": {
             "type": "integer",
             "traits": {
@@ -3612,6 +4196,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The participant’s recording state.</p>"
                     }
+                },
+                "protocol": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of ingest protocol that the participant employs for broadcasting.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3651,6 +4241,35 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ivsrealtime#ParticipantSummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantProtocol": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "WHIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WHIP"
+                    }
+                },
+                "RTMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTMP"
+                    }
+                },
+                "RTMPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTMPS"
+                    }
+                }
             }
         },
         "com.amazonaws.ivsrealtime#ParticipantRecordingFilterByRecordingState": {
@@ -4175,7 +4794,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -4236,7 +4855,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -4410,7 +5029,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 },
                 "autoParticipantRecordingConfiguration": {
@@ -4461,12 +5080,24 @@
                 "whip": {
                     "target": "com.amazonaws.ivsrealtime#StageEndpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>WHIP endpoint.</p>"
+                        "smithy.api#documentation": "<p>The endpoint to be used for IVS real-time streaming using the WHIP protocol.</p>"
+                    }
+                },
+                "rtmp": {
+                    "target": "com.amazonaws.ivsrealtime#StageEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint to be used for IVS real-time streaming using the RTMP protocol.</p>"
+                    }
+                },
+                "rtmps": {
+                    "target": "com.amazonaws.ivsrealtime#StageEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint to be used for IVS real-time streaming using the RTMPS protocol.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about various endpoints for a stage.</p>"
+                "smithy.api#documentation": "<p>Summary information about various endpoints for a stage. We recommend that you cache these values at stage\n            creation; the values can be cached for up to 14 days.</p>"
             }
         },
         "com.amazonaws.ivsrealtime#StageName": {
@@ -4572,7 +5203,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -4618,7 +5249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a Composition from a stage based on the configuration provided in the\n         request.</p>\n         <p>A Composition is an ephemeral resource that exists after this endpoint returns\n         successfully. Composition stops and the resource is deleted:</p>\n         <ul>\n            <li>\n               <p>When <a>StopComposition</a> is called.</p>\n            </li>\n            <li>\n               <p>After a 1-minute timeout, when all participants are disconnected from the\n               stage.</p>\n            </li>\n            <li>\n               <p>After a 1-minute timeout, if there are no participants in the stage when\n               StartComposition is called.</p>\n            </li>\n            <li>\n               <p>When broadcasting to the IVS channel fails and all retries are exhausted.</p>\n            </li>\n            <li>\n               <p>When broadcasting is disconnected and all attempts to reconnect are\n               exhausted.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Starts a Composition from a stage based on the configuration provided in the\n         request.</p>\n         <p>A Composition is an ephemeral resource that exists after this operation returns\n         successfully. Composition stops and the resource is deleted:</p>\n         <ul>\n            <li>\n               <p>When <a>StopComposition</a> is called.</p>\n            </li>\n            <li>\n               <p>After a 1-minute timeout, when all participants are disconnected from the\n               stage.</p>\n            </li>\n            <li>\n               <p>After a 1-minute timeout, if there are no participants in the stage when\n               StartComposition is called.</p>\n            </li>\n            <li>\n               <p>When broadcasting to the IVS channel fails and all retries are exhausted.</p>\n            </li>\n            <li>\n               <p>When broadcasting is disconnected and all attempts to reconnect are\n               exhausted.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartComposition"
@@ -4658,7 +5289,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
                     }
                 }
             },
@@ -4763,7 +5394,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -4816,7 +5447,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>"
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n\t limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented there.</p>"
                     }
                 }
             },
@@ -4828,6 +5459,13 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ivsrealtime#StorageConfigurationSummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StreamKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^rt_[0-9]+_[a-z0-9-]+_[a-zA-Z0-9-]+_.+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.ivsrealtime#String": {
@@ -4895,7 +5533,7 @@
                 "tags": {
                     "target": "com.amazonaws.ivsrealtime#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of tags to be added or updated. Array of maps, each of the form\n            <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints beyond what is documented\n         there.</p>",
+                        "smithy.api#documentation": "<p>Array of tags to be added or updated. Array of maps, each of the form\n         <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4976,7 +5614,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.ivsrealtime#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of tags to be removed. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints beyond what is documented\n         there.</p>",
+                        "smithy.api#documentation": "<p>Array of tags to be removed. Array of maps, each of the form <code>string:string\n         (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html\">Best practices and strategies</a>\n         in <i>Tagging AWS Resources and Tag Editor</i> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is documented\n         there.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -4986,6 +5624,74 @@
         "com.amazonaws.ivsrealtime#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.ivsrealtime#UpdateIngestConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#UpdateIngestConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#UpdateIngestConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a specified IngestConfiguration. Only the stage ARN attached to the IngestConfiguration can be updated. An IngestConfiguration that is active cannot be updated.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateIngestConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#UpdateIngestConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the IngestConfiguration, for which the related stage ARN needs to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stageArn": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfigurationStageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage ARN that needs to be updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#UpdateIngestConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "ingestConfiguration": {
+                    "target": "com.amazonaws.ivsrealtime#IngestConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated IngestConfiguration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ivsrealtime#UpdateStage": {
             "type": "operation",

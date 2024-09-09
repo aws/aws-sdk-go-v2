@@ -2295,7 +2295,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the default certificate and the certificate list for the specified HTTPS or TLS\n      listener.</p>\n         <p>If the default certificate is also in the certificate list, it appears twice in the\n      results (once with <code>IsDefault</code> set to true and once with <code>IsDefault</code> set\n      to false).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates\">SSL certificates</a> in the <i>Application Load Balancers Guide</i> or\n        <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#tls-listener-certificate\">Server certificates</a> in the <i>Network Load Balancers\n      Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the default certificate and the certificate list for the specified HTTPS or TLS\n      listener.</p>\n         <p>If the default certificate is also in the certificate list, it appears twice in the\n      results (once with <code>IsDefault</code> set to true and once with <code>IsDefault</code> set\n      to false).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#https-listener-certificates\">SSL certificates</a> in the <i>Application Load Balancers Guide</i> or\n        <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#tls-listener-certificate\">Server certificates</a> in the <i>Network Load Balancers\n      Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "Certificates"
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#DescribeListenerCertificatesInput": {
@@ -2594,9 +2599,6 @@
                     "outputToken": "NextMarker",
                     "items": "LoadBalancers"
                 },
-                "smithy.api#suppress": [
-                    "WaitableTraitInvalidErrorType"
-                ],
                 "smithy.waiters#waitable": {
                     "LoadBalancerAvailable": {
                         "acceptors": [
@@ -2623,7 +2625,7 @@
                             {
                                 "state": "retry",
                                 "matcher": {
-                                    "errorType": "LoadBalancerNotFound"
+                                    "errorType": "LoadBalancerNotFoundException"
                                 }
                             }
                         ],
@@ -2640,7 +2642,7 @@
                             {
                                 "state": "retry",
                                 "matcher": {
-                                    "errorType": "LoadBalancerNotFound"
+                                    "errorType": "LoadBalancerNotFoundException"
                                 }
                             }
                         ],
@@ -2661,7 +2663,7 @@
                             {
                                 "state": "success",
                                 "matcher": {
-                                    "errorType": "LoadBalancerNotFound"
+                                    "errorType": "LoadBalancerNotFoundException"
                                 }
                             }
                         ],
@@ -2776,7 +2778,12 @@
                             ]
                         }
                     }
-                ]
+                ],
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "Rules"
+                }
             }
         },
         "com.amazonaws.elasticloadbalancingv2#DescribeRulesInput": {
