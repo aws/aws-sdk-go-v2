@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9fc0f1b-835b-4f59-a472-bf881fe56db9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/content/en/docs/migrating/_index.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/en/docs/migrating/_index.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/en/docs/sdk-utilities/ec2-imds.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/en/docs/sdk-utilities/ec2-imds.md" afterDir="false" />
-    </list>
+    <list default="true" id="c9fc0f1b-835b-4f59-a472-bf881fe56db9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,7 +45,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1725907084536</updated>
-      <workItem from="1725907086281" duration="3277000" />
+      <workItem from="1725907086281" duration="3679000" />
     </task>
     <servers />
   </component>
