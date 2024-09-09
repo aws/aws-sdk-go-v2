@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – AWS KMS Examples</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/</link>
     <description>Recent content in AWS KMS Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: CreateKeyv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/createkey/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/createkey/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/createkey/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/createkey/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: DecryptDatav2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/decryptdata/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/decryptdata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/decryptdata/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/decryptdata/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Docs: EncryptDatav2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/encryptdata/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/encryptdata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/encryptdata/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/encryptdata/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Docs: ReEncryptDatav2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/reencryptdata/</guid>
       <description>
         
         

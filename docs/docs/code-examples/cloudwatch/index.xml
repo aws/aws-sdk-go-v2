@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Amazon CloudWatch Examples</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/</link>
     <description>Recent content in Amazon CloudWatch Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: CreateCustomMetricv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/createcustommetric/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/createcustommetric/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/createcustommetric/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/createcustommetric/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: CreateEnableMetricAlarmv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/createenablemetricalarm/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/createenablemetricalarm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/createenablemetricalarm/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/createenablemetricalarm/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Docs: DescribeAlarmsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/describealarms/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/describealarms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/describealarms/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/describealarms/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Docs: DisableAlarmv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/disablealarm/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/disablealarm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/disablealarm/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/disablealarm/</guid>
       <description>
         
         
@@ -68,10 +68,10 @@
     
     <item>
       <title>Docs: ListMetricsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/listmetrics/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/listmetrics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/listmetrics/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/listmetrics/</guid>
       <description>
         
         
@@ -81,10 +81,10 @@
     
     <item>
       <title>Docs: PutEventv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/putevent/</guid>
       <description>
         
         

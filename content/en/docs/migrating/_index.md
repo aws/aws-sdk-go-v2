@@ -34,9 +34,9 @@ Import Root | Description
 
 ## Configuration Loading
 
-The [session]({{< apiref v1="aws/session" >}}) package and associated functionality are replaced with a simplified
-configuration system provided by the [config]({{< apiref "config" >}}) package. The `config` package is a separate Go
-module, and can be included in your applications dependencies by with `go get`.
+The [session]({{< apiref v1="aws/session" >}}) package from AWS SDK for Go v1 has been replaced by the [config]({{< apiref "config" >}})
+package in AWS SDK for Go v2. You can include this new config package in your application's dependencies with go get.
+Both `session.NewSession` in v1 and `config.LoadDefaultConfig` in v2 use the default credential provider chain, which automatically caches and refreshes credentials before they expire.
 ```sh
 go get github.com/aws/aws-sdk-go-v2/config
 ```
@@ -1448,3 +1448,67 @@ been condensed:
 
 To learn how to migrate to the 3.x major version of the encryption client, see
 [this guide](https://docs.aws.amazon.com/amazon-s3-encryption-client/latest/developerguide/go-v3-migration.html).
+
+
+## Service Customizations Changes
+
+### S3
+When migrating from AWS SDK for Go v1 to v2, an important change to be aware of involves the handling of the `SSECustomerKey` used for server-side encryption with customer-provided keys (SSE-C). In Go SDK v1, the encoding of the `SSECustomerKey` to Base64 was handled internally by the SDK. In SDK v2, this automatic encoding has been removed, and it is now required to manually encode the `SSECustomerKey` to Base64 before passing it to the SDK.
+
+Example Adjustment:
+
+```go
+// V1
+
+import (
+  "context"
+  "encoding/base64"
+  "github.com/aws/aws-sdk-go-v2/config"
+  "github.com/aws/aws-sdk-go-v2/service/s3"
+)
+// ... more code
+
+plainTextKey := "12345678901234567890123456789012" // 32 bytes in length
+
+// calculate md5..
+
+_, err = client.PutObjectWithContext(context.Background(), &s3.PutObjectInput{
+    Bucket: aws.String("your-bucket-name"),
+    Key:    aws.String("your-object-key"),
+    Body:                 strings.NewReader("hello-world"),
+    SSECustomerKey:       &plainTextKey,
+    SSECustomerKeyMD5:    &base64Md5,
+    SSECustomerAlgorithm: aws.String("AES256"),
+})
+
+// ... more code
+```
+
+```go
+// V2
+
+import (
+  "github.com/aws/aws-sdk-go/aws"
+  "github.com/aws/aws-sdk-go/aws/session"
+  "github.com/aws/aws-sdk-go/service/s3"
+)
+
+// ... more code
+
+plainTextKey := "12345678901234567890123456789012" // 32 bytes in length
+base64EncodedKey := base64.StdEncoding.EncodeToString([]byte(plainTextKey))
+
+// calculate md5..
+
+_, err = client.PutObject(context.Background(), &s3.PutObjectInput{
+    Bucket: aws.String("your-bucket-name"),
+    Key:    aws.String("your-object-key"),
+    Body:                 strings.NewReader("hello-world"),
+    SSECustomerKey:       &base64EncodedKey,
+    SSECustomerKeyMD5:    &base64Md5,
+    SSECustomerAlgorithm: aws.String("AES256"),
+})
+
+// ... more code
+```
+

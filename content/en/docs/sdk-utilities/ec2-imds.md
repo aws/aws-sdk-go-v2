@@ -38,15 +38,15 @@ Then use the service client to retrieve information from a metadata category suc
 (the private IP address of the instance).
 
 ```go
-localip, err := client.GetMetadata(context.TODO(), &imds.GetMetadataInput{
-	Path: "local-ipv4",
+localIp, err := client.GetMetadata(context.TODO(), &imds.GetMetadataInput{
+    Path: "local-ipv4",
 })
 if err != nil {
     log.Printf("Unable to retrieve the private IP address from the EC2 instance: %s\n", err)
     return
 }
-
-fmt.Printf("local-ip: %v\n", localip)
+content, _ := io.ReadAll(localIp.Content)
+fmt.Printf("local-ip: %v\n", string(content))
 ```
 
 For a list of all metadata categories, see

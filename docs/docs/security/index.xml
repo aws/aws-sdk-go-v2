@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Security for this AWS Product or Service</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/security/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/security/</link>
     <description>Recent content in Security for this AWS Product or Service on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 09 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/security/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/security/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Docs: Compliance Validation for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/compliance-validation/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/compliance-validation/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/compliance-validation/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/compliance-validation/</guid>
       <description>
         
         
@@ -60,10 +60,10 @@ helps you check your compliance with security industry standards and best practi
     
     <item>
       <title>Docs: Identity and Access Management for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/iam/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/iam/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/iam/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/iam/</guid>
       <description>
         
         
@@ -90,10 +90,10 @@ of &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt;
     
     <item>
       <title>Docs: Infrastructure Security for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/infrastructure-security/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/infrastructure-security/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/infrastructure-security/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/infrastructure-security/</guid>
       <description>
         
         
@@ -113,10 +113,10 @@ whitepaper.&lt;/p&gt;
     
     <item>
       <title>Docs: Resilience for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</guid>
       <description>
         
         
@@ -140,10 +140,10 @@ and &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt
     
     <item>
       <title>Docs: Data Protection in this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/data-protection/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/data-protection/</link>
       <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/data-protection/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/data-protection/</guid>
       <description>
         
         
@@ -181,10 +181,10 @@ information in the URL to validate your request to that server.&lt;/p&gt;
     
     <item>
       <title>Docs: TLS Version in AWS SDK for Go V2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/tls/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/tls/</link>
       <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/tls/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/tls/</guid>
       <description>
         
         
