@@ -5309,7 +5309,7 @@
                 "VoiceToneAnalysisTaskId": {
                     "target": "com.amazonaws.chimesdkvoice#NonEmptyString256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the voice tone anlysis task.</p>",
+                        "smithy.api#documentation": "<p>The ID of the voice tone analysis task.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6495,7 +6495,7 @@
                 "Disabled": {
                     "target": "com.amazonaws.chimesdkvoice#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Denotes the configration as enabled or disabled.</p>"
+                        "smithy.api#documentation": "<p>Denotes the configuration as enabled or disabled.</p>"
                     }
                 },
                 "ConfigurationArn": {
@@ -10687,7 +10687,7 @@
                 "Country": {
                     "target": "com.amazonaws.chimesdkvoice#SensitiveNonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The country in the address being validated.</p>",
+                        "smithy.api#documentation": "<p>The country in the address being validated as two-letter country code in ISO 3166-1\n         alpha-2 format, such as <code>US</code>. For more information, see <a href=\"https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2\">ISO 3166-1 alpha-2</a> in\n         Wikipedia.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10710,7 +10710,7 @@
                     "target": "com.amazonaws.chimesdkvoice#ValidationResult",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Number indicating the result of address validation. <code>0</code> means the \n         address was perfect as-is and successfully validated. <code>1</code> means the \n         address was corrected. <code>2</code> means the address sent was not close \n         enough and was not validated.</p>"
+                        "smithy.api#documentation": "<p>Number indicating the result of address validation.</p>\n         <p>Each possible result is defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>0</code> - Address validation succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>1</code> - Address validation succeeded. The address was a close enough\n               match and has been corrected as part of the address object.</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - Address validation failed. You should re-submit the validation\n               request with candidates from the <code>CandidateAddressList</code> result, if it's a\n               close match.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AddressExternalId": {

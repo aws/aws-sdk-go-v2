@@ -551,6 +551,12 @@
                         "aws.cloudformation#cfnMutability": "write",
                         "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
                     }
+                },
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.pipes#KmsKeyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key \n      Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>If you do not specify a customer managed key identifier, EventBridge uses an\n        Amazon Web Services owned key to encrypt pipe data.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html\">Managing keys</a> in the <i>Key Management Service\n                                Developer Guide</i>. </p>"
+                    }
                 }
             },
             "traits": {
@@ -898,6 +904,12 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.pipes#KmsKeyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n      customer managed key for EventBridge to use to encrypt pipe data, if one has been specified.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html\">Data encryption in EventBridge</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
                     }
                 }
             },
@@ -1573,6 +1585,16 @@
                         "name": "AT_TIMESTAMP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.pipes#KmsKeyIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-/:]*$"
             }
         },
         "com.amazonaws.pipes#LaunchType": {
@@ -4404,7 +4426,7 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.pipes#S3OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format EventBridge uses for the log records.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>json</code>: JSON </p>\n            </li>\n            <li>\n               <p>\n                  <code>plain</code>: Plain text</p>\n            </li>\n            <li>\n               <p>\n                  <code>w3c</code>: <a href=\"https://www.w3.org/TR/WD-logfile\">W3C extended\n                  logging file format</a>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The format EventBridge uses for the log records.</p>\n         <p>EventBridge currently only supports <code>json</code> formatting.</p>"
                     }
                 }
             },
@@ -4437,7 +4459,7 @@
                 "OutputFormat": {
                     "target": "com.amazonaws.pipes#S3OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>How EventBridge should format the log records.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>json</code>: JSON </p>\n            </li>\n            <li>\n               <p>\n                  <code>plain</code>: Plain text</p>\n            </li>\n            <li>\n               <p>\n                  <code>w3c</code>: <a href=\"https://www.w3.org/TR/WD-logfile\">W3C extended\n                  logging file format</a>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>How EventBridge should format the log records.</p>\n         <p>EventBridge currently only supports <code>json</code> formatting.</p>"
                     }
                 },
                 "Prefix": {
@@ -4641,7 +4663,7 @@
                 "SecurityGroup": {
                     "target": "com.amazonaws.pipes#SecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the security groups associated with the stream. These security groups must all\n         be in the same VPC. You can specify as many as five security groups. If you do not specify\n         a security group, the default security group for the VPC is used.</p>"
+                        "smithy.api#documentation": "<p>Specifies the security groups associated with the stream. These security groups must all\n         be in the same VPC. You can specify as many as five security groups.</p>"
                     }
                 }
             },
@@ -5440,6 +5462,12 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "write",
                         "smithy.api#documentation": "<p>The logging configuration settings for the pipe.</p>"
+                    }
+                },
+                "KmsKeyIdentifier": {
+                    "target": "com.amazonaws.pipes#KmsKeyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the KMS\n         customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key \n         Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.</p>\n         <p>To update a pipe that is using the default Amazon Web Services owned key to use a customer managed key instead, or update a pipe that is using a customer managed key to use a\n         different customer managed key, specify a customer managed key identifier.</p>\n         <p>To update a pipe that is using a customer managed key to use the default Amazon Web Services owned key, specify an empty string.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html\">Managing keys</a> in the <i>Key Management Service\n            Developer Guide</i>. </p>"
                     }
                 }
             },

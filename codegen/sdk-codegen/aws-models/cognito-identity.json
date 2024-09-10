@@ -2279,7 +2279,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 50000
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cognitoidentity#IdentityProviders": {
@@ -2907,7 +2908,10 @@
             }
         },
         "com.amazonaws.cognitoidentity#OIDCToken": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.cognitoidentity#PaginationKey": {
             "type": "string",
@@ -3099,7 +3103,10 @@
             }
         },
         "com.amazonaws.cognitoidentity#SecretKeyString": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.cognitoidentity#SessionTokenString": {
             "type": "string"
