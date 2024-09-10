@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9fc0f1b-835b-4f59-a472-bf881fe56db9" name="Changes" comment="" />
+    <list default="true" id="c9fc0f1b-835b-4f59-a472-bf881fe56db9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/en/docs/configuring-sdk/_index.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/en/docs/configuring-sdk/_index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/en/docs/configuring-sdk/custom-http.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/en/docs/configuring-sdk/custom-http.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/content/en/docs/migrating/_index.md" beforeDir="false" afterPath="$PROJECT_DIR$/content/en/docs/migrating/_index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/cloud9-go/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/cloud9-go/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/cloudwatch/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/cloudwatch/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/dynamodb/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/dynamodb/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/ec2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/ec2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/iam/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/iam/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/kms/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/kms/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/s3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/s3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/sns/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/sns/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/sqs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/sqs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/ssm/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/ssm/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/code-examples/sts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/code-examples/sts/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/auth/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/auth/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/custom-http/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/custom-http/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/endpoints/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/endpoints/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/logging/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/logging/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/configuring-sdk/retries-timeouts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/configuring-sdk/retries-timeouts/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/faq/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/faq/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/faq/timing-operations/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/faq/timing-operations/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/getting-started/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/getting-started/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/handling-errors/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/handling-errors/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/making-requests/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/making-requests/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/middleware/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/middleware/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/migrating/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/migrating/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/sdk-utilities/cloudfront/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/sdk-utilities/cloudfront/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/sdk-utilities/ec2-imds/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/sdk-utilities/ec2-imds/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/sdk-utilities/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/sdk-utilities/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/sdk-utilities/rds/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/sdk-utilities/rds/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/sdk-utilities/s3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/sdk-utilities/s3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/compliance-validation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/compliance-validation/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/data-protection/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/data-protection/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/disaster-recovery-resiliency/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/disaster-recovery-resiliency/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/iam/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/iam/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/infrastructure-security/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/infrastructure-security/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/security/tls/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/security/tls/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/unit-testing/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/docs/unit-testing/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/sitemap.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +94,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1725907084536</updated>
-      <workItem from="1725907086281" duration="3679000" />
+      <workItem from="1725907086281" duration="9243000" />
     </task>
     <servers />
   </component>

@@ -101,7 +101,7 @@ retry configuration. Most settings …">
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.154f45173041201f2e48489b706d1ed4.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -123,7 +123,7 @@ retry configuration. Most settings …">
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.154f45173041201f2e48489b706d1ed4.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -757,7 +757,7 @@ $ export AWS_SESSION_TOKEN=TOKEN
 </span></span></code></pre></div><h3 id="specify-credentials-programmatically">Specify Credentials Programmatically</h3>
 <p><code>config.LoadDefaultConfig</code> allows you to provide an explicit
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsProvider">aws.CredentialProvider</a> when loading the shared configuration sources.
-To pass an explicity credential provider when loading shared configuration use
+To pass an explicit credential provider when loading shared configuration use
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#WithCredentialsProvider">config.WithCredentialsProvider</a>. For example, if <code>customProvider</code>
 references an instance of <code>aws.CredentialProvider</code> implementation, it can be passed during configuration loading
 like so:</p>
@@ -768,8 +768,7 @@ like so:</p>
 
 <div class="pageinfo pageinfo-info">
 <p>All credential providers passed to or returned by <code>LoadDefaultConfig</code> are wrapped in a
-<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsCache">CredentialsCache</a> automatically. This enables caching and concurrency safe
-credential access. If you explicitly configure a provider on <code>aws.Config</code> directly you must explicitly wrap the provider
+<a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsCache">CredentialsCache</a> automatically. This enables caching, and credential rotation that is concurrency safe. If you explicitly configure a provider on <code>aws.Config</code> directly you must also explicitly wrap the provider
 with this type using <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#NewCredentialsCache">NewCredentialsCache</a>.</p>
 
 </div>

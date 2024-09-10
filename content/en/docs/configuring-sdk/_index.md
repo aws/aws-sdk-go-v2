@@ -327,7 +327,7 @@ $ export AWS_SESSION_TOKEN=TOKEN
 ### Specify Credentials Programmatically
 `config.LoadDefaultConfig` allows you to provide an explicit
 [aws.CredentialProvider]({{< apiref "aws#CredentialsProvider" >}}) when loading the shared configuration sources.
-To pass an explicity credential provider when loading shared configuration use
+To pass an explicit credential provider when loading shared configuration use
 [config.WithCredentialsProvider]({{< apiref "config#WithCredentialsProvider" >}}). For example, if `customProvider`
 references an instance of `aws.CredentialProvider` implementation, it can be passed during configuration loading
 like so:
@@ -341,8 +341,7 @@ If you explicitly provide credentials, as in this example, the SDK uses only tho
 
 {{% pageinfo color="info" %}}
 All credential providers passed to or returned by `LoadDefaultConfig` are wrapped in a
-[CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) automatically. This enables caching and concurrency safe 
-credential access. If you explicitly configure a provider on `aws.Config` directly you must explicitly wrap the provider
+[CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) automatically. This enables caching, and credential rotation that is concurrency safe. If you explicitly configure a provider on `aws.Config` directly you must also explicitly wrap the provider
 with this type using [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" >}}).
 {{% /pageinfo %}}
 

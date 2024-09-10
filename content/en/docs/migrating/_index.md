@@ -34,9 +34,9 @@ Import Root | Description
 
 ## Configuration Loading
 
-The [session]({{< apiref v1="aws/session" >}}) package from AWS SDK for Go v1 has been replaced by the [config]({{< apiref "config" >}})
-package in AWS SDK for Go v2. You can include this new config package in your application's dependencies with go get.
-Both `session.NewSession` in v1 and `config.LoadDefaultConfig` in v2 use the default credential provider chain, which automatically caches and refreshes credentials before they expire.
+The [session]({{< apiref v1="aws/session" >}}) package and associated functionality are replaced with a simplified
+configuration system provided by the [config]({{< apiref "config" >}}) package. The `config` package is a separate Go
+module, and can be included in your applications dependencies by with `go get`.
 ```sh
 go get github.com/aws/aws-sdk-go-v2/config
 ```

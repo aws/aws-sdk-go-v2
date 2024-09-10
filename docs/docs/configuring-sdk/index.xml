@@ -659,8 +659,8 @@ resolver that returns a modifiable endpoint:&lt;/p&gt;
         
         &lt;p&gt;The AWS SDK for Go V2 uses a default HTTP client with default configuration values. Although you can change some of
 these configuration values, the default HTTP client and transport are not sufficiently configured for customers using
-the AWS SDK for Go V2 in an environment with high throughput and low latency requirements. This section describes how
-to configure a custom HTTP client, and use that client to create AWS SDK for Go V2 calls.&lt;/p&gt;
+the AWS SDK for Go V2 in an environment with high throughput and low latency requirements. For more information, please refer to our &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/faq/&#34;&gt;FAQ&lt;/a&gt; as configuration recommendations vary based on specific workloads.
+This section describes how to configure a custom HTTP client, and use that client to create AWS SDK for Go V2 calls.&lt;/p&gt;
 &lt;p&gt;To assist you in creating a custom HTTP client, this section describes how to the
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/transport/http#NewBuildableClient&#34;&gt;NewBuildableClient&lt;/a&gt; to configure custom settings, and use
 that client with an AWS SDK for Go V2 service client.&lt;/p&gt;

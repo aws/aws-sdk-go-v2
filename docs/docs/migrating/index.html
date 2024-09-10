@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.154f45173041201f2e48489b706d1ed4.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.154f45173041201f2e48489b706d1ed4.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -594,9 +594,9 @@ provide new features and functionality that follows the Go module versioning str
 </tbody>
 </table>
 <h2 id="configuration-loading">Configuration Loading</h2>
-<p>The <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/session">session</a> package from AWS SDK for Go v1 has been replaced by the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config">config</a>
-package in AWS SDK for Go v2. You can include this new config package in your application&rsquo;s dependencies with go get.
-Both <code>session.NewSession</code> in v1 and <code>config.LoadDefaultConfig</code> in v2 use the default credential provider chain, which automatically caches and refreshes credentials before they expire.</p>
+<p>The <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/session">session</a> package and associated functionality are replaced with a simplified
+configuration system provided by the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config">config</a> package. The <code>config</code> package is a separate Go
+module, and can be included in your applications dependencies by with <code>go get</code>.</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>go get github.com/aws/aws-sdk-go-v2/config
 </span></span></code></pre></div><p>The <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/session#New">session.New</a>, <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/session#NewSession">session.NewSession</a>,
 <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/session#NewSessionWithOptions">NewSessionWithOptions</a>, and
@@ -1897,7 +1897,7 @@ APIs are replaced by
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified June 13, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/f460186b4ea38843d0b2e0a774ba1abaae63a4b8">Update _index.md (#2677) (f460186)</a>
+  Last modified September 9, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/1f0371e09f2ed2595b018d25012409d21d40a65d">fixing code example and adding clarifications to docs (1f0371e)</a>
 </div>
 
 </div>
