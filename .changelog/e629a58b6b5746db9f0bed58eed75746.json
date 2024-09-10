@@ -1,0 +1,8 @@
+{
+    "id": "e629a58b-6b57-46db-9f0b-ed58eed75746",
+    "type": "feature",
+    "description": "This release adds sensitive trait to some required shapes.",
+    "modules": [
+        "service/cognitoidentity"
+    ]
+}

@@ -164,14 +164,59 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "fips-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "cleanrooms-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "cleanrooms-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "cleanrooms-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "cleanrooms-fips.us-east-1.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "cleanrooms-fips.us-east-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "cleanrooms-fips.us-west-2.amazonaws.com",
+			},
 		},
 	},
 	{

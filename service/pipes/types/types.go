@@ -1614,13 +1614,7 @@ type S3LogDestination struct {
 
 	// The format EventBridge uses for the log records.
 	//
-	//   - json : JSON
-	//
-	//   - plain : Plain text
-	//
-	//   - w3c : [W3C extended logging file format]
-	//
-	// [W3C extended logging file format]: https://www.w3.org/TR/WD-logfile
+	// EventBridge currently only supports json formatting.
 	OutputFormat S3OutputFormat
 
 	// The prefix text with which to begin Amazon S3 log object names.
@@ -1650,13 +1644,7 @@ type S3LogDestinationParameters struct {
 
 	// How EventBridge should format the log records.
 	//
-	//   - json : JSON
-	//
-	//   - plain : Plain text
-	//
-	//   - w3c : [W3C extended logging file format]
-	//
-	// [W3C extended logging file format]: https://www.w3.org/TR/WD-logfile
+	// EventBridge currently only supports json formatting.
 	OutputFormat S3OutputFormat
 
 	// Specifies any prefix text with which to begin Amazon S3 log object names.
@@ -1747,9 +1735,7 @@ func (*SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth) isS
 type SelfManagedKafkaAccessConfigurationVpc struct {
 
 	// Specifies the security groups associated with the stream. These security groups
-	// must all be in the same VPC. You can specify as many as five security groups. If
-	// you do not specify a security group, the default security group for the VPC is
-	// used.
+	// must all be in the same VPC. You can specify as many as five security groups.
 	SecurityGroup []string
 
 	// Specifies the subnets associated with the stream. These subnets must all be in

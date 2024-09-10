@@ -168,7 +168,7 @@ type MediaInsightsConfiguration struct {
 	// The configuration's ARN.
 	ConfigurationArn *string
 
-	// Denotes the configration as enabled or disabled.
+	// Denotes the configuration as enabled or disabled.
 	Disabled *bool
 
 	noSmithyDocumentSerde

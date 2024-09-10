@@ -1053,7 +1053,7 @@ type AwsApiCallAction struct {
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastSeen *string
 
-	// Provided if CallerType is remoteIp . Provides information about the remote IP
+	// Provided if CallerType is remoteip . Provides information about the remote IP
 	// address that the API call originated from.
 	RemoteIpDetails *ActionRemoteIpDetails
 
@@ -15030,32 +15030,34 @@ type CodeVulnerabilitiesFilePath struct {
 	noSmithyDocumentSerde
 }
 
-// Contains finding details that are specific to control-based findings. Only
-// returned for findings generated from controls.
+// This object typically provides details about a control finding, such as
+// applicable standards and the status of control checks. While finding providers
+// can add custom content in Compliance object fields, they are typically used to
+// review details of Security Hub control findings.
 type Compliance struct {
 
-	// The enabled security standards in which a security control is currently
-	// enabled.
+	// Typically provides an array of enabled security standards in which a security
+	// control is currently enabled.
 	AssociatedStandards []AssociatedStandard
 
-	// For a control, the industry or regulatory framework requirements that are
-	// related to the control. The check for that control is aligned with these
+	// Typically provides the industry or regulatory framework requirements that are
+	// related to a control. The check for that control is aligned with these
 	// requirements.
 	//
 	// Array Members: Maximum number of 32 items.
 	RelatedRequirements []string
 
-	//  The unique identifier of a control across standards. Values for this field
-	// typically consist of an Amazon Web Servicesservice and a number, such as
-	// APIGateway.5.
+	//  Typically provides the unique identifier of a control across standards. For
+	// Security Hub controls, this field consists of an Amazon Web Servicesservice and
+	// a unique number, such as APIGateway.5 .
 	SecurityControlId *string
 
-	//  An object that includes security control parameter names and values.
+	//  Typically an object that includes security control parameter names and values.
 	SecurityControlParameters []SecurityControlParameter
 
-	// The result of a standards check.
+	// Typically summarizes the result of a control check.
 	//
-	// The valid values for Status are as follows.
+	// For Security Hub controls, valid values for Status are as follows.
 	//
 	//   - PASSED - Standards check passed for all evaluated resources.
 	//
@@ -15070,11 +15072,7 @@ type Compliance struct {
 	//   Security Hub automatically archives the finding after 3 days.
 	Status ComplianceStatus
 
-	// For findings generated from controls, a list of reasons behind the value of
-	// Status . For the list of status reason codes and their meanings, see [Standards-related information in the ASFF] in the
-	// Security Hub User Guide.
-	//
-	// [Standards-related information in the ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
+	// Typically used to provide a list of reasons for the value of Status .
 	StatusReasons []StatusReason
 
 	noSmithyDocumentSerde

@@ -64,6 +64,23 @@ type UpdatePipeInput struct {
 	// The parameters required to set up enrichment on your pipe.
 	EnrichmentParameters *types.PipeEnrichmentParameters
 
+	// The identifier of the KMS customer managed key for EventBridge to use, if you
+	// choose to use a customer managed key to encrypt pipe data. The identifier can be
+	// the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+	//
+	// To update a pipe that is using the default Amazon Web Services owned key to use
+	// a customer managed key instead, or update a pipe that is using a customer
+	// managed key to use a different customer managed key, specify a customer managed
+	// key identifier.
+	//
+	// To update a pipe that is using a customer managed key to use the default Amazon
+	// Web Services owned key, specify an empty string.
+	//
+	// For more information, see [Managing keys] in the Key Management Service Developer Guide.
+	//
+	// [Managing keys]: https://docs.aws.amazon.com/kms/latest/developerguide/getting-started.html
+	KmsKeyIdentifier *string
+
 	// The logging configuration settings for the pipe.
 	LogConfiguration *types.PipeLogConfigurationParameters
 

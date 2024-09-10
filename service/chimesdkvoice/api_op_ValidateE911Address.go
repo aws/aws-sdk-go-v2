@@ -42,7 +42,10 @@ type ValidateE911AddressInput struct {
 	// This member is required.
 	City *string
 
-	// The country in the address being validated.
+	// The country in the address being validated as two-letter country code in ISO
+	// 3166-1 alpha-2 format, such as US . For more information, see [ISO 3166-1 alpha-2] in Wikipedia.
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	//
 	// This member is required.
 	Country *string
@@ -81,9 +84,17 @@ type ValidateE911AddressOutput struct {
 	// The list of address suggestions..
 	CandidateAddressList []types.CandidateAddress
 
-	// Number indicating the result of address validation. 0 means the address was
-	// perfect as-is and successfully validated. 1 means the address was corrected. 2
-	// means the address sent was not close enough and was not validated.
+	// Number indicating the result of address validation.
+	//
+	// Each possible result is defined as follows:
+	//
+	//   - 0 - Address validation succeeded.
+	//
+	//   - 1 - Address validation succeeded. The address was a close enough match and
+	//   has been corrected as part of the address object.
+	//
+	//   - 2 - Address validation failed. You should re-submit the validation request
+	//   with candidates from the CandidateAddressList result, if it's a close match.
 	ValidationResult int32
 
 	// Metadata pertaining to the operation's result.

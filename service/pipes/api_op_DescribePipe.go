@@ -64,6 +64,14 @@ type DescribePipeOutput struct {
 	// The parameters required to set up enrichment on your pipe.
 	EnrichmentParameters *types.PipeEnrichmentParameters
 
+	// The identifier of the KMS customer managed key for EventBridge to use to
+	// encrypt pipe data, if one has been specified.
+	//
+	// For more information, see [Data encryption in EventBridge] in the Amazon EventBridge User Guide.
+	//
+	// [Data encryption in EventBridge]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+	KmsKeyIdentifier *string
+
 	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
 	//
 	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime

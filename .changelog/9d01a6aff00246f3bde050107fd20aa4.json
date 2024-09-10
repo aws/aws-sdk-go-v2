@@ -1,0 +1,8 @@
+{
+    "id": "9d01a6af-f002-46f3-bde0-50107fd20aa4",
+    "type": "documentation",
+    "description": "Documentation-only update that clarifies the ValidateE911Address action of the Amazon Chime SDK Voice APIs.",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

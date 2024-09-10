@@ -117,6 +117,11 @@ func awsRestjson1_serializeOpDocumentCreatePipeInput(v *CreatePipeInput, value s
 		}
 	}
 
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
+	}
+
 	if v.LogConfiguration != nil {
 		ok := object.Key("LogConfiguration")
 		if err := awsRestjson1_serializeDocumentPipeLogConfigurationParameters(v.LogConfiguration, ok); err != nil {
@@ -833,6 +838,11 @@ func awsRestjson1_serializeOpDocumentUpdatePipeInput(v *UpdatePipeInput, value s
 		if err := awsRestjson1_serializeDocumentPipeEnrichmentParameters(v.EnrichmentParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.KmsKeyIdentifier != nil {
+		ok := object.Key("KmsKeyIdentifier")
+		ok.String(*v.KmsKeyIdentifier)
 	}
 
 	if v.LogConfiguration != nil {
