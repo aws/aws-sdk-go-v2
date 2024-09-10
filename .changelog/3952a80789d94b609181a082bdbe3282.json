@@ -1,8 +1,0 @@
-{
-    "id": "3952a807-89d9-4b60-9181-a082bdbe3282",
-    "type": "feature",
-    "description": "This release adds support for customer managed KMS keys in Amazon EventBridge Pipe",
-    "modules": [
-        "service/pipes"
-    ]
-}

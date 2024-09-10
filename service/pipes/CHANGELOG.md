@@ -1,3 +1,7 @@
+# v1.15.0 (2024-09-10)
+
+* **Feature**: This release adds support for customer managed KMS keys in Amazon EventBridge Pipe
+
 # v1.14.6 (2024-09-04)
 
 * No change notes available for this release.

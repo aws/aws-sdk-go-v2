@@ -1,3 +1,13 @@
+# Release (2024-09-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.17.7](service/chimesdkvoice/CHANGELOG.md#v1177-2024-09-10)
+  * **Documentation**: Documentation-only update that clarifies the ValidateE911Address action of the Amazon Chime SDK Voice APIs.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.15.0](service/pipes/CHANGELOG.md#v1150-2024-09-10)
+  * **Feature**: This release adds support for customer managed KMS keys in Amazon EventBridge Pipe
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.52.3](service/securityhub/CHANGELOG.md#v1523-2024-09-10)
+  * **Documentation**: Documentation update for Security Hub
+
 # Release (2024-09-09)
 
 ## General Highlights

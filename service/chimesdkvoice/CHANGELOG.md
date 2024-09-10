@@ -1,3 +1,7 @@
+# v1.17.7 (2024-09-10)
+
+* **Documentation**: Documentation-only update that clarifies the ValidateE911Address action of the Amazon Chime SDK Voice APIs.
+
 # v1.17.6 (2024-09-04)
 
 * No change notes available for this release.
