@@ -1,6 +1,6 @@
 <!doctype html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head>
+  <head><script src="/aws-sdk-go-v2/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=aws-sdk-go-v2/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.115.4">
@@ -23,13 +23,13 @@
 <meta property="og:title" content="Amazon EC2 Instance Metadata Service" />
 <meta property="og:description" content="Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service Client" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-02-01T05:55:09-08:00" />
+<meta property="article:modified_time" content="2024-09-09T14:28:55-07:00" />
 <meta itemprop="name" content="Amazon EC2 Instance Metadata Service">
 <meta itemprop="description" content="Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service Client">
-<meta itemprop="dateModified" content="2023-02-01T05:55:09-08:00" />
-<meta itemprop="wordCount" content="235">
+<meta itemprop="dateModified" content="2024-09-09T14:28:55-07:00" />
+<meta itemprop="wordCount" content="239">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Amazon EC2 Instance Metadata Service"/>
 <meta name="twitter:description" content="Using the AWS SDK for Go V2 Amazon EC2 Instance Metadata Service Client"/>
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -456,13 +456,13 @@
             <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
+    <a href="http://localhost:1313/aws-sdk-go-v2/docs/">Developer Guide</a>
   </li>
   <li class="breadcrumb-item">
-    <a href="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/">SDK Utilities</a>
+    <a href="http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/">SDK Utilities</a>
   </li>
   <li class="breadcrumb-item active" aria-current="page">
-    <a href="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/" aria-disabled="true" class="btn-link disabled">Amazon EC2 IMDS</a>
+    <a href="http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/" aria-disabled="true" class="btn-link disabled">Amazon EC2 IMDS</a>
   </li>
   </ol>
 </nav>
@@ -491,7 +491,7 @@ The <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/imds">f
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/imds#Client">Client</a> type that can be used to access the Amazon EC2
 Instance Metadata Service. The <code>Client</code> and associated operations can be used similar to the other AWS service clients
 provided by the SDK. To learn more information on how to configure the SDK, and use service clients see
-<a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a> and <a href="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>.</p>
+<a href="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a> and <a href="http://localhost:1313/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>.</p>
 <p>The client can help you easily retrieve information about instances on which your applications run, such as its AWS
 Region or local IP address. Typically, you must create and submit HTTP requests to retrieve instance metadata. Instead,
 create an <code>imds.Client</code> to access the Amazon EC2 Instance Metadata Service using a programmatic client
@@ -512,15 +512,15 @@ like other AWS Services.</p>
 </span></span><span style="display:flex;"><span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">imds</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">)</span>
 </span></span></code></pre></div><p>Then use the service client to retrieve information from a metadata category such as <code>local-ipv4</code>
 (the private IP address of the instance).</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">localip</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetMetadata</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">imds</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetMetadataInput</span><span style="color:#000;font-weight:bold">{</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#000">Path</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;local-ipv4&#34;</span><span style="color:#000;font-weight:bold">,</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#000">localIp</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">client</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetMetadata</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">TODO</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">imds</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">GetMetadataInput</span><span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">Path</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;local-ipv4&#34;</span><span style="color:#000;font-weight:bold">,</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">log</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Unable to retrieve the private IP address from the EC2 instance: %s\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;local-ip: %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">localip</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">content</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">io</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ReadAll</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">localIp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Content</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">fmt</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;local-ip: %v\n&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87">string</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">content</span><span style="color:#000;font-weight:bold">))</span>
 </span></span></code></pre></div><p>For a list of all metadata categories, see
 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html">Instance Metadata Categories</a>
 in the Amazon EC2 User Guide.</p>
@@ -528,7 +528,7 @@ in the Amazon EC2 User Guide.</p>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified February 1, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/a704fcb4de09ac53dba0e09b86ef8c9bc081bceb">fix example for IMDS client `getRegion()` (#1977) (a704fcb4de)</a>
+  Last modified September 9, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/1f0371e09f2ed2595b018d25012409d21d40a65d">fixing code example and adding clarifications to docs (1f0371e)</a>
 </div>
 
 </div>

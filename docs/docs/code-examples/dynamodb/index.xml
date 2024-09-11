@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Amazon DynamoDB Examples</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/</link>
     <description>Recent content in Amazon DynamoDB Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: DescribeTablev2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/describetable/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/describetable/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/describetable/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/describetable/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: ScanItemsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/scanitems/</guid>
       <description>
         
         

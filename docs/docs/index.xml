@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Developer Guide</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/</link>
     <description>Recent content in Developer Guide on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Docs: Timing SDK operations</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/faq/timing-operations/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/faq/timing-operations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/faq/timing-operations/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/faq/timing-operations/</guid>
       <description>
         
         
@@ -259,10 +259,10 @@ well.&lt;/p&gt;
     
     <item>
       <title>Docs: Getting Started with the AWS SDK for Go V2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/getting-started/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/getting-started/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/getting-started/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/getting-started/</guid>
       <description>
         
         
@@ -380,10 +380,10 @@ AWS SDK Shared Configuration is loaded, a client is constructed, and an API oper
     
     <item>
       <title>Docs: Using the AWS SDK for Go V2 with AWS Services</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/making-requests/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/making-requests/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/making-requests/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/making-requests/</guid>
       <description>
         
         
@@ -403,7 +403,7 @@ provide slightly different construction patterns that we will look at in the fol
 &lt;p&gt;&lt;code&gt;NewFromConfig&lt;/code&gt; function provides a consistent interface for constructing service clients using the
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config&#34;&gt;aws.Config&lt;/a&gt;. An &lt;code&gt;aws.Config&lt;/code&gt; can be loaded using the
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig&#34;&gt;config.LoadDefaultConfig&lt;/a&gt;. For more information on constructing
-an &lt;code&gt;aws.Config&lt;/code&gt; see &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/&#34;&gt;Configure the SDK&lt;/a&gt;. The following example shows how to construct
+an &lt;code&gt;aws.Config&lt;/code&gt; see &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/&#34;&gt;Configure the SDK&lt;/a&gt;. The following example shows how to construct
 an Amazon S3 service client using the &lt;code&gt;aws.Config&lt;/code&gt;and the &lt;code&gt;NewFromConfig&lt;/code&gt; function:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;context&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;github.com/aws/aws-sdk-go-v2/config&amp;#34;&lt;/span&gt;
@@ -564,7 +564,7 @@ struct should not be accessed in the event that a non-nil error is returned by t
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For more information on error handling, including how to inspect for specific error types, see the
-&lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/&#34;&gt;Handling Errors&lt;/a&gt; documentation.&lt;/p&gt;
+&lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/handling-errors/&#34;&gt;Handling Errors&lt;/a&gt; documentation.&lt;/p&gt;
 &lt;h4 id=&#34;responses-with-ioreadcloser&#34;&gt;Responses with &lt;code&gt;io.ReadCloser&lt;/code&gt;&lt;/h4&gt;
 &lt;p&gt;Some API operations return a response struct that contain an output member that
 is an &lt;code&gt;io.ReadCloser&lt;/code&gt;. This will be the case for API operations that expose
@@ -901,10 +901,10 @@ retryable function. The waiter-specific options also provides &lt;code&gt;APIOpt
     
     <item>
       <title>Docs: Handling Errors in the AWS SDK for Go V2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/handling-errors/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/handling-errors/</guid>
       <description>
         
         
@@ -1024,10 +1024,10 @@ troubleshooting your request. You can use &lt;a href=&#34;https://pkg.go.dev/git
     
     <item>
       <title>Docs: Customizing the AWS SDK for Go V2 Client Requests</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/middleware/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/middleware/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/middleware/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/middleware/</guid>
       <description>
         
         
@@ -1045,7 +1045,7 @@ interface by default.&lt;/p&gt;
 Build, Finalize, and Deserialize. Each step contains zero or more middleware that operate on that step&amp;rsquo;s input and
 output types. The following diagram and table provide an overview of how an operation&amp;rsquo;s request and response traverses
 the stack.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://aws.github.io/aws-sdk-go-v2/aws-sdk-go-v2/diagrams/middleware.png&#34; alt=&#34;Middleware&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/aws-sdk-go-v2/aws-sdk-go-v2/diagrams/middleware.png&#34; alt=&#34;Middleware&#34;&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1360,10 +1360,10 @@ output shape via the &lt;code&gt;ResultMetadata&lt;/code&gt; structure member.&l
     
     <item>
       <title>Docs: Unit Testing with the AWS SDK for Go V2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/unit-testing/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/unit-testing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/unit-testing/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/unit-testing/</guid>
       <description>
         
         
@@ -1548,10 +1548,10 @@ operation paginator.&lt;/p&gt;
     
     <item>
       <title>Docs: Using AWS Cloud9 with the AWS SDK for Go V2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/cloud9-go/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/cloud9-go/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/cloud9-go/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/cloud9-go/</guid>
       <description>
         
         
@@ -1593,7 +1593,7 @@ environment. This is the fastest way to begin using AWS Cloud9.&lt;/p&gt;
 to &lt;a href=&#34;#InstallUpgradeGo&#34;&gt;Install/Upgrade Go&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Follow the &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/aws-sdk-go-v2/docs/getting-started/&#34;&gt;Getting Started&lt;/a&gt; guide to set up a Go project under &lt;code&gt;~/environment&lt;/code&gt;,
+&lt;p&gt;Follow the &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/aws-sdk-go-v2/docs/getting-started/&#34;&gt;Getting Started&lt;/a&gt; guide to set up a Go project under &lt;code&gt;~/environment&lt;/code&gt;,
 or follow the steps to &lt;a href=&#34;#DownloadExample&#34;&gt;Download Example Code&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -1632,10 +1632,10 @@ for environment (EC2)&lt;/strong&gt;, earlier in this topic.)&lt;/p&gt;
     
     <item>
       <title>Docs: Configuring Authentication</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/auth/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/auth/</link>
       <pubDate>Fri, 01 Dec 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/auth/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/auth/</guid>
       <description>
         
         
@@ -1891,10 +1891,10 @@ you require custom authentication behavior therein:&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon RDS Utilities</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/rds/</link>
       <pubDate>Fri, 16 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/rds/</guid>
       <description>
         
         
@@ -1939,10 +1939,10 @@ database:&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon CloudFront Utilities</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</guid>
       <description>
         
         
@@ -1980,10 +1980,10 @@ AWS SDK for Go V2 API Reference.&lt;/p&gt;
     
     <item>
       <title>Docs: Compliance Validation for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/compliance-validation/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/compliance-validation/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/compliance-validation/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/compliance-validation/</guid>
       <description>
         
         
@@ -2023,10 +2023,10 @@ helps you check your compliance with security industry standards and best practi
     
     <item>
       <title>Docs: Configuring Client Endpoints</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/endpoints/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/endpoints/</guid>
       <description>
         
         
@@ -2398,17 +2398,17 @@ resolver that returns a modifiable endpoint:&lt;/p&gt;
     
     <item>
       <title>Docs: Customizing the HTTP Client</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/custom-http/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/custom-http/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/custom-http/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/custom-http/</guid>
       <description>
         
         
         &lt;p&gt;The AWS SDK for Go V2 uses a default HTTP client with default configuration values. Although you can change some of
 these configuration values, the default HTTP client and transport are not sufficiently configured for customers using
-the AWS SDK for Go V2 in an environment with high throughput and low latency requirements. This section describes how
-to configure a custom HTTP client, and use that client to create AWS SDK for Go V2 calls.&lt;/p&gt;
+the AWS SDK for Go V2 in an environment with high throughput and low latency requirements. For more information, please refer to our &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/faq/&#34;&gt;FAQ&lt;/a&gt; as configuration recommendations vary based on specific workloads.
+This section describes how to configure a custom HTTP client, and use that client to create AWS SDK for Go V2 calls.&lt;/p&gt;
 &lt;p&gt;To assist you in creating a custom HTTP client, this section describes how to the
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/transport/http#NewBuildableClient&#34;&gt;NewBuildableClient&lt;/a&gt; to configure custom settings, and use
 that client with an AWS SDK for Go V2 service client.&lt;/p&gt;
@@ -2534,10 +2534,10 @@ InvokeAsync** API operation.&lt;/p&gt;
     
     <item>
       <title>Docs: Identity and Access Management for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/iam/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/iam/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/iam/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/iam/</guid>
       <description>
         
         
@@ -2564,10 +2564,10 @@ of &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt;
     
     <item>
       <title>Docs: Infrastructure Security for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/infrastructure-security/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/infrastructure-security/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/infrastructure-security/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/infrastructure-security/</guid>
       <description>
         
         
@@ -2587,10 +2587,10 @@ whitepaper.&lt;/p&gt;
     
     <item>
       <title>Docs: Logging</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/logging/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/logging/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/logging/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/logging/</guid>
       <description>
         
         
@@ -2631,10 +2631,10 @@ can be set to enable debugging messaging for:&lt;/p&gt;
     
     <item>
       <title>Docs: Resilience for this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/disaster-recovery-resiliency/</guid>
       <description>
         
         
@@ -2658,10 +2658,10 @@ and &lt;a href=&#34;https://aws.amazon.com/compliance/services-in-scope/&#34;&gt
     
     <item>
       <title>Docs: Data Protection in this AWS Product or Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/data-protection/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/data-protection/</link>
       <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/data-protection/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/data-protection/</guid>
       <description>
         
         
@@ -2699,10 +2699,10 @@ information in the URL to validate your request to that server.&lt;/p&gt;
     
     <item>
       <title>Docs: TLS Version in AWS SDK for Go V2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/security/tls/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/security/tls/</link>
       <pubDate>Mon, 09 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/security/tls/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/security/tls/</guid>
       <description>
         
         
@@ -2766,10 +2766,10 @@ each service prior to production deployment.&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon EC2 Instance Metadata Service</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</guid>
       <description>
         
         
@@ -2779,7 +2779,7 @@ The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/imds#Client&#34;&gt;Client&lt;/a&gt; type that can be used to access the Amazon EC2
 Instance Metadata Service. The &lt;code&gt;Client&lt;/code&gt; and associated operations can be used similar to the other AWS service clients
 provided by the SDK. To learn more information on how to configure the SDK, and use service clients see
-&lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/&#34;&gt;Configuring the SDK&lt;/a&gt; and &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/making-requests/&#34;&gt;Using AWS Services&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/&#34;&gt;Configuring the SDK&lt;/a&gt; and &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/making-requests/&#34;&gt;Using AWS Services&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The client can help you easily retrieve information about instances on which your applications run, such as its AWS
 Region or local IP address. Typically, you must create and submit HTTP requests to retrieve instance metadata. Instead,
 create an &lt;code&gt;imds.Client&lt;/code&gt; to access the Amazon EC2 Instance Metadata Service using a programmatic client
@@ -2800,15 +2800,15 @@ like other AWS Services.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;imds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;NewFromConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;cfg&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then use the service client to retrieve information from a metadata category such as &lt;code&gt;local-ipv4&lt;/code&gt;
 (the private IP address of the instance).&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;localip&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetMetadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;imds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetMetadataInput&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#000&#34;&gt;Path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;local-ipv4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;localIp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetMetadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;imds&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GetMetadataInput&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000&#34;&gt;Path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;local-ipv4&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;})&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Printf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Unable to retrieve the private IP address from the EC2 instance: %s\n&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;return&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Printf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;local-ip: %v\n&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;localip&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;content&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;io&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ReadAll&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;localIp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Content&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Printf&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;local-ip: %v\n&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#204a87&#34;&gt;string&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;content&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For a list of all metadata categories, see
 &lt;a href=&#34;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-categories.html&#34;&gt;Instance Metadata Categories&lt;/a&gt;
 in the Amazon EC2 User Guide.&lt;/p&gt;
@@ -2818,10 +2818,10 @@ in the Amazon EC2 User Guide.&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon S3 Utilities</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/s3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/s3/</guid>
       <description>
         
         
@@ -3194,7 +3194,7 @@ client&amp;rsquo;s configured Region.&lt;/p&gt;
 &lt;p&gt;For API operations like &lt;code&gt;PutObject&lt;/code&gt; and &lt;code&gt;UploadPart&lt;/code&gt;, the Amazon S3 client expects the value of the &lt;code&gt;Body&lt;/code&gt; input parameter to implement the &lt;a href=&#34;https://pkg.go.dev/io#Seeker&#34;&gt;io.Seeker&lt;/a&gt; interface by default. The &lt;code&gt;io.Seeker&lt;/code&gt; interface is used by the client to determine the length of the value to upload, and to compute payload hash for the &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html&#34;&gt;request signature&lt;/a&gt;. If the &lt;code&gt;Body&lt;/code&gt; input parameter value does not implement &lt;code&gt;io.Seeker&lt;/code&gt;, your application will receive an error.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;operation error S3: PutObject, failed to compute payload hash: failed to seek
 body to start, request stream is not seekable
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can change this behavior by modifying the operation method&amp;rsquo;s &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/middleware/&#34;&gt;Middleware&lt;/a&gt; using functional options. The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions&#34;&gt;WithAPIOptions&lt;/a&gt; helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html&#34;&gt;Unsigned Payload&lt;/a&gt; request signature add &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&#34;&gt;v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can change this behavior by modifying the operation method&amp;rsquo;s &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/middleware/&#34;&gt;Middleware&lt;/a&gt; using functional options. The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions&#34;&gt;WithAPIOptions&lt;/a&gt; helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html&#34;&gt;Unsigned Payload&lt;/a&gt; request signature add &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&#34;&gt;v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;resp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PutObject&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;s3&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PutObjectInput&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000&#34;&gt;Bucket&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;bucketName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000&#34;&gt;Key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;objectName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
@@ -3207,7 +3207,7 @@ body to start, request stream is not seekable
 
 &lt;div class=&#34;pageinfo pageinfo-warning&#34;&gt;
 &lt;p&gt;Amazon S3 requires the content length to be provided for all object&amp;rsquo;s uploaded to a bucket. Since the &lt;code&gt;Body&lt;/code&gt; input parameter does not implement &lt;code&gt;io.Seeker&lt;/code&gt; interface the client will not be able to compute the &lt;code&gt;ContentLength&lt;/code&gt; parameter for the request. The parameter must be provided by the application. The request will fail if the &lt;code&gt;ContentLength&lt;/code&gt; parameter is not provided.&lt;/p&gt;
-&lt;p&gt;Use the SDK&amp;rsquo;s &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#upload-manager&#34;&gt;Amazon S3 Upload Manager&lt;/a&gt; for uploads that are not seekable, and do not have a known length.&lt;/p&gt;
+&lt;p&gt;Use the SDK&amp;rsquo;s &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/s3/#upload-manager&#34;&gt;Amazon S3 Upload Manager&lt;/a&gt; for uploads that are not seekable, and do not have a known length.&lt;/p&gt;
 
 &lt;/div&gt;
 
@@ -3217,10 +3217,10 @@ body to start, request stream is not seekable
     
     <item>
       <title>Docs: Retries and Timeouts</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/retries-timeouts/</guid>
       <description>
         
         
@@ -3353,8 +3353,8 @@ than what&amp;rsquo;s available results in operation failure with a
 &lt;p&gt;The default implementation is parameterized as follows (how to modify each setting):&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;a capacity of 500 (set the value of RateLimiter on StandardOptions using &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/ratelimit#NewTokenRateLimit&#34;&gt;NewTokenRateLimit&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;a retry caused by a timeout costs 10 tokens (set RetryCost on StandardOptions)&lt;/li&gt;
-&lt;li&gt;a retry caused by other errors costs 5 tokens (set RetryTimeoutCost on StandardOptions)&lt;/li&gt;
+&lt;li&gt;a retry caused by a timeout costs 10 tokens (set RetryTimeoutCost on StandardOptions)&lt;/li&gt;
+&lt;li&gt;a retry caused by other errors costs 5 tokens (set RetryCost on StandardOptions)&lt;/li&gt;
 &lt;li&gt;an operation that succeeds on the 1st attempt adds 1 token (set NoRetryIncrement on StandardOptions)
 &lt;ul&gt;
 &lt;li&gt;operations that succeed on the 2nd or later attempt do not add back any tokens&lt;/li&gt;

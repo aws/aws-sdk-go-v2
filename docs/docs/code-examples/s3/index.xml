@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Amazon S3 Examples</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/</link>
     <description>Recent content in Amazon S3 Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: CopyObjectv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/copyobject/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/copyobject/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/copyobject/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/copyobject/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: CreateBucketv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/createbucket/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/createbucket/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/createbucket/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/createbucket/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Docs: DeleteBucketv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/deletebucket/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/deletebucket/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/deletebucket/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/deletebucket/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Docs: DeleteObjectv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/deleteobject/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/deleteobject/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/deleteobject/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/deleteobject/</guid>
       <description>
         
         
@@ -68,10 +68,10 @@
     
     <item>
       <title>Docs: GeneratePresignedURLv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/generatepresignedurl/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/generatepresignedurl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/generatepresignedurl/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/generatepresignedurl/</guid>
       <description>
         
         
@@ -81,10 +81,10 @@
     
     <item>
       <title>Docs: GetBucketAclv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/getbucketacl/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/getbucketacl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/getbucketacl/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/getbucketacl/</guid>
       <description>
         
         
@@ -94,10 +94,10 @@
     
     <item>
       <title>Docs: GetObjectAclv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/getobjectacl/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/getobjectacl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/getobjectacl/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/getobjectacl/</guid>
       <description>
         
         
@@ -107,10 +107,10 @@
     
     <item>
       <title>Docs: ListBucketsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/listbuckets/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/listbuckets/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/listbuckets/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/listbuckets/</guid>
       <description>
         
         
@@ -120,10 +120,10 @@
     
     <item>
       <title>Docs: ListObjectsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/listobjects/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/listobjects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/listobjects/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/listobjects/</guid>
       <description>
         
         
@@ -133,10 +133,10 @@
     
     <item>
       <title>Docs: PutObjectv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/putobject/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/putobject/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/putobject/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/putobject/</guid>
       <description>
         
         

@@ -1,6 +1,6 @@
 <!doctype html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head>
+  <head><script src="/aws-sdk-go-v2/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=aws-sdk-go-v2/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.115.4">
@@ -23,7 +23,7 @@
 <meta property="og:title" content="Using the AWS SDK for Go V2 with AWS Services" />
 <meta property="og:description" content="Construct service clients and make operation calls to send requests to AWS services." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="http://localhost:1313/aws-sdk-go-v2/docs/making-requests/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-12-21T16:57:52-05:00" />
 <meta itemprop="name" content="Using the AWS SDK for Go V2 with AWS Services">
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.9f33279f24e0567986b8fc9db212092b.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -485,10 +485,10 @@
             <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
+    <a href="http://localhost:1313/aws-sdk-go-v2/docs/">Developer Guide</a>
   </li>
   <li class="breadcrumb-item active" aria-current="page">
-    <a href="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/" aria-disabled="true" class="btn-link disabled">Using AWS Services</a>
+    <a href="http://localhost:1313/aws-sdk-go-v2/docs/making-requests/" aria-disabled="true" class="btn-link disabled">Using AWS Services</a>
   </li>
   </ol>
 </nav>
@@ -527,7 +527,7 @@ provide slightly different construction patterns that we will look at in the fol
 <p><code>NewFromConfig</code> function provides a consistent interface for constructing service clients using the
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Config">aws.Config</a>. An <code>aws.Config</code> can be loaded using the
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/config#LoadDefaultConfig">config.LoadDefaultConfig</a>. For more information on constructing
-an <code>aws.Config</code> see <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configure the SDK</a>. The following example shows how to construct
+an <code>aws.Config</code> see <a href="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/">Configure the SDK</a>. The following example shows how to construct
 an Amazon S3 service client using the <code>aws.Config</code>and the <code>NewFromConfig</code> function:</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;context&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
@@ -688,7 +688,7 @@ struct should not be accessed in the event that a non-nil error is returned by t
 </span></span><span style="display:flex;"><span>	<span style="color:#204a87;font-weight:bold">return</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div><p>For more information on error handling, including how to inspect for specific error types, see the
-<a href="https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a> documentation.</p>
+<a href="http://localhost:1313/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a> documentation.</p>
 <h4 id="responses-with-ioreadcloser">Responses with <code>io.ReadCloser</code></h4>
 <p>Some API operations return a response struct that contain an output member that
 is an <code>io.ReadCloser</code>. This will be the case for API operations that expose
@@ -1023,7 +1023,7 @@ retryable function. The waiter-specific options also provides <code>APIOptions</
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified December 21, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/3f113799524a997bf4d686c7cbc556143b968aeb">docs: add FAQ/troubleshooting and operation timing guide (#2434) (3f11379952)</a>
+  Last modified December 21, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/3f113799524a997bf4d686c7cbc556143b968aeb">docs: add FAQ/troubleshooting and operation timing guide (#2434) (3f11379)</a>
 </div>
 
 </div>

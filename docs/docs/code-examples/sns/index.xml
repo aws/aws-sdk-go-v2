@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Amazon SNS Examples</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/</link>
     <description>Recent content in Amazon SNS Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: CreateTopicv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/createtopic/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/createtopic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/createtopic/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/createtopic/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: ListSubscriptionsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/listsubscriptions/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/listsubscriptions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/listsubscriptions/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/listsubscriptions/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Docs: ListTopicsv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/listtopics/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/listtopics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/listtopics/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/listtopics/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Docs: Publishv2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/publish/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/publish/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/publish/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/publish/</guid>
       <description>
         
         
@@ -68,10 +68,10 @@
     
     <item>
       <title>Docs: Subscribev2</title>
-      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/subscribe/</link>
+      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/subscribe/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/subscribe/</guid>
+      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/subscribe/</guid>
       <description>
         
         

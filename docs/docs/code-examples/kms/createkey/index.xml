@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – CreateKeyv2</title>
-    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/createkey/</link>
+    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/createkey/</link>
     <description>Recent content in CreateKeyv2 on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/createkey/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/createkey/index.xml" rel="self" type="application/rss+xml" />
     
     
       

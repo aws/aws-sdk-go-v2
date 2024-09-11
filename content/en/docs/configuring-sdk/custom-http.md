@@ -7,8 +7,8 @@ description: "Create a custom HTTP client with the AWS SDK for Go V2 to specify 
 
 The {{% alias sdk-go %}} uses a default HTTP client with default configuration values. Although you can change some of
 these configuration values, the default HTTP client and transport are not sufficiently configured for customers using
-the {{% alias sdk-go %}} in an environment with high throughput and low latency requirements. This section describes how
-to configure a custom HTTP client, and use that client to create {{% alias sdk-go %}} calls.
+the {{% alias sdk-go %}} in an environment with high throughput and low latency requirements. For more information, please refer to our [FAQ]({{% ref "faq.md" %}}) as configuration recommendations vary based on specific workloads.
+This section describes how to configure a custom HTTP client, and use that client to create {{% alias sdk-go %}} calls.
 
 To assist you in creating a custom HTTP client, this section describes how to the 
 [NewBuildableClient]({{< apiref "aws/transport/http#NewBuildableClient" >}}) to configure custom settings, and use 
