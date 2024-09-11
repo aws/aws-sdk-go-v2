@@ -1,0 +1,8 @@
+{
+    "id": "187482d6-5f83-4fba-9a2f-d35c1a94d083",
+    "type": "feature",
+    "description": "Added KMS_DSSE to EncryptionType",
+    "modules": [
+        "service/ecr"
+    ]
+}

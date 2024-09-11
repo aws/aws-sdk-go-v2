@@ -29,7 +29,7 @@ func (c *Client) GetFilter(ctx context.Context, params *GetFilterInput, optFns .
 
 type GetFilterInput struct {
 
-	// The unique ID of the detector that the filter is associated with.
+	// The unique ID of the detector that is associated with this filter.
 	//
 	// This member is required.
 	DetectorId *string

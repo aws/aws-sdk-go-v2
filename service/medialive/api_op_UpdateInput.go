@@ -51,6 +51,9 @@ type UpdateInputInput struct {
 	// issues.
 	MediaConnectFlows []types.MediaConnectFlowRequest
 
+	// Multicast Input settings.
+	MulticastSettings *types.MulticastSettingsUpdateRequest
+
 	// Name of the input.
 	Name *string
 

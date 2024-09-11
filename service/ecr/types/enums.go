@@ -6,8 +6,9 @@ type EncryptionType string
 
 // Enum values for EncryptionType
 const (
-	EncryptionTypeAes256 EncryptionType = "AES256"
-	EncryptionTypeKms    EncryptionType = "KMS"
+	EncryptionTypeAes256  EncryptionType = "AES256"
+	EncryptionTypeKms     EncryptionType = "KMS"
+	EncryptionTypeKmsDsse EncryptionType = "KMS_DSSE"
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
@@ -18,6 +19,7 @@ func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"AES256",
 		"KMS",
+		"KMS_DSSE",
 	}
 }
 

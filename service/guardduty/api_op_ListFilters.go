@@ -28,7 +28,7 @@ func (c *Client) ListFilters(ctx context.Context, params *ListFiltersInput, optF
 
 type ListFiltersInput struct {
 
-	// The unique ID of the detector that the filter is associated with.
+	// The unique ID of the detector that is associated with the filter.
 	//
 	// This member is required.
 	DetectorId *string

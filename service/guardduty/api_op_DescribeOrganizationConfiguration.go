@@ -36,8 +36,8 @@ func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *
 
 type DescribeOrganizationConfigurationInput struct {
 
-	// The ID of the detector to retrieve information about the delegated
-	// administrator from.
+	// The detector ID of the delegated administrator for which you need to retrieve
+	// the information.
 	//
 	// This member is required.
 	DetectorId *string

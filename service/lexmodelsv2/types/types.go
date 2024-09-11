@@ -1667,6 +1667,16 @@ type BotLocaleImportSpecification struct {
 	NluIntentConfidenceThreshold *float64
 
 	// Defines settings for using an Amazon Polly voice to communicate with a user.
+	//
+	// Valid values include:
+	//
+	//   - standard
+	//
+	//   - neural
+	//
+	//   - long-form
+	//
+	//   - generative
 	VoiceSettings *VoiceSettings
 
 	noSmithyDocumentSerde
@@ -5627,6 +5637,16 @@ type UtteranceSpecification struct {
 }
 
 // Defines settings for using an Amazon Polly voice to communicate with a user.
+//
+// Valid values include:
+//
+//   - standard
+//
+//   - neural
+//
+//   - long-form
+//
+//   - generative
 type VoiceSettings struct {
 
 	// The identifier of the Amazon Polly voice to use.

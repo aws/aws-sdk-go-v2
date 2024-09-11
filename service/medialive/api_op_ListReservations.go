@@ -33,7 +33,7 @@ type ListReservationsInput struct {
 	// Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
 	ChannelClass *string
 
-	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', or 'LINK'
+	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', 'LINK', or 'AV1'
 	Codec *string
 
 	// Placeholder documentation for MaxResults

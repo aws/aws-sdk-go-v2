@@ -71,6 +71,10 @@ type DescribeInputOutput struct {
 	// Settings for the input devices.
 	InputDevices []types.InputDeviceSettings
 
+	// The location of this input. AWS, for an input existing in the AWS Cloud,
+	// On-Prem for an input in a customer network.
+	InputNetworkLocation types.InputNetworkLocation
+
 	// A list of IDs for all Inputs which are partners of this one.
 	InputPartnerIds []string
 
@@ -81,6 +85,9 @@ type DescribeInputOutput struct {
 
 	// A list of MediaConnect Flows for this input.
 	MediaConnectFlows []types.MediaConnectFlow
+
+	// Multicast Input settings.
+	MulticastSettings *types.MulticastSettings
 
 	// The user-assigned name (This is a mutable value).
 	Name *string

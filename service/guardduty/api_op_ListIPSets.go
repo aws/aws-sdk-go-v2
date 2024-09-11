@@ -30,7 +30,7 @@ func (c *Client) ListIPSets(ctx context.Context, params *ListIPSetsInput, optFns
 
 type ListIPSetsInput struct {
 
-	// The unique ID of the detector that the IPSet is associated with.
+	// The unique ID of the detector that is associated with IPSet.
 	//
 	// This member is required.
 	DetectorId *string

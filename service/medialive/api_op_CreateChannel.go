@@ -30,6 +30,9 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 // A request to create a channel
 type CreateChannelInput struct {
 
+	// The Elemental Anywhere settings for this channel.
+	AnywhereSettings *types.AnywhereSettings
+
 	// Specification of CDI inputs for this channel
 	CdiInputSpecification *types.CdiInputSpecification
 

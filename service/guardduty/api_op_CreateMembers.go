@@ -65,8 +65,8 @@ type CreateMembersInput struct {
 	// This member is required.
 	AccountDetails []types.AccountDetail
 
-	// The unique ID of the detector of the GuardDuty account that you want to
-	// associate member accounts with.
+	// The unique ID of the detector of the GuardDuty account for which you want to
+	// associate member accounts.
 	//
 	// This member is required.
 	DetectorId *string

@@ -41,6 +41,9 @@ type DeleteChannelInput struct {
 // Placeholder documentation for DeleteChannelResponse
 type DeleteChannelOutput struct {
 
+	// Anywhere settings for this channel.
+	AnywhereSettings *types.DescribeAnywhereSettings
+
 	// The unique arn of the channel.
 	Arn *string
 

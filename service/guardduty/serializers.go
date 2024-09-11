@@ -2915,6 +2915,21 @@ func awsRestjson1_serializeOpDocumentGetFindingsStatisticsInput(v *GetFindingsSt
 		}
 	}
 
+	if len(v.GroupBy) > 0 {
+		ok := object.Key("groupBy")
+		ok.String(string(v.GroupBy))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if len(v.OrderBy) > 0 {
+		ok := object.Key("orderBy")
+		ok.String(string(v.OrderBy))
+	}
+
 	return nil
 }
 

@@ -35,7 +35,7 @@ func (c *Client) GetMemberDetectors(ctx context.Context, params *GetMemberDetect
 
 type GetMemberDetectorsInput struct {
 
-	// The account ID of the member account.
+	// A list of member account IDs.
 	//
 	// This member is required.
 	AccountIds []string

@@ -498,6 +498,31 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 	}
 }
 
+type GroupByType string
+
+// Enum values for GroupByType
+const (
+	GroupByTypeAccount     GroupByType = "ACCOUNT"
+	GroupByTypeDate        GroupByType = "DATE"
+	GroupByTypeFindingType GroupByType = "FINDING_TYPE"
+	GroupByTypeResource    GroupByType = "RESOURCE"
+	GroupByTypeSeverity    GroupByType = "SEVERITY"
+)
+
+// Values returns all known values for GroupByType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupByType) Values() []GroupByType {
+	return []GroupByType{
+		"ACCOUNT",
+		"DATE",
+		"FINDING_TYPE",
+		"RESOURCE",
+		"SEVERITY",
+	}
+}
+
 type IpSetFormat string
 
 // Enum values for IpSetFormat

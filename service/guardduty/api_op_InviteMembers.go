@@ -71,8 +71,8 @@ type InviteMembersInput struct {
 	// This member is required.
 	AccountIds []string
 
-	// The unique ID of the detector of the GuardDuty account that you want to invite
-	// members with.
+	// The unique ID of the detector of the GuardDuty account with which you want to
+	// invite members.
 	//
 	// This member is required.
 	DetectorId *string

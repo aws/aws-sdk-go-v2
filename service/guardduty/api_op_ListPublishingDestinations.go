@@ -30,7 +30,7 @@ func (c *Client) ListPublishingDestinations(ctx context.Context, params *ListPub
 
 type ListPublishingDestinationsInput struct {
 
-	// The ID of the detector to retrieve publishing destinations for.
+	// The detector ID for which you want to retrieve the publishing destination.
 	//
 	// This member is required.
 	DetectorId *string

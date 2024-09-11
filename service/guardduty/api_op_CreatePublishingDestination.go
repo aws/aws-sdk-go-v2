@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a publishing destination to export findings to. The resource to export
-// findings to must exist before you use this operation.
+// Creates a publishing destination where you can export your GuardDuty findings.
+// Before you start exporting the findings, the destination resource must exist.
 func (c *Client) CreatePublishingDestination(ctx context.Context, params *CreatePublishingDestinationInput, optFns ...func(*Options)) (*CreatePublishingDestinationOutput, error) {
 	if params == nil {
 		params = &CreatePublishingDestinationInput{}

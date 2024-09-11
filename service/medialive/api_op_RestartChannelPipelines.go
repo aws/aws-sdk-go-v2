@@ -45,6 +45,9 @@ type RestartChannelPipelinesInput struct {
 // Placeholder documentation for RestartChannelPipelinesResponse
 type RestartChannelPipelinesOutput struct {
 
+	// Anywhere settings for this channel.
+	AnywhereSettings *types.DescribeAnywhereSettings
+
 	// The unique arn of the channel.
 	Arn *string
 

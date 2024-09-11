@@ -2509,9 +2509,6 @@ func validateOpGetFindingsStatisticsInput(v *GetFindingsStatisticsInput) error {
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
-	if v.FindingStatisticTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FindingStatisticTypes"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -113,6 +113,18 @@ type AncillarySourceSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Elemental anywhere settings
+type AnywhereSettings struct {
+
+	// The ID of the channel placement group for the channel.
+	ChannelPlacementGroupId *string
+
+	// The ID of the cluster for the channel.
+	ClusterId *string
+
+	noSmithyDocumentSerde
+}
+
 // Archive Cdn Settings
 type ArchiveCdnSettings struct {
 
@@ -532,6 +544,118 @@ type AutomaticInputFailoverSettings struct {
 	// Input preference when deciding which input to make active when a previously
 	// failed input has recovered.
 	InputPreference InputPreference
+
+	noSmithyDocumentSerde
+}
+
+// Av1 Color Space Settings
+type Av1ColorSpaceSettings struct {
+
+	// Passthrough applies no color space conversion to the output
+	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings
+
+	// Hdr10 Settings
+	Hdr10Settings *Hdr10Settings
+
+	// Rec601 Settings
+	Rec601Settings *Rec601Settings
+
+	// Rec709 Settings
+	Rec709Settings *Rec709Settings
+
+	noSmithyDocumentSerde
+}
+
+// Av1 Settings
+type Av1Settings struct {
+
+	// The denominator for the framerate. Framerate is a fraction, for example, 24000
+	// / 1001.
+	//
+	// This member is required.
+	FramerateDenominator *int32
+
+	// The numerator for the framerate. Framerate is a fraction, for example, 24000 /
+	// 1001.
+	//
+	// This member is required.
+	FramerateNumerator *int32
+
+	// Configures whether MediaLive will write AFD values into the video. AUTO:
+	// MediaLive will try to preserve the input AFD value (in cases where multiple AFD
+	// values are valid). FIXED: the AFD value will be the value configured in the
+	// fixedAfd parameter. NONE: MediaLive won't write AFD into the video
+	AfdSignaling AfdSignaling
+
+	// The size of the buffer (HRD buffer model) in bits.
+	BufSize *int32
+
+	// Color Space settings
+	ColorSpaceSettings *Av1ColorSpaceSettings
+
+	// Complete this property only if you set the afdSignaling property to FIXED.
+	// Choose the AFD value (4 bits) to write on all frames of the video encode.
+	FixedAfd FixedAfd
+
+	// The GOP size (keyframe interval). If GopSizeUnits is frames, GopSize must be a
+	// whole number and must be greater than or equal to 1. If GopSizeUnits is seconds,
+	// GopSize must be greater than 0, but it can be a decimal.
+	GopSize *float64
+
+	// Choose the units for the GOP size: FRAMES or SECONDS. For SECONDS, MediaLive
+	// converts the size into a frame count at run time.
+	GopSizeUnits Av1GopSizeUnits
+
+	// Sets the level. This parameter is one of the properties of the encoding scheme
+	// for AV1.
+	Level Av1Level
+
+	// Sets the amount of lookahead. A value of LOW can decrease latency and memory
+	// usage. A value of HIGH can produce better quality for certain content.
+	LookAheadRateControl Av1LookAheadRateControl
+
+	// The maximum bitrate to assign. For recommendations, see the description for
+	// qvbrQualityLevel.
+	MaxBitrate *int32
+
+	// Applies only if you enable SceneChangeDetect. Sets the interval between frames.
+	// This property ensures a minimum separation between repeated (cadence) I-frames
+	// and any I-frames inserted by scene change detection (SCD frames). Enter a number
+	// for the interval, measured in number of frames. If an SCD frame and a cadence
+	// frame are closer than the specified number of frames, MediaLive shrinks or
+	// stretches the GOP to include the SCD frame. Then normal cadence resumes in the
+	// next GOP. For GOP stretch to succeed, you must enable LookAheadRateControl. Note
+	// that the maximum GOP stretch = (GOP size) + (Minimum I-interval) - 1
+	MinIInterval *int32
+
+	// The denominator for the output pixel aspect ratio (PAR).
+	ParDenominator *int32
+
+	// The numerator for the output pixel aspect ratio (PAR).
+	ParNumerator *int32
+
+	// Controls the target quality for the video encode. With QVBR rate control mode,
+	// the final quality is the target quality, constrained by the maxBitrate. Set
+	// values for the qvbrQualityLevel property and maxBitrate property that suit your
+	// most important viewing devices. To let MediaLive set the quality level (AUTO
+	// mode), leave the qvbrQualityLevel field empty. In this case, MediaLive uses the
+	// maximum bitrate, and the quality follows from that: more complex content might
+	// have a lower quality. Or set a target quality level and a maximum bitrate. With
+	// more complex content, MediaLive will try to achieve the target quality, but it
+	// won't exceed the maximum bitrate. With less complex content, This option will
+	// use only the bitrate needed to reach the target quality. Recommended values are:
+	// Primary screen: qvbrQualityLevel: Leave empty. maxBitrate: 4,000,000 PC or
+	// tablet: qvbrQualityLevel: Leave empty. maxBitrate: 1,500,000 to 3,000,000
+	// Smartphone: qvbrQualityLevel: Leave empty. maxBitrate: 1,000,000 to 1,500,000
+	QvbrQualityLevel *int32
+
+	// Controls whether MediaLive inserts I-frames when it detects a scene change.
+	// ENABLED or DISABLED.
+	SceneChangeDetect Av1SceneChangeDetect
+
+	// Configures the timecode burn-in feature. If you enable this feature, the
+	// timecode will become part of the video.
+	TimecodeBurninSettings *TimecodeBurninSettings
 
 	noSmithyDocumentSerde
 }
@@ -1023,6 +1147,9 @@ type CdiInputSpecification struct {
 // Placeholder documentation for Channel
 type Channel struct {
 
+	// Anywhere settings for this channel.
+	AnywhereSettings *DescribeAnywhereSettings
+
 	// The unique arn of the channel.
 	Arn *string
 
@@ -1094,6 +1221,9 @@ type ChannelEgressEndpoint struct {
 
 // Placeholder documentation for ChannelSummary
 type ChannelSummary struct {
+
+	// AnywhereSettings settings for this channel.
+	AnywhereSettings *DescribeAnywhereSettings
 
 	// The unique arn of the channel.
 	Arn *string
@@ -1282,6 +1412,77 @@ type CloudWatchAlarmTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Used in DescribeClusterResult, DescribeClusterSummary, UpdateClusterResult.
+type ClusterNetworkSettings struct {
+
+	// The network interface that is the default route for traffic to and from the
+	// node. MediaLive Anywhere uses this default when the destination for the traffic
+	// isn't covered by the route table for any of the networks. Specify the value of
+	// the appropriate logicalInterfaceName parameter that you create in the
+	// interfaceMappings.
+	DefaultRoute *string
+
+	// An array of interfaceMapping objects for this Cluster. Each mapping logically
+	// connects one interface on the nodes with one Network. You need only one mapping
+	// for each interface because all the Nodes share the mapping.
+	InterfaceMappings []InterfaceMapping
+
+	noSmithyDocumentSerde
+}
+
+// Used in a CreateClusterRequest.
+type ClusterNetworkSettingsCreateRequest struct {
+
+	// Specify one network interface as the default route for traffic to and from the
+	// Node. MediaLive Anywhere uses this default when the destination for the traffic
+	// isn't covered by the route table for any of the networks. Specify the value of
+	// the appropriate logicalInterfaceName parameter that you create in the
+	// interfaceMappings.
+	DefaultRoute *string
+
+	// An array of interfaceMapping objects for this Cluster. You must create a
+	// mapping for node interfaces that you plan to use for encoding traffic. You
+	// typically don't create a mapping for the management interface. You define this
+	// mapping in the Cluster so that the mapping can be used by all the Nodes. Each
+	// mapping logically connects one interface on the nodes with one Network. Each
+	// mapping consists of a pair of parameters. The logicalInterfaceName parameter
+	// creates a logical name for the Node interface that handles a specific type of
+	// traffic. For example, my-Inputs-Interface. The networkID parameter refers to the
+	// ID of the network. When you create the Nodes in this Cluster, you will associate
+	// the logicalInterfaceName with the appropriate physical interface.
+	InterfaceMappings []InterfaceMappingCreateRequest
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for ClusterNetworkSettingsUpdateRequest
+type ClusterNetworkSettingsUpdateRequest struct {
+
+	// Include this parameter only if you want to change the default route for the
+	// Cluster. Specify one network interface as the default route for traffic to and
+	// from the node. MediaLive Anywhere uses this default when the destination for the
+	// traffic isn't covered by the route table for any of the networks. Specify the
+	// value of the appropriate logicalInterfaceName parameter that you create in the
+	// interfaceMappings.
+	DefaultRoute *string
+
+	// An array of interfaceMapping objects for this Cluster. Include this parameter
+	// only if you want to change the interface mappings for the Cluster. Typically,
+	// you change the interface mappings only to fix an error you made when creating
+	// the mapping. In an update request, make sure that you enter the entire set of
+	// mappings again, not just the mappings that you want to add or change. You define
+	// this mapping so that the mapping can be used by all the Nodes. Each mapping
+	// logically connects one interface on the nodes with one Network. Each mapping
+	// consists of a pair of parameters. The logicalInterfaceName parameter creates a
+	// logical name for the Node interface that handles a specific type of traffic. For
+	// example, my-Inputs-Interface. The networkID parameter refers to the ID of the
+	// network. When you create the Nodes in this Cluster, you will associate the
+	// logicalInterfaceName with the appropriate physical interface.
+	InterfaceMappings []InterfaceMappingUpdateRequest
+
+	noSmithyDocumentSerde
+}
+
 // Cmaf Ingest Group Settings
 type CmafIngestGroupSettings struct {
 
@@ -1366,6 +1567,164 @@ type ColorCorrectionSettings struct {
 
 // Passthrough applies no color space conversion to the output
 type ColorSpacePassthroughSettings struct {
+	noSmithyDocumentSerde
+}
+
+// Elemental anywhere settings
+type DescribeAnywhereSettings struct {
+
+	// The ID of the channel placement group for the channel.
+	ChannelPlacementGroupId *string
+
+	// The ID of the cluster for the channel.
+	ClusterId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the response for ListChannelPlacementGroups
+type DescribeChannelPlacementGroupSummary struct {
+
+	// The ARN of this ChannelPlacementGroup. It is automatically assigned when the
+	// ChannelPlacementGroup is created.
+	Arn *string
+
+	// Used in ListChannelPlacementGroupsResult
+	Channels []string
+
+	// The ID of the Cluster that the Node belongs to.
+	ClusterId *string
+
+	// The ID of the ChannelPlacementGroup. Unique in the AWS account. The ID is the
+	// resource-id portion of the ARN.
+	Id *string
+
+	// The name that you specified for the ChannelPlacementGroup.
+	Name *string
+
+	// An array with one item, which is the signle Node that is associated with the
+	// ChannelPlacementGroup.
+	Nodes []string
+
+	// The current state of the ChannelPlacementGroup.
+	State ChannelPlacementGroupState
+
+	noSmithyDocumentSerde
+}
+
+// Used in ListClustersResult.
+type DescribeClusterSummary struct {
+
+	// The ARN of this Cluster. It is automatically assigned when the Cluster is
+	// created.
+	Arn *string
+
+	// An array of the IDs of the Channels that are associated with this Cluster. One
+	// Channel is associated with the Cluster as follows: A Channel belongs to a
+	// ChannelPlacementGroup. A ChannelPlacementGroup is attached to a Node. A Node
+	// belongs to a Cluster.
+	ChannelIds []string
+
+	// The hardware type for the Cluster.
+	ClusterType ClusterType
+
+	// The ID of the Cluster. Unique in the AWS account. The ID is the resource-id
+	// portion of the ARN.
+	Id *string
+
+	// The ARN of the IAM role for the Node in this Cluster. Any Nodes that are
+	// associated with this Cluster assume this role. The role gives permissions to the
+	// operations that you expect these Node to perform.
+	InstanceRoleArn *string
+
+	// The name that you specified for the Cluster.
+	Name *string
+
+	// Network settings that connect the Nodes in the Cluster to one or more of the
+	// Networks that the Cluster is associated with.
+	NetworkSettings *ClusterNetworkSettings
+
+	// The current state of the Cluster.
+	State ClusterState
+
+	noSmithyDocumentSerde
+}
+
+// Used in ListNetworksResult.
+type DescribeNetworkSummary struct {
+
+	// The ARN of this Network. It is automatically assigned when the Network is
+	// created.
+	Arn *string
+
+	// Placeholder documentation for __listOf__string
+	AssociatedClusterIds []string
+
+	// The ID of the Network. Unique in the AWS account. The ID is the resource-id
+	// portion of the ARN.
+	Id *string
+
+	// An array of IpPools in your organization's network that identify a collection
+	// of IP addresses in your organization's network that are reserved for use in
+	// MediaLive Anywhere. MediaLive Anywhere uses these IP addresses for Push inputs
+	// (in both Bridge and NAT networks) and for output destinations (only in Bridge
+	// networks). Each IpPool specifies one CIDR block.
+	IpPools []IpPool
+
+	// The name that you specified for this Network.
+	Name *string
+
+	// An array of routes that MediaLive Anywhere needs to know about in order to
+	// route encoding traffic.
+	Routes []Route
+
+	// The current state of the Network. Only MediaLive Anywhere can change the state.
+	State NetworkState
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for DescribeNodeSummary
+type DescribeNodeSummary struct {
+
+	// The ARN of the Node. It is automatically assigned when the Node is created.
+	Arn *string
+
+	// An array of IDs. Each ID is one ChannelPlacementGroup that is associated with
+	// this Node. Empty if the Node is not yet associated with any groups.
+	ChannelPlacementGroups []string
+
+	// The ID of the Cluster that the Node belongs to.
+	ClusterId *string
+
+	// The current connection state of the Node.
+	ConnectionState NodeConnectionState
+
+	// The unique ID of the Node. Unique in the Cluster. The ID is the resource-id
+	// portion of the ARN.
+	Id *string
+
+	// The EC2 ARN of the Instance associated with the Node.
+	InstanceArn *string
+
+	// At the routing layer will get it from the callerId/context for use with bring
+	// your own device.
+	ManagedInstanceId *string
+
+	// The name that you specified for the Node.
+	Name *string
+
+	// Documentation update needed
+	NodeInterfaceMappings []NodeInterfaceMapping
+
+	// The initial role current role of the Node in the Cluster. ACTIVE means the Node
+	// is available for encoding. BACKUP means the Node is a redundant Node and might
+	// get used if an ACTIVE Node fails.
+	Role NodeRole
+
+	// The current state of the Node.
+	State NodeState
+
 	noSmithyDocumentSerde
 }
 
@@ -3242,6 +3601,10 @@ type Input struct {
 	// Settings for the input devices.
 	InputDevices []InputDeviceSettings
 
+	// The location of this input. AWS, for an input existing in the AWS Cloud,
+	// On-Prem for an input in a customer network.
+	InputNetworkLocation InputNetworkLocation
+
 	// A list of IDs for all Inputs which are partners of this one.
 	InputPartnerIds []string
 
@@ -3252,6 +3615,9 @@ type Input struct {
 
 	// A list of MediaConnect Flows for this input.
 	MediaConnectFlows []MediaConnectFlow
+
+	// Multicast Input settings.
+	MulticastSettings *MulticastSettings
 
 	// The user-assigned name (This is a mutable value).
 	Name *string
@@ -3298,6 +3664,10 @@ type InputAttachment struct {
 	// Settings of an input (caption selector, etc.)
 	InputSettings *InputSettings
 
+	// Optional assignment of an input to a logical interface on the Node. Only
+	// applies to on premises channels.
+	LogicalInterfaceNames []string
+
 	noSmithyDocumentSerde
 }
 
@@ -3343,6 +3713,14 @@ type InputDestination struct {
 	// lifetime of the input.
 	Ip *string
 
+	// The ID of the attached network.
+	Network *string
+
+	// If the push input has an input location of ON-PREM it's a requirement to
+	// specify what the route of the input is going to be on the customer local
+	// network.
+	NetworkRoutes []InputDestinationRoute
+
 	// The port number for the input.
 	Port *string
 
@@ -3358,8 +3736,33 @@ type InputDestination struct {
 // Endpoint settings for a PUSH type input.
 type InputDestinationRequest struct {
 
+	// If the push input has an input location of ON-PREM, ID the ID of the attached
+	// network.
+	Network *string
+
+	// If the push input has an input location of ON-PREM it's a requirement to
+	// specify what the route of the input is going to be on the customer local
+	// network.
+	NetworkRoutes []InputRequestDestinationRoute
+
+	// If the push input has an input location of ON-PREM it's optional to specify
+	// what the ip address of the input is going to be on the customer local network.
+	StaticIpAddress *string
+
 	// A unique name for the location the RTMP stream is being pushed to.
 	StreamName *string
+
+	noSmithyDocumentSerde
+}
+
+// A network route configuration.
+type InputDestinationRoute struct {
+
+	// The CIDR of the route.
+	Cidr *string
+
+	// An optional gateway for the route.
+	Gateway *string
 
 	noSmithyDocumentSerde
 }
@@ -3750,6 +4153,18 @@ type InputPrepareScheduleActionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// A network route configuration.
+type InputRequestDestinationRoute struct {
+
+	// The CIDR of the route.
+	Cidr *string
+
+	// An optional gateway for the route.
+	Gateway *string
+
+	noSmithyDocumentSerde
+}
+
 // An Input Security Group
 type InputSecurityGroup struct {
 
@@ -3930,6 +4345,82 @@ type InputWhitelistRule struct {
 type InputWhitelistRuleCidr struct {
 
 	// The IPv4 CIDR to whitelist.
+	Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in ClusterNetworkSettings
+type InterfaceMapping struct {
+
+	// The logical name for one interface (on every Node) that handles a specific type
+	// of traffic. We recommend that the name hints at the physical interface it
+	// applies to. For example, it could refer to the traffic that the physical
+	// interface handles. For example, my-Inputs-Interface.
+	LogicalInterfaceName *string
+
+	// The ID of the network that you want to connect to the specified
+	// logicalInterfaceName.
+	NetworkId *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in ClusterNetworkSettingsCreateRequest.
+type InterfaceMappingCreateRequest struct {
+
+	// The logical name for one interface (on every Node) that handles a specific type
+	// of traffic. We recommend that the name hints at the physical interface it
+	// applies to. For example, it could refer to the traffic that the physical
+	// interface handles. For example, my-Inputs-Interface.
+	LogicalInterfaceName *string
+
+	// The ID of the network that you want to connect to the specified
+	// logicalInterfaceName.
+	NetworkId *string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for InterfaceMappingUpdateRequest
+type InterfaceMappingUpdateRequest struct {
+
+	// The logical name for one interface (on every Node) that handles a specific type
+	// of traffic. We recommend that the name hints at the physical interface it
+	// applies to. For example, it could refer to the traffic that the physical
+	// interface handles. For example, my-Inputs-Interface.
+	LogicalInterfaceName *string
+
+	// The ID of the network that you want to connect to the specified
+	// logicalInterfaceName. You can use the ListNetworks operation to discover all the
+	// IDs.
+	NetworkId *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in DescribeNetworkResult, DescribeNetworkSummary, UpdateNetworkResult.
+type IpPool struct {
+
+	// A CIDR block of IP addresses that are reserved for MediaLive Anywhere.
+	Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in CreateNetworkRequest.
+type IpPoolCreateRequest struct {
+
+	// A CIDR block of IP addresses to reserve for MediaLive Anywhere.
+	Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in UpdateNetworkRequest.
+type IpPoolUpdateRequest struct {
+
+	// A CIDR block of IP addresses to reserve for MediaLive Anywhere.
 	Cidr *string
 
 	noSmithyDocumentSerde
@@ -4703,6 +5194,90 @@ type MsSmoothOutputSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Multicast-specific input settings.
+type MulticastInputSettings struct {
+
+	// Optionally, a source ip address to filter by for Source-specific Multicast (SSM)
+	SourceIpAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a Multicast input. Contains a list of multicast Urls and optional
+// source ip addresses.
+type MulticastSettings struct {
+
+	// Placeholder documentation for __listOfMulticastSource
+	Sources []MulticastSource
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a Multicast input. Contains a list of multicast Urls and optional
+// source ip addresses.
+type MulticastSettingsCreateRequest struct {
+
+	// Placeholder documentation for __listOfMulticastSourceCreateRequest
+	Sources []MulticastSourceCreateRequest
+
+	noSmithyDocumentSerde
+}
+
+// Settings for a Multicast input. Contains a list of multicast Urls and optional
+// source ip addresses.
+type MulticastSettingsUpdateRequest struct {
+
+	// Placeholder documentation for __listOfMulticastSourceUpdateRequest
+	Sources []MulticastSourceUpdateRequest
+
+	noSmithyDocumentSerde
+}
+
+// Pair of multicast url and source ip address (optional) that make up a multicast
+// source.
+type MulticastSource struct {
+
+	// This represents the customer's source URL where multicast stream is pulled from.
+	//
+	// This member is required.
+	Url *string
+
+	// This represents the ip address of the device sending the multicast stream.
+	SourceIp *string
+
+	noSmithyDocumentSerde
+}
+
+// Pair of multicast url and source ip address (optional) that make up a multicast
+// source.
+type MulticastSourceCreateRequest struct {
+
+	// This represents the customer's source URL where multicast stream is pulled from.
+	//
+	// This member is required.
+	Url *string
+
+	// This represents the ip address of the device sending the multicast stream.
+	SourceIp *string
+
+	noSmithyDocumentSerde
+}
+
+// Pair of multicast url and source ip address (optional) that make up a multicast
+// source.
+type MulticastSourceUpdateRequest struct {
+
+	// This represents the customer's source URL where multicast stream is pulled from.
+	//
+	// This member is required.
+	Url *string
+
+	// This represents the ip address of the device sending the multicast stream.
+	SourceIp *string
+
+	noSmithyDocumentSerde
+}
+
 // The multiplex object.
 type Multiplex struct {
 
@@ -5036,6 +5611,9 @@ type NetworkInputSettings struct {
 	// Specifies HLS input settings when the uri is for a HLS manifest.
 	HlsInputSettings *HlsInputSettings
 
+	// Specifies multicast input settings when the uri is for a multicast event.
+	MulticastInputSettings *MulticastInputSettings
+
 	// Check HTTPS server certificates. When set to checkCryptographyOnly,
 	// cryptography in the certificate will be checked, but not the server's name.
 	// Certain subdomains (notably S3 buckets that use dots in the bucket name) do not
@@ -5116,6 +5694,41 @@ type NielsenWatermarksSettings struct {
 	// Complete these fields only if you want to insert watermarks of type Nielsen
 	// NAES II (N2) and Nielsen NAES VI (NW).
 	NielsenNaesIiNwSettings *NielsenNaesIiNw
+
+	noSmithyDocumentSerde
+}
+
+// A mapping that's used to pair a logical network interface name on a Node with
+// the physical interface name exposed in the operating system.
+type NodeInterfaceMapping struct {
+
+	// A uniform logical interface name to address in a MediaLive channel
+	// configuration.
+	LogicalInterfaceName *string
+
+	// Used in NodeInterfaceMapping and NodeInterfaceMappingCreateRequest
+	NetworkInterfaceMode NetworkInterfaceMode
+
+	// The name of the physical interface on the hardware that will be running
+	// Elemental anywhere.
+	PhysicalInterfaceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in CreateNodeRequest.
+type NodeInterfaceMappingCreateRequest struct {
+
+	// Specify one of the logicalInterfaceNames that you created in the Cluster that
+	// this node belongs to. For example, my-Inputs-Interface.
+	LogicalInterfaceName *string
+
+	// The style of the network -- NAT or BRIDGE.
+	NetworkInterfaceMode NetworkInterfaceMode
+
+	// Specify the physical name that corresponds to the logicalInterfaceName that you
+	// specified in this interface mapping. For example, Eth1 or ENO1234EXAMPLE.
+	PhysicalInterfaceName *string
 
 	noSmithyDocumentSerde
 }
@@ -5201,6 +5814,9 @@ type OutputDestination struct {
 	// encoder.
 	Settings []OutputDestinationSettings
 
+	// SRT settings for an SRT output; one destination for each redundant encoder.
+	SrtSettings []SrtOutputDestinationSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -5269,6 +5885,9 @@ type OutputGroupSettings struct {
 	// Rtmp Group Settings
 	RtmpGroupSettings *RtmpGroupSettings
 
+	// Srt Group Settings
+	SrtGroupSettings *SrtGroupSettings
+
 	// Udp Group Settings
 	UdpGroupSettings *UdpGroupSettings
 
@@ -5322,6 +5941,9 @@ type OutputSettings struct {
 
 	// Rtmp Output Settings
 	RtmpOutputSettings *RtmpOutputSettings
+
+	// Srt Output Settings
+	SrtOutputSettings *SrtOutputSettings
 
 	// Udp Output Settings
 	UdpOutputSettings *UdpOutputSettings
@@ -5519,6 +6141,42 @@ type ReservationResourceSpecification struct {
 
 	// Video quality, e.g. 'STANDARD' (Outputs only)
 	VideoQuality ReservationVideoQuality
+
+	noSmithyDocumentSerde
+}
+
+// Used in DescribeNetworkResult, DescribeNetworkSummary, UpdateNetworkResult.
+type Route struct {
+
+	// A CIDR block for one Route.
+	Cidr *string
+
+	// The IP address of the Gateway for this route, if applicable.
+	Gateway *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in CreateNetworkRequest.
+type RouteCreateRequest struct {
+
+	// A CIDR block for one Route.
+	Cidr *string
+
+	// The IP address of the Gateway for this route, if applicable.
+	Gateway *string
+
+	noSmithyDocumentSerde
+}
+
+// Used in UpdateNetworkRequest.
+type RouteUpdateRequest struct {
+
+	// A CIDR block for one Route.
+	Cidr *string
+
+	// The IP address of the Gateway for this route, if applicable.
+	Gateway *string
 
 	noSmithyDocumentSerde
 }
@@ -6092,6 +6750,72 @@ type SrtCallerSourceRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Srt Group Settings
+type SrtGroupSettings struct {
+
+	// Specifies behavior of last resort when input video is lost, and no more backup
+	// inputs are available. When dropTs is selected the entire transport stream will
+	// stop being emitted. When dropProgram is selected the program can be dropped from
+	// the transport stream (and replaced with null packets to meet the TS bitrate
+	// requirement). Or, when emitProgram is chosen the transport stream will continue
+	// to be produced normally with repeat frames, black frames, or slate frames
+	// substituted for the absent input video.
+	InputLossAction InputLossActionForUdpOut
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for SrtOutputDestinationSettings
+type SrtOutputDestinationSettings struct {
+
+	// Arn used to extract the password from Secrets Manager
+	EncryptionPassphraseSecretArn *string
+
+	// Stream id for SRT destinations (URLs of type srt://)
+	StreamId *string
+
+	// A URL specifying a destination
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Srt Output Settings
+type SrtOutputSettings struct {
+
+	// Udp Container Settings
+	//
+	// This member is required.
+	ContainerSettings *UdpContainerSettings
+
+	// Reference to an OutputDestination ID defined in the channel
+	//
+	// This member is required.
+	Destination *OutputLocationRef
+
+	// SRT output buffering in milliseconds. A higher value increases latency through
+	// the encoder. But the benefits are that it helps to maintain a constant,
+	// low-jitter SRT output, and it accommodates clock recovery, input switching,
+	// input disruptions, picture reordering, and so on. Range: 0-10000 milliseconds.
+	BufferMsec *int32
+
+	// The encryption level for the content. Valid values are AES128, AES192, AES256.
+	// You and the downstream system should plan how to set this field because the
+	// values must not conflict with each other.
+	EncryptionType SrtEncryptionType
+
+	// The latency value, in milliseconds, that is proposed during the SRT connection
+	// handshake. SRT will choose the maximum of the values proposed by the sender and
+	// receiver. On the sender side, latency is the amount of time a packet is held to
+	// give it a chance to be delivered successfully. On the receiver side, latency is
+	// the amount of time the packet is held before delivering to the application,
+	// aiding in packet recovery and matching as closely as possible the packet timing
+	// of the sender. Range: 40-16000 milliseconds.
+	Latency *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configured sources for this SRT input.
 type SrtSettings struct {
 
@@ -6574,6 +7298,9 @@ type VideoBlackFailoverSettings struct {
 
 // Video Codec Settings
 type VideoCodecSettings struct {
+
+	// Av1 Settings
+	Av1Settings *Av1Settings
 
 	// Frame Capture Settings
 	FrameCaptureSettings *FrameCaptureSettings

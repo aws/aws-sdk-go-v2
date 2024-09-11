@@ -30,8 +30,8 @@ import (
 const ServiceID = "ECR"
 const ServiceAPIVersion = "2015-09-21"
 
-// Client provides the API client to make operations call for Amazon EC2 Container
-// Registry.
+// Client provides the API client to make operations call for Amazon Elastic
+// Container Registry.
 type Client struct {
 	options Options
 

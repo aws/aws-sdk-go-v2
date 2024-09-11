@@ -158,6 +158,18 @@ func TestCheckSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCloudWatchAlarmTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
@@ -175,6 +187,18 @@ func TestCheckSnapshot_CreateCloudWatchAlarmTemplateGroup(t *testing.T) {
 	_, err := svc.CreateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +278,42 @@ func TestCheckSnapshot_CreateMultiplexProgram(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateNodeRegistrationScript(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNodeRegistrationScript(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateNodeRegistrationScript")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreatePartnerInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePartnerInput(context.Background(), nil, func(o *Options) {
@@ -302,6 +362,18 @@ func TestCheckSnapshot_DeleteChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCloudWatchAlarmTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
@@ -319,6 +391,18 @@ func TestCheckSnapshot_DeleteCloudWatchAlarmTemplateGroup(t *testing.T) {
 	_, err := svc.DeleteCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -398,6 +482,30 @@ func TestCheckSnapshot_DeleteMultiplexProgram(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteReservation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteReservation(context.Background(), nil, func(o *Options) {
@@ -470,6 +578,30 @@ func TestCheckSnapshot_DescribeChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInput(context.Background(), nil, func(o *Options) {
@@ -535,6 +667,30 @@ func TestCheckSnapshot_DescribeMultiplexProgram(t *testing.T) {
 	_, err := svc.DescribeMultiplexProgram(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeMultiplexProgram")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeNode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -650,6 +806,18 @@ func TestCheckSnapshot_GetSignalMap(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListChannelPlacementGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannelPlacementGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChannelPlacementGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListChannels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
@@ -679,6 +847,18 @@ func TestCheckSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
 	_, err := svc.ListCloudWatchAlarmTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCloudWatchAlarmTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListClusters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListClusters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -775,6 +955,30 @@ func TestCheckSnapshot_ListMultiplexPrograms(t *testing.T) {
 	_, err := svc.ListMultiplexPrograms(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListMultiplexPrograms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNetworks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNetworks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNodes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1046,6 +1250,18 @@ func TestCheckSnapshot_UpdateChannelClass(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCloudWatchAlarmTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
@@ -1063,6 +1279,18 @@ func TestCheckSnapshot_UpdateCloudWatchAlarmTemplateGroup(t *testing.T) {
 	_, err := svc.UpdateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1147,6 +1375,42 @@ func TestCheckSnapshot_UpdateMultiplexProgram(t *testing.T) {
 	_, err := svc.UpdateMultiplexProgram(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateMultiplexProgram")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateNodeState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNodeState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateNodeState")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1261,6 +1525,18 @@ func TestUpdateSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCloudWatchAlarmTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
@@ -1278,6 +1554,18 @@ func TestUpdateSnapshot_CreateCloudWatchAlarmTemplateGroup(t *testing.T) {
 	_, err := svc.CreateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1357,6 +1645,42 @@ func TestUpdateSnapshot_CreateMultiplexProgram(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateNodeRegistrationScript(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateNodeRegistrationScript(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateNodeRegistrationScript")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreatePartnerInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePartnerInput(context.Background(), nil, func(o *Options) {
@@ -1405,6 +1729,18 @@ func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCloudWatchAlarmTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
@@ -1422,6 +1758,18 @@ func TestUpdateSnapshot_DeleteCloudWatchAlarmTemplateGroup(t *testing.T) {
 	_, err := svc.DeleteCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1501,6 +1849,30 @@ func TestUpdateSnapshot_DeleteMultiplexProgram(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteReservation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteReservation(context.Background(), nil, func(o *Options) {
@@ -1573,6 +1945,30 @@ func TestUpdateSnapshot_DescribeChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInput(context.Background(), nil, func(o *Options) {
@@ -1638,6 +2034,30 @@ func TestUpdateSnapshot_DescribeMultiplexProgram(t *testing.T) {
 	_, err := svc.DescribeMultiplexProgram(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeMultiplexProgram")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeNode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1753,6 +2173,18 @@ func TestUpdateSnapshot_GetSignalMap(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListChannelPlacementGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannelPlacementGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChannelPlacementGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListChannels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
@@ -1782,6 +2214,18 @@ func TestUpdateSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
 	_, err := svc.ListCloudWatchAlarmTemplates(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCloudWatchAlarmTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListClusters(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListClusters")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1878,6 +2322,30 @@ func TestUpdateSnapshot_ListMultiplexPrograms(t *testing.T) {
 	_, err := svc.ListMultiplexPrograms(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListMultiplexPrograms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNetworks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNetworks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNetworks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNodes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2149,6 +2617,18 @@ func TestUpdateSnapshot_UpdateChannelClass(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateChannelPlacementGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannelPlacementGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateChannelPlacementGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateCloudWatchAlarmTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
@@ -2166,6 +2646,18 @@ func TestUpdateSnapshot_UpdateCloudWatchAlarmTemplateGroup(t *testing.T) {
 	_, err := svc.UpdateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2250,6 +2742,42 @@ func TestUpdateSnapshot_UpdateMultiplexProgram(t *testing.T) {
 	_, err := svc.UpdateMultiplexProgram(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMultiplexProgram")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateNetwork(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNetwork(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNetwork")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateNodeState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateNodeState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateNodeState")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

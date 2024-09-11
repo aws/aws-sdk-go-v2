@@ -37,7 +37,7 @@ type ListOfferingsInput struct {
 	// '2345678' (a channel ID)
 	ChannelConfiguration *string
 
-	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', or 'LINK'
+	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', 'LINK', or 'AV1'
 	Codec *string
 
 	// Filter by offering duration, e.g. '12'

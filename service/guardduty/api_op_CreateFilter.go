@@ -33,8 +33,8 @@ func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, op
 
 type CreateFilterInput struct {
 
-	// The ID of the detector belonging to the GuardDuty account that you want to
-	// create a filter for.
+	// The detector ID associated with the GuardDuty account for which you want to
+	// create a filter.
 	//
 	// This member is required.
 	DetectorId *string

@@ -1,0 +1,8 @@
+{
+    "id": "5d7d7eb5-c0f5-4d7f-bda3-74c59be44842",
+    "type": "feature",
+    "description": "Add support for new statistic types in GetFindingsStatistics.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

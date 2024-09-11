@@ -536,6 +536,110 @@ func (AuthenticationScheme) Values() []AuthenticationScheme {
 	}
 }
 
+type Av1GopSizeUnits string
+
+// Enum values for Av1GopSizeUnits
+const (
+	Av1GopSizeUnitsFrames  Av1GopSizeUnits = "FRAMES"
+	Av1GopSizeUnitsSeconds Av1GopSizeUnits = "SECONDS"
+)
+
+// Values returns all known values for Av1GopSizeUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1GopSizeUnits) Values() []Av1GopSizeUnits {
+	return []Av1GopSizeUnits{
+		"FRAMES",
+		"SECONDS",
+	}
+}
+
+type Av1Level string
+
+// Enum values for Av1Level
+const (
+	Av1LevelAv1Level2    Av1Level = "AV1_LEVEL_2"
+	Av1LevelAv1Level21   Av1Level = "AV1_LEVEL_2_1"
+	Av1LevelAv1Level3    Av1Level = "AV1_LEVEL_3"
+	Av1LevelAv1Level31   Av1Level = "AV1_LEVEL_3_1"
+	Av1LevelAv1Level4    Av1Level = "AV1_LEVEL_4"
+	Av1LevelAv1Level41   Av1Level = "AV1_LEVEL_4_1"
+	Av1LevelAv1Level5    Av1Level = "AV1_LEVEL_5"
+	Av1LevelAv1Level51   Av1Level = "AV1_LEVEL_5_1"
+	Av1LevelAv1Level52   Av1Level = "AV1_LEVEL_5_2"
+	Av1LevelAv1Level53   Av1Level = "AV1_LEVEL_5_3"
+	Av1LevelAv1Level6    Av1Level = "AV1_LEVEL_6"
+	Av1LevelAv1Level61   Av1Level = "AV1_LEVEL_6_1"
+	Av1LevelAv1Level62   Av1Level = "AV1_LEVEL_6_2"
+	Av1LevelAv1Level63   Av1Level = "AV1_LEVEL_6_3"
+	Av1LevelAv1LevelAuto Av1Level = "AV1_LEVEL_AUTO"
+)
+
+// Values returns all known values for Av1Level. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1Level) Values() []Av1Level {
+	return []Av1Level{
+		"AV1_LEVEL_2",
+		"AV1_LEVEL_2_1",
+		"AV1_LEVEL_3",
+		"AV1_LEVEL_3_1",
+		"AV1_LEVEL_4",
+		"AV1_LEVEL_4_1",
+		"AV1_LEVEL_5",
+		"AV1_LEVEL_5_1",
+		"AV1_LEVEL_5_2",
+		"AV1_LEVEL_5_3",
+		"AV1_LEVEL_6",
+		"AV1_LEVEL_6_1",
+		"AV1_LEVEL_6_2",
+		"AV1_LEVEL_6_3",
+		"AV1_LEVEL_AUTO",
+	}
+}
+
+type Av1LookAheadRateControl string
+
+// Enum values for Av1LookAheadRateControl
+const (
+	Av1LookAheadRateControlHigh   Av1LookAheadRateControl = "HIGH"
+	Av1LookAheadRateControlLow    Av1LookAheadRateControl = "LOW"
+	Av1LookAheadRateControlMedium Av1LookAheadRateControl = "MEDIUM"
+)
+
+// Values returns all known values for Av1LookAheadRateControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1LookAheadRateControl) Values() []Av1LookAheadRateControl {
+	return []Av1LookAheadRateControl{
+		"HIGH",
+		"LOW",
+		"MEDIUM",
+	}
+}
+
+type Av1SceneChangeDetect string
+
+// Enum values for Av1SceneChangeDetect
+const (
+	Av1SceneChangeDetectDisabled Av1SceneChangeDetect = "DISABLED"
+	Av1SceneChangeDetectEnabled  Av1SceneChangeDetect = "ENABLED"
+)
+
+// Values returns all known values for Av1SceneChangeDetect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1SceneChangeDetect) Values() []Av1SceneChangeDetect {
+	return []Av1SceneChangeDetect{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type AvailBlankingState string
 
 // Enum values for AvailBlankingState
@@ -791,6 +895,35 @@ func (ChannelPipelineIdToRestart) Values() []ChannelPipelineIdToRestart {
 	}
 }
 
+type ChannelPlacementGroupState string
+
+// Enum values for ChannelPlacementGroupState
+const (
+	ChannelPlacementGroupStateUnassigned   ChannelPlacementGroupState = "UNASSIGNED"
+	ChannelPlacementGroupStateAssigning    ChannelPlacementGroupState = "ASSIGNING"
+	ChannelPlacementGroupStateAssigned     ChannelPlacementGroupState = "ASSIGNED"
+	ChannelPlacementGroupStateDeleting     ChannelPlacementGroupState = "DELETING"
+	ChannelPlacementGroupStateDeleteFailed ChannelPlacementGroupState = "DELETE_FAILED"
+	ChannelPlacementGroupStateDeleted      ChannelPlacementGroupState = "DELETED"
+	ChannelPlacementGroupStateUnassigning  ChannelPlacementGroupState = "UNASSIGNING"
+)
+
+// Values returns all known values for ChannelPlacementGroupState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelPlacementGroupState) Values() []ChannelPlacementGroupState {
+	return []ChannelPlacementGroupState{
+		"UNASSIGNED",
+		"ASSIGNING",
+		"ASSIGNED",
+		"DELETING",
+		"DELETE_FAILED",
+		"DELETED",
+		"UNASSIGNING",
+	}
+}
+
 type ChannelState string
 
 // Enum values for ChannelState
@@ -931,6 +1064,50 @@ func (CloudWatchAlarmTemplateTreatMissingData) Values() []CloudWatchAlarmTemplat
 		"breaching",
 		"ignore",
 		"missing",
+	}
+}
+
+type ClusterState string
+
+// Enum values for ClusterState
+const (
+	ClusterStateCreating     ClusterState = "CREATING"
+	ClusterStateCreateFailed ClusterState = "CREATE_FAILED"
+	ClusterStateActive       ClusterState = "ACTIVE"
+	ClusterStateDeleting     ClusterState = "DELETING"
+	ClusterStateDeleteFailed ClusterState = "DELETE_FAILED"
+	ClusterStateDeleted      ClusterState = "DELETED"
+)
+
+// Values returns all known values for ClusterState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterState) Values() []ClusterState {
+	return []ClusterState{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"DELETING",
+		"DELETE_FAILED",
+		"DELETED",
+	}
+}
+
+type ClusterType string
+
+// Enum values for ClusterType
+const (
+	ClusterTypeOnPremises ClusterType = "ON_PREMISES"
+)
+
+// Values returns all known values for ClusterType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterType) Values() []ClusterType {
+	return []ClusterType{
+		"ON_PREMISES",
 	}
 }
 
@@ -3976,6 +4153,27 @@ func (InputMaximumBitrate) Values() []InputMaximumBitrate {
 	}
 }
 
+type InputNetworkLocation string
+
+// Enum values for InputNetworkLocation
+const (
+	InputNetworkLocationAws        InputNetworkLocation = "AWS"
+	InputNetworkLocationOnPremise  InputNetworkLocation = "ON_PREMISE"
+	InputNetworkLocationOnPremises InputNetworkLocation = "ON_PREMISES"
+)
+
+// Values returns all known values for InputNetworkLocation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InputNetworkLocation) Values() []InputNetworkLocation {
+	return []InputNetworkLocation{
+		"AWS",
+		"ON_PREMISE",
+		"ON_PREMISES",
+	}
+}
+
 type InputPreference string
 
 // Enum values for InputPreference
@@ -4136,6 +4334,7 @@ const (
 	InputTypeAwsCdi       InputType = "AWS_CDI"
 	InputTypeTsFile       InputType = "TS_FILE"
 	InputTypeSrtCaller    InputType = "SRT_CALLER"
+	InputTypeMulticast    InputType = "MULTICAST"
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
@@ -4155,6 +4354,7 @@ func (InputType) Values() []InputType {
 		"AWS_CDI",
 		"TS_FILE",
 		"SRT_CALLER",
+		"MULTICAST",
 	}
 }
 
@@ -4965,6 +5165,58 @@ func (NetworkInputServerValidation) Values() []NetworkInputServerValidation {
 	}
 }
 
+type NetworkInterfaceMode string
+
+// Enum values for NetworkInterfaceMode
+const (
+	NetworkInterfaceModeNat    NetworkInterfaceMode = "NAT"
+	NetworkInterfaceModeBridge NetworkInterfaceMode = "BRIDGE"
+)
+
+// Values returns all known values for NetworkInterfaceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkInterfaceMode) Values() []NetworkInterfaceMode {
+	return []NetworkInterfaceMode{
+		"NAT",
+		"BRIDGE",
+	}
+}
+
+type NetworkState string
+
+// Enum values for NetworkState
+const (
+	NetworkStateCreating     NetworkState = "CREATING"
+	NetworkStateCreateFailed NetworkState = "CREATE_FAILED"
+	NetworkStateActive       NetworkState = "ACTIVE"
+	NetworkStateDeleting     NetworkState = "DELETING"
+	NetworkStateIdle         NetworkState = "IDLE"
+	NetworkStateInUse        NetworkState = "IN_USE"
+	NetworkStateUpdating     NetworkState = "UPDATING"
+	NetworkStateDeleteFailed NetworkState = "DELETE_FAILED"
+	NetworkStateDeleted      NetworkState = "DELETED"
+)
+
+// Values returns all known values for NetworkState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkState) Values() []NetworkState {
+	return []NetworkState{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"DELETING",
+		"IDLE",
+		"IN_USE",
+		"UPDATING",
+		"DELETE_FAILED",
+		"DELETED",
+	}
+}
+
 type NielsenPcmToId3TaggingState string
 
 // Enum values for NielsenPcmToId3TaggingState
@@ -5056,6 +5308,83 @@ func (NielsenWatermarkTimezones) Values() []NielsenWatermarkTimezones {
 		"US_PACIFIC",
 		"US_SAMOA",
 		"UTC",
+	}
+}
+
+type NodeConnectionState string
+
+// Enum values for NodeConnectionState
+const (
+	NodeConnectionStateConnected    NodeConnectionState = "CONNECTED"
+	NodeConnectionStateDisconnected NodeConnectionState = "DISCONNECTED"
+)
+
+// Values returns all known values for NodeConnectionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeConnectionState) Values() []NodeConnectionState {
+	return []NodeConnectionState{
+		"CONNECTED",
+		"DISCONNECTED",
+	}
+}
+
+type NodeRole string
+
+// Enum values for NodeRole
+const (
+	NodeRoleBackup NodeRole = "BACKUP"
+	NodeRoleActive NodeRole = "ACTIVE"
+)
+
+// Values returns all known values for NodeRole. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeRole) Values() []NodeRole {
+	return []NodeRole{
+		"BACKUP",
+		"ACTIVE",
+	}
+}
+
+type NodeState string
+
+// Enum values for NodeState
+const (
+	NodeStateCreated              NodeState = "CREATED"
+	NodeStateRegistering          NodeState = "REGISTERING"
+	NodeStateReadyToActivate      NodeState = "READY_TO_ACTIVATE"
+	NodeStateRegistrationFailed   NodeState = "REGISTRATION_FAILED"
+	NodeStateActivationFailed     NodeState = "ACTIVATION_FAILED"
+	NodeStateActive               NodeState = "ACTIVE"
+	NodeStateReady                NodeState = "READY"
+	NodeStateInUse                NodeState = "IN_USE"
+	NodeStateDeregistering        NodeState = "DEREGISTERING"
+	NodeStateDraining             NodeState = "DRAINING"
+	NodeStateDeregistrationFailed NodeState = "DEREGISTRATION_FAILED"
+	NodeStateDeregistered         NodeState = "DEREGISTERED"
+)
+
+// Values returns all known values for NodeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeState) Values() []NodeState {
+	return []NodeState{
+		"CREATED",
+		"REGISTERING",
+		"READY_TO_ACTIVATE",
+		"REGISTRATION_FAILED",
+		"ACTIVATION_FAILED",
+		"ACTIVE",
+		"READY",
+		"IN_USE",
+		"DEREGISTERING",
+		"DRAINING",
+		"DEREGISTRATION_FAILED",
+		"DEREGISTERED",
 	}
 }
 
@@ -5182,6 +5511,7 @@ const (
 	ReservationCodecHevc  ReservationCodec = "HEVC"
 	ReservationCodecAudio ReservationCodec = "AUDIO"
 	ReservationCodecLink  ReservationCodec = "LINK"
+	ReservationCodecAv1   ReservationCodec = "AV1"
 )
 
 // Values returns all known values for ReservationCodec. Note that this can be
@@ -5195,6 +5525,7 @@ func (ReservationCodec) Values() []ReservationCodec {
 		"HEVC",
 		"AUDIO",
 		"LINK",
+		"AV1",
 	}
 }
 
@@ -5983,6 +6314,27 @@ func (Smpte2038DataPreference) Values() []Smpte2038DataPreference {
 	}
 }
 
+type SrtEncryptionType string
+
+// Enum values for SrtEncryptionType
+const (
+	SrtEncryptionTypeAes128 SrtEncryptionType = "AES128"
+	SrtEncryptionTypeAes192 SrtEncryptionType = "AES192"
+	SrtEncryptionTypeAes256 SrtEncryptionType = "AES256"
+)
+
+// Values returns all known values for SrtEncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SrtEncryptionType) Values() []SrtEncryptionType {
+	return []SrtEncryptionType{
+		"AES128",
+		"AES192",
+		"AES256",
+	}
+}
+
 type TemporalFilterPostFilterSharpening string
 
 // Enum values for TemporalFilterPostFilterSharpening
@@ -6206,6 +6558,25 @@ func (UdpTimedMetadataId3Frame) Values() []UdpTimedMetadataId3Frame {
 		"NONE",
 		"PRIV",
 		"TDRL",
+	}
+}
+
+type UpdateNodeStateShape string
+
+// Enum values for UpdateNodeStateShape
+const (
+	UpdateNodeStateShapeActive   UpdateNodeStateShape = "ACTIVE"
+	UpdateNodeStateShapeDraining UpdateNodeStateShape = "DRAINING"
+)
+
+// Values returns all known values for UpdateNodeStateShape. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateNodeStateShape) Values() []UpdateNodeStateShape {
+	return []UpdateNodeStateShape{
+		"ACTIVE",
+		"DRAINING",
 	}
 }
 

@@ -28,7 +28,7 @@ func (c *Client) DeleteFilter(ctx context.Context, params *DeleteFilterInput, op
 
 type DeleteFilterInput struct {
 
-	// The unique ID of the detector that the filter is associated with.
+	// The unique ID of the detector that is associated with the filter.
 	//
 	// This member is required.
 	DetectorId *string

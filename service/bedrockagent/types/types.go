@@ -705,10 +705,14 @@ type BedrockEmbeddingModelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for a foundation model used to parse documents for a data source.
+// Settings for a foundation model or [inference profile] used to parse documents for a data source.
+//
+// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 type BedrockFoundationModelConfiguration struct {
 
-	// The model's ARN.
+	// The ARN of the foundation model or [inference profile].
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	ModelArn *string
@@ -2284,7 +2288,7 @@ type ParameterDetail struct {
 // contents of each page.
 //
 // To use a model to parse PDF documents, set the parsing strategy to
-// BEDROCK_FOUNDATION_MODEL and specify the model to use by ARN. You can also
+// BEDROCK_FOUNDATION_MODEL and specify the model or [inference profile] to use by ARN. You can also
 // override the default parsing prompt with instructions for how to interpret
 // images and tables in your documents. The following models are supported.
 //
@@ -2295,6 +2299,7 @@ type ParameterDetail struct {
 // You can get the ARN of a model with the [ListFoundationModels] action. Standard model usage charges
 // apply for the foundation model parsing strategy.
 //
+// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 // [ListFoundationModels]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListFoundationModels.html
 type ParsingConfiguration struct {
 

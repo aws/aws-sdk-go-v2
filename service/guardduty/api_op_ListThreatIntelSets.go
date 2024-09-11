@@ -30,7 +30,7 @@ func (c *Client) ListThreatIntelSets(ctx context.Context, params *ListThreatInte
 
 type ListThreatIntelSetsInput struct {
 
-	// The unique ID of the detector that the threatIntelSet is associated with.
+	// The unique ID of the detector that is associated with the threatIntelSet.
 	//
 	// This member is required.
 	DetectorId *string

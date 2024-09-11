@@ -32,7 +32,7 @@ func (c *Client) GetCoverageStatistics(ctx context.Context, params *GetCoverageS
 
 type GetCoverageStatisticsInput struct {
 
-	// The unique ID of the GuardDuty detector associated to the coverage statistics.
+	// The unique ID of the GuardDuty detector.
 	//
 	// This member is required.
 	DetectorId *string
@@ -42,7 +42,7 @@ type GetCoverageStatisticsInput struct {
 	// This member is required.
 	StatisticsType []types.CoverageStatisticsType
 
-	// Represents the criteria used to filter the coverage statistics
+	// Represents the criteria used to filter the coverage statistics.
 	FilterCriteria *types.CoverageFilterCriteria
 
 	noSmithyDocumentSerde

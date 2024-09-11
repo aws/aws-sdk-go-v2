@@ -138,6 +138,8 @@ type ListFindingsInput struct {
 	//   it's set to 'false', only unarchived findings are listed. When this attribute is
 	//   not set, all existing findings are listed.
 	//
+	//   - service.ebsVolumeScanDetails.scanId
+	//
 	//   - service.resourceRole
 	//
 	//   - severity

@@ -30,7 +30,7 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 
 type ListMembersInput struct {
 
-	// The unique ID of the detector the member is associated with.
+	// The unique ID of the detector that is associated with the member.
 	//
 	// This member is required.
 	DetectorId *string

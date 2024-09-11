@@ -1194,13 +1194,14 @@ type KnowledgeBaseRetrievalResult struct {
 // [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
 type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 
-	// The unique identifier of the knowledge base that is queried and the foundation
-	// model used for generation.
+	// The unique identifier of the knowledge base that is queried.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The ARN of the foundation model used to generate a response.
+	// The ARN of the foundation model or [inference profile] used to generate a response.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	ModelArn *string

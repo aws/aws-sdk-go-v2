@@ -2148,8 +2148,10 @@ type VoiceEngine string
 
 // Enum values for VoiceEngine
 const (
-	VoiceEngineStandard VoiceEngine = "standard"
-	VoiceEngineNeural   VoiceEngine = "neural"
+	VoiceEngineStandard   VoiceEngine = "standard"
+	VoiceEngineNeural     VoiceEngine = "neural"
+	VoiceEngineLongForm   VoiceEngine = "long-form"
+	VoiceEngineGenerative VoiceEngine = "generative"
 )
 
 // Values returns all known values for VoiceEngine. Note that this can be expanded
@@ -2160,5 +2162,7 @@ func (VoiceEngine) Values() []VoiceEngine {
 	return []VoiceEngine{
 		"standard",
 		"neural",
+		"long-form",
+		"generative",
 	}
 }

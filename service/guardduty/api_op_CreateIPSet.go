@@ -39,8 +39,8 @@ type CreateIPSetInput struct {
 	// This member is required.
 	Activate *bool
 
-	// The unique ID of the detector of the GuardDuty account that you want to create
-	// an IPSet for.
+	// The unique ID of the detector of the GuardDuty account for which you want to
+	// create an IPSet.
 	//
 	// This member is required.
 	DetectorId *string

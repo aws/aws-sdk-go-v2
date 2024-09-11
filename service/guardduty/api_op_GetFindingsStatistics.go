@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon GuardDuty findings statistics for the specified detector ID.
+// Lists GuardDuty findings statistics for the specified detector ID.
+//
+// You must provide either findingStatisticTypes or groupBy parameter, and not
+// both. You can use the maxResults and orderBy parameters only when using groupBy .
 //
 // There might be regional differences because some flags might not be available
 // in all the Regions where GuardDuty is currently supported. For more information,
@@ -35,19 +38,33 @@ func (c *Client) GetFindingsStatistics(ctx context.Context, params *GetFindingsS
 
 type GetFindingsStatisticsInput struct {
 
-	// The ID of the detector that specifies the GuardDuty service whose findings'
-	// statistics you want to retrieve.
+	// The ID of the detector whose findings statistics you want to retrieve.
 	//
 	// This member is required.
 	DetectorId *string
 
-	// The types of finding statistics to retrieve.
-	//
-	// This member is required.
-	FindingStatisticTypes []types.FindingStatisticType
-
 	// Represents the criteria that is used for querying findings.
 	FindingCriteria *types.FindingCriteria
+
+	// The types of finding statistics to retrieve.
+	//
+	// Deprecated: This parameter is deprecated, please use GroupBy instead
+	FindingStatisticTypes []types.FindingStatisticType
+
+	// Displays the findings statistics grouped by one of the listed valid values.
+	GroupBy types.GroupByType
+
+	// The maximum number of results to be returned in the response. The default value
+	// is 25.
+	//
+	// You can use this parameter only with the groupBy parameter.
+	MaxResults *int32
+
+	// Displays the sorted findings in the requested order. The default value of
+	// orderBy is DESC .
+	//
+	// You can use this parameter only with the groupBy parameter.
+	OrderBy types.OrderBy
 
 	noSmithyDocumentSerde
 }
@@ -58,6 +75,12 @@ type GetFindingsStatisticsOutput struct {
 	//
 	// This member is required.
 	FindingStatistics *types.FindingStatistics
+
+	// The pagination parameter to be used on the next list operation to retrieve more
+	// items.
+	//
+	// This parameter is currently not supported.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -36,6 +36,10 @@ type CreateInputInput struct {
 	// Settings for the devices.
 	InputDevices []types.InputDeviceSettings
 
+	// The location of this input. AWS, for an input existing in the AWS Cloud,
+	// On-Prem for an input in a customer network.
+	InputNetworkLocation types.InputNetworkLocation
+
 	// A list of security groups referenced by IDs to attach to the input.
 	InputSecurityGroups []string
 
@@ -44,6 +48,9 @@ type CreateInputInput struct {
 	// is when you have more than one is that each Flow is in a separate Availability
 	// Zone as this ensures your EML input is redundant to AZ issues.
 	MediaConnectFlows []types.MediaConnectFlowRequest
+
+	// Multicast Input settings.
+	MulticastSettings *types.MulticastSettingsCreateRequest
 
 	// Name of the input.
 	Name *string

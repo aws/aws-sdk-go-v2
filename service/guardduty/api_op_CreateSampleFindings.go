@@ -30,7 +30,7 @@ func (c *Client) CreateSampleFindings(ctx context.Context, params *CreateSampleF
 
 type CreateSampleFindingsInput struct {
 
-	// The ID of the detector to create sample findings for.
+	// The ID of the detector for which you need to create sample findings.
 	//
 	// This member is required.
 	DetectorId *string

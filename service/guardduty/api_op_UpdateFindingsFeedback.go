@@ -29,7 +29,8 @@ func (c *Client) UpdateFindingsFeedback(ctx context.Context, params *UpdateFindi
 
 type UpdateFindingsFeedbackInput struct {
 
-	// The ID of the detector associated with the findings to update feedback for.
+	// The ID of the detector that is associated with the findings for which you want
+	// to update the feedback.
 	//
 	// This member is required.
 	DetectorId *string

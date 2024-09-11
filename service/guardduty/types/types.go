@@ -81,6 +81,22 @@ type AccountLevelPermissions struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a list of map of accounts with the number of findings associated
+// with each account.
+type AccountStatistics struct {
+
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
+	// The timestamp at which the finding for this account was last generated.
+	LastGeneratedAt *time.Time
+
+	// The total number of findings associated with an account.
+	TotalFindings *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about actions.
 type Action struct {
 
@@ -736,6 +752,29 @@ type DataSourcesFreeTrial struct {
 	noSmithyDocumentSerde
 }
 
+// Represents list a map of dates with a count of total findings generated on each
+// date.
+type DateStatistics struct {
+
+	// The timestamp when the total findings count is observed.
+	//
+	// For example, Date would look like "2024-09-05T17:00:00-07:00" whereas
+	// LastGeneratedAt would look like 2024-09-05T17:12:29-07:00".
+	Date *time.Time
+
+	// The timestamp at which the last finding in the findings count, was generated.
+	LastGeneratedAt *time.Time
+
+	// The severity of the findings generated on each date.
+	Severity *float64
+
+	// The total number of findings that were generated per severity level on each
+	// date.
+	TotalFindings *int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on the server side encryption method used in the S3
 // bucket. See [S3 Server-Side Encryption]for more information.
 //
@@ -1227,8 +1266,52 @@ type FindingCriteria struct {
 // Contains information about finding statistics.
 type FindingStatistics struct {
 
-	// Represents a map of severity to count statistics for a set of findings.
+	// Represents a list of map of severity to count statistics for a set of findings.
+	//
+	// Deprecated: This parameter is deprecated. Please set GroupBy to 'SEVERITY' to
+	// return GroupedBySeverity instead.
 	CountBySeverity map[string]int32
+
+	// Represents a list of map of accounts with a findings count associated with each
+	// account.
+	GroupedByAccount []AccountStatistics
+
+	// Represents a list of map of dates with a count of total findings generated on
+	// each date per severity level.
+	GroupedByDate []DateStatistics
+
+	// Represents a list of map of finding types with a count of total findings
+	// generated for each type.
+	//
+	// Based on the orderBy parameter, this request returns either the most occurring
+	// finding types or the least occurring finding types. If the orderBy parameter is
+	// ASC , this will represent the least occurring finding types in your account;
+	// otherwise, this will represent the most occurring finding types. The default
+	// value of orderBy is DESC .
+	GroupedByFindingType []FindingTypeStatistics
+
+	// Represents a list of map of top resources with a count of total findings.
+	GroupedByResource []ResourceStatistics
+
+	// Represents a list of map of total findings for each severity level.
+	GroupedBySeverity []SeverityStatistics
+
+	noSmithyDocumentSerde
+}
+
+// Information about each finding type associated with the groupedByFindingType
+// statistics.
+type FindingTypeStatistics struct {
+
+	// Name of the finding type.
+	FindingType *string
+
+	// The timestamp at which this finding type was last generated in your environment.
+	LastGeneratedAt *time.Time
+
+	// The total number of findings associated with generated for each distinct
+	// finding type.
+	TotalFindings *int32
 
 	noSmithyDocumentSerde
 }
@@ -2730,6 +2813,52 @@ type ResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about each resource type associated with the groupedByResource
+// statistics.
+type ResourceStatistics struct {
+
+	// The ID of the Amazon Web Services account.
+	AccountId *string
+
+	// The timestamp at which the statistics for this resource was last generated.
+	LastGeneratedAt *time.Time
+
+	// ID associated with each resource. The following list provides the mapping of
+	// the resource type and resource ID.
+	//
+	// Mapping of resource and resource ID
+	//
+	//   - AccessKey - resource.accessKeyDetails.accessKeyId
+	//
+	//   - Container - resource.containerDetails.id
+	//
+	//   - ECSCluster - resource.ecsClusterDetails.name
+	//
+	//   - EKSCluster - resource.eksClusterDetails.name
+	//
+	//   - Instance - resource.instanceDetails.instanceId
+	//
+	//   - KubernetesCluster -
+	//   resource.kubernetesDetails.kubernetesWorkloadDetails.name
+	//
+	//   - Lambda - resource.lambdaDetails.functionName
+	//
+	//   - RDSDBInstance - resource.rdsDbInstanceDetails.dbInstanceIdentifier
+	//
+	//   - S3Bucket - resource.s3BucketDetails.name
+	//
+	//   - S3Object - resource.s3BucketDetails.name
+	ResourceId *string
+
+	// The type of resource.
+	ResourceType *string
+
+	// The total number of findings associated with this resource.
+	TotalFindings *int32
+
+	noSmithyDocumentSerde
+}
+
 // Additional information about the suspicious activity.
 type RuntimeContext struct {
 
@@ -2917,8 +3046,8 @@ type Scan struct {
 	AccountId *string
 
 	// The unique detector ID of the administrator account that the request is
-	// associated with. Note that this value will be the same as the one used for
-	// DetectorId if the account is an administrator.
+	// associated with. If the account is an administrator, the AdminDetectorId will
+	// be the same as the one used for DetectorId .
 	AdminDetectorId *string
 
 	// List of volumes that were attached to the original instance to be scanned.
@@ -3196,6 +3325,22 @@ type ServiceAdditionalInfo struct {
 
 	// This field specifies the value of the additional information.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about severity level for each finding type.
+type SeverityStatistics struct {
+
+	// The timestamp at which a finding type for a specific severity was last
+	// generated.
+	LastGeneratedAt *time.Time
+
+	// The severity level associated with each finding type.
+	Severity *float64
+
+	// The total number of findings associated with this severity.
+	TotalFindings *int32
 
 	noSmithyDocumentSerde
 }
