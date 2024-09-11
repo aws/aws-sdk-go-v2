@@ -1,8 +1,0 @@
-{
-    "id": "a31e9328-114e-4584-934f-3ec96cfe0ff9",
-    "type": "feature",
-    "description": "Support new Polly voice engines in VoiceSettings: long-form and generative",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

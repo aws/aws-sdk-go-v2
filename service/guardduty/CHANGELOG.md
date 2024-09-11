@@ -1,3 +1,7 @@
+# v1.46.0 (2024-09-11)
+
+* **Feature**: Add support for new statistic types in GetFindingsStatistics.
+
 # v1.45.6 (2024-09-04)
 
 * No change notes available for this release.

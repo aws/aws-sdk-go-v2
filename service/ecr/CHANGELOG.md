@@ -1,3 +1,7 @@
+# v1.33.0 (2024-09-11)
+
+* **Feature**: Added KMS_DSSE to EncryptionType
+
 # v1.32.4 (2024-09-04)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.58.0 (2024-09-11)
+
+* **Feature**: Adds AV1 Codec support, SRT ouputs, and MediaLive Anywhere support.
+
 # v1.57.1 (2024-09-04)
 
 * No change notes available for this release.

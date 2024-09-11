@@ -1,3 +1,19 @@
+# Release (2024-09-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.19.0](service/bedrockagent/CHANGELOG.md#v1190-2024-09-11)
+  * **Feature**: Amazon Bedrock Knowledge Bases now supports using inference profiles to increase throughput and improve resilience.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.19.0](service/bedrockagentruntime/CHANGELOG.md#v1190-2024-09-11)
+  * **Feature**: Amazon Bedrock Knowledge Bases now supports using inference profiles to increase throughput and improve resilience.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.33.0](service/ecr/CHANGELOG.md#v1330-2024-09-11)
+  * **Feature**: Added KMS_DSSE to EncryptionType
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.46.0](service/guardduty/CHANGELOG.md#v1460-2024-09-11)
+  * **Feature**: Add support for new statistic types in GetFindingsStatistics.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.47.0](service/lexmodelsv2/CHANGELOG.md#v1470-2024-09-11)
+  * **Feature**: Support new Polly voice engines in VoiceSettings: long-form and generative
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.58.0](service/medialive/CHANGELOG.md#v1580-2024-09-11)
+  * **Feature**: Adds AV1 Codec support, SRT ouputs, and MediaLive Anywhere support.
+
 # Release (2024-09-10)
 
 ## Module Highlights

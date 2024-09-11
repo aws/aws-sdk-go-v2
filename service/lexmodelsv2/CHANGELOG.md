@@ -1,3 +1,7 @@
+# v1.47.0 (2024-09-11)
+
+* **Feature**: Support new Polly voice engines in VoiceSettings: long-form and generative
+
 # v1.46.3 (2024-09-04)
 
 * No change notes available for this release.

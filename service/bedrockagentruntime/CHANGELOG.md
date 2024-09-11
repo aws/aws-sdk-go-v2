@@ -1,3 +1,7 @@
+# v1.19.0 (2024-09-11)
+
+* **Feature**: Amazon Bedrock Knowledge Bases now supports using inference profiles to increase throughput and improve resilience.
+
 # v1.18.2 (2024-09-04)
 
 * No change notes available for this release.

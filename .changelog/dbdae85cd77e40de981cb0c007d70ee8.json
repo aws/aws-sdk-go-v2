@@ -1,8 +1,0 @@
-{
-    "id": "dbdae85c-d77e-40de-981c-b0c007d70ee8",
-    "type": "feature",
-    "description": "Amazon Bedrock Knowledge Bases now supports using inference profiles to increase throughput and improve resilience.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

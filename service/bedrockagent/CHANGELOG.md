@@ -1,3 +1,7 @@
+# v1.19.0 (2024-09-11)
+
+* **Feature**: Amazon Bedrock Knowledge Bases now supports using inference profiles to increase throughput and improve resilience.
+
 # v1.18.0 (2024-09-04)
 
 * **Feature**: Add support for user metadata inside PromptVariant.

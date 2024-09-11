@@ -1,3 +1,7 @@
+# v1.52.4 (2024-09-11)
+
+* No change notes available for this release.
+
 # v1.52.3 (2024-09-10)
 
 * **Documentation**: Documentation update for Security Hub
