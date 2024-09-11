@@ -1061,10 +1061,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 20,
-                    "max": 1011
+                    "min": 1,
+                    "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))))|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
         "com.amazonaws.bedrockagentruntime#ByteContentBlob": {
@@ -3627,14 +3627,14 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the knowledge base that is queried and the foundation model used for generation.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the knowledge base that is queried.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "modelArn": {
                     "target": "com.amazonaws.bedrockagentruntime#BedrockModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the foundation model used to generate a response.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a> used to generate a response.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5024,7 +5024,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results. The response only cites sources that are relevant to the query.</p>",
+                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results and using the specified foundation model or <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html\">inference profile</a>. The response only cites sources that are relevant to the query.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",

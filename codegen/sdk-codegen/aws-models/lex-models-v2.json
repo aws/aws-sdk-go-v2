@@ -25023,6 +25023,18 @@
                     "traits": {
                         "smithy.api#enumValue": "neural"
                     }
+                },
+                "LongForm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "long-form"
+                    }
+                },
+                "Generative": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "generative"
+                    }
                 }
             }
         },
@@ -25047,7 +25059,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines settings for using an Amazon Polly voice to communicate with a\n         user.</p>"
+                "smithy.api#documentation": "<p>Defines settings for using an Amazon Polly voice to communicate with a\n         user.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>standard</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>neural</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>long-form</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>generative</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.lexmodelsv2#WaitAndContinueSpecification": {

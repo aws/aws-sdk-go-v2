@@ -206,7 +206,7 @@
                 },
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Amazon Elastic Container Registry</fullname>\n         <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Customers can use the\n            familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR\n            provides a secure, scalable, and reliable registry for your Docker or Open Container\n            Initiative (OCI) images. Amazon ECR supports private repositories with resource-based\n            permissions using IAM so that specific users or Amazon EC2 instances can access\n            repositories and images.</p>\n         <p>Amazon ECR has service endpoints in each supported Region. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ecr.html\">Amazon ECR endpoints</a> in the\n                <i>Amazon Web Services General Reference</i>.</p>",
-                "smithy.api#title": "Amazon EC2 Container Registry",
+                "smithy.api#title": "Amazon Elastic Container Registry",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ecr.amazonaws.com/doc/2015-09-21/"
                 },
@@ -2142,7 +2142,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring. Amazon ECR will assume your supplied role when\n            the customRoleArn is specified. When this field isn't specified, Amazon ECR will\n            use the service-linked role for the repository creation template.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring. Amazon ECR will assume your supplied role when the\n            customRoleArn is specified. When this field isn't specified, Amazon ECR will use the\n            service-linked role for the repository creation template.</p>"
                     }
                 }
             },
@@ -3329,7 +3329,20 @@
                     "outputToken": "nextToken",
                     "items": "repositories",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeRepositoriesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecr#DescribeRepositoriesRequest": {
@@ -3486,7 +3499,7 @@
                 "encryptionType": {
                     "target": "com.amazonaws.ecr#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n         <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with Key Management Service key stored in KMS. When you\n            use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key\n            for Amazon ECR, or specify your own KMS key, which you already created. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting data using server-side\n                encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>\n         <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using\n                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The encryption type to use.</p>\n         <p>If you use the <code>KMS</code> encryption type, the contents of the repository will\n            be encrypted using server-side encryption with Key Management Service key stored in KMS. When you\n            use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key\n            for Amazon ECR, or specify your own KMS key, which you already created.</p>\n         <p>If you use the <code>KMS_DSSE</code> encryption type, the contents of the repository\n            will be encrypted with two layers of encryption using server-side encryption with the\n            KMS Management Service key stored in KMS. Similar to the KMS encryption type, you\n            can either use the default Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS\n            key, which you've already created. </p>\n         <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption\n            with Amazon S3-managed encryption keys which encrypts the images in the repository using an\n            AES256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using\n                server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the\n                <i>Amazon Simple Storage Service Console Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3535,6 +3548,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "KMS"
+                    }
+                },
+                "KMS_DSSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KMS_DSSE"
                     }
                 }
             }
@@ -5550,7 +5569,22 @@
                     "outputToken": "nextToken",
                     "items": "imageIds",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListImagesFailure",
+                        "params": {
+                            "repositoryName": "not-a-real-repository"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.ecr#ListImagesFilter": {
@@ -6910,7 +6944,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role when\n            the customRoleArn is specified. When this field isn't specified, Amazon ECR will\n            use the service-linked role for the repository creation template.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role\n            when the customRoleArn is specified. When this field isn't specified, Amazon ECR will use the\n            service-linked role for the repository creation template.</p>"
                     }
                 },
                 "createdAt": {
@@ -8223,7 +8257,7 @@
                 "customRoleArn": {
                     "target": "com.amazonaws.ecr#CustomRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring. Amazon ECR will assume your supplied role when\n            the customRoleArn is specified. When this field isn't specified, Amazon ECR will\n            use the service-linked role for the repository creation template.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the role to be assumed by Amazon ECR. This role must be in the same account as\n            the registry that you are configuring. Amazon ECR will assume your supplied role when the\n            customRoleArn is specified. When this field isn't specified, Amazon ECR will use the\n            service-linked role for the repository creation template.</p>"
                     }
                 }
             },
