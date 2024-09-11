@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Code Examples</title>
-    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/</link>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/</link>
     <description>Recent content in Code Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 14 Jan 2021 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Docs: Amazon CloudWatch Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/cloudwatch/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/cloudwatch/</guid>
       <description>
         
         
@@ -31,10 +31,10 @@
     
     <item>
       <title>Docs: Amazon DynamoDB Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/dynamodb/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/dynamodb/</guid>
       <description>
         
         
@@ -45,10 +45,10 @@
     
     <item>
       <title>Docs: Amazon EC2 Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/ec2/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/ec2/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ec2/</guid>
       <description>
         
         
@@ -59,10 +59,10 @@
     
     <item>
       <title>Docs: Amazon S3 Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/s3/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/s3/</guid>
       <description>
         
         
@@ -73,10 +73,10 @@
     
     <item>
       <title>Docs: Amazon SNS Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sns/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sns/</guid>
       <description>
         
         
@@ -87,10 +87,10 @@
     
     <item>
       <title>Docs: Amazon SQS Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/</guid>
       <description>
         
         
@@ -101,10 +101,10 @@
     
     <item>
       <title>Docs: AWS KMS Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/kms/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/kms/</guid>
       <description>
         
         
@@ -115,10 +115,10 @@
     
     <item>
       <title>Docs: AWS STS Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sts/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sts/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sts/</guid>
       <description>
         
         
@@ -129,10 +129,10 @@
     
     <item>
       <title>Docs: AWS Systems Manager Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/ssm/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/ssm/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/ssm/</guid>
       <description>
         
         
@@ -143,10 +143,10 @@
     
     <item>
       <title>Docs: IAM Examples</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/</guid>
       <description>
         
         

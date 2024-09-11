@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Using the AWS SDK for Go V2 Utilities</title>
-    <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/</link>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/</link>
     <description>Recent content in Using the AWS SDK for Go V2 Utilities on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Docs: Amazon RDS Utilities</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/rds/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</link>
       <pubDate>Fri, 16 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/rds/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</guid>
       <description>
         
         
@@ -65,10 +65,10 @@ database:&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon CloudFront Utilities</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</link>
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/cloudfront/</guid>
       <description>
         
         
@@ -106,10 +106,10 @@ AWS SDK for Go V2 API Reference.&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon EC2 Instance Metadata Service</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/ec2-imds/</guid>
       <description>
         
         
@@ -119,7 +119,7 @@ The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/
 &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/ec2/imds#Client&#34;&gt;Client&lt;/a&gt; type that can be used to access the Amazon EC2
 Instance Metadata Service. The &lt;code&gt;Client&lt;/code&gt; and associated operations can be used similar to the other AWS service clients
 provided by the SDK. To learn more information on how to configure the SDK, and use service clients see
-&lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/&#34;&gt;Configuring the SDK&lt;/a&gt; and &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/making-requests/&#34;&gt;Using AWS Services&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/&#34;&gt;Configuring the SDK&lt;/a&gt; and &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/making-requests/&#34;&gt;Using AWS Services&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The client can help you easily retrieve information about instances on which your applications run, such as its AWS
 Region or local IP address. Typically, you must create and submit HTTP requests to retrieve instance metadata. Instead,
 create an &lt;code&gt;imds.Client&lt;/code&gt; to access the Amazon EC2 Instance Metadata Service using a programmatic client
@@ -158,10 +158,10 @@ in the Amazon EC2 User Guide.&lt;/p&gt;
     
     <item>
       <title>Docs: Amazon S3 Utilities</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/s3/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/s3/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/</guid>
       <description>
         
         
@@ -534,7 +534,7 @@ client&amp;rsquo;s configured Region.&lt;/p&gt;
 &lt;p&gt;For API operations like &lt;code&gt;PutObject&lt;/code&gt; and &lt;code&gt;UploadPart&lt;/code&gt;, the Amazon S3 client expects the value of the &lt;code&gt;Body&lt;/code&gt; input parameter to implement the &lt;a href=&#34;https://pkg.go.dev/io#Seeker&#34;&gt;io.Seeker&lt;/a&gt; interface by default. The &lt;code&gt;io.Seeker&lt;/code&gt; interface is used by the client to determine the length of the value to upload, and to compute payload hash for the &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html&#34;&gt;request signature&lt;/a&gt;. If the &lt;code&gt;Body&lt;/code&gt; input parameter value does not implement &lt;code&gt;io.Seeker&lt;/code&gt;, your application will receive an error.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;operation error S3: PutObject, failed to compute payload hash: failed to seek
 body to start, request stream is not seekable
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can change this behavior by modifying the operation method&amp;rsquo;s &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/middleware/&#34;&gt;Middleware&lt;/a&gt; using functional options. The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions&#34;&gt;WithAPIOptions&lt;/a&gt; helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html&#34;&gt;Unsigned Payload&lt;/a&gt; request signature add &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&#34;&gt;v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&lt;/a&gt;.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;You can change this behavior by modifying the operation method&amp;rsquo;s &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/middleware/&#34;&gt;Middleware&lt;/a&gt; using functional options. The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#WithAPIOptions&#34;&gt;WithAPIOptions&lt;/a&gt; helper returns a functional option for zero or more middleware mutators. To disable the client computing the payload hash and use &lt;a href=&#34;https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-header-based-auth.html&#34;&gt;Unsigned Payload&lt;/a&gt; request signature add &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/signer/v4#SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&#34;&gt;v4.SwapComputePayloadSHA256ForUnsignedPayloadMiddleware&lt;/a&gt;.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;resp&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PutObject&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;s3&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;PutObjectInput&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000&#34;&gt;Bucket&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;bucketName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#000&#34;&gt;Key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;objectName&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
@@ -547,7 +547,7 @@ body to start, request stream is not seekable
 
 &lt;div class=&#34;pageinfo pageinfo-warning&#34;&gt;
 &lt;p&gt;Amazon S3 requires the content length to be provided for all object&amp;rsquo;s uploaded to a bucket. Since the &lt;code&gt;Body&lt;/code&gt; input parameter does not implement &lt;code&gt;io.Seeker&lt;/code&gt; interface the client will not be able to compute the &lt;code&gt;ContentLength&lt;/code&gt; parameter for the request. The parameter must be provided by the application. The request will fail if the &lt;code&gt;ContentLength&lt;/code&gt; parameter is not provided.&lt;/p&gt;
-&lt;p&gt;Use the SDK&amp;rsquo;s &lt;a href=&#34;http://localhost:1313/aws-sdk-go-v2/docs/sdk-utilities/s3/#upload-manager&#34;&gt;Amazon S3 Upload Manager&lt;/a&gt; for uploads that are not seekable, and do not have a known length.&lt;/p&gt;
+&lt;p&gt;Use the SDK&amp;rsquo;s &lt;a href=&#34;https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#upload-manager&#34;&gt;Amazon S3 Upload Manager&lt;/a&gt; for uploads that are not seekable, and do not have a known length.&lt;/p&gt;
 
 &lt;/div&gt;
 

@@ -1,10 +1,10 @@
 <!doctype html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head><script src="/aws-sdk-go-v2/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=aws-sdk-go-v2/livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.115.4">
-<link rel="alternate" type="application/rss&#43;xml" href="http://localhost:1313/aws-sdk-go-v2/docs/migrating/index.xml">
+<link rel="alternate" type="application/rss&#43;xml" href="https://aws.github.io/aws-sdk-go-v2/docs/migrating/index.xml">
 <meta name="robots" content="index, follow">
 
 
@@ -24,7 +24,7 @@
 <meta property="og:title" content="Migrating to the AWS SDK for Go V2" />
 <meta property="og:description" content="How to migrate to the AWS SDK for Go V2 from AWS SDK for Go V1." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/aws-sdk-go-v2/docs/migrating/" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/migrating/" />
 <meta itemprop="name" content="Migrating to the AWS SDK for Go V2">
 <meta itemprop="description" content="How to migrate to the AWS SDK for Go V2 from AWS SDK for Go V1."><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Migrating to the AWS SDK for Go V2"/>
@@ -100,7 +100,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.1ed5201c9429d6d49ab1e6d6c5e5409e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -122,7 +122,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.1ed5201c9429d6d49ab1e6d6c5e5409e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -512,10 +512,10 @@
             <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="http://localhost:1313/aws-sdk-go-v2/docs/">Developer Guide</a>
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
   </li>
   <li class="breadcrumb-item active" aria-current="page">
-    <a href="http://localhost:1313/aws-sdk-go-v2/docs/migrating/" aria-disabled="true" class="btn-link disabled">Migrating</a>
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/migrating/" aria-disabled="true" class="btn-link disabled">Migrating</a>
   </li>
   </ol>
 </nav>
@@ -606,7 +606,7 @@ module, and can be included in your applications dependencies by with <code>go g
 programmatically. These function names are prefixed with <code>With</code> followed by option that they override. Let&rsquo;s look at
 some examples of how to migrate usage of the <code>session</code> package.</p>
 <p>For more information on loading shared configuration
-see <a href="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the AWS SDK for Go V2</a>.</p>
+see <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the AWS SDK for Go V2</a>.</p>
 <h4 id="examples">Examples</h4>
 <h5 id="migrating-from-newsession-to-loaddefaultconfig">Migrating from NewSession to LoadDefaultConfig</h5>
 <p>The following example shows how usage of <code>session.NewSession</code> without additional argument parameters is migrated to
@@ -743,7 +743,7 @@ the service operations being used:</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">io</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">ReadAll</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">object</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Body</span><span style="color:#000;font-weight:bold">)</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
-</span></span></code></pre></div><p>See the <a href="http://localhost:1313/aws-sdk-go-v2/docs/unit-testing/">testing guide</a> for more
+</span></span></code></pre></div><p>See the <a href="https://aws.github.io/aws-sdk-go-v2/docs/unit-testing/">testing guide</a> for more
 information.</p>
 <h2 id="credentials--credential-providers">Credentials &amp; Credential Providers</h2>
 <p>The <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/credentials">aws/credentials</a> package and associated credential providers have been
@@ -1028,7 +1028,7 @@ client to your dependencies use</p>
 When migrating from the AWS SDK for Go we recommend that you use the <code>NewFromConfig</code> variant, which will return a new
 service client using values from an <code>aws.Config</code>. The <code>aws.Config</code> value will have been created while loading the SDK shared configuration using
 <code>config.LoadDefaultConfig</code>. For details on creating service clients see
-<a href="http://localhost:1313/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>.</p>
+<a href="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/">Using AWS Services</a>.</p>
 <h5 id="example-1-1">Example 1</h5>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
@@ -1104,7 +1104,7 @@ your application requires a custom endpoint, you can specify custom behavior on 
 <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/endpoints#Resolver">endpoints.Resolver</a> you must
 migrate it to conform to this new per-service interface.</p>
 <p>For more information on endpoints and implementing a custom resolver, see
-<a href="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Configuring Client Endpoints</a>.</p>
+<a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/">Configuring Client Endpoints</a>.</p>
 <h3 id="authentication">Authentication</h3>
 <p>The AWS SDK for Go V2 supports more advanced authentication behavior, which
 enables the use of newer AWS service features such as codecatalyst and S3
@@ -1198,7 +1198,7 @@ In the event a service does not model a specific type for an error, you can util
 <a href="https://pkg.go.dev/github.com/aws/smithy-go/#APIError">smithy.APIError</a> interface type for inspecting the returned error code and message
 from the service. This functionality replaces <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/awserr#Error">awserr.Error</a> and the other
 <a href="https://docs.aws.amazon.com/sdk-for-go/api/aws/awserr">awserr</a> functionality from the AWS SDK for Go V1. For more details information on
-handling errors see <a href="http://localhost:1313/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>.</p>
+handling errors see <a href="https://aws.github.io/aws-sdk-go-v2/docs/handling-errors/">Handling Errors</a>.</p>
 <h4 id="example-6">Example</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
 </span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span>
@@ -1261,7 +1261,7 @@ to use paginate over the Amazon S3 <code>ListObjectsV2</code> operation you must
 <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/service/s3#ListObjectsV2Paginator">ListObjectsV2Paginator</a> which provides the methods <code>HasMorePages</code>,
 and <code>NextPage</code> for determining whether there are more pages to retrieve and invoking the operation to retrieve the next
 page respectively. More details on using the SDK paginators can be found at
-<a href="http://localhost:1313/aws-sdk-go-v2/docs/making-requests/#using-paginators"></a>.</p>
+<a href="https://aws.github.io/aws-sdk-go-v2/docs/making-requests/#using-paginators"></a>.</p>
 <p>Let&rsquo;s look at an example of how to migrate from a AWS SDK for Go paginator to the AWS SDK for Go V2 equivalent.</p>
 <h4 id="example-7">Example</h4>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// V1
@@ -1897,7 +1897,7 @@ APIs are replaced by
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified September 9, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/1f0371e09f2ed2595b018d25012409d21d40a65d">fixing code example and adding clarifications to docs (1f0371e)</a>
+  Last modified September 11, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/6ae12f1824b14ed439766f736e9bf3d509789b01">fixing code example and adding clarifications to docs (#2781) (6ae12f1824)</a>
 </div>
 
 </div>

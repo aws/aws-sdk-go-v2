@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – CreateLPQueuev2</title>
-    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</link>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</link>
     <description>Recent content in CreateLPQueuev2 on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/index.xml" rel="self" type="application/rss+xml" />
     
     
       

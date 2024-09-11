@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – IAM Examples</title>
-    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/</link>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/</link>
     <description>Recent content in IAM Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: AccessKeyLastUsedv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/accesskeylastused/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/accesskeylastused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/accesskeylastused/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/accesskeylastused/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: AttachUserPolicyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/attachuserpolicy/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/attachuserpolicy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/attachuserpolicy/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/attachuserpolicy/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Docs: CreateAccessKeyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createaccesskey/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createaccesskey/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createaccesskey/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createaccesskey/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Docs: CreateAccountAliasv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createaccountalias/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createaccountalias/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createaccountalias/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createaccountalias/</guid>
       <description>
         
         
@@ -68,10 +68,10 @@
     
     <item>
       <title>Docs: CreatePolicyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createpolicy/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createpolicy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createpolicy/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createpolicy/</guid>
       <description>
         
         
@@ -81,10 +81,10 @@
     
     <item>
       <title>Docs: CreateUserv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createuser/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createuser/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/createuser/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/createuser/</guid>
       <description>
         
         
@@ -94,10 +94,10 @@
     
     <item>
       <title>Docs: DeleteAccessKeyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteaccesskey/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteaccesskey/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteaccesskey/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteaccesskey/</guid>
       <description>
         
         
@@ -107,10 +107,10 @@
     
     <item>
       <title>Docs: DeleteAccountAliasv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteaccountalias/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteaccountalias/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteaccountalias/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteaccountalias/</guid>
       <description>
         
         
@@ -120,10 +120,10 @@
     
     <item>
       <title>Docs: DeleteServerCertv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteservercert/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteservercert/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteservercert/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteservercert/</guid>
       <description>
         
         
@@ -133,10 +133,10 @@
     
     <item>
       <title>Docs: DeleteUserv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteuser/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteuser/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/deleteuser/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/deleteuser/</guid>
       <description>
         
         
@@ -146,10 +146,10 @@
     
     <item>
       <title>Docs: DetachUserPolicyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/detachuserpolicy/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/detachuserpolicy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/detachuserpolicy/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/detachuserpolicy/</guid>
       <description>
         
         
@@ -159,10 +159,10 @@
     
     <item>
       <title>Docs: GetPolicyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/getpolicy/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/getpolicy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/getpolicy/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/getpolicy/</guid>
       <description>
         
         
@@ -172,10 +172,10 @@
     
     <item>
       <title>Docs: GetServerCertv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/getservercert/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/getservercert/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/getservercert/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/getservercert/</guid>
       <description>
         
         
@@ -185,10 +185,10 @@
     
     <item>
       <title>Docs: ListAccessKeysv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listaccesskeys/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listaccesskeys/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listaccesskeys/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listaccesskeys/</guid>
       <description>
         
         
@@ -198,10 +198,10 @@
     
     <item>
       <title>Docs: ListAccountAliasesv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listaccountaliases/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listaccountaliases/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listaccountaliases/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listaccountaliases/</guid>
       <description>
         
         
@@ -211,10 +211,10 @@
     
     <item>
       <title>Docs: ListAdminsv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listadmins/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listadmins/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listadmins/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listadmins/</guid>
       <description>
         
         
@@ -224,10 +224,10 @@
     
     <item>
       <title>Docs: ListServerCertsv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listservercerts/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listservercerts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listservercerts/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listservercerts/</guid>
       <description>
         
         
@@ -237,10 +237,10 @@
     
     <item>
       <title>Docs: ListUsersv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listusers/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listusers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/listusers/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/listusers/</guid>
       <description>
         
         
@@ -250,10 +250,10 @@
     
     <item>
       <title>Docs: UpdateAccessKeyv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/updateaccesskey/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateaccesskey/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/updateaccesskey/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateaccesskey/</guid>
       <description>
         
         
@@ -263,10 +263,10 @@
     
     <item>
       <title>Docs: UpdateServerCertv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/updateservercert/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateservercert/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/updateservercert/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateservercert/</guid>
       <description>
         
         
@@ -276,10 +276,10 @@
     
     <item>
       <title>Docs: UpdateUserv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/updateuser/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateuser/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/iam/updateuser/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/iam/updateuser/</guid>
       <description>
         
         

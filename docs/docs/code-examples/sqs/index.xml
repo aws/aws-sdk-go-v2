@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AWS SDK for Go V2 – Amazon SQS Examples</title>
-    <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/</link>
+    <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/</link>
     <description>Recent content in Amazon SQS Examples on AWS SDK for Go V2</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     
-	  <atom:link href="http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Docs: ChangeMsgVisibilityv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/changemsgvisibility/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/changemsgvisibility/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/changemsgvisibility/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/changemsgvisibility/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Docs: ConfigureLPQueuev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/configurelpqueue/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/configurelpqueue/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/configurelpqueue/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/configurelpqueue/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Docs: CreateLPQueuev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createlpqueue/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Docs: CreateQueuev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/createqueue/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createqueue/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/createqueue/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/createqueue/</guid>
       <description>
         
         
@@ -68,10 +68,10 @@
     
     <item>
       <title>Docs: DeadLetterQueuev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/deadletterqueue/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deadletterqueue/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/deadletterqueue/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deadletterqueue/</guid>
       <description>
         
         
@@ -81,10 +81,10 @@
     
     <item>
       <title>Docs: DeleteMessagev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/deletemessage/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deletemessage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/deletemessage/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deletemessage/</guid>
       <description>
         
         
@@ -94,10 +94,10 @@
     
     <item>
       <title>Docs: DeleteQueuev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/deletequeue/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deletequeue/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/deletequeue/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/deletequeue/</guid>
       <description>
         
         
@@ -107,10 +107,10 @@
     
     <item>
       <title>Docs: GetQueueURLv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/getqueueurl/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/getqueueurl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/getqueueurl/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/getqueueurl/</guid>
       <description>
         
         
@@ -120,10 +120,10 @@
     
     <item>
       <title>Docs: ListQueuesv2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/listqueues/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/listqueues/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/listqueues/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/listqueues/</guid>
       <description>
         
         
@@ -133,10 +133,10 @@
     
     <item>
       <title>Docs: ReceiveLPMessagev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/receivelpmessage/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/receivelpmessage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/receivelpmessage/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/receivelpmessage/</guid>
       <description>
         
         
@@ -146,10 +146,10 @@
     
     <item>
       <title>Docs: ReceiveMessagev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/receivemessage/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/receivemessage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/receivemessage/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/receivemessage/</guid>
       <description>
         
         
@@ -159,10 +159,10 @@
     
     <item>
       <title>Docs: SendMessagev2</title>
-      <link>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/</link>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/</guid>
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/code-examples/sqs/sendmessage/</guid>
       <description>
         
         
