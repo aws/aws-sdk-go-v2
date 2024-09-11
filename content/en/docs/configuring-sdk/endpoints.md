@@ -334,6 +334,8 @@ When migrating from v1 to v2 of endpoint resolution, the following general princ
 * Returning an Endpoint with HostnameImmutable set to `true` is roughly
   equivalent to implementing an `EndpointResolverV2` which returns the
   originally returned URL from v1.
+  * The primary exception is for operations with modeled endpoint prefixes. A
+    note on this is given further down.
 
 Examples for these cases are provided below.
 
@@ -343,6 +345,16 @@ example, signing overrides for custom features like S3 Object Lambda would
 still be set for immutable endpoints returned via v1 code, but the same will
 not be done for v2.
 {{% /pageinfo %}}
+
+### Note on host prefixes
+
+Some operations are modeled with host prefixes to be prepended to the resolved
+endpoint. This behavior must work in tandem with the output of
+ResolveEndpointV2 and therefore the host prefix will still be applied to that
+result.
+
+You can manually disable endpoint host prefixing by applying a middleware, see
+the examples section.
 
 ### Examples
 
@@ -398,5 +410,72 @@ func (*staticResolver) ResolveEndpoint(ctx context.Context, params svc.EndpointP
 client := svc.NewFromConfig(cfg, func (o *svc.Options) {
     o.EndpointResolverV2 = &staticResolver{}
 })
+```
+
+#### Disable host prefix
+
+```go
+import (
+    "context"
+    "fmt"
+    "net/url"
+
+    "github.com/aws/aws-sdk-go-v2/aws"
+    "github.com/aws/aws-sdk-go-v2/config"
+    "github.com/aws/aws-sdk-go-v2/service/<service>"
+    smithyendpoints "github.com/aws/smithy-go/endpoints"
+    "github.com/aws/smithy-go/middleware"
+    smithyhttp "github.com/aws/smithy-go/transport/http"
+)
+
+// disableEndpointPrefix applies the flag that will prevent any
+// operation-specific host prefix from being applied
+type disableEndpointPrefix struct{}
+
+func (disableEndpointPrefix) ID() string { return "disableEndpointPrefix" }
+
+func (disableEndpointPrefix) HandleInitialize(
+    ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+) (middleware.InitializeOutput, middleware.Metadata, error) {
+    ctx = smithyhttp.SetHostnameImmutable(ctx, true)
+    return next.HandleInitialize(ctx, in)
+}
+
+func addDisableEndpointPrefix(o *<service>.Options) {
+    o.APIOptions = append(o.APIOptions, (func(stack *middleware.Stack) error {
+        return stack.Initialize.Add(disableEndpointPrefix{}, middleware.After)
+    }))
+}
+
+type staticResolver struct{}
+
+func (staticResolver) ResolveEndpoint(ctx context.Context, params <service>.EndpointParameters) (
+    smithyendpoints.Endpoint, error,
+) {
+    u, err := url.Parse("https://custom.endpoint.api/")
+    if err != nil {
+        return smithyendpoints.Endpoint{}, err
+    }
+
+    return smithyendpoints.Endpoint{URI: *u}, nil
+}
+
+
+func main() {
+    cfg, err := config.LoadDefaultConfig(context.Background())
+    if err != nil {
+        panic(err)
+    }
+
+    svc := <service>.NewFromConfig(cfg, func(o *<service>.Options) {
+        o.EndpointResolverV2 = staticResolver{}
+    })
+
+    _, err = svc.<Operation>(context.Background(), &<service>.<OperationInput>{ /* ... */ },
+        addDisableEndpointPrefix)
+    if err != nil {
+        panic(err)
+    }
+}
 ```
 

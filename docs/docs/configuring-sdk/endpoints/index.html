@@ -1,6 +1,6 @@
 <!doctype html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
-  <head><script src="/aws-sdk-go-v2/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=aws-sdk-go-v2/livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.115.4">
@@ -23,13 +23,13 @@
 <meta property="og:title" content="Configuring Client Endpoints" />
 <meta property="og:description" content="Customizing service client endpoints." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" /><meta property="article:section" content="docs" />
+<meta property="og:url" content="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" /><meta property="article:section" content="docs" />
 <meta property="article:published_time" content="2020-11-12T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-10-06T22:55:58+03:00" />
+<meta property="article:modified_time" content="2024-09-11T12:26:00-04:00" />
 <meta itemprop="name" content="Configuring Client Endpoints">
 <meta itemprop="description" content="Customizing service client endpoints."><meta itemprop="datePublished" content="2020-11-12T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2023-10-06T22:55:58+03:00" />
-<meta itemprop="wordCount" content="1658">
+<meta itemprop="dateModified" content="2024-09-11T12:26:00-04:00" />
+<meta itemprop="wordCount" content="1888">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Configuring Client Endpoints"/>
 <meta name="twitter:description" content="Customizing service client endpoints."/>
@@ -104,7 +104,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.1ed5201c9429d6d49ab1e6d6c5e5409e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -126,7 +126,7 @@
   aria-label="Search this site…"
   autocomplete="off"
   
-  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.30b245754e63db1f94dcbaa3ba0f9915.json"
+  data-offline-search-index-json-src="/aws-sdk-go-v2/offline-search-index.1ed5201c9429d6d49ab1e6d6c5e5409e.json"
   data-offline-search-base-href="/"
   data-offline-search-max-results="10"
 >
@@ -446,6 +446,7 @@
         </li>
         <li><a href="#migration">Migration</a>
           <ul>
+            <li><a href="#note-on-host-prefixes">Note on host prefixes</a></li>
             <li><a href="#examples-2">Examples</a></li>
           </ul>
         </li>
@@ -484,13 +485,13 @@
             <nav aria-label="breadcrumb" class="td-breadcrumbs">
   <ol class="breadcrumb">
   <li class="breadcrumb-item">
-    <a href="http://localhost:1313/aws-sdk-go-v2/docs/">Developer Guide</a>
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/">Developer Guide</a>
   </li>
   <li class="breadcrumb-item">
-    <a href="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a>
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/">Configuring the SDK</a>
   </li>
   <li class="breadcrumb-item active" aria-current="page">
-    <a href="http://localhost:1313/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" aria-disabled="true" class="btn-link disabled">Endpoints</a>
+    <a href="https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/endpoints/" aria-disabled="true" class="btn-link disabled">Endpoints</a>
   </li>
   </ol>
 </nav>
@@ -815,7 +816,12 @@ equivalent to setting <code>BaseEndpoint</code> to the originally returned URL f
 leaving <code>EndpointResolverV2</code> as the default.</li>
 <li>Returning an Endpoint with HostnameImmutable set to <code>true</code> is roughly
 equivalent to implementing an <code>EndpointResolverV2</code> which returns the
-originally returned URL from v1.</li>
+originally returned URL from v1.
+<ul>
+<li>The primary exception is for operations with modeled endpoint prefixes. A
+note on this is given further down.</li>
+</ul>
+</li>
 </ul>
 <p>Examples for these cases are provided below.</p>
 
@@ -828,6 +834,13 @@ not be done for v2.</p>
 
 </div>
 
+<h3 id="note-on-host-prefixes">Note on host prefixes</h3>
+<p>Some operations are modeled with host prefixes to be prepended to the resolved
+endpoint. This behavior must work in tandem with the output of
+ResolveEndpointV2 and therefore the host prefix will still be applied to that
+result.</p>
+<p>You can manually disable endpoint host prefixing by applying a middleware, see
+the examples section.</p>
 <h3 id="examples-2">Examples</h3>
 <h4 id="mutable-endpoint">Mutable endpoint</h4>
 <p>The following code sample demonstrates how to migrate a basic v1 endpoint
@@ -875,11 +888,74 @@ resolver that returns a modifiable endpoint:</p>
 </span></span><span style="display:flex;"><span><span style="color:#000">client</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverV2</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000">staticResolver</span><span style="color:#000;font-weight:bold">{}</span>
 </span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">})</span>
+</span></span></code></pre></div><h4 id="disable-host-prefix">Disable host prefix</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;net/url&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/aws&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/config&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/aws-sdk-go-v2/service/&lt;service&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyendpoints</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/endpoints&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyhttp</span> <span style="color:#4e9a06">&#34;github.com/aws/smithy-go/transport/http&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// disableEndpointPrefix applies the flag that will prevent any
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">// operation-specific host prefix from being applied
+</span></span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">disableEndpointPrefix</span> <span style="color:#204a87;font-weight:bold">struct</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">disableEndpointPrefix</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ID</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#204a87;font-weight:bold">string</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#4e9a06">&#34;disableEndpointPrefix&#34;</span> <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">disableEndpointPrefix</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeInput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">next</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeHandler</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">InitializeOutput</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Metadata</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">ctx</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">smithyhttp</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">SetHostnameImmutable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">true</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">next</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">HandleInitialize</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">in</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">addDisableEndpointPrefix</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">&gt;.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#204a87">append</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">APIOptions</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">stack</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Stack</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">error</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">stack</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Initialize</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">disableEndpointPrefix</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">middleware</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">After</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}))</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">type</span> <span style="color:#000">staticResolver</span> <span style="color:#204a87;font-weight:bold">struct</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">staticResolver</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">ResolveEndpoint</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ctx</span> <span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Context</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">params</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">&gt;.</span><span style="color:#000">EndpointParameters</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">(</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">error</span><span style="color:#000;font-weight:bold">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">u</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">url</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Parse</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;https://custom.endpoint.api/&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{},</span> <span style="color:#000">err</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">smithyendpoints</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Endpoint</span><span style="color:#000;font-weight:bold">{</span><span style="color:#000">URI</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">u</span><span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">nil</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">func</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">LoadDefaultConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">())</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">svc</span> <span style="color:#ce5c00;font-weight:bold">:=</span> <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">&gt;.</span><span style="color:#000">NewFromConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cfg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">func</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">o</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">&gt;.</span><span style="color:#000">Options</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">o</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">EndpointResolverV2</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">staticResolver</span><span style="color:#000;font-weight:bold">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">})</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">err</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">svc</span><span style="color:#000;font-weight:bold">.&lt;</span><span style="color:#000">Operation</span><span style="color:#000;font-weight:bold">&gt;(</span><span style="color:#000">context</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">Background</span><span style="color:#000;font-weight:bold">(),</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">service</span><span style="color:#000;font-weight:bold">&gt;.&lt;</span><span style="color:#000">OperationInput</span><span style="color:#000;font-weight:bold">&gt;{</span> <span style="color:#8f5902;font-style:italic">/* ... */</span> <span style="color:#000;font-weight:bold">},</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#000">addDisableEndpointPrefix</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000">err</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nil</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#204a87">panic</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">err</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span>
 </span></span></code></pre></div>
 	
 	
 	<div class="text-muted mt-5 pt-3 border-top">
-  Last modified October 6, 2023: <a href="https://github.com/aws/aws-sdk-go-v2/commit/52072aba6a7566a97e009a8b629707bfa9dfce75">Fix code snippets in devguide for endpointsv2 (#2301) (52072ab)</a>
+  Last modified September 11, 2024: <a href="https://github.com/aws/aws-sdk-go-v2/commit/9b54222000d587cbd6c9ea829942fe3f05450067">add blurb on disabling endpoint prefix (9b54222000)</a>
 </div>
 
 </div>
