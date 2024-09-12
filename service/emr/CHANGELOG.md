@@ -1,3 +1,7 @@
+# v1.43.0 (2024-09-12)
+
+* **Feature**: Update APIs to allow modification of ODCR options, allocation strategy, and InstanceTypeConfigs on running InstanceFleet clusters.
+
 # v1.42.6 (2024-09-04)
 
 * No change notes available for this release.

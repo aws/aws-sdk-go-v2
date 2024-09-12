@@ -1,8 +1,0 @@
-{
-    "id": "2be32db8-26e2-422c-9de1-a8a2a5cd9dfd",
-    "type": "documentation",
-    "description": "This release adds support for the os-upgrade pending maintenance action for Amazon Aurora DB clusters.",
-    "modules": [
-        "service/rds"
-    ]
-}

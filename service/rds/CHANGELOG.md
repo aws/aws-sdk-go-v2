@@ -1,3 +1,7 @@
+# v1.82.5 (2024-09-12)
+
+* **Documentation**: This release adds support for the os-upgrade pending maintenance action for Amazon Aurora DB clusters.
+
 # v1.82.4 (2024-09-04)
 
 * No change notes available for this release.

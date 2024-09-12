@@ -1,3 +1,7 @@
+# v1.37.0 (2024-09-12)
+
+* **Feature**: Correct incorrectly mapped error in ELBv2 waiters
+
 # v1.36.0 (2024-09-09)
 
 * **Feature**: Add paginators for the ELBv2 DescribeListenerCertificates and DescribeRules APIs. Fix broken waiter for the ELBv2 DescribeLoadBalancers API.

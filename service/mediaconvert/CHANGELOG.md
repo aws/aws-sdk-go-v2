@@ -1,3 +1,7 @@
+# v1.58.0 (2024-09-12)
+
+* **Feature**: This release includes support for dynamic video overlay workflows, including picture-in-picture and squeezeback
+
 # v1.57.6 (2024-09-04)
 
 * No change notes available for this release.

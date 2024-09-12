@@ -1,8 +1,0 @@
-{
-    "id": "9de88b61-b670-46d3-9096-0851970ae313",
-    "type": "feature",
-    "description": "Correct incorrectly mapped error in ELBv2 waiters",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

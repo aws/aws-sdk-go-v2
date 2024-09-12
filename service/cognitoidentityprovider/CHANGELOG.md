@@ -1,3 +1,7 @@
+# v1.44.0 (2024-09-12)
+
+* **Feature**: Added email MFA option to user pools with advanced security features.
+
 # v1.43.4 (2024-09-04)
 
 * No change notes available for this release.

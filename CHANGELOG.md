@@ -1,3 +1,23 @@
+# Release (2024-09-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.44.0](service/cognitoidentityprovider/CHANGELOG.md#v1440-2024-09-12)
+  * **Feature**: Added email MFA option to user pools with advanced security features.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.37.0](service/elasticloadbalancingv2/CHANGELOG.md#v1370-2024-09-12)
+  * **Feature**: Correct incorrectly mapped error in ELBv2 waiters
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.43.0](service/emr/CHANGELOG.md#v1430-2024-09-12)
+  * **Feature**: Update APIs to allow modification of ODCR options, allocation strategy, and InstanceTypeConfigs on running InstanceFleet clusters.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.96.0](service/glue/CHANGELOG.md#v1960-2024-09-12)
+  * **Feature**: AWS Glue is introducing two new optimizers for Apache Iceberg tables: snapshot retention and orphan file deletion. Customers can enable these optimizers and customize their configurations to perform daily maintenance tasks on their Iceberg tables based on their specific requirements.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.58.0](service/mediaconvert/CHANGELOG.md#v1580-2024-09-12)
+  * **Feature**: This release includes support for dynamic video overlay workflows, including picture-in-picture and squeezeback
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.82.5](service/rds/CHANGELOG.md#v1825-2024-09-12)
+  * **Documentation**: This release adds support for the os-upgrade pending maintenance action for Amazon Aurora DB clusters.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.32.0](service/storagegateway/CHANGELOG.md#v1320-2024-09-12)
+  * **Feature**: The S3 File Gateway now supports DSSE-KMS encryption. A new parameter EncryptionType is added to these APIs: CreateSmbFileShare, CreateNfsFileShare, UpdateSmbFileShare, UpdateNfsFileShare, DescribeSmbFileShares, DescribeNfsFileShares. Also, in favor of EncryptionType, KmsEncrypted is deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.27.0](service/synthetics/CHANGELOG.md#v1270-2024-09-12)
+  * **Feature**: This release introduces two features. The first is tag replication, which allows for the propagation of canary tags onto Synthetics related resources, such as Lambda functions. The second is a limit increase in canary name length, which has now been increased from 21 to 255 characters.
+
 # Release (2024-09-11)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.27.0 (2024-09-12)
+
+* **Feature**: This release introduces two features. The first is tag replication, which allows for the propagation of canary tags onto Synthetics related resources, such as Lambda functions. The second is a limit increase in canary name length, which has now been increased from 21 to 255 characters.
+
 # v1.26.8 (2024-09-04)
 
 * No change notes available for this release.
