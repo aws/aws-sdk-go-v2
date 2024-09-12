@@ -2164,7 +2164,9 @@ type TableOptimizerType string
 
 // Enum values for TableOptimizerType
 const (
-	TableOptimizerTypeCompaction TableOptimizerType = "compaction"
+	TableOptimizerTypeCompaction         TableOptimizerType = "compaction"
+	TableOptimizerTypeRetention          TableOptimizerType = "retention"
+	TableOptimizerTypeOrphanFileDeletion TableOptimizerType = "orphan_file_deletion"
 )
 
 // Values returns all known values for TableOptimizerType. Note that this can be
@@ -2174,6 +2176,8 @@ const (
 func (TableOptimizerType) Values() []TableOptimizerType {
 	return []TableOptimizerType{
 		"compaction",
+		"retention",
+		"orphan_file_deletion",
 	}
 }
 

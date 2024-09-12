@@ -1,0 +1,8 @@
+{
+    "id": "eee8ee90-2fee-4f05-aad5-f1fb78ee2925",
+    "type": "feature",
+    "description": "Added email MFA option to user pools with advanced security features.",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

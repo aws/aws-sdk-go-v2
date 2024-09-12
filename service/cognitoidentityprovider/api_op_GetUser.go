@@ -77,7 +77,7 @@ type GetUserOutput struct {
 	PreferredMfaSetting *string
 
 	// The MFA options that are activated for the user. The possible values in this
-	// list are SMS_MFA and SOFTWARE_TOKEN_MFA .
+	// list are SMS_MFA , EMAIL_OTP , and SOFTWARE_TOKEN_MFA .
 	UserMFASettingList []string
 
 	// Metadata pertaining to the operation's result.

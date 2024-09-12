@@ -132,3 +132,20 @@ func (EncryptionMode) Values() []EncryptionMode {
 		"SSE_KMS",
 	}
 }
+
+type ResourceToTag string
+
+// Enum values for ResourceToTag
+const (
+	ResourceToTagLambdaFunction ResourceToTag = "lambda-function"
+)
+
+// Values returns all known values for ResourceToTag. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceToTag) Values() []ResourceToTag {
+	return []ResourceToTag{
+		"lambda-function",
+	}
+}

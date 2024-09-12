@@ -203,6 +203,13 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 		ok.String(*v.Name)
 	}
 
+	if v.ResourcesToReplicateTags != nil {
+		ok := object.Key("ResourcesToReplicateTags")
+		if err := awsRestjson1_serializeDocumentResourceList(v.ResourcesToReplicateTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RunConfig != nil {
 		ok := object.Key("RunConfig")
 		if err := awsRestjson1_serializeDocumentCanaryRunConfigInput(v.RunConfig, ok); err != nil {
@@ -1961,6 +1968,17 @@ func awsRestjson1_serializeDocumentEnvironmentVariablesMap(v map[string]string, 
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceList(v []types.ResourceToTag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

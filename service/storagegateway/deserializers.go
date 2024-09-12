@@ -12143,6 +12143,15 @@ func awsAwsjson11_deserializeDocumentNFSFileShareInfo(v **types.NFSFileShareInfo
 				sv.DefaultStorageClass = ptr.String(jtv)
 			}
 
+		case "EncryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = types.EncryptionType(jtv)
+			}
+
 		case "FileShareARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12601,6 +12610,15 @@ func awsAwsjson11_deserializeDocumentSMBFileShareInfo(v **types.SMBFileShareInfo
 					return fmt.Errorf("expected StorageClass to be of type string, got %T instead", value)
 				}
 				sv.DefaultStorageClass = ptr.String(jtv)
+			}
+
+		case "EncryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = types.EncryptionType(jtv)
 			}
 
 		case "FileShareARN":

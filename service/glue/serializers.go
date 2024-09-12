@@ -16529,6 +16529,45 @@ func awsAwsjson11_serializeDocumentIcebergInput(v *types.IcebergInput, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIcebergOrphanFileDeletionConfiguration(v *types.IcebergOrphanFileDeletionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		ok.String(*v.Location)
+	}
+
+	if v.OrphanFileRetentionPeriodInDays != nil {
+		ok := object.Key("orphanFileRetentionPeriodInDays")
+		ok.Integer(*v.OrphanFileRetentionPeriodInDays)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIcebergRetentionConfiguration(v *types.IcebergRetentionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CleanExpiredFiles != nil {
+		ok := object.Key("cleanExpiredFiles")
+		ok.Boolean(*v.CleanExpiredFiles)
+	}
+
+	if v.NumberOfSnapshotsToRetain != nil {
+		ok := object.Key("numberOfSnapshotsToRetain")
+		ok.Integer(*v.NumberOfSnapshotsToRetain)
+	}
+
+	if v.SnapshotRetentionPeriodInDays != nil {
+		ok := object.Key("snapshotRetentionPeriodInDays")
+		ok.Integer(*v.SnapshotRetentionPeriodInDays)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIcebergTarget(v *types.IcebergTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18081,6 +18120,20 @@ func awsAwsjson11_serializeDocumentOrderList(v []types.Order, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOrphanFileDeletionConfiguration(v *types.OrphanFileDeletionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IcebergConfiguration != nil {
+		ok := object.Key("icebergConfiguration")
+		if err := awsAwsjson11_serializeDocumentIcebergOrphanFileDeletionConfiguration(v.IcebergConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentParameterMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18818,6 +18871,20 @@ func awsAwsjson11_serializeDocumentResourceUriList(v []types.ResourceUri, value 
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRetentionConfiguration(v *types.RetentionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IcebergConfiguration != nil {
+		ok := object.Key("icebergConfiguration")
+		if err := awsAwsjson11_serializeDocumentIcebergRetentionConfiguration(v.IcebergConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -20796,6 +20863,20 @@ func awsAwsjson11_serializeDocumentTableOptimizerConfiguration(v *types.TableOpt
 	if v.Enabled != nil {
 		ok := object.Key("enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	if v.OrphanFileDeletionConfiguration != nil {
+		ok := object.Key("orphanFileDeletionConfiguration")
+		if err := awsAwsjson11_serializeDocumentOrphanFileDeletionConfiguration(v.OrphanFileDeletionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetentionConfiguration != nil {
+		ok := object.Key("retentionConfiguration")
+		if err := awsAwsjson11_serializeDocumentRetentionConfiguration(v.RetentionConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RoleArn != nil {

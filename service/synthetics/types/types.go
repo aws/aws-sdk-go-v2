@@ -135,6 +135,18 @@ type Canary struct {
 // running the script. If the script is stored in an S3 bucket, the bucket name,
 // key, and version are also included. If the script was passed into the canary
 // directly, the script code is contained in the value of Zipfile .
+//
+// If you are uploading your canary scripts with an Amazon S3 bucket, your zip
+// file should include your script in a certain folder structure.
+//
+//   - For Node.js canaries, the folder structure must be
+//     nodejs/node_modules/myCanaryFilename.js For more information, see [Packaging your Node.js canary files]
+//
+//   - For Python canaries, the folder structure must be python/myCanaryFilename.p
+//     or python/myFolder/myCanaryFilename.py For more information, see [Packaging your Python canary files]
+//
+// [Packaging your Node.js canary files]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Nodejs.html#CloudWatch_Synthetics_Canaries_package
+// [Packaging your Python canary files]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_WritingCanary_Python.html#CloudWatch_Synthetics_Canaries_WritingCanary_Python_package
 type CanaryCodeInput struct {
 
 	// The entry point to use for the source code when running the canary. For

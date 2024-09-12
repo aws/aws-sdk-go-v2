@@ -3604,6 +3604,13 @@ func awsAwsjson11_serializeDocumentInstanceFleetModifyConfig(v *types.InstanceFl
 		ok.String(*v.InstanceFleetId)
 	}
 
+	if v.InstanceTypeConfigs != nil {
+		ok := object.Key("InstanceTypeConfigs")
+		if err := awsAwsjson11_serializeDocumentInstanceTypeConfigList(v.InstanceTypeConfigs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResizeSpecifications != nil {
 		ok := object.Key("ResizeSpecifications")
 		if err := awsAwsjson11_serializeDocumentInstanceFleetResizingSpecifications(v.ResizeSpecifications, ok); err != nil {
@@ -4237,6 +4244,18 @@ func awsAwsjson11_serializeDocumentOnDemandResizingSpecification(v *types.OnDema
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AllocationStrategy) > 0 {
+		ok := object.Key("AllocationStrategy")
+		ok.String(string(v.AllocationStrategy))
+	}
+
+	if v.CapacityReservationOptions != nil {
+		ok := object.Key("CapacityReservationOptions")
+		if err := awsAwsjson11_serializeDocumentOnDemandCapacityReservationOptions(v.CapacityReservationOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TimeoutDurationMinutes != nil {
 		ok := object.Key("TimeoutDurationMinutes")
 		ok.Integer(*v.TimeoutDurationMinutes)
@@ -4553,6 +4572,11 @@ func awsAwsjson11_serializeDocumentSpotProvisioningSpecification(v *types.SpotPr
 func awsAwsjson11_serializeDocumentSpotResizingSpecification(v *types.SpotResizingSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AllocationStrategy) > 0 {
+		ok := object.Key("AllocationStrategy")
+		ok.String(string(v.AllocationStrategy))
+	}
 
 	if v.TimeoutDurationMinutes != nil {
 		ok := object.Key("TimeoutDurationMinutes")

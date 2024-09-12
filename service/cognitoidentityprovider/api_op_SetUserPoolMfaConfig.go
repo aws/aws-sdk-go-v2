@@ -22,7 +22,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Services service, Amazon Simple Notification Service might place your
+// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -53,6 +53,13 @@ type SetUserPoolMfaConfigInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// Configures user pool email messages for MFA. Sets the subject and body of the
+	// email message template for MFA messages. To activate this setting, [advanced security features]must be
+	// active in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	EmailMfaConfiguration *types.EmailMfaConfigType
+
 	// The MFA configuration. If you set the MfaConfiguration value to ‘ON’, only
 	// users who have set up an MFA factor can sign in. To learn more, see [Adding Multi-Factor Authentication (MFA) to a user pool]. Valid
 	// values include:
@@ -67,16 +74,25 @@ type SetUserPoolMfaConfigInput struct {
 	// [Adding Multi-Factor Authentication (MFA) to a user pool]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html
 	MfaConfiguration types.UserPoolMfaType
 
-	// The SMS text message MFA configuration.
+	// Configures user pool SMS messages for MFA. Sets the message template and the
+	// SMS message sending configuration for Amazon SNS.
 	SmsMfaConfiguration *types.SmsMfaConfigType
 
-	// The software token MFA configuration.
+	// Configures a user pool for time-based one-time password (TOTP) MFA. Enables or
+	// disables TOTP.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	noSmithyDocumentSerde
 }
 
 type SetUserPoolMfaConfigOutput struct {
+
+	// Shows user pool email message configuration for MFA. Includes the subject and
+	// body of the email message template for MFA messages. To activate this setting, [advanced security features]
+	// must be active in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	EmailMfaConfiguration *types.EmailMfaConfigType
 
 	// The MFA configuration. Valid values include:
 	//
@@ -88,10 +104,12 @@ type SetUserPoolMfaConfigOutput struct {
 	//   factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
-	// The SMS text message MFA configuration.
+	// Shows user pool SMS message configuration for MFA. Includes the message
+	// template and the SMS message sending configuration for Amazon SNS.
 	SmsMfaConfiguration *types.SmsMfaConfigType
 
-	// The software token MFA configuration.
+	// Shows user pool configuration for time-based one-time password (TOTP) MFA.
+	// Includes TOTP enabled or disabled state.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// Metadata pertaining to the operation's result.

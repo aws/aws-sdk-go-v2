@@ -44,7 +44,7 @@ type DescribeCanariesInput struct {
 
 	// Specify this parameter to limit how many canaries are returned each time you
 	// use the DescribeCanaries operation. If you omit this parameter, the default of
-	// 100 is used.
+	// 20 is used.
 	MaxResults *int32
 
 	// Use this parameter to return only canaries that match the names that you
@@ -172,7 +172,7 @@ func (c *Client) addOperationDescribeCanariesMiddlewares(stack *middleware.Stack
 type DescribeCanariesPaginatorOptions struct {
 	// Specify this parameter to limit how many canaries are returned each time you
 	// use the DescribeCanaries operation. If you omit this parameter, the default of
-	// 100 is used.
+	// 20 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

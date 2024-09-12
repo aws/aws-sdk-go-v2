@@ -148,9 +148,10 @@ type CachediSCSIVolume struct {
 	// have this timestamp.
 	CreatedDate *time.Time
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
-	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
+	// Optional. The Amazon Resource Name (ARN) of a symmetric customer master key
+	// (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not
+	// support asymmetric CMKs. This value must be set if KMSEncrypted is true , or if
+	// EncryptionType is SseKms or DsseKms .
 	KMSKey *string
 
 	// If the cached volume was created from a snapshot, this field contains the
@@ -531,6 +532,18 @@ type NFSFileShareInfo struct {
 	// S3_ONEZONE_IA
 	DefaultStorageClass *string
 
+	// A value that specifies the type of server-side encryption that the file share
+	// will use for the data that it stores in Amazon S3.
+	//
+	// We recommend using EncryptionType instead of KMSEncrypted to set the file share
+	// encryption method. You do not need to provide values for both parameters.
+	//
+	// If values for both parameters exist in the same request, then the specified
+	// encryption methods must not conflict. For example, if EncryptionType is SseS3 ,
+	// then KMSEncrypted must be false . If EncryptionType is SseKms or DsseKms , then
+	// KMSEncrypted must be true .
+	EncryptionType EncryptionType
+
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string
 
@@ -559,15 +572,27 @@ type NFSFileShareInfo struct {
 	// Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
-	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
+	// Optional. Set to true to use Amazon S3 server-side encryption with your own KMS
+	// key (SSE-KMS), or false to use a key managed by Amazon S3 (SSE-S3). To use
+	// dual-layer encryption (DSSE-KMS), set the EncryptionType parameter instead.
+	//
+	// We recommend using EncryptionType instead of KMSEncrypted to set the file share
+	// encryption method. You do not need to provide values for both parameters.
+	//
+	// If values for both parameters exist in the same request, then the specified
+	// encryption methods must not conflict. For example, if EncryptionType is SseS3 ,
+	// then KMSEncrypted must be false . If EncryptionType is SseKms or DsseKms , then
+	// KMSEncrypted must be true .
 	//
 	// Valid Values: true | false
+	//
+	// Deprecated: KMSEncrypted is deprecated, use EncryptionType instead.
 	KMSEncrypted bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
-	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
+	// Optional. The Amazon Resource Name (ARN) of a symmetric customer master key
+	// (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not
+	// support asymmetric CMKs. This value must be set if KMSEncrypted is true , or if
+	// EncryptionType is SseKms or DsseKms .
 	KMSKey *string
 
 	// A custom ARN for the backend storage used for storing data for file shares. It
@@ -612,6 +637,10 @@ type NFSFileShareInfo struct {
 	//
 	// SettlingTimeInSeconds has no effect on the timing of the object uploading to
 	// Amazon S3, only the timing of the notification.
+	//
+	// This setting is not meant to specify an exact time at which the notification
+	// will be sent. In some cases, the gateway might require more than the specified
+	// delay time to generate and send notifications.
 	//
 	// The following example sets NotificationPolicy on with SettlingTimeInSeconds set
 	// to 60.
@@ -757,6 +786,18 @@ type SMBFileShareInfo struct {
 	// S3_ONEZONE_IA
 	DefaultStorageClass *string
 
+	// A value that specifies the type of server-side encryption that the file share
+	// will use for the data that it stores in Amazon S3.
+	//
+	// We recommend using EncryptionType instead of KMSEncrypted to set the file share
+	// encryption method. You do not need to provide values for both parameters.
+	//
+	// If values for both parameters exist in the same request, then the specified
+	// encryption methods must not conflict. For example, if EncryptionType is SseS3 ,
+	// then KMSEncrypted must be false . If EncryptionType is SseKms or DsseKms , then
+	// KMSEncrypted must be true .
+	EncryptionType EncryptionType
+
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string
 
@@ -791,15 +832,27 @@ type SMBFileShareInfo struct {
 	// be set if Authentication is set to ActiveDirectory .
 	InvalidUserList []string
 
-	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
+	// Optional. Set to true to use Amazon S3 server-side encryption with your own KMS
+	// key (SSE-KMS), or false to use a key managed by Amazon S3 (SSE-S3). To use
+	// dual-layer encryption (DSSE-KMS), set the EncryptionType parameter instead.
+	//
+	// We recommend using EncryptionType instead of KMSEncrypted to set the file share
+	// encryption method. You do not need to provide values for both parameters.
+	//
+	// If values for both parameters exist in the same request, then the specified
+	// encryption methods must not conflict. For example, if EncryptionType is SseS3 ,
+	// then KMSEncrypted must be false . If EncryptionType is SseKms or DsseKms , then
+	// KMSEncrypted must be true .
 	//
 	// Valid Values: true | false
+	//
+	// Deprecated: KMSEncrypted is deprecated, use EncryptionType instead.
 	KMSEncrypted bool
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
-	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
+	// Optional. The Amazon Resource Name (ARN) of a symmetric customer master key
+	// (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not
+	// support asymmetric CMKs. This value must be set if KMSEncrypted is true , or if
+	// EncryptionType is SseKms or DsseKms .
 	KMSKey *string
 
 	// A custom ARN for the backend storage used for storing data for file shares. It
@@ -837,6 +890,10 @@ type SMBFileShareInfo struct {
 	//
 	// SettlingTimeInSeconds has no effect on the timing of the object uploading to
 	// Amazon S3, only the timing of the notification.
+	//
+	// This setting is not meant to specify an exact time at which the notification
+	// will be sent. In some cases, the gateway might require more than the specified
+	// delay time to generate and send notifications.
 	//
 	// The following example sets NotificationPolicy on with SettlingTimeInSeconds set
 	// to 60.
@@ -890,9 +947,9 @@ type SMBFileShareInfo struct {
 	// enabled on the SMB file share. If it is set to false , it indicates that file
 	// and directory permissions are mapped to the POSIX permission.
 	//
-	// For more information, see [Using Microsoft Windows ACLs to control access to an SMB file share] in the Storage Gateway User Guide.
+	// For more information, see [Using Windows ACLs to limit SMB file share access] in the Amazon S3 File Gateway User Guide.
 	//
-	// [Using Microsoft Windows ACLs to control access to an SMB file share]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
+	// [Using Windows ACLs to limit SMB file share access]: https://docs.aws.amazon.com/filegateway/latest/files3/smb-acl.html
 	SMBACLEnabled *bool
 
 	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically
@@ -939,7 +996,11 @@ type SoftwareUpdatePreferences struct {
 	//
 	// ALL_VERSIONS - Enables regular gateway maintenance updates.
 	//
-	// EMERGENCY_VERSIONS_ONLY - Disables regular gateway maintenance updates.
+	// EMERGENCY_VERSIONS_ONLY - Disables regular gateway maintenance updates. The
+	// gateway will still receive emergency version updates on rare occasions if
+	// necessary to remedy highly critical security or durability issues. You will be
+	// notified before an emergency version update is applied. These updates are
+	// applied during your gateway's scheduled maintenance window.
 	AutomaticUpdatePolicy AutomaticUpdatePolicy
 
 	noSmithyDocumentSerde
@@ -966,9 +1027,10 @@ type StorediSCSIVolume struct {
 	// have this timestamp.
 	CreatedDate *time.Time
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
-	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
+	// Optional. The Amazon Resource Name (ARN) of a symmetric customer master key
+	// (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not
+	// support asymmetric CMKs. This value must be set if KMSEncrypted is true , or if
+	// EncryptionType is SseKms or DsseKms .
 	KMSKey *string
 
 	// Indicates if when the stored volume was created, existing data on the
@@ -1059,9 +1121,10 @@ type Tag struct {
 // Describes a virtual tape object.
 type Tape struct {
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
-	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
+	// Optional. The Amazon Resource Name (ARN) of a symmetric customer master key
+	// (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not
+	// support asymmetric CMKs. This value must be set if KMSEncrypted is true , or if
+	// EncryptionType is SseKms or DsseKms .
 	KMSKey *string
 
 	// The date that the tape enters a custom tape pool.
@@ -1121,9 +1184,10 @@ type TapeArchive struct {
 	// YYYY-MM-DD'T'HH:MM:SS'Z' format.
 	CompletionTime *time.Time
 
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
-	// for Amazon S3 server-side encryption. Storage Gateway does not support
-	// asymmetric CMKs. This value can only be set when KMSEncrypted is true . Optional.
+	// Optional. The Amazon Resource Name (ARN) of a symmetric customer master key
+	// (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not
+	// support asymmetric CMKs. This value must be set if KMSEncrypted is true , or if
+	// EncryptionType is SseKms or DsseKms .
 	KMSKey *string
 
 	// The time that the tape entered the custom tape pool.

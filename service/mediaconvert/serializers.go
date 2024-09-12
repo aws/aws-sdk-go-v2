@@ -246,6 +246,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		}
 	}
 
+	if v.JobEngineVersion != nil {
+		ok := object.Key("jobEngineVersion")
+		ok.String(*v.JobEngineVersion)
+	}
+
 	if v.JobTemplate != nil {
 		ok := object.Key("jobTemplate")
 		ok.String(*v.JobTemplate)
@@ -1705,6 +1710,70 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
+type awsRestjson1_serializeOpListVersions struct {
+}
+
+func (*awsRestjson1_serializeOpListVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2017-08-29/versions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListVersionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListVersionsInput(v *ListVersionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpPutPolicy struct {
 }
 
@@ -2801,6 +2870,19 @@ func awsRestjson1_serializeDocument__listOfVideoOverlayInputClipping(v []types.V
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentVideoOverlayInputClipping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfVideoOverlayTransition(v []types.VideoOverlayTransition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentVideoOverlayTransition(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5635,6 +5717,11 @@ func awsRestjson1_serializeDocumentFileSourceSettings(v *types.FileSourceSetting
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ByteRateLimit) > 0 {
+		ok := object.Key("byteRateLimit")
+		ok.String(string(v.ByteRateLimit))
+	}
+
 	if len(v.Convert608To708) > 0 {
 		ok := object.Key("convert608To708")
 		ok.String(string(v.Convert608To708))
@@ -5955,6 +6042,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 	if len(v.RepeatPps) > 0 {
 		ok := object.Key("repeatPps")
 		ok.String(string(v.RepeatPps))
+	}
+
+	if len(v.SaliencyAwareEncoding) > 0 {
+		ok := object.Key("saliencyAwareEncoding")
+		ok.String(string(v.SaliencyAwareEncoding))
 	}
 
 	if len(v.ScanTypeConversionMode) > 0 {
@@ -9779,6 +9871,13 @@ func awsRestjson1_serializeDocumentVideoOverlay(v *types.VideoOverlay, value smi
 		ok.String(*v.EndTimecode)
 	}
 
+	if v.InitialPosition != nil {
+		ok := object.Key("initialPosition")
+		if err := awsRestjson1_serializeDocumentVideoOverlayPosition(v.InitialPosition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Input != nil {
 		ok := object.Key("input")
 		if err := awsRestjson1_serializeDocumentVideoOverlayInput(v.Input, ok); err != nil {
@@ -9786,9 +9885,21 @@ func awsRestjson1_serializeDocumentVideoOverlay(v *types.VideoOverlay, value smi
 		}
 	}
 
+	if len(v.Playback) > 0 {
+		ok := object.Key("playback")
+		ok.String(string(v.Playback))
+	}
+
 	if v.StartTimecode != nil {
 		ok := object.Key("startTimecode")
 		ok.String(*v.StartTimecode)
+	}
+
+	if v.Transitions != nil {
+		ok := object.Key("transitions")
+		if err := awsRestjson1_serializeDocument__listOfVideoOverlayTransition(v.Transitions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -9826,6 +9937,62 @@ func awsRestjson1_serializeDocumentVideoOverlayInput(v *types.VideoOverlayInput,
 func awsRestjson1_serializeDocumentVideoOverlayInputClipping(v *types.VideoOverlayInputClipping, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EndTimecode != nil {
+		ok := object.Key("endTimecode")
+		ok.String(*v.EndTimecode)
+	}
+
+	if v.StartTimecode != nil {
+		ok := object.Key("startTimecode")
+		ok.String(*v.StartTimecode)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverlayPosition(v *types.VideoOverlayPosition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Height != nil {
+		ok := object.Key("height")
+		ok.Integer(*v.Height)
+	}
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("unit")
+		ok.String(string(v.Unit))
+	}
+
+	if v.Width != nil {
+		ok := object.Key("width")
+		ok.Integer(*v.Width)
+	}
+
+	if v.XPosition != nil {
+		ok := object.Key("xPosition")
+		ok.Integer(*v.XPosition)
+	}
+
+	if v.YPosition != nil {
+		ok := object.Key("yPosition")
+		ok.Integer(*v.YPosition)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoOverlayTransition(v *types.VideoOverlayTransition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndPosition != nil {
+		ok := object.Key("endPosition")
+		if err := awsRestjson1_serializeDocumentVideoOverlayPosition(v.EndPosition, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndTimecode != nil {
 		ok := object.Key("endTimecode")

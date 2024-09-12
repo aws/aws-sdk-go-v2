@@ -55,10 +55,20 @@ type SetUserMFAPreferenceInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The SMS text message multi-factor authentication (MFA) settings.
+	// User preferences for email message MFA. Activates or deactivates email MFA and
+	// sets it as the preferred MFA method when multiple methods are available. To
+	// activate this setting, [advanced security features]must be active in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	EmailMfaSettings *types.EmailMfaSettingsType
+
+	// User preferences for SMS message MFA. Activates or deactivates SMS MFA and sets
+	// it as the preferred MFA method when multiple methods are available.
 	SMSMfaSettings *types.SMSMfaSettingsType
 
-	// The time-based one-time password (TOTP) software token MFA settings.
+	// User preferences for time-based one-time password (TOTP) MFA. Activates or
+	// deactivates TOTP MFA and sets it as the preferred MFA method when multiple
+	// methods are available.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
 
 	noSmithyDocumentSerde

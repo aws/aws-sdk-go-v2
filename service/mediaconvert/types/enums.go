@@ -654,6 +654,7 @@ const (
 	AudioDurationCorrectionAuto     AudioDurationCorrection = "AUTO"
 	AudioDurationCorrectionTrack    AudioDurationCorrection = "TRACK"
 	AudioDurationCorrectionFrame    AudioDurationCorrection = "FRAME"
+	AudioDurationCorrectionForce    AudioDurationCorrection = "FORCE"
 )
 
 // Values returns all known values for AudioDurationCorrection. Note that this can
@@ -666,6 +667,7 @@ func (AudioDurationCorrection) Values() []AudioDurationCorrection {
 		"AUTO",
 		"TRACK",
 		"FRAME",
+		"FORCE",
 	}
 }
 
@@ -1450,6 +1452,25 @@ func (CaptionDestinationType) Values() []CaptionDestinationType {
 	}
 }
 
+type CaptionSourceByteRateLimit string
+
+// Enum values for CaptionSourceByteRateLimit
+const (
+	CaptionSourceByteRateLimitEnabled  CaptionSourceByteRateLimit = "ENABLED"
+	CaptionSourceByteRateLimitDisabled CaptionSourceByteRateLimit = "DISABLED"
+)
+
+// Values returns all known values for CaptionSourceByteRateLimit. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CaptionSourceByteRateLimit) Values() []CaptionSourceByteRateLimit {
+	return []CaptionSourceByteRateLimit{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type CaptionSourceConvertPaintOnToPopOn string
 
 // Enum values for CaptionSourceConvertPaintOnToPopOn
@@ -2228,6 +2249,7 @@ const (
 	ContainerTypeMp4  ContainerType = "MP4"
 	ContainerTypeMpd  ContainerType = "MPD"
 	ContainerTypeMxf  ContainerType = "MXF"
+	ContainerTypeOgg  ContainerType = "OGG"
 	ContainerTypeWebm ContainerType = "WEBM"
 	ContainerTypeRaw  ContainerType = "RAW"
 	ContainerTypeY4m  ContainerType = "Y4M"
@@ -2248,6 +2270,7 @@ func (ContainerType) Values() []ContainerType {
 		"MP4",
 		"MPD",
 		"MXF",
+		"OGG",
 		"WEBM",
 		"RAW",
 		"Y4M",
@@ -4011,6 +4034,25 @@ func (H264RepeatPps) Values() []H264RepeatPps {
 	return []H264RepeatPps{
 		"DISABLED",
 		"ENABLED",
+	}
+}
+
+type H264SaliencyAwareEncoding string
+
+// Enum values for H264SaliencyAwareEncoding
+const (
+	H264SaliencyAwareEncodingDisabled  H264SaliencyAwareEncoding = "DISABLED"
+	H264SaliencyAwareEncodingPreferred H264SaliencyAwareEncoding = "PREFERRED"
+)
+
+// Values returns all known values for H264SaliencyAwareEncoding. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264SaliencyAwareEncoding) Values() []H264SaliencyAwareEncoding {
+	return []H264SaliencyAwareEncoding{
+		"DISABLED",
+		"PREFERRED",
 	}
 }
 
@@ -8580,6 +8622,44 @@ func (VideoCodec) Values() []VideoCodec {
 		"VP8",
 		"VP9",
 		"XAVC",
+	}
+}
+
+type VideoOverlayPlayBackMode string
+
+// Enum values for VideoOverlayPlayBackMode
+const (
+	VideoOverlayPlayBackModeOnce   VideoOverlayPlayBackMode = "ONCE"
+	VideoOverlayPlayBackModeRepeat VideoOverlayPlayBackMode = "REPEAT"
+)
+
+// Values returns all known values for VideoOverlayPlayBackMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoOverlayPlayBackMode) Values() []VideoOverlayPlayBackMode {
+	return []VideoOverlayPlayBackMode{
+		"ONCE",
+		"REPEAT",
+	}
+}
+
+type VideoOverlayUnit string
+
+// Enum values for VideoOverlayUnit
+const (
+	VideoOverlayUnitPixels     VideoOverlayUnit = "PIXELS"
+	VideoOverlayUnitPercentage VideoOverlayUnit = "PERCENTAGE"
+)
+
+// Values returns all known values for VideoOverlayUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VideoOverlayUnit) Values() []VideoOverlayUnit {
+	return []VideoOverlayUnit{
+		"PIXELS",
+		"PERCENTAGE",
 	}
 }
 

@@ -5697,6 +5697,11 @@ func awsAwsjson11_serializeOpDocumentCreateNFSFileShareInput(v *CreateNFSFileSha
 		ok.String(*v.DefaultStorageClass)
 	}
 
+	if len(v.EncryptionType) > 0 {
+		ok := object.Key("EncryptionType")
+		ok.String(string(v.EncryptionType))
+	}
+
 	if v.FileShareName != nil {
 		ok := object.Key("FileShareName")
 		ok.String(*v.FileShareName)
@@ -5830,6 +5835,11 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 	if v.DefaultStorageClass != nil {
 		ok := object.Key("DefaultStorageClass")
 		ok.String(*v.DefaultStorageClass)
+	}
+
+	if len(v.EncryptionType) > 0 {
+		ok := object.Key("EncryptionType")
+		ok.String(string(v.EncryptionType))
 	}
 
 	if v.FileShareName != nil {
@@ -7320,6 +7330,11 @@ func awsAwsjson11_serializeOpDocumentUpdateNFSFileShareInput(v *UpdateNFSFileSha
 		ok.String(*v.DefaultStorageClass)
 	}
 
+	if len(v.EncryptionType) > 0 {
+		ok := object.Key("EncryptionType")
+		ok.String(string(v.EncryptionType))
+	}
+
 	if v.FileShareARN != nil {
 		ok := object.Key("FileShareARN")
 		ok.String(*v.FileShareARN)
@@ -7416,6 +7431,11 @@ func awsAwsjson11_serializeOpDocumentUpdateSMBFileShareInput(v *UpdateSMBFileSha
 	if v.DefaultStorageClass != nil {
 		ok := object.Key("DefaultStorageClass")
 		ok.String(*v.DefaultStorageClass)
+	}
+
+	if len(v.EncryptionType) > 0 {
+		ok := object.Key("EncryptionType")
+		ok.String(string(v.EncryptionType))
 	}
 
 	if v.FileShareARN != nil {

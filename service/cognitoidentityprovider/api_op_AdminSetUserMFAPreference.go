@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The user's multi-factor authentication (MFA) preference, including which MFA
-// options are activated, and if any are preferred. Only one factor can be set as
-// preferred. The preferred MFA factor will be used to authenticate a user if
+// Sets the user's multi-factor authentication (MFA) preference, including which
+// MFA options are activated, and if any are preferred. Only one factor can be set
+// as preferred. The preferred MFA factor will be used to authenticate a user if
 // multiple factors are activated. If multiple options are activated and no
 // preference is set, a challenge to choose an MFA option will be returned during
 // sign-in.
@@ -48,7 +48,7 @@ func (c *Client) AdminSetUserMFAPreference(ctx context.Context, params *AdminSet
 
 type AdminSetUserMFAPreferenceInput struct {
 
-	// The user pool ID.
+	// The ID of the user pool where you want to set a user's MFA preferences.
 	//
 	// This member is required.
 	UserPoolId *string
@@ -62,10 +62,20 @@ type AdminSetUserMFAPreferenceInput struct {
 	// This member is required.
 	Username *string
 
-	// The SMS text message MFA settings.
+	// User preferences for email message MFA. Activates or deactivates email MFA and
+	// sets it as the preferred MFA method when multiple methods are available. To
+	// activate this setting, [advanced security features]must be active in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	EmailMfaSettings *types.EmailMfaSettingsType
+
+	// User preferences for SMS message MFA. Activates or deactivates SMS MFA and sets
+	// it as the preferred MFA method when multiple methods are available.
 	SMSMfaSettings *types.SMSMfaSettingsType
 
-	// The time-based one-time password software token MFA settings.
+	// User preferences for time-based one-time password (TOTP) MFA. Activates or
+	// deactivates TOTP MFA and sets it as the preferred MFA method when multiple
+	// methods are available.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
 
 	noSmithyDocumentSerde

@@ -69,6 +69,13 @@ type CreateJobInput struct {
 	// information about this feature, see the AWS Elemental MediaConvert User Guide.
 	HopDestinations []types.HopDestination
 
+	// Use Job engine versions to run jobs for your production workflow on one
+	// version, while you test and validate the latest version. To specify a Job engine
+	// version: Enter a date in a YYYY-MM-DD format. For a list of valid Job engine
+	// versions, submit a ListVersions request. To not specify a Job engine version:
+	// Leave blank.
+	JobEngineVersion *string
+
 	// Optional. When you create a job, you can either specify a job template or
 	// specify the transcoding settings individually.
 	JobTemplate *string

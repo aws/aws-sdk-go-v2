@@ -1,0 +1,8 @@
+{
+    "id": "87ae5fab-879e-4708-964d-7cbc5a9b1860",
+    "type": "feature",
+    "description": "Update APIs to allow modification of ODCR options, allocation strategy, and InstanceTypeConfigs on running InstanceFleet clusters.",
+    "modules": [
+        "service/emr"
+    ]
+}

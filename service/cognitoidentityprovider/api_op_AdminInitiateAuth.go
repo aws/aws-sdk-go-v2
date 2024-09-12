@@ -22,7 +22,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Services service, Amazon Simple Notification Service might place your
+// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -213,10 +213,14 @@ type AdminInitiateAuthOutput struct {
 	//   at least one MFA type to continue to authenticate.
 	//
 	//   - SELECT_MFA_TYPE : Selects the MFA type. Valid MFA options are SMS_MFA for
-	//   text SMS MFA, and SOFTWARE_TOKEN_MFA for time-based one-time password (TOTP)
-	//   software token MFA.
+	//   SMS message MFA, EMAIL_OTP for email message MFA, and SOFTWARE_TOKEN_MFA for
+	//   time-based one-time password (TOTP) software token MFA.
 	//
-	//   - SMS_MFA : Next challenge is to supply an SMS_MFA_CODE , delivered via SMS.
+	//   - SMS_MFA : Next challenge is to supply an SMS_MFA_CODE that your user pool
+	//   delivered in an SMS message.
+	//
+	//   - EMAIL_OTP : Next challenge is to supply an EMAIL_OTP_CODE that your user
+	//   pool delivered in an email message.
 	//
 	//   - PASSWORD_VERIFIER : Next challenge is to supply PASSWORD_CLAIM_SIGNATURE ,
 	//   PASSWORD_CLAIM_SECRET_BLOCK , and TIMESTAMP after the client-side SRP

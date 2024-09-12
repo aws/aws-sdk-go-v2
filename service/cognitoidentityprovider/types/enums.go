@@ -164,6 +164,7 @@ type ChallengeNameType string
 // Enum values for ChallengeNameType
 const (
 	ChallengeNameTypeSmsMfa                 ChallengeNameType = "SMS_MFA"
+	ChallengeNameTypeEmailOtp               ChallengeNameType = "EMAIL_OTP"
 	ChallengeNameTypeSoftwareTokenMfa       ChallengeNameType = "SOFTWARE_TOKEN_MFA"
 	ChallengeNameTypeSelectMfaType          ChallengeNameType = "SELECT_MFA_TYPE"
 	ChallengeNameTypeMfaSetup               ChallengeNameType = "MFA_SETUP"
@@ -182,6 +183,7 @@ const (
 func (ChallengeNameType) Values() []ChallengeNameType {
 	return []ChallengeNameType{
 		"SMS_MFA",
+		"EMAIL_OTP",
 		"SOFTWARE_TOKEN_MFA",
 		"SELECT_MFA_TYPE",
 		"MFA_SETUP",

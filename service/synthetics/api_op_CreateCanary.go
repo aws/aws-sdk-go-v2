@@ -118,6 +118,14 @@ type CreateCanaryInput struct {
 	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
 	FailureRetentionPeriodInDays *int32
 
+	// To have the tags that you apply to this canary also be applied to the Lambda
+	// function that the canary uses, specify this parameter with the value
+	// lambda-function .
+	//
+	// If you specify this parameter and don't specify any tags in the Tags parameter,
+	// the canary creation fails.
+	ResourcesToReplicateTags []types.ResourceToTag
+
 	// A structure that contains the configuration for individual canary runs, such as
 	// timeout value and environment variables.
 	//
@@ -136,6 +144,10 @@ type CreateCanaryInput struct {
 	// Tags can help you organize and categorize your resources. You can also use them
 	// to scope user permissions, by granting a user permission to access or change
 	// only the resources that have certain tag values.
+	//
+	// To have the tags that you apply to this canary also be applied to the Lambda
+	// function that the canary uses, specify this parameter with the value
+	// lambda-function .
 	Tags map[string]string
 
 	// If this canary is to test an endpoint in a VPC, this structure contains

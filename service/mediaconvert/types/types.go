@@ -34,7 +34,12 @@ type AacSettings struct {
 	// on Bitrate control mode and Profile.
 	Bitrate *int32
 
-	// AAC Profile.
+	// Specify the AAC profile. For the widest player compatibility and where higher
+	// bitrates are acceptable: Keep the default profile, LC (AAC-LC) For improved
+	// audio performance at lower bitrates: Choose HEV1 or HEV2. HEV1 (AAC-HE v1) adds
+	// spectral band replication to improve speech audio at low bitrates. HEV2 (AAC-HE
+	// v2) adds parametric stereo, which optimizes for encoding stereo audio at very
+	// low bitrates.
 	CodecProfile AacCodecProfile
 
 	// The Coding mode that you specify determines the number of audio channels and
@@ -47,28 +52,29 @@ type AacSettings struct {
 	// channels, C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
-	// Rate Control Mode.
+	// Specify the AAC rate control mode. For a constant bitrate: Choose CBR. Your AAC
+	// output bitrate will be equal to the value that you choose for Bitrate. For a
+	// variable bitrate: Choose VBR. Your AAC output bitrate will vary according to
+	// your audio content and the value that you choose for Bitrate quality.
 	RateControlMode AacRateControlMode
 
 	// Enables LATM/LOAS AAC output. Note that if you use LATM/LOAS AAC in an output,
 	// you must choose "No container" for the output container.
 	RawFormat AacRawFormat
 
-	// Specify the Sample rate in Hz. Valid sample rates depend on the Profile and
-	// Coding mode that you select. The following list shows valid sample rates for
-	// each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver
-	// Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC
-	// Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding
-	// mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile,
-	// Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode
-	// 2.0: 22050, 24000, 32000, 44100, 48000.
+	// Specify the AAC sample rate in samples per second (Hz). Valid sample rates
+	// depend on the AAC profile and Coding mode that you select. For a list of
+	// supported sample rates, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html
 	SampleRate *int32
 
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
 	// containers.
 	Specification AacSpecification
 
-	// VBR Quality Level - Only used if rate_control_mode is VBR.
+	// Specify the quality of your variable bitrate (VBR) AAC audio. For a list of
+	// approximate VBR bitrates, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/aac-support.html#aac_vbr
 	VbrQuality AacVbrQuality
 
 	noSmithyDocumentSerde
@@ -468,7 +474,10 @@ type AudioSelector struct {
 	// frame by a variable amount to align audio frames with STTS timestamps. No
 	// corrections are made to already-aligned frames. Frame-level correction may
 	// affect the pitch of corrected frames, and is recommended for atonal audio
-	// content such as speech or percussion.
+	// content such as speech or percussion. * Force: Apply audio duration correction,
+	// either Track or Frame depending on your input, regardless of the accuracy of
+	// your input's STTS table. Your output audio and video may not be aligned or it
+	// may contain audio artifacts.
 	AudioDurationCorrection AudioDurationCorrection
 
 	// Selects a specific language code from within an audio source, using the ISO
@@ -3043,6 +3052,16 @@ type FileGroupSettings struct {
 // FileSoureSettings.
 type FileSourceSettings struct {
 
+	// Choose whether to limit the byte rate at which your SCC input captions are
+	// inserted into your output. To not limit the caption rate: We recommend that you
+	// keep the default value, Disabled. MediaConvert inserts captions in your output
+	// according to the byte rates listed in the EIA-608 specification, typically 2 or
+	// 3 caption bytes per frame depending on your output frame rate. To limit your
+	// output caption rate: Choose Enabled. Choose this option if your downstream
+	// systems require a maximum of 2 caption bytes per frame. Note that this setting
+	// has no effect when your output frame rate is 30 or 60.
+	ByteRateLimit CaptionSourceByteRateLimit
+
 	// Specify whether this set of input captions appears in your outputs in both 608
 	// and 708 format. If you choose Upconvert, MediaConvert includes the captions data
 	// in two ways: it passes the 608 data through using the 608 compatibility bytes
@@ -3374,20 +3393,23 @@ type H264Settings struct {
 	// 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate *int32
 
-	// Use this setting only when you also enable Scene change detection. This setting
-	// determines how the encoder manages the spacing between I-frames that it inserts
-	// as part of the I-frame cadence and the I-frames that it inserts for Scene change
-	// detection. We recommend that you have the transcoder automatically choose this
-	// value for you based on characteristics of your input video. To enable this
-	// automatic behavior, do this by keeping the default empty value. When you
-	// explicitly specify a value for this setting, the encoder determines whether to
-	// skip a cadence-driven I-frame by the value you set. For example, if you set Min
-	// I interval to 5 and a cadence-driven I-frame would fall within 5 frames of a
-	// scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this
-	// way, one GOP is shrunk slightly and one GOP is stretched slightly. When the
-	// cadence-driven I-frames are farther from the scene-change I-frame than the value
-	// you set, then the encoder leaves all I-frames in place and the GOPs surrounding
-	// the scene change are smaller than the usual cadence GOPs.
+	// Specify the minimum number of frames allowed between two IDR-frames in your
+	// output. This includes frames created at the start of a GOP or a scene change.
+	// Use Min I-Interval to improve video compression by varying GOP size when two
+	// IDR-frames would be created near each other. For example, if a regular
+	// cadence-driven IDR-frame would fall within 5 frames of a scene-change IDR-frame,
+	// and you set Min I-interval to 5, then the encoder would only write an IDR-frame
+	// for the scene-change. In this way, one GOP is shortened or extended. If a
+	// cadence-driven IDR-frame would be further than 5 frames from a scene-change
+	// IDR-frame, then the encoder leaves all IDR-frames in place. To use an
+	// automatically determined interval: We recommend that you keep this value blank.
+	// This allows for MediaConvert to use an optimal setting according to the
+	// characteristics of your input video, and results in better video compression. To
+	// manually specify an interval: Enter a value from 1 to 30. Use when your
+	// downstream systems have specific GOP size requirements. To disable GOP size
+	// variance: Enter 0. MediaConvert will only create IDR-frames at the start of your
+	// output's cadence-driven GOP. Use when your downstream systems require a regular
+	// GOP size.
 	MinIInterval *int32
 
 	// Specify the number of B-frames between reference frames in this output. For the
@@ -3441,6 +3463,16 @@ type H264Settings struct {
 
 	// Places a PPS header on each encoded picture, even if repeated.
 	RepeatPps H264RepeatPps
+
+	// Specify whether to apply Saliency aware encoding to your output. Use to improve
+	// the perceptual video quality of your output by allocating more encoding bits to
+	// the prominent or noticeable parts of your content. To apply saliency aware
+	// encoding, when possible: We recommend that you choose Preferred. The effects of
+	// Saliency aware encoding are best seen in lower bitrate outputs. When you choose
+	// Preferred, note that Saliency aware encoding will only apply to outputs that are
+	// 720p or higher in resolution. To not apply saliency aware encoding, prioritizing
+	// encoding speed over perceptual video quality: Choose Disabled.
+	SaliencyAwareEncoding H264SaliencyAwareEncoding
 
 	// Use this setting for interlaced outputs, when your output frame rate is half of
 	// your input frame rate. In this situation, choose Optimized interlacing to create
@@ -3755,20 +3787,23 @@ type H265Settings struct {
 	// 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate *int32
 
-	// Use this setting only when you also enable Scene change detection. This setting
-	// determines how the encoder manages the spacing between I-frames that it inserts
-	// as part of the I-frame cadence and the I-frames that it inserts for Scene change
-	// detection. We recommend that you have the transcoder automatically choose this
-	// value for you based on characteristics of your input video. To enable this
-	// automatic behavior, do this by keeping the default empty value. When you
-	// explicitly specify a value for this setting, the encoder determines whether to
-	// skip a cadence-driven I-frame by the value you set. For example, if you set Min
-	// I interval to 5 and a cadence-driven I-frame would fall within 5 frames of a
-	// scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this
-	// way, one GOP is shrunk slightly and one GOP is stretched slightly. When the
-	// cadence-driven I-frames are farther from the scene-change I-frame than the value
-	// you set, then the encoder leaves all I-frames in place and the GOPs surrounding
-	// the scene change are smaller than the usual cadence GOPs.
+	// Specify the minimum number of frames allowed between two IDR-frames in your
+	// output. This includes frames created at the start of a GOP or a scene change.
+	// Use Min I-Interval to improve video compression by varying GOP size when two
+	// IDR-frames would be created near each other. For example, if a regular
+	// cadence-driven IDR-frame would fall within 5 frames of a scene-change IDR-frame,
+	// and you set Min I-interval to 5, then the encoder would only write an IDR-frame
+	// for the scene-change. In this way, one GOP is shortened or extended. If a
+	// cadence-driven IDR-frame would be further than 5 frames from a scene-change
+	// IDR-frame, then the encoder leaves all IDR-frames in place. To use an
+	// automatically determined interval: We recommend that you keep this value blank.
+	// This allows for MediaConvert to use an optimal setting according to the
+	// characteristics of your input video, and results in better video compression. To
+	// manually specify an interval: Enter a value from 1 to 30. Use when your
+	// downstream systems have specific GOP size requirements. To disable GOP size
+	// variance: Enter 0. MediaConvert will only create IDR-frames at the start of your
+	// output's cadence-driven GOP. Use when your downstream systems require a regular
+	// GOP size.
 	MinIInterval *int32
 
 	// Specify the number of B-frames between reference frames in this output. For the
@@ -5026,6 +5061,19 @@ type Job struct {
 	// resources
 	Id *string
 
+	// The Job engine version that you requested for your job. Valid versions are in a
+	// YYYY-MM-DD format.
+	JobEngineVersionRequested *string
+
+	// The Job engine version that your job used. Job engine versions are in a
+	// YYYY-MM-DD format. When you request an expired version, the response for this
+	// property will be empty. Requests to create jobs with an expired version result
+	// in a regular job, as if no specific Job engine version was requested. When you
+	// request an invalid version, the response for this property will be empty.
+	// Requests to create jobs with an invalid version result in a 400 error message,
+	// and no job is created.
+	JobEngineVersionUsed *string
+
 	// An estimate of how far your job has progressed. This estimate is shown as a
 	// percentage of the total time from when your job leaves its queue to when your
 	// output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert
@@ -5090,6 +5138,24 @@ type Job struct {
 	// issues with your input, output, or job. For more information, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
 	Warnings []WarningGroup
+
+	noSmithyDocumentSerde
+}
+
+// Use Job engine versions to run jobs for your production workflow on one
+// version, while you test and validate the latest version. Job engine versions are
+// in a YYYY-MM-DD format.
+type JobEngineVersion struct {
+
+	// The date that this Job engine version expires. Requests to create jobs with an
+	// expired version result in a regular job, as if no specific Job engine version
+	// was requested.
+	ExpirationDate *time.Time
+
+	// Use Job engine versions to run jobs for your production workflow on one
+	// version, while you test and validate the latest version. Job engine versions are
+	// in a YYYY-MM-DD format.
+	Version *string
 
 	noSmithyDocumentSerde
 }
@@ -6244,18 +6310,19 @@ type Mpeg2Settings struct {
 	// 5000000.
 	MaxBitrate *int32
 
-	// Use this setting only when you also enable Scene change detection. This setting
-	// determines how the encoder manages the spacing between I-frames that it inserts
-	// as part of the I-frame cadence and the I-frames that it inserts for Scene change
-	// detection. When you specify a value for this setting, the encoder determines
-	// whether to skip a cadence-driven I-frame by the value you set. For example, if
-	// you set Min I interval to 5 and a cadence-driven I-frame would fall within 5
-	// frames of a scene-change I-frame, then the encoder skips the cadence-driven
-	// I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched
-	// slightly. When the cadence-driven I-frames are farther from the scene-change
-	// I-frame than the value you set, then the encoder leaves all I-frames in place
-	// and the GOPs surrounding the scene change are smaller than the usual cadence
-	// GOPs.
+	// Specify the minimum number of frames allowed between two IDR-frames in your
+	// output. This includes frames created at the start of a GOP or a scene change.
+	// Use Min I-Interval to improve video compression by varying GOP size when two
+	// IDR-frames would be created near each other. For example, if a regular
+	// cadence-driven IDR-frame would fall within 5 frames of a scene-change IDR-frame,
+	// and you set Min I-interval to 5, then the encoder would only write an IDR-frame
+	// for the scene-change. In this way, one GOP is shortened or extended. If a
+	// cadence-driven IDR-frame would be further than 5 frames from a scene-change
+	// IDR-frame, then the encoder leaves all IDR-frames in place. To manually specify
+	// an interval: Enter a value from 1 to 30. Use when your downstream systems have
+	// specific GOP size requirements. To disable GOP size variance: Enter 0.
+	// MediaConvert will only create IDR-frames at the start of your output's
+	// cadence-driven GOP. Use when your downstream systems require a regular GOP size.
 	MinIInterval *int32
 
 	// Specify the number of B-frames that MediaConvert puts between reference frames
@@ -8010,29 +8077,49 @@ type VideoDetail struct {
 // see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html
 type VideoOverlay struct {
 
-	// Enter the end timecode in the underlying input video for this overlay. Your
-	// overlay will be active through this frame. To display your video overlay for the
-	// duration of the underlying video: Leave blank. Use the format HH:MM:SS:FF or
-	// HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is
+	// Enter the end timecode in the base input video for this overlay. Your overlay
+	// will be active through this frame. To display your video overlay for the
+	// duration of the base input video: Leave blank. Use the format HH:MM:SS:FF or
+	// HH:MM:SS;FF, where HH is the hour, MM is the minute, SS isthe second, and FF is
 	// the frame number. When entering this value, take into account your choice for
-	// the underlying Input timecode source. For example, if you have embedded
+	// the base input video's timecode source. For example, if you have embedded
 	// timecodes that start at 01:00:00:00 and you want your overlay to end ten minutes
 	// into the video, enter 01:10:00:00.
 	EndTimecode *string
+
+	// Specify the Initial position of your video overlay. To specify the Initial
+	// position of your video overlay, including distance from the left or top edge of
+	// the base input video's frame, or size: Enter a value for X position, Y position,
+	// Width, or Height. To use the full frame of the base input video: Leave blank.
+	InitialPosition *VideoOverlayPosition
 
 	// Input settings for Video overlay. You can include one or more video overlays in
 	// sequence at different times that you specify.
 	Input *VideoOverlayInput
 
-	// Enter the start timecode in the underlying input video for this overlay. Your
-	// overlay will be active starting with this frame. To display your video overlay
-	// starting at the beginning of the underlying video: Leave blank. Use the format
+	// Specify whether your video overlay repeats or plays only once. To repeat your
+	// video overlay on a loop: Keep the default value, Repeat. Your overlay will
+	// repeat for the duration of the base input video. To playback your video overlay
+	// only once: Choose Once. With either option, you can end playback at a time that
+	// you specify by entering a value for End timecode.
+	Playback VideoOverlayPlayBackMode
+
+	// Enter the start timecode in the base input video for this overlay. Your overlay
+	// will be active starting with this frame. To display your video overlay starting
+	// at the beginning of the base input video: Leave blank. Use the format
 	// HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the
 	// second, and FF is the frame number. When entering this value, take into account
-	// your choice for the underlying Input timecode source. For example, if you have
+	// your choice for the base input video's timecode source. For example, if you have
 	// embedded timecodes that start at 01:00:00:00 and you want your overlay to begin
 	// five minutes into the video, enter 01:05:00:00.
 	StartTimecode *string
+
+	// Specify one or more transitions for your video overlay. Use Transitions to
+	// reposition or resize your overlay over time. To use the same position and size
+	// for the duration of your video overlay: Leave blank. To specify a Transition:
+	// Enter a value for Start timecode, End Timecode, X Position, Y Position, Width,
+	// or Height.
+	Transitions []VideoOverlayTransition
 
 	noSmithyDocumentSerde
 }
@@ -8041,10 +8128,8 @@ type VideoOverlay struct {
 // sequence at different times that you specify.
 type VideoOverlayInput struct {
 
-	// Specify the input file S3, HTTP, or HTTPS URI for your video overlay. For
-	// consistency in color and formatting in your output video image, we recommend
-	// that you specify a video with similar characteristics as the underlying input
-	// video.
+	// Specify the input file S3, HTTP, or HTTPS URL for your video overlay. To
+	// specify one or more Transitions for your base input video instead: Leave blank.
 	FileInput *string
 
 	// Specify one or more clips to use from your video overlay. When you include an
@@ -8080,6 +8165,89 @@ type VideoOverlayInputClipping struct {
 	// clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the
 	// minute, SS is the second, and FF is the frame number. When entering this value,
 	// take into account your choice for Timecode source.
+	StartTimecode *string
+
+	noSmithyDocumentSerde
+}
+
+// position of video overlay
+type VideoOverlayPosition struct {
+
+	// To scale your video overlay to the same height as the base input video: Leave
+	// blank. To scale the height of your video overlay to a different height: Enter an
+	// integer representing the Unit type that you choose, either Pixels or Percentage.
+	// For example, when you enter 360 and choose Pixels, your video overlay will be
+	// rendered with a height of 360. When you enter 50, choose Percentage, and your
+	// overlay's source has a height of 1080, your video overlay will be rendered with
+	// a height of 540. To scale your overlay to a specific height while automatically
+	// maintaining its original aspect ratio, enter a value for Height and leave Width
+	// blank.
+	Height *int32
+
+	// Specify the Unit type to use when you enter a value for X position, Y position,
+	// Width, or Height. You can choose Pixels or Percentage. Leave blank to use the
+	// default value, Pixels.
+	Unit VideoOverlayUnit
+
+	// To scale your video overlay to the same width as the base input video: Leave
+	// blank. To scale the width of your video overlay to a different width: Enter an
+	// integer representing the Unit type that you choose, either Pixels or Percentage.
+	// For example, when you enter 640 and choose Pixels, your video overlay will scale
+	// to a height of 640 pixels. When you enter 50, choose Percentage, and your
+	// overlay's source has a width of 1920, your video overlay will scale to a width
+	// of 960. To scale your overlay to a specific width while automatically
+	// maintaining its original aspect ratio, enter a value for Width and leave Height
+	// blank.
+	Width *int32
+
+	// To position the left edge of your video overlay along the left edge of the base
+	// input video's frame: Keep blank, or enter 0. To position the left edge of your
+	// video overlay to the right, relative to the left edge of the base input video's
+	// frame: Enter an integer representing the Unit type that you choose, either
+	// Pixels or Percentage. For example, when you enter 10 and choose Pixels, your
+	// video overlay will be positioned 10 pixels from the left edge of the base input
+	// video's frame. When you enter 10, choose Percentage, and your base input video
+	// is 1920x1080, your video overlay will be positioned 192 pixels from the left
+	// edge of the base input video's frame.
+	XPosition *int32
+
+	// To position the top edge of your video overlay along the top edge of the base
+	// input video's frame: Keep blank, or enter 0. To position the top edge of your
+	// video overlay down, relative to the top edge of the base input video's frame:
+	// Enter an integer representing the Unit type that you choose, either Pixels or
+	// Percentage. For example, when you enter 10 and choose Pixels, your video overlay
+	// will be positioned 10 pixels from the top edge of the base input video's frame.
+	// When you enter 10, choose Percentage, and your underlying video is 1920x1080,
+	// your video overlay will be positioned 108 pixels from the top edge of the base
+	// input video's frame.
+	YPosition *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specify one or more Transitions for your video overlay. Use Transitions to
+// reposition or resize your overlay over time. To use the same position and size
+// for the duration of your video overlay: Leave blank. To specify a Transition:
+// Enter a value for Start timecode, End Timecode, X Position, Y Position, Width,
+// or Height.
+type VideoOverlayTransition struct {
+
+	// Specify the ending position for this transition, relative to the base input
+	// video's frame. Your video overlay will move smoothly to this position, beginning
+	// at this transition's Start timecode and ending at this transition's End
+	// timecode.
+	EndPosition *VideoOverlayPosition
+
+	// Specify the timecode for when this transition ends. Use the format HH:MM:SS:FF
+	// or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF
+	// is the frame number. When entering this value, take into account your choice for
+	// Timecode source.
+	EndTimecode *string
+
+	// Specify the timecode for when this transition begins. Use the format
+	// HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the
+	// second, and FF is the frame number. When entering this value, take into account
+	// your choice for Timecode source.
 	StartTimecode *string
 
 	noSmithyDocumentSerde

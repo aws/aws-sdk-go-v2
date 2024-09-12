@@ -39,6 +39,13 @@ type GetUserPoolMfaConfigInput struct {
 
 type GetUserPoolMfaConfigOutput struct {
 
+	// Shows user pool email message configuration for MFA. Includes the subject and
+	// body of the email message template for MFA messages. To activate this setting, [advanced security features]
+	// must be active in your user pool.
+	//
+	// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+	EmailMfaConfiguration *types.EmailMfaConfigType
+
 	// The multi-factor authentication (MFA) configuration. Valid values include:
 	//
 	//   - OFF MFA won't be used for any users.
@@ -49,10 +56,12 @@ type GetUserPoolMfaConfigOutput struct {
 	//   factor activated.
 	MfaConfiguration types.UserPoolMfaType
 
-	// The SMS text message multi-factor authentication (MFA) configuration.
+	// Shows user pool SMS message configuration for MFA. Includes the message
+	// template and the SMS message sending configuration for Amazon SNS.
 	SmsMfaConfiguration *types.SmsMfaConfigType
 
-	// The software token multi-factor authentication (MFA) configuration.
+	// Shows user pool configuration for time-based one-time password (TOTP) MFA.
+	// Includes TOTP enabled or disabled state.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// Metadata pertaining to the operation's result.

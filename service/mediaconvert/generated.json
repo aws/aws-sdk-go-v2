@@ -30,6 +30,7 @@
         "api_op_ListPresets.go",
         "api_op_ListQueues.go",
         "api_op_ListTagsForResource.go",
+        "api_op_ListVersions.go",
         "api_op_PutPolicy.go",
         "api_op_SearchJobs.go",
         "api_op_TagResource.go",

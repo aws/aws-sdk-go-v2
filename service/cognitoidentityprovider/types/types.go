@@ -612,6 +612,45 @@ type EmailConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+// Sets or shows user pool email message configuration for MFA. Includes the
+// subject and body of the email message template for MFA messages. To activate
+// this setting, [advanced security features]must be active in your user pool.
+//
+// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+type EmailMfaConfigType struct {
+
+	// The template for the email message that your user pool sends to users with an
+	// MFA code. The message must contain the {####} placeholder. In the message,
+	// Amazon Cognito replaces this placeholder with the code. If you don't provide
+	// this parameter, Amazon Cognito sends messages in the default format.
+	Message *string
+
+	// The subject of the email message that your user pool sends to users with an MFA
+	// code.
+	Subject *string
+
+	noSmithyDocumentSerde
+}
+
+// User preferences for multi-factor authentication with email messages. Activates
+// or deactivates email MFA and sets it as the preferred MFA method when multiple
+// methods are available. To activate this setting, [advanced security features]must be active in your user
+// pool.
+//
+// [advanced security features]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+type EmailMfaSettingsType struct {
+
+	// Specifies whether email message MFA is active for a user. When the value of
+	// this parameter is Enabled , the user will be prompted for MFA during all sign-in
+	// attempts, unless device tracking is turned on and the device has been trusted.
+	Enabled bool
+
+	// Specifies whether email message MFA is the user's preferred method.
+	PreferredMfa bool
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the user context data captured at the time of an event request.
 type EventContextDataType struct {
 
@@ -1419,13 +1458,14 @@ type SmsConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
-// The SMS text message multi-factor authentication (MFA) configuration type.
+// Configures user pool SMS messages for multi-factor authentication (MFA). Sets
+// the message template and the SMS message sending configuration for Amazon SNS.
 type SmsMfaConfigType struct {
 
-	// The SMS authentication message that will be sent to users with the code they
-	// must sign in. The message must contain the ‘{####}’ placeholder, which is
-	// replaced with the code. If the message isn't included, and default message will
-	// be used.
+	// The SMS message that your user pool sends to users with an MFA code. The
+	// message must contain the {####} placeholder. In the message, Amazon Cognito
+	// replaces this placeholder with the code. If you don't provide this parameter,
+	// Amazon Cognito sends messages in the default format.
 	SmsAuthenticationMessage *string
 
 	// The SMS configuration with the settings that your Amazon Cognito user pool must
@@ -1447,9 +1487,9 @@ type SmsMfaConfigType struct {
 // Authentication for the user pool.
 type SMSMfaSettingsType struct {
 
-	// Specifies whether SMS text message MFA is activated. If an MFA type is
-	// activated for a user, the user will be prompted for MFA during all sign-in
-	// attempts, unless device tracking is turned on and the device has been trusted.
+	// Specifies whether SMS message MFA is activated. If an MFA type is activated for
+	// a user, the user will be prompted for MFA during all sign-in attempts, unless
+	// device tracking is turned on and the device has been trusted.
 	Enabled bool
 
 	// Specifies whether SMS is the preferred MFA method.
@@ -1458,7 +1498,8 @@ type SMSMfaSettingsType struct {
 	noSmithyDocumentSerde
 }
 
-// The type used for enabling software token MFA at the user pool level.
+// Configures a user pool for time-based one-time password (TOTP) multi-factor
+// authentication (MFA). Enables or disables TOTP.
 type SoftwareTokenMfaConfigType struct {
 
 	// Specifies whether software token MFA is activated.
@@ -1965,17 +2006,17 @@ type UserPoolClientType struct {
 	// Defaults to LEGACY when you don't provide a value.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
-	// The list of user attributes that you want your app client to have read-only
-	// access to. After your user authenticates in your app, their access token
-	// authorizes them to read their own attribute value for any attribute in this
-	// list. An example of this kind of activity is when your user selects a link to
-	// view their profile information. Your app makes a [GetUser]API request to retrieve and
-	// display your user's profile data.
+	// The list of user attributes that you want your app client to have read access
+	// to. After your user authenticates in your app, their access token authorizes
+	// them to read their own attribute value for any attribute in this list. An
+	// example of this kind of activity is when your user selects a link to view their
+	// profile information. Your app makes a [GetUser]API request to retrieve and display your
+	// user's profile data.
 	//
 	// When you don't specify the ReadAttributes for your app client, your app can
 	// read the values of email_verified , phone_number_verified , and the Standard
-	// attributes of your user pool. When your user pool has read access to these
-	// default attributes, ReadAttributes doesn't return any information. Amazon
+	// attributes of your user pool. When your user pool app client has read access to
+	// these default attributes, ReadAttributes doesn't return any information. Amazon
 	// Cognito only populates ReadAttributes in the API response if you have specified
 	// your own custom set of read attributes.
 	//

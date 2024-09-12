@@ -98,7 +98,7 @@ type AdminGetUserOutput struct {
 	UserLastModifiedDate *time.Time
 
 	// The MFA options that are activated for the user. The possible values in this
-	// list are SMS_MFA and SOFTWARE_TOKEN_MFA .
+	// list are SMS_MFA , EMAIL_OTP , and SOFTWARE_TOKEN_MFA .
 	UserMFASettingList []string
 
 	// The user status. Can be one of the following:

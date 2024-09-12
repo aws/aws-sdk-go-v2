@@ -1575,6 +1575,9 @@ func awsAwsjson11_deserializeOpErrorAdminInitiateAuth(response *smithyhttp.Respo
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
+	case strings.EqualFold("InvalidEmailRoleAccessPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEmailRoleAccessPolicyException(response, errorBody)
+
 	case strings.EqualFold("InvalidLambdaResponseException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidLambdaResponseException(response, errorBody)
 
@@ -2472,6 +2475,9 @@ func awsAwsjson11_deserializeOpErrorAdminRespondToAuthChallenge(response *smithy
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidEmailRoleAccessPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEmailRoleAccessPolicyException(response, errorBody)
 
 	case strings.EqualFold("InvalidLambdaResponseException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidLambdaResponseException(response, errorBody)
@@ -8433,6 +8439,9 @@ func awsAwsjson11_deserializeOpErrorInitiateAuth(response *smithyhttp.Response, 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 
+	case strings.EqualFold("InvalidEmailRoleAccessPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEmailRoleAccessPolicyException(response, errorBody)
+
 	case strings.EqualFold("InvalidLambdaResponseException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidLambdaResponseException(response, errorBody)
 
@@ -9941,6 +9950,9 @@ func awsAwsjson11_deserializeOpErrorRespondToAuthChallenge(response *smithyhttp.
 
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidEmailRoleAccessPolicyException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEmailRoleAccessPolicyException(response, errorBody)
 
 	case strings.EqualFold("InvalidLambdaResponseException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidLambdaResponseException(response, errorBody)
@@ -16303,6 +16315,55 @@ func awsAwsjson11_deserializeDocumentEmailConfigurationType(v **types.EmailConfi
 					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
 				}
 				sv.SourceArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEmailMfaConfigType(v **types.EmailMfaConfigType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailMfaConfigType
+	if *v == nil {
+		sv = &types.EmailMfaConfigType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmailMfaMessageType to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "Subject":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmailMfaSubjectType to be of type string, got %T instead", value)
+				}
+				sv.Subject = ptr.String(jtv)
 			}
 
 		default:
@@ -24041,6 +24102,11 @@ func awsAwsjson11_deserializeOpDocumentGetUserPoolMfaConfigOutput(v **GetUserPoo
 
 	for key, value := range shape {
 		switch key {
+		case "EmailMfaConfiguration":
+			if err := awsAwsjson11_deserializeDocumentEmailMfaConfigType(&sv.EmailMfaConfiguration, value); err != nil {
+				return err
+			}
+
 		case "MfaConfiguration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24887,6 +24953,11 @@ func awsAwsjson11_deserializeOpDocumentSetUserPoolMfaConfigOutput(v **SetUserPoo
 
 	for key, value := range shape {
 		switch key {
+		case "EmailMfaConfiguration":
+			if err := awsAwsjson11_deserializeDocumentEmailMfaConfigType(&sv.EmailMfaConfiguration, value); err != nil {
+				return err
+			}
+
 		case "MfaConfiguration":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -518,7 +518,7 @@ type BatchTableOptimizer struct {
 	TableName *string
 
 	// A TableOptimizer object that contains details on the configuration and last run
-	// of a table optimzer.
+	// of a table optimizer.
 	TableOptimizer *TableOptimizer
 
 	noSmithyDocumentSerde
@@ -1457,6 +1457,15 @@ type ColumnStatisticsTaskRun struct {
 
 	// The type of workers being used for generating stats. The default is g.1x .
 	WorkerType *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains compaction metrics for the optimizer run.
+type CompactionMetrics struct {
+
+	// A structure containing the Iceberg compaction metrics for the optimizer run.
+	IcebergMetrics *IcebergCompactionMetrics
 
 	noSmithyDocumentSerde
 }
@@ -4158,6 +4167,24 @@ type HudiTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Compaction metrics for Iceberg for the optimizer run.
+type IcebergCompactionMetrics struct {
+
+	// The duration of the job in hours.
+	JobDurationInHour float64
+
+	// The number of bytes removed by the compaction job run.
+	NumberOfBytesCompacted int64
+
+	// The number of DPU hours consumed by the job.
+	NumberOfDpus int32
+
+	// The number of files removed by the compaction job run.
+	NumberOfFilesCompacted int64
+
+	noSmithyDocumentSerde
+}
+
 // A structure that defines an Apache Iceberg metadata table to create in the
 // catalog.
 type IcebergInput struct {
@@ -4169,6 +4196,77 @@ type IcebergInput struct {
 
 	// The table version for the Iceberg table. Defaults to 2.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Iceberg orphan file deletion optimizer.
+type IcebergOrphanFileDeletionConfiguration struct {
+
+	// Specifies a directory in which to look for files (defaults to the table's
+	// location). You may choose a sub-directory rather than the top-level table
+	// location.
+	Location *string
+
+	// The number of days that orphan files should be retained before file deletion.
+	// If an input is not provided, the default value 3 will be used.
+	OrphanFileRetentionPeriodInDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// Orphan file deletion metrics for Iceberg for the optimizer run.
+type IcebergOrphanFileDeletionMetrics struct {
+
+	// The duration of the job in hours.
+	JobDurationInHour float64
+
+	// The number of DPU hours consumed by the job.
+	NumberOfDpus int32
+
+	// The number of orphan files deleted by the orphan file deletion job run.
+	NumberOfOrphanFilesDeleted int64
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Iceberg snapshot retention optimizer.
+type IcebergRetentionConfiguration struct {
+
+	// If set to false, snapshots are only deleted from table metadata, and the
+	// underlying data and metadata files are not deleted.
+	CleanExpiredFiles *bool
+
+	// The number of Iceberg snapshots to retain within the retention period. If an
+	// input is not provided, the corresponding Iceberg table configuration field will
+	// be used or if not present, the default value 1 will be used.
+	NumberOfSnapshotsToRetain *int32
+
+	// The number of days to retain the Iceberg snapshots. If an input is not
+	// provided, the corresponding Iceberg table configuration field will be used or if
+	// not present, the default value 5 will be used.
+	SnapshotRetentionPeriodInDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// Snapshot retention metrics for Iceberg for the optimizer run.
+type IcebergRetentionMetrics struct {
+
+	// The duration of the job in hours.
+	JobDurationInHour float64
+
+	// The number of data files deleted by the retention job run.
+	NumberOfDataFilesDeleted int64
+
+	// The number of DPU hours consumed by the job.
+	NumberOfDpus int32
+
+	// The number of manifest files deleted by the retention job run.
+	NumberOfManifestFilesDeleted int64
+
+	// The number of manifest lists deleted by the retention job run.
+	NumberOfManifestListsDeleted int64
 
 	noSmithyDocumentSerde
 }
@@ -6187,6 +6285,25 @@ type Order struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for an orphan file deletion optimizer.
+type OrphanFileDeletionConfiguration struct {
+
+	// The configuration for an Iceberg orphan file deletion optimizer.
+	IcebergConfiguration *IcebergOrphanFileDeletionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains orphan file deletion metrics for the optimizer run.
+type OrphanFileDeletionMetrics struct {
+
+	// A structure containing the Iceberg orphan file deletion metrics for the
+	// optimizer run.
+	IcebergMetrics *IcebergOrphanFileDeletionMetrics
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing other metadata for a schema version belonging to the
 // same metadata key.
 type OtherMetadataValueListItem struct {
@@ -6788,6 +6905,24 @@ type ResourceUri struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a snapshot retention optimizer.
+type RetentionConfiguration struct {
+
+	// The configuration for an Iceberg snapshot retention optimizer.
+	IcebergConfiguration *IcebergRetentionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains retention metrics for the optimizer run.
+type RetentionMetrics struct {
+
+	// A structure containing the Iceberg retention metrics for the optimizer run.
+	IcebergMetrics *IcebergRetentionMetrics
+
+	noSmithyDocumentSerde
+}
+
 // A run identifier.
 type RunIdentifier struct {
 
@@ -6801,6 +6936,9 @@ type RunIdentifier struct {
 }
 
 // Metrics for the optimizer run.
+//
+// This structure is deprecated. See the individual metric members for compaction,
+// retention, and orphan file deletion.
 type RunMetrics struct {
 
 	// The duration of the job in hours.
@@ -8684,7 +8822,14 @@ type TableOptimizer struct {
 	// A TableOptimizerRun object representing the last run of the table optimizer.
 	LastRun *TableOptimizerRun
 
-	// The type of table optimizer. Currently, the only valid value is compaction .
+	// The type of table optimizer. The valid values are:
+	//
+	//   - compaction : for managing compaction with a table optimizer.
+	//
+	//   - retention : for managing the retention of snapshot with a table optimizer.
+	//
+	//   - orphan_file_deletion : for managing the deletion of orphan files with a
+	//   table optimizer.
 	Type TableOptimizerType
 
 	noSmithyDocumentSerde
@@ -8697,6 +8842,12 @@ type TableOptimizerConfiguration struct {
 	// Whether table optimization is enabled.
 	Enabled *bool
 
+	// The configuration for an orphan file deletion optimizer.
+	OrphanFileDeletionConfiguration *OrphanFileDeletionConfiguration
+
+	// The configuration for a snapshot retention optimizer.
+	RetentionConfiguration *RetentionConfiguration
+
 	// A role passed by the caller which gives the service permission to update the
 	// resources associated with the optimizer on the caller's behalf.
 	RoleArn *string
@@ -8706,6 +8857,9 @@ type TableOptimizerConfiguration struct {
 
 // Contains details for a table optimizer run.
 type TableOptimizerRun struct {
+
+	// A CompactionMetrics object containing metrics for the optimizer run.
+	CompactionMetrics *CompactionMetrics
 
 	// Represents the epoch timestamp at which the compaction job ended.
 	EndTimestamp *time.Time
@@ -8717,7 +8871,19 @@ type TableOptimizerRun struct {
 	EventType TableOptimizerEventType
 
 	// A RunMetrics object containing metrics for the optimizer run.
+	//
+	// This member is deprecated. See the individual metric members for compaction,
+	// retention, and orphan file deletion.
+	//
+	// Deprecated: Metrics has been replaced by optimizer type specific metrics such
+	// as IcebergCompactionMetrics
 	Metrics *RunMetrics
+
+	// An OrphanFileDeletionMetrics object containing metrics for the optimizer run.
+	OrphanFileDeletionMetrics *OrphanFileDeletionMetrics
+
+	// A RetentionMetrics object containing metrics for the optimizer run.
+	RetentionMetrics *RetentionMetrics
 
 	// Represents the epoch timestamp at which the compaction job was started within
 	// Lake Formation.

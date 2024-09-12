@@ -1060,6 +1060,13 @@ type InstanceFleetModifyConfig struct {
 	// This member is required.
 	InstanceFleetId *string
 
+	// An array of InstanceTypeConfig objects that specify how Amazon EMR provisions
+	// Amazon EC2 instances when it fulfills On-Demand and Spot capacities. For more
+	// information, see [InstanceTypeConfig].
+	//
+	// [InstanceTypeConfig]: https://docs.aws.amazon.com/emr/latest/APIReference/API_InstanceTypeConfig.html
+	InstanceTypeConfigs []InstanceTypeConfig
+
 	// The resize specification for the instance fleet.
 	ResizeSpecifications *InstanceFleetResizingSpecifications
 
@@ -1074,8 +1081,7 @@ type InstanceFleetModifyConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The launch specification for Spot Instances in the fleet, which determines the
-// defined duration, provisioning timeout behavior, and allocation strategy.
+// The launch specification for On-Demand and Spot Instances in the fleet.
 //
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
 // and later, excluding 5.0.x versions. On-Demand and Spot instance allocation
@@ -1083,7 +1089,7 @@ type InstanceFleetModifyConfig struct {
 type InstanceFleetProvisioningSpecifications struct {
 
 	//  The launch specification for On-Demand Instances in the instance fleet, which
-	// determines the allocation strategy.
+	// determines the allocation strategy and capacity reservation options.
 	//
 	// The instance fleet configuration is available only in Amazon EMR releases 4.8.0
 	// and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is
@@ -1091,7 +1097,7 @@ type InstanceFleetProvisioningSpecifications struct {
 	OnDemandSpecification *OnDemandProvisioningSpecification
 
 	// The launch specification for Spot instances in the fleet, which determines the
-	// defined duration, provisioning timeout behavior, and allocation strategy.
+	// allocation strategy, defined duration, and provisioning timeout behavior.
 	SpotSpecification *SpotProvisioningSpecification
 
 	noSmithyDocumentSerde
@@ -1101,11 +1107,12 @@ type InstanceFleetProvisioningSpecifications struct {
 type InstanceFleetResizingSpecifications struct {
 
 	// The resize specification for On-Demand Instances in the instance fleet, which
-	// contains the resize timeout period.
+	// contains the allocation strategy, capacity reservation options, and the resize
+	// timeout period.
 	OnDemandResizeSpecification *OnDemandResizingSpecification
 
 	// The resize specification for Spot Instances in the instance fleet, which
-	// contains the resize timeout period.
+	// contains the allocation strategy and the resize timeout period.
 	SpotResizeSpecification *SpotResizingSpecification
 
 	noSmithyDocumentSerde
@@ -2213,6 +2220,14 @@ type OnDemandProvisioningSpecification struct {
 // contains the resize timeout period.
 type OnDemandResizingSpecification struct {
 
+	// Specifies the allocation strategy to use to launch On-Demand instances during a
+	// resize. The default is lowest-price .
+	AllocationStrategy OnDemandProvisioningAllocationStrategy
+
+	// Describes the strategy for using unused Capacity Reservations for fulfilling
+	// On-Demand capacity.
+	CapacityReservationOptions *OnDemandCapacityReservationOptions
+
 	// On-Demand resize timeout in minutes. If On-Demand Instances are not provisioned
 	// within this time, the resize workflow stops. The minimum value is 5 minutes, and
 	// the maximum value is 10,080 minutes (7 days). The timeout applies to all resize
@@ -2220,8 +2235,6 @@ type OnDemandResizingSpecification struct {
 	// Managed Scaling or by the customer (via Amazon EMR Console, Amazon EMR CLI
 	// modify-instance-fleet or Amazon EMR SDK ModifyInstanceFleet API) or by Amazon
 	// EMR due to Amazon EC2 Spot Reclamation.
-	//
-	// This member is required.
 	TimeoutDurationMinutes *int32
 
 	noSmithyDocumentSerde
@@ -2636,6 +2649,12 @@ type SpotProvisioningSpecification struct {
 // contains the resize timeout period.
 type SpotResizingSpecification struct {
 
+	// Specifies the allocation strategy to use to launch Spot instances during a
+	// resize. If you run Amazon EMR releases 6.9.0 or higher, the default is
+	// price-capacity-optimized . If you run Amazon EMR releases 6.8.0 or lower, the
+	// default is capacity-optimized .
+	AllocationStrategy SpotProvisioningAllocationStrategy
+
 	// Spot resize timeout in minutes. If Spot Instances are not provisioned within
 	// this time, the resize workflow will stop provisioning of Spot instances. Minimum
 	// value is 5 minutes and maximum value is 10,080 minutes (7 days). The timeout
@@ -2643,8 +2662,6 @@ type SpotResizingSpecification struct {
 	// triggered by Amazon EMR Managed Scaling or by the customer (via Amazon EMR
 	// Console, Amazon EMR CLI modify-instance-fleet or Amazon EMR SDK
 	// ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2 Spot Reclamation.
-	//
-	// This member is required.
 	TimeoutDurationMinutes *int32
 
 	noSmithyDocumentSerde

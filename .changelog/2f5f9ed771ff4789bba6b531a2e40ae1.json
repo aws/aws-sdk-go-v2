@@ -1,0 +1,8 @@
+{
+    "id": "2f5f9ed7-71ff-4789-bba6-b531a2e40ae1",
+    "type": "feature",
+    "description": "This release includes support for dynamic video overlay workflows, including picture-in-picture and squeezeback",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

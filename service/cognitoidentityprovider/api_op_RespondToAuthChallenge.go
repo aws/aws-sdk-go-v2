@@ -35,7 +35,7 @@ import (
 // sign in.
 //
 // If you have never used SMS text messages with Amazon Cognito or any other
-// Amazon Web Services service, Amazon Simple Notification Service might place your
+// Amazon Web Servicesservice, Amazon Simple Notification Service might place your
 // account in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone
 // numbers. After you test your app while in the sandbox environment, you can move
 // out of the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
@@ -90,11 +90,19 @@ type RespondToAuthChallengeInput struct {
 	// client that has a client secret.
 	//
 	// SMS_MFA "ChallengeName": "SMS_MFA", "ChallengeResponses": {"SMS_MFA_CODE":
-	// "[SMS_code]", "USERNAME": "[username]"}
+	// "[code]", "USERNAME": "[username]"}
 	//
-	// PASSWORD_VERIFIER "ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
-	// {"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]", "PASSWORD_CLAIM_SECRET_BLOCK":
-	// "[secret_block]", "TIMESTAMP": [timestamp], "USERNAME": "[username]"}
+	// EMAIL_OTP "ChallengeName": "EMAIL_OTP", "ChallengeResponses":
+	// {"EMAIL_OTP_CODE": "[code]", "USERNAME": "[username]"}
+	//
+	// PASSWORD_VERIFIER This challenge response is part of the SRP flow. Amazon
+	// Cognito requires that your application respond to this challenge within a few
+	// seconds. When the response time exceeds this period, your user pool returns a
+	// NotAuthorizedException error.
+	//
+	//     "ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+	//     {"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]", "PASSWORD_CLAIM_SECRET_BLOCK":
+	//     "[secret_block]", "TIMESTAMP": [timestamp], "USERNAME": "[username]"}
 	//
 	// Add "DEVICE_KEY" when you sign in with a remembered device.
 	//

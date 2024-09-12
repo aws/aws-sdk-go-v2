@@ -474,9 +474,6 @@ type CreateDBInstanceReadReplicaInput struct {
 	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
 	// request for the operation that can run in the source Amazon Web Services Region.
 	//
-	// SourceRegion isn't supported for SQL Server, because Amazon RDS for SQL Server
-	// doesn't support cross-Region read replicas.
-	//
 	// This setting doesn't apply to RDS Custom DB instances.
 	//
 	// [Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html

@@ -6194,6 +6194,40 @@ func awsAwsjson11_serializeDocumentEmailConfigurationType(v *types.EmailConfigur
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEmailMfaConfigType(v *types.EmailMfaConfigType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Message != nil {
+		ok := object.Key("Message")
+		ok.String(*v.Message)
+	}
+
+	if v.Subject != nil {
+		ok := object.Key("Subject")
+		ok.String(*v.Subject)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEmailMfaSettingsType(v *types.EmailMfaSettingsType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.PreferredMfa {
+		ok := object.Key("PreferredMfa")
+		ok.Boolean(v.PreferredMfa)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEventFiltersType(v []types.EventFilterType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -7671,6 +7705,13 @@ func awsAwsjson11_serializeOpDocumentAdminRespondToAuthChallengeInput(v *AdminRe
 func awsAwsjson11_serializeOpDocumentAdminSetUserMFAPreferenceInput(v *AdminSetUserMFAPreferenceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EmailMfaSettings != nil {
+		ok := object.Key("EmailMfaSettings")
+		if err := awsAwsjson11_serializeDocumentEmailMfaSettingsType(v.EmailMfaSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.SMSMfaSettings != nil {
 		ok := object.Key("SMSMfaSettings")
@@ -9403,6 +9444,13 @@ func awsAwsjson11_serializeOpDocumentSetUserMFAPreferenceInput(v *SetUserMFAPref
 		ok.String(*v.AccessToken)
 	}
 
+	if v.EmailMfaSettings != nil {
+		ok := object.Key("EmailMfaSettings")
+		if err := awsAwsjson11_serializeDocumentEmailMfaSettingsType(v.EmailMfaSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SMSMfaSettings != nil {
 		ok := object.Key("SMSMfaSettings")
 		if err := awsAwsjson11_serializeDocumentSMSMfaSettingsType(v.SMSMfaSettings, ok); err != nil {
@@ -9423,6 +9471,13 @@ func awsAwsjson11_serializeOpDocumentSetUserMFAPreferenceInput(v *SetUserMFAPref
 func awsAwsjson11_serializeOpDocumentSetUserPoolMfaConfigInput(v *SetUserPoolMfaConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EmailMfaConfiguration != nil {
+		ok := object.Key("EmailMfaConfiguration")
+		if err := awsAwsjson11_serializeDocumentEmailMfaConfigType(v.EmailMfaConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.MfaConfiguration) > 0 {
 		ok := object.Key("MfaConfiguration")

@@ -392,7 +392,6 @@ type ConnectionPoolConfiguration struct {
 	// The number of seconds for a proxy to wait for a connection to become available
 	// in the connection pool. This setting only applies when the proxy has opened its
 	// maximum number of connections and all connections are busy with client sessions.
-	// For an unlimited wait time, specify 0 .
 	//
 	// Default: 120
 	//
@@ -2271,7 +2270,19 @@ type DBParameterGroupStatus struct {
 	// The name of the DB parameter group.
 	DBParameterGroupName *string
 
-	// The status of parameter updates.
+	// The status of parameter updates. Valid values are:
+	//
+	//   - applying : The parameter group change is being applied to the database.
+	//
+	//   - failed-to-apply : The parameter group is in an invalid state.
+	//
+	//   - in-sync : The parameter group change is synchronized with the database.
+	//
+	//   - pending-database-upgrade : The parameter group change will be applied after
+	//   the DB instance is upgraded.
+	//
+	//   - pending-reboot : The parameter group change will be applied after the DB
+	//   instance reboots.
 	ParameterApplyStatus *string
 
 	noSmithyDocumentSerde
@@ -4161,10 +4172,23 @@ type PendingMaintenanceAction struct {
 	//
 	// For more information about maintenance actions, see [Maintaining a DB instance].
 	//
-	// Valid Values: system-update | db-upgrade | hardware-maintenance |
-	// ca-certificate-rotation
+	// Valid Values:
 	//
+	//   - ca-certificate-rotation
+	//
+	//   - db-upgrade
+	//
+	//   - hardware-maintenance
+	//
+	//   - os-upgrade
+	//
+	//   - system-update
+	//
+	// For more information about these actions, see [Maintenance actions for Amazon Aurora] or [Maintenance actions for Amazon RDS].
+	//
+	// [Maintenance actions for Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
 	// [Maintaining a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
+	// [Maintenance actions for Amazon Aurora]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
 	Action *string
 
 	// The date of the maintenance window when the action is applied. The maintenance

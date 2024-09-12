@@ -11351,6 +11351,20 @@ func awsAwsjson11_deserializeDocumentOnDemandResizingSpecification(v **types.OnD
 
 	for key, value := range shape {
 		switch key {
+		case "AllocationStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OnDemandProvisioningAllocationStrategy to be of type string, got %T instead", value)
+				}
+				sv.AllocationStrategy = types.OnDemandProvisioningAllocationStrategy(jtv)
+			}
+
+		case "CapacityReservationOptions":
+			if err := awsAwsjson11_deserializeDocumentOnDemandCapacityReservationOptions(&sv.CapacityReservationOptions, value); err != nil {
+				return err
+			}
+
 		case "TimeoutDurationMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12610,6 +12624,15 @@ func awsAwsjson11_deserializeDocumentSpotResizingSpecification(v **types.SpotRes
 
 	for key, value := range shape {
 		switch key {
+		case "AllocationStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpotProvisioningAllocationStrategy to be of type string, got %T instead", value)
+				}
+				sv.AllocationStrategy = types.SpotProvisioningAllocationStrategy(jtv)
+			}
+
 		case "TimeoutDurationMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)

@@ -94,6 +94,8 @@ type CreateDBInstanceInput struct {
 	//
 	//   - custom-sqlserver-web (for RDS Custom for SQL Server DB instances)
 	//
+	//   - custom-sqlserver-dev (for RDS Custom for SQL Server DB instances)
+	//
 	//   - db2-ae
 	//
 	//   - db2-se
@@ -465,8 +467,6 @@ type CreateDBInstanceInput struct {
 	// Constraints:
 	//
 	//   - Must match the name of an existing DB subnet group.
-	//
-	//   - Must not be default .
 	//
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string

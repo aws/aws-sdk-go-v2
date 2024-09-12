@@ -1,0 +1,8 @@
+{
+    "id": "4d668815-3794-4deb-8ba4-292753b569b5",
+    "type": "feature",
+    "description": "AWS Glue is introducing two new optimizers for Apache Iceberg tables: snapshot retention and orphan file deletion. Customers can enable these optimizers and customize their configurations to perform daily maintenance tasks on their Iceberg tables based on their specific requirements.",
+    "modules": [
+        "service/glue"
+    ]
+}
