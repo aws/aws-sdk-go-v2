@@ -2599,6 +2599,9 @@
                     "outputToken": "NextMarker",
                     "items": "LoadBalancers"
                 },
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "LoadBalancerAvailable": {
                         "acceptors": [
@@ -2625,7 +2628,7 @@
                             {
                                 "state": "retry",
                                 "matcher": {
-                                    "errorType": "LoadBalancerNotFoundException"
+                                    "errorType": "LoadBalancerNotFound"
                                 }
                             }
                         ],
@@ -2642,7 +2645,7 @@
                             {
                                 "state": "retry",
                                 "matcher": {
-                                    "errorType": "LoadBalancerNotFoundException"
+                                    "errorType": "LoadBalancerNotFound"
                                 }
                             }
                         ],
@@ -2663,7 +2666,7 @@
                             {
                                 "state": "success",
                                 "matcher": {
-                                    "errorType": "LoadBalancerNotFoundException"
+                                    "errorType": "LoadBalancerNotFound"
                                 }
                             }
                         ],

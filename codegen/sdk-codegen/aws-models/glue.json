@@ -3540,7 +3540,19 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
                 }
             ],
             "traits": {
@@ -4015,7 +4027,7 @@
                 "tableOptimizer": {
                     "target": "com.amazonaws.glue#TableOptimizer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>TableOptimizer</code> object that contains details on the configuration and last run of a table optimzer.</p>"
+                        "smithy.api#documentation": "<p>A <code>TableOptimizer</code> object that contains details on the configuration and last run of a table optimizer.</p>"
                     }
                 }
             },
@@ -6470,6 +6482,20 @@
                     "max": 40
                 },
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
+            }
+        },
+        "com.amazonaws.glue#CompactionMetrics": {
+            "type": "structure",
+            "members": {
+                "IcebergMetrics": {
+                    "target": "com.amazonaws.glue#IcebergCompactionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the Iceberg compaction metrics for the optimizer run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains compaction metrics for the optimizer run.</p>"
             }
         },
         "com.amazonaws.glue#Comparator": {
@@ -10221,6 +10247,12 @@
                 },
                 {
                     "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
                 }
             ],
             "traits": {
@@ -13530,6 +13562,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
                 }
             ],
             "traits": {
@@ -20055,6 +20090,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
                 }
             ],
             "traits": {
@@ -22151,6 +22189,42 @@
                 "smithy.api#pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:iam::[0-9]{12}:role/.+$"
             }
         },
+        "com.amazonaws.glue#IcebergCompactionMetrics": {
+            "type": "structure",
+            "members": {
+                "NumberOfBytesCompacted": {
+                    "target": "com.amazonaws.glue#metricCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of bytes removed by the compaction job run.</p>"
+                    }
+                },
+                "NumberOfFilesCompacted": {
+                    "target": "com.amazonaws.glue#metricCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of files removed by the compaction job run.</p>"
+                    }
+                },
+                "NumberOfDpus": {
+                    "target": "com.amazonaws.glue#dpuCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
+                "JobDurationInHour": {
+                    "target": "com.amazonaws.glue#dpuDurationInHour",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The duration of the job in hours.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Compaction metrics for Iceberg for the optimizer run.</p>"
+            }
+        },
         "com.amazonaws.glue#IcebergInput": {
             "type": "structure",
             "members": {
@@ -22170,6 +22244,124 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that defines an Apache Iceberg metadata table to create in the catalog.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergOrphanFileDeletionConfiguration": {
+            "type": "structure",
+            "members": {
+                "orphanFileRetentionPeriodInDays": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days that orphan files should be retained before file deletion. If an input is not provided, the default value 3 will be used.</p>"
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a directory in which to look for files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an Iceberg orphan file deletion optimizer.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergOrphanFileDeletionMetrics": {
+            "type": "structure",
+            "members": {
+                "NumberOfOrphanFilesDeleted": {
+                    "target": "com.amazonaws.glue#metricCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of orphan files deleted by the orphan file deletion job run.</p>"
+                    }
+                },
+                "NumberOfDpus": {
+                    "target": "com.amazonaws.glue#dpuCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
+                "JobDurationInHour": {
+                    "target": "com.amazonaws.glue#dpuDurationInHour",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The duration of the job in hours.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Orphan file deletion metrics for Iceberg for the optimizer run.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergRetentionConfiguration": {
+            "type": "structure",
+            "members": {
+                "snapshotRetentionPeriodInDays": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain the Iceberg snapshots. If an input is not provided, the corresponding Iceberg table configuration field will be used or if not present, the default value 5 will be used.</p>"
+                    }
+                },
+                "numberOfSnapshotsToRetain": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Iceberg snapshots to retain within the retention period. If an input is not provided, the corresponding Iceberg table configuration field will be used or if not present, the default value 1 will be used.</p>"
+                    }
+                },
+                "cleanExpiredFiles": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to false, snapshots are only deleted from table metadata, and the underlying data and metadata files are not deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an Iceberg snapshot retention optimizer.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergRetentionMetrics": {
+            "type": "structure",
+            "members": {
+                "NumberOfDataFilesDeleted": {
+                    "target": "com.amazonaws.glue#metricCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of data files deleted by the retention job run.</p>"
+                    }
+                },
+                "NumberOfManifestFilesDeleted": {
+                    "target": "com.amazonaws.glue#metricCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of manifest files deleted by the retention job run.</p>"
+                    }
+                },
+                "NumberOfManifestListsDeleted": {
+                    "target": "com.amazonaws.glue#metricCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of manifest lists deleted by the retention job run.</p>"
+                    }
+                },
+                "NumberOfDpus": {
+                    "target": "com.amazonaws.glue#dpuCounts",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of DPU hours consumed by the job.</p>"
+                    }
+                },
+                "JobDurationInHour": {
+                    "target": "com.amazonaws.glue#dpuDurationInHour",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The duration of the job in hours.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Snapshot retention metrics for Iceberg for the optimizer run.</p>"
             }
         },
         "com.amazonaws.glue#IcebergTarget": {
@@ -25875,6 +26067,12 @@
                 },
                 {
                     "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
                 }
             ],
             "traits": {
@@ -25882,6 +26080,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "TableOptimizerRuns",
                     "pageSize": "MaxResults"
                 }
             }
@@ -27734,6 +27933,34 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#Order"
+            }
+        },
+        "com.amazonaws.glue#OrphanFileDeletionConfiguration": {
+            "type": "structure",
+            "members": {
+                "icebergConfiguration": {
+                    "target": "com.amazonaws.glue#IcebergOrphanFileDeletionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an Iceberg orphan file deletion optimizer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an orphan file deletion optimizer.</p>"
+            }
+        },
+        "com.amazonaws.glue#OrphanFileDeletionMetrics": {
+            "type": "structure",
+            "members": {
+                "IcebergMetrics": {
+                    "target": "com.amazonaws.glue#IcebergOrphanFileDeletionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the Iceberg orphan file deletion metrics for the optimizer run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains orphan file deletion metrics for the optimizer run.</p>"
             }
         },
         "com.amazonaws.glue#OtherMetadataValueList": {
@@ -30151,6 +30378,34 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#RetentionConfiguration": {
+            "type": "structure",
+            "members": {
+                "icebergConfiguration": {
+                    "target": "com.amazonaws.glue#IcebergRetentionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an Iceberg snapshot retention optimizer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a snapshot retention optimizer.</p>"
+            }
+        },
+        "com.amazonaws.glue#RetentionMetrics": {
+            "type": "structure",
+            "members": {
+                "IcebergMetrics": {
+                    "target": "com.amazonaws.glue#IcebergRetentionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the Iceberg retention metrics for the optimizer run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains retention metrics for the optimizer run.</p>"
+            }
+        },
         "com.amazonaws.glue#Role": {
             "type": "string"
         },
@@ -30230,7 +30485,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metrics for the optimizer run.</p>"
+                "smithy.api#documentation": "<p>Metrics for the optimizer run.</p>\n         <p>This structure is deprecated. See the individual metric members for compaction, retention, and orphan file deletion.</p>"
             }
         },
         "com.amazonaws.glue#RunStatement": {
@@ -35248,7 +35503,7 @@
                 "type": {
                     "target": "com.amazonaws.glue#TableOptimizerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of table optimizer. Currently, the only valid value is <code>compaction</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of table optimizer. The valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>compaction</code>: for managing compaction with a table optimizer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>retention</code>: for managing the retention of snapshot with a table optimizer.</p>\n            </li>\n            <li>\n               <p>\n                  <code>orphan_file_deletion</code>: for managing the deletion of orphan files with a table optimizer.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "configuration": {
@@ -35280,7 +35535,19 @@
                 "enabled": {
                     "target": "com.amazonaws.glue#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether table optimization is enabled. </p>"
+                        "smithy.api#documentation": "<p>Whether table optimization is enabled.</p>"
+                    }
+                },
+                "retentionConfiguration": {
+                    "target": "com.amazonaws.glue#RetentionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a snapshot retention optimizer.</p>"
+                    }
+                },
+                "orphanFileDeletionConfiguration": {
+                    "target": "com.amazonaws.glue#OrphanFileDeletionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an orphan file deletion optimizer.</p>"
                     }
                 }
             },
@@ -35341,13 +35608,34 @@
                 "metrics": {
                     "target": "com.amazonaws.glue#RunMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>RunMetrics</code> object containing metrics for the optimizer run.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Metrics has been replaced by optimizer type specific metrics such as IcebergCompactionMetrics"
+                        },
+                        "smithy.api#documentation": "<p>A <code>RunMetrics</code> object containing metrics for the optimizer run.</p>\n         <p>This member is deprecated. See the individual metric members for compaction, retention, and orphan file deletion.</p>"
                     }
                 },
                 "error": {
                     "target": "com.amazonaws.glue#MessageString",
                     "traits": {
                         "smithy.api#documentation": "<p>An error that occured during the optimizer run.</p>"
+                    }
+                },
+                "compactionMetrics": {
+                    "target": "com.amazonaws.glue#CompactionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>CompactionMetrics</code> object containing metrics for the optimizer run.</p>"
+                    }
+                },
+                "retentionMetrics": {
+                    "target": "com.amazonaws.glue#RetentionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>RetentionMetrics</code> object containing metrics for the optimizer run.</p>"
+                    }
+                },
+                "orphanFileDeletionMetrics": {
+                    "target": "com.amazonaws.glue#OrphanFileDeletionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>OrphanFileDeletionMetrics</code> object containing metrics for the optimizer run.</p>"
                     }
                 }
             },
@@ -35371,6 +35659,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "compaction"
+                    }
+                },
+                "RETENTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "retention"
+                    }
+                },
+                "ORPHAN_FILE_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "orphan_file_deletion"
                     }
                 }
             }
@@ -35927,6 +36227,21 @@
                         "smithy.api#enumValue": "FIND_MATCHES"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The throttling threshhold was exceeded.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.glue#Timeout": {
@@ -38373,6 +38688,9 @@
                     "target": "com.amazonaws.glue#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -38380,6 +38698,12 @@
                 },
                 {
                     "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ValidationException"
                 }
             ],
             "traits": {
@@ -39777,6 +40101,24 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.glue#dpuCounts": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.glue#dpuDurationInHour": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.glue#metricCounts": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.glue#tableNameString": {

@@ -1463,16 +1463,25 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EncryptionType": {
+                    "target": "com.amazonaws.storagegateway#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of server-side encryption that the file share will use\n         for the data that it stores in Amazon S3.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>"
+                    }
+                },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#deprecated": {
+                            "message": "KMSEncrypted is deprecated, use EncryptionType instead."
+                        },
+                        "smithy.api#documentation": "<p>Optional. Set to <code>true</code> to use Amazon S3 server-side encryption with\n         your own KMS key (SSE-KMS), or <code>false</code> to use a key managed by\n            Amazon S3 (SSE-S3). To use dual-layer encryption (DSSE-KMS), set the\n            <code>EncryptionType</code> parameter instead.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This\n         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>Optional. The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used\n         for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric\n         CMKs. This value must be set if <code>KMSEncrypted</code> is <code>true</code>, or if\n            <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>.</p>"
                     }
                 },
                 "Role": {
@@ -1552,7 +1561,7 @@
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n            <p>This setting is not meant to specify an exact time at which the notification will be\n            sent. In some cases, the gateway might require more than the specified delay time to\n            generate and send notifications.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 },
                 "VPCEndpointDNSName": {
@@ -1631,16 +1640,25 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EncryptionType": {
+                    "target": "com.amazonaws.storagegateway#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of server-side encryption that the file share will use\n         for the data that it stores in Amazon S3.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>"
+                    }
+                },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#deprecated": {
+                            "message": "KMSEncrypted is deprecated, use EncryptionType instead."
+                        },
+                        "smithy.api#documentation": "<p>Optional. Set to <code>true</code> to use Amazon S3 server-side encryption with\n         your own KMS key (SSE-KMS), or <code>false</code> to use a key managed by\n            Amazon S3 (SSE-S3). To use dual-layer encryption (DSSE-KMS), set the\n            <code>EncryptionType</code> parameter instead.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This\n         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>Optional. The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used\n         for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric\n         CMKs. This value must be set if <code>KMSEncrypted</code> is <code>true</code>, or if\n            <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>.</p>"
                     }
                 },
                 "Role": {
@@ -1690,7 +1708,7 @@
                 "SMBACLEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>Storage Gateway User\n            Guide</i>.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/smb-acl.html\">Using Windows ACLs to limit SMB file share\n            access</a> in the <i>Amazon S3 File Gateway User\n         Guide</i>.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "AccessBasedEnumeration": {
@@ -1756,7 +1774,7 @@
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n            <p>This setting is not meant to specify an exact time at which the notification will be\n            sent. In some cases, the gateway might require more than the specified delay time to\n            generate and send notifications.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 },
                 "VPCEndpointDNSName": {
@@ -3879,7 +3897,7 @@
                 "SoftwareUpdatePreferences": {
                     "target": "com.amazonaws.storagegateway#SoftwareUpdatePreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of variables indicating the software update preferences for the gateway.</p>\n         <p>Includes <code>AutomaticUpdatePolicy</code> field with the following inputs:</p>\n         <p>\n            <code>ALL_VERSIONS</code> - Enables regular gateway maintenance updates.</p>\n         <p>\n            <code>EMERGENCY_VERSIONS_ONLY</code> - Disables regular gateway maintenance\n         updates.</p>"
+                        "smithy.api#documentation": "<p>A set of variables indicating the software update preferences for the gateway.</p>\n         <p>Includes <code>AutomaticUpdatePolicy</code> parameter with the following inputs:</p>\n         <p>\n            <code>ALL_VERSIONS</code> - Enables regular gateway maintenance updates.</p>\n         <p>\n            <code>EMERGENCY_VERSIONS_ONLY</code> - Disables regular gateway maintenance updates. The\n         gateway will still receive emergency version updates on rare occasions if necessary to\n         remedy highly critical security or durability issues. You will be notified before an\n         emergency version update is applied. These updates are applied during your gateway's\n         scheduled maintenance window.</p>"
                     }
                 }
             },
@@ -4530,22 +4548,6 @@
                 "smithy.api#documentation": "<p>Returns information about the upload buffer of a gateway. This operation is supported\n         for the stored volume, cached volume, and tape gateway types.</p>\n         <p>The response includes disk IDs that are configured as upload buffer space, and it\n         includes the amount of upload buffer space allocated and used.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To describe upload buffer of gateway",
-                        "documentation": "Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated/used.",
-                        "input": {
-                            "GatewayARN": "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
-                        },
-                        "output": {
-                            "GatewayARN": "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
-                            "DiskIds": [
-                                "pci-0000:03:00.0-scsi-0:0:0:0",
-                                "pci-0000:04:00.0-scsi-0:1:0:0"
-                            ],
-                            "UploadBufferUsedInBytes": 161061273600,
-                            "UploadBufferAllocatedInBytes": 0
-                        }
-                    },
-                    {
                         "title": "To describe upload buffer of a gateway",
                         "documentation": "Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated and used.",
                         "input": {
@@ -4559,6 +4561,22 @@
                             ],
                             "UploadBufferUsedInBytes": 0,
                             "UploadBufferAllocatedInBytes": 161061273600
+                        }
+                    },
+                    {
+                        "title": "To describe upload buffer of gateway",
+                        "documentation": "Returns information about the upload buffer of a gateway including disk IDs and the amount of upload buffer space allocated/used.",
+                        "input": {
+                            "GatewayARN": "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B"
+                        },
+                        "output": {
+                            "GatewayARN": "arn:aws:storagegateway:us-east-1:111122223333:gateway/sgw-12A3456B",
+                            "DiskIds": [
+                                "pci-0000:03:00.0-scsi-0:0:0:0",
+                                "pci-0000:04:00.0-scsi-0:1:0:0"
+                            ],
+                            "UploadBufferUsedInBytes": 161061273600,
+                            "UploadBufferAllocatedInBytes": 0
                         }
                     }
                 ]
@@ -5201,6 +5219,29 @@
         },
         "com.amazonaws.storagegateway#Ec2InstanceRegion": {
             "type": "string"
+        },
+        "com.amazonaws.storagegateway#EncryptionType": {
+            "type": "enum",
+            "members": {
+                "SseS3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SseS3"
+                    }
+                },
+                "SseKms": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SseKms"
+                    }
+                },
+                "DsseKms": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DsseKms"
+                    }
+                }
+            }
         },
         "com.amazonaws.storagegateway#EndpointNetworkConfiguration": {
             "type": "structure",
@@ -6350,7 +6391,7 @@
         "com.amazonaws.storagegateway#KMSKey": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This\n         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>",
+                "smithy.api#documentation": "<p>Optional. The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used\n         for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric\n         CMKs. This value must be set if <code>KMSEncrypted</code> is <code>true</code>, or if\n            <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>.</p>",
                 "smithy.api#length": {
                     "min": 7,
                     "max": 2048
@@ -7315,11 +7356,20 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN"
                 },
+                "EncryptionType": {
+                    "target": "com.amazonaws.storagegateway#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of server-side encryption that the file share will use\n         for the data that it stores in Amazon S3.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>"
+                    }
+                },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#deprecated": {
+                            "message": "KMSEncrypted is deprecated, use EncryptionType instead."
+                        },
+                        "smithy.api#documentation": "<p>Optional. Set to <code>true</code> to use Amazon S3 server-side encryption with\n         your own KMS key (SSE-KMS), or <code>false</code> to use a key managed by\n            Amazon S3 (SSE-S3). To use dual-layer encryption (DSSE-KMS), set the\n            <code>EncryptionType</code> parameter instead.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
@@ -7388,7 +7438,7 @@
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n            <p>This setting is not meant to specify an exact time at which the notification will be\n            sent. In some cases, the gateway might require more than the specified delay time to\n            generate and send notifications.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 },
                 "VPCEndpointDNSName": {
@@ -8152,11 +8202,20 @@
                 "GatewayARN": {
                     "target": "com.amazonaws.storagegateway#GatewayARN"
                 },
+                "EncryptionType": {
+                    "target": "com.amazonaws.storagegateway#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of server-side encryption that the file share will use\n         for the data that it stores in Amazon S3.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>"
+                    }
+                },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#deprecated": {
+                            "message": "KMSEncrypted is deprecated, use EncryptionType instead."
+                        },
+                        "smithy.api#documentation": "<p>Optional. Set to <code>true</code> to use Amazon S3 server-side encryption with\n         your own KMS key (SSE-KMS), or <code>false</code> to use a key managed by\n            Amazon S3 (SSE-S3). To use dual-layer encryption (DSSE-KMS), set the\n            <code>EncryptionType</code> parameter instead.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
@@ -8204,7 +8263,7 @@
                 "SMBACLEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this value is set to <code>true</code>, it indicates that access control list (ACL)\n         is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that\n         file and directory permissions are mapped to the POSIX permission.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>Storage Gateway User\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>If this value is set to <code>true</code>, it indicates that access control list (ACL)\n         is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that\n         file and directory permissions are mapped to the POSIX permission.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/smb-acl.html\">Using Windows ACLs to limit SMB file share\n            access</a> in the <i>Amazon S3 File Gateway User\n         Guide</i>.</p>"
                     }
                 },
                 "AccessBasedEnumeration": {
@@ -8267,7 +8326,7 @@
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n            <p>This setting is not meant to specify an exact time at which the notification will be\n            sent. In some cases, the gateway might require more than the specified delay time to\n            generate and send notifications.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 },
                 "VPCEndpointDNSName": {
@@ -8575,7 +8634,7 @@
                 "AutomaticUpdatePolicy": {
                     "target": "com.amazonaws.storagegateway#AutomaticUpdatePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the automatic update policy for a gateway.</p>\n         <p>\n            <code>ALL_VERSIONS</code> - Enables regular gateway maintenance updates.</p>\n         <p>\n            <code>EMERGENCY_VERSIONS_ONLY</code> - Disables regular gateway maintenance\n         updates.</p>"
+                        "smithy.api#documentation": "<p>Indicates the automatic update policy for a gateway.</p>\n         <p>\n            <code>ALL_VERSIONS</code> - Enables regular gateway maintenance updates.</p>\n         <p>\n            <code>EMERGENCY_VERSIONS_ONLY</code> - Disables regular gateway maintenance updates. The\n         gateway will still receive emergency version updates on rare occasions if necessary to\n         remedy highly critical security or durability issues. You will be notified before an\n         emergency version update is applied. These updates are applied during your gateway's\n         scheduled maintenance window.</p>"
                     }
                 }
             },
@@ -11140,7 +11199,7 @@
                 "SoftwareUpdatePreferences": {
                     "target": "com.amazonaws.storagegateway#SoftwareUpdatePreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of variables indicating the software update preferences for the gateway.</p>\n         <p>Includes <code>AutomaticUpdatePolicy</code> field with the following inputs:</p>\n         <p>\n            <code>ALL_VERSIONS</code> - Enables regular gateway maintenance updates.</p>\n         <p>\n            <code>EMERGENCY_VERSIONS_ONLY</code> - Disables regular gateway maintenance\n         updates.</p>"
+                        "smithy.api#documentation": "<p>A set of variables indicating the software update preferences for the gateway.</p>\n         <p>Includes <code>AutomaticUpdatePolicy</code> field with the following inputs:</p>\n         <p>\n            <code>ALL_VERSIONS</code> - Enables regular gateway maintenance updates.</p>\n         <p>\n            <code>EMERGENCY_VERSIONS_ONLY</code> - Disables regular gateway maintenance updates. The\n         gateway will still receive emergency version updates on rare occasions if necessary to\n         remedy highly critical security or durability issues. You will be notified before an\n         emergency version update is applied. These updates are applied during your gateway's\n         scheduled maintenance window.</p>"
                     }
                 }
             },
@@ -11191,16 +11250,25 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EncryptionType": {
+                    "target": "com.amazonaws.storagegateway#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of server-side encryption that the file share will use\n         for the data that it stores in Amazon S3.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>"
+                    }
+                },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#deprecated": {
+                            "message": "KMSEncrypted is deprecated, use EncryptionType instead."
+                        },
+                        "smithy.api#documentation": "<p>Optional. Set to <code>true</code> to use Amazon S3 server-side encryption with\n         your own KMS key (SSE-KMS), or <code>false</code> to use a key managed by\n            Amazon S3 (SSE-S3). To use dual-layer encryption (DSSE-KMS), set the\n            <code>EncryptionType</code> parameter instead.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This\n         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>Optional. The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used\n         for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric\n         CMKs. This value must be set if <code>KMSEncrypted</code> is <code>true</code>, or if\n            <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>.</p>"
                     }
                 },
                 "NFSFileShareDefaults": {
@@ -11266,7 +11334,7 @@
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n            <p>This setting is not meant to specify an exact time at which the notification will be\n            sent. In some cases, the gateway might require more than the specified delay time to\n            generate and send notifications.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 },
                 "AuditDestinationARN": {
@@ -11326,16 +11394,25 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EncryptionType": {
+                    "target": "com.amazonaws.storagegateway#EncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of server-side encryption that the file share will use\n         for the data that it stores in Amazon S3.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>"
+                    }
+                },
                 "KMSEncrypted": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own\n            KMS key, or <code>false</code> to use a key managed by Amazon S3.\n         Optional.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#deprecated": {
+                            "message": "KMSEncrypted is deprecated, use EncryptionType instead."
+                        },
+                        "smithy.api#documentation": "<p>Optional. Set to <code>true</code> to use Amazon S3 server-side encryption with\n         your own KMS key (SSE-KMS), or <code>false</code> to use a key managed by\n            Amazon S3 (SSE-S3). To use dual-layer encryption (DSSE-KMS), set the\n            <code>EncryptionType</code> parameter instead.</p>\n         <note>\n            <p>We recommend using <code>EncryptionType</code> instead of <code>KMSEncrypted</code>\n            to set the file share encryption method. You do not need to provide values for both\n            parameters.</p>\n            <p>If values for both parameters exist in the same request, then the specified\n            encryption methods must not conflict. For example, if <code>EncryptionType</code> is\n               <code>SseS3</code>, then <code>KMSEncrypted</code> must be <code>false</code>. If\n               <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>, then\n               <code>KMSEncrypted</code> must be <code>true</code>.</p>\n         </note>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "KMSKey": {
                     "target": "com.amazonaws.storagegateway#KMSKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This\n         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>"
+                        "smithy.api#documentation": "<p>Optional. The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used\n         for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric\n         CMKs. This value must be set if <code>KMSEncrypted</code> is <code>true</code>, or if\n            <code>EncryptionType</code> is <code>SseKms</code> or <code>DsseKms</code>.</p>"
                     }
                 },
                 "DefaultStorageClass": {
@@ -11371,7 +11448,7 @@
                 "SMBACLEnabled": {
                     "target": "com.amazonaws.storagegateway#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to\n            control access to an SMB file share</a> in the <i>Storage Gateway User\n            Guide</i>.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file\n         share. Set it to <code>false</code> to map file and directory permissions to the POSIX\n         permissions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/filegateway/latest/files3/smb-acl.html\">Using Windows ACLs to limit SMB file share\n            access</a> in the <i>Amazon S3 File Gateway User\n         Guide</i>.</p>\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>"
                     }
                 },
                 "AccessBasedEnumeration": {
@@ -11425,7 +11502,7 @@
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n            <p>This setting is not meant to specify an exact time at which the notification will be\n            sent. In some cases, the gateway might require more than the specified delay time to\n            generate and send notifications.</p>\n         </note>\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 },
                 "OplocksEnabled": {
@@ -11868,7 +11945,8 @@
                 "smithy.api#length": {
                     "min": 50,
                     "max": 500
-                }
+                },
+                "smithy.api#pattern": "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:gateway\\/(.+)\\/volume\\/vol-(\\S+)$"
             }
         },
         "com.amazonaws.storagegateway#VolumeARNs": {
