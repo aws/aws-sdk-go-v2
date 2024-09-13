@@ -211,7 +211,7 @@ You can also use temporary security credentials by adding the session
 tokens to your profile, as shown in the following example:
 
 ```ini
-[temp]
+[profile temp]
 aws_access_key_id = <YOUR_TEMP_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_TEMP_SECRET_ACCESS_KEY>
 aws_session_token = <YOUR_SESSION_TOKEN>
@@ -258,11 +258,11 @@ credentials file, you can declare multiple profiles, as follows.
 aws_access_key_id = <YOUR_DEFAULT_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_DEFAULT_SECRET_ACCESS_KEY>
 
-[test-account]
+[profile test-account]
 aws_access_key_id = <YOUR_TEST_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_TEST_SECRET_ACCESS_KEY>
 
-[prod-account]
+[profile prod-account]
 ; work profile
 aws_access_key_id = <YOUR_PROD_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_PROD_SECRET_ACCESS_KEY>
