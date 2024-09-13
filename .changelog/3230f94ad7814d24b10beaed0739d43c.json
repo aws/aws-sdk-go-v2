@@ -1,0 +1,8 @@
+{
+    "id": "3230f94a-d781-4d24-b10b-eaed0739d43c",
+    "type": "bugfix",
+    "description": "Read `AWS_CONTAINER_CREDENTIALS_FULL_URI` env variable if set when reading a profile with `credential_source`. Also ensure `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is always read before it",
+    "modules": [
+        "config"
+    ]
+}
