@@ -1,3 +1,7 @@
+# v1.24.4 (2024-09-13)
+
+* **Documentation**: Doc only update to Amplify to explain platform setting for Next.js 14 SSG only applications
+
 # v1.24.3 (2024-09-04)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.38.4 (2024-09-13)
+
+* **Documentation**: Updates to all tags descriptions.
+
 # v1.38.3 (2024-09-04)
 
 * No change notes available for this release.

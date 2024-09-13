@@ -1,3 +1,13 @@
+# Release (2024-09-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.24.4](service/amplify/CHANGELOG.md#v1244-2024-09-13)
+  * **Documentation**: Doc only update to Amplify to explain platform setting for Next.js 14 SSG only applications
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.38.4](service/ivs/CHANGELOG.md#v1384-2024-09-13)
+  * **Documentation**: Updates to all tags descriptions.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.14.8](service/ivschat/CHANGELOG.md#v1148-2024-09-13)
+  * **Documentation**: Updates to all tags descriptions.
+
 # Release (2024-09-12)
 
 ## Module Highlights

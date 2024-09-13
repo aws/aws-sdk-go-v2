@@ -1,8 +1,0 @@
-{
-    "id": "60fdae4d-2c5f-47ba-9897-1427b7a05a05",
-    "type": "documentation",
-    "description": "Updates to all tags descriptions.",
-    "modules": [
-        "service/ivschat"
-    ]
-}
