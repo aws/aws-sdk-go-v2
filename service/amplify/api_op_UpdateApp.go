@@ -120,6 +120,9 @@ type UpdateAppInput struct {
 	// . For a dynamic server-side rendered (SSR) app, set the platform type to
 	// WEB_COMPUTE . For an app requiring Amplify Hosting's original SSR support only,
 	// set the platform type to WEB_DYNAMIC .
+	//
+	// If you are deploying an SSG only app with Next.js version 14 or later, you must
+	// set the platform type to WEB_COMPUTE .
 	Platform types.Platform
 
 	// The name of the Git repository for an Amplify app.

@@ -53,16 +53,16 @@
 //
 // A tag is a metadata label that you assign to an Amazon Web Services resource. A
 // tag comprises a key and a value, both set by you. For example, you might set a
-// tag as topic:nature to label a particular video category. See [Tagging Amazon Web Services Resources] for more
-// information, including restrictions that apply to tags and "Tag naming limits
-// and requirements"; Amazon IVS has no service-specific constraints beyond what is
-// documented there.
+// tag as topic:nature to label a particular video category. See [Best practices and strategies] in Tagging
+// Amazon Web Services Resources and Tag Editor for details, including restrictions
+// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+// service-specific constraints beyond what is documented there.
 //
 // Tags can help you identify and organize your Amazon Web Services resources. For
 // example, you can use the same tag for different resources to indicate that they
 // are related. You can also use tags to manage access (see [Access Tags]).
 //
-// The Amazon IVS API has these tag-related endpoints: TagResource, UntagResource, and ListTagsForResource. The following
+// The Amazon IVS API has these tag-related operations: TagResource, UntagResource, and ListTagsForResource. The following
 // resources support tagging: Channels, Stream Keys, Playback Key Pairs, and
 // Recording Configurations.
 //
@@ -106,12 +106,12 @@
 // specify a resource unambiguously across all of AWS, such as in IAM policies and
 // API calls. For more information, see [Amazon Resource Names]in the AWS General Reference.
 //
-// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 // [Amazon Resource Names]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 // [Amazon IVS page]: https://docs.aws.amazon.com/general/latest/gr/ivs.html
 // [Identity and Access Management]: https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html
 // [Document History]: https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html
 // [Amazon IVS private channels]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
+// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 // [Getting Started with IVS Low-Latency Streaming]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/getting-started.html
 // [Access Tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
 // [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html

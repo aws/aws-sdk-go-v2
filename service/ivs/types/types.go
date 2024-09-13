@@ -135,11 +135,12 @@ type Channel struct {
 	Srt *Srt
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
@@ -188,11 +189,12 @@ type ChannelSummary struct {
 	RecordingConfigurationArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
@@ -242,11 +244,12 @@ type PlaybackKeyPair struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -262,11 +265,12 @@ type PlaybackKeyPairSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -305,11 +309,12 @@ type PlaybackRestrictionPolicy struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -347,11 +352,12 @@ type PlaybackRestrictionPolicySummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -389,11 +395,12 @@ type RecordingConfiguration struct {
 	RenditionConfiguration *RenditionConfiguration
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	// A complex type that allows you to enable/disable the recording of thumbnails
@@ -428,11 +435,12 @@ type RecordingConfigurationSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -553,11 +561,12 @@ type StreamKey struct {
 	ChannelArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	// Stream-key value.
@@ -576,11 +585,12 @@ type StreamKeySummary struct {
 	ChannelArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
-	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
-	// service-specific constraints beyond what is documented there.
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
 	//
-	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

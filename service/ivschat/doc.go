@@ -39,16 +39,16 @@
 //
 // A tag is a metadata label that you assign to an AWS resource. A tag comprises a
 // key and a value, both set by you. For example, you might set a tag as
-// topic:nature to label a particular video category. See [Tagging AWS Resources] for more information,
-// including restrictions that apply to tags and "Tag naming limits and
-// requirements"; Amazon IVS Chat has no service-specific constraints beyond what
-// is documented there.
+// topic:nature to label a particular video category. See [Best practices and strategies] in Tagging Amazon Web
+// Services Resources and Tag Editor for details, including restrictions that apply
+// to tags and "Tag naming limits and requirements"; Amazon IVS Chat has no
+// service-specific constraints beyond what is documented there.
 //
 // Tags can help you identify and organize your AWS resources. For example, you
 // can use the same tag for different resources to indicate that they are related.
 // You can also use tags to manage access (see [Access Tags]).
 //
-// The Amazon IVS Chat API has these tag-related endpoints: TagResource, UntagResource, and ListTagsForResource. The
+// The Amazon IVS Chat API has these tag-related operations: TagResource, UntagResource, and ListTagsForResource. The
 // following resource supports tagging: Room.
 //
 // At most 50 tags can be applied to a resource.
@@ -66,7 +66,7 @@
 //     permissions for Amazon IVS Chat API requests.
 //
 // Users (viewers) connect to a room using secure access tokens that you create
-// using the CreateChatTokenendpoint through the AWS SDK. You call CreateChatToken for every
+// using the CreateChatTokenoperation through the AWS SDK. You call CreateChatToken for every
 // user’s chat session, passing identity and authorization information about the
 // user.
 //
@@ -97,10 +97,10 @@
 // API calls. For more information, see [Amazon Resource Names]in the AWS General Reference.
 //
 // [Amazon Resource Names]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 // [Amazon IVS page]: https://docs.aws.amazon.com/general/latest/gr/ivs.html
 // [Identity and Access Management]: https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html
 // [Amazon IVS Chat Messaging API]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html
+// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 // [Amazon IVS Chat Messaging API Reference]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/chat-messaging-api.html
 // [Access Tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
 // [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html

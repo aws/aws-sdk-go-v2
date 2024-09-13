@@ -1,0 +1,8 @@
+{
+    "id": "80e55271-ccd1-45dc-b889-eef6069ff83d",
+    "type": "documentation",
+    "description": "Doc only update to Amplify to explain platform setting for Next.js 14 SSG only applications",
+    "modules": [
+        "service/amplify"
+    ]
+}

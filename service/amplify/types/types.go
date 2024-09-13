@@ -66,6 +66,9 @@ type App struct {
 	// WEB_COMPUTE . For an app requiring Amplify Hosting's original SSR support only,
 	// set the platform type to WEB_DYNAMIC .
 	//
+	// If you are deploying an SSG only app with Next.js 14 or later, you must use the
+	// platform type WEB_COMPUTE .
+	//
 	// This member is required.
 	Platform Platform
 
