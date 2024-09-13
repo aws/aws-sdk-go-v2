@@ -692,7 +692,7 @@ func TestResolveCredentialsEcsContainer(t *testing.T) {
 			expectedSecretKey: "SECRET-Full-Path",
 			envVar: map[string]string{
 				"AWS_CONTAINER_CREDENTIALS_FULL_URI": "placeholder-replaced-at-runtime",
-				"AWS_PROFILE":                            "ecscontainer",
+				"AWS_PROFILE":                        "ecscontainer",
 			},
 			configFile: filepath.Join("testdata", "config_source_shared"),
 		},
