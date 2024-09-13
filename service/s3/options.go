@@ -12,6 +12,7 @@ import (
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/metrics"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -84,6 +85,9 @@ type Options struct {
 
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
+
+	// The client meter provider.
+	MeterProvider metrics.MeterProvider
 
 	// The region to send requests to. (Required)
 	Region string

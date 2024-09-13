@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	smithy "github.com/aws/smithy-go"
 	smithyauth "github.com/aws/smithy-go/auth"
+	"github.com/aws/smithy-go/metrics"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -270,7 +271,13 @@ func (m *getIdentityMiddleware) HandleFinalize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("no identity resolver")
 	}
 
-	identity, err := resolver.GetIdentity(innerCtx, rscheme.IdentityProperties)
+	identity, err := timeOperationMetric(ctx, "client.call.resolve_identity_duration",
+		func() (smithyauth.Identity, error) {
+			return resolver.GetIdentity(innerCtx, rscheme.IdentityProperties)
+		},
+		func(o *metrics.RecordMetricOptions) {
+			o.Properties.Set("auth.scheme_id", rscheme.Scheme.SchemeID())
+		})
 	if err != nil {
 		return out, metadata, fmt.Errorf("get identity: %w", err)
 	}
@@ -326,7 +333,12 @@ func (m *signRequestMiddleware) HandleFinalize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("no signer")
 	}
 
-	if err := signer.SignRequest(ctx, req, identity, rscheme.SignerProperties); err != nil {
+	_, err = timeOperationMetric(ctx, "client.call.signing_duration", func() (any, error) {
+		return nil, signer.SignRequest(ctx, req, identity, rscheme.SignerProperties)
+	}, func(o *metrics.RecordMetricOptions) {
+		o.Properties.Set("auth.scheme_id", rscheme.Scheme.SchemeID())
+	})
+	if err != nil {
 		return out, metadata, fmt.Errorf("sign request: %w", err)
 	}
 
