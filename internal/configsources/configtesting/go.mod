@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/internal/configsources/configtesting
 go 1.21
 
 require (
-	github.com/aws/aws-sdk-go-v2/config v1.27.33
+	github.com/aws/aws-sdk-go-v2/config v1.27.34
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.17
 )
 

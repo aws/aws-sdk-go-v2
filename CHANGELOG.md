@@ -1,3 +1,24 @@
+# Release (2024-09-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.27.34](config/CHANGELOG.md#v12734-2024-09-16)
+  * **Bug Fix**: Read `AWS_CONTAINER_CREDENTIALS_FULL_URI` env variable if set when reading a profile with `credential_source`. Also ensure `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is always read before it
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.17.0](service/bedrock/CHANGELOG.md#v1170-2024-09-16)
+  * **Feature**: This feature adds cross account s3 bucket and VPC support to ModelInvocation jobs. To use a cross account bucket, pass in the accountId of the bucket to s3BucketOwner in the ModelInvocationJobInputDataConfig or ModelInvocationJobOutputDataConfig.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.56.0](service/iot/CHANGELOG.md#v1560-2024-09-16)
+  * **Feature**: This release adds additional enhancements to AWS IoT Device Management Software Package Catalog and Jobs. It also adds SBOM support in Software Package Version.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.59.0](service/medialive/CHANGELOG.md#v1590-2024-09-16)
+  * **Feature**: Removing the ON_PREMISE enum from the input settings field.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.31.3](service/organizations/CHANGELOG.md#v1313-2024-09-16)
+  * **Documentation**: Doc only update for AWS Organizations that fixes several customer-reported issues
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.2.7](service/pcaconnectorscep/CHANGELOG.md#v127-2024-09-16)
+  * **Documentation**: This is a general availability (GA) release of Connector for SCEP, a feature of AWS Private CA. Connector for SCEP links your SCEP-enabled and mobile device management systems to AWS Private CA for digital signature installation and certificate management.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.83.0](service/rds/CHANGELOG.md#v1830-2024-09-16)
+  * **Feature**: Launching Global Cluster tagging.
+
 # Release (2024-09-13)
 
 ## Module Highlights

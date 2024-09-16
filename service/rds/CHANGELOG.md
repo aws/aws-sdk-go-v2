@@ -1,3 +1,7 @@
+# v1.83.0 (2024-09-16)
+
+* **Feature**: Launching Global Cluster tagging.
+
 # v1.82.5 (2024-09-12)
 
 * **Documentation**: This release adds support for the os-upgrade pending maintenance action for Amazon Aurora DB clusters.

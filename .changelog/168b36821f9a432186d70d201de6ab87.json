@@ -1,8 +1,0 @@
-{
-    "id": "168b3682-1f9a-4321-86d7-0d201de6ab87",
-    "type": "feature",
-    "description": "Launching Global Cluster tagging.",
-    "modules": [
-        "service/rds"
-    ]
-}

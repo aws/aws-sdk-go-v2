@@ -1,8 +1,0 @@
-{
-    "id": "e81876a0-da82-4662-abf4-75c2a33b71b4",
-    "type": "documentation",
-    "description": "This is a general availability (GA) release of Connector for SCEP, a feature of AWS Private CA. Connector for SCEP links your SCEP-enabled and mobile device management systems to AWS Private CA for digital signature installation and certificate management.",
-    "modules": [
-        "service/pcaconnectorscep"
-    ]
-}

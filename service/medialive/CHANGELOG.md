@@ -1,3 +1,7 @@
+# v1.59.0 (2024-09-16)
+
+* **Feature**: Removing the ON_PREMISE enum from the input settings field.
+
 # v1.58.0 (2024-09-11)
 
 * **Feature**: Adds AV1 Codec support, SRT ouputs, and MediaLive Anywhere support.

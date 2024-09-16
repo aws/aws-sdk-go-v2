@@ -2,8 +2,8 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.5
-	github.com/aws/aws-sdk-go-v2/config v1.27.33
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.18
+	github.com/aws/aws-sdk-go-v2/config v1.27.34
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.19
 	github.com/aws/aws-sdk-go-v2/service/acm v1.28.8
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.8
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.4
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.177.3
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.45.4
-	github.com/aws/aws-sdk-go-v2/service/efs v1.31.6
+	github.com/aws/aws-sdk-go-v2/service/efs v1.31.7
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.40.9
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.26.7
@@ -49,7 +49,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/iam v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.23.6
-	github.com/aws/aws-sdk-go-v2/service/iot v1.55.6
+	github.com/aws/aws-sdk-go-v2/service/iot v1.56.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.29.7
 	github.com/aws/aws-sdk-go-v2/service/kms v1.35.7
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.58.3
@@ -58,7 +58,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.33.7
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.21.6
 	github.com/aws/aws-sdk-go-v2/service/polly v1.43.2
-	github.com/aws/aws-sdk-go-v2/service/rds v1.82.5
+	github.com/aws/aws-sdk-go-v2/service/rds v1.83.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.46.8
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.43.5
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.43.2
@@ -78,7 +78,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.30.7
 	github.com/aws/aws-sdk-go-v2/service/support v1.24.7
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.27.6
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.19.6
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.19.7
 	github.com/aws/aws-sdk-go-v2/service/waf v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.52.2

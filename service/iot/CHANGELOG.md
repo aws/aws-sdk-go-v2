@@ -1,3 +1,7 @@
+# v1.56.0 (2024-09-16)
+
+* **Feature**: This release adds additional enhancements to AWS IoT Device Management Software Package Catalog and Jobs. It also adds SBOM support in Software Package Version.
+
 # v1.55.6 (2024-09-04)
 
 * No change notes available for this release.

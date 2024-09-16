@@ -1,3 +1,7 @@
+# v1.31.3 (2024-09-16)
+
+* **Documentation**: Doc only update for AWS Organizations that fixes several customer-reported issues
+
 # v1.31.2 (2024-09-04)
 
 * No change notes available for this release.

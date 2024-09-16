@@ -1,8 +1,0 @@
-{
-    "id": "d0d08c6d-b9e3-494a-bfa3-ad759e6e23e8",
-    "type": "feature",
-    "description": "Removing the ON_PREMISE enum from the input settings field.",
-    "modules": [
-        "service/medialive"
-    ]
-}

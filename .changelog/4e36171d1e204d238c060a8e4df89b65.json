@@ -1,8 +1,0 @@
-{
-    "id": "4e36171d-1e20-4d23-8c06-0a8e4df89b65",
-    "type": "feature",
-    "description": "This feature adds cross account s3 bucket and VPC support to ModelInvocation jobs. To use a cross account bucket, pass in the accountId of the bucket to s3BucketOwner in the ModelInvocationJobInputDataConfig or ModelInvocationJobOutputDataConfig.",
-    "modules": [
-        "service/bedrock"
-    ]
-}
