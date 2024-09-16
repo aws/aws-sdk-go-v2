@@ -33,15 +33,51 @@ func swapECSContainerURI(path string) func() {
 	}
 }
 
-func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolverWithOptions, func()) {
+const ecsFullPathResponse = `{
+  "Code": "Success",
+  "Type": "AWS-HMAC",
+  "AccessKeyId": "ecs-full-path-access-key",
+  "SecretAccessKey": "ecs-full-path-ecs-secret-key",
+  "Token": "ecs-full-path-token",
+  "Expiration": "2100-01-01T00:00:00Z",
+  "LastUpdated": "2009-11-23T00:00:00Z"
+}`
+
+const assumeRoleRespEcsFullPathMsg = `
+<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+    <AssumeRoleResult>
+        <AssumedRoleUser>
+            <Arn>arn:aws:sts::account_id:assumed-role/role/session_name</Arn>
+            <AssumedRoleId>AKID:session_name</AssumedRoleId>
+        </AssumedRoleUser>
+        <Credentials>
+            <AccessKeyId>AKID-Full-Path</AccessKeyId>
+            <SecretAccessKey>SECRET-Full-Path</SecretAccessKey>
+            <SessionToken>SESSION_TOKEN-Full-Path</SessionToken>
+            <Expiration>%s</Expiration>
+        </Credentials>
+    </AssumeRoleResult>
+    <ResponseMetadata>
+        <RequestId>request-id</RequestId>
+    </ResponseMetadata>
+</AssumeRoleResponse>
+`
+
+var ecsMetadataServerURL string
+
+func setupCredentialsEndpoints() (aws.EndpointResolverWithOptions, func()) {
 	ecsMetadataServer := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
 			if r.URL.Path == "/ECS" {
 				w.Write([]byte(ecsResponse))
+				// Used when we specify a full path instead of relative path
+			} else if r.URL.Path == "/ECSFullPath" {
+				w.Write([]byte(ecsFullPathResponse))
 			} else {
 				w.Write([]byte(""))
 			}
 		}))
+	ecsMetadataServerURL = ecsMetadataServer.URL
 	resetECSEndpoint := swapECSContainerURI(ecsMetadataServer.URL)
 
 	ec2MetadataServer := httptest.NewServer(http.HandlerFunc(
@@ -74,6 +110,15 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolverWithOptions, f
 
 			switch form.Get("Action") {
 			case "AssumeRole":
+				if val, ok := r.Header["X-Amz-Security-Token"]; ok {
+					if val[0] == "ecs-full-path-token" {
+						w.Write([]byte(fmt.Sprintf(
+							assumeRoleRespEcsFullPathMsg,
+							smithytime.FormatDateTime(time.Now().
+								Add(15*time.Minute)))))
+						return
+					}
+				}
 				w.Write([]byte(fmt.Sprintf(
 					assumeRoleRespMsg,
 					smithytime.FormatDateTime(time.Now().
@@ -394,7 +439,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 				os.Setenv("AWS_PROFILE", c.envProfile)
 			}
 
-			endpointResolver, cleanupFn := setupCredentialsEndpoints(t)
+			endpointResolver, cleanupFn := setupCredentialsEndpoints()
 			defer cleanupFn()
 
 			var cleanup func()
@@ -602,6 +647,107 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 			tc.expectedError(t, err)
 		})
 	}
+}
+
+func TestResolveCredentialsEcsContainer(t *testing.T) {
+	testCases := map[string]struct {
+		expectedAccessKey string
+		expectedSecretKey string
+		envVar            map[string]string
+		configFile        string
+	}{
+		"only relative ECS URI set": {
+			expectedAccessKey: "ecs-access-key",
+			expectedSecretKey: "ecs-secret-key",
+			envVar: map[string]string{
+				"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI": "/ECS",
+			},
+		},
+		"only full ECS URI set": {
+			expectedAccessKey: "ecs-full-path-access-key",
+			expectedSecretKey: "ecs-full-path-ecs-secret-key",
+			envVar: map[string]string{
+				"AWS_CONTAINER_CREDENTIALS_FULL_URI": "placeholder-replaced-at-runtime",
+			},
+		},
+		"relative ECS URI has precedence over full": {
+			expectedAccessKey: "ecs-access-key",
+			expectedSecretKey: "ecs-secret-key",
+			envVar: map[string]string{
+				"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI": "/ECS",
+				"AWS_CONTAINER_CREDENTIALS_FULL_URI":     "placeholder-replaced-at-runtime",
+			},
+		},
+		"credential source only relative ECS URI set": {
+			expectedAccessKey: "AKID",
+			expectedSecretKey: "SECRET",
+			envVar: map[string]string{
+				"AWS_PROFILE":                            "ecscontainer",
+				"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI": "/ECS",
+			},
+			configFile: filepath.Join("testdata", "config_source_shared"),
+		},
+		"credential source only full ECS URI set": {
+			expectedAccessKey: "AKID-Full-Path",
+			expectedSecretKey: "SECRET-Full-Path",
+			envVar: map[string]string{
+				"AWS_CONTAINER_CREDENTIALS_FULL_URI": "placeholder-replaced-at-runtime",
+				"AWS_PROFILE":                        "ecscontainer",
+			},
+			configFile: filepath.Join("testdata", "config_source_shared"),
+		},
+		"credential source relative ECS URI has precedence over full": {
+			expectedAccessKey: "AKID",
+			expectedSecretKey: "SECRET",
+			envVar: map[string]string{
+				"AWS_CONTAINER_CREDENTIALS_RELATIVE_URI": "/ECS",
+				"AWS_CONTAINER_CREDENTIALS_FULL_URI":     "placeholder-replaced-at-runtime",
+				"AWS_PROFILE":                            "ecscontainer",
+			},
+			configFile: filepath.Join("testdata", "config_source_shared"),
+		},
+	}
+
+	for name, tc := range testCases {
+		t.Run(name, func(t *testing.T) {
+			endpointResolver, cleanupFn := setupCredentialsEndpoints()
+			defer cleanupFn()
+			restoreEnv := awstesting.StashEnv()
+			defer awstesting.PopEnv(restoreEnv)
+			var sharedConfigFiles []string
+			if tc.configFile != "" {
+				sharedConfigFiles = append(sharedConfigFiles, tc.configFile)
+			}
+			opts := []func(*LoadOptions) error{
+				WithEndpointResolverWithOptions(endpointResolver),
+				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
+				WithSharedConfigFiles(sharedConfigFiles),
+				WithSharedCredentialsFiles([]string{}),
+			}
+			for k, v := range tc.envVar {
+				// since we don't know the value of this until the server starts
+				if k == "AWS_CONTAINER_CREDENTIALS_FULL_URI" {
+					v = ecsMetadataServerURL + "/ECSFullPath"
+				}
+				os.Setenv(k, v)
+			}
+			cfg, err := LoadDefaultConfig(context.TODO(), opts...)
+			if err != nil {
+				t.Fatalf("could not load config: %s", err)
+			}
+			actual, err := cfg.Credentials.Retrieve(context.TODO())
+			if err != nil {
+				t.Fatalf("could not retrieve credentials: %s", err)
+			}
+			if actual.AccessKeyID != tc.expectedAccessKey {
+				t.Errorf("expected access key to be %s, got %s", tc.expectedAccessKey, actual.AccessKeyID)
+			}
+			if actual.SecretAccessKey != tc.expectedSecretKey {
+				t.Errorf("expected secret key to be %s, got %s", tc.expectedSecretKey, actual.SecretAccessKey)
+			}
+		})
+	}
+
 }
 
 type stubErrorClient struct {
