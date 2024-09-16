@@ -19967,12 +19967,6 @@
                         "smithy.api#enumValue": "AWS"
                     }
                 },
-                "ON_PREMISE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ON_PREMISE"
-                    }
-                },
                 "ON_PREMISES": {
                     "target": "smithy.api#Unit",
                     "traits": {

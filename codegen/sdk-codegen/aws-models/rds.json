@@ -2081,7 +2081,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ca-certificate-rotation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hardware-maintenance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>os-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>system-update</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about these actions, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora\">Maintenance actions for Amazon Aurora</a> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds\">Maintenance actions for Amazon RDS</a>.</p>",
+                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid Values: <code>system-update</code>, <code>db-upgrade</code>, \n          <code>hardware-maintenance</code>, <code>ca-certificate-rotation</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6606,6 +6606,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable storage encryption for the new global database cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be specified if <code>SourceDBClusterIdentifier</code> is specified. In this case, Amazon Aurora uses the setting from the source DB cluster.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rds#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to assign to the global cluster.</p>"
                     }
                 }
             },
@@ -19485,6 +19491,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A data object containing all properties for the current state of an in-process or pending switchover or failover process for this global cluster (Aurora global database).\n      This object is empty unless the <code>SwitchoverGlobalCluster</code> or <code>FailoverGlobalCluster</code> operation was called on this global cluster.</p>"
                     }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.rds#TagList"
                 }
             },
             "traits": {
@@ -20779,7 +20788,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags on an Amazon RDS resource.</p>\n         <p>For an overview on tagging an Amazon RDS resource, \n          see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a> \n          in the <i>Amazon RDS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Lists all tags on an Amazon RDS resource.</p>\n         <p>For an overview on tagging an Amazon RDS resource, \n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>\n            or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS Resources</a> in the <i>Amazon Aurora User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To list tags on an Amazon RDS resource",
@@ -24734,7 +24743,7 @@
                 "Action": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of pending maintenance action that is available for the resource. </p>\n         <p>For more information about maintenance actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html\">Maintaining a DB instance</a>.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ca-certificate-rotation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hardware-maintenance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>os-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>system-update</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about these actions, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora\">Maintenance actions for Amazon Aurora</a> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds\">Maintenance actions for Amazon RDS</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of pending maintenance action that is available for the resource. </p>\n         <p>For more information about maintenance actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html\">Maintaining a DB instance</a>.</p>\n         <p>Valid Values:<code> system-update | db-upgrade | hardware-maintenance | ca-certificate-rotation</code>\n         </p>"
                     }
                 },
                 "AutoAppliedAfterDate": {
@@ -26159,7 +26168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes metadata tags from an Amazon RDS resource.</p>\n         <p>For an overview on tagging an Amazon RDS resource, \n          see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a> \n          in the <i>Amazon RDS User Guide.</i>\n         </p>",
+                "smithy.api#documentation": "<p>Removes metadata tags from an Amazon RDS resource.</p>\n         <p>For an overview on tagging an Amazon RDS resource, \n          see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>\n          or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS Resources</a> in the <i>Amazon Aurora User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To remove tags from a resource",
