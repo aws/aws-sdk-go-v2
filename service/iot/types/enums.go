@@ -1386,6 +1386,65 @@ func (RetryableFailureType) Values() []RetryableFailureType {
 	}
 }
 
+type SbomValidationErrorCode string
+
+// Enum values for SbomValidationErrorCode
+const (
+	SbomValidationErrorCodeIncompatibleFormat    SbomValidationErrorCode = "INCOMPATIBLE_FORMAT"
+	SbomValidationErrorCodeFileSizeLimitExceeded SbomValidationErrorCode = "FILE_SIZE_LIMIT_EXCEEDED"
+)
+
+// Values returns all known values for SbomValidationErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SbomValidationErrorCode) Values() []SbomValidationErrorCode {
+	return []SbomValidationErrorCode{
+		"INCOMPATIBLE_FORMAT",
+		"FILE_SIZE_LIMIT_EXCEEDED",
+	}
+}
+
+type SbomValidationResult string
+
+// Enum values for SbomValidationResult
+const (
+	SbomValidationResultFailed    SbomValidationResult = "FAILED"
+	SbomValidationResultSucceeded SbomValidationResult = "SUCCEEDED"
+)
+
+// Values returns all known values for SbomValidationResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SbomValidationResult) Values() []SbomValidationResult {
+	return []SbomValidationResult{
+		"FAILED",
+		"SUCCEEDED",
+	}
+}
+
+type SbomValidationStatus string
+
+// Enum values for SbomValidationStatus
+const (
+	SbomValidationStatusInProgress SbomValidationStatus = "IN_PROGRESS"
+	SbomValidationStatusFailed     SbomValidationStatus = "FAILED"
+	SbomValidationStatusSucceeded  SbomValidationStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for SbomValidationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SbomValidationStatus) Values() []SbomValidationStatus {
+	return []SbomValidationStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"SUCCEEDED",
+	}
+}
+
 type ServerCertificateStatus string
 
 // Enum values for ServerCertificateStatus

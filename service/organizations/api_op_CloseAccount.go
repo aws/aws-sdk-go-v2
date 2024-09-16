@@ -32,8 +32,9 @@ import (
 //
 //	- You can close only 10% of member accounts, between 10 and 1000, within a
 //	rolling 30 day period. This quota is not bound by a calendar month, but starts
-//	when you close an account. After you reach this limit, you can close additional
-//	accounts. For more information, see [Closing a member account in your organization]and [Quotas for Organizations]in the Organizations User Guide.
+//	when you close an account. After you reach this limit, you can't close
+//	additional accounts. For more information, see [Closing a member account in your organization]and [Quotas for Organizations]in the Organizations User
+//	Guide.
 //
 //	- To reinstate a closed account, contact Amazon Web Services Support within
 //	the 90-day grace period while the account is in SUSPENDED status.

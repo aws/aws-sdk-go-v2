@@ -14,9 +14,10 @@ import (
 // Lists all tags on an Amazon RDS resource.
 //
 // For an overview on tagging an Amazon RDS resource, see [Tagging Amazon RDS Resources] in the Amazon RDS User
-// Guide.
+// Guide or [Tagging Amazon Aurora and Amazon RDS Resources]in the Amazon Aurora User Guide.
 //
-// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+// [Tagging Amazon Aurora and Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

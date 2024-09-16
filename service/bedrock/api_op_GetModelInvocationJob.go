@@ -105,6 +105,12 @@ type GetModelInvocationJobOutput struct {
 	// The number of hours after which batch inference job was set to time out.
 	TimeoutDurationInHours *int32
 
+	// The configuration of the Virtual Private Cloud (VPC) for the data in the batch
+	// inference job. For more information, see [Protect batch inference jobs using a VPC].
+	//
+	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+	VpcConfig *types.VpcConfig
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

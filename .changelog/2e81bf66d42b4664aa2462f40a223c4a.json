@@ -1,0 +1,8 @@
+{
+    "id": "2e81bf66-d42b-4664-aa24-62f40a223c4a",
+    "type": "documentation",
+    "description": "Doc only update for AWS Organizations that fixes several customer-reported issues",
+    "modules": [
+        "service/organizations"
+    ]
+}

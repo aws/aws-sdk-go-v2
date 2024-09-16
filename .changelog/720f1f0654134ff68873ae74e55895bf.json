@@ -1,0 +1,8 @@
+{
+    "id": "720f1f06-5413-4ff6-8873-ae74e55895bf",
+    "type": "feature",
+    "description": "This release adds additional enhancements to AWS IoT Device Management Software Package Catalog and Jobs. It also adds SBOM support in Software Package Version.",
+    "modules": [
+        "service/iot"
+    ]
+}

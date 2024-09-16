@@ -4650,6 +4650,11 @@ func awsRestjson1_deserializeOpDocumentGetModelInvocationJobOutput(v **GetModelI
 				sv.TimeoutDurationInHours = ptr.Int32(int32(i64))
 			}
 
+		case "vpcConfig":
+			if err := awsRestjson1_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12094,6 +12099,15 @@ func awsRestjson1_deserializeDocumentModelInvocationJobS3InputDataConfig(v **typ
 
 	for key, value := range shape {
 		switch key {
+		case "s3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
 		case "s3InputFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12143,6 +12157,15 @@ func awsRestjson1_deserializeDocumentModelInvocationJobS3OutputDataConfig(v **ty
 
 	for key, value := range shape {
 		switch key {
+		case "s3BucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.S3BucketOwner = ptr.String(jtv)
+			}
+
 		case "s3EncryptionKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12362,6 +12385,11 @@ func awsRestjson1_deserializeDocumentModelInvocationJobSummary(v **types.ModelIn
 					return err
 				}
 				sv.TimeoutDurationInHours = ptr.Int32(int32(i64))
+			}
+
+		case "vpcConfig":
+			if err := awsRestjson1_deserializeDocumentVpcConfig(&sv.VpcConfig, value); err != nil {
+				return err
 			}
 
 		default:

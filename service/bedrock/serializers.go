@@ -938,6 +938,13 @@ func awsRestjson1_serializeOpDocumentCreateModelInvocationJobInput(v *CreateMode
 		ok.Integer(*v.TimeoutDurationInHours)
 	}
 
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsRestjson1_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4560,6 +4567,11 @@ func awsRestjson1_serializeDocumentModelInvocationJobS3InputDataConfig(v *types.
 	object := value.Object()
 	defer object.Close()
 
+	if v.S3BucketOwner != nil {
+		ok := object.Key("s3BucketOwner")
+		ok.String(*v.S3BucketOwner)
+	}
+
 	if len(v.S3InputFormat) > 0 {
 		ok := object.Key("s3InputFormat")
 		ok.String(string(v.S3InputFormat))
@@ -4576,6 +4588,11 @@ func awsRestjson1_serializeDocumentModelInvocationJobS3InputDataConfig(v *types.
 func awsRestjson1_serializeDocumentModelInvocationJobS3OutputDataConfig(v *types.ModelInvocationJobS3OutputDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.S3BucketOwner != nil {
+		ok := object.Key("s3BucketOwner")
+		ok.String(*v.S3BucketOwner)
+	}
 
 	if v.S3EncryptionKeyId != nil {
 		ok := object.Key("s3EncryptionKeyId")

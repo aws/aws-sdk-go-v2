@@ -44,6 +44,10 @@ type CreatePackageVersionInput struct {
 	// This member is required.
 	VersionName *string
 
+	// The various build components created during the build process such as libraries
+	// and configuration files that make up a software package version.
+	Artifact *types.PackageVersionArtifact
+
 	// Metadata that can be used to define a package version’s configuration. For
 	// example, the S3 file location, configuration options that are being sent to the
 	// device or fleet.
@@ -59,6 +63,10 @@ type CreatePackageVersionInput struct {
 	// A summary of the package version being created. This can be used to outline the
 	// package's contents or purpose.
 	Description *string
+
+	// The inline job document associated with a software package version used for a
+	// quick job deployment via IoT Jobs.
+	Recipe *string
 
 	// Metadata that can be used to manage the package version.
 	Tags map[string]string

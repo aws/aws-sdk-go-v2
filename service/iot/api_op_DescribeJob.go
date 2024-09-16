@@ -38,6 +38,10 @@ type DescribeJobInput struct {
 	// This member is required.
 	JobId *string
 
+	// A flag that provides a view of the job document before and after the
+	// substitution parameters have been resolved with their exact values.
+	BeforeSubstitution bool
+
 	noSmithyDocumentSerde
 }
 

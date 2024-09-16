@@ -3457,6 +3457,15 @@ type GlobalCluster struct {
 	// The storage encryption setting for the global database cluster.
 	StorageEncrypted *bool
 
+	// A list of tags.
+	//
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+	TagList []Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -4172,23 +4181,10 @@ type PendingMaintenanceAction struct {
 	//
 	// For more information about maintenance actions, see [Maintaining a DB instance].
 	//
-	// Valid Values:
+	// Valid Values: system-update | db-upgrade | hardware-maintenance |
+	// ca-certificate-rotation
 	//
-	//   - ca-certificate-rotation
-	//
-	//   - db-upgrade
-	//
-	//   - hardware-maintenance
-	//
-	//   - os-upgrade
-	//
-	//   - system-update
-	//
-	// For more information about these actions, see [Maintenance actions for Amazon Aurora] or [Maintenance actions for Amazon RDS].
-	//
-	// [Maintenance actions for Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
 	// [Maintaining a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
-	// [Maintenance actions for Amazon Aurora]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
 	Action *string
 
 	// The date of the maintenance window when the action is applied. The maintenance

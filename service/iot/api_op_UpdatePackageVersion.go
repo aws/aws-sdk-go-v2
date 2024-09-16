@@ -50,6 +50,9 @@ type UpdatePackageVersionInput struct {
 	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	Action types.PackageVersionAction
 
+	// The various components that make up a software package version.
+	Artifact *types.PackageVersionArtifact
+
 	// Metadata that can be used to define a package version’s configuration. For
 	// example, the Amazon S3 file location, configuration options that are being sent
 	// to the device or fleet.
@@ -67,6 +70,10 @@ type UpdatePackageVersionInput struct {
 
 	// The package version description.
 	Description *string
+
+	// The inline job document associated with a software package version used for a
+	// quick job deployment via IoT Jobs.
+	Recipe *string
 
 	noSmithyDocumentSerde
 }

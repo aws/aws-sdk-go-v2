@@ -30,6 +30,26 @@ func (m *validateOpAcceptCertificateTransfer) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateSbomWithPackageVersion struct {
+}
+
+func (*validateOpAssociateSbomWithPackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSbomWithPackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSbomWithPackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSbomWithPackageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateTargetsWithJob struct {
 }
 
@@ -2230,6 +2250,26 @@ func (m *validateOpDisableTopicRule) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateSbomFromPackageVersion struct {
+}
+
+func (*validateOpDisassociateSbomFromPackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSbomFromPackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSbomFromPackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSbomFromPackageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableTopicRule struct {
 }
 
@@ -2805,6 +2845,26 @@ func (m *validateOpListRelatedResourcesForAuditFinding) HandleInitialize(ctx con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRelatedResourcesForAuditFindingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSbomValidationResults struct {
+}
+
+func (*validateOpListSbomValidationResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSbomValidationResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSbomValidationResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSbomValidationResultsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3954,6 +4014,10 @@ func addOpAcceptCertificateTransferValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpAcceptCertificateTransfer{}, middleware.After)
 }
 
+func addOpAssociateSbomWithPackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSbomWithPackageVersion{}, middleware.After)
+}
+
 func addOpAssociateTargetsWithJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateTargetsWithJob{}, middleware.After)
 }
@@ -4394,6 +4458,10 @@ func addOpDisableTopicRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableTopicRule{}, middleware.After)
 }
 
+func addOpDisassociateSbomFromPackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSbomFromPackageVersion{}, middleware.After)
+}
+
 func addOpEnableTopicRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableTopicRule{}, middleware.After)
 }
@@ -4508,6 +4576,10 @@ func addOpListProvisioningTemplateVersionsValidationMiddleware(stack *middleware
 
 func addOpListRelatedResourcesForAuditFindingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRelatedResourcesForAuditFinding{}, middleware.After)
+}
+
+func addOpListSbomValidationResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSbomValidationResults{}, middleware.After)
 }
 
 func addOpListSecurityProfilesForTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -6588,6 +6660,27 @@ func validateOpAcceptCertificateTransferInput(v *AcceptCertificateTransferInput)
 	}
 }
 
+func validateOpAssociateSbomWithPackageVersionInput(v *AssociateSbomWithPackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSbomWithPackageVersionInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if v.Sbom == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sbom"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateTargetsWithJobInput(v *AssociateTargetsWithJobInput) error {
 	if v == nil {
 		return nil
@@ -8591,6 +8684,24 @@ func validateOpDisableTopicRuleInput(v *DisableTopicRuleInput) error {
 	}
 }
 
+func validateOpDisassociateSbomFromPackageVersionInput(v *DisassociateSbomFromPackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSbomFromPackageVersionInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableTopicRuleInput(v *EnableTopicRuleInput) error {
 	if v == nil {
 		return nil
@@ -9051,6 +9162,24 @@ func validateOpListRelatedResourcesForAuditFindingInput(v *ListRelatedResourcesF
 	invalidParams := smithy.InvalidParamsError{Context: "ListRelatedResourcesForAuditFindingInput"}
 	if v.FindingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSbomValidationResultsInput(v *ListSbomValidationResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSbomValidationResultsInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

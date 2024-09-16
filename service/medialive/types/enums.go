@@ -4158,7 +4158,6 @@ type InputNetworkLocation string
 // Enum values for InputNetworkLocation
 const (
 	InputNetworkLocationAws        InputNetworkLocation = "AWS"
-	InputNetworkLocationOnPremise  InputNetworkLocation = "ON_PREMISE"
 	InputNetworkLocationOnPremises InputNetworkLocation = "ON_PREMISES"
 )
 
@@ -4169,7 +4168,6 @@ const (
 func (InputNetworkLocation) Values() []InputNetworkLocation {
 	return []InputNetworkLocation{
 		"AWS",
-		"ON_PREMISE",
 		"ON_PREMISES",
 	}
 }

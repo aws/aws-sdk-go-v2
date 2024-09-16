@@ -98,6 +98,18 @@ func TestCheckSnapshot_AddThingToThingGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateSbomWithPackageVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSbomWithPackageVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSbomWithPackageVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateTargetsWithJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateTargetsWithJob(context.Background(), nil, func(o *Options) {
@@ -1514,6 +1526,18 @@ func TestCheckSnapshot_DisableTopicRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateSbomFromPackageVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSbomFromPackageVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSbomFromPackageVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_EnableTopicRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableTopicRule(context.Background(), nil, func(o *Options) {
@@ -2227,6 +2251,18 @@ func TestCheckSnapshot_ListRoleAliases(t *testing.T) {
 	_, err := svc.ListRoleAliases(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRoleAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSbomValidationResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSbomValidationResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSbomValidationResults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3150,6 +3186,18 @@ func TestUpdateSnapshot_AddThingToThingGroup(t *testing.T) {
 	_, err := svc.AddThingToThingGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddThingToThingGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSbomWithPackageVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSbomWithPackageVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSbomWithPackageVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4573,6 +4621,18 @@ func TestUpdateSnapshot_DisableTopicRule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateSbomFromPackageVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSbomFromPackageVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSbomFromPackageVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_EnableTopicRule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EnableTopicRule(context.Background(), nil, func(o *Options) {
@@ -5286,6 +5346,18 @@ func TestUpdateSnapshot_ListRoleAliases(t *testing.T) {
 	_, err := svc.ListRoleAliases(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRoleAliases")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSbomValidationResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSbomValidationResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSbomValidationResults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

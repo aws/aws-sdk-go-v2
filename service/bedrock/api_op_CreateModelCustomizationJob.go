@@ -110,8 +110,10 @@ type CreateModelCustomizationJobInput struct {
 	// Information about the validation dataset.
 	ValidationDataConfig *types.ValidationDataConfig
 
-	// VPC configuration (optional). Configuration parameters for the private Virtual
-	// Private Cloud (VPC) that contains the resources you are using for this job.
+	// The configuration of the Virtual Private Cloud (VPC) that contains the
+	// resources that you're using for this job. For more information, see [Protect your model customization jobs using a VPC].
+	//
+	// [Protect your model customization jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/vpc-model-customization.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde

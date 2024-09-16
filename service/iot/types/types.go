@@ -3037,6 +3037,16 @@ type PackageSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 location for the artifacts associated with a software package
+// version.
+type PackageVersionArtifact struct {
+
+	// The S3 location.
+	S3Location *S3Location
+
+	noSmithyDocumentSerde
+}
+
 // A summary of information about a package version.
 type PackageVersionSummary struct {
 
@@ -3492,6 +3502,37 @@ type SalesforceAction struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 location for the software bill of materials associated with a
+// software package version.
+type Sbom struct {
+
+	// The S3 location.
+	S3Location *S3Location
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the validation results for a specific software bill of materials
+// (SBOM) attached to a software package version.
+type SbomValidationResultSummary struct {
+
+	// The errorCode representing the validation failure error if the SBOM validation
+	// failed.
+	ErrorCode SbomValidationErrorCode
+
+	// The errorMessage representing the validation failure error if the SBOM
+	// validation failed.
+	ErrorMessage *string
+
+	// The name of the SBOM file.
+	FileName *string
+
+	// The end result of the SBOM validation.
+	ValidationResult SbomValidationResult
+
+	noSmithyDocumentSerde
+}
+
 // Information about the scheduled audit.
 type ScheduledAuditMetadata struct {
 
@@ -3616,7 +3657,7 @@ type ServerCertificateConfig struct {
 	//
 	// For more information, see [Configuring OCSP server-certificate stapling in domain configuration] from Amazon Web Services IoT Core Developer Guide.
 	//
-	// [Configuring OCSP server-certificate stapling in domain configuration]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-domain-ocsp-config.html
+	// [Configuring OCSP server-certificate stapling in domain configuration]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-endpoints-cert-config.html
 	EnableOCSPCheck *bool
 
 	noSmithyDocumentSerde

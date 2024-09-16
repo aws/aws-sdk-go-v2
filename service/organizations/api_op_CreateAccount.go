@@ -60,10 +60,10 @@ import (
 //     your organization is still initializing, wait one hour and then try again. If
 //     the error persists, contact [Amazon Web Services Support].
 //
-//   - Using CreateAccount to create multiple temporary accounts isn't recommended.
-//     You can only close an account from the Billing and Cost Management console, and
-//     you must be signed in as the root user. For information on the requirements and
-//     process for closing an account, see [Closing a member account in your organization]in the Organizations User Guide.
+//   - It isn't recommended to use CreateAccount to create multiple temporary
+//     accounts, and using the CreateAccount API to close accounts is subject to a
+//     30-day usage quota. For information on the requirements and process for closing
+//     an account, see [Closing a member account in your organization]in the Organizations User Guide.
 //
 // When you create a member account with this operation, you can choose whether to
 // create the account with the IAM User and Role Access to Billing Information

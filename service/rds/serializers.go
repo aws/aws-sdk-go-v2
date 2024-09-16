@@ -12869,6 +12869,13 @@ func awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(v *CreateGlobalClus
 		objectKey.Boolean(*v.StorageEncrypted)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

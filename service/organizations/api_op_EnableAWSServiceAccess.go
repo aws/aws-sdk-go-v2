@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the integration of an Amazon Web Services service (the service that is
-// specified by ServicePrincipal ) with Organizations. When you enable integration,
-// you allow the specified service to create a [service-linked role]in all the accounts in your
-// organization. This allows the service to perform operations on your behalf in
-// your organization and its accounts.
+// Provides an Amazon Web Services service (the service that is specified by
+// ServicePrincipal ) with permissions to view the structure of an organization,
+// create a [service-linked role]in all the accounts in the organization, and allow the service to
+// perform operations on behalf of the organization and its accounts. Establishing
+// these permissions can be a first step in enabling the integration of an Amazon
+// Web Services service with Organizations.
 //
 // We recommend that you enable integration between Organizations and the
 // specified Amazon Web Services service by using the console or commands that are

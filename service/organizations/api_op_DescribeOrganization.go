@@ -43,8 +43,9 @@ type DescribeOrganizationOutput struct {
 	//
 	// The AvailablePolicyTypes part of the response is deprecated, and you shouldn't
 	// use it in your apps. It doesn't include any policy type supported by
-	// Organizations other than SCPs. To determine which policy types are enabled in
-	// your organization, use the ListRootsoperation.
+	// Organizations other than SCPs. In the China (Ningxia) Region, no policy type is
+	// included. To determine which policy types are enabled in your organization, use
+	// the ListRootsoperation.
 	Organization *types.Organization
 
 	// Metadata pertaining to the operation's result.

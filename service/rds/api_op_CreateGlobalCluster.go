@@ -126,6 +126,9 @@ type CreateGlobalClusterInput struct {
 	//   Amazon Aurora uses the setting from the source DB cluster.
 	StorageEncrypted *bool
 
+	// Tags to assign to the global cluster.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

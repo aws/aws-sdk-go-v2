@@ -49,6 +49,9 @@ type GetPackageVersionInput struct {
 
 type GetPackageVersionOutput struct {
 
+	// The various components that make up a software package version.
+	Artifact *types.PackageVersionArtifact
+
 	// Metadata that were added to the package version that can be used to define a
 	// package version’s configuration.
 	Attributes map[string]string
@@ -70,6 +73,17 @@ type GetPackageVersionOutput struct {
 
 	// The ARN for the package version.
 	PackageVersionArn *string
+
+	// The inline job document associated with a software package version used for a
+	// quick job deployment via IoT Jobs.
+	Recipe *string
+
+	// The software bill of materials for a software package version.
+	Sbom *types.Sbom
+
+	// The status of the validation for a new software bill of materials added to a
+	// software package version.
+	SbomValidationStatus types.SbomValidationStatus
 
 	// The status associated to the package version. For more information, see [Package version lifecycle].
 	//

@@ -1502,13 +1502,17 @@ type ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig struct {
 func (*ModelInvocationJobOutputDataConfigMemberS3OutputDataConfig) isModelInvocationJobOutputDataConfig() {
 }
 
-// Contains the configuration of the S3 location of the output data.
+// Contains the configuration of the S3 location of the input data.
 type ModelInvocationJobS3InputDataConfig struct {
 
 	// The S3 location of the input data.
 	//
 	// This member is required.
 	S3Uri *string
+
+	// The ID of the Amazon Web Services account that owns the S3 bucket containing
+	// the input data.
+	S3BucketOwner *string
 
 	// The format of the input data.
 	S3InputFormat S3InputFormat
@@ -1523,6 +1527,10 @@ type ModelInvocationJobS3OutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// The ID of the Amazon Web Services account that owns the S3 bucket containing
+	// the output data.
+	S3BucketOwner *string
 
 	// The unique identifier of the key that encrypts the S3 location of the output
 	// data.
@@ -1598,6 +1606,12 @@ type ModelInvocationJobSummary struct {
 
 	// The number of hours after which the batch inference job was set to time out.
 	TimeoutDurationInHours *int32
+
+	// The configuration of the Virtual Private Cloud (VPC) for the data in the batch
+	// inference job. For more information, see [Protect batch inference jobs using a VPC].
+	//
+	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-vpc
+	VpcConfig *VpcConfig
 
 	noSmithyDocumentSerde
 }
@@ -1780,15 +1794,17 @@ type ValidatorMetric struct {
 	noSmithyDocumentSerde
 }
 
-// VPC configuration.
+// The configuration of a virtual private cloud (VPC). For more information, see [Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink].
+//
+// [Protect your data using Amazon Virtual Private Cloud and Amazon Web Services PrivateLink]: https://docs.aws.amazon.com/bedrock/latest/userguide/usingVPC.html
 type VpcConfig struct {
 
-	// VPC configuration security group Ids.
+	// An array of IDs for each security group in the VPC to use.
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// VPC configuration subnets.
+	// An array of IDs for each subnet in the VPC to use.
 	//
 	// This member is required.
 	SubnetIds []string
