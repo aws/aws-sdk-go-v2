@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.logging.Logger;
 
+import software.amazon.smithy.aws.go.codegen.customization.AccountIDEndpointRouting;
 import software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -242,6 +243,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(SDK_ACCOUNTID_ENDPOINT_MODE)
                     .type(SdkGoTypes.Aws.AccountIDEndpointMode)
                     .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
+                    .servicePredicate(AccountIDEndpointRouting::hasAccountIdEndpoints)
                     .build()
     );
 
