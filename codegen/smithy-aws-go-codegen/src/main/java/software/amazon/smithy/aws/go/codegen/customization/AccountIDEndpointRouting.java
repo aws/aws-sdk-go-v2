@@ -9,6 +9,8 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.shapes.ServiceShape;
+import software.amazon.smithy.rulesengine.language.syntax.Identifier;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.utils.MapUtils;
 
@@ -17,6 +19,10 @@ import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 public class AccountIDEndpointRouting implements GoIntegration {
     @Override
     public void renderPreEndpointResolutionHook(GoSettings settings, GoWriter writer, Model model) {
+        if (!hasAccountIdEndpoints(model, settings.getService(model))) {
+            return;
+        }
+
         writer.write("""
                 if err := checkAccountID(getIdentity(ctx), m.options.AccountIDEndpointMode); err != nil {
                     return out, metadata, $T("invalid accountID set: %w", err)
@@ -32,9 +38,10 @@ public class AccountIDEndpointRouting implements GoIntegration {
             SymbolProvider symbolProvider,
             GoDelegator goDelegator
     ) {
-        if (!settings.getService(model).hasTrait(EndpointRuleSetTrait.class)) {
+        if (!hasAccountIdEndpoints(model, settings.getService(model))) {
             return;
         }
+
         goDelegator.useShapeWriter(settings.getService(model), goTemplate("""
         func checkAccountID(identity $auth:T, mode $accountIDEndpointMode:T) error {
             switch mode {
@@ -66,5 +73,20 @@ public class AccountIDEndpointRouting implements GoIntegration {
         "errorf", GoStdlibTypes.Fmt.Errorf
         )
         ));
+    }
+
+    public static boolean hasAccountIdEndpoints(Model model, ServiceShape service) {
+        if (!service.hasTrait(EndpointRuleSetTrait.class)) {
+            return false;
+        }
+
+        var rules = service.expectTrait(EndpointRuleSetTrait.class).getEndpointRuleSet();
+        for (var param : rules.getParameters()) {
+            if (param.getBuiltIn().orElse("").equals("AWS::Auth::AccountId")) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
