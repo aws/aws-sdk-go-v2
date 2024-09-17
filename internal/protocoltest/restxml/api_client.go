@@ -252,7 +252,6 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		AppID:                       cfg.AppID,
 		DisableRequestCompression:   cfg.DisableRequestCompression,
 		RequestMinCompressSizeBytes: cfg.RequestMinCompressSizeBytes,
-		AccountIDEndpointMode:       cfg.AccountIDEndpointMode,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
