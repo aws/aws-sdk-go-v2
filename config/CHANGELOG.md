@@ -1,3 +1,7 @@
+# v1.27.35 (2024-09-17)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.34 (2024-09-16)
 
 * **Bug Fix**: Read `AWS_CONTAINER_CREDENTIALS_FULL_URI` env variable if set when reading a profile with `credential_source`. Also ensure `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is always read before it

@@ -1,3 +1,8 @@
+# v1.59.0 (2024-09-17)
+
+* **Feature**: Support for JSON resource-based policies and block public access
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.58.3 (2024-09-04)
 
 * No change notes available for this release.

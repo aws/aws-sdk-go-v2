@@ -1,8 +1,0 @@
-{
-    "id": "edda608a-7c62-4d02-b304-8aa4aac91c34",
-    "type": "documentation",
-    "description": "This is a documentation only release to address various tickets.",
-    "modules": [
-        "service/ecs"
-    ]
-}

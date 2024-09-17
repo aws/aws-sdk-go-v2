@@ -1,8 +1,0 @@
-{
-    "id": "2b88a3b9-3db7-44ed-8b96-ac92287113df",
-    "type": "feature",
-    "description": "GitLab Enhancements - Add support for Self-Hosted GitLab runners in CodeBuild. Add group webhooks",
-    "modules": [
-        "service/codebuild"
-    ]
-}

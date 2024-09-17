@@ -1,3 +1,23 @@
+# Release (2024-09-17)
+
+## General Highlights
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.43.0](service/codebuild/CHANGELOG.md#v1430-2024-09-17)
+  * **Feature**: GitLab Enhancements - Add support for Self-Hosted GitLab runners in CodeBuild. Add group webhooks
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.34.0](service/ecr/CHANGELOG.md#v1340-2024-09-17)
+  * **Feature**: The `DescribeImageScanning` API now includes `fixAvailable`, `exploitAvailable`, and `fixedInVersion` fields to provide more detailed information about the availability of fixes, exploits, and fixed versions for identified image vulnerabilities.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.45.5](service/ecs/CHANGELOG.md#v1455-2024-09-17)
+  * **Documentation**: This is a documentation only release to address various tickets.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.59.0](service/lambda/CHANGELOG.md#v1590-2024-09-17)
+  * **Feature**: Support for JSON resource-based policies and block public access
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.83.1](service/rds/CHANGELOG.md#v1831-2024-09-17)
+  * **Documentation**: Updates Amazon RDS documentation with configuration information about the BYOL model for RDS for Db2.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.53.0](service/ssm/CHANGELOG.md#v1530-2024-09-17)
+  * **Feature**: Support for additional levels of cross-account, cross-Region organizational units in Automation. Various documentation updates.
+
 # Release (2024-09-16)
 
 ## General Highlights

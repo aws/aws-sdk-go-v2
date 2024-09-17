@@ -1,3 +1,7 @@
+# v1.31.4 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.31.3 (2024-09-16)
 
 * **Documentation**: Doc only update for AWS Organizations that fixes several customer-reported issues
