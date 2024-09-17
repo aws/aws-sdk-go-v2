@@ -7966,6 +7966,15 @@ func awsAwsjson11_deserializeDocumentEnhancedImageScanFinding(v **types.Enhanced
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "exploitAvailable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExploitAvailable to be of type string, got %T instead", value)
+				}
+				sv.ExploitAvailable = ptr.String(jtv)
+			}
+
 		case "findingArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7989,6 +7998,15 @@ func awsAwsjson11_deserializeDocumentEnhancedImageScanFinding(v **types.Enhanced
 					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "fixAvailable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FixAvailable to be of type string, got %T instead", value)
+				}
+				sv.FixAvailable = ptr.String(jtv)
 			}
 
 		case "lastObservedAt":
@@ -12933,6 +12951,15 @@ func awsAwsjson11_deserializeDocumentVulnerablePackage(v **types.VulnerablePacka
 					return fmt.Errorf("expected FilePath to be of type string, got %T instead", value)
 				}
 				sv.FilePath = ptr.String(jtv)
+			}
+
+		case "fixedInVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FixedInVersion to be of type string, got %T instead", value)
+				}
+				sv.FixedInVersion = ptr.String(jtv)
 			}
 
 		case "name":

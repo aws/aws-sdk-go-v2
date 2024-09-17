@@ -117,8 +117,8 @@ type UpdateOpsItemInput struct {
 	// Specify a new severity for an OpsItem.
 	Severity *string
 
-	// The OpsItem status. Status can be Open , In Progress , or Resolved . For more
-	// information, see [Editing OpsItem details]in the Amazon Web Services Systems Manager User Guide.
+	// The OpsItem status. For more information, see [Editing OpsItem details] in the Amazon Web Services
+	// Systems Manager User Guide.
 	//
 	// [Editing OpsItem details]: https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html
 	Status types.OpsItemStatus

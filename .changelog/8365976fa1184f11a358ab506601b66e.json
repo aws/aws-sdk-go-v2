@@ -1,0 +1,8 @@
+{
+    "id": "8365976f-a118-4f11-a358-ab506601b66e",
+    "type": "feature",
+    "description": "Support for additional levels of cross-account, cross-Region organizational units in Automation. Various documentation updates.",
+    "modules": [
+        "service/ssm"
+    ]
+}

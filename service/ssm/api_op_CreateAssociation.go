@@ -215,10 +215,10 @@ type CreateAssociationInput struct {
 	// Amazon Web Services resource groups, all managed nodes in an Amazon Web Services
 	// account, or individual managed node IDs. You can target all managed nodes in an
 	// Amazon Web Services account by specifying the InstanceIds key with a value of *
-	// . For more information about choosing targets for an association, see [About targets and rate controls in State Manager associations]in the
+	// . For more information about choosing targets for an association, see [Understanding targets and rate controls in State Manager associations]in the
 	// Amazon Web Services Systems Manager User Guide.
 	//
-	// [About targets and rate controls in State Manager associations]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html
+	// [Understanding targets and rate controls in State Manager associations]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html
 	Targets []types.Target
 
 	noSmithyDocumentSerde

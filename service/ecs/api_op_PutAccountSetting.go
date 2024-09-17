@@ -81,9 +81,6 @@ type PutAccountSettingInput struct {
 	//   more information on using IPv6 with tasks launched on Amazon EC2 instances, see [Using a VPC in dual-stack mode]
 	//   . For more information on using IPv6 with tasks launched on Fargate, see [Using a VPC in dual-stack mode].
 	//
-	//   - fargateFIPSMode - If you specify fargateFIPSMode , Fargate FIPS 140
-	//   compliance is affected.
-	//
 	//   - fargateTaskRetirementWaitPeriod - When Amazon Web Services determines that a
 	//   security or infrastructure update is needed for an Amazon ECS task hosted on
 	//   Fargate, the tasks need to be stopped and new tasks launched to replace them.

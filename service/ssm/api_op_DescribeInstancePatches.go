@@ -55,10 +55,10 @@ type DescribeInstancePatchesInput struct {
 	//
 	// Sample values: Installed | InstalledOther | InstalledPendingReboot
 	//
-	// For lists of all State values, see [Understanding patch compliance state values]in the Amazon Web Services Systems Manager
+	// For lists of all State values, see [Patch compliance state values]in the Amazon Web Services Systems Manager
 	//   User Guide.
 	//
-	// [Understanding patch compliance state values]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html
+	// [Patch compliance state values]: https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patches to return (per page).

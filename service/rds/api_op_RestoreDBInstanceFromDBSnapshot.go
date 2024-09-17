@@ -411,10 +411,10 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// License model information for the restored DB instance.
 	//
 	// License models for RDS for Db2 require additional configuration. The Bring Your
-	// Own License (BYOL) model requires a custom parameter group. The Db2 license
-	// through Amazon Web Services Marketplace model requires an Amazon Web Services
-	// Marketplace subscription. For more information, see [RDS for Db2 licensing options]in the Amazon RDS User
-	// Guide.
+	// Own License (BYOL) model requires a custom parameter group and an Amazon Web
+	// Services License Manager self-managed license. The Db2 license through Amazon
+	// Web Services Marketplace model requires an Amazon Web Services Marketplace
+	// subscription. For more information, see [Amazon RDS for Db2 licensing options]in the Amazon RDS User Guide.
 	//
 	// This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.
 	//
@@ -434,7 +434,7 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	//
 	// Default: Same as the source.
 	//
-	// [RDS for Db2 licensing options]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
+	// [Amazon RDS for Db2 licensing options]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
 	LicenseModel *string
 
 	// Specifies whether the DB instance is a Multi-AZ deployment.

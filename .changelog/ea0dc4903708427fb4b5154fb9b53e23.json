@@ -1,0 +1,8 @@
+{
+    "id": "ea0dc490-3708-427f-b4b5-154fb9b53e23",
+    "type": "feature",
+    "description": "Support for JSON resource-based policies and block public access",
+    "modules": [
+        "service/lambda"
+    ]
+}

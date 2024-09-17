@@ -730,10 +730,10 @@ type CreateDBInstanceInput struct {
 	// The license model information for this DB instance.
 	//
 	// License models for RDS for Db2 require additional configuration. The Bring Your
-	// Own License (BYOL) model requires a custom parameter group. The Db2 license
-	// through Amazon Web Services Marketplace model requires an Amazon Web Services
-	// Marketplace subscription. For more information, see [RDS for Db2 licensing options]in the Amazon RDS User
-	// Guide.
+	// Own License (BYOL) model requires a custom parameter group and an Amazon Web
+	// Services License Manager self-managed license. The Db2 license through Amazon
+	// Web Services Marketplace model requires an Amazon Web Services Marketplace
+	// subscription. For more information, see [Amazon RDS for Db2 licensing options]in the Amazon RDS User Guide.
 	//
 	// The default for RDS for Db2 is bring-your-own-license .
 	//
@@ -753,7 +753,7 @@ type CreateDBInstanceInput struct {
 	//
 	//   - RDS for PostgreSQL - postgresql-license
 	//
-	// [RDS for Db2 licensing options]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
+	// [Amazon RDS for Db2 licensing options]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
 	LicenseModel *string
 
 	// Specifies whether to manage the master user password with Amazon Web Services

@@ -23424,6 +23424,15 @@ func awsAwsjson11_deserializeDocumentAutomationExecution(v **types.AutomationExe
 				return err
 			}
 
+		case "TargetLocationsURL":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetLocationsURL to be of type string, got %T instead", value)
+				}
+				sv.TargetLocationsURL = ptr.String(jtv)
+			}
+
 		case "TargetMaps":
 			if err := awsAwsjson11_deserializeDocumentTargetMaps(&sv.TargetMaps, value); err != nil {
 				return err
@@ -23761,6 +23770,15 @@ func awsAwsjson11_deserializeDocumentAutomationExecutionMetadata(v **types.Autom
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Target = ptr.String(jtv)
+			}
+
+		case "TargetLocationsURL":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetLocationsURL to be of type string, got %T instead", value)
+				}
+				sv.TargetLocationsURL = ptr.String(jtv)
 			}
 
 		case "TargetMaps":
@@ -26991,6 +27009,42 @@ func awsAwsjson11_deserializeDocumentEffectivePatchList(v *[]types.EffectivePatc
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentExcludeAccounts(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ExcludeAccount to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}
@@ -41135,6 +41189,11 @@ func awsAwsjson11_deserializeDocumentTargetLocation(v **types.TargetLocation, va
 				return err
 			}
 
+		case "ExcludeAccounts":
+			if err := awsAwsjson11_deserializeDocumentExcludeAccounts(&sv.ExcludeAccounts, value); err != nil {
+				return err
+			}
+
 		case "ExecutionRoleName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -41142,6 +41201,15 @@ func awsAwsjson11_deserializeDocumentTargetLocation(v **types.TargetLocation, va
 					return fmt.Errorf("expected ExecutionRoleName to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRoleName = ptr.String(jtv)
+			}
+
+		case "IncludeChildOrganizationUnits":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeChildOrganizationUnits = jtv
 			}
 
 		case "Regions":
@@ -41170,6 +41238,29 @@ func awsAwsjson11_deserializeDocumentTargetLocation(v **types.TargetLocation, va
 					return fmt.Errorf("expected MaxErrors to be of type string, got %T instead", value)
 				}
 				sv.TargetLocationMaxErrors = ptr.String(jtv)
+			}
+
+		case "Targets":
+			if err := awsAwsjson11_deserializeDocumentTargets(&sv.Targets, value); err != nil {
+				return err
+			}
+
+		case "TargetsMaxConcurrency":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaxConcurrency to be of type string, got %T instead", value)
+				}
+				sv.TargetsMaxConcurrency = ptr.String(jtv)
+			}
+
+		case "TargetsMaxErrors":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaxErrors to be of type string, got %T instead", value)
+				}
+				sv.TargetsMaxErrors = ptr.String(jtv)
 			}
 
 		default:

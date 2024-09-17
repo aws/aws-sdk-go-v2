@@ -8630,6 +8630,17 @@ func awsAwsjson11_serializeDocumentDocumentReviews(v *types.DocumentReviews, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentExcludeAccounts(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInstanceAssociationOutputLocation(v *types.InstanceAssociationOutputLocation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10670,9 +10681,21 @@ func awsAwsjson11_serializeDocumentTargetLocation(v *types.TargetLocation, value
 		}
 	}
 
+	if v.ExcludeAccounts != nil {
+		ok := object.Key("ExcludeAccounts")
+		if err := awsAwsjson11_serializeDocumentExcludeAccounts(v.ExcludeAccounts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionRoleName != nil {
 		ok := object.Key("ExecutionRoleName")
 		ok.String(*v.ExecutionRoleName)
+	}
+
+	if v.IncludeChildOrganizationUnits {
+		ok := object.Key("IncludeChildOrganizationUnits")
+		ok.Boolean(v.IncludeChildOrganizationUnits)
 	}
 
 	if v.Regions != nil {
@@ -10697,6 +10720,23 @@ func awsAwsjson11_serializeDocumentTargetLocation(v *types.TargetLocation, value
 	if v.TargetLocationMaxErrors != nil {
 		ok := object.Key("TargetLocationMaxErrors")
 		ok.String(*v.TargetLocationMaxErrors)
+	}
+
+	if v.Targets != nil {
+		ok := object.Key("Targets")
+		if err := awsAwsjson11_serializeDocumentTargets(v.Targets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetsMaxConcurrency != nil {
+		ok := object.Key("TargetsMaxConcurrency")
+		ok.String(*v.TargetsMaxConcurrency)
+	}
+
+	if v.TargetsMaxErrors != nil {
+		ok := object.Key("TargetsMaxErrors")
+		ok.String(*v.TargetsMaxErrors)
 	}
 
 	return nil
@@ -14214,6 +14254,11 @@ func awsAwsjson11_serializeOpDocumentStartAutomationExecutionInput(v *StartAutom
 		if err := awsAwsjson11_serializeDocumentTargetLocations(v.TargetLocations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TargetLocationsURL != nil {
+		ok := object.Key("TargetLocationsURL")
+		ok.String(*v.TargetLocationsURL)
 	}
 
 	if v.TargetMaps != nil {

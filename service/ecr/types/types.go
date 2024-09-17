@@ -166,10 +166,11 @@ type EncryptionConfiguration struct {
 	//
 	// If you use the AES256 encryption type, Amazon ECR uses server-side encryption
 	// with Amazon S3-managed encryption keys which encrypts the images in the
-	// repository using an AES256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]in
-	// the Amazon Simple Storage Service Console Developer Guide.
+	// repository using an AES256 encryption algorithm.
 	//
-	// [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+	// For more information, see [Amazon ECR encryption at rest] in the Amazon Elastic Container Registry User Guide.
+	//
+	// [Amazon ECR encryption at rest]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html
 	//
 	// This member is required.
 	EncryptionType EncryptionType
@@ -225,11 +226,20 @@ type EnhancedImageScanFinding struct {
 	// The description of the finding.
 	Description *string
 
+	// If a finding discovered in your environment has an exploit available.
+	ExploitAvailable *string
+
 	// The Amazon Resource Number (ARN) of the finding.
 	FindingArn *string
 
 	// The date and time that the finding was first observed.
 	FirstObservedAt *time.Time
+
+	// Details on whether a fix is available through a version update. This value can
+	// be YES , NO , or PARTIAL . A PARTIAL fix means that some, but not all, of the
+	// packages identified in the finding have fixes available through updated
+	// versions.
+	FixAvailable *string
 
 	// The date and time that the finding was last observed.
 	LastObservedAt *time.Time
@@ -977,6 +987,9 @@ type VulnerablePackage struct {
 
 	// The file path of the vulnerable package.
 	FilePath *string
+
+	// The version of the package that contains the vulnerability fix.
+	FixedInVersion *string
 
 	// The name of the vulnerable package.
 	Name *string

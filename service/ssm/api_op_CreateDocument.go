@@ -17,7 +17,7 @@ import (
 // schemas, features, and syntax, see [Amazon Web Services Systems Manager Documents]in the Amazon Web Services Systems Manager
 // User Guide.
 //
-// [Amazon Web Services Systems Manager Documents]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html
+// [Amazon Web Services Systems Manager Documents]: https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html
 func (c *Client) CreateDocument(ctx context.Context, params *CreateDocumentInput, optFns ...func(*Options)) (*CreateDocumentOutput, error) {
 	if params == nil {
 		params = &CreateDocumentInput{}
