@@ -3193,7 +3193,7 @@
                 "Values": {
                     "target": "com.amazonaws.ssm#AttachmentsSourceValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of a key-value pair that identifies the location of an attachment to a document.\n   The format for <b>Value</b> depends on the type of key you\n   specify.</p>\n         <ul>\n            <li>\n               <p>For the key <i>SourceUrl</i>, the value is an S3 bucket location. For\n     example:</p>\n               <p>\n                  <code>\"Values\": [ \"s3://doc-example-bucket/my-folder\" ]</code>\n               </p>\n            </li>\n            <li>\n               <p>For the key <i>S3FileUrl</i>, the value is a file in an S3 bucket. For\n     example:</p>\n               <p>\n                  <code>\"Values\": [ \"s3://doc-example-bucket/my-folder/my-file.py\" ]</code>\n               </p>\n            </li>\n            <li>\n               <p>For the key <i>AttachmentReference</i>, the value is constructed from the\n     name of another SSM document in your account, a version number of that document, and a file\n     attached to that document version that you want to reuse. For example:</p>\n               <p>\n                  <code>\"Values\": [ \"MyOtherDocument/3/my-other-file.py\" ]</code>\n               </p>\n               <p>However, if the SSM document is shared with you from another account, the full SSM\n     document ARN must be specified instead of the document name only. For example:</p>\n               <p>\n                  <code>\"Values\": [\n      \"arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py\"\n      ]</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value of a key-value pair that identifies the location of an attachment to a document.\n   The format for <b>Value</b> depends on the type of key you\n   specify.</p>\n         <ul>\n            <li>\n               <p>For the key <i>SourceUrl</i>, the value is an S3 bucket location. For\n     example:</p>\n               <p>\n                  <code>\"Values\": [ \"s3://amzn-s3-demo-bucket/my-prefix\" ]</code>\n               </p>\n            </li>\n            <li>\n               <p>For the key <i>S3FileUrl</i>, the value is a file in an S3 bucket. For\n     example:</p>\n               <p>\n                  <code>\"Values\": [ \"s3://amzn-s3-demo-bucket/my-prefix/my-file.py\" ]</code>\n               </p>\n            </li>\n            <li>\n               <p>For the key <i>AttachmentReference</i>, the value is constructed from the\n     name of another SSM document in your account, a version number of that document, and a file\n     attached to that document version that you want to reuse. For example:</p>\n               <p>\n                  <code>\"Values\": [ \"MyOtherDocument/3/my-other-file.py\" ]</code>\n               </p>\n               <p>However, if the SSM document is shared with you from another account, the full SSM\n     document ARN must be specified instead of the document name only. For example:</p>\n               <p>\n                  <code>\"Values\": [\n      \"arn:aws:ssm:us-east-2:111122223333:document/OtherAccountDocument/3/their-file.py\"\n      ]</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -3499,6 +3499,12 @@
                     "target": "com.amazonaws.ssm#AlarmStateInformationList",
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch alarm that was invoked by the automation.</p>"
+                    }
+                },
+                "TargetLocationsURL": {
+                    "target": "com.amazonaws.ssm#TargetLocationsURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A publicly accessible URL for a file that contains the <code>TargetLocations</code> body.\n   Currently, only files in presigned Amazon S3 buckets are supported</p>"
                     }
                 },
                 "AutomationSubtype": {
@@ -3837,7 +3843,7 @@
                 "AutomationType": {
                     "target": "com.amazonaws.ssm#AutomationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or\n   CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and\n   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Amazon Web Services Regions and accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or\n   CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and\n   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running automations in multiple Amazon Web Services Regions and accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
                     }
                 },
                 "AlarmConfiguration": {
@@ -3850,6 +3856,12 @@
                     "target": "com.amazonaws.ssm#AlarmStateInformationList",
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch alarm that was invoked by the automation.</p>"
+                    }
+                },
+                "TargetLocationsURL": {
+                    "target": "com.amazonaws.ssm#TargetLocationsURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A publicly accessible URL for a file that contains the <code>TargetLocations</code> body.\n   Currently, only files in presigned Amazon S3 buckets are supported</p>"
                     }
                 },
                 "AutomationSubtype": {
@@ -4179,7 +4191,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package\n                        name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -4191,7 +4203,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package\n                        name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -4635,7 +4647,7 @@
                 "value": {
                     "target": "com.amazonaws.ssm#CommandFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter value. Valid values for each filter key are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>InvokedAfter</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions\n     occurring July 7, 2021, and later.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InvokedBefore</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions from\n     before July 7, 2021.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: Specify a valid command status to see a list of\n     all command executions with that status. The status choices depend on the API you call.</p>\n               <p>The status values you can specify for <code>ListCommands</code> are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccessDenied</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ExecutionTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Incomplete</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NoInstancesInTag</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>LimitExceeded</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>The status values you can specify for <code>ListCommandInvocations</code> are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Delayed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccessDenied</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ExecutionTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Undeliverable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InvalidPlatform</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Terminated</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM\n     document) for which you want to see command execution results. For example, specify\n      <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to\n     perform security patching operations on managed nodes. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExecutionStage</b>: Specify one of the following values\n      (<code>ListCommands</code> operations only):</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Executing</code>: Returns a list of command executions that are currently still\n       running.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Complete</code>: Returns a list of command executions that have already completed.\n      </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filter value. Valid values for each filter key are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>InvokedAfter</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2024-07-07T00:00:00Z</code> to see a list of command executions\n     occurring July 7, 2021, and later.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InvokedBefore</b>: Specify a timestamp to limit your results.\n     For example, specify <code>2024-07-07T00:00:00Z</code> to see a list of command executions from\n     before July 7, 2021.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: Specify a valid command status to see a list of\n     all command executions with that status. The status choices depend on the API you call.</p>\n               <p>The status values you can specify for <code>ListCommands</code> are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccessDenied</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ExecutionTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Incomplete</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>NoInstancesInTag</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>LimitExceeded</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>The status values you can specify for <code>ListCommandInvocations</code> are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Pending</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InProgress</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Delayed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Success</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Cancelled</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Failed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AccessDenied</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DeliveryTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ExecutionTimedOut</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Undeliverable</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>InvalidPlatform</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Terminated</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM\n     document) for which you want to see command execution results. For example, specify\n      <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to\n     perform security patching operations on managed nodes. </p>\n            </li>\n            <li>\n               <p>\n                  <b>ExecutionStage</b>: Specify one of the following values\n      (<code>ListCommands</code> operations only):</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Executing</code>: Returns a list of command executions that are currently still\n       running.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Complete</code>: Returns a list of command executions that have already completed.\n      </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4954,13 +4966,13 @@
                 "OutputS3BucketName": {
                     "target": "com.amazonaws.ssm#S3BucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 bucket where the responses to the command executions should be stored. This was\n   requested when issuing the command. For example, in the following response:</p>\n         <p>\n            <code>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript</code>\n         </p>\n         <p>\n            <code>doc-example-bucket</code> is the name of the S3 bucket;</p>\n         <p>\n            <code>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix</code> is the name of the S3 prefix;</p>\n         <p>\n            <code>i-02573cafcfEXAMPLE</code> is the managed node ID;</p>\n         <p>\n            <code>awsrunShellScript</code> is the name of the plugin.</p>"
+                        "smithy.api#documentation": "<p>The S3 bucket where the responses to the command executions should be stored. This was\n   requested when issuing the command. For example, in the following response:</p>\n         <p>\n            <code>amzn-s3-demo-bucket/my-prefix/i-02573cafcfEXAMPLE/awsrunShellScript</code>\n         </p>\n         <p>\n            <code>amzn-s3-demo-bucket</code> is the name of the S3 bucket;</p>\n         <p>\n            <code>my-prefix</code> is the name of the S3 prefix;</p>\n         <p>\n            <code>i-02573cafcfEXAMPLE</code> is the managed node ID;</p>\n         <p>\n            <code>awsrunShellScript</code> is the name of the plugin.</p>"
                     }
                 },
                 "OutputS3KeyPrefix": {
                     "target": "com.amazonaws.ssm#S3KeyPrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 directory path inside the bucket where the responses to the command executions should\n   be stored. This was requested when issuing the command. For example, in the following\n   response:</p>\n         <p>\n            <code>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript</code>\n         </p>\n         <p>\n            <code>doc-example-bucket</code> is the name of the S3 bucket;</p>\n         <p>\n            <code>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix</code> is the name of the S3 prefix;</p>\n         <p>\n            <code>i-02573cafcfEXAMPLE</code> is the managed node ID;</p>\n         <p>\n            <code>awsrunShellScript</code> is the name of the plugin.</p>"
+                        "smithy.api#documentation": "<p>The S3 directory path inside the bucket where the responses to the command executions should\n   be stored. This was requested when issuing the command. For example, in the following\n   response:</p>\n         <p>\n            <code>amzn-s3-demo-bucket/my-prefix/i-02573cafcfEXAMPLE/awsrunShellScript</code>\n         </p>\n         <p>\n            <code>amzn-s3-demo-bucket</code> is the name of the S3 bucket;</p>\n         <p>\n            <code>my-prefix</code> is the name of the S3 prefix;</p>\n         <p>\n            <code>i-02573cafcfEXAMPLE</code> is the managed node ID;</p>\n         <p>\n            <code>awsrunShellScript</code> is the name of the plugin.</p>"
                     }
                 }
             },
@@ -5641,7 +5653,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an activation code and activation ID you can use to register your on-premises\n   servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with\n   Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and\n   ID when installing SSM Agent on machines in your hybrid environment. For more information about\n   requirements for managing on-premises machines using Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html\">Setting up\n    Amazon Web Services Systems Manager for hybrid and multicloud environments</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are\n    configured for Systems Manager are all called <i>managed nodes</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Generates an activation code and activation ID you can use to register your on-premises\n   servers, edge devices, or virtual machine (VM) with Amazon Web Services Systems Manager. Registering these machines with\n   Systems Manager makes it possible to manage them using Systems Manager capabilities. You use the activation code and\n   ID when installing SSM Agent on machines in your hybrid environment. For more information about\n   requirements for managing on-premises machines using Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-hybrid-multicloud.html\">Using Amazon Web Services Systems Manager in\n    hybrid and multicloud environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>\n         <note>\n            <p>Amazon Elastic Compute Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that are\n    configured for Systems Manager are all called <i>managed nodes</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateActivationRequest": {
@@ -5662,7 +5674,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid and multicloud environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must\n    create a unique role.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html\">Create the IAM service role required for Systems Manager in a hybrid and multicloud\n    environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must\n    create a unique role.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5675,7 +5687,7 @@
                 "ExpirationDate": {
                     "target": "com.amazonaws.ssm#ExpirationDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date by which this activation request should expire, in timestamp format, such as\n   \"2021-07-07T00:00:00\". You can specify a date up to 30 days in advance. If you don't provide an\n   expiration date, the activation code expires in 24 hours.</p>"
+                        "smithy.api#documentation": "<p>The date by which this activation request should expire, in timestamp format, such as\n   \"2024-07-07T00:00:00\". You can specify a date up to 30 days in advance. If you don't provide an\n   expiration date, the activation code expires in 24 hours.</p>"
                     }
                 },
                 "Tags": {
@@ -6025,7 +6037,7 @@
                 "Targets": {
                     "target": "com.amazonaws.ssm#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets for the association. You can target managed nodes by using tags, Amazon Web Services resource\n   groups, all managed nodes in an Amazon Web Services account, or individual managed node IDs. You can target all\n   managed nodes in an Amazon Web Services account by specifying the <code>InstanceIds</code> key with a value of\n    <code>*</code>. For more information about choosing targets for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html\">About targets and rate controls in State Manager associations</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The targets for the association. You can target managed nodes by using tags, Amazon Web Services resource\n   groups, all managed nodes in an Amazon Web Services account, or individual managed node IDs. You can target all\n   managed nodes in an Amazon Web Services account by specifying the <code>InstanceIds</code> key with a value of\n    <code>*</code>. For more information about choosing targets for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html\">Understanding targets and rate controls in State Manager associations</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ScheduleExpression": {
@@ -6170,7 +6182,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs\n   on your managed nodes. For more information about SSM documents, including information about\n   supported schemas, features, and syntax, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-ssm-docs.html\">Amazon Web Services Systems Manager Documents</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a Amazon Web Services Systems Manager (SSM document). An SSM document defines the actions that Systems Manager performs\n   on your managed nodes. For more information about SSM documents, including information about\n   supported schemas, features, and syntax, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/documents.html\">Amazon Web Services Systems Manager Documents</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#CreateDocumentRequest": {
@@ -6662,7 +6674,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package\n                        name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -6681,7 +6693,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package\n                        name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -6757,7 +6769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location.\n   Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html\">Configuring resource data\n    sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a\n   single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple\n   Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager\n    Explorer to display data from multiple accounts and Regions</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you\n    enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you\n    secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>\n         </note>"
+                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location.\n   Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-create-resource-data-sync.html\">Creatinga a\n    resource data sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a\n   single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple\n   Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager\n    Explorer to display data from multiple accounts and Regions</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you\n    enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you\n    secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateResourceDataSyncRequest": {
@@ -7097,7 +7109,7 @@
                 "DeletionSummary": {
                     "target": "com.amazonaws.ssm#InventoryDeletionSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A summary of the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary\">Understanding the delete inventory summary</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A summary of the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-custom.html#delete-custom-inventory-summary\">Deleting custom inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             },
@@ -9030,7 +9042,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#PatchOrchestratorFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each element in the array is a structure containing a key-value pair.</p>\n         <p>Supported keys for <code>DescribeInstancePatches</code>include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Classification</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Security</code> | <code>SecurityUpdates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>KBId</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>KB4480056</code> | <code>java-1.7.0-openjdk.x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Severity</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Important</code> | <code>Medium</code> | <code>Low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>State</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Installed</code> | <code>InstalledOther</code> |\n      <code>InstalledPendingReboot</code>\n               </p>\n               <p>For lists of all <code>State</code> values, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html\">Understanding\n      patch compliance state values</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Each element in the array is a structure containing a key-value pair.</p>\n         <p>Supported keys for <code>DescribeInstancePatches</code>include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>Classification</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Security</code> | <code>SecurityUpdates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>KBId</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>KB4480056</code> | <code>java-1.7.0-openjdk.x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>Severity</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Important</code> | <code>Medium</code> | <code>Low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>State</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Installed</code> | <code>InstalledOther</code> |\n      <code>InstalledPendingReboot</code>\n               </p>\n               <p>For lists of all <code>State</code> values, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-compliance-states.html\">Patch compliance\n      state values</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -9448,7 +9460,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each entry in the array is a structure containing:</p>\n         <ul>\n            <li>\n               <p>Key. A string between 1 and 128 characters. Supported keys include\n      <code>ExecutedBefore</code> and <code>ExecutedAfter</code>.</p>\n            </li>\n            <li>\n               <p>Values. An array of strings, each between 1 and 256 characters. Supported values are\n     date/time strings in a valid ISO 8601 date/time format, such as\n      <code>2021-11-04T05:00:00Z</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Each entry in the array is a structure containing:</p>\n         <ul>\n            <li>\n               <p>Key. A string between 1 and 128 characters. Supported keys include\n      <code>ExecutedBefore</code> and <code>ExecutedAfter</code>.</p>\n            </li>\n            <li>\n               <p>Values. An array of strings, each between 1 and 256 characters. Supported values are\n     date/time strings in a valid ISO 8601 date/time format, such as\n      <code>2024-11-04T05:00:00Z</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
@@ -11796,6 +11808,28 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.ssm#ExcludeAccount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 68
+                },
+                "smithy.api#pattern": "^(ou-[a-z0-9]{4,32}-[a-z0-9]{8,32})|(\\d{12})$"
+            }
+        },
+        "com.amazonaws.ssm#ExcludeAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#ExcludeAccount"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
         "com.amazonaws.ssm#ExecutionMode": {
             "type": "enum",
             "members": {
@@ -13408,7 +13442,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up Maintenance Windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskType": {
@@ -13845,7 +13879,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the parameter that you want to query. For\n   parameters shared with you from another account, you must use the full ARN.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>\n         <p>For more information about shared parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html\">Working with shared parameters</a> in\n   the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the parameter that you want to query. For\n   parameters shared with you from another account, you must use the full ARN.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>\n         <p>For more information about shared parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html\">Working with\n    shared parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14815,7 +14849,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is\n   activated as a Systems Manager managed node. The name is specified as the <code>DefaultInstanceName</code>\n   property using the <a>CreateActivation</a> command. It is applied to the managed node\n   by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as\n   explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a\n    hybrid and multicloud environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a\n    hybrid and multicloud environment (Windows)</a>. To retrieve the <code>Name</code> tag of an\n   EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>Amazon Web Services CLI Command Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is\n   activated as a Systems Manager managed node. The name is specified as the <code>DefaultInstanceName</code>\n   property using the <a>CreateActivation</a> command. It is applied to the managed node\n   by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as\n   explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-ssm-agent-install-linux.html\">How to\n    install SSM Agent on hybrid Linux nodes</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-ssm-agent-install-windows.html\">How to\n    install SSM Agent on hybrid Windows Server nodes</a>. To retrieve the <code>Name</code> tag\n   of an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> operation. For information, see\n    <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>Amazon Web Services CLI Command Reference</i>.</p>"
                     }
                 },
                 "IPAddress": {
@@ -15078,7 +15112,7 @@
                 "InstallOverrideList": {
                     "target": "com.amazonaws.ssm#InstallOverrideList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An https URL or an Amazon Simple Storage Service (Amazon S3) path-style URL to a list of\n   patches to be installed. This patch installation list, which you maintain in an S3 bucket in YAML\n   format and specify in the SSM document <code>AWS-RunPatchBaseline</code>, overrides the patches\n   specified by the default patch baseline.</p>\n         <p>For more information about the <code>InstallOverrideList</code> parameter, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html\">About the\n     <code>AWS-RunPatchBaseline SSM document</code>\n            </a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An https URL or an Amazon Simple Storage Service (Amazon S3) path-style URL to a list of\n   patches to be installed. This patch installation list, which you maintain in an S3 bucket in YAML\n   format and specify in the SSM document <code>AWS-RunPatchBaseline</code>, overrides the patches\n   specified by the default patch baseline.</p>\n         <p>For more information about the <code>InstallOverrideList</code> parameter, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html\">SSM Command\n    document for patching: <code>AWS-RunPatchBaseline</code>\n            </a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "OwnerInformation": {
@@ -16673,7 +16707,7 @@
                 "DeletionSummary": {
                     "target": "com.amazonaws.ssm#InventoryDeletionSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete\">Understanding the delete inventory summary</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Information about the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-custom.html#delete-custom-inventory\">Understanding the delete inventory summary</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "LastStatusUpdateTime": {
@@ -16775,7 +16809,7 @@
                 "Type": {
                     "target": "com.amazonaws.ssm#InventoryQueryOperatorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of filter.</p>\n         <note>\n            <p>The <code>Exists</code> filter must be used with aggregators. For more information, see\n     <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html\">Aggregating inventory\n     data</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of filter.</p>\n         <note>\n            <p>The <code>Exists</code> filter must be used with aggregators. For more information, see\n     <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/inventory-aggregate.html\">Aggregating inventory data</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>"
                     }
                 }
             },
@@ -19516,7 +19550,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up Maintenance Windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TimeoutSeconds": {
@@ -19710,7 +19744,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up Maintenance Windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "MaxConcurrency": {
@@ -20790,7 +20824,7 @@
                 "Status": {
                     "target": "com.amazonaws.ssm#OpsItemStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or\n    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The OpsItem status. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "OpsItemId": {
@@ -21922,7 +21956,7 @@
                 "Status": {
                     "target": "com.amazonaws.ssm#OpsItemStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or\n    <code>Resolved</code>.</p>"
+                        "smithy.api#documentation": "<p>The OpsItem status.</p>"
                     }
                 },
                 "OpsItemId": {
@@ -23343,7 +23377,7 @@
                 "State": {
                     "target": "com.amazonaws.ssm#PatchComplianceDataState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the patch on the managed node, such as INSTALLED or FAILED.</p>\n         <p>For descriptions of each patch state, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch\">About patch compliance</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The state of the patch on the managed node, such as INSTALLED or FAILED.</p>\n         <p>For descriptions of each patch state, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/compliance-about.html#compliance-monitor-patch\">About\n    patch compliance</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23997,13 +24031,13 @@
                     "target": "com.amazonaws.ssm#ApproveAfterDays",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of days after the release date of each patch matched by the rule that the patch\n   is marked as approved in the patch baseline. For example, a value of <code>7</code> means that\n   patches are approved seven days after they are released.</p>\n         <note>\n            <p>This parameter is marked as not required, but your request must include a value\n    for either <code>ApproveAfterDays</code> or <code>ApproveUntilDate</code>.</p>\n         </note>\n         <p> Not supported for Debian Server or Ubuntu Server.</p>"
+                        "smithy.api#documentation": "<p>The number of days after the release date of each patch matched by the rule that the patch\n   is marked as approved in the patch baseline. For example, a value of <code>7</code> means that\n   patches are approved seven days after they are released.</p>\n         <p>This parameter is marked as <code>Required: No</code>, but your request must include a value\n   for either <code>ApproveAfterDays</code> or <code>ApproveUntilDate</code>.</p>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>\n         <important>\n            <p>Use caution when setting this value for Windows Server patch baselines. Because patch\n    updates that are replaced by later updates are removed, setting too broad a value for this\n    parameter can result in crucial patches not being installed. For more information, see the\n     <b>Windows Server</b> tab in the topic <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html\">How security\n     patches are selected</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
                     }
                 },
                 "ApproveUntilDate": {
                     "target": "com.amazonaws.ssm#PatchStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before\n   this date are installed automatically.</p>\n         <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,\n   <code>2021-12-31</code>.</p>\n         <note>\n            <p>This parameter is marked as not required, but your request must include a value\n    for either <code>ApproveUntilDate</code> or <code>ApproveAfterDays</code>.</p>\n         </note>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>"
+                        "smithy.api#documentation": "<p>The cutoff date for auto approval of released patches. Any patches released on or before\n   this date are installed automatically.</p>\n         <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,\n   <code>2024-12-31</code>.</p>\n         <p>This parameter is marked as <code>Required: No</code>, but your request must include a value\n   for either <code>ApproveUntilDate</code> or <code>ApproveAfterDays</code>.</p>\n         <p>Not supported for Debian Server or Ubuntu Server.</p>\n         <important>\n            <p>Use caution when setting this value for Windows Server patch baselines. Because patch\n    updates that are replaced by later updates are removed, setting too broad a value for this\n    parameter can result in crucial patches not being installed. For more information, see the\n     <b>Windows Server</b> tab in the topic <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-selecting-patches.html\">How security\n     patches are selected</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </important>"
                     }
                 },
                 "EnableNonSecurity": {
@@ -25082,7 +25116,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up Maintenance Windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskType": {
@@ -27005,7 +27039,7 @@
                 "value": {
                     "target": "com.amazonaws.ssm#SessionFilterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filter value. Valid values for each filter key are as follows:</p>\n         <ul>\n            <li>\n               <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify\n     2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.</p>\n            </li>\n            <li>\n               <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify\n     2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p>\n            </li>\n            <li>\n               <p>Target: Specify a managed node to which session connections have been made.</p>\n            </li>\n            <li>\n               <p>Owner: Specify an Amazon Web Services user to see a list of sessions started by that user.</p>\n            </li>\n            <li>\n               <p>Status: Specify a valid session status to see a list of all sessions with that status.\n     Status values you can specify include:</p>\n               <ul>\n                  <li>\n                     <p>Connected</p>\n                  </li>\n                  <li>\n                     <p>Connecting</p>\n                  </li>\n                  <li>\n                     <p>Disconnected</p>\n                  </li>\n                  <li>\n                     <p>Terminated</p>\n                  </li>\n                  <li>\n                     <p>Terminating</p>\n                  </li>\n                  <li>\n                     <p>Failed</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>SessionId: Specify a session ID to return details about the session.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filter value. Valid values for each filter key are as follows:</p>\n         <ul>\n            <li>\n               <p>InvokedAfter: Specify a timestamp to limit your results. For example, specify\n     2024-08-29T00:00:00Z to see sessions that started August 29, 2024, and later.</p>\n            </li>\n            <li>\n               <p>InvokedBefore: Specify a timestamp to limit your results. For example, specify\n     2024-08-29T00:00:00Z to see sessions that started before August 29, 2024.</p>\n            </li>\n            <li>\n               <p>Target: Specify a managed node to which session connections have been made.</p>\n            </li>\n            <li>\n               <p>Owner: Specify an Amazon Web Services user to see a list of sessions started by that user.</p>\n            </li>\n            <li>\n               <p>Status: Specify a valid session status to see a list of all sessions with that status.\n     Status values you can specify include:</p>\n               <ul>\n                  <li>\n                     <p>Connected</p>\n                  </li>\n                  <li>\n                     <p>Connecting</p>\n                  </li>\n                  <li>\n                     <p>Disconnected</p>\n                  </li>\n                  <li>\n                     <p>Terminated</p>\n                  </li>\n                  <li>\n                     <p>Terminating</p>\n                  </li>\n                  <li>\n                     <p>Failed</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>SessionId: Specify a session ID to return details about the session.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -27537,7 +27571,7 @@
                 "Targets": {
                     "target": "com.amazonaws.ssm#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value mapping to target resources. Required if you specify TargetParameterName.</p>"
+                        "smithy.api#documentation": "<p>A key-value mapping to target resources. Required if you specify TargetParameterName.</p>\n         <p>If both this parameter and the <code>TargetLocation:Targets</code> parameter are supplied,\n    <code>TargetLocation:Targets</code> takes precedence.</p>"
                     }
                 },
                 "TargetMaps": {
@@ -27549,19 +27583,19 @@
                 "MaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run this task in parallel. You can specify a\n   number, such as 10, or a percentage, such as 10%. The default value is <code>10</code>.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run this task in parallel. You can specify a\n   number, such as 10, or a percentage, such as 10%. The default value is <code>10</code>.</p>\n         <p>If both this parameter and the <code>TargetLocation:TargetsMaxConcurrency</code> are\n   supplied, <code>TargetLocation:TargetsMaxConcurrency</code> takes precedence.</p>"
                     }
                 },
                 "MaxErrors": {
                     "target": "com.amazonaws.ssm#MaxErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of errors that are allowed before the system stops running the automation on\n   additional targets. You can specify either an absolute number of errors, for example 10, or a\n   percentage of the target set, for example 10%. If you specify 3, for example, the system stops\n   running the automation when the fourth error is received. If you specify 0, then the system stops\n   running the automation on additional targets after the first error result is returned. If you run\n   an automation on 50 resources and set max-errors to 10%, then the system stops running the\n   automation on additional targets when the sixth error is received.</p>\n         <p>Executions that are already running an automation when max-errors is reached are allowed to\n   complete, but some of these executions may fail as well. If you need to ensure that there won't\n   be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one\n   at a time.</p>"
+                        "smithy.api#documentation": "<p>The number of errors that are allowed before the system stops running the automation on\n   additional targets. You can specify either an absolute number of errors, for example 10, or a\n   percentage of the target set, for example 10%. If you specify 3, for example, the system stops\n   running the automation when the fourth error is received. If you specify 0, then the system stops\n   running the automation on additional targets after the first error result is returned. If you run\n   an automation on 50 resources and set max-errors to 10%, then the system stops running the\n   automation on additional targets when the sixth error is received.</p>\n         <p>Executions that are already running an automation when max-errors is reached are allowed to\n   complete, but some of these executions may fail as well. If you need to ensure that there won't\n   be more than max-errors failed executions, set max-concurrency to 1 so the executions proceed one\n   at a time.</p>\n         <p>If this parameter and the <code>TargetLocation:TargetsMaxErrors</code> parameter are both\n   supplied, <code>TargetLocation:TargetsMaxErrors</code> takes precedence.</p>"
                     }
                 },
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the\n   automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple\n   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Amazon Web Services Regions and Amazon Web Services accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the\n   automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple\n   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running automations in multiple Amazon Web Services Regions and accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
                     }
                 },
                 "Tags": {
@@ -27574,6 +27608,12 @@
                     "target": "com.amazonaws.ssm#AlarmConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The CloudWatch alarm you want to apply to your automation.</p>"
+                    }
+                },
+                "TargetLocationsURL": {
+                    "target": "com.amazonaws.ssm#TargetLocationsURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a publicly accessible URL for a file that contains the <code>TargetLocations</code>\n   body. Currently, only files in presigned Amazon S3 buckets are supported. </p>"
                     }
                 }
             },
@@ -28364,6 +28404,37 @@
                 },
                 "TargetLocationAlarmConfiguration": {
                     "target": "com.amazonaws.ssm#AlarmConfiguration"
+                },
+                "IncludeChildOrganizationUnits": {
+                    "target": "com.amazonaws.ssm#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether to include child organizational units (OUs) that are children of the\n   targeted OUs. The default is <code>false</code>.</p>"
+                    }
+                },
+                "ExcludeAccounts": {
+                    "target": "com.amazonaws.ssm#ExcludeAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services accounts or organizational units to exclude as expanded targets.</p>"
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.ssm#Targets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value mappings to target resources. If you specify values for this data type,\n   you must also specify a value for <code>TargetParameterName</code>.</p>\n         <p>This <code>Targets</code> parameter takes precedence over the\n    <code>StartAutomationExecution:Targets</code> parameter if both are supplied.</p>"
+                    }
+                },
+                "TargetsMaxConcurrency": {
+                    "target": "com.amazonaws.ssm#MaxConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of targets allowed to run this task in parallel. This\n    <code>TargetsMaxConcurrency</code> takes precedence over the\n    <code>StartAutomationExecution:MaxConcurrency</code> parameter if both are supplied.</p>"
+                    }
+                },
+                "TargetsMaxErrors": {
+                    "target": "com.amazonaws.ssm#MaxErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of errors that are allowed before the system stops running the automation\n   on additional targets. This <code>TargetsMaxErrors</code> parameter takes precedence over the\n    <code>StartAutomationExecution:MaxErrors</code> parameter if both are supplied.</p>"
+                    }
                 }
             },
             "traits": {
@@ -28380,6 +28451,12 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.ssm#TargetLocationsURL": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^https:\\/\\/[-a-zA-Z0-9@:%._\\+~#=]{1,253}\\.s3(\\.[a-z\\d-]{9,16})?\\.amazonaws\\.com\\/.{1,2000}$"
             }
         },
         "com.amazonaws.ssm#TargetMap": {
@@ -28451,7 +28528,7 @@
                     "code": "TargetNotConnected",
                     "httpResponseCode": 430
                 },
-                "smithy.api#documentation": "<p>The specified target managed node for the session isn't fully configured for use with Session Manager.\n   For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html\">Getting started with\n    Session Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. This error is also returned if you\n   attempt to start a session on a managed node that is located in a different account or\n   Region</p>",
+                "smithy.api#documentation": "<p>The specified target managed node for the session isn't fully configured for use with Session Manager.\n   For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started.html\">Setting up\n    Session Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. This error is also returned if you\n   attempt to start a session on a managed node that is located in a different account or\n   Region</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -29686,7 +29763,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up Maintenance Windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskParameters": {
@@ -29792,7 +29869,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up Maintenance Windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskParameters": {
@@ -29894,7 +29971,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid and multicloud environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must\n    create a unique role.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/hybrid-multicloud-service-role.html\">Create the IAM service role required for Systems Manager in hybrid and multicloud\n    environments</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must\n    create a unique role.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -29987,7 +30064,7 @@
                 "Status": {
                     "target": "com.amazonaws.ssm#OpsItemStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or\n    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The OpsItem status. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "OpsItemId": {
@@ -30178,7 +30255,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package\n                        name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -30197,7 +30274,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package\n                        name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {

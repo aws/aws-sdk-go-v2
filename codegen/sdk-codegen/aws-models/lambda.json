@@ -85,6 +85,9 @@
                     "target": "com.amazonaws.lambda#DeleteProvisionedConcurrencyConfig"
                 },
                 {
+                    "target": "com.amazonaws.lambda#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.lambda#GetAccountSettings"
                 },
                 {
@@ -131,6 +134,12 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#GetProvisionedConcurrencyConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#GetPublicAccessBlockConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#GetResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.lambda#GetRuntimeManagementConfig"
@@ -200,6 +209,12 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#PutProvisionedConcurrencyConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PutPublicAccessBlockConfig"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PutResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.lambda#PutRuntimeManagementConfig"
@@ -3576,6 +3591,66 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.lambda#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> from a function.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2024-09-16/resource-policy/{ResourceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lambda#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lambda#PolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function you want to delete the policy from. You can use either a qualified or an unqualified ARN, \n      but the value you specify must be a complete ARN and wildcard characters are not accepted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.lambda#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Delete the existing policy only if its revision ID matches the string you specify. To find the revision ID of the policy currently attached \n      to your function, use the <a>GetResourcePolicy</a> action.</p>",
+                        "smithy.api#httpQuery": "RevisionId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.lambda#Description": {
             "type": "string",
             "traits": {
@@ -6093,6 +6168,134 @@
                     "target": "com.amazonaws.lambda#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lambda#GetPublicAccessBlockConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#GetPublicAccessBlockConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#GetPublicAccessBlockConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the public-access settings for a function.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2024-09-16/public-access-block/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#GetPublicAccessBlockConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lambda#PublicAccessBlockResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function you want to retrieve public-access settings for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#GetPublicAccessBlockConfigResponse": {
+            "type": "structure",
+            "members": {
+                "PublicAccessBlockConfig": {
+                    "target": "com.amazonaws.lambda#PublicAccessBlockConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public-access settings configured for the function you specified</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lambda#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#GetResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> attached to a function.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2024-09-16/resource-policy/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lambda#PolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function you want to retrieve the policy for. You can use either a qualified or an unqualified ARN, \n      but the value you specify must be a complete ARN and wildcard characters are not accepted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#GetResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.lambda#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource-based policy attached to the function you specified.</p>"
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.lambda#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy.</p>"
                     }
                 }
             },
@@ -8886,6 +9089,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.lambda#PolicyResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_])+)?$"
+            }
+        },
         "com.amazonaws.lambda#PositiveInteger": {
             "type": "integer",
             "traits": {
@@ -9025,6 +9238,55 @@
                         "smithy.api#enumValue": "FAILED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lambda#PublicAccessBlockConfig": {
+            "type": "structure",
+            "members": {
+                "BlockPublicPolicy": {
+                    "target": "com.amazonaws.lambda#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To block the creation of resource-based policies that would grant public access to your function, set <code>BlockPublicPolicy</code> \n      to <code>true</code>. To allow the creation of resource-based policies that would grant public access to your function, set <code>BlockPublicPolicy</code> \n      to <code>false</code>.</p>"
+                    }
+                },
+                "RestrictPublicResource": {
+                    "target": "com.amazonaws.lambda#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To block public access to your function, even if its resource-based policy allows it, set <code>RestrictPublicResource</code> to <code>true</code>. To \n      allow public access to a function with a resource-based policy that permits it, set <code>RestrictPublicResource</code> to <code>false</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines the public-access settings for a function.</p>"
+            }
+        },
+        "com.amazonaws.lambda#PublicAccessBlockResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 170
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.lambda#PublicPolicyException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lambda prevented your policy from being created because it would grant public access to your function. If you intended to \n      create a public policy, use the <a>PutPublicAccessBlockConfig</a> API action to configure your function's public-access settings \n      to allow public policies.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.lambda#PublishLayerVersion": {
@@ -9639,6 +9901,169 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lambda#PutPublicAccessBlockConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#PutPublicAccessBlockConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#PutPublicAccessBlockConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Configure your function's public-access settings.</p>\n         <p>To control public access to a Lambda function, you can choose whether to allow the creation of \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policies</a> that \n      allow public access to that function. You can also block public access to a function, even if it has an existing resource-based \n    policy that allows it.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2024-09-16/public-access-block/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#PutPublicAccessBlockConfigRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lambda#PublicAccessBlockResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function you want to configure public-access settings for. Public-access settings \n    are applied at the function level, so you can't apply different settings to function versions or aliases.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicAccessBlockConfig": {
+                    "target": "com.amazonaws.lambda#PublicAccessBlockConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object defining the public-access settings you want to apply.</p>\n         <p>To block the creation of resource-based policies that would grant public access to your function, set <code>BlockPublicPolicy</code> \n      to <code>true</code>. To allow the creation of resource-based policies that would grant public access to your function, set <code>BlockPublicPolicy</code> \n      to <code>false</code>.</p>\n         <p>To block public access to your function, even if its resource-based policy allows it, set <code>RestrictPublicResource</code> to <code>true</code>. To \n      allow public access to a function with a resource-based policy that permits it, set <code>RestrictPublicResource</code> to <code>false</code>.</p>\n         <p>The default setting for both <code>BlockPublicPolicy</code> and <code>RestrictPublicResource</code> is <code>true</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#PutPublicAccessBlockConfigResponse": {
+            "type": "structure",
+            "members": {
+                "PublicAccessBlockConfig": {
+                    "target": "com.amazonaws.lambda#PublicAccessBlockConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public-access settings Lambda applied to your function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lambda#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lambda#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lambda#PutResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambda#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PolicyLengthExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#PublicPolicyException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> \n      to a function. You can use resource-based policies to grant access to other \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-cross-account.html\">Amazon Web Services accounts</a>, \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-organization.html\">organizations</a>, or \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-services.html\">services</a>. Resource-based policies \n    apply to a single function, version, or alias.</p>\n         <important>\n            <p>Adding a resource-based policy using this API action replaces any existing policy you've previously created. This means that if \n        you've previously added resource-based permissions to a function using the <a>AddPermission</a> action, those \n      permissions will be overwritten by your new policy.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2024-09-16/resource-policy/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lambda#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lambda#PolicyResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function you want to add the policy to. You can use either a qualified or an unqualified ARN, \n      but the value you specify must be a complete ARN and wildcard characters are not accepted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.lambda#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON resource-based policy you want to add to your function.</p>\n         <p>To learn more about creating resource-based policies for controlling access to \n      Lambda, see <a href=\"https://docs.aws.amazon.com/\">Working with resource-based IAM policies in Lambda</a> in the \n    <i>Lambda Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.lambda#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replace the existing policy only if its revision ID matches the string you specify. To find the revision ID of the policy currently attached \n      to your function, use the <a>GetResourcePolicy</a> action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lambda#PutResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.lambda#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy Lambda added to your function.</p>"
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.lambda#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision ID of the policy Lambda added to your function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lambda#PutRuntimeManagementConfig": {
             "type": "operation",
             "input": {
@@ -10060,6 +10485,16 @@
                 "smithy.api#httpError": 502
             }
         },
+        "com.amazonaws.lambda#ResourcePolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20480
+                },
+                "smithy.api#pattern": "^[\\s\\S]+$"
+            }
+        },
         "com.amazonaws.lambda#ResponseStreamingInvocationType": {
             "type": "enum",
             "members": {
@@ -10075,6 +10510,16 @@
                         "smithy.api#enumValue": "DryRun"
                     }
                 }
+            }
+        },
+        "com.amazonaws.lambda#RevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.lambda#RoleArn": {

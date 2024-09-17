@@ -7455,20 +7455,20 @@
                 "name": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of either the enterprise or organization that will send webhook events to CodeBuild, depending on if the webhook is a global or organization webhook respectively.</p>",
+                        "smithy.api#documentation": "<p>The name of either the group, enterprise, or organization that will send webhook events to CodeBuild, depending on the type of webhook.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "domain": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain of the GitHub Enterprise organization. Note that this parameter is only required if your project's source type is GITHUB_ENTERPRISE</p>"
+                        "smithy.api#documentation": "<p>The domain of the GitHub Enterprise organization or the GitLab Self Managed group. Note that this parameter is only required if your project's source type is GITHUB_ENTERPRISE or GITLAB_SELF_MANAGED.</p>"
                     }
                 },
                 "scope": {
                     "target": "com.amazonaws.codebuild#WebhookScopeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of scope for a GitHub webhook.</p>",
+                        "smithy.api#documentation": "<p>The type of scope for a GitHub or GitLab webhook.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9205,6 +9205,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GITHUB_GLOBAL"
+                    }
+                },
+                "GITLAB_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_GROUP"
                     }
                 }
             }
