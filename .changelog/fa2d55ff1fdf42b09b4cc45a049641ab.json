@@ -1,8 +1,0 @@
-{
-    "id": "fa2d55ff-1fdf-42b0-9b4c-c45a049641ab",
-    "type": "feature",
-    "description": "Added new APIs for enabling, disabling, and describing access to the AWS Directory Service Data API",
-    "modules": [
-        "service/directoryservice"
-    ]
-}

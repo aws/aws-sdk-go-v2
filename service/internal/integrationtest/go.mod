@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.5
 	github.com/aws/aws-sdk-go-v2/config v1.27.35
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.20
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.21
 	github.com/aws/aws-sdk-go-v2/service/acm v1.28.9
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.25.9
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.31.5
@@ -27,7 +27,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.40.8
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.27.10
-	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.27.7
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.37.4
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.34.10
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.177.4
@@ -58,13 +58,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.33.8
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.21.7
 	github.com/aws/aws-sdk-go-v2/service/polly v1.43.3
-	github.com/aws/aws-sdk-go-v2/service/rds v1.83.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.83.2
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.46.9
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.43.6
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.43.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.25.7
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.30.9
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.61.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.62.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.47.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.32.9
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.30.7

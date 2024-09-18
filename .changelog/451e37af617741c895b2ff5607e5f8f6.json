@@ -1,8 +1,0 @@
-{
-    "id": "451e37af-6177-41c8-95b2-ff5607e5f8f6",
-    "type": "feature",
-    "description": "Add `launchType` and `sourceIPs` fields to GuardDuty findings.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.83.2 (2024-09-18)
+
+* **Documentation**: Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.
+
 # v1.83.1 (2024-09-17)
 
 * **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.

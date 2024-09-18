@@ -1,8 +1,0 @@
-{
-    "id": "83877ff1-d56c-4747-846a-0dffc68e68c4",
-    "type": "feature",
-    "description": "Added new AWS Directory Service Data API, enabling you to manage data stored in AWS Directory Service directories. This includes APIs for creating, reading, updating, and deleting directory users, groups, and group memberships.",
-    "modules": [
-        "service/directoryservicedata"
-    ]
-}

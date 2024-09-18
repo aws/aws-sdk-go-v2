@@ -1,3 +1,25 @@
+# Release (2024-09-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.41.0](service/costexplorer/CHANGELOG.md#v1410-2024-09-18)
+  * **Feature**: This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon DynamoDB reservations.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.28.0](service/directoryservice/CHANGELOG.md#v1280-2024-09-18)
+  * **Feature**: Added new APIs for enabling, disabling, and describing access to the AWS Directory Service Data API
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.0.0](service/directoryservicedata/CHANGELOG.md#v100-2024-09-18)
+  * **Release**: New AWS service client module
+  * **Feature**: Added new AWS Directory Service Data API, enabling you to manage data stored in AWS Directory Service directories. This includes APIs for creating, reading, updating, and deleting directory users, groups, and group memberships.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.47.0](service/guardduty/CHANGELOG.md#v1470-2024-09-18)
+  * **Feature**: Add `launchType` and `sourceIPs` fields to GuardDuty findings.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.3.0](service/mailmanager/CHANGELOG.md#v130-2024-09-18)
+  * **Feature**: Introduce a new RuleSet condition evaluation, where customers can set up a StringExpression with a MimeHeader condition. This condition will perform the necessary validation based on the X-header provided by customers.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.83.2](service/rds/CHANGELOG.md#v1832-2024-09-18)
+  * **Documentation**: Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.62.0](service/s3/CHANGELOG.md#v1620-2024-09-18)
+  * **Feature**: Added SSE-KMS support for directory buckets.
+
 # Release (2024-09-17)
 
 ## General Highlights
