@@ -12,6 +12,7 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -25,6 +26,10 @@ func (*awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnector) ID() str
 func (m *awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -72,6 +77,8 @@ func (m *awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnector) Handle
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsAssociatePhoneNumbersWithVoiceConnectorInput(v *AssociatePhoneNumbersWithVoiceConnectorInput, encoder *httpbinding.Encoder) error {
@@ -120,6 +127,10 @@ func (*awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnectorGroup) ID(
 func (m *awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnectorGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -167,6 +178,8 @@ func (m *awsRestjson1_serializeOpAssociatePhoneNumbersWithVoiceConnectorGroup) H
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsAssociatePhoneNumbersWithVoiceConnectorGroupInput(v *AssociatePhoneNumbersWithVoiceConnectorGroupInput, encoder *httpbinding.Encoder) error {
@@ -215,6 +228,10 @@ func (*awsRestjson1_serializeOpAssociatePhoneNumberWithUser) ID() string {
 func (m *awsRestjson1_serializeOpAssociatePhoneNumberWithUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -262,6 +279,8 @@ func (m *awsRestjson1_serializeOpAssociatePhoneNumberWithUser) HandleSerialize(c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsAssociatePhoneNumberWithUserInput(v *AssociatePhoneNumberWithUserInput, encoder *httpbinding.Encoder) error {
@@ -312,6 +331,10 @@ func (*awsRestjson1_serializeOpAssociateSigninDelegateGroupsWithAccount) ID() st
 func (m *awsRestjson1_serializeOpAssociateSigninDelegateGroupsWithAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -359,6 +382,8 @@ func (m *awsRestjson1_serializeOpAssociateSigninDelegateGroupsWithAccount) Handl
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsAssociateSigninDelegateGroupsWithAccountInput(v *AssociateSigninDelegateGroupsWithAccountInput, encoder *httpbinding.Encoder) error {
@@ -402,6 +427,10 @@ func (*awsRestjson1_serializeOpBatchCreateAttendee) ID() string {
 func (m *awsRestjson1_serializeOpBatchCreateAttendee) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -449,6 +478,8 @@ func (m *awsRestjson1_serializeOpBatchCreateAttendee) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchCreateAttendeeInput(v *BatchCreateAttendeeInput, encoder *httpbinding.Encoder) error {
@@ -492,6 +523,10 @@ func (*awsRestjson1_serializeOpBatchCreateChannelMembership) ID() string {
 func (m *awsRestjson1_serializeOpBatchCreateChannelMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -539,6 +574,8 @@ func (m *awsRestjson1_serializeOpBatchCreateChannelMembership) HandleSerialize(c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchCreateChannelMembershipInput(v *BatchCreateChannelMembershipInput, encoder *httpbinding.Encoder) error {
@@ -592,6 +629,10 @@ func (*awsRestjson1_serializeOpBatchCreateRoomMembership) ID() string {
 func (m *awsRestjson1_serializeOpBatchCreateRoomMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -639,6 +680,8 @@ func (m *awsRestjson1_serializeOpBatchCreateRoomMembership) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchCreateRoomMembershipInput(v *BatchCreateRoomMembershipInput, encoder *httpbinding.Encoder) error {
@@ -691,6 +734,10 @@ func (*awsRestjson1_serializeOpBatchDeletePhoneNumber) ID() string {
 func (m *awsRestjson1_serializeOpBatchDeletePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -734,6 +781,8 @@ func (m *awsRestjson1_serializeOpBatchDeletePhoneNumber) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchDeletePhoneNumberInput(v *BatchDeletePhoneNumberInput, encoder *httpbinding.Encoder) error {
@@ -768,6 +817,10 @@ func (*awsRestjson1_serializeOpBatchSuspendUser) ID() string {
 func (m *awsRestjson1_serializeOpBatchSuspendUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -815,6 +868,8 @@ func (m *awsRestjson1_serializeOpBatchSuspendUser) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchSuspendUserInput(v *BatchSuspendUserInput, encoder *httpbinding.Encoder) error {
@@ -858,6 +913,10 @@ func (*awsRestjson1_serializeOpBatchUnsuspendUser) ID() string {
 func (m *awsRestjson1_serializeOpBatchUnsuspendUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -905,6 +964,8 @@ func (m *awsRestjson1_serializeOpBatchUnsuspendUser) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchUnsuspendUserInput(v *BatchUnsuspendUserInput, encoder *httpbinding.Encoder) error {
@@ -948,6 +1009,10 @@ func (*awsRestjson1_serializeOpBatchUpdatePhoneNumber) ID() string {
 func (m *awsRestjson1_serializeOpBatchUpdatePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -991,6 +1056,8 @@ func (m *awsRestjson1_serializeOpBatchUpdatePhoneNumber) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchUpdatePhoneNumberInput(v *BatchUpdatePhoneNumberInput, encoder *httpbinding.Encoder) error {
@@ -1025,6 +1092,10 @@ func (*awsRestjson1_serializeOpBatchUpdateUser) ID() string {
 func (m *awsRestjson1_serializeOpBatchUpdateUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1072,6 +1143,8 @@ func (m *awsRestjson1_serializeOpBatchUpdateUser) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsBatchUpdateUserInput(v *BatchUpdateUserInput, encoder *httpbinding.Encoder) error {
@@ -1115,6 +1188,10 @@ func (*awsRestjson1_serializeOpCreateAccount) ID() string {
 func (m *awsRestjson1_serializeOpCreateAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1158,6 +1235,8 @@ func (m *awsRestjson1_serializeOpCreateAccount) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateAccountInput(v *CreateAccountInput, encoder *httpbinding.Encoder) error {
@@ -1190,6 +1269,10 @@ func (*awsRestjson1_serializeOpCreateAppInstance) ID() string {
 func (m *awsRestjson1_serializeOpCreateAppInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1233,6 +1316,8 @@ func (m *awsRestjson1_serializeOpCreateAppInstance) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateAppInstanceInput(v *CreateAppInstanceInput, encoder *httpbinding.Encoder) error {
@@ -1282,6 +1367,10 @@ func (*awsRestjson1_serializeOpCreateAppInstanceAdmin) ID() string {
 func (m *awsRestjson1_serializeOpCreateAppInstanceAdmin) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1329,6 +1418,8 @@ func (m *awsRestjson1_serializeOpCreateAppInstanceAdmin) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateAppInstanceAdminInput(v *CreateAppInstanceAdminInput, encoder *httpbinding.Encoder) error {
@@ -1370,6 +1461,10 @@ func (*awsRestjson1_serializeOpCreateAppInstanceUser) ID() string {
 func (m *awsRestjson1_serializeOpCreateAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1413,6 +1508,8 @@ func (m *awsRestjson1_serializeOpCreateAppInstanceUser) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateAppInstanceUserInput(v *CreateAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -1472,6 +1569,10 @@ func (*awsRestjson1_serializeOpCreateAttendee) ID() string {
 func (m *awsRestjson1_serializeOpCreateAttendee) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1519,6 +1620,8 @@ func (m *awsRestjson1_serializeOpCreateAttendee) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateAttendeeInput(v *CreateAttendeeInput, encoder *httpbinding.Encoder) error {
@@ -1567,6 +1670,10 @@ func (*awsRestjson1_serializeOpCreateBot) ID() string {
 func (m *awsRestjson1_serializeOpCreateBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1614,6 +1721,8 @@ func (m *awsRestjson1_serializeOpCreateBot) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateBotInput(v *CreateBotInput, encoder *httpbinding.Encoder) error {
@@ -1660,6 +1769,10 @@ func (*awsRestjson1_serializeOpCreateChannel) ID() string {
 func (m *awsRestjson1_serializeOpCreateChannel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1707,6 +1820,8 @@ func (m *awsRestjson1_serializeOpCreateChannel) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateChannelInput(v *CreateChannelInput, encoder *httpbinding.Encoder) error {
@@ -1776,6 +1891,10 @@ func (*awsRestjson1_serializeOpCreateChannelBan) ID() string {
 func (m *awsRestjson1_serializeOpCreateChannelBan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1823,6 +1942,8 @@ func (m *awsRestjson1_serializeOpCreateChannelBan) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateChannelBanInput(v *CreateChannelBanInput, encoder *httpbinding.Encoder) error {
@@ -1869,6 +1990,10 @@ func (*awsRestjson1_serializeOpCreateChannelMembership) ID() string {
 func (m *awsRestjson1_serializeOpCreateChannelMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -1916,6 +2041,8 @@ func (m *awsRestjson1_serializeOpCreateChannelMembership) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateChannelMembershipInput(v *CreateChannelMembershipInput, encoder *httpbinding.Encoder) error {
@@ -1967,6 +2094,10 @@ func (*awsRestjson1_serializeOpCreateChannelModerator) ID() string {
 func (m *awsRestjson1_serializeOpCreateChannelModerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2014,6 +2145,8 @@ func (m *awsRestjson1_serializeOpCreateChannelModerator) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateChannelModeratorInput(v *CreateChannelModeratorInput, encoder *httpbinding.Encoder) error {
@@ -2060,6 +2193,10 @@ func (*awsRestjson1_serializeOpCreateMediaCapturePipeline) ID() string {
 func (m *awsRestjson1_serializeOpCreateMediaCapturePipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2103,6 +2240,8 @@ func (m *awsRestjson1_serializeOpCreateMediaCapturePipeline) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateMediaCapturePipelineInput(v *CreateMediaCapturePipelineInput, encoder *httpbinding.Encoder) error {
@@ -2162,6 +2301,10 @@ func (*awsRestjson1_serializeOpCreateMeeting) ID() string {
 func (m *awsRestjson1_serializeOpCreateMeeting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2205,6 +2348,8 @@ func (m *awsRestjson1_serializeOpCreateMeeting) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateMeetingInput(v *CreateMeetingInput, encoder *httpbinding.Encoder) error {
@@ -2266,6 +2411,10 @@ func (*awsRestjson1_serializeOpCreateMeetingDialOut) ID() string {
 func (m *awsRestjson1_serializeOpCreateMeetingDialOut) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2313,6 +2462,8 @@ func (m *awsRestjson1_serializeOpCreateMeetingDialOut) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateMeetingDialOutInput(v *CreateMeetingDialOutInput, encoder *httpbinding.Encoder) error {
@@ -2364,6 +2515,10 @@ func (*awsRestjson1_serializeOpCreateMeetingWithAttendees) ID() string {
 func (m *awsRestjson1_serializeOpCreateMeetingWithAttendees) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2407,6 +2562,8 @@ func (m *awsRestjson1_serializeOpCreateMeetingWithAttendees) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateMeetingWithAttendeesInput(v *CreateMeetingWithAttendeesInput, encoder *httpbinding.Encoder) error {
@@ -2475,6 +2632,10 @@ func (*awsRestjson1_serializeOpCreatePhoneNumberOrder) ID() string {
 func (m *awsRestjson1_serializeOpCreatePhoneNumberOrder) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2518,6 +2679,8 @@ func (m *awsRestjson1_serializeOpCreatePhoneNumberOrder) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreatePhoneNumberOrderInput(v *CreatePhoneNumberOrderInput, encoder *httpbinding.Encoder) error {
@@ -2557,6 +2720,10 @@ func (*awsRestjson1_serializeOpCreateProxySession) ID() string {
 func (m *awsRestjson1_serializeOpCreateProxySession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2604,6 +2771,8 @@ func (m *awsRestjson1_serializeOpCreateProxySession) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateProxySessionInput(v *CreateProxySessionInput, encoder *httpbinding.Encoder) error {
@@ -2681,6 +2850,10 @@ func (*awsRestjson1_serializeOpCreateRoom) ID() string {
 func (m *awsRestjson1_serializeOpCreateRoom) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2728,6 +2901,8 @@ func (m *awsRestjson1_serializeOpCreateRoom) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateRoomInput(v *CreateRoomInput, encoder *httpbinding.Encoder) error {
@@ -2774,6 +2949,10 @@ func (*awsRestjson1_serializeOpCreateRoomMembership) ID() string {
 func (m *awsRestjson1_serializeOpCreateRoomMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2821,6 +3000,8 @@ func (m *awsRestjson1_serializeOpCreateRoomMembership) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateRoomMembershipInput(v *CreateRoomMembershipInput, encoder *httpbinding.Encoder) error {
@@ -2876,6 +3057,10 @@ func (*awsRestjson1_serializeOpCreateSipMediaApplication) ID() string {
 func (m *awsRestjson1_serializeOpCreateSipMediaApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -2919,6 +3104,8 @@ func (m *awsRestjson1_serializeOpCreateSipMediaApplication) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateSipMediaApplicationInput(v *CreateSipMediaApplicationInput, encoder *httpbinding.Encoder) error {
@@ -2963,6 +3150,10 @@ func (*awsRestjson1_serializeOpCreateSipMediaApplicationCall) ID() string {
 func (m *awsRestjson1_serializeOpCreateSipMediaApplicationCall) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3010,6 +3201,8 @@ func (m *awsRestjson1_serializeOpCreateSipMediaApplicationCall) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateSipMediaApplicationCallInput(v *CreateSipMediaApplicationCallInput, encoder *httpbinding.Encoder) error {
@@ -3063,6 +3256,10 @@ func (*awsRestjson1_serializeOpCreateSipRule) ID() string {
 func (m *awsRestjson1_serializeOpCreateSipRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3106,6 +3303,8 @@ func (m *awsRestjson1_serializeOpCreateSipRule) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateSipRuleInput(v *CreateSipRuleInput, encoder *httpbinding.Encoder) error {
@@ -3160,6 +3359,10 @@ func (*awsRestjson1_serializeOpCreateUser) ID() string {
 func (m *awsRestjson1_serializeOpCreateUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3207,6 +3410,8 @@ func (m *awsRestjson1_serializeOpCreateUser) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateUserInput(v *CreateUserInput, encoder *httpbinding.Encoder) error {
@@ -3258,6 +3463,10 @@ func (*awsRestjson1_serializeOpCreateVoiceConnector) ID() string {
 func (m *awsRestjson1_serializeOpCreateVoiceConnector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3301,6 +3510,8 @@ func (m *awsRestjson1_serializeOpCreateVoiceConnector) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateVoiceConnectorInput(v *CreateVoiceConnectorInput, encoder *httpbinding.Encoder) error {
@@ -3343,6 +3554,10 @@ func (*awsRestjson1_serializeOpCreateVoiceConnectorGroup) ID() string {
 func (m *awsRestjson1_serializeOpCreateVoiceConnectorGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3386,6 +3601,8 @@ func (m *awsRestjson1_serializeOpCreateVoiceConnectorGroup) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsCreateVoiceConnectorGroupInput(v *CreateVoiceConnectorGroupInput, encoder *httpbinding.Encoder) error {
@@ -3425,6 +3642,10 @@ func (*awsRestjson1_serializeOpDeleteAccount) ID() string {
 func (m *awsRestjson1_serializeOpDeleteAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3461,6 +3682,8 @@ func (m *awsRestjson1_serializeOpDeleteAccount) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteAccountInput(v *DeleteAccountInput, encoder *httpbinding.Encoder) error {
@@ -3490,6 +3713,10 @@ func (*awsRestjson1_serializeOpDeleteAppInstance) ID() string {
 func (m *awsRestjson1_serializeOpDeleteAppInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3526,6 +3753,8 @@ func (m *awsRestjson1_serializeOpDeleteAppInstance) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceInput(v *DeleteAppInstanceInput, encoder *httpbinding.Encoder) error {
@@ -3555,6 +3784,10 @@ func (*awsRestjson1_serializeOpDeleteAppInstanceAdmin) ID() string {
 func (m *awsRestjson1_serializeOpDeleteAppInstanceAdmin) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3591,6 +3824,8 @@ func (m *awsRestjson1_serializeOpDeleteAppInstanceAdmin) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceAdminInput(v *DeleteAppInstanceAdminInput, encoder *httpbinding.Encoder) error {
@@ -3629,6 +3864,10 @@ func (*awsRestjson1_serializeOpDeleteAppInstanceStreamingConfigurations) ID() st
 func (m *awsRestjson1_serializeOpDeleteAppInstanceStreamingConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3665,6 +3904,8 @@ func (m *awsRestjson1_serializeOpDeleteAppInstanceStreamingConfigurations) Handl
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceStreamingConfigurationsInput(v *DeleteAppInstanceStreamingConfigurationsInput, encoder *httpbinding.Encoder) error {
@@ -3694,6 +3935,10 @@ func (*awsRestjson1_serializeOpDeleteAppInstanceUser) ID() string {
 func (m *awsRestjson1_serializeOpDeleteAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3730,6 +3975,8 @@ func (m *awsRestjson1_serializeOpDeleteAppInstanceUser) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceUserInput(v *DeleteAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -3759,6 +4006,10 @@ func (*awsRestjson1_serializeOpDeleteAttendee) ID() string {
 func (m *awsRestjson1_serializeOpDeleteAttendee) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3795,6 +4046,8 @@ func (m *awsRestjson1_serializeOpDeleteAttendee) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteAttendeeInput(v *DeleteAttendeeInput, encoder *httpbinding.Encoder) error {
@@ -3833,6 +4086,10 @@ func (*awsRestjson1_serializeOpDeleteChannel) ID() string {
 func (m *awsRestjson1_serializeOpDeleteChannel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3869,6 +4126,8 @@ func (m *awsRestjson1_serializeOpDeleteChannel) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteChannelInput(v *DeleteChannelInput, encoder *httpbinding.Encoder) error {
@@ -3903,6 +4162,10 @@ func (*awsRestjson1_serializeOpDeleteChannelBan) ID() string {
 func (m *awsRestjson1_serializeOpDeleteChannelBan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -3939,6 +4202,8 @@ func (m *awsRestjson1_serializeOpDeleteChannelBan) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteChannelBanInput(v *DeleteChannelBanInput, encoder *httpbinding.Encoder) error {
@@ -3982,6 +4247,10 @@ func (*awsRestjson1_serializeOpDeleteChannelMembership) ID() string {
 func (m *awsRestjson1_serializeOpDeleteChannelMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4018,6 +4287,8 @@ func (m *awsRestjson1_serializeOpDeleteChannelMembership) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteChannelMembershipInput(v *DeleteChannelMembershipInput, encoder *httpbinding.Encoder) error {
@@ -4061,6 +4332,10 @@ func (*awsRestjson1_serializeOpDeleteChannelMessage) ID() string {
 func (m *awsRestjson1_serializeOpDeleteChannelMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4097,6 +4372,8 @@ func (m *awsRestjson1_serializeOpDeleteChannelMessage) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteChannelMessageInput(v *DeleteChannelMessageInput, encoder *httpbinding.Encoder) error {
@@ -4140,6 +4417,10 @@ func (*awsRestjson1_serializeOpDeleteChannelModerator) ID() string {
 func (m *awsRestjson1_serializeOpDeleteChannelModerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4176,6 +4457,8 @@ func (m *awsRestjson1_serializeOpDeleteChannelModerator) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteChannelModeratorInput(v *DeleteChannelModeratorInput, encoder *httpbinding.Encoder) error {
@@ -4219,6 +4502,10 @@ func (*awsRestjson1_serializeOpDeleteEventsConfiguration) ID() string {
 func (m *awsRestjson1_serializeOpDeleteEventsConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4255,6 +4542,8 @@ func (m *awsRestjson1_serializeOpDeleteEventsConfiguration) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteEventsConfigurationInput(v *DeleteEventsConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -4293,6 +4582,10 @@ func (*awsRestjson1_serializeOpDeleteMediaCapturePipeline) ID() string {
 func (m *awsRestjson1_serializeOpDeleteMediaCapturePipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4329,6 +4622,8 @@ func (m *awsRestjson1_serializeOpDeleteMediaCapturePipeline) HandleSerialize(ctx
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteMediaCapturePipelineInput(v *DeleteMediaCapturePipelineInput, encoder *httpbinding.Encoder) error {
@@ -4358,6 +4653,10 @@ func (*awsRestjson1_serializeOpDeleteMeeting) ID() string {
 func (m *awsRestjson1_serializeOpDeleteMeeting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4394,6 +4693,8 @@ func (m *awsRestjson1_serializeOpDeleteMeeting) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteMeetingInput(v *DeleteMeetingInput, encoder *httpbinding.Encoder) error {
@@ -4423,6 +4724,10 @@ func (*awsRestjson1_serializeOpDeletePhoneNumber) ID() string {
 func (m *awsRestjson1_serializeOpDeletePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4459,6 +4764,8 @@ func (m *awsRestjson1_serializeOpDeletePhoneNumber) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeletePhoneNumberInput(v *DeletePhoneNumberInput, encoder *httpbinding.Encoder) error {
@@ -4488,6 +4795,10 @@ func (*awsRestjson1_serializeOpDeleteProxySession) ID() string {
 func (m *awsRestjson1_serializeOpDeleteProxySession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4524,6 +4835,8 @@ func (m *awsRestjson1_serializeOpDeleteProxySession) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteProxySessionInput(v *DeleteProxySessionInput, encoder *httpbinding.Encoder) error {
@@ -4562,6 +4875,10 @@ func (*awsRestjson1_serializeOpDeleteRoom) ID() string {
 func (m *awsRestjson1_serializeOpDeleteRoom) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4598,6 +4915,8 @@ func (m *awsRestjson1_serializeOpDeleteRoom) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteRoomInput(v *DeleteRoomInput, encoder *httpbinding.Encoder) error {
@@ -4636,6 +4955,10 @@ func (*awsRestjson1_serializeOpDeleteRoomMembership) ID() string {
 func (m *awsRestjson1_serializeOpDeleteRoomMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4672,6 +4995,8 @@ func (m *awsRestjson1_serializeOpDeleteRoomMembership) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteRoomMembershipInput(v *DeleteRoomMembershipInput, encoder *httpbinding.Encoder) error {
@@ -4719,6 +5044,10 @@ func (*awsRestjson1_serializeOpDeleteSipMediaApplication) ID() string {
 func (m *awsRestjson1_serializeOpDeleteSipMediaApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4755,6 +5084,8 @@ func (m *awsRestjson1_serializeOpDeleteSipMediaApplication) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteSipMediaApplicationInput(v *DeleteSipMediaApplicationInput, encoder *httpbinding.Encoder) error {
@@ -4784,6 +5115,10 @@ func (*awsRestjson1_serializeOpDeleteSipRule) ID() string {
 func (m *awsRestjson1_serializeOpDeleteSipRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4820,6 +5155,8 @@ func (m *awsRestjson1_serializeOpDeleteSipRule) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteSipRuleInput(v *DeleteSipRuleInput, encoder *httpbinding.Encoder) error {
@@ -4849,6 +5186,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnector) ID() string {
 func (m *awsRestjson1_serializeOpDeleteVoiceConnector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4885,6 +5226,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnector) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorInput(v *DeleteVoiceConnectorInput, encoder *httpbinding.Encoder) error {
@@ -4914,6 +5257,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorEmergencyCallingConfiguration
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorEmergencyCallingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -4950,6 +5297,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorEmergencyCallingConfigurati
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorEmergencyCallingConfigurationInput(v *DeleteVoiceConnectorEmergencyCallingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -4979,6 +5328,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorGroup) ID() string {
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5015,6 +5368,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorGroup) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorGroupInput(v *DeleteVoiceConnectorGroupInput, encoder *httpbinding.Encoder) error {
@@ -5044,6 +5399,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorOrigination) ID() string {
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorOrigination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5080,6 +5439,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorOrigination) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorOriginationInput(v *DeleteVoiceConnectorOriginationInput, encoder *httpbinding.Encoder) error {
@@ -5109,6 +5470,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorProxy) ID() string {
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorProxy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5145,6 +5510,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorProxy) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorProxyInput(v *DeleteVoiceConnectorProxyInput, encoder *httpbinding.Encoder) error {
@@ -5174,6 +5541,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorStreamingConfiguration) ID() 
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorStreamingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5210,6 +5581,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorStreamingConfiguration) Han
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorStreamingConfigurationInput(v *DeleteVoiceConnectorStreamingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -5239,6 +5612,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorTermination) ID() string {
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorTermination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5275,6 +5652,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorTermination) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorTerminationInput(v *DeleteVoiceConnectorTerminationInput, encoder *httpbinding.Encoder) error {
@@ -5304,6 +5683,10 @@ func (*awsRestjson1_serializeOpDeleteVoiceConnectorTerminationCredentials) ID() 
 func (m *awsRestjson1_serializeOpDeleteVoiceConnectorTerminationCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5351,6 +5734,8 @@ func (m *awsRestjson1_serializeOpDeleteVoiceConnectorTerminationCredentials) Han
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDeleteVoiceConnectorTerminationCredentialsInput(v *DeleteVoiceConnectorTerminationCredentialsInput, encoder *httpbinding.Encoder) error {
@@ -5394,6 +5779,10 @@ func (*awsRestjson1_serializeOpDescribeAppInstance) ID() string {
 func (m *awsRestjson1_serializeOpDescribeAppInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5430,6 +5819,8 @@ func (m *awsRestjson1_serializeOpDescribeAppInstance) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeAppInstanceInput(v *DescribeAppInstanceInput, encoder *httpbinding.Encoder) error {
@@ -5459,6 +5850,10 @@ func (*awsRestjson1_serializeOpDescribeAppInstanceAdmin) ID() string {
 func (m *awsRestjson1_serializeOpDescribeAppInstanceAdmin) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5495,6 +5890,8 @@ func (m *awsRestjson1_serializeOpDescribeAppInstanceAdmin) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeAppInstanceAdminInput(v *DescribeAppInstanceAdminInput, encoder *httpbinding.Encoder) error {
@@ -5533,6 +5930,10 @@ func (*awsRestjson1_serializeOpDescribeAppInstanceUser) ID() string {
 func (m *awsRestjson1_serializeOpDescribeAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5569,6 +5970,8 @@ func (m *awsRestjson1_serializeOpDescribeAppInstanceUser) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeAppInstanceUserInput(v *DescribeAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -5598,6 +6001,10 @@ func (*awsRestjson1_serializeOpDescribeChannel) ID() string {
 func (m *awsRestjson1_serializeOpDescribeChannel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5634,6 +6041,8 @@ func (m *awsRestjson1_serializeOpDescribeChannel) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeChannelInput(v *DescribeChannelInput, encoder *httpbinding.Encoder) error {
@@ -5668,6 +6077,10 @@ func (*awsRestjson1_serializeOpDescribeChannelBan) ID() string {
 func (m *awsRestjson1_serializeOpDescribeChannelBan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5704,6 +6117,8 @@ func (m *awsRestjson1_serializeOpDescribeChannelBan) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeChannelBanInput(v *DescribeChannelBanInput, encoder *httpbinding.Encoder) error {
@@ -5747,6 +6162,10 @@ func (*awsRestjson1_serializeOpDescribeChannelMembership) ID() string {
 func (m *awsRestjson1_serializeOpDescribeChannelMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5783,6 +6202,8 @@ func (m *awsRestjson1_serializeOpDescribeChannelMembership) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeChannelMembershipInput(v *DescribeChannelMembershipInput, encoder *httpbinding.Encoder) error {
@@ -5826,6 +6247,10 @@ func (*awsRestjson1_serializeOpDescribeChannelMembershipForAppInstanceUser) ID()
 func (m *awsRestjson1_serializeOpDescribeChannelMembershipForAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5862,6 +6287,8 @@ func (m *awsRestjson1_serializeOpDescribeChannelMembershipForAppInstanceUser) Ha
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeChannelMembershipForAppInstanceUserInput(v *DescribeChannelMembershipForAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -5900,6 +6327,10 @@ func (*awsRestjson1_serializeOpDescribeChannelModeratedByAppInstanceUser) ID() s
 func (m *awsRestjson1_serializeOpDescribeChannelModeratedByAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -5936,6 +6367,8 @@ func (m *awsRestjson1_serializeOpDescribeChannelModeratedByAppInstanceUser) Hand
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeChannelModeratedByAppInstanceUserInput(v *DescribeChannelModeratedByAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -5974,6 +6407,10 @@ func (*awsRestjson1_serializeOpDescribeChannelModerator) ID() string {
 func (m *awsRestjson1_serializeOpDescribeChannelModerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6010,6 +6447,8 @@ func (m *awsRestjson1_serializeOpDescribeChannelModerator) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDescribeChannelModeratorInput(v *DescribeChannelModeratorInput, encoder *httpbinding.Encoder) error {
@@ -6053,6 +6492,10 @@ func (*awsRestjson1_serializeOpDisassociatePhoneNumberFromUser) ID() string {
 func (m *awsRestjson1_serializeOpDisassociatePhoneNumberFromUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6089,6 +6532,8 @@ func (m *awsRestjson1_serializeOpDisassociatePhoneNumberFromUser) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDisassociatePhoneNumberFromUserInput(v *DisassociatePhoneNumberFromUserInput, encoder *httpbinding.Encoder) error {
@@ -6127,6 +6572,10 @@ func (*awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnector) ID() 
 func (m *awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6174,6 +6623,8 @@ func (m *awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnector) Han
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDisassociatePhoneNumbersFromVoiceConnectorInput(v *DisassociatePhoneNumbersFromVoiceConnectorInput, encoder *httpbinding.Encoder) error {
@@ -6217,6 +6668,10 @@ func (*awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnectorGroup) 
 func (m *awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnectorGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6264,6 +6719,8 @@ func (m *awsRestjson1_serializeOpDisassociatePhoneNumbersFromVoiceConnectorGroup
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDisassociatePhoneNumbersFromVoiceConnectorGroupInput(v *DisassociatePhoneNumbersFromVoiceConnectorGroupInput, encoder *httpbinding.Encoder) error {
@@ -6307,6 +6764,10 @@ func (*awsRestjson1_serializeOpDisassociateSigninDelegateGroupsFromAccount) ID()
 func (m *awsRestjson1_serializeOpDisassociateSigninDelegateGroupsFromAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6354,6 +6815,8 @@ func (m *awsRestjson1_serializeOpDisassociateSigninDelegateGroupsFromAccount) Ha
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsDisassociateSigninDelegateGroupsFromAccountInput(v *DisassociateSigninDelegateGroupsFromAccountInput, encoder *httpbinding.Encoder) error {
@@ -6397,6 +6860,10 @@ func (*awsRestjson1_serializeOpGetAccount) ID() string {
 func (m *awsRestjson1_serializeOpGetAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6433,6 +6900,8 @@ func (m *awsRestjson1_serializeOpGetAccount) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetAccountInput(v *GetAccountInput, encoder *httpbinding.Encoder) error {
@@ -6462,6 +6931,10 @@ func (*awsRestjson1_serializeOpGetAccountSettings) ID() string {
 func (m *awsRestjson1_serializeOpGetAccountSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6498,6 +6971,8 @@ func (m *awsRestjson1_serializeOpGetAccountSettings) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetAccountSettingsInput(v *GetAccountSettingsInput, encoder *httpbinding.Encoder) error {
@@ -6527,6 +7002,10 @@ func (*awsRestjson1_serializeOpGetAppInstanceRetentionSettings) ID() string {
 func (m *awsRestjson1_serializeOpGetAppInstanceRetentionSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6563,6 +7042,8 @@ func (m *awsRestjson1_serializeOpGetAppInstanceRetentionSettings) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetAppInstanceRetentionSettingsInput(v *GetAppInstanceRetentionSettingsInput, encoder *httpbinding.Encoder) error {
@@ -6592,6 +7073,10 @@ func (*awsRestjson1_serializeOpGetAppInstanceStreamingConfigurations) ID() strin
 func (m *awsRestjson1_serializeOpGetAppInstanceStreamingConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6628,6 +7113,8 @@ func (m *awsRestjson1_serializeOpGetAppInstanceStreamingConfigurations) HandleSe
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetAppInstanceStreamingConfigurationsInput(v *GetAppInstanceStreamingConfigurationsInput, encoder *httpbinding.Encoder) error {
@@ -6657,6 +7144,10 @@ func (*awsRestjson1_serializeOpGetAttendee) ID() string {
 func (m *awsRestjson1_serializeOpGetAttendee) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6693,6 +7184,8 @@ func (m *awsRestjson1_serializeOpGetAttendee) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetAttendeeInput(v *GetAttendeeInput, encoder *httpbinding.Encoder) error {
@@ -6731,6 +7224,10 @@ func (*awsRestjson1_serializeOpGetBot) ID() string {
 func (m *awsRestjson1_serializeOpGetBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6767,6 +7264,8 @@ func (m *awsRestjson1_serializeOpGetBot) HandleSerialize(ctx context.Context, in
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetBotInput(v *GetBotInput, encoder *httpbinding.Encoder) error {
@@ -6805,6 +7304,10 @@ func (*awsRestjson1_serializeOpGetChannelMessage) ID() string {
 func (m *awsRestjson1_serializeOpGetChannelMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6841,6 +7344,8 @@ func (m *awsRestjson1_serializeOpGetChannelMessage) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetChannelMessageInput(v *GetChannelMessageInput, encoder *httpbinding.Encoder) error {
@@ -6884,6 +7389,10 @@ func (*awsRestjson1_serializeOpGetEventsConfiguration) ID() string {
 func (m *awsRestjson1_serializeOpGetEventsConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6920,6 +7429,8 @@ func (m *awsRestjson1_serializeOpGetEventsConfiguration) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetEventsConfigurationInput(v *GetEventsConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -6958,6 +7469,10 @@ func (*awsRestjson1_serializeOpGetGlobalSettings) ID() string {
 func (m *awsRestjson1_serializeOpGetGlobalSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -6990,6 +7505,8 @@ func (m *awsRestjson1_serializeOpGetGlobalSettings) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetGlobalSettingsInput(v *GetGlobalSettingsInput, encoder *httpbinding.Encoder) error {
@@ -7010,6 +7527,10 @@ func (*awsRestjson1_serializeOpGetMediaCapturePipeline) ID() string {
 func (m *awsRestjson1_serializeOpGetMediaCapturePipeline) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7046,6 +7567,8 @@ func (m *awsRestjson1_serializeOpGetMediaCapturePipeline) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetMediaCapturePipelineInput(v *GetMediaCapturePipelineInput, encoder *httpbinding.Encoder) error {
@@ -7075,6 +7598,10 @@ func (*awsRestjson1_serializeOpGetMeeting) ID() string {
 func (m *awsRestjson1_serializeOpGetMeeting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7111,6 +7638,8 @@ func (m *awsRestjson1_serializeOpGetMeeting) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetMeetingInput(v *GetMeetingInput, encoder *httpbinding.Encoder) error {
@@ -7140,6 +7669,10 @@ func (*awsRestjson1_serializeOpGetMessagingSessionEndpoint) ID() string {
 func (m *awsRestjson1_serializeOpGetMessagingSessionEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7172,6 +7705,8 @@ func (m *awsRestjson1_serializeOpGetMessagingSessionEndpoint) HandleSerialize(ct
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetMessagingSessionEndpointInput(v *GetMessagingSessionEndpointInput, encoder *httpbinding.Encoder) error {
@@ -7192,6 +7727,10 @@ func (*awsRestjson1_serializeOpGetPhoneNumber) ID() string {
 func (m *awsRestjson1_serializeOpGetPhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7228,6 +7767,8 @@ func (m *awsRestjson1_serializeOpGetPhoneNumber) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetPhoneNumberInput(v *GetPhoneNumberInput, encoder *httpbinding.Encoder) error {
@@ -7257,6 +7798,10 @@ func (*awsRestjson1_serializeOpGetPhoneNumberOrder) ID() string {
 func (m *awsRestjson1_serializeOpGetPhoneNumberOrder) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7293,6 +7838,8 @@ func (m *awsRestjson1_serializeOpGetPhoneNumberOrder) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetPhoneNumberOrderInput(v *GetPhoneNumberOrderInput, encoder *httpbinding.Encoder) error {
@@ -7322,6 +7869,10 @@ func (*awsRestjson1_serializeOpGetPhoneNumberSettings) ID() string {
 func (m *awsRestjson1_serializeOpGetPhoneNumberSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7354,6 +7905,8 @@ func (m *awsRestjson1_serializeOpGetPhoneNumberSettings) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetPhoneNumberSettingsInput(v *GetPhoneNumberSettingsInput, encoder *httpbinding.Encoder) error {
@@ -7374,6 +7927,10 @@ func (*awsRestjson1_serializeOpGetProxySession) ID() string {
 func (m *awsRestjson1_serializeOpGetProxySession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7410,6 +7967,8 @@ func (m *awsRestjson1_serializeOpGetProxySession) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetProxySessionInput(v *GetProxySessionInput, encoder *httpbinding.Encoder) error {
@@ -7448,6 +8007,10 @@ func (*awsRestjson1_serializeOpGetRetentionSettings) ID() string {
 func (m *awsRestjson1_serializeOpGetRetentionSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7484,6 +8047,8 @@ func (m *awsRestjson1_serializeOpGetRetentionSettings) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetRetentionSettingsInput(v *GetRetentionSettingsInput, encoder *httpbinding.Encoder) error {
@@ -7513,6 +8078,10 @@ func (*awsRestjson1_serializeOpGetRoom) ID() string {
 func (m *awsRestjson1_serializeOpGetRoom) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7549,6 +8118,8 @@ func (m *awsRestjson1_serializeOpGetRoom) HandleSerialize(ctx context.Context, i
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetRoomInput(v *GetRoomInput, encoder *httpbinding.Encoder) error {
@@ -7587,6 +8158,10 @@ func (*awsRestjson1_serializeOpGetSipMediaApplication) ID() string {
 func (m *awsRestjson1_serializeOpGetSipMediaApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7623,6 +8198,8 @@ func (m *awsRestjson1_serializeOpGetSipMediaApplication) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetSipMediaApplicationInput(v *GetSipMediaApplicationInput, encoder *httpbinding.Encoder) error {
@@ -7652,6 +8229,10 @@ func (*awsRestjson1_serializeOpGetSipMediaApplicationLoggingConfiguration) ID() 
 func (m *awsRestjson1_serializeOpGetSipMediaApplicationLoggingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7688,6 +8269,8 @@ func (m *awsRestjson1_serializeOpGetSipMediaApplicationLoggingConfiguration) Han
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetSipMediaApplicationLoggingConfigurationInput(v *GetSipMediaApplicationLoggingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -7717,6 +8300,10 @@ func (*awsRestjson1_serializeOpGetSipRule) ID() string {
 func (m *awsRestjson1_serializeOpGetSipRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7753,6 +8340,8 @@ func (m *awsRestjson1_serializeOpGetSipRule) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetSipRuleInput(v *GetSipRuleInput, encoder *httpbinding.Encoder) error {
@@ -7782,6 +8371,10 @@ func (*awsRestjson1_serializeOpGetUser) ID() string {
 func (m *awsRestjson1_serializeOpGetUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7818,6 +8411,8 @@ func (m *awsRestjson1_serializeOpGetUser) HandleSerialize(ctx context.Context, i
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetUserInput(v *GetUserInput, encoder *httpbinding.Encoder) error {
@@ -7856,6 +8451,10 @@ func (*awsRestjson1_serializeOpGetUserSettings) ID() string {
 func (m *awsRestjson1_serializeOpGetUserSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7892,6 +8491,8 @@ func (m *awsRestjson1_serializeOpGetUserSettings) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetUserSettingsInput(v *GetUserSettingsInput, encoder *httpbinding.Encoder) error {
@@ -7930,6 +8531,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnector) ID() string {
 func (m *awsRestjson1_serializeOpGetVoiceConnector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -7966,6 +8571,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnector) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorInput(v *GetVoiceConnectorInput, encoder *httpbinding.Encoder) error {
@@ -7995,6 +8602,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorEmergencyCallingConfiguration) I
 func (m *awsRestjson1_serializeOpGetVoiceConnectorEmergencyCallingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8031,6 +8642,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorEmergencyCallingConfiguration)
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorEmergencyCallingConfigurationInput(v *GetVoiceConnectorEmergencyCallingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -8060,6 +8673,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorGroup) ID() string {
 func (m *awsRestjson1_serializeOpGetVoiceConnectorGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8096,6 +8713,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorGroup) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorGroupInput(v *GetVoiceConnectorGroupInput, encoder *httpbinding.Encoder) error {
@@ -8125,6 +8744,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorLoggingConfiguration) ID() strin
 func (m *awsRestjson1_serializeOpGetVoiceConnectorLoggingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8161,6 +8784,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorLoggingConfiguration) HandleSe
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorLoggingConfigurationInput(v *GetVoiceConnectorLoggingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -8190,6 +8815,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorOrigination) ID() string {
 func (m *awsRestjson1_serializeOpGetVoiceConnectorOrigination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8226,6 +8855,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorOrigination) HandleSerialize(c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorOriginationInput(v *GetVoiceConnectorOriginationInput, encoder *httpbinding.Encoder) error {
@@ -8255,6 +8886,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorProxy) ID() string {
 func (m *awsRestjson1_serializeOpGetVoiceConnectorProxy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8291,6 +8926,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorProxy) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorProxyInput(v *GetVoiceConnectorProxyInput, encoder *httpbinding.Encoder) error {
@@ -8320,6 +8957,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorStreamingConfiguration) ID() str
 func (m *awsRestjson1_serializeOpGetVoiceConnectorStreamingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8356,6 +8997,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorStreamingConfiguration) Handle
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorStreamingConfigurationInput(v *GetVoiceConnectorStreamingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -8385,6 +9028,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorTermination) ID() string {
 func (m *awsRestjson1_serializeOpGetVoiceConnectorTermination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8421,6 +9068,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorTermination) HandleSerialize(c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorTerminationInput(v *GetVoiceConnectorTerminationInput, encoder *httpbinding.Encoder) error {
@@ -8450,6 +9099,10 @@ func (*awsRestjson1_serializeOpGetVoiceConnectorTerminationHealth) ID() string {
 func (m *awsRestjson1_serializeOpGetVoiceConnectorTerminationHealth) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8486,6 +9139,8 @@ func (m *awsRestjson1_serializeOpGetVoiceConnectorTerminationHealth) HandleSeria
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsGetVoiceConnectorTerminationHealthInput(v *GetVoiceConnectorTerminationHealthInput, encoder *httpbinding.Encoder) error {
@@ -8515,6 +9170,10 @@ func (*awsRestjson1_serializeOpInviteUsers) ID() string {
 func (m *awsRestjson1_serializeOpInviteUsers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8562,6 +9221,8 @@ func (m *awsRestjson1_serializeOpInviteUsers) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsInviteUsersInput(v *InviteUsersInput, encoder *httpbinding.Encoder) error {
@@ -8610,6 +9271,10 @@ func (*awsRestjson1_serializeOpListAccounts) ID() string {
 func (m *awsRestjson1_serializeOpListAccounts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8646,6 +9311,8 @@ func (m *awsRestjson1_serializeOpListAccounts) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAccountsInput(v *ListAccountsInput, encoder *httpbinding.Encoder) error {
@@ -8682,6 +9349,10 @@ func (*awsRestjson1_serializeOpListAppInstanceAdmins) ID() string {
 func (m *awsRestjson1_serializeOpListAppInstanceAdmins) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8718,6 +9389,8 @@ func (m *awsRestjson1_serializeOpListAppInstanceAdmins) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAppInstanceAdminsInput(v *ListAppInstanceAdminsInput, encoder *httpbinding.Encoder) error {
@@ -8755,6 +9428,10 @@ func (*awsRestjson1_serializeOpListAppInstances) ID() string {
 func (m *awsRestjson1_serializeOpListAppInstances) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8791,6 +9468,8 @@ func (m *awsRestjson1_serializeOpListAppInstances) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAppInstancesInput(v *ListAppInstancesInput, encoder *httpbinding.Encoder) error {
@@ -8819,6 +9498,10 @@ func (*awsRestjson1_serializeOpListAppInstanceUsers) ID() string {
 func (m *awsRestjson1_serializeOpListAppInstanceUsers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8855,6 +9538,8 @@ func (m *awsRestjson1_serializeOpListAppInstanceUsers) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAppInstanceUsersInput(v *ListAppInstanceUsersInput, encoder *httpbinding.Encoder) error {
@@ -8887,6 +9572,10 @@ func (*awsRestjson1_serializeOpListAttendees) ID() string {
 func (m *awsRestjson1_serializeOpListAttendees) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8923,6 +9612,8 @@ func (m *awsRestjson1_serializeOpListAttendees) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAttendeesInput(v *ListAttendeesInput, encoder *httpbinding.Encoder) error {
@@ -8960,6 +9651,10 @@ func (*awsRestjson1_serializeOpListAttendeeTags) ID() string {
 func (m *awsRestjson1_serializeOpListAttendeeTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -8996,6 +9691,8 @@ func (m *awsRestjson1_serializeOpListAttendeeTags) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAttendeeTagsInput(v *ListAttendeeTagsInput, encoder *httpbinding.Encoder) error {
@@ -9034,6 +9731,10 @@ func (*awsRestjson1_serializeOpListBots) ID() string {
 func (m *awsRestjson1_serializeOpListBots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9070,6 +9771,8 @@ func (m *awsRestjson1_serializeOpListBots) HandleSerialize(ctx context.Context, 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListBotsInput(v *ListBotsInput, encoder *httpbinding.Encoder) error {
@@ -9107,6 +9810,10 @@ func (*awsRestjson1_serializeOpListChannelBans) ID() string {
 func (m *awsRestjson1_serializeOpListChannelBans) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9143,6 +9850,8 @@ func (m *awsRestjson1_serializeOpListChannelBans) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelBansInput(v *ListChannelBansInput, encoder *httpbinding.Encoder) error {
@@ -9185,6 +9894,10 @@ func (*awsRestjson1_serializeOpListChannelMemberships) ID() string {
 func (m *awsRestjson1_serializeOpListChannelMemberships) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9221,6 +9934,8 @@ func (m *awsRestjson1_serializeOpListChannelMemberships) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelMembershipsInput(v *ListChannelMembershipsInput, encoder *httpbinding.Encoder) error {
@@ -9267,6 +9982,10 @@ func (*awsRestjson1_serializeOpListChannelMembershipsForAppInstanceUser) ID() st
 func (m *awsRestjson1_serializeOpListChannelMembershipsForAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9303,6 +10022,8 @@ func (m *awsRestjson1_serializeOpListChannelMembershipsForAppInstanceUser) Handl
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelMembershipsForAppInstanceUserInput(v *ListChannelMembershipsForAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -9340,6 +10061,10 @@ func (*awsRestjson1_serializeOpListChannelMessages) ID() string {
 func (m *awsRestjson1_serializeOpListChannelMessages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9376,6 +10101,8 @@ func (m *awsRestjson1_serializeOpListChannelMessages) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelMessagesInput(v *ListChannelMessagesInput, encoder *httpbinding.Encoder) error {
@@ -9430,6 +10157,10 @@ func (*awsRestjson1_serializeOpListChannelModerators) ID() string {
 func (m *awsRestjson1_serializeOpListChannelModerators) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9466,6 +10197,8 @@ func (m *awsRestjson1_serializeOpListChannelModerators) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelModeratorsInput(v *ListChannelModeratorsInput, encoder *httpbinding.Encoder) error {
@@ -9508,6 +10241,10 @@ func (*awsRestjson1_serializeOpListChannels) ID() string {
 func (m *awsRestjson1_serializeOpListChannels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9544,6 +10281,8 @@ func (m *awsRestjson1_serializeOpListChannels) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelsInput(v *ListChannelsInput, encoder *httpbinding.Encoder) error {
@@ -9585,6 +10324,10 @@ func (*awsRestjson1_serializeOpListChannelsModeratedByAppInstanceUser) ID() stri
 func (m *awsRestjson1_serializeOpListChannelsModeratedByAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9621,6 +10364,8 @@ func (m *awsRestjson1_serializeOpListChannelsModeratedByAppInstanceUser) HandleS
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListChannelsModeratedByAppInstanceUserInput(v *ListChannelsModeratedByAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -9658,6 +10403,10 @@ func (*awsRestjson1_serializeOpListMediaCapturePipelines) ID() string {
 func (m *awsRestjson1_serializeOpListMediaCapturePipelines) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9694,6 +10443,8 @@ func (m *awsRestjson1_serializeOpListMediaCapturePipelines) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListMediaCapturePipelinesInput(v *ListMediaCapturePipelinesInput, encoder *httpbinding.Encoder) error {
@@ -9722,6 +10473,10 @@ func (*awsRestjson1_serializeOpListMeetings) ID() string {
 func (m *awsRestjson1_serializeOpListMeetings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9758,6 +10513,8 @@ func (m *awsRestjson1_serializeOpListMeetings) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListMeetingsInput(v *ListMeetingsInput, encoder *httpbinding.Encoder) error {
@@ -9786,6 +10543,10 @@ func (*awsRestjson1_serializeOpListMeetingTags) ID() string {
 func (m *awsRestjson1_serializeOpListMeetingTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9822,6 +10583,8 @@ func (m *awsRestjson1_serializeOpListMeetingTags) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListMeetingTagsInput(v *ListMeetingTagsInput, encoder *httpbinding.Encoder) error {
@@ -9851,6 +10614,10 @@ func (*awsRestjson1_serializeOpListPhoneNumberOrders) ID() string {
 func (m *awsRestjson1_serializeOpListPhoneNumberOrders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9887,6 +10654,8 @@ func (m *awsRestjson1_serializeOpListPhoneNumberOrders) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListPhoneNumberOrdersInput(v *ListPhoneNumberOrdersInput, encoder *httpbinding.Encoder) error {
@@ -9915,6 +10684,10 @@ func (*awsRestjson1_serializeOpListPhoneNumbers) ID() string {
 func (m *awsRestjson1_serializeOpListPhoneNumbers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -9951,6 +10724,8 @@ func (m *awsRestjson1_serializeOpListPhoneNumbers) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListPhoneNumbersInput(v *ListPhoneNumbersInput, encoder *httpbinding.Encoder) error {
@@ -9995,6 +10770,10 @@ func (*awsRestjson1_serializeOpListProxySessions) ID() string {
 func (m *awsRestjson1_serializeOpListProxySessions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10031,6 +10810,8 @@ func (m *awsRestjson1_serializeOpListProxySessions) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListProxySessionsInput(v *ListProxySessionsInput, encoder *httpbinding.Encoder) error {
@@ -10072,6 +10853,10 @@ func (*awsRestjson1_serializeOpListRoomMemberships) ID() string {
 func (m *awsRestjson1_serializeOpListRoomMemberships) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10108,6 +10893,8 @@ func (m *awsRestjson1_serializeOpListRoomMemberships) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListRoomMembershipsInput(v *ListRoomMembershipsInput, encoder *httpbinding.Encoder) error {
@@ -10154,6 +10941,10 @@ func (*awsRestjson1_serializeOpListRooms) ID() string {
 func (m *awsRestjson1_serializeOpListRooms) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10190,6 +10981,8 @@ func (m *awsRestjson1_serializeOpListRooms) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListRoomsInput(v *ListRoomsInput, encoder *httpbinding.Encoder) error {
@@ -10231,6 +11024,10 @@ func (*awsRestjson1_serializeOpListSipMediaApplications) ID() string {
 func (m *awsRestjson1_serializeOpListSipMediaApplications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10267,6 +11064,8 @@ func (m *awsRestjson1_serializeOpListSipMediaApplications) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListSipMediaApplicationsInput(v *ListSipMediaApplicationsInput, encoder *httpbinding.Encoder) error {
@@ -10295,6 +11094,10 @@ func (*awsRestjson1_serializeOpListSipRules) ID() string {
 func (m *awsRestjson1_serializeOpListSipRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10331,6 +11134,8 @@ func (m *awsRestjson1_serializeOpListSipRules) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListSipRulesInput(v *ListSipRulesInput, encoder *httpbinding.Encoder) error {
@@ -10363,6 +11168,10 @@ func (*awsRestjson1_serializeOpListSupportedPhoneNumberCountries) ID() string {
 func (m *awsRestjson1_serializeOpListSupportedPhoneNumberCountries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10399,6 +11208,8 @@ func (m *awsRestjson1_serializeOpListSupportedPhoneNumberCountries) HandleSerial
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListSupportedPhoneNumberCountriesInput(v *ListSupportedPhoneNumberCountriesInput, encoder *httpbinding.Encoder) error {
@@ -10423,6 +11234,10 @@ func (*awsRestjson1_serializeOpListTagsForResource) ID() string {
 func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10459,6 +11274,8 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsForResourceInput, encoder *httpbinding.Encoder) error {
@@ -10483,6 +11300,10 @@ func (*awsRestjson1_serializeOpListUsers) ID() string {
 func (m *awsRestjson1_serializeOpListUsers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10519,6 +11340,8 @@ func (m *awsRestjson1_serializeOpListUsers) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encoder *httpbinding.Encoder) error {
@@ -10564,6 +11387,10 @@ func (*awsRestjson1_serializeOpListVoiceConnectorGroups) ID() string {
 func (m *awsRestjson1_serializeOpListVoiceConnectorGroups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10600,6 +11427,8 @@ func (m *awsRestjson1_serializeOpListVoiceConnectorGroups) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListVoiceConnectorGroupsInput(v *ListVoiceConnectorGroupsInput, encoder *httpbinding.Encoder) error {
@@ -10628,6 +11457,10 @@ func (*awsRestjson1_serializeOpListVoiceConnectors) ID() string {
 func (m *awsRestjson1_serializeOpListVoiceConnectors) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10664,6 +11497,8 @@ func (m *awsRestjson1_serializeOpListVoiceConnectors) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListVoiceConnectorsInput(v *ListVoiceConnectorsInput, encoder *httpbinding.Encoder) error {
@@ -10692,6 +11527,10 @@ func (*awsRestjson1_serializeOpListVoiceConnectorTerminationCredentials) ID() st
 func (m *awsRestjson1_serializeOpListVoiceConnectorTerminationCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10728,6 +11567,8 @@ func (m *awsRestjson1_serializeOpListVoiceConnectorTerminationCredentials) Handl
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListVoiceConnectorTerminationCredentialsInput(v *ListVoiceConnectorTerminationCredentialsInput, encoder *httpbinding.Encoder) error {
@@ -10757,6 +11598,10 @@ func (*awsRestjson1_serializeOpLogoutUser) ID() string {
 func (m *awsRestjson1_serializeOpLogoutUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10793,6 +11638,8 @@ func (m *awsRestjson1_serializeOpLogoutUser) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsLogoutUserInput(v *LogoutUserInput, encoder *httpbinding.Encoder) error {
@@ -10831,6 +11678,10 @@ func (*awsRestjson1_serializeOpPutAppInstanceRetentionSettings) ID() string {
 func (m *awsRestjson1_serializeOpPutAppInstanceRetentionSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10878,6 +11729,8 @@ func (m *awsRestjson1_serializeOpPutAppInstanceRetentionSettings) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutAppInstanceRetentionSettingsInput(v *PutAppInstanceRetentionSettingsInput, encoder *httpbinding.Encoder) error {
@@ -10921,6 +11774,10 @@ func (*awsRestjson1_serializeOpPutAppInstanceStreamingConfigurations) ID() strin
 func (m *awsRestjson1_serializeOpPutAppInstanceStreamingConfigurations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10968,6 +11825,8 @@ func (m *awsRestjson1_serializeOpPutAppInstanceStreamingConfigurations) HandleSe
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutAppInstanceStreamingConfigurationsInput(v *PutAppInstanceStreamingConfigurationsInput, encoder *httpbinding.Encoder) error {
@@ -11011,6 +11870,10 @@ func (*awsRestjson1_serializeOpPutEventsConfiguration) ID() string {
 func (m *awsRestjson1_serializeOpPutEventsConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11058,6 +11921,8 @@ func (m *awsRestjson1_serializeOpPutEventsConfiguration) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutEventsConfigurationInput(v *PutEventsConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -11113,6 +11978,10 @@ func (*awsRestjson1_serializeOpPutRetentionSettings) ID() string {
 func (m *awsRestjson1_serializeOpPutRetentionSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11160,6 +12029,8 @@ func (m *awsRestjson1_serializeOpPutRetentionSettings) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutRetentionSettingsInput(v *PutRetentionSettingsInput, encoder *httpbinding.Encoder) error {
@@ -11203,6 +12074,10 @@ func (*awsRestjson1_serializeOpPutSipMediaApplicationLoggingConfiguration) ID() 
 func (m *awsRestjson1_serializeOpPutSipMediaApplicationLoggingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11250,6 +12125,8 @@ func (m *awsRestjson1_serializeOpPutSipMediaApplicationLoggingConfiguration) Han
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutSipMediaApplicationLoggingConfigurationInput(v *PutSipMediaApplicationLoggingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -11293,6 +12170,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorEmergencyCallingConfiguration) I
 func (m *awsRestjson1_serializeOpPutVoiceConnectorEmergencyCallingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11340,6 +12221,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorEmergencyCallingConfiguration)
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorEmergencyCallingConfigurationInput(v *PutVoiceConnectorEmergencyCallingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -11383,6 +12266,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorLoggingConfiguration) ID() strin
 func (m *awsRestjson1_serializeOpPutVoiceConnectorLoggingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11430,6 +12317,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorLoggingConfiguration) HandleSe
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorLoggingConfigurationInput(v *PutVoiceConnectorLoggingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -11473,6 +12362,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorOrigination) ID() string {
 func (m *awsRestjson1_serializeOpPutVoiceConnectorOrigination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11520,6 +12413,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorOrigination) HandleSerialize(c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorOriginationInput(v *PutVoiceConnectorOriginationInput, encoder *httpbinding.Encoder) error {
@@ -11563,6 +12458,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorProxy) ID() string {
 func (m *awsRestjson1_serializeOpPutVoiceConnectorProxy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11610,6 +12509,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorProxy) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorProxyInput(v *PutVoiceConnectorProxyInput, encoder *httpbinding.Encoder) error {
@@ -11668,6 +12569,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorStreamingConfiguration) ID() str
 func (m *awsRestjson1_serializeOpPutVoiceConnectorStreamingConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11715,6 +12620,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorStreamingConfiguration) Handle
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorStreamingConfigurationInput(v *PutVoiceConnectorStreamingConfigurationInput, encoder *httpbinding.Encoder) error {
@@ -11758,6 +12665,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorTermination) ID() string {
 func (m *awsRestjson1_serializeOpPutVoiceConnectorTermination) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11805,6 +12716,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorTermination) HandleSerialize(c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorTerminationInput(v *PutVoiceConnectorTerminationInput, encoder *httpbinding.Encoder) error {
@@ -11848,6 +12761,10 @@ func (*awsRestjson1_serializeOpPutVoiceConnectorTerminationCredentials) ID() str
 func (m *awsRestjson1_serializeOpPutVoiceConnectorTerminationCredentials) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11895,6 +12812,8 @@ func (m *awsRestjson1_serializeOpPutVoiceConnectorTerminationCredentials) Handle
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsPutVoiceConnectorTerminationCredentialsInput(v *PutVoiceConnectorTerminationCredentialsInput, encoder *httpbinding.Encoder) error {
@@ -11938,6 +12857,10 @@ func (*awsRestjson1_serializeOpRedactChannelMessage) ID() string {
 func (m *awsRestjson1_serializeOpRedactChannelMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -11974,6 +12897,8 @@ func (m *awsRestjson1_serializeOpRedactChannelMessage) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsRedactChannelMessageInput(v *RedactChannelMessageInput, encoder *httpbinding.Encoder) error {
@@ -12017,6 +12942,10 @@ func (*awsRestjson1_serializeOpRedactConversationMessage) ID() string {
 func (m *awsRestjson1_serializeOpRedactConversationMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12053,6 +12982,8 @@ func (m *awsRestjson1_serializeOpRedactConversationMessage) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsRedactConversationMessageInput(v *RedactConversationMessageInput, encoder *httpbinding.Encoder) error {
@@ -12100,6 +13031,10 @@ func (*awsRestjson1_serializeOpRedactRoomMessage) ID() string {
 func (m *awsRestjson1_serializeOpRedactRoomMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12136,6 +13071,8 @@ func (m *awsRestjson1_serializeOpRedactRoomMessage) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsRedactRoomMessageInput(v *RedactRoomMessageInput, encoder *httpbinding.Encoder) error {
@@ -12183,6 +13120,10 @@ func (*awsRestjson1_serializeOpRegenerateSecurityToken) ID() string {
 func (m *awsRestjson1_serializeOpRegenerateSecurityToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12219,6 +13160,8 @@ func (m *awsRestjson1_serializeOpRegenerateSecurityToken) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsRegenerateSecurityTokenInput(v *RegenerateSecurityTokenInput, encoder *httpbinding.Encoder) error {
@@ -12257,6 +13200,10 @@ func (*awsRestjson1_serializeOpResetPersonalPIN) ID() string {
 func (m *awsRestjson1_serializeOpResetPersonalPIN) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12293,6 +13240,8 @@ func (m *awsRestjson1_serializeOpResetPersonalPIN) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsResetPersonalPINInput(v *ResetPersonalPINInput, encoder *httpbinding.Encoder) error {
@@ -12331,6 +13280,10 @@ func (*awsRestjson1_serializeOpRestorePhoneNumber) ID() string {
 func (m *awsRestjson1_serializeOpRestorePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12367,6 +13320,8 @@ func (m *awsRestjson1_serializeOpRestorePhoneNumber) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsRestorePhoneNumberInput(v *RestorePhoneNumberInput, encoder *httpbinding.Encoder) error {
@@ -12396,6 +13351,10 @@ func (*awsRestjson1_serializeOpSearchAvailablePhoneNumbers) ID() string {
 func (m *awsRestjson1_serializeOpSearchAvailablePhoneNumbers) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12432,6 +13391,8 @@ func (m *awsRestjson1_serializeOpSearchAvailablePhoneNumbers) HandleSerialize(ct
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsSearchAvailablePhoneNumbersInput(v *SearchAvailablePhoneNumbersInput, encoder *httpbinding.Encoder) error {
@@ -12484,6 +13445,10 @@ func (*awsRestjson1_serializeOpSendChannelMessage) ID() string {
 func (m *awsRestjson1_serializeOpSendChannelMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12531,6 +13496,8 @@ func (m *awsRestjson1_serializeOpSendChannelMessage) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsSendChannelMessageInput(v *SendChannelMessageInput, encoder *httpbinding.Encoder) error {
@@ -12597,6 +13564,10 @@ func (*awsRestjson1_serializeOpStartMeetingTranscription) ID() string {
 func (m *awsRestjson1_serializeOpStartMeetingTranscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12644,6 +13615,8 @@ func (m *awsRestjson1_serializeOpStartMeetingTranscription) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsStartMeetingTranscriptionInput(v *StartMeetingTranscriptionInput, encoder *httpbinding.Encoder) error {
@@ -12687,6 +13660,10 @@ func (*awsRestjson1_serializeOpStopMeetingTranscription) ID() string {
 func (m *awsRestjson1_serializeOpStopMeetingTranscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12723,6 +13700,8 @@ func (m *awsRestjson1_serializeOpStopMeetingTranscription) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsStopMeetingTranscriptionInput(v *StopMeetingTranscriptionInput, encoder *httpbinding.Encoder) error {
@@ -12752,6 +13731,10 @@ func (*awsRestjson1_serializeOpTagAttendee) ID() string {
 func (m *awsRestjson1_serializeOpTagAttendee) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12799,6 +13782,8 @@ func (m *awsRestjson1_serializeOpTagAttendee) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsTagAttendeeInput(v *TagAttendeeInput, encoder *httpbinding.Encoder) error {
@@ -12851,6 +13836,10 @@ func (*awsRestjson1_serializeOpTagMeeting) ID() string {
 func (m *awsRestjson1_serializeOpTagMeeting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12898,6 +13887,8 @@ func (m *awsRestjson1_serializeOpTagMeeting) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsTagMeetingInput(v *TagMeetingInput, encoder *httpbinding.Encoder) error {
@@ -12941,6 +13932,10 @@ func (*awsRestjson1_serializeOpTagResource) ID() string {
 func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -12984,6 +13979,8 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
@@ -13023,6 +14020,10 @@ func (*awsRestjson1_serializeOpUntagAttendee) ID() string {
 func (m *awsRestjson1_serializeOpUntagAttendee) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13070,6 +14071,8 @@ func (m *awsRestjson1_serializeOpUntagAttendee) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUntagAttendeeInput(v *UntagAttendeeInput, encoder *httpbinding.Encoder) error {
@@ -13122,6 +14125,10 @@ func (*awsRestjson1_serializeOpUntagMeeting) ID() string {
 func (m *awsRestjson1_serializeOpUntagMeeting) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13169,6 +14176,8 @@ func (m *awsRestjson1_serializeOpUntagMeeting) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUntagMeetingInput(v *UntagMeetingInput, encoder *httpbinding.Encoder) error {
@@ -13212,6 +14221,10 @@ func (*awsRestjson1_serializeOpUntagResource) ID() string {
 func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13255,6 +14268,8 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
@@ -13294,6 +14309,10 @@ func (*awsRestjson1_serializeOpUpdateAccount) ID() string {
 func (m *awsRestjson1_serializeOpUpdateAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13341,6 +14360,8 @@ func (m *awsRestjson1_serializeOpUpdateAccount) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateAccountInput(v *UpdateAccountInput, encoder *httpbinding.Encoder) error {
@@ -13387,6 +14408,10 @@ func (*awsRestjson1_serializeOpUpdateAccountSettings) ID() string {
 func (m *awsRestjson1_serializeOpUpdateAccountSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13434,6 +14459,8 @@ func (m *awsRestjson1_serializeOpUpdateAccountSettings) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateAccountSettingsInput(v *UpdateAccountSettingsInput, encoder *httpbinding.Encoder) error {
@@ -13477,6 +14504,10 @@ func (*awsRestjson1_serializeOpUpdateAppInstance) ID() string {
 func (m *awsRestjson1_serializeOpUpdateAppInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13524,6 +14555,8 @@ func (m *awsRestjson1_serializeOpUpdateAppInstance) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateAppInstanceInput(v *UpdateAppInstanceInput, encoder *httpbinding.Encoder) error {
@@ -13570,6 +14603,10 @@ func (*awsRestjson1_serializeOpUpdateAppInstanceUser) ID() string {
 func (m *awsRestjson1_serializeOpUpdateAppInstanceUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13617,6 +14654,8 @@ func (m *awsRestjson1_serializeOpUpdateAppInstanceUser) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateAppInstanceUserInput(v *UpdateAppInstanceUserInput, encoder *httpbinding.Encoder) error {
@@ -13663,6 +14702,10 @@ func (*awsRestjson1_serializeOpUpdateBot) ID() string {
 func (m *awsRestjson1_serializeOpUpdateBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13710,6 +14753,8 @@ func (m *awsRestjson1_serializeOpUpdateBot) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateBotInput(v *UpdateBotInput, encoder *httpbinding.Encoder) error {
@@ -13760,6 +14805,10 @@ func (*awsRestjson1_serializeOpUpdateChannel) ID() string {
 func (m *awsRestjson1_serializeOpUpdateChannel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13807,6 +14856,8 @@ func (m *awsRestjson1_serializeOpUpdateChannel) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateChannelInput(v *UpdateChannelInput, encoder *httpbinding.Encoder) error {
@@ -13863,6 +14914,10 @@ func (*awsRestjson1_serializeOpUpdateChannelMessage) ID() string {
 func (m *awsRestjson1_serializeOpUpdateChannelMessage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -13910,6 +14965,8 @@ func (m *awsRestjson1_serializeOpUpdateChannelMessage) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateChannelMessageInput(v *UpdateChannelMessageInput, encoder *httpbinding.Encoder) error {
@@ -13970,6 +15027,10 @@ func (*awsRestjson1_serializeOpUpdateChannelReadMarker) ID() string {
 func (m *awsRestjson1_serializeOpUpdateChannelReadMarker) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14006,6 +15067,8 @@ func (m *awsRestjson1_serializeOpUpdateChannelReadMarker) HandleSerialize(ctx co
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateChannelReadMarkerInput(v *UpdateChannelReadMarkerInput, encoder *httpbinding.Encoder) error {
@@ -14040,6 +15103,10 @@ func (*awsRestjson1_serializeOpUpdateGlobalSettings) ID() string {
 func (m *awsRestjson1_serializeOpUpdateGlobalSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14083,6 +15150,8 @@ func (m *awsRestjson1_serializeOpUpdateGlobalSettings) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateGlobalSettingsInput(v *UpdateGlobalSettingsInput, encoder *httpbinding.Encoder) error {
@@ -14124,6 +15193,10 @@ func (*awsRestjson1_serializeOpUpdatePhoneNumber) ID() string {
 func (m *awsRestjson1_serializeOpUpdatePhoneNumber) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14171,6 +15244,8 @@ func (m *awsRestjson1_serializeOpUpdatePhoneNumber) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdatePhoneNumberInput(v *UpdatePhoneNumberInput, encoder *httpbinding.Encoder) error {
@@ -14217,6 +15292,10 @@ func (*awsRestjson1_serializeOpUpdatePhoneNumberSettings) ID() string {
 func (m *awsRestjson1_serializeOpUpdatePhoneNumberSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14260,6 +15339,8 @@ func (m *awsRestjson1_serializeOpUpdatePhoneNumberSettings) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdatePhoneNumberSettingsInput(v *UpdatePhoneNumberSettingsInput, encoder *httpbinding.Encoder) error {
@@ -14292,6 +15373,10 @@ func (*awsRestjson1_serializeOpUpdateProxySession) ID() string {
 func (m *awsRestjson1_serializeOpUpdateProxySession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14339,6 +15424,8 @@ func (m *awsRestjson1_serializeOpUpdateProxySession) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateProxySessionInput(v *UpdateProxySessionInput, encoder *httpbinding.Encoder) error {
@@ -14396,6 +15483,10 @@ func (*awsRestjson1_serializeOpUpdateRoom) ID() string {
 func (m *awsRestjson1_serializeOpUpdateRoom) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14443,6 +15534,8 @@ func (m *awsRestjson1_serializeOpUpdateRoom) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateRoomInput(v *UpdateRoomInput, encoder *httpbinding.Encoder) error {
@@ -14493,6 +15586,10 @@ func (*awsRestjson1_serializeOpUpdateRoomMembership) ID() string {
 func (m *awsRestjson1_serializeOpUpdateRoomMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14540,6 +15637,8 @@ func (m *awsRestjson1_serializeOpUpdateRoomMembership) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateRoomMembershipInput(v *UpdateRoomMembershipInput, encoder *httpbinding.Encoder) error {
@@ -14599,6 +15698,10 @@ func (*awsRestjson1_serializeOpUpdateSipMediaApplication) ID() string {
 func (m *awsRestjson1_serializeOpUpdateSipMediaApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14646,6 +15749,8 @@ func (m *awsRestjson1_serializeOpUpdateSipMediaApplication) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateSipMediaApplicationInput(v *UpdateSipMediaApplicationInput, encoder *httpbinding.Encoder) error {
@@ -14694,6 +15799,10 @@ func (*awsRestjson1_serializeOpUpdateSipMediaApplicationCall) ID() string {
 func (m *awsRestjson1_serializeOpUpdateSipMediaApplicationCall) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14741,6 +15850,8 @@ func (m *awsRestjson1_serializeOpUpdateSipMediaApplicationCall) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateSipMediaApplicationCallInput(v *UpdateSipMediaApplicationCallInput, encoder *httpbinding.Encoder) error {
@@ -14793,6 +15904,10 @@ func (*awsRestjson1_serializeOpUpdateSipRule) ID() string {
 func (m *awsRestjson1_serializeOpUpdateSipRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14840,6 +15955,8 @@ func (m *awsRestjson1_serializeOpUpdateSipRule) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateSipRuleInput(v *UpdateSipRuleInput, encoder *httpbinding.Encoder) error {
@@ -14893,6 +16010,10 @@ func (*awsRestjson1_serializeOpUpdateUser) ID() string {
 func (m *awsRestjson1_serializeOpUpdateUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -14940,6 +16061,8 @@ func (m *awsRestjson1_serializeOpUpdateUser) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateUserInput(v *UpdateUserInput, encoder *httpbinding.Encoder) error {
@@ -15002,6 +16125,10 @@ func (*awsRestjson1_serializeOpUpdateUserSettings) ID() string {
 func (m *awsRestjson1_serializeOpUpdateUserSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -15049,6 +16176,8 @@ func (m *awsRestjson1_serializeOpUpdateUserSettings) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateUserSettingsInput(v *UpdateUserSettingsInput, encoder *httpbinding.Encoder) error {
@@ -15101,6 +16230,10 @@ func (*awsRestjson1_serializeOpUpdateVoiceConnector) ID() string {
 func (m *awsRestjson1_serializeOpUpdateVoiceConnector) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -15148,6 +16281,8 @@ func (m *awsRestjson1_serializeOpUpdateVoiceConnector) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateVoiceConnectorInput(v *UpdateVoiceConnectorInput, encoder *httpbinding.Encoder) error {
@@ -15194,6 +16329,10 @@ func (*awsRestjson1_serializeOpUpdateVoiceConnectorGroup) ID() string {
 func (m *awsRestjson1_serializeOpUpdateVoiceConnectorGroup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -15241,6 +16380,8 @@ func (m *awsRestjson1_serializeOpUpdateVoiceConnectorGroup) HandleSerialize(ctx 
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsUpdateVoiceConnectorGroupInput(v *UpdateVoiceConnectorGroupInput, encoder *httpbinding.Encoder) error {
@@ -15289,6 +16430,10 @@ func (*awsRestjson1_serializeOpValidateE911Address) ID() string {
 func (m *awsRestjson1_serializeOpValidateE911Address) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -15332,6 +16477,8 @@ func (m *awsRestjson1_serializeOpValidateE911Address) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsValidateE911AddressInput(v *ValidateE911AddressInput, encoder *httpbinding.Encoder) error {

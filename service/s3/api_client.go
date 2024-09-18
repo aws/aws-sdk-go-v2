@@ -298,14 +298,14 @@ func (c *Client) invokeOperation(
 	decorated := middleware.DecorateHandler(handler, stack)
 	result, metadata, err = decorated.Handle(ctx, params)
 	if err != nil {
-		span.SetProperty("error.go.type", fmt.Sprintf("%T", err))
-		span.SetProperty("error.go.error", err.Error())
+		span.SetProperty("exception.type", fmt.Sprintf("%T", err))
+		span.SetProperty("exception.message", err.Error())
 
 		var aerr smithy.APIError
 		if errors.As(err, &aerr) {
-			span.SetProperty("error.api.code", aerr.ErrorCode())
-			span.SetProperty("error.api.message", aerr.ErrorMessage())
-			span.SetProperty("error.api.fault", aerr.ErrorFault().String())
+			span.SetProperty("api.error_code", aerr.ErrorCode())
+			span.SetProperty("api.error_message", aerr.ErrorMessage())
+			span.SetProperty("api.error_fault", aerr.ErrorFault().String())
 		}
 
 		err = &smithy.OperationError{

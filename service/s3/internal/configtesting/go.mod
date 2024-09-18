@@ -22,8 +22,6 @@ require (
 	github.com/aws/smithy-go v1.20.4 // indirect
 )
 
-replace github.com/aws/smithy-go => /Users/lucix/git/aws-sdk-go-v2/../smithy-go
-
 replace github.com/aws/aws-sdk-go-v2 => ../../../../
 
 replace github.com/aws/aws-sdk-go-v2/config => ../../../../config/
