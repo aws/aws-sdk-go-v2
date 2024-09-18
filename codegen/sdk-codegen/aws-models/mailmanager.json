@@ -4415,7 +4415,7 @@
                 },
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<fullname>AWS SES Mail Manager API</fullname>\n         <p>\n            <a href=\"http://aws.amazon.com/ses\">AWS SES Mail Manager API</a> contains operations and data types\n         that comprise the Mail Manager feature of Amazon Simple Email Service.</p>\n         <p>Mail Manager is a set of Amazon SES email gateway features designed to help you strengthen\n         your organization's email infrastructure, simplify email workflow management, and\n         streamline email compliance control. To learn more, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/eb.html\">Mail Manager chapter</a> in the Amazon SES Developer\n         Guide.</p>",
+                "smithy.api#documentation": "<fullname>Amazon SES Mail Manager API</fullname>\n         <p>The Amazon SES Mail Manager API contains operations and data types\n         that comprise the Mail Manager feature of <a href=\"http://aws.amazon.com/ses\">Amazon Simple Email Service (SES)</a>.</p>\n         <p>Mail Manager is a set of Amazon SES email gateway features designed to help you strengthen\n         your organization's email infrastructure, simplify email workflow management, and\n         streamline email compliance control. To learn more, see the <a href=\"https://docs.aws.amazon.com/ses/latest/dg/eb.html\">Mail Manager chapter</a> in the <i>Amazon SES Developer\n         Guide</i>.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://w.amazon.com/bin/view/AWS/Border"
                 },
@@ -5118,6 +5118,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The textual body content of an email message.</p>"
+            }
+        },
+        "com.amazonaws.mailmanager#MimeHeaderAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^X-[a-zA-Z0-9-]{1,256}$"
             }
         },
         "com.amazonaws.mailmanager#NameOrArn": {
@@ -6400,6 +6406,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The email attribute to evaluate in a string condition expression.</p>"
                     }
+                },
+                "MimeHeaderAttribute": {
+                    "target": "com.amazonaws.mailmanager#MimeHeaderAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email MIME X-Header attribute to evaluate in a string condition expression.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7083,10 +7095,19 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.mailmanager#StringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.mailmanager#StringValueList": {
             "type": "list",
             "member": {
-                "target": "smithy.api#String"
+                "target": "com.amazonaws.mailmanager#StringValue"
             },
             "traits": {
                 "smithy.api#length": {
@@ -7658,7 +7679,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>&gt;Update attributes of an already provisioned rule set.</p>",
+                "smithy.api#documentation": "<p>Update attributes of an already provisioned rule set.</p>",
                 "smithy.api#idempotent": {}
             }
         },
