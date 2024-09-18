@@ -53,6 +53,8 @@ func (m *awsRestxml_deserializeOpAbortMultipartUpload) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -146,6 +148,8 @@ func (m *awsRestxml_deserializeOpCompleteMultipartUpload) HandleDeserialize(ctx 
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -432,6 +436,8 @@ func (m *awsRestxml_deserializeOpCopyObject) HandleDeserialize(ctx context.Conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -643,6 +649,8 @@ func (m *awsRestxml_deserializeOpCreateBucket) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -739,6 +747,8 @@ func (m *awsRestxml_deserializeOpCreateMultipartUpload) HandleDeserialize(ctx co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -984,6 +994,8 @@ func (m *awsRestxml_deserializeOpCreateSession) HandleDeserialize(ctx context.Co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1129,6 +1141,8 @@ func (m *awsRestxml_deserializeOpDeleteBucket) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1207,6 +1221,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketAnalyticsConfiguration) HandleDeser
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1285,6 +1301,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketCors) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1363,6 +1381,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketEncryption) HandleDeserialize(ctx c
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1441,6 +1461,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketIntelligentTieringConfiguration) Ha
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1519,6 +1541,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketInventoryConfiguration) HandleDeser
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1597,6 +1621,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketLifecycle) HandleDeserialize(ctx co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1675,6 +1701,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketMetricsConfiguration) HandleDeseria
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1753,6 +1781,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketOwnershipControls) HandleDeserializ
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1831,6 +1861,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketPolicy) HandleDeserialize(ctx conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1909,6 +1941,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketReplication) HandleDeserialize(ctx 
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -1987,6 +2021,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketTagging) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2065,6 +2101,8 @@ func (m *awsRestxml_deserializeOpDeleteBucketWebsite) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2143,6 +2181,8 @@ func (m *awsRestxml_deserializeOpDeleteObject) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2247,6 +2287,8 @@ func (m *awsRestxml_deserializeOpDeleteObjects) HandleDeserialize(ctx context.Co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2412,6 +2454,8 @@ func (m *awsRestxml_deserializeOpDeleteObjectTagging) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2502,6 +2546,8 @@ func (m *awsRestxml_deserializeOpDeletePublicAccessBlock) HandleDeserialize(ctx 
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2580,6 +2626,8 @@ func (m *awsRestxml_deserializeOpGetBucketAccelerateConfiguration) HandleDeseria
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2746,6 +2794,8 @@ func (m *awsRestxml_deserializeOpGetBucketAcl) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -2894,6 +2944,8 @@ func (m *awsRestxml_deserializeOpGetBucketAnalyticsConfiguration) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3036,6 +3088,8 @@ func (m *awsRestxml_deserializeOpGetBucketCors) HandleDeserialize(ctx context.Co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3178,6 +3232,8 @@ func (m *awsRestxml_deserializeOpGetBucketEncryption) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3320,6 +3376,8 @@ func (m *awsRestxml_deserializeOpGetBucketIntelligentTieringConfiguration) Handl
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3462,6 +3520,8 @@ func (m *awsRestxml_deserializeOpGetBucketInventoryConfiguration) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3604,6 +3664,8 @@ func (m *awsRestxml_deserializeOpGetBucketLifecycleConfiguration) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3746,6 +3808,8 @@ func (m *awsRestxml_deserializeOpGetBucketLocation) HandleDeserialize(ctx contex
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -3895,6 +3959,8 @@ func (m *awsRestxml_deserializeOpGetBucketLogging) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4037,6 +4103,8 @@ func (m *awsRestxml_deserializeOpGetBucketMetricsConfiguration) HandleDeserializ
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4179,6 +4247,8 @@ func (m *awsRestxml_deserializeOpGetBucketNotificationConfiguration) HandleDeser
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4339,6 +4409,8 @@ func (m *awsRestxml_deserializeOpGetBucketOwnershipControls) HandleDeserialize(c
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4481,6 +4553,8 @@ func (m *awsRestxml_deserializeOpGetBucketPolicy) HandleDeserialize(ctx context.
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4579,6 +4653,8 @@ func (m *awsRestxml_deserializeOpGetBucketPolicyStatus) HandleDeserialize(ctx co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4721,6 +4797,8 @@ func (m *awsRestxml_deserializeOpGetBucketReplication) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -4863,6 +4941,8 @@ func (m *awsRestxml_deserializeOpGetBucketRequestPayment) HandleDeserialize(ctx 
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -5012,6 +5092,8 @@ func (m *awsRestxml_deserializeOpGetBucketTagging) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -5154,6 +5236,8 @@ func (m *awsRestxml_deserializeOpGetBucketVersioning) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -5316,6 +5400,8 @@ func (m *awsRestxml_deserializeOpGetBucketWebsite) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -5476,6 +5562,8 @@ func (m *awsRestxml_deserializeOpGetObject) HandleDeserialize(ctx context.Contex
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -5800,6 +5888,8 @@ func (m *awsRestxml_deserializeOpGetObjectAcl) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -5968,6 +6058,8 @@ func (m *awsRestxml_deserializeOpGetObjectAttributes) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -6202,6 +6294,8 @@ func (m *awsRestxml_deserializeOpGetObjectLegalHold) HandleDeserialize(ctx conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -6344,6 +6438,8 @@ func (m *awsRestxml_deserializeOpGetObjectLockConfiguration) HandleDeserialize(c
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -6486,6 +6582,8 @@ func (m *awsRestxml_deserializeOpGetObjectRetention) HandleDeserialize(ctx conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -6628,6 +6726,8 @@ func (m *awsRestxml_deserializeOpGetObjectTagging) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -6787,6 +6887,8 @@ func (m *awsRestxml_deserializeOpGetObjectTorrent) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -6889,6 +6991,8 @@ func (m *awsRestxml_deserializeOpGetPublicAccessBlock) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -7031,6 +7135,8 @@ func (m *awsRestxml_deserializeOpHeadBucket) HandleDeserialize(ctx context.Conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -7143,6 +7249,8 @@ func (m *awsRestxml_deserializeOpHeadObject) HandleDeserialize(ctx context.Conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -7443,6 +7551,8 @@ func (m *awsRestxml_deserializeOpListBucketAnalyticsConfigurations) HandleDeseri
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -7627,6 +7737,8 @@ func (m *awsRestxml_deserializeOpListBucketIntelligentTieringConfigurations) Han
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -7811,6 +7923,8 @@ func (m *awsRestxml_deserializeOpListBucketInventoryConfigurations) HandleDeseri
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -7995,6 +8109,8 @@ func (m *awsRestxml_deserializeOpListBucketMetricsConfigurations) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -8179,6 +8295,8 @@ func (m *awsRestxml_deserializeOpListBuckets) HandleDeserialize(ctx context.Cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -8340,6 +8458,8 @@ func (m *awsRestxml_deserializeOpListDirectoryBuckets) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -8495,6 +8615,8 @@ func (m *awsRestxml_deserializeOpListMultipartUploads) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -8797,6 +8919,8 @@ func (m *awsRestxml_deserializeOpListObjects) HandleDeserialize(ctx context.Cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -9076,6 +9200,8 @@ func (m *awsRestxml_deserializeOpListObjectsV2) HandleDeserialize(ctx context.Co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -9385,6 +9511,8 @@ func (m *awsRestxml_deserializeOpListObjectVersions) HandleDeserialize(ctx conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -9693,6 +9821,8 @@ func (m *awsRestxml_deserializeOpListParts) HandleDeserialize(ctx context.Contex
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10002,6 +10132,8 @@ func (m *awsRestxml_deserializeOpPutBucketAccelerateConfiguration) HandleDeseria
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10080,6 +10212,8 @@ func (m *awsRestxml_deserializeOpPutBucketAcl) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10158,6 +10292,8 @@ func (m *awsRestxml_deserializeOpPutBucketAnalyticsConfiguration) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10236,6 +10372,8 @@ func (m *awsRestxml_deserializeOpPutBucketCors) HandleDeserialize(ctx context.Co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10314,6 +10452,8 @@ func (m *awsRestxml_deserializeOpPutBucketEncryption) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10392,6 +10532,8 @@ func (m *awsRestxml_deserializeOpPutBucketIntelligentTieringConfiguration) Handl
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10470,6 +10612,8 @@ func (m *awsRestxml_deserializeOpPutBucketInventoryConfiguration) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10548,6 +10692,8 @@ func (m *awsRestxml_deserializeOpPutBucketLifecycleConfiguration) HandleDeserial
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10626,6 +10772,8 @@ func (m *awsRestxml_deserializeOpPutBucketLogging) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10704,6 +10852,8 @@ func (m *awsRestxml_deserializeOpPutBucketMetricsConfiguration) HandleDeserializ
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10782,6 +10932,8 @@ func (m *awsRestxml_deserializeOpPutBucketNotificationConfiguration) HandleDeser
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10860,6 +11012,8 @@ func (m *awsRestxml_deserializeOpPutBucketOwnershipControls) HandleDeserialize(c
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -10938,6 +11092,8 @@ func (m *awsRestxml_deserializeOpPutBucketPolicy) HandleDeserialize(ctx context.
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11016,6 +11172,8 @@ func (m *awsRestxml_deserializeOpPutBucketReplication) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11094,6 +11252,8 @@ func (m *awsRestxml_deserializeOpPutBucketRequestPayment) HandleDeserialize(ctx 
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11172,6 +11332,8 @@ func (m *awsRestxml_deserializeOpPutBucketTagging) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11250,6 +11412,8 @@ func (m *awsRestxml_deserializeOpPutBucketVersioning) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11328,6 +11492,8 @@ func (m *awsRestxml_deserializeOpPutBucketWebsite) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11406,6 +11572,8 @@ func (m *awsRestxml_deserializeOpPutObject) HandleDeserialize(ctx context.Contex
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11565,6 +11733,8 @@ func (m *awsRestxml_deserializeOpPutObjectAcl) HandleDeserialize(ctx context.Con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11658,6 +11828,8 @@ func (m *awsRestxml_deserializeOpPutObjectLegalHold) HandleDeserialize(ctx conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11748,6 +11920,8 @@ func (m *awsRestxml_deserializeOpPutObjectLockConfiguration) HandleDeserialize(c
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11838,6 +12012,8 @@ func (m *awsRestxml_deserializeOpPutObjectRetention) HandleDeserialize(ctx conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -11928,6 +12104,8 @@ func (m *awsRestxml_deserializeOpPutObjectTagging) HandleDeserialize(ctx context
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -12018,6 +12196,8 @@ func (m *awsRestxml_deserializeOpPutPublicAccessBlock) HandleDeserialize(ctx con
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -12096,6 +12276,8 @@ func (m *awsRestxml_deserializeOpRestoreObject) HandleDeserialize(ctx context.Co
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -12194,6 +12376,8 @@ func (m *awsRestxml_deserializeOpSelectObjectContent) HandleDeserialize(ctx cont
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -12266,6 +12450,8 @@ func (m *awsRestxml_deserializeOpUploadPart) HandleDeserialize(ctx context.Conte
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -12410,6 +12596,8 @@ func (m *awsRestxml_deserializeOpUploadPartCopy) HandleDeserialize(ctx context.C
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
@@ -12603,6 +12791,8 @@ func (m *awsRestxml_deserializeOpWriteGetObjectResponse) HandleDeserialize(ctx c
 	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
 	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
