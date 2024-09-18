@@ -490,6 +490,26 @@ func (m *validateOpDescribeConditionalForwarders) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDirectoryDataAccess struct {
+}
+
+func (*validateOpDescribeDirectoryDataAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDirectoryDataAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDirectoryDataAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDirectoryDataAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomainControllers struct {
 }
 
@@ -630,6 +650,26 @@ func (m *validateOpDisableClientAuthentication) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableDirectoryDataAccess struct {
+}
+
+func (*validateOpDisableDirectoryDataAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableDirectoryDataAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableDirectoryDataAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableDirectoryDataAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableLDAPS struct {
 }
 
@@ -705,6 +745,26 @@ func (m *validateOpEnableClientAuthentication) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableClientAuthenticationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableDirectoryDataAccess struct {
+}
+
+func (*validateOpEnableDirectoryDataAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableDirectoryDataAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableDirectoryDataAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableDirectoryDataAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1326,6 +1386,10 @@ func addOpDescribeConditionalForwardersValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDescribeConditionalForwarders{}, middleware.After)
 }
 
+func addOpDescribeDirectoryDataAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDirectoryDataAccess{}, middleware.After)
+}
+
 func addOpDescribeDomainControllersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainControllers{}, middleware.After)
 }
@@ -1354,6 +1418,10 @@ func addOpDisableClientAuthenticationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDisableClientAuthentication{}, middleware.After)
 }
 
+func addOpDisableDirectoryDataAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableDirectoryDataAccess{}, middleware.After)
+}
+
 func addOpDisableLDAPSValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableLDAPS{}, middleware.After)
 }
@@ -1368,6 +1436,10 @@ func addOpDisableSsoValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpEnableClientAuthenticationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableClientAuthentication{}, middleware.After)
+}
+
+func addOpEnableDirectoryDataAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableDirectoryDataAccess{}, middleware.After)
 }
 
 func addOpEnableLDAPSValidationMiddleware(stack *middleware.Stack) error {
@@ -2093,6 +2165,21 @@ func validateOpDescribeConditionalForwardersInput(v *DescribeConditionalForwarde
 	}
 }
 
+func validateOpDescribeDirectoryDataAccessInput(v *DescribeDirectoryDataAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDirectoryDataAccessInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDomainControllersInput(v *DescribeDomainControllersInput) error {
 	if v == nil {
 		return nil
@@ -2204,6 +2291,21 @@ func validateOpDisableClientAuthenticationInput(v *DisableClientAuthenticationIn
 	}
 }
 
+func validateOpDisableDirectoryDataAccessInput(v *DisableDirectoryDataAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableDirectoryDataAccessInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableLDAPSInput(v *DisableLDAPSInput) error {
 	if v == nil {
 		return nil
@@ -2262,6 +2364,21 @@ func validateOpEnableClientAuthenticationInput(v *EnableClientAuthenticationInpu
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableDirectoryDataAccessInput(v *EnableDirectoryDataAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableDirectoryDataAccessInput"}
+	if v.DirectoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DirectoryId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

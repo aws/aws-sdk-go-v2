@@ -1,0 +1,8 @@
+{
+    "id": "a0c3a91f-3884-4c49-a453-6493cc18076c",
+    "type": "documentation",
+    "description": "Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.",
+    "modules": [
+        "service/rds"
+    ]
+}

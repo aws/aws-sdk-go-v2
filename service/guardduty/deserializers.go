@@ -14004,6 +14004,15 @@ func awsRestjson1_deserializeDocumentEcsTaskDetails(v **types.EcsTaskDetails, va
 				sv.Group = ptr.String(jtv)
 			}
 
+		case "launchType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LaunchType = ptr.String(jtv)
+			}
+
 		case "startedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16037,7 +16046,7 @@ func awsRestjson1_deserializeDocumentKubernetesApiCallAction(v **types.Kubernete
 				sv.ResourceName = ptr.String(jtv)
 			}
 
-		case "sourceIps":
+		case "sourceIPs":
 			if err := awsRestjson1_deserializeDocumentSourceIps(&sv.SourceIps, value); err != nil {
 				return err
 			}

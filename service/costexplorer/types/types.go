@@ -37,8 +37,8 @@ type Anomaly struct {
 	// The first day the anomaly is detected.
 	AnomalyStartDate *string
 
-	// The dimension for the anomaly (for example, an Amazon Web Service in a service
-	// monitor).
+	// The dimension for the anomaly (for example, an Amazon Web Servicesservice in a
+	// service monitor).
 	DimensionValue *string
 
 	// The feedback value.
@@ -822,6 +822,18 @@ type DiskResourceUtilization struct {
 	noSmithyDocumentSerde
 }
 
+// The DynamoDB reservations that Amazon Web Services recommends that you purchase.
+type DynamoDBCapacityDetails struct {
+
+	// The capacity unit of the recommended reservation.
+	CapacityUnits *string
+
+	// The Amazon Web Services Region of the recommended reservation.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
 // The EBS field that contains a list of EBS metrics that are associated with the
 // current instance.
 type EBSResourceUtilization struct {
@@ -1595,21 +1607,26 @@ type ReservationPurchaseRecommendationDetail struct {
 	// reservation purchases.
 	AverageNormalizedUnitsUsedPerHour *string
 
+	// The average number of provisioned capacity units that you used in an hour
+	// during the historical period. Amazon Web Services uses this to calculate your
+	// recommended reservation purchases.
+	AverageNumberOfCapacityUnitsUsedPerHour *string
+
 	// The average number of instances that you used in an hour during the historical
 	// period. Amazon Web Services uses this to calculate your recommended reservation
 	// purchases.
 	AverageNumberOfInstancesUsedPerHour *string
 
-	// The average utilization of your instances. Amazon Web Services uses this to
-	// calculate your recommended reservation purchases.
+	// The average utilization of your recommendations. Amazon Web Services uses this
+	// to calculate your recommended reservation purchases.
 	AverageUtilization *string
 
 	// The currency code that Amazon Web Services used to calculate the costs for this
-	// instance.
+	// recommendation.
 	CurrencyCode *string
 
-	// How long Amazon Web Services estimates that it takes for this instance to start
-	// saving you money, in months.
+	// How long Amazon Web Services estimates that it takes for this recommendation to
+	// start saving you money, in months.
 	EstimatedBreakEvenInMonths *string
 
 	// How much Amazon Web Services estimates that you spend on On-Demand Instances in
@@ -1637,6 +1654,11 @@ type ReservationPurchaseRecommendationDetail struct {
 	// reservation purchases.
 	MaximumNormalizedUnitsUsedPerHour *string
 
+	// The maximum number of provisioned capacity units that you used in an hour
+	// during the historical period. Amazon Web Services uses this to calculate your
+	// recommended reservation purchases.
+	MaximumNumberOfCapacityUnitsUsedPerHour *string
+
 	// The maximum number of instances that you used in an hour during the historical
 	// period. Amazon Web Services uses this to calculate your recommended reservation
 	// purchases.
@@ -1647,6 +1669,11 @@ type ReservationPurchaseRecommendationDetail struct {
 	// reservation purchases.
 	MinimumNormalizedUnitsUsedPerHour *string
 
+	// The minimum number of provisioned capacity units that you used in an hour
+	// during the historical period. Amazon Web Services uses this to calculate your
+	// recommended reservation purchases.
+	MinimumNumberOfCapacityUnitsUsedPerHour *string
+
 	// The minimum number of instances that you used in an hour during the historical
 	// period. Amazon Web Services uses this to calculate your recommended reservation
 	// purchases.
@@ -1656,13 +1683,21 @@ type ReservationPurchaseRecommendationDetail struct {
 	// purchase.
 	RecommendedNormalizedUnitsToPurchase *string
 
+	// The number of reserved capacity units that Amazon Web Services recommends that
+	// you purchase.
+	RecommendedNumberOfCapacityUnitsToPurchase *string
+
 	// The number of instances that Amazon Web Services recommends that you purchase.
 	RecommendedNumberOfInstancesToPurchase *string
 
-	// How much purchasing this instance costs you on a monthly basis.
+	// How much purchasing this recommendation costs you on a monthly basis.
 	RecurringStandardMonthlyCost *string
 
-	// How much purchasing this instance costs you upfront.
+	// Details about the reservations that Amazon Web Services recommends that you
+	// purchase.
+	ReservedCapacityDetails *ReservedCapacityDetails
+
+	// How much purchasing this recommendation costs you upfront.
 	UpfrontCost *string
 
 	noSmithyDocumentSerde
@@ -1717,6 +1752,16 @@ type ReservationUtilizationGroup struct {
 
 	// The value of a specific reservation attribute.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the reservations that Amazon Web Services recommends that you
+// purchase.
+type ReservedCapacityDetails struct {
+
+	// The DynamoDB reservations that Amazon Web Services recommends that you purchase.
+	DynamoDBCapacityDetails *DynamoDBCapacityDetails
 
 	noSmithyDocumentSerde
 }
@@ -1868,9 +1913,9 @@ type RightsizingRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The combination of Amazon Web Service, linked account, linked account name,
-// Region, and usage type where a cost anomaly is observed. The linked account name
-// will only be available when the account name can be identified.
+// The combination of Amazon Web Servicesservice, linked account, linked account
+// name, Region, and usage type where a cost anomaly is observed. The linked
+// account name will only be available when the account name can be identified.
 type RootCause struct {
 
 	// The member account value that's associated with the cost anomaly.
@@ -1882,7 +1927,7 @@ type RootCause struct {
 	// The Amazon Web Services Region that's associated with the cost anomaly.
 	Region *string
 
-	// The Amazon Web Service name that's associated with the cost anomaly.
+	// The Amazon Web Servicesservice name that's associated with the cost anomaly.
 	Service *string
 
 	// The UsageType value that's associated with the cost anomaly.

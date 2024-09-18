@@ -3625,6 +3625,10 @@ func awsAwsjson10_serializeDocumentRuleStringToEvaluate(v types.RuleStringToEval
 		av := object.Key("Attribute")
 		av.String(string(uv.Value))
 
+	case *types.RuleStringToEvaluateMemberMimeHeaderAttribute:
+		av := object.Key("MimeHeaderAttribute")
+		av.String(uv.Value)
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 

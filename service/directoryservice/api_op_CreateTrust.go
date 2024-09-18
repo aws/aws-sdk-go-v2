@@ -62,8 +62,8 @@ type CreateTrustInput struct {
 	// This member is required.
 	TrustDirection types.TrustDirection
 
-	// The trust password. The must be the same password that was used when creating
-	// the trust relationship on the external domain.
+	// The trust password. The trust password must be the same password that was used
+	// when creating the trust relationship on the external domain.
 	//
 	// This member is required.
 	TrustPassword *string

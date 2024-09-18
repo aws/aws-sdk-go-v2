@@ -3,10 +3,10 @@
 // Package mailmanager provides the API client, operations, and parameter types
 // for MailManager.
 //
-// # AWS SES Mail Manager API
+// # Amazon SES Mail Manager API
 //
-// [AWS SES Mail Manager API]contains operations and data types that comprise the Mail Manager feature of
-// Amazon Simple Email Service.
+// The Amazon SES Mail Manager API contains operations and data types that
+// comprise the Mail Manager feature of [Amazon Simple Email Service (SES)].
 //
 // Mail Manager is a set of Amazon SES email gateway features designed to help you
 // strengthen your organization's email infrastructure, simplify email workflow
@@ -14,5 +14,5 @@
 // the Amazon SES Developer Guide.
 //
 // [Mail Manager chapter]: https://docs.aws.amazon.com/ses/latest/dg/eb.html
-// [AWS SES Mail Manager API]: http://aws.amazon.com/ses
+// [Amazon Simple Email Service (SES)]: http://aws.amazon.com/ses
 package mailmanager

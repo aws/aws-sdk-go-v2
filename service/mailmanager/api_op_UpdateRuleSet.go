@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// >Update attributes of an already provisioned rule set.
+// Update attributes of an already provisioned rule set.
 func (c *Client) UpdateRuleSet(ctx context.Context, params *UpdateRuleSetInput, optFns ...func(*Options)) (*UpdateRuleSetOutput, error) {
 	if params == nil {
 		params = &UpdateRuleSetInput{}

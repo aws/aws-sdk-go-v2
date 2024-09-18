@@ -11,7 +11,8 @@ import (
 )
 
 // Resets the password for any user in your Managed Microsoft AD or Simple AD
-// directory.
+// directory. Disabled users will become enabled and can be authenticated following
+// the API call.
 //
 // You can reset the password for any user in your directory with the following
 // exceptions:

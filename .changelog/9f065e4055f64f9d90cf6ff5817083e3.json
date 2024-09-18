@@ -1,0 +1,8 @@
+{
+    "id": "9f065e40-55f6-4f9d-90cf-6ff5817083e3",
+    "type": "feature",
+    "description": "Added SSE-KMS support for directory buckets.",
+    "modules": [
+        "service/s3"
+    ]
+}

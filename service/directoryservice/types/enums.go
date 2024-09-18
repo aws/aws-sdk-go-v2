@@ -86,6 +86,31 @@ func (ClientAuthenticationType) Values() []ClientAuthenticationType {
 	}
 }
 
+type DataAccessStatus string
+
+// Enum values for DataAccessStatus
+const (
+	DataAccessStatusDisabled  DataAccessStatus = "Disabled"
+	DataAccessStatusDisabling DataAccessStatus = "Disabling"
+	DataAccessStatusEnabled   DataAccessStatus = "Enabled"
+	DataAccessStatusEnabling  DataAccessStatus = "Enabling"
+	DataAccessStatusFailed    DataAccessStatus = "Failed"
+)
+
+// Values returns all known values for DataAccessStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataAccessStatus) Values() []DataAccessStatus {
+	return []DataAccessStatus{
+		"Disabled",
+		"Disabling",
+		"Enabled",
+		"Enabling",
+		"Failed",
+	}
+}
+
 type DirectoryConfigurationStatus string
 
 // Enum values for DirectoryConfigurationStatus
@@ -165,6 +190,7 @@ const (
 	DirectoryStageDeleting      DirectoryStage = "Deleting"
 	DirectoryStageDeleted       DirectoryStage = "Deleted"
 	DirectoryStageFailed        DirectoryStage = "Failed"
+	DirectoryStageUpdating      DirectoryStage = "Updating"
 )
 
 // Values returns all known values for DirectoryStage. Note that this can be
@@ -184,6 +210,7 @@ func (DirectoryStage) Values() []DirectoryStage {
 		"Deleting",
 		"Deleted",
 		"Failed",
+		"Updating",
 	}
 }
 
@@ -221,6 +248,7 @@ const (
 	DomainControllerStatusDeleting  DomainControllerStatus = "Deleting"
 	DomainControllerStatusDeleted   DomainControllerStatus = "Deleted"
 	DomainControllerStatusFailed    DomainControllerStatus = "Failed"
+	DomainControllerStatusUpdating  DomainControllerStatus = "Updating"
 )
 
 // Values returns all known values for DomainControllerStatus. Note that this can
@@ -236,6 +264,7 @@ func (DomainControllerStatus) Values() []DomainControllerStatus {
 		"Deleting",
 		"Deleted",
 		"Failed",
+		"Updating",
 	}
 }
 

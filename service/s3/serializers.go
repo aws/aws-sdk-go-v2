@@ -886,9 +886,29 @@ func awsRestxml_serializeOpHttpBindingsCreateSessionInput(v *CreateSessionInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.BucketKeyEnabled != nil {
+		locationName := "X-Amz-Server-Side-Encryption-Bucket-Key-Enabled"
+		encoder.SetHeader(locationName).Boolean(*v.BucketKeyEnabled)
+	}
+
+	if len(v.ServerSideEncryption) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption"
+		encoder.SetHeader(locationName).String(string(v.ServerSideEncryption))
+	}
+
 	if len(v.SessionMode) > 0 {
 		locationName := "X-Amz-Create-Session-Mode"
 		encoder.SetHeader(locationName).String(string(v.SessionMode))
+	}
+
+	if v.SSEKMSEncryptionContext != nil && len(*v.SSEKMSEncryptionContext) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Context"
+		encoder.SetHeader(locationName).String(*v.SSEKMSEncryptionContext)
+	}
+
+	if v.SSEKMSKeyId != nil && len(*v.SSEKMSKeyId) > 0 {
+		locationName := "X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id"
+		encoder.SetHeader(locationName).String(*v.SSEKMSKeyId)
 	}
 
 	return nil

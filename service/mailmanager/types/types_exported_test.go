@@ -392,6 +392,9 @@ func ExampleRuleStringToEvaluate_outputUsage() {
 	case *types.RuleStringToEvaluateMemberAttribute:
 		_ = v.Value // Value is types.RuleStringEmailAttribute
 
+	case *types.RuleStringToEvaluateMemberMimeHeaderAttribute:
+		_ = v.Value // Value is string
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -402,6 +405,7 @@ func ExampleRuleStringToEvaluate_outputUsage() {
 }
 
 var _ types.RuleStringEmailAttribute
+var _ *string
 
 func ExampleRuleVerdictToEvaluate_outputUsage() {
 	var union types.RuleVerdictToEvaluate

@@ -978,6 +978,11 @@ func (m *awsRestxml_deserializeOpCreateSession) HandleDeserialize(ctx context.Co
 	output := &CreateSessionOutput{}
 	out.Result = output
 
+	err = awsRestxml_deserializeOpHttpBindingsCreateSessionOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
@@ -1052,6 +1057,37 @@ func awsRestxml_deserializeOpErrorCreateSession(response *smithyhttp.Response, m
 	}
 }
 
+func awsRestxml_deserializeOpHttpBindingsCreateSessionOutput(v *CreateSessionOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("x-amz-server-side-encryption-bucket-key-enabled"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		vv, err := strconv.ParseBool(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.BucketKeyEnabled = ptr.Bool(vv)
+	}
+
+	if headerValues := response.Header.Values("x-amz-server-side-encryption"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ServerSideEncryption = types.ServerSideEncryption(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-server-side-encryption-context"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.SSEKMSEncryptionContext = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-server-side-encryption-aws-kms-key-id"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.SSEKMSKeyId = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestxml_deserializeOpDocumentCreateSessionOutput(v **CreateSessionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

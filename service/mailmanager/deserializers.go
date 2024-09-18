@@ -9206,6 +9206,18 @@ loop:
 			uv = &types.RuleStringToEvaluateMemberAttribute{Value: mv}
 			break loop
 
+		case "MimeHeaderAttribute":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MimeHeaderAttribute to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.RuleStringToEvaluateMemberMimeHeaderAttribute{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -9780,7 +9792,7 @@ func awsAwsjson10_deserializeDocumentStringValueList(v *[]string, value interfac
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
 			}
 			col = jtv
 		}

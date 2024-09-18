@@ -34,8 +34,8 @@ type DisableClientAuthenticationInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// The type of client authentication to disable. Currently, only the parameter,
-	// SmartCard is supported.
+	// The type of client authentication to disable. Currently the only parameter
+	// "SmartCard" is supported.
 	//
 	// This member is required.
 	Type types.ClientAuthenticationType

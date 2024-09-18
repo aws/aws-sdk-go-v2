@@ -7501,6 +7501,55 @@ func awsAwsjson11_deserializeDocumentDiskResourceUtilization(v **types.DiskResou
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDynamoDBCapacityDetails(v **types.DynamoDBCapacityDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamoDBCapacityDetails
+	if *v == nil {
+		sv = &types.DynamoDBCapacityDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CapacityUnits":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CapacityUnits = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEBSResourceUtilization(v **types.EBSResourceUtilization, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10349,6 +10398,15 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				sv.AverageNormalizedUnitsUsedPerHour = ptr.String(jtv)
 			}
 
+		case "AverageNumberOfCapacityUnitsUsedPerHour":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.AverageNumberOfCapacityUnitsUsedPerHour = ptr.String(jtv)
+			}
+
 		case "AverageNumberOfInstancesUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10435,6 +10493,15 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				sv.MaximumNormalizedUnitsUsedPerHour = ptr.String(jtv)
 			}
 
+		case "MaximumNumberOfCapacityUnitsUsedPerHour":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.MaximumNumberOfCapacityUnitsUsedPerHour = ptr.String(jtv)
+			}
+
 		case "MaximumNumberOfInstancesUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10451,6 +10518,15 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
 				sv.MinimumNormalizedUnitsUsedPerHour = ptr.String(jtv)
+			}
+
+		case "MinimumNumberOfCapacityUnitsUsedPerHour":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.MinimumNumberOfCapacityUnitsUsedPerHour = ptr.String(jtv)
 			}
 
 		case "MinimumNumberOfInstancesUsedPerHour":
@@ -10471,6 +10547,15 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				sv.RecommendedNormalizedUnitsToPurchase = ptr.String(jtv)
 			}
 
+		case "RecommendedNumberOfCapacityUnitsToPurchase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.RecommendedNumberOfCapacityUnitsToPurchase = ptr.String(jtv)
+			}
+
 		case "RecommendedNumberOfInstancesToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10487,6 +10572,11 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
 				sv.RecurringStandardMonthlyCost = ptr.String(jtv)
+			}
+
+		case "ReservedCapacityDetails":
+			if err := awsAwsjson11_deserializeDocumentReservedCapacityDetails(&sv.ReservedCapacityDetails, value); err != nil {
+				return err
 			}
 
 		case "UpfrontCost":
@@ -10781,6 +10871,42 @@ func awsAwsjson11_deserializeDocumentReservationUtilizationGroups(v *[]types.Res
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReservedCapacityDetails(v **types.ReservedCapacityDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReservedCapacityDetails
+	if *v == nil {
+		sv = &types.ReservedCapacityDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DynamoDBCapacityDetails":
+			if err := awsAwsjson11_deserializeDocumentDynamoDBCapacityDetails(&sv.DynamoDBCapacityDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

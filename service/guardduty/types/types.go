@@ -1056,6 +1056,9 @@ type EcsTaskDetails struct {
 	// The name of the task group that's associated with the task.
 	Group *string
 
+	// A capacity on which the task is running. For example, Fargate and EC2 .
+	LaunchType *string
+
 	// The Unix timestamp for the time when the task started.
 	StartedAt *time.Time
 
