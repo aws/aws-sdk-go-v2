@@ -10,10 +10,10 @@ import (
 
 	privatemetrics "github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
+	"github.com/aws/smithy-go"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
@@ -415,12 +415,12 @@ func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresO
 	return nil
 }
 
-// deduces the modeled exception type from an attempt error, which is almost
-// always wrapped
+// Determines the value of exception.type for metrics purposes. We prefer an
+// API-specific error code, otherwise it's just the Go type for the value.
 func errorType(err error) string {
-	var terr *awshttp.ResponseError
+	var terr smithy.APIError
 	if errors.As(err, &terr) {
-		return fmt.Sprintf("%T", terr.Err)
+		return terr.ErrorCode()
 	}
 	return fmt.Sprintf("%T", err)
 }
