@@ -8,13 +8,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
+	privatemetrics "github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/metrics"
 	smithymiddle "github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	"github.com/aws/smithy-go/transport/http"
@@ -39,6 +41,9 @@ type Attempt struct {
 	// attempts are reached.
 	LogAttempts bool
 
+	// A Meter instance for recording retry-related metrics.
+	OperationMeter metrics.Meter
+
 	retryer       aws.RetryerV2
 	requestCloner RequestCloner
 }
@@ -56,6 +61,10 @@ func NewAttemptMiddleware(retryer aws.Retryer, requestCloner RequestCloner, optF
 	for _, fn := range optFns {
 		fn(m)
 	}
+	if m.OperationMeter == nil {
+		m.OperationMeter = metrics.NopMeterProvider{}.Meter("")
+	}
+
 	return m
 }
 
@@ -81,6 +90,11 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 	maxAttempts := r.retryer.MaxAttempts()
 	releaseRetryToken := nopRelease
 
+	retryMetrics, err := newAttemptMetrics(r.OperationMeter)
+	if err != nil {
+		return out, metadata, err
+	}
+
 	for {
 		attemptNum++
 		attemptInput := in
@@ -102,7 +116,19 @@ func (r *Attempt) HandleFinalize(ctx context.Context, in smithymiddle.FinalizeIn
 		attemptCtx, span := tracing.StartSpan(attemptCtx, "Attempt", func(o *tracing.SpanOptions) {
 			o.Properties.Set("operation.attempt", attemptNum)
 		})
+		retryMetrics.Attempts.Add(ctx, 1, withOperationMetadata(ctx))
+
+		start := sdk.NowTime()
 		out, attemptResult, releaseRetryToken, err = r.handleAttempt(attemptCtx, attemptInput, releaseRetryToken, next)
+		elapsed := sdk.NowTime().Sub(start)
+
+		retryMetrics.AttemptDuration.Record(ctx, float64(elapsed)/1e9, withOperationMetadata(ctx))
+		if err != nil {
+			retryMetrics.Errors.Add(ctx, 1, withOperationMetadata(ctx), func(o *metrics.RecordMetricOptions) {
+				o.Properties.Set("exception.type", errorType(err))
+			})
+		}
+
 		span.End()
 
 		attemptClockSkew, _ = awsmiddle.GetAttemptSkew(attemptResult.ResponseMetadata)
@@ -245,7 +271,7 @@ func (r *Attempt) handleAttempt(
 	// that time. Potentially early exist if the sleep is canceled via the
 	// context.
 	retryDelay, reqErr := r.retryer.RetryDelay(attemptNum, err)
-	mctx := metrics.Context(ctx)
+	mctx := privatemetrics.Context(ctx)
 	if mctx != nil {
 		attempt, err := mctx.Data().LatestAttempt()
 		if err != nil {
@@ -387,4 +413,14 @@ func AddRetryMiddlewares(stack *smithymiddle.Stack, options AddRetryMiddlewaresO
 		return err
 	}
 	return nil
+}
+
+// deduces the modeled exception type from an attempt error, which is almost
+// always wrapped
+func errorType(err error) string {
+	var terr *awshttp.ResponseError
+	if errors.As(err, &terr) {
+		return fmt.Sprintf("%T", terr.Err)
+	}
+	return fmt.Sprintf("%T", err)
 }

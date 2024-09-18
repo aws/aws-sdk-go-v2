@@ -2,6 +2,8 @@ module github.com/aws/aws-sdk-go-v2/service/s3
 
 go 1.21
 
+toolchain go1.22.6
+
 require (
 	github.com/aws/aws-sdk-go-v2 v1.30.5
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.4

@@ -30,6 +30,8 @@ func (m *awsRestxml_serializeOpAbortMultipartUpload) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -67,6 +69,7 @@ func (m *awsRestxml_serializeOpAbortMultipartUpload) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -112,6 +115,8 @@ func (m *awsRestxml_serializeOpCompleteMultipartUpload) HandleSerialize(ctx cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -173,6 +178,7 @@ func (m *awsRestxml_serializeOpCompleteMultipartUpload) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -258,6 +264,8 @@ func (m *awsRestxml_serializeOpCopyObject) HandleSerialize(ctx context.Context, 
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -295,6 +303,7 @@ func (m *awsRestxml_serializeOpCopyObject) HandleSerialize(ctx context.Context, 
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -525,6 +534,8 @@ func (m *awsRestxml_serializeOpCreateBucket) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -586,6 +597,7 @@ func (m *awsRestxml_serializeOpCreateBucket) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -648,6 +660,8 @@ func (m *awsRestxml_serializeOpCreateMultipartUpload) HandleSerialize(ctx contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -685,6 +699,7 @@ func (m *awsRestxml_serializeOpCreateMultipartUpload) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -860,6 +875,8 @@ func (m *awsRestxml_serializeOpCreateSession) HandleSerialize(ctx context.Contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -897,6 +914,7 @@ func (m *awsRestxml_serializeOpCreateSession) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -944,6 +962,8 @@ func (m *awsRestxml_serializeOpDeleteBucket) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -981,6 +1001,7 @@ func (m *awsRestxml_serializeOpDeleteBucket) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1008,6 +1029,8 @@ func (m *awsRestxml_serializeOpDeleteBucketAnalyticsConfiguration) HandleSeriali
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1045,6 +1068,7 @@ func (m *awsRestxml_serializeOpDeleteBucketAnalyticsConfiguration) HandleSeriali
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1076,6 +1100,8 @@ func (m *awsRestxml_serializeOpDeleteBucketCors) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1113,6 +1139,7 @@ func (m *awsRestxml_serializeOpDeleteBucketCors) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1140,6 +1167,8 @@ func (m *awsRestxml_serializeOpDeleteBucketEncryption) HandleSerialize(ctx conte
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1177,6 +1206,7 @@ func (m *awsRestxml_serializeOpDeleteBucketEncryption) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1204,6 +1234,8 @@ func (m *awsRestxml_serializeOpDeleteBucketIntelligentTieringConfiguration) Hand
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1241,6 +1273,7 @@ func (m *awsRestxml_serializeOpDeleteBucketIntelligentTieringConfiguration) Hand
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1267,6 +1300,8 @@ func (m *awsRestxml_serializeOpDeleteBucketInventoryConfiguration) HandleSeriali
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1304,6 +1339,7 @@ func (m *awsRestxml_serializeOpDeleteBucketInventoryConfiguration) HandleSeriali
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1335,6 +1371,8 @@ func (m *awsRestxml_serializeOpDeleteBucketLifecycle) HandleSerialize(ctx contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1372,6 +1410,7 @@ func (m *awsRestxml_serializeOpDeleteBucketLifecycle) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1399,6 +1438,8 @@ func (m *awsRestxml_serializeOpDeleteBucketMetricsConfiguration) HandleSerialize
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1436,6 +1477,7 @@ func (m *awsRestxml_serializeOpDeleteBucketMetricsConfiguration) HandleSerialize
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1467,6 +1509,8 @@ func (m *awsRestxml_serializeOpDeleteBucketOwnershipControls) HandleSerialize(ct
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1504,6 +1548,7 @@ func (m *awsRestxml_serializeOpDeleteBucketOwnershipControls) HandleSerialize(ct
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1531,6 +1576,8 @@ func (m *awsRestxml_serializeOpDeleteBucketPolicy) HandleSerialize(ctx context.C
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1568,6 +1615,7 @@ func (m *awsRestxml_serializeOpDeleteBucketPolicy) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1595,6 +1643,8 @@ func (m *awsRestxml_serializeOpDeleteBucketReplication) HandleSerialize(ctx cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1632,6 +1682,7 @@ func (m *awsRestxml_serializeOpDeleteBucketReplication) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1659,6 +1710,8 @@ func (m *awsRestxml_serializeOpDeleteBucketTagging) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1696,6 +1749,7 @@ func (m *awsRestxml_serializeOpDeleteBucketTagging) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1723,6 +1777,8 @@ func (m *awsRestxml_serializeOpDeleteBucketWebsite) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1760,6 +1816,7 @@ func (m *awsRestxml_serializeOpDeleteBucketWebsite) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1787,6 +1844,8 @@ func (m *awsRestxml_serializeOpDeleteObject) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1824,6 +1883,7 @@ func (m *awsRestxml_serializeOpDeleteObject) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1879,6 +1939,8 @@ func (m *awsRestxml_serializeOpDeleteObjects) HandleSerialize(ctx context.Contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1940,6 +2002,7 @@ func (m *awsRestxml_serializeOpDeleteObjects) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -1987,6 +2050,8 @@ func (m *awsRestxml_serializeOpDeleteObjectTagging) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2024,6 +2089,7 @@ func (m *awsRestxml_serializeOpDeleteObjectTagging) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2064,6 +2130,8 @@ func (m *awsRestxml_serializeOpDeletePublicAccessBlock) HandleSerialize(ctx cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2101,6 +2169,7 @@ func (m *awsRestxml_serializeOpDeletePublicAccessBlock) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2128,6 +2197,8 @@ func (m *awsRestxml_serializeOpGetBucketAccelerateConfiguration) HandleSerialize
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2165,6 +2236,7 @@ func (m *awsRestxml_serializeOpGetBucketAccelerateConfiguration) HandleSerialize
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2197,6 +2269,8 @@ func (m *awsRestxml_serializeOpGetBucketAcl) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2234,6 +2308,7 @@ func (m *awsRestxml_serializeOpGetBucketAcl) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2261,6 +2336,8 @@ func (m *awsRestxml_serializeOpGetBucketAnalyticsConfiguration) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2298,6 +2375,7 @@ func (m *awsRestxml_serializeOpGetBucketAnalyticsConfiguration) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2329,6 +2407,8 @@ func (m *awsRestxml_serializeOpGetBucketCors) HandleSerialize(ctx context.Contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2366,6 +2446,7 @@ func (m *awsRestxml_serializeOpGetBucketCors) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2393,6 +2474,8 @@ func (m *awsRestxml_serializeOpGetBucketEncryption) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2430,6 +2513,7 @@ func (m *awsRestxml_serializeOpGetBucketEncryption) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2457,6 +2541,8 @@ func (m *awsRestxml_serializeOpGetBucketIntelligentTieringConfiguration) HandleS
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2494,6 +2580,7 @@ func (m *awsRestxml_serializeOpGetBucketIntelligentTieringConfiguration) HandleS
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2520,6 +2607,8 @@ func (m *awsRestxml_serializeOpGetBucketInventoryConfiguration) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2557,6 +2646,7 @@ func (m *awsRestxml_serializeOpGetBucketInventoryConfiguration) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2588,6 +2678,8 @@ func (m *awsRestxml_serializeOpGetBucketLifecycleConfiguration) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2625,6 +2717,7 @@ func (m *awsRestxml_serializeOpGetBucketLifecycleConfiguration) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2652,6 +2745,8 @@ func (m *awsRestxml_serializeOpGetBucketLocation) HandleSerialize(ctx context.Co
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2689,6 +2784,7 @@ func (m *awsRestxml_serializeOpGetBucketLocation) HandleSerialize(ctx context.Co
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2716,6 +2812,8 @@ func (m *awsRestxml_serializeOpGetBucketLogging) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2753,6 +2851,7 @@ func (m *awsRestxml_serializeOpGetBucketLogging) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2780,6 +2879,8 @@ func (m *awsRestxml_serializeOpGetBucketMetricsConfiguration) HandleSerialize(ct
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2817,6 +2918,7 @@ func (m *awsRestxml_serializeOpGetBucketMetricsConfiguration) HandleSerialize(ct
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2848,6 +2950,8 @@ func (m *awsRestxml_serializeOpGetBucketNotificationConfiguration) HandleSeriali
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2885,6 +2989,7 @@ func (m *awsRestxml_serializeOpGetBucketNotificationConfiguration) HandleSeriali
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2912,6 +3017,8 @@ func (m *awsRestxml_serializeOpGetBucketOwnershipControls) HandleSerialize(ctx c
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -2949,6 +3056,7 @@ func (m *awsRestxml_serializeOpGetBucketOwnershipControls) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -2976,6 +3084,8 @@ func (m *awsRestxml_serializeOpGetBucketPolicy) HandleSerialize(ctx context.Cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3013,6 +3123,7 @@ func (m *awsRestxml_serializeOpGetBucketPolicy) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3040,6 +3151,8 @@ func (m *awsRestxml_serializeOpGetBucketPolicyStatus) HandleSerialize(ctx contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3077,6 +3190,7 @@ func (m *awsRestxml_serializeOpGetBucketPolicyStatus) HandleSerialize(ctx contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3104,6 +3218,8 @@ func (m *awsRestxml_serializeOpGetBucketReplication) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3141,6 +3257,7 @@ func (m *awsRestxml_serializeOpGetBucketReplication) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3168,6 +3285,8 @@ func (m *awsRestxml_serializeOpGetBucketRequestPayment) HandleSerialize(ctx cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3205,6 +3324,7 @@ func (m *awsRestxml_serializeOpGetBucketRequestPayment) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3232,6 +3352,8 @@ func (m *awsRestxml_serializeOpGetBucketTagging) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3269,6 +3391,7 @@ func (m *awsRestxml_serializeOpGetBucketTagging) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3296,6 +3419,8 @@ func (m *awsRestxml_serializeOpGetBucketVersioning) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3333,6 +3458,7 @@ func (m *awsRestxml_serializeOpGetBucketVersioning) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3360,6 +3486,8 @@ func (m *awsRestxml_serializeOpGetBucketWebsite) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3397,6 +3525,7 @@ func (m *awsRestxml_serializeOpGetBucketWebsite) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3424,6 +3553,8 @@ func (m *awsRestxml_serializeOpGetObject) HandleSerialize(ctx context.Context, i
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3461,6 +3592,7 @@ func (m *awsRestxml_serializeOpGetObject) HandleSerialize(ctx context.Context, i
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3579,6 +3711,8 @@ func (m *awsRestxml_serializeOpGetObjectAcl) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3616,6 +3750,7 @@ func (m *awsRestxml_serializeOpGetObjectAcl) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3661,6 +3796,8 @@ func (m *awsRestxml_serializeOpGetObjectAttributes) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3698,6 +3835,7 @@ func (m *awsRestxml_serializeOpGetObjectAttributes) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3782,6 +3920,8 @@ func (m *awsRestxml_serializeOpGetObjectLegalHold) HandleSerialize(ctx context.C
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3819,6 +3959,7 @@ func (m *awsRestxml_serializeOpGetObjectLegalHold) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3864,6 +4005,8 @@ func (m *awsRestxml_serializeOpGetObjectLockConfiguration) HandleSerialize(ctx c
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3901,6 +4044,7 @@ func (m *awsRestxml_serializeOpGetObjectLockConfiguration) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -3928,6 +4072,8 @@ func (m *awsRestxml_serializeOpGetObjectRetention) HandleSerialize(ctx context.C
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -3965,6 +4111,7 @@ func (m *awsRestxml_serializeOpGetObjectRetention) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4010,6 +4157,8 @@ func (m *awsRestxml_serializeOpGetObjectTagging) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4047,6 +4196,7 @@ func (m *awsRestxml_serializeOpGetObjectTagging) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4092,6 +4242,8 @@ func (m *awsRestxml_serializeOpGetObjectTorrent) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4129,6 +4281,7 @@ func (m *awsRestxml_serializeOpGetObjectTorrent) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4170,6 +4323,8 @@ func (m *awsRestxml_serializeOpGetPublicAccessBlock) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4207,6 +4362,7 @@ func (m *awsRestxml_serializeOpGetPublicAccessBlock) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4234,6 +4390,8 @@ func (m *awsRestxml_serializeOpHeadBucket) HandleSerialize(ctx context.Context, 
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4271,6 +4429,7 @@ func (m *awsRestxml_serializeOpHeadBucket) HandleSerialize(ctx context.Context, 
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4298,6 +4457,8 @@ func (m *awsRestxml_serializeOpHeadObject) HandleSerialize(ctx context.Context, 
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4335,6 +4496,7 @@ func (m *awsRestxml_serializeOpHeadObject) HandleSerialize(ctx context.Context, 
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4453,6 +4615,8 @@ func (m *awsRestxml_serializeOpListBucketAnalyticsConfigurations) HandleSerializ
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4490,6 +4654,7 @@ func (m *awsRestxml_serializeOpListBucketAnalyticsConfigurations) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4521,6 +4686,8 @@ func (m *awsRestxml_serializeOpListBucketIntelligentTieringConfigurations) Handl
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4558,6 +4725,7 @@ func (m *awsRestxml_serializeOpListBucketIntelligentTieringConfigurations) Handl
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4584,6 +4752,8 @@ func (m *awsRestxml_serializeOpListBucketInventoryConfigurations) HandleSerializ
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4621,6 +4791,7 @@ func (m *awsRestxml_serializeOpListBucketInventoryConfigurations) HandleSerializ
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4652,6 +4823,8 @@ func (m *awsRestxml_serializeOpListBucketMetricsConfigurations) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4689,6 +4862,7 @@ func (m *awsRestxml_serializeOpListBucketMetricsConfigurations) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4720,6 +4894,8 @@ func (m *awsRestxml_serializeOpListBuckets) HandleSerialize(ctx context.Context,
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4757,6 +4933,7 @@ func (m *awsRestxml_serializeOpListBuckets) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4787,6 +4964,8 @@ func (m *awsRestxml_serializeOpListDirectoryBuckets) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4824,6 +5003,7 @@ func (m *awsRestxml_serializeOpListDirectoryBuckets) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4854,6 +5034,8 @@ func (m *awsRestxml_serializeOpListMultipartUploads) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4891,6 +5073,7 @@ func (m *awsRestxml_serializeOpListMultipartUploads) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -4947,6 +5130,8 @@ func (m *awsRestxml_serializeOpListObjects) HandleSerialize(ctx context.Context,
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -4984,6 +5169,7 @@ func (m *awsRestxml_serializeOpListObjects) HandleSerialize(ctx context.Context,
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5050,6 +5236,8 @@ func (m *awsRestxml_serializeOpListObjectsV2) HandleSerialize(ctx context.Contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5087,6 +5275,7 @@ func (m *awsRestxml_serializeOpListObjectsV2) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5161,6 +5350,8 @@ func (m *awsRestxml_serializeOpListObjectVersions) HandleSerialize(ctx context.C
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5198,6 +5389,7 @@ func (m *awsRestxml_serializeOpListObjectVersions) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5268,6 +5460,8 @@ func (m *awsRestxml_serializeOpListParts) HandleSerialize(ctx context.Context, i
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5305,6 +5499,7 @@ func (m *awsRestxml_serializeOpListParts) HandleSerialize(ctx context.Context, i
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5373,6 +5568,8 @@ func (m *awsRestxml_serializeOpPutBucketAccelerateConfiguration) HandleSerialize
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5434,6 +5631,7 @@ func (m *awsRestxml_serializeOpPutBucketAccelerateConfiguration) HandleSerialize
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5466,6 +5664,8 @@ func (m *awsRestxml_serializeOpPutBucketAcl) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5527,6 +5727,7 @@ func (m *awsRestxml_serializeOpPutBucketAcl) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5594,6 +5795,8 @@ func (m *awsRestxml_serializeOpPutBucketAnalyticsConfiguration) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5655,6 +5858,7 @@ func (m *awsRestxml_serializeOpPutBucketAnalyticsConfiguration) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5686,6 +5890,8 @@ func (m *awsRestxml_serializeOpPutBucketCors) HandleSerialize(ctx context.Contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5747,6 +5953,7 @@ func (m *awsRestxml_serializeOpPutBucketCors) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5784,6 +5991,8 @@ func (m *awsRestxml_serializeOpPutBucketEncryption) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5845,6 +6054,7 @@ func (m *awsRestxml_serializeOpPutBucketEncryption) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5882,6 +6092,8 @@ func (m *awsRestxml_serializeOpPutBucketIntelligentTieringConfiguration) HandleS
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -5943,6 +6155,7 @@ func (m *awsRestxml_serializeOpPutBucketIntelligentTieringConfiguration) HandleS
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -5969,6 +6182,8 @@ func (m *awsRestxml_serializeOpPutBucketInventoryConfiguration) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6030,6 +6245,7 @@ func (m *awsRestxml_serializeOpPutBucketInventoryConfiguration) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6061,6 +6277,8 @@ func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6122,6 +6340,7 @@ func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6154,6 +6373,8 @@ func (m *awsRestxml_serializeOpPutBucketLogging) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6215,6 +6436,7 @@ func (m *awsRestxml_serializeOpPutBucketLogging) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6252,6 +6474,8 @@ func (m *awsRestxml_serializeOpPutBucketMetricsConfiguration) HandleSerialize(ct
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6313,6 +6537,7 @@ func (m *awsRestxml_serializeOpPutBucketMetricsConfiguration) HandleSerialize(ct
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6344,6 +6569,8 @@ func (m *awsRestxml_serializeOpPutBucketNotificationConfiguration) HandleSeriali
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6405,6 +6632,7 @@ func (m *awsRestxml_serializeOpPutBucketNotificationConfiguration) HandleSeriali
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6437,6 +6665,8 @@ func (m *awsRestxml_serializeOpPutBucketOwnershipControls) HandleSerialize(ctx c
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6498,6 +6728,7 @@ func (m *awsRestxml_serializeOpPutBucketOwnershipControls) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6530,6 +6761,8 @@ func (m *awsRestxml_serializeOpPutBucketPolicy) HandleSerialize(ctx context.Cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6579,6 +6812,7 @@ func (m *awsRestxml_serializeOpPutBucketPolicy) HandleSerialize(ctx context.Cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6621,6 +6855,8 @@ func (m *awsRestxml_serializeOpPutBucketReplication) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6682,6 +6918,7 @@ func (m *awsRestxml_serializeOpPutBucketReplication) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6724,6 +6961,8 @@ func (m *awsRestxml_serializeOpPutBucketRequestPayment) HandleSerialize(ctx cont
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6785,6 +7024,7 @@ func (m *awsRestxml_serializeOpPutBucketRequestPayment) HandleSerialize(ctx cont
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6822,6 +7062,8 @@ func (m *awsRestxml_serializeOpPutBucketTagging) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6883,6 +7125,7 @@ func (m *awsRestxml_serializeOpPutBucketTagging) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -6920,6 +7163,8 @@ func (m *awsRestxml_serializeOpPutBucketVersioning) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -6981,6 +7226,7 @@ func (m *awsRestxml_serializeOpPutBucketVersioning) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7023,6 +7269,8 @@ func (m *awsRestxml_serializeOpPutBucketWebsite) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7084,6 +7332,7 @@ func (m *awsRestxml_serializeOpPutBucketWebsite) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7121,6 +7370,8 @@ func (m *awsRestxml_serializeOpPutObject) HandleSerialize(ctx context.Context, i
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7170,6 +7421,7 @@ func (m *awsRestxml_serializeOpPutObject) HandleSerialize(ctx context.Context, i
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7380,6 +7632,8 @@ func (m *awsRestxml_serializeOpPutObjectAcl) HandleSerialize(ctx context.Context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7441,6 +7695,7 @@ func (m *awsRestxml_serializeOpPutObjectAcl) HandleSerialize(ctx context.Context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7526,6 +7781,8 @@ func (m *awsRestxml_serializeOpPutObjectLegalHold) HandleSerialize(ctx context.C
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7587,6 +7844,7 @@ func (m *awsRestxml_serializeOpPutObjectLegalHold) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7642,6 +7900,8 @@ func (m *awsRestxml_serializeOpPutObjectLockConfiguration) HandleSerialize(ctx c
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7703,6 +7963,7 @@ func (m *awsRestxml_serializeOpPutObjectLockConfiguration) HandleSerialize(ctx c
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7750,6 +8011,8 @@ func (m *awsRestxml_serializeOpPutObjectRetention) HandleSerialize(ctx context.C
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7811,6 +8074,7 @@ func (m *awsRestxml_serializeOpPutObjectRetention) HandleSerialize(ctx context.C
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7871,6 +8135,8 @@ func (m *awsRestxml_serializeOpPutObjectTagging) HandleSerialize(ctx context.Con
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -7932,6 +8198,7 @@ func (m *awsRestxml_serializeOpPutObjectTagging) HandleSerialize(ctx context.Con
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -7987,6 +8254,8 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -8048,6 +8317,7 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -8085,6 +8355,8 @@ func (m *awsRestxml_serializeOpRestoreObject) HandleSerialize(ctx context.Contex
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -8146,6 +8418,7 @@ func (m *awsRestxml_serializeOpRestoreObject) HandleSerialize(ctx context.Contex
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -8196,6 +8469,8 @@ func (m *awsRestxml_serializeOpSelectObjectContent) HandleSerialize(ctx context.
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -8251,6 +8526,7 @@ func (m *awsRestxml_serializeOpSelectObjectContent) HandleSerialize(ctx context.
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -8381,6 +8657,8 @@ func (m *awsRestxml_serializeOpUploadPart) HandleSerialize(ctx context.Context, 
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -8430,6 +8708,7 @@ func (m *awsRestxml_serializeOpUploadPart) HandleSerialize(ctx context.Context, 
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -8529,6 +8808,8 @@ func (m *awsRestxml_serializeOpUploadPartCopy) HandleSerialize(ctx context.Conte
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -8566,6 +8847,7 @@ func (m *awsRestxml_serializeOpUploadPartCopy) HandleSerialize(ctx context.Conte
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
@@ -8680,6 +8962,8 @@ func (m *awsRestxml_serializeOpWriteGetObjectResponse) HandleSerialize(ctx conte
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
 	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -8729,6 +9013,7 @@ func (m *awsRestxml_serializeOpWriteGetObjectResponse) HandleSerialize(ctx conte
 	}
 	in.Request = request
 
+	endTimer()
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }

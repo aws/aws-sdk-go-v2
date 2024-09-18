@@ -27,6 +27,7 @@ import (
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/metrics"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,6 +39,129 @@ import (
 
 const ServiceID = "S3"
 const ServiceAPIVersion = "2006-03-01"
+
+type operationMetrics struct {
+	Duration                metrics.Float64Histogram
+	SerializeDuration       metrics.Float64Histogram
+	ResolveIdentityDuration metrics.Float64Histogram
+	ResolveEndpointDuration metrics.Float64Histogram
+	SignRequestDuration     metrics.Float64Histogram
+	DeserializeDuration     metrics.Float64Histogram
+}
+
+func (m *operationMetrics) histogramFor(name string) metrics.Float64Histogram {
+	switch name {
+	case "client.call.duration":
+		return m.Duration
+	case "client.call.serialization_duration":
+		return m.SerializeDuration
+	case "client.call.resolve_identity_duration":
+		return m.ResolveIdentityDuration
+	case "client.call.resolve_endpoint_duration":
+		return m.ResolveEndpointDuration
+	case "client.call.signing_duration":
+		return m.SignRequestDuration
+	case "client.call.deserialization_duration":
+		return m.DeserializeDuration
+	default:
+		panic("unrecognized operation metric")
+	}
+}
+
+func timeOperationMetric[T any](
+	ctx context.Context, metric string, fn func() (T, error),
+	opts ...metrics.RecordMetricOption,
+) (T, error) {
+	instr := getOperationMetrics(ctx).histogramFor(metric)
+	opts = append([]metrics.RecordMetricOption{withOperationMetadata(ctx)}, opts...)
+
+	start := time.Now()
+	v, err := fn()
+	end := time.Now()
+
+	elapsed := end.Sub(start)
+	instr.Record(ctx, float64(elapsed)/1e9, opts...)
+	return v, err
+}
+
+func startMetricTimer(ctx context.Context, metric string, opts ...metrics.RecordMetricOption) func() {
+	instr := getOperationMetrics(ctx).histogramFor(metric)
+	opts = append([]metrics.RecordMetricOption{withOperationMetadata(ctx)}, opts...)
+
+	var ended bool
+	start := time.Now()
+	return func() {
+		if ended {
+			return
+		}
+		ended = true
+
+		end := time.Now()
+
+		elapsed := end.Sub(start)
+		instr.Record(ctx, float64(elapsed)/1e9, opts...)
+	}
+}
+
+func withOperationMetadata(ctx context.Context) metrics.RecordMetricOption {
+	return func(o *metrics.RecordMetricOptions) {
+		o.Properties.Set("rpc.service", middleware.GetServiceID(ctx))
+		o.Properties.Set("rpc.method", middleware.GetOperationName(ctx))
+	}
+}
+
+type operationMetricsKey struct{}
+
+func withOperationMetrics(parent context.Context, mp metrics.MeterProvider) (context.Context, error) {
+	meter := mp.Meter("github.com/aws/aws-sdk-go-v2/service/s3")
+	om := &operationMetrics{}
+
+	var err error
+
+	om.Duration, err = operationMetricTimer(meter, "client.call.duration",
+		"Overall call duration (including retries and time to send or receive request and response body)")
+	if err != nil {
+		return nil, err
+	}
+	om.SerializeDuration, err = operationMetricTimer(meter, "client.call.serialization_duration",
+		"The time it takes to serialize a message body")
+	if err != nil {
+		return nil, err
+	}
+	om.ResolveIdentityDuration, err = operationMetricTimer(meter, "client.call.auth.resolve_identity_duration",
+		"The time taken to acquire an identity (AWS credentials, bearer token, etc) from an Identity Provider")
+	if err != nil {
+		return nil, err
+	}
+	om.ResolveEndpointDuration, err = operationMetricTimer(meter, "client.call.resolve_endpoint_duration",
+		"The time it takes to resolve an endpoint (endpoint resolver, not DNS) for the request")
+	if err != nil {
+		return nil, err
+	}
+	om.SignRequestDuration, err = operationMetricTimer(meter, "client.call.auth.signing_duration",
+		"The time it takes to sign a request")
+	if err != nil {
+		return nil, err
+	}
+	om.DeserializeDuration, err = operationMetricTimer(meter, "client.call.deserialization_duration",
+		"The time it takes to deserialize a message body")
+	if err != nil {
+		return nil, err
+	}
+
+	return context.WithValue(parent, operationMetricsKey{}, om), nil
+}
+
+func operationMetricTimer(m metrics.Meter, name, desc string) (metrics.Float64Histogram, error) {
+	return m.Float64Histogram(name, func(o *metrics.InstrumentOptions) {
+		o.UnitLabel = "s"
+		o.Description = desc
+	})
+}
+
+func getOperationMetrics(ctx context.Context) *operationMetrics {
+	return ctx.Value(operationMetricsKey{}).(*operationMetrics)
+}
 
 func operationTracer(p tracing.TracerProvider) tracing.Tracer {
 	return p.Tracer("github.com/aws/aws-sdk-go-v2/service/s3")
@@ -73,6 +197,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPSignerV4a(&options)
 
 	resolveTracerProvider(&options)
+
+	resolveMeterProvider(&options)
 
 	resolveAuthSchemeResolver(&options)
 
@@ -110,8 +236,15 @@ func (c *Client) Options() Options {
 	return c.options.Copy()
 }
 
-func (c *Client) invokeOperation(ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error) (result interface{}, metadata middleware.Metadata, err error) {
+func (c *Client) invokeOperation(
+	ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error,
+) (
+	result interface{}, metadata middleware.Metadata, err error,
+) {
 	ctx = middleware.ClearStackValues(ctx)
+	ctx = middleware.WithServiceID(ctx, ServiceID)
+	ctx = middleware.WithOperationName(ctx, opID)
+
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 
@@ -141,8 +274,13 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		}
 	}
 
+	ctx, err = withOperationMetrics(ctx, options.MeterProvider)
+	if err != nil {
+		return nil, metadata, err
+	}
+
 	tracer := operationTracer(options.TracerProvider)
-	spanName := fmt.Sprintf("S3.%s", opID)
+	spanName := fmt.Sprintf("%s.%s", ServiceID, opID)
 
 	ctx = tracing.WithOperationTracer(ctx, tracer)
 
@@ -150,8 +288,10 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 		o.Kind = tracing.SpanKindClient
 		o.Properties.Set("rpc.system", "aws-api")
 		o.Properties.Set("rpc.method", opID)
-		o.Properties.Set("rpc.service", "S3")
+		o.Properties.Set("rpc.service", ServiceID)
 	})
+	endTimer := startMetricTimer(ctx, "client.call.duration")
+	defer endTimer()
 	defer span.End()
 
 	handler := smithyhttp.NewClientHandler(options.HTTPClient)
@@ -574,6 +714,7 @@ func addIsPaginatorUserAgent(o *Options) {
 func addRetry(stack *middleware.Stack, o Options) error {
 	attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
+		m.OperationMeter = o.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/s3")
 	})
 	if err := stack.Finalize.Insert(attempt, "Signing", middleware.Before); err != nil {
 		return err
@@ -705,6 +846,12 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 func resolveTracerProvider(options *Options) {
 	if options.TracerProvider == nil {
 		options.TracerProvider = &tracing.NopTracerProvider{}
+	}
+}
+
+func resolveMeterProvider(options *Options) {
+	if options.MeterProvider == nil {
+		options.MeterProvider = metrics.NopMeterProvider{}
 	}
 }
 
