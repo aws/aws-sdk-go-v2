@@ -1650,6 +1650,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Adds permissions to the resource-based policy of a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a>. Use this action to grant layer\n      usage permission to other accounts. You can grant permission to a single account, all accounts in an organization,\n      or all Amazon Web Services accounts.  </p>\n         <p>To revoke permission, call <a>RemoveLayerVersionPermission</a> with the statement ID that you\n      specified when you added it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add permissions to a layer version",
+                        "documentation": "The following example grants permission for the account 223456789012 to use version 1 of a layer named my-layer.",
+                        "input": {
+                            "LayerName": "my-layer",
+                            "VersionNumber": 1,
+                            "StatementId": "xaccount",
+                            "Action": "lambda:GetLayerVersion",
+                            "Principal": "223456789012"
+                        },
+                        "output": {
+                            "Statement": "{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::223456789012:root\"},\"Action\":\"lambda:GetLayerVersion\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1\"}",
+                            "RevisionId": "35d87451-f796-4a3f-a618-95a3671b0a0c"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy",
@@ -1755,6 +1772,9 @@
                     "target": "com.amazonaws.lambda#PreconditionFailedException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#PublicPolicyException"
+                },
+                {
                     "target": "com.amazonaws.lambda#ResourceConflictException"
                 },
                 {
@@ -1768,7 +1788,37 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Grants an Amazon Web Servicesservice, Amazon Web Services account, or Amazon Web Services organization\n      permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict\n      access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name\n      (ARN) of that version or alias to invoke the function. Note: Lambda does not support adding policies\n      to version $LATEST.</p>\n         <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. To grant\n      permission to an organization defined in Organizations, specify the organization ID as the\n        <code>PrincipalOrgID</code>. For Amazon Web Servicesservices, the principal is a domain-style identifier that\n      the service defines, such as <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For Amazon Web Servicesservices, you can also specify the ARN of the associated resource as the <code>SourceArn</code>. If\n      you grant permission to a service principal without specifying the source, other accounts could potentially\n      configure resources in their account to invoke your Lambda function.</p>\n         <p>This operation adds a statement to a resource-based permissions policy for the function. For more information\n      about function policies, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">Using resource-based policies for Lambda</a>.</p>",
+                "smithy.api#documentation": "<p>Grants a <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">principal</a> \n      permission to use a function. You can apply the policy at the function level, or specify a qualifier to restrict\n      access to a single version or alias. If you use a qualifier, the invoker must use the full Amazon Resource Name\n      (ARN) of that version or alias to invoke the function. Note: Lambda does not support adding policies\n      to version $LATEST.</p>\n         <p>To grant permission to another account, specify the account ID as the <code>Principal</code>. To grant\n      permission to an organization defined in Organizations, specify the organization ID as the\n        <code>PrincipalOrgID</code>. For Amazon Web Servicesservices, the principal is a domain-style identifier that\n      the service defines, such as <code>s3.amazonaws.com</code> or <code>sns.amazonaws.com</code>. For Amazon Web Servicesservices, you can also specify the ARN of the associated resource as the <code>SourceArn</code>. If\n      you grant permission to a service principal without specifying the source, other accounts could potentially\n      configure resources in their account to invoke your Lambda function.</p>\n         <p>This operation adds a statement to a resource-based permissions policy for the function. For more information\n      about function policies, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">Using resource-based policies for Lambda</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To grant Amazon S3 permission to invoke a function",
+                        "documentation": "The following example adds permission for Amazon S3 to invoke a Lambda function named my-function for notifications from a bucket named my-bucket-1xpuxmplzrlbh in account 123456789012.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "StatementId": "s3",
+                            "Action": "lambda:InvokeFunction",
+                            "Principal": "s3.amazonaws.com",
+                            "SourceArn": "arn:aws:s3:::my-bucket-1xpuxmplzrlbh/*",
+                            "SourceAccount": "123456789012"
+                        },
+                        "output": {
+                            "Statement": "{\"Sid\":\"s3\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\",\"Condition\":{\"StringEquals\":{\"AWS:SourceAccount\":\"123456789012\"},\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:s3:::my-bucket-1xpuxmplzrlbh\"}}}"
+                        }
+                    },
+                    {
+                        "title": "To grant another account permission to invoke a function",
+                        "documentation": "The following example adds permission for account 223456789012 invoke a Lambda function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "StatementId": "xaccount",
+                            "Action": "lambda:InvokeFunction",
+                            "Principal": "223456789012"
+                        },
+                        "output": {
+                            "Statement": "{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::223456789012:root\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function\"}"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/functions/{FunctionName}/policy",
@@ -1804,7 +1854,7 @@
                 "Principal": {
                     "target": "com.amazonaws.lambda#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice or Amazon Web Services account that invokes the function. If you specify a\n      service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through\n      that service.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice, Amazon Web Services account, IAM user, or IAM role that invokes the function. If you specify a\n      service, use <code>SourceArn</code> or <code>SourceAccount</code> to limit who can invoke the function through\n      that service.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2394,6 +2444,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html\">alias</a> for a\n      Lambda function version. Use aliases to provide clients with a function identifier that you can update to invoke a\n      different version.</p>\n         <p>You can also map an alias to split invocation requests between two versions. Use the\n        <code>RoutingConfig</code> parameter to specify a second version and the percentage of invocation requests that\n      it receives.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an alias for a Lambda function",
+                        "documentation": "The following example creates an alias named LIVE that points to version 1 of the my-function Lambda function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Name": "LIVE",
+                            "FunctionVersion": "1",
+                            "Description": "alias for live version of function"
+                        },
+                        "output": {
+                            "FunctionVersion": "1",
+                            "Name": "LIVE",
+                            "AliasArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:LIVE",
+                            "RevisionId": "873282ed-xmpl-4dc8-a069-d0c647e470c6",
+                            "Description": "alias for live version of function"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/functions/{FunctionName}/aliases",
@@ -2489,6 +2558,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The code signing policies define the actions to take if the validation checks fail. </p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lambda#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to add to the code signing configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2537,6 +2612,26 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function.</p>\n         <p>For details about how to configure different event sources, see the following topics. </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping\">\n            Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping\">\n            Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource\">\n            Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping\">\n            Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html\">\n            Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html\">\n            Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html\">\n            Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>\n         <p>The following error handling options are available only for stream sources (DynamoDB and Kinesis):</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BisectBatchOnFunctionError</code> – If the function returns an error, split the batch in two and retry.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DestinationConfig</code> – Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRecordAgeInSeconds</code> – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p>\n            </li>\n            <li>\n               <p>\n                  <code>MaximumRetryAttempts</code> – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ParallelizationFactor</code> – Process multiple batches from each shard concurrently.</p>\n            </li>\n         </ul>\n         <p>For information about which configuration parameters apply to each event source, see the following topics.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params\">\n          Amazon DynamoDB Streams</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params\">\n          Amazon Kinesis</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params\">\n          Amazon SQS</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params\">\n          Amazon MQ and RabbitMQ</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms\">\n          Amazon MSK</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms\">\n          Apache Kafka</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/with-documentdb.html#docdb-configuration\">\n          Amazon DocumentDB</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a mapping between an event source and an AWS Lambda function",
+                        "documentation": "The following example creates a mapping between an SQS queue and the my-function Lambda function.",
+                        "input": {
+                            "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:my-queue",
+                            "FunctionName": "my-function",
+                            "BatchSize": 5
+                        },
+                        "output": {
+                            "UUID": "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE",
+                            "StateTransitionReason": "USER_INITIATED",
+                            "LastModified": 1.569284520333E9,
+                            "BatchSize": 5,
+                            "State": "Creating",
+                            "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                            "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:my-queue"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/event-source-mappings",
@@ -2624,6 +2719,12 @@
                     "target": "com.amazonaws.lambda#MaximumRetryAttemptsEventSourceMapping",
                     "traits": {
                         "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lambda#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to apply to the event source mapping.</p>"
                     }
                 },
                 "TumblingWindowInSeconds": {
@@ -2736,6 +2837,66 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a Lambda function. To create a function, you need a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html\">deployment package</a> and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role\">execution role</a>. The\n      deployment package is a .zip file archive or container image that contains your function code. The execution role\n      grants the function permission to use Amazon Web Servicesservices, such as Amazon CloudWatch Logs for log\n      streaming and X-Ray for request tracing.</p>\n         <p>If the deployment package is a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html\">container\n        image</a>, then you set the package type to <code>Image</code>. For a container image, the code property\n      must include the URI of a container image in the Amazon ECR registry. You do not need to specify the\n      handler and runtime properties.</p>\n         <p>If the deployment package is a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip\">.zip file archive</a>, then\n      you set the package type to <code>Zip</code>. For a .zip file archive, the code property specifies the location of\n      the .zip file. You must also specify the handler and runtime properties. The code in the deployment package must\n      be compatible with the target instruction set architecture of the function (<code>x86-64</code> or\n        <code>arm64</code>). If you do not specify the architecture, then the default value is\n      <code>x86-64</code>.</p>\n         <p>When you create a function, Lambda provisions an instance of the function and its supporting\n      resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can't\n      invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code>\n      fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to\n      invoke. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Lambda function states</a>.</p>\n         <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version\n      changes when you update your function's code and configuration. A published version is a snapshot of your function\n      code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be\n      changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of\n      your function from its initial configuration.</p>\n         <p>The other parameters let you configure version-specific and function-level settings. You can modify\n      version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply\n      to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>)\n      and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p>\n         <p>You can use code signing if your deployment package is a .zip file archive. To enable code signing for this\n      function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with\n        <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from\n      a trusted publisher. The code-signing configuration includes set of signing profiles, which define the trusted\n      publishers for this function.</p>\n         <p>If another Amazon Web Services account or an Amazon Web Servicesservice invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based Identity and Access Management (IAM) policy. You can grant permissions at the function level, on a version, or on an alias.</p>\n         <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events\n      in other Amazon Web Servicesservices, create an event source mapping (<a>CreateEventSourceMapping</a>),\n      or configure a function trigger in the other service. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html\">Invoking Lambda\n      functions</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a function",
+                        "documentation": "The following example creates a function with a deployment package in Amazon S3 and enables X-Ray tracing and environment variable encryption.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Runtime": "nodejs12.x",
+                            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                            "Handler": "index.handler",
+                            "Code": {
+                                "S3Bucket": "my-bucket-1xpuxmplzrlbh",
+                                "S3Key": "function.zip"
+                            },
+                            "Description": "Process image objects from Amazon S3.",
+                            "Timeout": 15,
+                            "MemorySize": 256,
+                            "Publish": true,
+                            "Environment": {
+                                "Variables": {
+                                    "BUCKET": "my-bucket-1xpuxmplzrlbh",
+                                    "PREFIX": "inbound"
+                                }
+                            },
+                            "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                            "TracingConfig": {
+                                "Mode": "Active"
+                            },
+                            "Tags": {
+                                "DEPARTMENT": "Assets"
+                            }
+                        },
+                        "output": {
+                            "FunctionName": "my-function",
+                            "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                            "Runtime": "nodejs12.x",
+                            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                            "Handler": "index.handler",
+                            "CodeSize": 5797206,
+                            "Description": "Process image objects from Amazon S3.",
+                            "Timeout": 15,
+                            "MemorySize": 256,
+                            "LastModified": "2020-04-10T19:06:32.563+0000",
+                            "CodeSha256": "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=",
+                            "Version": "1",
+                            "Environment": {
+                                "Variables": {
+                                    "PREFIX": "inbound",
+                                    "BUCKET": "my-bucket-1xpuxmplzrlbh"
+                                }
+                            },
+                            "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                            "TracingConfig": {
+                                "Mode": "Active"
+                            },
+                            "RevisionId": "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727",
+                            "State": "Active",
+                            "LastUpdateStatus": "Successful"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/functions",
@@ -3074,6 +3235,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html\">alias</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a Lambda function alias",
+                        "documentation": "The following example deletes an alias named BLUE from a function named my-function",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Name": "BLUE"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
@@ -3239,6 +3410,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.\n      Otherwise, all versions and aliases are deleted. This doesn't require the user to have explicit\n      permissions for <a>DeleteAlias</a>.</p>\n         <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Servicesservices and resources that invoke your function\n      directly, delete the trigger in the service where you originally configured it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a version of a Lambda function",
+                        "documentation": "The following example deletes version 1 of a Lambda function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "1"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-03-31/functions/{FunctionName}",
@@ -3326,6 +3507,15 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Removes a concurrent execution limit from a function.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove the reserved concurrent execution limit from a function",
+                        "documentation": "The following example deletes the reserved concurrent execution limit from a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2017-10-31/functions/{FunctionName}/concurrency",
@@ -3376,6 +3566,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the configuration for asynchronous invocation for a function, version, or alias.</p>\n         <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an asynchronous invocation configuration",
+                        "documentation": "The following example deletes the asynchronous invocation configuration for the GREEN alias of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "GREEN"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",
@@ -3501,6 +3701,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a>. Deleted versions can no longer be viewed or added to functions. To avoid\n      breaking functions, a copy of the version remains in Lambda until no functions refer to it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a version of a Lambda layer",
+                        "documentation": "The following example deletes version 2 of a layer named my-layer.",
+                        "input": {
+                            "LayerName": "my-layer",
+                            "VersionNumber": 2
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}",
@@ -3560,6 +3770,16 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes the provisioned concurrency configuration for a function.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a provisioned concurrency configuration",
+                        "documentation": "The following example deletes the provisioned concurrency configuration for the GREEN alias of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "GREEN"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
@@ -3620,7 +3840,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> from a function.</p>",
+                "smithy.api#documentation": "<note>\n            <p>The option to create and modify full JSON resource-based policies, and to use the PutResourcePolicy, GetResourcePolicy, and DeleteResourcePolicy APIs, won't be \n      available in all Amazon Web Services Regions until September 30, 2024.</p>\n         </note>\n         <p>Deletes a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> from a function.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2024-09-16/resource-policy/{ResourceArn}",
@@ -4001,6 +4221,16 @@
                 }
             }
         },
+        "com.amazonaws.lambda#EventSourceMappingArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 85,
+                    "max": 120
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+            }
+        },
         "com.amazonaws.lambda#EventSourceMappingConfiguration": {
             "type": "structure",
             "members": {
@@ -4176,6 +4406,12 @@
                     "target": "com.amazonaws.lambda#FilterCriteriaError",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about an error related to filter criteria encryption.</p>"
+                    }
+                },
+                "EventSourceMappingArn": {
+                    "target": "com.amazonaws.lambda#EventSourceMappingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the event source mapping.</p>"
                     }
                 }
             },
@@ -4870,6 +5106,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves details about your account's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/limits.html\">limits</a> and usage in an Amazon Web Services Region.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get account settings",
+                        "documentation": "This operation takes no parameters and returns details about storage and concurrency quotas in the current Region.",
+                        "output": {
+                            "AccountLimit": {
+                                "CodeSizeUnzipped": 262144000,
+                                "UnreservedConcurrentExecutions": 1000,
+                                "ConcurrentExecutions": 1000,
+                                "CodeSizeZipped": 52428800,
+                                "TotalCodeSize": 80530636800
+                            },
+                            "AccountUsage": {
+                                "FunctionCount": 4,
+                                "TotalCodeSize": 9426
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2016-08-19/account-settings",
@@ -4928,6 +5183,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns details about a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html\">alias</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a Lambda function alias",
+                        "documentation": "The following example returns details about an alias named BLUE for a function named my-function",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Name": "BLUE"
+                        },
+                        "output": {
+                            "AliasArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE",
+                            "Name": "BLUE",
+                            "FunctionVersion": "3",
+                            "RevisionId": "594f41fb-xmpl-4c20-95c7-6ca5f2a92c93",
+                            "Description": "Production environment BLUE."
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
@@ -5089,6 +5361,52 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about the function or function version, with a link to download the deployment package\n      that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are\n      returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a Lambda function",
+                        "documentation": "The following example returns code and configuration details for version 1 of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "1"
+                        },
+                        "output": {
+                            "Configuration": {
+                                "FunctionName": "my-function",
+                                "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                                "Runtime": "nodejs12.x",
+                                "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                                "Handler": "index.handler",
+                                "CodeSize": 5797206,
+                                "Description": "Process image objects from Amazon S3.",
+                                "Timeout": 15,
+                                "MemorySize": 256,
+                                "LastModified": "2020-04-10T19:06:32.563+0000",
+                                "CodeSha256": "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=",
+                                "Version": "$LATEST",
+                                "Environment": {
+                                    "Variables": {
+                                        "PREFIX": "inbound",
+                                        "BUCKET": "my-bucket-1xpuxmplzrlbh"
+                                    }
+                                },
+                                "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                                "TracingConfig": {
+                                    "Mode": "Active"
+                                },
+                                "RevisionId": "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727",
+                                "State": "Active",
+                                "LastUpdateStatus": "Successful"
+                            },
+                            "Code": {
+                                "RepositoryType": "S3",
+                                "Location": "https://awslambda-us-west-2-tasks.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-function-e7d9d1ed-xmpl-4f79-904a-4b87f2681f30?versionId=sH3TQwBOaUy..."
+                            },
+                            "Tags": {
+                                "DEPARTMENT": "Assets"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions/{FunctionName}",
@@ -5280,6 +5598,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns details about the reserved concurrency configuration for a function. To set a concurrency limit for a\n      function, use <a>PutFunctionConcurrency</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get the reserved concurrency setting for a function",
+                        "documentation": "The following example returns the reserved concurrency setting for a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function"
+                        },
+                        "output": {
+                            "ReservedConcurrentExecutions": 250
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2019-09-30/functions/{FunctionName}/concurrency",
@@ -5341,6 +5671,43 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns the version-specific settings of a Lambda function or version. The output includes only options that\n      can vary between versions of a function. To modify these settings, use <a>UpdateFunctionConfiguration</a>.</p>\n         <p>To get all of a function's details, including function-level settings, use <a>GetFunction</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a Lambda function's event source mapping",
+                        "documentation": "The following example returns and configuration details for version 1 of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "1"
+                        },
+                        "output": {
+                            "FunctionName": "my-function",
+                            "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                            "Runtime": "nodejs12.x",
+                            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                            "Handler": "index.handler",
+                            "CodeSize": 5797206,
+                            "Description": "Process image objects from Amazon S3.",
+                            "Timeout": 15,
+                            "MemorySize": 256,
+                            "LastModified": "2020-04-10T19:06:32.563+0000",
+                            "CodeSha256": "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=",
+                            "Version": "$LATEST",
+                            "Environment": {
+                                "Variables": {
+                                    "PREFIX": "inbound",
+                                    "BUCKET": "my-bucket-1xpuxmplzrlbh"
+                                }
+                            },
+                            "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                            "TracingConfig": {
+                                "Mode": "Active"
+                            },
+                            "RevisionId": "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727",
+                            "State": "Active",
+                            "LastUpdateStatus": "Successful"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions/{FunctionName}/configuration",
@@ -5784,6 +6151,33 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a>, with a link to download the layer archive\n        that's valid for 10 minutes.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a Lambda layer version",
+                        "documentation": "The following example returns information for version 1 of a layer named my-layer.",
+                        "input": {
+                            "LayerName": "my-layer",
+                            "VersionNumber": 1
+                        },
+                        "output": {
+                            "Content": {
+                                "Location": "https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...",
+                                "CodeSha256": "tv9jJO+rPbXUUXuRKi7CwHzKtLDkDRJLB3cC3Z/ouXo=",
+                                "CodeSize": 169
+                            },
+                            "LayerArn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer",
+                            "LayerVersionArn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:1",
+                            "Description": "My Python layer",
+                            "CreatedDate": "2018-11-14T23:03:52.894+0000",
+                            "Version": 1,
+                            "LicenseInfo": "MIT",
+                            "CompatibleRuntimes": [
+                                "python3.6",
+                                "python3.7"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}",
@@ -5815,6 +6209,30 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns information about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a>, with a link to download the layer archive\n        that's valid for 10 minutes.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a Lambda layer version",
+                        "documentation": "The following example returns information about the layer version with the specified Amazon Resource Name (ARN).",
+                        "input": {
+                            "Arn": "arn:aws:lambda:ca-central-1:123456789012:layer:blank-python-lib:3"
+                        },
+                        "output": {
+                            "Content": {
+                                "Location": "https://awslambda-us-east-2-layers.s3.us-east-2.amazonaws.com/snapshots/123456789012/blank-python-lib-e5212378-xmpl-44ee-8398-9d8ec5113949?versionId=WbZnvf...",
+                                "CodeSha256": "6x+xmpl/M3BnQUk7gS9sGmfeFsR/npojXoA3fZUv4eU=",
+                                "CodeSize": 9529009
+                            },
+                            "LayerArn": "arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib",
+                            "LayerVersionArn": "arn:aws:lambda:us-east-2:123456789012:layer:blank-python-lib:3",
+                            "Description": "Dependencies for the blank-python sample app.",
+                            "CreatedDate": "2020-03-31T00:35:18.949+0000",
+                            "Version": 3,
+                            "CompatibleRuntimes": [
+                                "python3.8"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2018-10-31/layers?find=LayerVersion",
@@ -6023,6 +6441,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based IAM policy</a> for a function, version, or alias.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To retrieve a Lambda function policy",
+                        "documentation": "The following example returns the resource-based policy for version 1 of a Lambda function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "1"
+                        },
+                        "output": {
+                            "Policy": "{\"Version\":\"2012-10-17\",\"Id\":\"default\",\"Statement\":[{\"Sid\":\"xaccount\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:root\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:123456789012:function:my-function:1\"}]}",
+                            "RevisionId": "4843f2f6-7c59-4fda-b484-afd0bc0e22b8"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions/{FunctionName}/policy",
@@ -6100,6 +6532,38 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a provisioned concurrency configuration",
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "AvailableProvisionedConcurrentExecutions": 100,
+                            "AllocatedProvisionedConcurrentExecutions": 100,
+                            "Status": "READY",
+                            "LastModified": "2019-12-31T20:28:49+0000"
+                        }
+                    },
+                    {
+                        "title": "To view a provisioned concurrency configuration",
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE"
+                        },
+                        "output": {
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "AvailableProvisionedConcurrentExecutions": 100,
+                            "AllocatedProvisionedConcurrentExecutions": 100,
+                            "Status": "READY",
+                            "LastModified": "2019-12-31T20:28:49+0000"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
@@ -6198,7 +6662,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve the public-access settings for a function.</p>",
+                "smithy.api#documentation": "<note>\n            <p>The option to configure public-access settings, and to use the PutPublicAccessBlock and GetPublicAccessBlock APIs, won't be \n      available in all Amazon Web Services Regions until September 30, 2024.</p>\n         </note>\n         <p>Retrieve the public-access settings for a function.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2024-09-16/public-access-block/{ResourceArn}",
@@ -6259,7 +6723,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> attached to a function.</p>",
+                "smithy.api#documentation": "<note>\n            <p>The option to create and modify full JSON resource-based policies, and to use the PutResourcePolicy, GetResourcePolicy, and DeleteResourcePolicy APIs, won't be \n      available in all Amazon Web Services Regions until September 30, 2024.</p>\n         </note>\n         <p>Retrieves the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> attached to a function.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2024-09-16/resource-policy/{ResourceArn}",
@@ -6837,6 +7301,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or\n      asynchronously. By default, Lambda invokes your function synchronously (i.e. the<code>InvocationType</code>\n      is <code>RequestResponse</code>). To invoke a function asynchronously, set <code>InvocationType</code> to\n      <code>Event</code>. Lambda passes the <code>ClientContext</code> object to your function for\n      synchronous invocations only.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html\">synchronous invocation</a>,\n      details about the function response, including errors, are included in the response body and headers. For either\n      invocation type, you can find more information in the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html\">execution log</a> and <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html\">trace</a>.</p>\n         <p>When an error occurs, your function may be invoked multiple times. Retry behavior varies by error type,\n      client, event source, and invocation type. For example, if you invoke a function asynchronously and it returns an\n      error, Lambda executes the function up to two more times. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html\">Error handling and automatic retries in\n          Lambda</a>.</p>\n         <p>For <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html\">asynchronous invocation</a>,\n      Lambda adds events to a queue before sending them to your function. If your function does not have enough capacity\n      to keep up with the queue, events may be lost. Occasionally, your function may receive the same event multiple\n      times, even if no error occurs. To retain events that were not processed, configure your function with a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq\">dead-letter queue</a>.</p>\n         <p>The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that\n      prevent your function from executing, such as permissions errors, <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html\">quota</a> errors, or issues with your function's code and\n      configuration. For example, Lambda returns <code>TooManyRequestsException</code> if running the\n      function would cause you to exceed a concurrency limit at either the account level\n        (<code>ConcurrentInvocationLimitExceeded</code>) or function level\n        (<code>ReservedFunctionConcurrentInvocationLimitExceeded</code>).</p>\n         <p>For functions with a long timeout, your client might disconnect during synchronous invocation while it waits\n      for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long\n      connections with timeout or keep-alive settings.</p>\n         <p>This operation requires permission for the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html\">lambda:InvokeFunction</a> action. For details on how to set up\n      permissions for cross-account invocations, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke\">Granting function\n      access to other accounts</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To invoke a Lambda function",
+                        "documentation": "The following example invokes version 1 of a function named my-function with an empty event payload.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Payload": "{}",
+                            "Qualifier": "1"
+                        },
+                        "output": {
+                            "StatusCode": 200,
+                            "Payload": "200 SUCCESS"
+                        }
+                    },
+                    {
+                        "title": "To invoke a Lambda function asynchronously",
+                        "documentation": "The following example invokes version 1 of a function named my-function asynchronously.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Payload": "{}",
+                            "InvocationType": "Event",
+                            "Qualifier": "1"
+                        },
+                        "output": {
+                            "StatusCode": 202,
+                            "Payload": ""
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/functions/{FunctionName}/invocations",
@@ -6872,6 +7365,19 @@
             "traits": {
                 "smithy.api#deprecated": {},
                 "smithy.api#documentation": "<important>\n            <p>For asynchronous function invocation, use <a>Invoke</a>.</p>\n         </important>\n         <p>Invokes a function asynchronously.</p>\n         <note>\n            <p>If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not \n        propagated to the function, even if X-Ray active tracing is turned on.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To invoke a Lambda function asynchronously",
+                        "documentation": "The following example invokes a Lambda function asynchronously",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "InvokeArgs": "{}"
+                        },
+                        "output": {
+                            "Status": 202
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2014-11-13/functions/{FunctionName}/invoke-async",
@@ -7715,6 +8221,38 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html\">aliases</a>\n      for a Lambda function.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list a function's aliases",
+                        "documentation": "The following example returns a list of aliases for a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function"
+                        },
+                        "output": {
+                            "Aliases": [
+                                {
+                                    "AliasArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function:BETA",
+                                    "RevisionId": "a410117f-xmpl-494e-8035-7e204bb7933b",
+                                    "FunctionVersion": "2",
+                                    "Name": "BLUE",
+                                    "Description": "Production environment BLUE.",
+                                    "RoutingConfig": {
+                                        "AdditionalVersionWeights": {
+                                            "1": 0.7
+                                        }
+                                    }
+                                },
+                                {
+                                    "AliasArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function:LIVE",
+                                    "RevisionId": "21d40116-xmpl-40ba-9360-3ea284da1bb5",
+                                    "FunctionVersion": "1",
+                                    "Name": "GREEN",
+                                    "Description": "Production environment GREEN."
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions/{FunctionName}/aliases",
@@ -7882,6 +8420,28 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists event source mappings. Specify an <code>EventSourceArn</code> to show only event source mappings for a\n      single event source.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the event source mappings for a function",
+                        "documentation": "The following example returns a list of the event source mappings for a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function"
+                        },
+                        "output": {
+                            "EventSourceMappings": [
+                                {
+                                    "UUID": "a1b2c3d4-5678-90ab-cdef-11111EXAMPLE",
+                                    "StateTransitionReason": "USER_INITIATED",
+                                    "LastModified": 1.569284520333E9,
+                                    "BatchSize": 5,
+                                    "State": "Enabled",
+                                    "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                                    "EventSourceArn": "arn:aws:sqs:us-west-2:123456789012:mySQSqueue"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/event-source-mappings",
@@ -7975,6 +8535,31 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of configurations for asynchronous invocation for a function.</p>\n         <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To view a list of asynchronous invocation configurations",
+                        "documentation": "The following example returns a list of asynchronous invocation configurations for a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function"
+                        },
+                        "output": {
+                            "FunctionEventInvokeConfigs": [
+                                {
+                                    "LastModified": 1.577824406719E9,
+                                    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN",
+                                    "MaximumRetryAttempts": 2,
+                                    "MaximumEventAgeInSeconds": 1800
+                                },
+                                {
+                                    "LastModified": 1.577824396653E9,
+                                    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE",
+                                    "MaximumRetryAttempts": 0,
+                                    "MaximumEventAgeInSeconds": 3600
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config/list",
@@ -8147,6 +8732,58 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of Lambda functions, with the version-specific configuration of each. Lambda returns up to 50\n      functions per call.</p>\n         <p>Set <code>FunctionVersion</code> to <code>ALL</code> to include all published versions of each function in\n      addition to the unpublished version.</p>\n         <note>\n            <p>The <code>ListFunctions</code> operation returns a subset of the <a>FunctionConfiguration</a> fields.\n        To get the additional fields (State, StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason,\n        LastUpdateStatusReasonCode,  RuntimeVersionConfig) for a function or version, use <a>GetFunction</a>.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a list of Lambda functions",
+                        "documentation": "This operation returns a list of Lambda functions.",
+                        "output": {
+                            "NextMarker": "",
+                            "Functions": [
+                                {
+                                    "TracingConfig": {
+                                        "Mode": "PassThrough"
+                                    },
+                                    "Version": "$LATEST",
+                                    "CodeSha256": "dBG9m8SGdmlEjw/JYXlhhvCrAv5TxvXsbL/RMr0fT/I=",
+                                    "FunctionName": "helloworld",
+                                    "MemorySize": 128,
+                                    "RevisionId": "1718e831-badf-4253-9518-d0644210af7b",
+                                    "CodeSize": 294,
+                                    "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:helloworld",
+                                    "Handler": "helloworld.handler",
+                                    "Role": "arn:aws:iam::123456789012:role/service-role/MyTestFunction-role-zgur6bf4",
+                                    "Timeout": 3,
+                                    "LastModified": "2019-09-23T18:32:33.857+0000",
+                                    "Runtime": "nodejs10.x",
+                                    "Description": ""
+                                },
+                                {
+                                    "TracingConfig": {
+                                        "Mode": "PassThrough"
+                                    },
+                                    "Version": "$LATEST",
+                                    "CodeSha256": "sU0cJ2/hOZevwV/lTxCuQqK3gDZP3i8gUoqUUVRmY6E=",
+                                    "FunctionName": "my-function",
+                                    "VpcConfig": {
+                                        "SubnetIds": [],
+                                        "VpcId": "",
+                                        "SecurityGroupIds": []
+                                    },
+                                    "MemorySize": 256,
+                                    "RevisionId": "93017fc9-59cb-41dc-901b-4845ce4bf668",
+                                    "CodeSize": 266,
+                                    "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                                    "Handler": "index.handler",
+                                    "Role": "arn:aws:iam::123456789012:role/service-role/helloWorldPython-role-uy3l9qyq",
+                                    "Timeout": 3,
+                                    "LastModified": "2019-10-01T16:47:28.490+0000",
+                                    "Runtime": "nodejs10.x",
+                                    "Description": ""
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions",
@@ -8325,6 +8962,37 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists the versions of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a>. Versions that have been deleted aren't listed. Specify a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime identifier</a> to list only\n      versions that indicate that they're compatible with that runtime. Specify a compatible architecture to include only \n      layer versions that are compatible with that architecture.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list versions of a layer",
+                        "documentation": "The following example displays information about the versions for the layer named blank-java-lib",
+                        "input": {
+                            "LayerName": "blank-java-lib"
+                        },
+                        "output": {
+                            "LayerVersions": [
+                                {
+                                    "LayerVersionArn": "arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:7",
+                                    "Version": 7,
+                                    "Description": "Dependencies for the blank-java sample app.",
+                                    "CreatedDate": "2020-03-18T23:38:42.284+0000",
+                                    "CompatibleRuntimes": [
+                                        "java8"
+                                    ]
+                                },
+                                {
+                                    "LayerVersionArn": "arn:aws:lambda:us-east-2:123456789012:layer:blank-java-lib:6",
+                                    "Version": 6,
+                                    "Description": "Dependencies for the blank-java sample app.",
+                                    "CreatedDate": "2020-03-17T07:24:21.960+0000",
+                                    "CompatibleRuntimes": [
+                                        "java8"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2018-10-31/layers/{LayerName}/versions",
@@ -8423,6 +9091,33 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html\">Lambda\n        layers</a> and shows information about the latest version of each. Specify a\n        <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime\n        identifier</a> to list only layers that indicate that they're compatible with that\n      runtime. Specify a compatible architecture to include only layers that are compatible with\n      that  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architecture</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the layers that are compatible with your function's runtime",
+                        "documentation": "The following example returns information about layers that are compatible with the Python 3.7 runtime.",
+                        "input": {
+                            "CompatibleRuntime": "python3.7"
+                        },
+                        "output": {
+                            "Layers": [
+                                {
+                                    "LayerName": "my-layer",
+                                    "LayerArn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer",
+                                    "LatestMatchingVersion": {
+                                        "LayerVersionArn": "arn:aws:lambda:us-east-2:123456789012:layer:my-layer:2",
+                                        "Version": 2,
+                                        "Description": "My layer",
+                                        "CreatedDate": "2018-11-15T00:37:46.592+0000",
+                                        "CompatibleRuntimes": [
+                                            "python3.6",
+                                            "python3.7"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2018-10-31/layers",
@@ -8516,6 +9211,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a list of provisioned concurrency configurations for a function.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get a list of provisioned concurrency configurations",
+                        "documentation": "The following example returns a list of provisioned concurrency configurations for a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function"
+                        },
+                        "output": {
+                            "ProvisionedConcurrencyConfigs": [
+                                {
+                                    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:GREEN",
+                                    "RequestedProvisionedConcurrentExecutions": 100,
+                                    "AvailableProvisionedConcurrentExecutions": 100,
+                                    "AllocatedProvisionedConcurrentExecutions": 100,
+                                    "Status": "READY",
+                                    "LastModified": "2019-12-31T20:29:00+0000"
+                                },
+                                {
+                                    "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:BLUE",
+                                    "RequestedProvisionedConcurrentExecutions": 100,
+                                    "AvailableProvisionedConcurrentExecutions": 100,
+                                    "AllocatedProvisionedConcurrentExecutions": 100,
+                                    "Status": "READY",
+                                    "LastModified": "2019-12-31T20:28:49+0000"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL",
@@ -8602,7 +9326,22 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a>. You can\n      also view tags with <a>GetFunction</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a function, event source mapping, or code signing configuration's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a>. You can\n      also view funciton tags with <a>GetFunction</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To retrieve the list of tags for a Lambda function",
+                        "documentation": "The following example displays the tags attached to the my-function Lambda function.",
+                        "input": {
+                            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function"
+                        },
+                        "output": {
+                            "Tags": {
+                                "Category": "Web Tools",
+                                "Department": "Sales"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2017-03-31/tags/{Resource}",
@@ -8614,9 +9353,9 @@
             "type": "structure",
             "members": {
                 "Resource": {
-                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "target": "com.amazonaws.lambda#TaggableResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The function's Amazon Resource Name (ARN). \n      Note: Lambda does not support adding tags to aliases or versions.</p>",
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN). \n      Note: Lambda does not support adding tags to function aliases or versions.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8664,6 +9403,69 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a list of <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">versions</a>,\n      with the version-specific configuration of each. Lambda returns up to 50 versions per call.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list versions of a function",
+                        "documentation": "The following example returns a list of versions of a function named my-function",
+                        "input": {
+                            "FunctionName": "my-function"
+                        },
+                        "output": {
+                            "Versions": [
+                                {
+                                    "FunctionName": "my-function",
+                                    "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                                    "Runtime": "nodejs12.x",
+                                    "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                                    "Handler": "index.handler",
+                                    "CodeSize": 5797206,
+                                    "Description": "Process image objects from Amazon S3.",
+                                    "Timeout": 15,
+                                    "MemorySize": 256,
+                                    "LastModified": "2020-04-10T19:06:32.563+0000",
+                                    "CodeSha256": "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=",
+                                    "Version": "$LATEST",
+                                    "Environment": {
+                                        "Variables": {
+                                            "PREFIX": "inbound",
+                                            "BUCKET": "my-bucket-1xpuxmplzrlbh"
+                                        }
+                                    },
+                                    "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                                    "TracingConfig": {
+                                        "Mode": "Active"
+                                    },
+                                    "RevisionId": "850ca006-2d98-4ff4-86db-8766e9d32fe9"
+                                },
+                                {
+                                    "FunctionName": "my-function",
+                                    "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                                    "Runtime": "nodejs12.x",
+                                    "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                                    "Handler": "index.handler",
+                                    "CodeSize": 5797206,
+                                    "Description": "Process image objects from Amazon S3.",
+                                    "Timeout": 5,
+                                    "MemorySize": 256,
+                                    "LastModified": "2020-04-10T19:06:32.563+0000",
+                                    "CodeSha256": "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=",
+                                    "Version": "1",
+                                    "Environment": {
+                                        "Variables": {
+                                            "PREFIX": "inbound",
+                                            "BUCKET": "my-bucket-1xpuxmplzrlbh"
+                                        }
+                                    },
+                                    "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                                    "TracingConfig": {
+                                        "Mode": "Active"
+                                    },
+                                    "RevisionId": "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-03-31/functions/{FunctionName}/versions",
@@ -9316,6 +10118,42 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a> from a ZIP archive. Each time you call <code>PublishLayerVersion</code> with the same\n      layer name, a new version is created.</p>\n         <p>Add layers to your function with <a>CreateFunction</a> or <a>UpdateFunctionConfiguration</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a Lambda layer version",
+                        "documentation": "The following example creates a new Python library layer version. The command retrieves the layer content a file named layer.zip in the specified S3 bucket.",
+                        "input": {
+                            "LayerName": "my-layer",
+                            "Description": "My Python layer",
+                            "Content": {
+                                "S3Bucket": "lambda-layers-us-west-2-123456789012",
+                                "S3Key": "layer.zip"
+                            },
+                            "CompatibleRuntimes": [
+                                "python3.6",
+                                "python3.7"
+                            ],
+                            "LicenseInfo": "MIT"
+                        },
+                        "output": {
+                            "Content": {
+                                "Location": "https://awslambda-us-west-2-layers.s3.us-west-2.amazonaws.com/snapshots/123456789012/my-layer-4aaa2fbb-ff77-4b0a-ad92-5b78a716a96a?versionId=27iWyA73cCAYqyH...",
+                                "CodeSha256": "tv9jJO+rPbXUUXuRKi7CwHzKtLDkDRJLB3cC3Z/ouXo=",
+                                "CodeSize": 169
+                            },
+                            "LayerArn": "arn:aws:lambda:us-west-2:123456789012:layer:my-layer",
+                            "LayerVersionArn": "arn:aws:lambda:us-west-2:123456789012:layer:my-layer:1",
+                            "Description": "My Python layer",
+                            "CreatedDate": "2018-11-14T23:03:52.894+0000",
+                            "Version": 1,
+                            "LicenseInfo": "MIT",
+                            "CompatibleRuntimes": [
+                                "python3.6",
+                                "python3.7"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2018-10-31/layers/{LayerName}/versions",
@@ -9466,6 +10304,44 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html\">version</a> from the\n      current code and configuration of a function. Use versions to create a snapshot of your function code and\n      configuration that doesn't change.</p>\n         <p>Lambda doesn't publish a version if the function's configuration and code haven't changed since the last\n      version. Use <a>UpdateFunctionCode</a> or <a>UpdateFunctionConfiguration</a> to update the\n      function before publishing a version.</p>\n         <p>Clients can invoke versions directly or with an alias. To create an alias, use <a>CreateAlias</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To publish a version of a Lambda function",
+                        "documentation": "This operation publishes a version of a Lambda function",
+                        "input": {
+                            "FunctionName": "myFunction",
+                            "CodeSha256": "",
+                            "Description": ""
+                        },
+                        "output": {
+                            "FunctionName": "my-function",
+                            "FunctionArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                            "Runtime": "nodejs12.x",
+                            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                            "Handler": "index.handler",
+                            "CodeSize": 5797206,
+                            "Description": "Process image objects from Amazon S3.",
+                            "Timeout": 5,
+                            "MemorySize": 256,
+                            "LastModified": "2020-04-10T19:06:32.563+0000",
+                            "CodeSha256": "YFgDgEKG3ugvF1+pX64gV6tu9qNuIYNUdgJm8nCxsm4=",
+                            "Version": "1",
+                            "Environment": {
+                                "Variables": {
+                                    "PREFIX": "inbound",
+                                    "BUCKET": "my-bucket-1xpuxmplzrlbh"
+                                }
+                            },
+                            "KMSKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b0844d6c-xmpl-4463-97a4-d49f50839966",
+                            "TracingConfig": {
+                                "Mode": "Active"
+                            },
+                            "RevisionId": "b75dcd81-xmpl-48a8-a75a-93ba8b5b9727",
+                            "State": "Active",
+                            "LastUpdateStatus": "Successful"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-03-31/functions/{FunctionName}/versions",
@@ -9616,6 +10492,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency\n      level.</p>\n         <p>Concurrency settings apply to the function as a whole, including all published versions and the unpublished\n      version. Reserving concurrency both ensures that your function has capacity to process the specified number of\n      events simultaneously, and prevents it from scaling beyond that level. Use <a>GetFunction</a> to see\n      the current setting for a function.</p>\n         <p>Use <a>GetAccountSettings</a> to see your Regional concurrency limit. You can reserve concurrency\n      for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for\n      functions that aren't configured with a per-function limit. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html\">Lambda function scaling</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To configure a reserved concurrency limit for a function",
+                        "documentation": "The following example configures 100 reserved concurrent executions for the my-function function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "ReservedConcurrentExecutions": 100
+                        },
+                        "output": {
+                            "ReservedConcurrentExecutions": 100
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2017-10-31/functions/{FunctionName}/concurrency",
@@ -9819,6 +10708,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Adds a provisioned concurrency configuration to a function's alias or version.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To allocate provisioned concurrency",
+                        "documentation": "The following example allocates 100 provisioned concurrency for the BLUE alias of the specified function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Qualifier": "BLUE",
+                            "ProvisionedConcurrentExecutions": 100
+                        },
+                        "output": {
+                            "RequestedProvisionedConcurrentExecutions": 100,
+                            "AllocatedProvisionedConcurrentExecutions": 0,
+                            "Status": "IN_PROGRESS",
+                            "LastModified": "2019-11-21T19:32:12+0000"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2019-09-30/functions/{FunctionName}/provisioned-concurrency",
@@ -9927,7 +10833,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configure your function's public-access settings.</p>\n         <p>To control public access to a Lambda function, you can choose whether to allow the creation of \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policies</a> that \n      allow public access to that function. You can also block public access to a function, even if it has an existing resource-based \n    policy that allows it.</p>",
+                "smithy.api#documentation": "<note>\n            <p>The option to configure public-access settings, and to use the PutPublicAccessBlock and GetPublicAccessBlock APIs, won't be \n      available in all Amazon Web Services Regions until September 30, 2024.</p>\n         </note>\n         <p>Configure your function's public-access settings.</p>\n         <p>To control public access to a Lambda function, you can choose whether to allow the creation of \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policies</a> that \n      allow public access to that function. You can also block public access to a function, even if it has an existing resource-based \n    policy that allows it.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2024-09-16/public-access-block/{ResourceArn}",
@@ -10007,7 +10913,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> \n      to a function. You can use resource-based policies to grant access to other \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-cross-account.html\">Amazon Web Services accounts</a>, \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-organization.html\">organizations</a>, or \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-services.html\">services</a>. Resource-based policies \n    apply to a single function, version, or alias.</p>\n         <important>\n            <p>Adding a resource-based policy using this API action replaces any existing policy you've previously created. This means that if \n        you've previously added resource-based permissions to a function using the <a>AddPermission</a> action, those \n      permissions will be overwritten by your new policy.</p>\n         </important>",
+                "smithy.api#documentation": "<note>\n            <p>The option to create and modify full JSON resource-based policies, and to use the PutResourcePolicy, GetResourcePolicy, and DeleteResourcePolicy APIs, won't be \n      available in all Amazon Web Services Regions until September 30, 2024.</p>\n         </note>\n         <p>Adds a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html\">resource-based policy</a> \n      to a function. You can use resource-based policies to grant access to other \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-cross-account.html\">Amazon Web Services accounts</a>, \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-organization.html\">organizations</a>, or \n      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-services.html\">services</a>. Resource-based policies \n    apply to a single function, version, or alias.</p>\n         <important>\n            <p>Adding a resource-based policy using this API action replaces any existing policy you've previously created. This means that if \n        you've previously added resource-based permissions to a function using the <a>AddPermission</a> action, those \n      permissions will be overwritten by your new policy.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2024-09-16/resource-policy/{ResourceArn}",
@@ -10260,6 +11166,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Removes a statement from the permissions policy for a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda\n        layer</a>. For more information, see\n        <a>AddLayerVersionPermission</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete layer-version permissions",
+                        "documentation": "The following example deletes permission for an account to configure a layer version.",
+                        "input": {
+                            "LayerName": "my-layer",
+                            "VersionNumber": 1,
+                            "StatementId": "xaccount"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}",
@@ -10323,6 +11240,9 @@
                     "target": "com.amazonaws.lambda#PreconditionFailedException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#PublicPolicyException"
+                },
+                {
                     "target": "com.amazonaws.lambda#ResourceNotFoundException"
                 },
                 {
@@ -10334,6 +11254,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Revokes function-use permission from an Amazon Web Servicesservice or another Amazon Web Services account. You\n      can get the ID of the statement from the output of <a>GetPolicy</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove a Lambda function's permissions",
+                        "documentation": "The following example removes a permissions statement named xaccount from the PROD alias of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "StatementId": "xaccount",
+                            "Qualifier": "PROD"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
@@ -11436,7 +12367,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a> to a function.</p>",
+                "smithy.api#documentation": "<p>Adds <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a> to a function, event source mapping, or code signing configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add tags to an existing Lambda function",
+                        "documentation": "The following example adds a tag with the key name DEPARTMENT and a value of 'Department A' to the specified Lambda function.",
+                        "input": {
+                            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                            "Tags": {
+                                "DEPARTMENT": "Department A"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2017-03-31/tags/{Resource}",
@@ -11448,9 +12391,9 @@
             "type": "structure",
             "members": {
                 "Resource": {
-                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "target": "com.amazonaws.lambda#TaggableResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The function's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11458,7 +12401,7 @@
                 "Tags": {
                     "target": "com.amazonaws.lambda#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags to apply to the function.</p>",
+                        "smithy.api#documentation": "<p>A list of tags to apply to the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11469,6 +12412,16 @@
         },
         "com.amazonaws.lambda#TagValue": {
             "type": "string"
+        },
+        "com.amazonaws.lambda#TaggableResource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*):lambda:[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:(function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?|code-signing-config:csc-[a-z0-9]{17}|event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+            }
         },
         "com.amazonaws.lambda#Tags": {
             "type": "map",
@@ -11703,7 +12656,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a> from a function.</p>",
+                "smithy.api#documentation": "<p>Removes <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a> from a function, event source mapping, or code signing configuration.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To remove tags from an existing Lambda function",
+                        "documentation": "The following example removes the tag with the key name DEPARTMENT tag from the my-function Lambda function.",
+                        "input": {
+                            "Resource": "arn:aws:lambda:us-west-2:123456789012:function:my-function",
+                            "TagKeys": [
+                                "DEPARTMENT"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2017-03-31/tags/{Resource}",
@@ -11715,9 +12680,9 @@
             "type": "structure",
             "members": {
                 "Resource": {
-                    "target": "com.amazonaws.lambda#FunctionArn",
+                    "target": "com.amazonaws.lambda#TaggableResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The function's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11725,7 +12690,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.lambda#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tag keys to remove from the function.</p>",
+                        "smithy.api#documentation": "<p>A list of tag keys to remove from the resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -11765,6 +12730,34 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates the configuration of a Lambda function <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html\">alias</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a function alias",
+                        "documentation": "The following example updates the alias named BLUE to send 30% of traffic to version 2 and 70% to version 1.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "Name": "BLUE",
+                            "FunctionVersion": "2",
+                            "RoutingConfig": {
+                                "AdditionalVersionWeights": {
+                                    "1": 0.7
+                                }
+                            }
+                        },
+                        "output": {
+                            "FunctionVersion": "2",
+                            "Name": "BLUE",
+                            "AliasArn": "arn:aws:lambda:us-west-2:123456789012:function:my-function:BLUE",
+                            "RevisionId": "594f41fb-xmpl-4c20-95c7-6ca5f2a92c93",
+                            "Description": "Production environment BLUE.",
+                            "RoutingConfig": {
+                                "AdditionalVersionWeights": {
+                                    "1": 0.7
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
@@ -12088,6 +13081,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates a Lambda function's code. If code signing is enabled for the function, the code package\n      must be signed by a trusted publisher. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html\">Configuring code signing for Lambda</a>.</p>\n         <p>If the function's package type is <code>Image</code>, then you must specify the code package in\n        <code>ImageUri</code> as the URI of a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html\">container image</a> in the Amazon ECR registry.</p>\n         <p>If the function's package type is <code>Zip</code>, then you must specify the deployment package as a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip\">.zip file\n        archive</a>. Enter the Amazon S3 bucket and key of the code .zip file location. You can also provide\n      the function code inline using the <code>ZipFile</code> field.</p>\n         <p>The code in the deployment package must be compatible with the target instruction set architecture of the\n      function (<code>x86-64</code> or <code>arm64</code>).</p>\n         <p>The function's code is locked when you publish a version. You can't modify the code of a published version,\n      only the unpublished version.</p>\n         <note>\n            <p>For a function defined as a container image, Lambda resolves the image tag to an image digest. In\n          Amazon ECR, if you update the image tag to a new image, Lambda does not automatically\n        update the function.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a Lambda function's code",
+                        "documentation": "The following example replaces the code of the unpublished ($LATEST) version of a function named my-function with the contents of the specified zip file in Amazon S3.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "S3Bucket": "my-bucket-1xpuxmplzrlbh",
+                            "S3Key": "function.zip"
+                        },
+                        "output": {
+                            "TracingConfig": {
+                                "Mode": "PassThrough"
+                            },
+                            "CodeSha256": "PFn4S+er27qk+UuZSTKEQfNKG/XNn7QJs90mJgq6oH8=",
+                            "FunctionName": "my-function",
+                            "CodeSize": 308,
+                            "RevisionId": "873282ed-xmpl-4dc8-a069-d0c647e470c6",
+                            "MemorySize": 128,
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+                            "Version": "$LATEST",
+                            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                            "Timeout": 3,
+                            "LastModified": "2019-08-14T22:26:11.234+0000",
+                            "Handler": "index.handler",
+                            "Runtime": "nodejs12.x",
+                            "Description": ""
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/functions/{FunctionName}/code",
@@ -12206,6 +13228,34 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Modify the version-specific settings of a Lambda function.</p>\n         <p>When you update a function, Lambda provisions an instance of the function and its supporting\n      resources. If your function connects to a VPC, this process can take a minute. During this time, you can't modify\n      the function, but you can still invoke it. The <code>LastUpdateStatus</code>, <code>LastUpdateStatusReason</code>,\n      and <code>LastUpdateStatusReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a>\n      indicate when the update is complete and the function is processing events with the new configuration. For more\n      information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html\">Lambda\n        function states</a>.</p>\n         <p>These settings can vary between versions of a function and are locked when you publish a version. You can't\n      modify the configuration of a published version, only the unpublished version.</p>\n         <p>To configure function concurrency, use <a>PutFunctionConcurrency</a>. To grant invoke permissions\n      to an Amazon Web Services account or Amazon Web Servicesservice, use <a>AddPermission</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update a Lambda function's configuration",
+                        "documentation": "The following example modifies the memory size to be 256 MB for the unpublished ($LATEST) version of a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "MemorySize": 256
+                        },
+                        "output": {
+                            "TracingConfig": {
+                                "Mode": "PassThrough"
+                            },
+                            "CodeSha256": "PFn4S+er27qk+UuZSTKEQfNKG/XNn7QJs90mJgq6oH8=",
+                            "FunctionName": "my-function",
+                            "CodeSize": 308,
+                            "RevisionId": "873282ed-xmpl-4dc8-a069-d0c647e470c6",
+                            "MemorySize": 256,
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function",
+                            "Version": "$LATEST",
+                            "Role": "arn:aws:iam::123456789012:role/lambda-role",
+                            "Timeout": 3,
+                            "LastModified": "2019-08-14T22:26:11.234+0000",
+                            "Handler": "index.handler",
+                            "Runtime": "nodejs12.x",
+                            "Description": ""
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-03-31/functions/{FunctionName}/configuration",
@@ -12364,6 +13414,32 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Updates the configuration for asynchronous invocation for a function, version, or alias.</p>\n         <p>To configure options for asynchronous invocation, use <a>PutFunctionEventInvokeConfig</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To update an asynchronous invocation configuration",
+                        "documentation": "The following example adds an on-failure destination to the existing asynchronous invocation configuration for a function named my-function.",
+                        "input": {
+                            "FunctionName": "my-function",
+                            "DestinationConfig": {
+                                "OnFailure": {
+                                    "Destination": "arn:aws:sqs:us-east-2:123456789012:destination"
+                                }
+                            }
+                        },
+                        "output": {
+                            "LastModified": 1.573687896493E9,
+                            "FunctionArn": "arn:aws:lambda:us-east-2:123456789012:function:my-function:$LATEST",
+                            "MaximumRetryAttempts": 0,
+                            "MaximumEventAgeInSeconds": 3600,
+                            "DestinationConfig": {
+                                "OnSuccess": {},
+                                "OnFailure": {
+                                    "Destination": "arn:aws:sqs:us-east-2:123456789012:destination"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2019-09-25/functions/{FunctionName}/event-invoke-config",

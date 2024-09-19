@@ -634,6 +634,9 @@
                     "target": "com.amazonaws.glue#TagResource"
                 },
                 {
+                    "target": "com.amazonaws.glue#TestConnection"
+                },
+                {
                     "target": "com.amazonaws.glue#UntagResource"
                 },
                 {
@@ -36227,6 +36230,102 @@
                         "smithy.api#enumValue": "FIND_MATCHES"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#TestConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#TestConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#TestConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#FederationSourceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#GlueEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tests a connection to a service to validate the service credentials that you provide.</p>\n         <p>You can either provide an existing connection name or a <code>TestConnectionInput</code> for testing a non-existing connection input. Providing both at the same time will cause an error.</p>\n         <p>If the action is successful, the service sends back an HTTP 200 response.</p>"
+            }
+        },
+        "com.amazonaws.glue#TestConnectionInput": {
+            "type": "structure",
+            "members": {
+                "ConnectionType": {
+                    "target": "com.amazonaws.glue#ConnectionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of connection to test. This operation is only available for the <code>JDBC</code> or <code>SALESFORCE</code> connection types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConnectionProperties": {
+                    "target": "com.amazonaws.glue#ConnectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pairs that define parameters for the connection.</p>\n         <p>JDBC connections use the following connection properties:</p>\n         <ul>\n            <li>\n               <p>Required: All of (<code>HOST</code>, <code>PORT</code>, <code>JDBC_ENGINE</code>) or <code>JDBC_CONNECTION_URL</code>.</p>\n            </li>\n            <li>\n               <p>Required: All of (<code>USERNAME</code>, <code>PASSWORD</code>) or <code>SECRET_ID</code>.</p>\n            </li>\n            <li>\n               <p>Optional: <code>JDBC_ENFORCE_SSL</code>, <code>CUSTOM_JDBC_CERT</code>, <code>CUSTOM_JDBC_CERT_STRING</code>, <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code>. These parameters are used to configure SSL with JDBC.</p>\n            </li>\n         </ul>\n         <p>SALESFORCE connections require the <code>AuthenticationConfiguration</code> member to be configured.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthenticationConfiguration": {
+                    "target": "com.amazonaws.glue#AuthenticationConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure containing the authentication configuration in the TestConnection request. Required for a connection to Salesforce using OAuth authentication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that is used to specify testing a connection to a service.</p>"
+            }
+        },
+        "com.amazonaws.glue#TestConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional. The name of the connection to test. If only name is provided, the operation will get the connection and use that for testing.</p>"
+                    }
+                },
+                "TestConnectionInput": {
+                    "target": "com.amazonaws.glue#TestConnectionInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that is used to specify testing a connection to a service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#TestConnectionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.glue#ThrottlingException": {

@@ -1991,6 +1991,98 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.medialive#BandwidthReductionFilterSettings": {
+            "type": "structure",
+            "members": {
+                "PostFilterSharpening": {
+                    "target": "com.amazonaws.medialive#BandwidthReductionPostFilterSharpening",
+                    "traits": {
+                        "smithy.api#documentation": "Configures the sharpening control, which is available when the bandwidth reduction filter is enabled. This\ncontrol sharpens edges and contours, which produces a specific artistic effect that you might want.\n\nWe recommend that you test each of the values (including DISABLED) to observe the sharpening effect on the\ncontent.",
+                        "smithy.api#jsonName": "postFilterSharpening"
+                    }
+                },
+                "Strength": {
+                    "target": "com.amazonaws.medialive#BandwidthReductionFilterStrength",
+                    "traits": {
+                        "smithy.api#documentation": "Enables the bandwidth reduction filter. The filter strengths range from 1 to 4. We recommend that you always\nenable this filter and use AUTO, to let MediaLive apply the optimum filtering for the context.",
+                        "smithy.api#jsonName": "strength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bandwidth Reduction Filter Settings"
+            }
+        },
+        "com.amazonaws.medialive#BandwidthReductionFilterStrength": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "STRENGTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH_1"
+                    }
+                },
+                "STRENGTH_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH_2"
+                    }
+                },
+                "STRENGTH_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH_3"
+                    }
+                },
+                "STRENGTH_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRENGTH_4"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bandwidth Reduction Filter Strength"
+            }
+        },
+        "com.amazonaws.medialive#BandwidthReductionPostFilterSharpening": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "SHARPENING_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARPENING_1"
+                    }
+                },
+                "SHARPENING_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARPENING_2"
+                    }
+                },
+                "SHARPENING_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARPENING_3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Bandwidth Reduction Post Filter Sharpening"
+            }
+        },
         "com.amazonaws.medialive#BatchDelete": {
             "type": "operation",
             "input": {
@@ -15485,6 +15577,12 @@
                     "traits": {
                         "smithy.api#jsonName": "temporalFilterSettings"
                     }
+                },
+                "BandwidthReductionFilterSettings": {
+                    "target": "com.amazonaws.medialive#BandwidthReductionFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "bandwidthReductionFilterSettings"
+                    }
                 }
             },
             "traits": {
@@ -16427,6 +16525,12 @@
                     "target": "com.amazonaws.medialive#TemporalFilterSettings",
                     "traits": {
                         "smithy.api#jsonName": "temporalFilterSettings"
+                    }
+                },
+                "BandwidthReductionFilterSettings": {
+                    "target": "com.amazonaws.medialive#BandwidthReductionFilterSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "bandwidthReductionFilterSettings"
                     }
                 }
             },
@@ -19975,7 +20079,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "With the introduction of MediaLive OnPrem, a MediaLive input can now exist in two different places: AWS or\ninside an on-premise datacenter. By default all inputs will continue to be AWS inputs."
+                "smithy.api#documentation": "With the introduction of MediaLive Anywhere, a MediaLive input can now exist in two different places: AWS or\ninside an on-premises datacenter. By default all inputs will continue to be AWS inputs."
             }
         },
         "com.amazonaws.medialive#InputPreference": {
@@ -25996,11 +26100,131 @@
                 "smithy.api#documentation": "The multiplex object."
             }
         },
+        "com.amazonaws.medialive#MultiplexContainerSettings": {
+            "type": "structure",
+            "members": {
+                "MultiplexM2tsSettings": {
+                    "target": "com.amazonaws.medialive#MultiplexM2tsSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "multiplexM2tsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Multiplex Container Settings"
+            }
+        },
         "com.amazonaws.medialive#MultiplexGroupSettings": {
             "type": "structure",
             "members": {},
             "traits": {
                 "smithy.api#documentation": "Multiplex Group Settings"
+            }
+        },
+        "com.amazonaws.medialive#MultiplexM2tsSettings": {
+            "type": "structure",
+            "members": {
+                "AbsentInputAudioBehavior": {
+                    "target": "com.amazonaws.medialive#M2tsAbsentInputAudioBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "When set to drop, output audio streams will be removed from the program if the selected input audio stream is removed from the input. This allows the output audio configuration to dynamically change based on input configuration. If this is set to encodeSilence, all output audio streams will output encoded silence when not connected to an active input stream.",
+                        "smithy.api#jsonName": "absentInputAudioBehavior"
+                    }
+                },
+                "Arib": {
+                    "target": "com.amazonaws.medialive#M2tsArib",
+                    "traits": {
+                        "smithy.api#documentation": "When set to enabled, uses ARIB-compliant field muxing and removes video descriptor.",
+                        "smithy.api#jsonName": "arib"
+                    }
+                },
+                "AudioBufferModel": {
+                    "target": "com.amazonaws.medialive#M2tsAudioBufferModel",
+                    "traits": {
+                        "smithy.api#documentation": "When set to dvb, uses DVB buffer model for Dolby Digital audio.  When set to atsc, the ATSC model is used.",
+                        "smithy.api#jsonName": "audioBufferModel"
+                    }
+                },
+                "AudioFramesPerPes": {
+                    "target": "com.amazonaws.medialive#__integerMin0",
+                    "traits": {
+                        "smithy.api#documentation": "The number of audio frames to insert for each PES packet.",
+                        "smithy.api#jsonName": "audioFramesPerPes"
+                    }
+                },
+                "AudioStreamType": {
+                    "target": "com.amazonaws.medialive#M2tsAudioStreamType",
+                    "traits": {
+                        "smithy.api#documentation": "When set to atsc, uses stream type = 0x81 for AC3 and stream type = 0x87 for EAC3. When set to dvb, uses stream type = 0x06.",
+                        "smithy.api#jsonName": "audioStreamType"
+                    }
+                },
+                "CcDescriptor": {
+                    "target": "com.amazonaws.medialive#M2tsCcDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "When set to enabled, generates captionServiceDescriptor in PMT.",
+                        "smithy.api#jsonName": "ccDescriptor"
+                    }
+                },
+                "Ebif": {
+                    "target": "com.amazonaws.medialive#M2tsEbifControl",
+                    "traits": {
+                        "smithy.api#documentation": "If set to passthrough, passes any EBIF data from the input source to this output.",
+                        "smithy.api#jsonName": "ebif"
+                    }
+                },
+                "EsRateInPes": {
+                    "target": "com.amazonaws.medialive#M2tsEsRateInPes",
+                    "traits": {
+                        "smithy.api#documentation": "Include or exclude the ES Rate field in the PES header.",
+                        "smithy.api#jsonName": "esRateInPes"
+                    }
+                },
+                "Klv": {
+                    "target": "com.amazonaws.medialive#M2tsKlv",
+                    "traits": {
+                        "smithy.api#documentation": "If set to passthrough, passes any KLV data from the input source to this output.",
+                        "smithy.api#jsonName": "klv"
+                    }
+                },
+                "NielsenId3Behavior": {
+                    "target": "com.amazonaws.medialive#M2tsNielsenId3Behavior",
+                    "traits": {
+                        "smithy.api#documentation": "If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.",
+                        "smithy.api#jsonName": "nielsenId3Behavior"
+                    }
+                },
+                "PcrControl": {
+                    "target": "com.amazonaws.medialive#M2tsPcrControl",
+                    "traits": {
+                        "smithy.api#documentation": "When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This parameter is effective only when the PCR PID is the same as the video or audio elementary stream.",
+                        "smithy.api#jsonName": "pcrControl"
+                    }
+                },
+                "PcrPeriod": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max500",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum time in milliseconds between Program Clock Reference (PCRs) inserted into the transport stream.",
+                        "smithy.api#jsonName": "pcrPeriod"
+                    }
+                },
+                "Scte35Control": {
+                    "target": "com.amazonaws.medialive#M2tsScte35Control",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally pass SCTE-35 signals from the input source to this output.",
+                        "smithy.api#jsonName": "scte35Control"
+                    }
+                },
+                "Scte35PrerollPullupMilliseconds": {
+                    "target": "com.amazonaws.medialive#__doubleMin0Max5000",
+                    "traits": {
+                        "smithy.api#documentation": "Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.",
+                        "smithy.api#jsonName": "scte35PrerollPullupMilliseconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Multiplex M2ts Settings"
             }
         },
         "com.amazonaws.medialive#MultiplexMediaConnectOutputDestinationSettings": {
@@ -26043,6 +26267,12 @@
                         "smithy.api#documentation": "Destination is a Multiplex.",
                         "smithy.api#jsonName": "destination",
                         "smithy.api#required": {}
+                    }
+                },
+                "ContainerSettings": {
+                    "target": "com.amazonaws.medialive#MultiplexContainerSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "containerSettings"
                     }
                 }
             },
