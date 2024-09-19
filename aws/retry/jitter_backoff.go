@@ -41,9 +41,9 @@ func (j *ExponentialJitterBackoff) BackoffDelay(attempt int, err error) (time.Du
 		return 0, err
 	}
 
-	// [0.0, 1.0) * 2 ^ attempts
+	// [0.0, 1.0) + 2 ^ attempts
 	ri := int64(1 << uint64(attempt))
-	delaySeconds := b * float64(ri)
+	delaySeconds := b + float64(ri)
 
 	return timeconv.FloatSecondsDur(delaySeconds), nil
 }
