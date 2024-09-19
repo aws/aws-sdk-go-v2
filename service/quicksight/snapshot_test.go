@@ -1346,6 +1346,18 @@ func TestCheckSnapshot_ListFolders(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFoldersForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFoldersForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFoldersForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListGroupMemberships(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListGroupMemberships(context.Background(), nil, func(o *Options) {
@@ -3462,6 +3474,18 @@ func TestUpdateSnapshot_ListFolders(t *testing.T) {
 	_, err := svc.ListFolders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFolders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFoldersForResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFoldersForResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFoldersForResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

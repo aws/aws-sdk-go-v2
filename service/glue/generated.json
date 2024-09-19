@@ -208,6 +208,7 @@
         "api_op_StopTrigger.go",
         "api_op_StopWorkflowRun.go",
         "api_op_TagResource.go",
+        "api_op_TestConnection.go",
         "api_op_UntagResource.go",
         "api_op_UpdateBlueprint.go",
         "api_op_UpdateClassifier.go",

@@ -16,7 +16,8 @@ import (
 type Connection struct {
 
 	// The Amazon Resource Name (ARN) of the connection. The ARN is used as the
-	// connection reference when the connection is shared between Amazon Web Services.
+	// connection reference when the connection is shared between Amazon Web
+	// Servicesservices.
 	//
 	// The ARN is never reused if the connection is deleted.
 	ConnectionArn *string
@@ -448,6 +449,10 @@ type SyncConfiguration struct {
 	// Whether to enable or disable publishing of deployment status to source
 	// providers.
 	PublishDeploymentStatus PublishDeploymentStatus
+
+	// A toggle that specifies whether to enable or disable pull request comments for
+	// the sync configuration to be created.
+	PullRequestComment PullRequestComment
 
 	// When to trigger Git sync to begin the stack update.
 	TriggerResourceUpdateOn TriggerResourceUpdateOn

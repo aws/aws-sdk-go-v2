@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a function's [tags]. You can also view tags with GetFunction.
+// Returns a function, event source mapping, or code signing configuration's [tags]. You
+// can also view funciton tags with GetFunction.
 //
 // [tags]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
@@ -30,8 +31,8 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// The function's Amazon Resource Name (ARN). Note: Lambda does not support adding
-	// tags to aliases or versions.
+	// The resource's Amazon Resource Name (ARN). Note: Lambda does not support adding
+	// tags to function aliases or versions.
 	//
 	// This member is required.
 	Resource *string

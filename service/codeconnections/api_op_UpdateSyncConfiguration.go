@@ -51,6 +51,10 @@ type UpdateSyncConfigurationInput struct {
 	// providers.
 	PublishDeploymentStatus types.PublishDeploymentStatus
 
+	// TA toggle that specifies whether to enable or disable pull request comments for
+	// the sync configuration to be updated.
+	PullRequestComment types.PullRequestComment
+
 	// The ID of the repository link for the sync configuration to be updated.
 	RepositoryLinkId *string
 

@@ -317,6 +317,9 @@ func awsRestjson1_deserializeOpErrorAddPermission(response *smithyhttp.Response,
 	case strings.EqualFold("PreconditionFailedException", errorCode):
 		return awsRestjson1_deserializeErrorPreconditionFailedException(response, errorBody)
 
+	case strings.EqualFold("PublicPolicyException", errorCode):
+		return awsRestjson1_deserializeErrorPublicPolicyException(response, errorBody)
+
 	case strings.EqualFold("ResourceConflictException", errorCode):
 		return awsRestjson1_deserializeErrorResourceConflictException(response, errorBody)
 
@@ -922,6 +925,15 @@ func awsRestjson1_deserializeOpDocumentCreateEventSourceMappingOutput(v **Create
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.EventSourceArn = ptr.String(jtv)
+			}
+
+		case "EventSourceMappingArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourceMappingArn to be of type string, got %T instead", value)
+				}
+				sv.EventSourceMappingArn = ptr.String(jtv)
 			}
 
 		case "FilterCriteria":
@@ -2178,6 +2190,15 @@ func awsRestjson1_deserializeOpDocumentDeleteEventSourceMappingOutput(v **Delete
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.EventSourceArn = ptr.String(jtv)
+			}
+
+		case "EventSourceMappingArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourceMappingArn to be of type string, got %T instead", value)
+				}
+				sv.EventSourceMappingArn = ptr.String(jtv)
 			}
 
 		case "FilterCriteria":
@@ -3891,6 +3912,15 @@ func awsRestjson1_deserializeOpDocumentGetEventSourceMappingOutput(v **GetEventS
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.EventSourceArn = ptr.String(jtv)
+			}
+
+		case "EventSourceMappingArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourceMappingArn to be of type string, got %T instead", value)
+				}
+				sv.EventSourceMappingArn = ptr.String(jtv)
 			}
 
 		case "FilterCriteria":
@@ -11937,6 +11967,9 @@ func awsRestjson1_deserializeOpErrorRemovePermission(response *smithyhttp.Respon
 	case strings.EqualFold("PreconditionFailedException", errorCode):
 		return awsRestjson1_deserializeErrorPreconditionFailedException(response, errorBody)
 
+	case strings.EqualFold("PublicPolicyException", errorCode):
+		return awsRestjson1_deserializeErrorPublicPolicyException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -12710,6 +12743,15 @@ func awsRestjson1_deserializeOpDocumentUpdateEventSourceMappingOutput(v **Update
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.EventSourceArn = ptr.String(jtv)
+			}
+
+		case "EventSourceMappingArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourceMappingArn to be of type string, got %T instead", value)
+				}
+				sv.EventSourceMappingArn = ptr.String(jtv)
 			}
 
 		case "FilterCriteria":
@@ -17748,6 +17790,15 @@ func awsRestjson1_deserializeDocumentEventSourceMappingConfiguration(v **types.E
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.EventSourceArn = ptr.String(jtv)
+			}
+
+		case "EventSourceMappingArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventSourceMappingArn to be of type string, got %T instead", value)
+				}
+				sv.EventSourceMappingArn = ptr.String(jtv)
 			}
 
 		case "FilterCriteria":

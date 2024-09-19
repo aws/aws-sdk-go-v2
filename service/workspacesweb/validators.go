@@ -570,6 +570,26 @@ func (m *validateOpDisassociateUserSettings) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExpireSession struct {
+}
+
+func (*validateOpExpireSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExpireSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExpireSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExpireSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBrowserSettings struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpGetPortalServiceProviderMetadata) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSession struct {
+}
+
+func (*validateOpGetSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTrustStoreCertificate struct {
 }
 
@@ -785,6 +825,26 @@ func (m *validateOpListIdentityProviders) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListIdentityProvidersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSessions struct {
+}
+
+func (*validateOpListSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSessionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1142,6 +1202,10 @@ func addOpDisassociateUserSettingsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDisassociateUserSettings{}, middleware.After)
 }
 
+func addOpExpireSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExpireSession{}, middleware.After)
+}
+
 func addOpGetBrowserSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBrowserSettings{}, middleware.After)
 }
@@ -1166,6 +1230,10 @@ func addOpGetPortalServiceProviderMetadataValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpGetPortalServiceProviderMetadata{}, middleware.After)
 }
 
+func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSession{}, middleware.After)
+}
+
 func addOpGetTrustStoreCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTrustStoreCertificate{}, middleware.After)
 }
@@ -1184,6 +1252,10 @@ func addOpGetUserSettingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListIdentityProvidersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIdentityProviders{}, middleware.After)
+}
+
+func addOpListSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSessions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1868,6 +1940,24 @@ func validateOpDisassociateUserSettingsInput(v *DisassociateUserSettingsInput) e
 	}
 }
 
+func validateOpExpireSessionInput(v *ExpireSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExpireSessionInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBrowserSettingsInput(v *GetBrowserSettingsInput) error {
 	if v == nil {
 		return nil
@@ -1958,6 +2048,24 @@ func validateOpGetPortalServiceProviderMetadataInput(v *GetPortalServiceProvider
 	}
 }
 
+func validateOpGetSessionInput(v *GetSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTrustStoreCertificateInput(v *GetTrustStoreCertificateInput) error {
 	if v == nil {
 		return nil
@@ -2028,6 +2136,21 @@ func validateOpListIdentityProvidersInput(v *ListIdentityProvidersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityProvidersInput"}
 	if v.PortalArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSessionsInput(v *ListSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSessionsInput"}
+	if v.PortalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -143,6 +143,44 @@ func (RendererType) Values() []RendererType {
 	}
 }
 
+type SessionSortBy string
+
+// Enum values for SessionSortBy
+const (
+	SessionSortByStartTimeAscending  SessionSortBy = "StartTimeAscending"
+	SessionSortByStartTimeDescending SessionSortBy = "StartTimeDescending"
+)
+
+// Values returns all known values for SessionSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionSortBy) Values() []SessionSortBy {
+	return []SessionSortBy{
+		"StartTimeAscending",
+		"StartTimeDescending",
+	}
+}
+
+type SessionStatus string
+
+// Enum values for SessionStatus
+const (
+	SessionStatusActive     SessionStatus = "Active"
+	SessionStatusTerminated SessionStatus = "Terminated"
+)
+
+// Values returns all known values for SessionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionStatus) Values() []SessionStatus {
+	return []SessionStatus{
+		"Active",
+		"Terminated",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

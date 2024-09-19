@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The option to configure public-access settings, and to use the
+// PutPublicAccessBlock and GetPublicAccessBlock APIs, won't be available in all
+// Amazon Web Services Regions until September 30, 2024.
+//
 // Retrieve the public-access settings for a function.
 func (c *Client) GetPublicAccessBlockConfig(ctx context.Context, params *GetPublicAccessBlockConfigInput, optFns ...func(*Options)) (*GetPublicAccessBlockConfigOutput, error) {
 	if params == nil {

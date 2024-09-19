@@ -27463,6 +27463,55 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBandwidthReductionFilterSettings(v **types.BandwidthReductionFilterSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BandwidthReductionFilterSettings
+	if *v == nil {
+		sv = &types.BandwidthReductionFilterSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "postFilterSharpening":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BandwidthReductionPostFilterSharpening to be of type string, got %T instead", value)
+				}
+				sv.PostFilterSharpening = types.BandwidthReductionPostFilterSharpening(jtv)
+			}
+
+		case "strength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BandwidthReductionFilterStrength to be of type string, got %T instead", value)
+				}
+				sv.Strength = types.BandwidthReductionFilterStrength(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBatchFailedResultModel(v **types.BatchFailedResultModel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -32567,6 +32616,11 @@ func awsRestjson1_deserializeDocumentH264FilterSettings(v **types.H264FilterSett
 
 	for key, value := range shape {
 		switch key {
+		case "bandwidthReductionFilterSettings":
+			if err := awsRestjson1_deserializeDocumentBandwidthReductionFilterSettings(&sv.BandwidthReductionFilterSettings, value); err != nil {
+				return err
+			}
+
 		case "temporalFilterSettings":
 			if err := awsRestjson1_deserializeDocumentTemporalFilterSettings(&sv.TemporalFilterSettings, value); err != nil {
 				return err
@@ -33154,6 +33208,11 @@ func awsRestjson1_deserializeDocumentH265FilterSettings(v **types.H265FilterSett
 
 	for key, value := range shape {
 		switch key {
+		case "bandwidthReductionFilterSettings":
+			if err := awsRestjson1_deserializeDocumentBandwidthReductionFilterSettings(&sv.BandwidthReductionFilterSettings, value); err != nil {
+				return err
+			}
+
 		case "temporalFilterSettings":
 			if err := awsRestjson1_deserializeDocumentTemporalFilterSettings(&sv.TemporalFilterSettings, value); err != nil {
 				return err
@@ -39204,6 +39263,42 @@ func awsRestjson1_deserializeDocumentMultiplex(v **types.Multiplex, value interf
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMultiplexContainerSettings(v **types.MultiplexContainerSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiplexContainerSettings
+	if *v == nil {
+		sv = &types.MultiplexContainerSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "multiplexM2tsSettings":
+			if err := awsRestjson1_deserializeDocumentMultiplexM2tsSettings(&sv.MultiplexM2tsSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMultiplexGroupSettings(v **types.MultiplexGroupSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39226,6 +39321,196 @@ func awsRestjson1_deserializeDocumentMultiplexGroupSettings(v **types.MultiplexG
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiplexM2tsSettings(v **types.MultiplexM2tsSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiplexM2tsSettings
+	if *v == nil {
+		sv = &types.MultiplexM2tsSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "absentInputAudioBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsAbsentInputAudioBehavior to be of type string, got %T instead", value)
+				}
+				sv.AbsentInputAudioBehavior = types.M2tsAbsentInputAudioBehavior(jtv)
+			}
+
+		case "arib":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsArib to be of type string, got %T instead", value)
+				}
+				sv.Arib = types.M2tsArib(jtv)
+			}
+
+		case "audioBufferModel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsAudioBufferModel to be of type string, got %T instead", value)
+				}
+				sv.AudioBufferModel = types.M2tsAudioBufferModel(jtv)
+			}
+
+		case "audioFramesPerPes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AudioFramesPerPes = ptr.Int32(int32(i64))
+			}
+
+		case "audioStreamType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsAudioStreamType to be of type string, got %T instead", value)
+				}
+				sv.AudioStreamType = types.M2tsAudioStreamType(jtv)
+			}
+
+		case "ccDescriptor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsCcDescriptor to be of type string, got %T instead", value)
+				}
+				sv.CcDescriptor = types.M2tsCcDescriptor(jtv)
+			}
+
+		case "ebif":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsEbifControl to be of type string, got %T instead", value)
+				}
+				sv.Ebif = types.M2tsEbifControl(jtv)
+			}
+
+		case "esRateInPes":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsEsRateInPes to be of type string, got %T instead", value)
+				}
+				sv.EsRateInPes = types.M2tsEsRateInPes(jtv)
+			}
+
+		case "klv":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsKlv to be of type string, got %T instead", value)
+				}
+				sv.Klv = types.M2tsKlv(jtv)
+			}
+
+		case "nielsenId3Behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsNielsenId3Behavior to be of type string, got %T instead", value)
+				}
+				sv.NielsenId3Behavior = types.M2tsNielsenId3Behavior(jtv)
+			}
+
+		case "pcrControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsPcrControl to be of type string, got %T instead", value)
+				}
+				sv.PcrControl = types.M2tsPcrControl(jtv)
+			}
+
+		case "pcrPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max500 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PcrPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "scte35Control":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsScte35Control to be of type string, got %T instead", value)
+				}
+				sv.Scte35Control = types.M2tsScte35Control(jtv)
+			}
+
+		case "scte35PrerollPullupMilliseconds":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Scte35PrerollPullupMilliseconds = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Scte35PrerollPullupMilliseconds = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected __doubleMin0Max5000 to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 
@@ -39333,6 +39618,11 @@ func awsRestjson1_deserializeDocumentMultiplexOutputSettings(v **types.Multiplex
 
 	for key, value := range shape {
 		switch key {
+		case "containerSettings":
+			if err := awsRestjson1_deserializeDocumentMultiplexContainerSettings(&sv.ContainerSettings, value); err != nil {
+				return err
+			}
+
 		case "destination":
 			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.Destination, value); err != nil {
 				return err

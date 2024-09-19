@@ -5581,6 +5581,15 @@ func awsAwsjson10_deserializeDocumentSyncConfiguration(v **types.SyncConfigurati
 				sv.PublishDeploymentStatus = types.PublishDeploymentStatus(jtv)
 			}
 
+		case "PullRequestComment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PullRequestComment to be of type string, got %T instead", value)
+				}
+				sv.PullRequestComment = types.PullRequestComment(jtv)
+			}
+
 		case "RepositoryLinkId":
 			if value != nil {
 				jtv, ok := value.(string)

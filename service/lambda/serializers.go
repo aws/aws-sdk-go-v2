@@ -455,6 +455,13 @@ func awsRestjson1_serializeOpDocumentCreateCodeSigningConfigInput(v *CreateCodeS
 		ok.String(*v.Description)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -653,6 +660,13 @@ func awsRestjson1_serializeOpDocumentCreateEventSourceMappingInput(v *CreateEven
 	if v.StartingPositionTimestamp != nil {
 		ok := object.Key("StartingPositionTimestamp")
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartingPositionTimestamp))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Topics != nil {

@@ -355,10 +355,10 @@ type Portal struct {
 	// with your web portal. User and group access to your web portal is controlled
 	// through your identity provider.
 	//
-	// IAM Identity Center web portals are authenticated through IAM Identity Center
-	// (successor to Single Sign-On). Identity sources (including external identity
-	// provider integration), plus user and group access to your web portal, can be
-	// configured in the IAM Identity Center.
+	// IAM Identity Center web portals are authenticated through IAM Identity Center.
+	// Identity sources (including external identity provider integration), plus user
+	// and group access to your web portal, can be configured in the IAM Identity
+	// Center.
 	AuthenticationType AuthenticationType
 
 	// The ARN of the browser settings that is associated with this web portal.
@@ -430,10 +430,10 @@ type PortalSummary struct {
 	// with your web portal. User and group access to your web portal is controlled
 	// through your identity provider.
 	//
-	// IAM Identity Center web portals are authenticated through IAM Identity Center
-	// (successor to Single Sign-On). Identity sources (including external identity
-	// provider integration), plus user and group access to your web portal, can be
-	// configured in the IAM Identity Center.
+	// IAM Identity Center web portals are authenticated through IAM Identity Center.
+	// Identity sources (including external identity provider integration), plus user
+	// and group access to your web portal, can be configured in the IAM Identity
+	// Center.
 	AuthenticationType AuthenticationType
 
 	// The ARN of the browser settings that is associated with the web portal.
@@ -479,6 +479,57 @@ type PortalSummary struct {
 
 	// The ARN of the user settings that is associated with the web portal.
 	UserSettingsArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a secure browser session.
+type Session struct {
+
+	// The IP address of the client.
+	ClientIpAddresses []string
+
+	// The end time of the session.
+	EndTime *time.Time
+
+	// The ARN of the web portal.
+	PortalArn *string
+
+	// The ID of the session.
+	SessionId *string
+
+	// The start time of the session.
+	StartTime *time.Time
+
+	// The status of the session.
+	Status SessionStatus
+
+	// The username of the session.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a secure browser session.
+type SessionSummary struct {
+
+	// The end time of the session.
+	EndTime *time.Time
+
+	// The ARN of the web portal.
+	PortalArn *string
+
+	// The ID of the session.
+	SessionId *string
+
+	// The start time of the session.
+	StartTime *time.Time
+
+	// The status of the session.
+	Status SessionStatus
+
+	// The username of the session.
+	Username *string
 
 	noSmithyDocumentSerde
 }

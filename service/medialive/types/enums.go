@@ -659,6 +659,56 @@ func (AvailBlankingState) Values() []AvailBlankingState {
 	}
 }
 
+type BandwidthReductionFilterStrength string
+
+// Enum values for BandwidthReductionFilterStrength
+const (
+	BandwidthReductionFilterStrengthAuto      BandwidthReductionFilterStrength = "AUTO"
+	BandwidthReductionFilterStrengthStrength1 BandwidthReductionFilterStrength = "STRENGTH_1"
+	BandwidthReductionFilterStrengthStrength2 BandwidthReductionFilterStrength = "STRENGTH_2"
+	BandwidthReductionFilterStrengthStrength3 BandwidthReductionFilterStrength = "STRENGTH_3"
+	BandwidthReductionFilterStrengthStrength4 BandwidthReductionFilterStrength = "STRENGTH_4"
+)
+
+// Values returns all known values for BandwidthReductionFilterStrength. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BandwidthReductionFilterStrength) Values() []BandwidthReductionFilterStrength {
+	return []BandwidthReductionFilterStrength{
+		"AUTO",
+		"STRENGTH_1",
+		"STRENGTH_2",
+		"STRENGTH_3",
+		"STRENGTH_4",
+	}
+}
+
+type BandwidthReductionPostFilterSharpening string
+
+// Enum values for BandwidthReductionPostFilterSharpening
+const (
+	BandwidthReductionPostFilterSharpeningDisabled    BandwidthReductionPostFilterSharpening = "DISABLED"
+	BandwidthReductionPostFilterSharpeningSharpening1 BandwidthReductionPostFilterSharpening = "SHARPENING_1"
+	BandwidthReductionPostFilterSharpeningSharpening2 BandwidthReductionPostFilterSharpening = "SHARPENING_2"
+	BandwidthReductionPostFilterSharpeningSharpening3 BandwidthReductionPostFilterSharpening = "SHARPENING_3"
+)
+
+// Values returns all known values for BandwidthReductionPostFilterSharpening.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BandwidthReductionPostFilterSharpening) Values() []BandwidthReductionPostFilterSharpening {
+	return []BandwidthReductionPostFilterSharpening{
+		"DISABLED",
+		"SHARPENING_1",
+		"SHARPENING_2",
+		"SHARPENING_3",
+	}
+}
+
 type BlackoutSlateNetworkEndBlackout string
 
 // Enum values for BlackoutSlateNetworkEndBlackout

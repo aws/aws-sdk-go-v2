@@ -45,6 +45,9 @@ type CreateCodeSigningConfigInput struct {
 	// Descriptive name for this code signing configuration.
 	Description *string
 
+	// A list of tags to add to the code signing configuration.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

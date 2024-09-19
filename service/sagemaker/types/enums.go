@@ -209,6 +209,14 @@ const (
 	AppInstanceTypeMlG616xlarge            AppInstanceType = "ml.g6.16xlarge"
 	AppInstanceTypeMlG624xlarge            AppInstanceType = "ml.g6.24xlarge"
 	AppInstanceTypeMlG648xlarge            AppInstanceType = "ml.g6.48xlarge"
+	AppInstanceTypeMlG6eXlarge             AppInstanceType = "ml.g6e.xlarge"
+	AppInstanceTypeMlG6e2xlarge            AppInstanceType = "ml.g6e.2xlarge"
+	AppInstanceTypeMlG6e4xlarge            AppInstanceType = "ml.g6e.4xlarge"
+	AppInstanceTypeMlG6e8xlarge            AppInstanceType = "ml.g6e.8xlarge"
+	AppInstanceTypeMlG6e12xlarge           AppInstanceType = "ml.g6e.12xlarge"
+	AppInstanceTypeMlG6e16xlarge           AppInstanceType = "ml.g6e.16xlarge"
+	AppInstanceTypeMlG6e24xlarge           AppInstanceType = "ml.g6e.24xlarge"
+	AppInstanceTypeMlG6e48xlarge           AppInstanceType = "ml.g6e.48xlarge"
 	AppInstanceTypeMlGeospatialInteractive AppInstanceType = "ml.geospatial.interactive"
 	AppInstanceTypeMlP4d24xlarge           AppInstanceType = "ml.p4d.24xlarge"
 	AppInstanceTypeMlP4de24xlarge          AppInstanceType = "ml.p4de.24xlarge"
@@ -370,6 +378,14 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 		"ml.geospatial.interactive",
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",

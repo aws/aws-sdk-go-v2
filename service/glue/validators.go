@@ -3350,6 +3350,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTestConnection struct {
+}
+
+func (*validateOpTestConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagResource struct {
 }
 
@@ -4456,6 +4476,10 @@ func addOpStopWorkflowRunValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTestConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestConnection{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -8078,6 +8102,24 @@ func validateTaskRunSortCriteria(v *types.TaskRunSortCriteria) error {
 	}
 }
 
+func validateTestConnectionInput(v *types.TestConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestConnectionInput"}
+	if len(v.ConnectionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionType"))
+	}
+	if v.ConnectionProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTransformConfigParameter(v *types.TransformConfigParameter) error {
 	if v == nil {
 		return nil
@@ -11306,6 +11348,23 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 	if v.TagsToAdd == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagsToAdd"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTestConnectionInput(v *TestConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestConnectionInput"}
+	if v.TestConnectionInput != nil {
+		if err := validateTestConnectionInput(v.TestConnectionInput); err != nil {
+			invalidParams.AddNested("TestConnectionInput", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

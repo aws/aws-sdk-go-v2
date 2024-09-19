@@ -72,6 +72,10 @@ type CreateSyncConfigurationInput struct {
 	// providers.
 	PublishDeploymentStatus types.PublishDeploymentStatus
 
+	// A toggle that specifies whether to enable or disable pull request comments for
+	// the sync configuration to be created.
+	PullRequestComment types.PullRequestComment
+
 	// When to trigger Git sync to begin the stack update.
 	TriggerResourceUpdateOn types.TriggerResourceUpdateOn
 

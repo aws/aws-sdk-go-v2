@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Grants an Amazon Web Servicesservice, Amazon Web Services account, or Amazon
-// Web Services organization permission to use a function. You can apply the policy
-// at the function level, or specify a qualifier to restrict access to a single
-// version or alias. If you use a qualifier, the invoker must use the full Amazon
-// Resource Name (ARN) of that version or alias to invoke the function. Note:
-// Lambda does not support adding policies to version $LATEST.
+// Grants a [principal] permission to use a function. You can apply the policy at the
+// function level, or specify a qualifier to restrict access to a single version or
+// alias. If you use a qualifier, the invoker must use the full Amazon Resource
+// Name (ARN) of that version or alias to invoke the function. Note: Lambda does
+// not support adding policies to version $LATEST.
 //
 // To grant permission to another account, specify the account ID as the Principal
 // . To grant permission to an organization defined in Organizations, specify the
@@ -31,6 +30,7 @@ import (
 // This operation adds a statement to a resource-based permissions policy for the
 // function. For more information about function policies, see [Using resource-based policies for Lambda].
 //
+// [principal]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
 // [Using resource-based policies for Lambda]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {
@@ -72,9 +72,9 @@ type AddPermissionInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The Amazon Web Servicesservice or Amazon Web Services account that invokes the
-	// function. If you specify a service, use SourceArn or SourceAccount to limit who
-	// can invoke the function through that service.
+	// The Amazon Web Servicesservice, Amazon Web Services account, IAM user, or IAM
+	// role that invokes the function. If you specify a service, use SourceArn or
+	// SourceAccount to limit who can invoke the function through that service.
 	//
 	// This member is required.
 	Principal *string

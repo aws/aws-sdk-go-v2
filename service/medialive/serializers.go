@@ -10966,6 +10966,23 @@ func awsRestjson1_serializeDocumentAvailSettings(v *types.AvailSettings, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBandwidthReductionFilterSettings(v *types.BandwidthReductionFilterSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PostFilterSharpening) > 0 {
+		ok := object.Key("postFilterSharpening")
+		ok.String(string(v.PostFilterSharpening))
+	}
+
+	if len(v.Strength) > 0 {
+		ok := object.Key("strength")
+		ok.String(string(v.Strength))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBatchScheduleActionCreateRequest(v *types.BatchScheduleActionCreateRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12569,6 +12586,13 @@ func awsRestjson1_serializeDocumentH264FilterSettings(v *types.H264FilterSetting
 	object := value.Object()
 	defer object.Close()
 
+	if v.BandwidthReductionFilterSettings != nil {
+		ok := object.Key("bandwidthReductionFilterSettings")
+		if err := awsRestjson1_serializeDocumentBandwidthReductionFilterSettings(v.BandwidthReductionFilterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemporalFilterSettings != nil {
 		ok := object.Key("temporalFilterSettings")
 		if err := awsRestjson1_serializeDocumentTemporalFilterSettings(v.TemporalFilterSettings, ok); err != nil {
@@ -12865,6 +12889,13 @@ func awsRestjson1_serializeDocumentH265ColorSpaceSettings(v *types.H265ColorSpac
 func awsRestjson1_serializeDocumentH265FilterSettings(v *types.H265FilterSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BandwidthReductionFilterSettings != nil {
+		ok := object.Key("bandwidthReductionFilterSettings")
+		if err := awsRestjson1_serializeDocumentBandwidthReductionFilterSettings(v.BandwidthReductionFilterSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.TemporalFilterSettings != nil {
 		ok := object.Key("temporalFilterSettings")
@@ -15161,6 +15192,20 @@ func awsRestjson1_serializeDocumentMulticastSourceUpdateRequest(v *types.Multica
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMultiplexContainerSettings(v *types.MultiplexContainerSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MultiplexM2tsSettings != nil {
+		ok := object.Key("multiplexM2tsSettings")
+		if err := awsRestjson1_serializeDocumentMultiplexM2tsSettings(v.MultiplexM2tsSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMultiplexGroupSettings(v *types.MultiplexGroupSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -15168,9 +15213,106 @@ func awsRestjson1_serializeDocumentMultiplexGroupSettings(v *types.MultiplexGrou
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMultiplexM2tsSettings(v *types.MultiplexM2tsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AbsentInputAudioBehavior) > 0 {
+		ok := object.Key("absentInputAudioBehavior")
+		ok.String(string(v.AbsentInputAudioBehavior))
+	}
+
+	if len(v.Arib) > 0 {
+		ok := object.Key("arib")
+		ok.String(string(v.Arib))
+	}
+
+	if len(v.AudioBufferModel) > 0 {
+		ok := object.Key("audioBufferModel")
+		ok.String(string(v.AudioBufferModel))
+	}
+
+	if v.AudioFramesPerPes != nil {
+		ok := object.Key("audioFramesPerPes")
+		ok.Integer(*v.AudioFramesPerPes)
+	}
+
+	if len(v.AudioStreamType) > 0 {
+		ok := object.Key("audioStreamType")
+		ok.String(string(v.AudioStreamType))
+	}
+
+	if len(v.CcDescriptor) > 0 {
+		ok := object.Key("ccDescriptor")
+		ok.String(string(v.CcDescriptor))
+	}
+
+	if len(v.Ebif) > 0 {
+		ok := object.Key("ebif")
+		ok.String(string(v.Ebif))
+	}
+
+	if len(v.EsRateInPes) > 0 {
+		ok := object.Key("esRateInPes")
+		ok.String(string(v.EsRateInPes))
+	}
+
+	if len(v.Klv) > 0 {
+		ok := object.Key("klv")
+		ok.String(string(v.Klv))
+	}
+
+	if len(v.NielsenId3Behavior) > 0 {
+		ok := object.Key("nielsenId3Behavior")
+		ok.String(string(v.NielsenId3Behavior))
+	}
+
+	if len(v.PcrControl) > 0 {
+		ok := object.Key("pcrControl")
+		ok.String(string(v.PcrControl))
+	}
+
+	if v.PcrPeriod != nil {
+		ok := object.Key("pcrPeriod")
+		ok.Integer(*v.PcrPeriod)
+	}
+
+	if len(v.Scte35Control) > 0 {
+		ok := object.Key("scte35Control")
+		ok.String(string(v.Scte35Control))
+	}
+
+	if v.Scte35PrerollPullupMilliseconds != nil {
+		ok := object.Key("scte35PrerollPullupMilliseconds")
+		switch {
+		case math.IsNaN(*v.Scte35PrerollPullupMilliseconds):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Scte35PrerollPullupMilliseconds, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Scte35PrerollPullupMilliseconds, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Scte35PrerollPullupMilliseconds)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMultiplexOutputSettings(v *types.MultiplexOutputSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ContainerSettings != nil {
+		ok := object.Key("containerSettings")
+		if err := awsRestjson1_serializeDocumentMultiplexContainerSettings(v.ContainerSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Destination != nil {
 		ok := object.Key("destination")

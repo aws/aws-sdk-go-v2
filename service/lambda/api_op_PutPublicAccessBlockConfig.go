@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The option to configure public-access settings, and to use the
+// PutPublicAccessBlock and GetPublicAccessBlock APIs, won't be available in all
+// Amazon Web Services Regions until September 30, 2024.
+//
 // Configure your function's public-access settings.
 //
 // To control public access to a Lambda function, you can choose whether to allow

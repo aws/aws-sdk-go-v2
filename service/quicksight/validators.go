@@ -2130,6 +2130,26 @@ func (m *validateOpListFolderMembers) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFoldersForResource struct {
+}
+
+func (*validateOpListFoldersForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFoldersForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFoldersForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFoldersForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFolders struct {
 }
 
@@ -3972,6 +3992,10 @@ func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListFolderMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFolderMembers{}, middleware.After)
+}
+
+func addOpListFoldersForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFoldersForResource{}, middleware.After)
 }
 
 func addOpListFoldersValidationMiddleware(stack *middleware.Stack) error {
@@ -20794,6 +20818,24 @@ func validateOpListFolderMembersInput(v *ListFolderMembersInput) error {
 	}
 	if v.FolderId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFoldersForResourceInput(v *ListFoldersForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFoldersForResourceInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

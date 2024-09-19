@@ -9470,6 +9470,88 @@ func awsRestjson1_serializeOpHttpBindingsListFoldersInput(v *ListFoldersInput, e
 	return nil
 }
 
+type awsRestjson1_serializeOpListFoldersForResource struct {
+}
+
+func (*awsRestjson1_serializeOpListFoldersForResource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListFoldersForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListFoldersForResourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/resource/{ResourceArn}/folders")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListFoldersForResourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListFoldersForResourceInput(v *ListFoldersForResourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	if v.ResourceArn == nil || len(*v.ResourceArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceArn must not be empty")}
+	}
+	if v.ResourceArn != nil {
+		if err := encoder.SetURI("ResourceArn").String(*v.ResourceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListGroupMemberships struct {
 }
 
@@ -23567,6 +23649,11 @@ func awsRestjson1_serializeDocumentDefaultDateTimePickerControlOptions(v *types.
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -23660,6 +23747,11 @@ func awsRestjson1_serializeDocumentDefaultFilterControlOptions(v *types.DefaultF
 func awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v *types.DefaultFilterDropDownControlOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -23820,6 +23912,11 @@ func awsRestjson1_serializeDocumentDefaultPaginatedLayoutConfiguration(v *types.
 func awsRestjson1_serializeDocumentDefaultRelativeDateTimeControlOptions(v *types.DefaultRelativeDateTimeControlOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -25012,6 +25109,11 @@ func awsRestjson1_serializeDocumentFilterDateTimePickerControl(v *types.FilterDa
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -25051,6 +25153,11 @@ func awsRestjson1_serializeDocumentFilterDropDownControl(v *types.FilterDropDown
 		if err := awsRestjson1_serializeDocumentCascadingControlConfiguration(v.CascadingControlConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
 	}
 
 	if v.DisplayOptions != nil {
@@ -25295,6 +25402,11 @@ func awsRestjson1_serializeDocumentFilterOperationTargetVisualsConfiguration(v *
 func awsRestjson1_serializeDocumentFilterRelativeDateTimeControl(v *types.FilterRelativeDateTimeControl, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -30400,6 +30512,11 @@ func awsRestjson1_serializeDocumentParameterDropDownControl(v *types.ParameterDr
 		if err := awsRestjson1_serializeDocumentCascadingControlConfiguration(v.CascadingControlConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.CommitMode) > 0 {
+		ok := object.Key("CommitMode")
+		ok.String(string(v.CommitMode))
 	}
 
 	if v.DisplayOptions != nil {

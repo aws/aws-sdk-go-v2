@@ -1711,6 +1711,11 @@ func awsAwsjson10_serializeOpDocumentCreateSyncConfigurationInput(v *CreateSyncC
 		ok.String(string(v.PublishDeploymentStatus))
 	}
 
+	if len(v.PullRequestComment) > 0 {
+		ok := object.Key("PullRequestComment")
+		ok.String(string(v.PullRequestComment))
+	}
+
 	if v.RepositoryLinkId != nil {
 		ok := object.Key("RepositoryLinkId")
 		ok.String(*v.RepositoryLinkId)
@@ -2146,6 +2151,11 @@ func awsAwsjson10_serializeOpDocumentUpdateSyncConfigurationInput(v *UpdateSyncC
 	if len(v.PublishDeploymentStatus) > 0 {
 		ok := object.Key("PublishDeploymentStatus")
 		ok.String(string(v.PublishDeploymentStatus))
+	}
+
+	if len(v.PullRequestComment) > 0 {
+		ok := object.Key("PullRequestComment")
+		ok.String(string(v.PullRequestComment))
 	}
 
 	if v.RepositoryLinkId != nil {

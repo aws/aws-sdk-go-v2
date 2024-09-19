@@ -1,0 +1,8 @@
+{
+    "id": "ceab748a-ee01-43a2-ac1b-26a7e570d139",
+    "type": "feature",
+    "description": "This release provides support for additional DRM configurations per SPEKE Version 2.0.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

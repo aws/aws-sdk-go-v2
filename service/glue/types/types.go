@@ -9052,6 +9052,40 @@ type TaskRunSortCriteria struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that is used to specify testing a connection to a service.
+type TestConnectionInput struct {
+
+	// The key-value pairs that define parameters for the connection.
+	//
+	// JDBC connections use the following connection properties:
+	//
+	//   - Required: All of ( HOST , PORT , JDBC_ENGINE ) or JDBC_CONNECTION_URL .
+	//
+	//   - Required: All of ( USERNAME , PASSWORD ) or SECRET_ID .
+	//
+	//   - Optional: JDBC_ENFORCE_SSL , CUSTOM_JDBC_CERT , CUSTOM_JDBC_CERT_STRING ,
+	//   SKIP_CUSTOM_JDBC_CERT_VALIDATION . These parameters are used to configure SSL
+	//   with JDBC.
+	//
+	// SALESFORCE connections require the AuthenticationConfiguration member to be
+	// configured.
+	//
+	// This member is required.
+	ConnectionProperties map[string]string
+
+	// The type of connection to test. This operation is only available for the JDBC
+	// or SALESFORCE connection types.
+	//
+	// This member is required.
+	ConnectionType ConnectionType
+
+	// A structure containing the authentication configuration in the TestConnection
+	// request. Required for a connection to Salesforce using OAuth authentication.
+	AuthenticationConfiguration *AuthenticationConfigurationInput
+
+	noSmithyDocumentSerde
+}
+
 // A timestamped inclusion annotation.
 type TimestampedInclusionAnnotation struct {
 

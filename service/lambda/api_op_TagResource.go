@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds [tags] to a function.
+// Adds [tags] to a function, event source mapping, or code signing configuration.
 //
 // [tags]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -30,12 +30,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The function's Amazon Resource Name (ARN).
+	// The resource's Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	Resource *string
 
-	// A list of tags to apply to the function.
+	// A list of tags to apply to the resource.
 	//
 	// This member is required.
 	Tags map[string]string

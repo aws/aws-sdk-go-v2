@@ -250,6 +250,9 @@ type CreateEventSourceMappingInput struct {
 	// reading. StartingPositionTimestamp cannot be in the future.
 	StartingPositionTimestamp *time.Time
 
+	// A list of tags to apply to the event source mapping.
+	Tags map[string]string
+
 	// The name of the Kafka topic.
 	Topics []string
 
@@ -295,6 +298,9 @@ type CreateEventSourceMappingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
+
+	// The Amazon Resource Name (ARN) of the event source mapping.
+	EventSourceMappingArn *string
 
 	// An object that defines the filter criteria that determine whether Lambda should
 	// process an event. For more information, see [Lambda event filtering].

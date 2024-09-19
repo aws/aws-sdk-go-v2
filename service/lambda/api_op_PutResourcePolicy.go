@@ -10,6 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// The option to create and modify full JSON resource-based policies, and to use
+// the PutResourcePolicy, GetResourcePolicy, and DeleteResourcePolicy APIs, won't
+// be available in all Amazon Web Services Regions until September 30, 2024.
+//
 // Adds a [resource-based policy] to a function. You can use resource-based policies to grant access to
 // other [Amazon Web Services accounts], [organizations], or [services]. Resource-based policies apply to a single function, version, or
 // alias.

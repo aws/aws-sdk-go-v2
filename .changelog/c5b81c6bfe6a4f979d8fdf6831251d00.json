@@ -1,0 +1,8 @@
+{
+    "id": "c5b81c6b-fe6a-4f97-9d8f-df6831251d00",
+    "type": "feature",
+    "description": "QuickSight: 1. Add new API - ListFoldersForResource. 2. Commit mode adds visibility configuration of Apply button on multi-select controls for authors.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

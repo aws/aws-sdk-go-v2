@@ -5615,6 +5615,23 @@ func awsRestjson1_serializeDocumentEmbeddedSourceSettings(v *types.EmbeddedSourc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEncryptionContractConfiguration(v *types.EncryptionContractConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SpekeAudioPreset) > 0 {
+		ok := object.Key("spekeAudioPreset")
+		ok.String(string(v.SpekeAudioPreset))
+	}
+
+	if len(v.SpekeVideoPreset) > 0 {
+		ok := object.Key("spekeVideoPreset")
+		ok.String(string(v.SpekeVideoPreset))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEsamManifestConfirmConditionNotification(v *types.EsamManifestConfirmConditionNotification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9359,6 +9376,13 @@ func awsRestjson1_serializeDocumentSpekeKeyProvider(v *types.SpekeKeyProvider, v
 		ok.String(*v.CertificateArn)
 	}
 
+	if v.EncryptionContractConfiguration != nil {
+		ok := object.Key("encryptionContractConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionContractConfiguration(v.EncryptionContractConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceId != nil {
 		ok := object.Key("resourceId")
 		ok.String(*v.ResourceId)
@@ -9391,6 +9415,13 @@ func awsRestjson1_serializeDocumentSpekeKeyProviderCmaf(v *types.SpekeKeyProvide
 	if v.DashSignaledSystemIds != nil {
 		ok := object.Key("dashSignaledSystemIds")
 		if err := awsRestjson1_serializeDocument__listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12(v.DashSignaledSystemIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EncryptionContractConfiguration != nil {
+		ok := object.Key("encryptionContractConfiguration")
+		if err := awsRestjson1_serializeDocumentEncryptionContractConfiguration(v.EncryptionContractConfiguration, ok); err != nil {
 			return err
 		}
 	}

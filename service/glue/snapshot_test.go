@@ -2462,6 +2462,18 @@ func TestCheckSnapshot_TagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_TestConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TestConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UntagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
@@ -5142,6 +5154,18 @@ func TestUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TestConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TestConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
