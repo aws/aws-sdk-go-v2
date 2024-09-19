@@ -35,10 +35,11 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
             SymbolProvider symbolProvider,
             GoDelegator delegator
     ) {
-        delegator.useShapeWriter(settings.getService(model), this::generateRetryMiddlewareHelpers);
+        delegator.useShapeWriter(settings.getService(model), writer ->
+                generateRetryMiddlewareHelpers(writer, settings.getModuleName()));
     }
 
-    private void generateRetryMiddlewareHelpers(GoWriter writer) {
+    private void generateRetryMiddlewareHelpers(GoWriter writer, String moduleName) {
         writer
                 .addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE)
                 .addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT)
@@ -47,6 +48,7 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
                         func addRetry(stack *middleware.Stack, o Options) error {
                         attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
                             m.LogAttempts = o.ClientLogMode.IsRetries()
+                            m.OperationMeter = o.MeterProvider.Meter($S)
                         })
                         if err := stack.Finalize.Insert(attempt, "Signing", middleware.Before); err != nil {
                             return err
@@ -55,6 +57,6 @@ public class AwsRetryMiddlewareHelper implements GoIntegration {
                             return err
                         }
                         return nil
-                    }"""));
+                    }""", moduleName));
     }
 }

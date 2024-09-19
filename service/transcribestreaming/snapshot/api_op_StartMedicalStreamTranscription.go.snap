@@ -1,10 +1,13 @@
 StartMedicalStreamTranscription
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -13,6 +16,7 @@ StartMedicalStreamTranscription
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		ComputePayloadHash
 		SigV4ContentSHA256Header
@@ -20,6 +24,7 @@ StartMedicalStreamTranscription
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

@@ -8,7 +8,9 @@ import (
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/auth/bearer"
 	"github.com/aws/smithy-go/logging"
+	"github.com/aws/smithy-go/metrics"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 )
@@ -69,6 +71,9 @@ type Options struct {
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
 
+	// The client meter provider.
+	MeterProvider metrics.MeterProvider
+
 	// The region to send requests to. (Required)
 	Region string
 
@@ -102,6 +107,9 @@ type Options struct {
 	// should not populate this structure programmatically, or rely on the values here
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
+
+	// The client tracer provider.
+	TracerProvider tracing.TracerProvider
 
 	// The initial DefaultsMode used when the client options were constructed. If the
 	// DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved
