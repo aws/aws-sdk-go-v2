@@ -1,9 +1,12 @@
 ListBackups
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -13,6 +16,7 @@ ListBackups
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		ResolveAuthScheme
@@ -21,6 +25,7 @@ ListBackups
 		disableHTTPS
 		DiscoverEndpoint
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

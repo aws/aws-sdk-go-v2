@@ -1,11 +1,14 @@
 UpdateAssetProperty
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -15,6 +18,7 @@ UpdateAssetProperty
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		ResolveAuthScheme
 		GetIdentity
@@ -22,6 +26,7 @@ UpdateAssetProperty
 		disableHTTPS
 		EndpointHostPrefix
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions
