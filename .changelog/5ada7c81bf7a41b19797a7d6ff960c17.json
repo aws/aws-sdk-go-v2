@@ -1,8 +1,0 @@
-{
-    "id": "5ada7c81-bf7a-41b1-9797-a7d6ff960c17",
-    "type": "feature",
-    "description": "Adds Bandwidth Reduction Filtering for HD AVC and HEVC encodes, multiplex container settings.",
-    "modules": [
-        "service/medialive"
-    ]
-}

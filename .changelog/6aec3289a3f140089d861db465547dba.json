@@ -1,8 +1,0 @@
-{
-    "id": "6aec3289-a3f1-4008-9d86-1db465547dba",
-    "type": "feature",
-    "description": "Tagging support for Lambda event source mapping, and code signing configuration resources.",
-    "modules": [
-        "service/lambda"
-    ]
-}

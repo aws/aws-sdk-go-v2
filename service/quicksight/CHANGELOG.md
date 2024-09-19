@@ -1,3 +1,7 @@
+# v1.72.0 (2024-09-19)
+
+* **Feature**: QuickSight: 1. Add new API - ListFoldersForResource. 2. Commit mode adds visibility configuration of Apply button on multi-select controls for authors.
+
 # v1.71.3 (2024-09-17)
 
 * **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.

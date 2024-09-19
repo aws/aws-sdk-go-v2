@@ -45,14 +45,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.32.5
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.24.7
-	github.com/aws/aws-sdk-go-v2/service/glue v1.96.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.97.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.26.7
 	github.com/aws/aws-sdk-go-v2/service/iam v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.23.7
 	github.com/aws/aws-sdk-go-v2/service/iot v1.56.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.29.8
 	github.com/aws/aws-sdk-go-v2/service/kms v1.35.8
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.59.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.60.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.40.7
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.22.7
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.33.8

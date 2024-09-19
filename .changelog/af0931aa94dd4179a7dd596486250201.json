@@ -1,8 +1,0 @@
-{
-    "id": "af0931aa-94dd-4179-a7dd-596486250201",
-    "type": "feature",
-    "description": "WorkSpaces Secure Browser now enables Administrators to view and manage end-user browsing sessions via Session Management APIs.",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}

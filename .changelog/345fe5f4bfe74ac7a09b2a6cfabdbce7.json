@@ -1,8 +1,0 @@
-{
-    "id": "345fe5f4-bfe7-4ac7-a09b-2a6cfabdbce7",
-    "type": "feature",
-    "description": "This change is for releasing TestConnection api SDK model",
-    "modules": [
-        "service/glue"
-    ]
-}

@@ -1,3 +1,23 @@
+# Release (2024-09-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.3.0](service/codeconnections/CHANGELOG.md#v130-2024-09-19)
+  * **Feature**: This release adds the PullRequestComment field to CreateSyncConfiguration API input, UpdateSyncConfiguration API input, GetSyncConfiguration API output and ListSyncConfiguration API output
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.97.0](service/glue/CHANGELOG.md#v1970-2024-09-19)
+  * **Feature**: This change is for releasing TestConnection api SDK model
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.60.0](service/lambda/CHANGELOG.md#v1600-2024-09-19)
+  * **Feature**: Tagging support for Lambda event source mapping, and code signing configuration resources.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.59.0](service/mediaconvert/CHANGELOG.md#v1590-2024-09-19)
+  * **Feature**: This release provides support for additional DRM configurations per SPEKE Version 2.0.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.60.0](service/medialive/CHANGELOG.md#v1600-2024-09-19)
+  * **Feature**: Adds Bandwidth Reduction Filtering for HD AVC and HEVC encodes, multiplex container settings.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.72.0](service/quicksight/CHANGELOG.md#v1720-2024-09-19)
+  * **Feature**: QuickSight: 1. Add new API - ListFoldersForResource. 2. Commit mode adds visibility configuration of Apply button on multi-select controls for authors.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.158.0](service/sagemaker/CHANGELOG.md#v11580-2024-09-19)
+  * **Feature**: Introduced support for G6e instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.22.0](service/workspacesweb/CHANGELOG.md#v1220-2024-09-19)
+  * **Feature**: WorkSpaces Secure Browser now enables Administrators to view and manage end-user browsing sessions via Session Management APIs.
+
 # Release (2024-09-18)
 
 ## General Highlights

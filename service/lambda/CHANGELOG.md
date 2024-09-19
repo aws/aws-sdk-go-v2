@@ -1,3 +1,7 @@
+# v1.60.0 (2024-09-19)
+
+* **Feature**: Tagging support for Lambda event source mapping, and code signing configuration resources.
+
 # v1.59.0 (2024-09-17)
 
 * **Feature**: Support for JSON resource-based policies and block public access

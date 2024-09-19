@@ -1,8 +1,0 @@
-{
-    "id": "e8820abc-8d45-4b01-bd6b-a9841c02b054",
-    "type": "feature",
-    "description": "This release adds the PullRequestComment field to CreateSyncConfiguration API input, UpdateSyncConfiguration API input, GetSyncConfiguration API output and ListSyncConfiguration API output",
-    "modules": [
-        "service/codeconnections"
-    ]
-}
