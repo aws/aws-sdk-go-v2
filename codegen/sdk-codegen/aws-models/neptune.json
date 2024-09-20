@@ -1442,17 +1442,6 @@
                             "expect": {
                                 "error": "Invalid Configuration: Missing Region"
                             }
-                        },
-                        {
-                            "documentation": "Partition doesn't support DualStack",
-                            "expect": {
-                                "error": "DualStack is enabled but this partition does not support DualStack"
-                            },
-                            "params": {
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false,
-                                "UseDualStack": true
-                            }
                         }
                     ],
                     "version": "1.0"
@@ -6123,7 +6112,20 @@
                     "outputToken": "Marker",
                     "items": "DBEngineVersions",
                     "pageSize": "MaxRecords"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDBEngineVersionsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.neptune#DescribeDBEngineVersionsMessage": {
@@ -6211,6 +6213,21 @@
                 },
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
+                ],
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeDBInstancesFailure",
+                        "params": {
+                            "DBInstanceIdentifier": "fake-id"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
                 ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {

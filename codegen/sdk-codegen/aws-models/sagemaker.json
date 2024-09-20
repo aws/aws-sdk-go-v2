@@ -57284,6 +57284,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information for hub access.</p>"
                     }
+                },
+                "ManifestS3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3ModelUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI of the manifest file. The manifest file is a CSV file that stores the artifact locations.</p>"
+                    }
                 }
             },
             "traits": {

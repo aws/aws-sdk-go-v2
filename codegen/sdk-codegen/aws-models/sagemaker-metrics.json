@@ -29,6 +29,53 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.sagemakermetrics#BatchGetMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakermetrics#BatchGetMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakermetrics#BatchGetMetricsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Used to retrieve training metrics from SageMaker.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/BatchGetMetrics",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakermetrics#BatchGetMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "MetricQueries": {
+                    "target": "com.amazonaws.sagemakermetrics#MetricQueryList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Queries made to retrieve training metrics from SageMaker.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakermetrics#BatchGetMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "MetricQueryResults": {
+                    "target": "com.amazonaws.sagemakermetrics#MetricQueryResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of a query to retrieve training metrics from SageMaker.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemakermetrics#BatchPutMetrics": {
             "type": "operation",
             "input": {
@@ -38,7 +85,7 @@
                 "target": "com.amazonaws.sagemakermetrics#BatchPutMetricsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to ingest training metrics into SageMaker. These metrics can be visualized in SageMaker Studio and\n         retrieved with the <code>GetMetrics</code> API.\n      </p>",
+                "smithy.api#documentation": "<p>Used to ingest training metrics into SageMaker. These metrics can be visualized in SageMaker Studio.\n      </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/BatchPutMetrics",
@@ -85,7 +132,7 @@
                     "target": "com.amazonaws.sagemakermetrics#ExperimentEntityName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the Trial Component to associate with the metrics.</p>",
+                        "smithy.api#documentation": "<p>The name of the Trial Component to associate with the metrics. The Trial Component name must be entirely lowercase.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -126,11 +173,24 @@
                     "min": 1,
                     "max": 120
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$"
+                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9]){0,119}$"
             }
         },
         "com.amazonaws.sagemakermetrics#Integer": {
             "type": "integer"
+        },
+        "com.amazonaws.sagemakermetrics#Long": {
+            "type": "long"
+        },
+        "com.amazonaws.sagemakermetrics#Message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*"
+            }
         },
         "com.amazonaws.sagemakermetrics#MetricName": {
             "type": "string",
@@ -140,6 +200,233 @@
                     "max": 255
                 },
                 "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricQuery": {
+            "type": "structure",
+            "members": {
+                "MetricName": {
+                    "target": "com.amazonaws.sagemakermetrics#MetricName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the metric to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.sagemakermetrics#SageMakerResourceArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ARN of the SageMaker resource to retrieve metrics for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricStat": {
+                    "target": "com.amazonaws.sagemakermetrics#MetricStatistic",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The metrics stat type of metrics to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Period": {
+                    "target": "com.amazonaws.sagemakermetrics#Period",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time period of metrics to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "XAxisType": {
+                    "target": "com.amazonaws.sagemakermetrics#XAxisType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The x-axis type of metrics to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Start": {
+                    "target": "com.amazonaws.sagemakermetrics#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of metrics to retrieve.</p>"
+                    }
+                },
+                "End": {
+                    "target": "com.amazonaws.sagemakermetrics#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of metrics to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a query to retrieve training metrics from SageMaker.</p>"
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricQueryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakermetrics#MetricQuery"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricQueryResult": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemakermetrics#MetricQueryResultStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the metric query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemakermetrics#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the status of the metric query.</p>"
+                    }
+                },
+                "XAxisValues": {
+                    "target": "com.amazonaws.sagemakermetrics#XAxisValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The values for the x-axis of the metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MetricValues": {
+                    "target": "com.amazonaws.sagemakermetrics#MetricValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The metric values retrieved by the query.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a query to retrieve training metrics from SageMaker.</p>"
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricQueryResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakermetrics#MetricQueryResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricQueryResultStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
+                    }
+                },
+                "TRUNCATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Truncated"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalError"
+                    }
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ValidationError"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricStatistic": {
+            "type": "enum",
+            "members": {
+                "MIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Min"
+                    }
+                },
+                "MAX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Max"
+                    }
+                },
+                "AVG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Avg"
+                    }
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                },
+                "STD_DEV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StdDev"
+                    }
+                },
+                "LAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Last"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakermetrics#MetricValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakermetrics#Double"
+            }
+        },
+        "com.amazonaws.sagemakermetrics#Period": {
+            "type": "enum",
+            "members": {
+                "ONE_MINUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OneMinute"
+                    }
+                },
+                "FIVE_MINUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FiveMinute"
+                    }
+                },
+                "ONE_HOUR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OneHour"
+                    }
+                },
+                "ITERATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IterationNumber"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemakermetrics#PutMetricsErrorCode": {
@@ -225,6 +512,9 @@
             "type": "service",
             "version": "2022-09-30",
             "operations": [
+                {
+                    "target": "com.amazonaws.sagemakermetrics#BatchGetMetrics"
+                },
                 {
                     "target": "com.amazonaws.sagemakermetrics#BatchPutMetrics"
                 }
@@ -909,6 +1199,16 @@
                 }
             }
         },
+        "com.amazonaws.sagemakermetrics#SageMakerResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-].*/"
+            }
+        },
         "com.amazonaws.sagemakermetrics#Step": {
             "type": "integer",
             "traits": {
@@ -919,6 +1219,29 @@
         },
         "com.amazonaws.sagemakermetrics#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.sagemakermetrics#XAxisType": {
+            "type": "enum",
+            "members": {
+                "ITERATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IterationNumber"
+                    }
+                },
+                "TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Timestamp"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakermetrics#XAxisValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemakermetrics#Long"
+            }
         }
     }
 }
