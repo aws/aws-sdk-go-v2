@@ -155,7 +155,7 @@ func main() {
 The following sample program demonstrates the interaction between
 `BaseEndpoint` and `EndpointResolverV2`. **This is an advanced use case:**
 
-```kotlin
+```go
 import (
     "context"
     "fmt"
@@ -181,7 +181,7 @@ func (*resolverV2) ResolveEndpoint(ctx context.Context, params s3.EndpointParame
 }
 
 func main() {
-    cfg, err := config.LoadDefaultConfig(context.Background()
+    cfg, err := config.LoadDefaultConfig(context.Background())
     if (err != nil) {
         log.Fatal(err)
     }
