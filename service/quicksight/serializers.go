@@ -10123,6 +10123,10 @@ func (*awsRestjson1_serializeOpListFoldersForResource) ID() string {
 func (m *awsRestjson1_serializeOpListFoldersForResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
 	request, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
@@ -10159,6 +10163,8 @@ func (m *awsRestjson1_serializeOpListFoldersForResource) HandleSerialize(ctx con
 	}
 	in.Request = request
 
+	endTimer()
+	span.End()
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListFoldersForResourceInput(v *ListFoldersForResourceInput, encoder *httpbinding.Encoder) error {

@@ -1,0 +1,8 @@
+{
+    "id": "c68e2f09-de42-43b4-afdf-7fa766bf0818",
+    "type": "feature",
+    "description": "Add v2 smoke tests and smithy smokeTests trait for SDK testing.",
+    "modules": [
+        "service/neptune"
+    ]
+}

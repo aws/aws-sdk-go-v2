@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchGetMetrics struct {
+}
+
+func (*validateOpBatchGetMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchPutMetrics struct {
 }
 
@@ -30,8 +50,56 @@ func (m *validateOpBatchPutMetrics) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchGetMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetMetrics{}, middleware.After)
+}
+
 func addOpBatchPutMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutMetrics{}, middleware.After)
+}
+
+func validateMetricQuery(v *types.MetricQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricQuery"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if len(v.MetricStat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricStat"))
+	}
+	if len(v.Period) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
+	if len(v.XAxisType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("XAxisType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricQueryList(v []types.MetricQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricQueryList"}
+	for i := range v {
+		if err := validateMetricQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateRawMetricData(v *types.RawMetricData) error {
@@ -63,6 +131,25 @@ func validateRawMetricDataList(v []types.RawMetricData) error {
 	for i := range v {
 		if err := validateRawMetricData(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetMetricsInput(v *BatchGetMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetMetricsInput"}
+	if v.MetricQueries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricQueries"))
+	} else if v.MetricQueries != nil {
+		if err := validateMetricQueryList(v.MetricQueries); err != nil {
+			invalidParams.AddNested("MetricQueries", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

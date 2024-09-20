@@ -1,0 +1,8 @@
+{
+    "id": "4b42e520-2640-4253-9c49-0057eb359c9d",
+    "type": "feature",
+    "description": "Releasing new ErrorCodes for SysPrep failures during ImageImport and CreateImage process",
+    "modules": [
+        "service/workspaces"
+    ]
+}

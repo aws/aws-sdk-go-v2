@@ -15956,6 +15956,10 @@ type S3ModelDataSource struct {
 	// Configuration information for hub access.
 	HubAccessConfig *InferenceHubAccessConfig
 
+	// The Amazon S3 URI of the manifest file. The manifest file is a CSV file that
+	// stores the artifact locations.
+	ManifestS3Uri *string
+
 	// Specifies the access configuration file for the ML model. You can explicitly
 	// accept the model end-user license agreement (EULA) within the ModelAccessConfig
 	// . You are responsible for reviewing and complying with any applicable license

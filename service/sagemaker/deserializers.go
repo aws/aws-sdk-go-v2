@@ -74916,6 +74916,15 @@ func awsAwsjson11_deserializeDocumentS3ModelDataSource(v **types.S3ModelDataSour
 				return err
 			}
 
+		case "ManifestS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ModelUri to be of type string, got %T instead", value)
+				}
+				sv.ManifestS3Uri = ptr.String(jtv)
+			}
+
 		case "ModelAccessConfig":
 			if err := awsAwsjson11_deserializeDocumentModelAccessConfig(&sv.ModelAccessConfig, value); err != nil {
 				return err

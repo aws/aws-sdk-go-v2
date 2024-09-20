@@ -196,9 +196,9 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPSignerV4a(&options)
 
-	resolveMeterProvider(&options)
-
 	resolveTracerProvider(&options)
+
+	resolveMeterProvider(&options)
 
 	resolveAuthSchemeResolver(&options)
 

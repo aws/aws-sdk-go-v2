@@ -12,7 +12,7 @@ import (
 )
 
 // Used to ingest training metrics into SageMaker. These metrics can be visualized
-// in SageMaker Studio and retrieved with the GetMetrics API.
+// in SageMaker Studio.
 func (c *Client) BatchPutMetrics(ctx context.Context, params *BatchPutMetricsInput, optFns ...func(*Options)) (*BatchPutMetricsOutput, error) {
 	if params == nil {
 		params = &BatchPutMetricsInput{}
@@ -35,7 +35,8 @@ type BatchPutMetricsInput struct {
 	// This member is required.
 	MetricData []types.RawMetricData
 
-	// The name of the Trial Component to associate with the metrics.
+	// The name of the Trial Component to associate with the metrics. The Trial
+	// Component name must be entirely lowercase.
 	//
 	// This member is required.
 	TrialComponentName *string

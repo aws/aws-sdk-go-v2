@@ -1,0 +1,8 @@
+{
+    "id": "5ee92cee-ca5d-4e7b-b0a3-6a1d4d6d568b",
+    "type": "feature",
+    "description": "This release introduces support for the SageMaker Metrics BatchGetMetrics API.",
+    "modules": [
+        "service/sagemakermetrics"
+    ]
+}

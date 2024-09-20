@@ -29870,6 +29870,11 @@ func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource,
 		}
 	}
 
+	if v.ManifestS3Uri != nil {
+		ok := object.Key("ManifestS3Uri")
+		ok.String(*v.ManifestS3Uri)
+	}
+
 	if v.ModelAccessConfig != nil {
 		ok := object.Key("ModelAccessConfig")
 		if err := awsAwsjson11_serializeDocumentModelAccessConfig(v.ModelAccessConfig, ok); err != nil {
