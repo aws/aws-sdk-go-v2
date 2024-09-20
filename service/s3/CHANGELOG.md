@@ -1,3 +1,8 @@
+# v1.63.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.0 (2024-09-18)
 
 * **Feature**: Added SSE-KMS support for directory buckets.

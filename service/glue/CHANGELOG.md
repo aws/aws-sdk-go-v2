@@ -1,3 +1,8 @@
+# v1.98.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.97.0 (2024-09-19)
 
 * **Feature**: This change is for releasing TestConnection api SDK model

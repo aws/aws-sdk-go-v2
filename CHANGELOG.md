@@ -1,3 +1,21 @@
+# Release (2024-09-20)
+
+## General Highlights
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.35.0](service/dynamodb/CHANGELOG.md#v1350-2024-09-20)
+  * **Feature**: Generate account endpoint for DynamoDB requests when the account ID is available
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.34.0](service/neptune/CHANGELOG.md#v1340-2024-09-20)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.159.0](service/sagemaker/CHANGELOG.md#v11590-2024-09-20)
+  * **Feature**: Amazon SageMaker now supports using manifest files to specify the location of uncompressed model artifacts within Model Packages
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.11.0](service/sagemakermetrics/CHANGELOG.md#v1110-2024-09-20)
+  * **Feature**: This release introduces support for the SageMaker Metrics BatchGetMetrics API.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.47.0](service/workspaces/CHANGELOG.md#v1470-2024-09-20)
+  * **Feature**: Releasing new ErrorCodes for SysPrep failures during ImageImport and CreateImage process
+
 # Release (2024-09-19)
 
 ## Module Highlights

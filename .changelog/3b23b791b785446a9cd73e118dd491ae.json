@@ -1,8 +1,0 @@
-{
-    "id": "3b23b791-b785-446a-9cd7-3e118dd491ae",
-    "type": "feature",
-    "description": "Amazon SageMaker now supports using manifest files to specify the location of uncompressed model artifacts within Model Packages",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

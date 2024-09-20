@@ -1,3 +1,9 @@
+# v1.159.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Feature**: Amazon SageMaker now supports using manifest files to specify the location of uncompressed model artifacts within Model Packages
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.158.0 (2024-09-19)
 
 * **Feature**: Introduced support for G6e instance types on SageMaker Studio for JupyterLab and CodeEditor applications.

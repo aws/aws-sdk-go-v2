@@ -1,8 +1,0 @@
-{
-    "id": "53b6b742-8c6c-426d-8e8b-bf5d40aef436",
-    "type": "feature",
-    "description": "Generate account endpoint for DynamoDB requests when the account ID is available",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

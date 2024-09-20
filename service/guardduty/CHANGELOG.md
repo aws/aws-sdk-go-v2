@@ -1,3 +1,8 @@
+# v1.48.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2024-09-18)
 
 * **Feature**: Add `launchType` and `sourceIPs` fields to GuardDuty findings.

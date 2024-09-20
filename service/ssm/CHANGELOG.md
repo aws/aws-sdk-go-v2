@@ -1,3 +1,8 @@
+# v1.54.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2024-09-17)
 
 * **Feature**: Support for additional levels of cross-account, cross-Region organizational units in Automation. Various documentation updates.
