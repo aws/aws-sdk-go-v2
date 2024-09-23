@@ -88,6 +88,10 @@ type CreateApplicationInput struct {
 	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
 	RuntimeConfiguration []types.Configuration
 
+	// The scheduler configuration for batch and streaming jobs running on this
+	// application. Supported with release labels emr-7.0.0 and above.
+	SchedulerConfiguration *types.SchedulerConfiguration
+
 	// The tags assigned to the application.
 	Tags map[string]string
 

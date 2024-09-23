@@ -21,6 +21,7 @@
         "api_op_GetView.go",
         "api_op_ListIndexes.go",
         "api_op_ListIndexesForMembers.go",
+        "api_op_ListResources.go",
         "api_op_ListSupportedResourceTypes.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListViews.go",

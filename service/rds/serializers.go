@@ -16859,6 +16859,11 @@ func awsAwsquery_serializeOpDocumentModifyDBShardGroupInput(v *ModifyDBShardGrou
 	object := value.Object()
 	_ = object
 
+	if v.ComputeRedundancy != nil {
+		objectKey := object.Key("ComputeRedundancy")
+		objectKey.Integer(*v.ComputeRedundancy)
+	}
+
 	if v.DBShardGroupIdentifier != nil {
 		objectKey := object.Key("DBShardGroupIdentifier")
 		objectKey.String(*v.DBShardGroupIdentifier)

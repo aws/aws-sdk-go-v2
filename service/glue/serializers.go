@@ -15733,6 +15733,13 @@ func awsAwsjson11_serializeDocumentConnectionInput(v *types.ConnectionInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AthenaProperties != nil {
+		ok := object.Key("AthenaProperties")
+		if err := awsAwsjson11_serializeDocumentPropertyMap(v.AthenaProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AuthenticationConfiguration != nil {
 		ok := object.Key("AuthenticationConfiguration")
 		if err := awsAwsjson11_serializeDocumentAuthenticationConfigurationInput(v.AuthenticationConfiguration, ok); err != nil {
@@ -19915,6 +19922,17 @@ func awsAwsjson11_serializeDocumentProfileConfiguration(v *types.ProfileConfigur
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPropertyMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

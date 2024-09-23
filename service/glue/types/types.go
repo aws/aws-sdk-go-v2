@@ -1562,6 +1562,9 @@ type ConfusionMatrix struct {
 // Defines a connection to a data source.
 type Connection struct {
 
+	// This field is not currently used.
+	AthenaProperties map[string]string
+
 	// The authentication properties of the connection.
 	AuthenticationConfiguration *AuthenticationConfiguration
 
@@ -1864,6 +1867,9 @@ type ConnectionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// This field is not currently used.
+	AthenaProperties map[string]string
 
 	// The authentication properties of the connection. Used for a Salesforce
 	// connection.

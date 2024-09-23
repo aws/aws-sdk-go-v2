@@ -218,6 +218,18 @@ func TestCheckSnapshot_ListIndexesForMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListSupportedResourceTypes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListSupportedResourceTypes(context.Background(), nil, func(o *Options) {
@@ -462,6 +474,18 @@ func TestUpdateSnapshot_ListIndexesForMembers(t *testing.T) {
 	_, err := svc.ListIndexesForMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIndexesForMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResources")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -2637,6 +2637,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				return err
 			}
 
+		case "schedulerConfiguration":
+			if err := awsRestjson1_deserializeDocumentSchedulerConfiguration(&sv.SchedulerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3684,6 +3689,22 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.CreatedBy = ptr.String(jtv)
 			}
 
+		case "endedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3743,6 +3764,19 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				return err
 			}
 
+		case "queuedDurationMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueuedDurationMilliseconds = ptr.Int64(i64)
+			}
+
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3755,6 +3789,22 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 		case "retryPolicy":
 			if err := awsRestjson1_deserializeDocumentRetryPolicy(&sv.RetryPolicy, value); err != nil {
 				return err
+			}
+
+		case "startedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "state":
@@ -4866,6 +4916,63 @@ func awsRestjson1_deserializeDocumentS3MonitoringConfiguration(v **types.S3Monit
 					return fmt.Errorf("expected UriString to be of type string, got %T instead", value)
 				}
 				sv.LogUri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulerConfiguration(v **types.SchedulerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SchedulerConfiguration
+	if *v == nil {
+		sv = &types.SchedulerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxConcurrentRuns":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConcurrentRuns = ptr.Int32(int32(i64))
+			}
+
+		case "queueTimeoutMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueueTimeoutMinutes = ptr.Int32(int32(i64))
 			}
 
 		default:

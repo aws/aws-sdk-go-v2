@@ -1,0 +1,8 @@
+{
+    "id": "03a1fad9-08c4-4cb7-8438-70f20c758915",
+    "type": "feature",
+    "description": "This release adds support for job concurrency and queuing configuration at Application level.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

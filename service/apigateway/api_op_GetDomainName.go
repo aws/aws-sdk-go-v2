@@ -54,7 +54,8 @@ type GetDomainNameOutput struct {
 	CertificateName *string
 
 	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded.
+	// this domain name was uploaded. API Gateway doesn't change this value if you
+	// update the certificate.
 	CertificateUploadDate *time.Time
 
 	// The domain name of the Amazon CloudFront distribution associated with this

@@ -82,7 +82,8 @@ type CreateAgentInput struct {
 	// A description of the agent.
 	Description *string
 
-	// The foundation model to be used for orchestration by the agent you create.
+	// The Amazon Resource Name (ARN) of the foundation model to be used for
+	// orchestration by the agent you create.
 	FoundationModel *string
 
 	// The unique Guardrail configuration assigned to the agent when it is created.

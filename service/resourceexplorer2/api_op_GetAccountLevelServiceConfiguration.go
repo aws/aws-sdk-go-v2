@@ -13,8 +13,7 @@ import (
 
 // Retrieves the status of your account's Amazon Web Services service access, and
 // validates the service linked role required to access the multi-account search
-// feature. Only the management account or a delegated administrator with service
-// access enabled can invoke this API call.
+// feature. Only the management account can invoke this API call.
 func (c *Client) GetAccountLevelServiceConfiguration(ctx context.Context, params *GetAccountLevelServiceConfigurationInput, optFns ...func(*Options)) (*GetAccountLevelServiceConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAccountLevelServiceConfigurationInput{}

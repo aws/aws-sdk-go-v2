@@ -3241,9 +3241,6 @@ func awsAwsquery_deserializeOpErrorCreateDBShardGroup(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidMaxAcu", errorCode):
-		return awsAwsquery_deserializeErrorInvalidMaxAcuFault(response, errorBody)
-
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
@@ -14114,9 +14111,6 @@ func awsAwsquery_deserializeOpErrorModifyDBShardGroup(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
-	case strings.EqualFold("InvalidMaxAcu", errorCode):
-		return awsAwsquery_deserializeErrorInvalidMaxAcuFault(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -23920,50 +23914,6 @@ func awsAwsquery_deserializeErrorInvalidIntegrationStateFault(response *smithyht
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentInvalidIntegrationStateFault(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return output
-}
-
-func awsAwsquery_deserializeErrorInvalidMaxAcuFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	output := &types.InvalidMaxAcuFault{}
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-	body := io.TeeReader(errorBody, ringBuffer)
-	rootDecoder := xml.NewDecoder(body)
-	t, err := smithyxml.FetchRootElement(rootDecoder)
-	if err == io.EOF {
-		return output
-	}
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	t, err = decoder.GetElement("Error")
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-	err = awsAwsquery_deserializeDocumentInvalidMaxAcuFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -37870,6 +37820,19 @@ func awsAwsquery_deserializeDocumentDBShardGroup(v **types.DBShardGroup, decoder
 				sv.DBClusterIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBShardGroupArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -44927,55 +44890,6 @@ func awsAwsquery_deserializeDocumentInvalidIntegrationStateFault(v **types.Inval
 	var sv *types.InvalidIntegrationStateFault
 	if *v == nil {
 		sv = &types.InvalidIntegrationStateFault{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("message", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.Message = ptr.String(xtv)
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentInvalidMaxAcuFault(v **types.InvalidMaxAcuFault, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.InvalidMaxAcuFault
-	if *v == nil {
-		sv = &types.InvalidMaxAcuFault{}
 	} else {
 		sv = *v
 	}
@@ -57309,6 +57223,19 @@ func awsAwsquery_deserializeOpDocumentCreateDBShardGroupOutput(v **CreateDBShard
 				sv.DBClusterIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBShardGroupArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -58822,6 +58749,19 @@ func awsAwsquery_deserializeOpDocumentDeleteDBShardGroupOutput(v **DeleteDBShard
 			{
 				xtv := string(val)
 				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
@@ -63350,6 +63290,19 @@ func awsAwsquery_deserializeOpDocumentModifyDBShardGroupOutput(v **ModifyDBShard
 				sv.DBClusterIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBShardGroupArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -64195,6 +64148,19 @@ func awsAwsquery_deserializeOpDocumentRebootDBShardGroupOutput(v **RebootDBShard
 			{
 				xtv := string(val)
 				sv.DBClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DBShardGroupArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBShardGroupArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DBShardGroupIdentifier", t.Name.Local):

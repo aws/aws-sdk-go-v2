@@ -81,6 +81,7 @@ const (
 	JobRunStateFailed     JobRunState = "FAILED"
 	JobRunStateCancelling JobRunState = "CANCELLING"
 	JobRunStateCancelled  JobRunState = "CANCELLED"
+	JobRunStateQueued     JobRunState = "QUEUED"
 )
 
 // Values returns all known values for JobRunState. Note that this can be expanded
@@ -97,5 +98,6 @@ func (JobRunState) Values() []JobRunState {
 		"FAILED",
 		"CANCELLING",
 		"CANCELLED",
+		"QUEUED",
 	}
 }

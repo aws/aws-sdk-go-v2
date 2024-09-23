@@ -2031,9 +2031,11 @@ type KnowledgeBaseFlowNodeConfiguration struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The unique identifier of the model to use to generate a response from the query
-	// results. Omit this field if you want to return the retrieved results as an
+	// The unique identifier of the model or [inference profile] to use to generate a response from the
+	// query results. Omit this field if you want to return the retrieved results as an
 	// array.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	ModelId *string
 
 	noSmithyDocumentSerde
@@ -2484,7 +2486,9 @@ type PromptFlowNodeConfiguration struct {
 // Contains configurations for a prompt defined inline in the node.
 type PromptFlowNodeInlineConfiguration struct {
 
-	// The unique identifier of the model to run inference with.
+	// The unique identifier of the model or [inference profile] to run inference with.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	ModelId *string
@@ -2637,9 +2641,9 @@ type PromptOverrideConfiguration struct {
 	// The ARN of the Lambda function to use when parsing the raw foundation model
 	// output in parts of the agent sequence. If you specify this field, at least one
 	// of the promptConfigurations must contain a parserMode value that is set to
-	// OVERRIDDEN . For more information, see [Parser Lambda function in Agents for Amazon Bedrock].
+	// OVERRIDDEN . For more information, see [Parser Lambda function in Amazon Bedrock Agents].
 	//
-	// [Parser Lambda function in Agents for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
+	// [Parser Lambda function in Amazon Bedrock Agents]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
 	OverrideLambda *string
 
 	noSmithyDocumentSerde
@@ -2733,7 +2737,10 @@ type PromptVariant struct {
 	// [Create a prompt using Prompt management]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html
 	Metadata []PromptMetadataEntry
 
-	// The unique identifier of the model with which to run inference on the prompt.
+	// The unique identifier of the model or [inference profile] with which to run inference on the
+	// prompt.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	ModelId *string
 
 	// Contains configurations for the prompt template.

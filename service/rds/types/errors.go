@@ -2885,33 +2885,6 @@ func (e *InvalidIntegrationStateFault) ErrorCode() string {
 }
 func (e *InvalidIntegrationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The maximum capacity of the DB shard group must be 48-7168 Aurora capacity
-// units (ACUs).
-type InvalidMaxAcuFault struct {
-	Message *string
-
-	ErrorCodeOverride *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *InvalidMaxAcuFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InvalidMaxAcuFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InvalidMaxAcuFault) ErrorCode() string {
-	if e == nil || e.ErrorCodeOverride == nil {
-		return "InvalidMaxAcu"
-	}
-	return *e.ErrorCodeOverride
-}
-func (e *InvalidMaxAcuFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
 // The option group isn't in the available state.
 type InvalidOptionGroupStateFault struct {
 	Message *string

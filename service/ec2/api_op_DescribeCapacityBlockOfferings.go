@@ -37,16 +37,6 @@ type DescribeCapacityBlockOfferingsInput struct {
 	// This member is required.
 	CapacityDurationHours *int32
 
-	// The number of instances for which to reserve capacity.
-	//
-	// This member is required.
-	InstanceCount *int32
-
-	// The type of instance for which the Capacity Block offering reserves capacity.
-	//
-	// This member is required.
-	InstanceType *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation . Otherwise, it is
@@ -55,6 +45,12 @@ type DescribeCapacityBlockOfferingsInput struct {
 
 	// The latest end date for the Capacity Block offering.
 	EndDateRange *time.Time
+
+	// The number of instances for which to reserve capacity.
+	InstanceCount *int32
+
+	// The type of instance for which the Capacity Block offering reserves capacity.
+	InstanceType *string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more

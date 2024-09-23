@@ -1,0 +1,8 @@
+{
+    "id": "70377f17-e6e2-4a3f-9b4b-d274516325a8",
+    "type": "feature",
+    "description": "Added AthenaProperties parameter to Glue Connections, allowing Athena to store service specific properties on Glue Connections.",
+    "modules": [
+        "service/glue"
+    ]
+}

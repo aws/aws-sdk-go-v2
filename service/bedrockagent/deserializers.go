@@ -16759,7 +16759,7 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseFlowNodeConfiguration(v **type
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ModelIdentifier to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KnowledgeBaseModelIdentifier to be of type string, got %T instead", value)
 				}
 				sv.ModelId = ptr.String(jtv)
 			}

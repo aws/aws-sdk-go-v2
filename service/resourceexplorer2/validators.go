@@ -130,6 +130,26 @@ func (m *validateOpListIndexesForMembers) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListResources struct {
+}
+
+func (*validateOpListResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -272,6 +292,10 @@ func addOpGetViewValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListIndexesForMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIndexesForMembers{}, middleware.After)
+}
+
+func addOpListResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResources{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -437,6 +461,23 @@ func validateOpListIndexesForMembersInput(v *ListIndexesForMembersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListIndexesForMembersInput"}
 	if v.AccountIdList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIdList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourcesInput(v *ListResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourcesInput"}
+	if v.Filters != nil {
+		if err := validateSearchFilter(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

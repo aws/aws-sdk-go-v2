@@ -86,6 +86,10 @@ type UpdateApplicationInput struct {
 	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
 	RuntimeConfiguration []types.Configuration
 
+	// The scheduler configuration for batch and streaming jobs running on this
+	// application. Supported with release labels emr-7.0.0 and above.
+	SchedulerConfiguration *types.SchedulerConfiguration
+
 	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput .
 	// This parameter must contain all valid worker types for a Spark or Hive
 	// application. Valid worker types include Driver and Executor for Spark

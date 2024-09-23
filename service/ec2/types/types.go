@@ -15761,7 +15761,7 @@ type SnapshotRecycleBinInfo struct {
 // Details about the import snapshot task.
 type SnapshotTaskDetail struct {
 
-	// The description of the snapshot.
+	// The description of the disk image being imported.
 	Description *string
 
 	// The size of the disk in the snapshot, in GiB.

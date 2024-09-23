@@ -39,7 +39,7 @@ import (
 // This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora,
 // use RestoreDBClusterFromSnapshot .
 //
-// [Upgrading a PostgreSQL DB snapshot engine version]: https://docs.aws.amazon.com/USER_UpgradeDBSnapshot.PostgreSQL.html
+// [Upgrading a PostgreSQL DB snapshot engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html
 // [Upgrading a MySQL DB snapshot engine version]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
 func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *RestoreDBInstanceFromDBSnapshotInput, optFns ...func(*Options)) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
 	if params == nil {

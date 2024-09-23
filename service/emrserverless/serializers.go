@@ -252,6 +252,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		}
 	}
 
+	if v.SchedulerConfiguration != nil {
+		ok := object.Key("schedulerConfiguration")
+		if err := awsRestjson1_serializeDocumentSchedulerConfiguration(v.SchedulerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1537,6 +1544,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.SchedulerConfiguration != nil {
+		ok := object.Key("schedulerConfiguration")
+		if err := awsRestjson1_serializeDocumentSchedulerConfiguration(v.SchedulerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.WorkerTypeSpecifications != nil {
 		ok := object.Key("workerTypeSpecifications")
 		if err := awsRestjson1_serializeDocumentWorkerTypeSpecificationInputMap(v.WorkerTypeSpecifications, ok); err != nil {
@@ -1952,6 +1966,23 @@ func awsRestjson1_serializeDocumentS3MonitoringConfiguration(v *types.S3Monitori
 	if v.LogUri != nil {
 		ok := object.Key("logUri")
 		ok.String(*v.LogUri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchedulerConfiguration(v *types.SchedulerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxConcurrentRuns != nil {
+		ok := object.Key("maxConcurrentRuns")
+		ok.Integer(*v.MaxConcurrentRuns)
+	}
+
+	if v.QueueTimeoutMinutes != nil {
+		ok := object.Key("queueTimeoutMinutes")
+		ok.Integer(*v.QueueTimeoutMinutes)
 	}
 
 	return nil
