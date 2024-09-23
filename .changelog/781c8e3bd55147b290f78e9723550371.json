@@ -1,8 +1,0 @@
-{
-    "id": "781c8e3b-d551-47b2-90f7-8e9723550371",
-    "type": "feature",
-    "description": "Support ComputeRedundancy parameter in ModifyDBShardGroup API. Add DBShardGroupArn in DBShardGroup API response. Remove InvalidMaxAcuFault from CreateDBShardGroup and ModifyDBShardGroup API. Both API will throw InvalidParameterValueException for invalid ACU configuration.",
-    "modules": [
-        "service/rds"
-    ]
-}

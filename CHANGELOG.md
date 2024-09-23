@@ -1,3 +1,26 @@
+# Release (2024-09-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.26.1](service/apigateway/CHANGELOG.md#v1261-2024-09-23)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.46.0](service/athena/CHANGELOG.md#v1460-2024-09-23)
+  * **Feature**: List/Get/Update/Delete/CreateDataCatalog now integrate with AWS Glue connections. Users can create a Glue connection through Athena or use a Glue connection to define their Athena federated parameters.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.21.0](service/bedrockagent/CHANGELOG.md#v1210-2024-09-23)
+  * **Feature**: Amazon Bedrock Prompt Flows and Prompt Management now supports using inference profiles to increase throughput and improve resilience.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.179.0](service/ec2/CHANGELOG.md#v11790-2024-09-23)
+  * **Feature**: Amazon EC2 G6e instances powered by NVIDIA L40S Tensor Core GPUs are the most cost-efficient GPU instances for deploying generative AI models and the highest performance GPU instances for spatial computing workloads.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.25.0](service/emrserverless/CHANGELOG.md#v1250-2024-09-23)
+  * **Feature**: This release adds support for job concurrency and queuing configuration at Application level.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.99.0](service/glue/CHANGELOG.md#v1990-2024-09-23)
+  * **Feature**: Added AthenaProperties parameter to Glue Connections, allowing Athena to store service specific properties on Glue Connections.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.85.0](service/rds/CHANGELOG.md#v1850-2024-09-23)
+  * **Feature**: Support ComputeRedundancy parameter in ModifyDBShardGroup API. Add DBShardGroupArn in DBShardGroup API response. Remove InvalidMaxAcuFault from CreateDBShardGroup and ModifyDBShardGroup API. Both API will throw InvalidParameterValueException for invalid ACU configuration.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.14.0](service/resourceexplorer2/CHANGELOG.md#v1140-2024-09-23)
+  * **Feature**: AWS Resource Explorer released ListResources feature which allows customers to list all indexed AWS resources within a view.
+
 # Release (2024-09-20)
 
 ## General Highlights

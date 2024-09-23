@@ -4,8 +4,8 @@ go 1.21
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.31.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.35.0
-	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.23.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.35.1
+	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.23.1
 )
 
 require github.com/aws/smithy-go v1.21.0 // indirect

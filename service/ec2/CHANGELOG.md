@@ -1,3 +1,7 @@
+# v1.179.0 (2024-09-23)
+
+* **Feature**: Amazon EC2 G6e instances powered by NVIDIA L40S Tensor Core GPUs are the most cost-efficient GPU instances for deploying generative AI models and the highest performance GPU instances for spatial computing workloads.
+
 # v1.178.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.

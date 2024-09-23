@@ -1,3 +1,7 @@
+# v1.14.0 (2024-09-23)
+
+* **Feature**: AWS Resource Explorer released ListResources feature which allows customers to list all indexed AWS resources within a view.
+
 # v1.13.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.

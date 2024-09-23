@@ -1,3 +1,7 @@
+# v1.25.0 (2024-09-23)
+
+* **Feature**: This release adds support for job concurrency and queuing configuration at Application level.
+
 # v1.24.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.

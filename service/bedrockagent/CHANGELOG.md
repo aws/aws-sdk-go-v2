@@ -1,3 +1,7 @@
+# v1.21.0 (2024-09-23)
+
+* **Feature**: Amazon Bedrock Prompt Flows and Prompt Management now supports using inference profiles to increase throughput and improve resilience.
+
 # v1.20.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.

@@ -1,3 +1,7 @@
+# v1.26.1 (2024-09-23)
+
+* **Documentation**: Documentation updates for Amazon API Gateway
+
 # v1.26.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.

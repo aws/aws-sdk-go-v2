@@ -1,3 +1,7 @@
+# v1.46.0 (2024-09-23)
+
+* **Feature**: List/Get/Update/Delete/CreateDataCatalog now integrate with AWS Glue connections. Users can create a Glue connection through Athena or use a Glue connection to define their Athena federated parameters.
+
 # v1.45.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.
