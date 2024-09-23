@@ -650,7 +650,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the status of your account's Amazon Web Services service access, and validates the service\n            linked role required to access the multi-account search feature. Only the management\n            account or a delegated administrator with service access enabled can invoke this API\n            call. </p>",
+                "smithy.api#documentation": "<p>Retrieves the status of your account's Amazon Web Services service access, and validates the service\n            linked role required to access the multi-account search feature. Only the management\n            account can invoke this API call. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetAccountLevelServiceConfiguration"
@@ -1186,6 +1186,124 @@
                 }
             }
         },
+        "com.amazonaws.resourceexplorer2#ListResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourceexplorer2#ListResourcesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourceexplorer2#ListResourcesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourceexplorer2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of resources and their details that match the specified criteria. This query must \n            use a view. If you don’t explicitly specify a view, then Resource Explorer uses the default view for the Amazon Web Services Region \n            in which you call this operation. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListResources"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Resources"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListResourcesInput": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.resourceexplorer2#SearchFilter"
+                },
+                "MaxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that you want included on each page of the \n    response. If you do not include this parameter, it defaults to a value appropriate to the \n    operation. If additional items exist beyond those included in the current response, the \n    <code>NextToken</code> response element is present and has a value (is not null). Include that \n    value as the <code>NextToken</code> request parameter in the next call to the operation to get \n    the next part of the results.</p>\n         <note>\n            <p>An API operation can return fewer results than the maximum even when there are \n    more results available. You should check <code>NextToken</code> after every operation to ensure \n    that you receive all of the results.</p>\n         </note>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "ViewArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon resource name (ARN) of the view to use for the query. If you don't \n            specify a value for this parameter, then the operation automatically uses the default view \n            for the Amazon Web Services Region in which you called this operation. If the Region either doesn't have \n            a default view or if you don't have permission to use the default view, then the operation \n            fails with a 401 Unauthorized exception.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1000
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n    <code>NextToken</code> response in a previous request. A <code>NextToken</code> response \n    indicates that more output is available. Set this parameter to the value of the previous \n    call's <code>NextToken</code> response to indicate where the output should continue \n    from. The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourceexplorer2#ListResourcesOutput": {
+            "type": "structure",
+            "members": {
+                "Resources": {
+                    "target": "com.amazonaws.resourceexplorer2#ResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of structures that describe the resources that match the query. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is \n    included in the current response. Use this value in the <code>NextToken</code> request parameter \n    in a subsequent call to the operation to get the next part of the output. You should repeat this \n    until the <code>NextToken</code> response element comes back as <code>null</code>.\n    The pagination tokens expire after 24 hours.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2048
+                        }
+                    }
+                },
+                "ViewArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the view that this operation used to perform the search. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1011
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourceexplorer2#ListSupportedResourceTypes": {
             "type": "operation",
             "input": {
@@ -1461,7 +1579,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1011
+                    "max": 1280
                 },
                 "smithy.api#sensitive": {}
             }
@@ -1502,7 +1620,7 @@
                 "Service": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Service that owns the resource and is responsible for creating and updating\n            it.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice that owns the resource and is responsible for creating and updating\n            it.</p>"
                     }
                 },
                 "LastReportedAt": {
@@ -1564,6 +1682,9 @@
                 },
                 {
                     "target": "com.amazonaws.resourceexplorer2#ListIndexesForMembers"
+                },
+                {
+                    "target": "com.amazonaws.resourceexplorer2#ListResources"
                 },
                 {
                     "target": "com.amazonaws.resourceexplorer2#ListSupportedResourceTypes"
@@ -2490,7 +2611,7 @@
                 "Service": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Service that is associated with the resource type. This is the primary\n            service that lets you create and interact with resources of this type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Servicesservice that is associated with the resource type. This is the primary\n            service that lets you create and interact with resources of this type.</p>"
                     }
                 },
                 "ResourceType": {

@@ -5457,7 +5457,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DB parameter group to associate with this DB instance.</p>\n         <p>If you don't specify a value for <code>DBParameterGroupName</code>, then Amazon RDS\n            uses the <code>DBParameterGroup</code> of the source DB instance for a same Region read\n            replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a\n            cross-Region read replica.</p>\n         <p>Specifying a parameter group for this operation is only supported for MySQL DB instances for cross-Region read replicas and for Oracle DB instances. It isn't supported for MySQL DB instances for same Region read replicas or for RDS Custom.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the DB parameter group to associate with this read replica DB\n            instance.</p>\n         <p>For Single-AZ or Multi-AZ DB instance read replica instances, if you don't specify a\n            value for <code>DBParameterGroupName</code>, then Amazon RDS uses the\n                <code>DBParameterGroup</code> of the source DB instance for a same Region read\n            replica, or the default <code>DBParameterGroup</code> for the specified DB engine for a\n            cross-Region read replica.</p>\n         <p>For Multi-AZ DB cluster same Region read replica instances, if you don't specify a\n            value for <code>DBParameterGroupName</code>, then Amazon RDS uses the default\n                <code>DBParameterGroup</code>.</p>\n         <p>Specifying a parameter group for this operation is only supported for MySQL DB\n            instances for cross-Region read replicas, for Multi-AZ DB cluster read replica\n            instances, and for Oracle DB instances. It isn't supported for MySQL DB instances for\n            same Region read replicas or for RDS Custom.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -6085,9 +6085,6 @@
                     "target": "com.amazonaws.rds#InvalidDBClusterStateFault"
                 },
                 {
-                    "target": "com.amazonaws.rds#InvalidMaxAcuFault"
-                },
-                {
                     "target": "com.amazonaws.rds#InvalidVPCNetworkStateFault"
                 },
                 {
@@ -6123,7 +6120,7 @@
                 "ComputeRedundancy": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to create standby instances for the DB shard group. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.</p>\n            </li>\n            <li>\n               <p>1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.</p>\n            </li>\n            <li>\n               <p>2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>\n            </li>\n            <li>\n               <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>\n            </li>\n            <li>\n               <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxACU": {
@@ -11117,7 +11114,7 @@
                 "ComputeRedundancy": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to create standby instances for the DB shard group. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a single, primary DB instance for each physical shard. This is the default value, and the only one supported for the preview.</p>\n            </li>\n            <li>\n               <p>1 - Creates a primary DB instance and a standby instance in a different Availability Zone (AZ) for each physical shard.</p>\n            </li>\n            <li>\n               <p>2 - Creates a primary DB instance and two standby instances in different AZs for each physical shard.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>\n            </li>\n            <li>\n               <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>\n            </li>\n            <li>\n               <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Status": {
@@ -11136,6 +11133,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection endpoint for the DB shard group.</p>"
+                    }
+                },
+                "DBShardGroupArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the DB shard group.</p>"
                     }
                 }
             }
@@ -20511,23 +20514,6 @@
                 "smithy.api#httpError": 400
             }
         },
-        "com.amazonaws.rds#InvalidMaxAcuFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.rds#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "aws.protocols#awsQueryError": {
-                    "code": "InvalidMaxAcu",
-                    "httpResponseCode": 400
-                },
-                "smithy.api#documentation": "<p>The maximum capacity of the DB shard group must be 48-7168 Aurora capacity units (ACUs).</p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
         "com.amazonaws.rds#InvalidOptionGroupStateFault": {
             "type": "structure",
             "members": {
@@ -22878,9 +22864,6 @@
                 },
                 {
                     "target": "com.amazonaws.rds#InvalidDBClusterStateFault"
-                },
-                {
-                    "target": "com.amazonaws.rds#InvalidMaxAcuFault"
                 }
             ],
             "traits": {
@@ -22908,6 +22891,12 @@
                     "target": "com.amazonaws.rds#DoubleOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum capacity of the DB shard group in Aurora capacity units (ACUs).</p>"
+                    }
+                },
+                "ComputeRedundancy": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to create standby DB shard groups for the DB shard group. Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>0 - Creates a DB shard group without a standby DB shard group. This is the default value.</p>\n            </li>\n            <li>\n               <p>1 - Creates a DB shard group with a standby DB shard group in a different Availability Zone (AZ).</p>\n            </li>\n            <li>\n               <p>2 - Creates a DB shard group with two standby DB shard groups in two different AZs.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -27805,7 +27794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with most\n            of the source's original configuration, including the default security group and DB parameter group. By default, the new DB\n            instance is created as a Single-AZ deployment, except when the instance is a SQL Server instance that has an option group\n            associated with mirroring. In this case, the instance becomes a Multi-AZ deployment, not a Single-AZ deployment.</p>\n         <p>If you want to replace your original DB instance with the new, restored DB instance, then rename your original DB instance\n            before you call the <code>RestoreDBInstanceFromDBSnapshot</code> operation. RDS doesn't allow two DB instances with the same name. After you\n            have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as\n            the <code>DBInstanceIdentifier</code> in the call to the <code>RestoreDBInstanceFromDBSnapshot</code> operation. The result is that you replace the original\n            DB instance with the DB instance created from the snapshot.</p>\n         <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code>\n      must be the ARN of the shared DB snapshot.</p>\n         <p>To restore from a DB snapshot with an unsupported engine version, you must first upgrade the \n        engine version of the snapshot. For more information about upgrading a RDS for MySQL DB snapshot engine version, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html\">Upgrading a MySQL DB snapshot engine version</a>. \n        For more information about upgrading a RDS for PostgreSQL DB snapshot engine version, <a href=\"https://docs.aws.amazon.com/USER_UpgradeDBSnapshot.PostgreSQL.html\">Upgrading a PostgreSQL DB snapshot engine version</a>.</p>\n         <note>\n            <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with most\n            of the source's original configuration, including the default security group and DB parameter group. By default, the new DB\n            instance is created as a Single-AZ deployment, except when the instance is a SQL Server instance that has an option group\n            associated with mirroring. In this case, the instance becomes a Multi-AZ deployment, not a Single-AZ deployment.</p>\n         <p>If you want to replace your original DB instance with the new, restored DB instance, then rename your original DB instance\n            before you call the <code>RestoreDBInstanceFromDBSnapshot</code> operation. RDS doesn't allow two DB instances with the same name. After you\n            have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as\n            the <code>DBInstanceIdentifier</code> in the call to the <code>RestoreDBInstanceFromDBSnapshot</code> operation. The result is that you replace the original\n            DB instance with the DB instance created from the snapshot.</p>\n         <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code>\n      must be the ARN of the shared DB snapshot.</p>\n         <p>To restore from a DB snapshot with an unsupported engine version, you must first upgrade the \n        engine version of the snapshot. For more information about upgrading a RDS for MySQL DB snapshot engine version, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html\">Upgrading a MySQL DB snapshot engine version</a>. \n        For more information about upgrading a RDS for PostgreSQL DB snapshot engine version, <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html\">Upgrading a PostgreSQL DB snapshot engine version</a>.</p>\n         <note>\n            <p>This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To restore a DB instance from a DB snapshot",
