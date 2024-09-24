@@ -1,8 +1,0 @@
-{
-    "id": "4d2a9b13-478c-4d84-83bc-8530f9d8c102",
-    "type": "feature",
-    "description": "Releasing minor partitional endpoint updates",
-    "modules": [
-        "service/budgets"
-    ]
-}

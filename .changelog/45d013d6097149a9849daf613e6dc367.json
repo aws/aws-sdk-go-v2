@@ -1,8 +1,0 @@
-{
-    "id": "45d013d6-0971-49a9-849d-af613e6dc367",
-    "type": "feature",
-    "description": "Adding `HiddenInstanceTypes` and `HiddenSageMakerImageVersionAliases` attribute to SageMaker API",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

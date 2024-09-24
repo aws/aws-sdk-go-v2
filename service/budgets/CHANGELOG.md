@@ -1,3 +1,7 @@
+# v1.27.0 (2024-09-24)
+
+* **Feature**: Releasing minor partitional endpoint updates
+
 # v1.26.1 (2024-09-23)
 
 * No change notes available for this release.

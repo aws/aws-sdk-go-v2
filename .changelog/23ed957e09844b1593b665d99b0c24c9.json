@@ -1,8 +1,0 @@
-{
-    "id": "23ed957e-0984-4b15-93b6-65d99b0c24c9",
-    "type": "feature",
-    "description": "This release includes support to add tags when creating a stream",
-    "modules": [
-        "service/kinesis"
-    ]
-}

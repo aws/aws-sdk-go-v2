@@ -1,3 +1,7 @@
+# v1.31.0 (2024-09-24)
+
+* **Feature**: This release includes support to add tags when creating a stream
+
 # v1.30.1 (2024-09-23)
 
 * No change notes available for this release.

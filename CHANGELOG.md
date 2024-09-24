@@ -1,3 +1,17 @@
+# Release (2024-09-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.19.0](service/bedrock/CHANGELOG.md#v1190-2024-09-24)
+  * **Feature**: Add support for Cross Region Inference in Bedrock Model Evaluations.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.27.0](service/budgets/CHANGELOG.md#v1270-2024-09-24)
+  * **Feature**: Releasing minor partitional endpoint updates
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.31.0](service/kinesis/CHANGELOG.md#v1310-2024-09-24)
+  * **Feature**: This release includes support to add tags when creating a stream
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.14.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1140-2024-09-24)
+  * **Feature**: AWS End User Messaging SMS-Voice V2 has added support for resource policies. Use the three new APIs to create, view, edit, and delete resource policies.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.160.0](service/sagemaker/CHANGELOG.md#v11600-2024-09-24)
+  * **Feature**: Adding `HiddenInstanceTypes` and `HiddenSageMakerImageVersionAliases` attribute to SageMaker API
+
 # Release (2024-09-23)
 
 ## General Highlights

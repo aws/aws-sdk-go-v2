@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iam v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/iot v1.57.1
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.30.1
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.61.1
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.41.1
