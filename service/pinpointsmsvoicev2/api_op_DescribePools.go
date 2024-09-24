@@ -51,8 +51,16 @@ type DescribePoolsInput struct {
 	// supply a value for this field in the initial request.
 	NextToken *string
 
+	// Use SELF to filter the list of Pools to ones your account owns or use SHARED to
+	// filter on Pools shared with your account. The Owner and PoolIds parameters
+	// can't be used at the same time.
+	Owner types.Owner
+
 	// The unique identifier of pools to find. This is an array of strings that can be
 	// either the PoolId or PoolArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	PoolIds []string
 
 	noSmithyDocumentSerde

@@ -1,0 +1,8 @@
+{
+    "id": "61996466-5c46-4cac-ac59-e725fdd55bf7",
+    "type": "feature",
+    "description": "AWS End User Messaging SMS-Voice V2 has added support for resource policies. Use the three new APIs to create, view, edit, and delete resource policies.",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

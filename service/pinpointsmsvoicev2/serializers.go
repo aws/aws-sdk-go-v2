@@ -1602,6 +1602,67 @@ func (m *awsAwsjson10_serializeOpDeleteRegistrationFieldValue) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDeleteResourcePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteResourcePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteResourcePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.DeleteResourcePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDeleteTextMessageSpendLimitOverride struct {
 }
 
@@ -3188,6 +3249,67 @@ func (m *awsAwsjson10_serializeOpGetProtectConfigurationCountryRuleSet) HandleSe
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetResourcePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpGetResourcePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetResourcePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.GetResourcePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListPoolOriginationIdentities struct {
 }
 
@@ -3537,6 +3659,67 @@ func (m *awsAwsjson10_serializeOpPutRegistrationFieldValue) HandleSerialize(ctx 
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentPutRegistrationFieldValueInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpPutResourcePolicy struct {
+}
+
+func (*awsAwsjson10_serializeOpPutResourcePolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPutResourcePolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PinpointSMSVoiceV2.PutResourcePolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPutResourcePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6363,6 +6546,18 @@ func awsAwsjson10_serializeOpDocumentDeleteRegistrationInput(v *DeleteRegistrati
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDeleteResourcePolicyInput(v *DeleteResourcePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteTextMessageSpendLimitOverrideInput(v *DeleteTextMessageSpendLimitOverrideInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6547,6 +6742,11 @@ func awsAwsjson10_serializeOpDocumentDescribeOptOutListsInput(v *DescribeOptOutL
 		}
 	}
 
+	if len(v.Owner) > 0 {
+		ok := object.Key("Owner")
+		ok.String(string(v.Owner))
+	}
+
 	return nil
 }
 
@@ -6569,6 +6769,11 @@ func awsAwsjson10_serializeOpDocumentDescribePhoneNumbersInput(v *DescribePhoneN
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.Owner) > 0 {
+		ok := object.Key("Owner")
+		ok.String(string(v.Owner))
 	}
 
 	if v.PhoneNumberIds != nil {
@@ -6600,6 +6805,11 @@ func awsAwsjson10_serializeOpDocumentDescribePoolsInput(v *DescribePoolsInput, v
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.Owner) > 0 {
+		ok := object.Key("Owner")
+		ok.String(string(v.Owner))
 	}
 
 	if v.PoolIds != nil {
@@ -6895,6 +7105,11 @@ func awsAwsjson10_serializeOpDocumentDescribeSenderIdsInput(v *DescribeSenderIds
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.Owner) > 0 {
+		ok := object.Key("Owner")
+		ok.String(string(v.Owner))
+	}
+
 	if v.SenderIds != nil {
 		ok := object.Key("SenderIds")
 		if err := awsAwsjson10_serializeDocumentSenderIdList(v.SenderIds, ok); err != nil {
@@ -7028,6 +7243,18 @@ func awsAwsjson10_serializeOpDocumentGetProtectConfigurationCountryRuleSetInput(
 	if v.ProtectConfigurationId != nil {
 		ok := object.Key("ProtectConfigurationId")
 		ok.String(*v.ProtectConfigurationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetResourcePolicyInput(v *GetResourcePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	return nil
@@ -7176,6 +7403,23 @@ func awsAwsjson10_serializeOpDocumentPutRegistrationFieldValueInput(v *PutRegist
 	if v.TextValue != nil {
 		ok := object.Key("TextValue")
 		ok.String(*v.TextValue)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Policy != nil {
+		ok := object.Key("Policy")
+		ok.String(*v.Policy)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	return nil

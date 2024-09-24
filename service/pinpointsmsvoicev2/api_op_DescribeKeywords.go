@@ -42,6 +42,9 @@ type DescribeKeywordsInput struct {
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
 	// PhoneNumberArn while DescribeSenderIdscan be used to get the values for SenderId and SenderIdArn.
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	OriginationIdentity *string
 

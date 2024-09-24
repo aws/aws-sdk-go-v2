@@ -1,0 +1,8 @@
+{
+    "id": "65bf69ce-bdd1-42cb-8254-5c2eee25e407",
+    "type": "feature",
+    "description": "Add support for Cross Region Inference in Bedrock Model Evaluations.",
+    "modules": [
+        "service/bedrock"
+    ]
+}

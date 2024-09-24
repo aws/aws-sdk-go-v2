@@ -426,6 +426,74 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-iso-e" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://budgets.global.cloud.adc-e.uk"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "budgets")
+											smithyhttp.SetSigV4ASigningName(&sp, "budgets")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "eu-isoe-west-1")
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
+			if _PartitionResult.Name == "aws-iso-f" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://budgets.global.csp.hci.ic.gov"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "budgets")
+											smithyhttp.SetSigV4ASigningName(&sp, "budgets")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "us-isof-south-1")
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {

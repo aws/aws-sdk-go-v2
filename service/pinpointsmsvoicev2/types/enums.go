@@ -568,6 +568,25 @@ func (OptedOutFilterName) Values() []OptedOutFilterName {
 	}
 }
 
+type Owner string
+
+// Enum values for Owner
+const (
+	OwnerSelf   Owner = "SELF"
+	OwnerShared Owner = "SHARED"
+)
+
+// Values returns all known values for Owner. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Owner) Values() []Owner {
+	return []Owner{
+		"SELF",
+		"SHARED",
+	}
+}
+
 type PhoneNumberFilterName string
 
 // Enum values for PhoneNumberFilterName
@@ -954,6 +973,7 @@ const (
 	ResourceTypeRegistrationAttachment    ResourceType = "registration-attachment"
 	ResourceTypeVerifiedDestinationNumber ResourceType = "verified-destination-number"
 	ResourceTypeProtectConfiguration      ResourceType = "protect-configuration"
+	ResourceTypePolicy                    ResourceType = "policy"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -975,6 +995,7 @@ func (ResourceType) Values() []ResourceType {
 		"registration-attachment",
 		"verified-destination-number",
 		"protect-configuration",
+		"policy",
 	}
 }
 

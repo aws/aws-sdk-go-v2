@@ -9080,9 +9080,6 @@ func validateHumanTaskConfig(v *types.HumanTaskConfig) error {
 	if v.UiConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UiConfig"))
 	}
-	if v.PreHumanTaskLambdaArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PreHumanTaskLambdaArn"))
-	}
 	if v.TaskTitle == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskTitle"))
 	}
@@ -9095,9 +9092,7 @@ func validateHumanTaskConfig(v *types.HumanTaskConfig) error {
 	if v.TaskTimeLimitInSeconds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskTimeLimitInSeconds"))
 	}
-	if v.AnnotationConsolidationConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AnnotationConsolidationConfig"))
-	} else if v.AnnotationConsolidationConfig != nil {
+	if v.AnnotationConsolidationConfig != nil {
 		if err := validateAnnotationConsolidationConfig(v.AnnotationConsolidationConfig); err != nil {
 			invalidParams.AddNested("AnnotationConsolidationConfig", err.(smithy.InvalidParamsError))
 		}

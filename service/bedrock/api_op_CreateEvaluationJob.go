@@ -39,8 +39,10 @@ type CreateEvaluationJobInput struct {
 	EvaluationConfig types.EvaluationConfig
 
 	// Specify the models you want to use in your model evaluation job. Automatic
-	// model evaluation jobs support a single model, and model evaluation job that use
-	// human workers support two models.
+	// model evaluation jobs support a single model or [inference profile], and model evaluation job that
+	// use human workers support two models or inference profiles.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	InferenceConfig types.EvaluationInferenceConfig

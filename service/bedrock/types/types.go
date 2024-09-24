@@ -115,7 +115,7 @@ type CustomModelSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the ARN of the Amazon Bedrock models specified in your model
+// Contains the ARN of the Amazon Bedrock model or [inference profile] specified in your model
 // evaluation job. Each Amazon Bedrock model supports different inferenceParams .
 // To learn more about supported inference parameters for Amazon Bedrock models,
 // see [Inference parameters for foundation models].
@@ -126,6 +126,7 @@ type CustomModelSummary struct {
 // \"temperature\":\"0.25\" to successfully accepted in the request.
 //
 // [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 type EvaluationBedrockModel struct {
 
 	// Each Amazon Bedrock support different inference parameters that change how the
@@ -134,7 +135,7 @@ type EvaluationBedrockModel struct {
 	// This member is required.
 	InferenceParams *string
 
-	// The ARN of the Amazon Bedrock model specified.
+	// The ARN of the Amazon Bedrock model or inference profile specified.
 	//
 	// This member is required.
 	ModelIdentifier *string
@@ -265,7 +266,8 @@ type EvaluationModelConfig interface {
 	isEvaluationModelConfig()
 }
 
-// Defines the Amazon Bedrock model and inference parameters you want used.
+// Defines the Amazon Bedrock model or inference profile and inference parameters
+// you want used.
 type EvaluationModelConfigMemberBedrockModel struct {
 	Value EvaluationBedrockModel
 

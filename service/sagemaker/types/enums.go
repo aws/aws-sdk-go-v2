@@ -3966,6 +3966,7 @@ const (
 	MlToolsEndpoints             MlTools = "Endpoints"
 	MlToolsProjects              MlTools = "Projects"
 	MlToolsInferenceOptimization MlTools = "InferenceOptimization"
+	MlToolsPerformanceEvaluation MlTools = "PerformanceEvaluation"
 )
 
 // Values returns all known values for MlTools. Note that this can be expanded in
@@ -3988,6 +3989,7 @@ func (MlTools) Values() []MlTools {
 		"Endpoints",
 		"Projects",
 		"InferenceOptimization",
+		"PerformanceEvaluation",
 	}
 }
 
@@ -6289,6 +6291,23 @@ func (S3ModelDataType) Values() []S3ModelDataType {
 	return []S3ModelDataType{
 		"S3Prefix",
 		"S3Object",
+	}
+}
+
+type SageMakerImageName string
+
+// Enum values for SageMakerImageName
+const (
+	SageMakerImageNameSagemakerDistribution SageMakerImageName = "sagemaker_distribution"
+)
+
+// Values returns all known values for SageMakerImageName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SageMakerImageName) Values() []SageMakerImageName {
+	return []SageMakerImageName{
+		"sagemaker_distribution",
 	}
 }
 

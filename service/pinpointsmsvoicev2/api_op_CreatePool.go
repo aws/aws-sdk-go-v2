@@ -61,6 +61,9 @@ type CreatePoolInput struct {
 	// After the pool is created you can add more origination identities to the pool
 	// by using [AssociateOriginationIdentity].
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// [AssociateOriginationIdentity]: https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html
 	//
 	// This member is required.

@@ -36,6 +36,9 @@ type UpdatePoolInput struct {
 	// The unique identifier of the pool to update. Valid values are either the PoolId
 	// or PoolArn.
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	PoolId *string
 
@@ -44,6 +47,9 @@ type UpdatePoolInput struct {
 
 	// The OptOutList to associate with the pool. Valid values are either
 	// OptOutListName or OptOutListArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	OptOutListName *string
 
 	// By default this is set to false. When an end recipient sends a message that

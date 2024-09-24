@@ -11,65 +11,57 @@ import (
 	"time"
 )
 
-// Deletes an existing opted out destination phone number from the specified
-// opt-out list.
+// Attaches a resource-based policy to a AWS End User Messaging SMS and Voice
+// resource(phone number, sender Id, phone poll, or opt-out list) that is used for
+// sharing the resource. A shared resource can be a Pool, Opt-out list, Sender Id,
+// or Phone number. For more information about resource-based policies, see [Working with shared resources]in the
+// AWS End User Messaging SMS User Guide.
 //
-// Each destination phone number can only be deleted once every 30 days.
-//
-// If the specified destination phone number doesn't exist or if the opt-out list
-// doesn't exist, an error is returned.
-func (c *Client) DeleteOptedOutNumber(ctx context.Context, params *DeleteOptedOutNumberInput, optFns ...func(*Options)) (*DeleteOptedOutNumberOutput, error) {
+// [Working with shared resources]: https://docs.aws.amazon.com/sms-voice/latest/userguide/shared-resources.html
+func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
-		params = &DeleteOptedOutNumberInput{}
+		params = &PutResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteOptedOutNumber", params, optFns, c.addOperationDeleteOptedOutNumberMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutResourcePolicy", params, optFns, c.addOperationPutResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteOptedOutNumberOutput)
+	out := result.(*PutResourcePolicyOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteOptedOutNumberInput struct {
+type PutResourcePolicyInput struct {
 
-	// The OptOutListName or OptOutListArn to remove the phone number from.
-	//
-	// If you are using a shared AWS End User Messaging SMS and Voice resource then
-	// you must use the full Amazon Resource Name(ARN).
+	// The JSON formatted resource-based policy to attach.
 	//
 	// This member is required.
-	OptOutListName *string
+	Policy *string
 
-	// The phone number, in E.164 format, to remove from the OptOutList.
+	// The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice
+	// resource to attach the resource-based policy to.
 	//
 	// This member is required.
-	OptedOutNumber *string
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-type DeleteOptedOutNumberOutput struct {
+type PutResourcePolicyOutput struct {
 
-	// This is true if it was the end user who requested their phone number be
-	// removed.
-	EndUserOptedOut bool
-
-	// The OptOutListArn that the phone number was removed from.
-	OptOutListArn *string
-
-	// The OptOutListName that the phone number was removed from.
-	OptOutListName *string
-
-	// The phone number that was removed from the OptOutList.
-	OptedOutNumber *string
-
-	// The time that the number was removed at, in [UNIX epoch time] format.
+	// The time when the resource-based policy was created, in [UNIX epoch time] format.
 	//
 	// [UNIX epoch time]: https://www.epochconverter.com/
-	OptedOutTimestamp *time.Time
+	CreatedTimestamp *time.Time
+
+	// The JSON formatted Resource Policy.
+	Policy *string
+
+	// The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice
+	// resource attached to the resource-based policy.
+	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,19 +69,19 @@ type DeleteOptedOutNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteOptedOutNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteOptedOutNumber{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteOptedOutNumber{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOptedOutNumber"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "PutResourcePolicy"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -141,10 +133,10 @@ func (c *Client) addOperationDeleteOptedOutNumberMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDeleteOptedOutNumberValidationMiddleware(stack); err != nil {
+	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOptedOutNumber(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -177,10 +169,10 @@ func (c *Client) addOperationDeleteOptedOutNumberMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteOptedOutNumber(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opPutResourcePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteOptedOutNumber",
+		OperationName: "PutResourcePolicy",
 	}
 }

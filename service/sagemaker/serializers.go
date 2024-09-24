@@ -24602,6 +24602,17 @@ func awsAwsjson11_serializeDocumentHiddenAppTypesList(v []types.AppType, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentHiddenInstanceTypesList(v []types.AppInstanceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentHiddenMlToolsList(v []types.MlTools, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -24609,6 +24620,38 @@ func awsAwsjson11_serializeDocumentHiddenMlToolsList(v []types.MlTools, value sm
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHiddenSageMakerImage(v *types.HiddenSageMakerImage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SageMakerImageName) > 0 {
+		ok := object.Key("SageMakerImageName")
+		ok.String(string(v.SageMakerImageName))
+	}
+
+	if v.VersionAliases != nil {
+		ok := object.Key("VersionAliases")
+		if err := awsAwsjson11_serializeDocumentVersionAliasesList(v.VersionAliases, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHiddenSageMakerImageVersionAliasesList(v []types.HiddenSageMakerImage, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentHiddenSageMakerImage(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -30500,9 +30543,23 @@ func awsAwsjson11_serializeDocumentStudioWebPortalSettings(v *types.StudioWebPor
 		}
 	}
 
+	if v.HiddenInstanceTypes != nil {
+		ok := object.Key("HiddenInstanceTypes")
+		if err := awsAwsjson11_serializeDocumentHiddenInstanceTypesList(v.HiddenInstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.HiddenMlTools != nil {
 		ok := object.Key("HiddenMlTools")
 		if err := awsAwsjson11_serializeDocumentHiddenMlToolsList(v.HiddenMlTools, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HiddenSageMakerImageVersionAliases != nil {
+		ok := object.Key("HiddenSageMakerImageVersionAliases")
+		if err := awsAwsjson11_serializeDocumentHiddenSageMakerImageVersionAliasesList(v.HiddenSageMakerImageVersionAliases, ok); err != nil {
 			return err
 		}
 	}
@@ -31721,6 +31778,17 @@ func awsAwsjson11_serializeDocumentVectorConfig(v *types.VectorConfig, value smi
 		ok.Integer(*v.Dimension)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVersionAliasesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

@@ -21,13 +21,15 @@ import (
 // You can register up to 20 consumers per stream. A given consumer can only be
 // registered with one stream at a time.
 //
-// For an example of how to use this operations, see Enhanced Fan-Out Using the Kinesis Data Streams API.
+// For an example of how to use this operation, see [Enhanced Fan-Out Using the Kinesis Data Streams API].
 //
 // The use of this operation has a limit of five transactions per second per
 // account. Also, only 5 consumers can be created simultaneously. In other words,
 // you cannot have more than 5 consumers in a CREATING status at the same time.
 // Registering a 6th consumer while there are 5 in a CREATING status results in a
 // LimitExceededException .
+//
+// [Enhanced Fan-Out Using the Kinesis Data Streams API]: https://docs.aws.amazon.com/streams/latest/dev/building-enhanced-consumers-api.html
 func (c *Client) RegisterStreamConsumer(ctx context.Context, params *RegisterStreamConsumerInput, optFns ...func(*Options)) (*RegisterStreamConsumerOutput, error) {
 	if params == nil {
 		params = &RegisterStreamConsumerInput{}

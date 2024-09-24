@@ -52592,6 +52592,42 @@ func awsAwsjson11_deserializeDocumentHiddenAppTypesList(v *[]types.AppType, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentHiddenInstanceTypesList(v *[]types.AppInstanceType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AppInstanceType
+	if *v == nil {
+		cv = []types.AppInstanceType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AppInstanceType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AppInstanceType to be of type string, got %T instead", value)
+			}
+			col = types.AppInstanceType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentHiddenMlToolsList(v *[]types.MlTools, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52621,6 +52657,85 @@ func awsAwsjson11_deserializeDocumentHiddenMlToolsList(v *[]types.MlTools, value
 			}
 			col = types.MlTools(jtv)
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHiddenSageMakerImage(v **types.HiddenSageMakerImage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HiddenSageMakerImage
+	if *v == nil {
+		sv = &types.HiddenSageMakerImage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SageMakerImageName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SageMakerImageName to be of type string, got %T instead", value)
+				}
+				sv.SageMakerImageName = types.SageMakerImageName(jtv)
+			}
+
+		case "VersionAliases":
+			if err := awsAwsjson11_deserializeDocumentVersionAliasesList(&sv.VersionAliases, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHiddenSageMakerImageVersionAliasesList(v *[]types.HiddenSageMakerImage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.HiddenSageMakerImage
+	if *v == nil {
+		cv = []types.HiddenSageMakerImage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.HiddenSageMakerImage
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentHiddenSageMakerImage(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -77124,8 +77239,18 @@ func awsAwsjson11_deserializeDocumentStudioWebPortalSettings(v **types.StudioWeb
 				return err
 			}
 
+		case "HiddenInstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentHiddenInstanceTypesList(&sv.HiddenInstanceTypes, value); err != nil {
+				return err
+			}
+
 		case "HiddenMlTools":
 			if err := awsAwsjson11_deserializeDocumentHiddenMlToolsList(&sv.HiddenMlTools, value); err != nil {
+				return err
+			}
+
+		case "HiddenSageMakerImageVersionAliases":
+			if err := awsAwsjson11_deserializeDocumentHiddenSageMakerImageVersionAliasesList(&sv.HiddenSageMakerImageVersionAliases, value); err != nil {
 				return err
 			}
 
@@ -82499,6 +82624,42 @@ func awsAwsjson11_deserializeDocumentVectorConfig(v **types.VectorConfig, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVersionAliasesList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ImageVersionAliasPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

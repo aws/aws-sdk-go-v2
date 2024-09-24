@@ -69,10 +69,16 @@ type RequestPhoneNumberInput struct {
 
 	// The name of the OptOutList to associate with the phone number. You can use the
 	// OptOutListName or OptOutListArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	OptOutListName *string
 
 	// The pool to associated with the phone number. You can use the PoolId or
 	// PoolArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	PoolId *string
 
 	// Use this field to attach your phone number for an external registration process.

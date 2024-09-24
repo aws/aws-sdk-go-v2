@@ -490,6 +490,26 @@ func (m *validateOpDeleteRegistration) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteVerifiedDestinationNumber struct {
 }
 
@@ -890,6 +910,26 @@ func (m *validateOpGetProtectConfigurationCountryRuleSet) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPoolOriginationIdentities struct {
 }
 
@@ -1005,6 +1045,26 @@ func (m *validateOpPutRegistrationFieldValue) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutRegistrationFieldValueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1586,6 +1646,10 @@ func addOpDeleteRegistrationValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteRegistration{}, middleware.After)
 }
 
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
 func addOpDeleteVerifiedDestinationNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVerifiedDestinationNumber{}, middleware.After)
 }
@@ -1666,6 +1730,10 @@ func addOpGetProtectConfigurationCountryRuleSetValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpGetProtectConfigurationCountryRuleSet{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
 func addOpListPoolOriginationIdentitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPoolOriginationIdentities{}, middleware.After)
 }
@@ -1688,6 +1756,10 @@ func addOpPutOptedOutNumberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutRegistrationFieldValueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRegistrationFieldValue{}, middleware.After)
+}
+
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
 func addOpReleasePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
@@ -2887,6 +2959,21 @@ func validateOpDeleteRegistrationInput(v *DeleteRegistrationInput) error {
 	}
 }
 
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteVerifiedDestinationNumberInput(v *DeleteVerifiedDestinationNumberInput) error {
 	if v == nil {
 		return nil
@@ -3237,6 +3324,21 @@ func validateOpGetProtectConfigurationCountryRuleSetInput(v *GetProtectConfigura
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPoolOriginationIdentitiesInput(v *ListPoolOriginationIdentitiesInput) error {
 	if v == nil {
 		return nil
@@ -3341,6 +3443,24 @@ func validateOpPutRegistrationFieldValueInput(v *PutRegistrationFieldValueInput)
 	}
 	if v.FieldPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

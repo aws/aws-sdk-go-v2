@@ -46,6 +46,9 @@ type DeleteKeywordInput struct {
 	// or PoolArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and PhoneNumberArn
 	// and DescribePoolsto find the values of PoolId and PoolArn.
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	OriginationIdentity *string
 

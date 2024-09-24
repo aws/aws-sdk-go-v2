@@ -41,6 +41,9 @@ type DeletePoolInput struct {
 	// The PoolId or PoolArn of the pool to delete. You can use DescribePools to find the values
 	// for PoolId and PoolArn .
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	PoolId *string
 

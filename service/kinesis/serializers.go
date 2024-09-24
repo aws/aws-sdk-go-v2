@@ -2137,6 +2137,13 @@ func awsAwsjson11_serializeOpDocumentCreateStreamInput(v *CreateStreamInput, val
 		ok.String(*v.StreamName)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
