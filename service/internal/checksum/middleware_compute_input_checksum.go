@@ -8,6 +8,7 @@ import (
 	"io"
 	"strconv"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
@@ -49,12 +50,13 @@ type computeInputPayloadChecksum struct {
 	// the Algorithm's header is already set on the request.
 	EnableTrailingChecksum bool
 
-	// States that a checksum is required to be included for the operation. If
-	// Input does not specify a checksum, fallback to built in MD5 checksum is
-	// used.
-	//
+	// States that a checksum is required to be calculated for the operation.
+	// If input does not specify a checksum, fallback to built in CRC32 checksum is used.
 	// Replaces smithy-go's ContentChecksum middleware.
-	RequireChecksum bool
+	RequireChecksum aws.RequireChecksum
+
+	// States user config to opt-in/out checksum calculation
+	RequestChecksumCalculation aws.RequestChecksumCalculation
 
 	// Enables support for computing the SHA256 checksum of input payloads
 	// along with the algorithm specified checksum. Prevents downstream
@@ -110,6 +112,23 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
+	var algorithm Algorithm
+	var checksum string
+	var set bool
+	algorithm, set, err = getInputAlgorithm(ctx)
+	if err != nil {
+		return out, metadata, err
+	}
+	if m.RequireChecksum == aws.RequireChecksumPending &&
+		m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
+		!set {
+		m.RequireChecksum = aws.RequireChecksumFalse
+	}
+
+	if m.RequireChecksum == aws.RequireChecksumFalse {
+		return next.HandleFinalize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, computeInputHeaderChecksumError{
@@ -117,8 +136,6 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 		}
 	}
 
-	var algorithm Algorithm
-	var checksum string
 	defer func() {
 		if algorithm == "" || checksum == "" || err != nil {
 			return
@@ -130,30 +147,22 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 		})
 	}()
 
-	// If no algorithm was specified, and the operation requires a checksum,
-	// fallback to the legacy content MD5 checksum.
-	algorithm, ok, err = getInputAlgorithm(ctx)
-	if err != nil {
-		return out, metadata, err
-	} else if !ok {
-		if m.RequireChecksum {
-			checksum, err = setMD5Checksum(ctx, req)
-			if err != nil {
-				return out, metadata, computeInputHeaderChecksumError{
-					Msg: "failed to compute stream's MD5 checksum",
-					Err: err,
-				}
-			}
-			algorithm = Algorithm("MD5")
+	// If the checksum header is already set nothing to do.
+	for _, supportedAlgorithm := range supportedAlgorithms {
+		header := AlgorithmHTTPHeader(supportedAlgorithm)
+		if cs := req.Header.Get(header); cs != "" {
+			// need to add header value to metadata
+			algorithm = supportedAlgorithm
+			checksum = cs
+			return next.HandleFinalize(ctx, in)
 		}
-		return next.HandleFinalize(ctx, in)
 	}
 
-	// If the checksum header is already set nothing to do.
-	checksumHeader := AlgorithmHTTPHeader(algorithm)
-	if checksum = req.Header.Get(checksumHeader); checksum != "" {
-		return next.HandleFinalize(ctx, in)
+	// if user doesn't set algorithm, fallback to the default CRC32 checksum.
+	if !set {
+		algorithm = AlgorithmCRC32
 	}
+	checksumHeader := AlgorithmHTTPHeader(algorithm)
 
 	computePayloadHash := m.EnableComputePayloadHash
 	if v := v4.GetPayloadHash(ctx); v != "" {
@@ -248,7 +257,8 @@ func (e computeInputTrailingChecksumError) Unwrap() error { return e.Err }
 //   - Trailing checksums are supported.
 type addInputChecksumTrailer struct {
 	EnableTrailingChecksum           bool
-	RequireChecksum                  bool
+	RequireChecksum                  aws.RequireChecksum
+	RequestChecksumCalculation       aws.RequestChecksumCalculation
 	EnableComputePayloadHash         bool
 	EnableDecodedContentLengthHeader bool
 }
@@ -264,6 +274,25 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
+	var algorithm Algorithm
+	var set bool
+	algorithm, set, err = getInputAlgorithm(ctx)
+	if err != nil {
+		return out, metadata, computeInputTrailingChecksumError{
+			Msg: "failed to get algorithm",
+			Err: err,
+		}
+	}
+	if m.RequireChecksum == aws.RequireChecksumPending &&
+		m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
+		!set {
+		m.RequireChecksum = aws.RequireChecksumFalse
+	}
+
+	if m.RequireChecksum == aws.RequireChecksumFalse {
+		return next.HandleFinalize(ctx, in)
+	}
+
 	if enabled, _ := middleware.GetStackValue(ctx, useTrailer{}).(bool); !enabled {
 		return next.HandleFinalize(ctx, in)
 	}
@@ -281,24 +310,17 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 		}
 	}
 
-	// If no algorithm was specified, there is nothing to do.
-	algorithm, ok, err := getInputAlgorithm(ctx)
-	if err != nil {
-		return out, metadata, computeInputTrailingChecksumError{
-			Msg: "failed to get algorithm",
-			Err: err,
-		}
-	} else if !ok {
-		return out, metadata, computeInputTrailingChecksumError{
-			Msg: "no algorithm specified",
+	// If the checksum header is already set nothing to do.
+	for _, supportedAlgorithm := range supportedAlgorithms {
+		header := AlgorithmHTTPHeader(supportedAlgorithm)
+		if req.Header.Get(header) != "" {
+			return next.HandleFinalize(ctx, in)
 		}
 	}
 
-	// If the checksum header is already set before finalize could run, there
-	// is nothing to do.
-	checksumHeader := AlgorithmHTTPHeader(algorithm)
-	if req.Header.Get(checksumHeader) != "" {
-		return next.HandleFinalize(ctx, in)
+	// if user doesn't set algorithm, fallback to the default CRC32 checksum.
+	if !set {
+		algorithm = AlgorithmCRC32
 	}
 
 	stream := req.GetStream()
@@ -443,40 +465,4 @@ func getRequestStreamLength(req *smithyhttp.Request) (int64, error) {
 	}
 
 	return -1, nil
-}
-
-// setMD5Checksum computes the MD5 of the request payload and sets it to the
-// Content-MD5 header. Returning the MD5 base64 encoded string or error.
-//
-// If the MD5 is already set as the Content-MD5 header, that value will be
-// returned, and nothing else will be done.
-//
-// If the payload is empty, no MD5 will be computed. No error will be returned.
-// Empty payloads do not have an MD5 value.
-//
-// Replaces the smithy-go middleware for httpChecksum trait.
-func setMD5Checksum(ctx context.Context, req *smithyhttp.Request) (string, error) {
-	if v := req.Header.Get(contentMD5Header); len(v) != 0 {
-		return v, nil
-	}
-	stream := req.GetStream()
-	if stream == nil {
-		return "", nil
-	}
-
-	if !req.IsStreamSeekable() {
-		return "", fmt.Errorf(
-			"unseekable stream is not supported for computing md5 checksum")
-	}
-
-	v, err := computeMD5Checksum(stream)
-	if err != nil {
-		return "", err
-	}
-	if err := req.RewindStream(); err != nil {
-		return "", fmt.Errorf("failed to rewind stream after computing MD5 checksum, %w", err)
-	}
-	// set the 'Content-MD5' header
-	req.Header.Set(contentMD5Header, string(v))
-	return string(v), nil
 }

@@ -165,6 +165,12 @@ type Config struct {
 
 	// Controls how a resolved AWS account ID is handled for endpoint routing.
 	AccountIDEndpointMode AccountIDEndpointMode
+
+	// RequestChecksumCalculation opt-in/out request checksum calculation
+	RequestChecksumCalculation RequestChecksumCalculation
+
+	// ResponseChecksumValidation opt-in/out response checksum validation
+	ResponseChecksumValidation ResponseChecksumValidation
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

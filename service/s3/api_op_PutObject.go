@@ -5,6 +5,7 @@ package s3
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
@@ -806,7 +807,8 @@ func getPutObjectRequestAlgorithmMember(input interface{}) (string, bool) {
 func addPutObjectInputChecksumMiddlewares(stack *middleware.Stack, options Options) error {
 	return internalChecksum.AddInputMiddleware(stack, internalChecksum.InputMiddlewareOptions{
 		GetAlgorithm:                     getPutObjectRequestAlgorithmMember,
-		RequireChecksum:                  false,
+		RequireChecksum:                  aws.RequireChecksumPending,
+		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           true,
 		EnableComputeSHA256PayloadHash:   true,
 		EnableDecodedContentLengthHeader: true,

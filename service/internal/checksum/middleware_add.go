@@ -1,6 +1,7 @@
 package checksum
 
 import (
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -14,10 +15,13 @@ type InputMiddlewareOptions struct {
 	// and true, or false if no algorithm is specified.
 	GetAlgorithm func(interface{}) (string, bool)
 
-	// Forces the middleware to compute the input payload's checksum. The
+	// Whether operation model forces middleware to compute the input payload's checksum. The
 	// request will fail if the algorithm is not specified or unable to compute
 	// the checksum.
-	RequireChecksum bool
+	RequireChecksum aws.RequireChecksum
+
+	// User config to opt-in/out request checksum calculation
+	RequestChecksumCalculation aws.RequestChecksumCalculation
 
 	// Enables support for wrapping the serialized input payload with a
 	// content-encoding: aws-check wrapper, and including a trailer for the
@@ -82,6 +86,7 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 
 	inputChecksum := &computeInputPayloadChecksum{
 		RequireChecksum:                  options.RequireChecksum,
+		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           options.EnableTrailingChecksum,
 		EnableComputePayloadHash:         options.EnableComputeSHA256PayloadHash,
 		EnableDecodedContentLengthHeader: options.EnableDecodedContentLengthHeader,
@@ -95,6 +100,7 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 		trailerMiddleware := &addInputChecksumTrailer{
 			EnableTrailingChecksum:           inputChecksum.EnableTrailingChecksum,
 			RequireChecksum:                  inputChecksum.RequireChecksum,
+			RequestChecksumCalculation:       inputChecksum.RequestChecksumCalculation,
 			EnableComputePayloadHash:         inputChecksum.EnableComputePayloadHash,
 			EnableDecodedContentLengthHeader: inputChecksum.EnableDecodedContentLengthHeader,
 		}
@@ -125,6 +131,12 @@ type OutputMiddlewareOptions struct {
 	// Given the input parameter value, the function must return the validation
 	// mode and true, or false if no mode is specified.
 	GetValidationMode func(interface{}) (string, bool)
+
+	// Whether operation model forces middleware to validate checksum
+	RequireChecksum aws.RequireChecksum
+
+	// User config to opt-in/out response checksum validation
+	ResponseChecksumValidation aws.ResponseChecksumValidation
 
 	// The set of checksum algorithms that should be used for response payload
 	// checksum validation. The algorithm(s) used will be a union of the
@@ -161,6 +173,8 @@ func AddOutputMiddleware(stack *middleware.Stack, options OutputMiddlewareOption
 
 	m := &validateOutputPayloadChecksum{
 		Algorithms:                    algorithms,
+		RequireChecksum:               options.RequireChecksum,
+		ResponseChecksumValidation:    options.ResponseChecksumValidation,
 		IgnoreMultipartValidation:     options.IgnoreMultipartValidation,
 		LogMultipartValidationSkipped: options.LogMultipartValidationSkipped,
 		LogValidationSkipped:          options.LogValidationSkipped,

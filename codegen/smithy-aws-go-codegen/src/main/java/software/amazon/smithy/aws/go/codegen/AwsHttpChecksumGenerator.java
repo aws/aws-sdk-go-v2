@@ -178,11 +178,11 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
     }
 
     // return true if operation shape is decorated with `httpChecksum` trait.
-    private boolean hasChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    private static boolean hasChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         return operation.hasTrait(HttpChecksumTrait.class);
     }
 
-    private boolean hasInputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    private static boolean hasInputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         if (!hasChecksumTrait(model, service, operation)) {
             return false;
         }
@@ -190,12 +190,32 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         return trait.isRequestChecksumRequired() || trait.getRequestAlgorithmMember().isPresent();
     }
 
-    private boolean hasOutputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
+    public static boolean hasInputChecksumTrait(Model model, ServiceShape service) {
+        for (ShapeId operationID : service.getAllOperations()) {
+                OperationShape operation = model.expectShape(operationID, OperationShape.class);
+                if (hasInputChecksumTrait(model, service, operation)) {
+                    return true;
+                }
+        }
+        return false;
+    }
+
+        private static boolean hasOutputChecksumTrait(Model model, ServiceShape service, OperationShape operation) {
         if (!hasChecksumTrait(model, service, operation)) {
             return false;
         }
         HttpChecksumTrait trait = operation.expectTrait(HttpChecksumTrait.class);
         return trait.getRequestValidationModeMember().isPresent() && !trait.getResponseAlgorithms().isEmpty();
+    }
+
+    public static boolean hasOutputChecksumTrait(Model model, ServiceShape service) {
+        for (ShapeId operationID : service.getAllOperations()) {
+            OperationShape operation = model.expectShape(operationID, OperationShape.class);
+            if (hasOutputChecksumTrait(model, service, operation)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isS3ServiceShape(Model model, ServiceShape service) {
@@ -243,7 +263,8 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("""
                                     return $T(stack, $T{
                                         GetAlgorithm: $L,
-                                        RequireChecksum: $L,
+                                        RequireChecksum: $T,
+                                        RequestChecksumCalculation: options.RequestChecksumCalculation,
                                         EnableTrailingChecksum: $L,
                                         EnableComputeSHA256PayloadHash: true,
                                         EnableDecodedContentLengthHeader: $L,
@@ -254,12 +275,21 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             hasRequestAlgorithmMember ?
                                     getRequestAlgorithmAccessorFuncName(operationName) : "nil",
-                            isRequestChecksumRequired,
+                            getInputRequireChecksum(isRequestChecksumRequired, hasRequestAlgorithmMember),
                             supportsRequestTrailingChecksum,
                             supportsDecodedContentLengthHeader);
                 }
         );
         writer.insertTrailingNewline();
+    }
+
+    private Symbol getInputRequireChecksum(boolean isRequestChecksumRequired, boolean hasRequestAlgorithmMember) {
+        if (isRequestChecksumRequired) {
+            return SdkGoTypes.Aws.RequireChecksumTrue;
+        } else if (hasRequestAlgorithmMember) {
+            return SdkGoTypes.Aws.RequireChecksumPending;
+        }
+        return SdkGoTypes.Aws.RequireChecksumFalse;
     }
 
     private void writeOutputMiddlewareHelper(
@@ -284,6 +314,8 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("""
                                     return $T(stack, $T{
                                         GetValidationMode: $L,
+                                        RequireChecksum: $T,
+                                        ResponseChecksumValidation: options.ResponseChecksumValidation,
                                         ValidationAlgorithms: $L,
                                         IgnoreMultipartValidation: $L,
                                         LogValidationSkipped: true,
@@ -293,14 +325,20 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             SymbolUtils.createValueSymbolBuilder("OutputMiddlewareOptions",
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
-
                             getRequestValidationModeAccessorFuncName(operationName),
+                            getOutputRequireChecksum(responseAlgorithms),
                             convertToGoStringList(responseAlgorithms),
                             ignoreMultipartChecksumValidationMap.getOrDefault(
                                     service.toShapeId(), new HashSet<>()).contains(operation.toShapeId())
                     );
                 });
         writer.insertTrailingNewline();
+    }
+    private Symbol getOutputRequireChecksum(List<String> responseAlgorithms) {
+        if (responseAlgorithms.isEmpty()) {
+            return SdkGoTypes.Aws.RequireChecksumFalse;
+        }
+        return SdkGoTypes.Aws.RequireChecksumPending;
     }
 
     private String convertToGoStringList(List<String> list) {
