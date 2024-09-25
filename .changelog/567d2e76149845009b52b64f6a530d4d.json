@@ -1,8 +1,0 @@
-{
-    "id": "567d2e76-1498-4500-9b52-b64f6a530d4d",
-    "type": "documentation",
-    "description": "Doc-only update for CloudTrail network activity events release (in preview)",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

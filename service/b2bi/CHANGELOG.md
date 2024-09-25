@@ -1,3 +1,7 @@
+# v1.0.0-preview.42 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.0.0-preview.41 (2024-09-23)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.99.1 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.99.0 (2024-09-23)
 
 * **Feature**: Added AthenaProperties parameter to Glue Connections, allowing Athena to store service specific properties on Glue Connections.

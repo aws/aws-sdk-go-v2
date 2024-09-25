@@ -1,3 +1,16 @@
+# Release (2024-09-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.43.2](service/cloudtrail/CHANGELOG.md#v1432-2024-09-25)
+  * **Documentation**: Doc-only update for CloudTrail network activity events release (in preview)
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.179.1](service/ec2/CHANGELOG.md#v11791-2024-09-25)
+  * **Documentation**: Updates to documentation for the transit gateway security group referencing feature.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.48.2](service/fsx/CHANGELOG.md#v1482-2024-09-25)
+  * **Documentation**: Doc-only update to address Lustre S3 hard-coded names.
+
 # Release (2024-09-24)
 
 ## Module Highlights

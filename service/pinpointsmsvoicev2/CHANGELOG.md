@@ -1,3 +1,7 @@
+# v1.14.1 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.14.0 (2024-09-24)
 
 * **Feature**: AWS End User Messaging SMS-Voice V2 has added support for resource policies. Use the three new APIs to create, view, edit, and delete resource policies.

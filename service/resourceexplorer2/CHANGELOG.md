@@ -1,3 +1,7 @@
+# v1.14.1 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.14.0 (2024-09-23)
 
 * **Feature**: AWS Resource Explorer released ListResources feature which allows customers to list all indexed AWS resources within a view.

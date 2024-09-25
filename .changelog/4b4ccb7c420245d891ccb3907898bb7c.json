@@ -1,8 +1,0 @@
-{
-    "id": "4b4ccb7c-4202-45d8-91cc-b3907898bb7c",
-    "type": "documentation",
-    "description": "Updates to documentation for the transit gateway security group referencing feature.",
-    "modules": [
-        "service/ec2"
-    ]
-}

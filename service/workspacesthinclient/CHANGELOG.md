@@ -1,3 +1,7 @@
+# v1.9.2 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.9.1 (2024-09-23)
 
 * No change notes available for this release.

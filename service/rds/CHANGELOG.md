@@ -1,3 +1,7 @@
+# v1.85.1 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.85.0 (2024-09-23)
 
 * **Feature**: Support ComputeRedundancy parameter in ModifyDBShardGroup API. Add DBShardGroupArn in DBShardGroup API response. Remove InvalidMaxAcuFault from CreateDBShardGroup and ModifyDBShardGroup API. Both API will throw InvalidParameterValueException for invalid ACU configuration.

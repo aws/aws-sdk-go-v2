@@ -1,3 +1,7 @@
+# v1.25.1 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.25.0 (2024-09-23)
 
 * **Feature**: This release adds support for job concurrency and queuing configuration at Application level.

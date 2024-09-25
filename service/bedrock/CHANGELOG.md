@@ -1,3 +1,7 @@
+# v1.19.1 (2024-09-25)
+
+* No change notes available for this release.
+
 # v1.19.0 (2024-09-24)
 
 * **Feature**: Add support for Cross Region Inference in Bedrock Model Evaluations.
