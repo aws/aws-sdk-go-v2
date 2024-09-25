@@ -56,7 +56,7 @@
 
 ## Module Highlights
 * `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.35.0](service/dynamodb/CHANGELOG.md#v1350-2024-09-20)
-  * **Feature**: Generate account endpoint for DynamoDB requests when the account ID is available
+  * **Feature**: Generate and use AWS-account-based endpoints for DynamoDB requests when the account ID is available. The new endpoint URL pattern will be https://<account-id>.ddb.<region>.amazonaws.com. See the documentation for details: https://docs.aws.amazon.com/sdkref/latest/guide/feature-account-endpoints.html.
 * `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.34.0](service/neptune/CHANGELOG.md#v1340-2024-09-20)
   * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
 * `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.159.0](service/sagemaker/CHANGELOG.md#v11590-2024-09-20)
