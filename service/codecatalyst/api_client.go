@@ -190,9 +190,9 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveBearerAuthSigner(&options)
 
-	resolveTracerProvider(&options)
-
 	resolveMeterProvider(&options)
+
+	resolveTracerProvider(&options)
 
 	resolveAuthSchemeResolver(&options)
 
