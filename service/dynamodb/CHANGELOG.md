@@ -9,7 +9,7 @@
 # v1.35.0 (2024-09-20)
 
 * **Feature**: Add tracing and metrics support to service clients.
-* **Feature**: Generate account endpoint for DynamoDB requests when the account ID is available
+* **Feature**: Generate and use AWS-account-based endpoints for DynamoDB requests when the account ID is available. The new endpoint URL pattern will be https://<account-id>.ddb.<region>.amazonaws.com. See the documentation for details: https://docs.aws.amazon.com/sdkref/latest/guide/feature-account-endpoints.html.
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.34.10 (2024-09-17)
