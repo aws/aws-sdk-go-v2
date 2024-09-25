@@ -20,8 +20,8 @@ import (
 // set to FIXED_RETENTION_PRICING . By default, TerminationProtection is enabled.
 //
 // For event data stores for CloudTrail events, AdvancedEventSelectors includes or
-// excludes management or data events in your event data store. For more
-// information about AdvancedEventSelectors , see [AdvancedEventSelectors].
+// excludes management, data, or network activity events in your event data store.
+// For more information about AdvancedEventSelectors , see [AdvancedEventSelectors].
 //
 // For event data stores for CloudTrail Insights events, Config configuration
 // items, Audit Manager evidence, or non-Amazon Web Services events,

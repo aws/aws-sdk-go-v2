@@ -12,8 +12,8 @@ import (
 
 // Stops the ingestion of live events on an event data store specified as either
 // an ARN or the ID portion of the ARN. To stop ingestion, the event data store
-// Status must be ENABLED and the eventCategory must be Management , Data , or
-// ConfigurationItem .
+// Status must be ENABLED and the eventCategory must be Management , Data ,
+// NetworkActivity , or ConfigurationItem .
 func (c *Client) StopEventDataStoreIngestion(ctx context.Context, params *StopEventDataStoreIngestionInput, optFns ...func(*Options)) (*StopEventDataStoreIngestionOutput, error) {
 	if params == nil {
 		params = &StopEventDataStoreIngestionInput{}

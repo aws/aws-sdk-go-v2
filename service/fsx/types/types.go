@@ -478,9 +478,9 @@ type CompletionReport struct {
 	// file system's linked S3 data repository. An absolute path that defines where the
 	// completion report will be stored in the destination location. The Path you
 	// provide must be located within the file system’s ExportPath. An example Path
-	// value is "s3://myBucket/myExportPath/optionalPrefix". The report provides the
-	// following information for each file in the report: FilePath, FileStatus, and
-	// ErrorCode.
+	// value is "s3://amzn-s3-demo-bucket/myExportPath/optionalPrefix". The report
+	// provides the following information for each file in the report: FilePath,
+	// FileStatus, and ErrorCode.
 	Path *string
 
 	// Required if Enabled is set to true . Specifies the scope of the CompletionReport
@@ -1578,10 +1578,10 @@ type DataRepositoryAssociation struct {
 	//   DataRepositorySubdirectories parameter.
 	//
 	//   - For Amazon File Cache, the path can be an S3 bucket or prefix in the format
-	//   s3://myBucket/myPrefix/ .
+	//   s3://bucket-name/prefix/ (where prefix is optional).
 	//
 	//   - For Amazon FSx for Lustre, the path can be an S3 bucket or prefix in the
-	//   format s3://myBucket/myPrefix/ .
+	//   format s3://bucket-name/prefix/ (where prefix is optional).
 	DataRepositoryPath *string
 
 	// For Amazon File Cache, a list of NFS Exports that will be linked with an NFS
@@ -2369,8 +2369,8 @@ type FileCacheDataRepositoryAssociation struct {
 	//   which indicates the root of the subdirectories specified with the
 	//   DataRepositorySubdirectories parameter.
 	//
-	//   - The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/
-	//   .
+	//   - The path can be an S3 bucket or prefix in the format
+	//   s3://bucket-name/prefix/ (where prefix is optional).
 	//
 	// This member is required.
 	DataRepositoryPath *string
