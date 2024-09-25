@@ -1,3 +1,24 @@
+# v1.48.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.48.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.48.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.0 (2024-09-18)
+
+* **Feature**: Add `launchType` and `sourceIPs` fields to GuardDuty findings.
+
+# v1.46.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.46.0 (2024-09-11)
 
 * **Feature**: Add support for new statistic types in GetFindingsStatistics.

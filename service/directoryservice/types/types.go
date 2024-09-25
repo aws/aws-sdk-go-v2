@@ -292,7 +292,7 @@ type DirectoryDescription struct {
 	// Additional information about the directory stage.
 	StageReason *string
 
-	// The directory size.
+	// The directory type.
 	Type DirectoryType
 
 	// A DirectoryVpcSettingsDescription object that contains additional information about a directory. This member
@@ -552,7 +552,7 @@ type RadiusSettings struct {
 	RadiusPort *int32
 
 	// The maximum number of times that communication with the RADIUS server is
-	// attempted.
+	// retried after the initial attempt.
 	RadiusRetries int32
 
 	// An array of strings that contains the fully qualified domain name (FQDN) or IP
@@ -819,7 +819,7 @@ type Tag struct {
 
 	// Required name of the tag. The string value can be Unicode characters and cannot
 	// be prefixed with "aws:". The string can contain only the set of Unicode letters,
-	// digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex:
+	// digits, white-space, '_', '.', '/', '=', '+', '-', ':', '@'(Java regex:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	//
 	// This member is required.
@@ -827,7 +827,8 @@ type Tag struct {
 
 	// The optional value of the tag. The string value can be Unicode characters. The
 	// string can contain only the set of Unicode letters, digits, white-space, '_',
-	// '.', '/', '=', '+', '-' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
+	// '.', '/', '=', '+', '-', ':', '@' (Java regex:
+	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	//
 	// This member is required.
 	Value *string

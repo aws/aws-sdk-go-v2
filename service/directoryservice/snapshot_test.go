@@ -362,6 +362,18 @@ func TestCheckSnapshot_DescribeDirectories(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDirectoryDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDirectoryDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDirectoryDataAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDomainControllers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomainControllers(context.Background(), nil, func(o *Options) {
@@ -482,6 +494,18 @@ func TestCheckSnapshot_DisableClientAuthentication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableDirectoryDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableDirectoryDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableDirectoryDataAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableLDAPS(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableLDAPS(context.Background(), nil, func(o *Options) {
@@ -523,6 +547,18 @@ func TestCheckSnapshot_EnableClientAuthentication(t *testing.T) {
 	_, err := svc.EnableClientAuthentication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableClientAuthentication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableDirectoryDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableDirectoryDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableDirectoryDataAccess")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1165,6 +1201,18 @@ func TestUpdateSnapshot_DescribeDirectories(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDirectoryDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDirectoryDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDirectoryDataAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDomainControllers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomainControllers(context.Background(), nil, func(o *Options) {
@@ -1285,6 +1333,18 @@ func TestUpdateSnapshot_DisableClientAuthentication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableDirectoryDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableDirectoryDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableDirectoryDataAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableLDAPS(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableLDAPS(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1386,18 @@ func TestUpdateSnapshot_EnableClientAuthentication(t *testing.T) {
 	_, err := svc.EnableClientAuthentication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableClientAuthentication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableDirectoryDataAccess(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableDirectoryDataAccess(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableDirectoryDataAccess")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

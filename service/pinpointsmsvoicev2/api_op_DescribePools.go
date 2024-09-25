@@ -51,8 +51,16 @@ type DescribePoolsInput struct {
 	// supply a value for this field in the initial request.
 	NextToken *string
 
+	// Use SELF to filter the list of Pools to ones your account owns or use SHARED to
+	// filter on Pools shared with your account. The Owner and PoolIds parameters
+	// can't be used at the same time.
+	Owner types.Owner
+
 	// The unique identifier of pools to find. This is an array of strings that can be
 	// either the PoolId or PoolArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	PoolIds []string
 
 	noSmithyDocumentSerde
@@ -117,6 +125,9 @@ func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -154,6 +165,18 @@ func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

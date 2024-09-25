@@ -13,7 +13,7 @@ import (
 // Starts the ingestion of live events on an event data store specified as either
 // an ARN or the ID portion of the ARN. To start ingestion, the event data store
 // Status must be STOPPED_INGESTION and the eventCategory must be Management , Data
-// , or ConfigurationItem .
+// , NetworkActivity , or ConfigurationItem .
 func (c *Client) StartEventDataStoreIngestion(ctx context.Context, params *StartEventDataStoreIngestionInput, optFns ...func(*Options)) (*StartEventDataStoreIngestionOutput, error) {
 	if params == nil {
 		params = &StartEventDataStoreIngestionInput{}
@@ -90,6 +90,9 @@ func (c *Client) addOperationStartEventDataStoreIngestionMiddlewares(stack *midd
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -127,6 +130,18 @@ func (c *Client) addOperationStartEventDataStoreIngestionMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

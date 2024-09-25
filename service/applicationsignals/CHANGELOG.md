@@ -1,3 +1,20 @@
+# v1.5.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.5.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.5.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.4.0 (2024-09-05)
 
 * **Feature**: Amazon CloudWatch Application Signals now supports creating Service Level Objectives using a new calculation type. Users can now create SLOs which are configured with request-based SLIs to help meet their specific business requirements.

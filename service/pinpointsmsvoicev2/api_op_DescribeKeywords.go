@@ -42,6 +42,9 @@ type DescribeKeywordsInput struct {
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
 	// PhoneNumberArn while DescribeSenderIdscan be used to get the values for SenderId and SenderIdArn.
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	OriginationIdentity *string
 
@@ -125,6 +128,9 @@ func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -162,6 +168,18 @@ func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

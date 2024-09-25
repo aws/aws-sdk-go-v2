@@ -39,8 +39,10 @@ type CreateEvaluationJobInput struct {
 	EvaluationConfig types.EvaluationConfig
 
 	// Specify the models you want to use in your model evaluation job. Automatic
-	// model evaluation jobs support a single model, and model evaluation job that use
-	// human workers support two models.
+	// model evaluation jobs support a single model or [inference profile], and model evaluation job that
+	// use human workers support two models or inference profiles.
+	//
+	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	//
 	// This member is required.
 	InferenceConfig types.EvaluationInferenceConfig
@@ -145,6 +147,9 @@ func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.St
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -185,6 +190,18 @@ func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

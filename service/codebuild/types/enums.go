@@ -1017,6 +1017,7 @@ type WebhookScopeType string
 const (
 	WebhookScopeTypeGithubOrganization WebhookScopeType = "GITHUB_ORGANIZATION"
 	WebhookScopeTypeGithubGlobal       WebhookScopeType = "GITHUB_GLOBAL"
+	WebhookScopeTypeGitlabGroup        WebhookScopeType = "GITLAB_GROUP"
 )
 
 // Values returns all known values for WebhookScopeType. Note that this can be
@@ -1027,5 +1028,6 @@ func (WebhookScopeType) Values() []WebhookScopeType {
 	return []WebhookScopeType{
 		"GITHUB_ORGANIZATION",
 		"GITHUB_GLOBAL",
+		"GITLAB_GROUP",
 	}
 }

@@ -1151,6 +1151,9 @@ const (
 	WorkspaceImageErrorDetailCodeInPlaceUpgrade                WorkspaceImageErrorDetailCode = "InPlaceUpgrade"
 	WorkspaceImageErrorDetailCodeAntiVirusInstalled            WorkspaceImageErrorDetailCode = "AntiVirusInstalled"
 	WorkspaceImageErrorDetailCodeUefiNotSupported              WorkspaceImageErrorDetailCode = "UEFINotSupported"
+	WorkspaceImageErrorDetailCodeUnknownError                  WorkspaceImageErrorDetailCode = "UnknownError"
+	WorkspaceImageErrorDetailCodeAppxPackagesInstalled         WorkspaceImageErrorDetailCode = "AppXPackagesInstalled"
+	WorkspaceImageErrorDetailCodeReservedStorageInUse          WorkspaceImageErrorDetailCode = "ReservedStorageInUse"
 )
 
 // Values returns all known values for WorkspaceImageErrorDetailCode. Note that
@@ -1186,6 +1189,9 @@ func (WorkspaceImageErrorDetailCode) Values() []WorkspaceImageErrorDetailCode {
 		"InPlaceUpgrade",
 		"AntiVirusInstalled",
 		"UEFINotSupported",
+		"UnknownError",
+		"AppXPackagesInstalled",
+		"ReservedStorageInUse",
 	}
 }
 

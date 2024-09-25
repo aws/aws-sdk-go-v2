@@ -1,11 +1,14 @@
 InitiateJob
 	Initialize stack step
+		spanInitializeStart
 		Glacier:DefaultAccountID
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		Glacier:APIVersion
 		setOperationInput
 		ResolveEndpoint
@@ -16,6 +19,7 @@ InitiateJob
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		Glacier:TreeHash
 		ResolveAuthScheme
@@ -23,6 +27,7 @@ InitiateJob
 		ResolveEndpointV2
 		disableHTTPS
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

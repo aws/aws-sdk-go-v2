@@ -1,3 +1,24 @@
+# v1.14.1 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.14.0 (2024-09-24)
+
+* **Feature**: AWS End User Messaging SMS-Voice V2 has added support for resource policies. Use the three new APIs to create, view, edit, and delete resource policies.
+
+# v1.13.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.13.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.9 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.12.8 (2024-09-04)
 
 * No change notes available for this release.

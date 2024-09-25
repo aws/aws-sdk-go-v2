@@ -72,6 +72,10 @@ type CreateSyncConfigurationInput struct {
 	// providers.
 	PublishDeploymentStatus types.PublishDeploymentStatus
 
+	// A toggle that specifies whether to enable or disable pull request comments for
+	// the sync configuration to be created.
+	PullRequestComment types.PullRequestComment
+
 	// When to trigger Git sync to begin the stack update.
 	TriggerResourceUpdateOn types.TriggerResourceUpdateOn
 
@@ -136,6 +140,9 @@ func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -173,6 +180,18 @@ func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchGetMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchPutMetrics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchPutMetrics(context.Background(), nil, func(o *Options) {
@@ -73,6 +85,18 @@ func TestCheckSnapshot_BatchPutMetrics(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchGetMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchPutMetrics(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchPutMetrics(context.Background(), nil, func(o *Options) {

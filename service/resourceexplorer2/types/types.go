@@ -157,8 +157,8 @@ type Resource struct {
 	// The type of the resource.
 	ResourceType *string
 
-	// The Amazon Web Service that owns the resource and is responsible for creating
-	// and updating it.
+	// The Amazon Web Servicesservice that owns the resource and is responsible for
+	// creating and updating it.
 	Service *string
 
 	noSmithyDocumentSerde
@@ -230,8 +230,9 @@ type SupportedResourceType struct {
 	// The unique identifier of the resource type.
 	ResourceType *string
 
-	// The Amazon Web Service that is associated with the resource type. This is the
-	// primary service that lets you create and interact with resources of this type.
+	// The Amazon Web Servicesservice that is associated with the resource type. This
+	// is the primary service that lets you create and interact with resources of this
+	// type.
 	Service *string
 
 	noSmithyDocumentSerde

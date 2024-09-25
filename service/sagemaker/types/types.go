@@ -6451,6 +6451,19 @@ type GitConfigForUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// The SageMaker images that are hidden from the Studio user interface. You must
+// specify the SageMaker image name and version aliases.
+type HiddenSageMakerImage struct {
+
+	//  The SageMaker image name that you are hiding from the Studio user interface.
+	SageMakerImageName SageMakerImageName
+
+	//  The version aliases you are hiding from the Studio user interface.
+	VersionAliases []string
+
+	noSmithyDocumentSerde
+}
+
 // Stores the holiday featurization attributes applicable to each item of
 // time-series datasets during the training of a forecasting model. This allows the
 // model to identify patterns associated with specific holidays.
@@ -6906,15 +6919,62 @@ type HumanLoopRequestSource struct {
 // Information required for human workers to complete a labeling task.
 type HumanTaskConfig struct {
 
-	// Configures how labels are consolidated across human workers.
-	//
-	// This member is required.
-	AnnotationConsolidationConfig *AnnotationConsolidationConfig
-
 	// The number of human workers that will label an object.
 	//
 	// This member is required.
 	NumberOfHumanWorkersPerDataObject *int32
+
+	// A description of the task for your human workers.
+	//
+	// This member is required.
+	TaskDescription *string
+
+	// The amount of time that a worker has to complete a task.
+	//
+	// If you create a custom labeling job, the maximum value for this parameter is 8
+	// hours (28,800 seconds).
+	//
+	// If you create a labeling job using a [built-in task type] the maximum for this parameter depends on
+	// the task type you use:
+	//
+	//   - For [image]and [text]labeling jobs, the maximum is 8 hours (28,800 seconds).
+	//
+	//   - For [3D point cloud]and [video frame]labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL
+	//   mode. For most users, the maximum is also 30 days.
+	//
+	// [built-in task type]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
+	// [image]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html
+	// [video frame]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html
+	// [3D point cloud]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html
+	// [text]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html
+	//
+	// This member is required.
+	TaskTimeLimitInSeconds *int32
+
+	// A title for the task for your human workers.
+	//
+	// This member is required.
+	TaskTitle *string
+
+	// Information about the user interface that workers use to complete the labeling
+	// task.
+	//
+	// This member is required.
+	UiConfig *UiConfig
+
+	// The Amazon Resource Name (ARN) of the work team assigned to complete the tasks.
+	//
+	// This member is required.
+	WorkteamArn *string
+
+	// Configures how labels are consolidated across human workers.
+	AnnotationConsolidationConfig *AnnotationConsolidationConfig
+
+	// Defines the maximum number of data objects that can be labeled by human workers
+	// at the same time. Also referred to as batch size. Each object may have more than
+	// one worker at one time. The default value is 1000 objects. To increase the
+	// maximum value to 5000 objects, contact Amazon Web Services Support.
+	MaxConcurrentTaskCount *int32
 
 	// The Amazon Resource Name (ARN) of a Lambda function that is run before a data
 	// object is sent to a human worker. Use this function to provide input to a custom
@@ -7699,58 +7759,7 @@ type HumanTaskConfig struct {
 	// [3D Point Cloud Task types]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-task-types.html
 	// [Pre-annotation Lambda]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-prelambda
 	// [Verify and Adjust Labels]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html
-	//
-	// This member is required.
 	PreHumanTaskLambdaArn *string
-
-	// A description of the task for your human workers.
-	//
-	// This member is required.
-	TaskDescription *string
-
-	// The amount of time that a worker has to complete a task.
-	//
-	// If you create a custom labeling job, the maximum value for this parameter is 8
-	// hours (28,800 seconds).
-	//
-	// If you create a labeling job using a [built-in task type] the maximum for this parameter depends on
-	// the task type you use:
-	//
-	//   - For [image]and [text]labeling jobs, the maximum is 8 hours (28,800 seconds).
-	//
-	//   - For [3D point cloud]and [video frame]labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL
-	//   mode. For most users, the maximum is also 30 days.
-	//
-	// [built-in task type]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html
-	// [image]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-images.html
-	// [video frame]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html
-	// [3D point cloud]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html
-	// [text]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-text.html
-	//
-	// This member is required.
-	TaskTimeLimitInSeconds *int32
-
-	// A title for the task for your human workers.
-	//
-	// This member is required.
-	TaskTitle *string
-
-	// Information about the user interface that workers use to complete the labeling
-	// task.
-	//
-	// This member is required.
-	UiConfig *UiConfig
-
-	// The Amazon Resource Name (ARN) of the work team assigned to complete the tasks.
-	//
-	// This member is required.
-	WorkteamArn *string
-
-	// Defines the maximum number of data objects that can be labeled by human workers
-	// at the same time. Also referred to as batch size. Each object may have more than
-	// one worker at one time. The default value is 1000 objects. To increase the
-	// maximum value to 5000 objects, contact Amazon Web Services Support.
-	MaxConcurrentTaskCount *int32
 
 	// The price that you pay for each task performed by an Amazon Mechanical Turk
 	// worker.
@@ -10047,12 +10056,6 @@ type LabelingJobSummary struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The Amazon Resource Name (ARN) of a Lambda function. The function is run before
-	// each data object is sent to a worker.
-	//
-	// This member is required.
-	PreHumanTaskLambdaArn *string
-
 	// The Amazon Resource Name (ARN) of the work team assigned to the job.
 	//
 	// This member is required.
@@ -10074,6 +10077,10 @@ type LabelingJobSummary struct {
 
 	// The location of the output produced by the labeling job.
 	LabelingJobOutput *LabelingJobOutput
+
+	// The Amazon Resource Name (ARN) of a Lambda function. The function is run before
+	// each data object is sent to a worker.
+	PreHumanTaskLambdaArn *string
 
 	noSmithyDocumentSerde
 }
@@ -15956,6 +15963,10 @@ type S3ModelDataSource struct {
 	// Configuration information for hub access.
 	HubAccessConfig *InferenceHubAccessConfig
 
+	// The Amazon S3 URI of the manifest file. The manifest file is a CSV file that
+	// stores the artifact locations.
+	ManifestS3Uri *string
+
 	// Specifies the access configuration file for the ML model. You can explicitly
 	// accept the model end-user license agreement (EULA) within the ModelAccessConfig
 	// . You are responsible for reviewing and complying with any applicable license
@@ -16872,8 +16883,14 @@ type StudioWebPortalSettings struct {
 	// [Applications supported in Studio]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated-apps.html
 	HiddenAppTypes []AppType
 
+	//  The instance types you are hiding from the Studio user interface.
+	HiddenInstanceTypes []AppInstanceType
+
 	// The machine learning tools that are hidden from the Studio left navigation pane.
 	HiddenMlTools []MlTools
+
+	//  The version aliases you are hiding from the Studio user interface.
+	HiddenSageMakerImageVersionAliases []HiddenSageMakerImage
 
 	noSmithyDocumentSerde
 }

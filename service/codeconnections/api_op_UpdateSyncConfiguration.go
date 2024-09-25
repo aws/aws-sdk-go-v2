@@ -51,6 +51,10 @@ type UpdateSyncConfigurationInput struct {
 	// providers.
 	PublishDeploymentStatus types.PublishDeploymentStatus
 
+	// TA toggle that specifies whether to enable or disable pull request comments for
+	// the sync configuration to be updated.
+	PullRequestComment types.PullRequestComment
+
 	// The ID of the repository link for the sync configuration to be updated.
 	RepositoryLinkId *string
 
@@ -119,6 +123,9 @@ func (c *Client) addOperationUpdateSyncConfigurationMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -156,6 +163,18 @@ func (c *Client) addOperationUpdateSyncConfigurationMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

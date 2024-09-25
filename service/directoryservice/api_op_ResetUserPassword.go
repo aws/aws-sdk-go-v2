@@ -11,7 +11,8 @@ import (
 )
 
 // Resets the password for any user in your Managed Microsoft AD or Simple AD
-// directory.
+// directory. Disabled users will become enabled and can be authenticated following
+// the API call.
 //
 // You can reset the password for any user in your directory with the following
 // exceptions:
@@ -114,6 +115,9 @@ func (c *Client) addOperationResetUserPasswordMiddlewares(stack *middleware.Stac
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -151,6 +155,18 @@ func (c *Client) addOperationResetUserPasswordMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

@@ -1,3 +1,21 @@
+# v1.44.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.44.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.44.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.0 (2024-09-17)
+
+* **Feature**: GitLab Enhancements - Add support for Self-Hosted GitLab runners in CodeBuild. Add group webhooks
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.42.3 (2024-09-04)
 
 * No change notes available for this release.

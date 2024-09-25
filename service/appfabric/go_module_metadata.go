@@ -3,4 +3,4 @@
 package appfabric
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.9.6"
+const goModuleVersion = "1.10.2"

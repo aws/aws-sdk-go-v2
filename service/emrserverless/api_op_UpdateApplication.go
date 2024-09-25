@@ -86,6 +86,10 @@ type UpdateApplicationInput struct {
 	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
 	RuntimeConfiguration []types.Configuration
 
+	// The scheduler configuration for batch and streaming jobs running on this
+	// application. Supported with release labels emr-7.0.0 and above.
+	SchedulerConfiguration *types.SchedulerConfiguration
+
 	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput .
 	// This parameter must contain all valid worker types for a Spark or Hive
 	// application. Valid worker types include Driver and Executor for Spark
@@ -153,6 +157,9 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -193,6 +200,18 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

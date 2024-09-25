@@ -103,6 +103,25 @@ func (PublishDeploymentStatus) Values() []PublishDeploymentStatus {
 	}
 }
 
+type PullRequestComment string
+
+// Enum values for PullRequestComment
+const (
+	PullRequestCommentEnabled  PullRequestComment = "ENABLED"
+	PullRequestCommentDisabled PullRequestComment = "DISABLED"
+)
+
+// Values returns all known values for PullRequestComment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PullRequestComment) Values() []PullRequestComment {
+	return []PullRequestComment{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type RepositorySyncStatus string
 
 // Enum values for RepositorySyncStatus

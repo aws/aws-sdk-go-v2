@@ -36,6 +36,9 @@ type UpdatePoolInput struct {
 	// The unique identifier of the pool to update. Valid values are either the PoolId
 	// or PoolArn.
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	PoolId *string
 
@@ -44,6 +47,9 @@ type UpdatePoolInput struct {
 
 	// The OptOutList to associate with the pool. Valid values are either
 	// OptOutListName or OptOutListArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	OptOutListName *string
 
 	// By default this is set to false. When an end recipient sends a message that
@@ -166,6 +172,9 @@ func (c *Client) addOperationUpdatePoolMiddlewares(stack *middleware.Stack, opti
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -203,6 +212,18 @@ func (c *Client) addOperationUpdatePoolMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

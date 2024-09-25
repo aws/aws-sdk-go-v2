@@ -1,3 +1,25 @@
+# v1.85.1 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.85.0 (2024-09-23)
+
+* **Feature**: Support ComputeRedundancy parameter in ModifyDBShardGroup API. Add DBShardGroupArn in DBShardGroup API response. Remove InvalidMaxAcuFault from CreateDBShardGroup and ModifyDBShardGroup API. Both API will throw InvalidParameterValueException for invalid ACU configuration.
+
+# v1.84.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.83.2 (2024-09-18)
+
+* **Documentation**: Updates Amazon RDS documentation with information upgrading snapshots with unsupported engine versions for RDS for MySQL and RDS for PostgreSQL.
+
+# v1.83.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+* **Documentation**: Updates Amazon RDS documentation with configuration information about the BYOL model for RDS for Db2.
+
 # v1.83.0 (2024-09-16)
 
 * **Feature**: Launching Global Cluster tagging.

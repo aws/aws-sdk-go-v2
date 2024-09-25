@@ -48,8 +48,16 @@ type DescribePhoneNumbersInput struct {
 	// supply a value for this field in the initial request.
 	NextToken *string
 
+	// Use SELF to filter the list of phone numbers to ones your account owns or use
+	// SHARED to filter on phone numbers shared with your account. The Owner and
+	// PhoneNumberIds parameters can't be used at the same time.
+	Owner types.Owner
+
 	// The unique identifier of phone numbers to find information about. This is an
 	// array of strings that can be either the PhoneNumberId or PhoneNumberArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	PhoneNumberIds []string
 
 	noSmithyDocumentSerde
@@ -114,6 +122,9 @@ func (c *Client) addOperationDescribePhoneNumbersMiddlewares(stack *middleware.S
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -151,6 +162,18 @@ func (c *Client) addOperationDescribePhoneNumbersMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

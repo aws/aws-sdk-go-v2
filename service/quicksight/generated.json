@@ -115,6 +115,7 @@
         "api_op_ListDataSources.go",
         "api_op_ListFolderMembers.go",
         "api_op_ListFolders.go",
+        "api_op_ListFoldersForResource.go",
         "api_op_ListGroupMemberships.go",
         "api_op_ListGroups.go",
         "api_op_ListIAMPolicyAssignments.go",

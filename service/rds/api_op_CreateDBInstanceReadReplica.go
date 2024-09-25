@@ -122,17 +122,23 @@ type CreateDBInstanceReadReplicaInput struct {
 	// [DB Instance Class]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
 	DBInstanceClass *string
 
-	// The name of the DB parameter group to associate with this DB instance.
+	// The name of the DB parameter group to associate with this read replica DB
+	// instance.
 	//
-	// If you don't specify a value for DBParameterGroupName , then Amazon RDS uses the
+	// For Single-AZ or Multi-AZ DB instance read replica instances, if you don't
+	// specify a value for DBParameterGroupName , then Amazon RDS uses the
 	// DBParameterGroup of the source DB instance for a same Region read replica, or
 	// the default DBParameterGroup for the specified DB engine for a cross-Region
 	// read replica.
 	//
+	// For Multi-AZ DB cluster same Region read replica instances, if you don't
+	// specify a value for DBParameterGroupName , then Amazon RDS uses the default
+	// DBParameterGroup .
+	//
 	// Specifying a parameter group for this operation is only supported for MySQL DB
-	// instances for cross-Region read replicas and for Oracle DB instances. It isn't
-	// supported for MySQL DB instances for same Region read replicas or for RDS
-	// Custom.
+	// instances for cross-Region read replicas, for Multi-AZ DB cluster read replica
+	// instances, and for Oracle DB instances. It isn't supported for MySQL DB
+	// instances for same Region read replicas or for RDS Custom.
 	//
 	// Constraints:
 	//
@@ -685,6 +691,9 @@ func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middl
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -725,6 +734,18 @@ func (c *Client) addOperationCreateDBInstanceReadReplicaMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

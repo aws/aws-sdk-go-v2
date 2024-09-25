@@ -81,9 +81,6 @@ type PutAccountSettingInput struct {
 	//   more information on using IPv6 with tasks launched on Amazon EC2 instances, see [Using a VPC in dual-stack mode]
 	//   . For more information on using IPv6 with tasks launched on Fargate, see [Using a VPC in dual-stack mode].
 	//
-	//   - fargateFIPSMode - If you specify fargateFIPSMode , Fargate FIPS 140
-	//   compliance is affected.
-	//
 	//   - fargateTaskRetirementWaitPeriod - When Amazon Web Services determines that a
 	//   security or infrastructure update is needed for an Amazon ECS task hosted on
 	//   Fargate, the tasks need to be stopped and new tasks launched to replace them.
@@ -202,6 +199,9 @@ func (c *Client) addOperationPutAccountSettingMiddlewares(stack *middleware.Stac
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -239,6 +239,18 @@ func (c *Client) addOperationPutAccountSettingMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

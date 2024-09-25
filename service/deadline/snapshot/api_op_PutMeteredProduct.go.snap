@@ -1,10 +1,13 @@
 PutMeteredProduct
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -14,6 +17,7 @@ PutMeteredProduct
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		ResolveAuthScheme
 		GetIdentity
@@ -21,6 +25,7 @@ PutMeteredProduct
 		disableHTTPS
 		EndpointHostPrefix
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

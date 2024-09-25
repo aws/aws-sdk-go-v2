@@ -1,3 +1,29 @@
+# v1.160.1 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.160.0 (2024-09-24)
+
+* **Feature**: Adding `HiddenInstanceTypes` and `HiddenSageMakerImageVersionAliases` attribute to SageMaker API
+
+# v1.159.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.159.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Feature**: Amazon SageMaker now supports using manifest files to specify the location of uncompressed model artifacts within Model Packages
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.158.0 (2024-09-19)
+
+* **Feature**: Introduced support for G6e instance types on SageMaker Studio for JupyterLab and CodeEditor applications.
+
+# v1.157.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.157.0 (2024-09-09)
 
 * **Feature**: Amazon Sagemaker supports orchestrating SageMaker HyperPod clusters with Amazon EKS

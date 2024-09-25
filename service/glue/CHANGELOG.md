@@ -1,3 +1,24 @@
+# v1.99.1 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.99.0 (2024-09-23)
+
+* **Feature**: Added AthenaProperties parameter to Glue Connections, allowing Athena to store service specific properties on Glue Connections.
+
+# v1.98.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.97.0 (2024-09-19)
+
+* **Feature**: This change is for releasing TestConnection api SDK model
+
+# v1.96.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.96.0 (2024-09-12)
 
 * **Feature**: AWS Glue is introducing two new optimizers for Apache Iceberg tables: snapshot retention and orphan file deletion. Customers can enable these optimizers and customize their configurations to perform daily maintenance tasks on their Iceberg tables based on their specific requirements.

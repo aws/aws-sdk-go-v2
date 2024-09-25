@@ -917,7 +917,7 @@
                 "ConnectionArn": {
                     "target": "com.amazonaws.codeconnections#ConnectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection\n      reference when the connection is shared between Amazon Web Services.</p>\n         <note>\n            <p>The ARN is never reused if the connection is deleted.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection\n      reference when the connection is shared between Amazon Web Servicesservices.</p>\n         <note>\n            <p>The ARN is never reused if the connection is deleted.</p>\n         </note>"
                     }
                 },
                 "ProviderType": {
@@ -1334,6 +1334,12 @@
                     "target": "com.amazonaws.codeconnections#TriggerResourceUpdateOn",
                     "traits": {
                         "smithy.api#documentation": "<p>When to trigger Git sync to begin the stack update.</p>"
+                    }
+                },
+                "PullRequestComment": {
+                    "target": "com.amazonaws.codeconnections#PullRequestComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A toggle that specifies whether to enable or disable pull request comments for the sync configuration to be created.</p>"
                     }
                 }
             },
@@ -2717,6 +2723,23 @@
                 }
             }
         },
+        "com.amazonaws.codeconnections#PullRequestComment": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codeconnections#RepositoryLinkArn": {
             "type": "string",
             "traits": {
@@ -3463,6 +3486,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When to trigger Git sync to begin the stack update.</p>"
                     }
+                },
+                "PullRequestComment": {
+                    "target": "com.amazonaws.codeconnections#PullRequestComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A toggle that specifies whether to enable or disable pull request comments for the sync configuration to be created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4070,6 +4099,12 @@
                     "target": "com.amazonaws.codeconnections#TriggerResourceUpdateOn",
                     "traits": {
                         "smithy.api#documentation": "<p>When to trigger Git sync to begin the stack update.</p>"
+                    }
+                },
+                "PullRequestComment": {
+                    "target": "com.amazonaws.codeconnections#PullRequestComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TA toggle that specifies whether to enable or disable pull request comments for the sync configuration to be updated.</p>"
                     }
                 }
             },

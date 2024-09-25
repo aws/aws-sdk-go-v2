@@ -359,14 +359,25 @@ type DataCatalog struct {
 	// This member is required.
 	Name *string
 
-	// The type of data catalog to create: LAMBDA for a federated catalog, HIVE for an
-	// external hive metastore, or GLUE for an Glue Data Catalog.
+	// The type of data catalog to create: LAMBDA for a federated catalog, GLUE for an
+	// Glue Data Catalog, and HIVE for an external Apache Hive metastore. FEDERATED is
+	// a federated catalog for which Athena creates the connection and the Lambda
+	// function for you based on the parameters that you pass.
 	//
 	// This member is required.
 	Type DataCatalogType
 
+	// The type of connection for a FEDERATED data catalog (for example, REDSHIFT ,
+	// MYSQL , or SQLSERVER ). For information about individual connectors, see [Available data source connectors].
+	//
+	// [Available data source connectors]: https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html
+	ConnectionType ConnectionType
+
 	// An optional description of the data catalog.
 	Description *string
+
+	// Text of the error that occurred during data catalog creation or deletion.
+	Error *string
 
 	// Specifies the Lambda function or functions to use for the data catalog. This is
 	// a mapping whose values depend on the catalog type.
@@ -399,7 +410,53 @@ type DataCatalog struct {
 	//   - The GLUE data catalog type also applies to the default AwsDataCatalog that
 	//   already exists in your account, of which you can have only one and cannot
 	//   modify.
+	//
+	//   - The FEDERATED data catalog type uses one of the following parameters, but
+	//   not both. Use connection-arn for an existing Glue connection. Use
+	//   connection-type and connection-properties to specify the configuration setting
+	//   for a new connection.
+	//
+	//   - connection-arn:
+	//
+	//   - connection-type:MYSQL|REDSHIFT|...., connection-properties:""
+	//
+	// For , use escaped JSON text, as in the following example.
+	//
+	//   "{\"spill_bucket\":\"my_spill\",\"spill_prefix\":\"athena-spill\",\"host\":\"abc12345.snowflakecomputing.com\",\"port\":\"1234\",\"warehouse\":\"DEV_WH\",\"database\":\"TEST\",\"schema\":\"PUBLIC\",\"SecretArn\":\"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j\"}"
 	Parameters map[string]string
+
+	// The status of the creation or deletion of the data catalog.
+	//
+	//   - The LAMBDA , GLUE , and HIVE data catalog types are created synchronously.
+	//   Their status is either CREATE_COMPLETE or CREATE_FAILED .
+	//
+	//   - The FEDERATED data catalog type is created asynchronously.
+	//
+	// Data catalog creation status:
+	//
+	//   - CREATE_IN_PROGRESS : Federated data catalog creation in progress.
+	//
+	//   - CREATE_COMPLETE : Data catalog creation complete.
+	//
+	//   - CREATE_FAILED : Data catalog could not be created.
+	//
+	//   - CREATE_FAILED_CLEANUP_IN_PROGRESS : Federated data catalog creation failed
+	//   and is being removed.
+	//
+	//   - CREATE_FAILED_CLEANUP_COMPLETE : Federated data catalog creation failed and
+	//   was removed.
+	//
+	//   - CREATE_FAILED_CLEANUP_FAILED : Federated data catalog creation failed but
+	//   could not be removed.
+	//
+	// Data catalog deletion status:
+	//
+	//   - DELETE_IN_PROGRESS : Federated data catalog deletion in progress.
+	//
+	//   - DELETE_COMPLETE : Federated data catalog deleted.
+	//
+	//   - DELETE_FAILED : Federated data catalog could not be deleted.
+	Status DataCatalogStatus
 
 	noSmithyDocumentSerde
 }
@@ -412,6 +469,48 @@ type DataCatalogSummary struct {
 	// or hyphen characters. The remainder of the length constraint of 256 is reserved
 	// for use by Athena.
 	CatalogName *string
+
+	// The type of connection for a FEDERATED data catalog (for example, REDSHIFT ,
+	// MYSQL , or SQLSERVER ). For information about individual connectors, see [Available data source connectors].
+	//
+	// [Available data source connectors]: https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html
+	ConnectionType ConnectionType
+
+	// Text of the error that occurred during data catalog creation or deletion.
+	Error *string
+
+	// The status of the creation or deletion of the data catalog.
+	//
+	//   - The LAMBDA , GLUE , and HIVE data catalog types are created synchronously.
+	//   Their status is either CREATE_COMPLETE or CREATE_FAILED .
+	//
+	//   - The FEDERATED data catalog type is created asynchronously.
+	//
+	// Data catalog creation status:
+	//
+	//   - CREATE_IN_PROGRESS : Federated data catalog creation in progress.
+	//
+	//   - CREATE_COMPLETE : Data catalog creation complete.
+	//
+	//   - CREATE_FAILED : Data catalog could not be created.
+	//
+	//   - CREATE_FAILED_CLEANUP_IN_PROGRESS : Federated data catalog creation failed
+	//   and is being removed.
+	//
+	//   - CREATE_FAILED_CLEANUP_COMPLETE : Federated data catalog creation failed and
+	//   was removed.
+	//
+	//   - CREATE_FAILED_CLEANUP_FAILED : Federated data catalog creation failed but
+	//   could not be removed.
+	//
+	// Data catalog deletion status:
+	//
+	//   - DELETE_IN_PROGRESS : Federated data catalog deletion in progress.
+	//
+	//   - DELETE_COMPLETE : Federated data catalog deleted.
+	//
+	//   - DELETE_FAILED : Federated data catalog could not be deleted.
+	Status DataCatalogStatus
 
 	// The data catalog type.
 	Type DataCatalogType

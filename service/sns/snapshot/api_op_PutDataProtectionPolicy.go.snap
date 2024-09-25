@@ -1,10 +1,13 @@
 PutDataProtectionPolicy
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -14,12 +17,14 @@ PutDataProtectionPolicy
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

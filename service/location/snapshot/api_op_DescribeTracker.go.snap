@@ -1,10 +1,13 @@
 DescribeTracker
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -14,6 +17,7 @@ DescribeTracker
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		ResolveAuthScheme
 		GetIdentity
@@ -21,6 +25,7 @@ DescribeTracker
 		disableHTTPS
 		EndpointHostPrefix
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

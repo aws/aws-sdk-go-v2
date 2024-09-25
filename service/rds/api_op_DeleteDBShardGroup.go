@@ -38,21 +38,24 @@ type DeleteDBShardGroupInput struct {
 
 type DeleteDBShardGroupOutput struct {
 
-	// Specifies whether to create standby instances for the DB shard group. Valid
-	// values are the following:
+	// Specifies whether to create standby DB shard groups for the DB shard group.
+	// Valid values are the following:
 	//
-	//   - 0 - Creates a single, primary DB instance for each physical shard. This is
-	//   the default value, and the only one supported for the preview.
+	//   - 0 - Creates a DB shard group without a standby DB shard group. This is the
+	//   default value.
 	//
-	//   - 1 - Creates a primary DB instance and a standby instance in a different
-	//   Availability Zone (AZ) for each physical shard.
+	//   - 1 - Creates a DB shard group with a standby DB shard group in a different
+	//   Availability Zone (AZ).
 	//
-	//   - 2 - Creates a primary DB instance and two standby instances in different
-	//   AZs for each physical shard.
+	//   - 2 - Creates a DB shard group with two standby DB shard groups in two
+	//   different AZs.
 	ComputeRedundancy *int32
 
 	// The name of the primary DB cluster for the DB shard group.
 	DBClusterIdentifier *string
+
+	// The Amazon Resource Name (ARN) for the DB shard group.
+	DBShardGroupArn *string
 
 	// The name of the DB shard group.
 	DBShardGroupIdentifier *string
@@ -139,6 +142,9 @@ func (c *Client) addOperationDeleteDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -176,6 +182,18 @@ func (c *Client) addOperationDeleteDBShardGroupMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

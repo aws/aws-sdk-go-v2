@@ -1,3 +1,20 @@
+# v1.57.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.57.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.57.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.56.0 (2024-09-16)
 
 * **Feature**: This release adds additional enhancements to AWS IoT Device Management Software Package Catalog and Jobs. It also adds SBOM support in Software Package Version.

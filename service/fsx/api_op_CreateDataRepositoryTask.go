@@ -106,8 +106,8 @@ type CreateDataRepositoryTaskInput struct {
 	//
 	//   - For import tasks, the list contains paths in the Amazon S3 bucket from
 	//   which POSIX metadata changes are imported to the FSx for Lustre file system. The
-	//   path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where
-	//   myPrefix is optional).
+	//   path can be an S3 bucket or prefix in the format s3://bucket-name/prefix
+	//   (where prefix is optional).
 	//
 	//   - For release tasks, the list contains directory or file paths on the FSx for
 	//   Lustre file system from which to release exported files. If a directory is
@@ -183,6 +183,9 @@ func (c *Client) addOperationCreateDataRepositoryTaskMiddlewares(stack *middlewa
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -223,6 +226,18 @@ func (c *Client) addOperationCreateDataRepositoryTaskMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

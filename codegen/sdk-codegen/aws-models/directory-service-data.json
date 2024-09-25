@@ -1,0 +1,3464 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.directoryservicedata#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Reason the request was unauthorized. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> You don't have permission to perform the request or access the directory. It can also\n      occur when the <code>DirectoryId</code> doesn't exist or the user, member, or group might be\n      outside of your organizational unit (OU). </p>\n         <p> Make sure that you have the authentication and authorization to perform the action.\n      Review the directory information in the request, and make sure that the object isn't outside\n      of your OU. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.directoryservicedata#AccessDeniedReason": {
+            "type": "enum",
+            "members": {
+                "IAM_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_AUTH"
+                    }
+                },
+                "DIRECTORY_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_AUTH"
+                    }
+                },
+                "DATA_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#AddGroupMember": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#AddGroupMemberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#AddGroupMemberResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds an existing user, group, or computer as a group member.</p>",
+                "smithy.api#http": {
+                    "uri": "/GroupMemberships/AddGroupMember",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#AddGroupMemberRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberName": {
+                    "target": "com.amazonaws.directoryservicedata#MemberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The <code>SAMAccountName</code> of the user, group, or computer to add as a group member.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberRealm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group member. This parameter is required only\n      when adding a member outside of your Managed Microsoft AD domain to a group inside of your\n      Managed Microsoft AD domain. This parameter defaults to the Managed Microsoft AD domain. </p>\n         <note>\n            <p> This parameter is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#AddGroupMemberResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#AttributeValue": {
+            "type": "union",
+            "members": {
+                "S": {
+                    "target": "com.amazonaws.directoryservicedata#StringAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates that the attribute type value is a string. For example: </p>\n         <p>\n            <code>\"S\": \"S Group\"</code>\n         </p>"
+                    }
+                },
+                "N": {
+                    "target": "com.amazonaws.directoryservicedata#NumberAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates that the attribute type value is a number. For example: </p>\n         <p>\n            <code>\"N\": \"16\"</code>\n         </p>"
+                    }
+                },
+                "BOOL": {
+                    "target": "com.amazonaws.directoryservicedata#BooleanAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates that the attribute type value is a boolean. For example: </p>\n         <p>\n            <code>\"BOOL\": true</code>\n         </p>"
+                    }
+                },
+                "SS": {
+                    "target": "com.amazonaws.directoryservicedata#StringSetAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates that the attribute type value is a string set. For example: </p>\n         <p>\n            <code>\"SS\": [\"sample_service_class/host.sample.com:1234/sample_service_name_1\",\n        \"sample_service_class/host.sample.com:1234/sample_service_name_2\"]</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The data type for an attribute. Each attribute value is described as a name-value pair.\n      The name is the AD schema name, and the value is the data itself. For a list of supported\n      attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>.\n    </p>"
+            }
+        },
+        "com.amazonaws.directoryservicedata#Attributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.directoryservicedata#LdapDisplayName"
+            },
+            "value": {
+                "target": "com.amazonaws.directoryservicedata#AttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#BooleanAttributeValue": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\x00-\\x7F]+$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> This error will occur when you try to create a resource that conflicts with an existing\n      object. It can also occur when adding a member to a group that the member is already\n      in.</p>\n         <p> This error can be caused by a request sent within the 8-hour idempotency window with the\n      same client token but different input parameters. Client tokens should not be re-used across\n      different requests. After 8 hours, any request with the same client token is treated as a new\n      request. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.directoryservicedata#CreateGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#CreateGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#CreateGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new group.</p>",
+                "smithy.api#http": {
+                    "uri": "/Groups/CreateGroup",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#CreateGroupRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupType": {
+                    "target": "com.amazonaws.directoryservicedata#GroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AD group type. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#how-active-directory-security-groups-work\">Active Directory security group type</a>.</p>"
+                    }
+                },
+                "GroupScope": {
+                    "target": "com.amazonaws.directoryservicedata#GroupScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The scope of the AD group. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#group-scope\">Active Directory security group scope</a>. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An expression that defines one or more attributes with the data type and value of each\n      attribute. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#CreateGroupResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>"
+                    }
+                },
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the group. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#CreateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#CreateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#CreateUserResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new user.</p>",
+                "smithy.api#http": {
+                    "uri": "/Users/CreateUser",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#CreateUserRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that’s associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.directoryservicedata#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The email address of the user. </p>"
+                    }
+                },
+                "GivenName": {
+                    "target": "com.amazonaws.directoryservicedata#GivenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The first name of the user. </p>"
+                    }
+                },
+                "Surname": {
+                    "target": "com.amazonaws.directoryservicedata#Surname",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The last name of the user. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An expression that defines one or more attribute names with the data type and value of\n      each attribute. A key is an attribute name, and the value is a list of maps. For a list of\n      supported attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>. </p>\n         <note>\n            <p> Attribute names are case insensitive. </p>\n         </note>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#CreateUserResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory where the address block is added. </p>"
+                    }
+                },
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the user. </p>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DeleteGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#DeleteGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#DeleteGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a group.</p>",
+                "smithy.api#http": {
+                    "uri": "/Groups/DeleteGroup",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#DeleteGroupRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DeleteGroupResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DeleteUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#DeleteUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#DeleteUserResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a user.</p>",
+                "smithy.api#http": {
+                    "uri": "/Users/DeleteUser",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#DeleteUserRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DeleteUserResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DescribeGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#DescribeGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#DescribeGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific group.</p>",
+                "smithy.api#http": {
+                    "uri": "/Groups/DescribeGroup",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeGroupFailure",
+                        "params": {
+                            "DirectoryId": "d-1111111111",
+                            "SAMAccountName": "test-group"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.directoryservicedata#DescribeGroupRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Identifier (ID) of the directory associated with the group.</p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group. </p>\n         <note>\n            <p> This parameter is optional, so you can return groups outside of your Managed Microsoft AD\n        domain. When no value is defined, only your Managed Microsoft AD groups are returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#LdapDisplayNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> One or more attributes to be returned for the group. For a list of supported attributes,\n      see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data-attributes.html\">Directory Service Data Attributes</a>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DescribeGroupResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group. </p>"
+                    }
+                },
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the group. </p>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>"
+                    }
+                },
+                "DistinguishedName": {
+                    "target": "com.amazonaws.directoryservicedata#DistinguishedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The <a href=\"https://learn.microsoft.com/en-us/windows/win32/ad/object-names-and-identities#distinguished-name\">distinguished name</a> of the object. </p>"
+                    }
+                },
+                "GroupType": {
+                    "target": "com.amazonaws.directoryservicedata#GroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AD group type. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#how-active-directory-security-groups-work\">Active Directory security group type</a>. </p>"
+                    }
+                },
+                "GroupScope": {
+                    "target": "com.amazonaws.directoryservicedata#GroupScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The scope of the AD group. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#group-scope\">Active Directory security groups</a>. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The attribute values that are returned for the attribute names that are included in the\n      request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DescribeUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#DescribeUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#DescribeUserResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific user.</p>",
+                "smithy.api#http": {
+                    "uri": "/Users/DescribeUser",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeUserFailure",
+                        "params": {
+                            "DirectoryId": "d-1111111111",
+                            "SAMAccountName": "test-user"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.directoryservicedata#DescribeUserRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#LdapDisplayNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> One or more attribute names to be returned for the user. A key is an attribute name, and\n      the value is a list of maps. For a list of supported attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the user. </p>\n         <note>\n            <p> This parameter is optional, so you can return users outside your Managed Microsoft AD domain.\n        When no value is defined, only your Managed Microsoft AD users are returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DescribeUserResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the user. </p>"
+                    }
+                },
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the user. </p>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>"
+                    }
+                },
+                "DistinguishedName": {
+                    "target": "com.amazonaws.directoryservicedata#DistinguishedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The <a href=\"https://learn.microsoft.com/en-us/windows/win32/ad/object-names-and-identities#distinguished-name\">distinguished name</a> of the object. </p>"
+                    }
+                },
+                "UserPrincipalName": {
+                    "target": "com.amazonaws.directoryservicedata#UserPrincipalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The UPN that is an Internet-style login name for a user and is based on the Internet\n      standard <a href=\"https://www.ietf.org/rfc/rfc0822.txt\">RFC 822</a>. The UPN is shorter\n      than the distinguished name and easier to remember. </p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.directoryservicedata#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The email address of the user. </p>"
+                    }
+                },
+                "GivenName": {
+                    "target": "com.amazonaws.directoryservicedata#GivenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The first name of the user. </p>"
+                    }
+                },
+                "Surname": {
+                    "target": "com.amazonaws.directoryservicedata#Surname",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The last name of the user. </p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates whether the user account is active. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The attribute values that are returned for the attribute names that are included in the\n      request. </p>\n         <note>\n            <p> Attribute names are case insensitive. </p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DirectoryId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^d-[0-9a-f]{10}$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#DirectoryServiceData": {
+            "type": "service",
+            "version": "2023-05-31",
+            "operations": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AddGroupMember"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#CreateGroup"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#CreateUser"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DeleteGroup"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DeleteUser"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DescribeGroup"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DescribeUser"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DisableUser"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ListGroupMembers"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ListGroups"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ListGroupsForMember"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#RemoveGroupMember"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#SearchGroups"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#SearchUsers"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#UpdateGroup"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#UpdateUser"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Directory Service Data",
+                    "arnNamespace": "ds",
+                    "cloudFormationName": "DirectoryServiceData",
+                    "cloudTrailEventSource": "ds.amazonaws.com",
+                    "endpointPrefix": "ds-data"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ds-data"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p> Amazon Web Services Directory Service Data is an extension of Directory Service. This API reference provides detailed information\n      about Directory Service Data operations and object types. </p>\n         <p> With Directory Service Data, you can create, read, update, and delete users, groups, and memberships from\n      your Managed Microsoft AD without additional costs and without deploying dedicated management\n      instances. You can also perform built-in object management tasks across directories without\n      direct network connectivity, which simplifies provisioning and access management to achieve\n      fully automated deployments. Directory Service Data supports user and group write operations, such as\n        <code>CreateUser</code> and <code>CreateGroup</code>, within the organizational unit (OU) of\n      your Managed Microsoft AD. Directory Service Data supports read operations, such as <code>ListUsers</code> and\n        <code>ListGroups</code>, on all users, groups, and group memberships within your\n      Managed Microsoft AD and across trusted realms. Directory Service Data supports adding and removing group members in\n      your OU and the Amazon Web Services Delegated Groups OU, so you can grant and deny access to specific roles\n      and permissions. For more information, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups.html\">Manage users and\n        groups</a> in the <i>Directory Service Administration Guide</i>. </p>\n         <note>\n            <p> Directory management operations and configuration changes made against the Directory Service\n        API will also reflect in Directory Service Data API with eventual consistency. You can expect a short delay\n        between management changes, such as adding a new directory trust and calling the Directory Service Data API\n        for the newly created trusted realm. </p>\n         </note>\n         <p> Directory Service Data connects to your Managed Microsoft AD domain controllers and performs operations on\n      underlying directory objects. When you create your Managed Microsoft AD, you choose subnets for domain\n      controllers that Directory Service creates on your behalf. If a domain controller is unavailable, Directory Service Data\n      uses an available domain controller. As a result, you might notice eventual consistency while\n      objects replicate from one domain controller to another domain controller. For more\n      information, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html\">What\n        gets created</a> in the <i>Directory Service Administration Guide</i>.\n      Directory limits vary by Managed Microsoft AD edition: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Standard edition</b> – Supports 8 transactions per\n          second (TPS) for read operations and 4 TPS for write operations per directory. There's a\n          concurrency limit of 10 concurrent requests. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Enterprise edition</b> – Supports 16 transactions per\n          second (TPS) for read operations and 8 TPS for write operations per directory. There's a\n          concurrency limit of 10 concurrent requests.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Amazon Web Services Account</b> - Supports a total of 100 TPS for\n          Directory Service Data operations across all directories.</p>\n            </li>\n         </ul>\n         <p> Directory Service Data only supports the Managed Microsoft AD directory type and is only available in the primary\n      Amazon Web Services Region. For more information, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html\">Managed Microsoft AD</a>\n      and <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/multi-region-global-primary-additional.html\">Primary vs additional Regions</a> in the <i>Directory Service Administration\n        Guide</i>. </p>",
+                "smithy.api#title": "AWS Directory Service Data",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://directoryservicedata.amazonaws.com/doc/2023-05-31/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ds-data-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ds-data-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ds-data.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ds-data.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ds-data.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#DirectoryUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Reason the request failed for the specified directory. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The request could not be completed due to a problem in the configuration or current state\n      of the specified directory. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DirectoryUnavailableReason": {
+            "type": "enum",
+            "members": {
+                "INVALID_DIRECTORY_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DIRECTORY_STATE"
+                    }
+                },
+                "DIRECTORY_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_TIMEOUT"
+                    }
+                },
+                "DIRECTORY_RESOURCES_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECTORY_RESOURCES_EXCEEDED"
+                    }
+                },
+                "NO_DISK_SPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_DISK_SPACE"
+                    }
+                },
+                "TRUST_AUTH_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUST_AUTH_FAILURE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#DisableUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#DisableUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#DisableUserResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Deactivates an active user account. For information about how to enable an inactive user\n      account, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/devguide/API_ResetUserPassword.html\">ResetUserPassword</a>\n      in the <i>Directory Service API Reference</i>.</p>",
+                "smithy.api#http": {
+                    "uri": "/Users/DisableUser",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#DisableUserRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DisableUserResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#DistinguishedName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#EmailAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.directoryservicedata#GivenName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#Group": {
+            "type": "structure",
+            "members": {
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the group. </p>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DistinguishedName": {
+                    "target": "com.amazonaws.directoryservicedata#DistinguishedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://learn.microsoft.com/en-us/windows/win32/ad/object-names-and-identities#distinguished-name\">distinguished name</a> of the object. </p>"
+                    }
+                },
+                "GroupType": {
+                    "target": "com.amazonaws.directoryservicedata#GroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AD group type. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#how-active-directory-security-groups-work\">Active Directory security group type</a>. </p>"
+                    }
+                },
+                "GroupScope": {
+                    "target": "com.amazonaws.directoryservicedata#GroupScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The scope of the AD group. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#group-scope\">Active Directory security groups</a>\n         </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An expression of one or more attributes, data types, and the values of a group. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A group object that contains identifying information and attributes for a specified\n      group. </p>"
+            }
+        },
+        "com.amazonaws.directoryservicedata#GroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#Group"
+            }
+        },
+        "com.amazonaws.directoryservicedata#GroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[^:;|=+\"*?<>/\\\\,\\[\\]@]+$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#GroupScope": {
+            "type": "enum",
+            "members": {
+                "DOMAIN_LOCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DomainLocal"
+                    }
+                },
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Global"
+                    }
+                },
+                "UNIVERSAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Universal"
+                    }
+                },
+                "BUILTIN_LOCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BuiltinLocal"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#GroupSummary": {
+            "type": "structure",
+            "members": {
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique security identifier (SID) of the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupType": {
+                    "target": "com.amazonaws.directoryservicedata#GroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AD group type. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#how-active-directory-security-groups-work\">Active Directory security group type</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupScope": {
+                    "target": "com.amazonaws.directoryservicedata#GroupScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the AD group. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#group-scope\">Active Directory security groups</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing a subset of fields of a group object from a directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservicedata#GroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#GroupSummary"
+            }
+        },
+        "com.amazonaws.directoryservicedata#GroupType": {
+            "type": "enum",
+            "members": {
+                "DISTRIBUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Distribution"
+                    }
+                },
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Security"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The operation didn't succeed because an internal error occurred. Try again later. </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#LdapDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[A-Za-z*][A-Za-z-*]*$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#LdapDisplayNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#LdapDisplayName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupMembers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#ListGroupMembersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#ListGroupMembersResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Returns member information for the specified group. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the\n        <code>ListGroupMembers.NextToken</code> member contains a token that you pass in the next\n      call to <code>ListGroupMembers</code>. This retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#http": {
+                    "uri": "/GroupMemberships/ListGroupMembers",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Members"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupMembersRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group. </p>\n         <note>\n            <p> This parameter is optional, so you can return members from a group outside of your\n        Managed Microsoft AD domain. When no value is defined, only members of your Managed Microsoft AD groups are\n        returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "MemberRealm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group member. This parameter defaults to the\n      Managed Microsoft AD domain. </p>\n         <note>\n            <p> This parameter is optional and case insensitive. </p>\n         </note>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.directoryservicedata#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to be returned per request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupMembersResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier (ID) of the directory associated with the group.</p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group. </p>"
+                    }
+                },
+                "MemberRealm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the member. </p>"
+                    }
+                },
+                "Members": {
+                    "target": "com.amazonaws.directoryservicedata#MemberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The member information that the request returns. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#ListGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#ListGroupsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Returns group information for the specified directory. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>ListGroups.NextToken</code>\n      member contains a token that you pass in the next call to <code>ListGroups</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#http": {
+                    "uri": "/Groups/ListGroups",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Groups"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupsForMember": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#ListGroupsForMemberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#ListGroupsForMemberResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Returns group information for the specified member. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the\n        <code>ListGroupsForMember.NextToken</code> member contains a token that you pass in the next\n      call to <code>ListGroupsForMember</code>. This retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#http": {
+                    "uri": "/GroupMemberships/ListGroupsForMember",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Groups"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupsForMemberRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the member. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group. </p>\n         <note>\n            <p> This parameter is optional, so you can return groups outside of your Managed Microsoft AD\n        domain. When no value is defined, only your Managed Microsoft AD groups are returned. </p>\n            <p> This value is case insensitive and defaults to your Managed Microsoft AD domain. </p>\n         </note>"
+                    }
+                },
+                "MemberRealm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group member. </p>\n         <note>\n            <p> This parameter is optional, so you can limit your results to the group members in a\n        specific domain. </p>\n            <p> This parameter is case insensitive and defaults to <code>Realm</code>\n            </p>\n         </note>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#MemberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The <code>SAMAccountName</code> of the user, group, or computer that's a member of the\n      group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.directoryservicedata#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to be returned per request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupsForMemberResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the member. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain that's associated with the group. </p>"
+                    }
+                },
+                "MemberRealm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain that's associated with the member. </p>"
+                    }
+                },
+                "Groups": {
+                    "target": "com.amazonaws.directoryservicedata#GroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The group information that the request returns. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name associated with the directory. </p>\n         <note>\n            <p> This parameter is optional, so you can return groups outside of your Managed Microsoft AD\n        domain. When no value is defined, only your Managed Microsoft AD groups are returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.directoryservicedata#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to be returned per request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListGroupsResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name associated with the group.</p>"
+                    }
+                },
+                "Groups": {
+                    "target": "com.amazonaws.directoryservicedata#GroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The group information that the request returns. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListUsers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#ListUsersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#ListUsersResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Returns user information for the specified directory. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>ListUsers.NextToken</code>\n      member contains a token that you pass in the next call to <code>ListUsers</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#http": {
+                    "uri": "/Users/ListUsers",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Users"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListUsersRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the user. </p>\n         <note>\n            <p> This parameter is optional, so you can return users outside of your Managed Microsoft AD\n        domain. When no value is defined, only your Managed Microsoft AD users are returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.directoryservicedata#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to be returned per request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ListUsersResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain that's associated with the user. </p>"
+                    }
+                },
+                "Users": {
+                    "target": "com.amazonaws.directoryservicedata#UserSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The user information that the request returns. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#Member": {
+            "type": "structure",
+            "members": {
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the group member. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#MemberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group member. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberType": {
+                    "target": "com.amazonaws.directoryservicedata#MemberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AD type of the member object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A member object that contains identifying information for a specified member.</p>"
+            }
+        },
+        "com.amazonaws.directoryservicedata#MemberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#Member"
+            }
+        },
+        "com.amazonaws.directoryservicedata#MemberName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[^:;|=+\"*?<>/\\\\,\\[\\]@]+$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#MemberType": {
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER"
+                    }
+                },
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                },
+                "COMPUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPUTER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6144
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#NumberAttributeValue": {
+            "type": "long",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#Realm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+[.]?$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#RemoveGroupMember": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#RemoveGroupMemberRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#RemoveGroupMemberResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Removes a member from a group. </p>",
+                "smithy.api#http": {
+                    "uri": "/GroupMemberships/RemoveGroupMember",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#RemoveGroupMemberRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the member. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberName": {
+                    "target": "com.amazonaws.directoryservicedata#MemberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The <code>SAMAccountName</code> of the user, group, or computer to remove from the group.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemberRealm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group member. This parameter defaults to the\n      Managed Microsoft AD domain. </p>\n         <note>\n            <p> This parameter is optional and case insensitive. </p>\n         </note>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#RemoveGroupMemberResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The resource couldn't be found. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.directoryservicedata#SID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#SearchGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#SearchGroupsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Searches the specified directory for a group. You can find groups that match the\n        <code>SearchString</code> parameter with the value of their attributes included in the\n        <code>SearchString</code> parameter. </p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>SearchGroups.NextToken</code>\n      member contains a token that you pass in the next call to <code>SearchGroups</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#http": {
+                    "uri": "/Groups/SearchGroups",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Groups"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SearchString": {
+                    "target": "com.amazonaws.directoryservicedata#SearchString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The attribute value that you want to search for. </p>\n         <note>\n            <p> Wildcard <code>(*)</code> searches aren't supported. For a list of supported\n        attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data\n          Attributes</a>. </p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SearchAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#LdapDisplayNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> One or more data attributes that are used to search for a group. For a list of supported\n      attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the group. </p>\n         <note>\n            <p> This parameter is optional, so you can return groups outside of your Managed Microsoft AD\n        domain. When no value is defined, only your Managed Microsoft AD groups are returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.directoryservicedata#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to be returned per request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchGroupsResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain that's associated with the group. </p>"
+                    }
+                },
+                "Groups": {
+                    "target": "com.amazonaws.directoryservicedata#GroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The group information that the request returns. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchUsers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#SearchUsersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#SearchUsersResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Searches the specified directory for a user. You can find users that match the\n        <code>SearchString</code> parameter with the value of their attributes included in the\n        <code>SearchString</code> parameter.</p>\n         <p> This operation supports pagination with the use of the <code>NextToken</code> request and\n      response parameters. If more results are available, the <code>SearchUsers.NextToken</code>\n      member contains a token that you pass in the next call to <code>SearchUsers</code>. This\n      retrieves the next set of items. </p>\n         <p> You can also specify a maximum number of return results with the <code>MaxResults</code>\n      parameter. </p>",
+                "smithy.api#http": {
+                    "uri": "/Users/SearchUsers",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Users"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchUsersRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain name that's associated with the user. </p>\n         <note>\n            <p> This parameter is optional, so you can return users outside of your Managed Microsoft AD\n        domain. When no value is defined, only your Managed Microsoft AD users are returned. </p>\n            <p> This value is case insensitive. </p>\n         </note>"
+                    }
+                },
+                "SearchString": {
+                    "target": "com.amazonaws.directoryservicedata#SearchString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The attribute value that you want to search for. </p>\n         <note>\n            <p> Wildcard <code>(*)</code> searches aren't supported. For a list of supported\n        attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data\n          Attributes</a>. </p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SearchAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#LdapDisplayNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> One or more data attributes that are used to search for a user. For a list of supported\n      attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data_attributes.html\">Directory Service Data Attributes</a>.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.directoryservicedata#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results to be returned per request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#SearchUsersResult": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory where the address block is added. </p>"
+                    }
+                },
+                "Realm": {
+                    "target": "com.amazonaws.directoryservicedata#Realm",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The domain that's associated with the user. </p>"
+                    }
+                },
+                "Users": {
+                    "target": "com.amazonaws.directoryservicedata#UserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The user information that the request returns. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.directoryservicedata#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An encoded paging token for paginated calls that can be passed back to retrieve the next\n      page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#StringAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#StringSetAttributeValue": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#StringAttributeValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#Surname": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The recommended amount of seconds to retry after a throttling exception. </p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The limit on the number of requests per second has been exceeded. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#UpdateGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#UpdateGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Updates group information. </p>",
+                "smithy.api#http": {
+                    "uri": "/Groups/UpdateGroup",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateGroupRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the group. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupType": {
+                    "target": "com.amazonaws.directoryservicedata#GroupType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AD group type. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#how-active-directory-security-groups-work\">Active Directory security group type</a>. </p>"
+                    }
+                },
+                "GroupScope": {
+                    "target": "com.amazonaws.directoryservicedata#GroupScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The scope of the AD group. For details, see <a href=\"https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#group-scope\">Active Directory security groups</a>. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An expression that defines one or more attributes with the data type and the value of\n      each attribute. </p>"
+                    }
+                },
+                "UpdateType": {
+                    "target": "com.amazonaws.directoryservicedata#UpdateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of update to be performed. If no value exists for the attribute, use\n        <code>ADD</code>. Otherwise, use <code>REPLACE</code> to change an attribute value or\n        <code>REMOVE</code> to clear the attribute value. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateGroupResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateType": {
+            "type": "enum",
+            "members": {
+                "ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD"
+                    }
+                },
+                "REPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE"
+                    }
+                },
+                "REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directoryservicedata#UpdateUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directoryservicedata#UpdateUserResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directoryservicedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.directoryservicedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Updates user information. </p>",
+                "smithy.api#http": {
+                    "uri": "/Users/UpdateUser",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateUserRequest": {
+            "type": "structure",
+            "members": {
+                "DirectoryId": {
+                    "target": "com.amazonaws.directoryservicedata#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The identifier (ID) of the directory that's associated with the user. </p>",
+                        "smithy.api#httpQuery": "DirectoryId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.directoryservicedata#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The email address of the user. </p>"
+                    }
+                },
+                "GivenName": {
+                    "target": "com.amazonaws.directoryservicedata#GivenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The first name of the user. </p>"
+                    }
+                },
+                "Surname": {
+                    "target": "com.amazonaws.directoryservicedata#Surname",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The last name of the user. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An expression that defines one or more attribute names with the data type and value of\n      each attribute. A key is an attribute name, and the value is a list of maps. For a list of\n      supported attributes, see <a href=\"https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ad_data-attributes.html\">Directory Service Data Attributes</a>. </p>\n         <note>\n            <p> Attribute names are case insensitive. </p>\n         </note>"
+                    }
+                },
+                "UpdateType": {
+                    "target": "com.amazonaws.directoryservicedata#UpdateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of update to be performed. If no value exists for the attribute, use\n        <code>ADD</code>. Otherwise, use <code>REPLACE</code> to change an attribute value or\n        <code>REMOVE</code> to clear the attribute value. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.directoryservicedata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique and case-sensitive identifier that you provide to make sure the idempotency of\n      the request, so multiple identical calls have the same effect as one single call. </p>\n         <p> A client token is valid for 8 hours after the first request that uses it completes. After\n      8 hours, any request with the same client token is treated as a new request. If the request\n      succeeds, any future uses of that token will be idempotent for another 8 hours. </p>\n         <p> If you submit a request with the same client token but change one of the other parameters\n      within the 8-hour idempotency window, Directory Service Data returns an <code>ConflictException</code>. </p>\n         <note>\n            <p> This parameter is optional when using the CLI or SDK. </p>\n         </note>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#UpdateUserResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#User": {
+            "type": "structure",
+            "members": {
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the user. </p>"
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the user. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DistinguishedName": {
+                    "target": "com.amazonaws.directoryservicedata#DistinguishedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The <a href=\"https://learn.microsoft.com/en-us/windows/win32/ad/object-names-and-identities#distinguished-name\">distinguished name</a> of the object. </p>"
+                    }
+                },
+                "UserPrincipalName": {
+                    "target": "com.amazonaws.directoryservicedata#UserPrincipalName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The UPN that is an internet-style login name for a user and based on the internet\n      standard <a href=\"https://www.ietf.org/rfc/rfc0822.txt\">RFC 822</a>. The UPN is shorter\n      than the distinguished name and easier to remember. </p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.directoryservicedata#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The email address of the user. </p>"
+                    }
+                },
+                "GivenName": {
+                    "target": "com.amazonaws.directoryservicedata#GivenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The first name of the user. </p>"
+                    }
+                },
+                "Surname": {
+                    "target": "com.amazonaws.directoryservicedata#Surname",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The last name of the user. </p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates whether the user account is active. </p>"
+                    }
+                },
+                "OtherAttributes": {
+                    "target": "com.amazonaws.directoryservicedata#Attributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An expression that includes one or more attributes, data types, and values of a\n      user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A user object that contains identifying information and attributes for a specified user.\n    </p>"
+            }
+        },
+        "com.amazonaws.directoryservicedata#UserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#User"
+            }
+        },
+        "com.amazonaws.directoryservicedata#UserName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[\\w\\-.]+$"
+            }
+        },
+        "com.amazonaws.directoryservicedata#UserPrincipalName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.directoryservicedata#UserSummary": {
+            "type": "structure",
+            "members": {
+                "SID": {
+                    "target": "com.amazonaws.directoryservicedata#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique security identifier (SID) of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SAMAccountName": {
+                    "target": "com.amazonaws.directoryservicedata#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GivenName": {
+                    "target": "com.amazonaws.directoryservicedata#GivenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first name of the user. </p>"
+                    }
+                },
+                "Surname": {
+                    "target": "com.amazonaws.directoryservicedata#Surname",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last name of the user.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the user account is active.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing a subset of the fields of a user object from a directory.</p>"
+            }
+        },
+        "com.amazonaws.directoryservicedata#UserSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directoryservicedata#UserSummary"
+            }
+        },
+        "com.amazonaws.directoryservicedata#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.directoryservicedata#ExceptionMessage"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.directoryservicedata#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Reason the request failed validation. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The request isn't valid. Review the details in the error message to update the invalid\n      parameters or values in your request. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.directoryservicedata#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "INVALID_REALM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_REALM"
+                    }
+                },
+                "INVALID_DIRECTORY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DIRECTORY_TYPE"
+                    }
+                },
+                "INVALID_SECONDARY_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SECONDARY_REGION"
+                    }
+                },
+                "INVALID_NEXT_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_NEXT_TOKEN"
+                    }
+                },
+                "INVALID_ATTRIBUTE_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_VALUE"
+                    }
+                },
+                "INVALID_ATTRIBUTE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_NAME"
+                    }
+                },
+                "INVALID_ATTRIBUTE_FOR_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_FOR_USER"
+                    }
+                },
+                "INVALID_ATTRIBUTE_FOR_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_FOR_GROUP"
+                    }
+                },
+                "INVALID_ATTRIBUTE_FOR_SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_FOR_SEARCH"
+                    }
+                },
+                "INVALID_ATTRIBUTE_FOR_MODIFY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ATTRIBUTE_FOR_MODIFY"
+                    }
+                },
+                "DUPLICATE_ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_ATTRIBUTE"
+                    }
+                },
+                "MISSING_ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_ATTRIBUTE"
+                    }
+                },
+                "ATTRIBUTE_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTRIBUTE_EXISTS"
+                    }
+                },
+                "LDAP_SIZE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP_SIZE_LIMIT_EXCEEDED"
+                    }
+                },
+                "LDAP_UNSUPPORTED_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LDAP_UNSUPPORTED_OPERATION"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -82,7 +82,8 @@ type CreateAgentInput struct {
 	// A description of the agent.
 	Description *string
 
-	// The foundation model to be used for orchestration by the agent you create.
+	// The Amazon Resource Name (ARN) of the foundation model to be used for
+	// orchestration by the agent you create.
 	FoundationModel *string
 
 	// The unique Guardrail configuration assigned to the agent when it is created.
@@ -171,6 +172,9 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -211,6 +215,18 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

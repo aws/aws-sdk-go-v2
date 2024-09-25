@@ -204,14 +204,14 @@
                 "PoolId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pool to update with the new Identity. This value can be either the PoolId or\n            PoolArn, and you can find these values using <a>DescribePools</a>.</p>",
+                        "smithy.api#documentation": "<p>The pool to update with the new Identity. This value can be either the PoolId or\n            PoolArn, and you can find these values using <a>DescribePools</a>.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrSenderIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use, such as PhoneNumberId, PhoneNumberArn, SenderId, or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn, while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use, such as PhoneNumberId, PhoneNumberArn, SenderId, or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn, while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1149,7 +1149,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrSenderIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>\n         <p>After the pool is created you can add more origination identities to the pool by using <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html\">AssociateOriginationIdentity</a>.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>\n         <p>After the pool is created you can add more origination identities to the pool by using <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_AssociateOriginationIdentity.html\">AssociateOriginationIdentity</a>.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2339,7 +2339,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrPoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, PoolId or\n            PoolArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn and <a>DescribePools</a> to find the values\n            of PoolId and PoolArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, PoolId or\n            PoolArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn and <a>DescribePools</a> to find the values\n            of PoolId and PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2478,7 +2478,7 @@
                 "OptOutListName": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn of the OptOutList to delete. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and\n            OptOutListArn.</p>",
+                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn of the OptOutList to delete. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and\n            OptOutListArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2551,7 +2551,7 @@
                 "OptOutListName": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn to remove the phone number from.</p>",
+                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn to remove the phone number from.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2644,7 +2644,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The PoolId or PoolArn of the pool to delete. You can use <a>DescribePools</a> to find the values for PoolId and PoolArn .</p>",
+                        "smithy.api#documentation": "<p>The PoolId or PoolArn of the pool to delete. You can use <a>DescribePools</a> to find the values for PoolId and PoolArn .</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3134,6 +3134,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource-based policy document attached to the AWS End User Messaging SMS and Voice resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource you're deleting the resource-based policy from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource that the resource-based policy was deleted from.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON formatted resource-based policy that was deleted.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the resource-based policy was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DeleteTextMessageSpendLimitOverride": {
             "type": "operation",
             "input": {
@@ -3581,7 +3651,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrPoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> to find the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3684,7 +3754,7 @@
                 "OptOutListNames": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OptOutLists to show the details of. This is an array of strings that can be either\n            the OptOutListName or OptOutListArn.</p>"
+                        "smithy.api#documentation": "<p>The OptOutLists to show the details of. This is an array of strings that can be either\n            the OptOutListName or OptOutListArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "NextToken": {
@@ -3697,6 +3767,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use <code>SELF</code> to filter the list of Opt-Out List to ones your account owns or use <code>SHARED</code> to filter on Opt-Out List shared with your account. The <code>Owner</code> and <code>OptOutListNames</code> parameters can't be used at the same time.</p>"
                     }
                 }
             },
@@ -3762,7 +3838,7 @@
                 "OptOutListName": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn of the OptOutList. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and\n            OptOutListArn.</p>",
+                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn of the OptOutList. You can use <a>DescribeOptOutLists</a> to find the values for OptOutListName and\n            OptOutListArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3865,7 +3941,7 @@
                 "PhoneNumberIds": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumberIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of phone numbers to find information about. This is an array of\n            strings that can be either the PhoneNumberId or PhoneNumberArn.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of phone numbers to find information about. This is an array of\n            strings that can be either the PhoneNumberId or PhoneNumberArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "Filters": {
@@ -3884,6 +3960,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use <code>SELF</code> to filter the list of phone numbers to ones your account owns or use <code>SHARED</code> to filter on phone numbers shared with your account. The <code>Owner</code> and <code>PhoneNumberIds</code> parameters can't be used at the same time.</p>"
                     }
                 }
             },
@@ -3949,7 +4031,7 @@
                 "PoolIds": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of pools to find. This is an array of strings that can be either\n            the PoolId or PoolArn.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of pools to find. This is an array of strings that can be either\n            the PoolId or PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "Filters": {
@@ -3968,6 +4050,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use <code>SELF</code> to filter the list of Pools to ones your account owns or use <code>SHARED</code> to filter on Pools shared with your account. The <code>Owner</code> and <code>PoolIds</code> parameters can't be used at the same time.</p>"
                     }
                 }
             },
@@ -4780,7 +4868,7 @@
                 "SenderIds": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SenderIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of SenderIdAndCountry objects to search for.</p>"
+                        "smithy.api#documentation": "<p>An array of SenderIdAndCountry objects to search for.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "Filters": {
@@ -4799,6 +4887,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use <code>SELF</code> to filter the list of Sender Ids to ones your account owns or use <code>SHARED</code> to filter on Sender Ids shared with your account. The <code>Owner</code> and <code>SenderIds</code> parameters can't be used at the same time. </p>"
                     }
                 }
             },
@@ -5074,14 +5168,14 @@
                 "PoolId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the pool to disassociate with the origination identity. This\n            value can be either the PoolId or PoolArn.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the pool to disassociate with the origination identity. This\n            value can be either the PoolId or PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrSenderIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> find the values for\n            PhoneNumberId and PhoneNumberArn, or use <a>DescribeSenderIds</a> to get the\n            values for SenderId and SenderIdArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> find the values for\n            PhoneNumberId and PhoneNumberArn, or use <a>DescribeSenderIds</a> to get the\n            values for SenderId and SenderIdArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5740,6 +5834,76 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the JSON text of the resource-based policy document attached to the AWS End User Messaging SMS and Voice resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource attached to the resource-based policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource attached to the resource-based policy.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON formatted string that contains the resource-based policy attached to the AWS End User Messaging SMS and Voice resource. </p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the resource-based policy was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#IamRoleArn": {
             "type": "string",
             "traits": {
@@ -6027,7 +6191,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the pool. This value can be either the PoolId or\n            PoolArn.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the pool. This value can be either the PoolId or\n            PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6665,6 +6829,21 @@
                 "target": "com.amazonaws.pinpointsmsvoicev2#OriginationIdentityMetadata"
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#Owner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SELF",
+                        "name": "SELF"
+                    },
+                    {
+                        "value": "SHARED",
+                        "name": "SHARED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#PhoneNumber": {
             "type": "string",
             "traits": {
@@ -7017,6 +7196,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteRegistrationFieldValue"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteTextMessageSpendLimitOverride"
                 },
                 {
@@ -7095,6 +7277,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSet"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicy"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentities"
                 },
                 {
@@ -7111,6 +7296,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PutRegistrationFieldValue"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ReleasePhoneNumber"
@@ -8454,7 +8642,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneOrPoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> get the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or\n            SenderIdArn. You can use <a>DescribePhoneNumbers</a> get the values for\n            PhoneNumberId and PhoneNumberArn while <a>DescribeSenderIds</a> can be used\n            to get the values for SenderId and SenderIdArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8556,7 +8744,7 @@
                 "OptOutListName": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn to add the phone number to.</p>",
+                        "smithy.api#documentation": "<p>The OptOutListName or OptOutListArn to add the phone number to.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8730,6 +8918,83 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the registration attachment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a resource-based policy to a AWS End User Messaging SMS and Voice resource(phone number, sender Id, phone poll, or opt-out list) that is used for\n            sharing the resource. A shared resource can be a Pool, Opt-out list, Sender Id, or Phone number. For more information about\n            resource-based policies, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/shared-resources.html\">Working with shared resources</a> in the <i>AWS End User Messaging SMS User Guide</i>. </p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource to attach the resource-based policy to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON formatted resource-based policy to attach.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#PutResourcePolicyResult": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource attached to the resource-based policy.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourcePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON formatted Resource Policy.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the resource-based policy was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
                     }
                 }
             },
@@ -9824,7 +10089,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumberIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use <a>DescribePhoneNumbers</a> to get the values for PhoneNumberId and\n            PhoneNumberArn.</p>",
+                        "smithy.api#documentation": "<p>The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use <a>DescribePhoneNumbers</a> to get the values for PhoneNumberId and\n            PhoneNumberArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10119,13 +10384,13 @@
                 "OptOutListName": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the OptOutList to associate with the phone number. You can use the\n            OptOutListName or OptOutListArn.</p>"
+                        "smithy.api#documentation": "<p>The name of the OptOutList to associate with the phone number. You can use the\n            OptOutListName or OptOutListArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "PoolId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pool to associated with the phone number. You can use the PoolId or PoolArn. </p>"
+                        "smithy.api#documentation": "<p>The pool to associated with the phone number. You can use the PoolId or PoolArn. </p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "RegistrationId": {
@@ -10484,6 +10749,15 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#ResourcePolicy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#ResourceType": {
             "type": "string",
             "traits": {
@@ -10539,6 +10813,10 @@
                     {
                         "value": "protect-configuration",
                         "name": "PROTECT_CONFIGURATION"
+                    },
+                    {
+                        "value": "policy",
+                        "name": "POLICY"
                     }
                 ]
             }
@@ -10707,7 +10985,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#VerificationMessageOriginationIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n            PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>"
+                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n            PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "ConfigurationSetName": {
@@ -10796,7 +11074,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#MediaMessageOriginationIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n           PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n           PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10916,7 +11194,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#TextMessageOriginationIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n            PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>"
+                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n            PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "MessageBody": {
@@ -11047,7 +11325,7 @@
                 "OriginationIdentity": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#VoiceMessageOriginationIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The origination identity to use for the voice call. This can be the PhoneNumber,\n            PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.</p>",
+                        "smithy.api#documentation": "<p>The origination identity to use for the voice call. This can be the PhoneNumber,\n            PhoneNumberId, PhoneNumberArn, PoolId, or PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12469,7 +12747,7 @@
                 "PhoneNumberId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumberIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the phone number. Valid values for this field can be either\n            the PhoneNumberId or PhoneNumberArn.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number. Valid values for this field can be either\n            the PhoneNumberId or PhoneNumberArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12665,7 +12943,7 @@
                 "PoolId": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the pool to update. Valid values are either the PoolId or\n            PoolArn.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the pool to update. Valid values are either the PoolId or\n            PoolArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12696,7 +12974,7 @@
                 "OptOutListName": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OptOutList to associate with the pool. Valid values are either OptOutListName or\n            OptOutListArn.</p>"
+                        "smithy.api#documentation": "<p>The OptOutList to associate with the pool. Valid values are either OptOutListName or\n            OptOutListArn.</p>\n         <important>\n            <p>If you are using a shared AWS End User Messaging SMS and Voice resource then you must use the full Amazon Resource Name(ARN).</p>\n         </important>"
                     }
                 },
                 "SharedRoutesEnabled": {

@@ -46,8 +46,8 @@ type CreateDataRepositoryAssociationInput struct {
 
 	// The path to the Amazon S3 data repository that will be linked to the file
 	// system. The path can be an S3 bucket or prefix in the format
-	// s3://myBucket/myPrefix/ . This path specifies where in the S3 data repository
-	// files will be imported from or exported to.
+	// s3://bucket-name/prefix/ (where prefix is optional). This path specifies where
+	// in the S3 data repository files will be imported from or exported to.
 	//
 	// This member is required.
 	DataRepositoryPath *string
@@ -159,6 +159,9 @@ func (c *Client) addOperationCreateDataRepositoryAssociationMiddlewares(stack *m
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -199,6 +202,18 @@ func (c *Client) addOperationCreateDataRepositoryAssociationMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

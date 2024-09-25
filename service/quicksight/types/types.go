@@ -5299,6 +5299,9 @@ type DecimalValueWhenUnsetConfiguration struct {
 // DateTimePicker .
 type DefaultDateTimePickerControlOptions struct {
 
+	// The visibility configuration of the Apply button on a DateTimePickerControl .
+	CommitMode CommitMode
+
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
 
@@ -5360,6 +5363,9 @@ type DefaultFilterControlOptions struct {
 
 // The default options that correspond to the Dropdown filter control type.
 type DefaultFilterDropDownControlOptions struct {
+
+	// The visibility configuration of the Apply button on a FilterDropDownControl .
+	CommitMode CommitMode
 
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
@@ -5477,6 +5483,9 @@ type DefaultPaginatedLayoutConfiguration struct {
 
 // The default options that correspond to the RelativeDateTime filter control type.
 type DefaultRelativeDateTimeControlOptions struct {
+
+	// The visibility configuration of the Apply button on a RelativeDateTimeControl .
+	CommitMode CommitMode
 
 	// The display options of a control.
 	DisplayOptions *RelativeDateTimeControlDisplayOptions
@@ -6262,6 +6271,9 @@ type FilterDateTimePickerControl struct {
 	// This member is required.
 	Title *string
 
+	// The visibility configurationof the Apply button on a DateTimePickerControl .
+	CommitMode CommitMode
+
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
 
@@ -6297,6 +6309,9 @@ type FilterDropDownControl struct {
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
+
+	// The visibility configuration of the Apply button on a FilterDropDownControl .
+	CommitMode CommitMode
 
 	// The display options of the FilterDropDownControl .
 	DisplayOptions *DropDownControlDisplayOptions
@@ -6488,6 +6503,10 @@ type FilterRelativeDateTimeControl struct {
 	//
 	// This member is required.
 	Title *string
+
+	// The visibility configuration of the Apply button on a
+	// FilterRelativeDateTimeControl .
+	CommitMode CommitMode
 
 	// The display options of a control.
 	DisplayOptions *RelativeDateTimeControlDisplayOptions
@@ -9908,6 +9927,9 @@ type ParameterDropDownControl struct {
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
+
+	// The visibility configuration of the Apply button on a ParameterDropDownControl .
+	CommitMode CommitMode
 
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions

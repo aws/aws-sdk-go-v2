@@ -1,3 +1,21 @@
+# v1.35.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.35.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.35.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2024-09-17)
+
+* **Feature**: The `DescribeImageScanning` API now includes `fixAvailable`, `exploitAvailable`, and `fixedInVersion` fields to provide more detailed information about the availability of fixes, exploits, and fixed versions for identified image vulnerabilities.
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.33.0 (2024-09-11)
 
 * **Feature**: Added KMS_DSSE to EncryptionType

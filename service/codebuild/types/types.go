@@ -2315,20 +2315,20 @@ type ScalingConfigurationOutput struct {
 // Contains configuration information about the scope for a webhook.
 type ScopeConfiguration struct {
 
-	// The name of either the enterprise or organization that will send webhook events
-	// to CodeBuild, depending on if the webhook is a global or organization webhook
-	// respectively.
+	// The name of either the group, enterprise, or organization that will send
+	// webhook events to CodeBuild, depending on the type of webhook.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of scope for a GitHub webhook.
+	// The type of scope for a GitHub or GitLab webhook.
 	//
 	// This member is required.
 	Scope WebhookScopeType
 
-	// The domain of the GitHub Enterprise organization. Note that this parameter is
-	// only required if your project's source type is GITHUB_ENTERPRISE
+	// The domain of the GitHub Enterprise organization or the GitLab Self Managed
+	// group. Note that this parameter is only required if your project's source type
+	// is GITHUB_ENTERPRISE or GITLAB_SELF_MANAGED.
 	Domain *string
 
 	noSmithyDocumentSerde

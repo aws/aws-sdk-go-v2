@@ -1199,6 +1199,7 @@ type RuleStringExpression struct {
 // The following types satisfy this interface:
 //
 //	RuleStringToEvaluateMemberAttribute
+//	RuleStringToEvaluateMemberMimeHeaderAttribute
 type RuleStringToEvaluate interface {
 	isRuleStringToEvaluate()
 }
@@ -1211,6 +1212,15 @@ type RuleStringToEvaluateMemberAttribute struct {
 }
 
 func (*RuleStringToEvaluateMemberAttribute) isRuleStringToEvaluate() {}
+
+// The email MIME X-Header attribute to evaluate in a string condition expression.
+type RuleStringToEvaluateMemberMimeHeaderAttribute struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleStringToEvaluateMemberMimeHeaderAttribute) isRuleStringToEvaluate() {}
 
 // A verdict expression is evaluated against verdicts of the email.
 type RuleVerdictExpression struct {

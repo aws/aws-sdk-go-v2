@@ -1,3 +1,20 @@
+# v1.46.1 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.46.0 (2024-09-23)
+
+* **Feature**: List/Get/Update/Delete/CreateDataCatalog now integrate with AWS Glue connections. Users can create a Glue connection through Athena or use a Glue connection to define their Athena federated parameters.
+
+# v1.45.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.8 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.44.7 (2024-09-04)
 
 * No change notes available for this release.

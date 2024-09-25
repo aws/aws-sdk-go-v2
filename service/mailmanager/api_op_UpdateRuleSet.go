@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// >Update attributes of an already provisioned rule set.
+// Update attributes of an already provisioned rule set.
 func (c *Client) UpdateRuleSet(ctx context.Context, params *UpdateRuleSetInput, optFns ...func(*Options)) (*UpdateRuleSetOutput, error) {
 	if params == nil {
 		params = &UpdateRuleSetInput{}
@@ -94,6 +94,9 @@ func (c *Client) addOperationUpdateRuleSetMiddlewares(stack *middleware.Stack, o
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -131,6 +134,18 @@ func (c *Client) addOperationUpdateRuleSetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

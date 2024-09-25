@@ -13,8 +13,7 @@ import (
 
 // Retrieves the status of your account's Amazon Web Services service access, and
 // validates the service linked role required to access the multi-account search
-// feature. Only the management account or a delegated administrator with service
-// access enabled can invoke this API call.
+// feature. Only the management account can invoke this API call.
 func (c *Client) GetAccountLevelServiceConfiguration(ctx context.Context, params *GetAccountLevelServiceConfigurationInput, optFns ...func(*Options)) (*GetAccountLevelServiceConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAccountLevelServiceConfigurationInput{}
@@ -89,6 +88,9 @@ func (c *Client) addOperationGetAccountLevelServiceConfigurationMiddlewares(stac
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -123,6 +125,18 @@ func (c *Client) addOperationGetAccountLevelServiceConfigurationMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

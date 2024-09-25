@@ -89,6 +89,10 @@ type Application struct {
 	// [GetApplication]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_GetApplication.html
 	RuntimeConfiguration []Configuration
 
+	// The scheduler configuration for batch and streaming jobs running on this
+	// application. Supported with release labels emr-7.0.0 and above.
+	SchedulerConfiguration *SchedulerConfiguration
+
 	// The state details of the application.
 	StateDetails *string
 
@@ -423,6 +427,9 @@ type JobRun struct {
 	// The configuration settings that are used to override default configuration.
 	ConfigurationOverrides *ConfigurationOverrides
 
+	// The date and time when the job was terminated.
+	EndedAt *time.Time
+
 	// Returns the job run timeout value from the StartJobRun call. If no timeout was
 	// specified, then it returns the default timeout of 720 minutes.
 	ExecutionTimeoutMinutes *int64
@@ -436,8 +443,14 @@ type JobRun struct {
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *NetworkConfiguration
 
+	// The total time for a job in the QUEUED state in milliseconds.
+	QueuedDurationMilliseconds *int64
+
 	// The retry policy of the job run.
 	RetryPolicy *RetryPolicy
+
+	// The date and time when the job moved to the RUNNING state.
+	StartedAt *time.Time
 
 	// The tags assigned to the job run.
 	Tags map[string]string
@@ -719,6 +732,23 @@ type S3MonitoringConfiguration struct {
 
 	// The Amazon S3 destination URI for log publishing.
 	LogUri *string
+
+	noSmithyDocumentSerde
+}
+
+// The scheduler configuration for batch and streaming jobs running on this
+// application. Supported with release labels emr-7.0.0 and above.
+type SchedulerConfiguration struct {
+
+	// The maximum concurrent job runs on this application. If scheduler configuration
+	// is enabled on your application, the default value is 15. The valid range is 1 to
+	// 1000.
+	MaxConcurrentRuns *int32
+
+	// The maximum duration in minutes for the job in QUEUED state. If scheduler
+	// configuration is enabled on your application, the default value is 360 minutes
+	// (6 hours). The valid range is from 15 to 720.
+	QueueTimeoutMinutes *int32
 
 	noSmithyDocumentSerde
 }

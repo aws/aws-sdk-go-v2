@@ -6679,6 +6679,23 @@
                 "smithy.api#documentation": "<p>A combo chart.</p>\n         <p>The <code>ComboChartVisual</code> includes stacked bar combo charts and clustered bar combo charts</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html\">Using combo charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>"
             }
         },
+        "com.amazonaws.quicksight#CommitMode": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#ComparativeOrder": {
             "type": "structure",
             "members": {
@@ -14472,6 +14489,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The display options of a control.</p>"
                     }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>DateTimePickerControl</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14569,6 +14592,12 @@
                     "target": "com.amazonaws.quicksight#FilterSelectableValues",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of selectable values that are used in a control.</p>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>"
                     }
                 }
             },
@@ -14719,6 +14748,12 @@
                     "target": "com.amazonaws.quicksight#RelativeDateTimeControlDisplayOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>RelativeDateTimeControl</code>.</p>"
                     }
                 }
             },
@@ -23481,6 +23516,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configurationof the Apply button on a <code>DateTimePickerControl</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23533,6 +23574,12 @@
                     "target": "com.amazonaws.quicksight#CascadingControlConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>"
                     }
                 }
             },
@@ -23815,6 +23862,12 @@
                     "target": "com.amazonaws.quicksight#RelativeDateTimeControlDisplayOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>FilterRelativeDateTimeControl</code>.</p>"
                     }
                 }
             },
@@ -24308,6 +24361,18 @@
                     "traits": {
                         "smithy.api#enumValue": "RESTRICTED"
                     }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#FoldersForResourceArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
                 }
             }
         },
@@ -30837,6 +30902,124 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ListFoldersForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListFoldersForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListFoldersForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all folders that a resource is a member of.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/resource/{ResourceArn}/folders",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Folders",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListFoldersForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account that contains the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) the resource whose folders you need to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListFoldersForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "Folders": {
+                    "target": "com.amazonaws.quicksight#FoldersForResourceArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that contains the Amazon Resource Names (ARNs) of all folders that the resource is a member of.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListFoldersRequest": {
             "type": "structure",
             "members": {
@@ -35799,6 +35982,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>"
                     }
+                },
+                "CommitMode": {
+                    "target": "com.amazonaws.quicksight#CommitMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility configuration of the Apply button on a <code>ParameterDropDownControl</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -38213,6 +38402,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListFolders"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListFoldersForResource"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListGroupMemberships"

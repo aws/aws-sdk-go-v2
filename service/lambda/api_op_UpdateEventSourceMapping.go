@@ -255,6 +255,9 @@ type UpdateEventSourceMappingOutput struct {
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
 
+	// The Amazon Resource Name (ARN) of the event source mapping.
+	EventSourceMappingArn *string
+
 	// An object that defines the filter criteria that determine whether Lambda should
 	// process an event. For more information, see [Lambda event filtering].
 	//
@@ -422,6 +425,9 @@ func (c *Client) addOperationUpdateEventSourceMappingMiddlewares(stack *middlewa
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -459,6 +465,18 @@ func (c *Client) addOperationUpdateEventSourceMappingMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

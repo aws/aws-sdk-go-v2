@@ -41,11 +41,17 @@ type DisassociateOriginationIdentityInput struct {
 	// SenderId or SenderIdArn. You can use DescribePhoneNumbersfind the values for PhoneNumberId and
 	// PhoneNumberArn, or use DescribeSenderIdsto get the values for SenderId and SenderIdArn.
 	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
+	//
 	// This member is required.
 	OriginationIdentity *string
 
 	// The unique identifier for the pool to disassociate with the origination
 	// identity. This value can be either the PoolId or PoolArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	//
 	// This member is required.
 	PoolId *string
@@ -124,6 +130,9 @@ func (c *Client) addOperationDisassociateOriginationIdentityMiddlewares(stack *m
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -164,6 +173,18 @@ func (c *Client) addOperationDisassociateOriginationIdentityMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

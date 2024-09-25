@@ -45,6 +45,9 @@ type CreateCodeSigningConfigInput struct {
 	// Descriptive name for this code signing configuration.
 	Description *string
 
+	// A list of tags to add to the code signing configuration.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -104,6 +107,9 @@ func (c *Client) addOperationCreateCodeSigningConfigMiddlewares(stack *middlewar
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -141,6 +147,18 @@ func (c *Client) addOperationCreateCodeSigningConfigMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

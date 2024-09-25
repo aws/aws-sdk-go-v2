@@ -918,6 +918,25 @@ func (ColumnTagName) Values() []ColumnTagName {
 	}
 }
 
+type CommitMode string
+
+// Enum values for CommitMode
+const (
+	CommitModeAuto   CommitMode = "AUTO"
+	CommitModeManual CommitMode = "MANUAL"
+)
+
+// Values returns all known values for CommitMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CommitMode) Values() []CommitMode {
+	return []CommitMode{
+		"AUTO",
+		"MANUAL",
+	}
+}
+
 type ComparisonMethod string
 
 // Enum values for ComparisonMethod

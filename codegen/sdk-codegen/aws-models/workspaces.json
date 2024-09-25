@@ -4833,7 +4833,20 @@
                     "outputToken": "NextToken",
                     "items": "Workspaces",
                     "pageSize": "Limit"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeWorkspacesSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesConnectionStatus": {
@@ -10813,6 +10826,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UEFINotSupported"
+                    }
+                },
+                "UNKNOWN_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownError"
+                    }
+                },
+                "APPX_PACKAGES_INSTALLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AppXPackagesInstalled"
+                    }
+                },
+                "RESERVED_STORAGE_IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReservedStorageInUse"
                     }
                 }
             }

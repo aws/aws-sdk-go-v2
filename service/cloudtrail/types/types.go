@@ -8,9 +8,10 @@ import (
 )
 
 // Advanced event selectors let you create fine-grained selectors for CloudTrail
-// management and data events. They help you control costs by logging only those
-// events that are important to you. For more information about advanced event
-// selectors, see [Logging management events]and [Logging data events] in the CloudTrail User Guide.
+// management, data, and network activity events. They help you control costs by
+// logging only those events that are important to you. For more information about
+// configuring advanced event selectors, see the [Logging data events], [Logging network activity events], and [Logging management events] topics in the CloudTrail
+// User Guide.
 //
 // You cannot apply both event selectors and advanced event selectors to a trail.
 //
@@ -34,10 +35,26 @@ import (
 //
 //   - resources.ARN
 //
+// # Supported CloudTrail event record fields for network activity events
+//
+// Network activity events is in preview release for CloudTrail and is subject to
+// change.
+//
+//   - eventCategory (required)
+//
+//   - eventSource (required)
+//
+//   - eventName
+//
+//   - errorCode - The only valid value for errorCode is VpceAccessDenied .
+//
+//   - vpcEndpointId
+//
 // For event data stores for CloudTrail Insights events, Config configuration
 // items, Audit Manager evidence, or events outside of Amazon Web Services, the
 // only supported field is eventCategory .
 //
+// [Logging network activity events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-network-events-with-cloudtrail.html
 // [Logging management events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html
 // [Logging data events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
 type AdvancedEventSelector struct {
@@ -62,32 +79,58 @@ type AdvancedFieldSelector struct {
 	// items, Audit Manager evidence, or events outside of Amazon Web Services, the
 	// field is used only for selecting events as filtering is not supported.
 	//
-	// For CloudTrail management events, supported fields include readOnly ,
-	// eventCategory , and eventSource .
+	// For CloudTrail management events, supported fields include eventCategory
+	// (required), eventSource , and readOnly .
 	//
-	// For CloudTrail data events, supported fields include readOnly , eventCategory ,
-	// eventName , resources.type , and resources.ARN .
+	// For CloudTrail data events, supported fields include eventCategory (required),
+	// resources.type (required), eventName , readOnly , and resources.ARN .
+	//
+	// For CloudTrail network activity events, supported fields include eventCategory
+	// (required), eventSource (required), eventName , errorCode , and vpcEndpointId .
 	//
 	// For event data stores for CloudTrail Insights events, Config configuration
 	// items, Audit Manager evidence, or events outside of Amazon Web Services, the
 	// only supported field is eventCategory .
 	//
-	//   - readOnly - Optional. Can be set to Equals a value of true or false . If you
-	//   do not add this field, CloudTrail logs both read and write events. A value of
-	//   true logs only read events. A value of false logs only write events.
+	//   - readOnly - This is an optional field that is only used for management events
+	//   and data events. This field can be set to Equals with a value of true or false
+	//   . If you do not add this field, CloudTrail logs both read and write events. A
+	//   value of true logs only read events. A value of false logs only write events.
 	//
-	//   - eventSource - For filtering management events only. This can be set to
-	//   NotEquals kms.amazonaws.com or NotEquals rdsdata.amazonaws.com .
+	//   - eventSource - This field is only used for management events and network
+	//   activity events.
 	//
-	//   - eventName - Can use any operator. You can use it to ﬁlter in or ﬁlter out
-	//   any data event logged to CloudTrail, such as PutBucket or GetSnapshotBlock .
-	//   You can have multiple values for this ﬁeld, separated by commas.
+	// For management events, this is an optional field that can be set to NotEquals
+	//   kms.amazonaws.com to exclude KMS management events, or NotEquals
+	//   rdsdata.amazonaws.com to exclude RDS management events.
 	//
-	//   - eventCategory - This is required and must be set to Equals .
+	// For network activity events, this is a required field that only uses the Equals
+	//   operator. Set this field to the event source for which you want to log network
+	//   activity events. If you want to log network activity events for multiple event
+	//   sources, you must create a separate field selector for each event source.
+	//
+	// The following are valid values for network activity events:
+	//
+	//   - cloudtrail.amazonaws.com
+	//
+	//   - ec2.amazonaws.com
+	//
+	//   - kms.amazonaws.com
+	//
+	//   - secretsmanager.amazonaws.com
+	//
+	//   - eventName - This is an optional field that is only used for data events and
+	//   network activity events. You can use any operator with eventName . You can use
+	//   it to ﬁlter in or ﬁlter out specific events. You can have multiple values for
+	//   this ﬁeld, separated by commas.
+	//
+	//   - eventCategory - This field is required and must be set to Equals .
 	//
 	//   - For CloudTrail management events, the value must be Management .
 	//
 	//   - For CloudTrail data events, the value must be Data .
+	//
+	//   - For CloudTrail network activity events, the value must be NetworkActivity .
 	//
 	// The following are used only for event data stores:
 	//
@@ -99,21 +142,25 @@ type AdvancedFieldSelector struct {
 	//
 	//   - For non-Amazon Web Services events, the value must be ActivityAuditLog .
 	//
+	//   - errorCode - This ﬁeld is only used to filter CloudTrail network activity
+	//   events and is optional. This is the error code to filter on. Currently, the only
+	//   valid errorCode is VpceAccessDenied . errorCode can only use the Equals
+	//   operator.
+	//
 	//   - resources.type - This ﬁeld is required for CloudTrail data events.
-	//   resources.type can only use the Equals operator, and the value can be one of
-	//   the following:
+	//   resources.type can only use the Equals operator.
 	//
-	//   - AWS::DynamoDB::Table
-	//
-	//   - AWS::Lambda::Function
-	//
-	//   - AWS::S3::Object
+	// The value can be one of the following:
 	//
 	//   - AWS::AppConfig::Configuration
 	//
 	//   - AWS::B2BI::Transformer
 	//
 	//   - AWS::Bedrock::AgentAlias
+	//
+	//   - AWS::Bedrock::FlowAlias
+	//
+	//   - AWS::Bedrock::Guardrail
 	//
 	//   - AWS::Bedrock::KnowledgeBase
 	//
@@ -123,6 +170,8 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::CloudTrail::Channel
 	//
+	//   - AWS::CloudWatch::Metric
+	//
 	//   - AWS::CodeWhisperer::Customization
 	//
 	//   - AWS::CodeWhisperer::Profile
@@ -130,6 +179,8 @@ type AdvancedFieldSelector struct {
 	//   - AWS::Cognito::IdentityPool
 	//
 	//   - AWS::DynamoDB::Stream
+	//
+	//   - AWS::DynamoDB::Table
 	//
 	//   - AWS::EC2::Snapshot
 	//
@@ -159,7 +210,15 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::KendraRanking::ExecutionPlan
 	//
+	//   - AWS::Kinesis::Stream
+	//
+	//   - AWS::Kinesis::StreamConsumer
+	//
 	//   - AWS::KinesisVideo::Stream
+	//
+	//   - AWS::Lambda::Function
+	//
+	//   - AWS::MachineLearning::MlModel
 	//
 	//   - AWS::ManagedBlockchain::Network
 	//
@@ -169,7 +228,17 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::NeptuneGraph::Graph
 	//
+	//   - AWS::One::UKey
+	//
+	//   - AWS::One::User
+	//
+	//   - AWS::PaymentCryptography::Alias
+	//
+	//   - AWS::PaymentCryptography::Key
+	//
 	//   - AWS::PCAConnectorAD::Connector
+	//
+	//   - AWS::PCAConnectorSCEP::Connector
 	//
 	//   - AWS::QApps:QApp
 	//
@@ -183,7 +252,13 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::RDS::DBCluster
 	//
+	//   - AWS::RUM::AppMonitor
+	//
 	//   - AWS::S3::AccessPoint
+	//
+	//   - AWS::S3::Object
+	//
+	//   - AWS::S3Express::Object
 	//
 	//   - AWS::S3ObjectLambda::AccessPoint
 	//
@@ -211,6 +286,8 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::SSMMessages::ControlChannel
 	//
+	//   - AWS::StepFunctions::StateMachine
+	//
 	//   - AWS::SWF::Domain
 	//
 	//   - AWS::ThinClient::Device
@@ -225,334 +302,27 @@ type AdvancedFieldSelector struct {
 	//
 	//   - AWS::XRay::Trace
 	//
-	// You can have only one resources.type ﬁeld per selector. To log data events on
-	//   more than one resource type, add another selector.
+	// You can have only one resources.type ﬁeld per selector. To log events on more
+	//   than one resource type, add another selector.
 	//
-	//   - resources.ARN - You can use any operator with resources.ARN , but if you use
-	//   Equals or NotEquals , the value must exactly match the ARN of a valid resource
-	//   of the type you've speciﬁed in the template as the value of resources.type.
+	//   - resources.ARN - The resources.ARN is an optional field for data events. You
+	//   can use any operator with resources.ARN , but if you use Equals or NotEquals ,
+	//   the value must exactly match the ARN of a valid resource of the type you've
+	//   speciﬁed in the template as the value of resources.type. To log all data events
+	//   for all objects in a specific S3 bucket, use the StartsWith operator, and
+	//   include only the bucket ARN as the matching value.
+	//
+	// For information about filtering data events on the resources.ARN field, see [Filtering data events by resources.ARN]in
+	//   the CloudTrail User Guide.
 	//
 	// You can't use the resources.ARN field to filter resource types that do not have
 	//   ARNs.
 	//
-	// The resources.ARN field can be set one of the following.
-	//
-	// If resources.type equals AWS::S3::Object , the ARN must be in one of the
-	//   following formats. To log all data events for all objects in a specific S3
-	//   bucket, use the StartsWith operator, and include only the bucket ARN as the
-	//   matching value.
-	//
-	// The trailing slash is intentional; do not exclude it. Replace the text between
-	//   less than and greater than symbols (<>) with resource-specific information.
-	//
-	//   - arn::s3:::/
-	//
-	//   - arn::s3::://
-	//
-	// When resources.type equals AWS::DynamoDB::Table , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::dynamodb:::table/
-	//
-	// When resources.type equals AWS::Lambda::Function , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::lambda:::function:
-	//
-	// When resources.type equals AWS::AppConfig::Configuration , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::appconfig:::application//environment//configuration/
-	//
-	// When resources.type equals AWS::B2BI::Transformer , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::b2bi:::transformer/
-	//
-	// When resources.type equals AWS::Bedrock::AgentAlias , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::bedrock:::agent-alias//
-	//
-	// When resources.type equals AWS::Bedrock::KnowledgeBase , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::bedrock:::knowledge-base/
-	//
-	// When resources.type equals AWS::Cassandra::Table , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::cassandra:::/keyspace//table/
-	//
-	// When resources.type equals AWS::CloudFront::KeyValueStore , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::cloudfront:::key-value-store/
-	//
-	// When resources.type equals AWS::CloudTrail::Channel , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::cloudtrail:::channel/
-	//
-	// When resources.type equals AWS::CodeWhisperer::Customization , and the operator
-	//   is set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::codewhisperer:::customization/
-	//
-	// When resources.type equals AWS::CodeWhisperer::Profile , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::codewhisperer:::profile/
-	//
-	// When resources.type equals AWS::Cognito::IdentityPool , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::cognito-identity:::identitypool/
-	//
-	// When resources.type equals AWS::DynamoDB::Stream , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::dynamodb:::table//stream/
-	//
-	// When resources.type equals AWS::EC2::Snapshot , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::ec2:::snapshot/
-	//
-	// When resources.type equals AWS::EMRWAL::Workspace , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::emrwal:::workspace/
-	//
-	// When resources.type equals AWS::FinSpace::Environment , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::finspace:::environment/
-	//
-	// When resources.type equals AWS::Glue::Table , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::glue:::table//
-	//
-	// When resources.type equals AWS::GreengrassV2::ComponentVersion , and the
-	//   operator is set to Equals or NotEquals , the ARN must be in the following
-	//   format:
-	//
-	//   - arn::greengrass:::components/
-	//
-	// When resources.type equals AWS::GreengrassV2::Deployment , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::greengrass:::deployments/
-	//
-	// When resources.type equals AWS::GuardDuty::Detector , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::guardduty:::detector/
-	//
-	// When resources.type equals AWS::IoT::Certificate , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::iot:::cert/
-	//
-	// When resources.type equals AWS::IoT::Thing , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::iot:::thing/
-	//
-	// When resources.type equals AWS::IoTSiteWise::Asset , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::iotsitewise:::asset/
-	//
-	// When resources.type equals AWS::IoTSiteWise::TimeSeries , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::iotsitewise:::timeseries/
-	//
-	// When resources.type equals AWS::IoTTwinMaker::Entity , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::iottwinmaker:::workspace//entity/
-	//
-	// When resources.type equals AWS::IoTTwinMaker::Workspace , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::iottwinmaker:::workspace/
-	//
-	// When resources.type equals AWS::KendraRanking::ExecutionPlan , and the operator
-	//   is set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::kendra-ranking:::rescore-execution-plan/
-	//
-	// When resources.type equals AWS::KinesisVideo::Stream , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::kinesisvideo:::stream//
-	//
-	// When resources.type equals AWS::ManagedBlockchain::Network , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::managedblockchain:::networks/
-	//
-	// When resources.type equals AWS::ManagedBlockchain::Node , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::managedblockchain:::nodes/
-	//
-	// When resources.type equals AWS::MedicalImaging::Datastore , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::medical-imaging:::datastore/
-	//
-	// When resources.type equals AWS::NeptuneGraph::Graph , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::neptune-graph:::graph/
-	//
-	// When resources.type equals AWS::PCAConnectorAD::Connector , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::pca-connector-ad:::connector/
-	//
-	// When resources.type equals AWS::QApps:QApp , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::qapps:::application//qapp/
-	//
-	// When resources.type equals AWS::QBusiness::Application , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::qbusiness:::application/
-	//
-	// When resources.type equals AWS::QBusiness::DataSource , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::qbusiness:::application//index//data-source/
-	//
-	// When resources.type equals AWS::QBusiness::Index , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::qbusiness:::application//index/
-	//
-	// When resources.type equals AWS::QBusiness::WebExperience , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::qbusiness:::application//web-experience/
-	//
-	// When resources.type equals AWS::RDS::DBCluster , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::rds:::cluster/
-	//
-	// When resources.type equals AWS::S3::AccessPoint , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in one of the following formats. To log
-	//   events on all objects in an S3 access point, we recommend that you use only the
-	//   access point ARN, don’t include the object path, and use the StartsWith or
-	//   NotStartsWith operators.
-	//
-	//   - arn::s3:::accesspoint/
-	//
-	//   - arn::s3:::accesspoint//object/
-	//
-	// When resources.type equals AWS::S3ObjectLambda::AccessPoint , and the operator
-	//   is set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::s3-object-lambda:::accesspoint/
-	//
-	// When resources.type equals AWS::S3Outposts::Object , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::s3-outposts:::
-	//
-	// When resources.type equals AWS::SageMaker::Endpoint , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::sagemaker:::endpoint/
-	//
-	// When resources.type equals AWS::SageMaker::ExperimentTrialComponent , and the
-	//   operator is set to Equals or NotEquals , the ARN must be in the following
-	//   format:
-	//
-	//   - arn::sagemaker:::experiment-trial-component/
-	//
-	// When resources.type equals AWS::SageMaker::FeatureGroup , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::sagemaker:::feature-group/
-	//
-	// When resources.type equals AWS::SCN::Instance , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::scn:::instance/
-	//
-	// When resources.type equals AWS::ServiceDiscovery::Namespace , and the operator
-	//   is set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::servicediscovery:::namespace/
-	//
-	// When resources.type equals AWS::ServiceDiscovery::Service , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::servicediscovery:::service/
-	//
-	// When resources.type equals AWS::SNS::PlatformEndpoint , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::sns:::endpoint///
-	//
-	// When resources.type equals AWS::SNS::Topic , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::sns:::
-	//
-	// When resources.type equals AWS::SQS::Queue , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::sqs:::
-	//
-	// When resources.type equals AWS::SSM::ManagedNode , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in one of the following formats:
-	//
-	//   - arn::ssm:::managed-instance/
-	//
-	//   - arn::ec2:::instance/
-	//
-	// When resources.type equals AWS::SSMMessages::ControlChannel , and the operator
-	//   is set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::ssmmessages:::control-channel/
-	//
-	// When resources.type equals AWS::SWF::Domain , and the operator is set to Equals
-	//   or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::swf:::domain/
-	//
-	// When resources.type equals AWS::ThinClient::Device , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::thinclient:::device/
-	//
-	// When resources.type equals AWS::ThinClient::Environment , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::thinclient:::environment/
-	//
-	// When resources.type equals AWS::Timestream::Database , and the operator is set
-	//   to Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::timestream:::database/
-	//
-	// When resources.type equals AWS::Timestream::Table , and the operator is set to
-	//   Equals or NotEquals , the ARN must be in the following format:
-	//
-	//   - arn::timestream:::database//table/
-	//
-	// When resources.type equals AWS::VerifiedPermissions::PolicyStore , and the
-	//   operator is set to Equals or NotEquals , the ARN must be in the following
-	//   format:
-	//
-	//   - arn::verifiedpermissions:::policy-store/
+	//   - vpcEndpointId - This ﬁeld is only used to filter CloudTrail network activity
+	//   events and is optional. This field identifies the VPC endpoint that the request
+	//   passed through. You can use any operator with vpcEndpointId .
+	//
+	// [Filtering data events by resources.ARN]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/filtering-data-events.html#filtering-data-events-resourcearn
 	//
 	// This member is required.
 	Field *string
@@ -600,15 +370,8 @@ type Channel struct {
 	noSmithyDocumentSerde
 }
 
-// Data events provide information about the resource operations performed on or
-// within a resource itself. These are also known as data plane operations. You can
-// specify up to 250 data resources for a trail.
-//
-// Configure the DataResource to specify the resource type and resource ARNs for
-// which you want to log data events.
-//
-// You can specify the following resource types in your event selectors for your
-// trail:
+// You can configure the DataResource in an EventSelector to log data events for
+// the following three resource types:
 //
 //   - AWS::DynamoDB::Table
 //
@@ -616,26 +379,31 @@ type Channel struct {
 //
 //   - AWS::S3::Object
 //
+// To log data events for all other resource types including objects stored in [directory buckets],
+// you must use [AdvancedEventSelectors]. You must also use AdvancedEventSelectors if you want to filter
+// on the eventName field.
+//
+// Configure the DataResource to specify the resource type and resource ARNs for
+// which you want to log data events.
+//
 // The total number of allowed data resources is 250. This number can be
 // distributed between 1 and 5 event selectors, but the total cannot exceed 250
 // across all selectors for the trail.
 //
-// If you are using advanced event selectors, the maximum total number of values
-// for all conditions, across all advanced event selectors for the trail, is 500.
-//
 // The following example demonstrates how logging works when you configure logging
-// of all data events for an S3 bucket named bucket-1 . In this example, the
-// CloudTrail user specified an empty prefix, and the option to log both Read and
-// Write data events.
+// of all data events for a general purpose bucket named amzn-s3-demo-bucket1 . In
+// this example, the CloudTrail user specified an empty prefix, and the option to
+// log both Read and Write data events.
 //
-//   - A user uploads an image file to bucket-1 .
+//   - A user uploads an image file to amzn-s3-demo-bucket1 .
 //
 //   - The PutObject API operation is an Amazon S3 object-level API. It is recorded
 //     as a data event in CloudTrail. Because the CloudTrail user specified an S3
 //     bucket with an empty prefix, events that occur on any object in that bucket are
 //     logged. The trail processes and logs the event.
 //
-//   - A user uploads an object to an Amazon S3 bucket named arn:aws:s3:::bucket-2 .
+//   - A user uploads an object to an Amazon S3 bucket named
+//     arn:aws:s3:::amzn-s3-demo-bucket1 .
 //
 //   - The PutObject API operation occurred for an object in an S3 bucket that the
 //     CloudTrail user didn't specify for the trail. The trail doesn’t log the event.
@@ -656,6 +424,9 @@ type Channel struct {
 //     the CloudTrail user did not specify logging data events for all Lambda
 //     functions, the Invoke operation for MyOtherLambdaFunction does not match the
 //     function specified for the trail. The trail doesn’t log the event.
+//
+// [AdvancedEventSelectors]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
+// [directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
 type DataResource struct {
 
 	// The resource type in which you want to log data events. You can specify the
@@ -684,12 +455,12 @@ type DataResource struct {
 	//   bucket that belongs to another Amazon Web Services account.
 	//
 	//   - To log data events for all objects in an S3 bucket, specify the bucket and
-	//   an empty object prefix such as arn:aws:s3:::bucket-1/ . The trail logs data
-	//   events for all objects in this S3 bucket.
+	//   an empty object prefix such as arn:aws:s3:::amzn-s3-demo-bucket1/ . The trail
+	//   logs data events for all objects in this S3 bucket.
 	//
 	//   - To log data events for specific objects, specify the S3 bucket and object
-	//   prefix such as arn:aws:s3:::bucket-1/example-images . The trail logs data
-	//   events for objects in this S3 bucket that match the prefix.
+	//   prefix such as arn:aws:s3:::amzn-s3-demo-bucket1/example-images . The trail
+	//   logs data events for objects in this S3 bucket that match the prefix.
 	//
 	//   - To log data events for all Lambda functions in your Amazon Web Services
 	//   account, specify the prefix as arn:aws:lambda .
@@ -844,16 +615,23 @@ type EventDataStore struct {
 // You cannot apply both event selectors and advanced event selectors to a trail.
 type EventSelector struct {
 
-	// CloudTrail supports data event logging for Amazon S3 objects, Lambda functions,
-	// and Amazon DynamoDB tables with basic event selectors. You can specify up to 250
-	// resources for an individual event selector, but the total number of data
-	// resources cannot exceed 250 across all event selectors in a trail. This limit
-	// does not apply if you configure resource logging for all data events.
+	// CloudTrail supports data event logging for Amazon S3 objects in standard S3
+	// buckets, Lambda functions, and Amazon DynamoDB tables with basic event
+	// selectors. You can specify up to 250 resources for an individual event selector,
+	// but the total number of data resources cannot exceed 250 across all event
+	// selectors in a trail. This limit does not apply if you configure resource
+	// logging for all data events.
 	//
 	// For more information, see [Data Events] and [Limits in CloudTrail] in the CloudTrail User Guide.
 	//
+	// To log data events for all other resource types including objects stored in [directory buckets],
+	// you must use [AdvancedEventSelectors]. You must also use AdvancedEventSelectors if you want to filter
+	// on the eventName field.
+	//
 	// [Data Events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html
 	// [Limits in CloudTrail]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html
+	// [AdvancedEventSelectors]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
+	// [directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
 	DataResources []DataResource
 
 	// An optional list of service event sources from which you do not want management

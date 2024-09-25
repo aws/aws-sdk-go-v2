@@ -1,3 +1,20 @@
+# v1.28.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.28.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.28.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.27.0 (2024-09-12)
 
 * **Feature**: This release introduces two features. The first is tag replication, which allows for the propagation of canary tags onto Synthetics related resources, such as Lambda functions. The second is a limit increase in canary name length, which has now been increased from 21 to 255 characters.

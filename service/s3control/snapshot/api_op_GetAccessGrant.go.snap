@@ -1,12 +1,15 @@
 GetAccessGrant
 	Initialize stack step
+		spanInitializeStart
 		S3Shared:ARNLookup
 		S3Control:BackfillInput
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		stashOperationInput
 		ResolveEndpoint
 		setArnFieldName
@@ -21,6 +24,7 @@ GetAccessGrant
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		ResolveAuthScheme
 		GetIdentity
@@ -30,6 +34,7 @@ GetAccessGrant
 		EndpointHostPrefix
 		ComputePayloadHash
 		SigV4ContentSHA256Header
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

@@ -349,6 +349,9 @@ type EventSourceMappingConfiguration struct {
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
 
+	// The Amazon Resource Name (ARN) of the event source mapping.
+	EventSourceMappingArn *string
+
 	// An object that defines the filter criteria that determine whether Lambda should
 	// process an event. For more information, see [Lambda event filtering].
 	//
@@ -1120,6 +1123,24 @@ type ProvisionedConcurrencyConfigListItem struct {
 	// For failed allocations, the reason that provisioned concurrency could not be
 	// allocated.
 	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that defines the public-access settings for a function.
+type PublicAccessBlockConfig struct {
+
+	// To block the creation of resource-based policies that would grant public access
+	// to your function, set BlockPublicPolicy to true . To allow the creation of
+	// resource-based policies that would grant public access to your function, set
+	// BlockPublicPolicy to false .
+	BlockPublicPolicy *bool
+
+	// To block public access to your function, even if its resource-based policy
+	// allows it, set RestrictPublicResource to true . To allow public access to a
+	// function with a resource-based policy that permits it, set
+	// RestrictPublicResource to false .
+	RestrictPublicResource *bool
 
 	noSmithyDocumentSerde
 }

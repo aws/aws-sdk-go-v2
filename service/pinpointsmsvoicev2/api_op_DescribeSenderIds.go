@@ -47,7 +47,15 @@ type DescribeSenderIdsInput struct {
 	// supply a value for this field in the initial request.
 	NextToken *string
 
+	// Use SELF to filter the list of Sender Ids to ones your account owns or use
+	// SHARED to filter on Sender Ids shared with your account. The Owner and SenderIds
+	// parameters can't be used at the same time.
+	Owner types.Owner
+
 	// An array of SenderIdAndCountry objects to search for.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	SenderIds []types.SenderIdAndCountry
 
 	noSmithyDocumentSerde
@@ -112,6 +120,9 @@ func (c *Client) addOperationDescribeSenderIdsMiddlewares(stack *middleware.Stac
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -149,6 +160,18 @@ func (c *Client) addOperationDescribeSenderIdsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

@@ -2,6 +2,79 @@
 
 package types
 
+type MetricQueryResultStatus string
+
+// Enum values for MetricQueryResultStatus
+const (
+	MetricQueryResultStatusComplete        MetricQueryResultStatus = "Complete"
+	MetricQueryResultStatusTruncated       MetricQueryResultStatus = "Truncated"
+	MetricQueryResultStatusInternalError   MetricQueryResultStatus = "InternalError"
+	MetricQueryResultStatusValidationError MetricQueryResultStatus = "ValidationError"
+)
+
+// Values returns all known values for MetricQueryResultStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricQueryResultStatus) Values() []MetricQueryResultStatus {
+	return []MetricQueryResultStatus{
+		"Complete",
+		"Truncated",
+		"InternalError",
+		"ValidationError",
+	}
+}
+
+type MetricStatistic string
+
+// Enum values for MetricStatistic
+const (
+	MetricStatisticMin    MetricStatistic = "Min"
+	MetricStatisticMax    MetricStatistic = "Max"
+	MetricStatisticAvg    MetricStatistic = "Avg"
+	MetricStatisticCount  MetricStatistic = "Count"
+	MetricStatisticStdDev MetricStatistic = "StdDev"
+	MetricStatisticLast   MetricStatistic = "Last"
+)
+
+// Values returns all known values for MetricStatistic. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetricStatistic) Values() []MetricStatistic {
+	return []MetricStatistic{
+		"Min",
+		"Max",
+		"Avg",
+		"Count",
+		"StdDev",
+		"Last",
+	}
+}
+
+type Period string
+
+// Enum values for Period
+const (
+	PeriodOneMinute       Period = "OneMinute"
+	PeriodFiveMinute      Period = "FiveMinute"
+	PeriodOneHour         Period = "OneHour"
+	PeriodIterationNumber Period = "IterationNumber"
+)
+
+// Values returns all known values for Period. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Period) Values() []Period {
+	return []Period{
+		"OneMinute",
+		"FiveMinute",
+		"OneHour",
+		"IterationNumber",
+	}
+}
+
 type PutMetricsErrorCode string
 
 // Enum values for PutMetricsErrorCode
@@ -22,5 +95,24 @@ func (PutMetricsErrorCode) Values() []PutMetricsErrorCode {
 		"INTERNAL_ERROR",
 		"VALIDATION_ERROR",
 		"CONFLICT_ERROR",
+	}
+}
+
+type XAxisType string
+
+// Enum values for XAxisType
+const (
+	XAxisTypeIterationNumber XAxisType = "IterationNumber"
+	XAxisTypeTimestamp       XAxisType = "Timestamp"
+)
+
+// Values returns all known values for XAxisType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (XAxisType) Values() []XAxisType {
+	return []XAxisType{
+		"IterationNumber",
+		"Timestamp",
 	}
 }

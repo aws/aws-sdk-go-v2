@@ -1,9 +1,12 @@
 GetRestApis
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		SetLogger
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -14,12 +17,14 @@ GetRestApis
 		AddTimeOffsetMiddleware
 		RecursionDetection
 		APIGATEWAY:AcceptHeader
+		spanBuildRequestEnd
 	Finalize stack step
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

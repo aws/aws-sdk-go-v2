@@ -716,6 +716,25 @@ type AvailSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Bandwidth Reduction Filter Settings
+type BandwidthReductionFilterSettings struct {
+
+	// Configures the sharpening control, which is available when the bandwidth
+	// reduction filter is enabled. This control sharpens edges and contours, which
+	// produces a specific artistic effect that you might want.
+	//
+	// We recommend that you test each of the values (including DISABLED) to observe
+	// the sharpening effect on the content.
+	PostFilterSharpening BandwidthReductionPostFilterSharpening
+
+	// Enables the bandwidth reduction filter. The filter strengths range from 1 to 4.
+	// We recommend that you always enable this filter and use AUTO, to let MediaLive
+	// apply the optimum filtering for the context.
+	Strength BandwidthReductionFilterStrength
+
+	noSmithyDocumentSerde
+}
+
 // Details from a failed operation
 type BatchFailedResultModel struct {
 
@@ -2562,6 +2581,9 @@ type H264ColorSpaceSettings struct {
 // H264 Filter Settings
 type H264FilterSettings struct {
 
+	// Bandwidth Reduction Filter Settings
+	BandwidthReductionFilterSettings *BandwidthReductionFilterSettings
+
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
 
@@ -2855,6 +2877,9 @@ type H265ColorSpaceSettings struct {
 
 // H265 Filter Settings
 type H265FilterSettings struct {
+
+	// Bandwidth Reduction Filter Settings
+	BandwidthReductionFilterSettings *BandwidthReductionFilterSettings
 
 	// Temporal Filter Settings
 	TemporalFilterSettings *TemporalFilterSettings
@@ -5314,8 +5339,83 @@ type Multiplex struct {
 	noSmithyDocumentSerde
 }
 
+// Multiplex Container Settings
+type MultiplexContainerSettings struct {
+
+	// Multiplex M2ts Settings
+	MultiplexM2tsSettings *MultiplexM2tsSettings
+
+	noSmithyDocumentSerde
+}
+
 // Multiplex Group Settings
 type MultiplexGroupSettings struct {
+	noSmithyDocumentSerde
+}
+
+// Multiplex M2ts Settings
+type MultiplexM2tsSettings struct {
+
+	// When set to drop, output audio streams will be removed from the program if the
+	// selected input audio stream is removed from the input. This allows the output
+	// audio configuration to dynamically change based on input configuration. If this
+	// is set to encodeSilence, all output audio streams will output encoded silence
+	// when not connected to an active input stream.
+	AbsentInputAudioBehavior M2tsAbsentInputAudioBehavior
+
+	// When set to enabled, uses ARIB-compliant field muxing and removes video
+	// descriptor.
+	Arib M2tsArib
+
+	// When set to dvb, uses DVB buffer model for Dolby Digital audio. When set to
+	// atsc, the ATSC model is used.
+	AudioBufferModel M2tsAudioBufferModel
+
+	// The number of audio frames to insert for each PES packet.
+	AudioFramesPerPes *int32
+
+	// When set to atsc, uses stream type = 0x81 for AC3 and stream type = 0x87 for
+	// EAC3. When set to dvb, uses stream type = 0x06.
+	AudioStreamType M2tsAudioStreamType
+
+	// When set to enabled, generates captionServiceDescriptor in PMT.
+	CcDescriptor M2tsCcDescriptor
+
+	// If set to passthrough, passes any EBIF data from the input source to this
+	// output.
+	Ebif M2tsEbifControl
+
+	// Include or exclude the ES Rate field in the PES header.
+	EsRateInPes M2tsEsRateInPes
+
+	// If set to passthrough, passes any KLV data from the input source to this output.
+	Klv M2tsKlv
+
+	// If set to passthrough, Nielsen inaudible tones for media tracking will be
+	// detected in the input audio and an equivalent ID3 tag will be inserted in the
+	// output.
+	NielsenId3Behavior M2tsNielsenId3Behavior
+
+	// When set to pcrEveryPesPacket, a Program Clock Reference value is inserted for
+	// every Packetized Elementary Stream (PES) header. This parameter is effective
+	// only when the PCR PID is the same as the video or audio elementary stream.
+	PcrControl M2tsPcrControl
+
+	// Maximum time in milliseconds between Program Clock Reference (PCRs) inserted
+	// into the transport stream.
+	PcrPeriod *int32
+
+	// Optionally pass SCTE-35 signals from the input source to this output.
+	Scte35Control M2tsScte35Control
+
+	// Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the
+	// output. Preroll is the amount of time between the presence of a SCTE-35
+	// indication in a transport stream and the PTS of the video frame it references.
+	// Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative
+	// pullup is not supported, which means that you can't make the preroll shorter. Be
+	// aware that latency in the output will increase by the pullup amount.
+	Scte35PrerollPullupMilliseconds *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -5344,6 +5444,9 @@ type MultiplexOutputSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	// Multiplex Container Settings
+	ContainerSettings *MultiplexContainerSettings
 
 	noSmithyDocumentSerde
 }

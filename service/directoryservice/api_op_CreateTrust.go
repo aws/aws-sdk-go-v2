@@ -62,8 +62,8 @@ type CreateTrustInput struct {
 	// This member is required.
 	TrustDirection types.TrustDirection
 
-	// The trust password. The must be the same password that was used when creating
-	// the trust relationship on the external domain.
+	// The trust password. The trust password must be the same password that was used
+	// when creating the trust relationship on the external domain.
 	//
 	// This member is required.
 	TrustPassword *string
@@ -135,6 +135,9 @@ func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, opt
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -172,6 +175,18 @@ func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

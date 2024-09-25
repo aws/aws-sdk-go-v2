@@ -12,8 +12,8 @@ import (
 
 // Stops the ingestion of live events on an event data store specified as either
 // an ARN or the ID portion of the ARN. To stop ingestion, the event data store
-// Status must be ENABLED and the eventCategory must be Management , Data , or
-// ConfigurationItem .
+// Status must be ENABLED and the eventCategory must be Management , Data ,
+// NetworkActivity , or ConfigurationItem .
 func (c *Client) StopEventDataStoreIngestion(ctx context.Context, params *StopEventDataStoreIngestionInput, optFns ...func(*Options)) (*StopEventDataStoreIngestionOutput, error) {
 	if params == nil {
 		params = &StopEventDataStoreIngestionInput{}
@@ -90,6 +90,9 @@ func (c *Client) addOperationStopEventDataStoreIngestionMiddlewares(stack *middl
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -127,6 +130,18 @@ func (c *Client) addOperationStopEventDataStoreIngestionMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

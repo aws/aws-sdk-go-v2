@@ -45,7 +45,15 @@ type DescribeOptOutListsInput struct {
 
 	// The OptOutLists to show the details of. This is an array of strings that can be
 	// either the OptOutListName or OptOutListArn.
+	//
+	// If you are using a shared AWS End User Messaging SMS and Voice resource then
+	// you must use the full Amazon Resource Name(ARN).
 	OptOutListNames []string
+
+	// Use SELF to filter the list of Opt-Out List to ones your account owns or use
+	// SHARED to filter on Opt-Out List shared with your account. The Owner and
+	// OptOutListNames parameters can't be used at the same time.
+	Owner types.Owner
 
 	noSmithyDocumentSerde
 }
@@ -109,6 +117,9 @@ func (c *Client) addOperationDescribeOptOutListsMiddlewares(stack *middleware.St
 	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
+	if err = addSpanRetryLoop(stack, options); err != nil {
+		return err
+	}
 	if err = addClientUserAgent(stack, options); err != nil {
 		return err
 	}
@@ -143,6 +154,18 @@ func (c *Client) addOperationDescribeOptOutListsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
+	if err = addSpanInitializeStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanInitializeEnd(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestStart(stack); err != nil {
+		return err
+	}
+	if err = addSpanBuildRequestEnd(stack); err != nil {
 		return err
 	}
 	return nil

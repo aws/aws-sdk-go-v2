@@ -1,11 +1,14 @@
 ImportTable
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setOperationInput
 		ResolveEndpoint
 		OperationSerializer
@@ -15,6 +18,7 @@ ImportTable
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		ResolveAuthScheme
@@ -22,6 +26,7 @@ ImportTable
 		ResolveEndpointV2
 		disableHTTPS
 		ComputePayloadHash
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

@@ -29,6 +29,67 @@ type BatchPutMetricsError struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a query to retrieve training metrics from SageMaker.
+type MetricQuery struct {
+
+	// The name of the metric to retrieve.
+	//
+	// This member is required.
+	MetricName *string
+
+	// The metrics stat type of metrics to retrieve.
+	//
+	// This member is required.
+	MetricStat MetricStatistic
+
+	// The time period of metrics to retrieve.
+	//
+	// This member is required.
+	Period Period
+
+	// The ARN of the SageMaker resource to retrieve metrics for.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The x-axis type of metrics to retrieve.
+	//
+	// This member is required.
+	XAxisType XAxisType
+
+	// The end time of metrics to retrieve.
+	End *int64
+
+	// The start time of metrics to retrieve.
+	Start *int64
+
+	noSmithyDocumentSerde
+}
+
+// The result of a query to retrieve training metrics from SageMaker.
+type MetricQueryResult struct {
+
+	// The metric values retrieved by the query.
+	//
+	// This member is required.
+	MetricValues []float64
+
+	// The status of the metric query.
+	//
+	// This member is required.
+	Status MetricQueryResultStatus
+
+	// The values for the x-axis of the metrics.
+	//
+	// This member is required.
+	XAxisValues []int64
+
+	// A message describing the status of the metric query.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The raw metric data to associate with the resource.
 type RawMetricData struct {
 

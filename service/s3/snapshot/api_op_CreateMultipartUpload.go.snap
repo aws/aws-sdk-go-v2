@@ -1,11 +1,14 @@
 CreateMultipartUpload
 	Initialize stack step
+		spanInitializeStart
 		RegisterServiceMetadata
 		legacyEndpointContextSetter
 		S3Shared:ARNLookup
 		SetLogger
 		OperationInputValidation
+		spanInitializeEnd
 	Serialize stack step
+		spanBuildRequestStart
 		setCreateMPUChecksumAlgorithm
 		putBucketContext
 		setOperationInput
@@ -23,6 +26,7 @@ CreateMultipartUpload
 		UserAgent
 		AddTimeOffsetMiddleware
 		RecursionDetection
+		spanBuildRequestEnd
 	Finalize stack step
 		DisableAcceptEncodingGzip
 		ResolveAuthScheme
@@ -31,6 +35,7 @@ CreateMultipartUpload
 		disableHTTPS
 		ComputePayloadHash
 		SigV4ContentSHA256Header
+		spanRetryLoop
 		Retry
 		RetryMetricsHeader
 		setLegacyContextSigningOptions

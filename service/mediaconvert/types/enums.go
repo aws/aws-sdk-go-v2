@@ -7560,6 +7560,66 @@ func (PresetListBy) Values() []PresetListBy {
 	}
 }
 
+type PresetSpeke20Audio string
+
+// Enum values for PresetSpeke20Audio
+const (
+	PresetSpeke20AudioPresetAudio1 PresetSpeke20Audio = "PRESET_AUDIO_1"
+	PresetSpeke20AudioPresetAudio2 PresetSpeke20Audio = "PRESET_AUDIO_2"
+	PresetSpeke20AudioPresetAudio3 PresetSpeke20Audio = "PRESET_AUDIO_3"
+	PresetSpeke20AudioShared       PresetSpeke20Audio = "SHARED"
+	PresetSpeke20AudioUnencrypted  PresetSpeke20Audio = "UNENCRYPTED"
+)
+
+// Values returns all known values for PresetSpeke20Audio. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PresetSpeke20Audio) Values() []PresetSpeke20Audio {
+	return []PresetSpeke20Audio{
+		"PRESET_AUDIO_1",
+		"PRESET_AUDIO_2",
+		"PRESET_AUDIO_3",
+		"SHARED",
+		"UNENCRYPTED",
+	}
+}
+
+type PresetSpeke20Video string
+
+// Enum values for PresetSpeke20Video
+const (
+	PresetSpeke20VideoPresetVideo1 PresetSpeke20Video = "PRESET_VIDEO_1"
+	PresetSpeke20VideoPresetVideo2 PresetSpeke20Video = "PRESET_VIDEO_2"
+	PresetSpeke20VideoPresetVideo3 PresetSpeke20Video = "PRESET_VIDEO_3"
+	PresetSpeke20VideoPresetVideo4 PresetSpeke20Video = "PRESET_VIDEO_4"
+	PresetSpeke20VideoPresetVideo5 PresetSpeke20Video = "PRESET_VIDEO_5"
+	PresetSpeke20VideoPresetVideo6 PresetSpeke20Video = "PRESET_VIDEO_6"
+	PresetSpeke20VideoPresetVideo7 PresetSpeke20Video = "PRESET_VIDEO_7"
+	PresetSpeke20VideoPresetVideo8 PresetSpeke20Video = "PRESET_VIDEO_8"
+	PresetSpeke20VideoShared       PresetSpeke20Video = "SHARED"
+	PresetSpeke20VideoUnencrypted  PresetSpeke20Video = "UNENCRYPTED"
+)
+
+// Values returns all known values for PresetSpeke20Video. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PresetSpeke20Video) Values() []PresetSpeke20Video {
+	return []PresetSpeke20Video{
+		"PRESET_VIDEO_1",
+		"PRESET_VIDEO_2",
+		"PRESET_VIDEO_3",
+		"PRESET_VIDEO_4",
+		"PRESET_VIDEO_5",
+		"PRESET_VIDEO_6",
+		"PRESET_VIDEO_7",
+		"PRESET_VIDEO_8",
+		"SHARED",
+		"UNENCRYPTED",
+	}
+}
+
 type PricingPlan string
 
 // Enum values for PricingPlan

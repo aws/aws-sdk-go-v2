@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Client authentication is not available in this region at this time.
+// You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -378,7 +378,7 @@ func (e *DirectoryNotSharedException) ErrorCode() string {
 }
 func (e *DirectoryNotSharedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified directory is unavailable or could not be found.
+// The specified directory is unavailable.
 type DirectoryUnavailableException struct {
 	Message *string
 

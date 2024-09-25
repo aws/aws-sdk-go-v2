@@ -1,3 +1,24 @@
+# v1.60.2 (2024-09-25)
+
+* No change notes available for this release.
+
+# v1.60.1 (2024-09-23)
+
+* No change notes available for this release.
+
+# v1.60.0 (2024-09-20)
+
+* **Feature**: Add tracing and metrics support to service clients.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.0 (2024-09-19)
+
+* **Feature**: This release provides support for additional DRM configurations per SPEKE Version 2.0.
+
+# v1.58.1 (2024-09-17)
+
+* **Bug Fix**: **BREAKFIX**: Only generate AccountIDEndpointMode config for services that use it. This is a compiler break, but removes no actual functionality, as no services currently use the account ID in endpoint resolution.
+
 # v1.58.0 (2024-09-12)
 
 * **Feature**: This release includes support for dynamic video overlay workflows, including picture-in-picture and squeezeback
