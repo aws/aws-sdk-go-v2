@@ -1,0 +1,12 @@
+{
+    "id": "9ebe24c4-7915-41e0-840d-a49eab6f9d97",
+    "type": "feature",
+    "description": "add client cfg to opt-in/out checksum behavior and change its default algorithm",
+    "modules": [
+        ".",
+        "config",
+        "feature/dynamodbstreams/attributevalue",
+        "service/internal/checksum",
+        "service/s3"
+    ]
+}
