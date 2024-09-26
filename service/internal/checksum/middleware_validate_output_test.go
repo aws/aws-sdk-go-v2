@@ -93,6 +93,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 		"no checksum required": {
 			validateOptions: func(m *validateOutputPayloadChecksum) {
 				m.RequireChecksum = aws.RequireChecksumFalse
+				m.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenSupported
 			},
 			modifyContext: func(ctx context.Context) context.Context {
 				return setContextOutputValidationMode(ctx, "ENABLED")

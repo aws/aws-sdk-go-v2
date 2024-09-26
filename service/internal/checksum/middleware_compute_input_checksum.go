@@ -119,12 +119,8 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 	if err != nil {
 		return out, metadata, err
 	}
-	if m.RequireChecksum == aws.RequireChecksumPending &&
-		m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
-		!set {
-		m.RequireChecksum = aws.RequireChecksumFalse
-	}
 
+	checkRequireChecksum(&m.RequireChecksum, m.RequestChecksumCalculation, set)
 	if m.RequireChecksum == aws.RequireChecksumFalse {
 		return next.HandleFinalize(ctx, in)
 	}
@@ -283,12 +279,8 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 			Err: err,
 		}
 	}
-	if m.RequireChecksum == aws.RequireChecksumPending &&
-		m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
-		!set {
-		m.RequireChecksum = aws.RequireChecksumFalse
-	}
 
+	checkRequireChecksum(&m.RequireChecksum, m.RequestChecksumCalculation, set)
 	if m.RequireChecksum == aws.RequireChecksumFalse {
 		return next.HandleFinalize(ctx, in)
 	}
@@ -396,6 +388,14 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 	}
 
 	return out, metadata, err
+}
+
+func checkRequireChecksum(requireChecksum *aws.RequireChecksum, requestChecksumCalculation aws.RequestChecksumCalculation, set bool) {
+	if *requireChecksum == aws.RequireChecksumPending &&
+		requestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
+		!set {
+		*requireChecksum = aws.RequireChecksumFalse
+	}
 }
 
 func getInputAlgorithm(ctx context.Context) (Algorithm, bool, error) {

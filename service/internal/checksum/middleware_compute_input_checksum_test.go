@@ -149,6 +149,26 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				expectHeader:        http.Header{},
 				expectPayload:       []byte("hello world"),
 			},
+			"http set algorithm not require checksum calculation": {
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32C))
+				},
+				optionsFn: func(o *computeInputPayloadChecksum) {
+					o.RequireChecksum = aws.RequireChecksumFalse
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("http://example.aws")
+						r = requestMust(r.SetStream(strings.NewReader("hello world")))
+						r.ContentLength = 11
+						return r
+					}(),
+				},
+				expectContentLength: 11,
+				expectHeader:        http.Header{},
+				expectPayload:       []byte("hello world"),
+			},
 			"https user config require checksum but no algorithm set": {
 				optionsFn: func(o *computeInputPayloadChecksum) {
 					o.RequireChecksum = aws.RequireChecksumPending
@@ -168,6 +188,26 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				expectPayload:       []byte("hello world"),
 			},
 			"https not require checksum calculation": {
+				optionsFn: func(o *computeInputPayloadChecksum) {
+					o.RequireChecksum = aws.RequireChecksumFalse
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("https://example.aws")
+						r = requestMust(r.SetStream(strings.NewReader("hello world")))
+						r.ContentLength = -1
+						return r
+					}(),
+				},
+				expectContentLength: -1,
+				expectHeader:        http.Header{},
+				expectPayload:       []byte("hello world"),
+			},
+			"https set algorithm not require checksum calculation": {
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmSHA1))
+				},
 				optionsFn: func(o *computeInputPayloadChecksum) {
 					o.RequireChecksum = aws.RequireChecksumFalse
 				},
