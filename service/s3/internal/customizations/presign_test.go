@@ -68,26 +68,13 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 		},
 		"unseekable payload": {
-			// unseekable payload succeeds as we disable content sha256 computation for streaming input
+			// unseekable payload failed as checksum could not be calculated for unseekable stream during presign
 			input: s3.PutObjectInput{
 				Bucket: aws.String("mock-bucket"),
 				Key:    aws.String("mockkey"),
 				Body:   bytes.NewBuffer([]byte(`hello-world`)),
 			},
-			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectRequestURIQuery: []string{
-				"X-Amz-Expires=900",
-				"X-Amz-Credential",
-				"X-Amz-Date",
-				"x-id=PutObject",
-				"X-Amz-Signature",
-			},
-			expectMethod: "PUT",
-			expectSignedHeader: http.Header{
-				"Content-Length": []string{"11"},
-				"Content-Type":   []string{"application/octet-stream"},
-				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
-			},
+			expectError: "unseekable stream is not supported without TLS and trailing checksum",
 		},
 		"empty body": {
 			input: s3.PutObjectInput{
@@ -346,7 +333,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 		},
 		"unseekable payload": {
-			// unseekable payload succeeds as we disable content sha256 computation for streaming input
+			// unseekable payload failed as checksum could not be calculated for unseekable stream during presign
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
@@ -354,22 +341,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 				UploadId:   aws.String("123456"),
 				Body:       bytes.NewBuffer([]byte(`hello-world`)),
 			},
-			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
-			expectRequestURIQuery: []string{
-				"X-Amz-Expires=900",
-				"X-Amz-Credential",
-				"X-Amz-Date",
-				"partNumber=1",
-				"uploadId=123456",
-				"x-id=UploadPart",
-				"X-Amz-Signature",
-			},
-			expectMethod: "PUT",
-			expectSignedHeader: http.Header{
-				"Content-Length": []string{"11"},
-				"Content-Type":   []string{"application/octet-stream"},
-				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
-			},
+			expectError: "unseekable stream is not supported without TLS and trailing checksum",
 		},
 		"empty body": {
 			input: s3.UploadPartInput{
@@ -441,6 +413,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 				if e, a := c.expectError, err.Error(); !strings.Contains(a, e) {
 					t.Fatalf("expected error to be %s, got %s", e, a)
 				}
+				return
 			} else {
 				if len(c.expectError) != 0 {
 					t.Fatalf("expected error to be %v, got none", c.expectError)
