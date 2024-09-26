@@ -1,8 +1,0 @@
-{
-    "id": "1cc6c1f5-50bb-4404-81d2-870256d1445b",
-    "type": "documentation",
-    "description": "AWS PCS API documentation - Edited the description of the iamInstanceProfileArn parameter of the CreateComputeNodeGroup and UpdateComputeNodeGroup actions; edited the description of the SlurmCustomSetting data type to list the supported parameters for clusters and compute node groups.",
-    "modules": [
-        "service/pcs"
-    ]
-}

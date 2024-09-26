@@ -1,3 +1,19 @@
+# Release (2024-09-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.7.0](service/chatbot/CHANGELOG.md#v170-2024-09-26)
+  * **Feature**: Return State and StateReason fields for Chatbot Channel Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.62.0](service/lambda/CHANGELOG.md#v1620-2024-09-26)
+  * **Feature**: Reverting Lambda resource-based policy and block public access APIs.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.33.0](service/organizations/CHANGELOG.md#v1330-2024-09-26)
+  * **Feature**: Add support for policy operations on the CHATBOT_POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.1.3](service/pcs/CHANGELOG.md#v113-2024-09-26)
+  * **Documentation**: AWS PCS API documentation - Edited the description of the iamInstanceProfileArn parameter of the CreateComputeNodeGroup and UpdateComputeNodeGroup actions; edited the description of the SlurmCustomSetting data type to list the supported parameters for clusters and compute node groups.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.24.3](service/rdsdata/CHANGELOG.md#v1243-2024-09-26)
+  * **Documentation**: Documentation update for RDS Data API to reflect support for Aurora MySQL Serverless v2 and Provisioned DB clusters.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.161.0](service/sagemaker/CHANGELOG.md#v11610-2024-09-26)
+  * **Feature**: Adding `TagPropagation` attribute to Sagemaker API
+
 # Release (2024-09-25)
 
 ## General Highlights

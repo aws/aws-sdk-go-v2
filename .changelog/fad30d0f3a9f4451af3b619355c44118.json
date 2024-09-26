@@ -1,8 +1,0 @@
-{
-    "id": "fad30d0f-3a9f-4451-af3b-619355c44118",
-    "type": "feature",
-    "description": "Return State and StateReason fields for Chatbot Channel Configurations.",
-    "modules": [
-        "service/chatbot"
-    ]
-}

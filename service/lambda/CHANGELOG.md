@@ -1,3 +1,7 @@
+# v1.62.0 (2024-09-26)
+
+* **Feature**: Reverting Lambda resource-based policy and block public access APIs.
+
 # v1.61.2 (2024-09-25)
 
 * No change notes available for this release.

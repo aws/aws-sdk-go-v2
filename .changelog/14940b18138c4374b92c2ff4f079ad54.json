@@ -1,8 +1,0 @@
-{
-    "id": "14940b18-138c-4374-b92c-2ff4f079ad54",
-    "type": "feature",
-    "description": "Adding `TagPropagation` attribute to Sagemaker API",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

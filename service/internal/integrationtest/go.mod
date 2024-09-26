@@ -52,7 +52,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/iot v1.57.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/kms v1.36.2
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.61.2
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.62.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.34.2
