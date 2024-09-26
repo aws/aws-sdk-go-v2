@@ -9913,6 +9913,12 @@
                         "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n      communication in <code>VPCOnly</code> mode. Required when\n        <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n        <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided. If setting up the domain for use with RStudio, this value must be set to\n        <code>Service</code>.</p>"
                     }
                 },
+                "TagPropagation": {
+                    "target": "com.amazonaws.sagemaker#TagPropagation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>"
+                    }
+                },
                 "DefaultSpaceSettings": {
                     "target": "com.amazonaws.sagemaker#DefaultSpaceSettings",
                     "traits": {
@@ -19336,6 +19342,12 @@
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
                         "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n      communication in <code>VPCOnly</code> mode. Required when\n        <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n        <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided.</p>"
+                    }
+                },
+                "TagPropagation": {
+                    "target": "com.amazonaws.sagemaker#TagPropagation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain.</p>"
                     }
                 },
                 "DefaultSpaceSettings": {
@@ -62994,6 +63006,23 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#TagPropagation": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#TagValue": {
             "type": "string",
             "traits": {
@@ -68149,6 +68178,12 @@
                     "target": "com.amazonaws.sagemaker#AppNetworkAccessType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the VPC used for non-EFS traffic.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VpcOnly</code> - All Studio traffic is through the specified VPC and\n          subnets.</p>\n            </li>\n         </ul>\n         <p>This configuration can only be modified if there are no apps in the\n      <code>InService</code>, <code>Pending</code>, or <code>Deleting</code> state. The\n      configuration cannot be updated if\n        <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is already\n      set or <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n      provided as part of the same request.</p>"
+                    }
+                },
+                "TagPropagation": {
+                    "target": "com.amazonaws.sagemaker#TagPropagation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>"
                     }
                 }
             },
