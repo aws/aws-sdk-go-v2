@@ -32748,6 +32748,11 @@ func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		}
 	}
 
+	if len(v.TagPropagation) > 0 {
+		ok := object.Key("TagPropagation")
+		ok.String(string(v.TagPropagation))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -41490,6 +41495,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainInput(v *UpdateDomainInput, val
 		if err := awsAwsjson11_serializeDocumentSubnets(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.TagPropagation) > 0 {
+		ok := object.Key("TagPropagation")
+		ok.String(string(v.TagPropagation))
 	}
 
 	return nil

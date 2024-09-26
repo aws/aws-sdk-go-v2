@@ -88790,6 +88790,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOu
 				return err
 			}
 
+		case "TagPropagation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagPropagation to be of type string, got %T instead", value)
+				}
+				sv.TagPropagation = types.TagPropagation(jtv)
+			}
+
 		case "Url":
 			if value != nil {
 				jtv, ok := value.(string)

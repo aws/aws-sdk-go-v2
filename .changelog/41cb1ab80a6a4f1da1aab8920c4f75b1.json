@@ -1,0 +1,8 @@
+{
+    "id": "41cb1ab8-0a6a-4f1d-a1aa-b8920c4f75b1",
+    "type": "documentation",
+    "description": "Documentation update for RDS Data API to reflect support for Aurora MySQL Serverless v2 and Provisioned DB clusters.",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

@@ -71,6 +71,10 @@ type UpdateDomainInput struct {
 	// Deleting state.
 	SubnetIds []string
 
+	// Indicates whether custom tag propagation is supported for the domain. Defaults
+	// to DISABLED .
+	TagPropagation types.TagPropagation
+
 	noSmithyDocumentSerde
 }
 

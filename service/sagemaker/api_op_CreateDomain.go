@@ -136,6 +136,10 @@ type CreateDomainInput struct {
 	// control, specify a customer managed key.
 	KmsKeyId *string
 
+	// Indicates whether custom tag propagation is supported for the domain. Defaults
+	// to DISABLED .
+	TagPropagation types.TagPropagation
+
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the
 	// Search API.

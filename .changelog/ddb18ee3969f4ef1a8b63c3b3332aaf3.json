@@ -1,0 +1,8 @@
+{
+    "id": "ddb18ee3-969f-4ef1-a8b6-3c3b3332aaf3",
+    "type": "feature",
+    "description": "Reverting Lambda resource-based policy and block public access APIs.",
+    "modules": [
+        "service/lambda"
+    ]
+}
