@@ -1624,7 +1624,7 @@
                     "name": "profile"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. </p>\n         <p>For more information about the Amazon Connect Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>",
+                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html\">Customer Profiles actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html\">Customer Profiles data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. </p>\n         <p>For more information about the Amazon Connect Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>",
                 "smithy.api#title": "Amazon Connect Customer Profiles",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4524,6 +4524,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in\n         Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in\n         flowDefinition.</p>"
                     }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6199,6 +6205,12 @@
                     "target": "com.amazonaws.customerprofiles#optionalBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in\n         Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in\n         flowDefinition.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
                     }
                 }
             },
@@ -7922,6 +7934,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.\nIt supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, \n<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>"
                     }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7987,6 +8005,12 @@
                     "target": "com.amazonaws.customerprofiles#optionalBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Boolean that shows if the Flow that's associated with the Integration is created in\n         Amazon Appflow, or with ObjectTypeName equals _unstructured via API/CLI in\n         flowDefinition.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.customerprofiles#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role to make\n         Customer Profiles requests on your behalf.</p>"
                     }
                 }
             },

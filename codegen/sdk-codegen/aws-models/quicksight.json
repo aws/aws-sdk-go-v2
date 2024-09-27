@@ -20450,6 +20450,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeQPersonalizationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeQPersonalizationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeQPersonalizationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a personalization configuration.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/q-personalization-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeQPersonalizationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the personalization configuration that the user wants described.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeQPersonalizationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "PersonalizationMode": {
+                    "target": "com.amazonaws.quicksight#PersonalizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether personalization is enabled or not.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeRefreshSchedule": {
             "type": "operation",
             "input": {
@@ -36483,6 +36564,23 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PersonalizationMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#PhysicalTable": {
             "type": "union",
             "members": {
@@ -38320,6 +38418,9 @@
                     "target": "com.amazonaws.quicksight#DescribeNamespace"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeQPersonalizationConfiguration"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeRefreshSchedule"
                 },
                 {
@@ -38573,6 +38674,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdatePublicSharingSettings"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateQPersonalizationConfiguration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRefreshSchedule"
@@ -53422,6 +53526,97 @@
         "com.amazonaws.quicksight#UpdatePublicSharingSettingsResponse": {
             "type": "structure",
             "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateQPersonalizationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateQPersonalizationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateQPersonalizationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a personalization configuration.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/q-personalization-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateQPersonalizationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account account that contains the personalization configuration that the user wants to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PersonalizationMode": {
+                    "target": "com.amazonaws.quicksight#PersonalizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to allow Amazon QuickSight to customize data stories with user specific metadata, specifically location and job information, in your IAM Identity Center instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateQPersonalizationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "PersonalizationMode": {
+                    "target": "com.amazonaws.quicksight#PersonalizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The personalization mode that is used for the personalization configuration.</p>"
+                    }
+                },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
