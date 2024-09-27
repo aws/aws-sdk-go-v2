@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to enable finding aggregation. Must be called from the aggregation Region.
+// The aggregation Region is now called the home Region.
 //
-// For more details about cross-Region replication, see [Configuring finding aggregation] in the Security Hub User
-// Guide.
+// Used to enable cross-Region aggregation. This operation can be invoked from the
+// home Region only.
 //
-// [Configuring finding aggregation]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html
+// For information about how cross-Region aggregation works, see [Understanding cross-Region aggregation in Security Hub] in the Security
+// Hub User Guide.
+//
+// [Understanding cross-Region aggregation in Security Hub]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html
 func (c *Client) CreateFindingAggregator(ctx context.Context, params *CreateFindingAggregatorInput, optFns ...func(*Options)) (*CreateFindingAggregatorOutput, error) {
 	if params == nil {
 		params = &CreateFindingAggregatorInput{}
@@ -64,11 +67,11 @@ type CreateFindingAggregatorInput struct {
 	RegionLinkingMode *string
 
 	// If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED , then this is a
-	// space-separated list of Regions that do not aggregate findings to the
-	// aggregation Region.
+	// space-separated list of Regions that don't replicate and send findings to the
+	// home Region.
 	//
 	// If RegionLinkingMode is SPECIFIED_REGIONS , then this is a space-separated list
-	// of Regions that do aggregate findings to the aggregation Region.
+	// of Regions that do replicate and send findings to the home Region.
 	//
 	// An InvalidInputException error results if you populate this field while
 	// RegionLinkingMode is NO_REGIONS .
@@ -79,11 +82,12 @@ type CreateFindingAggregatorInput struct {
 
 type CreateFindingAggregatorOutput struct {
 
-	// The aggregation Region.
+	// The home Region. Findings generated in linked Regions are replicated and sent
+	// to the home Region.
 	FindingAggregationRegion *string
 
 	// The ARN of the finding aggregator. You use the finding aggregator ARN to
-	// retrieve details for, update, and stop finding aggregation.
+	// retrieve details for, update, and stop cross-Region aggregation.
 	FindingAggregatorArn *string
 
 	// Indicates whether to link all Regions, all Regions except for a list of

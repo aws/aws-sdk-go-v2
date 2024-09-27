@@ -2256,6 +2256,9 @@ type TrackingOptions struct {
 	// This member is required.
 	CustomRedirectDomain *string
 
+	// The https policy to use for tracking open and click events.
+	HttpsPolicy HttpsPolicy
+
 	noSmithyDocumentSerde
 }
 

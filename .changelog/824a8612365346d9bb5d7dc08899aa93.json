@@ -1,0 +1,8 @@
+{
+    "id": "824a8612-3653-46d9-bb5d-7dc08899aa93",
+    "type": "feature",
+    "description": "Adding personalization in QuickSight data stories. Admins can enable or disable personalization through QuickSight settings.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

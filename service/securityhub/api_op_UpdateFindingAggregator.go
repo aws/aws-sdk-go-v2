@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the finding aggregation configuration. Used to update the Region
-// linking mode and the list of included or excluded Regions. You cannot use
-// UpdateFindingAggregator to change the aggregation Region.
+// The aggregation Region is now called the home Region.
 //
-// You must run UpdateFindingAggregator from the current aggregation Region.
+// Updates cross-Region aggregation settings. You can use this operation to update
+// the Region linking mode and the list of included or excluded Amazon Web Services
+// Regions. However, you can't use this operation to change the home Region.
+//
+// You can invoke this operation from the current home Region only.
 func (c *Client) UpdateFindingAggregator(ctx context.Context, params *UpdateFindingAggregatorInput, optFns ...func(*Options)) (*UpdateFindingAggregatorOutput, error) {
 	if params == nil {
 		params = &UpdateFindingAggregatorInput{}
@@ -69,11 +71,11 @@ type UpdateFindingAggregatorInput struct {
 	RegionLinkingMode *string
 
 	// If RegionLinkingMode is ALL_REGIONS_EXCEPT_SPECIFIED , then this is a
-	// space-separated list of Regions that do not aggregate findings to the
-	// aggregation Region.
+	// space-separated list of Regions that don't replicate and send findings to the
+	// home Region.
 	//
 	// If RegionLinkingMode is SPECIFIED_REGIONS , then this is a space-separated list
-	// of Regions that do aggregate findings to the aggregation Region.
+	// of Regions that do replicate and send findings to the home Region.
 	//
 	// An InvalidInputException error results if you populate this field while
 	// RegionLinkingMode is NO_REGIONS .
@@ -84,7 +86,8 @@ type UpdateFindingAggregatorInput struct {
 
 type UpdateFindingAggregatorOutput struct {
 
-	// The aggregation Region.
+	// The home Region. Findings generated in linked Regions are replicated and sent
+	// to the home Region.
 	FindingAggregationRegion *string
 
 	// The ARN of the finding aggregator.

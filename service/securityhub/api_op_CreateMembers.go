@@ -34,8 +34,8 @@ import (
 // invitation, you use the InviteMembers operation. If the account owner accepts
 // the invitation, the account becomes a member account in Security Hub.
 //
-// Accounts that are managed using Organizations do not receive an invitation.
-// They automatically become a member account in Security Hub.
+// Accounts that are managed using Organizations don't receive an invitation. They
+// automatically become a member account in Security Hub.
 //
 //   - If the organization account does not have Security Hub enabled, then
 //     Security Hub and the default standards are automatically enabled. Note that

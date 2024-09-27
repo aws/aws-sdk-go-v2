@@ -4152,6 +4152,11 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 		}
 	}
 
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {

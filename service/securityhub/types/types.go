@@ -248,20 +248,16 @@ type AssociationStateDetails struct {
 	noSmithyDocumentSerde
 }
 
-//	One or more actions to update finding fields if a finding matches the defined
+//	One or more actions that Security Hub takes when a finding matches the defined
 //
-// criteria of the rule.
+// criteria of a rule.
 type AutomationRulesAction struct {
 
 	//  Specifies that the automation rule action is an update to a finding field.
 	FindingFieldsUpdate *AutomationRulesFindingFieldsUpdate
 
-	//  Specifies that the rule action should update the Types finding field. The Types
-	// finding field classifies findings in the format of
-	// namespace/category/classifier. For more information, see [Types taxonomy for ASFF]in the Security Hub
-	// User Guide.
-	//
-	// [Types taxonomy for ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+	//  Specifies the type of action that Security Hub takes when a finding matches
+	// the defined criteria of a rule.
 	Type AutomationRulesActionType
 
 	noSmithyDocumentSerde
@@ -609,7 +605,7 @@ type AutomationRulesFindingFilters struct {
 	//  The identifier for the given resource type. For Amazon Web Services resources
 	// that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon
 	// Web Services resources that lack ARNs, this is the identifier as defined by the
-	// Amazon Web Servicesservice that created the resource. For non-Amazon Web
+	// Amazon Web Services service that created the resource. For non-Amazon Web
 	// Services resources, this is a unique identifier that is associated with the
 	// resource.
 	//
@@ -2208,7 +2204,7 @@ type AwsBackupBackupPlanRuleCopyActionsDetails struct {
 
 	// Defines when a protected resource is transitioned to cold storage and when it
 	// expires. Backup transitions and expires backups automatically according to the
-	// lifecycle that you define. If you do not specify a lifecycle, Backup applies the
+	// lifecycle that you define. If you don't specify a lifecycle, Backup applies the
 	// lifecycle policy of the source backup to the destination backup.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
@@ -2236,7 +2232,7 @@ type AwsBackupBackupPlanRuleDetails struct {
 
 	// Defines when a protected resource is transitioned to cold storage and when it
 	// expires. Backup transitions and expires backups automatically according to the
-	// lifecycle that you define. If you do not specify a lifecycle, Backup applies the
+	// lifecycle that you define. If you don't specify a lifecycle, Backup applies the
 	// lifecycle policy of the source backup to the destination backup.
 	//
 	// Backups transitioned to cold storage must be stored in cold storage for a
@@ -2286,7 +2282,7 @@ type AwsBackupBackupVaultDetails struct {
 
 	// The unique ARN associated with the server-side encryption key. You can specify
 	// a key to encrypt your backups from services that support full Backup management.
-	// If you do not specify a key, Backup creates an KMS key for you by default.
+	// If you don't specify a key, Backup creates an KMS key for you by default.
 	EncryptionKeyArn *string
 
 	// The Amazon SNS event notifications for the specified backup vault.
@@ -6656,7 +6652,7 @@ type AwsEcsServiceDetails struct {
 	// The DAEMON scheduling strategy deploys exactly one task on each active
 	// container instance that meets all of the task placement constraints that are
 	// specified in the cluster. The service scheduler also evaluates the task
-	// placement constraints for running tasks and stops tasks that do not meet the
+	// placement constraints for running tasks and stops tasks that don't meet the
 	// placement constraints.
 	//
 	// Valid values: REPLICA | DAEMON
@@ -10753,7 +10749,7 @@ type AwsRdsDbInstanceDetails struct {
 	// Oracle
 	//
 	// Contains the Oracle System ID (SID) of the created DB instance. Not shown when
-	// the returned parameters do not apply to an Oracle DB instance.
+	// the returned parameters don't apply to an Oracle DB instance.
 	DBName *string
 
 	// Specifies the port that the DB instance listens on. If the DB instance is part
@@ -13243,7 +13239,7 @@ type AwsSecurityFindingFilters struct {
 	ComplianceAssociatedStandardsId []StringFilter
 
 	//  The unique identifier of a control across standards. Values for this field
-	// typically consist of an Amazon Web Servicesservice and a number, such as
+	// typically consist of an Amazon Web Services service and a number, such as
 	// APIGateway.5.
 	ComplianceSecurityControlId []StringFilter
 
@@ -13740,7 +13736,7 @@ type AwsSecurityFindingFilters struct {
 	//   - Compliance.Status changes from PASSED to FAILED , WARNING , or NOT_AVAILABLE
 	//   .
 	//
-	//   - SUPPRESSED - Indicates that you reviewed the finding and do not believe that
+	//   - SUPPRESSED - Indicates that you reviewed the finding and don't believe that
 	//   any action is needed.
 	//
 	// The workflow status of a SUPPRESSED finding does not change if RecordState
@@ -14781,7 +14777,7 @@ type AwsWafWebAclRule struct {
 	// requests are counted.
 	//
 	// ActivatedRule | OverrideAction applies only when updating or adding a RuleGroup
-	// to a web ACL. In this case you do not use ActivatedRule Action . For all other
+	// to a web ACL. In this case you don't use ActivatedRule Action . For all other
 	// update requests, ActivatedRule Action is used instead of ActivatedRule
 	// OverrideAction .
 	OverrideAction *WafOverrideAction
@@ -14789,7 +14785,7 @@ type AwsWafWebAclRule struct {
 	// Specifies the order in which the rules in a web ACL are evaluated. Rules with a
 	// lower value for Priority are evaluated before rules with a higher value. The
 	// value must be a unique integer. If you add multiple rules to a web ACL, the
-	// values do not need to be consecutive.
+	// values don't need to be consecutive.
 	Priority *int32
 
 	// The identifier for a rule.
@@ -15048,7 +15044,7 @@ type Compliance struct {
 	RelatedRequirements []string
 
 	//  Typically provides the unique identifier of a control across standards. For
-	// Security Hub controls, this field consists of an Amazon Web Servicesservice and
+	// Security Hub controls, this field consists of an Amazon Web Services service and
 	// a unique number, such as APIGateway.5 .
 	SecurityControlId *string
 
@@ -15524,8 +15520,8 @@ type FilePaths struct {
 	noSmithyDocumentSerde
 }
 
-// A finding aggregator. A finding aggregator contains the configuration for
-// finding aggregation.
+// A finding aggregator is a Security Hub resource that specifies cross-Region
+// aggregation settings, including the home Region and any linked Regions.
 type FindingAggregator struct {
 
 	// The ARN of the finding aggregator. You use the finding aggregator ARN to
@@ -15556,7 +15552,7 @@ type FindingHistoryRecord struct {
 	NextToken *string
 
 	//  Identifies the source of the event that changed the finding. For example, an
-	// integrated Amazon Web Servicesservice or third-party partner integration may
+	// integrated Amazon Web Services service or third-party partner integration may
 	// call [BatchImportFindings]BatchImportFindings , or an Security Hub customer may call [BatchUpdateFindings]
 	// BatchUpdateFindings .
 	//
@@ -15625,7 +15621,7 @@ type FindingHistoryUpdateSource struct {
 	Identity *string
 
 	//  Describes the type of finding change event, such as a call to [BatchImportFindings]
-	// BatchImportFindings (by an integrated Amazon Web Servicesservice or third party
+	// BatchImportFindings (by an integrated Amazon Web Services service or third party
 	// partner integration) or [BatchUpdateFindings]BatchUpdateFindings (by a Security Hub customer).
 	//
 	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
@@ -16768,7 +16764,7 @@ type Policy interface {
 	isPolicy()
 }
 
-// The Amazon Web Servicesservice that the configuration policy applies to.
+// The Amazon Web Services service that the configuration policy applies to.
 type PolicyMemberSecurityHub struct {
 	Value SecurityHubPolicy
 
@@ -17470,7 +17466,7 @@ type RouteSetDetails struct {
 	//  The IPv6 CIDR block used for the destination match.
 	DestinationIpv6CidrBlock *string
 
-	//  The prefix of the destination Amazon Web Servicesservice.
+	//  The prefix of the destination Amazon Web Services service.
 	DestinationPrefixListId *string
 
 	//  The ID of the egress-only internet gateway.
@@ -17817,8 +17813,8 @@ type SecurityControl struct {
 	SecurityControlArn *string
 
 	//  The unique identifier of a security control across standards. Values for this
-	// field typically consist of an Amazon Web Servicesservice name and a number, such
-	// as APIGateway.3.
+	// field typically consist of an Amazon Web Services service name and a number,
+	// such as APIGateway.3.
 	//
 	// This member is required.
 	SecurityControlId *string
@@ -17906,7 +17902,7 @@ type SecurityControlDefinition struct {
 	RemediationUrl *string
 
 	//  The unique identifier of a security control across standards. Values for this
-	// field typically consist of an Amazon Web Servicesservice name and a number (for
+	// field typically consist of an Amazon Web Services service name and a number (for
 	// example, APIGateway.3). This parameter differs from SecurityControlArn , which
 	// is a unique Amazon Resource Name (ARN) assigned to a control. The ARN references
 	// the security control ID (for example,
@@ -18059,7 +18055,7 @@ type Severity struct {
 	//
 	//   - CRITICAL - The issue must be remediated immediately to avoid it escalating.
 	//
-	// If you provide Normalized and do not provide Label , then Label is set
+	// If you provide Normalized and don't provide Label , then Label is set
 	// automatically as follows.
 	//
 	//   - 0 - INFORMATIONAL
@@ -18078,7 +18074,7 @@ type Severity struct {
 	//
 	// The value of Normalized can be an integer between 0 and 100 .
 	//
-	// If you provide Label and do not provide Normalized , then Normalized is set
+	// If you provide Label and don't provide Normalized , then Normalized is set
 	// automatically as follows.
 	//
 	//   - INFORMATIONAL - 0
@@ -18126,7 +18122,7 @@ type SeverityUpdate struct {
 	// The normalized severity for the finding. This attribute is to be deprecated in
 	// favor of Label .
 	//
-	// If you provide Normalized and do not provide Label , Label is set automatically
+	// If you provide Normalized and don't provide Label , Label is set automatically
 	// as follows.
 	//
 	//   - 0 - INFORMATIONAL
@@ -18286,8 +18282,8 @@ type StandardsControlAssociationDetail struct {
 	SecurityControlArn *string
 
 	//  The unique identifier of a security control across standards. Values for this
-	// field typically consist of an Amazon Web Servicesservice name and a number, such
-	// as APIGateway.3.
+	// field typically consist of an Amazon Web Services service name and a number,
+	// such as APIGateway.3.
 	//
 	// This member is required.
 	SecurityControlId *string
@@ -18365,7 +18361,7 @@ type StandardsControlAssociationSummary struct {
 	SecurityControlArn *string
 
 	//  A unique standard-agnostic identifier for a control. Values for this field
-	// typically consist of an Amazon Web Servicesservice and a number, such as
+	// typically consist of an Amazon Web Services service and a number, such as
 	// APIGateway.5. This field doesn't reference a specific standard.
 	//
 	// This member is required.
@@ -19202,7 +19198,7 @@ type Workflow struct {
 	//   issue. Used when the initial reviewer is not the resource owner, and needs
 	//   intervention from the resource owner.
 	//
-	//   - SUPPRESSED - Indicates that you reviewed the finding and do not believe that
+	//   - SUPPRESSED - Indicates that you reviewed the finding and don't believe that
 	//   any action is needed. The finding is no longer updated.
 	//
 	//   - RESOLVED - The finding was reviewed and remediated and is now considered
@@ -19239,7 +19235,7 @@ type WorkflowUpdate struct {
 	//   - RESOLVED - The finding was reviewed and remediated and is now considered
 	//   resolved.
 	//
-	//   - SUPPRESSED - Indicates that you reviewed the finding and do not believe that
+	//   - SUPPRESSED - Indicates that you reviewed the finding and don't believe that
 	//   any action is needed. The finding is no longer updated.
 	Status WorkflowStatus
 

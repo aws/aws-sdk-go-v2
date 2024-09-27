@@ -19692,6 +19692,15 @@ func awsRestjson1_deserializeDocumentTrackingOptions(v **types.TrackingOptions, 
 				sv.CustomRedirectDomain = ptr.String(jtv)
 			}
 
+		case "HttpsPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HttpsPolicy to be of type string, got %T instead", value)
+				}
+				sv.HttpsPolicy = types.HttpsPolicy(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

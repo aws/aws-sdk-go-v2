@@ -386,6 +386,27 @@ func (FeatureStatus) Values() []FeatureStatus {
 	}
 }
 
+type HttpsPolicy string
+
+// Enum values for HttpsPolicy
+const (
+	HttpsPolicyRequire         HttpsPolicy = "REQUIRE"
+	HttpsPolicyRequireOpenOnly HttpsPolicy = "REQUIRE_OPEN_ONLY"
+	HttpsPolicyOptional        HttpsPolicy = "OPTIONAL"
+)
+
+// Values returns all known values for HttpsPolicy. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HttpsPolicy) Values() []HttpsPolicy {
+	return []HttpsPolicy{
+		"REQUIRE",
+		"REQUIRE_OPEN_ONLY",
+		"OPTIONAL",
+	}
+}
+
 type IdentityType string
 
 // Enum values for IdentityType

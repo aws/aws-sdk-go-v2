@@ -16,7 +16,7 @@ import (
 // Administrator accounts can update findings for their account and their member
 // accounts. Member accounts can update findings for their account.
 //
-// Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a
+// Updates from BatchUpdateFindings don't affect the value of UpdatedAt for a
 // finding.
 //
 // Administrator and member accounts can use BatchUpdateFindings to update the

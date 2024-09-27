@@ -71,8 +71,8 @@ type EnableSecurityHubInput struct {
 	ControlFindingGenerator types.ControlFindingGenerator
 
 	// Whether to enable the security standards that Security Hub has designated as
-	// automatically enabled. If you do not provide a value for EnableDefaultStandards
-	// , it is set to true . To not enable the automatically enabled standards, set
+	// automatically enabled. If you don't provide a value for EnableDefaultStandards ,
+	// it is set to true . To not enable the automatically enabled standards, set
 	// EnableDefaultStandards to false .
 	EnableDefaultStandards *bool
 
