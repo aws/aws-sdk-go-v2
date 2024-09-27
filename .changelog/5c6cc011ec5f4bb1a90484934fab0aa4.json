@@ -1,0 +1,8 @@
+{
+    "id": "5c6cc011-ec5f-4bb1-a904-84934fab0aa4",
+    "type": "feature",
+    "description": "Remove deprecated worklink service.",
+    "modules": [
+        "."
+    ]
+}
