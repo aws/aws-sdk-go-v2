@@ -1,8 +1,0 @@
-{
-    "id": "3123e446-2909-4067-9a80-9b49ce910783",
-    "type": "feature",
-    "description": "This release adds support for engagement tracking over Https using custom domains.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

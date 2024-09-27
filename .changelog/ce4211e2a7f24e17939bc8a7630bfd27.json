@@ -1,8 +1,0 @@
-{
-    "id": "ce4211e2-a7f2-4e17-939b-c8a7630bfd27",
-    "type": "feature",
-    "description": "Introduces optional RoleArn parameter for PutIntegration request and includes RoleArn in the response of PutIntegration, GetIntegration and ListIntegrations",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

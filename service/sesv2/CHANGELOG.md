@@ -1,3 +1,7 @@
+# v1.35.0 (2024-09-27)
+
+* **Feature**: This release adds support for engagement tracking over Https using custom domains.
+
 # v1.34.2 (2024-09-25)
 
 * No change notes available for this release.

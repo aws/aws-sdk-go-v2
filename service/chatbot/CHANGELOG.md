@@ -1,3 +1,7 @@
+# v1.7.1 (2024-09-27)
+
+* No change notes available for this release.
+
 # v1.7.0 (2024-09-26)
 
 * **Feature**: Return State and StateReason fields for Chatbot Channel Configurations.

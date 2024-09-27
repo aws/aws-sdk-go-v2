@@ -1,3 +1,18 @@
+# Release (2024-09-27)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.41.0](service/customerprofiles/CHANGELOG.md#v1410-2024-09-27)
+  * **Feature**: Introduces optional RoleArn parameter for PutIntegration request and includes RoleArn in the response of PutIntegration, GetIntegration and ListIntegrations
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.74.0](service/quicksight/CHANGELOG.md#v1740-2024-09-27)
+  * **Feature**: Adding personalization in QuickSight data stories. Admins can enable or disable personalization through QuickSight settings.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.53.3](service/securityhub/CHANGELOG.md#v1533-2024-09-27)
+  * **Documentation**: Documentation updates for AWS Security Hub
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.35.0](service/sesv2/CHANGELOG.md#v1350-2024-09-27)
+  * **Feature**: This release adds support for engagement tracking over Https using custom domains.
+
 # Release (2024-09-26)
 
 ## Module Highlights
