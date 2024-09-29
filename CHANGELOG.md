@@ -1,3 +1,34 @@
+# Release (2024-09-27)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.41.0](service/customerprofiles/CHANGELOG.md#v1410-2024-09-27)
+  * **Feature**: Introduces optional RoleArn parameter for PutIntegration request and includes RoleArn in the response of PutIntegration, GetIntegration and ListIntegrations
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.74.0](service/quicksight/CHANGELOG.md#v1740-2024-09-27)
+  * **Feature**: Adding personalization in QuickSight data stories. Admins can enable or disable personalization through QuickSight settings.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.53.3](service/securityhub/CHANGELOG.md#v1533-2024-09-27)
+  * **Documentation**: Documentation updates for AWS Security Hub
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.35.0](service/sesv2/CHANGELOG.md#v1350-2024-09-27)
+  * **Feature**: This release adds support for engagement tracking over Https using custom domains.
+
+# Release (2024-09-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.7.0](service/chatbot/CHANGELOG.md#v170-2024-09-26)
+  * **Feature**: Return State and StateReason fields for Chatbot Channel Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.62.0](service/lambda/CHANGELOG.md#v1620-2024-09-26)
+  * **Feature**: Reverting Lambda resource-based policy and block public access APIs.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.33.0](service/organizations/CHANGELOG.md#v1330-2024-09-26)
+  * **Feature**: Add support for policy operations on the CHATBOT_POLICY policy type.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.1.3](service/pcs/CHANGELOG.md#v113-2024-09-26)
+  * **Documentation**: AWS PCS API documentation - Edited the description of the iamInstanceProfileArn parameter of the CreateComputeNodeGroup and UpdateComputeNodeGroup actions; edited the description of the SlurmCustomSetting data type to list the supported parameters for clusters and compute node groups.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.24.3](service/rdsdata/CHANGELOG.md#v1243-2024-09-26)
+  * **Documentation**: Documentation update for RDS Data API to reflect support for Aurora MySQL Serverless v2 and Provisioned DB clusters.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.161.0](service/sagemaker/CHANGELOG.md#v11610-2024-09-26)
+  * **Feature**: Adding `TagPropagation` attribute to Sagemaker API
+
 # Release (2024-09-25)
 
 ## General Highlights

@@ -1,3 +1,11 @@
+# v1.33.1 (2024-09-27)
+
+* No change notes available for this release.
+
+# v1.33.0 (2024-09-26)
+
+* **Feature**: Add support for policy operations on the CHATBOT_POLICY policy type.
+
 # v1.32.2 (2024-09-25)
 
 * No change notes available for this release.

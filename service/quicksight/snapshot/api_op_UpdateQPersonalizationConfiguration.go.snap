@@ -1,4 +1,4 @@
-ListTagsForResource
+UpdateQPersonalizationConfiguration
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata

@@ -1,3 +1,7 @@
+# v1.48.3 (2024-09-27)
+
+* No change notes available for this release.
+
 # v1.48.2 (2024-09-25)
 
 * **Documentation**: Doc-only update to address Lustre S3 hard-coded names.

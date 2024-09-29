@@ -1590,6 +1590,26 @@ func (m *validateOpDescribeNamespace) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeQPersonalizationConfiguration struct {
+}
+
+func (*validateOpDescribeQPersonalizationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQPersonalizationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQPersonalizationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQPersonalizationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeRefreshSchedule struct {
 }
 
@@ -3290,6 +3310,26 @@ func (m *validateOpUpdatePublicSharingSettings) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQPersonalizationConfiguration struct {
+}
+
+func (*validateOpUpdateQPersonalizationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQPersonalizationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQPersonalizationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQPersonalizationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRefreshSchedule struct {
 }
 
@@ -3886,6 +3926,10 @@ func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNamespace{}, middleware.After)
 }
 
+func addOpDescribeQPersonalizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQPersonalizationConfiguration{}, middleware.After)
+}
+
 func addOpDescribeRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRefreshSchedule{}, middleware.After)
 }
@@ -4224,6 +4268,10 @@ func addOpUpdateKeyRegistrationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdatePublicSharingSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePublicSharingSettings{}, middleware.After)
+}
+
+func addOpUpdateQPersonalizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQPersonalizationConfiguration{}, middleware.After)
 }
 
 func addOpUpdateRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -20315,6 +20363,21 @@ func validateOpDescribeNamespaceInput(v *DescribeNamespaceInput) error {
 	}
 }
 
+func validateOpDescribeQPersonalizationConfigurationInput(v *DescribeQPersonalizationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQPersonalizationConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeRefreshScheduleInput(v *DescribeRefreshScheduleInput) error {
 	if v == nil {
 		return nil
@@ -22111,6 +22174,24 @@ func validateOpUpdatePublicSharingSettingsInput(v *UpdatePublicSharingSettingsIn
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublicSharingSettingsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQPersonalizationConfigurationInput(v *UpdateQPersonalizationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQPersonalizationConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if len(v.PersonalizationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PersonalizationMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

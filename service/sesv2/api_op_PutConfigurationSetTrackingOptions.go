@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +39,13 @@ type PutConfigurationSetTrackingOptionsInput struct {
 
 	// The domain to use to track open and click events.
 	CustomRedirectDomain *string
+
+	// The https policy to use for tracking open and click events. If the value is
+	// OPTIONAL or HttpsPolicy is not specified, the open trackers use HTTP and click
+	// tracker use the original protocol of the link. If the value is REQUIRE, both
+	// open and click tracker uses HTTPS and if the value is REQUIRE_OPEN_ONLY open
+	// tracker uses HTTPS and link tracker is same as original protocol of the link.
+	HttpsPolicy types.HttpsPolicy
 
 	noSmithyDocumentSerde
 }

@@ -57,6 +57,10 @@ type PutIntegrationInput struct {
 	// ShopifyUpdateDraftOrders , ShopifyCreateOrders , and ShopifyUpdatedOrders .
 	ObjectTypeNames map[string]string
 
+	// The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role
+	// to make Customer Profiles requests on your behalf.
+	RoleArn *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -102,6 +106,10 @@ type PutIntegrationOutput struct {
 	// ShopifyCreateCustomers , ShopifyUpdateCustomers , ShopifyCreateDraftOrders ,
 	// ShopifyUpdateDraftOrders , ShopifyCreateOrders , and ShopifyUpdatedOrders .
 	ObjectTypeNames map[string]string
+
+	// The Amazon Resource Name (ARN) of the IAM role. The Integration uses this role
+	// to make Customer Profiles requests on your behalf.
+	RoleArn *string
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

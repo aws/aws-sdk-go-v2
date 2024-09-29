@@ -166,8 +166,15 @@ type ComputeNodeGroup struct {
 
 	// The Amazon Resource Name (ARN) of the IAM instance profile used to pass an IAM
 	// role when launching EC2 instances. The role contained in your instance profile
-	// must have pcs:RegisterComputeNodeGroupInstance permissions attached to
-	// provision instances correctly.
+	// must have the pcs:RegisterComputeNodeGroupInstance permission. The resource
+	// identifier of the ARN must start with AWSPCS or it must have /aws-pcs/ in its
+	// path.
+	//
+	// Examples
+	//
+	//   - arn:aws:iam::111122223333:instance-profile/AWSPCS-example-role-1
+	//
+	//   - arn:aws:iam::111122223333:instance-profile/aws-pcs/example-role-2
 	//
 	// This member is required.
 	IamInstanceProfileArn *string
@@ -629,11 +636,32 @@ type SlurmAuthKey struct {
 type SlurmCustomSetting struct {
 
 	// Amazon Web Services PCS supports configuration of the following Slurm
-	// parameters: [Prolog]Prolog , [Epilog]Epilog , and [SelectTypeParameters]SelectTypeParameters .
+	// parameters:
+	//
+	//   - For clusters
+	//
+	// [Prolog]
+	//   - Prolog
+	//
+	// [Epilog]
+	//   - Epilog
+	//
+	// [SelectTypeParameters]
+	//   - SelectTypeParameters
+	//
+	//   - For compute node groups
+	//
+	// [Weight]
+	//   - Weight
+	//
+	// [RealMemory]
+	//   - RealMemory
 	//
 	// [SelectTypeParameters]: https://slurm.schedmd.com/slurm.conf.html#OPT_SelectTypeParameters
 	// [Prolog]: https://slurm.schedmd.com/slurm.conf.html#OPT_Prolog_1
 	// [Epilog]: https://slurm.schedmd.com/slurm.conf.html#OPT_Epilog_1
+	// [Weight]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
+	// [RealMemory]: https://slurm.schedmd.com/slurm.conf.html#OPT_Weight
 	//
 	// This member is required.
 	ParameterName *string

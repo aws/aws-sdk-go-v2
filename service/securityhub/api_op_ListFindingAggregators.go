@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// If finding aggregation is enabled, then ListFindingAggregators returns the ARN
-// of the finding aggregator. You can run this operation from any Region.
+// If cross-Region aggregation is enabled, then ListFindingAggregators returns the
+// Amazon Resource Name (ARN) of the finding aggregator. You can run this operation
+// from any Amazon Web Services Region.
 func (c *Client) ListFindingAggregators(ctx context.Context, params *ListFindingAggregatorsInput, optFns ...func(*Options)) (*ListFindingAggregatorsOutput, error) {
 	if params == nil {
 		params = &ListFindingAggregatorsInput{}

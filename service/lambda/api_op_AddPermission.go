@@ -19,13 +19,13 @@ import (
 //
 // To grant permission to another account, specify the account ID as the Principal
 // . To grant permission to an organization defined in Organizations, specify the
-// organization ID as the PrincipalOrgID . For Amazon Web Servicesservices, the
+// organization ID as the PrincipalOrgID . For Amazon Web Services services, the
 // principal is a domain-style identifier that the service defines, such as
-// s3.amazonaws.com or sns.amazonaws.com . For Amazon Web Servicesservices, you can
-// also specify the ARN of the associated resource as the SourceArn . If you grant
-// permission to a service principal without specifying the source, other accounts
-// could potentially configure resources in their account to invoke your Lambda
-// function.
+// s3.amazonaws.com or sns.amazonaws.com . For Amazon Web Services services, you
+// can also specify the ARN of the associated resource as the SourceArn . If you
+// grant permission to a service principal without specifying the source, other
+// accounts could potentially configure resources in their account to invoke your
+// Lambda function.
 //
 // This operation adds a statement to a resource-based permissions policy for the
 // function. For more information about function policies, see [Using resource-based policies for Lambda].
@@ -72,7 +72,7 @@ type AddPermissionInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The Amazon Web Servicesservice, Amazon Web Services account, IAM user, or IAM
+	// The Amazon Web Services service, Amazon Web Services account, IAM user, or IAM
 	// role that invokes the function. If you specify a service, use SourceArn or
 	// SourceAccount to limit who can invoke the function through that service.
 	//
@@ -108,13 +108,13 @@ type AddPermissionInput struct {
 	// this option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
 
-	// For Amazon Web Servicesservice, the ID of the Amazon Web Services account that
+	// For Amazon Web Services service, the ID of the Amazon Web Services account that
 	// owns the resource. Use this together with SourceArn to ensure that the
 	// specified account owns the resource. It is possible for an Amazon S3 bucket to
 	// be deleted by its owner and recreated by another account.
 	SourceAccount *string
 
-	// For Amazon Web Servicesservices, the ARN of the Amazon Web Services resource
+	// For Amazon Web Services services, the ARN of the Amazon Web Services resource
 	// that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.
 	//
 	// Note that Lambda configures the comparison using the StringLike operator.

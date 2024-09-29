@@ -67,6 +67,15 @@ type ChimeWebhookConfiguration struct {
 	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
+	// Either ENABLED or DISABLED . The resource returns DISABLED if the
+	// organization's AWS Chatbot policy has explicitly denied that configuration. For
+	// example, if Amazon Chime is disabled.
+	State *string
+
+	// Provided if State is DISABLED . Provides context as to why the resource is
+	// disabled.
+	StateReason *string
+
 	// A map of tags assigned to a resource. A tag is a string-to-string map of
 	// key-value pairs.
 	Tags []Tag
@@ -93,6 +102,15 @@ type ConfiguredTeam struct {
 	//
 	// This member is required.
 	TenantId *string
+
+	// Either ENABLED or DISABLED . The resource returns DISABLED if the
+	// organization's AWS Chatbot policy has explicitly denied that configuration. For
+	// example, if Amazon Chime is disabled.
+	State *string
+
+	// Provided if State is DISABLED . Provides context as to why the resource is
+	// disabled.
+	StateReason *string
 
 	// The name of the Microsoft Teams Team.
 	TeamName *string
@@ -157,6 +175,15 @@ type SlackChannelConfiguration struct {
 	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
 
+	// Either ENABLED or DISABLED . The resource returns DISABLED if the
+	// organization's AWS Chatbot policy has explicitly denied that configuration. For
+	// example, if Amazon Chime is disabled.
+	State *string
+
+	// Provided if State is DISABLED . Provides context as to why the resource is
+	// disabled.
+	StateReason *string
+
 	// A map of tags assigned to a resource. A tag is a string-to-string map of
 	// key-value pairs.
 	Tags []Tag
@@ -214,6 +241,15 @@ type SlackWorkspace struct {
 	//
 	// This member is required.
 	SlackTeamName *string
+
+	// Either ENABLED or DISABLED . The resource returns DISABLED if the
+	// organization's AWS Chatbot policy has explicitly denied that configuration. For
+	// example, if Amazon Chime is disabled.
+	State *string
+
+	// Provided if State is DISABLED . Provides context as to why the resource is
+	// disabled.
+	StateReason *string
 
 	noSmithyDocumentSerde
 }
@@ -300,6 +336,15 @@ type TeamsChannelConfiguration struct {
 
 	// Logging levels include ERROR , INFO , or NONE .
 	LoggingLevel *string
+
+	// Either ENABLED or DISABLED . The resource returns DISABLED if the
+	// organization's AWS Chatbot policy has explicitly denied that configuration. For
+	// example, if Amazon Chime is disabled.
+	State *string
+
+	// Provided if State is DISABLED . Provides context as to why the resource is
+	// disabled.
+	StateReason *string
 
 	// A map of tags assigned to a resource. A tag is a string-to-string map of
 	// key-value pairs.

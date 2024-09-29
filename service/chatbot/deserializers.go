@@ -4882,6 +4882,24 @@ func awsRestjson1_deserializeDocumentChimeWebhookConfiguration(v **types.ChimeWe
 				return err
 			}
 
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "StateReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StateReason = ptr.String(jtv)
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -4961,6 +4979,24 @@ func awsRestjson1_deserializeDocumentConfiguredTeam(v **types.ConfiguredTeam, va
 
 	for key, value := range shape {
 		switch key {
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "StateReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StateReason = ptr.String(jtv)
+			}
+
 		case "TeamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6211,6 +6247,24 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				return err
 			}
 
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "StateReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StateReason = ptr.String(jtv)
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
@@ -6416,6 +6470,24 @@ func awsRestjson1_deserializeDocumentSlackWorkspace(v **types.SlackWorkspace, va
 					return fmt.Errorf("expected SlackTeamName to be of type string, got %T instead", value)
 				}
 				sv.SlackTeamName = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "StateReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StateReason = ptr.String(jtv)
 			}
 
 		default:
@@ -6732,6 +6804,24 @@ func awsRestjson1_deserializeDocumentTeamsChannelConfiguration(v **types.TeamsCh
 		case "SnsTopicArns":
 			if err := awsRestjson1_deserializeDocumentSnsTopicArnList(&sv.SnsTopicArns, value); err != nil {
 				return err
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceState to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "StateReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StateReason = ptr.String(jtv)
 			}
 
 		case "Tags":

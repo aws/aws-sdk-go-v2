@@ -5624,6 +5624,11 @@ func awsRestjson1_serializeOpDocumentPutConfigurationSetTrackingOptionsInput(v *
 		ok.String(*v.CustomRedirectDomain)
 	}
 
+	if len(v.HttpsPolicy) > 0 {
+		ok := object.Key("HttpsPolicy")
+		ok.String(string(v.HttpsPolicy))
+	}
+
 	return nil
 }
 
@@ -9207,6 +9212,11 @@ func awsRestjson1_serializeDocumentTrackingOptions(v *types.TrackingOptions, val
 	if v.CustomRedirectDomain != nil {
 		ok := object.Key("CustomRedirectDomain")
 		ok.String(*v.CustomRedirectDomain)
+	}
+
+	if len(v.HttpsPolicy) > 0 {
+		ok := object.Key("HttpsPolicy")
+		ok.String(string(v.HttpsPolicy))
 	}
 
 	return nil

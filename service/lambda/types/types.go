@@ -1127,24 +1127,6 @@ type ProvisionedConcurrencyConfigListItem struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines the public-access settings for a function.
-type PublicAccessBlockConfig struct {
-
-	// To block the creation of resource-based policies that would grant public access
-	// to your function, set BlockPublicPolicy to true . To allow the creation of
-	// resource-based policies that would grant public access to your function, set
-	// BlockPublicPolicy to false .
-	BlockPublicPolicy *bool
-
-	// To block public access to your function, even if its resource-based policy
-	// allows it, set RestrictPublicResource to true . To allow public access to a
-	// function with a resource-based policy that permits it, set
-	// RestrictPublicResource to false .
-	RestrictPublicResource *bool
-
-	noSmithyDocumentSerde
-}
-
 // The ARN of the runtime and any errors that occured.
 type RuntimeVersionConfig struct {
 

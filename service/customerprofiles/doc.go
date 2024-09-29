@@ -5,6 +5,10 @@
 //
 // # Amazon Connect Customer Profiles
 //
+// [Customer Profiles actions]
+//
+// [Customer Profiles data types]
+//
 // Amazon Connect Customer Profiles is a unified customer profile for your contact
 // center that has pre-built connectors powered by AppFlow that make it easy to
 // combine customer information from third party applications, such as Salesforce
@@ -14,5 +18,7 @@
 // For more information about the Amazon Connect Customer Profiles feature, see [Use Customer Profiles]
 // in the Amazon Connect Administrator's Guide.
 //
+// [Customer Profiles data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html
+// [Customer Profiles actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html
 // [Use Customer Profiles]: https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html
 package customerprofiles

@@ -14,13 +14,15 @@ import (
 // account. How the policy affects accounts depends on the type of policy. Refer to
 // the Organizations User Guide for information about each policy type:
 //
-// [AISERVICES_OPT_OUT_POLICY]
+// [SERVICE_CONTROL_POLICY]
 //
 // [BACKUP_POLICY]
 //
-// [SERVICE_CONTROL_POLICY]
-//
 // [TAG_POLICY]
+//
+// [CHATBOT_POLICY]
+//
+// [AISERVICES_OPT_OUT_POLICY]
 //
 // This operation can be called only from the organization's management account or
 // by a member account that is a delegated administrator for an Amazon Web Services
@@ -29,6 +31,7 @@ import (
 // [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
 // [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
 // [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+// [CHATBOT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_chatbot.html
 // [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {

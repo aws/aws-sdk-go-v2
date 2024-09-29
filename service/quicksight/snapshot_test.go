@@ -1010,6 +1010,18 @@ func TestCheckSnapshot_DescribeNamespace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeQPersonalizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQPersonalizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeQPersonalizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRefreshSchedule(context.Background(), nil, func(o *Options) {
@@ -2023,6 +2035,18 @@ func TestCheckSnapshot_UpdatePublicSharingSettings(t *testing.T) {
 	_, err := svc.UpdatePublicSharingSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdatePublicSharingSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateQPersonalizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQPersonalizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateQPersonalizationConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3145,6 +3169,18 @@ func TestUpdateSnapshot_DescribeNamespace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeQPersonalizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeQPersonalizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeQPersonalizationConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeRefreshSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRefreshSchedule(context.Background(), nil, func(o *Options) {
@@ -4158,6 +4194,18 @@ func TestUpdateSnapshot_UpdatePublicSharingSettings(t *testing.T) {
 	_, err := svc.UpdatePublicSharingSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePublicSharingSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateQPersonalizationConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateQPersonalizationConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateQPersonalizationConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -29,7 +29,7 @@ func (c *Client) GetInsights(ctx context.Context, params *GetInsightsInput, optF
 
 type GetInsightsInput struct {
 
-	// The ARNs of the insights to describe. If you do not provide any insight ARNs,
+	// The ARNs of the insights to describe. If you don't provide any insight ARNs,
 	// then GetInsights returns all of your custom insights. It does not return any
 	// managed insights.
 	InsightArns []string

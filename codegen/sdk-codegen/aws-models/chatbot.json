@@ -112,6 +112,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>"
                     }
+                },
+                "State": {
+                    "target": "com.amazonaws.chatbot#ResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Either <code>ENABLED</code> or <code>DISABLED</code>. The resource returns <code>DISABLED</code> if the organization's AWS Chatbot policy has explicitly denied that configuration.\n\t  For example, if Amazon Chime is disabled.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -176,6 +188,18 @@
                     "target": "com.amazonaws.chatbot#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Microsoft Teams Team.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.chatbot#ResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Either <code>ENABLED</code> or <code>DISABLED</code>. The resource returns <code>DISABLED</code> if the organization's AWS Chatbot policy has explicitly denied that configuration.\n\t  For example, if Amazon Chime is disabled.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>"
                     }
                 }
             },
@@ -2030,6 +2054,12 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.chatbot#ResourceState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(ENABLED|DISABLED)$"
+            }
+        },
         "com.amazonaws.chatbot#ServiceUnavailableException": {
             "type": "structure",
             "members": {
@@ -2123,6 +2153,18 @@
                     "target": "com.amazonaws.chatbot#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.chatbot#ResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Either <code>ENABLED</code> or <code>DISABLED</code>. The resource returns <code>DISABLED</code> if the organization's AWS Chatbot policy has explicitly denied that configuration.\n\t  For example, if Amazon Chime is disabled.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>"
                     }
                 }
             },
@@ -2249,6 +2291,18 @@
                         "smithy.api#documentation": "<p>The name of the Slack workspace.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "State": {
+                    "target": "com.amazonaws.chatbot#ResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Either <code>ENABLED</code> or <code>DISABLED</code>. The resource returns <code>DISABLED</code> if the organization's AWS Chatbot policy has explicitly denied that configuration.\n\t  For example, if Amazon Chime is disabled.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2266,6 +2320,9 @@
             "member": {
                 "target": "com.amazonaws.chatbot#Arn"
             }
+        },
+        "com.amazonaws.chatbot#String": {
+            "type": "string"
         },
         "com.amazonaws.chatbot#Tag": {
             "type": "structure",
@@ -2499,6 +2556,18 @@
                     "target": "com.amazonaws.chatbot#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of tags assigned to a resource. A tag is a string-to-string map of key-value pairs.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.chatbot#ResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Either <code>ENABLED</code> or <code>DISABLED</code>. The resource returns <code>DISABLED</code> if the organization's AWS Chatbot policy has explicitly denied that configuration.\n\t  For example, if Amazon Chime is disabled.</p>"
+                    }
+                },
+                "StateReason": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provided if State is <code>DISABLED</code>. Provides context as to why the resource is disabled.</p>"
                     }
                 }
             },

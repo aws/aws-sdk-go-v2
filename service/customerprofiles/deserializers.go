@@ -4292,6 +4292,15 @@ func awsRestjson1_deserializeOpDocumentGetIntegrationOutput(v **GetIntegrationOu
 				return err
 			}
 
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -8316,6 +8325,15 @@ func awsRestjson1_deserializeOpDocumentPutIntegrationOutput(v **PutIntegrationOu
 		case "ObjectTypeNames":
 			if err := awsRestjson1_deserializeDocumentObjectTypeNames(&sv.ObjectTypeNames, value); err != nil {
 				return err
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
 			}
 
 		case "Tags":
@@ -12419,6 +12437,15 @@ func awsRestjson1_deserializeDocumentListIntegrationItem(v **types.ListIntegrati
 		case "ObjectTypeNames":
 			if err := awsRestjson1_deserializeDocumentObjectTypeNames(&sv.ObjectTypeNames, value); err != nil {
 				return err
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
 			}
 
 		case "Tags":

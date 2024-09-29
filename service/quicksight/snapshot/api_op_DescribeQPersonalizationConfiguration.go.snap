@@ -1,4 +1,4 @@
-UpdateIdentityProviderConfiguration
+DescribeQPersonalizationConfiguration
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata

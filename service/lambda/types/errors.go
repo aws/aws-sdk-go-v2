@@ -742,37 +742,6 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// Lambda prevented your policy from being created because it would grant public
-// access to your function. If you intended to create a public policy, use the PutPublicAccessBlockConfigAPI
-// action to configure your function's public-access settings to allow public
-// policies.
-type PublicPolicyException struct {
-	Message *string
-
-	ErrorCodeOverride *string
-
-	Type *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *PublicPolicyException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *PublicPolicyException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *PublicPolicyException) ErrorCode() string {
-	if e == nil || e.ErrorCodeOverride == nil {
-		return "PublicPolicyException"
-	}
-	return *e.ErrorCodeOverride
-}
-func (e *PublicPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
 // Lambda has detected your function being invoked in a recursive loop with other
 // Amazon Web Services resources and stopped your function's invocation.
 type RecursiveInvocationException struct {

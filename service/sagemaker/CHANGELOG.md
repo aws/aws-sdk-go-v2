@@ -1,3 +1,11 @@
+# v1.161.1 (2024-09-27)
+
+* No change notes available for this release.
+
+# v1.161.0 (2024-09-26)
+
+* **Feature**: Adding `TagPropagation` attribute to Sagemaker API
+
 # v1.160.1 (2024-09-25)
 
 * No change notes available for this release.

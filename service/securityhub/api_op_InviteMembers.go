@@ -11,18 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// We recommend using Organizations instead of Security Hub invitations to manage
+// your member accounts. For information, see [Managing Security Hub administrator and member accounts with Organizations]in the Security Hub User Guide.
+//
 // Invites other Amazon Web Services accounts to become member accounts for the
 // Security Hub administrator account that the invitation is sent from.
 //
-// This operation is only used to invite accounts that do not belong to an
-// organization. Organization accounts do not receive invitations.
+// This operation is only used to invite accounts that don't belong to an Amazon
+// Web Services organization. Organization accounts don't receive invitations.
 //
 // Before you can use this action to invite a member, you must first use the
 // CreateMembers action to create the member account in Security Hub.
 //
 // When the account owner enables Security Hub and accepts the invitation to
 // become a member account, the administrator account can view the findings
-// generated from the member account.
+// generated in the member account.
+//
+// [Managing Security Hub administrator and member accounts with Organizations]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-accounts-orgs.html
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}

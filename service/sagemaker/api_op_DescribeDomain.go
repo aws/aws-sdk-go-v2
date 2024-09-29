@@ -115,6 +115,9 @@ type DescribeDomainOutput struct {
 	// The VPC subnets that the domain uses for communication.
 	SubnetIds []string
 
+	// Indicates whether custom tag propagation is supported for the domain.
+	TagPropagation types.TagPropagation
+
 	// The domain's URL.
 	Url *string
 

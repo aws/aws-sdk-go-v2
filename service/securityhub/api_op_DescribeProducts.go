@@ -16,7 +16,7 @@ import (
 // You can optionally provide an integration ARN. If you provide an integration
 // ARN, then the results only include that integration.
 //
-// If you do not provide an integration ARN, then the results include all of the
+// If you don't provide an integration ARN, then the results include all of the
 // available product integrations.
 func (c *Client) DescribeProducts(ctx context.Context, params *DescribeProductsInput, optFns ...func(*Options)) (*DescribeProductsOutput, error) {
 	if params == nil {
