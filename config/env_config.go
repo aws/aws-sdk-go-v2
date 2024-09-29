@@ -449,11 +449,11 @@ func (c EnvConfig) getAccountIDEndpointMode(context.Context) (aws.AccountIDEndpo
 }
 
 func (c EnvConfig) getRequestChecksumCalculation(context.Context) (aws.RequestChecksumCalculation, bool, error) {
-	return c.RequestChecksumCalculation, len(c.RequestChecksumCalculation) > 0, nil
+	return c.RequestChecksumCalculation, c.RequestChecksumCalculation > 0, nil
 }
 
 func (c EnvConfig) getResponseChecksumValidation(context.Context) (aws.ResponseChecksumValidation, bool, error) {
-	return c.ResponseChecksumValidation, len(c.ResponseChecksumValidation) > 0, nil
+	return c.ResponseChecksumValidation, c.ResponseChecksumValidation > 0, nil
 }
 
 // GetRetryMaxAttempts returns the value of AWS_MAX_ATTEMPTS if was specified,

@@ -5,7 +5,6 @@ package s3
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalChecksum "github.com/aws/aws-sdk-go-v2/service/internal/checksum"
@@ -365,7 +364,7 @@ func getPutBucketEncryptionRequestAlgorithmMember(input interface{}) (string, bo
 func addPutBucketEncryptionInputChecksumMiddlewares(stack *middleware.Stack, options Options) error {
 	return internalChecksum.AddInputMiddleware(stack, internalChecksum.InputMiddlewareOptions{
 		GetAlgorithm:                     getPutBucketEncryptionRequestAlgorithmMember,
-		RequireChecksum:                  aws.RequireChecksumTrue,
+		RequireChecksum:                  true,
 		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           false,
 		EnableComputeSHA256PayloadHash:   true,

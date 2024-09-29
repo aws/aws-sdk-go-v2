@@ -15,10 +15,8 @@ type InputMiddlewareOptions struct {
 	// and true, or false if no algorithm is specified.
 	GetAlgorithm func(interface{}) (string, bool)
 
-	// Whether operation model forces middleware to compute the input payload's checksum. The
-	// request will fail if the algorithm is not specified or unable to compute
-	// the checksum.
-	RequireChecksum aws.RequireChecksum
+	// Whether operation model forces middleware to compute the input payload's checksum.
+	RequireChecksum bool
 
 	// User config to opt-in/out request checksum calculation
 	RequestChecksumCalculation aws.RequestChecksumCalculation
@@ -76,7 +74,9 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 
 	// Initial checksum configuration look up middleware
 	err = stack.Initialize.Add(&setupInputContext{
-		GetAlgorithm: options.GetAlgorithm,
+		GetAlgorithm:               options.GetAlgorithm,
+		RequireChecksum:            options.RequireChecksum,
+		RequestChecksumCalculation: options.RequestChecksumCalculation,
 	}, middleware.Before)
 	if err != nil {
 		return err
@@ -85,8 +85,6 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 	stack.Build.Remove("ContentChecksum")
 
 	inputChecksum := &computeInputPayloadChecksum{
-		RequireChecksum:                  options.RequireChecksum,
-		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           options.EnableTrailingChecksum,
 		EnableComputePayloadHash:         options.EnableComputeSHA256PayloadHash,
 		EnableDecodedContentLengthHeader: options.EnableDecodedContentLengthHeader,
@@ -99,8 +97,6 @@ func AddInputMiddleware(stack *middleware.Stack, options InputMiddlewareOptions)
 	if options.EnableTrailingChecksum {
 		trailerMiddleware := &addInputChecksumTrailer{
 			EnableTrailingChecksum:           inputChecksum.EnableTrailingChecksum,
-			RequireChecksum:                  inputChecksum.RequireChecksum,
-			RequestChecksumCalculation:       inputChecksum.RequestChecksumCalculation,
 			EnableComputePayloadHash:         inputChecksum.EnableComputePayloadHash,
 			EnableDecodedContentLengthHeader: inputChecksum.EnableDecodedContentLengthHeader,
 		}
@@ -128,12 +124,11 @@ type OutputMiddlewareOptions struct {
 	// GetValidationMode is a function to get the checksum validation
 	// mode of the output payload from the input parameters.
 	//
-	// Given the input parameter value, the function must return the validation
-	// mode and true, or false if no mode is specified.
+	// Given the input parameter value, the function must return the validation mode
 	GetValidationMode func(interface{}) (string, bool)
 
 	// Whether operation model forces middleware to validate checksum
-	RequireChecksum aws.RequireChecksum
+	RequireChecksum bool
 
 	// User config to opt-in/out response checksum validation
 	ResponseChecksumValidation aws.ResponseChecksumValidation
@@ -146,7 +141,7 @@ type OutputMiddlewareOptions struct {
 	ValidationAlgorithms []string
 
 	// If set the middleware will ignore output multipart checksums. Otherwise
-	// an checksum format error will be returned by the middleware.
+	// a checksum format error will be returned by the middleware.
 	IgnoreMultipartValidation bool
 
 	// When set the middleware will log when output does not have checksum or
@@ -162,7 +157,8 @@ type OutputMiddlewareOptions struct {
 // checksum.
 func AddOutputMiddleware(stack *middleware.Stack, options OutputMiddlewareOptions) error {
 	err := stack.Initialize.Add(&setupOutputContext{
-		GetValidationMode: options.GetValidationMode,
+		GetValidationMode:          options.GetValidationMode,
+		ResponseChecksumValidation: options.ResponseChecksumValidation,
 	}, middleware.Before)
 	if err != nil {
 		return err
@@ -173,8 +169,6 @@ func AddOutputMiddleware(stack *middleware.Stack, options OutputMiddlewareOption
 
 	m := &validateOutputPayloadChecksum{
 		Algorithms:                    algorithms,
-		RequireChecksum:               options.RequireChecksum,
-		ResponseChecksumValidation:    options.ResponseChecksumValidation,
 		IgnoreMultipartValidation:     options.IgnoreMultipartValidation,
 		LogMultipartValidationSkipped: options.LogMultipartValidationSkipped,
 		LogValidationSkipped:          options.LogValidationSkipped,

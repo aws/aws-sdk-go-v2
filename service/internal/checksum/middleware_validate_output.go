@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -38,13 +37,6 @@ type validateOutputPayloadChecksum struct {
 	// headers.
 	Algorithms []Algorithm
 
-	// States that a checksum is required to be validated for the operation.
-	// If no checksum algorithm matches response header, no checksum will be validated
-	RequireChecksum aws.RequireChecksum
-
-	// States user config to opt-in/out checksum validation
-	ResponseChecksumValidation aws.ResponseChecksumValidation
-
 	// IgnoreMultipartValidation indicates multipart checksums ending with "-#"
 	// will be ignored.
 	IgnoreMultipartValidation bool
@@ -74,14 +66,7 @@ func (m *validateOutputPayloadChecksum) HandleDeserialize(
 		return out, metadata, err
 	}
 
-	mode := getContextOutputValidationMode(ctx)
-	if m.RequireChecksum == aws.RequireChecksumPending &&
-		m.ResponseChecksumValidation == aws.ResponseChecksumValidationWhenRequired &&
-		mode != "ENABLED" {
-		m.RequireChecksum = aws.RequireChecksumFalse
-	}
-
-	if m.RequireChecksum == aws.RequireChecksumFalse {
+	if mode := getContextOutputValidationMode(ctx); mode != "ENABLED" {
 		return out, metadata, err
 	}
 
@@ -103,8 +88,6 @@ func (m *validateOutputPayloadChecksum) HandleDeserialize(
 		expectedChecksum = value
 		algorithmToUse = algorithm
 	}
-
-	// TODO this must validate the validation mode is set to enabled.
 
 	logger := middleware.GetLogger(ctx)
 

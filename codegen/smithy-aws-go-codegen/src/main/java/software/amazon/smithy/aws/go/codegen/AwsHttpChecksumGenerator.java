@@ -263,7 +263,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("""
                                     return $T(stack, $T{
                                         GetAlgorithm: $L,
-                                        RequireChecksum: $T,
+                                        RequireChecksum: $L,
                                         RequestChecksumCalculation: options.RequestChecksumCalculation,
                                         EnableTrailingChecksum: $L,
                                         EnableComputeSHA256PayloadHash: true,
@@ -275,21 +275,12 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             hasRequestAlgorithmMember ?
                                     getRequestAlgorithmAccessorFuncName(operationName) : "nil",
-                            getInputRequireChecksum(isRequestChecksumRequired, hasRequestAlgorithmMember),
+                            isRequestChecksumRequired,
                             supportsRequestTrailingChecksum,
                             supportsDecodedContentLengthHeader);
                 }
         );
         writer.insertTrailingNewline();
-    }
-
-    private Symbol getInputRequireChecksum(boolean isRequestChecksumRequired, boolean hasRequestAlgorithmMember) {
-        if (isRequestChecksumRequired) {
-            return SdkGoTypes.Aws.RequireChecksumTrue;
-        } else if (hasRequestAlgorithmMember) {
-            return SdkGoTypes.Aws.RequireChecksumPending;
-        }
-        return SdkGoTypes.Aws.RequireChecksumFalse;
     }
 
     private void writeOutputMiddlewareHelper(
@@ -314,7 +305,6 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                     writer.write("""
                                     return $T(stack, $T{
                                         GetValidationMode: $L,
-                                        RequireChecksum: $T,
                                         ResponseChecksumValidation: options.ResponseChecksumValidation,
                                         ValidationAlgorithms: $L,
                                         IgnoreMultipartValidation: $L,
@@ -326,19 +316,12 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
                             SymbolUtils.createValueSymbolBuilder("OutputMiddlewareOptions",
                                     AwsGoDependency.SERVICE_INTERNAL_CHECKSUM).build(),
                             getRequestValidationModeAccessorFuncName(operationName),
-                            getOutputRequireChecksum(responseAlgorithms),
                             convertToGoStringList(responseAlgorithms),
                             ignoreMultipartChecksumValidationMap.getOrDefault(
                                     service.toShapeId(), new HashSet<>()).contains(operation.toShapeId())
                     );
                 });
         writer.insertTrailingNewline();
-    }
-    private Symbol getOutputRequireChecksum(List<String> responseAlgorithms) {
-        if (responseAlgorithms.isEmpty()) {
-            return SdkGoTypes.Aws.RequireChecksumFalse;
-        }
-        return SdkGoTypes.Aws.RequireChecksumPending;
     }
 
     private String convertToGoStringList(List<String> list) {

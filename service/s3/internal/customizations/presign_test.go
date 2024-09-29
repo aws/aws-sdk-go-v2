@@ -74,7 +74,20 @@ func TestPutObject_PresignURL(t *testing.T) {
 				Key:    aws.String("mockkey"),
 				Body:   bytes.NewBuffer([]byte(`hello-world`)),
 			},
-			expectError: "unseekable stream is not supported without TLS and trailing checksum",
+			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
+			expectRequestURIQuery: []string{
+				"X-Amz-Expires=900",
+				"X-Amz-Credential",
+				"X-Amz-Date",
+				"x-id=PutObject",
+				"X-Amz-Signature",
+			},
+			expectMethod: "PUT",
+			expectSignedHeader: http.Header{
+				"Content-Length": []string{"11"},
+				"Content-Type":   []string{"application/octet-stream"},
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+			},
 		},
 		"empty body": {
 			input: s3.PutObjectInput{
@@ -341,8 +354,22 @@ func TestUploadPart_PresignURL(t *testing.T) {
 				UploadId:   aws.String("123456"),
 				Body:       bytes.NewBuffer([]byte(`hello-world`)),
 			},
-			expectError: "unseekable stream is not supported without TLS and trailing checksum",
-		},
+			expectPresignedURLHost: "https://mock-bucket.s3.us-west-2.amazonaws.com/mockkey?",
+			expectRequestURIQuery: []string{
+				"X-Amz-Expires=900",
+				"X-Amz-Credential",
+				"X-Amz-Date",
+				"partNumber=1",
+				"uploadId=123456",
+				"x-id=UploadPart",
+				"X-Amz-Signature",
+			},
+			expectMethod: "PUT",
+			expectSignedHeader: http.Header{
+				"Content-Length": []string{"11"},
+				"Content-Type":   []string{"application/octet-stream"},
+				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
+			}},
 		"empty body": {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),

@@ -7,7 +7,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -32,6 +31,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 		expectPayload            []byte
 	}{
 		"success": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -47,57 +49,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectAlgorithmsUsed:     []string{"CRC32"},
 			expectPayload:            []byte("hello world"),
 		},
-		"user cfg allow checksum": {
-			validateOptions: func(m *validateOutputPayloadChecksum) {
-				m.RequireChecksum = aws.RequireChecksumPending
-				m.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenSupported
-			},
-			response: &smithyhttp.Response{
-				Response: &http.Response{
-					StatusCode: 200,
-					Header: func() http.Header {
-						h := http.Header{}
-						h.Set(AlgorithmHTTPHeader(AlgorithmSHA256), "uU0nuZNNPgilLlLX2n2r+sSE7+N6U4DukIj3rOLvzek=")
-						return h
-					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
-				},
-			},
-			expectHaveAlgorithmsUsed: true,
-			expectAlgorithmsUsed:     []string{"SHA256"},
-			expectPayload:            []byte("hello world"),
-		},
-		"user cfg require checksum and validation mode set": {
-			validateOptions: func(m *validateOutputPayloadChecksum) {
-				m.RequireChecksum = aws.RequireChecksumPending
-				m.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenRequired
-			},
-			modifyContext: func(ctx context.Context) context.Context {
-				return setContextOutputValidationMode(ctx, "ENABLED")
-			},
-			response: &smithyhttp.Response{
-				Response: &http.Response{
-					StatusCode: 200,
-					Header: func() http.Header {
-						h := http.Header{}
-						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32C), "crUfeA==")
-						return h
-					}(),
-					Body: ioutil.NopCloser(strings.NewReader("Hello world")),
-				},
-			},
-			expectHaveAlgorithmsUsed: true,
-			expectAlgorithmsUsed:     []string{"CRC32C"},
-			expectPayload:            []byte("Hello world"),
-		},
 		"no checksum required": {
-			validateOptions: func(m *validateOutputPayloadChecksum) {
-				m.RequireChecksum = aws.RequireChecksumFalse
-				m.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenSupported
-			},
-			modifyContext: func(ctx context.Context) context.Context {
-				return setContextOutputValidationMode(ctx, "ENABLED")
-			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -112,6 +64,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectPayload: []byte("Hello world"),
 		},
 		"checksum mismatch failure": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -126,6 +81,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectReadErr: "checksum did not match",
 		},
 		"read error": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -140,6 +98,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectReadErr: "some read error",
 		},
 		"unsupported algorithm": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -154,30 +115,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectLogged:  "no supported checksum",
 			expectPayload: []byte("hello world"),
 		},
-		"user cfg require checksum but no output validation mode": {
-			validateOptions: func(m *validateOutputPayloadChecksum) {
-				m.RequireChecksum = aws.RequireChecksumPending
-				m.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenRequired
-			},
-			response: &smithyhttp.Response{
-				Response: &http.Response{
-					StatusCode: 200,
-					Header: func() http.Header {
-						h := http.Header{}
-						return h
-					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
-				},
-			},
-			expectPayload: []byte("hello world"),
-		},
 		"unknown output validation model": {
 			modifyContext: func(ctx context.Context) context.Context {
 				return setContextOutputValidationMode(ctx, "something else")
-			},
-			validateOptions: func(m *validateOutputPayloadChecksum) {
-				m.RequireChecksum = aws.RequireChecksumPending
-				m.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenRequired
 			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
@@ -192,6 +132,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectPayload: []byte("hello world"),
 		},
 		"success ignore multipart checksum": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -211,6 +154,9 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			expectPayload:            []byte("hello world"),
 		},
 		"success skip ignore multipart checksum": {
+			modifyContext: func(ctx context.Context) context.Context {
+				return setContextOutputValidationMode(ctx, "ENABLED")
+			},
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 200,
@@ -246,7 +192,6 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 				Algorithms: []Algorithm{
 					AlgorithmSHA1, AlgorithmCRC32, AlgorithmCRC32C, AlgorithmSHA256,
 				},
-				RequireChecksum:               aws.RequireChecksumTrue,
 				LogValidationSkipped:          true,
 				LogMultipartValidationSkipped: true,
 			}

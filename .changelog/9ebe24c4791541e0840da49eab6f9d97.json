@@ -1,7 +1,7 @@
 {
     "id": "9ebe24c4-7915-41e0-840d-a49eab6f9d97",
     "type": "feature",
-    "description": "add client cfg to opt-in/out checksum behavior and change its default algorithm",
+    "description": "This feature adds new client cfg fields so user can opt-in/out request/response checksum calculation/validation for operation modeled with checksum trait. The default MD5 checksum algorithm is replaced with CRC32.",
     "modules": [
         ".",
         "config",

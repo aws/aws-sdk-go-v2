@@ -9,7 +9,6 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,7 +63,7 @@ func TestAddInputMiddleware(t *testing.T) {
 					return string(AlgorithmCRC32), true
 				},
 				EnableTrailingChecksum: true,
-				RequireChecksum:        aws.RequireChecksumTrue,
+				RequireChecksum:        true,
 			},
 			expectMiddleware: []string{
 				"test",
@@ -88,7 +87,6 @@ func TestAddInputMiddleware(t *testing.T) {
 				},
 			},
 			expectFinalize: &computeInputPayloadChecksum{
-				RequireChecksum:        aws.RequireChecksumTrue,
 				EnableTrailingChecksum: true,
 			},
 		},
@@ -168,9 +166,6 @@ func TestAddInputMiddleware(t *testing.T) {
 			var computeInput *computeInputPayloadChecksum
 			if c.expectFinalize != nil && ok {
 				computeInput = finalizeMW.(*computeInputPayloadChecksum)
-				if e, a := c.expectFinalize.RequireChecksum, computeInput.RequireChecksum; e != a {
-					t.Errorf("expect %v require checksum, got %v", e, a)
-				}
 				if e, a := c.expectFinalize.EnableTrailingChecksum, computeInput.EnableTrailingChecksum; e != a {
 					t.Errorf("expect %v enable trailing checksum, got %v", e, a)
 				}

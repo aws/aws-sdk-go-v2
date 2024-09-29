@@ -1278,11 +1278,11 @@ func (c SharedConfig) getAccountIDEndpointMode(ctx context.Context) (aws.Account
 }
 
 func (c SharedConfig) getRequestChecksumCalculation(ctx context.Context) (aws.RequestChecksumCalculation, bool, error) {
-	return c.RequestChecksumCalculation, len(c.RequestChecksumCalculation) > 0, nil
+	return c.RequestChecksumCalculation, c.RequestChecksumCalculation > 0, nil
 }
 
 func (c SharedConfig) getResponseChecksumValidation(ctx context.Context) (aws.ResponseChecksumValidation, bool, error) {
-	return c.ResponseChecksumValidation, len(c.ResponseChecksumValidation) > 0, nil
+	return c.ResponseChecksumValidation, c.ResponseChecksumValidation > 0, nil
 }
 
 func updateDefaultsMode(mode *aws.DefaultsMode, section ini.Section, key string) error {

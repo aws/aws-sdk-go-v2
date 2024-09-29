@@ -42,11 +42,6 @@ public final class SdkGoTypes {
         public static final Symbol RequestChecksumCalculation = AwsGoDependency.AWS_CORE.valueSymbol("RequestChecksumCalculation");
         public static final Symbol ResponseChecksumValidation = AwsGoDependency.AWS_CORE.valueSymbol("ResponseChecksumValidation");
 
-        public static final Symbol RequireChecksumTrue = AwsGoDependency.AWS_CORE.valueSymbol("RequireChecksumTrue");
-        public static final Symbol RequireChecksumFalse = AwsGoDependency.AWS_CORE.valueSymbol("RequireChecksumFalse");
-        public static final Symbol RequireChecksumPending = AwsGoDependency.AWS_CORE.valueSymbol("RequireChecksumPending");
-
-
         public static final class Middleware {
             public static final Symbol GetRequiresLegacyEndpoints = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetRequiresLegacyEndpoints");
             public static final Symbol GetSigningName = AwsGoDependency.AWS_MIDDLEWARE.valueSymbol("GetSigningName");

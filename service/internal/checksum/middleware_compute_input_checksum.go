@@ -8,7 +8,6 @@ import (
 	"io"
 	"strconv"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	presignedurlcust "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url"
@@ -49,14 +48,6 @@ type computeInputPayloadChecksum struct {
 	// The checksum will not be computed, nor added as trailing checksum, if
 	// the Algorithm's header is already set on the request.
 	EnableTrailingChecksum bool
-
-	// States that a checksum is required to be calculated for the operation.
-	// If input does not specify a checksum, fallback to built in CRC32 checksum is used.
-	// Replaces smithy-go's ContentChecksum middleware.
-	RequireChecksum aws.RequireChecksum
-
-	// States user config to opt-in/out checksum calculation
-	RequestChecksumCalculation aws.RequestChecksumCalculation
 
 	// Enables support for computing the SHA256 checksum of input payloads
 	// along with the algorithm specified checksum. Prevents downstream
@@ -112,16 +103,12 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	var algorithm Algorithm
 	var checksum string
-	var set bool
-	algorithm, set, err = getInputAlgorithm(ctx)
+	algorithm, ok, err := getInputAlgorithm(ctx)
 	if err != nil {
 		return out, metadata, err
 	}
-
-	checkRequireChecksum(&m.RequireChecksum, m.RequestChecksumCalculation, set)
-	if m.RequireChecksum == aws.RequireChecksumFalse {
+	if !ok {
 		return next.HandleFinalize(ctx, in)
 	}
 
@@ -153,12 +140,6 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 			return next.HandleFinalize(ctx, in)
 		}
 	}
-
-	// if user doesn't set algorithm, fallback to the default CRC32 checksum.
-	if !set {
-		algorithm = AlgorithmCRC32
-	}
-	checksumHeader := AlgorithmHTTPHeader(algorithm)
 
 	computePayloadHash := m.EnableComputePayloadHash
 	if v := v4.GetPayloadHash(ctx); v != "" {
@@ -222,6 +203,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 		}
 	}
 
+	checksumHeader := AlgorithmHTTPHeader(algorithm)
 	req.Header.Set(checksumHeader, checksum)
 
 	if computePayloadHash {
@@ -253,8 +235,6 @@ func (e computeInputTrailingChecksumError) Unwrap() error { return e.Err }
 //   - Trailing checksums are supported.
 type addInputChecksumTrailer struct {
 	EnableTrailingChecksum           bool
-	RequireChecksum                  aws.RequireChecksum
-	RequestChecksumCalculation       aws.RequestChecksumCalculation
 	EnableComputePayloadHash         bool
 	EnableDecodedContentLengthHeader bool
 }
@@ -270,18 +250,13 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 ) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
-	var algorithm Algorithm
-	var set bool
-	algorithm, set, err = getInputAlgorithm(ctx)
+	algorithm, ok, err := getInputAlgorithm(ctx)
 	if err != nil {
 		return out, metadata, computeInputTrailingChecksumError{
 			Msg: "failed to get algorithm",
 			Err: err,
 		}
-	}
-
-	checkRequireChecksum(&m.RequireChecksum, m.RequestChecksumCalculation, set)
-	if m.RequireChecksum == aws.RequireChecksumFalse {
+	} else if !ok {
 		return next.HandleFinalize(ctx, in)
 	}
 
@@ -308,11 +283,6 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 		if req.Header.Get(header) != "" {
 			return next.HandleFinalize(ctx, in)
 		}
-	}
-
-	// if user doesn't set algorithm, fallback to the default CRC32 checksum.
-	if !set {
-		algorithm = AlgorithmCRC32
 	}
 
 	stream := req.GetStream()
@@ -390,13 +360,13 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 	return out, metadata, err
 }
 
-func checkRequireChecksum(requireChecksum *aws.RequireChecksum, requestChecksumCalculation aws.RequestChecksumCalculation, set bool) {
-	if *requireChecksum == aws.RequireChecksumPending &&
-		requestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
-		!set {
-		*requireChecksum = aws.RequireChecksumFalse
-	}
-}
+//func checkRequireChecksum(requireChecksum *aws.RequireChecksum, requestChecksumCalculation aws.RequestChecksumCalculation, set bool) {
+//	if *requireChecksum == aws.RequireChecksumPending &&
+//		requestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
+//		!set {
+//		*requireChecksum = aws.RequireChecksumFalse
+//	}
+//}
 
 func getInputAlgorithm(ctx context.Context) (Algorithm, bool, error) {
 	ctxAlgorithm := internalcontext.GetChecksumInputAlgorithm(ctx)

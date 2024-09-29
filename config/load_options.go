@@ -292,11 +292,11 @@ func (o LoadOptions) getAccountIDEndpointMode(ctx context.Context) (aws.AccountI
 }
 
 func (o LoadOptions) getRequestChecksumCalculation(ctx context.Context) (aws.RequestChecksumCalculation, bool, error) {
-	return o.RequestChecksumCalculation, len(o.RequestChecksumCalculation) > 0, nil
+	return o.RequestChecksumCalculation, o.RequestChecksumCalculation > 0, nil
 }
 
 func (o LoadOptions) getResponseChecksumValidation(ctx context.Context) (aws.ResponseChecksumValidation, bool, error) {
-	return o.ResponseChecksumValidation, len(o.ResponseChecksumValidation) > 0, nil
+	return o.ResponseChecksumValidation, o.ResponseChecksumValidation > 0, nil
 }
 
 // WithRegion is a helper function to construct functional options
@@ -359,7 +359,7 @@ func WithAccountIDEndpointMode(m aws.AccountIDEndpointMode) LoadOptionsFunc {
 // that sets RequestChecksumCalculation on config's LoadOptions
 func WithRequestChecksumCalculation(c aws.RequestChecksumCalculation) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
-		if c != "" {
+		if c > 0 {
 			o.RequestChecksumCalculation = c
 		}
 		return nil
@@ -370,7 +370,7 @@ func WithRequestChecksumCalculation(c aws.RequestChecksumCalculation) LoadOption
 // that sets ResponseChecksumValidation on config's LoadOptions
 func WithResponseChecksumValidation(v aws.ResponseChecksumValidation) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
-		if v != "" {
+		if v > 0 {
 			o.ResponseChecksumValidation = v
 		}
 		return nil

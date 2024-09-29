@@ -2,6 +2,7 @@ package checksum
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
 
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/smithy-go/middleware"
@@ -17,6 +18,14 @@ type setupInputContext struct {
 	// Given the input parameter value, the function must return the algorithm
 	// and true, or false if no algorithm is specified.
 	GetAlgorithm func(interface{}) (string, bool)
+
+	// States that a checksum is required to be calculated for the operation.
+	// If input does not specify a checksum, fallback to built in CRC32 checksum is used.
+	// Replaces smithy-go's ContentChecksum middleware.
+	RequireChecksum bool
+
+	// States user config to opt-in/out checksum calculation
+	RequestChecksumCalculation aws.RequestChecksumCalculation
 }
 
 // ID for the middleware
@@ -31,13 +40,17 @@ func (m *setupInputContext) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	// Check if validation algorithm is specified.
+	var algorithm string
+	var ok bool
 	if m.GetAlgorithm != nil {
-		// check is input resource has a checksum algorithm
-		algorithm, ok := m.GetAlgorithm(in.Parameters)
-		if ok && len(algorithm) != 0 {
-			ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
+		algorithm, ok = m.GetAlgorithm(in.Parameters)
+	}
+
+	if m.RequireChecksum || m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenSupported || ok {
+		if !ok {
+			algorithm = "CRC32"
 		}
+		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
 	}
 
 	return next.HandleInitialize(ctx, in)
@@ -47,9 +60,11 @@ type setupOutputContext struct {
 	// GetValidationMode is a function to get the checksum validation
 	// mode of the output payload from the input parameters.
 	//
-	// Given the input parameter value, the function must return the validation
-	// mode and true, or false if no mode is specified.
+	// Given the input parameter value, the function must return the validation mode
 	GetValidationMode func(interface{}) (string, bool)
+
+	// ResponseChecksumValidation states user config to opt-in/out checksum validation
+	ResponseChecksumValidation aws.ResponseChecksumValidation
 }
 
 // ID for the middleware
@@ -64,13 +79,15 @@ func (m *setupOutputContext) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
+	var mode string
 	// Check if validation mode is specified.
 	if m.GetValidationMode != nil {
 		// check is input resource has a checksum algorithm
-		mode, ok := m.GetValidationMode(in.Parameters)
-		if ok && len(mode) != 0 {
-			ctx = setContextOutputValidationMode(ctx, mode)
-		}
+		mode, _ = m.GetValidationMode(in.Parameters)
+	}
+
+	if m.ResponseChecksumValidation == aws.ResponseChecksumValidationWhenSupported || mode == "ENABLED" {
+		ctx = setContextOutputValidationMode(ctx, "ENABLED")
 	}
 
 	return next.HandleInitialize(ctx, in)
