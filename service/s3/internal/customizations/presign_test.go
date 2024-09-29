@@ -68,7 +68,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 			},
 		},
 		"unseekable payload": {
-			// unseekable payload failed as checksum could not be calculated for unseekable stream during presign
+			// unseekable payload succeeds as we disable content sha256 computation for streaming input
 			input: s3.PutObjectInput{
 				Bucket: aws.String("mock-bucket"),
 				Key:    aws.String("mockkey"),
@@ -346,7 +346,7 @@ func TestUploadPart_PresignURL(t *testing.T) {
 			},
 		},
 		"unseekable payload": {
-			// unseekable payload failed as checksum could not be calculated for unseekable stream during presign
+			// unseekable payload succeeds as we disable content sha256 computation for streaming input
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
 				Key:        aws.String("mockkey"),
@@ -369,7 +369,8 @@ func TestUploadPart_PresignURL(t *testing.T) {
 				"Content-Length": []string{"11"},
 				"Content-Type":   []string{"application/octet-stream"},
 				"Host":           []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
-			}},
+			},
+		},
 		"empty body": {
 			input: s3.UploadPartInput{
 				Bucket:     aws.String("mock-bucket"),
@@ -440,7 +441,6 @@ func TestUploadPart_PresignURL(t *testing.T) {
 				if e, a := c.expectError, err.Error(); !strings.Contains(a, e) {
 					t.Fatalf("expected error to be %s, got %s", e, a)
 				}
-				return
 			} else {
 				if len(c.expectError) != 0 {
 					t.Fatalf("expected error to be %v, got none", c.expectError)
