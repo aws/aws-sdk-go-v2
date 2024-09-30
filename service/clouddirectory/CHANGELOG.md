@@ -1,3 +1,7 @@
+# v1.23.4 (2024-09-30)
+
+* **Documentation**: Add examples for API operations in model.
+
 # v1.23.3 (2024-09-27)
 
 * No change notes available for this release.

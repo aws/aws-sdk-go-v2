@@ -1,8 +1,0 @@
-{
-    "id": "30c54c5c-2f25-42ac-b909-1bc8707bef09",
-    "type": "feature",
-    "description": "Add support for custom models via provisioned throughput for Bedrock Model Evaluation",
-    "modules": [
-        "service/bedrock"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.7.0 (2024-09-30)
+
+* **Feature**: Release DataLakeDataset, DataIntegrationFlow and ResourceTagging APIs for AWS Supply Chain
+
 # v1.6.3 (2024-09-27)
 
 * No change notes available for this release.

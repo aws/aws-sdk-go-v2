@@ -1,8 +1,0 @@
-{
-    "id": "55f62c65-c8ab-4f20-b09b-a825d8eafbf3",
-    "type": "documentation",
-    "description": "Add examples for API operations in model.",
-    "modules": [
-        "service/clouddirectory"
-    ]
-}

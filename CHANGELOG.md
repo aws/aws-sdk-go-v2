@@ -1,3 +1,21 @@
+# Release (2024-09-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.23.4](service/clouddirectory/CHANGELOG.md#v1234-2024-09-30)
+  * **Documentation**: Add examples for API operations in model.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.111.0](service/connect/CHANGELOG.md#v11110-2024-09-30)
+  * **Feature**: Amazon Connect introduces StartOutboundChatContact API allowing customers to initiate outbound chat contacts
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.31.4](service/pricing/CHANGELOG.md#v1314-2024-09-30)
+  * **Documentation**: Add examples for API operations in model.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.26.0](service/resourcegroups/CHANGELOG.md#v1260-2024-09-30)
+  * **Feature**: This update includes new APIs to support application groups and to allow users to manage resource tag-sync tasks in applications.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.7.0](service/supplychain/CHANGELOG.md#v170-2024-09-30)
+  * **Feature**: Release DataLakeDataset, DataIntegrationFlow and ResourceTagging APIs for AWS Supply Chain
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.5.0](service/timestreaminfluxdb/CHANGELOG.md#v150-2024-09-30)
+  * **Feature**: Timestream for InfluxDB now supports port configuration and additional customer-modifiable InfluxDB v2 parameters. This release adds Port to the CreateDbInstance and UpdateDbInstance API, and additional InfluxDB v2 parameters to the CreateDbParameterGroup API.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.18.4](service/verifiedpermissions/CHANGELOG.md#v1184-2024-09-30)
+  * **Documentation**: Add examples for API operations in model.
+
 # Release (2024-09-27)
 
 ## General Highlights

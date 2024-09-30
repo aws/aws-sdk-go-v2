@@ -1,8 +1,0 @@
-{
-    "id": "20ee572b-47c1-4bad-af0f-3f1fc6b2ad79",
-    "type": "documentation",
-    "description": "Add examples for API operations in model.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}
