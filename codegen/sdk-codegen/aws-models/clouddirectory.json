@@ -81,6 +81,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To add a facet to an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "SchemaFacet": {
+                                "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+                                "FacetName": "node1"
+                            },
+                            "ObjectAttributeList": [],
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/object/facets",
@@ -390,7 +408,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -433,7 +450,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -446,7 +464,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -460,7 +477,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -483,7 +499,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -518,7 +533,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -529,14 +543,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -550,14 +566,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -566,18 +580,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -586,7 +599,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -606,14 +620,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -627,7 +643,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -647,7 +662,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -658,14 +672,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -676,9 +692,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1172,6 +1190,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Copies the input published schema, at the specified version, into the <a>Directory</a> with the same\n      name and version as that of the published schema.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To apply a schema",
+                        "documentation": "",
+                        "input": {
+                            "PublishedSchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/published/org/1",
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI"
+                        },
+                        "output": {
+                            "AppliedSchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI/schema/org/1",
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/schema/apply",
@@ -1276,6 +1308,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Attaches an existing object to another object. An object can be accessed in two\n      ways:</p>\n         <ol>\n            <li>\n               <p>Using the path</p>\n            </li>\n            <li>\n               <p>Using <code>ObjectIdentifier</code>\n               </p>\n            </li>\n         </ol>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To attach an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "ParentReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            },
+                            "ChildReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                            },
+                            "LinkName": "link2"
+                        },
+                        "output": {
+                            "AttachedObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/object/attach",
@@ -1373,6 +1424,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Attaches a policy object to a regular object. An object can have a limited number of attached\n      policies.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To attach a policy to an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "PolicyReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWgcBsTVmcQEWs6jlygfhuew"
+                            },
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWQoovm1s3Ts2v0NKrzdVnPw"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/policy/attach",
@@ -1465,6 +1532,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Attaches the specified object to the specified index.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To attach a index to an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "IndexReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q"
+                            },
+                            "TargetReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            }
+                        },
+                        "output": {
+                            "AttachedObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/index/attach",
@@ -1558,6 +1643,55 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Attaches a typed link to a specified source and target object. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To attach a typed link to an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "SourceObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                            },
+                            "TargetObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            },
+                            "TypedLinkFacet": {
+                                "TypedLinkName": "exampletypedlink8",
+                                "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                            },
+                            "Attributes": [
+                                {
+                                    "AttributeName": "22",
+                                    "Value": {
+                                        "BinaryValue": "c3Ry"
+                                    }
+                                }
+                            ]
+                        },
+                        "output": {
+                            "TypedLinkSpecifier": {
+                                "SourceObjectReference": {
+                                    "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                                },
+                                "IdentityAttributeValues": [
+                                    {
+                                        "AttributeName": "22",
+                                        "Value": {
+                                            "BinaryValue": "c3Ry"
+                                        }
+                                    }
+                                ],
+                                "TargetObjectReference": {
+                                    "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                                },
+                                "TypedLinkFacet": {
+                                    "TypedLinkName": "exampletypedlink8",
+                                    "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/typedlink/attach",
@@ -2889,6 +3023,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Performs all the read operations in a batch. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To run a batch read command",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "Operations": [],
+                            "ConsistencyLevel": "EVENTUAL"
+                        },
+                        "output": {
+                            "Responses": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/batchread",
@@ -3392,6 +3540,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Performs all the write operations in a batch. Either all the operations succeed or\n      none.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To run a batch write command",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "Operations": []
+                        },
+                        "output": {
+                            "Responses": []
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/batchwrite",
@@ -3856,6 +4017,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a <a>Directory</a> by copying the published schema into the\n      directory. A directory cannot be created without a schema.</p>\n         <p>You can also quickly create a directory using a managed schema, called the\n        <code>QuickStartSchema</code>. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html\">Managed Schema</a> in the <i>Amazon Cloud Directory Developer Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a new Cloud Directory",
+                        "documentation": "",
+                        "input": {
+                            "Name": "ExampleCD",
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/published/person/1"
+                        },
+                        "output": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI",
+                            "Name": "ExampleCD",
+                            "ObjectIdentifier": "AQHzK-KsptZGU78KjmnwGH6i-4guCM3uQFOTA9_NjeHDrg",
+                            "AppliedSchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI/schema/person/1"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/directory/create",
@@ -3964,6 +4141,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new <a>Facet</a> in a schema. Facet creation is allowed only\n      in development or applied schemas.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a facet",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+                            "Name": "node1",
+                            "ObjectType": "NODE"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/facet/create",
@@ -4064,6 +4253,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates an index object. See <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html\">Indexing and search</a> for more information.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an index",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8",
+                            "OrderedIndexedAttributeList": [],
+                            "IsUnique": true,
+                            "ParentReference": {},
+                            "LinkName": "Examplelink"
+                        },
+                        "output": {
+                            "ObjectIdentifier": "AQF0Fw173YJDlpLUV1eB50WvYsWFtVoUSmOzZjz_BLULIA"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/index",
@@ -4173,6 +4378,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates an object in a <a>Directory</a>. Additionally attaches the object to\n      a parent, if a parent reference and <code>LinkName</code> is specified. An object is simply a\n      collection of <a>Facet</a> attributes. You can also use this API call to create a\n      policy object, if the facet from which you create the object is a policy facet. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8",
+                            "SchemaFacets": [
+                                {
+                                    "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8/schema/ExampleOrgPersonSchema/1",
+                                    "FacetName": "Organization_Person"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "ObjectIdentifier": "AQF0Fw173YJDlpLUV1eB50WvScvjsYXcS3K2nP1HwDuuYQ"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/object",
@@ -4268,6 +4491,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a new schema in a development state. A schema can exist in three\n      phases:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Development:</i> This is a mutable phase of the schema. All new\n          schemas are in the development phase. Once the schema is finalized, it can be\n          published.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Published:</i> Published schemas are immutable and have a version\n          associated with them.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Applied:</i> Applied schemas are mutable in a way that allows you\n          to add new schema facets. You can also add new, nonrequired attributes to existing schema\n          facets. You can apply only published schemas to directories. </p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a schema",
+                        "documentation": "",
+                        "input": {
+                            "Name": "Customers"
+                        },
+                        "output": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Customers"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/schema/create",
@@ -4346,6 +4581,29 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a <a>TypedLinkFacet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To create a typed link facet",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschema",
+                            "Facet": {
+                                "Name": "FacetExample",
+                                "Attributes": [
+                                    {
+                                        "Name": "1",
+                                        "Type": "BINARY",
+                                        "RequiredBehavior": "REQUIRED_ALWAYS"
+                                    }
+                                ],
+                                "IdentityAttributeOrder": [
+                                    "1"
+                                ]
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/typedlink/facet/create",
@@ -4428,6 +4686,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme\n        caution\n        when deleting directories.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a directory",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                        },
+                        "output": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/directory",
@@ -4505,6 +4775,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a given <a>Facet</a>. All attributes and <a>Rule</a>s\n      that are associated with the facet will be deleted. Only development schema facets are allowed\n      deletion.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a facet",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest",
+                            "Name": "Organization"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/facet/delete",
@@ -4581,6 +4862,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an object and its associated attributes. Only objects with no children and no\n      parents can be deleted. The maximum number of attributes that can be deleted during an object deletion is 30. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html\">Amazon Cloud Directory Limits</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI",
+                            "ObjectReference": {
+                                "Selector": "$AQHzK-KsptZGU78KjmnwGH6i8H-voMZDSNCqfx-fRUcBFg"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/object/delete",
@@ -4654,6 +4948,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a given schema. Schemas in a development and published state can only be deleted. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a schema",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest"
+                        },
+                        "output": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorgtest"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/schema",
@@ -4727,6 +5033,17 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a <a>TypedLinkFacet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a typed link facet",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschematest",
+                            "Name": "ExampleFacet"
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/typedlink/facet/delete",
@@ -4806,6 +5123,24 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Detaches the specified object from the specified index.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To detach an object from an index",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "IndexReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q"
+                            },
+                            "TargetReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            }
+                        },
+                        "output": {
+                            "DetachedObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/index/detach",
@@ -4896,6 +5231,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Detaches a given object from the parent object. The object that is to be detached from the\n      parent is specified by the link name.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To detach an object from its parent object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "ParentReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            },
+                            "LinkName": "link2"
+                        },
+                        "output": {
+                            "DetachedObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/object/detach",
@@ -4986,6 +5337,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Detaches a policy from an object.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To detach a policy from an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "PolicyReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWgcBsTVmcQEWs6jlygfhuew"
+                            },
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWQoovm1s3Ts2v0NKrzdVnPw"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/policy/detach",
@@ -5069,6 +5436,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Detaches a typed link from a specified source and target object. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To detach a typed link from an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "TypedLinkSpecifier": {
+                                "SourceObjectReference": {
+                                    "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                                },
+                                "IdentityAttributeValues": [
+                                    {
+                                        "AttributeName": "22",
+                                        "Value": {
+                                            "BinaryValue": "c3Ry"
+                                        }
+                                    }
+                                ],
+                                "TargetObjectReference": {
+                                    "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                                },
+                                "TypedLinkFacet": {
+                                    "TypedLinkName": "exampletypedlink8",
+                                    "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/typedlink/detach",
@@ -5261,6 +5657,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Disables the specified directory. Disabled directories cannot be read or written to.\n      Only enabled directories can be disabled. Disabled directories may be reenabled.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To disable a directory",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                        },
+                        "output": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/directory/disable",
@@ -5335,6 +5743,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Enables the specified directory. Only disabled directories can be enabled. Once\n      enabled, the directory can then be read and written to.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To enable a disabled directory",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                        },
+                        "output": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/amazonclouddirectory/2017-01-11/directory/enable",
@@ -5748,6 +6168,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves metadata about a directory.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a directory",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY"
+                        },
+                        "output": {
+                            "Directory": {
+                                "CreationDateTime": 1.506115781186E9,
+                                "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                                "Name": "ExampleCD",
+                                "State": "ENABLED"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/directory/get",
@@ -5822,6 +6259,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema\n      facets -- published, development, or applied.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a facet",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+                            "Name": "node2"
+                        },
+                        "output": {
+                            "Facet": {
+                                "Name": "node2",
+                                "ObjectType": "NODE"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/facet",
@@ -6102,6 +6555,28 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves metadata about an object.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ"
+                            },
+                            "ConsistencyLevel": "SERIALIZABLE"
+                        },
+                        "output": {
+                            "SchemaFacets": [
+                                {
+                                    "FacetName": "node2",
+                                    "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                                }
+                            ],
+                            "ObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWmspn1fxfQmSQaaVKSbvEiQ"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/object/information",
@@ -6192,6 +6667,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves a JSON representation of the schema. See <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json\">JSON Schema Format</a> for more information.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get schema information and display it in JSON format",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                        },
+                        "output": {
+                            "Document": "{\"sourceSchemaArn\":\"arn:aws:clouddirectory:us-west-2:45132example:schema/published/org/1\",\"facets\":{\"node2\":{\"facetAttributes\":{},\"objectType\":\"NODE\"},\"Organization\":{\"facetAttributes\":{\"account_id\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"account_name\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"telephone_number\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"description\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_country\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_state\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street2\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street1\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"web_site\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"email\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_city\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"organization_status\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_postal_code\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"}},\"objectType\":\"LEAF_NODE\"},\"nodex\":{\"facetAttributes\":{},\"objectType\":\"NODE\"},\"Legal_Entity\":{\"facetAttributes\":{\"industry_vertical\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"registered_company_name\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"billing_currency\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_country\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_state\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street2\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_street1\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"tax_id\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_city\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"},\"mailing_address_postal_code\":{\"attributeDefinition\":{\"attributeType\":\"STRING\",\"isImmutable\":false,\"attributeRules\":{\"nameLength\":{\"parameters\":{\"min\":\"1\",\"max\":\"1024\"},\"ruleType\":\"STRING_LENGTH\"}}},\"requiredBehavior\":\"NOT_REQUIRED\"}},\"objectType\":\"LEAF_NODE\"},\"policyfacet\":{\"facetAttributes\":{},\"objectType\":\"POLICY\"},\"node1\":{\"facetAttributes\":{},\"objectType\":\"NODE\"}},\"typedLinkFacets\":{\"exampletypedlink\":{\"facetAttributes\":{\"1\":{\"attributeDefinition\":{\"attributeType\":\"BINARY\",\"isImmutable\":false,\"attributeRules\":{}},\"requiredBehavior\":\"REQUIRED_ALWAYS\"}},\"identityAttributeOrder\":[\"1\"]},\"exampletypedlink8\":{\"facetAttributes\":{\"22\":{\"attributeDefinition\":{\"attributeType\":\"BINARY\",\"isImmutable\":false,\"attributeRules\":{}},\"requiredBehavior\":\"REQUIRED_ALWAYS\"}},\"identityAttributeOrder\":[\"22\"]}}}",
+                            "Name": "org"
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/schema/json",
@@ -6274,6 +6762,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns the identity attribute order for a specific <a>TypedLinkFacet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To get information about a typed link facet",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+                            "Name": "exampletypedlink8"
+                        },
+                        "output": {
+                            "IdentityAttributeOrder": [
+                                "22"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/typedlink/facet/get",
@@ -6601,6 +7104,20 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists schema major versions applied to a directory. If <code>SchemaArn</code> is provided, lists the minor version.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list applied schema ARNs for a specified directory",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY"
+                        },
+                        "output": {
+                            "SchemaArns": [
+                                "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/schema/applied",
@@ -6702,6 +7219,26 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists indices attached to the specified object.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list the indices attached to an object",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "TargetReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            }
+                        },
+                        "output": {
+                            "IndexAttachments": [
+                                {
+                                    "IndexedAttributes": [],
+                                    "ObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/object/indices",
@@ -6812,6 +7349,22 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves each Amazon Resource Name (ARN) of schemas in the development\n      state.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list all development schema arns in your AWS account",
+                        "documentation": "",
+                        "output": {
+                            "SchemaArns": [
+                                "arn:aws:clouddirectory:us-west-2:45132example:schema/development/typedlinkschematest",
+                                "arn:aws:clouddirectory:us-west-2:45132example:schema/development/testCDschema",
+                                "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Customers",
+                                "arn:aws:clouddirectory:us-west-2:45132example:schema/development/CourseCatalog",
+                                "arn:aws:clouddirectory:us-west-2:45132example:schema/development/Consumers",
+                                "arn:aws:clouddirectory:us-west-2:45132example:schema/development/exampleorg"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/schema/development",
@@ -6897,6 +7450,46 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists directories created within an account.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list all directories in your AWS account",
+                        "documentation": "",
+                        "output": {
+                            "Directories": [
+                                {
+                                    "State": "ENABLED",
+                                    "CreationDateTime": 1.506121791167E9,
+                                    "Name": "ExampleCD4",
+                                    "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/Ae89hOKmw0bRpvYgW8EAsus"
+                                },
+                                {
+                                    "State": "DELETED",
+                                    "CreationDateTime": 1.485473189746E9,
+                                    "Name": "testCD",
+                                    "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AXQXDXvdgkOWktRXV4HnRa8"
+                                },
+                                {
+                                    "State": "ENABLED",
+                                    "CreationDateTime": 1.506115781186E9,
+                                    "Name": "ExampleCD",
+                                    "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY"
+                                },
+                                {
+                                    "State": "ENABLED",
+                                    "CreationDateTime": 1.506118003859E9,
+                                    "Name": "ExampleCD2",
+                                    "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AfMr4qym1kZTvwqOafAYfqI"
+                                },
+                                {
+                                    "State": "DELETED",
+                                    "CreationDateTime": 1.485477107925E9,
+                                    "Name": "testCD2",
+                                    "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AWeI1yjiB0SylWVTvQklCD0"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/directory/list",
@@ -6995,6 +7588,191 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves attributes attached to the facet.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list facet attributes",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+                            "Name": "Organization"
+                        },
+                        "output": {
+                            "Attributes": [
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "account_id"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "account_name"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "description"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "email"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "mailing_address_city"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "mailing_address_country"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "mailing_address_postal_code"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "mailing_address_state"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "mailing_address_street1"
+                                },
+                                {
+                                    "AttributeDefinition": {
+                                        "Rules": {
+                                            "nameLength": {
+                                                "Type": "STRING_LENGTH",
+                                                "Parameters": {
+                                                    "max": "1024",
+                                                    "min": "1"
+                                                }
+                                            }
+                                        },
+                                        "Type": "STRING",
+                                        "IsImmutable": false
+                                    },
+                                    "RequiredBehavior": "NOT_REQUIRED",
+                                    "Name": "mailing_address_street2"
+                                }
+                            ],
+                            "NextToken": "V0b3JnYW5pemF0aW9uX3N0YXR1cw=="
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/facet/attributes",
@@ -7098,6 +7876,25 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Retrieves the names of facets that exist in a schema.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list facet names",
+                        "documentation": "",
+                        "input": {
+                            "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                        },
+                        "output": {
+                            "FacetNames": [
+                                "Legal_Entity",
+                                "Organization",
+                                "node1",
+                                "node2",
+                                "nodex",
+                                "policyfacet"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/facet/list",
@@ -7200,6 +7997,83 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a>\n      information for an object. It also supports filtering by typed link facet and identity\n      attributes. For more information, see <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink\">Typed Links</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list incoming typed links",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            }
+                        },
+                        "output": {
+                            "LinkSpecifiers": [
+                                {
+                                    "SourceObjectReference": {
+                                        "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                                    },
+                                    "IdentityAttributeValues": [
+                                        {
+                                            "AttributeName": "22",
+                                            "Value": {
+                                                "BinaryValue": ""
+                                            }
+                                        }
+                                    ],
+                                    "TargetObjectReference": {
+                                        "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                                    },
+                                    "TypedLinkFacet": {
+                                        "TypedLinkName": "exampletypedlink8",
+                                        "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                                    }
+                                },
+                                {
+                                    "SourceObjectReference": {
+                                        "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                                    },
+                                    "IdentityAttributeValues": [
+                                        {
+                                            "AttributeName": "22",
+                                            "Value": {
+                                                "BinaryValue": "MA=="
+                                            }
+                                        }
+                                    ],
+                                    "TargetObjectReference": {
+                                        "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                                    },
+                                    "TypedLinkFacet": {
+                                        "TypedLinkName": "exampletypedlink8",
+                                        "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                                    }
+                                },
+                                {
+                                    "SourceObjectReference": {
+                                        "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                                    },
+                                    "IdentityAttributeValues": [
+                                        {
+                                            "AttributeName": "22",
+                                            "Value": {
+                                                "BinaryValue": "c3Ry"
+                                            }
+                                        }
+                                    ],
+                                    "TargetObjectReference": {
+                                        "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                                    },
+                                    "TypedLinkFacet": {
+                                        "TypedLinkName": "exampletypedlink8",
+                                        "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1"
+                                    }
+                                }
+                            ],
+                            "NextToken": ""
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/typedlink/incoming",
@@ -7325,6 +8199,35 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists objects attached to the specified index.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list an index",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "IndexReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q"
+                            }
+                        },
+                        "output": {
+                            "IndexAttachments": [
+                                {
+                                    "ObjectIdentifier": "AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw",
+                                    "IndexedAttributes": [
+                                        {
+                                            "Value": {},
+                                            "Key": {
+                                                "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1",
+                                                "FacetName": "Organization",
+                                                "Name": "description"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/index/targets",
@@ -7535,6 +8438,42 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists all attributes that are associated with an object.\n      </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list object attributes",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TW45F26R1HTY2z-stwKBte_Q"
+                            }
+                        },
+                        "output": {
+                            "Attributes": [
+                                {
+                                    "Value": {
+                                        "BooleanValue": true
+                                    },
+                                    "Key": {
+                                        "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/CloudDirectory/1.0",
+                                        "FacetName": "INDEX",
+                                        "Name": "index_is_unique"
+                                    }
+                                },
+                                {
+                                    "Value": {
+                                        "StringValue": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/org/1*Organization*description"
+                                    },
+                                    "Key": {
+                                        "SchemaArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY/schema/CloudDirectory/1.0",
+                                        "FacetName": "INDEX",
+                                        "Name": "ordered_indexed_attributes"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/object/attributes",
@@ -7657,6 +8596,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Returns a paginated list of child objects that are associated with a given\n      object.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list an objects children",
+                        "documentation": "",
+                        "input": {
+                            "DirectoryArn": "arn:aws:clouddirectory:us-west-2:45132example:directory/AYb8AOV81kHNgdj8mAO3dNY",
+                            "ObjectReference": {
+                                "Selector": "$AQGG_ADlfNZBzYHY_JgDt3TWcU7IARvOTeaR09zme1sVsw"
+                            }
+                        },
+                        "output": {
+                            "Children": {
+                                "link2": "AQGG_ADlfNZBzYHY_JgDt3TWSvfuEnDqTdmeCuTs6YBNUA"
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/amazonclouddirectory/2017-01-11/object/children",

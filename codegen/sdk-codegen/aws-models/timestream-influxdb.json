@@ -939,6 +939,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs to associate with the DB instance.</p>"
                     }
+                },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#default": 8086,
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>\n         <p>Valid Values: 1024-65535</p>\n         <p>Default: 8086</p>\n         <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>"
+                    }
                 }
             },
             "traits": {
@@ -984,6 +991,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections. The default value is 8086.</p>"
                     }
                 },
                 "dbInstanceType": {
@@ -1282,6 +1295,12 @@
                         "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
                     }
                 },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
+                    }
+                },
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
@@ -1577,6 +1596,12 @@
                         "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
                     }
                 },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
+                    }
+                },
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
@@ -1672,6 +1697,60 @@
                 }
             }
         },
+        "com.amazonaws.timestreaminfluxdb#Duration": {
+            "type": "structure",
+            "members": {
+                "durationType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of duration for InfluxDB parameters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of duration for InfluxDB parameters.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Duration for InfluxDB parameters in Timestream for InfluxDB.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DurationType": {
+            "type": "enum",
+            "members": {
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hours"
+                    }
+                },
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "minutes"
+                    }
+                },
+                "SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "seconds"
+                    }
+                },
+                "MILLISECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "milliseconds"
+                    }
+                }
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#GetDbInstance": {
             "type": "operation",
             "input": {
@@ -1755,6 +1834,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
                     }
                 },
                 "dbInstanceType": {
@@ -1977,6 +2062,228 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Disable the HTTP /metrics endpoint which exposes <a href=\"https://docs.influxdata.com/influxdb/v2/reference/internals/metrics/\">internal InfluxDB metrics</a>.</p>\n         <p>Default: false</p>"
                     }
+                },
+                "httpIdleTimeout": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum duration the server should keep established connections alive while waiting for new requests. Set to 0 for no timeout.</p>\n         <p>Default: 3 minutes</p>"
+                    }
+                },
+                "httpReadHeaderTimeout": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum duration the server should try to read HTTP headers for new requests. Set to 0 for no timeout.</p>\n         <p>Default: 10 seconds</p>"
+                    }
+                },
+                "httpReadTimeout": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum duration the server should try to read the entirety of new requests. Set to 0 for no timeout.</p>\n         <p>Default: 0</p>"
+                    }
+                },
+                "httpWriteTimeout": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum duration the server should spend processing and responding to write requests. Set to 0 for no timeout.</p>\n         <p>Default: 0</p>"
+                    }
+                },
+                "influxqlMaxSelectBuckets": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of group by time buckets a SELECT statement can create. 0 allows an unlimited number of buckets.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "influxqlMaxSelectPoint": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of points a SELECT statement can process. 0 allows an unlimited number of points. InfluxDB checks the point count every second (so queries exceeding the maximum aren’t immediately aborted).</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "influxqlMaxSelectSeries": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of series a SELECT statement can return. 0 allows an unlimited number of series.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "pprofDisabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disable the /debug/pprof HTTP endpoint. This endpoint provides runtime profiling data and can be helpful when debugging.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "queryInitialMemoryBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Initial bytes of memory allocated for a query.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "queryMaxMemoryBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of queries allowed in execution queue. When queue limit is reached, new queries are rejected. Setting to 0 allows an unlimited number of queries in the queue.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "queryMemoryBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum bytes of memory allowed for a single query. Must be greater or equal to queryInitialMemoryBytes.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "sessionLength": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Time to Live (TTL) in minutes for newly created user sessions.</p>\n         <p>Default: 60</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 2880
+                        }
+                    }
+                },
+                "sessionRenewDisabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disables automatically extending a user’s session TTL on each request. By default, every request sets the session’s expiration time to five minutes from now. When disabled, sessions expire after the specified <a href=\"https://docs.influxdata.com/influxdb/v2/reference/config-options/#session-length\">session length</a> and the user is redirected to the login page, even if recently active.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "storageCacheMaxMemorySize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum size (in bytes) a shard’s cache can reach before it starts rejecting writes. Must be greater than storageCacheSnapShotMemorySize and lower than instance’s total memory capacity. We recommend setting it to below 15% of the total memory capacity.</p>\n         <p>Default: 1073741824</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "storageCacheSnapshotMemorySize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size (in bytes) at which the storage engine will snapshot the cache and write it to a TSM file to make more memory available. Must not be greater than storageCacheMaxMemorySize.</p>\n         <p>Default: 26214400</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "storageCacheSnapshotWriteColdDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Duration at which the storage engine will snapshot the cache and write it to a new TSM file if the shard hasn’t received writes or deletes.</p>\n         <p>Default: 10 minutes</p>"
+                    }
+                },
+                "storageCompactFullWriteColdDuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Duration at which the storage engine will compact all TSM files in a shard if it hasn't received writes or deletes.</p>\n         <p>Default: 4 hours</p>"
+                    }
+                },
+                "storageCompactThroughputBurst": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rate limit (in bytes per second) that TSM compactions can write to disk.</p>\n         <p>Default: 50331648</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "storageMaxConcurrentCompactions": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of full and level compactions that can run concurrently. A value of 0 results in 50% of runtime.GOMAXPROCS(0) used at runtime. Any number greater than zero limits compactions to that value. This setting does not apply to cache snapshotting.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 64
+                        }
+                    }
+                },
+                "storageMaxIndexLogFileSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size (in bytes) at which an index write-ahead log (WAL) file will compact into an index file. Lower sizes will cause log files to be compacted more quickly and result in lower heap usage at the expense of write throughput.</p>\n         <p>Default: 1048576</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "storageNoValidateFieldSize": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Skip field size validation on incoming write requests.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "storageRetentionCheckInterval": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Interval of retention policy enforcement checks. Must be greater than 0.</p>\n         <p>Default: 30 minutes</p>"
+                    }
+                },
+                "storageSeriesFileMaxConcurrentSnapshotCompactions": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of snapshot compactions that can run concurrently across all series partitions in a database.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 64
+                        }
+                    }
+                },
+                "storageSeriesIdSetCacheSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size of the internal cache used in the TSI index to store previously calculated series results. Cached results are returned quickly rather than needing to be recalculated when a subsequent query with the same tag key/value predicate is executed. Setting this value to 0 will disable the cache and may decrease query performance.</p>\n         <p>Default: 100</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000000000000
+                        }
+                    }
+                },
+                "storageWalMaxConcurrentWrites": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number writes to the WAL directory to attempt at the same time. Setting this value to 0 results in number of processing units available x2.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 256
+                        }
+                    }
+                },
+                "storageWalMaxWriteDelay": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum amount of time a write request to the WAL directory will wait when the <a href=\"https://docs.influxdata.com/influxdb/v2/reference/config-options/#storage-wal-max-concurrent-writes\">maximum number of concurrent active writes to the WAL directory has been met</a>. Set to 0 to disable the timeout.</p>\n         <p>Default: 10 minutes</p>"
+                    }
+                },
+                "uiDisabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disable the InfluxDB user interface (UI). The UI is enabled by default.</p>\n         <p>Default: false</p>"
+                    }
                 }
             },
             "traits": {
@@ -2193,7 +2500,21 @@
                 }
             },
             "traits": {
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbInstanceResource",
+                        "ids": {
+                            "dbInstanceIdentifier": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource",
+                        "ids": {
+                            "dbParameterGroupIdentifier": "resourceArn"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.timestreaminfluxdb#ListTagsForResourceResponse": {
@@ -2297,6 +2618,15 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1024,
+                    "max": 65535
+                }
             }
         },
         "com.amazonaws.timestreaminfluxdb#RequestTagMap": {
@@ -2523,7 +2853,21 @@
                 }
             },
             "traits": {
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbInstanceResource",
+                        "ids": {
+                            "dbInstanceIdentifier": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource",
+                        "ids": {
+                            "dbParameterGroupIdentifier": "resourceArn"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.timestreaminfluxdb#TagValue": {
@@ -2619,7 +2963,21 @@
                 }
             },
             "traits": {
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbInstanceResource",
+                        "ids": {
+                            "dbInstanceIdentifier": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource",
+                        "ids": {
+                            "dbParameterGroupIdentifier": "resourceArn"
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.timestreaminfluxdb#UpdateDbInstance": {
@@ -2681,6 +3039,12 @@
                         "smithy.api#documentation": "<p>The id of the DB parameter group to assign to your DB instance. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.</p>"
                     }
                 },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>\n         <p>If you change the Port value, your database restarts immediately.</p>\n         <p>Valid Values: 1024-65535</p>\n         <p>Default: 8086</p>\n         <p>Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680</p>"
+                    }
+                },
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
@@ -2737,6 +3101,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number on which InfluxDB accepts connections.</p>"
                     }
                 },
                 "dbInstanceType": {
