@@ -16,7 +16,6 @@ import (
 )
 
 const (
-	contentMD5Header                           = "Content-Md5"
 	streamingUnsignedPayloadTrailerPayloadHash = "STREAMING-UNSIGNED-PAYLOAD-TRAILER"
 )
 
