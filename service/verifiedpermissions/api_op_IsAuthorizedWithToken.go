@@ -19,8 +19,6 @@ import (
 // policies in the specified policy store. The result of the decision is either
 // Allow or Deny , along with a list of the policies that resulted in the decision.
 //
-// At this time, Verified Permissions accepts tokens from only Amazon Cognito.
-//
 // Verified Permissions validates each token that is specified in a request by
 // checking its expiration date and its signature.
 //

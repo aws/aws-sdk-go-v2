@@ -3409,7 +3409,8 @@ type MetricFilterV2 struct {
 	// The values to use for filtering data.
 	//
 	// Valid metric filter values for INITIATION_METHOD : INBOUND | OUTBOUND | TRANSFER
-	// | QUEUE_TRANSFER | CALLBACK | API
+	// | QUEUE_TRANSFER | CALLBACK | API | WEBRTC_API | MONITOR | DISCONNECT |
+	// EXTERNAL_OUTBOUND
 	//
 	// Valid metric filter values for DISCONNECT_REASON : CUSTOMER_DISCONNECT |
 	// AGENT_DISCONNECT | THIRD_PARTY_DISCONNECT | TELECOM_PROBLEM | BARGED |
@@ -3562,7 +3563,7 @@ type NumberReference struct {
 //
 //   - Duration labels, such as NON_TALK_TIME , CONTACT_DURATION ,
 //     AGENT_INTERACTION_DURATION , CUSTOMER_HOLD_TIME have a minimum value of 0 and
-//     maximum value of 28800.
+//     maximum value of 63072000.
 //
 //   - Percentages have a minimum value of 0 and maximum value of 100.
 //
@@ -5873,8 +5874,8 @@ type Threshold struct {
 // Contains information about the threshold for service level metrics.
 type ThresholdV2 struct {
 
-	// The type of comparison. Only "less than" (LT) and "greater than" (GT)
-	// comparisons are supported.
+	// The type of comparison. Currently, "less than" (LT), "less than equal" (LTE),
+	// and "greater than" (GT) comparisons are supported.
 	Comparison *string
 
 	// The threshold value to compare.

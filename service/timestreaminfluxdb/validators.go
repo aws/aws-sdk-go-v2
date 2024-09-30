@@ -226,6 +226,76 @@ func addOpUpdateDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDbInstance{}, middleware.After)
 }
 
+func validateDuration(v *types.Duration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Duration"}
+	if len(v.DurationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationType"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInfluxDBv2Parameters(v *types.InfluxDBv2Parameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InfluxDBv2Parameters"}
+	if v.HttpIdleTimeout != nil {
+		if err := validateDuration(v.HttpIdleTimeout); err != nil {
+			invalidParams.AddNested("HttpIdleTimeout", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HttpReadHeaderTimeout != nil {
+		if err := validateDuration(v.HttpReadHeaderTimeout); err != nil {
+			invalidParams.AddNested("HttpReadHeaderTimeout", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HttpReadTimeout != nil {
+		if err := validateDuration(v.HttpReadTimeout); err != nil {
+			invalidParams.AddNested("HttpReadTimeout", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HttpWriteTimeout != nil {
+		if err := validateDuration(v.HttpWriteTimeout); err != nil {
+			invalidParams.AddNested("HttpWriteTimeout", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageCacheSnapshotWriteColdDuration != nil {
+		if err := validateDuration(v.StorageCacheSnapshotWriteColdDuration); err != nil {
+			invalidParams.AddNested("StorageCacheSnapshotWriteColdDuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageCompactFullWriteColdDuration != nil {
+		if err := validateDuration(v.StorageCompactFullWriteColdDuration); err != nil {
+			invalidParams.AddNested("StorageCompactFullWriteColdDuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageRetentionCheckInterval != nil {
+		if err := validateDuration(v.StorageRetentionCheckInterval); err != nil {
+			invalidParams.AddNested("StorageRetentionCheckInterval", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StorageWalMaxWriteDelay != nil {
+		if err := validateDuration(v.StorageWalMaxWriteDelay); err != nil {
+			invalidParams.AddNested("StorageWalMaxWriteDelay", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLogDeliveryConfiguration(v *types.LogDeliveryConfiguration) error {
 	if v == nil {
 		return nil
@@ -237,6 +307,25 @@ func validateLogDeliveryConfiguration(v *types.LogDeliveryConfiguration) error {
 		if err := validateS3Configuration(v.S3Configuration); err != nil {
 			invalidParams.AddNested("S3Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameters(v types.Parameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Parameters"}
+	switch uv := v.(type) {
+	case *types.ParametersMemberInfluxDBv2:
+		if err := validateInfluxDBv2Parameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[InfluxDBv2]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -305,6 +394,11 @@ func validateOpCreateDbParameterGroupInput(v *CreateDbParameterGroupInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDbParameterGroupInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Parameters != nil {
+		if err := validateParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

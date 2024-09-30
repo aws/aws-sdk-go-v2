@@ -91,6 +91,9 @@ type DeleteDbInstanceOutput struct {
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
+	// The port number on which InfluxDB accepts connections.
+	Port *int32
+
 	// Indicates if the DB instance has a public IP to facilitate access.
 	PubliclyAccessible *bool
 

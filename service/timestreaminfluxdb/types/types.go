@@ -40,6 +40,9 @@ type DbInstanceSummary struct {
 	// The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.
 	Endpoint *string
 
+	// The port number on which InfluxDB accepts connections.
+	Port *int32
+
 	// The status of the DB instance.
 	Status Status
 
@@ -70,6 +73,22 @@ type DbParameterGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Duration for InfluxDB parameters in Timestream for InfluxDB.
+type Duration struct {
+
+	// The type of duration for InfluxDB parameters.
+	//
+	// This member is required.
+	DurationType DurationType
+
+	// The value of duration for InfluxDB parameters.
+	//
+	// This member is required.
+	Value *int64
+
+	noSmithyDocumentSerde
+}
+
 // All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.
 type InfluxDBv2Parameters struct {
 
@@ -77,6 +96,49 @@ type InfluxDBv2Parameters struct {
 	//
 	// Default: false
 	FluxLogEnabled *bool
+
+	// Maximum duration the server should keep established connections alive while
+	// waiting for new requests. Set to 0 for no timeout.
+	//
+	// Default: 3 minutes
+	HttpIdleTimeout *Duration
+
+	// Maximum duration the server should try to read HTTP headers for new requests.
+	// Set to 0 for no timeout.
+	//
+	// Default: 10 seconds
+	HttpReadHeaderTimeout *Duration
+
+	// Maximum duration the server should try to read the entirety of new requests.
+	// Set to 0 for no timeout.
+	//
+	// Default: 0
+	HttpReadTimeout *Duration
+
+	// Maximum duration the server should spend processing and responding to write
+	// requests. Set to 0 for no timeout.
+	//
+	// Default: 0
+	HttpWriteTimeout *Duration
+
+	// Maximum number of group by time buckets a SELECT statement can create. 0 allows
+	// an unlimited number of buckets.
+	//
+	// Default: 0
+	InfluxqlMaxSelectBuckets *int64
+
+	// Maximum number of points a SELECT statement can process. 0 allows an unlimited
+	// number of points. InfluxDB checks the point count every second (so queries
+	// exceeding the maximum aren’t immediately aborted).
+	//
+	// Default: 0
+	InfluxqlMaxSelectPoint *int64
+
+	// Maximum number of series a SELECT statement can return. 0 allows an unlimited
+	// number of series.
+	//
+	// Default: 0
+	InfluxqlMaxSelectSeries *int64
 
 	// Log output level. InfluxDB outputs log entries with severity levels greater
 	// than or equal to the level specified.
@@ -98,11 +160,35 @@ type InfluxDBv2Parameters struct {
 	// Default: false
 	NoTasks *bool
 
+	// Disable the /debug/pprof HTTP endpoint. This endpoint provides runtime
+	// profiling data and can be helpful when debugging.
+	//
+	// Default: false
+	PprofDisabled *bool
+
 	// Number of queries allowed to execute concurrently. Setting to 0 allows an
 	// unlimited number of concurrent queries.
 	//
 	// Default: 0
 	QueryConcurrency *int32
+
+	// Initial bytes of memory allocated for a query.
+	//
+	// Default: 0
+	QueryInitialMemoryBytes *int64
+
+	// Maximum number of queries allowed in execution queue. When queue limit is
+	// reached, new queries are rejected. Setting to 0 allows an unlimited number of
+	// queries in the queue.
+	//
+	// Default: 0
+	QueryMaxMemoryBytes *int64
+
+	// Maximum bytes of memory allowed for a single query. Must be greater or equal to
+	// queryInitialMemoryBytes.
+	//
+	// Default: 0
+	QueryMemoryBytes *int64
 
 	// Maximum number of queries allowed in execution queue. When queue limit is
 	// reached, new queries are rejected. Setting to 0 allows an unlimited number of
@@ -111,9 +197,115 @@ type InfluxDBv2Parameters struct {
 	// Default: 0
 	QueryQueueSize *int32
 
+	// Specifies the Time to Live (TTL) in minutes for newly created user sessions.
+	//
+	// Default: 60
+	SessionLength *int32
+
+	// Disables automatically extending a user’s session TTL on each request. By
+	// default, every request sets the session’s expiration time to five minutes from
+	// now. When disabled, sessions expire after the specified [session length]and the user is
+	// redirected to the login page, even if recently active.
+	//
+	// Default: false
+	//
+	// [session length]: https://docs.influxdata.com/influxdb/v2/reference/config-options/#session-length
+	SessionRenewDisabled *bool
+
+	// Maximum size (in bytes) a shard’s cache can reach before it starts rejecting
+	// writes. Must be greater than storageCacheSnapShotMemorySize and lower than
+	// instance’s total memory capacity. We recommend setting it to below 15% of the
+	// total memory capacity.
+	//
+	// Default: 1073741824
+	StorageCacheMaxMemorySize *int64
+
+	// Size (in bytes) at which the storage engine will snapshot the cache and write
+	// it to a TSM file to make more memory available. Must not be greater than
+	// storageCacheMaxMemorySize.
+	//
+	// Default: 26214400
+	StorageCacheSnapshotMemorySize *int64
+
+	// Duration at which the storage engine will snapshot the cache and write it to a
+	// new TSM file if the shard hasn’t received writes or deletes.
+	//
+	// Default: 10 minutes
+	StorageCacheSnapshotWriteColdDuration *Duration
+
+	// Duration at which the storage engine will compact all TSM files in a shard if
+	// it hasn't received writes or deletes.
+	//
+	// Default: 4 hours
+	StorageCompactFullWriteColdDuration *Duration
+
+	// Rate limit (in bytes per second) that TSM compactions can write to disk.
+	//
+	// Default: 50331648
+	StorageCompactThroughputBurst *int64
+
+	// Maximum number of full and level compactions that can run concurrently. A value
+	// of 0 results in 50% of runtime.GOMAXPROCS(0) used at runtime. Any number greater
+	// than zero limits compactions to that value. This setting does not apply to cache
+	// snapshotting.
+	//
+	// Default: 0
+	StorageMaxConcurrentCompactions *int32
+
+	// Size (in bytes) at which an index write-ahead log (WAL) file will compact into
+	// an index file. Lower sizes will cause log files to be compacted more quickly and
+	// result in lower heap usage at the expense of write throughput.
+	//
+	// Default: 1048576
+	StorageMaxIndexLogFileSize *int64
+
+	// Skip field size validation on incoming write requests.
+	//
+	// Default: false
+	StorageNoValidateFieldSize *bool
+
+	// Interval of retention policy enforcement checks. Must be greater than 0.
+	//
+	// Default: 30 minutes
+	StorageRetentionCheckInterval *Duration
+
+	// Maximum number of snapshot compactions that can run concurrently across all
+	// series partitions in a database.
+	//
+	// Default: 0
+	StorageSeriesFileMaxConcurrentSnapshotCompactions *int32
+
+	// Size of the internal cache used in the TSI index to store previously calculated
+	// series results. Cached results are returned quickly rather than needing to be
+	// recalculated when a subsequent query with the same tag key/value predicate is
+	// executed. Setting this value to 0 will disable the cache and may decrease query
+	// performance.
+	//
+	// Default: 100
+	StorageSeriesIdSetCacheSize *int64
+
+	// Maximum number writes to the WAL directory to attempt at the same time. Setting
+	// this value to 0 results in number of processing units available x2.
+	//
+	// Default: 0
+	StorageWalMaxConcurrentWrites *int32
+
+	// Maximum amount of time a write request to the WAL directory will wait when the [maximum number of concurrent active writes to the WAL directory has been met]
+	// . Set to 0 to disable the timeout.
+	//
+	// Default: 10 minutes
+	//
+	// [maximum number of concurrent active writes to the WAL directory has been met]: https://docs.influxdata.com/influxdb/v2/reference/config-options/#storage-wal-max-concurrent-writes
+	StorageWalMaxWriteDelay *Duration
+
 	// Enable tracing in InfluxDB and specifies the tracing type. Tracing is disabled
 	// by default.
 	TracingType TracingType
+
+	// Disable the InfluxDB user interface (UI). The UI is enabled by default.
+	//
+	// Default: false
+	UiDisabled *bool
 
 	noSmithyDocumentSerde
 }

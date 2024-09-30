@@ -71,3 +71,127 @@ func (DataIntegrationEventType) Values() []DataIntegrationEventType {
 		"scn.data.supplyplan",
 	}
 }
+
+type DataIntegrationFlowFileType string
+
+// Enum values for DataIntegrationFlowFileType
+const (
+	DataIntegrationFlowFileTypeCsv     DataIntegrationFlowFileType = "CSV"
+	DataIntegrationFlowFileTypeParquet DataIntegrationFlowFileType = "PARQUET"
+	DataIntegrationFlowFileTypeJson    DataIntegrationFlowFileType = "JSON"
+)
+
+// Values returns all known values for DataIntegrationFlowFileType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowFileType) Values() []DataIntegrationFlowFileType {
+	return []DataIntegrationFlowFileType{
+		"CSV",
+		"PARQUET",
+		"JSON",
+	}
+}
+
+type DataIntegrationFlowLoadType string
+
+// Enum values for DataIntegrationFlowLoadType
+const (
+	DataIntegrationFlowLoadTypeIncremental DataIntegrationFlowLoadType = "INCREMENTAL"
+	DataIntegrationFlowLoadTypeReplace     DataIntegrationFlowLoadType = "REPLACE"
+)
+
+// Values returns all known values for DataIntegrationFlowLoadType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowLoadType) Values() []DataIntegrationFlowLoadType {
+	return []DataIntegrationFlowLoadType{
+		"INCREMENTAL",
+		"REPLACE",
+	}
+}
+
+type DataIntegrationFlowSourceType string
+
+// Enum values for DataIntegrationFlowSourceType
+const (
+	DataIntegrationFlowSourceTypeS3      DataIntegrationFlowSourceType = "S3"
+	DataIntegrationFlowSourceTypeDataset DataIntegrationFlowSourceType = "DATASET"
+)
+
+// Values returns all known values for DataIntegrationFlowSourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowSourceType) Values() []DataIntegrationFlowSourceType {
+	return []DataIntegrationFlowSourceType{
+		"S3",
+		"DATASET",
+	}
+}
+
+type DataIntegrationFlowTargetType string
+
+// Enum values for DataIntegrationFlowTargetType
+const (
+	DataIntegrationFlowTargetTypeS3      DataIntegrationFlowTargetType = "S3"
+	DataIntegrationFlowTargetTypeDataset DataIntegrationFlowTargetType = "DATASET"
+)
+
+// Values returns all known values for DataIntegrationFlowTargetType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowTargetType) Values() []DataIntegrationFlowTargetType {
+	return []DataIntegrationFlowTargetType{
+		"S3",
+		"DATASET",
+	}
+}
+
+type DataIntegrationFlowTransformationType string
+
+// Enum values for DataIntegrationFlowTransformationType
+const (
+	DataIntegrationFlowTransformationTypeSql  DataIntegrationFlowTransformationType = "SQL"
+	DataIntegrationFlowTransformationTypeNone DataIntegrationFlowTransformationType = "NONE"
+)
+
+// Values returns all known values for DataIntegrationFlowTransformationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationFlowTransformationType) Values() []DataIntegrationFlowTransformationType {
+	return []DataIntegrationFlowTransformationType{
+		"SQL",
+		"NONE",
+	}
+}
+
+type DataLakeDatasetSchemaFieldType string
+
+// Enum values for DataLakeDatasetSchemaFieldType
+const (
+	DataLakeDatasetSchemaFieldTypeInt       DataLakeDatasetSchemaFieldType = "INT"
+	DataLakeDatasetSchemaFieldTypeDouble    DataLakeDatasetSchemaFieldType = "DOUBLE"
+	DataLakeDatasetSchemaFieldTypeString    DataLakeDatasetSchemaFieldType = "STRING"
+	DataLakeDatasetSchemaFieldTypeTimestamp DataLakeDatasetSchemaFieldType = "TIMESTAMP"
+)
+
+// Values returns all known values for DataLakeDatasetSchemaFieldType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataLakeDatasetSchemaFieldType) Values() []DataLakeDatasetSchemaFieldType {
+	return []DataLakeDatasetSchemaFieldType{
+		"INT",
+		"DOUBLE",
+		"STRING",
+		"TIMESTAMP",
+	}
+}

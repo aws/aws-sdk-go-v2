@@ -35,6 +35,9 @@ type UpdateAccountSettingsInput struct {
 
 	// Specifies whether you want to turn [group lifecycle events] on or off.
 	//
+	// You can't turn on group lifecycle events if your resource groups quota is
+	// greater than 2,000.
+	//
 	// [group lifecycle events]: https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html
 	GroupLifecycleEventsDesiredStatus types.GroupLifecycleEventsDesiredStatus
 

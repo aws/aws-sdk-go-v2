@@ -101,6 +101,15 @@ type CreateDbInstanceInput struct {
 	// InfluxDB organization is a workspace for a group of users.
 	Organization *string
 
+	// The port number on which InfluxDB accepts connections.
+	//
+	// Valid Values: 1024-65535
+	//
+	// Default: 8086
+	//
+	// Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680
+	Port *int32
+
 	// Configures the DB instance with a public IP to facilitate access.
 	PubliclyAccessible *bool
 
@@ -171,6 +180,10 @@ type CreateDbInstanceOutput struct {
 
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// The port number on which InfluxDB accepts connections. The default value is
+	// 8086.
+	Port *int32
 
 	// Indicates if the DB instance has a public IP to facilitate access.
 	PubliclyAccessible *bool

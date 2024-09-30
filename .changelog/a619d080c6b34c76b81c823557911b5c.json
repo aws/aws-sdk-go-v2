@@ -1,0 +1,8 @@
+{
+    "id": "a619d080-c6b3-4c76-b81c-823557911b5c",
+    "type": "feature",
+    "description": "This update includes new APIs to support application groups and to allow users to manage resource tag-sync tasks in applications.",
+    "modules": [
+        "service/resourcegroups"
+    ]
+}

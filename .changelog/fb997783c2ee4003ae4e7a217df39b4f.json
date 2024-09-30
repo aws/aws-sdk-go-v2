@@ -1,0 +1,8 @@
+{
+    "id": "fb997783-c2ee-4003-ae4e-7a217df39b4f",
+    "type": "documentation",
+    "description": "Add examples for API operations in model.",
+    "modules": [
+        "service/pricing"
+    ]
+}

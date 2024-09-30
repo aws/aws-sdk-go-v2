@@ -1,0 +1,8 @@
+{
+    "id": "01e55ddb-1e8e-408b-a9a0-15b11759f931",
+    "type": "feature",
+    "description": "Amazon Connect introduces StartOutboundChatContact API allowing customers to initiate outbound chat contacts",
+    "modules": [
+        "service/connect"
+    ]
+}

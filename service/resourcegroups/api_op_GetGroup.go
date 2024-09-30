@@ -35,7 +35,7 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 
 type GetGroupInput struct {
 
-	// The name or the ARN of the resource group to retrieve.
+	// The name or the Amazon resource name (ARN) of the resource group to retrieve.
 	Group *string
 
 	// Deprecated - don't use this parameter. Use Group instead.

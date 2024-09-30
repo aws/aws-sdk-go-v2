@@ -2402,6 +2402,18 @@ func TestCheckSnapshot_StartContactStreaming(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartOutboundChatContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOutboundChatContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartOutboundChatContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartOutboundVoiceContact(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartOutboundVoiceContact(context.Background(), nil, func(o *Options) {
@@ -5454,6 +5466,18 @@ func TestUpdateSnapshot_StartContactStreaming(t *testing.T) {
 	_, err := svc.StartContactStreaming(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartContactStreaming")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartOutboundChatContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOutboundChatContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartOutboundChatContact")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

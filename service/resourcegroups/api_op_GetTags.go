@@ -11,7 +11,7 @@ import (
 )
 
 // Returns a list of tags that are associated with a resource group, specified by
-// an ARN.
+// an Amazon resource name (ARN).
 //
 // # Minimum permissions
 //
@@ -35,7 +35,8 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 
 type GetTagsInput struct {
 
-	// The ARN of the resource group whose tags you want to retrieve.
+	// The Amazon resource name (ARN) of the resource group whose tags you want to
+	// retrieve.
 	//
 	// This member is required.
 	Arn *string
@@ -45,7 +46,7 @@ type GetTagsInput struct {
 
 type GetTagsOutput struct {
 
-	// The ARN of the tagged resource group.
+	// TheAmazon resource name (ARN) of the tagged resource group.
 	Arn *string
 
 	// The tags associated with the specified resource group.

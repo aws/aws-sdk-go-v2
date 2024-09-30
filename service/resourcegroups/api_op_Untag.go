@@ -34,8 +34,9 @@ func (c *Client) Untag(ctx context.Context, params *UntagInput, optFns ...func(*
 
 type UntagInput struct {
 
-	// The ARN of the resource group from which to remove tags. The command removed
-	// both the specified keys and any values associated with those keys.
+	// The Amazon resource name (ARN) of the resource group from which to remove tags.
+	// The command removed both the specified keys and any values associated with those
+	// keys.
 	//
 	// This member is required.
 	Arn *string
@@ -50,7 +51,8 @@ type UntagInput struct {
 
 type UntagOutput struct {
 
-	// The ARN of the resource group from which tags have been removed.
+	// The Amazon resource name (ARN) of the resource group from which tags have been
+	// removed.
 	Arn *string
 
 	// The keys of the tags that were removed.

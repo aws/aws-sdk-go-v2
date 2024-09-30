@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of ARNs of the resources that are members of a specified
-// resource group.
+// Returns a list of Amazon resource names (ARNs) of the resources that are
+// members of a specified resource group.
 //
 // # Minimum permissions
 //
@@ -67,7 +67,7 @@ type ListGroupResourcesInput struct {
 	// query type (tag-based or Amazon CloudFront stack-based queries).
 	Filters []types.ResourceFilter
 
-	// The name or the ARN of the resource group
+	// The name or the Amazon resource name (ARN) of the resource group.
 	Group *string
 
 	//  Deprecated - don't use this parameter. Use the Group request field instead.

@@ -47,6 +47,8 @@ type ListGroupsInput struct {
 	//   have the specified configuration types attached. The current supported values
 	//   are:
 	//
+	//   - AWS::ResourceGroups::ApplicationGroup
+	//
 	//   - AWS::AppRegistry::Application
 	//
 	//   - AWS::AppRegistry::ApplicationResourceGroups

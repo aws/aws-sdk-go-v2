@@ -35,7 +35,7 @@ import (
 //     MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 .
 //
 //   - OpenID Connect (OIDC) provider: Namespace::[Entity
-//     type]::[principalIdClaim]|[user principal attribute] , for example
+//     type]::[entityIdPrefix]|[user principal attribute] , for example
 //     MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222 .
 //
 // Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed

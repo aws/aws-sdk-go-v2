@@ -15,10 +15,9 @@ import (
 //
 // Describes the specified contact.
 //
-// Contact information remains available in Amazon Connect for 24 months, and then
-// it is deleted.
-//
-// Only data from November 12, 2021, and later is returned by this API.
+// Contact information remains available in Amazon Connect for 24 months from the
+// InitiationTimestamp, and then it is deleted. Only contact information that is
+// available in Amazon Connect is returned by this API
 func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInput, optFns ...func(*Options)) (*DescribeContactOutput, error) {
 	if params == nil {
 		params = &DescribeContactInput{}

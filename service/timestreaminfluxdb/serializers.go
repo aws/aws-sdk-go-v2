@@ -686,6 +686,23 @@ func (m *awsAwsjson10_serializeOpUpdateDbInstance) HandleSerialize(ctx context.C
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentDuration(v *types.Duration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DurationType) > 0 {
+		ok := object.Key("durationType")
+		ok.String(string(v.DurationType))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.Long(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentInfluxDBv2Parameters(v *types.InfluxDBv2Parameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -693,6 +710,49 @@ func awsAwsjson10_serializeDocumentInfluxDBv2Parameters(v *types.InfluxDBv2Param
 	if v.FluxLogEnabled != nil {
 		ok := object.Key("fluxLogEnabled")
 		ok.Boolean(*v.FluxLogEnabled)
+	}
+
+	if v.HttpIdleTimeout != nil {
+		ok := object.Key("httpIdleTimeout")
+		if err := awsAwsjson10_serializeDocumentDuration(v.HttpIdleTimeout, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HttpReadHeaderTimeout != nil {
+		ok := object.Key("httpReadHeaderTimeout")
+		if err := awsAwsjson10_serializeDocumentDuration(v.HttpReadHeaderTimeout, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HttpReadTimeout != nil {
+		ok := object.Key("httpReadTimeout")
+		if err := awsAwsjson10_serializeDocumentDuration(v.HttpReadTimeout, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HttpWriteTimeout != nil {
+		ok := object.Key("httpWriteTimeout")
+		if err := awsAwsjson10_serializeDocumentDuration(v.HttpWriteTimeout, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InfluxqlMaxSelectBuckets != nil {
+		ok := object.Key("influxqlMaxSelectBuckets")
+		ok.Long(*v.InfluxqlMaxSelectBuckets)
+	}
+
+	if v.InfluxqlMaxSelectPoint != nil {
+		ok := object.Key("influxqlMaxSelectPoint")
+		ok.Long(*v.InfluxqlMaxSelectPoint)
+	}
+
+	if v.InfluxqlMaxSelectSeries != nil {
+		ok := object.Key("influxqlMaxSelectSeries")
+		ok.Long(*v.InfluxqlMaxSelectSeries)
 	}
 
 	if len(v.LogLevel) > 0 {
@@ -710,9 +770,29 @@ func awsAwsjson10_serializeDocumentInfluxDBv2Parameters(v *types.InfluxDBv2Param
 		ok.Boolean(*v.NoTasks)
 	}
 
+	if v.PprofDisabled != nil {
+		ok := object.Key("pprofDisabled")
+		ok.Boolean(*v.PprofDisabled)
+	}
+
 	if v.QueryConcurrency != nil {
 		ok := object.Key("queryConcurrency")
 		ok.Integer(*v.QueryConcurrency)
+	}
+
+	if v.QueryInitialMemoryBytes != nil {
+		ok := object.Key("queryInitialMemoryBytes")
+		ok.Long(*v.QueryInitialMemoryBytes)
+	}
+
+	if v.QueryMaxMemoryBytes != nil {
+		ok := object.Key("queryMaxMemoryBytes")
+		ok.Long(*v.QueryMaxMemoryBytes)
+	}
+
+	if v.QueryMemoryBytes != nil {
+		ok := object.Key("queryMemoryBytes")
+		ok.Long(*v.QueryMemoryBytes)
 	}
 
 	if v.QueryQueueSize != nil {
@@ -720,9 +800,97 @@ func awsAwsjson10_serializeDocumentInfluxDBv2Parameters(v *types.InfluxDBv2Param
 		ok.Integer(*v.QueryQueueSize)
 	}
 
+	if v.SessionLength != nil {
+		ok := object.Key("sessionLength")
+		ok.Integer(*v.SessionLength)
+	}
+
+	if v.SessionRenewDisabled != nil {
+		ok := object.Key("sessionRenewDisabled")
+		ok.Boolean(*v.SessionRenewDisabled)
+	}
+
+	if v.StorageCacheMaxMemorySize != nil {
+		ok := object.Key("storageCacheMaxMemorySize")
+		ok.Long(*v.StorageCacheMaxMemorySize)
+	}
+
+	if v.StorageCacheSnapshotMemorySize != nil {
+		ok := object.Key("storageCacheSnapshotMemorySize")
+		ok.Long(*v.StorageCacheSnapshotMemorySize)
+	}
+
+	if v.StorageCacheSnapshotWriteColdDuration != nil {
+		ok := object.Key("storageCacheSnapshotWriteColdDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.StorageCacheSnapshotWriteColdDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageCompactFullWriteColdDuration != nil {
+		ok := object.Key("storageCompactFullWriteColdDuration")
+		if err := awsAwsjson10_serializeDocumentDuration(v.StorageCompactFullWriteColdDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageCompactThroughputBurst != nil {
+		ok := object.Key("storageCompactThroughputBurst")
+		ok.Long(*v.StorageCompactThroughputBurst)
+	}
+
+	if v.StorageMaxConcurrentCompactions != nil {
+		ok := object.Key("storageMaxConcurrentCompactions")
+		ok.Integer(*v.StorageMaxConcurrentCompactions)
+	}
+
+	if v.StorageMaxIndexLogFileSize != nil {
+		ok := object.Key("storageMaxIndexLogFileSize")
+		ok.Long(*v.StorageMaxIndexLogFileSize)
+	}
+
+	if v.StorageNoValidateFieldSize != nil {
+		ok := object.Key("storageNoValidateFieldSize")
+		ok.Boolean(*v.StorageNoValidateFieldSize)
+	}
+
+	if v.StorageRetentionCheckInterval != nil {
+		ok := object.Key("storageRetentionCheckInterval")
+		if err := awsAwsjson10_serializeDocumentDuration(v.StorageRetentionCheckInterval, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StorageSeriesFileMaxConcurrentSnapshotCompactions != nil {
+		ok := object.Key("storageSeriesFileMaxConcurrentSnapshotCompactions")
+		ok.Integer(*v.StorageSeriesFileMaxConcurrentSnapshotCompactions)
+	}
+
+	if v.StorageSeriesIdSetCacheSize != nil {
+		ok := object.Key("storageSeriesIdSetCacheSize")
+		ok.Long(*v.StorageSeriesIdSetCacheSize)
+	}
+
+	if v.StorageWalMaxConcurrentWrites != nil {
+		ok := object.Key("storageWalMaxConcurrentWrites")
+		ok.Integer(*v.StorageWalMaxConcurrentWrites)
+	}
+
+	if v.StorageWalMaxWriteDelay != nil {
+		ok := object.Key("storageWalMaxWriteDelay")
+		if err := awsAwsjson10_serializeDocumentDuration(v.StorageWalMaxWriteDelay, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TracingType) > 0 {
 		ok := object.Key("tracingType")
 		ok.String(string(v.TracingType))
+	}
+
+	if v.UiDisabled != nil {
+		ok := object.Key("uiDisabled")
+		ok.Boolean(*v.UiDisabled)
 	}
 
 	return nil
@@ -875,6 +1043,11 @@ func awsAwsjson10_serializeOpDocumentCreateDbInstanceInput(v *CreateDbInstanceIn
 	if v.Password != nil {
 		ok := object.Key("password")
 		ok.String(*v.Password)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
 	}
 
 	if v.PubliclyAccessible != nil {
@@ -1091,6 +1264,11 @@ func awsAwsjson10_serializeOpDocumentUpdateDbInstanceInput(v *UpdateDbInstanceIn
 		if err := awsAwsjson10_serializeDocumentLogDeliveryConfiguration(v.LogDeliveryConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
 	}
 
 	return nil

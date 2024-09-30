@@ -63,9 +63,20 @@ type CreateGroupInput struct {
 	// [Service configurations for Resource Groups]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
 	Configuration []types.GroupConfigurationItem
 
+	// The critical rank of the application group on a scale of 1 to 10, with a rank
+	// of 1 being the most critical, and a rank of 10 being least critical.
+	Criticality *int32
+
 	// The description of the resource group. Descriptions can consist of letters,
 	// numbers, hyphens, underscores, periods, and spaces.
 	Description *string
+
+	// The name of the application group, which you can change at any time.
+	DisplayName *string
+
+	// A name, email address or other identifier for the person or group who is
+	// considered as the owner of this application group within your organization.
+	Owner *string
 
 	// The resource query that determines which Amazon Web Services resources are
 	// members of this group. For more information about resource queries, see [Create a tag-based group in Resource Groups].

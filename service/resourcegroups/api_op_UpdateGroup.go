@@ -36,18 +36,29 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 
 type UpdateGroupInput struct {
 
+	// The critical rank of the application group on a scale of 1 to 10, with a rank
+	// of 1 being the most critical, and a rank of 10 being least critical.
+	Criticality *int32
+
 	// The new description that you want to update the resource group with.
 	// Descriptions can contain letters, numbers, hyphens, underscores, periods, and
 	// spaces.
 	Description *string
 
-	// The name or the ARN of the resource group to modify.
+	// The name of the application group, which you can change at any time.
+	DisplayName *string
+
+	// The name or the ARN of the resource group to update.
 	Group *string
 
 	// Don't use this parameter. Use Group instead.
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
+
+	// A name, email address or other identifier for the person or group who is
+	// considered as the owner of this application group within your organization.
+	Owner *string
 
 	noSmithyDocumentSerde
 }

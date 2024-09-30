@@ -13,15 +13,16 @@ import (
 
 // Adds the specified resources to the specified group.
 //
-// You can use this operation with only resource groups that are configured with
-// the following types:
+// You can only use this operation with the following groups:
 //
 //   - AWS::EC2::HostManagement
 //
 //   - AWS::EC2::CapacityReservationPool
 //
-// Other resource group type and resource types aren't currently supported by this
-// operation.
+//   - AWS::ResourceGroups::ApplicationGroup
+//
+// Other resource group types and resource types are not currently supported by
+// this operation.
 //
 // # Minimum permissions
 //
@@ -45,12 +46,14 @@ func (c *Client) GroupResources(ctx context.Context, params *GroupResourcesInput
 
 type GroupResourcesInput struct {
 
-	// The name or the ARN of the resource group to add resources to.
+	// The name or the Amazon resource name (ARN) of the resource group to add
+	// resources to.
 	//
 	// This member is required.
 	Group *string
 
-	// The list of ARNs of the resources to be added to the group.
+	// The list of Amazon resource names (ARNs) of the resources to be added to the
+	// group.
 	//
 	// This member is required.
 	ResourceArns []string
@@ -60,18 +63,19 @@ type GroupResourcesInput struct {
 
 type GroupResourcesOutput struct {
 
-	// A list of ARNs of any resources that this operation failed to add to the group.
+	// A list of Amazon resource names (ARNs) of any resources that this operation
+	// failed to add to the group.
 	Failed []types.FailedResource
 
-	// A list of ARNs of any resources that this operation is still in the process
-	// adding to the group. These pending additions continue asynchronously. You can
-	// check the status of pending additions by using the ListGroupResourcesoperation, and checking the
-	// Resources array in the response and the Status field of each object in that
-	// array.
+	// A list of Amazon resource names (ARNs) of any resources that this operation is
+	// still in the process adding to the group. These pending additions continue
+	// asynchronously. You can check the status of pending additions by using the ListGroupResources
+	// operation, and checking the Resources array in the response and the Status
+	// field of each object in that array.
 	Pending []types.PendingResource
 
-	// A list of ARNs of the resources that this operation successfully added to the
-	// group.
+	// A list of Amazon resource names (ARNs) of the resources that this operation
+	// successfully added to the group.
 	Succeeded []string
 
 	// Metadata pertaining to the operation's result.

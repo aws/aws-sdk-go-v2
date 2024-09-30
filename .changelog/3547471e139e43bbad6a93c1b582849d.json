@@ -1,0 +1,8 @@
+{
+    "id": "3547471e-139e-43bb-ad6a-93c1b582849d",
+    "type": "feature",
+    "description": "Release DataLakeDataset, DataIntegrationFlow and ResourceTagging APIs for AWS Supply Chain",
+    "modules": [
+        "service/supplychain"
+    ]
+}

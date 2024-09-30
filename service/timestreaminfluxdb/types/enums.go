@@ -73,6 +73,29 @@ func (DeploymentType) Values() []DeploymentType {
 	}
 }
 
+type DurationType string
+
+// Enum values for DurationType
+const (
+	DurationTypeHours        DurationType = "hours"
+	DurationTypeMinutes      DurationType = "minutes"
+	DurationTypeSeconds      DurationType = "seconds"
+	DurationTypeMilliseconds DurationType = "milliseconds"
+)
+
+// Values returns all known values for DurationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DurationType) Values() []DurationType {
+	return []DurationType{
+		"hours",
+		"minutes",
+		"seconds",
+		"milliseconds",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel

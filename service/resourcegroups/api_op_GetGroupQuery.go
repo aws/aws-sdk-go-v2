@@ -38,7 +38,7 @@ func (c *Client) GetGroupQuery(ctx context.Context, params *GetGroupQueryInput, 
 
 type GetGroupQueryInput struct {
 
-	// The name or the ARN of the resource group to query.
+	// The name or the Amazon resource name (ARN) of the resource group to query.
 	Group *string
 
 	// Don't use this parameter. Use Group instead.
