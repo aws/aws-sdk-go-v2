@@ -50,7 +50,7 @@ func (m *setupInputContext) HandleInitialize(
 	}
 
 	if m.RequireChecksum || m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenSupported {
-		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, "CRC32")
+		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
 	}
 
 	return next.HandleInitialize(ctx, in)
