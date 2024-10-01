@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Begins an ingestion job, in which a data source is added to a knowledge base.
+// Begins a data ingestion job. Data sources are ingested into your knowledge base
+// so that Large Language Models (LLMs) can use your data.
 func (c *Client) StartIngestionJob(ctx context.Context, params *StartIngestionJobInput, optFns ...func(*Options)) (*StartIngestionJobOutput, error) {
 	if params == nil {
 		params = &StartIngestionJobInput{}
@@ -29,12 +30,13 @@ func (c *Client) StartIngestionJob(ctx context.Context, params *StartIngestionJo
 
 type StartIngestionJobInput struct {
 
-	// The unique identifier of the data source to ingest.
+	// The unique identifier of the data source you want to ingest into your knowledge
+	// base.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the knowledge base to which to add the data source.
+	// The unique identifier of the knowledge base for the data ingestion job.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -46,7 +48,7 @@ type StartIngestionJobInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// A description of the ingestion job.
+	// A description of the data ingestion job.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -54,7 +56,7 @@ type StartIngestionJobInput struct {
 
 type StartIngestionJobOutput struct {
 
-	// An object containing information about the ingestion job.
+	// Contains information about the data ingestion job.
 	//
 	// This member is required.
 	IngestionJob *types.IngestionJob

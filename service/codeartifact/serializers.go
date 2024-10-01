@@ -2190,6 +2190,10 @@ func awsRestjson1_serializeOpHttpBindingsGetRepositoryEndpointInput(v *GetReposi
 		encoder.SetQuery("domain-owner").String(*v.DomainOwner)
 	}
 
+	if len(v.EndpointType) > 0 {
+		encoder.SetQuery("endpointType").String(string(v.EndpointType))
+	}
+
 	if len(v.Format) > 0 {
 		encoder.SetQuery("format").String(string(v.Format))
 	}

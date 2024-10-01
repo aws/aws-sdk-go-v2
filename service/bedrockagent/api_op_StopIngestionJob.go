@@ -11,30 +11,38 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a data source.
-func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
+// Stops a currently running data ingestion job. You can send a StartIngestionJob
+// request again to ingest the rest of your data when you are ready.
+func (c *Client) StopIngestionJob(ctx context.Context, params *StopIngestionJobInput, optFns ...func(*Options)) (*StopIngestionJobOutput, error) {
 	if params == nil {
-		params = &GetDataSourceInput{}
+		params = &StopIngestionJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDataSource", params, optFns, c.addOperationGetDataSourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StopIngestionJob", params, optFns, c.addOperationStopIngestionJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDataSourceOutput)
+	out := result.(*StopIngestionJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDataSourceInput struct {
+type StopIngestionJobInput struct {
 
-	// The unique identifier of the data source.
+	// The unique identifier of the data source for the data ingestion job you want to
+	// stop.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the knowledge base for the data source.
+	// The unique identifier of the data ingestion job you want to stop.
+	//
+	// This member is required.
+	IngestionJobId *string
+
+	// The unique identifier of the knowledge base for the data ingestion job you want
+	// to stop.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -42,12 +50,12 @@ type GetDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
-type GetDataSourceOutput struct {
+type StopIngestionJobOutput struct {
 
-	// Contains details about the data source.
+	// Contains information about the stopped data ingestion job.
 	//
 	// This member is required.
-	DataSource *types.DataSource
+	IngestionJob *types.IngestionJob
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,19 +63,19 @@ type GetDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationStopIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopIngestionJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopIngestionJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataSource"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "StopIngestionJob"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -119,10 +127,10 @@ func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, o
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetDataSourceValidationMiddleware(stack); err != nil {
+	if err = addOpStopIngestionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataSource(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopIngestionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -155,10 +163,10 @@ func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDataSource(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStopIngestionJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetDataSource",
+		OperationName: "StopIngestionJob",
 	}
 }

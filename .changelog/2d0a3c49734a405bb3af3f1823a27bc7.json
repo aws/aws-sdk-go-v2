@@ -1,0 +1,8 @@
+{
+    "id": "2d0a3c49-734a-405b-b3af-3f1823a27bc7",
+    "type": "feature",
+    "description": "This release provides additional support for enabling Aurora Limitless Database DB clusters.",
+    "modules": [
+        "service/rds"
+    ]
+}

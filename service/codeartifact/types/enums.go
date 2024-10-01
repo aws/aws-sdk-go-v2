@@ -59,6 +59,25 @@ func (DomainStatus) Values() []DomainStatus {
 	}
 }
 
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypeDualstack EndpointType = "dualstack"
+	EndpointTypeIpv4      EndpointType = "ipv4"
+)
+
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"dualstack",
+		"ipv4",
+	}
+}
+
 type ExternalConnectionStatus string
 
 // Enum values for ExternalConnectionStatus

@@ -58,6 +58,7 @@
         "api_op_PrepareAgent.go",
         "api_op_PrepareFlow.go",
         "api_op_StartIngestionJob.go",
+        "api_op_StopIngestionJob.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateAgent.go",

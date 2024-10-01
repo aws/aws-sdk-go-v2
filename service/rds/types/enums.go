@@ -164,6 +164,25 @@ func (ClientPasswordAuthType) Values() []ClientPasswordAuthType {
 	}
 }
 
+type ClusterScalabilityType string
+
+// Enum values for ClusterScalabilityType
+const (
+	ClusterScalabilityTypeStandard  ClusterScalabilityType = "standard"
+	ClusterScalabilityTypeLimitless ClusterScalabilityType = "limitless"
+)
+
+// Values returns all known values for ClusterScalabilityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterScalabilityType) Values() []ClusterScalabilityType {
+	return []ClusterScalabilityType{
+		"standard",
+		"limitless",
+	}
+}
+
 type CustomEngineVersionStatus string
 
 // Enum values for CustomEngineVersionStatus

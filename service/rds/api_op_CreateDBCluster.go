@@ -157,6 +157,15 @@ type CreateDBClusterInput struct {
 	// Valid for Cluster Type: Aurora DB clusters only
 	CharacterSetName *string
 
+	// Specifies the scalability mode of the Aurora DB cluster. When set to limitless ,
+	// the cluster operates as an Aurora Limitless Database. When set to standard (the
+	// default), the cluster uses normal DB instance creation.
+	//
+	// Valid for: Aurora DB clusters only
+	//
+	// You can't modify this setting after you create the DB cluster.
+	ClusterScalabilityType types.ClusterScalabilityType
+
 	// Specifies whether to copy all tags from the DB cluster to snapshots of the DB
 	// cluster. The default is not to copy them.
 	//

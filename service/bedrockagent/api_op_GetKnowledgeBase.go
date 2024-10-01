@@ -29,7 +29,7 @@ func (c *Client) GetKnowledgeBase(ctx context.Context, params *GetKnowledgeBaseI
 
 type GetKnowledgeBaseInput struct {
 
-	// The unique identifier of the knowledge base for which to get information.
+	// The unique identifier of the knowledge base you want to get information on.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

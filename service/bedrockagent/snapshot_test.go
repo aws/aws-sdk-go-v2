@@ -662,6 +662,18 @@ func TestCheckSnapshot_StartIngestionJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1398,18 @@ func TestUpdateSnapshot_StartIngestionJob(t *testing.T) {
 	_, err := svc.StartIngestionJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartIngestionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopIngestionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopIngestionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopIngestionJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

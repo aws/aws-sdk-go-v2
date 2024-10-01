@@ -1,0 +1,8 @@
+{
+    "id": "d0ca0869-a234-425c-89af-877eac3be86a",
+    "type": "feature",
+    "description": "Add support for the dual stack endpoints.",
+    "modules": [
+        "service/codeartifact"
+    ]
+}

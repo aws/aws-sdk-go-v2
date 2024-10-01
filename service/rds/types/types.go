@@ -628,6 +628,11 @@ type DBCluster struct {
 	// The time when the DB cluster was created, in Universal Coordinated Time (UTC).
 	ClusterCreateTime *time.Time
 
+	// The scalability mode of the Aurora DB cluster. When set to limitless , the
+	// cluster operates as an Aurora Limitless Database. When set to standard (the
+	// default), the cluster uses normal DB instance creation.
+	ClusterScalabilityType ClusterScalabilityType
+
 	// Indicates whether tags are copied from the DB cluster to snapshots of the DB
 	// cluster.
 	CopyTagsToSnapshot *bool
@@ -2722,6 +2727,15 @@ type DBShardGroup struct {
 
 	// The status of the DB shard group.
 	Status *string
+
+	// A list of tags.
+	//
+	// For more information, see [Tagging Amazon RDS resources] in the Amazon RDS User Guide or [Tagging Amazon Aurora and Amazon RDS resources] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Tagging Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+	// [Tagging Amazon Aurora and Amazon RDS resources]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
+	TagList []Tag
 
 	noSmithyDocumentSerde
 }

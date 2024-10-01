@@ -631,6 +631,14 @@ type RepositoryExternalConnectionInfo struct {
 	//   format, such as a JAR file.
 	//
 	//   - nuget : A NuGet package.
+	//
+	//   - generic : A generic package.
+	//
+	//   - ruby : A Ruby package.
+	//
+	//   - swift : A Swift package.
+	//
+	//   - cargo : A Cargo package.
 	PackageFormat PackageFormat
 
 	//  The status of the external connection of a repository. There is one valid
