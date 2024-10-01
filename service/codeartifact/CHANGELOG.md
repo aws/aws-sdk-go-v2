@@ -1,3 +1,7 @@
+# v1.32.0 (2024-10-01)
+
+* **Feature**: Add support for the dual stack endpoints.
+
 # v1.31.3 (2024-09-27)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "32666c16-4163-47a4-b9e0-e586b1e2feab",
-    "type": "feature",
-    "description": "This release adds support to stop an ongoing ingestion job using the StopIngestionJob API in Agents for Amazon Bedrock.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

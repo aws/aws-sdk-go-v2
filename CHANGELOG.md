@@ -1,3 +1,13 @@
+# Release (2024-10-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.22.0](service/bedrockagent/CHANGELOG.md#v1220-2024-10-01)
+  * **Feature**: This release adds support to stop an ongoing ingestion job using the StopIngestionJob API in Agents for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.32.0](service/codeartifact/CHANGELOG.md#v1320-2024-10-01)
+  * **Feature**: Add support for the dual stack endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.86.0](service/rds/CHANGELOG.md#v1860-2024-10-01)
+  * **Feature**: This release provides additional support for enabling Aurora Limitless Database DB clusters.
+
 # Release (2024-09-30)
 
 ## Module Highlights
