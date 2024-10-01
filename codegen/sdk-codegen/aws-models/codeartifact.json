@@ -3182,6 +3182,23 @@
                 "target": "com.amazonaws.codeartifact#DomainSummary"
             }
         },
+        "com.amazonaws.codeartifact#EndpointType": {
+            "type": "enum",
+            "members": {
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                },
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codeartifact#ErrorMessage": {
             "type": "string"
         },
@@ -3816,6 +3833,13 @@
                         "smithy.api#documentation": "<p>\n      Returns which endpoint of a repository to return. A repository has one endpoint for each \n      package format.\n    </p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
+                    }
+                },
+                "endpointType": {
+                    "target": "com.amazonaws.codeartifact#EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that specifies the type of endpoint.</p>",
+                        "smithy.api#httpQuery": "endpointType"
                     }
                 }
             },
@@ -6990,7 +7014,7 @@
                 "packageFormat": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The package format associated with a repository's external connection. The valid package formats are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>nuget</code>: A NuGet package.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n        The package format associated with a repository's external connection. The valid package formats are:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>npm</code>: A Node Package Manager (npm) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>: A Python Package Index (PyPI) package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>nuget</code>: A NuGet package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>generic</code>: A generic package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ruby</code>: A Ruby package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>swift</code>: A Swift package.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>cargo</code>: A Cargo package.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "status": {

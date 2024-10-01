@@ -55,10 +55,38 @@
                 "smithy.api#documentation": "<p>The Resource Groups settings for this Amazon Web Services account.</p>"
             }
         },
+        "com.amazonaws.resourcegroups#ApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,150}/[a-zA-Z0-9]{22,26}$"
+            }
+        },
+        "com.amazonaws.resourcegroups#ApplicationTag": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.resourcegroups#ApplicationTagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.resourcegroups#ApplicationArn"
+            }
+        },
+        "com.amazonaws.resourcegroups#ApplicationTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^awsApplication$"
+            }
+        },
         "com.amazonaws.resourcegroups#Ardi": {
             "type": "service",
             "version": "2017-11-27",
             "operations": [
+                {
+                    "target": "com.amazonaws.resourcegroups#CancelTagSyncTask"
+                },
                 {
                     "target": "com.amazonaws.resourcegroups#CreateGroup"
                 },
@@ -81,7 +109,13 @@
                     "target": "com.amazonaws.resourcegroups#GetTags"
                 },
                 {
+                    "target": "com.amazonaws.resourcegroups#GetTagSyncTask"
+                },
+                {
                     "target": "com.amazonaws.resourcegroups#GroupResources"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ListGroupingStatuses"
                 },
                 {
                     "target": "com.amazonaws.resourcegroups#ListGroupResources"
@@ -90,10 +124,16 @@
                     "target": "com.amazonaws.resourcegroups#ListGroups"
                 },
                 {
+                    "target": "com.amazonaws.resourcegroups#ListTagSyncTasks"
+                },
+                {
                     "target": "com.amazonaws.resourcegroups#PutGroupConfiguration"
                 },
                 {
                     "target": "com.amazonaws.resourcegroups#SearchResources"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#StartTagSyncTask"
                 },
                 {
                     "target": "com.amazonaws.resourcegroups#Tag"
@@ -126,7 +166,7 @@
                     "name": "resource-groups"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Resource Groups lets you organize Amazon Web Services resources such as Amazon Elastic Compute Cloud instances, Amazon Relational Database Service\n            databases, and Amazon Simple Storage Service buckets into groups using criteria that you define as tags. A\n            resource group is a collection of resources that match the resource types specified in a\n            query, and share one or more tags or portions of tags. You can create a group of\n            resources based on their roles in your cloud infrastructure, lifecycle stages, regions,\n            application layers, or virtually any criteria. Resource Groups enable you to automate management\n            tasks, such as those in Amazon Web Services Systems Manager Automation documents, on tag-related resources in\n            Amazon Web Services Systems Manager. Groups of tagged resources also let you quickly view a custom console in\n            Amazon Web Services Systems Manager that shows Config compliance and other monitoring data about member\n            resources.</p>\n         <p>To create a resource group, build a resource query, and specify tags that identify the\n            criteria that members of the group have in common. Tags are key-value pairs.</p>\n         <p>For more information about Resource Groups, see the <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html\">Resource Groups User Guide</a>.</p>\n         <p>Resource Groups uses a REST-compliant API that you can use to perform the following types of\n            operations.</p>\n         <ul>\n            <li>\n               <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and\n                    resource query entities</p>\n            </li>\n            <li>\n               <p>Applying, editing, and removing tags from resource groups</p>\n            </li>\n            <li>\n               <p>Resolving resource group member ARNs so they can be returned as search\n                    results</p>\n            </li>\n            <li>\n               <p>Getting data about resources that are members of a group</p>\n            </li>\n            <li>\n               <p>Searching Amazon Web Services resources based on a resource query</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Resource Groups lets you organize Amazon Web Services resources such as Amazon Elastic Compute Cloud instances, Amazon Relational Database Service\n            databases, and Amazon Simple Storage Service buckets into groups using criteria that you define as tags. A\n            resource group is a collection of resources that match the resource types specified in a\n            query, and share one or more tags or portions of tags. You can create a group of\n            resources based on their roles in your cloud infrastructure, lifecycle stages, regions,\n            application layers, or virtually any criteria. Resource Groups enable you to automate management\n            tasks, such as those in Amazon Web Services Systems Manager Automation documents, on tag-related resources in\n            Amazon Web Services Systems Manager. Groups of tagged resources also let you quickly view a custom console in\n            Amazon Web Services Systems Manager that shows Config compliance and other monitoring data about member\n            resources.</p>\n         <p>To create a resource group, build a resource query, and specify tags that identify the\n            criteria that members of the group have in common. Tags are key-value pairs.</p>\n         <p>For more information about Resource Groups, see the <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html\">Resource Groups User Guide</a>.</p>\n         <p>Resource Groups uses a REST-compliant API that you can use to perform the following types of\n            operations.</p>\n         <ul>\n            <li>\n               <p>Create, Read, Update, and Delete (CRUD) operations on resource groups and\n                    resource query entities</p>\n            </li>\n            <li>\n               <p>Applying, editing, and removing tags from resource groups</p>\n            </li>\n            <li>\n               <p>Resolving resource group member Amazon resource names (ARN)s so they can be returned as search\n                    results</p>\n            </li>\n            <li>\n               <p>Getting data about resources that are members of a group</p>\n            </li>\n            <li>\n               <p>Searching Amazon Web Services resources based on a resource query</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Resource Groups",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1147,6 +1187,58 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.resourcegroups#CancelTagSyncTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroups#CancelTagSyncTaskInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the specified tag-sync task. </p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:CancelTagSyncTask</code> on the application group</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-groups:DeleteGroup</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/cancel-tag-sync-task",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#CancelTagSyncTaskInput": {
+            "type": "structure",
+            "members": {
+                "TaskArn": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the tag-sync task. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.resourcegroups#CreateGroup": {
             "type": "operation",
             "input": {
@@ -1185,7 +1277,7 @@
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.resourcegroups#GroupName",
+                    "target": "com.amazonaws.resourcegroups#CreateGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the group, which is the identifier of the group in other operations. You\n            can't change the name of a resource group after you create it. A resource group name can\n            consist of letters, numbers, hyphens, periods, and underscores. The name cannot start\n            with <code>AWS</code>, <code>aws</code>, or any other possible capitalization; these are\n            reserved. A resource group name must be unique within each Amazon Web Services Region in your Amazon Web Services\n            account.</p>",
                         "smithy.api#required": {}
@@ -1214,10 +1306,38 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A configuration associates the resource group with an Amazon Web Services service and specifies how\n            the service can interact with the resources in the group. A configuration is an array of\n                <a>GroupConfigurationItem</a> elements. For details about the syntax of\n            service configurations, see <a href=\"https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html\">Service configurations for Resource Groups</a>.</p>\n         <note>\n            <p>A resource group can contain either a <code>Configuration</code> or a\n                    <code>ResourceQuery</code>, but not both.</p>\n         </note>"
                     }
+                },
+                "Criticality": {
+                    "target": "com.amazonaws.resourcegroups#Criticality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The critical rank of the application group on a scale of 1 to 10, with a \n            rank of 1 being the most critical, and a rank of 10 being least critical.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.resourcegroups#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name, email address or other identifier for the person or group \n            who is considered as the owner of this application group within your organization. </p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.resourcegroups#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group, which you can change at any time. </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#CreateGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]+$"
             }
         },
         "com.amazonaws.resourcegroups#CreateGroupOutput": {
@@ -1250,6 +1370,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#Criticality": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.resourcegroups#DeleteGroup": {
@@ -1302,9 +1431,9 @@
                     }
                 },
                 "Group": {
-                    "target": "com.amazonaws.resourcegroups#GroupString",
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to delete.</p>"
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group to delete.</p>"
                     }
                 }
             },
@@ -1336,6 +1465,16 @@
                 "smithy.api#pattern": "^[\\sa-zA-Z0-9_\\.-]*$"
             }
         },
+        "com.amazonaws.resourcegroups#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.resourcegroups#ErrorCode": {
             "type": "string",
             "traits": {
@@ -1360,7 +1499,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.resourcegroups#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource that failed to be added or removed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource that failed to be added or removed.</p>"
                     }
                 },
                 "ErrorMessage": {
@@ -1527,7 +1666,7 @@
                 "Group": {
                     "target": "com.amazonaws.resourcegroups#GroupString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group for which you want to retrive the service\n            configuration.</p>"
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group for which you want to retrive the service\n            configuration.</p>"
                     }
                 }
             },
@@ -1562,9 +1701,9 @@
                     }
                 },
                 "Group": {
-                    "target": "com.amazonaws.resourcegroups#GroupString",
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group to retrieve.</p>"
                     }
                 }
             },
@@ -1638,7 +1777,7 @@
                 "Group": {
                     "target": "com.amazonaws.resourcegroups#GroupString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to query.</p>"
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group to query.</p>"
                     }
                 }
             },
@@ -1653,6 +1792,123 @@
                     "target": "com.amazonaws.resourcegroups#GroupQuery",
                     "traits": {
                         "smithy.api#documentation": "<p>The resource query associated with the specified group. For more information about\n            resource queries, see <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag\">Create\n                a tag-based group in Resource Groups</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#GetTagSyncTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroups#GetTagSyncTaskInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroups#GetTagSyncTaskOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specified tag-sync task. </p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetTagSyncTask</code> on the application group</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-tag-sync-task",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#GetTagSyncTaskInput": {
+            "type": "structure",
+            "members": {
+                "TaskArn": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the tag-sync task. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#GetTagSyncTaskOutput": {
+            "type": "structure",
+            "members": {
+                "GroupArn": {
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the application group. </p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.resourcegroups#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group. </p>"
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the tag-sync task. </p>"
+                    }
+                },
+                "TagKey": {
+                    "target": "com.amazonaws.resourcegroups#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key. </p>"
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.resourcegroups#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.resourcegroups#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the role assumed by Resource Groups to tag and untag resources on your behalf. </p>\n         <p>For more information about this role, review <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/arguide/app-tag-sync.html#tag-sync-role\">Tag-sync required permissions</a>. \n        </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the tag-sync task. </p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The tag-sync task is actively managing resources in \n                    the application by adding or removing the <code>awsApplication</code> tag from resources \n                    when they are tagged or untagged with the specified tag key-value pair. \n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The tag-sync task is not actively managing resources \n                    in the application. Review the <code>ErrorMessage</code> for more information about \n                    resolving the error. \n                </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.resourcegroups#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific error message in cases where the tag-sync task status\n            is <code>ERROR</code>. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.resourcegroups#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the tag-sync task was created. </p>"
                     }
                 }
             },
@@ -1689,7 +1945,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an\n            ARN.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetTags</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an\n            Amazon resource name (ARN).</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GetTags</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resources/{Arn}/tags",
@@ -1701,9 +1957,9 @@
             "type": "structure",
             "members": {
                 "Arn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group whose tags you want to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group whose tags you want to retrieve.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1717,9 +1973,9 @@
             "type": "structure",
             "members": {
                 "Arn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the tagged resource group.</p>"
+                        "smithy.api#documentation": "<p>TheAmazon resource name (ARN) of the tagged resource group.</p>"
                     }
                 },
                 "Tags": {
@@ -1737,9 +1993,9 @@
             "type": "structure",
             "members": {
                 "GroupArn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1755,6 +2011,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the resource group.</p>"
                     }
+                },
+                "Criticality": {
+                    "target": "com.amazonaws.resourcegroups#Criticality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The critical rank of the application group on a scale of 1 to 10, with a \n            rank of 1 being the most critical, and a rank of 10 being least critical.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.resourcegroups#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name, email address or other identifier for the person or group \n            who is considered as the owner of this application group within your organization. </p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.resourcegroups#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group, which you can change at any time. </p>"
+                    }
+                },
+                "ApplicationTag": {
+                    "target": "com.amazonaws.resourcegroups#ApplicationTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag that defines the application group membership. This tag is only supported \n            for application groups. </p>"
+                    }
                 }
             },
             "traits": {
@@ -1768,7 +2048,17 @@
                     "min": 12,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,300}$"
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/([a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26})$"
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupArnV2": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/([a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26})$"
             }
         },
         "com.amazonaws.resourcegroups#GroupConfiguration": {
@@ -1961,6 +2251,24 @@
                     "traits": {
                         "smithy.api#enumValue": "configuration-type"
                     }
+                },
+                "Owner": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "owner"
+                    }
+                },
+                "DisplayName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "display-name"
+                    }
+                },
+                "Criticality": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "criticality"
+                    }
                 }
             }
         },
@@ -1969,9 +2277,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 128
+                    "max": 300
                 },
-                "smithy.api#pattern": "^AWS::(AllSupported|[a-zA-Z0-9]+::[a-zA-Z0-9]+)$"
+                "smithy.api#pattern": "^AWS::(AllSupported|[a-zA-Z0-9]+::[a-zA-Z0-9]+)|[\\s\\p{L}0-9_\\.-]*$"
             }
         },
         "com.amazonaws.resourcegroups#GroupFilterValues": {
@@ -1998,7 +2306,31 @@
                 "GroupArn": {
                     "target": "com.amazonaws.resourcegroups#GroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.resourcegroups#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the application group. </p>"
+                    }
+                },
+                "Criticality": {
+                    "target": "com.amazonaws.resourcegroups#Criticality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The critical rank of the application group on a scale of 1 to 10, with a \n            rank of 1 being the most critical, and a rank of 10 being least critical.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.resourcegroups#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name, email address or other identifier for the person or group \n            who is considered as the owner of this group within your organization. </p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.resourcegroups#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group, which you can change at any time. </p>"
                     }
                 }
             },
@@ -2080,7 +2412,7 @@
                     "min": 1,
                     "max": 300
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}$"
             }
         },
         "com.amazonaws.resourcegroups#GroupParameterList": {
@@ -2140,7 +2472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified resources to the specified group.</p>\n         <important>\n            <p>You can use this operation with only resource groups that are configured with the\n                following types:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::EC2::HostManagement</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::EC2::CapacityReservationPool</code>\n                  </p>\n               </li>\n            </ul>\n            <p>Other resource group type and resource types aren't currently supported by this\n                operation.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GroupResources</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Adds the specified resources to the specified group.</p>\n         <important>\n            <p>You can only use this operation with the following groups:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>AWS::EC2::HostManagement</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::EC2::CapacityReservationPool</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS::ResourceGroups::ApplicationGroup</code>\n                  </p>\n               </li>\n            </ul>\n            <p>Other resource group types and resource types are not currently supported by this\n                operation.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:GroupResources</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/group-resources",
@@ -2152,16 +2484,16 @@
             "type": "structure",
             "members": {
                 "Group": {
-                    "target": "com.amazonaws.resourcegroups#GroupString",
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to add resources to.</p>",
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group to add resources to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceArns": {
                     "target": "com.amazonaws.resourcegroups#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of ARNs of the resources to be added to the group. </p>",
+                        "smithy.api#documentation": "<p>The list of Amazon resource names (ARNs) of the resources to be added to the group. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2176,19 +2508,19 @@
                 "Succeeded": {
                     "target": "com.amazonaws.resourcegroups#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs of the resources that this operation successfully added to the\n            group.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon resource names (ARNs) of the resources that this operation successfully added to the\n            group.</p>"
                     }
                 },
                 "Failed": {
                     "target": "com.amazonaws.resourcegroups#FailedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs of any resources that this operation failed to add to the group.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon resource names (ARNs) of any resources that this operation failed to add to the group.</p>"
                     }
                 },
                 "Pending": {
                     "target": "com.amazonaws.resourcegroups#PendingResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of ARNs of any resources that this operation is still in the process adding to\n            the group. These pending additions continue asynchronously. You can check the status of\n            pending additions by using the <code>\n               <a>ListGroupResources</a>\n            </code>\n            operation, and checking the <code>Resources</code> array in the response and the\n                <code>Status</code> field of each object in that array. </p>"
+                        "smithy.api#documentation": "<p>A list of Amazon resource names (ARNs) of any resources that this operation is still in the process adding to\n            the group. These pending additions continue asynchronously. You can check the status of\n            pending additions by using the <code>\n               <a>ListGroupResources</a>\n            </code>\n            operation, and checking the <code>Resources</code> array in the response and the\n                <code>Status</code> field of each object in that array. </p>"
                     }
                 }
             },
@@ -2203,7 +2535,113 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^(arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/)?[a-zA-Z0-9_\\.-]{1,300}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}|arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/([a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26})$"
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupStringV2": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}|arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/([a-zA-Z0-9_\\.-]{1,300}|[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26})$"
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupingStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKIPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupingStatusesItem": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.resourcegroups#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of a resource. </p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.resourcegroups#GroupingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the resource grouping action with values of \n            <code>GROUP</code> or <code>UNGROUP</code>. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.resourcegroups#GroupingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the resource grouping status with values of \n            <code>SUCCESS</code>, <code>FAILED</code>, <code>IN_PROGRESS</code>, \n            or <code>SKIPPED</code>. </p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.resourcegroups#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that explains the <code>ErrorCode</code>. </p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.resourcegroups#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the error code that was raised. </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.resourcegroups#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp of when the status was last updated. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about a grouping or ungrouping resource action. </p>"
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupingStatusesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroups#GroupingStatusesItem"
+            }
+        },
+        "com.amazonaws.resourcegroups#GroupingType": {
+            "type": "enum",
+            "members": {
+                "GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GROUP"
+                    }
+                },
+                "UNGROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNGROUP"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroups#InternalServerErrorException": {
@@ -2251,7 +2689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of ARNs of the resources that are members of a specified resource\n            group.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:ListGroupResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:ListStackResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Returns a list of Amazon resource names (ARNs) of the resources that are members of a specified resource\n            group.</p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:ListGroupResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:DescribeStacks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cloudformation:ListStackResources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:GetResources</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-group-resources",
@@ -2278,9 +2716,9 @@
                     }
                 },
                 "Group": {
-                    "target": "com.amazonaws.resourcegroups#GroupString",
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group</p>"
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group. </p>"
                     }
                 },
                 "Filters": {
@@ -2364,6 +2802,168 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.resourcegroups#ListGroupingStatuses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroups#ListGroupingStatusesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroups#ListGroupingStatusesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status of the last grouping or ungrouping action for \n            each resource in the specified application group. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-grouping-statuses",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "GroupingStatuses",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.resourcegroups#ListGroupingStatusesFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter. Filter names are case-sensitive. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.resourcegroups#ListGroupingStatusesFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to obtain more specific results from the list of grouping statuses. </p>"
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroups#ListGroupingStatusesFilter"
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesFilterName": {
+            "type": "enum",
+            "members": {
+                "Status": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "status"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resource-arn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^SUCCESS|FAILED|IN_PROGRESS|SKIPPED|arn:aws(-[a-z]+)*:[a-z0-9\\-]*:([a-z]{2}(-[a-z]+)+-\\d{1})?:([0-9]{12})?:.+$"
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroups#ListGroupingStatusesFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesInput": {
+            "type": "structure",
+            "members": {
+                "Group": {
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application group identifier, expressed as an Amazon resource name (ARN) or the application group name. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.resourcegroups#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of resources and their statuses returned in the \n            response. </p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.resourcegroups#ListGroupingStatusesFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter name and value pair that is used to return more \n            specific results from a list of resources. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.resourcegroups#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n            <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n            response indicates that more output is available. Set this parameter to the \n            value provided by a previous call's <code>NextToken</code> response to indicate \n            where the output should continue from. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#ListGroupingStatusesOutput": {
+            "type": "structure",
+            "members": {
+                "Group": {
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application group identifier, expressed as an Amazon resource name (ARN) or the application group name.</p>"
+                    }
+                },
+                "GroupingStatuses": {
+                    "target": "com.amazonaws.resourcegroups#GroupingStatusesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns details about the grouping or ungrouping status of the \n            resources in the specified application group. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.resourcegroups#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. \n            Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. \n            You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourcegroups#ListGroups": {
             "type": "operation",
             "input": {
@@ -2410,7 +3010,7 @@
                 "Filters": {
                     "target": "com.amazonaws.resourcegroups#GroupFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to\n            a <code>ListGroups</code> operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-type</code> - Filter the results to include only those resource groups that have the specified\n                    resource type in their <code>ResourceTypeFilter</code>. For example, <code>AWS::EC2::Instance</code> would\n                    return any resource group with a <code>ResourceTypeFilter</code> that includes\n                    <code>AWS::EC2::Instance</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>configuration-type</code> - Filter the results to include only those\n                    groups that have the specified configuration types attached. The current\n                    supported values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::AppRegistry::Application</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::AppRegistry::ApplicationResourceGroups</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::CloudFormation::Stack</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::CapacityReservationPool</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::HostManagement</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::NetworkFirewall::RuleGroup</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to\n            a <code>ListGroups</code> operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-type</code> - Filter the results to include only those resource groups that have the specified\n                    resource type in their <code>ResourceTypeFilter</code>. For example, <code>AWS::EC2::Instance</code> would\n                    return any resource group with a <code>ResourceTypeFilter</code> that includes\n                    <code>AWS::EC2::Instance</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>configuration-type</code> - Filter the results to include only those\n                    groups that have the specified configuration types attached. The current\n                    supported values are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::ResourceGroups::ApplicationGroup</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::AppRegistry::Application</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::AppRegistry::ApplicationResourceGroups</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::CloudFormation::Stack</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::CapacityReservationPool</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::HostManagement</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::NetworkFirewall::RuleGroup</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
@@ -2461,6 +3061,121 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.resourcegroups#ListTagSyncTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroups#ListTagSyncTasksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroups#ListTagSyncTasksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of tag-sync tasks. </p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:ListTagSyncTasks</code> with the group passed in the filters as the resource \n                    or * if using no filters </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-tag-sync-tasks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "TagSyncTasks",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#ListTagSyncTasksFilter": {
+            "type": "structure",
+            "members": {
+                "GroupArn": {
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the application group. </p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.resourcegroups#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns tag-sync tasks filtered by the Amazon resource name (ARN) or name of a \n            specified application group. </p>"
+            }
+        },
+        "com.amazonaws.resourcegroups#ListTagSyncTasksFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroups#ListTagSyncTasksFilter"
+            }
+        },
+        "com.amazonaws.resourcegroups#ListTagSyncTasksInput": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.resourcegroups#ListTagSyncTasksFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) or name of the application group for which you want to return a \n            list of tag-sync tasks. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.resourcegroups#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be included in the response. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.resourcegroups#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter for receiving additional results if you receive a \n            <code>NextToken</code> response in a previous request. A <code>NextToken</code> \n            response indicates that more output is available. Set this parameter to the \n            value provided by a previous call's <code>NextToken</code> response to indicate \n            where the output should continue from. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#ListTagSyncTasksOutput": {
+            "type": "structure",
+            "members": {
+                "TagSyncTasks": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag-sync tasks and information about each task. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.resourcegroups#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, indicates that more output is available than is included in the current response. \n            Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. \n            You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourcegroups#MaxResults": {
             "type": "integer",
             "traits": {
@@ -2504,6 +3219,16 @@
                 "smithy.api#documentation": "<p>One or more of the specified resources don't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.resourcegroups#Owner": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
         "com.amazonaws.resourcegroups#PendingResource": {
@@ -2569,7 +3294,7 @@
                 "Group": {
                     "target": "com.amazonaws.resourcegroups#GroupString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ARN of the resource group with the configuration that you want to\n            update.</p>"
+                        "smithy.api#documentation": "<p>The name or Amazon resource name (ARN) of the resource group with the configuration that you want to\n            update.</p>"
                     }
                 },
                 "Configuration": {
@@ -2767,7 +3492,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.resourcegroups#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of a resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of a resource.</p>"
                     }
                 },
                 "ResourceType": {
@@ -2793,7 +3518,7 @@
                 "Type": {
                     "target": "com.amazonaws.resourcegroups#QueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the query to perform. This can have one of two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>\n                     <code>CLOUDFORMATION_STACK_1_0:</code>\n                  </i> Specifies that you\n                    want the group to contain the members of an CloudFormation stack. The <code>Query</code>\n                    contains a <code>StackIdentifier</code> element with an ARN for a CloudFormation\n                    stack.</p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <code>TAG_FILTERS_1_0:</code>\n                  </i> Specifies that you want the\n                    group to include resource that have tags that match the query. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of the query to perform. This can have one of two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>\n                     <code>CLOUDFORMATION_STACK_1_0:</code>\n                  </i> Specifies that you\n                    want the group to contain the members of an CloudFormation stack. The <code>Query</code>\n                    contains a <code>StackIdentifier</code> element with an Amazon resource name (ARN) for a CloudFormation\n                    stack.</p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <code>TAG_FILTERS_1_0:</code>\n                  </i> Specifies that you want the\n                    group to include resource that have tags that match the query. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2838,6 +3563,16 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^AWS::[a-zA-Z0-9]+::\\w+$"
+            }
+        },
+        "com.amazonaws.resourcegroups#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.resourcegroups#SearchResources": {
@@ -2936,6 +3671,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.resourcegroups#StartTagSyncTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.resourcegroups#StartTagSyncTaskInput"
+            },
+            "output": {
+                "target": "com.amazonaws.resourcegroups#StartTagSyncTaskOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.resourcegroups#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.resourcegroups#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new tag-sync task to onboard and sync resources tagged with a specific tag key-value pair to an \n            application. </p>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:StartTagSyncTask</code> on the application group</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-groups:CreateGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>iam:PassRole</code> on the role provided in the request </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/start-tag-sync-task",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.resourcegroups#StartTagSyncTaskInput": {
+            "type": "structure",
+            "members": {
+                "Group": {
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) or name of the application group for which you want to create a tag-sync task. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKey": {
+                    "target": "com.amazonaws.resourcegroups#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key. Resources tagged with this tag key-value pair will be added to \n            the application. If a resource with this tag is later untagged, the tag-sync task removes\n            the resource from the application. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.resourcegroups#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value. Resources tagged with this tag key-value pair will be added to \n            the application. If a resource with this tag is later untagged, the tag-sync task removes\n            the resource from the application. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.resourcegroups#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#StartTagSyncTaskOutput": {
+            "type": "structure",
+            "members": {
+                "GroupArn": {
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the application group for which you want to add or remove resources. </p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.resourcegroups#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group to onboard and sync resources.</p>"
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the new tag-sync task. </p>"
+                    }
+                },
+                "TagKey": {
+                    "target": "com.amazonaws.resourcegroups#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key of the tag-sync task. </p>"
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.resourcegroups#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value of the tag-sync task. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.resourcegroups#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.resourcegroups#Tag": {
             "type": "operation",
             "input": {
@@ -2965,7 +3820,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource\n            group are not changed if they are not specified in the request parameters.</p>\n         <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:Tag</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Adds tags to a resource group with the specified Amazon resource name (ARN). Existing tags on a resource\n            group are not changed if they are not specified in the request parameters.</p>\n         <important>\n            <p>Do not store personally identifiable information (PII) or other confidential or\n                sensitive information in tags. We use tags to provide you with billing and\n                administration services. Tags are not intended to be used for private or sensitive\n                data.</p>\n         </important>\n         <p>\n            <b>Minimum permissions</b>\n         </p>\n         <p>To run this command, you must have the following permissions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>resource-groups:Tag</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/resources/{Arn}/tags",
@@ -2977,9 +3832,9 @@
             "type": "structure",
             "members": {
                 "Arn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group to which to add tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group to which to add tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3016,9 +3871,9 @@
             "type": "structure",
             "members": {
                 "Arn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the tagged resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the tagged resource.</p>"
                     }
                 },
                 "Tags": {
@@ -3030,6 +3885,101 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.resourcegroups#TagSyncTaskArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,150}/[a-z0-9]{26}/tag-sync-task/[a-z0-9]{26}$"
+            }
+        },
+        "com.amazonaws.resourcegroups#TagSyncTaskItem": {
+            "type": "structure",
+            "members": {
+                "GroupArn": {
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the application group. </p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.resourcegroups#GroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group. </p>"
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the tag-sync task. </p>"
+                    }
+                },
+                "TagKey": {
+                    "target": "com.amazonaws.resourcegroups#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key. </p>"
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.resourcegroups#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.resourcegroups#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the role assumed by the service to tag and untag resources on your behalf.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.resourcegroups#TagSyncTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the tag-sync task. </p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The tag-sync task is actively managing resources in \n                    the application by adding or removing the <code>awsApplication</code> tag from resources \n                    when they are tagged or untagged with the specified tag key-value pair. \n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - The tag-sync task is not actively managing resources \n                    in the application. Review the <code>ErrorMessage</code> for more information about \n                    resolving the error. \n                </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.resourcegroups#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific error message in cases where the tag-sync task status\n            is <code>Error</code>.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.resourcegroups#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the tag-sync task was created. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the tag-sync task. </p>"
+            }
+        },
+        "com.amazonaws.resourcegroups#TagSyncTaskList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resourcegroups#TagSyncTaskItem"
+            }
+        },
+        "com.amazonaws.resourcegroups#TagSyncTaskStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.resourcegroups#TagValue": {
@@ -3118,16 +4068,16 @@
             "type": "structure",
             "members": {
                 "Group": {
-                    "target": "com.amazonaws.resourcegroups#GroupString",
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group from which to remove the resources.</p>",
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group from which to remove the resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceArns": {
                     "target": "com.amazonaws.resourcegroups#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the resources to be removed from the group.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource names (ARNs) of the resources to be removed from the group.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3203,9 +4153,9 @@
             "type": "structure",
             "members": {
                 "Arn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group from which to remove tags. The command removed both the\n            specified keys and any values associated with those keys.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group from which to remove tags. The command removed both the\n            specified keys and any values associated with those keys.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3226,9 +4176,9 @@
             "type": "structure",
             "members": {
                 "Arn": {
-                    "target": "com.amazonaws.resourcegroups#GroupArn",
+                    "target": "com.amazonaws.resourcegroups#GroupArnV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group from which tags have been removed.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group from which tags have been removed.</p>"
                     }
                 },
                 "Keys": {
@@ -3282,7 +4232,7 @@
                 "GroupLifecycleEventsDesiredStatus": {
                     "target": "com.amazonaws.resourcegroups#GroupLifecycleEventsDesiredStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether you want to turn <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html\">group lifecycle events</a> on or off.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether you want to turn <a href=\"https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html\">group lifecycle events</a> on or off.</p>\n         <p>You can't turn on group lifecycle events if your resource groups quota is greater than 2,000. </p>"
                     }
                 }
             },
@@ -3354,15 +4304,33 @@
                     }
                 },
                 "Group": {
-                    "target": "com.amazonaws.resourcegroups#GroupString",
+                    "target": "com.amazonaws.resourcegroups#GroupStringV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to modify.</p>"
+                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to update.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.resourcegroups#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>The new description that you want to update the resource group with. Descriptions can\n            contain letters, numbers, hyphens, underscores, periods, and spaces.</p>"
+                    }
+                },
+                "Criticality": {
+                    "target": "com.amazonaws.resourcegroups#Criticality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The critical rank of the application group on a scale of 1 to 10, with a \n            rank of 1 being the most critical, and a rank of 10 being least critical.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.resourcegroups#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name, email address or other identifier for the person or group \n            who is considered as the owner of this application group within your organization. </p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.resourcegroups#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application group, which you can change at any time. </p>"
                     }
                 }
             },
@@ -3436,7 +4404,7 @@
                 "Group": {
                     "target": "com.amazonaws.resourcegroups#GroupString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or the ARN of the resource group to query.</p>"
+                        "smithy.api#documentation": "<p>The name or the Amazon resource name (ARN) of the resource group to query.</p>"
                     }
                 },
                 "ResourceQuery": {
@@ -3464,6 +4432,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.resourcegroups#timestamp": {
+            "type": "timestamp"
         }
     }
 }

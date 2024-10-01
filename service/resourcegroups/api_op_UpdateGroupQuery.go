@@ -47,7 +47,7 @@ type UpdateGroupQueryInput struct {
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
 
-	// The name or the ARN of the resource group to query.
+	// The name or the Amazon resource name (ARN) of the resource group to query.
 	Group *string
 
 	// Don't use this parameter. Use Group instead.

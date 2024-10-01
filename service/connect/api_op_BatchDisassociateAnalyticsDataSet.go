@@ -11,8 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Removes a list of analytics datasets associated with a given Amazon Connect
 // instance. You can disassociate multiple datasets in a single call.
 func (c *Client) BatchDisassociateAnalyticsDataSet(ctx context.Context, params *BatchDisassociateAnalyticsDataSetInput, optFns ...func(*Options)) (*BatchDisassociateAnalyticsDataSetOutput, error) {

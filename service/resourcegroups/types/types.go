@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // The Resource Groups settings for this Amazon Web Services account.
@@ -31,7 +32,8 @@ type FailedResource struct {
 	// The error message text associated with the failure.
 	ErrorMessage *string
 
-	// The ARN of the resource that failed to be added or removed.
+	// The Amazon resource name (ARN) of the resource that failed to be added or
+	// removed.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -53,7 +55,7 @@ type FailedResource struct {
 //     included in the group.
 type Group struct {
 
-	// The ARN of the resource group.
+	// The Amazon resource name (ARN) of the resource group.
 	//
 	// This member is required.
 	GroupArn *string
@@ -63,8 +65,23 @@ type Group struct {
 	// This member is required.
 	Name *string
 
+	// A tag that defines the application group membership. This tag is only supported
+	// for application groups.
+	ApplicationTag map[string]string
+
+	// The critical rank of the application group on a scale of 1 to 10, with a rank
+	// of 1 being the most critical, and a rank of 10 being least critical.
+	Criticality *int32
+
 	// The description of the resource group.
 	Description *string
+
+	// The name of the application group, which you can change at any time.
+	DisplayName *string
+
+	// A name, email address or other identifier for the person or group who is
+	// considered as the owner of this application group within your organization.
+	Owner *string
 
 	noSmithyDocumentSerde
 }
@@ -162,11 +179,50 @@ type GroupFilter struct {
 // The unique identifiers for a resource group.
 type GroupIdentifier struct {
 
-	// The ARN of the resource group.
+	// The critical rank of the application group on a scale of 1 to 10, with a rank
+	// of 1 being the most critical, and a rank of 10 being least critical.
+	Criticality *int32
+
+	// The description of the application group.
+	Description *string
+
+	// The name of the application group, which you can change at any time.
+	DisplayName *string
+
+	// The Amazon resource name (ARN) of the resource group.
 	GroupArn *string
 
 	// The name of the resource group.
 	GroupName *string
+
+	// A name, email address or other identifier for the person or group who is
+	// considered as the owner of this group within your organization.
+	Owner *string
+
+	noSmithyDocumentSerde
+}
+
+// The information about a grouping or ungrouping resource action.
+type GroupingStatusesItem struct {
+
+	// Describes the resource grouping action with values of GROUP or UNGROUP .
+	Action GroupingType
+
+	// Specifies the error code that was raised.
+	ErrorCode *string
+
+	// A message that explains the ErrorCode .
+	ErrorMessage *string
+
+	// The Amazon resource name (ARN) of a resource.
+	ResourceArn *string
+
+	// Describes the resource grouping status with values of SUCCESS , FAILED ,
+	// IN_PROGRESS , or SKIPPED .
+	Status GroupingStatus
+
+	// A timestamp of when the status was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -190,6 +246,24 @@ type GroupQuery struct {
 	noSmithyDocumentSerde
 }
 
+// A filter name and value pair that is used to obtain more specific results from
+// the list of grouping statuses.
+type ListGroupingStatusesFilter struct {
+
+	// The name of the filter. Filter names are case-sensitive.
+	//
+	// This member is required.
+	Name ListGroupingStatusesFilterName
+
+	// One or more filter values. Allowed filter values vary by resource filter name,
+	// and are case-sensitive.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // A structure returned by the ListGroupResources operation that contains identity and group
 // membership status information for one of the resources in the group.
 type ListGroupResourcesItem struct {
@@ -202,6 +276,19 @@ type ListGroupResourcesItem struct {
 	// This field is present in the response only if the group is of type
 	// AWS::EC2::HostManagement .
 	Status *ResourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Returns tag-sync tasks filtered by the Amazon resource name (ARN) or name of a
+// specified application group.
+type ListTagSyncTasksFilter struct {
+
+	// The Amazon resource name (ARN) of the application group.
+	GroupArn *string
+
+	// The name of the application group.
+	GroupName *string
 
 	noSmithyDocumentSerde
 }
@@ -251,7 +338,7 @@ type ResourceFilter struct {
 // A structure that contains the ARN of a resource and its resource type.
 type ResourceIdentifier struct {
 
-	// The ARN of a resource.
+	// The Amazon resource name (ARN) of a resource.
 	ResourceArn *string
 
 	// The resource type of a resource, such as AWS::EC2::Instance .
@@ -360,7 +447,7 @@ type ResourceQuery struct {
 	//
 	//   - CLOUDFORMATION_STACK_1_0: Specifies that you want the group to contain the
 	//   members of an CloudFormation stack. The Query contains a StackIdentifier
-	//   element with an ARN for a CloudFormation stack.
+	//   element with an Amazon resource name (ARN) for a CloudFormation stack.
 	//
 	//   - TAG_FILTERS_1_0: Specifies that you want the group to include resource that
 	//   have tags that match the query.
@@ -379,6 +466,50 @@ type ResourceStatus struct {
 
 	// The current status.
 	Name ResourceStatusValue
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon resource name (ARN) of the tag-sync task.
+type TagSyncTaskItem struct {
+
+	// The timestamp of when the tag-sync task was created.
+	CreatedAt *time.Time
+
+	// The specific error message in cases where the tag-sync task status is Error .
+	ErrorMessage *string
+
+	// The Amazon resource name (ARN) of the application group.
+	GroupArn *string
+
+	// The name of the application group.
+	GroupName *string
+
+	// The Amazon resource name (ARN) of the role assumed by the service to tag and
+	// untag resources on your behalf.
+	RoleArn *string
+
+	// The status of the tag-sync task.
+	//
+	// Valid values include:
+	//
+	//   - ACTIVE - The tag-sync task is actively managing resources in the application
+	//   by adding or removing the awsApplication tag from resources when they are
+	//   tagged or untagged with the specified tag key-value pair.
+	//
+	//   - ERROR - The tag-sync task is not actively managing resources in the
+	//   application. Review the ErrorMessage for more information about resolving the
+	//   error.
+	Status TagSyncTaskStatus
+
+	// The tag key.
+	TagKey *string
+
+	// The tag value.
+	TagValue *string
+
+	// The Amazon resource name (ARN) of the tag-sync task.
+	TaskArn *string
 
 	noSmithyDocumentSerde
 }

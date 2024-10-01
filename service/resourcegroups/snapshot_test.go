@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CancelTagSyncTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTagSyncTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelTagSyncTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGroup(context.Background(), nil, func(o *Options) {
@@ -146,11 +158,35 @@ func TestCheckSnapshot_GetTags(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTagSyncTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTagSyncTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTagSyncTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GroupResources(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GroupResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GroupResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGroupingStatuses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGroupingStatuses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGroupingStatuses")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -182,6 +218,18 @@ func TestCheckSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTagSyncTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagSyncTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTagSyncTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutGroupConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutGroupConfiguration(context.Background(), nil, func(o *Options) {
@@ -199,6 +247,18 @@ func TestCheckSnapshot_SearchResources(t *testing.T) {
 	_, err := svc.SearchResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTagSyncTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTagSyncTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTagSyncTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -277,6 +337,18 @@ func TestCheckSnapshot_UpdateGroupQuery(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CancelTagSyncTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelTagSyncTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelTagSyncTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGroup(context.Background(), nil, func(o *Options) {
@@ -361,11 +433,35 @@ func TestUpdateSnapshot_GetTags(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTagSyncTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTagSyncTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTagSyncTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GroupResources(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GroupResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GroupResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGroupingStatuses(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGroupingStatuses(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGroupingStatuses")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -397,6 +493,18 @@ func TestUpdateSnapshot_ListGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTagSyncTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTagSyncTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTagSyncTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutGroupConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutGroupConfiguration(context.Background(), nil, func(o *Options) {
@@ -414,6 +522,18 @@ func TestUpdateSnapshot_SearchResources(t *testing.T) {
 	_, err := svc.SearchResources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchResources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTagSyncTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTagSyncTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTagSyncTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

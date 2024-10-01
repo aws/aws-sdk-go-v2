@@ -1,3 +1,7 @@
+# v1.22.0 (2024-10-01)
+
+* **Feature**: This release adds support to stop an ongoing ingestion job using the StopIngestionJob API in Agents for Amazon Bedrock.
+
 # v1.21.2 (2024-09-27)
 
 * No change notes available for this release.

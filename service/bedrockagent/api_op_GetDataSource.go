@@ -34,7 +34,7 @@ type GetDataSourceInput struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the knowledge base that the data source was added to.
+	// The unique identifier of the knowledge base for the data source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

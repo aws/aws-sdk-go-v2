@@ -1736,8 +1736,8 @@ type InferenceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about an ingestion job, which converts a data source to
-// embeddings for a vector store in knowledge base.
+// Contains details about a data ingestion job. Data sources are ingested into a
+// knowledge base so that Large Language Models (LLMs) can use your data.
 //
 // This data type is used in the following API operations:
 //
@@ -1752,63 +1752,68 @@ type InferenceConfiguration struct {
 // [GetIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax
 type IngestionJob struct {
 
-	// The unique identifier of the ingested data source.
+	// The unique identifier of the data source for the data ingestion job.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the ingestion job.
+	// The unique identifier of the data ingestion job.
 	//
 	// This member is required.
 	IngestionJobId *string
 
-	// The unique identifier of the knowledge base to which the data source is being
-	// added.
+	// The unique identifier of the knowledge for the data ingestion job.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The time at which the ingestion job started.
+	// The time the data ingestion job started.
+	//
+	// If you stop a data ingestion job, the startedAt time is the time the job was
+	// started before the job was stopped.
 	//
 	// This member is required.
 	StartedAt *time.Time
 
-	// The status of the ingestion job.
+	// The status of the data ingestion job.
 	//
 	// This member is required.
 	Status IngestionJobStatus
 
-	// The time at which the ingestion job was last updated.
+	// The time the data ingestion job was last updated.
+	//
+	// If you stop a data ingestion job, the updatedAt time is the time the job was
+	// stopped.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The description of the ingestion job.
+	// The description of the data ingestion job.
 	Description *string
 
-	// A list of reasons that the ingestion job failed.
+	// A list of reasons that the data ingestion job failed.
 	FailureReasons []string
 
-	// Contains statistics about the ingestion job.
+	// Contains statistics about the data ingestion job.
 	Statistics *IngestionJobStatistics
 
 	noSmithyDocumentSerde
 }
 
-// Defines a filter by which to filter the results.
+// The definition of a filter to filter the data.
 type IngestionJobFilter struct {
 
-	// The attribute by which to filter the results.
+	// The name of field or attribute to apply the filter.
 	//
 	// This member is required.
 	Attribute IngestionJobFilterAttribute
 
-	// The operation to carry out between the attribute and the values.
+	// The operation to apply to the field or attribute.
 	//
 	// This member is required.
 	Operator IngestionJobFilterOperator
 
-	// A list of values for the attribute.
+	// A list of values that belong to the field or attribute.
 	//
 	// This member is required.
 	Values []string
@@ -1816,15 +1821,15 @@ type IngestionJobFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Parameters by which to sort the results.
+// The parameters of sorting the data.
 type IngestionJobSortBy struct {
 
-	// The attribute by which to sort the results.
+	// The name of field or attribute to apply sorting of data.
 	//
 	// This member is required.
 	Attribute IngestionJobSortByAttribute
 
-	// The order by which to sort the results.
+	// The order for sorting the data.
 	//
 	// This member is required.
 	Order SortOrder
@@ -1832,10 +1837,10 @@ type IngestionJobSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the statistics for the ingestion job.
+// Contains the statistics for the data ingestion job.
 type IngestionJobStatistics struct {
 
-	// The number of source documents that was deleted.
+	// The number of source documents that were deleted.
 	NumberOfDocumentsDeleted int64
 
 	// The number of source documents that failed to be ingested.
@@ -1863,43 +1868,43 @@ type IngestionJobStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about an ingestion job.
+// Contains details about a data ingestion job.
 type IngestionJobSummary struct {
 
-	// The unique identifier of the data source in the ingestion job.
+	// The unique identifier of the data source for the data ingestion job.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the ingestion job.
+	// The unique identifier of the data ingestion job.
 	//
 	// This member is required.
 	IngestionJobId *string
 
-	// The unique identifier of the knowledge base to which the data source is added.
+	// The unique identifier of the knowledge base for the data ingestion job.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The time at which the ingestion job was started.
+	// The time the data ingestion job started.
 	//
 	// This member is required.
 	StartedAt *time.Time
 
-	// The status of the ingestion job.
+	// The status of the data ingestion job.
 	//
 	// This member is required.
 	Status IngestionJobStatus
 
-	// The time at which the ingestion job was last updated.
+	// The time the data ingestion job was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The description of the ingestion job.
+	// The description of the data ingestion job.
 	Description *string
 
-	// Contains statistics for the ingestion job.
+	// Contains statistics for the data ingestion job.
 	Statistics *IngestionJobStatistics
 
 	noSmithyDocumentSerde
@@ -1938,7 +1943,7 @@ type IteratorFlowNodeConfiguration struct {
 // Contains information about a knowledge base.
 type KnowledgeBase struct {
 
-	// The time at which the knowledge base was created.
+	// The time the knowledge base was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -1989,7 +1994,7 @@ type KnowledgeBase struct {
 	// This member is required.
 	StorageConfiguration *StorageConfiguration
 
-	// The time at which the knowledge base was last updated.
+	// The time the knowledge base was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -2003,7 +2008,8 @@ type KnowledgeBase struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about the embeddings configuration of the knowledge base.
+// Contains details about the vector embeddings configuration of the knowledge
+// base.
 type KnowledgeBaseConfiguration struct {
 
 	// The type of data that the data source is converted into for the knowledge base.
@@ -2011,8 +2017,8 @@ type KnowledgeBaseConfiguration struct {
 	// This member is required.
 	Type KnowledgeBaseType
 
-	// Contains details about the embeddings model that'sused to convert the data
-	// source.
+	// Contains details about the model that's used to convert the data source into
+	// vector embeddings.
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfiguration
 
 	noSmithyDocumentSerde
@@ -2059,7 +2065,7 @@ type KnowledgeBaseSummary struct {
 	// This member is required.
 	Status KnowledgeBaseStatus
 
-	// The time at which the knowledge base was last updated.
+	// The time the knowledge base was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time

@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // The BillOfMaterialsImportJob details.
@@ -32,6 +33,290 @@ type BillOfMaterialsImportJob struct {
 	// When the BillOfMaterialsImportJob has reached a terminal state, there will be a
 	// message.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The DataIntegrationFlow details.
+type DataIntegrationFlow struct {
+
+	// The DataIntegrationFlow creation timestamp.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The DataIntegrationFlow instance ID.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The DataIntegrationFlow last modified timestamp.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The DataIntegrationFlow name.
+	//
+	// This member is required.
+	Name *string
+
+	// The DataIntegrationFlow source configurations.
+	//
+	// This member is required.
+	Sources []DataIntegrationFlowSource
+
+	// The DataIntegrationFlow target configuration.
+	//
+	// This member is required.
+	Target *DataIntegrationFlowTarget
+
+	// The DataIntegrationFlow transformation configurations.
+	//
+	// This member is required.
+	Transformation *DataIntegrationFlowTransformation
+
+	noSmithyDocumentSerde
+}
+
+// The dataset options used in dataset source and target configurations.
+type DataIntegrationFlowDatasetOptions struct {
+
+	// The dataset load option to remove duplicates.
+	DedupeRecords *bool
+
+	// The dataset data load type in dataset options.
+	LoadType DataIntegrationFlowLoadType
+
+	noSmithyDocumentSerde
+}
+
+// The dataset DataIntegrationFlow source configuration parameters.
+type DataIntegrationFlowDatasetSourceConfiguration struct {
+
+	// The ARN of the dataset.
+	//
+	// This member is required.
+	DatasetIdentifier *string
+
+	// The dataset DataIntegrationFlow source options.
+	Options *DataIntegrationFlowDatasetOptions
+
+	noSmithyDocumentSerde
+}
+
+// The dataset DataIntegrationFlow target configuration parameters.
+type DataIntegrationFlowDatasetTargetConfiguration struct {
+
+	// The dataset ARN.
+	//
+	// This member is required.
+	DatasetIdentifier *string
+
+	// The dataset DataIntegrationFlow target options.
+	Options *DataIntegrationFlowDatasetOptions
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 options used in S3 source and target configurations.
+type DataIntegrationFlowS3Options struct {
+
+	// The Amazon S3 file type in S3 options.
+	FileType DataIntegrationFlowFileType
+
+	noSmithyDocumentSerde
+}
+
+// The S3 DataIntegrationFlow source configuration parameters.
+type DataIntegrationFlowS3SourceConfiguration struct {
+
+	// The bucketName of the S3 source objects.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The prefix of the S3 source objects.
+	//
+	// This member is required.
+	Prefix *string
+
+	// The other options of the S3 DataIntegrationFlow source.
+	Options *DataIntegrationFlowS3Options
+
+	noSmithyDocumentSerde
+}
+
+// The S3 DataIntegrationFlow target configuration parameters.
+type DataIntegrationFlowS3TargetConfiguration struct {
+
+	// The bucketName of the S3 target objects.
+	//
+	// This member is required.
+	BucketName *string
+
+	// The prefix of the S3 target objects.
+	//
+	// This member is required.
+	Prefix *string
+
+	// The S3 DataIntegrationFlow target options.
+	Options *DataIntegrationFlowS3Options
+
+	noSmithyDocumentSerde
+}
+
+// The DataIntegrationFlow source parameters.
+type DataIntegrationFlowSource struct {
+
+	// The DataIntegrationFlow source name that can be used as table alias in SQL
+	// transformation query.
+	//
+	// This member is required.
+	SourceName *string
+
+	// The DataIntegrationFlow source type.
+	//
+	// This member is required.
+	SourceType DataIntegrationFlowSourceType
+
+	// The dataset DataIntegrationFlow source.
+	DatasetSource *DataIntegrationFlowDatasetSourceConfiguration
+
+	// The S3 DataIntegrationFlow source.
+	S3Source *DataIntegrationFlowS3SourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The SQL DataIntegrationFlow transformation configuration parameters.
+type DataIntegrationFlowSQLTransformationConfiguration struct {
+
+	// The transformation SQL query body based on SparkSQL.
+	//
+	// This member is required.
+	Query *string
+
+	noSmithyDocumentSerde
+}
+
+// The DataIntegrationFlow target parameters.
+type DataIntegrationFlowTarget struct {
+
+	// The DataIntegrationFlow target type.
+	//
+	// This member is required.
+	TargetType DataIntegrationFlowTargetType
+
+	// The dataset DataIntegrationFlow target.
+	DatasetTarget *DataIntegrationFlowDatasetTargetConfiguration
+
+	// The S3 DataIntegrationFlow target.
+	S3Target *DataIntegrationFlowS3TargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The DataIntegrationFlow transformation parameters.
+type DataIntegrationFlowTransformation struct {
+
+	// The DataIntegrationFlow transformation type.
+	//
+	// This member is required.
+	TransformationType DataIntegrationFlowTransformationType
+
+	// The SQL DataIntegrationFlow transformation configuration.
+	SqlTransformation *DataIntegrationFlowSQLTransformationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The data lake dataset details.
+type DataLakeDataset struct {
+
+	// The arn of the dataset.
+	//
+	// This member is required.
+	Arn *string
+
+	// The creation time of the dataset.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The Amazon Web Services Supply Chain instance identifier.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The last modified time of the dataset.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The name of the dataset. For asc name space, the name must be one of the
+	// supported data entities under [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
+	//
+	// [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+	//
+	// This member is required.
+	Name *string
+
+	// The name space of the dataset. The available values are:
+	//
+	//   - asc - For information on the Amazon Web Services Supply Chain supported
+	//   datasets see [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html].
+	//
+	//   - default - For datasets with custom user-defined schemas.
+	//
+	// [https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html]: https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html
+	//
+	// This member is required.
+	Namespace *string
+
+	// The schema of the dataset.
+	//
+	// This member is required.
+	Schema *DataLakeDatasetSchema
+
+	// The description of the dataset.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The schema details of the dataset.
+type DataLakeDatasetSchema struct {
+
+	// The list of field details of the dataset schema.
+	//
+	// This member is required.
+	Fields []DataLakeDatasetSchemaField
+
+	// The name of the dataset schema.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The dataset field details.
+type DataLakeDatasetSchemaField struct {
+
+	// Indicate if the field is required or not.
+	//
+	// This member is required.
+	IsRequired *bool
+
+	// The dataset field name.
+	//
+	// This member is required.
+	Name *string
+
+	// The dataset field type.
+	//
+	// This member is required.
+	Type DataLakeDatasetSchemaFieldType
 
 	noSmithyDocumentSerde
 }

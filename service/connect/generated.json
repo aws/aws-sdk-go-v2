@@ -203,6 +203,7 @@
         "api_op_StartContactEvaluation.go",
         "api_op_StartContactRecording.go",
         "api_op_StartContactStreaming.go",
+        "api_op_StartOutboundChatContact.go",
         "api_op_StartOutboundVoiceContact.go",
         "api_op_StartTaskContact.go",
         "api_op_StartWebRTCContact.go",

@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a knowledge base that contains data sources from which information can
-// be queried and used by LLMs. To create a knowledge base, you must first set up
-// your data sources and configure a supported vector store. For more information,
-// see [Set up your data for ingestion].
+// Creates a knowledge base. A knowledge base contains your data sources so that
+// Large Language Models (LLMs) can use your data. To create a knowledge base, you
+// must first set up your data sources and configure a supported vector store. For
+// more information, see [Set up a knowledge base].
 //
 // If you prefer to let Amazon Bedrock create and manage a vector store for you in
 // Amazon OpenSearch Service, use the console. For more information, see [Create a knowledge base].
@@ -42,10 +42,10 @@ import (
 //   - For a Redis Enterprise Cloud database, use the
 //     redisEnterpriseCloudConfiguration object. For more information, see [Create a vector store in Redis Enterprise Cloud].
 //
-// [Set up your data for ingestion]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html
 // [Create a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
 // [Create a vector store in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
 // [Create a vector store in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html
+// [Set up a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html
 // [Create a vector store in Amazon Aurora]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 // [Create a vector store in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {

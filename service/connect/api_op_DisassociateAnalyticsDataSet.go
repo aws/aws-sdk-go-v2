@@ -10,8 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Removes the dataset ID associated with a given Amazon Connect instance.
 func (c *Client) DisassociateAnalyticsDataSet(ctx context.Context, params *DisassociateAnalyticsDataSetInput, optFns ...func(*Options)) (*DisassociateAnalyticsDataSetOutput, error) {
 	if params == nil {

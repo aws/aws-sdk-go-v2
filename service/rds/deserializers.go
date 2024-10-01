@@ -3247,6 +3247,9 @@ func awsAwsquery_deserializeOpErrorCreateDBShardGroup(response *smithyhttp.Respo
 	case strings.EqualFold("MaxDBShardGroupLimitReached", errorCode):
 		return awsAwsquery_deserializeErrorMaxDBShardGroupLimitReached(response, errorBody)
 
+	case strings.EqualFold("NetworkTypeNotSupported", errorCode):
+		return awsAwsquery_deserializeErrorNetworkTypeNotSupported(response, errorBody)
+
 	case strings.EqualFold("UnsupportedDBEngineVersion", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedDBEngineVersionFault(response, errorBody)
 
@@ -28369,6 +28372,19 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.ClusterCreateTime = ptr.Time(t)
 			}
 
+		case strings.EqualFold("ClusterScalabilityType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterScalabilityType = types.ClusterScalabilityType(xtv)
+			}
+
 		case strings.EqualFold("CopyTagsToSnapshot", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -37933,6 +37949,12 @@ func awsAwsquery_deserializeDocumentDBShardGroup(v **types.DBShardGroup, decoder
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TagList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:
@@ -57338,6 +57360,12 @@ func awsAwsquery_deserializeOpDocumentCreateDBShardGroupOutput(v **CreateDBShard
 				sv.Status = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("TagList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
+				return err
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -58864,6 +58892,12 @@ func awsAwsquery_deserializeOpDocumentDeleteDBShardGroupOutput(v **DeleteDBShard
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TagList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:
@@ -63405,6 +63439,12 @@ func awsAwsquery_deserializeOpDocumentModifyDBShardGroupOutput(v **ModifyDBShard
 				sv.Status = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("TagList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
+				return err
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -64263,6 +64303,12 @@ func awsAwsquery_deserializeOpDocumentRebootDBShardGroupOutput(v **RebootDBShard
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("TagList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTagList(&sv.TagList, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:

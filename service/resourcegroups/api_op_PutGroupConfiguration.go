@@ -50,8 +50,8 @@ type PutGroupConfigurationInput struct {
 	// [Service configurations for Resource Groups]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
 	Configuration []types.GroupConfigurationItem
 
-	// The name or ARN of the resource group with the configuration that you want to
-	// update.
+	// The name or Amazon resource name (ARN) of the resource group with the
+	// configuration that you want to update.
 	Group *string
 
 	noSmithyDocumentSerde

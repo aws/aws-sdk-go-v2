@@ -31,8 +31,8 @@
 //
 //   - Applying, editing, and removing tags from resource groups
 //
-//   - Resolving resource group member ARNs so they can be returned as search
-//     results
+//   - Resolving resource group member Amazon resource names (ARN)s so they can be
+//     returned as search results
 //
 //   - Getting data about resources that are members of a group
 //

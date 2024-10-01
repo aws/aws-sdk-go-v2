@@ -14,6 +14,16 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.supplychain#AscResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$"
+            }
+        },
         "com.amazonaws.supplychain#BillOfMaterialsImportJob": {
             "type": "structure",
             "members": {
@@ -233,7 +243,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.supplychain#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An idempotency token.</p>",
+                        "smithy.api#documentation": "<p>An idempotency token ensures the API request is only completed no more than once. This way, retrying the request will not trigger the operation multiple times. A client token is a unique, case-sensitive string of 33 to 128 ASCII characters. To make an idempotent API request, specify a client token in the request. You should not reuse the same client token for other requests. If you retry a successful request with the same client token, the request will succeed with no further actions being taken, and you will receive the same API response as the original successful request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -256,6 +266,562 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of CreateBillOfMaterialsImportJob.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataIntegrationFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#CreateDataIntegrationFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#CreateDataIntegrationFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create DataIntegrationFlow to map one or more different sources to one target using the SQL transformation query.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful CreateDataIntegrationFlow for s3 to dataset flow",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "testStagingFlow",
+                            "sources": [
+                                {
+                                    "sourceType": "S3",
+                                    "sourceName": "testSourceName",
+                                    "s3Source": {
+                                        "bucketName": "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f",
+                                        "prefix": "example-prefix"
+                                    }
+                                }
+                            ],
+                            "transformation": {
+                                "transformationType": "SQL",
+                                "sqlTransformation": {
+                                    "query": "SELECT * FROM testSourceName"
+                                }
+                            },
+                            "target": {
+                                "targetType": "DATASET",
+                                "datasetTarget": {
+                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset"
+                                }
+                            },
+                            "tags": {
+                                "tagKey1": "tagValue1"
+                            }
+                        },
+                        "output": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "testStagingFlow"
+                        }
+                    },
+                    {
+                        "title": "Successful CreateDataIntegrationFlow for dataset to dataset flow",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "trading-partner",
+                            "sources": [
+                                {
+                                    "sourceType": "DATASET",
+                                    "sourceName": "testSourceName1",
+                                    "datasetSource": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1"
+                                    }
+                                },
+                                {
+                                    "sourceType": "DATASET",
+                                    "sourceName": "testSourceName2",
+                                    "datasetSource": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2"
+                                    }
+                                }
+                            ],
+                            "transformation": {
+                                "transformationType": "SQL",
+                                "sqlTransformation": {
+                                    "query": "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id"
+                                }
+                            },
+                            "target": {
+                                "targetType": "DATASET",
+                                "datasetTarget": {
+                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                }
+                            },
+                            "tags": {
+                                "tagKey1": "tagValue1"
+                            }
+                        },
+                        "output": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "trading-partner"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/api/data-integration/instance/{instanceId}/data-integration-flows/{name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataIntegrationFlowRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the DataIntegrationFlow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configurations for DataIntegrationFlow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transformation": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTransformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation configurations for DataIntegrationFlow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target configurations for DataIntegrationFlow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.supplychain#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the DataIntegrationFlow to be created</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for CreateDataIntegrationFlow.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataIntegrationFlowResponse": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DataIntegrationFlow created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for CreateDataIntegrationFlow.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataLakeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#CreateDataLakeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#CreateDataLakeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a data lake dataset.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Create an AWS Supply Chain inbound order dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "asc",
+                            "name": "inbound_order",
+                            "description": "This is an AWS Supply Chain inbound order dataset",
+                            "tags": {
+                                "tagKey1": "tagValue1",
+                                "tagKey2": "tagValue2"
+                            }
+                        },
+                        "output": {
+                            "dataset": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "namespace": "asc",
+                                "name": "inbound_order",
+                                "description": "This is an AWS Supply Chain inbound order dataset",
+                                "createdTime": 1.727116807751E9,
+                                "lastModifiedTime": 1.727116807751E9,
+                                "schema": {
+                                    "name": "InboundOrder",
+                                    "fields": [
+                                        {
+                                            "name": "id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "tpartner_id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "connection_id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "order_type",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_status",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "inbound_order_url",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_creation_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "company_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "to_site_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_currency_uom",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "vendor_currency_uom",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "exchange_rate",
+                                            "type": "DOUBLE",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "exchange_rate_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm2",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm_location_1",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm_location_2",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "submitted_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_start_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_end_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "shipping_instr_code",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "payment_terms_code",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "std_terms_agreement",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "std_terms_agreement_ver",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_number",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source_update_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source_event_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "db_creation_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "db_updation_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "Create a custom dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "default",
+                            "name": "my_dataset",
+                            "description": "This is a custom dataset",
+                            "schema": {
+                                "name": "MyDataset",
+                                "fields": [
+                                    {
+                                        "name": "id",
+                                        "type": "INT",
+                                        "isRequired": true
+                                    },
+                                    {
+                                        "name": "description",
+                                        "type": "STRING",
+                                        "isRequired": true
+                                    },
+                                    {
+                                        "name": "price",
+                                        "type": "DOUBLE",
+                                        "isRequired": false
+                                    },
+                                    {
+                                        "name": "creation_time",
+                                        "type": "TIMESTAMP",
+                                        "isRequired": false
+                                    }
+                                ]
+                            },
+                            "tags": {
+                                "tagKey1": "tagValue1",
+                                "tagKey2": "tagValue2"
+                            }
+                        },
+                        "output": {
+                            "dataset": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "namespace": "default",
+                                "name": "my_dataset",
+                                "description": "This is a custom dataset",
+                                "createdTime": 1.727116807751E9,
+                                "lastModifiedTime": 1.727116807751E9,
+                                "schema": {
+                                    "name": "MyDataset",
+                                    "fields": [
+                                        {
+                                            "name": "id",
+                                            "type": "INT",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "price",
+                                            "type": "DOUBLE",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "creation_time",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataLakeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name space of the dataset.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom schema of the data lake dataset and is only required when the name space is <i>default</i>.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the dataset.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.supplychain#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the dataset.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for CreateDataLakeDataset.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateDataLakeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "dataset": {
+                    "target": "com.amazonaws.supplychain#DataLakeDataset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detail of created dataset.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of CreateDataLakeDataset.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -406,15 +972,1054 @@
                 }
             }
         },
+        "com.amazonaws.supplychain#DataIntegrationFlow": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow instance ID.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "instanceId"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow name.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "name"
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow source configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "transformation": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTransformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow transformation configurations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow target configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow creation timestamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow last modified timestamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DataIntegrationFlow details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowDatasetOptions": {
+            "type": "structure",
+            "members": {
+                "loadType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowLoadType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset data load type in dataset options.</p>"
+                    }
+                },
+                "dedupeRecords": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset load option to remove duplicates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dataset options used in dataset source and target configurations.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowDatasetSourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "datasetIdentifier": {
+                    "target": "com.amazonaws.supplychain#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDatasetOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset DataIntegrationFlow source options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dataset DataIntegrationFlow source configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowDatasetTargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "datasetIdentifier": {
+                    "target": "com.amazonaws.supplychain#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDatasetOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset DataIntegrationFlow target options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dataset DataIntegrationFlow target configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowFileType": {
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARQUET"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataIntegrationFlow"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowLoadType": {
+            "type": "enum",
+            "members": {
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL"
+                    }
+                },
+                "REPLACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowResource": {
+            "type": "resource",
+            "identifiers": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID"
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName"
+                }
+            },
+            "properties": {
+                "sources": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceList"
+                },
+                "transformation": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTransformation"
+                },
+                "target": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTarget"
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.supplychain#CreateDataIntegrationFlow"
+            },
+            "read": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationFlow"
+            },
+            "update": {
+                "target": "com.amazonaws.supplychain#UpdateDataIntegrationFlow"
+            },
+            "delete": {
+                "target": "com.amazonaws.supplychain#DeleteDataIntegrationFlow"
+            },
+            "list": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationFlows"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "instance/{instanceId}/data-integration-flows/{name}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowS3Options": {
+            "type": "structure",
+            "members": {
+                "fileType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowFileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 file type in S3 options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 options used in S3 source and target configurations.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowS3Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 700
+                },
+                "smithy.api#pattern": "^[/A-Za-z0-9._-]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowS3SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.supplychain#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucketName of the S3 source objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix of the S3 source objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3Options",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The other options of the S3 DataIntegrationFlow source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 DataIntegrationFlow source configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowS3TargetConfiguration": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.supplychain#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucketName of the S3 target objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix of the S3 target objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "options": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3Options",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 DataIntegrationFlow target options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 DataIntegrationFlow target configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowSQLQuery": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowSQLTransformationConfiguration": {
+            "type": "structure",
+            "members": {
+                "query": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSQLQuery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation SQL query body based on SparkSQL.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SQL DataIntegrationFlow transformation configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowSource": {
+            "type": "structure",
+            "members": {
+                "sourceType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow source type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceName": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow source name that can be used as table alias in SQL transformation query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Source": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 DataIntegrationFlow source.</p>"
+                    }
+                },
+                "datasetSource": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDatasetSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset DataIntegrationFlow source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DataIntegrationFlow source parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataIntegrationFlowSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowSourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowSourceType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "DATASET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowTarget": {
+            "type": "structure",
+            "members": {
+                "targetType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow target type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Target": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowS3TargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 DataIntegrationFlow target.</p>"
+                    }
+                },
+                "datasetTarget": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowDatasetTargetConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset DataIntegrationFlow target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DataIntegrationFlow target parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowTargetType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "DATASET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASET"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowTransformation": {
+            "type": "structure",
+            "members": {
+                "transformationType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTransformationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DataIntegrationFlow transformation type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sqlTransformation": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSQLTransformationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SQL DataIntegrationFlow transformation configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DataIntegrationFlow transformation parameters.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationFlowTransformationType": {
+            "type": "enum",
+            "members": {
+                "SQL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SQL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDataset": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "instanceId"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "namespace"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "name"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the dataset.</p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data lake dataset details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataLakeDataset"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 75
+                },
+                "smithy.api#pattern": "^[a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-z]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetResource": {
+            "type": "resource",
+            "identifiers": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID"
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace"
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName"
+                }
+            },
+            "properties": {
+                "arn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn"
+                },
+                "schema": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchema"
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetDescription"
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp"
+                }
+            },
+            "put": {
+                "target": "com.amazonaws.supplychain#CreateDataLakeDataset"
+            },
+            "read": {
+                "target": "com.amazonaws.supplychain#GetDataLakeDataset"
+            },
+            "update": {
+                "target": "com.amazonaws.supplychain#UpdateDataLakeDataset"
+            },
+            "delete": {
+                "target": "com.amazonaws.supplychain#DeleteDataLakeDataset"
+            },
+            "list": {
+                "target": "com.amazonaws.supplychain#ListDataLakeDatasets"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
+                },
+                "smithy.api#noReplace": {}
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetSchema": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fields": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of field details of the dataset schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The schema details of the dataset.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetSchemaField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset field name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dataset field type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isRequired": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicate if the field is required or not.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The dataset field details.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#DataLakeDatasetSchemaField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetSchemaFieldType": {
+            "type": "enum",
+            "members": {
+                "INT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INT"
+                    }
+                },
+                "DOUBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOUBLE"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMESTAMP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataLakeDatasetSchemaName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DatasetIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^[-_/A-Za-z0-9:]+$"
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataIntegrationFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#DeleteDataIntegrationFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#DeleteDataIntegrationFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete the DataIntegrationFlow.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful DeleteDataIntegrationFlow",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "testStagingFlow"
+                        },
+                        "output": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "testStagingFlow"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/api/data-integration/instance/{instanceId}/data-integration-flows/{name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataIntegrationFlowRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DataIntegrationFlow to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for DeleteDataIntegrationFlow.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataIntegrationFlowResponse": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DataIntegrationFlow deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for DeleteDataIntegrationFlow.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataLakeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#DeleteDataLakeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#DeleteDataLakeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a data lake dataset.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete an AWS Supply Chain inbound_order dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "asc",
+                            "name": "inbound_order"
+                        },
+                        "output": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "asc",
+                            "name": "inbound_order"
+                        }
+                    },
+                    {
+                        "title": "Delete a custom dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "default",
+                            "name": "my_dataset"
+                        },
+                        "output": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "default",
+                            "name": "my_dataset"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataLakeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>asc: for <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">\n                AWS Supply Chain supported datasets\n            </a>.</p>\n            </li>\n            <li>\n               <p>default: for datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset. If the namespace is <i>asc</i>, the name must be one of the supported <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">data entities\n        </a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of DeleteDataLakeDataset.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteDataLakeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of deleted dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of deleted dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of DeleteDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.supplychain#GalaxyPublicAPIGateway": {
             "type": "service",
             "version": "2024-01-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.supplychain#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#UntagResource"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.supplychain#BillOfMaterialsImportJobResource"
                 },
                 {
                     "target": "com.amazonaws.supplychain#DataIntegrationEventResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetResource"
                 }
             ],
             "errors": [
@@ -1244,6 +2849,427 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.supplychain#GetDataIntegrationFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#GetDataIntegrationFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>View the DataIntegrationFlow details.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful GetDataIntegrationFlow",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "testStagingFlow"
+                        },
+                        "output": {
+                            "flow": {
+                                "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                                "name": "testStagingFlow",
+                                "sources": [
+                                    {
+                                        "sourceType": "S3",
+                                        "sourceName": "testSourceName",
+                                        "s3Source": {
+                                            "bucketName": "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f",
+                                            "prefix": "example-prefix"
+                                        }
+                                    }
+                                ],
+                                "target": {
+                                    "targetType": "DATASET",
+                                    "datasetTarget": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset"
+                                    }
+                                },
+                                "transformation": {
+                                    "transformationType": "SQL",
+                                    "sqlTransformation": {
+                                        "query": "SELECT * FROM testSourceName"
+                                    }
+                                },
+                                "createdTime": 1.72495640044E9,
+                                "lastModifiedTime": 1.72495640044E9
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/data-integration/instance/{instanceId}/data-integration-flows/{name}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationFlowRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DataIntegrationFlow created.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for GetDataIntegrationFlow.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataIntegrationFlowResponse": {
+            "type": "structure",
+            "members": {
+                "flow": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the DataIntegrationFlow returned.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for GetDataIntegrationFlow.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataLakeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#GetDataLakeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#GetDataLakeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a data lake dataset.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get properties of an existing AWS Supply Chain inbound order dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "asc",
+                            "name": "inbound_order"
+                        },
+                        "output": {
+                            "dataset": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "namespace": "asc",
+                                "name": "inbound_order",
+                                "description": "This is an AWS Supply Chain inbound order dataset",
+                                "createdTime": 1.727116807751E9,
+                                "lastModifiedTime": 1.727116807751E9,
+                                "schema": {
+                                    "name": "InboundOrder",
+                                    "fields": [
+                                        {
+                                            "name": "id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "tpartner_id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "connection_id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "order_type",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_status",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "inbound_order_url",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_creation_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "company_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "to_site_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_currency_uom",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "vendor_currency_uom",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "exchange_rate",
+                                            "type": "DOUBLE",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "exchange_rate_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm2",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm_location_1",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm_location_2",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "submitted_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_start_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_end_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "shipping_instr_code",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "payment_terms_code",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "std_terms_agreement",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "std_terms_agreement_ver",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_number",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source_update_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source_event_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "db_creation_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "db_updation_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "Get proporties of an existing custom dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "default",
+                            "name": "my_dataset"
+                        },
+                        "output": {
+                            "dataset": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "namespace": "default",
+                                "name": "my_dataset",
+                                "description": "This is a custom dataset",
+                                "createdTime": 1.727116807751E9,
+                                "lastModifiedTime": 1.727116807751E9,
+                                "schema": {
+                                    "name": "MyDataset",
+                                    "fields": [
+                                        {
+                                            "name": "id",
+                                            "type": "INT",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "price",
+                                            "type": "DOUBLE",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "creation_time",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataLakeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for GetDataLakeDataset.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetDataLakeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "dataset": {
+                    "target": "com.amazonaws.supplychain#DataLakeDataset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fetched dataset details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for UpdateDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.supplychain#InternalServerException": {
             "type": "structure",
             "members": {
@@ -1258,6 +3284,605 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.supplychain#ListDataIntegrationFlows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationFlowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListDataIntegrationFlowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the DataIntegrationFlows in a paginated way.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful ListDataIntegrationFlow",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d"
+                        },
+                        "output": {
+                            "flows": [
+                                {
+                                    "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                                    "name": "testStagingFlow",
+                                    "sources": [
+                                        {
+                                            "sourceType": "S3",
+                                            "sourceName": "testSourceName",
+                                            "s3Source": {
+                                                "bucketName": "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f",
+                                                "prefix": "example-prefix"
+                                            }
+                                        }
+                                    ],
+                                    "target": {
+                                        "targetType": "DATASET",
+                                        "datasetTarget": {
+                                            "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset"
+                                        }
+                                    },
+                                    "transformation": {
+                                        "transformationType": "SQL",
+                                        "sqlTransformation": {
+                                            "query": "SELECT * FROM testSourceName"
+                                        }
+                                    },
+                                    "createdTime": 1.72495640044E9,
+                                    "lastModifiedTime": 1.72495640044E9
+                                },
+                                {
+                                    "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                                    "name": "trading-partner",
+                                    "sources": [
+                                        {
+                                            "sourceType": "DATASET",
+                                            "sourceName": "testSourceName1",
+                                            "datasetSource": {
+                                                "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1"
+                                            }
+                                        },
+                                        {
+                                            "sourceType": "DATASET",
+                                            "sourceName": "testSourceName2",
+                                            "datasetSource": {
+                                                "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2"
+                                            }
+                                        }
+                                    ],
+                                    "transformation": {
+                                        "transformationType": "SQL",
+                                        "sqlTransformation": {
+                                            "query": "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id"
+                                        }
+                                    },
+                                    "target": {
+                                        "targetType": "DATASET",
+                                        "datasetTarget": {
+                                            "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                        }
+                                    },
+                                    "createdTime": 1.723576350688E10,
+                                    "lastModifiedTime": 1.723576350688E10
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/data-integration/instance/{instanceId}/data-integration-flows"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "flows"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationFlowsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch the next page of the DataIntegrationFlows.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>Specify the maximum number of DataIntegrationFlows to fetch in one paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for ListDataIntegrationFlows.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataIntegrationFlowsResponse": {
+            "type": "structure",
+            "members": {
+                "flows": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response parameters for ListDataIntegrationFlows.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch the next page of the DataIntegrationFlows.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for ListDataIntegrationFlows.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataLakeDatasets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListDataLakeDatasetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListDataLakeDatasetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the data lake datasets for a specific instance and name space.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List AWS Supply Chain datasets",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "asc"
+                        },
+                        "output": {
+                            "datasets": [
+                                {
+                                    "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order",
+                                    "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                    "namespace": "asc",
+                                    "name": "inbound_order",
+                                    "description": "This is an AWS Supply Chain inbound order dataset",
+                                    "createdTime": 1.727116807751E9,
+                                    "lastModifiedTime": 1.727116807751E9,
+                                    "schema": {
+                                        "name": "InboundOrder",
+                                        "fields": [
+                                            {
+                                                "name": "id",
+                                                "type": "STRING",
+                                                "isRequired": true
+                                            },
+                                            {
+                                                "name": "tpartner_id",
+                                                "type": "STRING",
+                                                "isRequired": true
+                                            },
+                                            {
+                                                "name": "connection_id",
+                                                "type": "STRING",
+                                                "isRequired": true
+                                            },
+                                            {
+                                                "name": "order_type",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "order_status",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "inbound_order_url",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "order_creation_date",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "company_id",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "to_site_id",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "order_currency_uom",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "vendor_currency_uom",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "exchange_rate",
+                                                "type": "DOUBLE",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "exchange_rate_date",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "incoterm",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "incoterm2",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "incoterm_location_1",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "incoterm_location_2",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "submitted_date",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "agreement_start_date",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "agreement_end_date",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "shipping_instr_code",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "payment_terms_code",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "std_terms_agreement",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "std_terms_agreement_ver",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "agreement_number",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "source",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "source_update_dttm",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "source_event_id",
+                                                "type": "STRING",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "db_creation_dttm",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "db_updation_dttm",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "List custom datasets using pagination",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "default",
+                            "maxResults": 2,
+                            "nextToken": "next_token_returned_from_previous_list_request"
+                        },
+                        "output": {
+                            "datasets": [
+                                {
+                                    "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset",
+                                    "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                    "namespace": "default",
+                                    "name": "my_dataset",
+                                    "description": "This is a custom dataset",
+                                    "createdTime": 1.727116807751E9,
+                                    "lastModifiedTime": 1.727116807751E9,
+                                    "schema": {
+                                        "name": "MyDataset",
+                                        "fields": [
+                                            {
+                                                "name": "id",
+                                                "type": "INT",
+                                                "isRequired": true
+                                            },
+                                            {
+                                                "name": "description",
+                                                "type": "STRING",
+                                                "isRequired": true
+                                            },
+                                            {
+                                                "name": "price",
+                                                "type": "DOUBLE",
+                                                "isRequired": false
+                                            },
+                                            {
+                                                "name": "creation_time",
+                                                "type": "TIMESTAMP",
+                                                "isRequired": false
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset_2",
+                                    "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                    "namespace": "default",
+                                    "name": "my_dataset_2",
+                                    "description": "This is a custom dataset 2",
+                                    "createdTime": 1.727116907751E9,
+                                    "lastModifiedTime": 1.727116907751E9,
+                                    "schema": {
+                                        "name": "MyDataset2",
+                                        "fields": [
+                                            {
+                                                "name": "id",
+                                                "type": "INT",
+                                                "isRequired": true
+                                            },
+                                            {
+                                                "name": "description",
+                                                "type": "STRING",
+                                                "isRequired": true
+                                            }
+                                        ]
+                                    }
+                                }
+                            ],
+                            "nextToken": "next_token_for_next_list_request"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "datasets"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataLakeDatasetsRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>asc: for <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">\n                AWS Supply Chain supported datasets\n            </a>.</p>\n            </li>\n            <li>\n               <p>default: for datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch next page of datasets.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The max number of datasets to fetch in this paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of ListDataLakeDatasets.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListDataLakeDatasetsResponse": {
+            "type": "structure",
+            "members": {
+                "datasets": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fetched dataset details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch next page of datasets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of ListDataLakeDatasets.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all the tags for an Amazon Web ServicesSupply Chain resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful ListTagsForResource",
+                        "input": {
+                            "resourceArn": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/data-integration-flows/my_flow1"
+                        },
+                        "output": {
+                            "tags": {
+                                "tagKey1": "tagValue1"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply chain resource ARN that needs tags to be listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of ListTagsForResource.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.supplychain#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to an Amazon Web Services Supply Chain resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of ListTagsForResource.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.supplychain#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -1269,6 +3894,16 @@
                 "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.supplychain#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][a-z0-9.-]*[a-z0-9]$"
             }
         },
         "com.amazonaws.supplychain#SendDataIntegrationEvent": {
@@ -1590,6 +4225,129 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.supplychain#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.supplychain#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.supplychain#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.supplychain#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.supplychain#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.supplychain#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create tags for an Amazon Web Services Supply chain resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful TagResource",
+                        "input": {
+                            "resourceArn": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/data-integration-flows/my_flow1",
+                            "tags": {
+                                "tagKey1": "tagValue1"
+                            }
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/api/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply chain resource ARN that needs to be tagged.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.supplychain#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of the Amazon Web Services Supply chain resource to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of TagResource.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for TagResource.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.supplychain#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -1614,6 +4372,624 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.supplychain#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete tags for an Amazon Web Services Supply chain resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful UntagResource",
+                        "input": {
+                            "resourceArn": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/data-integration-flows/my_flow1",
+                            "tagKeys": [
+                                "tagKey1"
+                            ]
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/api/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.supplychain#AscResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply chain resource ARN that needs to be untagged.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.supplychain#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys to be deleted for an Amazon Web Services Supply Chain resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of UntagResource.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of UntagResource.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataIntegrationFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#UpdateDataIntegrationFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#UpdateDataIntegrationFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the DataIntegrationFlow.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful UpdateDataIntegrationFlow for s3 to dataset flow to update SQL transformation",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "testStagingFlow",
+                            "sources": [
+                                {
+                                    "sourceType": "S3",
+                                    "sourceName": "testSourceName",
+                                    "s3Source": {
+                                        "bucketName": "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f",
+                                        "prefix": "example-prefix"
+                                    }
+                                }
+                            ],
+                            "transformation": {
+                                "transformationType": "SQL",
+                                "sqlTransformation": {
+                                    "query": "SELECT connection_id, bukrs AS id, txtmd AS description FROM testSourceName WHERE langu = 'E'"
+                                }
+                            },
+                            "target": {
+                                "targetType": "DATASET",
+                                "datasetTarget": {
+                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset"
+                                }
+                            }
+                        },
+                        "output": {
+                            "flow": {
+                                "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                                "name": "testStagingFlow",
+                                "sources": [
+                                    {
+                                        "sourceType": "S3",
+                                        "sourceName": "testSourceName",
+                                        "s3Source": {
+                                            "bucketName": "aws-supply-chain-data-b8c7bb28-a576-4334-b481-6d6e8e47371f",
+                                            "prefix": "example-prefix"
+                                        }
+                                    }
+                                ],
+                                "target": {
+                                    "targetType": "DATASET",
+                                    "datasetTarget": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset"
+                                    }
+                                },
+                                "transformation": {
+                                    "transformationType": "SQL",
+                                    "sqlTransformation": {
+                                        "query": "SELECT connection_id, bukrs AS id, txtmd AS description FROM testSourceName WHERE langu = 'E'"
+                                    }
+                                },
+                                "createdTime": 1.72495640044E9,
+                                "lastModifiedTime": 1.73245640577E9
+                            }
+                        }
+                    },
+                    {
+                        "title": "Successful UpdateDataIntegrationFlow for dataset to dataset flow to update sources",
+                        "input": {
+                            "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                            "name": "trading-partner",
+                            "sources": [
+                                {
+                                    "sourceType": "DATASET",
+                                    "sourceName": "testSourceName1",
+                                    "datasetSource": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1"
+                                    }
+                                },
+                                {
+                                    "sourceType": "DATASET",
+                                    "sourceName": "testSourceName2",
+                                    "datasetSource": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2_updated"
+                                    }
+                                }
+                            ],
+                            "transformation": {
+                                "transformationType": "SQL",
+                                "sqlTransformation": {
+                                    "query": "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id"
+                                }
+                            },
+                            "target": {
+                                "targetType": "DATASET",
+                                "datasetTarget": {
+                                    "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                }
+                            }
+                        },
+                        "output": {
+                            "flow": {
+                                "instanceId": "8850c54e-e187-4fa7-89d4-6370f165174d",
+                                "name": "trading-partner",
+                                "sources": [
+                                    {
+                                        "sourceType": "DATASET",
+                                        "sourceName": "testSourceName1",
+                                        "datasetSource": {
+                                            "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset1"
+                                        }
+                                    },
+                                    {
+                                        "sourceType": "DATASET",
+                                        "sourceName": "testSourceName2",
+                                        "datasetSource": {
+                                            "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/default/datasets/my_staging_dataset2_updated"
+                                        }
+                                    }
+                                ],
+                                "transformation": {
+                                    "transformationType": "SQL",
+                                    "sqlTransformation": {
+                                        "query": "SELECT S1.id AS id, S1.poc_org_unit_description AS description, S1.company_id AS company_id, S1.tpartner_type AS tpartner_type, S1.geo_id AS geo_id, S1.eff_start_date AS eff_start_date, S1.eff_end_date AS eff_end_date FROM testSourceName1 AS S1 LEFT JOIN testSourceName2 as S2 ON S1.id=S2.id"
+                                    }
+                                },
+                                "target": {
+                                    "targetType": "DATASET",
+                                    "datasetTarget": {
+                                        "datasetIdentifier": "arn:aws:scn:us-east-1:123456789012:instance/8850c54e-e187-4fa7-89d4-6370f165174d/namespaces/asc/datasets/trading_partner"
+                                    }
+                                },
+                                "createdTime": 1.72495640044E9,
+                                "lastModifiedTime": 1.73245640577E9
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/api/data-integration/instance/{instanceId}/data-integration-flows/{name}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataIntegrationFlowRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DataIntegrationFlow to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new source configurations for the DataIntegrationFlow.</p>"
+                    }
+                },
+                "transformation": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTransformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new transformation configurations for the DataIntegrationFlow.</p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlowTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new target configurations for the DataIntegrationFlow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for UpdateDataIntegrationFlow.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataIntegrationFlowResponse": {
+            "type": "structure",
+            "members": {
+                "flow": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationFlow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the updated DataIntegrationFlow.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for UpdateDataIntegrationFlow.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataLakeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#UpdateDataLakeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#UpdateDataLakeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a data lake dataset.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update description of an existing AWS Supply Chain inbound order dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "asc",
+                            "name": "inbound_order",
+                            "description": "This is an updated AWS Supply Chain inbound order dataset"
+                        },
+                        "output": {
+                            "dataset": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/asc/datasets/inbound_order",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "namespace": "asc",
+                                "name": "inbound_order",
+                                "description": "This is an updated AWS Supply Chain inbound order dataset",
+                                "createdTime": 1.727116807751E9,
+                                "lastModifiedTime": 1.727117453568E9,
+                                "schema": {
+                                    "name": "InboundOrder",
+                                    "fields": [
+                                        {
+                                            "name": "id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "tpartner_id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "connection_id",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "order_type",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_status",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "inbound_order_url",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_creation_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "company_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "to_site_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "order_currency_uom",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "vendor_currency_uom",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "exchange_rate",
+                                            "type": "DOUBLE",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "exchange_rate_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm2",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm_location_1",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "incoterm_location_2",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "submitted_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_start_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_end_date",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "shipping_instr_code",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "payment_terms_code",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "std_terms_agreement",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "std_terms_agreement_ver",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "agreement_number",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source_update_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "source_event_id",
+                                            "type": "STRING",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "db_creation_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "db_updation_dttm",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "Update description of an existing custom dataset",
+                        "input": {
+                            "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                            "namespace": "default",
+                            "name": "my_dataset",
+                            "description": "This is an updated custom dataset"
+                        },
+                        "output": {
+                            "dataset": {
+                                "arn": "arn:aws:scn:us-east-1:012345678910:instance/1877dd20-dee9-4639-8e99-cb67acf21fe5/namespaces/default/datasets/my_dataset",
+                                "instanceId": "1877dd20-dee9-4639-8e99-cb67acf21fe5",
+                                "namespace": "default",
+                                "name": "my_dataset",
+                                "description": "This is an updated custom dataset",
+                                "createdTime": 1.727116807751E9,
+                                "lastModifiedTime": 1.727117453568E9,
+                                "schema": {
+                                    "name": "MyDataset",
+                                    "fields": [
+                                        {
+                                            "name": "id",
+                                            "type": "INT",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "description",
+                                            "type": "STRING",
+                                            "isRequired": true
+                                        },
+                                        {
+                                            "name": "price",
+                                            "type": "DOUBLE",
+                                            "isRequired": false
+                                        },
+                                        {
+                                            "name": "creation_time",
+                                            "type": "TIMESTAMP",
+                                            "isRequired": false
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/api/datalake/instance/{instanceId}/namespaces/{namespace}/datasets/{name}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataLakeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name space of the dataset. The available values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>asc</b> - For information on the  Amazon Web Services Supply Chain supported datasets see <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>default</b> - For datasets with custom user-defined schemas.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset. For <b>asc</b> name space, the name must be one of the supported data entities under <a href=\"https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html\">https://docs.aws.amazon.com/aws-supply-chain/latest/userguide/data-model-asc.html</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.supplychain#DataLakeDatasetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated description of the data lake dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters of UpdateDataLakeDataset.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateDataLakeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "dataset": {
+                    "target": "com.amazonaws.supplychain#DataLakeDataset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated dataset details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters of UpdateDataLakeDataset.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.supplychain#ValidationException": {

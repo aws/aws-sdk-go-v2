@@ -1536,9 +1536,9 @@ type PolicyItem struct {
 
 	// The type of the policy. This is one of the following values:
 	//
-	//   - static
+	//   - STATIC
 	//
-	//   - templateLinked
+	//   - TEMPLATE_LINKED
 	//
 	// This member is required.
 	PolicyType PolicyType
@@ -1656,9 +1656,10 @@ type SchemaDefinition interface {
 }
 
 // A JSON string representation of the schema supported by applications that use
-// this policy store. For more information, see [Policy store schema]in the Amazon Verified Permissions
-// User Guide.
+// this policy store. To delete the schema, run [PutSchema]with {} for this parameter. For
+// more information, see [Policy store schema]in the Amazon Verified Permissions User Guide.
 //
+// [PutSchema]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PutSchema.html
 // [Policy store schema]: https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/schema.html
 type SchemaDefinitionMemberCedarJson struct {
 	Value string

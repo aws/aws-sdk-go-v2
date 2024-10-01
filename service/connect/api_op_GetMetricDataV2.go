@@ -571,7 +571,8 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
+	// LTE (for "Less than equal").
 	//
 	// UI name: [Contacts removed from queue in X seconds]
 	//
@@ -581,7 +582,8 @@ type GetMetricDataV2Input struct {
 	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// Threshold: For ThresholdValue enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
+	// LTE (for "Less than equal").
 	//
 	// UI name: [Contacts resolved in X]
 	//
@@ -793,7 +795,8 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
+	// LTE (for "Less than equal").
 	//
 	// UI name: [Service level X]
 	//
@@ -842,7 +845,8 @@ type GetMetricDataV2Input struct {
 	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
+	// LTE (for "Less than equal").
 	//
 	// UI name: [Contacts abandoned in X seconds]
 	//
@@ -852,7 +856,8 @@ type GetMetricDataV2Input struct {
 	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
 	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
-	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
+	// LTE (for "Less than equal").
 	//
 	// UI name: [Contacts answered in X seconds]
 	//

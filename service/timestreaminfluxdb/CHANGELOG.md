@@ -1,3 +1,7 @@
+# v1.5.0 (2024-09-30)
+
+* **Feature**: Timestream for InfluxDB now supports port configuration and additional customer-modifiable InfluxDB v2 parameters. This release adds Port to the CreateDbInstance and UpdateDbInstance API, and additional InfluxDB v2 parameters to the CreateDbParameterGroup API.
+
 # v1.4.3 (2024-09-27)
 
 * No change notes available for this release.

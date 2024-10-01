@@ -29,6 +29,9 @@ type GroupFilterName string
 const (
 	GroupFilterNameResourceType      GroupFilterName = "resource-type"
 	GroupFilterNameConfigurationType GroupFilterName = "configuration-type"
+	GroupFilterNameOwner             GroupFilterName = "owner"
+	GroupFilterNameDisplayName       GroupFilterName = "display-name"
+	GroupFilterNameCriticality       GroupFilterName = "criticality"
 )
 
 // Values returns all known values for GroupFilterName. Note that this can be
@@ -39,6 +42,51 @@ func (GroupFilterName) Values() []GroupFilterName {
 	return []GroupFilterName{
 		"resource-type",
 		"configuration-type",
+		"owner",
+		"display-name",
+		"criticality",
+	}
+}
+
+type GroupingStatus string
+
+// Enum values for GroupingStatus
+const (
+	GroupingStatusSuccess    GroupingStatus = "SUCCESS"
+	GroupingStatusFailed     GroupingStatus = "FAILED"
+	GroupingStatusInProgress GroupingStatus = "IN_PROGRESS"
+	GroupingStatusSkipped    GroupingStatus = "SKIPPED"
+)
+
+// Values returns all known values for GroupingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupingStatus) Values() []GroupingStatus {
+	return []GroupingStatus{
+		"SUCCESS",
+		"FAILED",
+		"IN_PROGRESS",
+		"SKIPPED",
+	}
+}
+
+type GroupingType string
+
+// Enum values for GroupingType
+const (
+	GroupingTypeGroup   GroupingType = "GROUP"
+	GroupingTypeUngroup GroupingType = "UNGROUP"
+)
+
+// Values returns all known values for GroupingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GroupingType) Values() []GroupingType {
+	return []GroupingType{
+		"GROUP",
+		"UNGROUP",
 	}
 }
 
@@ -82,6 +130,26 @@ func (GroupLifecycleEventsStatus) Values() []GroupLifecycleEventsStatus {
 		"INACTIVE",
 		"IN_PROGRESS",
 		"ERROR",
+	}
+}
+
+type ListGroupingStatusesFilterName string
+
+// Enum values for ListGroupingStatusesFilterName
+const (
+	ListGroupingStatusesFilterNameStatus      ListGroupingStatusesFilterName = "status"
+	ListGroupingStatusesFilterNameResourceArn ListGroupingStatusesFilterName = "resource-arn"
+)
+
+// Values returns all known values for ListGroupingStatusesFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListGroupingStatusesFilterName) Values() []ListGroupingStatusesFilterName {
+	return []ListGroupingStatusesFilterName{
+		"status",
+		"resource-arn",
 	}
 }
 
@@ -158,5 +226,24 @@ const (
 func (ResourceStatusValue) Values() []ResourceStatusValue {
 	return []ResourceStatusValue{
 		"PENDING",
+	}
+}
+
+type TagSyncTaskStatus string
+
+// Enum values for TagSyncTaskStatus
+const (
+	TagSyncTaskStatusActive TagSyncTaskStatus = "ACTIVE"
+	TagSyncTaskStatusError  TagSyncTaskStatus = "ERROR"
+)
+
+// Values returns all known values for TagSyncTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagSyncTaskStatus) Values() []TagSyncTaskStatus {
+	return []TagSyncTaskStatus{
+		"ACTIVE",
+		"ERROR",
 	}
 }

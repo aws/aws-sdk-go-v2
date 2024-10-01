@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the knowledge bases in an account and information about each of them.
+// Lists the knowledge bases in an account. The list also includesinformation
+// about each knowledge base.
 func (c *Client) ListKnowledgeBases(ctx context.Context, params *ListKnowledgeBasesInput, optFns ...func(*Options)) (*ListKnowledgeBasesOutput, error) {
 	if params == nil {
 		params = &ListKnowledgeBasesInput{}
@@ -45,7 +46,7 @@ type ListKnowledgeBasesInput struct {
 
 type ListKnowledgeBasesOutput struct {
 
-	// A list of objects, each of which contains information about a knowledge base.
+	// A list of knowledge bases with information about each knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseSummaries []types.KnowledgeBaseSummary

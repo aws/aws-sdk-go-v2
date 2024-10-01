@@ -515,9 +515,10 @@ type EndpointType string
 
 // Enum values for EndpointType
 const (
-	EndpointTypeTelephoneNumber EndpointType = "TELEPHONE_NUMBER"
-	EndpointTypeVoip            EndpointType = "VOIP"
-	EndpointTypeContactFlow     EndpointType = "CONTACT_FLOW"
+	EndpointTypeTelephoneNumber       EndpointType = "TELEPHONE_NUMBER"
+	EndpointTypeVoip                  EndpointType = "VOIP"
+	EndpointTypeContactFlow           EndpointType = "CONTACT_FLOW"
+	EndpointTypeConnectPhonenumberArn EndpointType = "CONNECT_PHONENUMBER_ARN"
 )
 
 // Values returns all known values for EndpointType. Note that this can be
@@ -529,6 +530,7 @@ func (EndpointType) Values() []EndpointType {
 		"TELEPHONE_NUMBER",
 		"VOIP",
 		"CONTACT_FLOW",
+		"CONNECT_PHONENUMBER_ARN",
 	}
 }
 

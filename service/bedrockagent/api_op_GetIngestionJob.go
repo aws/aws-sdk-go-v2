@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a ingestion job, in which a data source is added to a
-// knowledge base.
+// Gets information about a data ingestion job. Data sources are ingested into
+// your knowledge base so that Large Lanaguage Models (LLMs) can use your data.
 func (c *Client) GetIngestionJob(ctx context.Context, params *GetIngestionJobInput, optFns ...func(*Options)) (*GetIngestionJobOutput, error) {
 	if params == nil {
 		params = &GetIngestionJobInput{}
@@ -30,17 +30,19 @@ func (c *Client) GetIngestionJob(ctx context.Context, params *GetIngestionJobInp
 
 type GetIngestionJobInput struct {
 
-	// The unique identifier of the data source in the ingestion job.
+	// The unique identifier of the data source for the data ingestion job you want to
+	// get information on.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the ingestion job.
+	// The unique identifier of the data ingestion job you want to get information on.
 	//
 	// This member is required.
 	IngestionJobId *string
 
-	// The unique identifier of the knowledge base for which the ingestion job applies.
+	// The unique identifier of the knowledge base for the data ingestion job you want
+	// to get information on.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -50,7 +52,7 @@ type GetIngestionJobInput struct {
 
 type GetIngestionJobOutput struct {
 
-	// Contains details about the ingestion job.
+	// Contains details about the data ingestion job.
 	//
 	// This member is required.
 	IngestionJob *types.IngestionJob

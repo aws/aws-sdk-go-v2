@@ -18220,6 +18220,156 @@ func awsRestjson1_serializeOpDocumentStartContactStreamingInput(v *StartContactS
 	return nil
 }
 
+type awsRestjson1_serializeOpStartOutboundChatContact struct {
+}
+
+func (*awsRestjson1_serializeOpStartOutboundChatContact) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartOutboundChatContact) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartOutboundChatContactInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/contact/outbound-chat")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartOutboundChatContactInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartOutboundChatContactInput(v *StartOutboundChatContactInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartOutboundChatContactInput(v *StartOutboundChatContactInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("Attributes")
+		if err := awsRestjson1_serializeDocumentAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ChatDurationInMinutes != nil {
+		ok := object.Key("ChatDurationInMinutes")
+		ok.Integer(*v.ChatDurationInMinutes)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ContactFlowId != nil {
+		ok := object.Key("ContactFlowId")
+		ok.String(*v.ContactFlowId)
+	}
+
+	if v.DestinationEndpoint != nil {
+		ok := object.Key("DestinationEndpoint")
+		if err := awsRestjson1_serializeDocumentEndpoint(v.DestinationEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InitialSystemMessage != nil {
+		ok := object.Key("InitialSystemMessage")
+		if err := awsRestjson1_serializeDocumentChatMessage(v.InitialSystemMessage, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.ParticipantDetails != nil {
+		ok := object.Key("ParticipantDetails")
+		if err := awsRestjson1_serializeDocumentParticipantDetails(v.ParticipantDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RelatedContactId != nil {
+		ok := object.Key("RelatedContactId")
+		ok.String(*v.RelatedContactId)
+	}
+
+	if v.SegmentAttributes != nil {
+		ok := object.Key("SegmentAttributes")
+		if err := awsRestjson1_serializeDocumentSegmentAttributes(v.SegmentAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceEndpoint != nil {
+		ok := object.Key("SourceEndpoint")
+		if err := awsRestjson1_serializeDocumentEndpoint(v.SourceEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SupportedMessagingContentTypes != nil {
+		ok := object.Key("SupportedMessagingContentTypes")
+		if err := awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v.SupportedMessagingContentTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartOutboundVoiceContact struct {
 }
 

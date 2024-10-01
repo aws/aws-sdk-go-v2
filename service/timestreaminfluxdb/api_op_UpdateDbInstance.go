@@ -49,6 +49,17 @@ type UpdateDbInstanceInput struct {
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
+	// The port number on which InfluxDB accepts connections.
+	//
+	// If you change the Port value, your database restarts immediately.
+	//
+	// Valid Values: 1024-65535
+	//
+	// Default: 8086
+	//
+	// Constraints: The value can't be 2375-2376, 7788-7799, 8090, or 51678-51680
+	Port *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -105,6 +116,9 @@ type UpdateDbInstanceOutput struct {
 
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// The port number on which InfluxDB accepts connections.
+	Port *int32
 
 	// Indicates if the DB instance has a public IP to facilitate access.
 	PubliclyAccessible *bool

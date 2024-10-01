@@ -10,8 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
-//
 // Associates the specified dataset for a Amazon Connect instance with the target
 // account. You can associate only one dataset in a single call.
 func (c *Client) AssociateAnalyticsDataSet(ctx context.Context, params *AssociateAnalyticsDataSetInput, optFns ...func(*Options)) (*AssociateAnalyticsDataSetOutput, error) {

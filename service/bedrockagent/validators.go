@@ -930,6 +930,26 @@ func (m *validateOpStartIngestionJob) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopIngestionJob struct {
+}
+
+func (*validateOpStopIngestionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopIngestionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopIngestionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopIngestionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1332,6 +1352,10 @@ func addOpPrepareFlowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartIngestionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartIngestionJob{}, middleware.After)
+}
+
+func addOpStopIngestionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopIngestionJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -4136,6 +4160,27 @@ func validateOpStartIngestionJobInput(v *StartIngestionJobInput) error {
 	}
 	if v.DataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopIngestionJobInput(v *StopIngestionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopIngestionJobInput"}
+	if v.KnowledgeBaseId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KnowledgeBaseId"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.IngestionJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IngestionJobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

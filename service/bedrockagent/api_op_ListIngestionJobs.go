@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the ingestion jobs for a data source and information about each of them.
+// Lists the data ingestion jobs for a data source. The list also includes
+// information about each job.
 func (c *Client) ListIngestionJobs(ctx context.Context, params *ListIngestionJobsInput, optFns ...func(*Options)) (*ListIngestionJobsOutput, error) {
 	if params == nil {
 		params = &ListIngestionJobsInput{}
@@ -29,17 +30,17 @@ func (c *Client) ListIngestionJobs(ctx context.Context, params *ListIngestionJob
 
 type ListIngestionJobsInput struct {
 
-	// The unique identifier of the data source for which to return ingestion jobs.
+	// The unique identifier of the data source for the list of data ingestion jobs.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The unique identifier of the knowledge base for which to return ingestion jobs.
+	// The unique identifier of the knowledge base for the list of data ingestion jobs.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Contains a definition of a filter for which to filter the results.
+	// Contains information about the filters for filtering the data.
 	Filters []types.IngestionJobFilter
 
 	// The maximum number of results to return in the response. If the total number of
@@ -53,7 +54,7 @@ type ListIngestionJobsInput struct {
 	// this field to return the next batch of results.
 	NextToken *string
 
-	// Contains details about how to sort the results.
+	// Contains details about how to sort the data.
 	SortBy *types.IngestionJobSortBy
 
 	noSmithyDocumentSerde
@@ -61,7 +62,7 @@ type ListIngestionJobsInput struct {
 
 type ListIngestionJobsOutput struct {
 
-	// A list of objects, each of which contains information about an ingestion job.
+	// A list of data ingestion jobs with information about each job.
 	//
 	// This member is required.
 	IngestionJobSummaries []types.IngestionJobSummary

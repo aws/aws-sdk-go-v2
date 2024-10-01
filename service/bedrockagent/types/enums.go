@@ -460,6 +460,8 @@ const (
 	IngestionJobStatusInProgress IngestionJobStatus = "IN_PROGRESS"
 	IngestionJobStatusComplete   IngestionJobStatus = "COMPLETE"
 	IngestionJobStatusFailed     IngestionJobStatus = "FAILED"
+	IngestionJobStatusStopping   IngestionJobStatus = "STOPPING"
+	IngestionJobStatusStopped    IngestionJobStatus = "STOPPED"
 )
 
 // Values returns all known values for IngestionJobStatus. Note that this can be
@@ -472,6 +474,8 @@ func (IngestionJobStatus) Values() []IngestionJobStatus {
 		"IN_PROGRESS",
 		"COMPLETE",
 		"FAILED",
+		"STOPPING",
+		"STOPPED",
 	}
 }
 

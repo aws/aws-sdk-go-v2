@@ -3850,6 +3850,26 @@ func (m *validateOpStartContactStreaming) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartOutboundChatContact struct {
+}
+
+func (*validateOpStartOutboundChatContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartOutboundChatContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartOutboundChatContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartOutboundChatContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartOutboundVoiceContact struct {
 }
 
@@ -5816,6 +5836,10 @@ func addOpStartContactRecordingValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartContactStreamingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartContactStreaming{}, middleware.After)
+}
+
+func addOpStartOutboundChatContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartOutboundChatContact{}, middleware.After)
 }
 
 func addOpStartOutboundVoiceContactValidationMiddleware(stack *middleware.Stack) error {
@@ -11379,6 +11403,43 @@ func validateOpStartContactStreamingInput(v *StartContactStreamingInput) error {
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartOutboundChatContactInput(v *StartOutboundChatContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartOutboundChatContactInput"}
+	if v.SourceEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceEndpoint"))
+	}
+	if v.DestinationEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationEndpoint"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.SegmentAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentAttributes"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.ParticipantDetails != nil {
+		if err := validateParticipantDetails(v.ParticipantDetails); err != nil {
+			invalidParams.AddNested("ParticipantDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InitialSystemMessage != nil {
+		if err := validateChatMessage(v.InitialSystemMessage); err != nil {
+			invalidParams.AddNested("InitialSystemMessage", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

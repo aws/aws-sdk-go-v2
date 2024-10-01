@@ -4606,6 +4606,95 @@ func awsRestjson1_serializeOpDocumentStartIngestionJobInput(v *StartIngestionJob
 	return nil
 }
 
+type awsRestjson1_serializeOpStopIngestionJob struct {
+}
+
+func (*awsRestjson1_serializeOpStopIngestionJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopIngestionJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopIngestionJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/ingestionjobs/{ingestionJobId}/stop")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopIngestionJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopIngestionJobInput(v *StopIngestionJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DataSourceId == nil || len(*v.DataSourceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member dataSourceId must not be empty")}
+	}
+	if v.DataSourceId != nil {
+		if err := encoder.SetURI("dataSourceId").String(*v.DataSourceId); err != nil {
+			return err
+		}
+	}
+
+	if v.IngestionJobId == nil || len(*v.IngestionJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ingestionJobId must not be empty")}
+	}
+	if v.IngestionJobId != nil {
+		if err := encoder.SetURI("ingestionJobId").String(*v.IngestionJobId); err != nil {
+			return err
+		}
+	}
+
+	if v.KnowledgeBaseId == nil || len(*v.KnowledgeBaseId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member knowledgeBaseId must not be empty")}
+	}
+	if v.KnowledgeBaseId != nil {
+		if err := encoder.SetURI("knowledgeBaseId").String(*v.KnowledgeBaseId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 

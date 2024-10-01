@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCancelTagSyncTask struct {
+}
+
+func (*validateOpCancelTagSyncTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelTagSyncTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelTagSyncTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelTagSyncTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGroup struct {
 }
 
@@ -50,6 +70,26 @@ func (m *validateOpGetTags) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTagSyncTask struct {
+}
+
+func (*validateOpGetTagSyncTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTagSyncTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTagSyncTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTagSyncTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGroupResources struct {
 }
 
@@ -65,6 +105,26 @@ func (m *validateOpGroupResources) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGroupResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListGroupingStatuses struct {
+}
+
+func (*validateOpListGroupingStatuses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGroupingStatuses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGroupingStatusesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGroupingStatusesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +210,26 @@ func (m *validateOpSearchResources) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartTagSyncTask struct {
+}
+
+func (*validateOpStartTagSyncTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTagSyncTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTagSyncTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTagSyncTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTag struct {
 }
 
@@ -230,6 +310,10 @@ func (m *validateOpUpdateGroupQuery) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCancelTagSyncTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelTagSyncTask{}, middleware.After)
+}
+
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
 }
@@ -238,8 +322,16 @@ func addOpGetTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTags{}, middleware.After)
 }
 
+func addOpGetTagSyncTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTagSyncTask{}, middleware.After)
+}
+
 func addOpGroupResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGroupResources{}, middleware.After)
+}
+
+func addOpListGroupingStatusesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGroupingStatuses{}, middleware.After)
 }
 
 func addOpListGroupResourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -256,6 +348,10 @@ func addOpPutGroupConfigurationValidationMiddleware(stack *middleware.Stack) err
 
 func addOpSearchResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchResources{}, middleware.After)
+}
+
+func addOpStartTagSyncTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTagSyncTask{}, middleware.After)
 }
 
 func addOpTagValidationMiddleware(stack *middleware.Stack) error {
@@ -378,6 +474,41 @@ func validateGroupParameterList(v []types.GroupConfigurationParameter) error {
 	}
 }
 
+func validateListGroupingStatusesFilter(v *types.ListGroupingStatusesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGroupingStatusesFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListGroupingStatusesFilterList(v []types.ListGroupingStatusesFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGroupingStatusesFilterList"}
+	for i := range v {
+		if err := validateListGroupingStatusesFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceFilter(v *types.ResourceFilter) error {
 	if v == nil {
 		return nil
@@ -431,6 +562,21 @@ func validateResourceQuery(v *types.ResourceQuery) error {
 	}
 }
 
+func validateOpCancelTagSyncTaskInput(v *CancelTagSyncTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelTagSyncTaskInput"}
+	if v.TaskArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGroupInput(v *CreateGroupInput) error {
 	if v == nil {
 		return nil
@@ -471,6 +617,21 @@ func validateOpGetTagsInput(v *GetTagsInput) error {
 	}
 }
 
+func validateOpGetTagSyncTaskInput(v *GetTagSyncTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTagSyncTaskInput"}
+	if v.TaskArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGroupResourcesInput(v *GroupResourcesInput) error {
 	if v == nil {
 		return nil
@@ -481,6 +642,26 @@ func validateOpGroupResourcesInput(v *GroupResourcesInput) error {
 	}
 	if v.ResourceArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListGroupingStatusesInput(v *ListGroupingStatusesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGroupingStatusesInput"}
+	if v.Group == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Group"))
+	}
+	if v.Filters != nil {
+		if err := validateListGroupingStatusesFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -551,6 +732,30 @@ func validateOpSearchResourcesInput(v *SearchResourcesInput) error {
 		if err := validateResourceQuery(v.ResourceQuery); err != nil {
 			invalidParams.AddNested("ResourceQuery", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTagSyncTaskInput(v *StartTagSyncTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTagSyncTaskInput"}
+	if v.Group == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Group"))
+	}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if v.TagValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValue"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

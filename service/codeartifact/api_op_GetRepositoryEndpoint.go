@@ -67,6 +67,9 @@ type GetRepositoryEndpointInput struct {
 	// domain that contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
 
+	// A string that specifies the type of endpoint.
+	EndpointType types.EndpointType
+
 	noSmithyDocumentSerde
 }
 

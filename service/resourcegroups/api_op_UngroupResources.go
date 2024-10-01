@@ -38,12 +38,13 @@ func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesI
 
 type UngroupResourcesInput struct {
 
-	// The name or the ARN of the resource group from which to remove the resources.
+	// The name or the Amazon resource name (ARN) of the resource group from which to
+	// remove the resources.
 	//
 	// This member is required.
 	Group *string
 
-	// The ARNs of the resources to be removed from the group.
+	// The Amazon resource names (ARNs) of the resources to be removed from the group.
 	//
 	// This member is required.
 	ResourceArns []string

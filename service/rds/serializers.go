@@ -12582,6 +12582,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.CharacterSetName)
 	}
 
+	if len(v.ClusterScalabilityType) > 0 {
+		objectKey := object.Key("ClusterScalabilityType")
+		objectKey.String(string(v.ClusterScalabilityType))
+	}
+
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
@@ -13690,6 +13695,13 @@ func awsAwsquery_serializeOpDocumentCreateDBShardGroupInput(v *CreateDBShardGrou
 	if v.PubliclyAccessible != nil {
 		objectKey := object.Key("PubliclyAccessible")
 		objectKey.Boolean(*v.PubliclyAccessible)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -38,8 +38,8 @@ func (c *Client) GetGroupConfiguration(ctx context.Context, params *GetGroupConf
 
 type GetGroupConfigurationInput struct {
 
-	// The name or the ARN of the resource group for which you want to retrive the
-	// service configuration.
+	// The name or the Amazon resource name (ARN) of the resource group for which you
+	// want to retrive the service configuration.
 	Group *string
 
 	noSmithyDocumentSerde

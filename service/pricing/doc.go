@@ -20,12 +20,12 @@
 //     Amazon Web Services
 //
 // Use GetServices without a service code to retrieve the service codes for all
-// Amazon Web Services, then GetServices with a service code to retrieve the
-// attribute names for that service. After you have the service code and attribute
-// names, you can use GetAttributeValues to see what values are available for an
-// attribute. With the service code and an attribute name and value, you can use
-// GetProducts to find specific products that you're interested in, such as an
-// AmazonEC2 instance, with a Provisioned IOPS volumeType .
+// Amazon Web Services services, then GetServices with a service code to retrieve
+// the attribute names for that service. After you have the service code and
+// attribute names, you can use GetAttributeValues to see what values are
+// available for an attribute. With the service code and an attribute name and
+// value, you can use GetProducts to find specific products that you're interested
+// in, such as an AmazonEC2 instance, with a Provisioned IOPS volumeType .
 //
 // For more information, see [Using the Amazon Web Services Price List API] in the Billing User Guide.
 //

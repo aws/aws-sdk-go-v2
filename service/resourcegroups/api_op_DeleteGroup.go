@@ -37,7 +37,7 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The name or the ARN of the resource group to delete.
+	// The name or the Amazon resource name (ARN) of the resource group to delete.
 	Group *string
 
 	// Deprecated - don't use this parameter. Use Group instead.
