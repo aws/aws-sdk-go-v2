@@ -22,6 +22,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
@@ -73,9 +74,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
         ServiceShape service = settings.getService(model);
-        for (ShapeId operationId : service.getAllOperations()) {
-            final OperationShape operation = model.expectShape(operationId, OperationShape.class);
-
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             // Create a symbol provider because one is not available in this call.
             SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
 
@@ -128,8 +127,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
         boolean supportsComputeInputChecksumsWorkflow = false;
         boolean supportsChecksumValidationWorkflow = false;
 
-        for (ShapeId operationID : service.getAllOperations()) {
-            OperationShape operation = model.expectShape(operationID, OperationShape.class);
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             if (!hasChecksumTrait(model, service, operation)) {
                 continue;
             }
@@ -191,8 +189,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
     }
 
     public static boolean hasInputChecksumTrait(Model model, ServiceShape service) {
-        for (ShapeId operationID : service.getAllOperations()) {
-                OperationShape operation = model.expectShape(operationID, OperationShape.class);
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
                 if (hasInputChecksumTrait(model, service, operation)) {
                     return true;
                 }
@@ -209,8 +206,7 @@ public class AwsHttpChecksumGenerator implements GoIntegration {
     }
 
     public static boolean hasOutputChecksumTrait(Model model, ServiceShape service) {
-        for (ShapeId operationID : service.getAllOperations()) {
-            OperationShape operation = model.expectShape(operationID, OperationShape.class);
+        for (OperationShape operation : TopDownIndex.of(model).getContainedOperations(service)) {
             if (hasOutputChecksumTrait(model, service, operation)) {
                 return true;
             }

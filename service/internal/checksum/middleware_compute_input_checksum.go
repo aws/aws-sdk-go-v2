@@ -180,9 +180,7 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 	// Only seekable streams are supported for non-trailing checksums, because
 	// the stream needs to be rewound before the handler can continue.
 	if stream != nil && !req.IsStreamSeekable() {
-		return out, metadata, computeInputHeaderChecksumError{
-			Msg: "unseekable stream is not supported without TLS and trailing checksum",
-		}
+		return next.HandleFinalize(ctx, in)
 	}
 
 	var sha256Checksum string
@@ -358,14 +356,6 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 
 	return out, metadata, err
 }
-
-//func checkRequireChecksum(requireChecksum *aws.RequireChecksum, requestChecksumCalculation aws.RequestChecksumCalculation, set bool) {
-//	if *requireChecksum == aws.RequireChecksumPending &&
-//		requestChecksumCalculation == aws.RequestChecksumCalculationWhenRequired &&
-//		!set {
-//		*requireChecksum = aws.RequireChecksumFalse
-//	}
-//}
 
 func getInputAlgorithm(ctx context.Context) (Algorithm, bool, error) {
 	ctxAlgorithm := internalcontext.GetChecksumInputAlgorithm(ctx)

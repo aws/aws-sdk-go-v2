@@ -18,7 +18,9 @@ type InputMiddlewareOptions struct {
 	// Whether operation model forces middleware to compute the input payload's checksum.
 	RequireChecksum bool
 
-	// User config to opt-in/out request checksum calculation
+	// RequestChecksumCalculation is the user config to opt-in/out request checksum calculation. If RequireChecksum is
+	// set to true, checksum will be calculated and this field will be ignored, otherwise
+	// RequestChecksumCalculation will be used to indicate if checksum will be calculated
 	RequestChecksumCalculation aws.RequestChecksumCalculation
 
 	// Enables support for wrapping the serialized input payload with a
@@ -124,13 +126,11 @@ type OutputMiddlewareOptions struct {
 	// GetValidationMode is a function to get the checksum validation
 	// mode of the output payload from the input parameters.
 	//
-	// Given the input parameter value, the function must return the validation mode
+	// Given the input parameter value, the function must return the validation
+	// mode and true, or false if no mode is specified.
 	GetValidationMode func(interface{}) (string, bool)
 
-	// Whether operation model forces middleware to validate checksum
-	RequireChecksum bool
-
-	// User config to opt-in/out response checksum validation
+	// ResponseChecksumValidation is the user config to opt-in/out response checksum validation
 	ResponseChecksumValidation aws.ResponseChecksumValidation
 
 	// The set of checksum algorithms that should be used for response payload

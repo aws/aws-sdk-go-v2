@@ -449,8 +449,9 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						return r
 					}(),
 				},
-				expectErr:      "unseekable stream is not supported",
-				expectBuildErr: true,
+				expectContentLength: -1,
+				expectHeader:        http.Header{},
+				expectPayload:       []byte("hello world"),
 			},
 			"http stream read error": {
 				initContext: func(ctx context.Context) context.Context {
@@ -503,8 +504,9 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						return r
 					}(),
 				},
-				expectErr:      "unseekable stream is not supported",
-				expectBuildErr: true,
+				expectContentLength: -1,
+				expectHeader:        http.Header{},
+				expectPayload:       []byte("hello world"),
 			},
 		},
 

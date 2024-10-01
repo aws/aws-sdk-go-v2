@@ -1,11 +1,10 @@
 {
     "id": "9ebe24c4-7915-41e0-840d-a49eab6f9d97",
     "type": "feature",
-    "description": "This feature adds new client cfg fields so user can opt-in/out request/response checksum calculation/validation for operation modeled with checksum trait. The default MD5 checksum algorithm is replaced with CRC32.",
+    "description": "This feature adds new config fields to checksum-supported operations so user can switch on/off checksum workflow with those fields. The field RequestChecksumCalculation controls the request's checksum calculation and the field ResponseChecksumValidation controls the response's checksum validation. This feature also replaces the default MD5 checksum algorithm of checksum calculation with CRC32.",
     "modules": [
         ".",
         "config",
-        "feature/dynamodbstreams/attributevalue",
         "service/internal/checksum",
         "service/s3"
     ]

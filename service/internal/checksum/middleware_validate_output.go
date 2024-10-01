@@ -66,7 +66,7 @@ func (m *validateOutputPayloadChecksum) HandleDeserialize(
 		return out, metadata, err
 	}
 
-	if mode := getContextOutputValidationMode(ctx); mode != "ENABLED" {
+	if mode := getContextOutputValidationMode(ctx); mode != checksumValidationModeEnabled {
 		return out, metadata, err
 	}
 

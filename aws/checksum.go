@@ -4,23 +4,24 @@ package aws
 type RequestChecksumCalculation int
 
 const (
-	// RequestChecksumCalculationWhenSupported indicates request checksum should be calculated if
-	// client operation model has request checksum trait
-	RequestChecksumCalculationWhenSupported RequestChecksumCalculation = 1
+	// RequestChecksumCalculationWhenSupported indicates request checksum should be calculated
+	// when the operation supports input checksums
+	RequestChecksumCalculationWhenSupported RequestChecksumCalculation = iota
 
 	// RequestChecksumCalculationWhenRequired indicates request checksum should be calculated
-	// if modeled and user set an algorithm
-	RequestChecksumCalculationWhenRequired = 2
+	// when user sets a checksum algorithm
+	RequestChecksumCalculationWhenRequired
 )
 
 // ResponseChecksumValidation controls response checksum validation workflow
 type ResponseChecksumValidation int
 
 const (
-	// ResponseChecksumValidationWhenSupported indicates response checksum should be validated if modeled
-	ResponseChecksumValidationWhenSupported ResponseChecksumValidation = 1
+	// ResponseChecksumValidationWhenSupported indicates response checksum should be validated
+	// when the operation supports output checksums
+	ResponseChecksumValidationWhenSupported ResponseChecksumValidation = iota
 
-	// ResponseChecksumValidationWhenRequired indicates response checksum should be validated if modeled
-	// and user enable that in vlidation mode cfg
-	ResponseChecksumValidationWhenRequired = 2
+	// ResponseChecksumValidationWhenRequired indicates response checksum should be validated
+	// when user enables that in validation mode cfg
+	ResponseChecksumValidationWhenRequired
 )

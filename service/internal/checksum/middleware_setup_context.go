@@ -8,6 +8,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+const (
+	checksumValidationModeEnabled = "ENABLED"
+)
+
 // setupChecksumContext is the initial middleware that looks up the input
 // used to configure checksum behavior. This middleware must be executed before
 // input validation step or any other checksum middleware.
@@ -40,17 +44,13 @@ func (m *setupInputContext) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	var algorithm string
-	var ok bool
-	if m.GetAlgorithm != nil {
-		algorithm, ok = m.GetAlgorithm(in.Parameters)
+	if algorithm, ok := m.GetAlgorithm(in.Parameters); ok {
+		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
+		return next.HandleInitialize(ctx, in)
 	}
 
-	if m.RequireChecksum || m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenSupported || ok {
-		if !ok {
-			algorithm = "CRC32"
-		}
-		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, algorithm)
+	if m.RequireChecksum || m.RequestChecksumCalculation == aws.RequestChecksumCalculationWhenSupported {
+		ctx = internalcontext.SetChecksumInputAlgorithm(ctx, "CRC32")
 	}
 
 	return next.HandleInitialize(ctx, in)
@@ -60,7 +60,8 @@ type setupOutputContext struct {
 	// GetValidationMode is a function to get the checksum validation
 	// mode of the output payload from the input parameters.
 	//
-	// Given the input parameter value, the function must return the validation mode
+	// Given the input parameter value, the function must return the validation
+	// mode and true, or false if no mode is specified.
 	GetValidationMode func(interface{}) (string, bool)
 
 	// ResponseChecksumValidation states user config to opt-in/out checksum validation
@@ -79,15 +80,11 @@ func (m *setupOutputContext) HandleInitialize(
 ) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	var mode string
-	// Check if validation mode is specified.
-	if m.GetValidationMode != nil {
-		// check is input resource has a checksum algorithm
-		mode, _ = m.GetValidationMode(in.Parameters)
-	}
 
-	if m.ResponseChecksumValidation == aws.ResponseChecksumValidationWhenSupported || mode == "ENABLED" {
-		ctx = setContextOutputValidationMode(ctx, "ENABLED")
+	mode, _ := m.GetValidationMode(in.Parameters)
+
+	if m.ResponseChecksumValidation == aws.ResponseChecksumValidationWhenSupported || mode == checksumValidationModeEnabled {
+		ctx = setContextOutputValidationMode(ctx, checksumValidationModeEnabled)
 	}
 
 	return next.HandleInitialize(ctx, in)
