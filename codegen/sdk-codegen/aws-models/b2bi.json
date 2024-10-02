@@ -31,6 +31,9 @@
             "version": "2022-06-23",
             "operations": [
                 {
+                    "target": "com.amazonaws.b2bi#CreateStarterMappingTemplate"
+                },
+                {
                     "target": "com.amazonaws.b2bi#GetTransformerJob"
                 },
                 {
@@ -41,6 +44,9 @@
                 },
                 {
                     "target": "com.amazonaws.b2bi#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#TestConversion"
                 },
                 {
                     "target": "com.amazonaws.b2bi#TestMapping"
@@ -815,6 +821,23 @@
                 "smithy.api#documentation": "<p>A capability object. Currently, only EDI (electronic data interchange) capabilities are supported. A trading capability contains the information required to transform incoming EDI documents into JSON or XML outputs.</p>"
             }
         },
+        "com.amazonaws.b2bi#CapabilityDirection": {
+            "type": "enum",
+            "members": {
+                "INBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INBOUND"
+                    }
+                },
+                "OUTBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTBOUND"
+                    }
+                }
+            }
+        },
         "com.amazonaws.b2bi#CapabilityId": {
             "type": "string",
             "traits": {
@@ -838,6 +861,20 @@
                     "min": 1,
                     "max": 254
                 }
+            }
+        },
+        "com.amazonaws.b2bi#CapabilityOptions": {
+            "type": "structure",
+            "members": {
+                "outboundEdi": {
+                    "target": "com.amazonaws.b2bi#OutboundEdiOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the outbound EDI options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details for an Outbound EDI capability.</p>"
             }
         },
         "com.amazonaws.b2bi#CapabilitySummary": {
@@ -907,6 +944,94 @@
                 "smithy.api#documentation": "<p>A conflict exception is thrown when you attempt to delete a resource (such as a profile or a capability) that is being used by other resources.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.b2bi#ConversionSource": {
+            "type": "structure",
+            "members": {
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#ConversionSourceFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format for the input file: either JSON or XML.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputFile": {
+                    "target": "com.amazonaws.b2bi#InputFileSource",
+                    "traits": {
+                        "smithy.api#documentation": "File to be converted",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the input for an outbound transformation. </p>"
+            }
+        },
+        "com.amazonaws.b2bi#ConversionSourceFormat": {
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "XML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XML"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.b2bi#ConversionTarget": {
+            "type": "structure",
+            "members": {
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#ConversionTargetFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Currently, only X12 format is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formatDetails": {
+                    "target": "com.amazonaws.b2bi#ConversionTargetFormatDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the formatting details for the conversion target.</p>"
+                    }
+                },
+                "outputSampleFile": {
+                    "target": "com.amazonaws.b2bi#OutputSampleFileSource",
+                    "traits": {
+                        "smithy.api#documentation": "Customer uses this to provide a sample on what should file look like after conversion\nX12 EDI use case around this would be discovering the file syntax"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provide a sample of what the output of the transformation should look like.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#ConversionTargetFormat": {
+            "type": "enum",
+            "members": {
+                "X12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.b2bi#ConversionTargetFormatDetails": {
+            "type": "union",
+            "members": {
+                "x12": {
+                    "target": "com.amazonaws.b2bi#X12Details"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a structure describing the X12 details for the conversion target.</p>"
             }
         },
         "com.amazonaws.b2bi#CreateCapability": {
@@ -1246,6 +1371,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "capabilityOptions": {
+                    "target": "com.amazonaws.b2bi#CapabilityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the structure that contains the details for the associated capabilities.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -1311,6 +1442,12 @@
                     "target": "com.amazonaws.b2bi#PartnershipCapabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns one or more capabilities associated with this partnership.</p>"
+                    }
+                },
+                "capabilityOptions": {
+                    "target": "com.amazonaws.b2bi#CapabilityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the structure that contains the details for the associated capabilities.</p>"
                     }
                 },
                 "tradingPartnerId": {
@@ -1539,6 +1676,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.b2bi#CreateStarterMappingTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.b2bi#CreateStarterMappingTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.b2bi#CreateStarterMappingTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon Web Services B2B Data Interchange uses a mapping template in JSONata or XSLT format to transform a customer input file into a JSON or XML file that can be converted to EDI.</p>\n         <p>If you provide a sample EDI file with the same structure as the EDI files that you wish to generate, then the service can generate a mapping template.\n      The starter template contains placeholder values which you can replace with JSONata or XSLT expressions to take data from your input file and insert it\n      into the JSON or XML file that is used to generate the EDI.</p>\n         <p>If you do not provide a sample EDI file, then the service can generate a mapping template based on the EDI settings in the <code>templateDetails</code> parameter.\n   </p>\n         <p> Currently, we only support generating a template that can generate the input to produce an Outbound X12 EDI file.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample CreateStarterMappingTemplate call",
+                        "input": {
+                            "mappingType": "JSONATA",
+                            "templateDetails": {
+                                "x12": {
+                                    "transactionSet": "X12_110",
+                                    "version": "VERSION_4010"
+                                }
+                            },
+                            "outputSampleLocation": {
+                                "bucketName": "output-sample-bucket",
+                                "key": "output-sample-key"
+                            }
+                        },
+                        "output": {
+                            "mappingTemplate": "Example Mapping Template"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "uri": "/createmappingstarttemplate",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.b2bi#CreateStarterMappingTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "outputSampleLocation": {
+                    "target": "com.amazonaws.b2bi#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the location of the sample EDI file that is used to generate the mapping template.</p>"
+                    }
+                },
+                "mappingType": {
+                    "target": "com.amazonaws.b2bi#MappingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the format for the mapping template: either JSONATA or XSLT.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateDetails": {
+                    "target": "com.amazonaws.b2bi#TemplateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the details needed for generating the template. Specify the X12 transaction set and version for which the template is used:\n         currently, we only support X12.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.b2bi#CreateStarterMappingTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "mappingTemplate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a string that represents the mapping template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.b2bi#CreateTransformer": {
             "type": "operation",
             "input": {
@@ -1572,24 +1804,46 @@
             ],
             "traits": {
                 "aws.iam#requiredActions": [
-                    "b2bi:TagResource"
+                    "b2bi:TagResource",
+                    "b2bi:UpdateTransformer",
+                    "logs:CreateLogDelivery",
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:DescribeLogGroups",
+                    "logs:DescribeLogStreams",
+                    "logs:DescribeResourcePolicies",
+                    "logs:ListLogDeliveries",
+                    "logs:PutLogEvents",
+                    "logs:PutResourcePolicy"
                 ],
-                "smithy.api#documentation": "<p>Creates a transformer. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
+                "smithy.api#documentation": "<p>Creates a transformer. Amazon Web Services B2B Data Interchange currently supports two scenarios:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Inbound EDI</i>: the Amazon Web Services customer receives an EDI file from their trading partner. Amazon Web Services B2B Data Interchange \n               converts this EDI file into a JSON or XML file with a service-defined structure. A mapping template provided by the customer,\n               in JSONata or XSLT format, is optionally applied to this file to produce a JSON or XML file with the structure the customer requires.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Outbound EDI</i>: the Amazon Web Services customer has a JSON or XML file containing data that they wish to use\n               in an EDI file. A mapping template, provided by the customer (in either JSONata or XSLT format) is applied to this file to generate\n               a JSON or XML file in the service-defined structure. This file is then converted to an EDI file.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The following fields are provided for backwards compatibility only: <code>fileFormat</code>,\n            <code>mappingTemplate</code>, <code>ediType</code>, and <code>sampleDocument</code>.</p>\n            <ul>\n               <li>\n                  <p>Use the <code>mapping</code> data type in place of <code>mappingTemplate</code> and <code>fileFormat</code>\n                  </p>\n               </li>\n               <li>\n                  <p>Use the <code>sampleDocuments</code> data type in place of <code>sampleDocument</code>\n                  </p>\n               </li>\n               <li>\n                  <p>Use either the <code>inputConversion</code> or <code>outputConversion</code> in place of <code>ediType</code>\n                  </p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample CreateTransformer call",
                         "input": {
                             "clientToken": "foo",
-                            "ediType": {
-                                "x12Details": {
-                                    "transactionSet": "X12_110",
-                                    "version": "VERSION_4010"
+                            "name": "transformX12",
+                            "inputConversion": {
+                                "fromFormat": "X12",
+                                "formatOptions": {
+                                    "x12": {
+                                        "transactionSet": "X12_110",
+                                        "version": "VERSION_4010"
+                                    }
                                 }
                             },
-                            "fileFormat": "JSON",
-                            "mappingTemplate": "{}",
-                            "name": "transformJSON",
-                            "sampleDocument": "s3://test-bucket/sampleDoc.txt",
+                            "mapping": {
+                                "templateLanguage": "JSONATA",
+                                "template": "{}"
+                            },
+                            "sampleDocuments": {
+                                "bucketName": "test-bucket",
+                                "keys": [
+                                    {
+                                        "input": "sampleDoc.txt"
+                                    }
+                                ]
+                            },
                             "tags": [
                                 {
                                     "Key": "sampleKey",
@@ -1599,16 +1853,28 @@
                         },
                         "output": {
                             "createdAt": "2023-11-01T21:51:05.504Z",
-                            "ediType": {
-                                "x12Details": {
-                                    "transactionSet": "X12_110",
-                                    "version": "VERSION_4010"
+                            "name": "transformX12",
+                            "inputConversion": {
+                                "fromFormat": "X12",
+                                "formatOptions": {
+                                    "x12": {
+                                        "transactionSet": "X12_110",
+                                        "version": "VERSION_4010"
+                                    }
                                 }
                             },
-                            "fileFormat": "JSON",
-                            "mappingTemplate": "$",
-                            "name": "transformJSON",
-                            "sampleDocument": "s3://test-bucket/sampleDoc.txt",
+                            "mapping": {
+                                "templateLanguage": "JSONATA",
+                                "template": "{}"
+                            },
+                            "sampleDocuments": {
+                                "bucketName": "test-bucket",
+                                "keys": [
+                                    {
+                                        "input": "sampleDoc.txt"
+                                    }
+                                ]
+                            },
                             "status": "inactive",
                             "transformerArn": "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9",
                             "transformerId": "tr-974c129999f84d8c9"
@@ -1633,33 +1899,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "fileFormat": {
-                    "target": "com.amazonaws.b2bi#FileFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "mappingTemplate": {
-                    "target": "com.amazonaws.b2bi#MappingTemplate",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "ediType": {
-                    "target": "com.amazonaws.b2bi#EdiType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "sampleDocument": {
-                    "target": "com.amazonaws.b2bi#FileLocation",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
-                    }
-                },
                 "clientToken": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -1672,6 +1911,66 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
                         "smithy.api#documentation": "<p>Specifies the key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (capabilities, partnerships, and so on) for any purpose.</p>"
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#FileFormat",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Specifies that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
+                    }
+                },
+                "mappingTemplate": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>\n         <note>\n            <p>This parameter is available for backwards compatibility. Use the <a href=\"https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html\">Mapping</a> data type instead.</p>\n         </note>"
+                    }
+                },
+                "ediType": {
+                    "target": "com.amazonaws.b2bi#EdiType",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
+                    }
+                },
+                "sampleDocument": {
+                    "target": "com.amazonaws.b2bi#FileLocation",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
+                    }
+                },
+                "inputConversion": {
+                    "target": "com.amazonaws.b2bi#InputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify  the <code>InputConversion</code> object, which contains the format options for the inbound transformation.</p>"
+                    }
+                },
+                "mapping": {
+                    "target": "com.amazonaws.b2bi#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the structure that contains the mapping template and its language (either XSLT or JSONATA).</p>"
+                    }
+                },
+                "outputConversion": {
+                    "target": "com.amazonaws.b2bi#OutputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the <code>OutputConversion</code> object, which contains the format options for the outbound transformation.</p>"
+                    }
+                },
+                "sampleDocuments": {
+                    "target": "com.amazonaws.b2bi#SampleDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
                     }
                 }
             },
@@ -1703,20 +2002,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "fileFormat": {
-                    "target": "com.amazonaws.b2bi#FileFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "mappingTemplate": {
-                    "target": "com.amazonaws.b2bi#MappingTemplate",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "status": {
                     "target": "com.amazonaws.b2bi#TransformerStatus",
                     "traits": {
@@ -1724,24 +2009,75 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ediType": {
-                    "target": "com.amazonaws.b2bi#EdiType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "sampleDocument": {
-                    "target": "com.amazonaws.b2bi#FileLocation",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
-                    }
-                },
                 "createdAt": {
                     "target": "com.amazonaws.b2bi#CreatedDate",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a timestamp for creation date and time of the transformer.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#FileFormat",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
+                    }
+                },
+                "mappingTemplate": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
+                    }
+                },
+                "ediType": {
+                    "target": "com.amazonaws.b2bi#EdiType",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
+                    }
+                },
+                "sampleDocument": {
+                    "target": "com.amazonaws.b2bi#FileLocation",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
+                    }
+                },
+                "inputConversion": {
+                    "target": "com.amazonaws.b2bi#InputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>InputConversion</code> object, which contains the format options for the inbound transformation.</p>"
+                    }
+                },
+                "mapping": {
+                    "target": "com.amazonaws.b2bi#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the structure that contains the mapping template and its language (either XSLT or JSONATA).</p>"
+                    }
+                },
+                "outputConversion": {
+                    "target": "com.amazonaws.b2bi#OutputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>OutputConversion</code> object, which contains the format options for the outbound transformation.</p>"
+                    }
+                },
+                "sampleDocuments": {
+                    "target": "com.amazonaws.b2bi#SampleDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
                     }
                 }
             },
@@ -1974,7 +2310,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified transformer. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified transformer. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively,\n    a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample DeleteTransformer call",
@@ -2010,6 +2346,12 @@
         "com.amazonaws.b2bi#EdiConfiguration": {
             "type": "structure",
             "members": {
+                "capabilityDirection": {
+                    "target": "com.amazonaws.b2bi#CapabilityDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is capability is for inbound or outbound transformations.</p>"
+                    }
+                },
                 "type": {
                     "target": "com.amazonaws.b2bi#EdiType",
                     "traits": {
@@ -2054,7 +2396,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
+                "smithy.api#documentation": "<p>Specifies the details for the EDI standard that is being used for the transformer.\n         Currently, only X12 is supported. X12 is a set of standards and corresponding messages \n         that define specific business documents.</p>"
             }
         },
         "com.amazonaws.b2bi#Email": {
@@ -2091,6 +2433,12 @@
                     "traits": {
                         "smithy.api#enumValue": "JSON"
                     }
+                },
+                "NOT_USED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_USED"
+                    }
                 }
             }
         },
@@ -2100,6 +2448,28 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.b2bi#FormatOptions": {
+            "type": "union",
+            "members": {
+                "x12": {
+                    "target": "com.amazonaws.b2bi#X12Details"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains the X12 transaction set and version.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#FromFormat": {
+            "type": "enum",
+            "members": {
+                "X12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12"
+                    }
                 }
             }
         },
@@ -2378,6 +2748,9 @@
                         "smithy.api#documentation": "<p>Returns one or more capabilities associated with this partnership.</p>"
                     }
                 },
+                "capabilityOptions": {
+                    "target": "com.amazonaws.b2bi#CapabilityOptions"
+                },
                 "tradingPartnerId": {
                     "target": "com.amazonaws.b2bi#TradingPartnerId",
                     "traits": {
@@ -2575,7 +2948,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the details for the transformer specified by the transformer ID. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
+                "smithy.api#documentation": "<p>Retrieves the details for the transformer specified by the transformer ID. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively,\n    a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample GetTransformer call",
@@ -2584,17 +2957,28 @@
                         },
                         "output": {
                             "createdAt": "2023-11-01T21:51:05.504Z",
-                            "ediType": {
-                                "x12Details": {
-                                    "transactionSet": "X12_110",
-                                    "version": "VERSION_4010"
+                            "name": "transformX12",
+                            "inputConversion": {
+                                "fromFormat": "X12",
+                                "formatOptions": {
+                                    "x12": {
+                                        "transactionSet": "X12_110",
+                                        "version": "VERSION_4010"
+                                    }
                                 }
                             },
-                            "fileFormat": "JSON",
-                            "mappingTemplate": "$",
-                            "modifiedAt": "2023-11-01T21:51:05.504Z",
-                            "name": "transformJSON",
-                            "sampleDocument": "s3://test-bucket/sampleDoc.txt",
+                            "mapping": {
+                                "templateLanguage": "JSONATA",
+                                "template": "{}"
+                            },
+                            "sampleDocuments": {
+                                "bucketName": "test-bucket",
+                                "keys": [
+                                    {
+                                        "input": "sampleDoc.txt"
+                                    }
+                                ]
+                            },
                             "status": "inactive",
                             "transformerArn": "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9",
                             "transformerId": "tr-974c129999f84d8c9"
@@ -2753,38 +3137,11 @@
                         "smithy.api#required": {}
                     }
                 },
-                "fileFormat": {
-                    "target": "com.amazonaws.b2bi#FileFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "mappingTemplate": {
-                    "target": "com.amazonaws.b2bi#MappingTemplate",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "status": {
                     "target": "com.amazonaws.b2bi#TransformerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the state of the newly created transformer. The transformer can be either\n            <code>active</code> or <code>inactive</code>. For the transformer to be used in a\n         capability, its status must <code>active</code>.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "ediType": {
-                    "target": "com.amazonaws.b2bi#EdiType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "sampleDocument": {
-                    "target": "com.amazonaws.b2bi#FileLocation",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
                     }
                 },
                 "createdAt": {
@@ -2799,10 +3156,113 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a timestamp for last time the transformer was modified.</p>"
                     }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#FileFormat",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
+                    }
+                },
+                "mappingTemplate": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
+                    }
+                },
+                "ediType": {
+                    "target": "com.amazonaws.b2bi#EdiType",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
+                    }
+                },
+                "sampleDocument": {
+                    "target": "com.amazonaws.b2bi#FileLocation",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
+                    }
+                },
+                "inputConversion": {
+                    "target": "com.amazonaws.b2bi#InputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>InputConversion</code> object, which contains the format options for the inbound transformation.</p>"
+                    }
+                },
+                "mapping": {
+                    "target": "com.amazonaws.b2bi#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the structure that contains the mapping template and its language (either XSLT or JSONATA).</p>"
+                    }
+                },
+                "outputConversion": {
+                    "target": "com.amazonaws.b2bi#OutputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>OutputConversion</code> object, which contains the format options for the outbound transformation.</p>"
+                    }
+                },
+                "sampleDocuments": {
+                    "target": "com.amazonaws.b2bi#SampleDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.b2bi#InputConversion": {
+            "type": "structure",
+            "members": {
+                "fromFormat": {
+                    "target": "com.amazonaws.b2bi#FromFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format for the transformer input: currently on <code>X12</code> is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formatOptions": {
+                    "target": "com.amazonaws.b2bi#FormatOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the formatting options for an inbound transformer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the input formatting options for an inbound transformer (takes an X12-formatted\n         EDI document as input and converts it to JSON or XML.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#InputFileSource": {
+            "type": "union",
+            "members": {
+                "fileContent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the input contents, as a string, for the source of an outbound transformation.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 5000000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input file to use for an outbound transformation.</p>"
             }
         },
         "com.amazonaws.b2bi#InstructionsDocuments": {
@@ -2839,6 +3299,12 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.b2bi#KeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.b2bi#SampleDocumentKeys"
             }
         },
         "com.amazonaws.b2bi#ListCapabilities": {
@@ -3261,7 +3727,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the available transformers. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
+                "smithy.api#documentation": "<p>Lists the available transformers. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively,\n    a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample ListTransformers call",
@@ -3375,12 +3841,67 @@
                 }
             }
         },
+        "com.amazonaws.b2bi#Mapping": {
+            "type": "structure",
+            "members": {
+                "templateLanguage": {
+                    "target": "com.amazonaws.b2bi#MappingTemplateLanguage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformation language for the template, either XSLT or JSONATA.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents the mapping template, in the transformation language specified in <code>templateLanguage</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
+            }
+        },
         "com.amazonaws.b2bi#MappingTemplate": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 350000
+                }
+            }
+        },
+        "com.amazonaws.b2bi#MappingTemplateLanguage": {
+            "type": "enum",
+            "members": {
+                "XSLT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XSLT"
+                    }
+                },
+                "JSONATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONATA"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.b2bi#MappingType": {
+            "type": "enum",
+            "members": {
+                "JSONATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONATA"
+                    }
+                },
+                "XSLT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XSLT"
+                    }
                 }
             }
         },
@@ -3397,6 +3918,52 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.b2bi#OutboundEdiOptions": {
+            "type": "union",
+            "members": {
+                "x12": {
+                    "target": "com.amazonaws.b2bi#X12Envelope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains an X12 envelope structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for outbound EDI options.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#OutputConversion": {
+            "type": "structure",
+            "members": {
+                "toFormat": {
+                    "target": "com.amazonaws.b2bi#ToFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format for the output from an outbound transformer: only X12 is currently supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "formatOptions": {
+                    "target": "com.amazonaws.b2bi#FormatOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains the X12 transaction set and version for the transformer output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the formatting options for an outbound transformer (takes JSON or XML as input and converts it to an EDI document (currently only X12 format is supported).</p>"
+            }
+        },
+        "com.amazonaws.b2bi#OutputSampleFileSource": {
+            "type": "union",
+            "members": {
+                "fileLocation": {
+                    "target": "com.amazonaws.b2bi#S3Location"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the location of a sample file used for outbound transformations.</p>"
             }
         },
         "com.amazonaws.b2bi#PageToken": {
@@ -3504,6 +4071,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns one or more capabilities associated with this partnership.</p>"
                     }
+                },
+                "capabilityOptions": {
+                    "target": "com.amazonaws.b2bi#CapabilityOptions"
                 },
                 "tradingPartnerId": {
                     "target": "com.amazonaws.b2bi#TradingPartnerId",
@@ -3717,13 +4287,55 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the details for the Amazon S3 file location that is being used with Amazon Web Services B2BI Data Interchange. File\n         locations in Amazon S3 are identified using a combination of the bucket and key.</p>"
+                "smithy.api#documentation": "<p>Specifies the details for the Amazon S3 file location that is being used with Amazon Web Services B2B Data Interchange. File\n         locations in Amazon S3 are identified using a combination of the bucket and key.</p>"
             }
         },
         "com.amazonaws.b2bi#S3LocationList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.b2bi#S3Location"
+            }
+        },
+        "com.amazonaws.b2bi#SampleDocumentKeys": {
+            "type": "structure",
+            "members": {
+                "input": {
+                    "target": "com.amazonaws.b2bi#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of keys for your input sample documents.</p>"
+                    }
+                },
+                "output": {
+                    "target": "com.amazonaws.b2bi#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of keys for your output sample documents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An array of the Amazon S3 keys used to identify the location for your sample documents.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#SampleDocuments": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "com.amazonaws.b2bi#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the Amazon S3 bucket that is used to hold your sample documents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "keys": {
+                    "target": "com.amazonaws.b2bi#KeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an array of the Amazon S3 keys used to identify the location for your sample documents.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
             }
         },
         "com.amazonaws.b2bi#ServiceQuotaExceededException": {
@@ -3799,7 +4411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a job, using a transformer, to parse input EDI (electronic data interchange) file into the output structures used by Amazon Web Services B2BI Data Interchange.</p>\n         <p>If you only want to transform EDI (electronic data interchange) documents, you don't need to create profiles, partnerships or capabilities. Just\n      create and configure a transformer, and then run the <code>StartTransformerJob</code> API to process your files.</p>",
+                "smithy.api#documentation": "<p>Runs a job, using a transformer, to parse input EDI (electronic data interchange) file into the output structures used by Amazon Web Services B2B Data Interchange.</p>\n         <p>If you only want to transform EDI (electronic data interchange) documents, you don't need to create profiles, partnerships or capabilities. Just\n      create and configure a transformer, and then run the <code>StartTransformerJob</code> API to process your files.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample StartTransformerJob call",
@@ -4010,6 +4622,121 @@
                 }
             }
         },
+        "com.amazonaws.b2bi#TemplateDetails": {
+            "type": "union",
+            "members": {
+                "x12": {
+                    "target": "com.amazonaws.b2bi#X12Details"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A data structure that contains the information to use when generating a mapping template.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#TestConversion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.b2bi#TestConversionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.b2bi#TestConversionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.b2bi#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.b2bi#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation mimics the latter half of a typical Outbound EDI request. It takes an input JSON/XML in the B2Bi shape as input, converts it to an X12 EDI string, and return that string.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Sample TestConversion call",
+                        "input": {
+                            "source": {
+                                "fileFormat": "JSON",
+                                "inputFile": {
+                                    "fileContent": "Sample file content"
+                                }
+                            },
+                            "target": {
+                                "fileFormat": "X12",
+                                "formatDetails": {
+                                    "x12": {
+                                        "transactionSet": "X12_110",
+                                        "version": "VERSION_4010"
+                                    }
+                                }
+                            }
+                        },
+                        "output": {
+                            "convertedFileContent": "Sample converted file content",
+                            "validationMessages": []
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "uri": "/testconversion",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.b2bi#TestConversionRequest": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.b2bi#ConversionSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the source file for an outbound EDI request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.b2bi#ConversionTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the format (X12 is the only currently supported format), and other details for the conversion target.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.b2bi#TestConversionResponse": {
+            "type": "structure",
+            "members": {
+                "convertedFileContent": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the converted file content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "validationMessages": {
+                    "target": "com.amazonaws.b2bi#ValidationMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an array of strings, each containing a message that Amazon Web Services B2B Data Interchange generates during the conversion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.b2bi#TestMapping": {
             "type": "operation",
             "input": {
@@ -4080,7 +4807,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
+                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>\n         <note>\n            <p>This parameter is available for backwards compatibility. Use the <a href=\"https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html\">Mapping</a> data type instead.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4235,6 +4962,17 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.b2bi#ToFormat": {
+            "type": "enum",
+            "members": {
+                "X12": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "X12"
+                    }
+                }
+            }
+        },
         "com.amazonaws.b2bi#TradingPartnerId": {
             "type": "string",
             "traits": {
@@ -4337,7 +5075,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 254
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,512}$"
             }
         },
         "com.amazonaws.b2bi#TransformerStatus": {
@@ -4374,38 +5113,11 @@
                         "smithy.api#required": {}
                     }
                 },
-                "fileFormat": {
-                    "target": "com.amazonaws.b2bi#FileFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "mappingTemplate": {
-                    "target": "com.amazonaws.b2bi#MappingTemplate",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "status": {
                     "target": "com.amazonaws.b2bi#TransformerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the state of the newly created transformer. The transformer can be either\n            <code>active</code> or <code>inactive</code>. For the transformer to be used in a\n         capability, its status must <code>active</code>.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "ediType": {
-                    "target": "com.amazonaws.b2bi#EdiType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "sampleDocument": {
-                    "target": "com.amazonaws.b2bi#FileLocation",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
                     }
                 },
                 "createdAt": {
@@ -4420,10 +5132,74 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a timestamp representing the date and time for the most recent change for the transformer object.</p>"
                     }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#FileFormat",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
+                    }
+                },
+                "mappingTemplate": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
+                    }
+                },
+                "ediType": {
+                    "target": "com.amazonaws.b2bi#EdiType",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
+                    }
+                },
+                "sampleDocument": {
+                    "target": "com.amazonaws.b2bi#FileLocation",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
+                    }
+                },
+                "inputConversion": {
+                    "target": "com.amazonaws.b2bi#InputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a structure that contains the format options for the transformation.</p>"
+                    }
+                },
+                "mapping": {
+                    "target": "com.amazonaws.b2bi#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the structure that contains the mapping template and its language (either XSLT or JSONATA).</p>"
+                    }
+                },
+                "outputConversion": {
+                    "target": "com.amazonaws.b2bi#OutputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>OutputConversion</code> object, which contains the format options for the outbound transformation.</p>"
+                    }
+                },
+                "sampleDocuments": {
+                    "target": "com.amazonaws.b2bi#SampleDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details for a transformer object. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
+                "smithy.api#documentation": "<p>Contains the details for a transformer object. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively,\n    a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.</p>",
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.b2bi#Transformer"
@@ -4796,6 +5572,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of the capabilities associated with this partnership.</p>"
                     }
+                },
+                "capabilityOptions": {
+                    "target": "com.amazonaws.b2bi#CapabilityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To update, specify the structure that contains the details for the associated capabilities.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4848,6 +5630,12 @@
                     "target": "com.amazonaws.b2bi#PartnershipCapabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns one or more capabilities associated with this partnership.</p>"
+                    }
+                },
+                "capabilityOptions": {
+                    "target": "com.amazonaws.b2bi#CapabilityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the structure that contains the details for the associated capabilities.</p>"
                     }
                 },
                 "tradingPartnerId": {
@@ -5093,39 +5881,63 @@
                     "b2bi:TagResource",
                     "b2bi:UntagResource"
                 ],
-                "smithy.api#documentation": "<p>Updates the specified parameters for a transformer. A transformer\n   describes how to process the incoming EDI documents and extract the necessary\n   information to the output file.</p>",
+                "smithy.api#documentation": "<p>Updates the specified parameters for a transformer. A transformer can take an EDI file as input and transform it into a JSON-or XML-formatted document. Alternatively,\n    a transformer can take a JSON-or XML-formatted document as input and transform it into an EDI file.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Sample UpdateTransformer call",
                         "input": {
-                            "ediType": {
-                                "x12Details": {
-                                    "transactionSet": "X12_110",
-                                    "version": "VERSION_4010"
+                            "inputConversion": {
+                                "fromFormat": "X12",
+                                "formatOptions": {
+                                    "x12": {
+                                        "transactionSet": "X12_110",
+                                        "version": "VERSION_4010"
+                                    }
                                 }
                             },
-                            "fileFormat": "JSON",
-                            "mappingTemplate": "{}",
-                            "name": "transformJSON",
-                            "sampleDocument": "s3://test-bucket/sampleDoc.txt",
+                            "mapping": {
+                                "templateLanguage": "JSONATA",
+                                "template": "{}"
+                            },
+                            "sampleDocuments": {
+                                "bucketName": "test-bucket",
+                                "keys": [
+                                    {
+                                        "input": "sampleDoc.txt"
+                                    }
+                                ]
+                            },
+                            "name": "transformX12",
                             "status": "inactive",
                             "transformerId": "tr-974c129999f84d8c9"
                         },
                         "output": {
                             "createdAt": "2023-11-01T21:51:05.504Z",
-                            "ediType": {
-                                "x12Details": {
-                                    "transactionSet": "X12_110",
-                                    "version": "VERSION_4010"
+                            "modifiedAt": "2023-11-02T22:31:05.504Z",
+                            "name": "transformX12",
+                            "inputConversion": {
+                                "fromFormat": "X12",
+                                "formatOptions": {
+                                    "x12": {
+                                        "transactionSet": "X12_110",
+                                        "version": "VERSION_4010"
+                                    }
                                 }
                             },
-                            "fileFormat": "JSON",
-                            "mappingTemplate": "$",
-                            "modifiedAt": "2023-11-01T21:51:05.504Z",
-                            "name": "transformJSON",
-                            "sampleDocument": "s3://test-bucket/sampleDoc.txt",
+                            "mapping": {
+                                "templateLanguage": "JSONATA",
+                                "template": "{}"
+                            },
+                            "sampleDocuments": {
+                                "bucketName": "test-bucket",
+                                "keys": [
+                                    {
+                                        "input": "sampleDoc.txt"
+                                    }
+                                ]
+                            },
                             "status": "inactive",
-                            "transformerArn": "arn:aws:b2bi:us-west-2:607686414464:transformer/tr-974c129999f84d8c9",
+                            "transformerArn": "arn:aws:b2bi:us-west-2:123456789012:transformer/tr-974c129999f84d8c9",
                             "transformerId": "tr-974c129999f84d8c9"
                         }
                     }
@@ -5155,34 +5967,70 @@
                         "smithy.api#documentation": "<p>Specify a new name for the transformer, if you want to update it.</p>"
                     }
                 },
-                "fileFormat": {
-                    "target": "com.amazonaws.b2bi#FileFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
-                    }
-                },
-                "mappingTemplate": {
-                    "target": "com.amazonaws.b2bi#MappingTemplate",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
-                    }
-                },
                 "status": {
                     "target": "com.amazonaws.b2bi#TransformerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the transformer's status. You can update the state of the transformer, from <code>active</code> to <code>inactive</code>, or <code>inactive</code> to <code>active</code>.</p>"
                     }
                 },
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#FileFormat",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Specifies that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
+                    }
+                },
+                "mappingTemplate": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>\n         <note>\n            <p>This parameter is available for backwards compatibility. Use the <a href=\"https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html\">Mapping</a> data type instead.</p>\n         </note>"
+                    }
+                },
                 "ediType": {
                     "target": "com.amazonaws.b2bi#EdiType",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
                         "smithy.api#documentation": "<p>Specifies the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
                     }
                 },
                 "sampleDocument": {
                     "target": "com.amazonaws.b2bi#FileLocation",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
                         "smithy.api#documentation": "<p>Specifies a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
+                    }
+                },
+                "inputConversion": {
+                    "target": "com.amazonaws.b2bi#InputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To update, specify the <code>InputConversion</code> object, which contains the format options for the inbound transformation.</p>"
+                    }
+                },
+                "mapping": {
+                    "target": "com.amazonaws.b2bi#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the structure that contains the mapping template and its language (either XSLT or JSONATA).</p>"
+                    }
+                },
+                "outputConversion": {
+                    "target": "com.amazonaws.b2bi#OutputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To update, specify the <code>OutputConversion</code> object, which contains the format options for the outbound transformation.</p>"
+                    }
+                },
+                "sampleDocuments": {
+                    "target": "com.amazonaws.b2bi#SampleDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
                     }
                 }
             },
@@ -5214,38 +6062,11 @@
                         "smithy.api#required": {}
                     }
                 },
-                "fileFormat": {
-                    "target": "com.amazonaws.b2bi#FileFormat",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "mappingTemplate": {
-                    "target": "com.amazonaws.b2bi#MappingTemplate",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "status": {
                     "target": "com.amazonaws.b2bi#TransformerStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the state of the newly created transformer. The transformer can be either\n            <code>active</code> or <code>inactive</code>. For the transformer to be used in a\n         capability, its status must <code>active</code>.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "ediType": {
-                    "target": "com.amazonaws.b2bi#EdiType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "sampleDocument": {
-                    "target": "com.amazonaws.b2bi#FileLocation",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
                     }
                 },
                 "createdAt": {
@@ -5260,6 +6081,70 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a timestamp for last time the transformer was modified.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.b2bi#FileFormat",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns that the currently supported file formats for EDI transformations are <code>JSON</code> and <code>XML</code>.</p>"
+                    }
+                },
+                "mappingTemplate": {
+                    "target": "com.amazonaws.b2bi#MappingTemplate",
+                    "traits": {
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "NOT_USED",
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
+                    }
+                },
+                "ediType": {
+                    "target": "com.amazonaws.b2bi#EdiType",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns the details for the EDI standard that is being used for the transformer. Currently, only X12 is supported. X12 is a set of standards and corresponding messages that define specific business documents.</p>"
+                    }
+                },
+                "sampleDocument": {
+                    "target": "com.amazonaws.b2bi#FileLocation",
+                    "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This is a legacy trait. Please use input-conversion or output-conversion."
+                        },
+                        "smithy.api#documentation": "<p>Returns a sample EDI document that is used by a transformer as a guide for processing the EDI data.</p>"
+                    }
+                },
+                "inputConversion": {
+                    "target": "com.amazonaws.b2bi#InputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>InputConversion</code> object, which contains the format options for the inbound transformation.</p>"
+                    }
+                },
+                "mapping": {
+                    "target": "com.amazonaws.b2bi#Mapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the structure that contains the mapping template and its language (either XSLT or JSONATA).</p>"
+                    }
+                },
+                "outputConversion": {
+                    "target": "com.amazonaws.b2bi#OutputConversion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>OutputConversion</code> object, which contains the format options for the outbound transformation.</p>"
+                    }
+                },
+                "sampleDocuments": {
+                    "target": "com.amazonaws.b2bi#SampleDocuments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a structure that contains the Amazon S3 bucket and an array of the corresponding keys used to identify the location for your sample documents.</p>"
                     }
                 }
             },
@@ -5283,6 +6168,88 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.b2bi#ValidationMessages": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.b2bi#X12AcknowledgmentRequestedCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12ApplicationReceiverCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12ApplicationSenderCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12ComponentSeparator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"
+            }
+        },
+        "com.amazonaws.b2bi#X12DataElementSeparator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"
+            }
+        },
+        "com.amazonaws.b2bi#X12Delimiters": {
+            "type": "structure",
+            "members": {
+                "componentSeparator": {
+                    "target": "com.amazonaws.b2bi#X12ComponentSeparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component, or sub-element, separator. The default value is <code>:</code> (colon).</p>"
+                    }
+                },
+                "dataElementSeparator": {
+                    "target": "com.amazonaws.b2bi#X12DataElementSeparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data element separator. The default value is <code>*</code> (asterisk).</p>"
+                    }
+                },
+                "segmentTerminator": {
+                    "target": "com.amazonaws.b2bi#X12SegmentTerminator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment terminator. The default value is <code>~</code> (tilde).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>In X12 EDI messages, delimiters are used to mark the end of segments or elements, and are defined in the interchange control header.\n         The delimiters are part of the message's syntax and divide up its different elements.</p>"
+            }
+        },
         "com.amazonaws.b2bi#X12Details": {
             "type": "structure",
             "members": {
@@ -5295,12 +6262,193 @@
                 "version": {
                     "target": "com.amazonaws.b2bi#X12Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the version to use for the specified X12 transaction set.\n         \n         \n         \n      </p>"
+                        "smithy.api#documentation": "<p>Returns the version to use for the specified X12 transaction set.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that contains the X12 transaction set and version. The X12 structure is used when the system transforms an EDI (electronic data interchange) file.</p>\n         <note>\n            <p>If an EDI input file contains more than one transaction, each transaction must have the same transaction set and version, for example 214/4010. If not, the transformer cannot parse the file.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.b2bi#X12Envelope": {
+            "type": "structure",
+            "members": {
+                "common": {
+                    "target": "com.amazonaws.b2bi#X12OutboundEdiHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for the X12 outbound EDI headers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A wrapper structure for an X12 definition object.</p>\n         <p>the X12 envelope ensures the integrity of the data and the efficiency of the information exchange. The X12 message structure has hierarchical levels. From highest to the lowest, they are:</p>\n         <ul>\n            <li>\n               <p>Interchange Envelope</p>\n            </li>\n            <li>\n               <p>Functional Group</p>\n            </li>\n            <li>\n               <p>Transaction Set</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.b2bi#X12FunctionalGroupHeaders": {
+            "type": "structure",
+            "members": {
+                "applicationSenderCode": {
+                    "target": "com.amazonaws.b2bi#X12ApplicationSenderCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value representing the code used to identify the party transmitting a message, at position GS-02.</p>"
+                    }
+                },
+                "applicationReceiverCode": {
+                    "target": "com.amazonaws.b2bi#X12ApplicationReceiverCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value representing the code used to identify the party receiving a message, at position GS-03.</p>"
+                    }
+                },
+                "responsibleAgencyCode": {
+                    "target": "com.amazonaws.b2bi#X12ResponsibleAgencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code that identifies the issuer of the standard, at position GS-07.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Part of the X12 message structure. These are the functional group headers for the X12 EDI object.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#X12IdQualifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12InterchangeControlHeaders": {
+            "type": "structure",
+            "members": {
+                "senderIdQualifier": {
+                    "target": "com.amazonaws.b2bi#X12IdQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-05 in the header. Qualifier for the sender ID. Together, the ID and qualifier uniquely identify the sending trading partner.</p>"
+                    }
+                },
+                "senderId": {
+                    "target": "com.amazonaws.b2bi#X12SenderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-06 in the header. This value (along with the <code>senderIdQualifier</code>) identifies the sender of the interchange. </p>"
+                    }
+                },
+                "receiverIdQualifier": {
+                    "target": "com.amazonaws.b2bi#X12IdQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-07 in the header. Qualifier for the receiver ID. Together, the ID and qualifier uniquely identify the receiving trading partner.</p>"
+                    }
+                },
+                "receiverId": {
+                    "target": "com.amazonaws.b2bi#X12ReceiverId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-08 in the header. This value (along with the <code>receiverIdQualifier</code>) identifies the intended recipient of the interchange. </p>"
+                    }
+                },
+                "repetitionSeparator": {
+                    "target": "com.amazonaws.b2bi#X12RepetitionSeparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-11 in the header. This string makes it easier when you need to group similar adjacent element values together without using extra segments.</p>\n         <note>\n            <p>This parameter is only honored for version greater than 401 (<code>VERSION_4010</code> and higher).</p>\n            <p>For versions less than 401, this field is called <a href=\"https://www.stedi.com/edi/x12-004010/segment/ISA#ISA-11\">StandardsId</a>, in which case our service\n            sets the value to <code>U</code>.</p>\n         </note>"
+                    }
+                },
+                "acknowledgmentRequestedCode": {
+                    "target": "com.amazonaws.b2bi#X12AcknowledgmentRequestedCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-14 in the header. The value \"1\" indicates that the sender is requesting an interchange acknowledgment at receipt of the interchange. The value \"0\" is used otherwise.</p>"
+                    }
+                },
+                "usageIndicatorCode": {
+                    "target": "com.amazonaws.b2bi#X12UsageIndicatorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Located at position ISA-15 in the header. Specifies how this interchange is being used:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>T</code> indicates this interchange is for testing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>P</code> indicates this interchange is for production.</p>\n            </li>\n            <li>\n               <p>\n                  <code>I</code> indicates this interchange is informational.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>In X12, the Interchange Control Header is the first segment of an EDI document and is\n         part of the Interchange Envelope. It contains information about the sender and receiver,\n         the date and time of transmission, and the X12 version being used. It also includes\n         delivery information, such as the sender and receiver IDs.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#X12OutboundEdiHeaders": {
+            "type": "structure",
+            "members": {
+                "interchangeControlHeaders": {
+                    "target": "com.amazonaws.b2bi#X12InterchangeControlHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In X12 EDI messages, delimiters are used to mark the end of segments or elements, and are defined in the interchange control header.</p>"
+                    }
+                },
+                "functionalGroupHeaders": {
+                    "target": "com.amazonaws.b2bi#X12FunctionalGroupHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The functional group headers for the X12 object.</p>"
+                    }
+                },
+                "delimiters": {
+                    "target": "com.amazonaws.b2bi#X12Delimiters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delimiters, for example semicolon (<code>;</code>), that separates sections of the headers for the X12 object.</p>"
+                    }
+                },
+                "validateEdi": {
+                    "target": "com.amazonaws.b2bi#X12ValidateEdi",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not to validate the EDI for this X12 object: <code>TRUE</code> or <code>FALSE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing the details for an outbound EDI object.</p>"
+            }
+        },
+        "com.amazonaws.b2bi#X12ReceiverId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12RepetitionSeparator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.b2bi#X12ResponsibleAgencyCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12SegmentTerminator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[!&'()*+,\\-./:;?=%@\\[\\]_{}|<>~^`\"]$"
+            }
+        },
+        "com.amazonaws.b2bi#X12SenderId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.b2bi#X12TransactionSet": {
@@ -5757,6 +6905,19 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.b2bi#X12UsageIndicatorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.b2bi#X12ValidateEdi": {
+            "type": "boolean"
         },
         "com.amazonaws.b2bi#X12Version": {
             "type": "enum",

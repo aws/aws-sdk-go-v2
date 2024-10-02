@@ -137,6 +137,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DOMAIN_SMART_CARD_SIGNIN"
                     }
+                },
+                "AUTO_TIME_ZONE_REDIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_TIME_ZONE_REDIRECTION"
+                    }
                 }
             }
         },

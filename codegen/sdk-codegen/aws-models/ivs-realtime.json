@@ -2190,7 +2190,7 @@
                 "errorCode": {
                     "target": "com.amazonaws.ivsrealtime#EventErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is null.\n            <code>INSUFFICIENT_CAPABILITIES</code> indicates that the participant tried to take an\n         action that the participant’s token is not allowed to do. For more information about\n         participant capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>. <code>QUOTA_EXCEEDED</code> indicates that the\n         number of participants who want to publish/subscribe to a stage exceeds the quota; for more\n         information, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">Service Quotas</a>.\n            <code>PUBLISHER_NOT_FOUND</code> indicates that the participant tried to subscribe to a\n         publisher that doesn’t exist. </p>"
+                        "smithy.api#documentation": "<p>If the event is an error event, the error code is provided to give insight into the\n         specific error that occurred. If the event is not an error event, this field is null.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>B_FRAME_PRESENT</code> —\n\t\t     The participant's stream includes B-frames.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\">\n\t\t     IVS RTMP Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BITRATE_EXCEEDED</code> —\n\t\t     The participant exceeded the maximum supported bitrate.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CAPABILITIES</code> —\n\t\t     The participant tried to take an action\n\t\t     that the participant’s token is not allowed to do. For details on participant capabilities, see\n\t\t     the <code>capabilities</code> field in <a>CreateParticipantToken</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_SERVER_EXCEPTION</code> —\n\t\t     The participant failed to publish to the stage due to an internal server error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_AUDIO_CODEC</code> —\n\t\t     The participant is using an invalid audio codec.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\">\n\t\t     Stream Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_INPUT</code> —\n\t\t     The participant is using an invalid input stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_PROTOCOL</code> —\n\t\t     The participant's IngestConfiguration resource is configured for RTMPS but they tried streaming with RTMP.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\">\n\t\t     IVS RTMP Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_STREAM_KEY</code> —\n\t\t     The participant is using an invalid stream key.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html\">\n\t\t     IVS RTMP Publishing</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_VIDEO_CODEC</code> —\n\t\t     The participant is using an invalid video codec.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html\">\n\t\t     Stream Ingest</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLISHER_NOT_FOUND</code> —\n\t\t     The participant tried to subscribe to a publisher that doesn’t exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code> —\n\t\t     The number of participants who want to publish/subscribe to a stage exceeds the quota.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLUTION_EXCEEDED</code> —\n\t\t     The participant exceeded the maximum supported resolution.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REUSE_OF_STREAM_KEY</code> —\n\t\t     The participant tried to use a stream key that is associated with another active stage session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STREAM_DURATION_EXCEEDED</code> —\n\t\t     The participant exceeded the maximum allowed stream duration.\n\t\t     For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html\">\n\t\t     Service Quotas</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2265,6 +2265,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "REUSE_OF_STREAM_KEY"
+                    }
+                },
+                "B_FRAME_PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "B_FRAME_PRESENT"
+                    }
+                },
+                "INVALID_INPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_INPUT"
+                    }
+                },
+                "INTERNAL_SERVER_EXCEPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_EXCEPTION"
                     }
                 }
             }
@@ -2878,7 +2896,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 2,
                     "max": 1920
                 }
             }
@@ -5795,13 +5813,13 @@
                 "width": {
                     "target": "com.amazonaws.ivsrealtime#Width",
                     "traits": {
-                        "smithy.api#documentation": "<p>Video-resolution width. Note that the maximum value is determined by <code>width</code>\n         times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or\n         1080x1920). Default: 1280.</p>"
+                        "smithy.api#documentation": "<p>Video-resolution width. This must be an even number. Note that the maximum value is determined by <code>width</code>\n         times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or\n         1080x1920). Default: 1280.</p>"
                     }
                 },
                 "height": {
                     "target": "com.amazonaws.ivsrealtime#Height",
                     "traits": {
-                        "smithy.api#documentation": "<p>Video-resolution height. Note that the maximum value is determined by <code>width</code>\n         times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or\n         1080x1920). Default: 720.</p>"
+                        "smithy.api#documentation": "<p>Video-resolution height. This must be an even number. Note that the maximum value is determined by <code>width</code>\n         times <code>height</code>, such that the maximum total pixels is 2073600 (1920x1080 or\n         1080x1920). Default: 720.</p>"
                     }
                 },
                 "framerate": {
@@ -5877,7 +5895,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 2,
                     "max": 1920
                 }
             }
