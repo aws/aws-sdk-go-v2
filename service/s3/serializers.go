@@ -6359,6 +6359,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	if len(v.TransitionDefaultMinimumObjectSize) > 0 {
+		locationName := "X-Amz-Transition-Default-Minimum-Object-Size"
+		encoder.SetHeader(locationName).String(string(v.TransitionDefaultMinimumObjectSize))
+	}
+
 	return nil
 }
 

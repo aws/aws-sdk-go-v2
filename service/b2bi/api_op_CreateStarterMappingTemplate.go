@@ -9,82 +9,65 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Retrieves the details for a partnership, based on the partner and profile IDs
-// specified. A partnership represents the connection between you and your trading
-// partner. It ties together a profile and one or more trading capabilities.
-func (c *Client) GetPartnership(ctx context.Context, params *GetPartnershipInput, optFns ...func(*Options)) (*GetPartnershipOutput, error) {
+// Amazon Web Services B2B Data Interchange uses a mapping template in JSONata or
+// XSLT format to transform a customer input file into a JSON or XML file that can
+// be converted to EDI.
+//
+// If you provide a sample EDI file with the same structure as the EDI files that
+// you wish to generate, then the service can generate a mapping template. The
+// starter template contains placeholder values which you can replace with JSONata
+// or XSLT expressions to take data from your input file and insert it into the
+// JSON or XML file that is used to generate the EDI.
+//
+// If you do not provide a sample EDI file, then the service can generate a
+// mapping template based on the EDI settings in the templateDetails parameter.
+//
+// Currently, we only support generating a template that can generate the input to
+// produce an Outbound X12 EDI file.
+func (c *Client) CreateStarterMappingTemplate(ctx context.Context, params *CreateStarterMappingTemplateInput, optFns ...func(*Options)) (*CreateStarterMappingTemplateOutput, error) {
 	if params == nil {
-		params = &GetPartnershipInput{}
+		params = &CreateStarterMappingTemplateInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPartnership", params, optFns, c.addOperationGetPartnershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateStarterMappingTemplate", params, optFns, c.addOperationCreateStarterMappingTemplateMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetPartnershipOutput)
+	out := result.(*CreateStarterMappingTemplateOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetPartnershipInput struct {
+type CreateStarterMappingTemplateInput struct {
 
-	// Specifies the unique, system-generated identifier for a partnership.
+	// Specify the format for the mapping template: either JSONATA or XSLT.
 	//
 	// This member is required.
-	PartnershipId *string
+	MappingType types.MappingType
+
+	//  Describes the details needed for generating the template. Specify the X12
+	// transaction set and version for which the template is used: currently, we only
+	// support X12.
+	//
+	// This member is required.
+	TemplateDetails types.TemplateDetails
+
+	// Specify the location of the sample EDI file that is used to generate the
+	// mapping template.
+	OutputSampleLocation *types.S3Location
 
 	noSmithyDocumentSerde
 }
 
-type GetPartnershipOutput struct {
+type CreateStarterMappingTemplateOutput struct {
 
-	// Returns a timestamp for creation date and time of the partnership.
+	// Returns a string that represents the mapping template.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// Returns an Amazon Resource Name (ARN) for a specific Amazon Web Services
-	// resource, such as a capability, partnership, profile, or transformer.
-	//
-	// This member is required.
-	PartnershipArn *string
-
-	// Returns the unique, system-generated identifier for a partnership.
-	//
-	// This member is required.
-	PartnershipId *string
-
-	// Returns the unique, system-generated identifier for the profile connected to
-	// this partnership.
-	//
-	// This member is required.
-	ProfileId *string
-
-	// Returns one or more capabilities associated with this partnership.
-	Capabilities []string
-
-	// Contains the details for an Outbound EDI capability.
-	CapabilityOptions *types.CapabilityOptions
-
-	// Returns the email address associated with this trading partner.
-	Email *string
-
-	// Returns a timestamp that identifies the most recent date and time that the
-	// partnership was modified.
-	ModifiedAt *time.Time
-
-	// Returns the display name of the partnership
-	Name *string
-
-	// Returns the phone number associated with the partnership.
-	Phone *string
-
-	// Returns the unique identifier for the partner for this partnership.
-	TradingPartnerId *string
+	MappingTemplate *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,19 +75,19 @@ type GetPartnershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreateStarterMappingTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPartnership{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateStarterMappingTemplate{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPartnership{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateStarterMappingTemplate{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPartnership"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStarterMappingTemplate"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -156,10 +139,10 @@ func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetPartnershipValidationMiddleware(stack); err != nil {
+	if err = addOpCreateStarterMappingTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPartnership(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStarterMappingTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -192,10 +175,10 @@ func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetPartnership(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateStarterMappingTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetPartnership",
+		OperationName: "CreateStarterMappingTemplate",
 	}
 }

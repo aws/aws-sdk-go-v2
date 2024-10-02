@@ -202,6 +202,11 @@ func awsRestjson1_deserializeOpDocumentApplyGuardrailOutput(v **ApplyGuardrailOu
 				return err
 			}
 
+		case "guardrailCoverage":
+			if err := awsRestjson1_deserializeDocumentGuardrailCoverage(&sv.GuardrailCoverage, value); err != nil {
+				return err
+			}
+
 		case "outputs":
 			if err := awsRestjson1_deserializeDocumentGuardrailOutputContentList(&sv.Outputs, value); err != nil {
 				return err
@@ -2215,6 +2220,11 @@ func awsRestjson1_deserializeDocumentGuardrailAssessment(v **types.GuardrailAsse
 				return err
 			}
 
+		case "invocationMetrics":
+			if err := awsRestjson1_deserializeDocumentGuardrailInvocationMetrics(&sv.InvocationMetrics, value); err != nil {
+				return err
+			}
+
 		case "sensitiveInformationPolicy":
 			if err := awsRestjson1_deserializeDocumentGuardrailSensitiveInformationPolicyAssessment(&sv.SensitiveInformationPolicy, value); err != nil {
 				return err
@@ -2380,6 +2390,15 @@ func awsRestjson1_deserializeDocumentGuardrailContentFilter(v **types.GuardrailC
 					return fmt.Errorf("expected GuardrailContentFilterConfidence to be of type string, got %T instead", value)
 				}
 				sv.Confidence = types.GuardrailContentFilterConfidence(jtv)
+			}
+
+		case "filterStrength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContentFilterStrength to be of type string, got %T instead", value)
+				}
+				sv.FilterStrength = types.GuardrailContentFilterStrength(jtv)
 			}
 
 		case "type":
@@ -2657,6 +2676,42 @@ func awsRestjson1_deserializeDocumentGuardrailContextualGroundingPolicyAssessmen
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGuardrailCoverage(v **types.GuardrailCoverage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailCoverage
+	if *v == nil {
+		sv = &types.GuardrailCoverage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "textCharacters":
+			if err := awsRestjson1_deserializeDocumentGuardrailTextCharactersCoverage(&sv.TextCharacters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGuardrailCustomWord(v **types.GuardrailCustomWord, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2737,6 +2792,60 @@ func awsRestjson1_deserializeDocumentGuardrailCustomWordList(v *[]types.Guardrai
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailInvocationMetrics(v **types.GuardrailInvocationMetrics, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailInvocationMetrics
+	if *v == nil {
+		sv = &types.GuardrailInvocationMetrics{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guardrailCoverage":
+			if err := awsRestjson1_deserializeDocumentGuardrailCoverage(&sv.GuardrailCoverage, value); err != nil {
+				return err
+			}
+
+		case "guardrailProcessingLatency":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailProcessingLatency to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GuardrailProcessingLatency = ptr.Int64(i64)
+			}
+
+		case "usage":
+			if err := awsRestjson1_deserializeDocumentGuardrailUsage(&sv.Usage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -3066,6 +3175,63 @@ func awsRestjson1_deserializeDocumentGuardrailSensitiveInformationPolicyAssessme
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGuardrailTextCharactersCoverage(v **types.GuardrailTextCharactersCoverage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailTextCharactersCoverage
+	if *v == nil {
+		sv = &types.GuardrailTextCharactersCoverage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guarded":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TextCharactersGuarded to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Guarded = ptr.Int32(int32(i64))
+			}
+
+		case "total":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TextCharactersTotal to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Total = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGuardrailTopic(v **types.GuardrailTopic, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3229,6 +3395,115 @@ func awsRestjson1_deserializeDocumentGuardrailTraceAssessment(v **types.Guardrai
 		case "outputAssessments":
 			if err := awsRestjson1_deserializeDocumentGuardrailAssessmentListMap(&sv.OutputAssessments, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailUsage(v **types.GuardrailUsage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailUsage
+	if *v == nil {
+		sv = &types.GuardrailUsage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "contentPolicyUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContentPolicyUnitsProcessed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ContentPolicyUnits = ptr.Int32(int32(i64))
+			}
+
+		case "contextualGroundingPolicyUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailContextualGroundingPolicyUnitsProcessed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ContextualGroundingPolicyUnits = ptr.Int32(int32(i64))
+			}
+
+		case "sensitiveInformationPolicyFreeUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSensitiveInformationPolicyFreeUnitsProcessed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SensitiveInformationPolicyFreeUnits = ptr.Int32(int32(i64))
+			}
+
+		case "sensitiveInformationPolicyUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSensitiveInformationPolicyUnitsProcessed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SensitiveInformationPolicyUnits = ptr.Int32(int32(i64))
+			}
+
+		case "topicPolicyUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailTopicPolicyUnitsProcessed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TopicPolicyUnits = ptr.Int32(int32(i64))
+			}
+
+		case "wordPolicyUnits":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GuardrailWordPolicyUnitsProcessed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WordPolicyUnits = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -4539,115 +4814,6 @@ func awsRestjson1_deserializeDocumentGuardrailOutputContentList(v *[]types.Guard
 
 	}
 	*v = cv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentGuardrailUsage(v **types.GuardrailUsage, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.GuardrailUsage
-	if *v == nil {
-		sv = &types.GuardrailUsage{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "contentPolicyUnits":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected GuardrailContentPolicyUnitsProcessed to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.ContentPolicyUnits = ptr.Int32(int32(i64))
-			}
-
-		case "contextualGroundingPolicyUnits":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected GuardrailContextualGroundingPolicyUnitsProcessed to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.ContextualGroundingPolicyUnits = ptr.Int32(int32(i64))
-			}
-
-		case "sensitiveInformationPolicyFreeUnits":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected GuardrailSensitiveInformationPolicyFreeUnitsProcessed to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.SensitiveInformationPolicyFreeUnits = ptr.Int32(int32(i64))
-			}
-
-		case "sensitiveInformationPolicyUnits":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected GuardrailSensitiveInformationPolicyUnitsProcessed to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.SensitiveInformationPolicyUnits = ptr.Int32(int32(i64))
-			}
-
-		case "topicPolicyUnits":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected GuardrailTopicPolicyUnitsProcessed to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.TopicPolicyUnits = ptr.Int32(int32(i64))
-			}
-
-		case "wordPolicyUnits":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected GuardrailWordPolicyUnitsProcessed to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.WordPolicyUnits = ptr.Int32(int32(i64))
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
 	return nil
 }
 

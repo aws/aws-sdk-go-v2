@@ -65,6 +65,9 @@ type DescribeAppOutput struct {
 	// The type of app.
 	AppType types.AppType
 
+	// The lifecycle configuration that runs before the default lifecycle configuration
+	BuiltInLifecycleConfigArn *string
+
 	// The creation time of the application.
 	//
 	// After an application has been shut down for 24 hours, SageMaker deletes all

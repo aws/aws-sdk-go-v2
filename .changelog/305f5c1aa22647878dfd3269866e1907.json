@@ -1,0 +1,8 @@
+{
+    "id": "305f5c1a-a226-4787-8dfd-3269866e1907",
+    "type": "documentation",
+    "description": "WSP is being rebranded to become DCV.",
+    "modules": [
+        "service/workspaces"
+    ]
+}

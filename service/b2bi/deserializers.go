@@ -417,6 +417,126 @@ func awsAwsjson10_deserializeOpErrorCreateProfile(response *smithyhttp.Response,
 	}
 }
 
+type awsAwsjson10_deserializeOpCreateStarterMappingTemplate struct {
+}
+
+func (*awsAwsjson10_deserializeOpCreateStarterMappingTemplate) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpCreateStarterMappingTemplate) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorCreateStarterMappingTemplate(response, &metadata)
+	}
+	output := &CreateStarterMappingTemplateOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentCreateStarterMappingTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorCreateStarterMappingTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpCreateTransformer struct {
 }
 
@@ -2401,6 +2521,129 @@ func awsAwsjson10_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 }
 
+type awsAwsjson10_deserializeOpTestConversion struct {
+}
+
+func (*awsAwsjson10_deserializeOpTestConversion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpTestConversion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorTestConversion(response, &metadata)
+	}
+	output := &TestConversionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentTestConversionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorTestConversion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpTestMapping struct {
 }
 
@@ -3617,6 +3860,42 @@ func awsAwsjson10_deserializeDocumentCapabilityList(v *[]types.CapabilitySummary
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCapabilityOptions(v **types.CapabilityOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CapabilityOptions
+	if *v == nil {
+		sv = &types.CapabilityOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "outboundEdi":
+			if err := awsAwsjson10_deserializeDocumentOutboundEdiOptions(&sv.OutboundEdi, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCapabilitySummary(v **types.CapabilitySummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3763,6 +4042,15 @@ func awsAwsjson10_deserializeDocumentEdiConfiguration(v **types.EdiConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "capabilityDirection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityDirection to be of type string, got %T instead", value)
+				}
+				sv.CapabilityDirection = types.CapabilityDirection(jtv)
+			}
+
 		case "inputLocation":
 			if err := awsAwsjson10_deserializeDocumentS3Location(&sv.InputLocation, value); err != nil {
 				return err
@@ -3833,6 +4121,91 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentFormatOptions(v *types.FormatOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.FormatOptions
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "x12":
+			var mv types.X12Details
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentX12Details(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FormatOptionsMemberX12{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInputConversion(v **types.InputConversion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InputConversion
+	if *v == nil {
+		sv = &types.InputConversion{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "formatOptions":
+			if err := awsAwsjson10_deserializeDocumentFormatOptions(&sv.FormatOptions, value); err != nil {
+				return err
+			}
+
+		case "fromFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FromFormat to be of type string, got %T instead", value)
+				}
+				sv.FromFormat = types.FromFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -3912,6 +4285,174 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 					return err
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentKeyList(v *[]types.SampleDocumentKeys, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SampleDocumentKeys
+	if *v == nil {
+		cv = []types.SampleDocumentKeys{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SampleDocumentKeys
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentSampleDocumentKeys(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentMapping(v **types.Mapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Mapping
+	if *v == nil {
+		sv = &types.Mapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "template":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MappingTemplate to be of type string, got %T instead", value)
+				}
+				sv.Template = ptr.String(jtv)
+			}
+
+		case "templateLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MappingTemplateLanguage to be of type string, got %T instead", value)
+				}
+				sv.TemplateLanguage = types.MappingTemplateLanguage(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOutboundEdiOptions(v *types.OutboundEdiOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.OutboundEdiOptions
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "x12":
+			var mv types.X12Envelope
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentX12Envelope(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OutboundEdiOptionsMemberX12{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOutputConversion(v **types.OutputConversion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutputConversion
+	if *v == nil {
+		sv = &types.OutputConversion{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "formatOptions":
+			if err := awsAwsjson10_deserializeDocumentFormatOptions(&sv.FormatOptions, value); err != nil {
+				return err
+			}
+
+		case "toFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ToFormat to be of type string, got %T instead", value)
+				}
+				sv.ToFormat = types.ToFormat(jtv)
 			}
 
 		default:
@@ -4017,6 +4558,11 @@ func awsAwsjson10_deserializeDocumentPartnershipSummary(v **types.PartnershipSum
 		switch key {
 		case "capabilities":
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
+				return err
+			}
+
+		case "capabilityOptions":
+			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
 
@@ -4350,6 +4896,100 @@ func awsAwsjson10_deserializeDocumentS3LocationList(v *[]types.S3Location, value
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentSampleDocumentKeys(v **types.SampleDocumentKeys, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SampleDocumentKeys
+	if *v == nil {
+		sv = &types.SampleDocumentKeys{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "input":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Key to be of type string, got %T instead", value)
+				}
+				sv.Input = ptr.String(jtv)
+			}
+
+		case "output":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Key to be of type string, got %T instead", value)
+				}
+				sv.Output = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentSampleDocuments(v **types.SampleDocuments, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SampleDocuments
+	if *v == nil {
+		sv = &types.SampleDocuments{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
+				}
+				sv.BucketName = ptr.String(jtv)
+			}
+
+		case "keys":
+			if err := awsAwsjson10_deserializeDocumentKeyList(&sv.Keys, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4645,6 +5285,16 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				sv.FileFormat = types.FileFormat(jtv)
 			}
 
+		case "inputConversion":
+			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
+				return err
+			}
+
+		case "mapping":
+			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
+				return err
+			}
+
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4676,6 +5326,11 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "outputConversion":
+			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
+				return err
+			}
+
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4683,6 +5338,11 @@ func awsAwsjson10_deserializeDocumentTransformerSummary(v **types.TransformerSum
 					return fmt.Errorf("expected FileLocation to be of type string, got %T instead", value)
 				}
 				sv.SampleDocument = ptr.String(jtv)
+			}
+
+		case "sampleDocuments":
+			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -4752,6 +5412,100 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentValidationMessages(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12Delimiters(v **types.X12Delimiters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12Delimiters
+	if *v == nil {
+		sv = &types.X12Delimiters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "componentSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12ComponentSeparator to be of type string, got %T instead", value)
+				}
+				sv.ComponentSeparator = ptr.String(jtv)
+			}
+
+		case "dataElementSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12DataElementSeparator to be of type string, got %T instead", value)
+				}
+				sv.DataElementSeparator = ptr.String(jtv)
+			}
+
+		case "segmentTerminator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12SegmentTerminator to be of type string, got %T instead", value)
+				}
+				sv.SegmentTerminator = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentX12Details(v **types.X12Details, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4790,6 +5544,249 @@ func awsAwsjson10_deserializeDocumentX12Details(v **types.X12Details, value inte
 					return fmt.Errorf("expected X12Version to be of type string, got %T instead", value)
 				}
 				sv.Version = types.X12Version(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12Envelope(v **types.X12Envelope, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12Envelope
+	if *v == nil {
+		sv = &types.X12Envelope{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "common":
+			if err := awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(&sv.Common, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(v **types.X12FunctionalGroupHeaders, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12FunctionalGroupHeaders
+	if *v == nil {
+		sv = &types.X12FunctionalGroupHeaders{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationReceiverCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12ApplicationReceiverCode to be of type string, got %T instead", value)
+				}
+				sv.ApplicationReceiverCode = ptr.String(jtv)
+			}
+
+		case "applicationSenderCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12ApplicationSenderCode to be of type string, got %T instead", value)
+				}
+				sv.ApplicationSenderCode = ptr.String(jtv)
+			}
+
+		case "responsibleAgencyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12ResponsibleAgencyCode to be of type string, got %T instead", value)
+				}
+				sv.ResponsibleAgencyCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(v **types.X12InterchangeControlHeaders, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12InterchangeControlHeaders
+	if *v == nil {
+		sv = &types.X12InterchangeControlHeaders{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "acknowledgmentRequestedCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12AcknowledgmentRequestedCode to be of type string, got %T instead", value)
+				}
+				sv.AcknowledgmentRequestedCode = ptr.String(jtv)
+			}
+
+		case "receiverId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12ReceiverId to be of type string, got %T instead", value)
+				}
+				sv.ReceiverId = ptr.String(jtv)
+			}
+
+		case "receiverIdQualifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12IdQualifier to be of type string, got %T instead", value)
+				}
+				sv.ReceiverIdQualifier = ptr.String(jtv)
+			}
+
+		case "repetitionSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12RepetitionSeparator to be of type string, got %T instead", value)
+				}
+				sv.RepetitionSeparator = ptr.String(jtv)
+			}
+
+		case "senderId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12SenderId to be of type string, got %T instead", value)
+				}
+				sv.SenderId = ptr.String(jtv)
+			}
+
+		case "senderIdQualifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12IdQualifier to be of type string, got %T instead", value)
+				}
+				sv.SenderIdQualifier = ptr.String(jtv)
+			}
+
+		case "usageIndicatorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected X12UsageIndicatorCode to be of type string, got %T instead", value)
+				}
+				sv.UsageIndicatorCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentX12OutboundEdiHeaders(v **types.X12OutboundEdiHeaders, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.X12OutboundEdiHeaders
+	if *v == nil {
+		sv = &types.X12OutboundEdiHeaders{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "delimiters":
+			if err := awsAwsjson10_deserializeDocumentX12Delimiters(&sv.Delimiters, value); err != nil {
+				return err
+			}
+
+		case "functionalGroupHeaders":
+			if err := awsAwsjson10_deserializeDocumentX12FunctionalGroupHeaders(&sv.FunctionalGroupHeaders, value); err != nil {
+				return err
+			}
+
+		case "interchangeControlHeaders":
+			if err := awsAwsjson10_deserializeDocumentX12InterchangeControlHeaders(&sv.InterchangeControlHeaders, value); err != nil {
+				return err
+			}
+
+		case "validateEdi":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected X12ValidateEdi to be of type *bool, got %T instead", value)
+				}
+				sv.ValidateEdi = ptr.Bool(jtv)
 			}
 
 		default:
@@ -4915,6 +5912,11 @@ func awsAwsjson10_deserializeOpDocumentCreatePartnershipOutput(v **CreatePartner
 		switch key {
 		case "capabilities":
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
+				return err
+			}
+
+		case "capabilityOptions":
+			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
 
@@ -5119,6 +6121,46 @@ func awsAwsjson10_deserializeOpDocumentCreateProfileOutput(v **CreateProfileOutp
 	return nil
 }
 
+func awsAwsjson10_deserializeOpDocumentCreateStarterMappingTemplateOutput(v **CreateStarterMappingTemplateOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateStarterMappingTemplateOutput
+	if *v == nil {
+		sv = &CreateStarterMappingTemplateOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mappingTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MappingTemplate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransformerOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5168,6 +6210,16 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				sv.FileFormat = types.FileFormat(jtv)
 			}
 
+		case "inputConversion":
+			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
+				return err
+			}
+
+		case "mapping":
+			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
+				return err
+			}
+
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5186,6 +6238,11 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "outputConversion":
+			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
+				return err
+			}
+
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5193,6 +6250,11 @@ func awsAwsjson10_deserializeOpDocumentCreateTransformerOutput(v **CreateTransfo
 					return fmt.Errorf("expected FileLocation to be of type string, got %T instead", value)
 				}
 				sv.SampleDocument = ptr.String(jtv)
+			}
+
+		case "sampleDocuments":
+			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -5358,6 +6420,11 @@ func awsAwsjson10_deserializeOpDocumentGetPartnershipOutput(v **GetPartnershipOu
 		switch key {
 		case "capabilities":
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
+				return err
+			}
+
+		case "capabilityOptions":
+			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
 
@@ -5691,6 +6758,16 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				sv.FileFormat = types.FileFormat(jtv)
 			}
 
+		case "inputConversion":
+			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
+				return err
+			}
+
+		case "mapping":
+			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
+				return err
+			}
+
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5722,6 +6799,11 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "outputConversion":
+			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
+				return err
+			}
+
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5729,6 +6811,11 @@ func awsAwsjson10_deserializeOpDocumentGetTransformerOutput(v **GetTransformerOu
 					return fmt.Errorf("expected FileLocation to be of type string, got %T instead", value)
 				}
 				sv.SampleDocument = ptr.String(jtv)
+			}
+
+		case "sampleDocuments":
+			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -6023,6 +7110,51 @@ func awsAwsjson10_deserializeOpDocumentStartTransformerJobOutput(v **StartTransf
 	return nil
 }
 
+func awsAwsjson10_deserializeOpDocumentTestConversionOutput(v **TestConversionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *TestConversionOutput
+	if *v == nil {
+		sv = &TestConversionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "convertedFileContent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ConvertedFileContent = ptr.String(jtv)
+			}
+
+		case "validationMessages":
+			if err := awsAwsjson10_deserializeDocumentValidationMessages(&sv.ValidationMessages, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentTestMappingOutput(v **TestMappingOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6230,6 +7362,11 @@ func awsAwsjson10_deserializeOpDocumentUpdatePartnershipOutput(v **UpdatePartner
 		switch key {
 		case "capabilities":
 			if err := awsAwsjson10_deserializeDocumentPartnershipCapabilities(&sv.Capabilities, value); err != nil {
+				return err
+			}
+
+		case "capabilityOptions":
+			if err := awsAwsjson10_deserializeDocumentCapabilityOptions(&sv.CapabilityOptions, value); err != nil {
 				return err
 			}
 
@@ -6509,6 +7646,16 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				sv.FileFormat = types.FileFormat(jtv)
 			}
 
+		case "inputConversion":
+			if err := awsAwsjson10_deserializeDocumentInputConversion(&sv.InputConversion, value); err != nil {
+				return err
+			}
+
+		case "mapping":
+			if err := awsAwsjson10_deserializeDocumentMapping(&sv.Mapping, value); err != nil {
+				return err
+			}
+
 		case "mappingTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6540,6 +7687,11 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "outputConversion":
+			if err := awsAwsjson10_deserializeDocumentOutputConversion(&sv.OutputConversion, value); err != nil {
+				return err
+			}
+
 		case "sampleDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6547,6 +7699,11 @@ func awsAwsjson10_deserializeOpDocumentUpdateTransformerOutput(v **UpdateTransfo
 					return fmt.Errorf("expected FileLocation to be of type string, got %T instead", value)
 				}
 				sv.SampleDocument = ptr.String(jtv)
+			}
+
+		case "sampleDocuments":
+			if err := awsAwsjson10_deserializeDocumentSampleDocuments(&sv.SampleDocuments, value); err != nil {
+				return err
 			}
 
 		case "status":

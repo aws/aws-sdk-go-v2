@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateStarterMappingTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStarterMappingTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateStarterMappingTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTransformer(context.Background(), nil, func(o *Options) {
@@ -302,6 +314,18 @@ func TestCheckSnapshot_TagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_TestConversion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestConversion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TestConversion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TestMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TestMapping(context.Background(), nil, func(o *Options) {
@@ -414,6 +438,18 @@ func TestUpdateSnapshot_CreateProfile(t *testing.T) {
 	_, err := svc.CreateProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateStarterMappingTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateStarterMappingTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateStarterMappingTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -618,6 +654,18 @@ func TestUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TestConversion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestConversion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TestConversion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

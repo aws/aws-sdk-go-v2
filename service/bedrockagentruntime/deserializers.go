@@ -4586,8 +4586,18 @@ func awsRestjson1_deserializeDocumentPostProcessingModelInvocationOutput(v **typ
 
 	for key, value := range shape {
 		switch key {
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "parsedResponse":
 			if err := awsRestjson1_deserializeDocumentPostProcessingParsedResponse(&sv.ParsedResponse, value); err != nil {
+				return err
+			}
+
+		case "rawResponse":
+			if err := awsRestjson1_deserializeDocumentRawResponse(&sv.RawResponse, value); err != nil {
 				return err
 			}
 
@@ -4721,8 +4731,18 @@ func awsRestjson1_deserializeDocumentPreProcessingModelInvocationOutput(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "parsedResponse":
 			if err := awsRestjson1_deserializeDocumentPreProcessingParsedResponse(&sv.ParsedResponse, value); err != nil {
+				return err
+			}
+
+		case "rawResponse":
+			if err := awsRestjson1_deserializeDocumentRawResponse(&sv.RawResponse, value); err != nil {
 				return err
 			}
 

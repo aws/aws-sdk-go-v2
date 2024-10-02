@@ -1,8 +1,7 @@
-CreateSuiteDefinition
+TestConversion
 	Initialize stack step
 		spanInitializeStart
 		RegisterServiceMetadata
-		OperationIdempotencyTokenAutoFill
 		legacyEndpointContextSetter
 		SetLogger
 		OperationInputValidation

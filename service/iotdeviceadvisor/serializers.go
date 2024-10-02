@@ -88,6 +88,11 @@ func awsRestjson1_serializeOpDocumentCreateSuiteDefinitionInput(v *CreateSuiteDe
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.SuiteDefinitionConfiguration != nil {
 		ok := object.Key("suiteDefinitionConfiguration")
 		if err := awsRestjson1_serializeDocumentSuiteDefinitionConfiguration(v.SuiteDefinitionConfiguration, ok); err != nil {

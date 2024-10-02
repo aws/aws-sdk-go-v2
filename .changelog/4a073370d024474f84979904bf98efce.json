@@ -1,0 +1,8 @@
+{
+    "id": "4a073370-d024-474f-8497-9904bf98efce",
+    "type": "feature",
+    "description": "Added new fields to Amazon Bedrock Guardrails trace",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

@@ -9,82 +9,52 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Retrieves the details for a partnership, based on the partner and profile IDs
-// specified. A partnership represents the connection between you and your trading
-// partner. It ties together a profile and one or more trading capabilities.
-func (c *Client) GetPartnership(ctx context.Context, params *GetPartnershipInput, optFns ...func(*Options)) (*GetPartnershipOutput, error) {
+// This operation mimics the latter half of a typical Outbound EDI request. It
+// takes an input JSON/XML in the B2Bi shape as input, converts it to an X12 EDI
+// string, and return that string.
+func (c *Client) TestConversion(ctx context.Context, params *TestConversionInput, optFns ...func(*Options)) (*TestConversionOutput, error) {
 	if params == nil {
-		params = &GetPartnershipInput{}
+		params = &TestConversionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetPartnership", params, optFns, c.addOperationGetPartnershipMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestConversion", params, optFns, c.addOperationTestConversionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetPartnershipOutput)
+	out := result.(*TestConversionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetPartnershipInput struct {
+type TestConversionInput struct {
 
-	// Specifies the unique, system-generated identifier for a partnership.
+	// Specify the source file for an outbound EDI request.
 	//
 	// This member is required.
-	PartnershipId *string
+	Source *types.ConversionSource
+
+	// Specify the format (X12 is the only currently supported format), and other
+	// details for the conversion target.
+	//
+	// This member is required.
+	Target *types.ConversionTarget
 
 	noSmithyDocumentSerde
 }
 
-type GetPartnershipOutput struct {
+type TestConversionOutput struct {
 
-	// Returns a timestamp for creation date and time of the partnership.
+	// Returns the converted file content.
 	//
 	// This member is required.
-	CreatedAt *time.Time
+	ConvertedFileContent *string
 
-	// Returns an Amazon Resource Name (ARN) for a specific Amazon Web Services
-	// resource, such as a capability, partnership, profile, or transformer.
-	//
-	// This member is required.
-	PartnershipArn *string
-
-	// Returns the unique, system-generated identifier for a partnership.
-	//
-	// This member is required.
-	PartnershipId *string
-
-	// Returns the unique, system-generated identifier for the profile connected to
-	// this partnership.
-	//
-	// This member is required.
-	ProfileId *string
-
-	// Returns one or more capabilities associated with this partnership.
-	Capabilities []string
-
-	// Contains the details for an Outbound EDI capability.
-	CapabilityOptions *types.CapabilityOptions
-
-	// Returns the email address associated with this trading partner.
-	Email *string
-
-	// Returns a timestamp that identifies the most recent date and time that the
-	// partnership was modified.
-	ModifiedAt *time.Time
-
-	// Returns the display name of the partnership
-	Name *string
-
-	// Returns the phone number associated with the partnership.
-	Phone *string
-
-	// Returns the unique identifier for the partner for this partnership.
-	TradingPartnerId *string
+	// Returns an array of strings, each containing a message that Amazon Web Services
+	// B2B Data Interchange generates during the conversion.
+	ValidationMessages []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,19 +62,19 @@ type GetPartnershipOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestConversionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPartnership{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestConversion{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPartnership{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestConversion{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPartnership"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "TestConversion"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -156,10 +126,10 @@ func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, 
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpGetPartnershipValidationMiddleware(stack); err != nil {
+	if err = addOpTestConversionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPartnership(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestConversion(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -192,10 +162,10 @@ func (c *Client) addOperationGetPartnershipMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetPartnership(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTestConversion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "GetPartnership",
+		OperationName: "TestConversion",
 	}
 }

@@ -1,0 +1,8 @@
+{
+    "id": "2c808562-e171-4e25-be60-8e11a90ab100",
+    "type": "feature",
+    "description": "Added support for Automatic Time Zone Redirection on Amazon AppStream 2.0",
+    "modules": [
+        "service/appstream"
+    ]
+}

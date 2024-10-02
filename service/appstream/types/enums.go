@@ -30,6 +30,7 @@ const (
 	ActionPrintingToLocalDevice        Action = "PRINTING_TO_LOCAL_DEVICE"
 	ActionDomainPasswordSignin         Action = "DOMAIN_PASSWORD_SIGNIN"
 	ActionDomainSmartCardSignin        Action = "DOMAIN_SMART_CARD_SIGNIN"
+	ActionAutoTimeZoneRedirection      Action = "AUTO_TIME_ZONE_REDIRECTION"
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
@@ -45,6 +46,7 @@ func (Action) Values() []Action {
 		"PRINTING_TO_LOCAL_DEVICE",
 		"DOMAIN_PASSWORD_SIGNIN",
 		"DOMAIN_SMART_CARD_SIGNIN",
+		"AUTO_TIME_ZONE_REDIRECTION",
 	}
 }
 

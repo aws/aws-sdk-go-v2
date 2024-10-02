@@ -12,7 +12,7 @@ import (
 )
 
 // Runs a job, using a transformer, to parse input EDI (electronic data
-// interchange) file into the output structures used by Amazon Web Services B2BI
+// interchange) file into the output structures used by Amazon Web Services B2B
 // Data Interchange.
 //
 // If you only want to transform EDI (electronic data interchange) documents, you

@@ -74,6 +74,9 @@ type ApplyGuardrailOutput struct {
 	// This member is required.
 	Usage *types.GuardrailUsage
 
+	// The guardrail coverage details in the apply guardrail response.
+	GuardrailCoverage *types.GuardrailCoverage
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

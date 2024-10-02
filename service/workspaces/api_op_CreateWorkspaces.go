@@ -19,8 +19,8 @@ import (
 //     Contact your account team to be allow-listed to use this value. For more
 //     information, see [Amazon WorkSpaces Core].
 //
-//   - You don't need to specify the PCOIP protocol for Linux bundles because WSP
-//     is the default protocol for those bundles.
+//   - You don't need to specify the PCOIP protocol for Linux bundles because DCV
+//     (formerly WSP) is the default protocol for those bundles.
 //
 //   - User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.
 //
