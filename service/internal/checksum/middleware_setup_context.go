@@ -23,12 +23,14 @@ type setupInputContext struct {
 	// and true, or false if no algorithm is specified.
 	GetAlgorithm func(interface{}) (string, bool)
 
-	// States that a checksum is required to be calculated for the operation.
-	// If input does not specify a checksum, fallback to built in CRC32 checksum is used.
-	// Replaces smithy-go's ContentChecksum middleware.
+	// RequireChecksum indicates whether operation model forces middleware to compute the input payload's checksum.
+	// If RequireChecksum is set to true, checksum will be calculated and RequestChecksumCalculation will be ignored,
+	// otherwise RequestChecksumCalculation will be used to indicate if checksum will be calculated
 	RequireChecksum bool
 
-	// States user config to opt-in/out checksum calculation
+	// RequestChecksumCalculation is the user config to opt-in/out request checksum calculation. If RequireChecksum is
+	// set to true, checksum will be calculated and this field will be ignored, otherwise
+	// RequestChecksumCalculation will be used to indicate if checksum will be calculated
 	RequestChecksumCalculation aws.RequestChecksumCalculation
 }
 

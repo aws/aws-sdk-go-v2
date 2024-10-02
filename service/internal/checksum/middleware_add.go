@@ -15,7 +15,9 @@ type InputMiddlewareOptions struct {
 	// and true, or false if no algorithm is specified.
 	GetAlgorithm func(interface{}) (string, bool)
 
-	// Whether operation model forces middleware to compute the input payload's checksum.
+	// RequireChecksum indicates whether operation model forces middleware to compute the input payload's checksum.
+	// If RequireChecksum is set to true, checksum will be calculated and RequestChecksumCalculation will be ignored,
+	// otherwise RequestChecksumCalculation will be used to indicate if checksum will be calculated
 	RequireChecksum bool
 
 	// RequestChecksumCalculation is the user config to opt-in/out request checksum calculation. If RequireChecksum is

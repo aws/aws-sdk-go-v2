@@ -370,9 +370,7 @@ func WithRequestChecksumCalculation(c aws.RequestChecksumCalculation) LoadOption
 // that sets ResponseChecksumValidation on config's LoadOptions
 func WithResponseChecksumValidation(v aws.ResponseChecksumValidation) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
-		if v > 0 {
-			o.ResponseChecksumValidation = v
-		}
+		o.ResponseChecksumValidation = v
 		return nil
 	}
 }

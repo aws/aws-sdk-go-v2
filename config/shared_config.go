@@ -121,6 +121,8 @@ const (
 
 	requestChecksumCalculationKey = "request_checksum_calculation"
 	responseChecksumValidationKey = "response_checksum_validation"
+	checksumWhenSupported         = "when_supported"
+	checksumWhenRequired          = "when_required"
 )
 
 // defaultSharedConfigProfile allows for swapping the default profile for testing
@@ -1230,9 +1232,9 @@ func updateRequestChecksumCalculation(m *aws.RequestChecksumCalculation, sec ini
 
 	v := sec.String(key)
 	switch strings.ToLower(v) {
-	case "when_supported":
+	case checksumWhenSupported:
 		*m = aws.RequestChecksumCalculationWhenSupported
-	case "when_required":
+	case checksumWhenRequired:
 		*m = aws.RequestChecksumCalculationWhenRequired
 	default:
 		return fmt.Errorf("invalid value for shared config profile field, %s=%s, must be when_supported/when_required", key, v)
@@ -1248,9 +1250,9 @@ func updateResponseChecksumValidation(m *aws.ResponseChecksumValidation, sec ini
 
 	v := sec.String(key)
 	switch strings.ToLower(v) {
-	case "when_supported":
+	case checksumWhenSupported:
 		*m = aws.ResponseChecksumValidationWhenSupported
-	case "when_required":
+	case checksumWhenRequired:
 		*m = aws.ResponseChecksumValidationWhenRequired
 	default:
 		return fmt.Errorf("invalid value for shared config profile field, %s=%s, must be when_supported/when_required", key, v)

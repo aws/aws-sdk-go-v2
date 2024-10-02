@@ -560,9 +560,9 @@ func setRequestChecksumCalculationFromEnvVal(m *aws.RequestChecksumCalculation, 
 		}
 
 		switch strings.ToLower(value) {
-		case "when_supported":
+		case checksumWhenSupported:
 			*m = aws.RequestChecksumCalculationWhenSupported
-		case "when_required":
+		case checksumWhenRequired:
 			*m = aws.RequestChecksumCalculationWhenRequired
 		default:
 			return fmt.Errorf("invalid value for environment variable, %s=%s, must be when_supported/when_required", k, value)
@@ -579,9 +579,9 @@ func setResponseChecksumValidationFromEnvVal(m *aws.ResponseChecksumValidation, 
 		}
 
 		switch strings.ToLower(value) {
-		case "when_supported":
+		case checksumWhenSupported:
 			*m = aws.ResponseChecksumValidationWhenSupported
-		case "when_required":
+		case checksumWhenRequired:
 			*m = aws.ResponseChecksumValidationWhenRequired
 		default:
 			return fmt.Errorf("invalid value for environment variable, %s=%s, must be when_supported/when_required", k, value)

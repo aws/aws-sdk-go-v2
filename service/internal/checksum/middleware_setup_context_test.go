@@ -83,6 +83,7 @@ func TestSetupInput(t *testing.T) {
 			expectValue: "CRC32",
 		},
 		"user config support checksum and use default": {
+			RequestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
 			getAlgorithm: func(v interface{}) (string, bool) {
 				return "", false
 			},
@@ -132,7 +133,8 @@ func TestSetupOutput(t *testing.T) {
 		expectValue                string
 	}{
 		"user config support checksum found empty": {
-			inputParams: Params{Value: ""},
+			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
+			inputParams:                Params{Value: ""},
 			getValidationMode: func(v interface{}) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
@@ -140,7 +142,8 @@ func TestSetupOutput(t *testing.T) {
 			expectValue: "ENABLED",
 		},
 		"user config support checksum found invalid value": {
-			inputParams: Params{Value: "abc123"},
+			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
+			inputParams:                Params{Value: "abc123"},
 			getValidationMode: func(v interface{}) (string, bool) {
 				vv := v.(Params)
 				return vv.Value, true
