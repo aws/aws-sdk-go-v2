@@ -1,3 +1,28 @@
+# Release (2024-10-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.40.0](service/appstream/CHANGELOG.md#v1400-2024-10-02)
+  * **Feature**: Added support for Automatic Time Zone Redirection on Amazon AppStream 2.0
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.44](service/b2bi/CHANGELOG.md#v100-preview44-2024-10-02)
+  * **Feature**: Added and updated APIs to support outbound EDI transformations
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.21.0](service/bedrockagentruntime/CHANGELOG.md#v1210-2024-10-02)
+  * **Feature**: Added raw model response and usage metrics to PreProcessing and PostProcessing Trace
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.18.0](service/bedrockruntime/CHANGELOG.md#v1180-2024-10-02)
+  * **Feature**: Added new fields to Amazon Bedrock Guardrails trace
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.30.0](service/iotdeviceadvisor/CHANGELOG.md#v1300-2024-10-02)
+  * **Feature**: Add clientToken attribute and implement idempotency for CreateSuiteDefinition.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.19.0](service/ivsrealtime/CHANGELOG.md#v1190-2024-10-02)
+  * **Feature**: Adds new Stage Health EventErrorCodes applicable to RTMP(S) broadcasts. Bug Fix: Enforces that EncoderConfiguration Video height and width must be even-number values.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.64.0](service/s3/CHANGELOG.md#v1640-2024-10-02)
+  * **Feature**: This release introduces a header representing the minimum object size limit for Lifecycle transitions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.162.0](service/sagemaker/CHANGELOG.md#v11620-2024-10-02)
+  * **Feature**: releasing builtinlcc to public
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.47.4](service/workspaces/CHANGELOG.md#v1474-2024-10-02)
+  * **Documentation**: WSP is being rebranded to become DCV.
+
 # Release (2024-10-01)
 
 ## Module Highlights

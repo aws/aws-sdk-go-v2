@@ -3,12 +3,12 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.31.0
 	github.com/aws/aws-sdk-go-v2/config v1.27.39
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.25
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.26
 	github.com/aws/aws-sdk-go-v2/service/acm v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.32.3
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.27.3
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.39.3
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/batch v1.45.3
@@ -42,7 +42,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/emr v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.34.3
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.33.3
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.33.4
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/glue v1.99.2
@@ -64,7 +64,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.44.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.26.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.31.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.63.3
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.64.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.48.3
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.31.3
@@ -82,7 +82,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.53.3
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.47.3
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.47.4
 	github.com/aws/smithy-go v1.21.0
 )
 

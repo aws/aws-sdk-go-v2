@@ -1,3 +1,7 @@
+# v1.47.4 (2024-10-02)
+
+* **Documentation**: WSP is being rebranded to become DCV.
+
 # v1.47.3 (2024-09-27)
 
 * No change notes available for this release.

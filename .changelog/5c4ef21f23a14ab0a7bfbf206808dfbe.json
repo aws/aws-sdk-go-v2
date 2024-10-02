@@ -1,8 +1,0 @@
-{
-    "id": "5c4ef21f-23a1-4ab0-a7bf-bf206808dfbe",
-    "type": "feature",
-    "description": "Added raw model response and usage metrics to PreProcessing and PostProcessing Trace",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

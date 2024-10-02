@@ -1,8 +1,0 @@
-{
-    "id": "ff36e625-7e91-4413-9cca-84a368e7692a",
-    "type": "feature",
-    "description": "Adds new Stage Health EventErrorCodes applicable to RTMP(S) broadcasts. Bug Fix: Enforces that EncoderConfiguration Video height and width must be even-number values.",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}

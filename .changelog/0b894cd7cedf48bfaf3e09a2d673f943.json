@@ -1,8 +1,0 @@
-{
-    "id": "0b894cd7-cedf-48bf-af3e-09a2d673f943",
-    "type": "feature",
-    "description": "Add clientToken attribute and implement idempotency for CreateSuiteDefinition.",
-    "modules": [
-        "service/iotdeviceadvisor"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.19.0 (2024-10-02)
+
+* **Feature**: Adds new Stage Health EventErrorCodes applicable to RTMP(S) broadcasts. Bug Fix: Enforces that EncoderConfiguration Video height and width must be even-number values.
+
 # v1.18.3 (2024-09-27)
 
 * No change notes available for this release.

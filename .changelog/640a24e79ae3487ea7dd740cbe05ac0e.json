@@ -1,8 +1,0 @@
-{
-    "id": "640a24e7-9ae3-487e-a7dd-740cbe05ac0e",
-    "type": "feature",
-    "description": "This release introduces a header representing the minimum object size limit for Lifecycle transitions.",
-    "modules": [
-        "service/s3"
-    ]
-}

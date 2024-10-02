@@ -1,3 +1,7 @@
+# v1.0.0-preview.44 (2024-10-02)
+
+* **Feature**: Added and updated APIs to support outbound EDI transformations
+
 # v1.0.0-preview.43 (2024-09-27)
 
 * No change notes available for this release.

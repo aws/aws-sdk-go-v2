@@ -1,8 +1,0 @@
-{
-    "id": "b4020f08-1268-4372-8557-1ca85e87124d",
-    "type": "feature",
-    "description": "releasing builtinlcc to public",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

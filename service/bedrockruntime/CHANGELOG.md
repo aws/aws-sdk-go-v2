@@ -1,3 +1,7 @@
+# v1.18.0 (2024-10-02)
+
+* **Feature**: Added new fields to Amazon Bedrock Guardrails trace
+
 # v1.17.3 (2024-09-27)
 
 * No change notes available for this release.

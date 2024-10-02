@@ -1,8 +1,0 @@
-{
-    "id": "b458caec-e307-4401-ac0b-18c781eadde2",
-    "type": "feature",
-    "description": "Added and updated APIs to support outbound EDI transformations",
-    "modules": [
-        "service/b2bi"
-    ]
-}
