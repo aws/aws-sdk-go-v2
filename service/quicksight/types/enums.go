@@ -360,6 +360,26 @@ func (AssetBundleExportJobDataSourcePropertyToOverride) Values() []AssetBundleEx
 	}
 }
 
+type AssetBundleExportJobFolderPropertyToOverride string
+
+// Enum values for AssetBundleExportJobFolderPropertyToOverride
+const (
+	AssetBundleExportJobFolderPropertyToOverrideName            AssetBundleExportJobFolderPropertyToOverride = "Name"
+	AssetBundleExportJobFolderPropertyToOverrideParentFolderArn AssetBundleExportJobFolderPropertyToOverride = "ParentFolderArn"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobFolderPropertyToOverride. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobFolderPropertyToOverride) Values() []AssetBundleExportJobFolderPropertyToOverride {
+	return []AssetBundleExportJobFolderPropertyToOverride{
+		"Name",
+		"ParentFolderArn",
+	}
+}
+
 type AssetBundleExportJobRefreshSchedulePropertyToOverride string
 
 // Enum values for AssetBundleExportJobRefreshSchedulePropertyToOverride
@@ -2263,6 +2283,27 @@ func (IdentityType) Values() []IdentityType {
 		"IAM",
 		"QUICKSIGHT",
 		"IAM_IDENTITY_CENTER",
+	}
+}
+
+type IncludeFolderMembers string
+
+// Enum values for IncludeFolderMembers
+const (
+	IncludeFolderMembersRecurse  IncludeFolderMembers = "RECURSE"
+	IncludeFolderMembersOneLevel IncludeFolderMembers = "ONE_LEVEL"
+	IncludeFolderMembersNone     IncludeFolderMembers = "NONE"
+)
+
+// Values returns all known values for IncludeFolderMembers. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludeFolderMembers) Values() []IncludeFolderMembers {
+	return []IncludeFolderMembers{
+		"RECURSE",
+		"ONE_LEVEL",
+		"NONE",
 	}
 }
 

@@ -80,6 +80,29 @@ func (AlertTargetType) Values() []AlertTargetType {
 	}
 }
 
+type ApplicationProtocol string
+
+// Enum values for ApplicationProtocol
+const (
+	ApplicationProtocolSecureMqtt ApplicationProtocol = "SECURE_MQTT"
+	ApplicationProtocolMqttWss    ApplicationProtocol = "MQTT_WSS"
+	ApplicationProtocolHttps      ApplicationProtocol = "HTTPS"
+	ApplicationProtocolDefault    ApplicationProtocol = "DEFAULT"
+)
+
+// Values returns all known values for ApplicationProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationProtocol) Values() []ApplicationProtocol {
+	return []ApplicationProtocol{
+		"SECURE_MQTT",
+		"MQTT_WSS",
+		"HTTPS",
+		"DEFAULT",
+	}
+}
+
 type AuditCheckRunStatus string
 
 // Enum values for AuditCheckRunStatus
@@ -282,6 +305,31 @@ func (AuthDecision) Values() []AuthDecision {
 		"ALLOWED",
 		"EXPLICIT_DENY",
 		"IMPLICIT_DENY",
+	}
+}
+
+type AuthenticationType string
+
+// Enum values for AuthenticationType
+const (
+	AuthenticationTypeCustomAuthX509 AuthenticationType = "CUSTOM_AUTH_X509"
+	AuthenticationTypeCustomAuth     AuthenticationType = "CUSTOM_AUTH"
+	AuthenticationTypeAwsX509        AuthenticationType = "AWS_X509"
+	AuthenticationTypeAwsSigv4       AuthenticationType = "AWS_SIGV4"
+	AuthenticationTypeDefault        AuthenticationType = "DEFAULT"
+)
+
+// Values returns all known values for AuthenticationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthenticationType) Values() []AuthenticationType {
+	return []AuthenticationType{
+		"CUSTOM_AUTH_X509",
+		"CUSTOM_AUTH",
+		"AWS_X509",
+		"AWS_SIGV4",
+		"DEFAULT",
 	}
 }
 

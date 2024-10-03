@@ -6570,6 +6570,26 @@ func (m *validateOpModifyInstanceCapacityReservationAttributes) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyInstanceCpuOptions struct {
+}
+
+func (*validateOpModifyInstanceCpuOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyInstanceCpuOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyInstanceCpuOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyInstanceCpuOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyInstanceCreditSpecification struct {
 }
 
@@ -10140,6 +10160,10 @@ func addOpModifyInstanceAttributeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpModifyInstanceCapacityReservationAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyInstanceCapacityReservationAttributes{}, middleware.After)
+}
+
+func addOpModifyInstanceCpuOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyInstanceCpuOptions{}, middleware.After)
 }
 
 func addOpModifyInstanceCreditSpecificationValidationMiddleware(stack *middleware.Stack) error {
@@ -16975,6 +16999,27 @@ func validateOpModifyInstanceCapacityReservationAttributesInput(v *ModifyInstanc
 	}
 	if v.CapacityReservationSpecification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CapacityReservationSpecification"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyInstanceCpuOptionsInput(v *ModifyInstanceCpuOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyInstanceCpuOptionsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.CoreCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreCount"))
+	}
+	if v.ThreadsPerCore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreadsPerCore"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "96171a0b-7c3f-421e-9796-32814c6b59ed",
+    "type": "feature",
+    "description": "Public GetMetricDataV2 Grouping increase from 3 to 4",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -14170,8 +14170,31 @@ func awsRestjson1_deserializeOpDocumentDescribeDomainConfigurationOutput(v **Des
 
 	for key, value := range shape {
 		switch key {
+		case "applicationProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationProtocol to be of type string, got %T instead", value)
+				}
+				sv.ApplicationProtocol = types.ApplicationProtocol(jtv)
+			}
+
+		case "authenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.AuthenticationType(jtv)
+			}
+
 		case "authorizerConfig":
 			if err := awsRestjson1_deserializeDocumentAuthorizerConfig(&sv.AuthorizerConfig, value); err != nil {
+				return err
+			}
+
+		case "clientCertificateConfig":
+			if err := awsRestjson1_deserializeDocumentClientCertificateConfig(&sv.ClientCertificateConfig, value); err != nil {
 				return err
 			}
 
@@ -46386,6 +46409,46 @@ func awsRestjson1_deserializeDocumentCidrs(v *[]string, value interface{}) error
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentClientCertificateConfig(v **types.ClientCertificateConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClientCertificateConfig
+	if *v == nil {
+		sv = &types.ClientCertificateConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientCertificateCallbackArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientCertificateCallbackArn to be of type string, got %T instead", value)
+				}
+				sv.ClientCertificateCallbackArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

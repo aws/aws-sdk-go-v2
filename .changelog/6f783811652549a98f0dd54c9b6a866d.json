@@ -1,0 +1,8 @@
+{
+    "id": "6f783811-6525-49a9-8f0d-d54c9b6a866d",
+    "type": "feature",
+    "description": "The AWS Marketplace Reporting service introduces the GetBuyerDashboard API. This API returns a dashboard that provides visibility into your organization's AWS Marketplace agreements and associated spend across the AWS accounts in your organization.",
+    "modules": [
+        "service/marketplacereporting"
+    ]
+}

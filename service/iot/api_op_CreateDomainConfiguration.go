@@ -38,8 +38,49 @@ type CreateDomainConfigurationInput struct {
 	// This member is required.
 	DomainConfigurationName *string
 
+	// An enumerated string that speciﬁes the application-layer protocol.
+	//
+	//   - SECURE_MQTT - MQTT over TLS.
+	//
+	//   - MQTT_WSS - MQTT over WebSocket.
+	//
+	//   - HTTPS - HTTP over TLS.
+	//
+	//   - DEFAULT - Use a combination of port and Application Layer Protocol
+	//   Negotiation (ALPN) to specify application_layer protocol. For more information,
+	//   see [Device communication protocols].
+	//
+	// [Device communication protocols]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+	ApplicationProtocol types.ApplicationProtocol
+
+	// An enumerated string that speciﬁes the authentication type.
+	//
+	//   - CUSTOM_AUTH_X509 - Use custom authentication and authorization with
+	//   additional details from the X.509 client certificate.
+	//
+	//   - CUSTOM_AUTH - Use custom authentication and authorization. For more
+	//   information, see [Custom authentication and authorization].
+	//
+	//   - AWS_X509 - Use X.509 client certificates without custom authentication and
+	//   authorization. For more information, see [X.509 client certificates].
+	//
+	//   - AWS_SIGV4 - Use Amazon Web Services Signature Version 4. For more
+	//   information, see [IAM users, groups, and roles].
+	//
+	//   - DEFAULT - Use a combination of port and Application Layer Protocol
+	//   Negotiation (ALPN) to specify authentication type. For more information, see [Device communication protocols].
+	//
+	// [Custom authentication and authorization]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+	// [X.509 client certificates]: https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html
+	// [IAM users, groups, and roles]: https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html
+	// [Device communication protocols]: https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html
+	AuthenticationType types.AuthenticationType
+
 	// An object that specifies the authorization service for a domain.
 	AuthorizerConfig *types.AuthorizerConfig
+
+	// An object that speciﬁes the client certificate conﬁguration for a domain.
+	ClientCertificateConfig *types.ClientCertificateConfig
 
 	// The name of the domain.
 	DomainName *string

@@ -602,6 +602,11 @@ func validateCreateHlsManifestConfiguration(v *types.CreateHlsManifestConfigurat
 	if v.ManifestName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
 	}
+	if v.StartTag != nil {
+		if err := validateStartTag(v.StartTag); err != nil {
+			invalidParams.AddNested("StartTag", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -633,6 +638,11 @@ func validateCreateLowLatencyHlsManifestConfiguration(v *types.CreateLowLatencyH
 	invalidParams := smithy.InvalidParamsError{Context: "CreateLowLatencyHlsManifestConfiguration"}
 	if v.ManifestName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if v.StartTag != nil {
+		if err := validateStartTag(v.StartTag); err != nil {
+			invalidParams.AddNested("StartTag", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -738,6 +748,21 @@ func validateSpekeKeyProvider(v *types.SpekeKeyProvider) error {
 	}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartTag(v *types.StartTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTag"}
+	if v.TimeOffset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeOffset"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -93,6 +93,15 @@ type StartAssetBundleExportJobInput struct {
 	// is also exported.
 	IncludeAllDependencies bool
 
+	// A setting that indicates whether you want to include folder assets. You can
+	// also use this setting to recusrsively include all subfolders of an exported
+	// folder.
+	IncludeFolderMembers types.IncludeFolderMembers
+
+	// A Boolean that determines if the exported asset carries over information about
+	// the folders that the asset is a member of.
+	IncludeFolderMemberships bool
+
 	// A Boolean that determines whether all permissions for each resource ARN are
 	// exported with the job. If you set IncludePermissions to TRUE , any permissions
 	// associated with each resource are exported.

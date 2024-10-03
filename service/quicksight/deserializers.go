@@ -11992,6 +11992,24 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetBundleExportJobOutput(v **De
 				sv.IncludeAllDependencies = jtv
 			}
 
+		case "IncludeFolderMembers":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IncludeFolderMembers to be of type string, got %T instead", value)
+				}
+				sv.IncludeFolderMembers = types.IncludeFolderMembers(jtv)
+			}
+
+		case "IncludeFolderMemberships":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeFolderMemberships = jtv
+			}
+
 		case "IncludePermissions":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -39443,6 +39461,11 @@ func awsRestjson1_deserializeDocumentAssetBundleCloudFormationOverridePropertyCo
 				return err
 			}
 
+		case "Folders":
+			if err := awsRestjson1_deserializeDocumentAssetBundleExportJobFolderOverridePropertiesList(&sv.Folders, value); err != nil {
+				return err
+			}
+
 		case "RefreshSchedules":
 			if err := awsRestjson1_deserializeDocumentAssetBundleExportJobRefreshScheduleOverridePropertiesList(&sv.RefreshSchedules, value); err != nil {
 				return err
@@ -40017,6 +40040,121 @@ func awsRestjson1_deserializeDocumentAssetBundleExportJobErrorList(v *[]types.As
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleExportJobFolderOverrideProperties(v **types.AssetBundleExportJobFolderOverrideProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleExportJobFolderOverrideProperties
+	if *v == nil {
+		sv = &types.AssetBundleExportJobFolderOverrideProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "Properties":
+			if err := awsRestjson1_deserializeDocumentAssetBundleExportJobFolderPropertyToOverrideList(&sv.Properties, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleExportJobFolderOverridePropertiesList(v *[]types.AssetBundleExportJobFolderOverrideProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleExportJobFolderOverrideProperties
+	if *v == nil {
+		cv = []types.AssetBundleExportJobFolderOverrideProperties{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleExportJobFolderOverrideProperties
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleExportJobFolderOverrideProperties(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleExportJobFolderPropertyToOverrideList(v *[]types.AssetBundleExportJobFolderPropertyToOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleExportJobFolderPropertyToOverride
+	if *v == nil {
+		cv = []types.AssetBundleExportJobFolderPropertyToOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleExportJobFolderPropertyToOverride
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AssetBundleExportJobFolderPropertyToOverride to be of type string, got %T instead", value)
+			}
+			col = types.AssetBundleExportJobFolderPropertyToOverride(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -41819,6 +41957,248 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobErrorList(v *[]types.As
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideParameters(v **types.AssetBundleImportJobFolderOverrideParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobFolderOverrideParameters
+	if *v == nil {
+		sv = &types.AssetBundleImportJobFolderOverrideParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FolderId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.FolderId = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "ParentFolderArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.ParentFolderArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideParametersList(v *[]types.AssetBundleImportJobFolderOverrideParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobFolderOverrideParameters
+	if *v == nil {
+		cv = []types.AssetBundleImportJobFolderOverrideParameters{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobFolderOverrideParameters
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideParameters(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverridePermissions(v **types.AssetBundleImportJobFolderOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobFolderOverridePermissions
+	if *v == nil {
+		sv = &types.AssetBundleImportJobFolderOverridePermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FolderIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.FolderIds, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentAssetBundleResourcePermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverridePermissionsList(v *[]types.AssetBundleImportJobFolderOverridePermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobFolderOverridePermissions
+	if *v == nil {
+		cv = []types.AssetBundleImportJobFolderOverridePermissions{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobFolderOverridePermissions
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverridePermissions(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideTags(v **types.AssetBundleImportJobFolderOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobFolderOverrideTags
+	if *v == nil {
+		sv = &types.AssetBundleImportJobFolderOverrideTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FolderIds":
+			if err := awsRestjson1_deserializeDocumentAssetBundleRestrictiveResourceIdList(&sv.FolderIds, value); err != nil {
+				return err
+			}
+
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideTagsList(v *[]types.AssetBundleImportJobFolderOverrideTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobFolderOverrideTags
+	if *v == nil {
+		cv = []types.AssetBundleImportJobFolderOverrideTags{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobFolderOverrideTags
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideTags(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideParameters(v **types.AssetBundleImportJobOverrideParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41858,6 +42238,11 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideParameters(v **
 
 		case "DataSources":
 			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideParametersList(&sv.DataSources, value); err != nil {
+				return err
+			}
+
+		case "Folders":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideParametersList(&sv.Folders, value); err != nil {
 				return err
 			}
 
@@ -41932,6 +42317,11 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobOverridePermissions(v *
 				return err
 			}
 
+		case "Folders":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverridePermissionsList(&sv.Folders, value); err != nil {
+				return err
+			}
+
 		case "Themes":
 			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobThemeOverridePermissionsList(&sv.Themes, value); err != nil {
 				return err
@@ -41985,6 +42375,11 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobOverrideTags(v **types.
 
 		case "DataSources":
 			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobDataSourceOverrideTagsList(&sv.DataSources, value); err != nil {
+				return err
+			}
+
+		case "Folders":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobFolderOverrideTagsList(&sv.Folders, value); err != nil {
 				return err
 			}
 
@@ -86568,6 +86963,46 @@ func awsRestjson1_deserializeDocumentTopicColumns(v *[]types.TopicColumn, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTopicConfigOptions(v **types.TopicConfigOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TopicConfigOptions
+	if *v == nil {
+		sv = &types.TopicConfigOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "QBusinessInsightsEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.QBusinessInsightsEnabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTopicConstantValue(v **types.TopicConstantValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -86707,6 +87142,11 @@ func awsRestjson1_deserializeDocumentTopicDetails(v **types.TopicDetails, value 
 
 	for key, value := range shape {
 		switch key {
+		case "ConfigOptions":
+			if err := awsRestjson1_deserializeDocumentTopicConfigOptions(&sv.ConfigOptions, value); err != nil {
+				return err
+			}
+
 		case "DataSets":
 			if err := awsRestjson1_deserializeDocumentDatasets(&sv.DataSets, value); err != nil {
 				return err

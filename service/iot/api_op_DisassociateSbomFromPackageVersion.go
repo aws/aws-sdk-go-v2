@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a software bill of materials (SBOM) from a specific software
-// package version.
+// Disassociates the selected software bill of materials (SBOM) from a specific
+// software package version.
 //
 // Requires permission to access the [DisassociateSbomWithPackageVersion] action.
 //

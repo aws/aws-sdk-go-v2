@@ -434,6 +434,8 @@ const (
 	ValidationExceptionTypeDrmSignalingMismatchSegmentEncryptionStatus           ValidationExceptionType = "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
 	ValidationExceptionTypeOnlyCmafInputTypeAllowForceEndpointErrorConfiguration ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION"
 	ValidationExceptionTypeSourceDisruptionsEnabledIncorrectly                   ValidationExceptionType = "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
+	ValidationExceptionTypeClipStartTimeWithStartOrEnd                           ValidationExceptionType = "CLIP_START_TIME_WITH_START_OR_END"
+	ValidationExceptionTypeStartTagTimeOffsetInvalid                             ValidationExceptionType = "START_TAG_TIME_OFFSET_INVALID"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -489,5 +491,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS",
 		"ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION",
 		"SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY",
+		"CLIP_START_TIME_WITH_START_OR_END",
+		"START_TAG_TIME_OFFSET_INVALID",
 	}
 }

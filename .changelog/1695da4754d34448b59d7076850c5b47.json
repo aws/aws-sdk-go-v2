@@ -1,0 +1,8 @@
+{
+    "id": "1695da47-54d3-4448-b59d-7076850c5b47",
+    "type": "feature",
+    "description": "This release includes a new API for modifying instance cpu-options after launch.",
+    "modules": [
+        "service/ec2"
+    ]
+}

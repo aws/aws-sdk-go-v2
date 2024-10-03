@@ -72,7 +72,7 @@ type UpdatePackageVersionInput struct {
 	Description *string
 
 	// The inline job document associated with a software package version used for a
-	// quick job deployment via IoT Jobs.
+	// quick job deployment.
 	Recipe *string
 
 	noSmithyDocumentSerde

@@ -6625,6 +6625,11 @@ func awsAwsjson11_deserializeDocumentActionDeclaration(v **types.ActionDeclarati
 				return err
 			}
 
+		case "commands":
+			if err := awsAwsjson11_deserializeDocumentCommandList(&sv.Commands, value); err != nil {
+				return err
+			}
+
 		case "configuration":
 			if err := awsAwsjson11_deserializeDocumentActionConfigurationMap(&sv.Configuration, value); err != nil {
 				return err
@@ -6655,6 +6660,11 @@ func awsAwsjson11_deserializeDocumentActionDeclaration(v **types.ActionDeclarati
 
 		case "outputArtifacts":
 			if err := awsAwsjson11_deserializeDocumentOutputArtifactList(&sv.OutputArtifacts, value); err != nil {
+				return err
+			}
+
+		case "outputVariables":
+			if err := awsAwsjson11_deserializeDocumentOutputVariableList(&sv.OutputVariables, value); err != nil {
 				return err
 			}
 
@@ -8862,6 +8872,42 @@ func awsAwsjson11_deserializeDocumentBlockerDeclaration(v **types.BlockerDeclara
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCommandList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Command to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.ConcurrentModificationException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9511,6 +9557,42 @@ func awsAwsjson11_deserializeDocumentFailureConditions(v **types.FailureConditio
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFilePathList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FilePath to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11167,6 +11249,11 @@ func awsAwsjson11_deserializeDocumentOutputArtifact(v **types.OutputArtifact, va
 
 	for key, value := range shape {
 		switch key {
+		case "files":
+			if err := awsAwsjson11_deserializeDocumentFilePathList(&sv.Files, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11212,6 +11299,42 @@ func awsAwsjson11_deserializeDocumentOutputArtifactList(v *[]types.OutputArtifac
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOutputVariableList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected OutputVariable to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

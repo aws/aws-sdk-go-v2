@@ -1119,6 +1119,16 @@ type CertificateValidity struct {
 	noSmithyDocumentSerde
 }
 
+// An object that speciﬁes the client certificate conﬁguration for a domain.
+type ClientCertificateConfig struct {
+
+	// The ARN of the Lambda function that IoT invokes after mutual TLS authentication
+	// during the connection.
+	ClientCertificateCallbackArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an action that updates a CloudWatch alarm.
 type CloudwatchAlarmAction struct {
 
@@ -3037,8 +3047,7 @@ type PackageSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 location for the artifacts associated with a software package
-// version.
+// A specific package version artifact associated with a software package version.
 type PackageVersionArtifact struct {
 
 	// The S3 location.
@@ -3502,8 +3511,8 @@ type SalesforceAction struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 location for the software bill of materials associated with a
-// software package version.
+// A specific software bill of matrerials associated with a software package
+// version.
 type Sbom struct {
 
 	// The S3 location.
@@ -4062,7 +4071,7 @@ type ThingDocument struct {
 	// [IoT Device Shadow service.]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html
 	Shadow *string
 
-	// Thing group names.
+	// Thing group and billing group names.
 	ThingGroupNames []string
 
 	// The thing ID.
