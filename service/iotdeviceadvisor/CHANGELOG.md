@@ -1,3 +1,7 @@
+# v1.30.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.30.0 (2024-10-02)
 
 * **Feature**: Add clientToken attribute and implement idempotency for CreateSuiteDefinition.

@@ -5,13 +5,13 @@ go 1.21
 require (
 	github.com/aws/aws-sdk-go-v2 v1.31.0
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.5
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.4.24
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.31.2
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.4.25
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.31.3
 	github.com/aws/smithy-go v1.21.0
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.37 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.38 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.18 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.18 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect

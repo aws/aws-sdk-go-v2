@@ -1,3 +1,7 @@
+# v1.21.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.21.0 (2024-10-02)
 
 * **Feature**: Added raw model response and usage metrics to PreProcessing and PostProcessing Trace

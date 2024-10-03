@@ -1,8 +1,0 @@
-{
-    "id": "3f2ce88a-cc8a-4841-8df8-653d516a9e76",
-    "type": "feature",
-    "description": "AWS CodePipeline introduces Commands action that enables you to easily run shell commands as part of your pipeline execution.",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

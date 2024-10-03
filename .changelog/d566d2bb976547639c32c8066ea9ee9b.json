@@ -1,8 +1,0 @@
-{
-    "id": "d566d2bb-9765-4763-9c32-c8066ea9ee9b",
-    "type": "feature",
-    "description": "Added support for ClipStartTime on the FilterConfiguration object on OriginEndpoint manifest settings objects. Added support for EXT-X-START tags on produced HLS child playlists.",
-    "modules": [
-        "service/mediapackagev2"
-    ]
-}

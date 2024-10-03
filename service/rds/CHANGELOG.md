@@ -1,3 +1,7 @@
+# v1.86.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.86.0 (2024-10-01)
 
 * **Feature**: This release provides additional support for enabling Aurora Limitless Database DB clusters.

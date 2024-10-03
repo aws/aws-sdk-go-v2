@@ -1,3 +1,7 @@
+# v1.162.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.162.0 (2024-10-02)
 
 * **Feature**: releasing builtinlcc to public

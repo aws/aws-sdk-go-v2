@@ -1,3 +1,25 @@
+# Release (2024-10-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.33.0](service/codepipeline/CHANGELOG.md#v1330-2024-10-03)
+  * **Feature**: AWS CodePipeline introduces Commands action that enables you to easily run shell commands as part of your pipeline execution.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.112.0](service/connect/CHANGELOG.md#v11120-2024-10-03)
+  * **Feature**: Public GetMetricDataV2 Grouping increase from 3 to 4
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.180.0](service/ec2/CHANGELOG.md#v11800-2024-10-03)
+  * **Feature**: This release includes a new API for modifying instance cpu-options after launch.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.58.0](service/iot/CHANGELOG.md#v1580-2024-10-03)
+  * **Feature**: This release adds support for Custom Authentication with X.509 Client Certificates, support for Custom Client Certificate validation, and support for selecting application protocol and authentication type without requiring TLS ALPN for customer's AWS IoT Domain Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.0.0](service/marketplacereporting/CHANGELOG.md#v100-2024-10-03)
+  * **Release**: New AWS service client module
+  * **Feature**: The AWS Marketplace Reporting service introduces the GetBuyerDashboard API. This API returns a dashboard that provides visibility into your organization's AWS Marketplace agreements and associated spend across the AWS accounts in your organization.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.17.0](service/mediapackagev2/CHANGELOG.md#v1170-2024-10-03)
+  * **Feature**: Added support for ClipStartTime on the FilterConfiguration object on OriginEndpoint manifest settings objects. Added support for EXT-X-START tags on produced HLS child playlists.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.75.0](service/quicksight/CHANGELOG.md#v1750-2024-10-03)
+  * **Feature**: QuickSight: Add support for exporting and importing folders in AssetBundle APIs
+
 # Release (2024-10-02)
 
 ## General Highlights

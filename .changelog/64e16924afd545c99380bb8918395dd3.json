@@ -1,8 +1,0 @@
-{
-    "id": "64e16924-afd5-45c9-9380-bb8918395dd3",
-    "type": "feature",
-    "description": "QuickSight: Add support for exporting and importing folders in AssetBundle APIs",
-    "modules": [
-        "service/quicksight"
-    ]
-}

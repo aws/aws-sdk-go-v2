@@ -1,3 +1,7 @@
+# v1.75.0 (2024-10-03)
+
+* **Feature**: QuickSight: Add support for exporting and importing folders in AssetBundle APIs
+
 # v1.74.0 (2024-09-27)
 
 * **Feature**: Adding personalization in QuickSight data stories. Admins can enable or disable personalization through QuickSight settings.

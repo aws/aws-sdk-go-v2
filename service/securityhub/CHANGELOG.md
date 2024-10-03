@@ -1,3 +1,7 @@
+# v1.53.4 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.53.3 (2024-09-27)
 
 * **Documentation**: Documentation updates for AWS Security Hub

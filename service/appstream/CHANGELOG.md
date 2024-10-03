@@ -1,3 +1,7 @@
+# v1.40.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.40.0 (2024-10-02)
 
 * **Feature**: Added support for Automatic Time Zone Redirection on Amazon AppStream 2.0
