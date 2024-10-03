@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.18
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.5
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.19
-	github.com/aws/smithy-go v1.21.0
+	github.com/aws/smithy-go v1.22.0
 	github.com/jmespath/go-jmespath v0.4.0
 )
 
