@@ -840,6 +840,9 @@
                 "ScteHls": {
                     "target": "com.amazonaws.mediapackagev2#ScteHls"
                 },
+                "StartTag": {
+                    "target": "com.amazonaws.mediapackagev2#StartTag"
+                },
                 "ManifestWindowSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -852,7 +855,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 1209600
@@ -892,6 +895,9 @@
                 "ScteHls": {
                     "target": "com.amazonaws.mediapackagev2#ScteHls"
                 },
+                "StartTag": {
+                    "target": "com.amazonaws.mediapackagev2#StartTag"
+                },
                 "ManifestWindowSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -904,7 +910,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 1209600
@@ -2370,6 +2376,12 @@
                             "max": 1209600
                         }
                     }
+                },
+                "ClipStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2909,7 +2921,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
+                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
                     }
                 },
                 "ScteHls": {
@@ -2917,6 +2929,9 @@
                 },
                 "FilterConfiguration": {
                     "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
+                },
+                "StartTag": {
+                    "target": "com.amazonaws.mediapackagev2#StartTag"
                 }
             },
             "traits": {
@@ -2961,7 +2976,7 @@
                 "ProgramDateTimeIntervalSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, \n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. \n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. \n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
+                        "smithy.api#documentation": "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval,\n         EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest.\n         The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.\n         ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p>\n         <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>"
                     }
                 },
                 "ScteHls": {
@@ -2969,6 +2984,9 @@
                 },
                 "FilterConfiguration": {
                     "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
+                },
+                "StartTag": {
+                    "target": "com.amazonaws.mediapackagev2#StartTag"
                 }
             },
             "traits": {
@@ -4836,6 +4854,27 @@
                 "smithy.api#documentation": "<p>The parameters for the SPEKE key provider.</p>"
             }
         },
+        "com.amazonaws.mediapackagev2#StartTag": {
+            "type": "structure",
+            "members": {
+                "TimeOffset": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Precise": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#TagArn": {
             "type": "string"
         },
@@ -4876,7 +4915,7 @@
                     "aws:TagKeys",
                     "aws:RequestTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>Assigns one of more tags (key-value pairs) to the specified MediaPackage resource.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user \n         permissions, by granting a user permission to access or change only resources with certain tag values.\n         You can use the TagResource operation with a resource that already has tags. If you specify a new tag \n         key for the resource, this tag is appended to the list of tags associated with the resource. If you \n         specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>",
+                "smithy.api#documentation": "<p>Assigns one of more tags (key-value pairs) to the specified MediaPackage resource.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n         permissions, by granting a user permission to access or change only resources with certain tag values.\n         You can use the TagResource operation with a resource that already has tags. If you specify a new tag\n         key for the resource, this tag is appended to the list of tags associated with the resource. If you\n         specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Add tags to a resource",
@@ -6103,6 +6142,18 @@
                     "traits": {
                         "smithy.api#enumValue": "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
                     }
+                },
+                "CLIP_START_TIME_WITH_START_OR_END": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLIP_START_TIME_WITH_START_OR_END"
+                    }
+                },
+                "START_TAG_TIME_OFFSET_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "START_TAG_TIME_OFFSET_INVALID"
+                    }
                 }
             }
         },
@@ -6184,7 +6235,7 @@
                     ],
                     "maxAge": 86400
                 },
-                "smithy.api#documentation": "<note>\n            <p>This guide is intended for creating AWS Elemental MediaPackage resources in MediaPackage Version 2 (v2) starting from May 2023. \n        To get started with MediaPackage v2, create your MediaPackage resources. There isn't an automated process to\n        migrate your resources from MediaPackage v1 to MediaPackage v2. </p>\n            <p>The names of the entities that you use to access this API, like URLs and ARNs, all have the versioning information \n           added, like \"v2\", to distinguish from the prior version. If you used MediaPackage prior to this release, you can't use\n           the MediaPackage v2 CLI or the MediaPackage v2 API to access any MediaPackage v1 resources.</p>\n            <p>If you created resources in MediaPackage v1, use video on demand (VOD) workflows, and aren't looking to migrate to MediaPackage v2 yet, \n           see the <a href=\"https://docs.aws.amazon.com/mediapackage/latest/apireference/what-is.html\">MediaPackage v1 Live API Reference</a>.</p>\n         </note>\n         <p>This is the AWS Elemental MediaPackage v2 Live REST API Reference. It describes all the MediaPackage API operations for live content in detail, and provides sample requests, responses, and errors for the supported web services protocols.</p>\n         <p>We assume that you have the IAM permissions that you need to use MediaPackage via the REST API. We also assume that you are familiar with the features and operations of MediaPackage, as described in the AWS Elemental MediaPackage User Guide.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This guide is intended for creating AWS Elemental MediaPackage resources in MediaPackage Version 2 (v2) starting from May 2023.\n        To get started with MediaPackage v2, create your MediaPackage resources. There isn't an automated process to\n        migrate your resources from MediaPackage v1 to MediaPackage v2. </p>\n            <p>The names of the entities that you use to access this API, like URLs and ARNs, all have the versioning information\n           added, like \"v2\", to distinguish from the prior version. If you used MediaPackage prior to this release, you can't use\n           the MediaPackage v2 CLI or the MediaPackage v2 API to access any MediaPackage v1 resources.</p>\n            <p>If you created resources in MediaPackage v1, use video on demand (VOD) workflows, and aren't looking to migrate to MediaPackage v2 yet,\n           see the <a href=\"https://docs.aws.amazon.com/mediapackage/latest/apireference/what-is.html\">MediaPackage v1 Live API Reference</a>.</p>\n         </note>\n         <p>This is the AWS Elemental MediaPackage v2 Live REST API Reference. It describes all the MediaPackage API operations for live content in detail, and provides sample requests, responses, and errors for the supported web services protocols.</p>\n         <p>We assume that you have the IAM permissions that you need to use MediaPackage via the REST API. We also assume that you are familiar with the features and operations of MediaPackage, as described in the AWS Elemental MediaPackage User Guide.</p>",
                 "smithy.api#title": "AWS Elemental MediaPackage v2",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

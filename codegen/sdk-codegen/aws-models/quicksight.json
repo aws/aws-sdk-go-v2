@@ -1456,6 +1456,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional list of structures that control how <code>Dashboard</code> resources are parameterized in the returned CloudFormation template.</p>"
                     }
+                },
+                "Folders": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobFolderOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that controls how <code>Folder</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1839,6 +1845,69 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#AssetBundleExportJobError"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobFolderOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Folder</code> resource whose override properties are configured in this structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobFolderPropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Folder</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>Folder</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobFolderOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobFolderOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobFolderPropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "PARENT_FOLDER_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ParentFolderArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobFolderPropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobFolderPropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.quicksight#AssetBundleExportJobRefreshScheduleOverrideProperties": {
@@ -2700,6 +2769,109 @@
                 "target": "com.amazonaws.quicksight#AssetBundleImportJobError"
             }
         },
+        "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "FolderId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the folder that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the folder.</p>"
+                    }
+                },
+                "ParentFolderArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new parent folder arn. This change can only be applied if the import creates a brand new folder. Existing folders cannot be moved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single folder that is being imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobFolderOverridePermissions": {
+            "type": "structure",
+            "members": {
+                "FolderIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to override all folders in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourcePermissions"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of permissions to be applied to a list of folder IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobFolderOverridePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobFolderOverridePermissions"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideTags": {
+            "type": "structure",
+            "members": {
+                "FolderIds": {
+                    "target": "com.amazonaws.quicksight#AssetBundleRestrictiveResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of folder IDs that you want to apply overrides to. You can use <code>*</code> to override all folders in this asset bundle.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the folders that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a list of tags to be assigned to a list of folder IDs.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideTagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideTags"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssetBundleImportJobOverrideParameters": {
             "type": "structure",
             "members": {
@@ -2750,6 +2922,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>"
                     }
+                },
+                "Folders": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>Folder</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2787,6 +2965,12 @@
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverridePermissionsList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of permissions overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Folders": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobFolderOverridePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of permissions for the folders that you want to apply overrides to.</p>"
                     }
                 }
             },
@@ -2831,6 +3015,12 @@
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideTagsList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tag overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Folders": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobFolderOverrideTagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag overrides for any <code>Folder</code> resources that are present in the asset bundle that is imported.</p>"
                     }
                 }
             },
@@ -18162,6 +18352,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of warning records that describe the analysis or dashboard that is exported. This array includes UI errors that can be skipped during the validation process.</p>\n         <p>This property only appears if <code>StrictModeForAllResources</code> in <code>ValidationStrategy</code> is set to <code>FALSE</code>.</p>"
                     }
+                },
+                "IncludeFolderMemberships": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The include folder memberships flag.</p>"
+                    }
+                },
+                "IncludeFolderMembers": {
+                    "target": "com.amazonaws.quicksight#IncludeFolderMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A setting that determines whether folder members are included.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27725,6 +27928,29 @@
                 "smithy.api#documentation": "<p>The identity type specified isn't supported. Supported identity types include\n\t\t\t\t<code>IAM</code> and <code>QUICKSIGHT</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.quicksight#IncludeFolderMembers": {
+            "type": "enum",
+            "members": {
+                "RECURSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECURSE"
+                    }
+                },
+                "ONE_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_LEVEL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.quicksight#IncrementalRefresh": {
@@ -45347,6 +45573,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An optional parameter that determines which validation strategy to use for the export job. If <code>StrictModeForAllResources</code> is set to <code>TRUE</code>, strict validation for every error is enforced. If it is set to <code>FALSE</code>, validation is skipped for specific UI errors that are shown as warnings. The default value for <code>StrictModeForAllResources</code> is <code>FALSE</code>.</p>"
                     }
+                },
+                "IncludeFolderMemberships": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean that determines if the exported asset carries over information about the folders that the asset is a member of. </p>"
+                    }
+                },
+                "IncludeFolderMembers": {
+                    "target": "com.amazonaws.quicksight#IncludeFolderMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A setting that indicates whether you want to include folder assets. You can also use this setting to recusrsively include all subfolders of an exported folder.</p>"
+                    }
                 }
             },
             "traits": {
@@ -49041,6 +49280,20 @@
                 "target": "com.amazonaws.quicksight#TopicColumn"
             }
         },
+        "com.amazonaws.quicksight#TopicConfigOptions": {
+            "type": "structure",
+            "members": {
+                "QBusinessInsightsEnabled": {
+                    "target": "com.amazonaws.quicksight#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables Amazon Q Business Insights for a <code>Topic</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration options for a <code>Topic</code>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#TopicConstantValue": {
             "type": "structure",
             "members": {
@@ -49125,6 +49378,12 @@
                     "target": "com.amazonaws.quicksight#Datasets",
                     "traits": {
                         "smithy.api#documentation": "<p>The data sets that the topic is associated with.</p>"
+                    }
+                },
+                "ConfigOptions": {
+                    "target": "com.amazonaws.quicksight#TopicConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for a <code>Topic</code>.</p>"
                     }
                 }
             },

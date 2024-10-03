@@ -2590,6 +2590,35 @@
                 "smithy.api#documentation": "<p>Contains information that allowed the authorization.</p>"
             }
         },
+        "com.amazonaws.iot#ApplicationProtocol": {
+            "type": "enum",
+            "members": {
+                "SECURE_MQTT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURE_MQTT"
+                    }
+                },
+                "MQTT_WSS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MQTT_WSS"
+                    }
+                },
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTPS"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iot#ApproximateSecondsBeforeTimedOut": {
             "type": "long"
         },
@@ -2764,7 +2793,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a software bill of materials (SBOM) with a specific software package version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateSbomWithPackageVersion</a> action.</p>",
+                "smithy.api#documentation": "<p>Associates the selected software bill of materials (SBOM) with a specific software package version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">AssociateSbomWithPackageVersion</a> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/packages/{packageName}/versions/{versionName}/sbom",
@@ -2832,7 +2861,7 @@
                 "sbomValidationStatus": {
                     "target": "com.amazonaws.iot#SbomValidationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the initial validation for the SBOM against the Software Package Data Exchange (SPDX) and CycloneDX industry standard format.</p>"
+                        "smithy.api#documentation": "<p>The status of the initial validation for the software bill of materials against the Software Package Data Exchange (SPDX) and CycloneDX industry standard formats.</p>"
                     }
                 }
             },
@@ -4043,6 +4072,41 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#AuthResult"
+            }
+        },
+        "com.amazonaws.iot#AuthenticationType": {
+            "type": "enum",
+            "members": {
+                "CUSTOM_AUTH_X509": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_AUTH_X509"
+                    }
+                },
+                "CUSTOM_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM_AUTH"
+                    }
+                },
+                "AWS_X509": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_X509"
+                    }
+                },
+                "AWS_SIGV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SIGV4"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                }
             }
         },
         "com.amazonaws.iot#AuthorizerArn": {
@@ -5881,6 +5945,30 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#ClientCertificateCallbackArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.iot#ClientCertificateConfig": {
+            "type": "structure",
+            "members": {
+                "clientCertificateCallbackArn": {
+                    "target": "com.amazonaws.iot#ClientCertificateCallbackArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Lambda function that IoT invokes after mutual TLS authentication during the connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>"
+            }
+        },
         "com.amazonaws.iot#ClientId": {
             "type": "string"
         },
@@ -6583,7 +6671,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a billing group.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateBillingGroup</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a billing group. If this call is made multiple times using\n\t\t\tthe same billing group name and configuration, the call will succeed. If this call is made with\n\t\t\tthe same billing group name but different configuration a <code>ResourceAlreadyExistsException</code> is thrown.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateBillingGroup</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/billing-groups/{billingGroupName}",
@@ -7128,6 +7216,24 @@
                     "target": "com.amazonaws.iot#ServerCertificateConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The server certificate configuration.</p>"
+                    }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.iot#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated string that speciﬁes the authentication type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM_AUTH_X509</code> - Use custom authentication and authorization with additional details from the X.509 client certificate.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM_AUTH</code> - Use custom authentication and authorization. For more\n               information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html\">Custom authentication and authorization</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_X509</code> - Use X.509 client certificates without custom authentication and authorization. For more information,\n               see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html\">X.509 client certificates</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SIGV4</code> - Use Amazon Web Services Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html\">IAM users, groups, and roles</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify authentication type.\n               For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html\">Device communication protocols</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "applicationProtocol": {
+                    "target": "com.amazonaws.iot#ApplicationProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated string that speciﬁes the application-layer protocol.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SECURE_MQTT</code> - MQTT over TLS.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>MQTT_WSS</code> - MQTT over WebSocket.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>HTTPS</code> - HTTP over TLS.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. \n               For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html\">Device communication protocols</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "clientCertificateConfig": {
+                    "target": "com.amazonaws.iot#ClientCertificateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>"
                     }
                 }
             },
@@ -8260,7 +8366,7 @@
                 "recipe": {
                     "target": "com.amazonaws.iot#PackageVersionRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inline job document associated with a software package version used for a quick job\n         deployment via IoT Jobs.</p>"
+                        "smithy.api#documentation": "<p>The inline job document associated with a software package version used for a quick job\n         deployment.</p>"
                     }
                 },
                 "tags": {
@@ -8887,7 +8993,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a role alias.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateRoleAlias</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a role alias.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateRoleAlias</a> action.</p>\n         <important>\n            <p>The value of <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_CreateRoleAlias.html#iot-CreateRoleAlias-request-credentialDurationSeconds\">\n                  <code>credentialDurationSeconds</code>\n               </a> must be less than or equal to the maximum session \n            duration of the IAM role that the role alias references. For more information, see \n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-api.html#roles-modify_max-session-duration-api\">\n               Modifying a role maximum session duration (Amazon Web Services API)</a> from the Amazon Web Services Identity and Access Management User Guide.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/role-aliases/{roleAlias}",
@@ -9497,7 +9603,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new thing type.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThingType</a> action.</p>",
+                "smithy.api#documentation": "<p>Creates a new thing type. If this call is made multiple times using\n\t\t\tthe same thing type name and configuration, the call will succeed. If this call is made with\n\t\t\tthe same thing type name but different configuration a <code>ResourceAlreadyExistsException</code> is thrown.\n\t\t</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateThingType</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/thing-types/{thingTypeName}",
@@ -13288,6 +13394,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The server certificate configuration.</p>"
                     }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.iot#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated string that speciﬁes the authentication type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM_AUTH_X509</code> - Use custom authentication and authorization with additional details from the X.509 client certificate.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM_AUTH</code> - Use custom authentication and authorization. For more\n               information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html\">Custom authentication and authorization</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_X509</code> - Use X.509 client certificates without custom authentication and authorization. For more information,\n               see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html\">X.509 client certificates</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SIGV4</code> - Use Amazon Web Services Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html\">IAM users, groups, and roles</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify authentication type.\n               For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html\">Device communication protocols</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "applicationProtocol": {
+                    "target": "com.amazonaws.iot#ApplicationProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated string that speciﬁes the application-layer protocol.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SECURE_MQTT</code> - MQTT over TLS.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>MQTT_WSS</code> - MQTT over WebSocket.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>HTTPS</code> - HTTP over TLS.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. \n               For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html\">Device communication protocols</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "clientCertificateConfig": {
+                    "target": "com.amazonaws.iot#ClientCertificateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15894,7 +16018,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates a software bill of materials (SBOM) from a specific software package version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DisassociateSbomWithPackageVersion</a> action.</p>",
+                "smithy.api#documentation": "<p>Disassociates the selected software bill of materials (SBOM) from a specific software package version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DisassociateSbomWithPackageVersion</a> action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/packages/{packageName}/versions/{versionName}/sbom",
@@ -17978,7 +18102,7 @@
                 "recipe": {
                     "target": "com.amazonaws.iot#PackageVersionRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inline job document associated with a software package version used for a quick job\n         deployment via IoT Jobs.</p>"
+                        "smithy.api#documentation": "<p>The inline job document associated with a software package version used for a quick job\n         deployment.</p>"
                     }
                 }
             },
@@ -27463,7 +27587,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon S3 location for the artifacts associated with a software package\n         version.</p>"
+                "smithy.api#documentation": "<p>A specific package version artifact associated with a software package version.</p>"
             }
         },
         "com.amazonaws.iot#PackageVersionErrorReason": {
@@ -29791,7 +29915,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon S3 location for the software bill of materials associated with a software\n         package version.</p>"
+                "smithy.api#documentation": "<p>A specific software bill of matrerials associated with a software\n         package version.</p>"
             }
         },
         "com.amazonaws.iot#SbomValidationErrorCode": {
@@ -32417,7 +32541,7 @@
                 "thingGroupNames": {
                     "target": "com.amazonaws.iot#ThingGroupNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Thing group names.</p>"
+                        "smithy.api#documentation": "<p>Thing group and billing group names.</p>"
                     }
                 },
                 "attributes": {
@@ -34526,6 +34650,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The server certificate configuration.</p>"
                     }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.iot#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated string that speciﬁes the authentication type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM_AUTH_X509</code> - Use custom authentication and authorization with additional details from the X.509 client certificate.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>CUSTOM_AUTH</code> - Use custom authentication and authorization. For more\n               information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html\">Custom authentication and authorization</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_X509</code> - Use X.509 client certificates without custom authentication and authorization. For more information,\n               see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html\">X.509 client certificates</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SIGV4</code> - Use Amazon Web Services Signature Version 4. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/custom-authentication.html\">IAM users, groups, and roles</a>.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT </code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify authentication type.\n               For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html\">Device communication protocols</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "applicationProtocol": {
+                    "target": "com.amazonaws.iot#ApplicationProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated string that speciﬁes the application-layer protocol.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SECURE_MQTT</code> - MQTT over TLS.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>MQTT_WSS</code> - MQTT over WebSocket.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>HTTPS</code> - HTTP over TLS.</p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <code>DEFAULT</code> - Use a combination of port and Application Layer Protocol Negotiation (ALPN) to specify application_layer protocol. \n               For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html\">Device communication protocols</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "clientCertificateConfig": {
+                    "target": "com.amazonaws.iot#ClientCertificateConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that speciﬁes the client certificate conﬁguration for a domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -35276,7 +35418,7 @@
                 "recipe": {
                     "target": "com.amazonaws.iot#PackageVersionRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inline job document associated with a software package version used for a quick job\n         deployment via IoT Jobs.</p>"
+                        "smithy.api#documentation": "<p>The inline job document associated with a software package version used for a quick job\n         deployment.</p>"
                     }
                 },
                 "clientToken": {
@@ -35421,7 +35563,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a role alias.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateRoleAlias</a> action.</p>",
+                "smithy.api#documentation": "<p>Updates a role alias.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdateRoleAlias</a> action.</p>\n         <important>\n            <p>The value of <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_UpdateRoleAlias.html#iot-UpdateRoleAlias-request-credentialDurationSeconds\">\n                  <code>credentialDurationSeconds</code>\n               </a> must be less than or equal to the\n            maximum session duration of the IAM role that the role alias references. For more\n            information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-api.html#roles-modify_max-session-duration-api\"> Modifying a role maximum session duration (Amazon Web Services API)</a> from the Amazon Web Services\n            Identity and Access Management User Guide.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/role-aliases/{roleAlias}",
