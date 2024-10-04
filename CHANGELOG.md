@@ -1,3 +1,15 @@
+# Release (2024-10-04)
+
+## General Highlights
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.181.0](service/ec2/CHANGELOG.md#v11810-2024-10-04)
+  * **Feature**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.26.0](service/iotdataplane/CHANGELOG.md#v1260-2024-10-04)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 # Release (2024-10-03)
 
 ## General Highlights

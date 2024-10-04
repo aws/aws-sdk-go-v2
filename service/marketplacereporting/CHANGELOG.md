@@ -1,3 +1,8 @@
+# v1.1.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0 (2024-10-03)
 
 * **Release**: New AWS service client module
