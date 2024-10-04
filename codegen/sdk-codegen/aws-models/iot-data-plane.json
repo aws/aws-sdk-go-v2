@@ -273,7 +273,23 @@
                     "method": "GET",
                     "uri": "/things/{thingName}/shadow",
                     "code": 200
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetThingShadowFailure",
+                        "params": {
+                            "thingName": "fake-thing"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2",
+                            "uri": "https://data-ats.iot.us-west-2.amazonaws.com"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "failure": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.iotdataplane#GetThingShadowRequest": {
