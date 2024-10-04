@@ -72,6 +72,8 @@ type ReportInstanceStatusInput struct {
 	Status types.ReportStatusType
 
 	// Descriptive text about the health state of your instance.
+	//
+	// Deprecated: This member has been deprecated
 	Description *string
 
 	// Checks whether you have the required permissions for the operation, without
