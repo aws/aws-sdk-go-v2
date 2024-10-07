@@ -1,6 +1,724 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.qconnect#AIAgent": {
+            "type": "resource",
+            "identifiers": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.qconnect#CreateAIAgent"
+            },
+            "read": {
+                "target": "com.amazonaws.qconnect#GetAIAgent"
+            },
+            "update": {
+                "target": "com.amazonaws.qconnect#UpdateAIAgent"
+            },
+            "delete": {
+                "target": "com.amazonaws.qconnect#DeleteAIAgent"
+            },
+            "list": {
+                "target": "com.amazonaws.qconnect#ListAIAgents"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.qconnect#CreateAIAgentVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#DeleteAIAgentVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ListAIAgentVersions"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "ai-agent/{assistantId}/{aiAgentId}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentAssociationConfigurationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KNOWLEDGE_BASE",
+                        "name": "KNOWLEDGE_BASE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentConfiguration": {
+            "type": "union",
+            "members": {
+                "manualSearchAIAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#ManualSearchAIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for AI Agents of type <code>MANUAL_SEARCH</code>.</p>"
+                    }
+                },
+                "answerRecommendationAIAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#AnswerRecommendationAIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for AI Agents of type <code>ANSWER_RECOMMENDATION</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A typed union that specifies the configuration based on the type of AI Agent.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentConfigurationData": {
+            "type": "structure",
+            "members": {
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AI Agent to be configured.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A type that specifies the AI Agent ID configuration data when mapping an AI Agents to be\n      used for an AI Agent type on a session or assistant.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentConfigurationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.qconnect#AIAgentType"
+            },
+            "value": {
+                "target": "com.amazonaws.qconnect#AIAgentConfigurationData"
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentData": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#AIAgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Agent was last modified.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the AI Agent.</p>"
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the origin of the AI Agent. <code>SYSTEM</code> for a default AI Agent created\n      by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent creation\n      APIs. </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data for the AI Agent.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#AIAgent"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#AIAgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Agent was last modified.</p>"
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the AI Agent.</p>"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Agent. <code>SYSTEM</code> for a default AI Agent created by Q in\n      Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent creation\n      APIs.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the AI Agent.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI Agent.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the AI Agent.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#AIAgent"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIAgentSummary"
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MANUAL_SEARCH",
+                        "name": "MANUAL_SEARCH"
+                    },
+                    {
+                        "value": "ANSWER_RECOMMENDATION",
+                        "name": "ANSWER_RECOMMENDATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentVersionSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIAgentVersionSummary"
+            }
+        },
+        "com.amazonaws.qconnect#AIAgentVersionSummary": {
+            "type": "structure",
+            "members": {
+                "aiAgentSummary": {
+                    "target": "com.amazonaws.qconnect#AIAgentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data for the summary of the AI Agent version.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number for this AI Agent version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the AI Agent version.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIPrompt": {
+            "type": "resource",
+            "identifiers": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn"
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.qconnect#CreateAIPrompt"
+            },
+            "read": {
+                "target": "com.amazonaws.qconnect#GetAIPrompt"
+            },
+            "update": {
+                "target": "com.amazonaws.qconnect#UpdateAIPrompt"
+            },
+            "delete": {
+                "target": "com.amazonaws.qconnect#DeleteAIPrompt"
+            },
+            "list": {
+                "target": "com.amazonaws.qconnect#ListAIPrompts"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.qconnect#CreateAIPromptVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#DeleteAIPromptVersion"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ListAIPromptVersions"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "ai-prompt/{assistantId}/{aiPromptId}"
+                },
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptAPIFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ANTHROPIC_CLAUDE_MESSAGES",
+                        "name": "ANTHROPIC_CLAUDE_MESSAGES"
+                    },
+                    {
+                        "value": "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+                        "name": "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptData": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Prompt</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#AIPromptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateType": {
+                    "target": "com.amazonaws.qconnect#AIPromptTemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the prompt template for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>CLAUDE_3_HAIKU_20240307_V1</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "apiFormat": {
+                    "target": "com.amazonaws.qconnect#AIPromptAPIFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API format used for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIPromptTemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the prompt template for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Prompt was last modified.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the AI Prompt.</p>"
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Prompt. <code>SYSTEM</code> for a default AI Prompt created by Q in\n      Connect or <code>CUSTOMER</code> for an AI Prompt created by calling AI Prompt creation APIs.\n    </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI Prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data for the AI Prompt</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#AIPrompt"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "assistantArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#AIPromptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Prompt was last modified.</p>"
+                    }
+                },
+                "templateType": {
+                    "target": "com.amazonaws.qconnect#AIPromptTemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the prompt template for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>CLAUDE_3_HAIKU_20240307_V1</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "apiFormat": {
+                    "target": "com.amazonaws.qconnect#AIPromptAPIFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API format used for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Prompt. <code>SYSTEM</code> for a default AI Prompt created by Q in\n      Connect or <code>CUSTOMER</code> for an AI Prompt created by calling AI Prompt creation APIs.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the AI Prompt.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.qconnect#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the AI Prompt.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the AI Prompt.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.qconnect#AIPrompt"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIPromptSummary"
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptTemplateConfiguration": {
+            "type": "union",
+            "members": {
+                "textFullAIPromptEditTemplateConfiguration": {
+                    "target": "com.amazonaws.qconnect#TextFullAIPromptEditTemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a prompt template that supports full textual prompt configuration\n      using a YAML prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A typed union that specifies the configuration for a prompt template based on its\n      type.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptTemplateType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TEXT",
+                        "name": "TEXT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ANSWER_GENERATION",
+                        "name": "ANSWER_GENERATION"
+                    },
+                    {
+                        "value": "INTENT_LABELING_GENERATION",
+                        "name": "INTENT_LABELING_GENERATION"
+                    },
+                    {
+                        "value": "QUERY_REFORMULATION",
+                        "name": "QUERY_REFORMULATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptVersionSummariesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AIPromptVersionSummary"
+            }
+        },
+        "com.amazonaws.qconnect#AIPromptVersionSummary": {
+            "type": "structure",
+            "members": {
+                "aiPromptSummary": {
+                    "target": "com.amazonaws.qconnect#AIPromptSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date for the summary of the AI Prompt version.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number for this AI Prompt version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the AI Prompt version.</p>"
+            }
+        },
         "com.amazonaws.qconnect#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -34,13 +752,45 @@
                 "target": "com.amazonaws.qconnect#TagCondition"
             }
         },
+        "com.amazonaws.qconnect#AnswerRecommendationAIAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "intentLabelingGenerationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Prompt identifier for the Intent Labeling prompt used by the\n        <code>ANSWER_RECOMMENDATION</code> AI Agent.</p>"
+                    }
+                },
+                "queryReformulationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Prompt identifier for the Query Reformulation prompt used by the\n        <code>ANSWER_RECOMMENDATION</code> AI Agent.</p>"
+                    }
+                },
+                "answerGenerationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Prompt identifier for the Answer Generation prompt used by the\n        <code>ANSWER_RECOMMENDATION</code> AI Agent.</p>"
+                    }
+                },
+                "associationConfigurations": {
+                    "target": "com.amazonaws.qconnect#AssociationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association configurations for overriding behavior on this AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the <code>ANSWER_RECOMMENDATION</code> AI Agent type.</p>"
+            }
+        },
         "com.amazonaws.qconnect#AppIntegrationsConfiguration": {
             "type": "structure",
             "members": {
                 "appIntegrationArn": {
                     "target": "com.amazonaws.qconnect#GenericArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.</p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n            <code>objectFields</code> is not provided, including at least <code>id</code>,\n            <code>title</code>, <code>updated_at</code>, and <code>draft</code> as source fields.\n        </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index\">SharePoint</a>, your AppIntegrations DataIntegration must have a FileConfiguration,\n          including only file extensions that are among <code>docx</code>, <code>pdf</code>,\n            <code>html</code>, <code>htm</code>, and <code>txt</code>. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://aws.amazon.com/s3/\">Amazon S3</a>, the\n          ObjectConfiguration and FileConfiguration of your AppIntegrations DataIntegration must be null.\n          The <code>SourceURI</code> of your DataIntegration must use the following format:\n            <code>s3://your_s3_bucket_name</code>.</p>\n               <important>\n                  <p>The bucket policy of the corresponding S3 bucket must allow the Amazon Web Services\n            principal <code>app-integrations.amazonaws.com</code> to perform\n              <code>s3:ListBucket</code>, <code>s3:GetObject</code>, and\n              <code>s3:GetBucketLocation</code> against the bucket.</p>\n               </important>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.</p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n          objectFields is not provided, including at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code> as source fields. </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, your AppIntegrations DataIntegration must have an ObjectConfiguration if\n            <code>objectFields</code> is not provided, including at least <code>id</code>,\n            <code>title</code>, <code>updated_at</code>, and <code>draft</code> as source fields.\n        </p>\n            </li>\n            <li>\n               <p> For <a href=\"https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index\">SharePoint</a>, your AppIntegrations DataIntegration must have a FileConfiguration,\n          including only file extensions that are among <code>docx</code>, <code>pdf</code>,\n            <code>html</code>, <code>htm</code>, and <code>txt</code>. </p>\n            </li>\n            <li>\n               <p> For <a href=\"http://aws.amazon.com/s3/\">Amazon S3</a>, the\n          ObjectConfiguration and FileConfiguration of your AppIntegrations DataIntegration must be null.\n          The <code>SourceURI</code> of your DataIntegration must use the following format:\n            <code>s3://your_s3_bucket_name</code>.</p>\n               <important>\n                  <p>The bucket policy of the corresponding S3 bucket must allow the Amazon Web Services\n            principal <code>app-integrations.amazonaws.com</code> to perform\n              <code>s3:ListBucket</code>, <code>s3:GetObject</code>, and\n              <code>s3:GetBucketLocation</code> against the bucket.</p>\n               </important>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -94,10 +844,22 @@
                     "target": "com.amazonaws.qconnect#QueryAssistant"
                 },
                 {
+                    "target": "com.amazonaws.qconnect#RemoveAssistantAIAgent"
+                },
+                {
                     "target": "com.amazonaws.qconnect#SearchSessions"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#UpdateAssistantAIAgent"
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.qconnect#AIAgent"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#AIPrompt"
+                },
                 {
                     "target": "com.amazonaws.qconnect#AssistantAssociation"
                 },
@@ -395,6 +1157,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant capability. </p>"
                     }
+                },
+                "aiAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that is\n      set on the Amazon Q in Connect Assistant.</p>"
+                    }
                 }
             },
             "traits": {
@@ -519,6 +1287,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant capability. </p>"
                     }
+                },
+                "aiAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that is\n      set on the Amazon Q in Connect Assistant.</p>"
+                    }
                 }
             },
             "traits": {
@@ -536,6 +1310,52 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#AssociationConfiguration": {
+            "type": "structure",
+            "members": {
+                "associationId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the association for this Association Configuration.</p>"
+                    }
+                },
+                "associationType": {
+                    "target": "com.amazonaws.qconnect#AIAgentAssociationConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the association for this Association Configuration.</p>"
+                    }
+                },
+                "associationConfigurationData": {
+                    "target": "com.amazonaws.qconnect#AssociationConfigurationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the configuration for an Amazon Q in Connect Assistant Association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an Amazon Q in Connect Assistant Association.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AssociationConfigurationData": {
+            "type": "union",
+            "members": {
+                "knowledgeBaseAssociationConfigurationData": {
+                    "target": "com.amazonaws.qconnect#KnowledgeBaseAssociationConfigurationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the configuration for a <code>KNOWLEDGE_BASE</code> type Amazon Q in Connect Assistant\n      Association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A typed union of the data of the configuration for an Amazon Q in Connect Assistant\n      Association.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#AssociationConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#AssociationConfiguration"
+            }
+        },
         "com.amazonaws.qconnect#AssociationType": {
             "type": "string",
             "traits": {
@@ -545,6 +1365,37 @@
                         "name": "KNOWLEDGE_BASE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#BedrockFoundationModelConfigurationForParsing": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.qconnect#BedrockModelArnForParsing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the foundation model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parsingPrompt": {
+                    "target": "com.amazonaws.qconnect#ParsingPrompt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for interpreting the contents of a document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for a foundation model used to parse documents for a data source.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#BedrockModelArnForParsing": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/anthropic.claude-3-haiku-20240307-v1:0$"
             }
         },
         "com.amazonaws.qconnect#Channel": {
@@ -564,6 +1415,90 @@
             },
             "traits": {
                 "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.qconnect#ChunkingConfiguration": {
+            "type": "structure",
+            "members": {
+                "chunkingStrategy": {
+                    "target": "com.amazonaws.qconnect#ChunkingStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a\n      data source that is returned when the knowledge base that it belongs to is queried. You have\n      the following options for chunking your data. If you opt for <code>NONE</code>, then you may\n      want to pre-process your files by splitting them up such that each file corresponds to a\n      chunk.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fixedSizeChunkingConfiguration": {
+                    "target": "com.amazonaws.qconnect#FixedSizeChunkingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configurations for when you choose fixed-size chunking. If you set the\n        <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>"
+                    }
+                },
+                "hierarchicalChunkingConfiguration": {
+                    "target": "com.amazonaws.qconnect#HierarchicalChunkingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for hierarchical document chunking for a data source. Hierarchical chunking\n      splits documents into layers of chunks where the first layer contains large chunks, and the\n      second layer contains smaller chunks derived from the first layer.</p>"
+                    }
+                },
+                "semanticChunkingConfiguration": {
+                    "target": "com.amazonaws.qconnect#SemanticChunkingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits a\n      document into smaller documents based on groups of similar content derived from the text with\n      natural language processing.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about how to chunk the documents in the data source. A chunk refers to an excerpt\n      from a data source that is returned when the knowledge base that it belongs to is\n      queried.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ChunkingStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FIXED_SIZE",
+                        "name": "FIXED_SIZE"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "HIERARCHICAL",
+                        "name": "HIERARCHICAL"
+                    },
+                    {
+                        "value": "SEMANTIC",
+                        "name": "SEMANTIC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#CitationSpan": {
+            "type": "structure",
+            "members": {
+                "beginOffsetInclusive": {
+                    "target": "com.amazonaws.qconnect#CitationSpanOffset",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Where the text with a citation starts in the generated output.</p>"
+                    }
+                },
+                "endOffsetExclusive": {
+                    "target": "com.amazonaws.qconnect#CitationSpanOffset",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Where the text with a citation ends in the generated output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about where the text with a citation begins and ends in the generated\n      output.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#CitationSpanOffset": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.qconnect#ClientToken": {
@@ -1089,6 +2024,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the content.</p>"
                     }
+                },
+                "sourceURL": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The web URL of the source content.</p>"
+                    }
+                },
+                "referenceType": {
+                    "target": "com.amazonaws.qconnect#ReferenceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of reference content.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1241,6 +2188,443 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(text/(plain|html|csv))|(application/(pdf|vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document))|(application/x\\.wisdom-json;source=(salesforce|servicenow|zendesk))$"
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateAIAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateAIAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Agent.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIAgentRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#AIAgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIAgentResponse": {
+            "type": "structure",
+            "members": {
+                "aiAgent": {
+                    "target": "com.amazonaws.qconnect#AIAgentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the created AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIAgentVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateAIAgentVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateAIAgentVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates and Amazon Q in Connect AI Agent version.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents/{aiAgentId}/versions",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIAgentVersionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The modification time of the AI Agent should be tracked for version creation. This field\n      should be specified to avoid version creation when simultaneous update to the underlying AI\n      Agent are possible. The value should be the modifiedTime returned from the request to create\n      or update an AI Agent so that version creation can fail if an update to the AI Agent post the\n      specified modification time has been made.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIAgentVersionResponse": {
+            "type": "structure",
+            "members": {
+                "aiAgent": {
+                    "target": "com.amazonaws.qconnect#AIAgentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Agent version.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Agent version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIPrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateAIPromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateAIPromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Prompt.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIPromptRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.qconnect#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.qconnect#AIPromptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIPromptTemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the prompt template for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateType": {
+                    "target": "com.amazonaws.qconnect#AIPromptTemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the prompt template for this AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelId": {
+                    "target": "com.amazonaws.qconnect#AIPromptModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the model used for this AI Prompt. Model Ids supported are:\n        <code>CLAUDE_3_HAIKU_20240307_V1</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "apiFormat": {
+                    "target": "com.amazonaws.qconnect#AIPromptAPIFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API Format of the AI Prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.qconnect#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the AI Prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIPromptResponse": {
+            "type": "structure",
+            "members": {
+                "aiPrompt": {
+                    "target": "com.amazonaws.qconnect#AIPromptData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIPromptVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#CreateAIPromptVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#CreateAIPromptVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect AI Prompt version.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts/{aiPromptId}/versions",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIPromptVersionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "modifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the AI Prompt was last modified.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#CreateAIPromptVersionResponse": {
+            "type": "structure",
+            "members": {
+                "aiPrompt": {
+                    "target": "com.amazonaws.qconnect#AIPromptData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Prompt version.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Prompt version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#CreateAssistant": {
@@ -1477,7 +2861,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an association between a content resource in a knowledge base and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html\">step-by-step\n        guides</a>. Step-by-step guides offer instructions to agents for resolving common\n      customer issues. You create a content association to integrate Amazon Q in Connect and step-by-step\n      guides. </p>\n         <p>After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a\n      recommendation to an agent based on the intent that it's detected, it also provides them with\n      the option to start the step-by-step guide that you have associated with the content.</p>\n         <p>Note the following limitations:</p>\n         <ul>\n            <li>\n               <p>You can create only one content association for each\n        content resource in a knowledge base.</p>\n            </li>\n            <li>\n               <p>You can associate a step-by-step guide with multiple content resources.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html\">Integrate Amazon Q in Connect with\n        step-by-step guides</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Creates an association between a content resource in a knowledge base and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html\">step-by-step guides</a>. Step-by-step guides offer instructions to agents for resolving\n      common customer issues. You create a content association to integrate Amazon Q in Connect and\n      step-by-step guides. </p>\n         <p>After you integrate Amazon Q and step-by-step guides, when Amazon Q provides a\n      recommendation to an agent based on the intent that it's detected, it also provides them with\n      the option to start the step-by-step guide that you have associated with the content.</p>\n         <p>Note the following limitations:</p>\n         <ul>\n            <li>\n               <p>You can create only one content association for each content resource in a knowledge\n          base.</p>\n            </li>\n            <li>\n               <p>You can associate a step-by-step guide with multiple content resources.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html\">Integrate Amazon Q in Connect with\n        step-by-step guides</a> in the <i>Amazon Connect Administrator\n        Guide</i>. </p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/associations",
                     "method": "POST"
@@ -1683,6 +3067,12 @@
                     "target": "com.amazonaws.qconnect#RenderingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about how to render the content.</p>"
+                    }
+                },
+                "vectorIngestionConfiguration": {
+                    "target": "com.amazonaws.qconnect#VectorIngestionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about how to ingest the documents in a data source.</p>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
@@ -1922,6 +3312,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions. </p>"
                     }
+                },
+                "aiAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that\n      should be used by Amazon Q in Connect for this Session.</p>"
+                    }
                 }
             }
         },
@@ -1949,6 +3345,12 @@
                     "target": "com.amazonaws.qconnect#GenerativeDataDetails",
                     "traits": {
                         "smithy.api#documentation": "<p> Details about the generative data.</p>"
+                    }
+                },
+                "intentDetectedData": {
+                    "target": "com.amazonaws.qconnect#IntentDetectedDataDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the intent data.</p>"
                     }
                 },
                 "sourceContentData": {
@@ -2005,6 +3407,280 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#DataSummary"
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteAIAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteAIAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Q in Connect AI Agent.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents/{aiAgentId}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIAgentRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Agent. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIAgentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIAgentVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteAIAgentVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteAIAgentVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Q in Connect AI Agent Version.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents/{aiAgentId}/versions/{versionNumber}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIAgentVersionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Agent. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Agent version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIAgentVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIPrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteAIPromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteAIPromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon Q in Connect AI Prompt.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts/{aiPromptId}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIPromptRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIPromptResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIPromptVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#DeleteAIPromptVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#DeleteAIPromptVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete and Amazon Q in Connect AI Prompt version.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts/{aiPromptId}/versions/{versionNumber}",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIPromptVersionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Prompt version to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#DeleteAIPromptVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#DeleteAssistant": {
@@ -2491,6 +4167,12 @@
                 "smithy.api#documentation": "<p>The configuration information of the external data source.</p>"
             }
         },
+        "com.amazonaws.qconnect#FailureReason": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#NonEmptyString"
+            }
+        },
         "com.amazonaws.qconnect#Filter": {
             "type": "structure",
             "members": {
@@ -2546,6 +4228,35 @@
                         "name": "EQUALS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.qconnect#FixedSizeChunkingConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens to include in a chunk.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "overlapPercentage": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of overlap between adjacent chunks of a data source.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 99
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configurations for when you choose fixed-size chunking. If you set the\n        <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>"
             }
         },
         "com.amazonaws.qconnect#GenerativeContentFeedbackData": {
@@ -2620,6 +4331,156 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:[a-z-]+?:[a-z-]+?:[a-z0-9-]*?:([0-9]{12})?:[a-zA-Z0-9-:/]+$"
+            }
+        },
+        "com.amazonaws.qconnect#GetAIAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#GetAIAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#GetAIAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets an Amazon Q in Connect AI Agent.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents/{aiAgentId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIAgentRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Agent (with or without a version qualifier).\n      Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIAgentResponse": {
+            "type": "structure",
+            "members": {
+                "aiAgent": {
+                    "target": "com.amazonaws.qconnect#AIAgentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Agent.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Agent version (returned if an AI Agent version was specified\n      via use of a qualifier for the <code>aiAgentId</code> on the request). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIPrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#GetAIPromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#GetAIPromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets and Amazon Q in Connect AI Prompt.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts/{aiPromptId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIPromptRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#GetAIPromptResponse": {
+            "type": "structure",
+            "members": {
+                "aiPrompt": {
+                    "target": "com.amazonaws.qconnect#AIPromptData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the AI Prompt.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "com.amazonaws.qconnect#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the AI Prompt version (returned if an AI Prompt version was\n      specified via use of a qualifier for the <code>aiPromptId</code> on the request). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#GetAssistant": {
@@ -3315,6 +5176,62 @@
                 "target": "com.amazonaws.qconnect#NonEmptyString"
             }
         },
+        "com.amazonaws.qconnect#HierarchicalChunkingConfiguration": {
+            "type": "structure",
+            "members": {
+                "levelConfigurations": {
+                    "target": "com.amazonaws.qconnect#HierarchicalChunkingLevelConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token settings for each layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "overlapTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of tokens to repeat across chunks in the same layer.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for hierarchical document chunking for a data source. Hierarchical chunking\n      splits documents into layers of chunks where the first layer contains large chunks, and the\n      second layer contains smaller chunks derived from the first layer.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#HierarchicalChunkingLevelConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens that a chunk can contain in this layer.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 8192
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Token settings for each layer.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#HierarchicalChunkingLevelConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#HierarchicalChunkingLevelConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.qconnect#Highlight": {
             "type": "structure",
             "members": {
@@ -3571,6 +5488,43 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#IntentDetectedDataDetails": {
+            "type": "structure",
+            "members": {
+                "intent": {
+                    "target": "com.amazonaws.qconnect#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detected intent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "intentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the detected intent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the detected intent.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#IntentInputData": {
+            "type": "structure",
+            "members": {
+                "intentId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q intent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Amazon Q intent.</p>"
+            }
+        },
         "com.amazonaws.qconnect#KnowledgeBase": {
             "type": "resource",
             "identifiers": {
@@ -3633,6 +5587,29 @@
                 },
                 "aws.cloudformation#cfnResource": {},
                 "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.qconnect#KnowledgeBaseAssociationConfigurationData": {
+            "type": "structure",
+            "members": {
+                "contentTagFilter": {
+                    "target": "com.amazonaws.qconnect#TagFilter"
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "overrideKnowledgeBaseSearchType": {
+                    "target": "com.amazonaws.qconnect#KnowledgeBaseSearchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search type to be used against the Knowledge Base for this request. The values can be\n        <code>SEMANTIC</code> which uses vector embeddings or <code>HYBRID</code> which use vector\n      embeddings and raw text</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data of the configuration for a <code>KNOWLEDGE_BASE</code> type Amazon Q in Connect\n      Assistant Association.</p>"
             }
         },
         "com.amazonaws.qconnect#KnowledgeBaseAssociationData": {
@@ -3700,6 +5677,12 @@
                         "smithy.api#timestampFormat": "epoch-seconds"
                     }
                 },
+                "vectorIngestionConfiguration": {
+                    "target": "com.amazonaws.qconnect#VectorIngestionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about how to ingest the documents in a data source.</p>"
+                    }
+                },
                 "sourceConfiguration": {
                     "target": "com.amazonaws.qconnect#SourceConfiguration",
                     "traits": {
@@ -3729,6 +5712,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
                     }
+                },
+                "ingestionStatus": {
+                    "target": "com.amazonaws.qconnect#SyncStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of ingestion on data source.</p>"
+                    }
+                },
+                "ingestionFailureReasons": {
+                    "target": "com.amazonaws.qconnect#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of failure reasons on ingestion per file.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3744,6 +5739,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#KnowledgeBaseSummary"
+            }
+        },
+        "com.amazonaws.qconnect#KnowledgeBaseSearchType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HYBRID",
+                        "name": "HYBRID"
+                    },
+                    {
+                        "value": "SEMANTIC",
+                        "name": "SEMANTIC"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#KnowledgeBaseStatus": {
@@ -3821,6 +5831,12 @@
                         "smithy.api#documentation": "<p>Configuration information about the external data source.</p>"
                     }
                 },
+                "vectorIngestionConfiguration": {
+                    "target": "com.amazonaws.qconnect#VectorIngestionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about how to ingest the documents in a data source.</p>"
+                    }
+                },
                 "renderingConfiguration": {
                     "target": "com.amazonaws.qconnect#RenderingConfiguration",
                     "traits": {
@@ -3870,6 +5886,14 @@
                     {
                         "value": "QUICK_RESPONSES",
                         "name": "QUICK_RESPONSES"
+                    },
+                    {
+                        "value": "MESSAGE_TEMPLATES",
+                        "name": "MESSAGE_TEMPLATES"
+                    },
+                    {
+                        "value": "MANAGED",
+                        "name": "MANAGED"
                     }
                 ]
             }
@@ -3881,6 +5905,402 @@
                     "min": 2,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.qconnect#ListAIAgentVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListAIAgentVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListAIAgentVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List AI Agent versions.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents/{aiAgentId}/versions",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "aiAgentVersionSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIAgentVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Agent for which versions are to be\n      listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Agent versions to be listed. <code>SYSTEM</code> for a default AI\n      Agent created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI\n      Agent creation APIs. </p>",
+                        "smithy.api#httpQuery": "origin"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIAgentVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "aiAgentVersionSummaries": {
+                    "target": "com.amazonaws.qconnect#AIAgentVersionSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of AI Agent versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIAgents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListAIAgentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListAIAgentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists AI Agents.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "aiAgentSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIAgentsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Agents to be listed. <code>SYSTEM</code> for a default AI Agent\n      created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent\n      creation APIs. </p>",
+                        "smithy.api#httpQuery": "origin"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIAgentsResponse": {
+            "type": "structure",
+            "members": {
+                "aiAgentSummaries": {
+                    "target": "com.amazonaws.qconnect#AIAgentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of AI Agents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIPromptVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListAIPromptVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListAIPromptVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists AI Prompt versions.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts/{aiPromptId}/versions",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "aiPromptVersionSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIPromptVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI prompt for which versions are to be\n      listed.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Prompt versions to be listed. <code>SYSTEM</code> for a default AI\n      Agent created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI\n      Agent creation APIs. </p>",
+                        "smithy.api#httpQuery": "origin"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIPromptVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "aiPromptVersionSummaries": {
+                    "target": "com.amazonaws.qconnect#AIPromptVersionSummariesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of the AI Prompt versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIPrompts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#ListAIPromptsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#ListAIPromptsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the AI Prompts available on the Amazon Q in Connect assistant.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "aiPromptSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIPromptsRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.qconnect#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "origin": {
+                    "target": "com.amazonaws.qconnect#Origin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the AI Prompts to be listed. <code>SYSTEM</code> for a default AI Agent\n      created by Q in Connect or <code>CUSTOMER</code> for an AI Agent created by calling AI Agent\n      creation APIs. </p>",
+                        "smithy.api#httpQuery": "origin"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#ListAIPromptsResponse": {
+            "type": "structure",
+            "members": {
+                "aiPromptSummaries": {
+                    "target": "com.amazonaws.qconnect#AIPromptSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summaries of the AI Prompts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.qconnect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in\n      the next request to retrieve the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#ListAssistantAssociations": {
@@ -4492,6 +6912,40 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#ManagedSourceConfiguration": {
+            "type": "union",
+            "members": {
+                "webCrawlerConfiguration": {
+                    "target": "com.amazonaws.qconnect#WebCrawlerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration data for web crawler data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Source configuration for managed resources.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ManualSearchAIAgentConfiguration": {
+            "type": "structure",
+            "members": {
+                "answerGenerationAIPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI Prompt identifier for the Answer Generation prompt used by the MANUAL_SEARCH AI\n      Agent.</p>"
+                    }
+                },
+                "associationConfigurations": {
+                    "target": "com.amazonaws.qconnect#AssociationConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association configurations for overriding behavior on this AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the <code>MANUAL_SEARCH</code> AI Agent type.</p>"
+            }
+        },
         "com.amazonaws.qconnect#MaxResults": {
             "type": "integer",
             "traits": {
@@ -4518,6 +6972,16 @@
                     "min": 1,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.qconnect#NonEmptySensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.qconnect#NonEmptyString": {
@@ -4680,6 +7144,77 @@
                     {
                         "value": "DESC",
                         "name": "DESC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#Origin": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SYSTEM",
+                        "name": "SYSTEM"
+                    },
+                    {
+                        "value": "CUSTOMER",
+                        "name": "CUSTOMER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#ParsingConfiguration": {
+            "type": "structure",
+            "members": {
+                "parsingStrategy": {
+                    "target": "com.amazonaws.qconnect#ParsingStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parsing strategy for the data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "bedrockFoundationModelConfiguration": {
+                    "target": "com.amazonaws.qconnect#BedrockFoundationModelConfigurationForParsing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings for a foundation model used to parse documents for a data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for parsing document contents. By default, the service converts the contents of\n      each document into text before splitting it into chunks. To improve processing of PDF files\n      with tables and images, you can configure the data source to convert the pages of text into\n      images and use a model to describe the contents of each page.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ParsingPrompt": {
+            "type": "structure",
+            "members": {
+                "parsingPromptText": {
+                    "target": "com.amazonaws.qconnect#ParsingPromptText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for interpreting the contents of a document.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Instructions for interpreting the contents of a document.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#ParsingPromptText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.qconnect#ParsingStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BEDROCK_FOUNDATION_MODEL",
+                        "name": "BEDROCK_FOUNDATION_MODEL"
                     }
                 ]
             }
@@ -4881,8 +7416,7 @@
                 "queryText": {
                     "target": "com.amazonaws.qconnect#QueryText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text to search for.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The text to search for.</p>"
                     }
                 },
                 "nextToken": {
@@ -4907,6 +7441,18 @@
                     "target": "com.amazonaws.qconnect#QueryConditionExpression",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about how to query content.</p>"
+                    }
+                },
+                "queryInputData": {
+                    "target": "com.amazonaws.qconnect#QueryInputData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the query.</p>"
+                    }
+                },
+                "overrideKnowledgeBaseSearchType": {
+                    "target": "com.amazonaws.qconnect#KnowledgeBaseSearchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search type to be used against the Knowledge Base for this request. The values can be\n        <code>SEMANTIC</code> which uses vector embeddings or <code>HYBRID</code> which use vector\n      embeddings and raw text.</p>"
                     }
                 }
             }
@@ -5006,6 +7552,26 @@
                 "smithy.api#documentation": "<p>The condition for the query.</p>"
             }
         },
+        "com.amazonaws.qconnect#QueryInputData": {
+            "type": "union",
+            "members": {
+                "queryTextInputData": {
+                    "target": "com.amazonaws.qconnect#QueryTextInputData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input information for the query.</p>"
+                    }
+                },
+                "intentInputData": {
+                    "target": "com.amazonaws.qconnect#IntentInputData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input information for the intent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input information for the query.</p>"
+            }
+        },
         "com.amazonaws.qconnect#QueryRecommendationTriggerData": {
             "type": "structure",
             "members": {
@@ -5029,6 +7595,10 @@
                         "name": "KNOWLEDGE_CONTENT"
                     },
                     {
+                        "value": "INTENT_ANSWER",
+                        "name": "INTENT_ANSWER"
+                    },
+                    {
                         "value": "GENERATIVE_ANSWER",
                         "name": "GENERATIVE_ANSWER"
                     }
@@ -5045,9 +7615,24 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "max": 1024
+                    "max": 512
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#QueryTextInputData": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.qconnect#QueryText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text to search for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the text to search for.</p>"
             }
         },
         "com.amazonaws.qconnect#QuickResponse": {
@@ -6030,6 +8615,25 @@
                     {
                         "value": "GENERATIVE_ANSWER",
                         "name": "GENERATIVE_ANSWER"
+                    },
+                    {
+                        "value": "DETECTED_INTENT",
+                        "name": "DETECTED_INTENT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#ReferenceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WEB_CRAWLER",
+                        "name": "WEB_CRAWLER"
+                    },
+                    {
+                        "value": "KNOWLEDGE_BASE",
+                        "name": "KNOWLEDGE_BASE"
                     }
                 ]
             }
@@ -6075,6 +8679,69 @@
                 "smithy.api#range": {
                     "min": 0.0
                 }
+            }
+        },
+        "com.amazonaws.qconnect#RemoveAssistantAIAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#RemoveAssistantAIAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#RemoveAssistantAIAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the AI Agent that is set for use by defafult on an Amazon Q in Connect\n      Assistant.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagentConfiguration",
+                    "method": "DELETE",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#RemoveAssistantAIAgentRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentType": {
+                    "target": "com.amazonaws.qconnect#AIAgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI Agent being removed for use by default from the Amazon Q in Connect\n      Assistant.</p>",
+                        "smithy.api#httpQuery": "aiAgentType",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#RemoveAssistantAIAgentResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qconnect#RemoveKnowledgeBaseTemplateUri": {
@@ -6207,6 +8874,54 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the result.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#RuntimeSessionData": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the data stored on the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.qconnect#RuntimeSessionDataValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the data stored on the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of key-value pairs that are stored on the session.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#RuntimeSessionDataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#RuntimeSessionData"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.qconnect#RuntimeSessionDataValue": {
+            "type": "union",
+            "members": {
+                "stringValue": {
+                    "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string value of the data stored on the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A union type that specifies the data stored on the session.</p>"
             }
         },
         "com.amazonaws.qconnect#SearchContent": {
@@ -6497,6 +9212,72 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#SeedUrl": {
+            "type": "structure",
+            "members": {
+                "url": {
+                    "target": "com.amazonaws.qconnect#WebUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URL for crawling</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A URL for crawling.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SeedUrls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#SeedUrl"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.qconnect#SemanticChunkingConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxTokens": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens that a chunk can contain.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "bufferSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buffer size.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "breakpointPercentileThreshold": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dissimilarity threshold for splitting chunks.</p>",
+                        "smithy.api#range": {
+                            "min": 50,
+                            "max": 99
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Settings for semantic document chunking for a data source. Semantic chunking splits a\n      document into smaller documents based on groups of similar content derived from the text with\n      natural language processing.</p>"
+            }
+        },
         "com.amazonaws.qconnect#SensitiveString": {
             "type": "string",
             "traits": {
@@ -6549,6 +9330,11 @@
             "update": {
                 "target": "com.amazonaws.qconnect#UpdateSession"
             },
+            "operations": [
+                {
+                    "target": "com.amazonaws.qconnect#UpdateSessionData"
+                }
+            ],
             "traits": {
                 "aws.api#arn": {
                     "template": "session/{assistantId}/{sessionId}"
@@ -6603,10 +9389,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions.</p>"
                     }
+                },
+                "aiAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that\n      should be used by Amazon Q in Connect for this Session.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the session.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SessionDataNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Custom",
+                        "name": "Custom"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#SessionIntegrationConfiguration": {
@@ -6682,6 +9485,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration information for Amazon AppIntegrations to automatically ingest content.</p>"
                     }
+                },
+                "managedSourceConfiguration": {
+                    "target": "com.amazonaws.qconnect#ManagedSourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source configuration for managed resources.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6717,6 +9526,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the source content ranking data.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "citationSpan": {
+                    "target": "com.amazonaws.qconnect#CitationSpan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about where the text with a citation begins and ends in the generated output.</p>"
                     }
                 }
             },
@@ -6919,6 +9734,60 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.qconnect#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_IN_PROGRESS",
+                        "name": "CREATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETE_IN_PROGRESS",
+                        "name": "DELETE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#SyncStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SYNC_FAILED",
+                        "name": "SYNC_FAILED"
+                    },
+                    {
+                        "value": "SYNCING_IN_PROGRESS",
+                        "name": "SYNCING_IN_PROGRESS"
+                    },
+                    {
+                        "value": "SYNC_SUCCESS",
+                        "name": "SYNC_SUCCESS"
+                    },
+                    {
+                        "value": "CREATE_IN_PROGRESS",
+                        "name": "CREATE_IN_PROGRESS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#TagCondition": {
             "type": "structure",
             "members": {
@@ -7070,6 +9939,16 @@
                 ]
             }
         },
+        "com.amazonaws.qconnect#TextAIPrompt": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.qconnect#TextData": {
             "type": "structure",
             "members": {
@@ -7082,6 +9961,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about the source content text data.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#TextFullAIPromptEditTemplateConfiguration": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.qconnect#TextAIPrompt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The YAML text for the AI Prompt template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a prompt template that supports full textual prompt configuration\n      using a YAML prompt.</p>"
             }
         },
         "com.amazonaws.qconnect#ThrottlingException": {
@@ -7173,6 +10067,273 @@
         "com.amazonaws.qconnect#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.qconnect#UpdateAIAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateAIAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateAIAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an AI Agent.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagents/{aiAgentId}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIAgentRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visbility status of the Amazon Q in Connect AI Agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the Amazon Q in Connect AI Agent.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the Amazon Q in Connect AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIAgentResponse": {
+            "type": "structure",
+            "members": {
+                "aiAgent": {
+                    "target": "com.amazonaws.qconnect#AIAgentData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the updated Amazon Q in Connect AI Agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIPrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateAIPromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateAIPromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an AI Prompt.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiprompts/{aiPromptId}",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIPromptRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.qconnect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n      request. If not provided, the AWS SDK populates this field. For more information about\n      idempotency, see <a href=\"http://aws.amazon.com/https:/aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiPromptId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect AI Prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "visibilityStatus": {
+                    "target": "com.amazonaws.qconnect#VisibilityStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility status of the Amazon Q in Connect AI prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIPromptTemplateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the prompt template for this AI Prompt.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the Amazon Q in Connect AI Prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAIPromptResponse": {
+            "type": "structure",
+            "members": {
+                "aiPrompt": {
+                    "target": "com.amazonaws.qconnect#AIPromptData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data of the updated Amazon Q in Connect AI Prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAssistantAIAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateAssistantAIAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateAssistantAIAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the AI Agent that is set for use by defafult on an Amazon Q in Connect\n      Assistant.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/aiagentConfiguration",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAssistantAIAgentRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "aiAgentType": {
+                    "target": "com.amazonaws.qconnect#AIAgentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AI Agent being updated for use by default on the Amazon Q in Connect\n      Assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configuration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfigurationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agent being updated for use by default on the Amazon Q in\n      Connect Assistant.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateAssistantAIAgentResponse": {
+            "type": "structure",
+            "members": {
+                "assistant": {
+                    "target": "com.amazonaws.qconnect#AssistantData"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.qconnect#UpdateContent": {
             "type": "operation",
@@ -7500,6 +10661,106 @@
                 }
             }
         },
+        "com.amazonaws.qconnect#UpdateSessionData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateSessionDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateSessionDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the data stored on an Amazon Q in Connect Session.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/sessions/{sessionId}/data",
+                    "method": "PATCH"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#UpdateSessionDataRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs\n      cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session. Can be either the ID or the ARN. URLs cannot contain the\n      ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.qconnect#SessionDataNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace into which the session data is stored. Supported namespaces are:\n      Custom</p>"
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.qconnect#RuntimeSessionDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data stored on the Amazon Q in Connect Session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateSessionDataResponse": {
+            "type": "structure",
+            "members": {
+                "sessionArn": {
+                    "target": "com.amazonaws.qconnect#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qconnect#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.qconnect#SessionDataNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace into which the session data is stored. Supported namespaces are:\n      Custom</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.qconnect#RuntimeSessionDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data stored in the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.qconnect#UpdateSessionRequest": {
             "type": "structure",
             "members": {
@@ -7529,6 +10790,12 @@
                     "target": "com.amazonaws.qconnect#TagFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions.</p>"
+                    }
+                },
+                "aiAgentConfiguration": {
+                    "target": "com.amazonaws.qconnect#AIAgentConfigurationMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the AI Agents (mapped by AI Agent Type to AI Agent version) that\n      should be used by Amazon Q in Connect for this Session.</p>"
                     }
                 }
             },
@@ -7575,6 +10842,43 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.qconnect#UrlConfiguration": {
+            "type": "structure",
+            "members": {
+                "seedUrls": {
+                    "target": "com.amazonaws.qconnect#SeedUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of URLs for crawling.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of the URL/URLs for the web content that you want to crawl. You should\n      be authorized to crawl the URLs.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#UrlFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#UrlFilterPattern"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#UrlFilterPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.qconnect#Uuid": {
             "type": "string",
             "traits": {
@@ -7585,6 +10889,18 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$"
+            }
+        },
+        "com.amazonaws.qconnect#UuidOrArnOrEitherWithQualifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$"
+            }
+        },
+        "com.amazonaws.qconnect#UuidWithQualifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$"
             }
         },
         "com.amazonaws.qconnect#ValidationException": {
@@ -7600,6 +10916,49 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.qconnect#VectorIngestionConfiguration": {
+            "type": "structure",
+            "members": {
+                "chunkingConfiguration": {
+                    "target": "com.amazonaws.qconnect#ChunkingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about how to chunk the documents in the data source. A chunk refers to an excerpt\n      from a data source that is returned when the knowledge base that it belongs to is\n      queried.</p>"
+                    }
+                },
+                "parsingConfiguration": {
+                    "target": "com.amazonaws.qconnect#ParsingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom parser for data source documents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about how to ingest the documents in a data source.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#Version": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.qconnect#VisibilityStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SAVED",
+                        "name": "SAVED"
+                    },
+                    {
+                        "value": "PUBLISHED",
+                        "name": "PUBLISHED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#WaitTimeSeconds": {
             "type": "integer",
             "traits": {
@@ -7608,6 +10967,84 @@
                     "min": 0,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.qconnect#WebCrawlerConfiguration": {
+            "type": "structure",
+            "members": {
+                "urlConfiguration": {
+                    "target": "com.amazonaws.qconnect#UrlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the URL/URLs for the web content that you want to crawl. You should\n      be authorized to crawl the URLs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "crawlerLimits": {
+                    "target": "com.amazonaws.qconnect#WebCrawlerLimits",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of crawl limits for the web URLs.</p>"
+                    }
+                },
+                "inclusionFilters": {
+                    "target": "com.amazonaws.qconnect#UrlFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more inclusion regular expression patterns to include certain URLs. If\n      you specify an inclusion and exclusion filter/pattern and both match a URL, the exclusion\n      filter takes precedence and the web content of the URL isn’t crawled.</p>"
+                    }
+                },
+                "exclusionFilters": {
+                    "target": "com.amazonaws.qconnect#UrlFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more exclusion regular expression patterns to exclude certain URLs. If\n      you specify an inclusion and exclusion filter/pattern and both match a URL, the exclusion\n      filter takes precedence and the web content of the URL isn’t crawled.</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.qconnect#WebScopeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of what is crawled for your URLs. You can choose to crawl only web pages that\n      belong to the same host or primary domain. For example, only web pages that contain the seed\n      URL <code>https://docs.aws.amazon.com/bedrock/latest/userguide/</code> and no other domains.\n      You can choose to include sub domains in addition to the host or primary domain. For example,\n      web pages that contain <code>aws.amazon.com</code> can also include sub domain\n        <code>docs.aws.amazon.com</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration details for the web data source.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#WebCrawlerLimits": {
+            "type": "structure",
+            "members": {
+                "rateLimit": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rate of web URLs retrieved per minute.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 300
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of crawl limits for the web URLs.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#WebScopeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HOST_ONLY",
+                        "name": "HOST_ONLY"
+                    },
+                    {
+                        "value": "SUBDOMAINS",
+                        "name": "SUBDOMAINS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.qconnect#WebUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^https?://[A-Za-z0-9][^\\s]*$"
             }
         },
         "com.amazonaws.qconnect#WisdomService": {
@@ -7643,7 +11080,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<note>\n            <p>\n               <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html\">automated abuse\n          detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full advantage of\n        the controls implemented in Amazon Bedrock to enforce safety, security, and the responsible use of\n        artificial intelligence (AI).</p>\n         </note>\n         <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced\n      evolution of Amazon Connect Wisdom that delivers real-time recommendations to help contact\n      center agents resolve customer issues quickly and accurately.</p>\n         <p>Amazon Q in Connect automatically detects customer intent during calls and chats using conversational\n      analytics and natural language understanding (NLU). It then provides agents with immediate,\n      real-time generative responses and suggested actions, and links to relevant documents and\n      articles. Agents can also query Amazon Q in Connect directly using natural language or keywords to answer\n      customer requests.</p>\n         <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or\n      manage content by uploading custom files.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI\n        powered agent assistance in real-time</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Q_Connect.html\">Amazon Q\n            actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Q_Connect.html\">Amazon Q data\n            types</a>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html\">automated abuse\n          detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full advantage of\n        the controls implemented in Amazon Bedrock to enforce safety, security, and the responsible use of\n        artificial intelligence (AI).</p>\n         </note>\n         <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced\n      evolution of Amazon Connect Wisdom that delivers real-time recommendations to help contact\n      center agents resolve customer issues quickly and accurately.</p>\n         <p>Amazon Q in Connect automatically detects customer intent during calls and chats using conversational\n      analytics and natural language understanding (NLU). It then provides agents with immediate,\n      real-time generative responses and suggested actions, and links to relevant documents and\n      articles. Agents can also query Amazon Q in Connect directly using natural language or keywords to answer\n      customer requests.</p>\n         <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or\n      manage content by uploading custom files.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI\n        powered agent assistance in real-time</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon Q Connect",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
