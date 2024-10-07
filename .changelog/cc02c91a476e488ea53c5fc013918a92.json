@@ -1,0 +1,8 @@
+{
+    "id": "cc02c91a-476e-488e-a53c-5fc013918a92",
+    "type": "bugfix",
+    "description": "Remove private metrics collection APIs. These APIs were annotated at the package level that they should not be used by callers and could be removed at any time. With the release of self-instrumented clients for SDK metrics, this internal code is obsolete.",
+    "modules": [
+        "."
+    ]
+}
