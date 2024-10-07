@@ -1829,9 +1829,7 @@ func awsRestjson1_serializeOpHttpBindingsSendApiAssetInput(v *SendApiAssetInput,
 	if v.RequestHeaders != nil {
 		hv := encoder.Headers("X-Amzn-Dataexchange-Header-")
 		for mapKey, mapVal := range v.RequestHeaders {
-			if len(mapVal) > 0 {
-				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
-			}
+			hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
 		}
 	}
 
