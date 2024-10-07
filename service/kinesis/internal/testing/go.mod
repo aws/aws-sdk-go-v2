@@ -3,17 +3,17 @@ module github.com/aws/aws-sdk-go-v2/service/kinesis/internal/testing
 go 1.21
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.32.0
+	github.com/aws/aws-sdk-go-v2 v1.32.1
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.6
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.5.0
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.0
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.5.1
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.32.1
 	github.com/aws/smithy-go v1.22.0
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.39 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.19 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.19 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.40 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.20 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.20 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 )
 

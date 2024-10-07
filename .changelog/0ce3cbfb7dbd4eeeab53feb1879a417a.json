@@ -1,8 +1,0 @@
-{
-    "id": "0ce3cbfb-7dbd-4eee-ab53-feb1879a417a",
-    "type": "documentation",
-    "description": "Documentation-only update for AWS Marketplace Reporting API.",
-    "modules": [
-        "service/marketplacereporting"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.65.1 (2024-10-07)
+
+* **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2024-10-04)
 
 * **Feature**: Add support for HTTP client metrics.

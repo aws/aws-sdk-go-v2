@@ -1,8 +1,0 @@
-{
-    "id": "7fbf9301-0477-4b91-a7b8-b1c09886f13a",
-    "type": "feature",
-    "description": "Add validation pattern to S3KeyPrefix on the EnableLogging API",
-    "modules": [
-        "service/redshift"
-    ]
-}
