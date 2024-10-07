@@ -70,6 +70,7 @@
         "api_op_ListFleetMembers.go",
         "api_op_ListFleets.go",
         "api_op_ListJobMembers.go",
+        "api_op_ListJobParameterDefinitions.go",
         "api_op_ListJobs.go",
         "api_op_ListLicenseEndpoints.go",
         "api_op_ListMeteredProducts.go",

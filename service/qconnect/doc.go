@@ -3,9 +3,12 @@
 // Package qconnect provides the API client, operations, and parameter types for
 // Amazon Q Connect.
 //
-//	Powered by Amazon Bedrock: Amazon Web Services implements [automated abuse detection]. Because Amazon Q
+// [Amazon Q actions]
 //
-// in Connect is built on Amazon Bedrock, users can take full advantage of the
+// [Amazon Q data types]
+//
+// Powered by Amazon Bedrock: Amazon Web Services implements [automated abuse detection]. Because Amazon Q in
+// Connect is built on Amazon Bedrock, users can take full advantage of the
 // controls implemented in Amazon Bedrock to enforce safety, security, and the
 // responsible use of artificial intelligence (AI).
 //
@@ -27,6 +30,7 @@
 // For more information, see [Use Amazon Q in Connect for generative AI powered agent assistance in real-time] in the Amazon Connect Administrator Guide.
 //
 // [Use Amazon Q in Connect for generative AI powered agent assistance in real-time]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html
-//
+// [Amazon Q actions]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Q_Connect.html
 // [automated abuse detection]: https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html
+// [Amazon Q data types]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Q_Connect.html
 package qconnect

@@ -42,6 +42,10 @@ type CreateSessionInput struct {
 	// This member is required.
 	Name *string
 
+	// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
+	// version) that should be used by Amazon Q in Connect for this Session.
+	AiAgentConfiguration map[string]types.AIAgentConfigurationData
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
 	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].

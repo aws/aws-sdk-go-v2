@@ -1,0 +1,8 @@
+{
+    "id": "f98a907d-f33a-4bca-859b-00951e803653",
+    "type": "feature",
+    "description": "This release adds support for the following capabilities: Configuration of the Gen AI system via AIAgent and AIPrompts. Integration support for Bedrock Knowledge Base.",
+    "modules": [
+        "service/qconnect"
+    ]
+}
