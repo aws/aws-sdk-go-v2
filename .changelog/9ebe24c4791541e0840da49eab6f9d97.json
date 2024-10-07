@@ -1,7 +1,7 @@
 {
     "id": "9ebe24c4-7915-41e0-840d-a49eab6f9d97",
     "type": "feature",
-    "description": "This feature adds new config fields to checksum-supported operations so user can switch on/off checksum workflow with those fields. The field RequestChecksumCalculation controls the request's checksum calculation and the field ResponseChecksumValidation controls the response's checksum validation. This feature also replaces the default MD5 checksum algorithm of checksum calculation with CRC32.",
+    "description": "Enable HTTP checksums in supported services by default. New config fields, RequestChecksumCalculation and ResponseChecksumValidation, allow the caller to opt-out of this new default behavior. This feature also replaces the default MD5 checksum with CRC32.",
     "modules": [
         ".",
         "config",

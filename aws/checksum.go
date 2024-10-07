@@ -7,12 +7,12 @@ const (
 	// RequestChecksumCalculationUnset is the unset value for RequestChecksumCalculation
 	RequestChecksumCalculationUnset RequestChecksumCalculation = iota
 
-	// RequestChecksumCalculationWhenSupported indicates request checksum should be calculated
-	// when the operation supports input checksums
+	// RequestChecksumCalculationWhenSupported indicates request checksum will be calculated
+	// if the operation supports input checksums
 	RequestChecksumCalculationWhenSupported
 
-	// RequestChecksumCalculationWhenRequired indicates request checksum should be calculated
-	// when user sets a checksum algorithm
+	// RequestChecksumCalculationWhenRequired indicates request checksum will be calculated
+	// if required by the operation or if user elects to set a checksum algorithm in request
 	RequestChecksumCalculationWhenRequired
 )
 
@@ -23,11 +23,11 @@ const (
 	// ResponseChecksumValidationUnset is the unset value for ResponseChecksumValidation
 	ResponseChecksumValidationUnset ResponseChecksumValidation = iota
 
-	// ResponseChecksumValidationWhenSupported indicates response checksum should be validated
-	// when the operation supports output checksums
+	// ResponseChecksumValidationWhenSupported indicates response checksum will be validated
+	// if the operation supports output checksums
 	ResponseChecksumValidationWhenSupported
 
-	// ResponseChecksumValidationWhenRequired indicates response checksum should be validated
-	// when user enables that in validation mode cfg
+	// ResponseChecksumValidationWhenRequired indicates response checksum will be validated
+	// if user sets the validation mode to ENABLED in request
 	ResponseChecksumValidationWhenRequired
 )
