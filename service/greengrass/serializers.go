@@ -260,7 +260,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateConnectorDefinitionInput(v *Creat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -364,7 +364,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateConnectorDefinitionVersionInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -465,7 +465,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateCoreDefinitionInput(v *CreateCore
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -569,7 +569,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateCoreDefinitionVersionInput(v *Cre
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -670,7 +670,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateDeploymentInput(v *CreateDeployme
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -779,7 +779,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateDeviceDefinitionInput(v *CreateDe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -883,7 +883,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateDeviceDefinitionVersionInput(v *C
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -984,7 +984,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateFunctionDefinitionInput(v *Create
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1088,7 +1088,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateFunctionDefinitionVersionInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1196,7 +1196,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateGroupInput(v *CreateGroupInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1289,7 +1289,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateGroupCertificateAuthorityInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1376,7 +1376,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateGroupVersionInput(v *CreateGroupV
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1505,7 +1505,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateLoggerDefinitionInput(v *CreateLo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1609,7 +1609,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateLoggerDefinitionVersionInput(v *C
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1710,7 +1710,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateResourceDefinitionInput(v *Create
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1814,7 +1814,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateResourceDefinitionVersionInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -1915,7 +1915,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateSoftwareUpdateJobInput(v *CreateS
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -2032,7 +2032,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateSubscriptionDefinitionInput(v *Cr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -2136,7 +2136,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateSubscriptionDefinitionVersionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -6297,7 +6297,7 @@ func awsRestjson1_serializeOpHttpBindingsResetDeploymentsInput(v *ResetDeploymen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}
@@ -6396,7 +6396,7 @@ func awsRestjson1_serializeOpHttpBindingsStartBulkDeploymentInput(v *StartBulkDe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AmznClientToken != nil && len(*v.AmznClientToken) > 0 {
+	if v.AmznClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.AmznClientToken)
 	}

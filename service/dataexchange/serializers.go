@@ -1797,22 +1797,22 @@ func awsRestjson1_serializeOpHttpBindingsSendApiAssetInput(v *SendApiAssetInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AssetId != nil && len(*v.AssetId) > 0 {
+	if v.AssetId != nil {
 		locationName := "X-Amzn-Dataexchange-Asset-Id"
 		encoder.SetHeader(locationName).String(*v.AssetId)
 	}
 
-	if v.DataSetId != nil && len(*v.DataSetId) > 0 {
+	if v.DataSetId != nil {
 		locationName := "X-Amzn-Dataexchange-Data-Set-Id"
 		encoder.SetHeader(locationName).String(*v.DataSetId)
 	}
 
-	if v.Method != nil && len(*v.Method) > 0 {
+	if v.Method != nil {
 		locationName := "X-Amzn-Dataexchange-Http-Method"
 		encoder.SetHeader(locationName).String(*v.Method)
 	}
 
-	if v.Path != nil && len(*v.Path) > 0 {
+	if v.Path != nil {
 		locationName := "X-Amzn-Dataexchange-Path"
 		encoder.SetHeader(locationName).String(*v.Path)
 	}
@@ -1833,7 +1833,7 @@ func awsRestjson1_serializeOpHttpBindingsSendApiAssetInput(v *SendApiAssetInput,
 		}
 	}
 
-	if v.RevisionId != nil && len(*v.RevisionId) > 0 {
+	if v.RevisionId != nil {
 		locationName := "X-Amzn-Dataexchange-Revision-Id"
 		encoder.SetHeader(locationName).String(*v.RevisionId)
 	}

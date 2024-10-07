@@ -97,7 +97,7 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 		encoder.SetHeader(locationName).String(string(v.LanguageCode))
 	}
 
-	if v.LanguageModelName != nil && len(*v.LanguageModelName) > 0 {
+	if v.LanguageModelName != nil {
 		locationName := "X-Amzn-Transcribe-Language-Model-Name"
 		encoder.SetHeader(locationName).String(*v.LanguageModelName)
 	}
@@ -117,12 +117,12 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 		encoder.SetHeader(locationName).String(string(v.PartialResultsStability))
 	}
 
-	if v.PiiEntityTypes != nil && len(*v.PiiEntityTypes) > 0 {
+	if v.PiiEntityTypes != nil {
 		locationName := "X-Amzn-Transcribe-Pii-Entity-Types"
 		encoder.SetHeader(locationName).String(*v.PiiEntityTypes)
 	}
 
-	if v.SessionId != nil && len(*v.SessionId) > 0 {
+	if v.SessionId != nil {
 		locationName := "X-Amzn-Transcribe-Session-Id"
 		encoder.SetHeader(locationName).String(*v.SessionId)
 	}
@@ -132,12 +132,12 @@ func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionIn
 		encoder.SetHeader(locationName).String(string(v.VocabularyFilterMethod))
 	}
 
-	if v.VocabularyFilterName != nil && len(*v.VocabularyFilterName) > 0 {
+	if v.VocabularyFilterName != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyFilterName)
 	}
 
-	if v.VocabularyName != nil && len(*v.VocabularyName) > 0 {
+	if v.VocabularyName != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyName)
 	}
@@ -236,7 +236,7 @@ func awsRestjson1_serializeOpHttpBindingsStartMedicalStreamTranscriptionInput(v 
 		encoder.SetHeader(locationName).Integer(*v.NumberOfChannels)
 	}
 
-	if v.SessionId != nil && len(*v.SessionId) > 0 {
+	if v.SessionId != nil {
 		locationName := "X-Amzn-Transcribe-Session-Id"
 		encoder.SetHeader(locationName).String(*v.SessionId)
 	}
@@ -256,7 +256,7 @@ func awsRestjson1_serializeOpHttpBindingsStartMedicalStreamTranscriptionInput(v 
 		encoder.SetHeader(locationName).String(string(v.Type))
 	}
 
-	if v.VocabularyName != nil && len(*v.VocabularyName) > 0 {
+	if v.VocabularyName != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyName)
 	}
@@ -360,12 +360,12 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).String(string(v.LanguageCode))
 	}
 
-	if v.LanguageModelName != nil && len(*v.LanguageModelName) > 0 {
+	if v.LanguageModelName != nil {
 		locationName := "X-Amzn-Transcribe-Language-Model-Name"
 		encoder.SetHeader(locationName).String(*v.LanguageModelName)
 	}
 
-	if v.LanguageOptions != nil && len(*v.LanguageOptions) > 0 {
+	if v.LanguageOptions != nil {
 		locationName := "X-Amzn-Transcribe-Language-Options"
 		encoder.SetHeader(locationName).String(*v.LanguageOptions)
 	}
@@ -390,7 +390,7 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).String(string(v.PartialResultsStability))
 	}
 
-	if v.PiiEntityTypes != nil && len(*v.PiiEntityTypes) > 0 {
+	if v.PiiEntityTypes != nil {
 		locationName := "X-Amzn-Transcribe-Pii-Entity-Types"
 		encoder.SetHeader(locationName).String(*v.PiiEntityTypes)
 	}
@@ -400,7 +400,7 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).String(string(v.PreferredLanguage))
 	}
 
-	if v.SessionId != nil && len(*v.SessionId) > 0 {
+	if v.SessionId != nil {
 		locationName := "X-Amzn-Transcribe-Session-Id"
 		encoder.SetHeader(locationName).String(*v.SessionId)
 	}
@@ -415,22 +415,22 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamTranscriptionInput(v *StartS
 		encoder.SetHeader(locationName).String(string(v.VocabularyFilterMethod))
 	}
 
-	if v.VocabularyFilterName != nil && len(*v.VocabularyFilterName) > 0 {
+	if v.VocabularyFilterName != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyFilterName)
 	}
 
-	if v.VocabularyFilterNames != nil && len(*v.VocabularyFilterNames) > 0 {
+	if v.VocabularyFilterNames != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Names"
 		encoder.SetHeader(locationName).String(*v.VocabularyFilterNames)
 	}
 
-	if v.VocabularyName != nil && len(*v.VocabularyName) > 0 {
+	if v.VocabularyName != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Name"
 		encoder.SetHeader(locationName).String(*v.VocabularyName)
 	}
 
-	if v.VocabularyNames != nil && len(*v.VocabularyNames) > 0 {
+	if v.VocabularyNames != nil {
 		locationName := "X-Amzn-Transcribe-Vocabulary-Names"
 		encoder.SetHeader(locationName).String(*v.VocabularyNames)
 	}

@@ -748,7 +748,7 @@ func awsRestxml_serializeOpHttpBindingsEndpointWithHostLabelHeaderOperationInput
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AccountId != nil && len(*v.AccountId) > 0 {
+	if v.AccountId != nil {
 		locationName := "X-Amz-Account-Id"
 		encoder.SetHeader(locationName).String(*v.AccountId)
 	}
@@ -1348,7 +1348,7 @@ func awsRestxml_serializeOpHttpBindingsHttpPayloadTraitsInput(v *HttpPayloadTrai
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil && len(*v.Foo) > 0 {
+	if v.Foo != nil {
 		locationName := "X-Foo"
 		encoder.SetHeader(locationName).String(*v.Foo)
 	}
@@ -1427,7 +1427,7 @@ func awsRestxml_serializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *Ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil && len(*v.Foo) > 0 {
+	if v.Foo != nil {
 		locationName := "X-Foo"
 		encoder.SetHeader(locationName).String(*v.Foo)
 	}
@@ -1982,7 +1982,7 @@ func awsRestxml_serializeOpHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeade
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil && len(*v.Foo) > 0 {
+	if v.Foo != nil {
 		locationName := "X-Foo"
 		encoder.SetHeader(locationName).String(*v.Foo)
 	}
@@ -2663,6 +2663,9 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 
 	if v.HeaderBooleanList != nil {
 		locationName := "X-Booleanlist"
+		if len(v.HeaderBooleanList) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.HeaderBooleanList {
 			{
 				encoder.AddHeader(locationName).Boolean(v.HeaderBooleanList[i])
@@ -2687,6 +2690,9 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 
 	if v.HeaderEnumList != nil {
 		locationName := "X-Enumlist"
+		if len(v.HeaderEnumList) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.HeaderEnumList {
 			if len(v.HeaderEnumList[i]) > 0 {
 				escaped := string(v.HeaderEnumList[i])
@@ -2716,6 +2722,9 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 
 	if v.HeaderIntegerList != nil {
 		locationName := "X-Integerlist"
+		if len(v.HeaderIntegerList) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.HeaderIntegerList {
 			{
 				encoder.AddHeader(locationName).Integer(v.HeaderIntegerList[i])
@@ -2733,13 +2742,16 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 		encoder.SetHeader(locationName).Short(*v.HeaderShort)
 	}
 
-	if v.HeaderString != nil && len(*v.HeaderString) > 0 {
+	if v.HeaderString != nil {
 		locationName := "X-String"
 		encoder.SetHeader(locationName).String(*v.HeaderString)
 	}
 
 	if v.HeaderStringList != nil {
 		locationName := "X-Stringlist"
+		if len(v.HeaderStringList) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.HeaderStringList {
 			if len(v.HeaderStringList[i]) > 0 {
 				escaped := v.HeaderStringList[i]
@@ -2754,6 +2766,9 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 
 	if v.HeaderStringSet != nil {
 		locationName := "X-Stringset"
+		if len(v.HeaderStringSet) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.HeaderStringSet {
 			if len(v.HeaderStringSet[i]) > 0 {
 				escaped := v.HeaderStringSet[i]
@@ -2768,6 +2783,9 @@ func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAn
 
 	if v.HeaderTimestampList != nil {
 		locationName := "X-Timestamplist"
+		if len(v.HeaderTimestampList) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.HeaderTimestampList {
 			{
 				encoder.AddHeader(locationName).String(smithytime.FormatHTTPDate(v.HeaderTimestampList[i]))
@@ -3064,18 +3082,21 @@ func awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersClientInput(v *NullAnd
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.A != nil && len(*v.A) > 0 {
+	if v.A != nil {
 		locationName := "X-A"
 		encoder.SetHeader(locationName).String(*v.A)
 	}
 
-	if v.B != nil && len(*v.B) > 0 {
+	if v.B != nil {
 		locationName := "X-B"
 		encoder.SetHeader(locationName).String(*v.B)
 	}
 
 	if v.C != nil {
 		locationName := "X-C"
+		if len(v.C) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.C {
 			if len(v.C[i]) > 0 {
 				escaped := v.C[i]
@@ -3150,18 +3171,21 @@ func awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersServerInput(v *NullAnd
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.A != nil && len(*v.A) > 0 {
+	if v.A != nil {
 		locationName := "X-A"
 		encoder.SetHeader(locationName).String(*v.A)
 	}
 
-	if v.B != nil && len(*v.B) > 0 {
+	if v.B != nil {
 		locationName := "X-B"
 		encoder.SetHeader(locationName).String(*v.B)
 	}
 
 	if v.C != nil {
 		locationName := "X-C"
+		if len(v.C) == 0 {
+			encoder.AddHeader(locationName).String("")
+		}
 		for i := range v.C {
 			if len(v.C[i]) > 0 {
 				escaped := v.C[i]
@@ -3323,7 +3347,7 @@ func awsRestxml_serializeOpHttpBindingsPutWithContentEncodingInput(v *PutWithCon
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Encoding != nil && len(*v.Encoding) > 0 {
+	if v.Encoding != nil {
 		locationName := "Content-Encoding"
 		encoder.SetHeader(locationName).String(*v.Encoding)
 	}
@@ -3734,7 +3758,7 @@ func awsRestxml_serializeOpHttpBindingsSimpleScalarPropertiesInput(v *SimpleScal
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil && len(*v.Foo) > 0 {
+	if v.Foo != nil {
 		locationName := "X-Foo"
 		encoder.SetHeader(locationName).String(*v.Foo)
 	}

@@ -86,7 +86,7 @@ func awsRestjson1_serializeOpHttpBindingsAddFacetToObjectInput(v *AddFacetToObje
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -192,7 +192,7 @@ func awsRestjson1_serializeOpHttpBindingsApplySchemaInput(v *ApplySchemaInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -282,7 +282,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachObjectInput(v *AttachObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -386,7 +386,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachPolicyInput(v *AttachPolicyInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -485,7 +485,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachToIndexInput(v *AttachToIndexInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -584,7 +584,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachTypedLinkInput(v *AttachTypedLink
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -702,7 +702,7 @@ func awsRestjson1_serializeOpHttpBindingsBatchReadInput(v *BatchReadInput, encod
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -794,7 +794,7 @@ func awsRestjson1_serializeOpHttpBindingsBatchWriteInput(v *BatchWriteInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -886,7 +886,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateDirectoryInput(v *CreateDirectory
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -976,7 +976,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateFacetInput(v *CreateFacetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -1083,7 +1083,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateIndexInput(v *CreateIndexInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -1192,7 +1192,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateObjectInput(v *CreateObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -1384,7 +1384,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateTypedLinkFacetInput(v *CreateType
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -1465,7 +1465,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDirectoryInput(v *DeleteDirectory
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -1543,7 +1543,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFacetInput(v *DeleteFacetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -1633,7 +1633,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -1714,7 +1714,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSchemaInput(v *DeleteSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -1792,7 +1792,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteTypedLinkFacetInput(v *DeleteType
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -1882,7 +1882,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachFromIndexInput(v *DetachFromIndex
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -1981,7 +1981,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachObjectInput(v *DetachObjectInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2078,7 +2078,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachPolicyInput(v *DetachPolicyInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2177,7 +2177,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachTypedLinkInput(v *DetachTypedLink
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2258,7 +2258,7 @@ func awsRestjson1_serializeOpHttpBindingsDisableDirectoryInput(v *DisableDirecto
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2325,7 +2325,7 @@ func awsRestjson1_serializeOpHttpBindingsEnableDirectoryInput(v *EnableDirectory
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2473,7 +2473,7 @@ func awsRestjson1_serializeOpHttpBindingsGetDirectoryInput(v *GetDirectoryInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2551,7 +2551,7 @@ func awsRestjson1_serializeOpHttpBindingsGetFacetInput(v *GetFacetInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -2641,7 +2641,7 @@ func awsRestjson1_serializeOpHttpBindingsGetLinkAttributesInput(v *GetLinkAttrib
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2750,7 +2750,7 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAt
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2861,7 +2861,7 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectInformationInput(v *GetObjectI
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -2942,7 +2942,7 @@ func awsRestjson1_serializeOpHttpBindingsGetSchemaAsJsonInput(v *GetSchemaAsJson
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -3020,7 +3020,7 @@ func awsRestjson1_serializeOpHttpBindingsGetTypedLinkFacetInformationInput(v *Ge
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -3211,7 +3211,7 @@ func awsRestjson1_serializeOpHttpBindingsListAttachedIndicesInput(v *ListAttache
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -3490,7 +3490,7 @@ func awsRestjson1_serializeOpHttpBindingsListFacetAttributesInput(v *ListFacetAt
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -3590,7 +3590,7 @@ func awsRestjson1_serializeOpHttpBindingsListFacetNamesInput(v *ListFacetNamesIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -3685,7 +3685,7 @@ func awsRestjson1_serializeOpHttpBindingsListIncomingTypedLinksInput(v *ListInco
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -3811,7 +3811,7 @@ func awsRestjson1_serializeOpHttpBindingsListIndexInput(v *ListIndexInput, encod
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4016,7 +4016,7 @@ func awsRestjson1_serializeOpHttpBindingsListObjectAttributesInput(v *ListObject
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4130,7 +4130,7 @@ func awsRestjson1_serializeOpHttpBindingsListObjectChildrenInput(v *ListObjectCh
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4232,7 +4232,7 @@ func awsRestjson1_serializeOpHttpBindingsListObjectParentPathsInput(v *ListObjec
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4339,7 +4339,7 @@ func awsRestjson1_serializeOpHttpBindingsListObjectParentsInput(v *ListObjectPar
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4451,7 +4451,7 @@ func awsRestjson1_serializeOpHttpBindingsListObjectPoliciesInput(v *ListObjectPo
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4553,7 +4553,7 @@ func awsRestjson1_serializeOpHttpBindingsListOutgoingTypedLinksInput(v *ListOutg
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4679,7 +4679,7 @@ func awsRestjson1_serializeOpHttpBindingsListPolicyAttachmentsInput(v *ListPolic
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -4963,7 +4963,7 @@ func awsRestjson1_serializeOpHttpBindingsListTypedLinkFacetAttributesInput(v *Li
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -5063,7 +5063,7 @@ func awsRestjson1_serializeOpHttpBindingsListTypedLinkFacetNamesInput(v *ListTyp
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -5158,7 +5158,7 @@ func awsRestjson1_serializeOpHttpBindingsLookupPolicyInput(v *LookupPolicyInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -5260,7 +5260,7 @@ func awsRestjson1_serializeOpHttpBindingsPublishSchemaInput(v *PublishSchemaInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DevelopmentSchemaArn != nil && len(*v.DevelopmentSchemaArn) > 0 {
+	if v.DevelopmentSchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DevelopmentSchemaArn)
 	}
@@ -5360,7 +5360,7 @@ func awsRestjson1_serializeOpHttpBindingsPutSchemaFromJsonInput(v *PutSchemaFrom
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -5450,7 +5450,7 @@ func awsRestjson1_serializeOpHttpBindingsRemoveFacetFromObjectInput(v *RemoveFac
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -5725,7 +5725,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFacetInput(v *UpdateFacetInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -5827,7 +5827,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLinkAttributesInput(v *UpdateLink
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -5926,7 +5926,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateObjectAttributesInput(v *UpdateOb
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.DirectoryArn != nil && len(*v.DirectoryArn) > 0 {
+	if v.DirectoryArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.DirectoryArn)
 	}
@@ -6025,7 +6025,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSchemaInput(v *UpdateSchemaInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}
@@ -6115,7 +6115,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateTypedLinkFacetInput(v *UpdateType
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SchemaArn != nil && len(*v.SchemaArn) > 0 {
+	if v.SchemaArn != nil {
 		locationName := "X-Amz-Data-Partition"
 		encoder.SetHeader(locationName).String(*v.SchemaArn)
 	}

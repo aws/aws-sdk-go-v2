@@ -850,7 +850,7 @@ func awsRestjson1_serializeOpHttpBindingsGetProfileInput(v *GetProfileInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
@@ -1368,7 +1368,7 @@ func awsRestjson1_serializeOpHttpBindingsPostAgentProfileInput(v *PostAgentProfi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}

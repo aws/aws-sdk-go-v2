@@ -3106,7 +3106,7 @@ func awsRestjson1_serializeOpHttpBindingsInvokeInput(v *InvokeInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientContext != nil && len(*v.ClientContext) > 0 {
+	if v.ClientContext != nil {
 		locationName := "X-Amz-Client-Context"
 		encoder.SetHeader(locationName).String(*v.ClientContext)
 	}
@@ -3291,7 +3291,7 @@ func awsRestjson1_serializeOpHttpBindingsInvokeWithResponseStreamInput(v *Invoke
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientContext != nil && len(*v.ClientContext) > 0 {
+	if v.ClientContext != nil {
 		locationName := "X-Amz-Client-Context"
 		encoder.SetHeader(locationName).String(*v.ClientContext)
 	}

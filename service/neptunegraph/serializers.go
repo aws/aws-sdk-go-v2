@@ -147,7 +147,7 @@ func awsRestjson1_serializeOpHttpBindingsCancelQueryInput(v *CancelQueryInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GraphIdentifier != nil && len(*v.GraphIdentifier) > 0 {
+	if v.GraphIdentifier != nil {
 		locationName := "Graphidentifier"
 		encoder.SetHeader(locationName).String(*v.GraphIdentifier)
 	}
@@ -938,7 +938,7 @@ func awsRestjson1_serializeOpHttpBindingsExecuteQueryInput(v *ExecuteQueryInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GraphIdentifier != nil && len(*v.GraphIdentifier) > 0 {
+	if v.GraphIdentifier != nil {
 		locationName := "Graphidentifier"
 		encoder.SetHeader(locationName).String(*v.GraphIdentifier)
 	}
@@ -1186,7 +1186,7 @@ func awsRestjson1_serializeOpHttpBindingsGetGraphSummaryInput(v *GetGraphSummary
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GraphIdentifier != nil && len(*v.GraphIdentifier) > 0 {
+	if v.GraphIdentifier != nil {
 		locationName := "Graphidentifier"
 		encoder.SetHeader(locationName).String(*v.GraphIdentifier)
 	}
@@ -1408,7 +1408,7 @@ func awsRestjson1_serializeOpHttpBindingsGetQueryInput(v *GetQueryInput, encoder
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GraphIdentifier != nil && len(*v.GraphIdentifier) > 0 {
+	if v.GraphIdentifier != nil {
 		locationName := "Graphidentifier"
 		encoder.SetHeader(locationName).String(*v.GraphIdentifier)
 	}
@@ -1777,7 +1777,7 @@ func awsRestjson1_serializeOpHttpBindingsListQueriesInput(v *ListQueriesInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GraphIdentifier != nil && len(*v.GraphIdentifier) > 0 {
+	if v.GraphIdentifier != nil {
 		locationName := "Graphidentifier"
 		encoder.SetHeader(locationName).String(*v.GraphIdentifier)
 	}

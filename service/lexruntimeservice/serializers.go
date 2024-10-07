@@ -270,12 +270,12 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
-	if v.ActiveContexts != nil && len(*v.ActiveContexts) > 0 {
+	if v.ActiveContexts != nil {
 		locationName := "X-Amz-Lex-Active-Contexts"
 		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.ActiveContexts))
 		encodedPtr := ptr.String(encodedVal)
@@ -300,19 +300,19 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 		}
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.RequestAttributes != nil && len(*v.RequestAttributes) > 0 {
+	if v.RequestAttributes != nil {
 		locationName := "X-Amz-Lex-Request-Attributes"
 		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.RequestAttributes))
 		encodedPtr := ptr.String(encodedVal)
 		encoder.SetHeader(locationName).String(*encodedPtr)
 	}
 
-	if v.SessionAttributes != nil && len(*v.SessionAttributes) > 0 {
+	if v.SessionAttributes != nil {
 		locationName := "X-Amz-Lex-Session-Attributes"
 		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.SessionAttributes))
 		encodedPtr := ptr.String(encodedVal)
@@ -534,7 +534,7 @@ func awsRestjson1_serializeOpHttpBindingsPutSessionInput(v *PutSessionInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}

@@ -95,7 +95,7 @@ func awsRestjson1_serializeOpHttpBindingsAssociateChannelFlowInput(v *AssociateC
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -194,7 +194,7 @@ func awsRestjson1_serializeOpHttpBindingsBatchCreateChannelMembershipInput(v *Ba
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -402,7 +402,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateChannelInput(v *CreateChannelInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -566,7 +566,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateChannelBanInput(v *CreateChannelB
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -770,7 +770,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateChannelMembershipInput(v *CreateC
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -879,7 +879,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateChannelModeratorInput(v *CreateCh
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -967,7 +967,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelInput(v *DeleteChannelInpu
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1043,7 +1043,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelBanInput(v *DeleteChannelB
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1199,7 +1199,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelMembershipInput(v *DeleteC
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1288,7 +1288,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelMessageInput(v *DeleteChan
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1386,7 +1386,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteChannelModeratorInput(v *DeleteCh
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1533,7 +1533,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelInput(v *DescribeChannel
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1609,7 +1609,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelBanInput(v *DescribeChan
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1765,7 +1765,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelMembershipInput(v *Descr
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1858,7 +1858,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelMembershipForAppInstance
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -1938,7 +1938,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelModeratedByAppInstanceUs
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2023,7 +2023,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeChannelModeratorInput(v *Descri
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2108,7 +2108,7 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateChannelFlowInput(v *Disasso
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2184,7 +2184,7 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelMembershipPreferencesInput(v 
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2269,7 +2269,7 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelMessageInput(v *GetChannelMes
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2358,7 +2358,7 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelMessageStatusInput(v *GetChan
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2576,7 +2576,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelBansInput(v *ListChannelBans
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2734,7 +2734,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelMembershipsInput(v *ListChan
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2821,7 +2821,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelMembershipsForAppInstanceUse
 		encoder.SetQuery("app-instance-user-arn").String(*v.AppInstanceUserArn)
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -2905,7 +2905,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelMessagesInput(v *ListChannel
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3005,7 +3005,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelModeratorsInput(v *ListChann
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3084,7 +3084,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsInput(v *ListChannelsInput,
 		encoder.SetQuery("app-instance-arn").String(*v.AppInstanceArn)
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3241,7 +3241,7 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsModeratedByAppInstanceUserI
 		encoder.SetQuery("app-instance-user-arn").String(*v.AppInstanceUserArn)
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3325,7 +3325,7 @@ func awsRestjson1_serializeOpHttpBindingsListSubChannelsInput(v *ListSubChannels
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3486,7 +3486,7 @@ func awsRestjson1_serializeOpHttpBindingsPutChannelExpirationSettingsInput(v *Pu
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3587,7 +3587,7 @@ func awsRestjson1_serializeOpHttpBindingsPutChannelMembershipPreferencesInput(v 
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3793,7 +3793,7 @@ func awsRestjson1_serializeOpHttpBindingsRedactChannelMessageInput(v *RedactChan
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -3892,7 +3892,7 @@ func awsRestjson1_serializeOpHttpBindingsSearchChannelsInput(v *SearchChannelsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -4001,7 +4001,7 @@ func awsRestjson1_serializeOpHttpBindingsSendChannelMessageInput(v *SendChannelM
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -4327,7 +4327,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelInput(v *UpdateChannelInpu
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -4537,7 +4537,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelMessageInput(v *UpdateChan
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}
@@ -4649,7 +4649,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelReadMarkerInput(v *UpdateC
 		}
 	}
 
-	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+	if v.ChimeBearer != nil {
 		locationName := "X-Amz-Chime-Bearer"
 		encoder.SetHeader(locationName).String(*v.ChimeBearer)
 	}

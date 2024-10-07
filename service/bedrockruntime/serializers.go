@@ -475,22 +475,22 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.GuardrailIdentifier != nil && len(*v.GuardrailIdentifier) > 0 {
+	if v.GuardrailIdentifier != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailidentifier"
 		encoder.SetHeader(locationName).String(*v.GuardrailIdentifier)
 	}
 
-	if v.GuardrailVersion != nil && len(*v.GuardrailVersion) > 0 {
+	if v.GuardrailVersion != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailversion"
 		encoder.SetHeader(locationName).String(*v.GuardrailVersion)
 	}
@@ -583,22 +583,22 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Accept != nil && len(*v.Accept) > 0 {
+	if v.Accept != nil {
 		locationName := "X-Amzn-Bedrock-Accept"
 		encoder.SetHeader(locationName).String(*v.Accept)
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.GuardrailIdentifier != nil && len(*v.GuardrailIdentifier) > 0 {
+	if v.GuardrailIdentifier != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailidentifier"
 		encoder.SetHeader(locationName).String(*v.GuardrailIdentifier)
 	}
 
-	if v.GuardrailVersion != nil && len(*v.GuardrailVersion) > 0 {
+	if v.GuardrailVersion != nil {
 		locationName := "X-Amzn-Bedrock-Guardrailversion"
 		encoder.SetHeader(locationName).String(*v.GuardrailVersion)
 	}

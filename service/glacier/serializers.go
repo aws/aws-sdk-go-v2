@@ -357,12 +357,12 @@ func awsRestjson1_serializeOpHttpBindingsCompleteMultipartUploadInput(v *Complet
 		}
 	}
 
-	if v.ArchiveSize != nil && len(*v.ArchiveSize) > 0 {
+	if v.ArchiveSize != nil {
 		locationName := "X-Amz-Archive-Size"
 		encoder.SetHeader(locationName).String(*v.ArchiveSize)
 	}
 
-	if v.Checksum != nil && len(*v.Checksum) > 0 {
+	if v.Checksum != nil {
 		locationName := "X-Amz-Sha256-Tree-Hash"
 		encoder.SetHeader(locationName).String(*v.Checksum)
 	}
@@ -1203,7 +1203,7 @@ func awsRestjson1_serializeOpHttpBindingsGetJobOutputInput(v *GetJobOutputInput,
 		}
 	}
 
-	if v.Range != nil && len(*v.Range) > 0 {
+	if v.Range != nil {
 		locationName := "Range"
 		encoder.SetHeader(locationName).String(*v.Range)
 	}
@@ -1632,12 +1632,12 @@ func awsRestjson1_serializeOpHttpBindingsInitiateMultipartUploadInput(v *Initiat
 		}
 	}
 
-	if v.ArchiveDescription != nil && len(*v.ArchiveDescription) > 0 {
+	if v.ArchiveDescription != nil {
 		locationName := "X-Amz-Archive-Description"
 		encoder.SetHeader(locationName).String(*v.ArchiveDescription)
 	}
 
-	if v.PartSize != nil && len(*v.PartSize) > 0 {
+	if v.PartSize != nil {
 		locationName := "X-Amz-Part-Size"
 		encoder.SetHeader(locationName).String(*v.PartSize)
 	}
@@ -2829,12 +2829,12 @@ func awsRestjson1_serializeOpHttpBindingsUploadArchiveInput(v *UploadArchiveInpu
 		}
 	}
 
-	if v.ArchiveDescription != nil && len(*v.ArchiveDescription) > 0 {
+	if v.ArchiveDescription != nil {
 		locationName := "X-Amz-Archive-Description"
 		encoder.SetHeader(locationName).String(*v.ArchiveDescription)
 	}
 
-	if v.Checksum != nil && len(*v.Checksum) > 0 {
+	if v.Checksum != nil {
 		locationName := "X-Amz-Sha256-Tree-Hash"
 		encoder.SetHeader(locationName).String(*v.Checksum)
 	}
@@ -2931,12 +2931,12 @@ func awsRestjson1_serializeOpHttpBindingsUploadMultipartPartInput(v *UploadMulti
 		}
 	}
 
-	if v.Checksum != nil && len(*v.Checksum) > 0 {
+	if v.Checksum != nil {
 		locationName := "X-Amz-Sha256-Tree-Hash"
 		encoder.SetHeader(locationName).String(*v.Checksum)
 	}
 
-	if v.Range != nil && len(*v.Range) > 0 {
+	if v.Range != nil {
 		locationName := "Content-Range"
 		encoder.SetHeader(locationName).String(*v.Range)
 	}

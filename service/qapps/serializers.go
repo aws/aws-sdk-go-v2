@@ -86,7 +86,7 @@ func awsRestjson1_serializeOpHttpBindingsAssociateLibraryItemReviewInput(v *Asso
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -176,7 +176,7 @@ func awsRestjson1_serializeOpHttpBindingsAssociateQAppWithUserInput(v *Associate
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -266,7 +266,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateLibraryItemInput(v *CreateLibrary
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -368,7 +368,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateQAppInput(v *CreateQAppInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -477,7 +477,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLibraryItemInput(v *DeleteLibrary
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -567,7 +567,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteQAppInput(v *DeleteQAppInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -657,7 +657,7 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateLibraryItemReviewInput(v *D
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -747,7 +747,7 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateQAppFromUserInput(v *Disass
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -830,7 +830,7 @@ func awsRestjson1_serializeOpHttpBindingsGetLibraryItemInput(v *GetLibraryItemIn
 		encoder.SetQuery("appId").String(*v.AppId)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -905,7 +905,7 @@ func awsRestjson1_serializeOpHttpBindingsGetQAppInput(v *GetQAppInput, encoder *
 		encoder.SetQuery("appId").String(*v.AppId)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -972,7 +972,7 @@ func awsRestjson1_serializeOpHttpBindingsGetQAppSessionInput(v *GetQAppSessionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1054,7 +1054,7 @@ func awsRestjson1_serializeOpHttpBindingsImportDocumentInput(v *ImportDocumentIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1162,7 +1162,7 @@ func awsRestjson1_serializeOpHttpBindingsListLibraryItemsInput(v *ListLibraryIte
 		encoder.SetQuery("categoryId").String(*v.CategoryId)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1237,7 +1237,7 @@ func awsRestjson1_serializeOpHttpBindingsListQAppsInput(v *ListQAppsInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1394,7 +1394,7 @@ func awsRestjson1_serializeOpHttpBindingsPredictQAppInput(v *PredictQAppInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1486,7 +1486,7 @@ func awsRestjson1_serializeOpHttpBindingsStartQAppSessionInput(v *StartQAppSessi
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1595,7 +1595,7 @@ func awsRestjson1_serializeOpHttpBindingsStopQAppSessionInput(v *StopQAppSession
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1858,7 +1858,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLibraryItemInput(v *UpdateLibrary
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -1960,7 +1960,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLibraryItemMetadataInput(v *Updat
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -2055,7 +2055,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateQAppInput(v *UpdateQAppInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}
@@ -2162,7 +2162,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateQAppSessionInput(v *UpdateQAppSes
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.InstanceId != nil && len(*v.InstanceId) > 0 {
+	if v.InstanceId != nil {
 		locationName := "Instance-Id"
 		encoder.SetHeader(locationName).String(*v.InstanceId)
 	}

@@ -168,7 +168,7 @@ func awsRestxml_serializeOpHttpBindingsCopyDistributionInput(v *CopyDistribution
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -1984,7 +1984,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteCachePolicyInput(v *DeleteCachePoli
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2060,7 +2060,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteCloudFrontOriginAccessIdentityInput
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2136,7 +2136,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteContinuousDeploymentPolicyInput(v *
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2212,7 +2212,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteDistributionInput(v *DeleteDistribu
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2288,7 +2288,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteFieldLevelEncryptionConfigInput(v *
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2364,7 +2364,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteFieldLevelEncryptionProfileInput(v 
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2431,7 +2431,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteFunctionInput(v *DeleteFunctionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2516,7 +2516,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteKeyGroupInput(v *DeleteKeyGroupInpu
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2583,7 +2583,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteKeyValueStoreInput(v *DeleteKeyValu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2739,7 +2739,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteOriginAccessControlInput(v *DeleteO
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2815,7 +2815,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteOriginRequestPolicyInput(v *DeleteO
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -2891,7 +2891,7 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicKeyInput(v *DeletePublicKeyIn
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -3070,7 +3070,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteResponseHeadersPolicyInput(v *Delet
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -3146,7 +3146,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteStreamingDistributionInput(v *Delet
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7205,7 +7205,7 @@ func awsRestxml_serializeOpHttpBindingsPublishFunctionInput(v *PublishFunctionIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7389,7 +7389,7 @@ func awsRestxml_serializeOpHttpBindingsTestFunctionInput(v *TestFunctionInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7615,7 +7615,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateCachePolicyInput(v *UpdateCachePoli
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7715,7 +7715,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateCloudFrontOriginAccessIdentityInput
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7815,7 +7815,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateContinuousDeploymentPolicyInput(v *
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7915,7 +7915,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateDistributionInput(v *UpdateDistribu
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -7991,7 +7991,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateDistributionWithStagingConfigInput(
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8095,7 +8095,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateFieldLevelEncryptionConfigInput(v *
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8195,7 +8195,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateFieldLevelEncryptionProfileInput(v 
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8280,7 +8280,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateFunctionInput(v *UpdateFunctionInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8418,7 +8418,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateKeyGroupInput(v *UpdateKeyGroupInpu
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8503,7 +8503,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateKeyValueStoreInput(v *UpdateKeyValu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8628,7 +8628,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateOriginAccessControlInput(v *UpdateO
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8728,7 +8728,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateOriginRequestPolicyInput(v *UpdateO
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -8828,7 +8828,7 @@ func awsRestxml_serializeOpHttpBindingsUpdatePublicKeyInput(v *UpdatePublicKeyIn
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -9068,7 +9068,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateResponseHeadersPolicyInput(v *Updat
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
@@ -9168,7 +9168,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateStreamingDistributionInput(v *Updat
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}

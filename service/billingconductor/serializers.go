@@ -452,7 +452,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateBillingGroupInput(v *CreateBillin
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}
@@ -573,7 +573,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateCustomLineItemInput(v *CreateCust
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}
@@ -699,7 +699,7 @@ func awsRestjson1_serializeOpHttpBindingsCreatePricingPlanInput(v *CreatePricing
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}
@@ -808,7 +808,7 @@ func awsRestjson1_serializeOpHttpBindingsCreatePricingRuleInput(v *CreatePricing
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}

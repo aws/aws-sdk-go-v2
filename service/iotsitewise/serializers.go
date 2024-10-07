@@ -1210,12 +1210,12 @@ func awsRestjson1_serializeOpHttpBindingsCreateAssetModelCompositeModelInput(v *
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
 
-	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+	if v.IfNoneMatch != nil {
 		locationName := "If-None-Match"
 		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
 	}
@@ -2059,12 +2059,12 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssetModelInput(v *DeleteAssetMod
 		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
 
-	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+	if v.IfNoneMatch != nil {
 		locationName := "If-None-Match"
 		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
 	}
@@ -2158,12 +2158,12 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAssetModelCompositeModelInput(v *
 		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
 
-	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+	if v.IfNoneMatch != nil {
 		locationName := "If-None-Match"
 		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
 	}
@@ -6744,12 +6744,12 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAssetModelInput(v *UpdateAssetMod
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
 
-	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+	if v.IfNoneMatch != nil {
 		locationName := "If-None-Match"
 		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
 	}
@@ -6898,12 +6898,12 @@ func awsRestjson1_serializeOpHttpBindingsUpdateAssetModelCompositeModelInput(v *
 		}
 	}
 
-	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+	if v.IfMatch != nil {
 		locationName := "If-Match"
 		encoder.SetHeader(locationName).String(*v.IfMatch)
 	}
 
-	if v.IfNoneMatch != nil && len(*v.IfNoneMatch) > 0 {
+	if v.IfNoneMatch != nil {
 		locationName := "If-None-Match"
 		encoder.SetHeader(locationName).String(*v.IfNoneMatch)
 	}
