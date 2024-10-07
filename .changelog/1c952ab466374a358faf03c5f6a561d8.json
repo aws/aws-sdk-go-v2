@@ -1,8 +1,0 @@
-{
-    "id": "1c952ab4-6637-4a35-8faf-03c5f6a561d8",
-    "type": "bugfix",
-    "description": "Remove integration tests for autoscaling APIs.",
-    "modules": [
-        "service/internal/integrationtest"
-    ]
-}

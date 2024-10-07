@@ -94,6 +94,9 @@ type CreateKnowledgeBaseInput struct {
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
+	// Contains details about how to ingest the documents in a data source.
+	VectorIngestionConfiguration *types.VectorIngestionConfiguration
+
 	noSmithyDocumentSerde
 }
 

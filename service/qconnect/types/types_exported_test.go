@@ -7,6 +7,46 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 )
 
+func ExampleAIAgentConfiguration_outputUsage() {
+	var union types.AIAgentConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration:
+		_ = v.Value // Value is types.AnswerRecommendationAIAgentConfiguration
+
+	case *types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration:
+		_ = v.Value // Value is types.ManualSearchAIAgentConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ManualSearchAIAgentConfiguration
+var _ *types.AnswerRecommendationAIAgentConfiguration
+
+func ExampleAIPromptTemplateConfiguration_outputUsage() {
+	var union types.AIPromptTemplateConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration:
+		_ = v.Value // Value is types.TextFullAIPromptEditTemplateConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TextFullAIPromptEditTemplateConfiguration
+
 func ExampleAssistantAssociationInputData_outputUsage() {
 	var union types.AssistantAssociationInputData
 	// type switches can be used to check the union value
@@ -42,6 +82,24 @@ func ExampleAssistantAssociationOutputData_outputUsage() {
 }
 
 var _ *types.KnowledgeBaseAssociationData
+
+func ExampleAssociationConfigurationData_outputUsage() {
+	var union types.AssociationConfigurationData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData:
+		_ = v.Value // Value is types.KnowledgeBaseAssociationConfigurationData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.KnowledgeBaseAssociationConfigurationData
 
 func ExampleConfiguration_outputUsage() {
 	var union types.Configuration
@@ -107,6 +165,9 @@ func ExampleDataDetails_outputUsage() {
 	case *types.DataDetailsMemberGenerativeData:
 		_ = v.Value // Value is types.GenerativeDataDetails
 
+	case *types.DataDetailsMemberIntentDetectedData:
+		_ = v.Value // Value is types.IntentDetectedDataDetails
+
 	case *types.DataDetailsMemberSourceContentData:
 		_ = v.Value // Value is types.SourceContentDataDetails
 
@@ -120,6 +181,7 @@ func ExampleDataDetails_outputUsage() {
 }
 
 var _ *types.ContentDataDetails
+var _ *types.IntentDetectedDataDetails
 var _ *types.GenerativeDataDetails
 var _ *types.SourceContentDataDetails
 
@@ -144,6 +206,24 @@ func ExampleDataReference_outputUsage() {
 
 var _ *types.GenerativeReference
 var _ *types.ContentReference
+
+func ExampleManagedSourceConfiguration_outputUsage() {
+	var union types.ManagedSourceConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ManagedSourceConfigurationMemberWebCrawlerConfiguration:
+		_ = v.Value // Value is types.WebCrawlerConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WebCrawlerConfiguration
 
 func ExampleOrCondition_outputUsage() {
 	var union types.OrCondition
@@ -184,6 +264,28 @@ func ExampleQueryCondition_outputUsage() {
 }
 
 var _ *types.QueryConditionItem
+
+func ExampleQueryInputData_outputUsage() {
+	var union types.QueryInputData
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QueryInputDataMemberIntentInputData:
+		_ = v.Value // Value is types.IntentInputData
+
+	case *types.QueryInputDataMemberQueryTextInputData:
+		_ = v.Value // Value is types.QueryTextInputData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.QueryTextInputData
+var _ *types.IntentInputData
 
 func ExampleQuickResponseContentProvider_outputUsage() {
 	var union types.QuickResponseContentProvider
@@ -239,12 +341,33 @@ func ExampleRecommendationTriggerData_outputUsage() {
 
 var _ *types.QueryRecommendationTriggerData
 
+func ExampleRuntimeSessionDataValue_outputUsage() {
+	var union types.RuntimeSessionDataValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RuntimeSessionDataValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleSourceConfiguration_outputUsage() {
 	var union types.SourceConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.SourceConfigurationMemberAppIntegrations:
 		_ = v.Value // Value is types.AppIntegrationsConfiguration
+
+	case *types.SourceConfigurationMemberManagedSourceConfiguration:
+		_ = v.Value // Value is types.ManagedSourceConfiguration
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -256,6 +379,7 @@ func ExampleSourceConfiguration_outputUsage() {
 }
 
 var _ *types.AppIntegrationsConfiguration
+var _ types.ManagedSourceConfiguration
 
 func ExampleTagFilter_outputUsage() {
 	var union types.TagFilter

@@ -111,6 +111,9 @@ type GetJobOutput struct {
 	// The parameters for the job.
 	Parameters map[string]types.JobParameter
 
+	// The job ID for the source job.
+	SourceJobId *string
+
 	// The date and time the resource started running.
 	StartedAt *time.Time
 

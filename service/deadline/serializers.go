@@ -1667,6 +1667,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.Integer(*v.Priority)
 	}
 
+	if v.SourceJobId != nil {
+		ok := object.Key("sourceJobId")
+		ok.String(*v.SourceJobId)
+	}
+
 	if v.StorageProfileId != nil {
 		ok := object.Key("storageProfileId")
 		ok.String(*v.StorageProfileId)
@@ -5736,6 +5741,103 @@ func (m *awsRestjson1_serializeOpListJobMembers) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListJobMembersInput(v *ListJobMembersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FarmId == nil || len(*v.FarmId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member farmId must not be empty")}
+	}
+	if v.FarmId != nil {
+		if err := encoder.SetURI("farmId").String(*v.FarmId); err != nil {
+			return err
+		}
+	}
+
+	if v.JobId == nil || len(*v.JobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobId must not be empty")}
+	}
+	if v.JobId != nil {
+		if err := encoder.SetURI("jobId").String(*v.JobId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.QueueId == nil || len(*v.QueueId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member queueId must not be empty")}
+	}
+	if v.QueueId != nil {
+		if err := encoder.SetURI("queueId").String(*v.QueueId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListJobParameterDefinitions struct {
+}
+
+func (*awsRestjson1_serializeOpListJobParameterDefinitions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListJobParameterDefinitions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListJobParameterDefinitionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2023-10-12/farms/{farmId}/queues/{queueId}/jobs/{jobId}/parameter-definitions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListJobParameterDefinitionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListJobParameterDefinitionsInput(v *ListJobParameterDefinitionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

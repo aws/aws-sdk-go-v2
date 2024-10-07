@@ -7,6 +7,371 @@ import (
 	"time"
 )
 
+// A typed union that specifies the configuration based on the type of AI Agent.
+//
+// The following types satisfy this interface:
+//
+//	AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration
+//	AIAgentConfigurationMemberManualSearchAIAgentConfiguration
+type AIAgentConfiguration interface {
+	isAIAgentConfiguration()
+}
+
+// The configuration for AI Agents of type ANSWER_RECOMMENDATION .
+type AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration struct {
+	Value AnswerRecommendationAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// The configuration for AI Agents of type MANUAL_SEARCH .
+type AIAgentConfigurationMemberManualSearchAIAgentConfiguration struct {
+	Value ManualSearchAIAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIAgentConfigurationMemberManualSearchAIAgentConfiguration) isAIAgentConfiguration() {}
+
+// A type that specifies the AI Agent ID configuration data when mapping an AI
+// Agents to be used for an AI Agent type on a session or assistant.
+type AIAgentConfigurationData struct {
+
+	// The ID of the AI Agent to be configured.
+	//
+	// This member is required.
+	AiAgentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The data for the AI Agent.
+type AIAgentData struct {
+
+	// The Amazon Resource Name (ARN) of the AI agent.
+	//
+	// This member is required.
+	AiAgentArn *string
+
+	// The identifier of the AI Agent.
+	//
+	// This member is required.
+	AiAgentId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
+	//
+	// This member is required.
+	AssistantArn *string
+
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// Configuration for the AI Agent.
+	//
+	// This member is required.
+	Configuration AIAgentConfiguration
+
+	// The name of the AI Agent.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the AI Agent.
+	//
+	// This member is required.
+	Type AIAgentType
+
+	// The visibility status of the AI Agent.
+	//
+	// This member is required.
+	VisibilityStatus VisibilityStatus
+
+	// The description of the AI Agent.
+	Description *string
+
+	// The time the AI Agent was last modified.
+	ModifiedTime *time.Time
+
+	// Specifies the origin of the AI Agent. SYSTEM for a default AI Agent created by
+	// Q in Connect or CUSTOMER for an AI Agent created by calling AI Agent creation
+	// APIs.
+	Origin Origin
+
+	// The status of the AI Agent.
+	Status Status
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the AI Agent.
+type AIAgentSummary struct {
+
+	// The Amazon Resource Name (ARN) of the AI agent.
+	//
+	// This member is required.
+	AiAgentArn *string
+
+	// The identifier of the AI Agent.
+	//
+	// This member is required.
+	AiAgentId *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
+	//
+	// This member is required.
+	AssistantArn *string
+
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// The name of the AI Agent.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the AI Agent.
+	//
+	// This member is required.
+	Type AIAgentType
+
+	// The visibility status of the AI Agent.
+	//
+	// This member is required.
+	VisibilityStatus VisibilityStatus
+
+	// The configuration for the AI Agent.
+	Configuration AIAgentConfiguration
+
+	// The description of the AI Agent.
+	Description *string
+
+	// The time the AI Agent was last modified.
+	ModifiedTime *time.Time
+
+	// The origin of the AI Agent. SYSTEM for a default AI Agent created by Q in
+	// Connect or CUSTOMER for an AI Agent created by calling AI Agent creation APIs.
+	Origin Origin
+
+	// The status of the AI Agent.
+	Status Status
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the AI Agent version.
+type AIAgentVersionSummary struct {
+
+	// The data for the summary of the AI Agent version.
+	AiAgentSummary *AIAgentSummary
+
+	// The version number for this AI Agent version.
+	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
+// The data for the AI Prompt
+type AIPromptData struct {
+
+	// The Amazon Resource Name (ARN) of the AI Prompt.
+	//
+	// This member is required.
+	AiPromptArn *string
+
+	// The identifier of the Amazon Q in Connect AI prompt.
+	//
+	// This member is required.
+	AiPromptId *string
+
+	// The API format used for this AI Prompt.
+	//
+	// This member is required.
+	ApiFormat AIPromptAPIFormat
+
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
+	//
+	// This member is required.
+	AssistantArn *string
+
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// The identifier of the model used for this AI Prompt. Model Ids supported are:
+	// CLAUDE_3_HAIKU_20240307_V1 .
+	//
+	// This member is required.
+	ModelId *string
+
+	// The name of the AI Prompt
+	//
+	// This member is required.
+	Name *string
+
+	// The configuration of the prompt template for this AI Prompt.
+	//
+	// This member is required.
+	TemplateConfiguration AIPromptTemplateConfiguration
+
+	// The type of the prompt template for this AI Prompt.
+	//
+	// This member is required.
+	TemplateType AIPromptTemplateType
+
+	// The type of this AI Prompt.
+	//
+	// This member is required.
+	Type AIPromptType
+
+	// The visibility status of the AI Prompt.
+	//
+	// This member is required.
+	VisibilityStatus VisibilityStatus
+
+	// The description of the AI Prompt.
+	Description *string
+
+	// The time the AI Prompt was last modified.
+	ModifiedTime *time.Time
+
+	// The origin of the AI Prompt. SYSTEM for a default AI Prompt created by Q in
+	// Connect or CUSTOMER for an AI Prompt created by calling AI Prompt creation
+	// APIs.
+	Origin Origin
+
+	// The status of the AI Prompt.
+	Status Status
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the AI Prompt.
+type AIPromptSummary struct {
+
+	// The Amazon Resource Name (ARN) of the AI Prompt.
+	//
+	// This member is required.
+	AiPromptArn *string
+
+	// The identifier of the Amazon Q in Connect AI prompt.
+	//
+	// This member is required.
+	AiPromptId *string
+
+	// The API format used for this AI Prompt.
+	//
+	// This member is required.
+	ApiFormat AIPromptAPIFormat
+
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
+	//
+	// This member is required.
+	AssistantArn *string
+
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// The identifier of the model used for this AI Prompt. Model Ids supported are:
+	// CLAUDE_3_HAIKU_20240307_V1 .
+	//
+	// This member is required.
+	ModelId *string
+
+	// The name of the AI Prompt.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the prompt template for this AI Prompt.
+	//
+	// This member is required.
+	TemplateType AIPromptTemplateType
+
+	// The type of this AI Prompt.
+	//
+	// This member is required.
+	Type AIPromptType
+
+	// The visibility status of the AI Prompt.
+	//
+	// This member is required.
+	VisibilityStatus VisibilityStatus
+
+	// The description of the AI Prompt.
+	Description *string
+
+	// The time the AI Prompt was last modified.
+	ModifiedTime *time.Time
+
+	// The origin of the AI Prompt. SYSTEM for a default AI Prompt created by Q in
+	// Connect or CUSTOMER for an AI Prompt created by calling AI Prompt creation
+	// APIs.
+	Origin Origin
+
+	// The status of the AI Prompt.
+	Status Status
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A typed union that specifies the configuration for a prompt template based on
+// its type.
+//
+// The following types satisfy this interface:
+//
+//	AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration
+type AIPromptTemplateConfiguration interface {
+	isAIPromptTemplateConfiguration()
+}
+
+// The configuration for a prompt template that supports full textual prompt
+// configuration using a YAML prompt.
+type AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration struct {
+	Value TextFullAIPromptEditTemplateConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration) isAIPromptTemplateConfiguration() {
+}
+
+// The summary of the AI Prompt version.
+type AIPromptVersionSummary struct {
+
+	// The date for the summary of the AI Prompt version.
+	AiPromptSummary *AIPromptSummary
+
+	// The version number for this AI Prompt version.
+	VersionNumber *int64
+
+	noSmithyDocumentSerde
+}
+
 // Content association data for a [step-by-step guide].
 //
 // [step-by-step guide]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html
@@ -15,6 +380,27 @@ type AmazonConnectGuideAssociationData struct {
 	//  The Amazon Resource Name (ARN) of an Amazon Connect flow. Step-by-step guides
 	// are a type of flow.
 	FlowId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the ANSWER_RECOMMENDATION AI Agent type.
+type AnswerRecommendationAIAgentConfiguration struct {
+
+	// The AI Prompt identifier for the Answer Generation prompt used by the
+	// ANSWER_RECOMMENDATION AI Agent.
+	AnswerGenerationAIPromptId *string
+
+	// The association configurations for overriding behavior on this AI Agent.
+	AssociationConfigurations []AssociationConfiguration
+
+	// The AI Prompt identifier for the Intent Labeling prompt used by the
+	// ANSWER_RECOMMENDATION AI Agent.
+	IntentLabelingGenerationAIPromptId *string
+
+	// The AI Prompt identifier for the Query Reformulation prompt used by the
+	// ANSWER_RECOMMENDATION AI Agent.
+	QueryReformulationAIPromptId *string
 
 	noSmithyDocumentSerde
 }
@@ -51,7 +437,7 @@ type AppIntegrationsConfiguration struct {
 	//   s3:GetObject , and s3:GetBucketLocation against the bucket.
 	//
 	// [ServiceNow]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
-	// [Amazon S3]: https://aws.amazon.com/s3/
+	// [Amazon S3]: http://aws.amazon.com/s3/
 	// [Zendesk]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
 	// [SharePoint]: https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index
 	// [Salesforce]: https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm
@@ -236,6 +622,10 @@ type AssistantData struct {
 	// This member is required.
 	Type AssistantType
 
+	// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
+	// version) that is set on the Amazon Q in Connect Assistant.
+	AiAgentConfiguration map[string]AIAgentConfigurationData
+
 	// The configuration information for the Amazon Q in Connect assistant capability.
 	CapabilityConfiguration *AssistantCapabilityConfiguration
 
@@ -303,6 +693,10 @@ type AssistantSummary struct {
 	// This member is required.
 	Type AssistantType
 
+	// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
+	// version) that is set on the Amazon Q in Connect Assistant.
+	AiAgentConfiguration map[string]AIAgentConfigurationData
+
 	// The configuration information for the Amazon Q in Connect assistant capability.
 	CapabilityConfiguration *AssistantCapabilityConfiguration
 
@@ -328,6 +722,101 @@ type AssistantSummary struct {
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Amazon Q in Connect Assistant Association.
+type AssociationConfiguration struct {
+
+	// The data of the configuration for an Amazon Q in Connect Assistant Association.
+	AssociationConfigurationData AssociationConfigurationData
+
+	// The identifier of the association for this Association Configuration.
+	AssociationId *string
+
+	// The type of the association for this Association Configuration.
+	AssociationType AIAgentAssociationConfigurationType
+
+	noSmithyDocumentSerde
+}
+
+// A typed union of the data of the configuration for an Amazon Q in Connect
+// Assistant Association.
+//
+// The following types satisfy this interface:
+//
+//	AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData
+type AssociationConfigurationData interface {
+	isAssociationConfigurationData()
+}
+
+// The data of the configuration for a KNOWLEDGE_BASE type Amazon Q in Connect
+// Assistant Association.
+type AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData struct {
+	Value KnowledgeBaseAssociationConfigurationData
+
+	noSmithyDocumentSerde
+}
+
+func (*AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData) isAssociationConfigurationData() {
+}
+
+// Settings for a foundation model used to parse documents for a data source.
+type BedrockFoundationModelConfigurationForParsing struct {
+
+	// The ARN of the foundation model.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// Instructions for interpreting the contents of a document.
+	ParsingPrompt *ParsingPrompt
+
+	noSmithyDocumentSerde
+}
+
+// Details about how to chunk the documents in the data source. A chunk refers to
+// an excerpt from a data source that is returned when the knowledge base that it
+// belongs to is queried.
+type ChunkingConfiguration struct {
+
+	// Knowledge base can split your source data into chunks. A chunk refers to an
+	// excerpt from a data source that is returned when the knowledge base that it
+	// belongs to is queried. You have the following options for chunking your data. If
+	// you opt for NONE , then you may want to pre-process your files by splitting them
+	// up such that each file corresponds to a chunk.
+	//
+	// This member is required.
+	ChunkingStrategy ChunkingStrategy
+
+	// Configurations for when you choose fixed-size chunking. If you set the
+	// chunkingStrategy as NONE , exclude this field.
+	FixedSizeChunkingConfiguration *FixedSizeChunkingConfiguration
+
+	// Settings for hierarchical document chunking for a data source. Hierarchical
+	// chunking splits documents into layers of chunks where the first layer contains
+	// large chunks, and the second layer contains smaller chunks derived from the
+	// first layer.
+	HierarchicalChunkingConfiguration *HierarchicalChunkingConfiguration
+
+	// Settings for semantic document chunking for a data source. Semantic chunking
+	// splits a document into smaller documents based on groups of similar content
+	// derived from the text with natural language processing.
+	SemanticChunkingConfiguration *SemanticChunkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about where the text with a citation begins and ends in
+// the generated output.
+type CitationSpan struct {
+
+	// Where the text with a citation starts in the generated output.
+	BeginOffsetInclusive int32
+
+	// Where the text with a citation ends in the generated output.
+	EndOffsetExclusive int32
 
 	noSmithyDocumentSerde
 }
@@ -604,6 +1093,12 @@ type ContentReference struct {
 	// knowledge base.
 	KnowledgeBaseId *string
 
+	// The type of reference content.
+	ReferenceType ReferenceType
+
+	// The web URL of the source content.
+	SourceURL *string
+
 	noSmithyDocumentSerde
 }
 
@@ -676,6 +1171,7 @@ type ContentSummary struct {
 //
 //	DataDetailsMemberContentData
 //	DataDetailsMemberGenerativeData
+//	DataDetailsMemberIntentDetectedData
 //	DataDetailsMemberSourceContentData
 type DataDetails interface {
 	isDataDetails()
@@ -698,6 +1194,15 @@ type DataDetailsMemberGenerativeData struct {
 }
 
 func (*DataDetailsMemberGenerativeData) isDataDetails() {}
+
+// Details about the intent data.
+type DataDetailsMemberIntentDetectedData struct {
+	Value IntentDetectedDataDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDetailsMemberIntentDetectedData) isDataDetails() {}
 
 // Details about the content data.
 type DataDetailsMemberSourceContentData struct {
@@ -818,6 +1323,23 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+// Configurations for when you choose fixed-size chunking. If you set the
+// chunkingStrategy as NONE , exclude this field.
+type FixedSizeChunkingConfiguration struct {
+
+	// The maximum number of tokens to include in a chunk.
+	//
+	// This member is required.
+	MaxTokens *int32
+
+	// The percentage of overlap between adjacent chunks of a data source.
+	//
+	// This member is required.
+	OverlapPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
 // The feedback information for a generative target type.
 type GenerativeContentFeedbackData struct {
 
@@ -884,6 +1406,36 @@ type GroupingConfiguration struct {
 	//
 	// [Amazon Connect routing profiles]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for hierarchical document chunking for a data source. Hierarchical
+// chunking splits documents into layers of chunks where the first layer contains
+// large chunks, and the second layer contains smaller chunks derived from the
+// first layer.
+type HierarchicalChunkingConfiguration struct {
+
+	// Token settings for each layer.
+	//
+	// This member is required.
+	LevelConfigurations []HierarchicalChunkingLevelConfiguration
+
+	// The number of tokens to repeat across chunks in the same layer.
+	//
+	// This member is required.
+	OverlapTokens *int32
+
+	noSmithyDocumentSerde
+}
+
+// Token settings for each layer.
+type HierarchicalChunkingLevelConfiguration struct {
+
+	// The maximum number of tokens that a chunk can contain in this layer.
+	//
+	// This member is required.
+	MaxTokens *int32
 
 	noSmithyDocumentSerde
 }
@@ -1024,6 +1576,51 @@ type ImportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the detected intent.
+type IntentDetectedDataDetails struct {
+
+	// The detected intent.
+	//
+	// This member is required.
+	Intent *string
+
+	// The identifier of the detected intent.
+	//
+	// This member is required.
+	IntentId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the Amazon Q intent.
+type IntentInputData struct {
+
+	// The identifier of the Amazon Q intent.
+	//
+	// This member is required.
+	IntentId *string
+
+	noSmithyDocumentSerde
+}
+
+// The data of the configuration for a KNOWLEDGE_BASE type Amazon Q in Connect
+// Assistant Association.
+type KnowledgeBaseAssociationConfigurationData struct {
+
+	// An object that can be used to specify Tag conditions.
+	ContentTagFilter TagFilter
+
+	// The maximum number of results to return per page.
+	MaxResults *int32
+
+	// The search type to be used against the Knowledge Base for this request. The
+	// values can be SEMANTIC which uses vector embeddings or HYBRID which use vector
+	// embeddings and raw text
+	OverrideKnowledgeBaseSearchType KnowledgeBaseSearchType
+
+	noSmithyDocumentSerde
+}
+
 // Association information about the knowledge base.
 type KnowledgeBaseAssociationData struct {
 
@@ -1067,6 +1664,12 @@ type KnowledgeBaseData struct {
 	// The description.
 	Description *string
 
+	// List of failure reasons on ingestion per file.
+	IngestionFailureReasons []string
+
+	// Status of ingestion on data source.
+	IngestionStatus SyncStatus
+
 	// An epoch timestamp indicating the most recent content modification inside the
 	// knowledge base. If no content exists in a knowledge base, this value is unset.
 	LastContentModificationTime *time.Time
@@ -1091,6 +1694,9 @@ type KnowledgeBaseData struct {
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	// Contains details about how to ingest the documents in a data source.
+	VectorIngestionConfiguration *VectorIngestionConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1147,6 +1753,40 @@ type KnowledgeBaseSummary struct {
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
+	// Contains details about how to ingest the documents in a data source.
+	VectorIngestionConfiguration *VectorIngestionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Source configuration for managed resources.
+//
+// The following types satisfy this interface:
+//
+//	ManagedSourceConfigurationMemberWebCrawlerConfiguration
+type ManagedSourceConfiguration interface {
+	isManagedSourceConfiguration()
+}
+
+// Configuration data for web crawler data source.
+type ManagedSourceConfigurationMemberWebCrawlerConfiguration struct {
+	Value WebCrawlerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ManagedSourceConfigurationMemberWebCrawlerConfiguration) isManagedSourceConfiguration() {}
+
+// The configuration for the MANUAL_SEARCH AI Agent type.
+type ManualSearchAIAgentConfiguration struct {
+
+	// The AI Prompt identifier for the Answer Generation prompt used by the
+	// MANUAL_SEARCH AI Agent.
+	AnswerGenerationAIPromptId *string
+
+	// The association configurations for overriding behavior on this AI Agent.
+	AssociationConfigurations []AssociationConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1190,6 +1830,35 @@ type OrConditionMemberTagCondition struct {
 
 func (*OrConditionMemberTagCondition) isOrCondition() {}
 
+// Settings for parsing document contents. By default, the service converts the
+// contents of each document into text before splitting it into chunks. To improve
+// processing of PDF files with tables and images, you can configure the data
+// source to convert the pages of text into images and use a model to describe the
+// contents of each page.
+type ParsingConfiguration struct {
+
+	// The parsing strategy for the data source.
+	//
+	// This member is required.
+	ParsingStrategy ParsingStrategy
+
+	// Settings for a foundation model used to parse documents for a data source.
+	BedrockFoundationModelConfiguration *BedrockFoundationModelConfigurationForParsing
+
+	noSmithyDocumentSerde
+}
+
+// Instructions for interpreting the contents of a document.
+type ParsingPrompt struct {
+
+	// Instructions for interpreting the contents of a document.
+	//
+	// This member is required.
+	ParsingPromptText *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about how to query content.
 //
 // The following types satisfy this interface:
@@ -1229,10 +1898,49 @@ type QueryConditionItem struct {
 	noSmithyDocumentSerde
 }
 
+// Input information for the query.
+//
+// The following types satisfy this interface:
+//
+//	QueryInputDataMemberIntentInputData
+//	QueryInputDataMemberQueryTextInputData
+type QueryInputData interface {
+	isQueryInputData()
+}
+
+// Input information for the intent.
+type QueryInputDataMemberIntentInputData struct {
+	Value IntentInputData
+
+	noSmithyDocumentSerde
+}
+
+func (*QueryInputDataMemberIntentInputData) isQueryInputData() {}
+
+// Input information for the query.
+type QueryInputDataMemberQueryTextInputData struct {
+	Value QueryTextInputData
+
+	noSmithyDocumentSerde
+}
+
+func (*QueryInputDataMemberQueryTextInputData) isQueryInputData() {}
+
 // Data associated with the QUERY RecommendationTriggerType.
 type QueryRecommendationTriggerData struct {
 
 	// The text associated with the recommendation trigger.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the text to search for.
+type QueryTextInputData struct {
+
+	// The text to search for.
+	//
+	// This member is required.
 	Text *string
 
 	noSmithyDocumentSerde
@@ -1835,6 +2543,40 @@ type ResultData struct {
 	noSmithyDocumentSerde
 }
 
+// The list of key-value pairs that are stored on the session.
+type RuntimeSessionData struct {
+
+	// The key of the data stored on the session.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the data stored on the session.
+	//
+	// This member is required.
+	Value RuntimeSessionDataValue
+
+	noSmithyDocumentSerde
+}
+
+// A union type that specifies the data stored on the session.
+//
+// The following types satisfy this interface:
+//
+//	RuntimeSessionDataValueMemberStringValue
+type RuntimeSessionDataValue interface {
+	isRuntimeSessionDataValue()
+}
+
+// The string value of the data stored on the session.
+type RuntimeSessionDataValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*RuntimeSessionDataValueMemberStringValue) isRuntimeSessionDataValue() {}
+
 // The search expression.
 type SearchExpression struct {
 
@@ -1842,6 +2584,38 @@ type SearchExpression struct {
 	//
 	// This member is required.
 	Filters []Filter
+
+	noSmithyDocumentSerde
+}
+
+// A URL for crawling.
+type SeedUrl struct {
+
+	// URL for crawling
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for semantic document chunking for a data source. Semantic chunking
+// splits a document into smaller documents based on groups of similar content
+// derived from the text with natural language processing.
+type SemanticChunkingConfiguration struct {
+
+	// The dissimilarity threshold for splitting chunks.
+	//
+	// This member is required.
+	BreakpointPercentileThreshold *int32
+
+	// The buffer size.
+	//
+	// This member is required.
+	BufferSize *int32
+
+	// The maximum number of tokens that a chunk can contain.
+	//
+	// This member is required.
+	MaxTokens *int32
 
 	noSmithyDocumentSerde
 }
@@ -1877,6 +2651,10 @@ type SessionData struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
+	// version) that should be used by Amazon Q in Connect for this Session.
+	AiAgentConfiguration map[string]AIAgentConfigurationData
 
 	// The description of the session.
 	Description *string
@@ -1934,6 +2712,7 @@ type SessionSummary struct {
 // The following types satisfy this interface:
 //
 //	SourceConfigurationMemberAppIntegrations
+//	SourceConfigurationMemberManagedSourceConfiguration
 type SourceConfiguration interface {
 	isSourceConfiguration()
 }
@@ -1947,6 +2726,15 @@ type SourceConfigurationMemberAppIntegrations struct {
 }
 
 func (*SourceConfigurationMemberAppIntegrations) isSourceConfiguration() {}
+
+// Source configuration for managed resources.
+type SourceConfigurationMemberManagedSourceConfiguration struct {
+	Value ManagedSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceConfigurationMemberManagedSourceConfiguration) isSourceConfiguration() {}
 
 // Details about the source content data.
 type SourceContentDataDetails struct {
@@ -1970,6 +2758,10 @@ type SourceContentDataDetails struct {
 	//
 	// This member is required.
 	Type SourceContentType
+
+	// Contains information about where the text with a citation begins and ends in
+	// the generated output.
+	CitationSpan *CitationSpan
 
 	noSmithyDocumentSerde
 }
@@ -2038,6 +2830,87 @@ type TextData struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for a prompt template that supports full textual prompt
+// configuration using a YAML prompt.
+type TextFullAIPromptEditTemplateConfiguration struct {
+
+	// The YAML text for the AI Prompt template.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the URL/URLs for the web content that you want to crawl.
+// You should be authorized to crawl the URLs.
+type UrlConfiguration struct {
+
+	// List of URLs for crawling.
+	SeedUrls []SeedUrl
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about how to ingest the documents in a data source.
+type VectorIngestionConfiguration struct {
+
+	// Details about how to chunk the documents in the data source. A chunk refers to
+	// an excerpt from a data source that is returned when the knowledge base that it
+	// belongs to is queried.
+	ChunkingConfiguration *ChunkingConfiguration
+
+	// A custom parser for data source documents.
+	ParsingConfiguration *ParsingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the web data source.
+type WebCrawlerConfiguration struct {
+
+	// The configuration of the URL/URLs for the web content that you want to crawl.
+	// You should be authorized to crawl the URLs.
+	//
+	// This member is required.
+	UrlConfiguration *UrlConfiguration
+
+	// The configuration of crawl limits for the web URLs.
+	CrawlerLimits *WebCrawlerLimits
+
+	// A list of one or more exclusion regular expression patterns to exclude certain
+	// URLs. If you specify an inclusion and exclusion filter/pattern and both match a
+	// URL, the exclusion filter takes precedence and the web content of the URL isn’t
+	// crawled.
+	ExclusionFilters []string
+
+	// A list of one or more inclusion regular expression patterns to include certain
+	// URLs. If you specify an inclusion and exclusion filter/pattern and both match a
+	// URL, the exclusion filter takes precedence and the web content of the URL isn’t
+	// crawled.
+	InclusionFilters []string
+
+	// The scope of what is crawled for your URLs. You can choose to crawl only web
+	// pages that belong to the same host or primary domain. For example, only web
+	// pages that contain the seed URL
+	// https://docs.aws.amazon.com/bedrock/latest/userguide/ and no other domains. You
+	// can choose to include sub domains in addition to the host or primary domain. For
+	// example, web pages that contain aws.amazon.com can also include sub domain
+	// docs.aws.amazon.com .
+	Scope WebScopeType
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of crawl limits for the web URLs.
+type WebCrawlerLimits struct {
+
+	// Rate of web URLs retrieved per minute.
+	RateLimit *int32
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -2049,17 +2922,23 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAIAgentConfiguration()           {}
+func (*UnknownUnionMember) isAIPromptTemplateConfiguration()  {}
 func (*UnknownUnionMember) isAssistantAssociationInputData()  {}
 func (*UnknownUnionMember) isAssistantAssociationOutputData() {}
+func (*UnknownUnionMember) isAssociationConfigurationData()   {}
 func (*UnknownUnionMember) isConfiguration()                  {}
 func (*UnknownUnionMember) isContentAssociationContents()     {}
 func (*UnknownUnionMember) isContentFeedbackData()            {}
 func (*UnknownUnionMember) isDataDetails()                    {}
 func (*UnknownUnionMember) isDataReference()                  {}
+func (*UnknownUnionMember) isManagedSourceConfiguration()     {}
 func (*UnknownUnionMember) isOrCondition()                    {}
 func (*UnknownUnionMember) isQueryCondition()                 {}
+func (*UnknownUnionMember) isQueryInputData()                 {}
 func (*UnknownUnionMember) isQuickResponseContentProvider()   {}
 func (*UnknownUnionMember) isQuickResponseDataProvider()      {}
 func (*UnknownUnionMember) isRecommendationTriggerData()      {}
+func (*UnknownUnionMember) isRuntimeSessionDataValue()        {}
 func (*UnknownUnionMember) isSourceConfiguration()            {}
 func (*UnknownUnionMember) isTagFilter()                      {}

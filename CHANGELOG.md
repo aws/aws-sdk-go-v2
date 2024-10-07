@@ -1,3 +1,24 @@
+# Release (2024-10-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.1
+  * **Bug Fix**: Remove private metrics collection APIs. These APIs were annotated at the package level that they should not be used by callers and could be removed at any time. With the release of self-instrumented clients for SDK metrics, this internal code is obsolete.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.32.1](service/dataexchange/CHANGELOG.md#v1321-2024-10-07)
+  * **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.6.0](service/deadline/CHANGELOG.md#v160-2024-10-07)
+  * **Feature**: Add support for using the template from a previous job during job creation and listing parameter definitions for a job.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.1.1](service/marketplacereporting/CHANGELOG.md#v111-2024-10-07)
+  * **Documentation**: Documentation-only update for AWS Marketplace Reporting API.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.12.0](service/qconnect/CHANGELOG.md#v1120-2024-10-07)
+  * **Feature**: This release adds support for the following capabilities: Configuration of the Gen AI system via AIAgent and AIPrompts. Integration support for Bedrock Knowledge Base.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.49.0](service/redshift/CHANGELOG.md#v1490-2024-10-07)
+  * **Feature**: Add validation pattern to S3KeyPrefix on the EnableLogging API
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.1](service/s3/CHANGELOG.md#v1651-2024-10-07)
+  * **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+
 # Release (2024-10-04)
 
 ## General Highlights

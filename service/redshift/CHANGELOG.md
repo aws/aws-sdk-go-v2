@@ -1,3 +1,8 @@
+# v1.49.0 (2024-10-07)
+
+* **Feature**: Add validation pattern to S3KeyPrefix on the EnableLogging API
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2024-10-04)
 
 * **Feature**: Add support for HTTP client metrics.

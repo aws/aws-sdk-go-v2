@@ -1190,6 +1190,26 @@ func (m *validateOpListJobMembers) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListJobParameterDefinitions struct {
+}
+
+func (*validateOpListJobParameterDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListJobParameterDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListJobParameterDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListJobParameterDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListJobs struct {
 }
 
@@ -2204,6 +2224,10 @@ func addOpListFleetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListJobMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobMembers{}, middleware.After)
+}
+
+func addOpListJobParameterDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListJobParameterDefinitions{}, middleware.After)
 }
 
 func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -3805,12 +3829,6 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	if v.QueueId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
 	}
-	if v.Template == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Template"))
-	}
-	if len(v.TemplateType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
-	}
 	if v.Priority == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
 	}
@@ -4688,6 +4706,27 @@ func validateOpListJobMembersInput(v *ListJobMembersInput) error {
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListJobParameterDefinitionsInput(v *ListJobParameterDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListJobParameterDefinitionsInput"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

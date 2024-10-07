@@ -1,3 +1,8 @@
+# v1.6.0 (2024-10-07)
+
+* **Feature**: Add support for using the template from a previous job during job creation and listing parameter definitions for a job.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2024-10-04)
 
 * **Feature**: Add support for HTTP client metrics.

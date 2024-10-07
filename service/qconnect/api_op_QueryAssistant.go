@@ -48,11 +48,6 @@ type QueryAssistantInput struct {
 	// This member is required.
 	AssistantId *string
 
-	// The text to search for.
-	//
-	// This member is required.
-	QueryText *string
-
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
@@ -60,8 +55,19 @@ type QueryAssistantInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
+	// The search type to be used against the Knowledge Base for this request. The
+	// values can be SEMANTIC which uses vector embeddings or HYBRID which use vector
+	// embeddings and raw text.
+	OverrideKnowledgeBaseSearchType types.KnowledgeBaseSearchType
+
 	// Information about how to query content.
 	QueryCondition []types.QueryCondition
+
+	// Information about the query.
+	QueryInputData types.QueryInputData
+
+	// The text to search for.
+	QueryText *string
 
 	// The identifier of the Amazon Q in Connect session. Can be either the ID or the
 	// ARN. URLs cannot contain the ARN.
