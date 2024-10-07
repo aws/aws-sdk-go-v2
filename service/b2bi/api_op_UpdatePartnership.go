@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +39,10 @@ type UpdatePartnershipInput struct {
 
 	// List of the capabilities associated with this partnership.
 	Capabilities []string
+
+	// To update, specify the structure that contains the details for the associated
+	// capabilities.
+	CapabilityOptions *types.CapabilityOptions
 
 	// The name of the partnership, used to identify it.
 	Name *string
@@ -72,6 +77,9 @@ type UpdatePartnershipOutput struct {
 
 	// Returns one or more capabilities associated with this partnership.
 	Capabilities []string
+
+	// Returns the structure that contains the details for the associated capabilities.
+	CapabilityOptions *types.CapabilityOptions
 
 	// Returns the email address associated with this trading partner.
 	Email *string

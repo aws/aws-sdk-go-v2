@@ -187,9 +187,9 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveEndpointResolverV2(&options)
 
-	resolveMeterProvider(&options)
-
 	resolveTracerProvider(&options)
+
+	resolveMeterProvider(&options)
 
 	resolveAuthSchemeResolver(&options)
 
@@ -275,7 +275,9 @@ func (c *Client) invokeOperation(
 	defer endTimer()
 	defer span.End()
 
-	handler := smithyhttp.NewClientHandler(options.HTTPClient)
+	handler := smithyhttp.NewClientHandlerWithOptions(options.HTTPClient, func(o *smithyhttp.ClientHandler) {
+		o.Meter = options.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/ecr")
+	})
 	decorated := middleware.DecorateHandler(handler, stack)
 	result, metadata, err = decorated.Handle(ctx, params)
 	if err != nil {

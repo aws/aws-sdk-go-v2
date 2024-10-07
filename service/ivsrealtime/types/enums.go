@@ -69,6 +69,9 @@ const (
 	EventErrorCodeInvalidProtocol          EventErrorCode = "INVALID_PROTOCOL"
 	EventErrorCodeInvalidStreamKey         EventErrorCode = "INVALID_STREAM_KEY"
 	EventErrorCodeReuseOfStreamKey         EventErrorCode = "REUSE_OF_STREAM_KEY"
+	EventErrorCodeBFramePresent            EventErrorCode = "B_FRAME_PRESENT"
+	EventErrorCodeInvalidInput             EventErrorCode = "INVALID_INPUT"
+	EventErrorCodeInternalServerException  EventErrorCode = "INTERNAL_SERVER_EXCEPTION"
 )
 
 // Values returns all known values for EventErrorCode. Note that this can be
@@ -88,6 +91,9 @@ func (EventErrorCode) Values() []EventErrorCode {
 		"INVALID_PROTOCOL",
 		"INVALID_STREAM_KEY",
 		"REUSE_OF_STREAM_KEY",
+		"B_FRAME_PRESENT",
+		"INVALID_INPUT",
+		"INTERNAL_SERVER_EXCEPTION",
 	}
 }
 

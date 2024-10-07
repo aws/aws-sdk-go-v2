@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a software bill of materials (SBOM) with a specific software package
-// version.
+// Associates the selected software bill of materials (SBOM) with a specific
+// software package version.
 //
 // Requires permission to access the [AssociateSbomWithPackageVersion] action.
 //
@@ -39,8 +39,8 @@ type AssociateSbomWithPackageVersionInput struct {
 	// This member is required.
 	PackageName *string
 
-	// The Amazon S3 location for the software bill of materials associated with a
-	// software package version.
+	// A specific software bill of matrerials associated with a software package
+	// version.
 	//
 	// This member is required.
 	Sbom *types.Sbom
@@ -63,12 +63,13 @@ type AssociateSbomWithPackageVersionOutput struct {
 	// The name of the new software package.
 	PackageName *string
 
-	// The Amazon S3 location for the software bill of materials associated with a
-	// software package version.
+	// A specific software bill of matrerials associated with a software package
+	// version.
 	Sbom *types.Sbom
 
-	// The status of the initial validation for the SBOM against the Software Package
-	// Data Exchange (SPDX) and CycloneDX industry standard format.
+	// The status of the initial validation for the software bill of materials against
+	// the Software Package Data Exchange (SPDX) and CycloneDX industry standard
+	// formats.
 	SbomValidationStatus types.SbomValidationStatus
 
 	// The name of the new package version.

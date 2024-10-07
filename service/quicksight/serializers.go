@@ -13248,6 +13248,16 @@ func awsRestjson1_serializeOpDocumentStartAssetBundleExportJobInput(v *StartAsse
 		ok.Boolean(v.IncludeAllDependencies)
 	}
 
+	if len(v.IncludeFolderMembers) > 0 {
+		ok := object.Key("IncludeFolderMembers")
+		ok.String(string(v.IncludeFolderMembers))
+	}
+
+	if v.IncludeFolderMemberships {
+		ok := object.Key("IncludeFolderMemberships")
+		ok.Boolean(v.IncludeFolderMemberships)
+	}
+
 	if v.IncludePermissions {
 		ok := object.Key("IncludePermissions")
 		ok.Boolean(v.IncludePermissions)
@@ -18423,6 +18433,13 @@ func awsRestjson1_serializeDocumentAssetBundleCloudFormationOverridePropertyConf
 		}
 	}
 
+	if v.Folders != nil {
+		ok := object.Key("Folders")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobFolderOverridePropertiesList(v.Folders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RefreshSchedules != nil {
 		ok := object.Key("RefreshSchedules")
 		if err := awsRestjson1_serializeDocumentAssetBundleExportJobRefreshScheduleOverridePropertiesList(v.RefreshSchedules, ok); err != nil {
@@ -18616,6 +18633,49 @@ func awsRestjson1_serializeDocumentAssetBundleExportJobDataSourceOverridePropert
 }
 
 func awsRestjson1_serializeDocumentAssetBundleExportJobDataSourcePropertyToOverrideList(v []types.AssetBundleExportJobDataSourcePropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobFolderOverrideProperties(v *types.AssetBundleExportJobFolderOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobFolderPropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobFolderOverridePropertiesList(v []types.AssetBundleExportJobFolderOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobFolderOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobFolderPropertyToOverrideList(v []types.AssetBundleExportJobFolderPropertyToOverride, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -19242,6 +19302,109 @@ func awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideTagsLis
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideParameters(v *types.AssetBundleImportJobFolderOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FolderId != nil {
+		ok := object.Key("FolderId")
+		ok.String(*v.FolderId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ParentFolderArn != nil {
+		ok := object.Key("ParentFolderArn")
+		ok.String(*v.ParentFolderArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideParametersList(v []types.AssetBundleImportJobFolderOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverridePermissions(v *types.AssetBundleImportJobFolderOverridePermissions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FolderIds != nil {
+		ok := object.Key("FolderIds")
+		if err := awsRestjson1_serializeDocumentAssetBundleRestrictiveResourceIdList(v.FolderIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("Permissions")
+		if err := awsRestjson1_serializeDocumentAssetBundleResourcePermissions(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverridePermissionsList(v []types.AssetBundleImportJobFolderOverridePermissions, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverridePermissions(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideTags(v *types.AssetBundleImportJobFolderOverrideTags, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FolderIds != nil {
+		ok := object.Key("FolderIds")
+		if err := awsRestjson1_serializeDocumentAssetBundleRestrictiveResourceIdList(v.FolderIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideTagsList(v []types.AssetBundleImportJobFolderOverrideTags, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideTags(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAssetBundleImportJobOverrideParameters(v *types.AssetBundleImportJobOverrideParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19270,6 +19433,13 @@ func awsRestjson1_serializeDocumentAssetBundleImportJobOverrideParameters(v *typ
 	if v.DataSources != nil {
 		ok := object.Key("DataSources")
 		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideParametersList(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Folders != nil {
+		ok := object.Key("Folders")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideParametersList(v.Folders, ok); err != nil {
 			return err
 		}
 	}
@@ -19337,6 +19507,13 @@ func awsRestjson1_serializeDocumentAssetBundleImportJobOverridePermissions(v *ty
 		}
 	}
 
+	if v.Folders != nil {
+		ok := object.Key("Folders")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverridePermissionsList(v.Folders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Themes != nil {
 		ok := object.Key("Themes")
 		if err := awsRestjson1_serializeDocumentAssetBundleImportJobThemeOverridePermissionsList(v.Themes, ok); err != nil {
@@ -19375,6 +19552,13 @@ func awsRestjson1_serializeDocumentAssetBundleImportJobOverrideTags(v *types.Ass
 	if v.DataSources != nil {
 		ok := object.Key("DataSources")
 		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideTagsList(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Folders != nil {
+		ok := object.Key("Folders")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobFolderOverrideTagsList(v.Folders, ok); err != nil {
 			return err
 		}
 	}
@@ -38523,6 +38707,18 @@ func awsRestjson1_serializeDocumentTopicColumns(v []types.TopicColumn, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTopicConfigOptions(v *types.TopicConfigOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.QBusinessInsightsEnabled != nil {
+		ok := object.Key("QBusinessInsightsEnabled")
+		ok.Boolean(*v.QBusinessInsightsEnabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTopicConstantValue(v *types.TopicConstantValue, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -38579,6 +38775,13 @@ func awsRestjson1_serializeDocumentTopicDateRangeFilter(v *types.TopicDateRangeF
 func awsRestjson1_serializeDocumentTopicDetails(v *types.TopicDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConfigOptions != nil {
+		ok := object.Key("ConfigOptions")
+		if err := awsRestjson1_serializeDocumentTopicConfigOptions(v.ConfigOptions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DataSets != nil {
 		ok := object.Key("DataSets")

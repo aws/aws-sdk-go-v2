@@ -97,6 +97,30 @@ func (GuardrailContentFilterConfidence) Values() []GuardrailContentFilterConfide
 	}
 }
 
+type GuardrailContentFilterStrength string
+
+// Enum values for GuardrailContentFilterStrength
+const (
+	GuardrailContentFilterStrengthNone   GuardrailContentFilterStrength = "NONE"
+	GuardrailContentFilterStrengthLow    GuardrailContentFilterStrength = "LOW"
+	GuardrailContentFilterStrengthMedium GuardrailContentFilterStrength = "MEDIUM"
+	GuardrailContentFilterStrengthHigh   GuardrailContentFilterStrength = "HIGH"
+)
+
+// Values returns all known values for GuardrailContentFilterStrength. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailContentFilterStrength) Values() []GuardrailContentFilterStrength {
+	return []GuardrailContentFilterStrength{
+		"NONE",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
 type GuardrailContentFilterType string
 
 // Enum values for GuardrailContentFilterType

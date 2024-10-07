@@ -2305,9 +2305,26 @@ func awsRestjson1_serializeOpDocumentCreateDomainConfigurationInput(v *CreateDom
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ApplicationProtocol) > 0 {
+		ok := object.Key("applicationProtocol")
+		ok.String(string(v.ApplicationProtocol))
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("authenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.AuthorizerConfig != nil {
 		ok := object.Key("authorizerConfig")
 		if err := awsRestjson1_serializeDocumentAuthorizerConfig(v.AuthorizerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientCertificateConfig != nil {
+		ok := object.Key("clientCertificateConfig")
+		if err := awsRestjson1_serializeDocumentClientCertificateConfig(v.ClientCertificateConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -20232,9 +20249,26 @@ func awsRestjson1_serializeOpDocumentUpdateDomainConfigurationInput(v *UpdateDom
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ApplicationProtocol) > 0 {
+		ok := object.Key("applicationProtocol")
+		ok.String(string(v.ApplicationProtocol))
+	}
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("authenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.AuthorizerConfig != nil {
 		ok := object.Key("authorizerConfig")
 		if err := awsRestjson1_serializeDocumentAuthorizerConfig(v.AuthorizerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientCertificateConfig != nil {
+		ok := object.Key("clientCertificateConfig")
+		if err := awsRestjson1_serializeDocumentClientCertificateConfig(v.ClientCertificateConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -23294,6 +23328,18 @@ func awsRestjson1_serializeDocumentCidrs(v []string, value smithyjson.Value) err
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentClientCertificateConfig(v *types.ClientCertificateConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientCertificateCallbackArn != nil {
+		ok := object.Key("clientCertificateCallbackArn")
+		ok.String(*v.ClientCertificateCallbackArn)
+	}
+
 	return nil
 }
 

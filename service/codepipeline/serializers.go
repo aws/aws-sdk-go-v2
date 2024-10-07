@@ -2716,6 +2716,13 @@ func awsAwsjson11_serializeDocumentActionDeclaration(v *types.ActionDeclaration,
 		}
 	}
 
+	if v.Commands != nil {
+		ok := object.Key("commands")
+		if err := awsAwsjson11_serializeDocumentCommandList(v.Commands, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Configuration != nil {
 		ok := object.Key("configuration")
 		if err := awsAwsjson11_serializeDocumentActionConfigurationMap(v.Configuration, ok); err != nil {
@@ -2743,6 +2750,13 @@ func awsAwsjson11_serializeDocumentActionDeclaration(v *types.ActionDeclaration,
 	if v.OutputArtifacts != nil {
 		ok := object.Key("outputArtifacts")
 		if err := awsAwsjson11_serializeDocumentOutputArtifactList(v.OutputArtifacts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputVariables != nil {
+		ok := object.Key("outputVariables")
+		if err := awsAwsjson11_serializeDocumentOutputVariableList(v.OutputVariables, ok); err != nil {
 			return err
 		}
 	}
@@ -3204,6 +3218,17 @@ func awsAwsjson11_serializeDocumentBlockerDeclaration(v *types.BlockerDeclaratio
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCommandList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3361,6 +3386,17 @@ func awsAwsjson11_serializeDocumentFailureDetails(v *types.FailureDetails, value
 		ok.String(string(v.Type))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFilePathList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3658,6 +3694,13 @@ func awsAwsjson11_serializeDocumentOutputArtifact(v *types.OutputArtifact, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.Files != nil {
+		ok := object.Key("files")
+		if err := awsAwsjson11_serializeDocumentFilePathList(v.Files, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3675,6 +3718,17 @@ func awsAwsjson11_serializeDocumentOutputArtifactList(v []types.OutputArtifact, 
 		if err := awsAwsjson11_serializeDocumentOutputArtifact(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOutputVariableList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

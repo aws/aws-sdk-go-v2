@@ -446,6 +446,12 @@
                         "smithy.api#documentation": "<p>The action's configuration. These are key-value pairs that specify input values for\n            an action. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements\">Action Structure Requirements in CodePipeline</a>. For the list of\n            configuration properties for the CloudFormation action type in CodePipeline, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html\">Configuration Properties Reference</a> in the <i>CloudFormation\n                User Guide</i>. For template snippets with examples, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html\">Using Parameter Override Functions with CodePipeline Pipelines</a> in the\n                    <i>CloudFormation User Guide</i>.</p>\n         <p>The values can be represented in either JSON or YAML format. For example, the JSON\n            configuration item format is as follows: </p>\n         <p>\n            <i>JSON:</i>\n         </p>\n         <p>\n            <code>\"Configuration\" : { Key : Value },</code>\n         </p>"
                     }
                 },
+                "commands": {
+                    "target": "com.amazonaws.codepipeline#CommandList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shell commands to run with your compute action in CodePipeline. All commands are\n            supported except multi-line formats. While CodeBuild logs and permissions are used, you\n            do not need to create any resources in CodeBuild.</p>\n         <note>\n            <p>Using compute time for this action will incur separate charges in\n                CodeBuild.</p>\n         </note>"
+                    }
+                },
                 "outputArtifacts": {
                     "target": "com.amazonaws.codepipeline#OutputArtifactList",
                     "traits": {
@@ -456,6 +462,12 @@
                     "target": "com.amazonaws.codepipeline#InputArtifactList",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or ID of the artifact consumed by the action, such as a test or build\n            artifact.</p>"
+                    }
+                },
+                "outputVariables": {
+                    "target": "com.amazonaws.codepipeline#OutputVariableList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of variables that are to be exported from the compute action. This is specifically CodeBuild environment variables as used for that action.</p>"
                     }
                 },
                 "roleArn": {
@@ -2863,6 +2875,27 @@
                 }
             }
         },
+        "com.amazonaws.codepipeline#Command": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#CommandList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#Command"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.codepipeline#ConcurrentModificationException": {
             "type": "structure",
             "members": {
@@ -3917,6 +3950,27 @@
                     "traits": {
                         "smithy.api#enumValue": "SystemUnavailable"
                     }
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#FilePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#FilePathList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#FilePath"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -5894,6 +5948,12 @@
                         "smithy.api#documentation": "<p>The name of the output of an artifact, such as \"My App\".</p>\n         <p>The input artifact of an action must exactly match the output artifact declared in\n            a preceding action, but the input artifact does not have to be the next action in strict\n            sequence from the action that provided the output artifact. Actions in parallel can\n            declare different output artifacts, which are in turn consumed by different following\n            actions.</p>\n         <p>Output artifact names must be unique within a pipeline.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "files": {
+                    "target": "com.amazonaws.codepipeline#FilePathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The files that you want to associate with the output artifact that will be exported from the compute action.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5904,6 +5964,27 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.codepipeline#OutputArtifact"
+            }
+        },
+        "com.amazonaws.codepipeline#OutputVariable": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.codepipeline#OutputVariableList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codepipeline#OutputVariable"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                }
             }
         },
         "com.amazonaws.codepipeline#OutputVariablesKey": {

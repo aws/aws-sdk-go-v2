@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Updates the specified parameters for a transformer. A transformer describes how
-// to process the incoming EDI documents and extract the necessary information to
-// the output file.
+// Updates the specified parameters for a transformer. A transformer can take an
+// EDI file as input and transform it into a JSON-or XML-formatted document.
+// Alternatively, a transformer can take a JSON-or XML-formatted document as input
+// and transform it into an EDI file.
 func (c *Client) UpdateTransformer(ctx context.Context, params *UpdateTransformerInput, optFns ...func(*Options)) (*UpdateTransformerOutput, error) {
 	if params == nil {
 		params = &UpdateTransformerInput{}
@@ -40,22 +41,55 @@ type UpdateTransformerInput struct {
 	// Specifies the details for the EDI standard that is being used for the
 	// transformer. Currently, only X12 is supported. X12 is a set of standards and
 	// corresponding messages that define specific business documents.
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
 	EdiType types.EdiType
 
 	// Specifies that the currently supported file formats for EDI transformations are
 	// JSON and XML .
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
 	FileFormat types.FileFormat
+
+	// To update, specify the InputConversion object, which contains the format
+	// options for the inbound transformation.
+	InputConversion *types.InputConversion
+
+	// Specify the structure that contains the mapping template and its language
+	// (either XSLT or JSONATA).
+	Mapping *types.Mapping
 
 	// Specifies the mapping template for the transformer. This template is used to
 	// map the parsed EDI file using JSONata or XSLT.
+	//
+	// This parameter is available for backwards compatibility. Use the [Mapping] data type
+	// instead.
+	//
+	// [Mapping]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
 	MappingTemplate *string
 
 	// Specify a new name for the transformer, if you want to update it.
 	Name *string
 
+	// To update, specify the OutputConversion object, which contains the format
+	// options for the outbound transformation.
+	OutputConversion *types.OutputConversion
+
 	// Specifies a sample EDI document that is used by a transformer as a guide for
 	// processing the EDI data.
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
 	SampleDocument *string
+
+	// Specify a structure that contains the Amazon S3 bucket and an array of the
+	// corresponding keys used to identify the location for your sample documents.
+	SampleDocuments *types.SampleDocuments
 
 	// Specifies the transformer's status. You can update the state of the
 	// transformer, from active to inactive , or inactive to active .
@@ -70,25 +104,6 @@ type UpdateTransformerOutput struct {
 	//
 	// This member is required.
 	CreatedAt *time.Time
-
-	// Returns the details for the EDI standard that is being used for the
-	// transformer. Currently, only X12 is supported. X12 is a set of standards and
-	// corresponding messages that define specific business documents.
-	//
-	// This member is required.
-	EdiType types.EdiType
-
-	// Returns that the currently supported file formats for EDI transformations are
-	// JSON and XML .
-	//
-	// This member is required.
-	FileFormat types.FileFormat
-
-	// Returns the mapping template for the transformer. This template is used to map
-	// the parsed EDI file using JSONata or XSLT.
-	//
-	// This member is required.
-	MappingTemplate *string
 
 	// Returns a timestamp for last time the transformer was modified.
 	//
@@ -118,9 +133,50 @@ type UpdateTransformerOutput struct {
 	// This member is required.
 	TransformerId *string
 
+	// Returns the details for the EDI standard that is being used for the
+	// transformer. Currently, only X12 is supported. X12 is a set of standards and
+	// corresponding messages that define specific business documents.
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
+	EdiType types.EdiType
+
+	// Returns that the currently supported file formats for EDI transformations are
+	// JSON and XML .
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
+	FileFormat types.FileFormat
+
+	// Returns the InputConversion object, which contains the format options for the
+	// inbound transformation.
+	InputConversion *types.InputConversion
+
+	// Returns the structure that contains the mapping template and its language
+	// (either XSLT or JSONATA).
+	Mapping *types.Mapping
+
+	// Returns the mapping template for the transformer. This template is used to map
+	// the parsed EDI file using JSONata or XSLT.
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
+	MappingTemplate *string
+
+	// Returns the OutputConversion object, which contains the format options for the
+	// outbound transformation.
+	OutputConversion *types.OutputConversion
+
 	// Returns a sample EDI document that is used by a transformer as a guide for
 	// processing the EDI data.
+	//
+	// Deprecated: This is a legacy trait. Please use input-conversion or
+	// output-conversion.
 	SampleDocument *string
+
+	// Returns a structure that contains the Amazon S3 bucket and an array of the
+	// corresponding keys used to identify the location for your sample documents.
+	SampleDocuments *types.SampleDocuments
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

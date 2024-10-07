@@ -1364,6 +1364,9 @@ type JobSearchSummary struct {
 	// The queue ID.
 	QueueId *string
 
+	// The job ID for the source job.
+	SourceJobId *string
+
 	// The date and time the resource started running.
 	StartedAt *time.Time
 
@@ -1446,6 +1449,9 @@ type JobSummary struct {
 
 	// The maximum number of retries for a job.
 	MaxRetriesPerTask *int32
+
+	// The job ID for the source job.
+	SourceJobId *string
 
 	// The date and time the resource started running.
 	StartedAt *time.Time

@@ -1,0 +1,954 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.marketplacereporting#AWSMarketplaceReporting": {
+            "type": "service",
+            "version": "2018-05-10",
+            "resources": [
+                {
+                    "target": "com.amazonaws.marketplacereporting#Dashboard"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Marketplace Reporting",
+                    "cloudTrailEventSource": "reporting-marketplace.amazonaws.com",
+                    "arnNamespace": "aws-marketplace",
+                    "endpointPrefix": "reporting-marketplace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "aws-marketplace"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalExposedHeaders": [
+                        "x-amzn-requestid",
+                        "x-amzn-errortype",
+                        "x-amzn-errormessage",
+                        "date"
+                    ]
+                },
+                "smithy.api#documentation": "<p>The Amazon Web Services Marketplace <code>GetBuyerDashboard</code> API enables you to get a procurement insights\n      dashboard programmatically. The API gets the agreement and cost analysis dashboards with\n      data for all of the Amazon Web Services accounts in your Amazon Web Services Organization. </p>\n         <p>To use the Amazon Web Services Marketplace Reporting API, you must complete the following prerequisites:</p>\n         <ul>\n            <li>\n               <p>Enable all features for your organization. For more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">Enabling all features for an organization with Organizations</a>, in the\n          <i>Organizations User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Call the service as the Organizations management account or an account registered\n          as a delegated administrator for the procurement insights service.</p>\n               <p>For more information about management accounts, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tutorials_basic.html\">Tutorial:\n          Creating and configuring an organization</a> and <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs-manage_accounts_management.html\">Managing the management account with Organizations</a>, both in the\n          <i>Organizations User Guide</i>.</p>\n               <p>For more information about delegated administrators, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/management-delegates.html\">Using\n          delegated administrators</a>, in the <i>Amazon Web Services Marketplace Buyer\n            Guide</i>.</p>\n            </li>\n            <li>\n               <p>Create an IAM policy that enables the\n          <code>aws-marketplace:GetBuyerDashboard</code> and\n          <code>organizations:DescribeOrganization</code> permissions. In addition,\n          the management account requires the\n          <code>organizations:EnableAWSServiceAccess</code> and\n          <code>iam:CreateServiceLinkedRole</code> permissions to create. For more\n          information about creating the policy, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">Policies and permissions in\n            Identity and Access Management</a>, in the <i>IAM User Guide</i>.</p>\n               <note>\n                  <p>Access can be shared only by registering the desired linked account as a\n            delegated administrator. That requires\n            <code>organizations:RegisterDelegatedAdministrator</code>\n                     <code>organizations:ListDelegatedAdministrators</code> and\n            <code>organizations:DeregisterDelegatedAdministrator</code>\n            permissions.</p>\n               </note>\n            </li>\n            <li>\n               <p>Use the Amazon Web Services Marketplace console to create the\n          <code>AWSServiceRoleForProcurementInsightsPolicy</code> service-linked role.\n          The role enables Amazon Web Services Marketplace procurement visibility integration. The management\n          account requires an IAM policy with the\n          <code>organizations:EnableAWSServiceAccess</code> and\n          <code>iam:CreateServiceLinkedRole</code> permissions to create the\n          service-linked role and enable the service access. For more information, see\n          <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/orgs-access-slr.html\">Granting access to\n            Organizations</a> and <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-service-linked-role-procurement.html\">Service-linked role to share procurement data</a> in the\n          <i>Amazon Web Services Marketplace Buyer Guide</i>.</p>\n            </li>\n            <li>\n               <p>After creating the service-linked role, you must enable trusted access that\n          grants Amazon Web Services Marketplace permission to access data from your Organizations. For more information,\n          see <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/orgs-access-slr.html\">Granting access to\n            Organizations</a> in the <i>Amazon Web Services Marketplace Buyer Guide</i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Marketplace Reporting Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://reporting-marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://reporting-marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://reporting-marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://reporting-marketplace.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://reporting-marketplace.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.marketplacereporting#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.marketplacereporting#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is malformed, or it contains an error such as an invalid parameter. Ensure the request has all required parameters.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.marketplacereporting#Dashboard": {
+            "type": "resource",
+            "identifiers": {
+                "dashboardIdentifier": {
+                    "target": "com.amazonaws.marketplacereporting#DashboardIdentifier"
+                }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.marketplacereporting#GetBuyerDashboard"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{dashboardIdentifier}",
+                    "absolute": true,
+                    "noRegion": true
+                }
+            }
+        },
+        "com.amazonaws.marketplacereporting#DashboardIdentifier": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "service": "com.amazonaws.marketplacereporting#AWSMarketplaceReporting",
+                    "resource": "com.amazonaws.marketplacereporting#Dashboard",
+                    "type": "AWS::Service::Resource"
+                },
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1023
+                },
+                "smithy.api#pattern": "^arn:aws:aws-marketplace::[0-9]{12}:AWSMarketplace/ReportingData/(Agreement_V1/Dashboard/AgreementSummary_V1|BillingEvent_V1/Dashboard/CostAnalysis_V1)$"
+            }
+        },
+        "com.amazonaws.marketplacereporting#EmbeddingDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "^(https://[a-zA-Z\\.\\*0-9\\-_]+[\\.]{1}[a-zA-Z]{1,}[a-zA-Z0-9&?/-_=]*[a-zA-Z\\*0-9/]+|http[s]*://localhost(:[0-9]{1,5})?)$"
+            }
+        },
+        "com.amazonaws.marketplacereporting#EmbeddingDomains": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacereporting#EmbeddingDomain"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.marketplacereporting#GetBuyerDashboard": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.marketplacereporting#GetBuyerDashboardInput"
+            },
+            "output": {
+                "target": "com.amazonaws.marketplacereporting#GetBuyerDashboardOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.marketplacereporting#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacereporting#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacereporting#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.marketplacereporting#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates an embedding URL for an Amazon QuickSight dashboard for an anonymous user.</p>\n         <note>\n            <p>This API is available only to Amazon Web Services Organization management accounts or\n      delegated administrators registered for the procurement insights\n      (<code>procurement-insights.marketplace.amazonaws.com</code>) feature.</p>\n         </note>\n         <p>The following rules apply to a generated URL:</p>\n         <ul>\n            <li>\n               <p>It contains a temporary bearer token, valid for 5 minutes after it is generated. Once redeemed within that period, it cannot be re-used again.</p>\n            </li>\n            <li>\n               <p>It has a session lifetime of one hour. The 5-minute validity period runs separately from the session lifetime.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Getting an agreements dashboard",
+                        "documentation": "The following example shows how to obtain a dashboard for active agreements",
+                        "input": {
+                            "dashboardIdentifier": "arn:aws:aws-marketplace::123456789012:AWSMarketplace/ReportingData/Agreement_V1/Dashboard/AgreementSummary_V1",
+                            "embeddingDomains": [
+                                "https://*.amazon.com"
+                            ]
+                        },
+                        "output": {
+                            "dashboardIdentifier": "arn:aws:aws-marketplace::123456789012:AWSMarketplace/ReportingData/Agreement_V1/Dashboard/AgreementSummary_V1",
+                            "embedUrl": "https://us-east-1.quicksight.aws.amazon.com/embed/1235asdbffffbbasdf123/dashboards/8a66afa6-f316-4e71-a1ed-0a5bea07a314?code=abcdefghijklmn&identityprovider=quicksight&isauthcode=true",
+                            "embeddingDomains": [
+                                "https://*.amazon.com"
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Getting a cost-analysis dashboard",
+                        "documentation": "The following example shows how to obtain a dashboard for cost analysis",
+                        "input": {
+                            "dashboardIdentifier": "arn:aws:aws-marketplace::123456789012:AWSMarketplace/ReportingData/BillingEvent_V1/Dashboard/CostAnalysis_V1",
+                            "embeddingDomains": [
+                                "https://*.amazon.com"
+                            ]
+                        },
+                        "output": {
+                            "dashboardIdentifier": "arn:aws:aws-marketplace::123456789012:AWSMarketplace/ReportingData/BillingEvent_V1/Dashboard/CostAnalysis_V1",
+                            "embedUrl": "https://us-east-1.quicksight.aws.amazon.com/embed/1235asdbffffbbasdf123/dashboards/8a66afa6-f316-4e71-a1ed-0a5bea07a314?code=abcdefghijklmn&identityprovider=quicksight&isauthcode=true",
+                            "embeddingDomains": [
+                                "https://*.amazon.com"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/getBuyerDashboard"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetBuyerDashboardUnauthorized",
+                        "params": {
+                            "dashboardIdentifier": "arn:aws:aws-marketplace::021234567890:AWSMarketplace/ReportingData/Agreement_V1/Dashboard/AgreementSummary_V1",
+                            "embeddingDomains": [
+                                "https://localhost:8080"
+                            ]
+                        },
+                        "expect": {
+                            "failure": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.marketplacereporting#GetBuyerDashboardInput": {
+            "type": "structure",
+            "members": {
+                "dashboardIdentifier": {
+                    "target": "com.amazonaws.marketplacereporting#DashboardIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the requested dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "embeddingDomains": {
+                    "target": "com.amazonaws.marketplacereporting#EmbeddingDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fully qualified domains that you add to the allow list for access to the generated URL that is then embedded. You can list up to two domains or subdomains in each API call.\n      To include all subdomains under a specific domain, use <code>*</code>. For example, <code>https://*.amazon.com</code> includes all subdomains under \n      <code>https://aws.amazon.com</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.marketplacereporting#Dashboard",
+                        "ids": {
+                            "dashboardIdentifier": "dashboardIdentifier"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.marketplacereporting#GetBuyerDashboardOutput": {
+            "type": "structure",
+            "members": {
+                "embedUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dashboard's embedding URL.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dashboardIdentifier": {
+                    "target": "com.amazonaws.marketplacereporting#DashboardIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the returned dashboard.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "embeddingDomains": {
+                    "target": "com.amazonaws.marketplacereporting#EmbeddingDomains",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified domains specified in the request. The domains enable access to the generated URL that is then embedded. You can list up to two domains or subdomains in each API call.\n      To include all subdomains under a specific domain, use <code>*</code>. For example, <code>https://*.amazon.com</code> includes all subdomains under \n      <code>https://aws.amazon.com</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.marketplacereporting#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation failed due to a server error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.marketplacereporting#UnauthorizedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have permission to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        }
+    }
+}

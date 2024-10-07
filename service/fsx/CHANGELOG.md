@@ -1,3 +1,16 @@
+# v1.49.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.4 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.48.3 (2024-09-27)
 
 * No change notes available for this release.

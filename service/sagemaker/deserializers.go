@@ -43417,6 +43417,15 @@ func awsAwsjson11_deserializeDocumentCodeEditorAppSettings(v **types.CodeEditorA
 				return err
 			}
 
+		case "BuiltInLifecycleConfigArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StudioLifecycleConfigArn to be of type string, got %T instead", value)
+				}
+				sv.BuiltInLifecycleConfigArn = ptr.String(jtv)
+			}
+
 		case "CustomImages":
 			if err := awsAwsjson11_deserializeDocumentCustomImages(&sv.CustomImages, value); err != nil {
 				return err
@@ -58067,6 +58076,15 @@ func awsAwsjson11_deserializeDocumentJupyterLabAppSettings(v **types.JupyterLabA
 		case "AppLifecycleManagement":
 			if err := awsAwsjson11_deserializeDocumentAppLifecycleManagement(&sv.AppLifecycleManagement, value); err != nil {
 				return err
+			}
+
+		case "BuiltInLifecycleConfigArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StudioLifecycleConfigArn to be of type string, got %T instead", value)
+				}
+				sv.BuiltInLifecycleConfigArn = ptr.String(jtv)
 			}
 
 		case "CodeRepositories":
@@ -87033,6 +87051,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 					return fmt.Errorf("expected AppType to be of type string, got %T instead", value)
 				}
 				sv.AppType = types.AppType(jtv)
+			}
+
+		case "BuiltInLifecycleConfigArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StudioLifecycleConfigArn to be of type string, got %T instead", value)
+				}
+				sv.BuiltInLifecycleConfigArn = ptr.String(jtv)
 			}
 
 		case "CreationTime":

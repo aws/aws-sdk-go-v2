@@ -270,15 +270,53 @@ type Event struct {
 
 	// If the event is an error event, the error code is provided to give insight into
 	// the specific error that occurred. If the event is not an error event, this field
-	// is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take
-	// an action that the participant’s token is not allowed to do. For more
-	// information about participant capabilities, see the capabilities field in CreateParticipantToken.
-	// QUOTA_EXCEEDED indicates that the number of participants who want to
-	// publish/subscribe to a stage exceeds the quota; for more information, see [Service Quotas].
-	// PUBLISHER_NOT_FOUND indicates that the participant tried to subscribe to a
-	// publisher that doesn’t exist.
+	// is null.
 	//
+	//   - B_FRAME_PRESENT — The participant's stream includes B-frames. For details,
+	//   see [IVS RTMP Publishing].
+	//
+	//   - BITRATE_EXCEEDED — The participant exceeded the maximum supported bitrate.
+	//   For details, see [Service Quotas].
+	//
+	//   - INSUFFICIENT_CAPABILITIES — The participant tried to take an action that the
+	//   participant’s token is not allowed to do. For details on participant
+	//   capabilities, see the capabilities field in CreateParticipantToken.
+	//
+	//   - INTERNAL_SERVER_EXCEPTION — The participant failed to publish to the stage
+	//   due to an internal server error.
+	//
+	//   - INVALID_AUDIO_CODEC — The participant is using an invalid audio codec. For
+	//   details, see [Stream Ingest].
+	//
+	//   - INVALID_INPUT — The participant is using an invalid input stream.
+	//
+	//   - INVALID_PROTOCOL — The participant's IngestConfiguration resource is
+	//   configured for RTMPS but they tried streaming with RTMP. For details, see [IVS RTMP Publishing].
+	//
+	//   - INVALID_STREAM_KEY — The participant is using an invalid stream key. For
+	//   details, see [IVS RTMP Publishing].
+	//
+	//   - INVALID_VIDEO_CODEC — The participant is using an invalid video codec. For
+	//   details, see [Stream Ingest].
+	//
+	//   - PUBLISHER_NOT_FOUND — The participant tried to subscribe to a publisher that
+	//   doesn’t exist.
+	//
+	//   - QUOTA_EXCEEDED — The number of participants who want to publish/subscribe to
+	//   a stage exceeds the quota. For details, see [Service Quotas].
+	//
+	//   - RESOLUTION_EXCEEDED — The participant exceeded the maximum supported
+	//   resolution. For details, see [Service Quotas].
+	//
+	//   - REUSE_OF_STREAM_KEY — The participant tried to use a stream key that is
+	//   associated with another active stage session.
+	//
+	//   - STREAM_DURATION_EXCEEDED — The participant exceeded the maximum allowed
+	//   stream duration. For details, see [Service Quotas].
+	//
+	// [Stream Ingest]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-stream-ingest.html
 	// [Service Quotas]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html
+	// [IVS RTMP Publishing]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html
 	ErrorCode EventErrorCode
 
 	// ISO 8601 timestamp (returned as a string) for when the event occurred.
@@ -934,14 +972,14 @@ type Video struct {
 	// Video frame rate, in fps. Default: 30.
 	Framerate *float32
 
-	// Video-resolution height. Note that the maximum value is determined by width
-	// times height , such that the maximum total pixels is 2073600 (1920x1080 or
-	// 1080x1920). Default: 720.
+	// Video-resolution height. This must be an even number. Note that the maximum
+	// value is determined by width times height , such that the maximum total pixels
+	// is 2073600 (1920x1080 or 1080x1920). Default: 720.
 	Height *int32
 
-	// Video-resolution width. Note that the maximum value is determined by width
-	// times height , such that the maximum total pixels is 2073600 (1920x1080 or
-	// 1080x1920). Default: 1280.
+	// Video-resolution width. This must be an even number. Note that the maximum
+	// value is determined by width times height , such that the maximum total pixels
+	// is 2073600 (1920x1080 or 1080x1920). Default: 1280.
 	Width *int32
 
 	noSmithyDocumentSerde

@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified transformer. A transformer describes how to process the
-// incoming EDI documents and extract the necessary information to the output file.
+// Deletes the specified transformer. A transformer can take an EDI file as input
+// and transform it into a JSON-or XML-formatted document. Alternatively, a
+// transformer can take a JSON-or XML-formatted document as input and transform it
+// into an EDI file.
 func (c *Client) DeleteTransformer(ctx context.Context, params *DeleteTransformerInput, optFns ...func(*Options)) (*DeleteTransformerOutput, error) {
 	if params == nil {
 		params = &DeleteTransformerInput{}

@@ -832,6 +832,12 @@
                         "smithy.api#documentation": "<p>The assessment details in the response from the guardrail.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "guardrailCoverage": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailCoverage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The guardrail coverage details in the apply guardrail response.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1636,6 +1642,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The contextual grounding policy used for the guardrail assessment.</p>"
                     }
+                },
+                "invocationMetrics": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailInvocationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The invocation metrics for the guardrail assessment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1732,6 +1744,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "filterStrength": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailContentFilterStrength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter strength setting for the guardrail content filter.</p>"
+                    }
+                },
                 "action": {
                     "target": "com.amazonaws.bedrockruntime#GuardrailContentPolicyAction",
                     "traits": {
@@ -1777,6 +1795,35 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockruntime#GuardrailContentFilter"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailContentFilterStrength": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailContentFilterType": {
@@ -2060,6 +2107,20 @@
                 "smithy.api#documentation": "<p>A text block that contains text that you want to assess with a guardrail. For more information, see <a>GuardrailConverseContentBlock</a>.</p>"
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailCoverage": {
+            "type": "structure",
+            "members": {
+                "textCharacters": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailTextCharactersCoverage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text characters of the guardrail coverage details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action of the guardrail coverage details.</p>"
+            }
+        },
         "com.amazonaws.bedrockruntime#GuardrailCustomWord": {
             "type": "structure",
             "members": {
@@ -2095,6 +2156,32 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailInvocationMetrics": {
+            "type": "structure",
+            "members": {
+                "guardrailProcessingLatency": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailProcessingLatency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processing latency details for the guardrail invocation metrics.</p>"
+                    }
+                },
+                "usage": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage details for the guardrail invocation metrics.</p>"
+                    }
+                },
+                "guardrailCoverage": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailCoverage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The coverage details for the guardrail invocation metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The invocation metrics for the guardrail.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailManagedWord": {
@@ -2392,6 +2479,9 @@
                 }
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailProcessingLatency": {
+            "type": "long"
+        },
         "com.amazonaws.bedrockruntime#GuardrailRegexFilter": {
             "type": "structure",
             "members": {
@@ -2556,6 +2646,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The text block to be evaluated by the guardrail.</p>"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailTextCharactersCoverage": {
+            "type": "structure",
+            "members": {
+                "guarded": {
+                    "target": "com.amazonaws.bedrockruntime#TextCharactersGuarded",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text characters that were guarded by the guardrail coverage.</p>"
+                    }
+                },
+                "total": {
+                    "target": "com.amazonaws.bedrockruntime#TextCharactersTotal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total text characters by the guardrail coverage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The guardrail coverage for the text characters.</p>"
             }
         },
         "com.amazonaws.bedrockruntime#GuardrailTopic": {
@@ -3568,6 +3678,12 @@
             "member": {
                 "target": "com.amazonaws.bedrockruntime#SystemContentBlock"
             }
+        },
+        "com.amazonaws.bedrockruntime#TextCharactersGuarded": {
+            "type": "integer"
+        },
+        "com.amazonaws.bedrockruntime#TextCharactersTotal": {
+            "type": "integer"
         },
         "com.amazonaws.bedrockruntime#ThrottlingException": {
             "type": "structure",

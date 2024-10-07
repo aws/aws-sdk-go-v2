@@ -329,14 +329,14 @@ type ExternalSourcesGenerationConfiguration struct {
 // retrieveAndGenerate function.
 type ExternalSourcesRetrieveAndGenerateConfiguration struct {
 
-	// The modelArn used with the external source wrapper object in the
-	// retrieveAndGenerate function.
+	// The model Amazon Resource Name (ARN) for the external source wrapper object in
+	// the retrieveAndGenerate function.
 	//
 	// This member is required.
 	ModelArn *string
 
-	// The document used with the external source wrapper object in the
-	// retrieveAndGenerate function.
+	// The document for the external source wrapper object in the retrieveAndGenerate
+	// function.
 	//
 	// This member is required.
 	Sources []ExternalSource
@@ -1540,9 +1540,15 @@ type PayloadPart struct {
 // The foundation model output from the post-processing step.
 type PostProcessingModelInvocationOutput struct {
 
+	// Provides details of the foundation model.
+	Metadata *Metadata
+
 	// Details about the response from the Lambda parsing of the output of the
 	// post-processing step.
 	ParsedResponse *PostProcessingParsedResponse
+
+	// Contains the raw output from the foundation model.
+	RawResponse *RawResponse
 
 	// The unique identifier of the trace.
 	TraceId *string
@@ -1600,9 +1606,15 @@ func (*PostProcessingTraceMemberModelInvocationOutput) isPostProcessingTrace() {
 // The foundation model output from the pre-processing step.
 type PreProcessingModelInvocationOutput struct {
 
+	// Provides details of the foundation model.
+	Metadata *Metadata
+
 	// Details about the response from the Lambda parsing of the output of the
 	// pre-processing step.
 	ParsedResponse *PreProcessingParsedResponse
+
+	// Contains the raw output from the foundation model.
+	RawResponse *RawResponse
 
 	// The unique identifier of the trace.
 	TraceId *string
@@ -2190,16 +2202,21 @@ type RetrievalResultWebLocation struct {
 // [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 type RetrieveAndGenerateConfiguration struct {
 
-	// The type of resource that is queried by the request.
+	// The type of resource that contains your data for retrieving information and
+	// generating responses.
+	//
+	// If you choose ot use EXTERNAL_SOURCES , then currently only Claude 3 Sonnet
+	// models for knowledge bases are supported.
 	//
 	// This member is required.
 	Type RetrieveAndGenerateType
 
-	// The configuration used with the external source wrapper object in the
+	// The configuration for the external source wrapper object in the
 	// retrieveAndGenerate function.
 	ExternalSourcesConfiguration *ExternalSourcesRetrieveAndGenerateConfiguration
 
-	// Contains details about the resource being queried.
+	// Contains details about the knowledge base for retrieving information and
+	// generating responses.
 	KnowledgeBaseConfiguration *KnowledgeBaseRetrieveAndGenerateConfiguration
 
 	noSmithyDocumentSerde

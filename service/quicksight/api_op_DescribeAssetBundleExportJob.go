@@ -98,6 +98,12 @@ type DescribeAssetBundleExportJobOutput struct {
 	// The include dependencies flag.
 	IncludeAllDependencies bool
 
+	// A setting that determines whether folder members are included.
+	IncludeFolderMembers types.IncludeFolderMembers
+
+	// The include folder memberships flag.
+	IncludeFolderMemberships bool
+
 	// The include permissions flag.
 	IncludePermissions bool
 

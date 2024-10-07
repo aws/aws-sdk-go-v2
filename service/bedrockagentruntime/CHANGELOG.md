@@ -1,3 +1,20 @@
+# v1.22.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.1 (2024-10-03)
+
+* No change notes available for this release.
+
+# v1.21.0 (2024-10-02)
+
+* **Feature**: Added raw model response and usage metrics to PreProcessing and PostProcessing Trace
+
 # v1.20.3 (2024-09-27)
 
 * No change notes available for this release.

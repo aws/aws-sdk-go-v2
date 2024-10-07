@@ -54,6 +54,9 @@ type CreatePartnershipInput struct {
 	// This member is required.
 	ProfileId *string
 
+	// Specify the structure that contains the details for the associated capabilities.
+	CapabilityOptions *types.CapabilityOptions
+
 	// Reserved for future use.
 	ClientToken *string
 
@@ -94,6 +97,9 @@ type CreatePartnershipOutput struct {
 
 	// Returns one or more capabilities associated with this partnership.
 	Capabilities []string
+
+	// Returns the structure that contains the details for the associated capabilities.
+	CapabilityOptions *types.CapabilityOptions
 
 	// Returns the email address associated with this trading partner.
 	Email *string

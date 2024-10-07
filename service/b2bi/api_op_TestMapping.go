@@ -46,6 +46,11 @@ type TestMappingInput struct {
 	// Specifies the mapping template for the transformer. This template is used to
 	// map the parsed EDI file using JSONata or XSLT.
 	//
+	// This parameter is available for backwards compatibility. Use the [Mapping] data type
+	// instead.
+	//
+	// [Mapping]: https://docs.aws.amazon.com/b2bi/latest/APIReference/API_Mapping.html
+	//
 	// This member is required.
 	MappingTemplate *string
 

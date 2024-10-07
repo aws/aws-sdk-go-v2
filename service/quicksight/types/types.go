@@ -667,6 +667,10 @@ type AssetBundleCloudFormationOverridePropertyConfiguration struct {
 	// parameterized in the returned CloudFormation template.
 	DataSources []AssetBundleExportJobDataSourceOverrideProperties
 
+	// An optional list of structures that controls how Folder resources are
+	// parameterized in the returned CloudFormation template.
+	Folders []AssetBundleExportJobFolderOverrideProperties
+
 	// An optional list of structures that control how RefreshSchedule resources are
 	// parameterized in the returned CloudFormation template.
 	RefreshSchedules []AssetBundleExportJobRefreshScheduleOverrideProperties
@@ -773,6 +777,25 @@ type AssetBundleExportJobError struct {
 
 	// The specific error type of the error that occurred.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific Folder resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobFolderOverrideProperties struct {
+
+	// The ARN of the specific Folder resource whose override properties are
+	// configured in this structure.
+	//
+	// This member is required.
+	Arn *string
+
+	// A list of Folder resource properties to generate variables for in the returned
+	// CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobFolderPropertyToOverride
 
 	noSmithyDocumentSerde
 }
@@ -1166,6 +1189,58 @@ type AssetBundleImportJobError struct {
 	noSmithyDocumentSerde
 }
 
+// The override parameters for a single folder that is being imported.
+type AssetBundleImportJobFolderOverrideParameters struct {
+
+	// The ID of the folder that you want to apply overrides to.
+	//
+	// This member is required.
+	FolderId *string
+
+	// A new name for the folder.
+	Name *string
+
+	// A new parent folder arn. This change can only be applied if the import creates
+	// a brand new folder. Existing folders cannot be moved.
+	ParentFolderArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of permissions to be applied to a list of folder
+// IDs.
+type AssetBundleImportJobFolderOverridePermissions struct {
+
+	// A list of folder IDs that you want to apply overrides to. You can use * to
+	// override all folders in this asset bundle.
+	//
+	// This member is required.
+	FolderIds []string
+
+	// A structure that contains the permissions for the resource that you want to
+	// override in an asset bundle import job.
+	Permissions *AssetBundleResourcePermissions
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains a list of tags to be assigned to a list of folder IDs.
+type AssetBundleImportJobFolderOverrideTags struct {
+
+	// A list of folder IDs that you want to apply overrides to. You can use * to
+	// override all folders in this asset bundle.
+	//
+	// This member is required.
+	FolderIds []string
+
+	// A list of tags for the folders that you want to apply overrides to.
+	//
+	// This member is required.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // A list of overrides that modify the asset bundle resource configuration before
 // the resource is imported.
 type AssetBundleImportJobOverrideParameters struct {
@@ -1185,6 +1260,10 @@ type AssetBundleImportJobOverrideParameters struct {
 	//  A list of overrides for any DataSource resources that are present in the asset
 	// bundle that is imported.
 	DataSources []AssetBundleImportJobDataSourceOverrideParameters
+
+	// A list of overrides for any Folder resources that are present in the asset
+	// bundle that is imported.
+	Folders []AssetBundleImportJobFolderOverrideParameters
 
 	// A list of overrides for any RefreshSchedule resources that are present in the
 	// asset bundle that is imported.
@@ -1225,6 +1304,9 @@ type AssetBundleImportJobOverridePermissions struct {
 	// in the asset bundle that is imported.
 	DataSources []AssetBundleImportJobDataSourceOverridePermissions
 
+	// A list of permissions for the folders that you want to apply overrides to.
+	Folders []AssetBundleImportJobFolderOverridePermissions
+
 	// A list of permissions overrides for any Theme resources that are present in the
 	// asset bundle that is imported.
 	Themes []AssetBundleImportJobThemeOverridePermissions
@@ -1251,6 +1333,10 @@ type AssetBundleImportJobOverrideTags struct {
 	// A list of tag overrides for any DataSource resources that are present in the
 	// asset bundle that is imported.
 	DataSources []AssetBundleImportJobDataSourceOverrideTags
+
+	// A list of tag overrides for any Folder resources that are present in the asset
+	// bundle that is imported.
+	Folders []AssetBundleImportJobFolderOverrideTags
 
 	// A list of tag overrides for any Theme resources that are present in the asset
 	// bundle that is imported.
@@ -14768,6 +14854,15 @@ type TopicColumn struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration options for a Topic .
+type TopicConfigOptions struct {
+
+	// Enables Amazon Q Business Insights for a Topic .
+	QBusinessInsightsEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // The definition for a TopicConstantValue .
 type TopicConstantValue struct {
 
@@ -14806,6 +14901,9 @@ type TopicDateRangeFilter struct {
 // A structure that describes the details of a topic, such as its name,
 // description, and associated data sets.
 type TopicDetails struct {
+
+	// Configuration options for a Topic .
+	ConfigOptions *TopicConfigOptions
 
 	// The data sets that the topic is associated with.
 	DataSets []DatasetMetadata

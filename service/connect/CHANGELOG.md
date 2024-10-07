@@ -1,3 +1,16 @@
+# v1.113.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.113.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.112.0 (2024-10-03)
+
+* **Feature**: Public GetMetricDataV2 Grouping increase from 3 to 4
+
 # v1.111.0 (2024-09-30)
 
 * **Feature**: Amazon Connect introduces StartOutboundChatContact API allowing customers to initiate outbound chat contacts

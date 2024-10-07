@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -65,6 +66,9 @@ type GetPartnershipOutput struct {
 
 	// Returns one or more capabilities associated with this partnership.
 	Capabilities []string
+
+	// Contains the details for an Outbound EDI capability.
+	CapabilityOptions *types.CapabilityOptions
 
 	// Returns the email address associated with this trading partner.
 	Email *string

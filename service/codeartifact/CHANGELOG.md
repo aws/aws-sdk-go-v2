@@ -1,3 +1,16 @@
+# v1.33.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.32.0 (2024-10-01)
 
 * **Feature**: Add support for the dual stack endpoints.

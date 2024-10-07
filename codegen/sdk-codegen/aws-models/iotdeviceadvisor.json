@@ -55,6 +55,16 @@
                 }
             }
         },
+        "com.amazonaws.iotdeviceadvisor#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\u0021-\\u007E]+$"
+            }
+        },
         "com.amazonaws.iotdeviceadvisor#ConflictException": {
             "type": "structure",
             "members": {
@@ -111,6 +121,13 @@
                     "target": "com.amazonaws.iotdeviceadvisor#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to be attached to the suite definition.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iotdeviceadvisor#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token for the test suite definition creation. \n            This token is used for tracking test suite definition creation \n            using retries and obtaining its status. This parameter is optional.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             },

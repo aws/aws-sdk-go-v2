@@ -439,9 +439,7 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	if v.Metadata != nil {
 		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
-			if len(mapVal) > 0 {
-				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
-			}
+			hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
 		}
 	}
 
@@ -790,9 +788,7 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	if v.Metadata != nil {
 		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
-			if len(mapVal) > 0 {
-				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
-			}
+			hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
 		}
 	}
 
@@ -6359,6 +6355,11 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	if len(v.TransitionDefaultMinimumObjectSize) > 0 {
+		locationName := "X-Amz-Transition-Default-Minimum-Object-Size"
+		encoder.SetHeader(locationName).String(string(v.TransitionDefaultMinimumObjectSize))
+	}
+
 	return nil
 }
 
@@ -7547,9 +7548,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	if v.Metadata != nil {
 		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
-			if len(mapVal) > 0 {
-				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
-			}
+			hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
 		}
 	}
 
@@ -9125,9 +9124,7 @@ func awsRestxml_serializeOpHttpBindingsWriteGetObjectResponseInput(v *WriteGetOb
 	if v.Metadata != nil {
 		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
-			if len(mapVal) > 0 {
-				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
-			}
+			hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(mapVal)
 		}
 	}
 

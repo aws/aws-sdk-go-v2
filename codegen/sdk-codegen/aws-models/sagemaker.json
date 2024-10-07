@@ -7620,6 +7620,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings that are used to configure and manage the lifecycle of CodeEditor\n      applications.</p>"
                     }
+                },
+                "BuiltInLifecycleConfigArn": {
+                    "target": "com.amazonaws.sagemaker#StudioLifecycleConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default \n      lifecycle configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17850,6 +17856,12 @@
                     "target": "com.amazonaws.sagemaker#ResourceSpec",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image\n      created on the instance.</p>"
+                    }
+                },
+                "BuiltInLifecycleConfigArn": {
+                    "target": "com.amazonaws.sagemaker#StudioLifecycleConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration</p>"
                     }
                 }
             },
@@ -35552,6 +35564,12 @@
                     "target": "com.amazonaws.sagemaker#EmrSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration parameters that specify the IAM roles assumed by the execution role of \n            SageMaker (assumable roles) and the cluster instances or job execution environments \n            (execution roles or runtime roles) to manage and access resources required for running Amazon EMR\n            clusters or Amazon EMR Serverless applications.</p>"
+                    }
+                },
+                "BuiltInLifecycleConfigArn": {
+                    "target": "com.amazonaws.sagemaker#StudioLifecycleConfigArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default \n      lifecycle configuration.</p>"
                     }
                 }
             },

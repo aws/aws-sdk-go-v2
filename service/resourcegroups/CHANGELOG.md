@@ -1,3 +1,16 @@
+# v1.27.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.27.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.1 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.26.0 (2024-09-30)
 
 * **Feature**: This update includes new APIs to support application groups and to allow users to manage resource tag-sync tasks in applications.

@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the available transformers. A transformer describes how to process the
-// incoming EDI documents and extract the necessary information to the output file.
+// Lists the available transformers. A transformer can take an EDI file as input
+// and transform it into a JSON-or XML-formatted document. Alternatively, a
+// transformer can take a JSON-or XML-formatted document as input and transform it
+// into an EDI file.
 func (c *Client) ListTransformers(ctx context.Context, params *ListTransformersInput, optFns ...func(*Options)) (*ListTransformersOutput, error) {
 	if params == nil {
 		params = &ListTransformersInput{}

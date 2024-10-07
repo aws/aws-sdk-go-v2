@@ -14,6 +14,7 @@ import (
 	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateChannel struct {
@@ -2403,6 +2404,13 @@ func awsRestjson1_serializeDocumentCreateHlsManifestConfiguration(v *types.Creat
 		}
 	}
 
+	if v.StartTag != nil {
+		ok := object.Key("StartTag")
+		if err := awsRestjson1_serializeDocumentStartTag(v.StartTag, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2453,6 +2461,13 @@ func awsRestjson1_serializeDocumentCreateLowLatencyHlsManifestConfiguration(v *t
 	if v.ScteHls != nil {
 		ok := object.Key("ScteHls")
 		if err := awsRestjson1_serializeDocumentScteHls(v.ScteHls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StartTag != nil {
+		ok := object.Key("StartTag")
+		if err := awsRestjson1_serializeDocumentStartTag(v.StartTag, ok); err != nil {
 			return err
 		}
 	}
@@ -2591,6 +2606,11 @@ func awsRestjson1_serializeDocumentEndpointErrorConditions(v []types.EndpointErr
 func awsRestjson1_serializeDocumentFilterConfiguration(v *types.FilterConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClipStartTime != nil {
+		ok := object.Key("ClipStartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ClipStartTime))
+	}
 
 	if v.End != nil {
 		ok := object.Key("End")
@@ -2755,6 +2775,36 @@ func awsRestjson1_serializeDocumentSpekeKeyProvider(v *types.SpekeKeyProvider, v
 	if v.Url != nil {
 		ok := object.Key("Url")
 		ok.String(*v.Url)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStartTag(v *types.StartTag, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Precise != nil {
+		ok := object.Key("Precise")
+		ok.Boolean(*v.Precise)
+	}
+
+	if v.TimeOffset != nil {
+		ok := object.Key("TimeOffset")
+		switch {
+		case math.IsNaN(float64(*v.TimeOffset)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TimeOffset), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TimeOffset), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TimeOffset)
+
+		}
 	}
 
 	return nil

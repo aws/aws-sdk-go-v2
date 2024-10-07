@@ -1,3 +1,83 @@
+# Release (2024-10-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.1
+  * **Bug Fix**: Remove private metrics collection APIs. These APIs were annotated at the package level that they should not be used by callers and could be removed at any time. With the release of self-instrumented clients for SDK metrics, this internal code is obsolete.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.32.1](service/dataexchange/CHANGELOG.md#v1321-2024-10-07)
+  * **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.6.0](service/deadline/CHANGELOG.md#v160-2024-10-07)
+  * **Feature**: Add support for using the template from a previous job during job creation and listing parameter definitions for a job.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.1.1](service/marketplacereporting/CHANGELOG.md#v111-2024-10-07)
+  * **Documentation**: Documentation-only update for AWS Marketplace Reporting API.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.12.0](service/qconnect/CHANGELOG.md#v1120-2024-10-07)
+  * **Feature**: This release adds support for the following capabilities: Configuration of the Gen AI system via AIAgent and AIPrompts. Integration support for Bedrock Knowledge Base.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.49.0](service/redshift/CHANGELOG.md#v1490-2024-10-07)
+  * **Feature**: Add validation pattern to S3KeyPrefix on the EnableLogging API
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.1](service/s3/CHANGELOG.md#v1651-2024-10-07)
+  * **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+
+# Release (2024-10-04)
+
+## General Highlights
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.181.0](service/ec2/CHANGELOG.md#v11810-2024-10-04)
+  * **Feature**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.26.0](service/iotdataplane/CHANGELOG.md#v1260-2024-10-04)
+  * **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+# Release (2024-10-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.33.0](service/codepipeline/CHANGELOG.md#v1330-2024-10-03)
+  * **Feature**: AWS CodePipeline introduces Commands action that enables you to easily run shell commands as part of your pipeline execution.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.112.0](service/connect/CHANGELOG.md#v11120-2024-10-03)
+  * **Feature**: Public GetMetricDataV2 Grouping increase from 3 to 4
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.180.0](service/ec2/CHANGELOG.md#v11800-2024-10-03)
+  * **Feature**: This release includes a new API for modifying instance cpu-options after launch.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.58.0](service/iot/CHANGELOG.md#v1580-2024-10-03)
+  * **Feature**: This release adds support for Custom Authentication with X.509 Client Certificates, support for Custom Client Certificate validation, and support for selecting application protocol and authentication type without requiring TLS ALPN for customer's AWS IoT Domain Configurations.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.0.0](service/marketplacereporting/CHANGELOG.md#v100-2024-10-03)
+  * **Release**: New AWS service client module
+  * **Feature**: The AWS Marketplace Reporting service introduces the GetBuyerDashboard API. This API returns a dashboard that provides visibility into your organization's AWS Marketplace agreements and associated spend across the AWS accounts in your organization.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.17.0](service/mediapackagev2/CHANGELOG.md#v1170-2024-10-03)
+  * **Feature**: Added support for ClipStartTime on the FilterConfiguration object on OriginEndpoint manifest settings objects. Added support for EXT-X-START tags on produced HLS child playlists.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.75.0](service/quicksight/CHANGELOG.md#v1750-2024-10-03)
+  * **Feature**: QuickSight: Add support for exporting and importing folders in AssetBundle APIs
+
+# Release (2024-10-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.40.0](service/appstream/CHANGELOG.md#v1400-2024-10-02)
+  * **Feature**: Added support for Automatic Time Zone Redirection on Amazon AppStream 2.0
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.44](service/b2bi/CHANGELOG.md#v100-preview44-2024-10-02)
+  * **Feature**: Added and updated APIs to support outbound EDI transformations
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.21.0](service/bedrockagentruntime/CHANGELOG.md#v1210-2024-10-02)
+  * **Feature**: Added raw model response and usage metrics to PreProcessing and PostProcessing Trace
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.18.0](service/bedrockruntime/CHANGELOG.md#v1180-2024-10-02)
+  * **Feature**: Added new fields to Amazon Bedrock Guardrails trace
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.30.0](service/iotdeviceadvisor/CHANGELOG.md#v1300-2024-10-02)
+  * **Feature**: Add clientToken attribute and implement idempotency for CreateSuiteDefinition.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.19.0](service/ivsrealtime/CHANGELOG.md#v1190-2024-10-02)
+  * **Feature**: Adds new Stage Health EventErrorCodes applicable to RTMP(S) broadcasts. Bug Fix: Enforces that EncoderConfiguration Video height and width must be even-number values.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.64.0](service/s3/CHANGELOG.md#v1640-2024-10-02)
+  * **Feature**: This release introduces a header representing the minimum object size limit for Lifecycle transitions.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.162.0](service/sagemaker/CHANGELOG.md#v11620-2024-10-02)
+  * **Feature**: releasing builtinlcc to public
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.47.4](service/workspaces/CHANGELOG.md#v1474-2024-10-02)
+  * **Documentation**: WSP is being rebranded to become DCV.
+
 # Release (2024-10-01)
 
 ## Module Highlights

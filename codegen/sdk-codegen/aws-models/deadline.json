@@ -2519,15 +2519,13 @@
                 "template": {
                     "target": "com.amazonaws.deadline#JobTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job template to use for this job.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The job template to use for this job.</p>"
                     }
                 },
                 "templateType": {
                     "target": "com.amazonaws.deadline#JobTemplateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The file type for the job template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The file type for the job template.</p>"
                     }
                 },
                 "priority": {
@@ -2574,6 +2572,12 @@
                     "traits": {
                         "smithy.api#default": 5,
                         "smithy.api#documentation": "<p>The maximum number of retries for each task.</p>"
+                    }
+                },
+                "sourceJobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID for the source job.</p>"
                     }
                 }
             },
@@ -7570,6 +7574,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the job.</p>\n         <important>\n            <p>This field can store any content. Escape or encode this content before displaying it on a webpage or any other system that might interpret the content of this field.</p>\n         </important>"
                     }
+                },
+                "sourceJobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID for the source job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10328,6 +10338,15 @@
                 "smithy.api#documentation": "<p>The details of job parameters.</p>"
             }
         },
+        "com.amazonaws.deadline#JobParameterDefinition": {
+            "type": "document"
+        },
+        "com.amazonaws.deadline#JobParameterDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.deadline#JobParameterDefinition"
+            }
+        },
         "com.amazonaws.deadline#JobParameters": {
             "type": "map",
             "key": {
@@ -10398,6 +10417,9 @@
                 },
                 {
                     "target": "com.amazonaws.deadline#ListJobMembers"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ListJobParameterDefinitions"
                 },
                 {
                     "target": "com.amazonaws.deadline#ListSessionActions"
@@ -10573,6 +10595,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The job parameters.</p>"
                     }
+                },
+                "sourceJobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID for the source job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10689,6 +10717,12 @@
                     "target": "com.amazonaws.deadline#MaxRetriesPerTask",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of retries for a job.</p>"
+                    }
+                },
+                "sourceJobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID for the source job.</p>"
                     }
                 }
             },
@@ -11637,6 +11671,125 @@
                     "target": "com.amazonaws.deadline#JobMembers",
                     "traits": {
                         "smithy.api#documentation": "<p>The members on the list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.deadline#ListJobParameterDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.deadline#ListJobParameterDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.deadline#ListJobParameterDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.deadline#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "ListJobParameterDefinitions",
+                    "documentation": "Grants permission to get a job's parameter definitions in the job template",
+                    "requiredActions": [
+                        "identitystore:ListGroupMembershipsForMember"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Lists parameter definitions of a job.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "management."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2023-10-12/farms/{farmId}/queues/{queueId}/jobs/{jobId}/parameter-definitions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "jobParameterDefinitions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.deadline#ListJobParameterDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the job to list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.deadline#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID to include on the list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "queueId": {
+                    "target": "com.amazonaws.deadline#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The queue ID to include on the list.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.deadline#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.deadline#ListJobParameterDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "jobParameterDefinitions": {
+                    "target": "com.amazonaws.deadline#JobParameterDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists parameter definitions of a job.</p>",
                         "smithy.api#required": {}
                     }
                 },

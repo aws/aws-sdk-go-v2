@@ -3540,6 +3540,11 @@ type CodeEditorAppSettings struct {
 	// applications.
 	AppLifecycleManagement *AppLifecycleManagement
 
+	// The lifecycle configuration that runs before the default lifecycle
+	// configuration. It can override changes made in the default lifecycle
+	// configuration.
+	BuiltInLifecycleConfigArn *string
+
 	// A list of custom SageMaker images that are configured to run as a Code Editor
 	// app.
 	CustomImages []CustomImage
@@ -9599,6 +9604,11 @@ type JupyterLabAppSettings struct {
 
 	// Indicates whether idle shutdown is activated for JupyterLab applications.
 	AppLifecycleManagement *AppLifecycleManagement
+
+	// The lifecycle configuration that runs before the default lifecycle
+	// configuration. It can override changes made in the default lifecycle
+	// configuration.
+	BuiltInLifecycleConfigArn *string
 
 	// A list of Git repositories that SageMaker automatically displays to users for
 	// cloning in the JupyterLab application.

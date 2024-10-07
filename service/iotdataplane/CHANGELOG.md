@@ -1,3 +1,17 @@
+# v1.26.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Feature**: Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.4 (2024-10-03)
+
+* No change notes available for this release.
+
 # v1.25.3 (2024-09-27)
 
 * No change notes available for this release.

@@ -70,6 +70,26 @@ func (m *validateOpCreateProfile) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStarterMappingTemplate struct {
+}
+
+func (*validateOpCreateStarterMappingTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStarterMappingTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStarterMappingTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStarterMappingTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTransformer struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTestConversion struct {
+}
+
+func (*validateOpTestConversion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestConversion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestConversionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestConversionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTestMapping struct {
 }
 
@@ -482,6 +522,10 @@ func addOpCreateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProfile{}, middleware.After)
 }
 
+func addOpCreateStarterMappingTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStarterMappingTemplate{}, middleware.After)
+}
+
 func addOpCreateTransformerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTransformer{}, middleware.After)
 }
@@ -534,6 +578,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
+func addOpTestConversionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestConversion{}, middleware.After)
+}
+
 func addOpTestMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTestMapping{}, middleware.After)
 }
@@ -581,6 +629,39 @@ func validateCapabilityConfiguration(v types.CapabilityConfiguration) error {
 	}
 }
 
+func validateConversionSource(v *types.ConversionSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConversionSource"}
+	if len(v.FileFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
+	}
+	if v.InputFile == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputFile"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConversionTarget(v *types.ConversionTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConversionTarget"}
+	if len(v.FileFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEdiConfiguration(v *types.EdiConfiguration) error {
 	if v == nil {
 		return nil
@@ -597,6 +678,69 @@ func validateEdiConfiguration(v *types.EdiConfiguration) error {
 	}
 	if v.TransformerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransformerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputConversion(v *types.InputConversion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputConversion"}
+	if len(v.FromFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FromFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMapping(v *types.Mapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Mapping"}
+	if len(v.TemplateLanguage) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateLanguage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputConversion(v *types.OutputConversion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConversion"}
+	if len(v.ToFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ToFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSampleDocuments(v *types.SampleDocuments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SampleDocuments"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.Keys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Keys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -728,6 +872,24 @@ func validateOpCreateProfileInput(v *CreateProfileInput) error {
 	}
 }
 
+func validateOpCreateStarterMappingTemplateInput(v *CreateStarterMappingTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStarterMappingTemplateInput"}
+	if len(v.MappingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MappingType"))
+	}
+	if v.TemplateDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateDetails"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTransformerInput(v *CreateTransformerInput) error {
 	if v == nil {
 		return nil
@@ -736,18 +898,29 @@ func validateOpCreateTransformerInput(v *CreateTransformerInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if len(v.FileFormat) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("FileFormat"))
-	}
-	if v.MappingTemplate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MappingTemplate"))
-	}
-	if v.EdiType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EdiType"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputConversion != nil {
+		if err := validateInputConversion(v.InputConversion); err != nil {
+			invalidParams.AddNested("InputConversion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Mapping != nil {
+		if err := validateMapping(v.Mapping); err != nil {
+			invalidParams.AddNested("Mapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConversion != nil {
+		if err := validateOutputConversion(v.OutputConversion); err != nil {
+			invalidParams.AddNested("OutputConversion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SampleDocuments != nil {
+		if err := validateSampleDocuments(v.SampleDocuments); err != nil {
+			invalidParams.AddNested("SampleDocuments", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -953,6 +1126,32 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 }
 
+func validateOpTestConversionInput(v *TestConversionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestConversionInput"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateConversionSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	} else if v.Target != nil {
+		if err := validateConversionTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTestMappingInput(v *TestMappingInput) error {
 	if v == nil {
 		return nil
@@ -1070,6 +1269,26 @@ func validateOpUpdateTransformerInput(v *UpdateTransformerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTransformerInput"}
 	if v.TransformerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TransformerId"))
+	}
+	if v.InputConversion != nil {
+		if err := validateInputConversion(v.InputConversion); err != nil {
+			invalidParams.AddNested("InputConversion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Mapping != nil {
+		if err := validateMapping(v.Mapping); err != nil {
+			invalidParams.AddNested("Mapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConversion != nil {
+		if err := validateOutputConversion(v.OutputConversion); err != nil {
+			invalidParams.AddNested("OutputConversion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SampleDocuments != nil {
+		if err := validateSampleDocuments(v.SampleDocuments); err != nil {
+			invalidParams.AddNested("SampleDocuments", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

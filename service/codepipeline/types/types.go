@@ -89,6 +89,13 @@ type ActionDeclaration struct {
 	// This member is required.
 	Name *string
 
+	// The shell commands to run with your compute action in CodePipeline. All
+	// commands are supported except multi-line formats. While CodeBuild logs and
+	// permissions are used, you do not need to create any resources in CodeBuild.
+	//
+	// Using compute time for this action will incur separate charges in CodeBuild.
+	Commands []string
+
 	// The action's configuration. These are key-value pairs that specify input values
 	// for an action. For more information, see [Action Structure Requirements in CodePipeline]. For the list of configuration
 	// properties for the CloudFormation action type in CodePipeline, see [Configuration Properties Reference]in the
@@ -118,6 +125,10 @@ type ActionDeclaration struct {
 	// The name or ID of the result of the action declaration, such as a test or build
 	// artifact.
 	OutputArtifacts []OutputArtifact
+
+	// The list of variables that are to be exported from the compute action. This is
+	// specifically CodeBuild environment variables as used for that action.
+	OutputVariables []string
 
 	// The action declaration's Amazon Web Services Region, such as us-east-1.
 	Region *string
@@ -1350,6 +1361,10 @@ type OutputArtifact struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The files that you want to associate with the output artifact that will be
+	// exported from the compute action.
+	Files []string
 
 	noSmithyDocumentSerde
 }

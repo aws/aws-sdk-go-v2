@@ -407,6 +407,9 @@ type GuardrailAssessment struct {
 	// The contextual grounding policy used for the guardrail assessment.
 	ContextualGroundingPolicy *GuardrailContextualGroundingPolicyAssessment
 
+	// The invocation metrics for the guardrail assessment.
+	InvocationMetrics *GuardrailInvocationMetrics
+
 	// The sensitive information policy.
 	SensitiveInformationPolicy *GuardrailSensitiveInformationPolicyAssessment
 
@@ -475,6 +478,9 @@ type GuardrailContentFilter struct {
 	//
 	// This member is required.
 	Type GuardrailContentFilterType
+
+	// The filter strength setting for the guardrail content filter.
+	FilterStrength GuardrailContentFilterStrength
 
 	noSmithyDocumentSerde
 }
@@ -562,6 +568,15 @@ type GuardrailConverseTextBlock struct {
 	noSmithyDocumentSerde
 }
 
+// The action of the guardrail coverage details.
+type GuardrailCoverage struct {
+
+	// The text characters of the guardrail coverage details.
+	TextCharacters *GuardrailTextCharactersCoverage
+
+	noSmithyDocumentSerde
+}
+
 // A custom word configured in a guardrail.
 type GuardrailCustomWord struct {
 
@@ -574,6 +589,21 @@ type GuardrailCustomWord struct {
 	//
 	// This member is required.
 	Match *string
+
+	noSmithyDocumentSerde
+}
+
+// The invocation metrics for the guardrail.
+type GuardrailInvocationMetrics struct {
+
+	// The coverage details for the guardrail invocation metrics.
+	GuardrailCoverage *GuardrailCoverage
+
+	// The processing latency details for the guardrail invocation metrics.
+	GuardrailProcessingLatency *int64
+
+	// The usage details for the guardrail invocation metrics.
+	Usage *GuardrailUsage
 
 	noSmithyDocumentSerde
 }
@@ -700,6 +730,18 @@ type GuardrailTextBlock struct {
 
 	// The qualifiers describing the text block.
 	Qualifiers []GuardrailContentQualifier
+
+	noSmithyDocumentSerde
+}
+
+// The guardrail coverage for the text characters.
+type GuardrailTextCharactersCoverage struct {
+
+	// The text characters that were guarded by the guardrail coverage.
+	Guarded *int32
+
+	// The total text characters by the guardrail coverage.
+	Total *int32
 
 	noSmithyDocumentSerde
 }

@@ -2,6 +2,25 @@
 
 package types
 
+type CapabilityDirection string
+
+// Enum values for CapabilityDirection
+const (
+	CapabilityDirectionInbound  CapabilityDirection = "INBOUND"
+	CapabilityDirectionOutbound CapabilityDirection = "OUTBOUND"
+)
+
+// Values returns all known values for CapabilityDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityDirection) Values() []CapabilityDirection {
+	return []CapabilityDirection{
+		"INBOUND",
+		"OUTBOUND",
+	}
+}
+
 type CapabilityType string
 
 // Enum values for CapabilityType
@@ -19,12 +38,49 @@ func (CapabilityType) Values() []CapabilityType {
 	}
 }
 
+type ConversionSourceFormat string
+
+// Enum values for ConversionSourceFormat
+const (
+	ConversionSourceFormatJson ConversionSourceFormat = "JSON"
+	ConversionSourceFormatXml  ConversionSourceFormat = "XML"
+)
+
+// Values returns all known values for ConversionSourceFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConversionSourceFormat) Values() []ConversionSourceFormat {
+	return []ConversionSourceFormat{
+		"JSON",
+		"XML",
+	}
+}
+
+type ConversionTargetFormat string
+
+// Enum values for ConversionTargetFormat
+const (
+	ConversionTargetFormatX12 ConversionTargetFormat = "X12"
+)
+
+// Values returns all known values for ConversionTargetFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConversionTargetFormat) Values() []ConversionTargetFormat {
+	return []ConversionTargetFormat{
+		"X12",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat
 const (
-	FileFormatXml  FileFormat = "XML"
-	FileFormatJson FileFormat = "JSON"
+	FileFormatXml     FileFormat = "XML"
+	FileFormatJson    FileFormat = "JSON"
+	FileFormatNotUsed FileFormat = "NOT_USED"
 )
 
 // Values returns all known values for FileFormat. Note that this can be expanded
@@ -35,6 +91,24 @@ func (FileFormat) Values() []FileFormat {
 	return []FileFormat{
 		"XML",
 		"JSON",
+		"NOT_USED",
+	}
+}
+
+type FromFormat string
+
+// Enum values for FromFormat
+const (
+	FromFormatX12 FromFormat = "X12"
+)
+
+// Values returns all known values for FromFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FromFormat) Values() []FromFormat {
+	return []FromFormat{
+		"X12",
 	}
 }
 
@@ -54,6 +128,61 @@ func (Logging) Values() []Logging {
 	return []Logging{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type MappingTemplateLanguage string
+
+// Enum values for MappingTemplateLanguage
+const (
+	MappingTemplateLanguageXslt    MappingTemplateLanguage = "XSLT"
+	MappingTemplateLanguageJsonata MappingTemplateLanguage = "JSONATA"
+)
+
+// Values returns all known values for MappingTemplateLanguage. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MappingTemplateLanguage) Values() []MappingTemplateLanguage {
+	return []MappingTemplateLanguage{
+		"XSLT",
+		"JSONATA",
+	}
+}
+
+type MappingType string
+
+// Enum values for MappingType
+const (
+	MappingTypeJsonata MappingType = "JSONATA"
+	MappingTypeXslt    MappingType = "XSLT"
+)
+
+// Values returns all known values for MappingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MappingType) Values() []MappingType {
+	return []MappingType{
+		"JSONATA",
+		"XSLT",
+	}
+}
+
+type ToFormat string
+
+// Enum values for ToFormat
+const (
+	ToFormatX12 ToFormat = "X12"
+)
+
+// Values returns all known values for ToFormat. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ToFormat) Values() []ToFormat {
+	return []ToFormat{
+		"X12",
 	}
 }
 

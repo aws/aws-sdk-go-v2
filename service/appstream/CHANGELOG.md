@@ -1,3 +1,20 @@
+# v1.41.1 (2024-10-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.0 (2024-10-04)
+
+* **Feature**: Add support for HTTP client metrics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.1 (2024-10-03)
+
+* No change notes available for this release.
+
+# v1.40.0 (2024-10-02)
+
+* **Feature**: Added support for Automatic Time Zone Redirection on Amazon AppStream 2.0
+
 # v1.39.3 (2024-09-27)
 
 * No change notes available for this release.

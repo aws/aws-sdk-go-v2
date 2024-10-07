@@ -22409,6 +22409,11 @@ func awsAwsjson11_serializeDocumentCodeEditorAppSettings(v *types.CodeEditorAppS
 		}
 	}
 
+	if v.BuiltInLifecycleConfigArn != nil {
+		ok := object.Key("BuiltInLifecycleConfigArn")
+		ok.String(*v.BuiltInLifecycleConfigArn)
+	}
+
 	if v.CustomImages != nil {
 		ok := object.Key("CustomImages")
 		if err := awsAwsjson11_serializeDocumentCustomImages(v.CustomImages, ok); err != nil {
@@ -25938,6 +25943,11 @@ func awsAwsjson11_serializeDocumentJupyterLabAppSettings(v *types.JupyterLabAppS
 		if err := awsAwsjson11_serializeDocumentAppLifecycleManagement(v.AppLifecycleManagement, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.BuiltInLifecycleConfigArn != nil {
+		ok := object.Key("BuiltInLifecycleConfigArn")
+		ok.String(*v.BuiltInLifecycleConfigArn)
 	}
 
 	if v.CodeRepositories != nil {
