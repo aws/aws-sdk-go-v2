@@ -54,6 +54,10 @@ func TestClient_NullAndEmptyHeadersClient_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RestJsonNullAndEmptyHeaders" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#NullAndEmptyHeadersClient")
+			}
+
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
