@@ -1,0 +1,8 @@
+{
+    "id": "4490529b-db80-4406-8d99-216cba424862",
+    "type": "feature",
+    "description": "Remove deprecated `nimble` service.",
+    "modules": [
+        "."
+    ]
+}
