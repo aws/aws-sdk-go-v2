@@ -11,7 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics/testutils"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
@@ -533,7 +532,7 @@ func TestClockSkew(t *testing.T) {
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
 			am := NewAttemptMiddleware(NewStandard(func(s *StandardOptions) {
-			}), testutils.NoopRequestCloner)
+			}), func(i any) any { return i })
 			ctx := internalcontext.SetAttemptSkewContext(context.Background(), tt.skew)
 			_, metadata, err := am.HandleFinalize(ctx, middleware.FinalizeInput{}, middleware.FinalizeHandlerFunc(
 				func(ctx context.Context, in middleware.FinalizeInput) (

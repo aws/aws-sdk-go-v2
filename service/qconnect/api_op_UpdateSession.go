@@ -43,6 +43,10 @@ type UpdateSessionInput struct {
 	// This member is required.
 	SessionId *string
 
+	// The configuration of the AI Agents (mapped by AI Agent Type to AI Agent
+	// version) that should be used by Amazon Q in Connect for this Session.
+	AiAgentConfiguration map[string]types.AIAgentConfigurationData
+
 	// The description.
 	Description *string
 

@@ -794,6 +794,18 @@ func TestCheckSnapshot_ListJobMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListJobParameterDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobParameterDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobParameterDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
@@ -2010,6 +2022,18 @@ func TestUpdateSnapshot_ListJobMembers(t *testing.T) {
 	_, err := svc.ListJobMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListJobMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListJobParameterDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobParameterDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobParameterDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

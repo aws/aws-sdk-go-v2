@@ -49,16 +49,6 @@ type CreateJobInput struct {
 	// This member is required.
 	QueueId *string
 
-	// The job template to use for this job.
-	//
-	// This member is required.
-	Template *string
-
-	// The file type for the job template.
-	//
-	// This member is required.
-	TemplateType types.JobTemplateType
-
 	// The attachments for the job. Attach files required for the job to run to a
 	// render job.
 	Attachments *types.Attachments
@@ -76,12 +66,21 @@ type CreateJobInput struct {
 	// The parameters for the job.
 	Parameters map[string]types.JobParameter
 
+	// The job ID for the source job.
+	SourceJobId *string
+
 	// The storage profile ID for the storage profile to connect to the job.
 	StorageProfileId *string
 
 	// The initial job status when it is created. Jobs that are created with a
 	// SUSPENDED status will not run until manually requeued.
 	TargetTaskRunStatus types.CreateJobTargetTaskRunStatus
+
+	// The job template to use for this job.
+	Template *string
+
+	// The file type for the job template.
+	TemplateType types.JobTemplateType
 
 	noSmithyDocumentSerde
 }

@@ -8506,9 +8506,9 @@
                     }
                 },
                 "S3KeyPrefix": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#S3KeyPrefixValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix applied to the log file names.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Cannot exceed 512 characters</p>\n            </li>\n            <li>\n               <p>Cannot contain spaces( ), double quotes (\"), single quotes ('), a backslash\n                    (\\), or control characters. The hexadecimal codes for invalid characters are: </p>\n               <ul>\n                  <li>\n                     <p>x00 to x20</p>\n                  </li>\n                  <li>\n                     <p>x22</p>\n                  </li>\n                  <li>\n                     <p>x27</p>\n                  </li>\n                  <li>\n                     <p>x5c</p>\n                  </li>\n                  <li>\n                     <p>x7f or larger</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The prefix applied to the log file names.</p>\n         <p>Valid characters are any letter from any language, any whitespace character, any numeric character, and the following characters: \n            underscore (<code>_</code>), period (<code>.</code>), colon (<code>:</code>), slash (<code>/</code>), equal (<code>=</code>), plus (<code>+</code>), backslash (<code>\\</code>),\n            hyphen (<code>-</code>), at symbol (<code>@</code>).</p>"
                     }
                 },
                 "LogDestinationType": {
@@ -10934,7 +10934,7 @@
                     }
                 },
                 "S3KeyPrefix": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#S3KeyPrefixValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The prefix applied to the log file names.</p>"
                     }
@@ -16910,6 +16910,16 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#S3KeyPrefixValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.redshift#SNSInvalidTopicFault": {

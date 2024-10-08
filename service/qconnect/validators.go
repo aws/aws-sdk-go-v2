@@ -10,6 +10,86 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAIAgent struct {
+}
+
+func (*validateOpCreateAIAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAIAgentVersion struct {
+}
+
+func (*validateOpCreateAIAgentVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIAgentVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIAgentVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIAgentVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAIPrompt struct {
+}
+
+func (*validateOpCreateAIPrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIPrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIPromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIPromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAIPromptVersion struct {
+}
+
+func (*validateOpCreateAIPromptVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIPromptVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIPromptVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIPromptVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAssistantAssociation struct {
 }
 
@@ -150,6 +230,86 @@ func (m *validateOpCreateSession) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAIAgent struct {
+}
+
+func (*validateOpDeleteAIAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAIAgentVersion struct {
+}
+
+func (*validateOpDeleteAIAgentVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIAgentVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIAgentVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIAgentVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAIPrompt struct {
+}
+
+func (*validateOpDeleteAIPrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIPrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIPromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIPromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAIPromptVersion struct {
+}
+
+func (*validateOpDeleteAIPromptVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIPromptVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIPromptVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIPromptVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAssistantAssociation struct {
 }
 
@@ -285,6 +445,46 @@ func (m *validateOpDeleteQuickResponse) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteQuickResponseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAIAgent struct {
+}
+
+func (*validateOpGetAIAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAIAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAIAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAIAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAIPrompt struct {
+}
+
+func (*validateOpGetAIPrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAIPrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAIPromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAIPromptInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +690,86 @@ func (m *validateOpGetSession) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAIAgents struct {
+}
+
+func (*validateOpListAIAgents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAIAgents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAIAgentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAIAgentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAIAgentVersions struct {
+}
+
+func (*validateOpListAIAgentVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAIAgentVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAIAgentVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAIAgentVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAIPrompts struct {
+}
+
+func (*validateOpListAIPrompts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAIPrompts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAIPromptsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAIPromptsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAIPromptVersions struct {
+}
+
+func (*validateOpListAIPromptVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAIPromptVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAIPromptVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAIPromptVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssistantAssociations struct {
 }
 
@@ -670,6 +950,26 @@ func (m *validateOpQueryAssistant) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveAssistantAIAgent struct {
+}
+
+func (*validateOpRemoveAssistantAIAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveAssistantAIAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveAssistantAIAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveAssistantAIAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveKnowledgeBaseTemplateUri struct {
 }
 
@@ -830,6 +1130,66 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAIAgent struct {
+}
+
+func (*validateOpUpdateAIAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAIAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAIAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAIAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAIPrompt struct {
+}
+
+func (*validateOpUpdateAIPrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAIPrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAIPromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAIPromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAssistantAIAgent struct {
+}
+
+func (*validateOpUpdateAssistantAIAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAssistantAIAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssistantAIAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssistantAIAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateContent struct {
 }
 
@@ -890,6 +1250,26 @@ func (m *validateOpUpdateQuickResponse) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSessionData struct {
+}
+
+func (*validateOpUpdateSessionData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSessionData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSessionDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSessionDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSession struct {
 }
 
@@ -908,6 +1288,22 @@ func (m *validateOpUpdateSession) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpCreateAIAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIAgent{}, middleware.After)
+}
+
+func addOpCreateAIAgentVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIAgentVersion{}, middleware.After)
+}
+
+func addOpCreateAIPromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIPrompt{}, middleware.After)
+}
+
+func addOpCreateAIPromptVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIPromptVersion{}, middleware.After)
 }
 
 func addOpCreateAssistantAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -938,6 +1334,22 @@ func addOpCreateSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSession{}, middleware.After)
 }
 
+func addOpDeleteAIAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIAgent{}, middleware.After)
+}
+
+func addOpDeleteAIAgentVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIAgentVersion{}, middleware.After)
+}
+
+func addOpDeleteAIPromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIPrompt{}, middleware.After)
+}
+
+func addOpDeleteAIPromptVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIPromptVersion{}, middleware.After)
+}
+
 func addOpDeleteAssistantAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAssistantAssociation{}, middleware.After)
 }
@@ -964,6 +1376,14 @@ func addOpDeleteKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDeleteQuickResponseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQuickResponse{}, middleware.After)
+}
+
+func addOpGetAIAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAIAgent{}, middleware.After)
+}
+
+func addOpGetAIPromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAIPrompt{}, middleware.After)
 }
 
 func addOpGetAssistantAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1006,6 +1426,22 @@ func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSession{}, middleware.After)
 }
 
+func addOpListAIAgentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAIAgents{}, middleware.After)
+}
+
+func addOpListAIAgentVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAIAgentVersions{}, middleware.After)
+}
+
+func addOpListAIPromptsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAIPrompts{}, middleware.After)
+}
+
+func addOpListAIPromptVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAIPromptVersions{}, middleware.After)
+}
+
 func addOpListAssistantAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssistantAssociations{}, middleware.After)
 }
@@ -1042,6 +1478,10 @@ func addOpQueryAssistantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpQueryAssistant{}, middleware.After)
 }
 
+func addOpRemoveAssistantAIAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveAssistantAIAgent{}, middleware.After)
+}
+
 func addOpRemoveKnowledgeBaseTemplateUriValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveKnowledgeBaseTemplateUri{}, middleware.After)
 }
@@ -1074,6 +1514,18 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAIAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAIAgent{}, middleware.After)
+}
+
+func addOpUpdateAIPromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAIPrompt{}, middleware.After)
+}
+
+func addOpUpdateAssistantAIAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAssistantAIAgent{}, middleware.After)
+}
+
 func addOpUpdateContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContent{}, middleware.After)
 }
@@ -1086,8 +1538,88 @@ func addOpUpdateQuickResponseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateQuickResponse{}, middleware.After)
 }
 
+func addOpUpdateSessionDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSessionData{}, middleware.After)
+}
+
 func addOpUpdateSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSession{}, middleware.After)
+}
+
+func validateAIAgentConfiguration(v types.AIAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAgentConfiguration"}
+	switch uv := v.(type) {
+	case *types.AIAgentConfigurationMemberAnswerRecommendationAIAgentConfiguration:
+		if err := validateAnswerRecommendationAIAgentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[answerRecommendationAIAgentConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AIAgentConfigurationMemberManualSearchAIAgentConfiguration:
+		if err := validateManualSearchAIAgentConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[manualSearchAIAgentConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAgentConfigurationData(v *types.AIAgentConfigurationData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAgentConfigurationData"}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIAgentConfigurationMap(v map[string]types.AIAgentConfigurationData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIAgentConfigurationMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateAIAgentConfigurationData(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIPromptTemplateConfiguration(v types.AIPromptTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIPromptTemplateConfiguration"}
+	switch uv := v.(type) {
+	case *types.AIPromptTemplateConfigurationMemberTextFullAIPromptEditTemplateConfiguration:
+		if err := validateTextFullAIPromptEditTemplateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[textFullAIPromptEditTemplateConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAndConditions(v []types.TagCondition) error {
@@ -1107,6 +1639,23 @@ func validateAndConditions(v []types.TagCondition) error {
 	}
 }
 
+func validateAnswerRecommendationAIAgentConfiguration(v *types.AnswerRecommendationAIAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnswerRecommendationAIAgentConfiguration"}
+	if v.AssociationConfigurations != nil {
+		if err := validateAssociationConfigurationList(v.AssociationConfigurations); err != nil {
+			invalidParams.AddNested("AssociationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration) error {
 	if v == nil {
 		return nil
@@ -1114,6 +1663,109 @@ func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "AppIntegrationsConfiguration"}
 	if v.AppIntegrationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppIntegrationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociationConfiguration(v *types.AssociationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociationConfiguration"}
+	if v.AssociationConfigurationData != nil {
+		if err := validateAssociationConfigurationData(v.AssociationConfigurationData); err != nil {
+			invalidParams.AddNested("AssociationConfigurationData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociationConfigurationData(v types.AssociationConfigurationData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociationConfigurationData"}
+	switch uv := v.(type) {
+	case *types.AssociationConfigurationDataMemberKnowledgeBaseAssociationConfigurationData:
+		if err := validateKnowledgeBaseAssociationConfigurationData(&uv.Value); err != nil {
+			invalidParams.AddNested("[knowledgeBaseAssociationConfigurationData]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssociationConfigurationList(v []types.AssociationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociationConfigurationList"}
+	for i := range v {
+		if err := validateAssociationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockFoundationModelConfigurationForParsing(v *types.BedrockFoundationModelConfigurationForParsing) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockFoundationModelConfigurationForParsing"}
+	if v.ModelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelArn"))
+	}
+	if v.ParsingPrompt != nil {
+		if err := validateParsingPrompt(v.ParsingPrompt); err != nil {
+			invalidParams.AddNested("ParsingPrompt", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChunkingConfiguration(v *types.ChunkingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChunkingConfiguration"}
+	if len(v.ChunkingStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ChunkingStrategy"))
+	}
+	if v.FixedSizeChunkingConfiguration != nil {
+		if err := validateFixedSizeChunkingConfiguration(v.FixedSizeChunkingConfiguration); err != nil {
+			invalidParams.AddNested("FixedSizeChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HierarchicalChunkingConfiguration != nil {
+		if err := validateHierarchicalChunkingConfiguration(v.HierarchicalChunkingConfiguration); err != nil {
+			invalidParams.AddNested("HierarchicalChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SemanticChunkingConfiguration != nil {
+		if err := validateSemanticChunkingConfiguration(v.SemanticChunkingConfiguration); err != nil {
+			invalidParams.AddNested("SemanticChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1197,6 +1849,24 @@ func validateFilterList(v []types.Filter) error {
 	}
 }
 
+func validateFixedSizeChunkingConfiguration(v *types.FixedSizeChunkingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FixedSizeChunkingConfiguration"}
+	if v.MaxTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTokens"))
+	}
+	if v.OverlapPercentage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OverlapPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGenerativeContentFeedbackData(v *types.GenerativeContentFeedbackData) error {
 	if v == nil {
 		return nil
@@ -1204,6 +1874,128 @@ func validateGenerativeContentFeedbackData(v *types.GenerativeContentFeedbackDat
 	invalidParams := smithy.InvalidParamsError{Context: "GenerativeContentFeedbackData"}
 	if len(v.Relevance) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Relevance"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalChunkingConfiguration(v *types.HierarchicalChunkingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalChunkingConfiguration"}
+	if v.LevelConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LevelConfigurations"))
+	} else if v.LevelConfigurations != nil {
+		if err := validateHierarchicalChunkingLevelConfigurations(v.LevelConfigurations); err != nil {
+			invalidParams.AddNested("LevelConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OverlapTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OverlapTokens"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalChunkingLevelConfiguration(v *types.HierarchicalChunkingLevelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalChunkingLevelConfiguration"}
+	if v.MaxTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTokens"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHierarchicalChunkingLevelConfigurations(v []types.HierarchicalChunkingLevelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HierarchicalChunkingLevelConfigurations"}
+	for i := range v {
+		if err := validateHierarchicalChunkingLevelConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIntentInputData(v *types.IntentInputData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IntentInputData"}
+	if v.IntentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseAssociationConfigurationData(v *types.KnowledgeBaseAssociationConfigurationData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseAssociationConfigurationData"}
+	if v.ContentTagFilter != nil {
+		if err := validateTagFilter(v.ContentTagFilter); err != nil {
+			invalidParams.AddNested("ContentTagFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedSourceConfiguration(v types.ManagedSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedSourceConfiguration"}
+	switch uv := v.(type) {
+	case *types.ManagedSourceConfigurationMemberWebCrawlerConfiguration:
+		if err := validateWebCrawlerConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[webCrawlerConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManualSearchAIAgentConfiguration(v *types.ManualSearchAIAgentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManualSearchAIAgentConfiguration"}
+	if v.AssociationConfigurations != nil {
+		if err := validateAssociationConfigurationList(v.AssociationConfigurations); err != nil {
+			invalidParams.AddNested("AssociationConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1245,6 +2037,41 @@ func validateOrConditions(v []types.OrCondition) error {
 		if err := validateOrCondition(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParsingConfiguration(v *types.ParsingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParsingConfiguration"}
+	if len(v.ParsingStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ParsingStrategy"))
+	}
+	if v.BedrockFoundationModelConfiguration != nil {
+		if err := validateBedrockFoundationModelConfigurationForParsing(v.BedrockFoundationModelConfiguration); err != nil {
+			invalidParams.AddNested("BedrockFoundationModelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParsingPrompt(v *types.ParsingPrompt) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParsingPrompt"}
+	if v.ParsingPromptText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParsingPromptText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1302,6 +2129,45 @@ func validateQueryConditionItem(v *types.QueryConditionItem) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryInputData(v types.QueryInputData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryInputData"}
+	switch uv := v.(type) {
+	case *types.QueryInputDataMemberIntentInputData:
+		if err := validateIntentInputData(&uv.Value); err != nil {
+			invalidParams.AddNested("[intentInputData]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.QueryInputDataMemberQueryTextInputData:
+		if err := validateQueryTextInputData(&uv.Value); err != nil {
+			invalidParams.AddNested("[queryTextInputData]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryTextInputData(v *types.QueryTextInputData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryTextInputData"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1425,6 +2291,41 @@ func validateQuickResponseSearchExpression(v *types.QuickResponseSearchExpressio
 	}
 }
 
+func validateRuntimeSessionData(v *types.RuntimeSessionData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeSessionData"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeSessionDataList(v []types.RuntimeSessionData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeSessionDataList"}
+	for i := range v {
+		if err := validateRuntimeSessionData(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchExpression(v *types.SearchExpression) error {
 	if v == nil {
 		return nil
@@ -1444,6 +2345,27 @@ func validateSearchExpression(v *types.SearchExpression) error {
 	}
 }
 
+func validateSemanticChunkingConfiguration(v *types.SemanticChunkingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SemanticChunkingConfiguration"}
+	if v.MaxTokens == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTokens"))
+	}
+	if v.BufferSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BufferSize"))
+	}
+	if v.BreakpointPercentileThreshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BreakpointPercentileThreshold"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSourceConfiguration(v types.SourceConfiguration) error {
 	if v == nil {
 		return nil
@@ -1453,6 +2375,11 @@ func validateSourceConfiguration(v types.SourceConfiguration) error {
 	case *types.SourceConfigurationMemberAppIntegrations:
 		if err := validateAppIntegrationsConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[appIntegrations]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SourceConfigurationMemberManagedSourceConfiguration:
+		if err := validateManagedSourceConfiguration(uv.Value); err != nil {
+			invalidParams.AddNested("[managedSourceConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1499,6 +2426,165 @@ func validateTagFilter(v types.TagFilter) error {
 			invalidParams.AddNested("[tagCondition]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTextFullAIPromptEditTemplateConfiguration(v *types.TextFullAIPromptEditTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextFullAIPromptEditTemplateConfiguration"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVectorIngestionConfiguration(v *types.VectorIngestionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VectorIngestionConfiguration"}
+	if v.ChunkingConfiguration != nil {
+		if err := validateChunkingConfiguration(v.ChunkingConfiguration); err != nil {
+			invalidParams.AddNested("ChunkingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParsingConfiguration != nil {
+		if err := validateParsingConfiguration(v.ParsingConfiguration); err != nil {
+			invalidParams.AddNested("ParsingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWebCrawlerConfiguration(v *types.WebCrawlerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WebCrawlerConfiguration"}
+	if v.UrlConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UrlConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAIAgentInput(v *CreateAIAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIAgentInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateAIAgentConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.VisibilityStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibilityStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAIAgentVersionInput(v *CreateAIAgentVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIAgentVersionInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAIPromptInput(v *CreateAIPromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIPromptInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.TemplateConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateConfiguration"))
+	} else if v.TemplateConfiguration != nil {
+		if err := validateAIPromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
+			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.VisibilityStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibilityStatus"))
+	}
+	if len(v.TemplateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
+	}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if len(v.ApiFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAIPromptVersionInput(v *CreateAIPromptVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIPromptVersionInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiPromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiPromptId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1607,6 +2693,11 @@ func validateOpCreateKnowledgeBaseInput(v *CreateKnowledgeBaseInput) error {
 			invalidParams.AddNested("SourceConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VectorIngestionConfiguration != nil {
+		if err := validateVectorIngestionConfiguration(v.VectorIngestionConfiguration); err != nil {
+			invalidParams.AddNested("VectorIngestionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1650,6 +2741,89 @@ func validateOpCreateSessionInput(v *CreateSessionInput) error {
 		if err := validateTagFilter(v.TagFilter); err != nil {
 			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.AiAgentConfiguration != nil {
+		if err := validateAIAgentConfigurationMap(v.AiAgentConfiguration); err != nil {
+			invalidParams.AddNested("AiAgentConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAIAgentInput(v *DeleteAIAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIAgentInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAIAgentVersionInput(v *DeleteAIAgentVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIAgentVersionInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAIPromptInput(v *DeleteAIPromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIPromptInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiPromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiPromptId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAIPromptVersionInput(v *DeleteAIPromptVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIPromptVersionInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiPromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiPromptId"))
+	}
+	if v.VersionNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1773,6 +2947,42 @@ func validateOpDeleteQuickResponseInput(v *DeleteQuickResponseInput) error {
 	}
 	if v.QuickResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuickResponseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAIAgentInput(v *GetAIAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAIAgentInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAIPromptInput(v *GetAIPromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAIPromptInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiPromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiPromptId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1958,6 +3168,72 @@ func validateOpGetSessionInput(v *GetSessionInput) error {
 	}
 }
 
+func validateOpListAIAgentsInput(v *ListAIAgentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAIAgentsInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAIAgentVersionsInput(v *ListAIAgentVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAIAgentVersionsInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAIPromptsInput(v *ListAIPromptsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAIPromptsInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAIPromptVersionsInput(v *ListAIPromptVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAIPromptVersionsInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiPromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiPromptId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAssistantAssociationsInput(v *ListAssistantAssociationsInput) error {
 	if v == nil {
 		return nil
@@ -2108,13 +3384,33 @@ func validateOpQueryAssistantInput(v *QueryAssistantInput) error {
 	if v.AssistantId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
 	}
-	if v.QueryText == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
-	}
 	if v.QueryCondition != nil {
 		if err := validateQueryConditionExpression(v.QueryCondition); err != nil {
 			invalidParams.AddNested("QueryCondition", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.QueryInputData != nil {
+		if err := validateQueryInputData(v.QueryInputData); err != nil {
+			invalidParams.AddNested("QueryInputData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveAssistantAIAgentInput(v *RemoveAssistantAIAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveAssistantAIAgentInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if len(v.AiAgentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2284,6 +3580,83 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateAIAgentInput(v *UpdateAIAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAIAgentInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentId"))
+	}
+	if len(v.VisibilityStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibilityStatus"))
+	}
+	if v.Configuration != nil {
+		if err := validateAIAgentConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAIPromptInput(v *UpdateAIPromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAIPromptInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.AiPromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AiPromptId"))
+	}
+	if len(v.VisibilityStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VisibilityStatus"))
+	}
+	if v.TemplateConfiguration != nil {
+		if err := validateAIPromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
+			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssistantAIAgentInput(v *UpdateAssistantAIAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssistantAIAgentInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if len(v.AiAgentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AiAgentType"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateAIAgentConfigurationData(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateContentInput(v *UpdateContentInput) error {
 	if v == nil {
 		return nil
@@ -2338,6 +3711,31 @@ func validateOpUpdateQuickResponseInput(v *UpdateQuickResponseInput) error {
 	}
 }
 
+func validateOpUpdateSessionDataInput(v *UpdateSessionDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSessionDataInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	} else if v.Data != nil {
+		if err := validateRuntimeSessionDataList(v.Data); err != nil {
+			invalidParams.AddNested("Data", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
 	if v == nil {
 		return nil
@@ -2352,6 +3750,11 @@ func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
 	if v.TagFilter != nil {
 		if err := validateTagFilter(v.TagFilter); err != nil {
 			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AiAgentConfiguration != nil {
+		if err := validateAIAgentConfigurationMap(v.AiAgentConfiguration); err != nil {
+			invalidParams.AddNested("AiAgentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

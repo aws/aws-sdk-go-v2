@@ -2,6 +2,100 @@
 
 package types
 
+type AIAgentAssociationConfigurationType string
+
+// Enum values for AIAgentAssociationConfigurationType
+const (
+	AIAgentAssociationConfigurationTypeKnowledgeBase AIAgentAssociationConfigurationType = "KNOWLEDGE_BASE"
+)
+
+// Values returns all known values for AIAgentAssociationConfigurationType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIAgentAssociationConfigurationType) Values() []AIAgentAssociationConfigurationType {
+	return []AIAgentAssociationConfigurationType{
+		"KNOWLEDGE_BASE",
+	}
+}
+
+type AIAgentType string
+
+// Enum values for AIAgentType
+const (
+	AIAgentTypeManualSearch         AIAgentType = "MANUAL_SEARCH"
+	AIAgentTypeAnswerRecommendation AIAgentType = "ANSWER_RECOMMENDATION"
+)
+
+// Values returns all known values for AIAgentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIAgentType) Values() []AIAgentType {
+	return []AIAgentType{
+		"MANUAL_SEARCH",
+		"ANSWER_RECOMMENDATION",
+	}
+}
+
+type AIPromptAPIFormat string
+
+// Enum values for AIPromptAPIFormat
+const (
+	AIPromptAPIFormatAnthropicClaudeMessages        AIPromptAPIFormat = "ANTHROPIC_CLAUDE_MESSAGES"
+	AIPromptAPIFormatAnthropicClaudeTextCompletions AIPromptAPIFormat = "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS"
+)
+
+// Values returns all known values for AIPromptAPIFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIPromptAPIFormat) Values() []AIPromptAPIFormat {
+	return []AIPromptAPIFormat{
+		"ANTHROPIC_CLAUDE_MESSAGES",
+		"ANTHROPIC_CLAUDE_TEXT_COMPLETIONS",
+	}
+}
+
+type AIPromptTemplateType string
+
+// Enum values for AIPromptTemplateType
+const (
+	AIPromptTemplateTypeText AIPromptTemplateType = "TEXT"
+)
+
+// Values returns all known values for AIPromptTemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIPromptTemplateType) Values() []AIPromptTemplateType {
+	return []AIPromptTemplateType{
+		"TEXT",
+	}
+}
+
+type AIPromptType string
+
+// Enum values for AIPromptType
+const (
+	AIPromptTypeAnswerGeneration         AIPromptType = "ANSWER_GENERATION"
+	AIPromptTypeIntentLabelingGeneration AIPromptType = "INTENT_LABELING_GENERATION"
+	AIPromptTypeQueryReformulation       AIPromptType = "QUERY_REFORMULATION"
+)
+
+// Values returns all known values for AIPromptType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIPromptType) Values() []AIPromptType {
+	return []AIPromptType{
+		"ANSWER_GENERATION",
+		"INTENT_LABELING_GENERATION",
+		"QUERY_REFORMULATION",
+	}
+}
+
 type AssistantCapabilityType string
 
 // Enum values for AssistantCapabilityType
@@ -79,6 +173,29 @@ const (
 func (AssociationType) Values() []AssociationType {
 	return []AssociationType{
 		"KNOWLEDGE_BASE",
+	}
+}
+
+type ChunkingStrategy string
+
+// Enum values for ChunkingStrategy
+const (
+	ChunkingStrategyFixedSize    ChunkingStrategy = "FIXED_SIZE"
+	ChunkingStrategyNone         ChunkingStrategy = "NONE"
+	ChunkingStrategyHierarchical ChunkingStrategy = "HIERARCHICAL"
+	ChunkingStrategySemantic     ChunkingStrategy = "SEMANTIC"
+)
+
+// Values returns all known values for ChunkingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChunkingStrategy) Values() []ChunkingStrategy {
+	return []ChunkingStrategy{
+		"FIXED_SIZE",
+		"NONE",
+		"HIERARCHICAL",
+		"SEMANTIC",
 	}
 }
 
@@ -223,6 +340,25 @@ func (ImportJobType) Values() []ImportJobType {
 	}
 }
 
+type KnowledgeBaseSearchType string
+
+// Enum values for KnowledgeBaseSearchType
+const (
+	KnowledgeBaseSearchTypeHybrid   KnowledgeBaseSearchType = "HYBRID"
+	KnowledgeBaseSearchTypeSemantic KnowledgeBaseSearchType = "SEMANTIC"
+)
+
+// Values returns all known values for KnowledgeBaseSearchType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KnowledgeBaseSearchType) Values() []KnowledgeBaseSearchType {
+	return []KnowledgeBaseSearchType{
+		"HYBRID",
+		"SEMANTIC",
+	}
+}
+
 type KnowledgeBaseStatus string
 
 // Enum values for KnowledgeBaseStatus
@@ -254,9 +390,11 @@ type KnowledgeBaseType string
 
 // Enum values for KnowledgeBaseType
 const (
-	KnowledgeBaseTypeExternal       KnowledgeBaseType = "EXTERNAL"
-	KnowledgeBaseTypeCustom         KnowledgeBaseType = "CUSTOM"
-	KnowledgeBaseTypeQuickResponses KnowledgeBaseType = "QUICK_RESPONSES"
+	KnowledgeBaseTypeExternal         KnowledgeBaseType = "EXTERNAL"
+	KnowledgeBaseTypeCustom           KnowledgeBaseType = "CUSTOM"
+	KnowledgeBaseTypeQuickResponses   KnowledgeBaseType = "QUICK_RESPONSES"
+	KnowledgeBaseTypeMessageTemplates KnowledgeBaseType = "MESSAGE_TEMPLATES"
+	KnowledgeBaseTypeManaged          KnowledgeBaseType = "MANAGED"
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
@@ -268,6 +406,8 @@ func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 		"EXTERNAL",
 		"CUSTOM",
 		"QUICK_RESPONSES",
+		"MESSAGE_TEMPLATES",
+		"MANAGED",
 	}
 }
 
@@ -287,6 +427,42 @@ func (Order) Values() []Order {
 	return []Order{
 		"ASC",
 		"DESC",
+	}
+}
+
+type Origin string
+
+// Enum values for Origin
+const (
+	OriginSystem   Origin = "SYSTEM"
+	OriginCustomer Origin = "CUSTOMER"
+)
+
+// Values returns all known values for Origin. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Origin) Values() []Origin {
+	return []Origin{
+		"SYSTEM",
+		"CUSTOMER",
+	}
+}
+
+type ParsingStrategy string
+
+// Enum values for ParsingStrategy
+const (
+	ParsingStrategyBedrockFoundationModel ParsingStrategy = "BEDROCK_FOUNDATION_MODEL"
+)
+
+// Values returns all known values for ParsingStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParsingStrategy) Values() []ParsingStrategy {
+	return []ParsingStrategy{
+		"BEDROCK_FOUNDATION_MODEL",
 	}
 }
 
@@ -351,6 +527,7 @@ type QueryResultType string
 // Enum values for QueryResultType
 const (
 	QueryResultTypeKnowledgeContent QueryResultType = "KNOWLEDGE_CONTENT"
+	QueryResultTypeIntentAnswer     QueryResultType = "INTENT_ANSWER"
 	QueryResultTypeGenerativeAnswer QueryResultType = "GENERATIVE_ANSWER"
 )
 
@@ -361,6 +538,7 @@ const (
 func (QueryResultType) Values() []QueryResultType {
 	return []QueryResultType{
 		"KNOWLEDGE_CONTENT",
+		"INTENT_ANSWER",
 		"GENERATIVE_ANSWER",
 	}
 }
@@ -481,6 +659,7 @@ const (
 	RecommendationTypeKnowledgeContent   RecommendationType = "KNOWLEDGE_CONTENT"
 	RecommendationTypeGenerativeResponse RecommendationType = "GENERATIVE_RESPONSE"
 	RecommendationTypeGenerativeAnswer   RecommendationType = "GENERATIVE_ANSWER"
+	RecommendationTypeDetectedIntent     RecommendationType = "DETECTED_INTENT"
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
@@ -492,6 +671,26 @@ func (RecommendationType) Values() []RecommendationType {
 		"KNOWLEDGE_CONTENT",
 		"GENERATIVE_RESPONSE",
 		"GENERATIVE_ANSWER",
+		"DETECTED_INTENT",
+	}
+}
+
+type ReferenceType string
+
+// Enum values for ReferenceType
+const (
+	ReferenceTypeWebCrawler    ReferenceType = "WEB_CRAWLER"
+	ReferenceTypeKnowledgeBase ReferenceType = "KNOWLEDGE_BASE"
+)
+
+// Values returns all known values for ReferenceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReferenceType) Values() []ReferenceType {
+	return []ReferenceType{
+		"WEB_CRAWLER",
+		"KNOWLEDGE_BASE",
 	}
 }
 
@@ -535,6 +734,23 @@ func (RelevanceLevel) Values() []RelevanceLevel {
 	}
 }
 
+type SessionDataNamespace string
+
+// Enum values for SessionDataNamespace
+const (
+	SessionDataNamespaceCustom SessionDataNamespace = "Custom"
+)
+
+// Values returns all known values for SessionDataNamespace. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionDataNamespace) Values() []SessionDataNamespace {
+	return []SessionDataNamespace{
+		"Custom",
+	}
+}
+
 type SourceContentType string
 
 // Enum values for SourceContentType
@@ -549,6 +765,56 @@ const (
 func (SourceContentType) Values() []SourceContentType {
 	return []SourceContentType{
 		"KNOWLEDGE_CONTENT",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusCreateInProgress Status = "CREATE_IN_PROGRESS"
+	StatusCreateFailed     Status = "CREATE_FAILED"
+	StatusActive           Status = "ACTIVE"
+	StatusDeleteInProgress Status = "DELETE_IN_PROGRESS"
+	StatusDeleteFailed     Status = "DELETE_FAILED"
+	StatusDeleted          Status = "DELETED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+		"DELETED",
+	}
+}
+
+type SyncStatus string
+
+// Enum values for SyncStatus
+const (
+	SyncStatusSyncFailed        SyncStatus = "SYNC_FAILED"
+	SyncStatusSyncingInProgress SyncStatus = "SYNCING_IN_PROGRESS"
+	SyncStatusSyncSuccess       SyncStatus = "SYNC_SUCCESS"
+	SyncStatusCreateInProgress  SyncStatus = "CREATE_IN_PROGRESS"
+)
+
+// Values returns all known values for SyncStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SyncStatus) Values() []SyncStatus {
+	return []SyncStatus{
+		"SYNC_FAILED",
+		"SYNCING_IN_PROGRESS",
+		"SYNC_SUCCESS",
+		"CREATE_IN_PROGRESS",
 	}
 }
 
@@ -568,5 +834,43 @@ func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"RECOMMENDATION",
 		"RESULT",
+	}
+}
+
+type VisibilityStatus string
+
+// Enum values for VisibilityStatus
+const (
+	VisibilityStatusSaved     VisibilityStatus = "SAVED"
+	VisibilityStatusPublished VisibilityStatus = "PUBLISHED"
+)
+
+// Values returns all known values for VisibilityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VisibilityStatus) Values() []VisibilityStatus {
+	return []VisibilityStatus{
+		"SAVED",
+		"PUBLISHED",
+	}
+}
+
+type WebScopeType string
+
+// Enum values for WebScopeType
+const (
+	WebScopeTypeHostOnly   WebScopeType = "HOST_ONLY"
+	WebScopeTypeSubdomains WebScopeType = "SUBDOMAINS"
+)
+
+// Values returns all known values for WebScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WebScopeType) Values() []WebScopeType {
+	return []WebScopeType{
+		"HOST_ONLY",
+		"SUBDOMAINS",
 	}
 }
