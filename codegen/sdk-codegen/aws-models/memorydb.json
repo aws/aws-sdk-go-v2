@@ -362,7 +362,7 @@
                     "name": "memorydb"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>MemoryDB is a fully managed, Redis OSS-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis OSS, a popular open source data store, enabling you to leverage Redis OSS’ flexible and friendly data structures, APIs, and commands.</p>",
+                "smithy.api#documentation": "<p>MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.</p>",
                 "smithy.api#title": "Amazon MemoryDB",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://memorydb.amazonaws.com/doc/2021-01-01/"
@@ -1461,16 +1461,22 @@
                         "smithy.api#documentation": "<p>The cluster's node type</p>"
                     }
                 },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Redis OSS or Valkey engine used by the cluster.</p>"
+                    }
+                },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis OSS engine version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The Redis engine version used by the cluster</p>"
                     }
                 },
                 "EnginePatchVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis OSS engine patch version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The engine patch version used by the cluster</p>"
                     }
                 },
                 "ParameterGroupName": {
@@ -1606,10 +1612,16 @@
                         "smithy.api#documentation": "<p>The node type used for the cluster</p>"
                     }
                 },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the Redis OSS or Valkey engine used by the cluster.</p>"
+                    }
+                },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis OSS engine version used by the cluster</p>"
+                        "smithy.api#documentation": "<p>The engine version used by the cluster</p>"
                     }
                 },
                 "MaintenanceWindow": {
@@ -2108,10 +2120,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the engine to be used for the nodes in this cluster. The value must be set to either Redis or Valkey.</p>"
+                    }
+                },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the Redis OSS engine to be used for the cluster.</p>"
+                        "smithy.api#documentation": "<p>The version number of the engine to be used for the cluster.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -2593,7 +2611,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a cluster. It also deletes all associated nodes and node endpoints</p>\n         <note>\n            <p>\n               <code>CreateSnapshot</code> permission is required to create a final snapshot. \n         Without this permission, the API call will fail with an <code>Access Denied</code> exception.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a cluster. It also deletes all associated nodes and node endpoints</p>"
             }
         },
         "com.amazonaws.memorydb#DeleteClusterRequest": {
@@ -3027,7 +3045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the available Redis OSS engine versions.</p>",
+                "smithy.api#documentation": "<p>Returns a list of the available engine versions.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3039,10 +3057,16 @@
         "com.amazonaws.memorydb#DescribeEngineVersionsRequest": {
             "type": "structure",
             "members": {
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine version to return. Valid values are either valkey or redis.</p>"
+                    }
+                },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Redis OSS engine version</p>"
+                        "smithy.api#documentation": "<p>The engine version.</p>"
                     }
                 },
                 "ParameterGroupFamily": {
@@ -3926,6 +3950,12 @@
         "com.amazonaws.memorydb#EngineVersionInfo": {
             "type": "structure",
             "members": {
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the Redis OSS or Valkey engine used by the cluster.</p>"
+                    }
+                },
                 "EngineVersion": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
@@ -3946,7 +3976,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details of the Redis OSS engine version</p>"
+                "smithy.api#documentation": "<p>Provides details of the engine version.</p>"
             }
         },
         "com.amazonaws.memorydb#EngineVersionInfoList": {
@@ -5370,6 +5400,12 @@
                         "smithy.api#documentation": "<p>Reflects the nature of the service update</p>"
                     }
                 },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MemoryDB engine to which the update applies. The values are either Redis or Valkey.</p>"
+                    }
+                },
                 "NodesUpdated": {
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
@@ -6503,6 +6539,12 @@
                     "target": "com.amazonaws.memorydb#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A valid node type that you want to scale this cluster up or down to.</p>"
+                    }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.memorydb#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the engine to be used for the nodes in this cluster. The value must be set to either Redis or Valkey.</p>"
                     }
                 },
                 "EngineVersion": {
