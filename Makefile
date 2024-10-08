@@ -410,7 +410,7 @@ ci-lint-install:
 #######################
 .PHONY: integration integ-modules-% cleanup-integ-buckets
 
-integration: integ-modules-service
+integration: integ-modules-service integ-modules-feature
 
 integ-modules-%:
 	@# integration command that uses the pattern to define the root path that
