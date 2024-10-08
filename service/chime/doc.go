@@ -42,6 +42,8 @@
 // Management (IAM). For more information, see [Identity and Access Management for Amazon Chime]in the Amazon Chime Administration
 // Guide.
 //
+// Deprecated: This namespace has been deprecated
+//
 // [Identity and Access Management for Amazon Chime]: https://docs.aws.amazon.com/chime/latest/ag/security-iam.html
 // [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 // [Installing the AWS Command Line Interface]: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
