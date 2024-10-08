@@ -99,6 +99,9 @@ func (c *Client) addOperationFloat16Middlewares(stack *middleware.Stack, options
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFloat16(options.Region), middleware.Before); err != nil {
 		return err
 	}
