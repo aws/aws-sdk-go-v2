@@ -150,8 +150,20 @@ public final class AwsProtocolUtils {
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
                         .operation(ShapeId.from("aws.protocoltests.json10#OperationWithNestedStructure"))
                         .addTestName("AwsJson10ClientPopulatesNestedDefaultValuesWhenMissing")
+                        .build(),
+
+                // TODO these tests are currently failing due to tests not being updated, see #2825
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#NullAndEmptyHeadersClient"))
+                        .addTestName("RestJsonNullAndEmptyHeaders")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
+                        .operation(ShapeId.from("aws.protocoltests.restxml#NullAndEmptyHeadersClient"))
+                        .addTestName("NullAndEmptyHeaders")
                         .build()
-                ));
+        ));
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
                 // CBOR default value deserialization (SHOULD)

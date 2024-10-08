@@ -74,7 +74,7 @@ func awsRestjson1_serializeOpHttpBindingsAssociateLicenseInput(v *AssociateLicen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.GrafanaToken != nil && len(*v.GrafanaToken) > 0 {
+	if v.GrafanaToken != nil {
 		locationName := "Grafana-Token"
 		encoder.SetHeader(locationName).String(*v.GrafanaToken)
 	}

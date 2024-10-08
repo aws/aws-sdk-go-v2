@@ -310,7 +310,7 @@ func awsRestjson1_serializeOpHttpBindingsPutSessionInput(v *PutSessionInput, enc
 		}
 	}
 
-	if v.ResponseContentType != nil && len(*v.ResponseContentType) > 0 {
+	if v.ResponseContentType != nil {
 		locationName := "Responsecontenttype"
 		encoder.SetHeader(locationName).String(*v.ResponseContentType)
 	}
@@ -588,17 +588,17 @@ func awsRestjson1_serializeOpHttpBindingsRecognizeUtteranceInput(v *RecognizeUtt
 		}
 	}
 
-	if v.RequestAttributes != nil && len(*v.RequestAttributes) > 0 {
+	if v.RequestAttributes != nil {
 		locationName := "X-Amz-Lex-Request-Attributes"
 		encoder.SetHeader(locationName).String(*v.RequestAttributes)
 	}
 
-	if v.RequestContentType != nil && len(*v.RequestContentType) > 0 {
+	if v.RequestContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.RequestContentType)
 	}
 
-	if v.ResponseContentType != nil && len(*v.ResponseContentType) > 0 {
+	if v.ResponseContentType != nil {
 		locationName := "Response-Content-Type"
 		encoder.SetHeader(locationName).String(*v.ResponseContentType)
 	}
@@ -612,7 +612,7 @@ func awsRestjson1_serializeOpHttpBindingsRecognizeUtteranceInput(v *RecognizeUtt
 		}
 	}
 
-	if v.SessionState != nil && len(*v.SessionState) > 0 {
+	if v.SessionState != nil {
 		locationName := "X-Amz-Lex-Session-State"
 		encoder.SetHeader(locationName).String(*v.SessionState)
 	}

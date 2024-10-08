@@ -1465,7 +1465,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRecordsInput(v *UpdateRecordsInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientContext != nil && len(*v.ClientContext) > 0 {
+	if v.ClientContext != nil {
 		locationName := "X-Amz-Client-Context"
 		encoder.SetHeader(locationName).String(*v.ClientContext)
 	}

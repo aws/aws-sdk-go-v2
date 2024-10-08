@@ -75,7 +75,7 @@ func awsRestjson1_serializeOpHttpBindingsAbortDocumentVersionUploadInput(v *Abor
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -160,7 +160,7 @@ func awsRestjson1_serializeOpHttpBindingsActivateUserInput(v *ActivateUserInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -247,7 +247,7 @@ func awsRestjson1_serializeOpHttpBindingsAddResourcePermissionsInput(v *AddResou
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -355,7 +355,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateCommentInput(v *CreateCommentInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -483,7 +483,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateCustomMetadataInput(v *CreateCust
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -588,7 +588,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateFolderInput(v *CreateFolderInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -683,7 +683,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateLabelsInput(v *CreateLabelsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -888,7 +888,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateUserInput(v *CreateUserInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1004,7 +1004,7 @@ func awsRestjson1_serializeOpHttpBindingsDeactivateUserInput(v *DeactivateUserIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1080,7 +1080,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCommentInput(v *DeleteCommentInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1174,7 +1174,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCustomMetadataInput(v *DeleteCust
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1264,7 +1264,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDocumentInput(v *DeleteDocumentIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1340,7 +1340,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDocumentVersionInput(v *DeleteDoc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1429,7 +1429,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFolderInput(v *DeleteFolderInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1505,7 +1505,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFolderContentsInput(v *DeleteFold
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1581,7 +1581,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLabelsInput(v *DeleteLabelsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1747,7 +1747,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteUserInput(v *DeleteUserInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1827,7 +1827,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeActivitiesInput(v *DescribeActi
 		encoder.SetQuery("activityTypes").String(*v.ActivityTypes)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -1926,7 +1926,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeCommentsInput(v *DescribeCommen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2019,7 +2019,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeDocumentVersionsInput(v *Descri
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2111,7 +2111,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeFolderContentsInput(v *Describe
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2211,7 +2211,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeGroupsInput(v *DescribeGroupsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2373,7 +2373,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeResourcePermissionsInput(v *Des
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2461,7 +2461,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeRootFoldersInput(v *DescribeRoo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2536,7 +2536,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeUsersInput(v *DescribeUsersInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2639,7 +2639,7 @@ func awsRestjson1_serializeOpHttpBindingsGetCurrentUserInput(v *GetCurrentUserIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2706,7 +2706,7 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentInput(v *GetDocumentInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2786,7 +2786,7 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentPathInput(v *GetDocumentPath
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2874,7 +2874,7 @@ func awsRestjson1_serializeOpHttpBindingsGetDocumentVersionInput(v *GetDocumentV
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -2967,7 +2967,7 @@ func awsRestjson1_serializeOpHttpBindingsGetFolderInput(v *GetFolderInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3047,7 +3047,7 @@ func awsRestjson1_serializeOpHttpBindingsGetFolderPathInput(v *GetFolderPathInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3135,7 +3135,7 @@ func awsRestjson1_serializeOpHttpBindingsGetResourcesInput(v *GetResourcesInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3229,7 +3229,7 @@ func awsRestjson1_serializeOpHttpBindingsInitiateDocumentVersionUploadInput(v *I
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3338,7 +3338,7 @@ func awsRestjson1_serializeOpHttpBindingsRemoveAllResourcePermissionsInput(v *Re
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3414,7 +3414,7 @@ func awsRestjson1_serializeOpHttpBindingsRemoveResourcePermissionInput(v *Remove
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3503,7 +3503,7 @@ func awsRestjson1_serializeOpHttpBindingsRestoreDocumentVersionsInput(v *Restore
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3590,7 +3590,7 @@ func awsRestjson1_serializeOpHttpBindingsSearchResourcesInput(v *SearchResources
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3723,7 +3723,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDocumentInput(v *UpdateDocumentIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3832,7 +3832,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDocumentVersionInput(v *UpdateDoc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -3940,7 +3940,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFolderInput(v *UpdateFolderInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}
@@ -4049,7 +4049,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateUserInput(v *UpdateUserInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.AuthenticationToken != nil && len(*v.AuthenticationToken) > 0 {
+	if v.AuthenticationToken != nil {
 		locationName := "Authentication"
 		encoder.SetHeader(locationName).String(*v.AuthenticationToken)
 	}

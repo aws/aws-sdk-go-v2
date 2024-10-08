@@ -460,7 +460,7 @@ func awsRestjson1_serializeOpHttpBindingsPublishInput(v *PublishInput, encoder *
 		encoder.SetQuery("contentType").String(*v.ContentType)
 	}
 
-	if v.CorrelationData != nil && len(*v.CorrelationData) > 0 {
+	if v.CorrelationData != nil {
 		locationName := "X-Amz-Mqtt5-Correlation-Data"
 		encoder.SetHeader(locationName).String(*v.CorrelationData)
 	}
@@ -495,7 +495,7 @@ func awsRestjson1_serializeOpHttpBindingsPublishInput(v *PublishInput, encoder *
 		}
 	}
 
-	if v.UserProperties != nil && len(*v.UserProperties) > 0 {
+	if v.UserProperties != nil {
 		locationName := "X-Amz-Mqtt5-User-Properties"
 		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.UserProperties))
 		encodedPtr := ptr.String(encodedVal)

@@ -1123,7 +1123,7 @@ func awsRestjson1_serializeOpHttpBindingsExecuteGremlinQueryInput(v *ExecuteGrem
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Serializer != nil && len(*v.Serializer) > 0 {
+	if v.Serializer != nil {
 		locationName := "Accept"
 		encoder.SetHeader(locationName).String(*v.Serializer)
 	}

@@ -93,7 +93,7 @@ func awsRestxml_serializeOpHttpBindingsSimpleScalarPropertiesInput(v *SimpleScal
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil && len(*v.Foo) > 0 {
+	if v.Foo != nil {
 		locationName := "X-Foo"
 		encoder.SetHeader(locationName).String(*v.Foo)
 	}

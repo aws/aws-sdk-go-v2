@@ -3084,7 +3084,7 @@ func awsRestjson1_serializeOpHttpBindingsGetReferenceInput(v *GetReferenceInput,
 		encoder.SetQuery("partNumber").Integer(*v.PartNumber)
 	}
 
-	if v.Range != nil && len(*v.Range) > 0 {
+	if v.Range != nil {
 		locationName := "Range"
 		encoder.SetHeader(locationName).String(*v.Range)
 	}

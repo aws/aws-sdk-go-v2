@@ -3402,7 +3402,7 @@ func awsRestjson1_serializeOpHttpBindingsPublishPackageVersionInput(v *PublishPa
 		encoder.SetQuery("asset").String(*v.AssetName)
 	}
 
-	if v.AssetSHA256 != nil && len(*v.AssetSHA256) > 0 {
+	if v.AssetSHA256 != nil {
 		locationName := "X-Amz-Content-Sha256"
 		encoder.SetHeader(locationName).String(*v.AssetSHA256)
 	}

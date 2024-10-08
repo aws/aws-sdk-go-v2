@@ -222,7 +222,7 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encod
 		}
 	}
 
-	if v.Range != nil && len(*v.Range) > 0 {
+	if v.Range != nil {
 		locationName := "Range"
 		encoder.SetHeader(locationName).String(*v.Range)
 	}
@@ -375,12 +375,12 @@ func awsRestjson1_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.CacheControl != nil && len(*v.CacheControl) > 0 {
+	if v.CacheControl != nil {
 		locationName := "Cache-Control"
 		encoder.SetHeader(locationName).String(*v.CacheControl)
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}

@@ -96,7 +96,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateChannelInput(v *CreateChannelInpu
 		}
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}
@@ -203,7 +203,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateChannelGroupInput(v *CreateChanne
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}
@@ -323,7 +323,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateOriginEndpointInput(v *CreateOrig
 		}
 	}
 
-	if v.ClientToken != nil && len(*v.ClientToken) > 0 {
+	if v.ClientToken != nil {
 		locationName := "X-Amzn-Client-Token"
 		encoder.SetHeader(locationName).String(*v.ClientToken)
 	}
@@ -2002,7 +2002,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelInput(v *UpdateChannelInpu
 		}
 	}
 
-	if v.ETag != nil && len(*v.ETag) > 0 {
+	if v.ETag != nil {
 		locationName := "X-Amzn-Update-If-Match"
 		encoder.SetHeader(locationName).String(*v.ETag)
 	}
@@ -2101,7 +2101,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelGroupInput(v *UpdateChanne
 		}
 	}
 
-	if v.ETag != nil && len(*v.ETag) > 0 {
+	if v.ETag != nil {
 		locationName := "X-Amzn-Update-If-Match"
 		encoder.SetHeader(locationName).String(*v.ETag)
 	}
@@ -2209,7 +2209,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateOriginEndpointInput(v *UpdateOrig
 		}
 	}
 
-	if v.ETag != nil && len(*v.ETag) > 0 {
+	if v.ETag != nil {
 		locationName := "X-Amzn-Update-If-Match"
 		encoder.SetHeader(locationName).String(*v.ETag)
 	}

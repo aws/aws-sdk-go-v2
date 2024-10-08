@@ -79,7 +79,7 @@ func awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(v *CompleteSnapsh
 		encoder.SetHeader(locationName).Integer(*v.ChangedBlocksCount)
 	}
 
-	if v.Checksum != nil && len(*v.Checksum) > 0 {
+	if v.Checksum != nil {
 		locationName := "X-Amz-Checksum"
 		encoder.SetHeader(locationName).String(*v.Checksum)
 	}
@@ -440,7 +440,7 @@ func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlo
 		}
 	}
 
-	if v.Checksum != nil && len(*v.Checksum) > 0 {
+	if v.Checksum != nil {
 		locationName := "X-Amz-Checksum"
 		encoder.SetHeader(locationName).String(*v.Checksum)
 	}

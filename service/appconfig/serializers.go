@@ -796,12 +796,12 @@ func awsRestjson1_serializeOpHttpBindingsCreateHostedConfigurationVersionInput(v
 		}
 	}
 
-	if v.ContentType != nil && len(*v.ContentType) > 0 {
+	if v.ContentType != nil {
 		locationName := "Content-Type"
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
-	if v.Description != nil && len(*v.Description) > 0 {
+	if v.Description != nil {
 		locationName := "Description"
 		encoder.SetHeader(locationName).String(*v.Description)
 	}
@@ -811,7 +811,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateHostedConfigurationVersionInput(v
 		encoder.SetHeader(locationName).Integer(*v.LatestVersionNumber)
 	}
 
-	if v.VersionLabel != nil && len(*v.VersionLabel) > 0 {
+	if v.VersionLabel != nil {
 		locationName := "Versionlabel"
 		encoder.SetHeader(locationName).String(*v.VersionLabel)
 	}

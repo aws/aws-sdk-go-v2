@@ -54,6 +54,10 @@ func TestClient_NullAndEmptyHeadersClient_awsRestxmlSerialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "NullAndEmptyHeaders" {
+				t.Skip("disabled test aws.protocoltests.restxml#RestXml aws.protocoltests.restxml#NullAndEmptyHeadersClient")
+			}
+
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
