@@ -27,7 +27,7 @@ const (
 	// if the operation supports output checksums
 	ResponseChecksumValidationWhenSupported
 
-	// ResponseChecksumValidationWhenRequired indicates response checksum will be validated
-	// if user sets the validation mode to ENABLED in request
+	// ResponseChecksumValidationWhenRequired indicates response checksum will only
+	// be validated if the operation requires output checksum validation
 	ResponseChecksumValidationWhenRequired
 )
