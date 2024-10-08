@@ -1,8 +1,0 @@
-{
-    "id": "1b8acea4-afb2-4313-bbda-387c24b5b72a",
-    "type": "feature",
-    "description": "Amazon MemoryDB SDK now supports all APIs for newly launched Valkey engine. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.",
-    "modules": [
-        "service/memorydb"
-    ]
-}

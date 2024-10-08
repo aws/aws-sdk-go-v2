@@ -1,9 +1,0 @@
-{
-    "id": "a3b1dd91-e03f-4540-b760-1093acd4e231",
-    "type": "documentation",
-    "description": "Doc-only update to generate deprecated annotation for services that have been marked as deprecated.",
-    "modules": [
-        "service/chime",
-        "service/sms"
-    ]
-}

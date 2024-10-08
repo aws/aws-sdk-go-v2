@@ -1,3 +1,8 @@
+# v1.43.0 (2024-10-08)
+
+* **Feature**: AWS ElastiCache SDK now supports using APIs with newly launched Valkey engine. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.1 (2024-10-07)
 
 * **Dependency Update**: Updated to the latest SDK module versions

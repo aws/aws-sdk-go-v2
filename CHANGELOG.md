@@ -1,3 +1,18 @@
+# Release (2024-10-08)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.34.2](service/chime/CHANGELOG.md#v1342-2024-10-08)
+  * **Documentation**: Doc-only update to generate deprecated annotation for services that have been marked as deprecated.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.43.0](service/elasticache/CHANGELOG.md#v1430-2024-10-08)
+  * **Feature**: AWS ElastiCache SDK now supports using APIs with newly launched Valkey engine. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.24.0](service/memorydb/CHANGELOG.md#v1240-2024-10-08)
+  * **Feature**: Amazon MemoryDB SDK now supports all APIs for newly launched Valkey engine. Please refer to the updated Amazon MemoryDB public documentation for detailed information on API usage.
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.24.2](service/sms/CHANGELOG.md#v1242-2024-10-08)
+  * **Documentation**: Doc-only update to generate deprecated annotation for services that have been marked as deprecated.
+
 # Release (2024-10-07)
 
 ## General Highlights

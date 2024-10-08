@@ -1,3 +1,7 @@
+# v1.12.1 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-10-07)
 
 * **Feature**: This release adds support for the following capabilities: Configuration of the Gen AI system via AIAgent and AIPrompts. Integration support for Bedrock Knowledge Base.

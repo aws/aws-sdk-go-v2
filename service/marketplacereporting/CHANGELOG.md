@@ -1,3 +1,7 @@
+# v1.1.2 (2024-10-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.1 (2024-10-07)
 
 * **Documentation**: Documentation-only update for AWS Marketplace Reporting API.

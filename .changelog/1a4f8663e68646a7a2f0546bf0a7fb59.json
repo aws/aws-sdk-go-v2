@@ -1,9 +1,0 @@
-{
-    "id": "1a4f8663-e686-46a7-a2f0-546bf0a7fb59",
-    "type": "bugfix",
-    "description": "Allow non-nil but empty headers",
-    "modules": [
-        "internal/protocoltest/awsrestjson",
-        "internal/protocoltest/restxml"
-    ]
-}
