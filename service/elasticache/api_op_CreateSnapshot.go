@@ -14,7 +14,7 @@ import (
 // Creates a copy of an entire cluster or replication group at a specific moment
 // in time.
 //
-// This operation is valid for Redis OSS only.
+// This operation is valid for Valkey or Redis OSS only.
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}
@@ -58,8 +58,8 @@ type CreateSnapshotInput struct {
 
 type CreateSnapshotOutput struct {
 
-	// Represents a copy of an entire Redis OSS cluster as of the time when the
-	// snapshot was taken.
+	// Represents a copy of an entire Valkey or Redis OSS cluster as of the time when
+	// the snapshot was taken.
 	Snapshot *types.Snapshot
 
 	// Metadata pertaining to the operation's result.

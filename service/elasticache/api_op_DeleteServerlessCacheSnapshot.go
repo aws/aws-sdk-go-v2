@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing serverless cache snapshot. Available for Redis OSS and
-// Serverless Memcached only.
+// Deletes an existing serverless cache snapshot. Available for Valkey, Redis OSS
+// and Serverless Memcached only.
 func (c *Client) DeleteServerlessCacheSnapshot(ctx context.Context, params *DeleteServerlessCacheSnapshotInput, optFns ...func(*Options)) (*DeleteServerlessCacheSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteServerlessCacheSnapshotInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteServerlessCacheSnapshot(ctx context.Context, params *Dele
 
 type DeleteServerlessCacheSnapshotInput struct {
 
-	// Idenfitier of the snapshot to be deleted. Available for Redis OSS and
+	// Idenfitier of the snapshot to be deleted. Available for Valkey, Redis OSS and
 	// Serverless Memcached only.
 	//
 	// This member is required.
@@ -41,8 +41,8 @@ type DeleteServerlessCacheSnapshotInput struct {
 
 type DeleteServerlessCacheSnapshotOutput struct {
 
-	// The snapshot to be deleted. Available for Redis OSS and Serverless Memcached
-	// only.
+	// The snapshot to be deleted. Available for Valkey, Redis OSS and Serverless
+	// Memcached only.
 	ServerlessCacheSnapshot *types.ServerlessCacheSnapshot
 
 	// Metadata pertaining to the operation's result.

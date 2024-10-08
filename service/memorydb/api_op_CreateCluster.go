@@ -60,7 +60,11 @@ type CreateClusterInput struct {
 	// An optional description of the cluster.
 	Description *string
 
-	// The version number of the Redis OSS engine to be used for the cluster.
+	// The name of the engine to be used for the nodes in this cluster. The value must
+	// be set to either Redis or Valkey.
+	Engine *string
+
+	// The version number of the engine to be used for the cluster.
 	EngineVersion *string
 
 	// The ID of the KMS key used to encrypt the cluster.

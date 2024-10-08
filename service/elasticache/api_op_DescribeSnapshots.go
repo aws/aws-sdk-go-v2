@@ -16,7 +16,7 @@ import (
 // single snapshot, or just the snapshots associated with a particular cache
 // cluster.
 //
-// This operation is valid for Redis OSS only.
+// This operation is valid for Valkey or Redis OSS only.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}

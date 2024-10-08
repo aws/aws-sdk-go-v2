@@ -1,0 +1,8 @@
+{
+    "id": "7c759fd5-7646-4014-b861-e5b5248f5a3e",
+    "type": "feature",
+    "description": "AWS ElastiCache SDK now supports using APIs with newly launched Valkey engine. Please refer to updated AWS ElastiCache public documentation for detailed information on API usage.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

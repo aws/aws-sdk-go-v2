@@ -42,6 +42,10 @@ type UpdateClusterInput struct {
 	// The description of the cluster to update
 	Description *string
 
+	// The name of the engine to be used for the nodes in this cluster. The value must
+	// be set to either Redis or Valkey.
+	Engine *string
+
 	// The upgraded version of the engine to be run on the nodes. You can upgrade to a
 	// newer engine version, but you cannot downgrade to an earlier engine version. If
 	// you want to use an earlier engine version, you must delete the existing cluster

@@ -59,8 +59,8 @@ type CacheCluster struct {
 	// Default: false
 	AtRestEncryptionEnabled *bool
 
-	// A flag that enables using an AuthToken (password) when issuing Redis OSS
-	// commands.
+	// A flag that enables using an AuthToken (password) when issuing Valkey or Redis
+	// OSS commands.
 	//
 	// Default: false
 	AuthTokenEnabled *bool
@@ -68,9 +68,9 @@ type CacheCluster struct {
 	// The date the auth token was last modified
 	AuthTokenLastModifiedDate *time.Time
 
-	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
-	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
-	// This parameter is disabled for previous versions.
+	//  If you are running Valkey or Redis OSS engine version 6.0 or later, set this
+	// parameter to yes if you want to opt-in to the next auto minor version upgrade
+	// campaign. This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
 	// The date and time when the cluster was created.
@@ -173,12 +173,14 @@ type CacheCluster struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -214,8 +216,9 @@ type CacheCluster struct {
 	EngineVersion *string
 
 	// The network type associated with the cluster, either ipv4 | ipv6 . IPv6 is
-	// supported for workloads using Redis OSS engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the [Nitro system].
+	// supported for workloads using Valkey 7.2 and above, Redis OSS engine version 6.2
+	// and above or Memcached engine version 1.6.6 and above on all instances built on
+	// the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery IpDiscovery
@@ -224,8 +227,8 @@ type CacheCluster struct {
 	LogDeliveryConfigurations []LogDeliveryConfiguration
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the [Nitro system].
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	NetworkType NetworkType
@@ -237,8 +240,8 @@ type CacheCluster struct {
 
 	// The number of cache nodes in the cluster.
 	//
-	// For clusters running Redis OSS, this value must be 1. For clusters running
-	// Memcached, this value must be between 1 and 40.
+	// For clusters running Valkey or Redis OSS, this value must be 1. For clusters
+	// running Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// A group of settings that are applied to the cluster in the future, or that are
@@ -341,7 +344,7 @@ type CacheEngineVersion struct {
 
 // Represents an individual cache node within a cluster. Each cache node runs its
 // own instance of the cluster's protocol-compliant caching software - either
-// Memcached or Redis OSS.
+// Memcached, Valkey or Redis OSS.
 //
 // The following node types are supported by ElastiCache. Generally speaking, the
 // current generation types provide more memory and computational power at lower
@@ -441,12 +444,14 @@ type CacheEngineVersion struct {
 //
 //   - All current generation instance types are created in Amazon VPC by default.
 //
-//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+//     instances.
 //
-//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+//     instances.
 //
-//   - Redis OSS configuration variables appendonly and appendfsync are not
-//     supported on Redis OSS version 2.8.22 and later.
+//   - The configuration variables appendonly and appendfsync are not supported on
+//     Valkey, or on Redis OSS version 2.8.22 and later.
 //
 // [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 type CacheNode struct {
@@ -483,8 +488,8 @@ type CacheNode struct {
 }
 
 // A parameter that has a different value for each cache node type it is applied
-// to. For example, in a Redis OSS cluster, a cache.m1.large cache node type would
-// have a larger maxmemory value than a cache.m1.small type.
+// to. For example, in a Valkey or Redis OSS cluster, a cache.m1.large cache node
+// type would have a larger maxmemory value than a cache.m1.small type.
 type CacheNodeTypeSpecificParameter struct {
 
 	// The valid range of values for the parameter.
@@ -668,9 +673,9 @@ type CacheSubnetGroup struct {
 	// A list of subnets associated with the cache subnet group.
 	Subnets []Subnet
 
-	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Redis
-	// OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
-	// built on the [Nitro system].
+	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Valkey
+	// 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	SupportedNetworkTypes []NetworkType
@@ -710,25 +715,27 @@ type ConfigureShard struct {
 
 	// The number of replicas you want in this node group at the end of this
 	// operation. The maximum value for NewReplicaCount is 5. The minimum value
-	// depends upon the type of Redis OSS replication group you are working with.
+	// depends upon the type of Valkey or Redis OSS replication group you are working
+	// with.
 	//
 	// The minimum number of replicas in a shard or replication group is:
 	//
-	//   - Redis OSS (cluster mode disabled)
+	//   - Valkey or Redis OSS (cluster mode disabled)
 	//
 	//   - If Multi-AZ: 1
 	//
 	//   - If Multi-AZ: 0
 	//
-	//   - Redis OSS (cluster mode enabled): 0 (though you will not be able to
-	//   failover to a replica if your primary node fails)
+	//   - Valkey or Redis OSS (cluster mode enabled): 0 (though you will not be able
+	//   to failover to a replica if your primary node fails)
 	//
 	// This member is required.
 	NewReplicaCount *int32
 
-	// The 4-digit id for the node group you are configuring. For Redis OSS (cluster
-	// mode disabled) replication groups, the node group id is always 0001. To find a
-	// Redis OSS (cluster mode enabled)'s node group's (shard's) id, see [Finding a Shard's Id].
+	// The 4-digit id for the node group you are configuring. For Valkey or Redis OSS
+	// (cluster mode disabled) replication groups, the node group id is always 0001. To
+	// find a Valkey or Redis OSS (cluster mode enabled)'s node group's (shard's) id,
+	// see [Finding a Shard's Id].
 	//
 	// [Finding a Shard's Id]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/shard-find-id.html
 	//
@@ -739,8 +746,7 @@ type ConfigureShard struct {
 	// zones the replication group's nodes are to be in. The nummber of
 	// PreferredAvailabilityZone values must equal the value of NewReplicaCount plus 1
 	// to account for the primary node. If this member of ReplicaConfiguration is
-	// omitted, ElastiCache (Redis OSS) selects the availability zone for each of the
-	// replicas.
+	// omitted, ElastiCache selects the availability zone for each of the replicas.
 	PreferredAvailabilityZones []string
 
 	// The outpost ARNs in which the cache cluster is created.
@@ -929,8 +935,8 @@ type GlobalReplicationGroup struct {
 	// using Redis OSS version 3.2.6 , 4.x or later.
 	AtRestEncryptionEnabled *bool
 
-	// A flag that enables using an AuthToken (password) when issuing Redis OSS
-	// commands.
+	// A flag that enables using an AuthToken (password) when issuing Valkey or Redis
+	// OSS commands.
 	//
 	// Default: false
 	AuthTokenEnabled *bool
@@ -941,10 +947,10 @@ type GlobalReplicationGroup struct {
 	// A flag that indicates whether the Global datastore is cluster enabled.
 	ClusterEnabled *bool
 
-	// The Elasticache engine. For Redis OSS only.
+	// The ElastiCache engine. For Valkey or Redis OSS only.
 	Engine *string
 
-	// The Elasticache (Redis OSS) engine version.
+	// The ElastiCache engine version.
 	EngineVersion *string
 
 	// Indicates the slot configuration and global identifier for each slice group.
@@ -1073,11 +1079,11 @@ type LogDeliveryConfigurationRequest struct {
 // Replica nodes.
 type NodeGroup struct {
 
-	// The identifier for the node group (shard). A Redis OSS (cluster mode disabled)
-	// replication group contains only 1 node group; therefore, the node group ID is
-	// 0001. A Redis OSS (cluster mode enabled) replication group contains 1 to 90 node
-	// groups numbered 0001 to 0090. Optionally, the user can provide the id for a node
-	// group.
+	// The identifier for the node group (shard). A Valkey or Redis OSS (cluster mode
+	// disabled) replication group contains only 1 node group; therefore, the node
+	// group ID is 0001. A Valkey or Redis OSS (cluster mode enabled) replication group
+	// contains 1 to 90 node groups numbered 0001 to 0090. Optionally, the user can
+	// provide the id for a node group.
 	NodeGroupId *string
 
 	// A list containing information about individual nodes within the node group
@@ -1106,8 +1112,8 @@ type NodeGroup struct {
 // ReplicaCount .
 type NodeGroupConfiguration struct {
 
-	// Either the ElastiCache (Redis OSS) supplied 4-digit id or a user supplied id
-	// for the node group these configuration values apply to.
+	// Either the ElastiCache supplied 4-digit id or a user supplied id for the node
+	// group these configuration values apply to.
 	NodeGroupId *string
 
 	// The Availability Zone where the primary node of this node group (shard) is
@@ -1148,8 +1154,8 @@ type NodeGroupMember struct {
 	CacheNodeId *string
 
 	// The role that is currently assigned to the node - primary or replica . This
-	// member is only applicable for Redis OSS (cluster mode disabled) replication
-	// groups.
+	// member is only applicable for Valkey or Redis OSS (cluster mode disabled)
+	// replication groups.
 	CurrentRole *string
 
 	// The name of the Availability Zone in which the node is located.
@@ -1159,8 +1165,8 @@ type NodeGroupMember struct {
 	PreferredOutpostArn *string
 
 	// The information required for client programs to connect to a node for read
-	// operations. The read endpoint is only applicable on Redis OSS (cluster mode
-	// disabled) clusters.
+	// operations. The read endpoint is only applicable on Valkey or Redis OSS (cluster
+	// mode disabled) clusters.
 	ReadEndpoint *Endpoint
 
 	noSmithyDocumentSerde
@@ -1349,8 +1355,8 @@ type PendingModifiedValues struct {
 
 	// The new number of cache nodes for the cluster.
 	//
-	// For clusters running Redis OSS, this value must be 1. For clusters running
-	// Memcached, this value must be between 1 and 40.
+	// For clusters running Valkey or Redis OSS, this value must be 1. For clusters
+	// running Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// A flag that enables in-transit encryption when set to true.
@@ -1375,7 +1381,7 @@ type ProcessedUpdateAction struct {
 	// The unique ID of the service update
 	ServiceUpdateName *string
 
-	// The status of the update action on the Redis OSS cluster
+	// The status of the update action on the Valkey or Redis OSS cluster
 	UpdateActionStatus UpdateActionStatus
 
 	noSmithyDocumentSerde
@@ -1416,7 +1422,8 @@ type RegionalConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains all of the attributes of a specific Redis OSS replication group.
+// Contains all of the attributes of a specific Valkey or Redis OSS replication
+// group.
 type ReplicationGroup struct {
 
 	// The ARN (Amazon Resource Name) of the replication group.
@@ -1434,8 +1441,8 @@ type ReplicationGroup struct {
 	// Default: false
 	AtRestEncryptionEnabled *bool
 
-	// A flag that enables using an AuthToken (password) when issuing Redis OSS
-	// commands.
+	// A flag that enables using an AuthToken (password) when issuing Valkey or Redis
+	// OSS commands.
 	//
 	// Default: false
 	AuthTokenEnabled *bool
@@ -1443,12 +1450,13 @@ type ReplicationGroup struct {
 	// The date the auth token was last modified
 	AuthTokenLastModifiedDate *time.Time
 
-	// If you are running Redis OSS engine version 6.0 or later, set this parameter to
-	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
-	// parameter is disabled for previous versions.
+	// If you are running Valkey 7.2 and above, or Redis OSS engine version 6.0 and
+	// above, set this parameter to yes if you want to opt-in to the next auto minor
+	// version upgrade campaign. This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
-	// Indicates the status of automatic failover for this Redis OSS replication group.
+	// Indicates the status of automatic failover for this Valkey or Redis OSS
+	// replication group.
 	AutomaticFailover AutomaticFailoverStatus
 
 	// The name of the compute and memory capacity node type for each node in the
@@ -1463,10 +1471,11 @@ type ReplicationGroup struct {
 	ClusterEnabled *bool
 
 	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
-	// first set the cluster mode to Compatible. Compatible mode allows your Redis OSS
-	// clients to connect using both cluster mode enabled and cluster mode disabled.
-	// After you migrate all Redis OSS clients to use cluster mode enabled, you can
-	// then complete cluster mode configuration and set the cluster mode to Enabled.
+	// first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+	// Redis OSS clients to connect using both cluster mode enabled and cluster mode
+	// disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+	// enabled, you can then complete cluster mode configuration and set the cluster
+	// mode to Enabled.
 	ClusterMode ClusterMode
 
 	// The configuration endpoint for this replication group. Use the configuration
@@ -1483,13 +1492,18 @@ type ReplicationGroup struct {
 	// The user supplied description of the replication group.
 	Description *string
 
+	// The engine used in a replication group. The options are redis, memcached or
+	// valkey.
+	Engine *string
+
 	// The name of the Global datastore and role of this replication group in the
 	// Global datastore.
 	GlobalReplicationGroupInfo *GlobalReplicationGroupInfo
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
-	// is supported for workloads using Redis OSS engine version 6.2 onward or
-	// Memcached engine version 1.6.6 on all instances built on the [Nitro system].
+	// is supported for workloads using Valkey 7.2 and above, Redis OSS engine version
+	// 6.2 and above or Memcached engine version 1.6.6 and above on all instances built
+	// on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery IpDiscovery
@@ -1513,16 +1527,16 @@ type ReplicationGroup struct {
 	MultiAZ MultiAZStatus
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
-	// Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the [Nitro system].
+	// Valkey 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	NetworkType NetworkType
 
-	// A list of node groups in this replication group. For Redis OSS (cluster mode
-	// disabled) replication groups, this is a single-element list. For Redis OSS
-	// (cluster mode enabled) replication groups, the list contains an entry for each
-	// node group (shard).
+	// A list of node groups in this replication group. For Valkey or Redis OSS
+	// (cluster mode disabled) replication groups, this is a single-element list. For
+	// Valkey or Redis OSS (cluster mode enabled) replication groups, the list contains
+	// an entry for each node group (shard).
 	NodeGroups []NodeGroup
 
 	// A group of settings to be applied to the replication group, either immediately
@@ -1580,21 +1594,23 @@ type ReplicationGroup struct {
 	noSmithyDocumentSerde
 }
 
-// The settings to be applied to the Redis OSS replication group, either
+// The settings to be applied to the Valkey or Redis OSS replication group, either
 // immediately or during the next maintenance window.
 type ReplicationGroupPendingModifiedValues struct {
 
 	// The auth token status
 	AuthTokenStatus AuthTokenUpdateStatus
 
-	// Indicates the status of automatic failover for this Redis OSS replication group.
+	// Indicates the status of automatic failover for this Valkey or Redis OSS
+	// replication group.
 	AutomaticFailoverStatus PendingAutomaticFailoverStatus
 
 	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
-	// first set the cluster mode to Compatible. Compatible mode allows your Redis OSS
-	// clients to connect using both cluster mode enabled and cluster mode disabled.
-	// After you migrate all Redis OSS clients to use cluster mode enabled, you can
-	// then complete cluster mode configuration and set the cluster mode to Enabled.
+	// first set the cluster mode to Compatible. Compatible mode allows your Valkey or
+	// Redis OSS clients to connect using both cluster mode enabled and cluster mode
+	// disabled. After you migrate all Valkey or Redis OSS clients to use cluster mode
+	// enabled, you can then complete cluster mode configuration and set the cluster
+	// mode to Enabled.
 	ClusterMode ClusterMode
 
 	// The log delivery configurations being modified
@@ -1714,12 +1730,14 @@ type ReservedCacheNode struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -1854,12 +1872,14 @@ type ReservedCacheNodesOffering struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -1892,8 +1912,8 @@ type ReservedCacheNodesOffering struct {
 // of a node group in the resharded cluster.
 type ReshardingConfiguration struct {
 
-	// Either the ElastiCache (Redis OSS) supplied 4-digit id or a user supplied id
-	// for the node group these configuration values apply to.
+	// Either the ElastiCache supplied 4-digit id or a user supplied id for the node
+	// group these configuration values apply to.
 	NodeGroupId *string
 
 	// A list of preferred availability zones for the nodes in this cluster.
@@ -1939,7 +1959,7 @@ type ServerlessCache struct {
 
 	// The daily time that a cache snapshot will be created. Default is NULL, i.e.
 	// snapshots will not be created at a specific time on a daily basis. Available for
-	// Redis OSS and Serverless Memcached only.
+	// Valkey, Redis OSS and Serverless Memcached only.
 	DailySnapshotTime *string
 
 	// A description of the serverless cache.
@@ -1974,7 +1994,7 @@ type ServerlessCache struct {
 	ServerlessCacheName *string
 
 	// The current setting for the number of serverless cache snapshots the system
-	// will retain. Available for Redis OSS and Serverless Memcached only.
+	// will retain. Available for Valkey, Redis OSS and Serverless Memcached only.
 	SnapshotRetentionLimit *int32
 
 	// The current status of the serverless cache. The allowed values are CREATING,
@@ -1988,7 +2008,7 @@ type ServerlessCache struct {
 	SubnetIds []string
 
 	// The identifier of the user group associated with the serverless cache.
-	// Available for Redis OSS only. Default is NULL.
+	// Available for Valkey and Redis OSS only. Default is NULL.
 	UserGroupId *string
 
 	noSmithyDocumentSerde
@@ -2009,64 +2029,64 @@ type ServerlessCacheConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The resource representing a serverless cache snapshot. Available for Redis OSS
-// and Serverless Memcached only.
+// The resource representing a serverless cache snapshot. Available for Valkey,
+// Redis OSS and Serverless Memcached only.
 type ServerlessCacheSnapshot struct {
 
 	// The Amazon Resource Name (ARN) of a serverless cache snapshot. Available for
-	// Redis OSS and Serverless Memcached only.
+	// Valkey, Redis OSS and Serverless Memcached only.
 	ARN *string
 
-	// The total size of a serverless cache snapshot, in bytes. Available for Redis
-	// OSS and Serverless Memcached only.
+	// The total size of a serverless cache snapshot, in bytes. Available for Valkey,
+	// Redis OSS and Serverless Memcached only.
 	BytesUsedForCache *string
 
 	// The date and time that the source serverless cache's metadata and cache data
-	// set was obtained for the snapshot. Available for Redis OSS and Serverless
-	// Memcached only.
+	// set was obtained for the snapshot. Available for Valkey, Redis OSS and
+	// Serverless Memcached only.
 	CreateTime *time.Time
 
-	// The time that the serverless cache snapshot will expire. Available for Redis
-	// OSS and Serverless Memcached only.
+	// The time that the serverless cache snapshot will expire. Available for Valkey,
+	// Redis OSS and Serverless Memcached only.
 	ExpiryTime *time.Time
 
 	// The ID of the Amazon Web Services Key Management Service (KMS) key of a
-	// serverless cache snapshot. Available for Redis OSS and Serverless Memcached
-	// only.
+	// serverless cache snapshot. Available for Valkey, Redis OSS and Serverless
+	// Memcached only.
 	KmsKeyId *string
 
 	// The configuration of the serverless cache, at the time the snapshot was taken.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCacheConfiguration *ServerlessCacheConfiguration
 
-	// The identifier of a serverless cache snapshot. Available for Redis OSS and
-	// Serverless Memcached only.
+	// The identifier of a serverless cache snapshot. Available for Valkey, Redis OSS
+	// and Serverless Memcached only.
 	ServerlessCacheSnapshotName *string
 
-	// The type of snapshot of serverless cache. Available for Redis OSS and
+	// The type of snapshot of serverless cache. Available for Valkey, Redis OSS and
 	// Serverless Memcached only.
 	SnapshotType *string
 
-	// The current status of the serverless cache. Available for Redis OSS and
+	// The current status of the serverless cache. Available for Valkey, Redis OSS and
 	// Serverless Memcached only.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// An update that you can apply to your Redis OSS clusters.
+// An update that you can apply to your Valkey or Redis OSS clusters.
 type ServiceUpdate struct {
 
 	// Indicates whether the service update will be automatically applied once the
 	// recommended apply-by date has expired.
 	AutoUpdateAfterRecommendedApplyByDate *bool
 
-	// The Elasticache engine to which the update applies. Either Redis OSS or
+	// The Elasticache engine to which the update applies. Either Valkey, Redis OSS or
 	// Memcached.
 	Engine *string
 
-	// The Elasticache engine version to which the update applies. Either Redis OSS or
-	// Memcached engine version.
+	// The Elasticache engine version to which the update applies. Either Valkey,
+	// Redis OSS or Memcached engine version.
 	EngineVersion *string
 
 	// The estimated length of time the service update will take
@@ -2111,20 +2131,20 @@ type SlotMigration struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a copy of an entire Redis OSS cluster as of the time when the
-// snapshot was taken.
+// Represents a copy of an entire Valkey or Redis OSS cluster as of the time when
+// the snapshot was taken.
 type Snapshot struct {
 
 	// The ARN (Amazon Resource Name) of the snapshot.
 	ARN *string
 
-	//  If you are running Redis OSS engine version 6.0 or later, set this parameter
-	// to yes if you want to opt-in to the next auto minor version upgrade campaign.
-	// This parameter is disabled for previous versions.
+	//  If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and
+	// above, set this parameter to yes if you want to opt-in to the next auto minor
+	// version upgrade campaign. This parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade *bool
 
-	// Indicates the status of automatic failover for the source Redis OSS replication
-	// group.
+	// Indicates the status of automatic failover for the source Valkey or Redis OSS
+	// replication group.
 	AutomaticFailover AutomaticFailoverStatus
 
 	// The date and time when the source cluster was created.
@@ -2221,12 +2241,14 @@ type Snapshot struct {
 	//
 	//   - All current generation instance types are created in Amazon VPC by default.
 	//
-	//   - Redis OSS append-only files (AOF) are not supported for T1 or T2 instances.
+	//   - Valkey or Redis OSS append-only files (AOF) are not supported for T1 or T2
+	//   instances.
 	//
-	//   - Redis OSS Multi-AZ with automatic failover is not supported on T1 instances.
+	//   - Valkey or Redis OSS Multi-AZ with automatic failover is not supported on T1
+	//   instances.
 	//
-	//   - Redis OSS configuration variables appendonly and appendfsync are not
-	//   supported on Redis OSS version 2.8.22 and later.
+	//   - The configuration variables appendonly and appendfsync are not supported on
+	//   Valkey, or on Redis OSS version 2.8.22 and later.
 	//
 	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
@@ -2258,8 +2280,8 @@ type Snapshot struct {
 
 	// The number of cache nodes in the source cluster.
 	//
-	// For clusters running Redis OSS, this value must be 1. For clusters running
-	// Memcached, this value must be between 1 and 40.
+	// For clusters running Valkey or Redis OSS, this value must be 1. For clusters
+	// running Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// The number of node groups (shards) in this snapshot. When restoring from a
@@ -2358,9 +2380,9 @@ type Subnet struct {
 	// The outpost ARN of the subnet.
 	SubnetOutpost *SubnetOutpost
 
-	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Redis
-	// OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
-	// built on the [Nitro system].
+	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Valkey
+	// 7.2 and above, Redis OSS engine version 6.2 and above or Memcached engine
+	// version 1.6.6 and above on all instances built on the [Nitro system].
 	//
 	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	SupportedNetworkTypes []NetworkType
@@ -2437,7 +2459,7 @@ type UpdateAction struct {
 	// The status of the service update on the cache node
 	CacheNodeUpdateStatus []CacheNodeUpdateStatus
 
-	// The Elasticache engine to which the update applies. Either Redis OSS or
+	// The Elasticache engine to which the update applies. Either Valkey, Redis OSS or
 	// Memcached.
 	Engine *string
 
@@ -2542,7 +2564,7 @@ type UserGroup struct {
 	ReplicationGroups []string
 
 	// Indicates which serverless caches the specified user group is associated with.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCaches []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",

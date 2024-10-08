@@ -12,10 +12,9 @@ import (
 )
 
 // Allows you to purchase a reserved cache node offering. Reserved nodes are not
-// eligible for cancellation and are non-refundable. For more information, see [Managing Costs with Reserved Nodes]for
-// Redis OSS or [Managing Costs with Reserved Nodes]for Memcached.
+// eligible for cancellation and are non-refundable. For more information, see [Managing Costs with Reserved Nodes].
 //
-// [Managing Costs with Reserved Nodes]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html
+// [Managing Costs with Reserved Nodes]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html
 func (c *Client) PurchaseReservedCacheNodesOffering(ctx context.Context, params *PurchaseReservedCacheNodesOfferingInput, optFns ...func(*Options)) (*PurchaseReservedCacheNodesOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseReservedCacheNodesOfferingInput{}

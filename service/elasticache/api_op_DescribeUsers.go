@@ -29,7 +29,7 @@ func (c *Client) DescribeUsers(ctx context.Context, params *DescribeUsersInput, 
 
 type DescribeUsersInput struct {
 
-	// The Redis OSS engine.
+	// The engine.
 	Engine *string
 
 	// Filter to determine the list of User IDs to return.

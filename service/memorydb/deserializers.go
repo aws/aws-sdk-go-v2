@@ -7237,6 +7237,15 @@ func awsAwsjson11_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Engine = ptr.String(jtv)
+			}
+
 		case "EnginePatchVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7482,6 +7491,15 @@ func awsAwsjson11_deserializeDocumentClusterConfiguration(v **types.ClusterConfi
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Engine = ptr.String(jtv)
 			}
 
 		case "EngineVersion":
@@ -7933,6 +7951,15 @@ func awsAwsjson11_deserializeDocumentEngineVersionInfo(v **types.EngineVersionIn
 
 	for key, value := range shape {
 		switch key {
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Engine = ptr.String(jtv)
+			}
+
 		case "EnginePatchVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10188,6 +10215,15 @@ func awsAwsjson11_deserializeDocumentServiceUpdate(v **types.ServiceUpdate, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "Engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Engine = ptr.String(jtv)
 			}
 
 		case "NodesUpdated":

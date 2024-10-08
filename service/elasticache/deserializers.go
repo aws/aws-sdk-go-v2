@@ -21352,6 +21352,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				sv.Description = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("Engine", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Engine = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("GlobalReplicationGroupInfo", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentGlobalReplicationGroupInfo(&sv.GlobalReplicationGroupInfo, nodeDecoder); err != nil {

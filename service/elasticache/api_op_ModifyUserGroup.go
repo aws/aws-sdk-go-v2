@@ -61,7 +61,7 @@ type ModifyUserGroupOutput struct {
 	ReplicationGroups []string
 
 	// Indicates which serverless caches the specified user group is associated with.
-	// Available for Redis OSS and Serverless Memcached only.
+	// Available for Valkey, Redis OSS and Serverless Memcached only.
 	ServerlessCaches []string
 
 	// Indicates user group status. Can be "creating", "active", "modifying",

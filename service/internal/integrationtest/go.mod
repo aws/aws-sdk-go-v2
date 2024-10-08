@@ -139,8 +139,6 @@ replace github.com/aws/aws-sdk-go-v2/service/appstream => ../../../service/appst
 
 replace github.com/aws/aws-sdk-go-v2/service/athena => ../../../service/athena/
 
-replace github.com/aws/aws-sdk-go-v2/service/autoscaling => ../../../service/autoscaling/
-
 replace github.com/aws/aws-sdk-go-v2/service/batch => ../../../service/batch/
 
 replace github.com/aws/aws-sdk-go-v2/service/cloudformation => ../../../service/cloudformation/

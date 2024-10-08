@@ -29,8 +29,8 @@ func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput
 
 type StartMigrationInput struct {
 
-	// List of endpoints from which data should be migrated. For Redis OSS (cluster
-	// mode disabled), list should have only one element.
+	// List of endpoints from which data should be migrated. For Valkey or Redis OSS
+	// (cluster mode disabled), the list should have only one element.
 	//
 	// This member is required.
 	CustomerNodeEndpointList []types.CustomerNodeEndpoint
@@ -45,7 +45,8 @@ type StartMigrationInput struct {
 
 type StartMigrationOutput struct {
 
-	// Contains all of the attributes of a specific Redis OSS replication group.
+	// Contains all of the attributes of a specific Valkey or Redis OSS replication
+	// group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.

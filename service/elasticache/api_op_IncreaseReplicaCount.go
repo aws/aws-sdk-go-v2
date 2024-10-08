@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Dynamically increases the number of replicas in a Redis OSS (cluster mode
-// disabled) replication group or the number of replica nodes in one or more node
-// groups (shards) of a Redis OSS (cluster mode enabled) replication group. This
-// operation is performed with no cluster down time.
+// Dynamically increases the number of replicas in a Valkey or Redis OSS (cluster
+// mode disabled) replication group or the number of replica nodes in one or more
+// node groups (shards) of a Valkey or Redis OSS (cluster mode enabled) replication
+// group. This operation is performed with no cluster down time.
 func (c *Client) IncreaseReplicaCount(ctx context.Context, params *IncreaseReplicaCountInput, optFns ...func(*Options)) (*IncreaseReplicaCountOutput, error) {
 	if params == nil {
 		params = &IncreaseReplicaCountInput{}
@@ -44,15 +44,16 @@ type IncreaseReplicaCountInput struct {
 	ReplicationGroupId *string
 
 	// The number of read replica nodes you want at the completion of this operation.
-	// For Redis OSS (cluster mode disabled) replication groups, this is the number of
-	// replica nodes in the replication group. For Redis OSS (cluster mode enabled)
-	// replication groups, this is the number of replica nodes in each of the
-	// replication group's node groups.
+	// For Valkey or Redis OSS (cluster mode disabled) replication groups, this is the
+	// number of replica nodes in the replication group. For Valkey or Redis OSS
+	// (cluster mode enabled) replication groups, this is the number of replica nodes
+	// in each of the replication group's node groups.
 	NewReplicaCount *int32
 
 	// A list of ConfigureShard objects that can be used to configure each shard in a
-	// Redis OSS (cluster mode enabled) replication group. The ConfigureShard has
-	// three members: NewReplicaCount , NodeGroupId , and PreferredAvailabilityZones .
+	// Valkey or Redis OSS (cluster mode enabled) replication group. The ConfigureShard
+	// has three members: NewReplicaCount , NodeGroupId , and
+	// PreferredAvailabilityZones .
 	ReplicaConfiguration []types.ConfigureShard
 
 	noSmithyDocumentSerde
@@ -60,7 +61,8 @@ type IncreaseReplicaCountInput struct {
 
 type IncreaseReplicaCountOutput struct {
 
-	// Contains all of the attributes of a specific Redis OSS replication group.
+	// Contains all of the attributes of a specific Valkey or Redis OSS replication
+	// group.
 	ReplicationGroup *types.ReplicationGroup
 
 	// Metadata pertaining to the operation's result.
