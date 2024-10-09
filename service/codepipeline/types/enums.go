@@ -12,6 +12,7 @@ const (
 	ActionCategoryTest     ActionCategory = "Test"
 	ActionCategoryInvoke   ActionCategory = "Invoke"
 	ActionCategoryApproval ActionCategory = "Approval"
+	ActionCategoryCompute  ActionCategory = "Compute"
 )
 
 // Values returns all known values for ActionCategory. Note that this can be
@@ -26,6 +27,7 @@ func (ActionCategory) Values() []ActionCategory {
 		"Test",
 		"Invoke",
 		"Approval",
+		"Compute",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "92c00966-42dd-4b7d-b083-a08422c2eeba",
+    "type": "feature",
+    "description": "AWS CodePipeline introduces a Compute category",
+    "modules": [
+        "service/codepipeline"
+    ]
+}
