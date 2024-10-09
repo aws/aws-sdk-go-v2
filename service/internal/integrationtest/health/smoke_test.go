@@ -13,6 +13,8 @@ import (
 )
 
 func TestInteg_00_DescribeEntityAggregates(t *testing.T) {
+	t.Skip() // requires enterprise support, V1543069783
+
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
