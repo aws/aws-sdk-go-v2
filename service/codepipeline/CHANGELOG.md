@@ -1,3 +1,7 @@
+# v1.35.0 (2024-10-09)
+
+* **Feature**: AWS CodePipeline introduces a Compute category
+
 # v1.34.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

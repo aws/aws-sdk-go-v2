@@ -1,3 +1,12 @@
+# Release (2024-10-09)
+
+## General Highlights
+* **Bug Fix**: Fixup some integration tests.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.35.0](service/codepipeline/CHANGELOG.md#v1350-2024-10-09)
+  * **Feature**: AWS CodePipeline introduces a Compute category
+
 # Release (2024-10-08)
 
 ## General Highlights
