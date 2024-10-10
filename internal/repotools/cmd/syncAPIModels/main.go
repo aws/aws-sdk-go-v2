@@ -67,7 +67,6 @@ func copyModelFile(model SourceModel) error {
 // SourceModel provides the type for a model that should be copied.
 type SourceModel struct {
 	SDKID       string
-	Version     string
 	SrcFilepath string
 	DstFilename string
 }
@@ -110,10 +109,6 @@ func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 				if shape.Type != "service" {
 					continue
 				}
-				if len(shape.Version) == 0 {
-					return fmt.Errorf("smithy service doesn't have version %s %s",
-						name, path)
-				}
 				if shape.Traits.Service == nil {
 					// Ignore services that don't have an SDK id.
 					continue
@@ -133,7 +128,6 @@ func findSmithyModels(modelPath string) (map[string]SourceModel, error) {
 				// TODO what about two services in same model file?
 				models[sdkID] = SourceModel{
 					SDKID:       sdkID,
-					Version:     shape.Version,
 					SrcFilepath: path,
 					DstFilename: sdkID + ".json",
 				}
