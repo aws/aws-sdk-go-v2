@@ -60,6 +60,32 @@ func (e *CollectorNotFoundFault) ErrorCode() string {
 }
 func (e *CollectorNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A dependency threw an exception.
+type FailedDependencyFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FailedDependencyFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FailedDependencyFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FailedDependencyFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FailedDependencyFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FailedDependencyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There are not enough resources allocated to the database migration.
 type InsufficientResourceCapacityFault struct {
 	Message *string

@@ -7418,7 +7418,7 @@ func awsAwsjson10_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -12009,7 +12009,7 @@ func awsAwsjson10_deserializeDocumentVehicleStatus(v **types.VehicleStatus, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignName to be of type string, got %T instead", value)
 				}
 				sv.CampaignName = ptr.String(jtv)
 			}
@@ -12352,7 +12352,7 @@ func awsAwsjson10_deserializeOpDocumentCreateCampaignOutput(v **CreateCampaignOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -12655,7 +12655,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteCampaignOutput(v **DeleteCampaignOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -12980,7 +12980,7 @@ func awsAwsjson10_deserializeOpDocumentGetCampaignOutput(v **GetCampaignOutput, 
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}
@@ -14903,7 +14903,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateCampaignOutput(v **UpdateCampaignOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected campaignArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
 			}

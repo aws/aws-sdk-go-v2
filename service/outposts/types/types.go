@@ -335,8 +335,10 @@ type Order struct {
 	//
 	//   - PREPARING - Order is received and being prepared.
 	//
-	//   - IN_PROGRESS - Order is either being built, shipped, or installed. To get
-	//   more details, see the line item status.
+	//   - IN_PROGRESS - Order is either being built or shipped. To get more details,
+	//   see the line item status.
+	//
+	//   - DELIVERED - Order was delivered to the Outpost site.
 	//
 	//   - COMPLETED - Order is complete.
 	//

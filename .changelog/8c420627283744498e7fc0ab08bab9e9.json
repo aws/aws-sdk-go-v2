@@ -1,0 +1,8 @@
+{
+    "id": "8c420627-2837-4449-8e7f-c0ab08bab9e9",
+    "type": "documentation",
+    "description": "This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -52,7 +52,9 @@ type CreateEndpointInput struct {
 	// value, include "mysql" , "oracle" , "postgres" , "mariadb" , "aurora" ,
 	// "aurora-postgresql" , "opensearch" , "redshift" , "s3" , "db2" , "db2-zos" ,
 	// "azuredb" , "sybase" , "dynamodb" , "mongodb" , "kinesis" , "kafka" ,
-	// "elasticsearch" , "docdb" , "sqlserver" , "neptune" , and "babelfish" .
+	// "elasticsearch" , "docdb" , "sqlserver" , "neptune" , "babelfish" ,
+	// redshift-serverless , aurora-serverless , aurora-postgresql-serverless ,
+	// gcp-mysql , azure-sql-managed-instance , redis , dms-transfer .
 	//
 	// This member is required.
 	EngineName *string

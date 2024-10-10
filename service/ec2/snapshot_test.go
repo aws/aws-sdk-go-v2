@@ -74,6 +74,18 @@ func TestCheckSnapshot_AcceptAddressTransfer(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AcceptCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptCapacityReservationBillingOwnership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
@@ -247,6 +259,18 @@ func TestCheckSnapshot_AssociateAddress(t *testing.T) {
 	_, err := svc.AssociateAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "AssociateAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateCapacityReservationBillingOwner")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2846,6 +2870,18 @@ func TestCheckSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationBillingRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeCapacityReservationFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCapacityReservationFleets(context.Background(), nil, func(o *Options) {
@@ -4819,6 +4855,18 @@ func TestCheckSnapshot_DisassociateAddress(t *testing.T) {
 	_, err := svc.DisassociateAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateCapacityReservationBillingOwner")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6950,6 +6998,18 @@ func TestCheckSnapshot_RegisterTransitGatewayMulticastGroupSources(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectCapacityReservationBillingOwnership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RejectTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -7609,6 +7669,18 @@ func TestUpdateSnapshot_AcceptAddressTransfer(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AcceptCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptCapacityReservationBillingOwnership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
@@ -7782,6 +7854,18 @@ func TestUpdateSnapshot_AssociateAddress(t *testing.T) {
 	_, err := svc.AssociateAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateCapacityReservationBillingOwner")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10381,6 +10465,18 @@ func TestUpdateSnapshot_DescribeCapacityBlockOfferings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationBillingRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeCapacityReservationFleets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeCapacityReservationFleets(context.Background(), nil, func(o *Options) {
@@ -12354,6 +12450,18 @@ func TestUpdateSnapshot_DisassociateAddress(t *testing.T) {
 	_, err := svc.DisassociateAddress(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateAddress")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateCapacityReservationBillingOwner(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCapacityReservationBillingOwner(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateCapacityReservationBillingOwner")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -14478,6 +14586,18 @@ func TestUpdateSnapshot_RegisterTransitGatewayMulticastGroupSources(t *testing.T
 	_, err := svc.RegisterTransitGatewayMulticastGroupSources(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterTransitGatewayMulticastGroupSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectCapacityReservationBillingOwnership")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

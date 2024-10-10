@@ -47,10 +47,10 @@ type UpdateCertificateAuthorityInput struct {
 	// This member is required.
 	CertificateAuthorityArn *string
 
-	// Contains information to enable Online Certificate Status Protocol (OCSP)
-	// support, to enable a certificate revocation list (CRL), to enable both, or to
-	// enable neither. If this parameter is not supplied, existing capibilites remain
-	// unchanged. For more information, see the [OcspConfiguration]and [CrlConfiguration] types.
+	// Contains information to enable support for Online Certificate Status Protocol
+	// (OCSP), certificate revocation list (CRL), both protocols, or neither. If you
+	// don't supply this parameter, existing capibilites remain unchanged. For more
+	// information, see the [OcspConfiguration]and [CrlConfiguration] types.
 	//
 	// The following requirements apply to revocation configurations.
 	//
@@ -67,8 +67,19 @@ type UpdateCertificateAuthorityInput struct {
 	//   - In a CRL or OCSP configuration, the value of a CNAME parameter must not
 	//   include a protocol prefix such as "http://" or "https://".
 	//
+	// If you update the S3BucketName of [CrlConfiguration], you can break revocation for existing
+	// certificates. In other words, if you call [UpdateCertificateAuthority]to update the CRL configuration's S3
+	// bucket name, Amazon Web Services Private CA only writes CRLs to the new S3
+	// bucket. Certificates issued prior to this point will have the old S3 bucket name
+	// in your CRL Distribution Point (CDP) extension, essentially breaking revocation.
+	// If you must update the S3 bucket, you'll need to reissue old certificates to
+	// keep the revocation working. Alternatively, you can use a [CustomCname]in your CRL
+	// configuration if you might need to change the S3 bucket name in the future.
+	//
 	// [RFC2396]: https://www.ietf.org/rfc/rfc2396.txt
+	// [CustomCname]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html#privateca-Type-CrlConfiguration-CustomCname
 	// [OcspConfiguration]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html
+	// [UpdateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
 	// [Amazon S3 bucket naming rules]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
 	// [CrlConfiguration]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html
 	RevocationConfiguration *types.RevocationConfiguration

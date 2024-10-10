@@ -4390,6 +4390,11 @@ func awsAwsjson11_serializeDocumentTargetAddress(v *types.TargetAddress, value s
 		ok.String(string(v.Protocol))
 	}
 
+	if v.ServerNameIndication != nil {
+		ok := object.Key("ServerNameIndication")
+		ok.String(*v.ServerNameIndication)
+	}
+
 	return nil
 }
 

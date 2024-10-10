@@ -1,0 +1,8 @@
+{
+    "id": "e233c4b3-d5e9-42bc-a698-376a8c8104ac",
+    "type": "documentation",
+    "description": "Documentation updates for AWS Private CA.",
+    "modules": [
+        "service/acmpca"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "c6ee909e-ae2f-4081-9657-0a2d43674411",
+    "type": "feature",
+    "description": "Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

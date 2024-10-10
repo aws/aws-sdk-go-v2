@@ -1,0 +1,8 @@
+{
+    "id": "74582b30-4a18-41dc-92e9-42bcb7a028ff",
+    "type": "feature",
+    "description": "This release adds support for assigning the billing of shared Amazon EC2 On-Demand Capacity Reservations.",
+    "modules": [
+        "service/ec2"
+    ]
+}

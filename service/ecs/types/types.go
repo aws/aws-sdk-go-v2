@@ -269,8 +269,10 @@ type CapacityProvider struct {
 // With FARGATE_SPOT , you can run interruption tolerant tasks at a rate that's
 // discounted compared to the FARGATE price. FARGATE_SPOT runs tasks on spare
 // compute capacity. When Amazon Web Services needs the capacity back, your tasks
-// are interrupted with a two-minute warning. FARGATE_SPOT only supports Linux
-// tasks with the X86_64 architecture on platform version 1.3.0 or later.
+// are interrupted with a two-minute warning. FARGATE_SPOT supports Linux tasks
+// with the X86_64 architecture on platform version 1.3.0 or later. FARGATE_SPOT
+// supports Linux tasks with the ARM64 architecture on platform version 1.4.0 or
+// later.
 //
 // A capacity provider strategy may contain a maximum of 6 capacity providers.
 //
@@ -2802,11 +2804,153 @@ type LogConfiguration struct {
 	// This member is required.
 	LogDriver LogDriver
 
-	// The configuration options to send to the log driver. This parameter requires
-	// version 1.19 of the Docker Remote API or greater on your container instance. To
-	// check the Docker Remote API version on your container instance, log in to your
-	// container instance and run the following command: sudo docker version --format
-	// '{{.Server.APIVersion}}'
+	// The configuration options to send to the log driver.
+	//
+	// The options you can specify depend on the log driver. Some of the options you
+	// can specify when you use the awslogs log driver to route logs to Amazon
+	// CloudWatch include the following:
+	//
+	// awslogs-create-group Required: No
+	//
+	// Specify whether you want the log group to be created automatically. If this
+	// option isn't specified, it defaults to false .
+	//
+	// Your IAM policy must include the logs:CreateLogGroup permission before you
+	// attempt to use awslogs-create-group .
+	//
+	// awslogs-region Required: Yes
+	//
+	// Specify the Amazon Web Services Region that the awslogs log driver is to send
+	// your Docker logs to. You can choose to send all of your logs from clusters in
+	// different Regions to a single region in CloudWatch Logs. This is so that they're
+	// all visible in one location. Otherwise, you can separate them by Region for more
+	// granularity. Make sure that the specified log group exists in the Region that
+	// you specify with this option.
+	//
+	// awslogs-group Required: Yes
+	//
+	// Make sure to specify a log group that the awslogs log driver sends its log
+	// streams to.
+	//
+	// awslogs-stream-prefix Required: Yes, when using the Fargate launch
+	// type.Optional for the EC2 launch type, required for the Fargate launch type.
+	//
+	// Use the awslogs-stream-prefix option to associate a log stream with the
+	// specified prefix, the container name, and the ID of the Amazon ECS task that the
+	// container belongs to. If you specify a prefix with this option, then the log
+	// stream takes the format prefix-name/container-name/ecs-task-id .
+	//
+	// If you don't specify a prefix with this option, then the log stream is named
+	// after the container ID that's assigned by the Docker daemon on the container
+	// instance. Because it's difficult to trace logs back to the container that sent
+	// them with just the Docker container ID (which is only available on the container
+	// instance), we recommend that you specify a prefix with this option.
+	//
+	// For Amazon ECS services, you can use the service name as the prefix. Doing so,
+	// you can trace log streams to the service that the container belongs to, the name
+	// of the container that sent them, and the ID of the task that the container
+	// belongs to.
+	//
+	// You must specify a stream-prefix for your logs to have your logs appear in the
+	// Log pane when using the Amazon ECS console.
+	//
+	// awslogs-datetime-format Required: No
+	//
+	// This option defines a multiline start pattern in Python strftime format. A log
+	// message consists of a line that matches the pattern and any following lines that
+	// don’t match the pattern. The matched line is the delimiter between log messages.
+	//
+	// One example of a use case for using this format is for parsing output such as a
+	// stack dump, which might otherwise be logged in multiple entries. The correct
+	// pattern allows it to be captured in a single entry.
+	//
+	// For more information, see [awslogs-datetime-format].
+	//
+	// You cannot configure both the awslogs-datetime-format and
+	// awslogs-multiline-pattern options.
+	//
+	// Multiline logging performs regular expression parsing and matching of all log
+	// messages. This might have a negative impact on logging performance.
+	//
+	// awslogs-multiline-pattern Required: No
+	//
+	// This option defines a multiline start pattern that uses a regular expression. A
+	// log message consists of a line that matches the pattern and any following lines
+	// that don’t match the pattern. The matched line is the delimiter between log
+	// messages.
+	//
+	// For more information, see [awslogs-multiline-pattern].
+	//
+	// This option is ignored if awslogs-datetime-format is also configured.
+	//
+	// You cannot configure both the awslogs-datetime-format and
+	// awslogs-multiline-pattern options.
+	//
+	// Multiline logging performs regular expression parsing and matching of all log
+	// messages. This might have a negative impact on logging performance.
+	//
+	// mode Required: No
+	//
+	// Valid values: non-blocking | blocking
+	//
+	// This option defines the delivery mode of log messages from the container to
+	// CloudWatch Logs. The delivery mode you choose affects application availability
+	// when the flow of logs from container to CloudWatch is interrupted.
+	//
+	// If you use the blocking mode and the flow of logs to CloudWatch is interrupted,
+	// calls from container code to write to the stdout and stderr streams will block.
+	// The logging thread of the application will block as a result. This may cause the
+	// application to become unresponsive and lead to container healthcheck failure.
+	//
+	// If you use the non-blocking mode, the container's logs are instead stored in an
+	// in-memory intermediate buffer configured with the max-buffer-size option. This
+	// prevents the application from becoming unresponsive when logs cannot be sent to
+	// CloudWatch. We recommend using this mode if you want to ensure service
+	// availability and are okay with some log loss. For more information, see [Preventing log loss with non-blocking mode in the awslogs container log driver]awslogs .
+	//
+	// max-buffer-size Required: No
+	//
+	// Default value: 1m
+	//
+	// When non-blocking mode is used, the max-buffer-size log option controls the
+	// size of the buffer that's used for intermediate message storage. Make sure to
+	// specify an adequate buffer size based on your application. When the buffer fills
+	// up, further logs cannot be stored. Logs that cannot be stored are lost.
+	//
+	// To route logs using the splunk log router, you need to specify a splunk-token
+	// and a splunk-url .
+	//
+	// When you use the awsfirelens log router to route logs to an Amazon Web Services
+	// Service or Amazon Web Services Partner Network destination for log storage and
+	// analytics, you can set the log-driver-buffer-limit option to limit the number
+	// of events that are buffered in memory, before being sent to the log router
+	// container. It can help to resolve potential log loss issue because high
+	// throughput might result in memory running out for the buffer inside of Docker.
+	//
+	// Other options you can specify when using awsfirelens to route logs depend on
+	// the destination. When you export logs to Amazon Data Firehose, you can specify
+	// the Amazon Web Services Region with region and a name for the log stream with
+	// delivery_stream .
+	//
+	// When you export logs to Amazon Kinesis Data Streams, you can specify an Amazon
+	// Web Services Region with region and a data stream name with stream .
+	//
+	// When you export logs to Amazon OpenSearch Service, you can specify options like
+	// Name , Host (OpenSearch Service endpoint without protocol), Port , Index , Type
+	// , Aws_auth , Aws_region , Suppress_Type_Name , and tls .
+	//
+	// When you export logs to Amazon S3, you can specify the bucket using the bucket
+	// option. You can also specify region , total_file_size , upload_timeout , and
+	// use_put_object as options.
+	//
+	// This parameter requires version 1.19 of the Docker Remote API or greater on
+	// your container instance. To check the Docker Remote API version on your
+	// container instance, log in to your container instance and run the following
+	// command: sudo docker version --format '{{.Server.APIVersion}}'
+	//
+	// [awslogs-multiline-pattern]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-multiline-pattern
+	// [awslogs-datetime-format]: https://docs.docker.com/config/containers/logging/awslogs/#awslogs-datetime-format
+	// [Preventing log loss with non-blocking mode in the awslogs container log driver]: http://aws.amazon.com/blogs/containers/preventing-log-loss-with-non-blocking-mode-in-the-awslogs-container-log-driver/
 	Options map[string]string
 
 	// The secrets to pass to the log configuration. For more information, see [Specifying sensitive data] in the

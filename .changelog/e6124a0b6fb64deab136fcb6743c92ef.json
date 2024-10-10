@@ -1,0 +1,8 @@
+{
+    "id": "e6124a0b-6fb6-4dea-b136-fcb6743c92ef",
+    "type": "feature",
+    "description": "Refine campaign related API validations",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

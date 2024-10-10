@@ -12269,6 +12269,15 @@ func awsAwsjson11_deserializeDocumentTargetAddress(v **types.TargetAddress, valu
 				sv.Protocol = types.Protocol(jtv)
 			}
 
+		case "ServerNameIndication":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerNameIndication to be of type string, got %T instead", value)
+				}
+				sv.ServerNameIndication = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

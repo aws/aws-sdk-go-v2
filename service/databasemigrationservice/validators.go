@@ -90,6 +90,26 @@ func (m *validateOpCancelReplicationTaskAssessmentRun) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataMigration struct {
+}
+
+func (*validateOpCreateDataMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataProvider struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpDeleteConnection) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataMigration struct {
+}
+
+func (*validateOpDeleteDataMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataMigrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -605,6 +645,26 @@ func (m *validateOpDescribeConversionConfiguration) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeConversionConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDataMigrations struct {
+}
+
+func (*validateOpDescribeDataMigrations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataMigrations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDataMigrationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDataMigrationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1350,6 +1410,26 @@ func (m *validateOpModifyConversionConfiguration) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyDataMigration struct {
+}
+
+func (*validateOpModifyDataMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyDataMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyDataMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyDataMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyDataProvider struct {
 }
 
@@ -1650,6 +1730,26 @@ func (m *validateOpRemoveTagsFromResource) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDataMigration struct {
+}
+
+func (*validateOpStartDataMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDataMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDataMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDataMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartExtensionPackAssociation struct {
 }
 
@@ -1870,6 +1970,26 @@ func (m *validateOpStartReplicationTask) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopDataMigration struct {
+}
+
+func (*validateOpStopDataMigration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopDataMigration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopDataMigrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopDataMigrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopReplication struct {
 }
 
@@ -1946,6 +2066,10 @@ func addOpCancelReplicationTaskAssessmentRunValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpCancelReplicationTaskAssessmentRun{}, middleware.After)
 }
 
+func addOpCreateDataMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataMigration{}, middleware.After)
+}
+
 func addOpCreateDataProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataProvider{}, middleware.After)
 }
@@ -1988,6 +2112,10 @@ func addOpDeleteCertificateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnection{}, middleware.After)
+}
+
+func addOpDeleteDataMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataMigration{}, middleware.After)
 }
 
 func addOpDeleteDataProviderValidationMiddleware(stack *middleware.Stack) error {
@@ -2048,6 +2176,10 @@ func addOpDescribeConnectionsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeConversionConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConversionConfiguration{}, middleware.After)
+}
+
+func addOpDescribeDataMigrationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataMigrations{}, middleware.After)
 }
 
 func addOpDescribeDataProvidersValidationMiddleware(stack *middleware.Stack) error {
@@ -2198,6 +2330,10 @@ func addOpModifyConversionConfigurationValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpModifyConversionConfiguration{}, middleware.After)
 }
 
+func addOpModifyDataMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyDataMigration{}, middleware.After)
+}
+
 func addOpModifyDataProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyDataProvider{}, middleware.After)
 }
@@ -2258,6 +2394,10 @@ func addOpRemoveTagsFromResourceValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpRemoveTagsFromResource{}, middleware.After)
 }
 
+func addOpStartDataMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDataMigration{}, middleware.After)
+}
+
 func addOpStartExtensionPackAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartExtensionPackAssociation{}, middleware.After)
 }
@@ -2300,6 +2440,10 @@ func addOpStartReplicationTaskAssessmentRunValidationMiddleware(stack *middlewar
 
 func addOpStartReplicationTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartReplicationTask{}, middleware.After)
+}
+
+func addOpStopDataMigrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopDataMigration{}, middleware.After)
 }
 
 func addOpStopReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -2631,6 +2775,27 @@ func validateOpCancelReplicationTaskAssessmentRunInput(v *CancelReplicationTaskA
 	}
 }
 
+func validateOpCreateDataMigrationInput(v *CreateDataMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataMigrationInput"}
+	if v.MigrationProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if len(v.DataMigrationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataMigrationType"))
+	}
+	if v.ServiceAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccessRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataProviderInput(v *CreateDataProviderInput) error {
 	if v == nil {
 		return nil
@@ -2895,6 +3060,21 @@ func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	}
 }
 
+func validateOpDeleteDataMigrationInput(v *DeleteDataMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataMigrationInput"}
+	if v.DataMigrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataMigrationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataProviderInput(v *DeleteDataProviderInput) error {
 	if v == nil {
 		return nil
@@ -3116,6 +3296,23 @@ func validateOpDescribeConversionConfigurationInput(v *DescribeConversionConfigu
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeConversionConfigurationInput"}
 	if v.MigrationProjectIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MigrationProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDataMigrationsInput(v *DescribeDataMigrationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataMigrationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3769,6 +3966,21 @@ func validateOpModifyConversionConfigurationInput(v *ModifyConversionConfigurati
 	}
 }
 
+func validateOpModifyDataMigrationInput(v *ModifyDataMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyDataMigrationInput"}
+	if v.DataMigrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataMigrationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyDataProviderInput(v *ModifyDataProviderInput) error {
 	if v == nil {
 		return nil
@@ -4055,6 +4267,24 @@ func validateOpRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput) error
 	}
 }
 
+func validateOpStartDataMigrationInput(v *StartDataMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDataMigrationInput"}
+	if v.DataMigrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataMigrationIdentifier"))
+	}
+	if len(v.StartType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StartType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartExtensionPackAssociationInput(v *StartExtensionPackAssociationInput) error {
 	if v == nil {
 		return nil
@@ -4255,6 +4485,21 @@ func validateOpStartReplicationTaskInput(v *StartReplicationTaskInput) error {
 	}
 	if len(v.StartReplicationTaskType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StartReplicationTaskType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopDataMigrationInput(v *StopDataMigrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopDataMigrationInput"}
+	if v.DataMigrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataMigrationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

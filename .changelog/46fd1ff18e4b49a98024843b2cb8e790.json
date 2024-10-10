@@ -1,0 +1,8 @@
+{
+    "id": "46fd1ff1-8e4b-49a9-8024-843b2cb8e790",
+    "type": "documentation",
+    "description": "Elastic Inference - Documentation update to add service shutdown notice.",
+    "modules": [
+        "service/elasticinference"
+    ]
+}

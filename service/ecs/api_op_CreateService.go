@@ -20,6 +20,8 @@ import (
 // before authorization. When a task definition revision is not specified,
 // authorization will occur using the latest revision of a task definition.
 //
+// Amazon Elastic Inference (EI) is no longer available to customers.
+//
 // In addition to maintaining the desired count of tasks in your service, you can
 // optionally run your service behind one or more load balancers. The load
 // balancers distribute traffic across the tasks that are associated with the
@@ -104,14 +106,6 @@ import (
 // When the service scheduler launches new tasks, it determines task placement.
 // For information about task placement and task placement strategies, see [Amazon ECS task placement]in the
 // Amazon Elastic Container Service Developer Guide
-//
-// Starting April 15, 2023, Amazon Web Services will not onboard new customers to
-// Amazon Elastic Inference (EI), and will help current customers migrate their
-// workloads to options that offer better price and performance. After April 15,
-// 2023, new customers will not be able to launch instances with Amazon EI
-// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
-// who have used Amazon EI at least once during the past 30-day period are
-// considered current customers and will be able to continue using the service.
 //
 // [Amazon ECS task placement]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
 // [Service scheduler concepts]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html

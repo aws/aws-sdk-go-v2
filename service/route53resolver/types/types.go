@@ -1196,6 +1196,10 @@ type TargetAddress struct {
 	//   - None, which is treated as Do53.
 	Protocol Protocol
 
+	//  The Server Name Indication of the DoH server that you want to forward queries
+	// to. This is only used if the Protocol of the TargetAddress is DoH .
+	ServerNameIndication *string
+
 	noSmithyDocumentSerde
 }
 

@@ -290,6 +290,7 @@ const (
 	OrderStatusCancelled  OrderStatus = "CANCELLED"
 	OrderStatusPreparing  OrderStatus = "PREPARING"
 	OrderStatusInProgress OrderStatus = "IN_PROGRESS"
+	OrderStatusDelivered  OrderStatus = "DELIVERED"
 	OrderStatusCompleted  OrderStatus = "COMPLETED"
 	OrderStatusError      OrderStatus = "ERROR"
 )
@@ -308,6 +309,7 @@ func (OrderStatus) Values() []OrderStatus {
 		"CANCELLED",
 		"PREPARING",
 		"IN_PROGRESS",
+		"DELIVERED",
 		"COMPLETED",
 		"ERROR",
 	}
