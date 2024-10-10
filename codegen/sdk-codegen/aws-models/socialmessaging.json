@@ -1,0 +1,2689 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.socialmessaging#AccessDeniedByMetaException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.socialmessaging#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.socialmessaging#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.socialmessaging#AssociateInProgressToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#AssociateWhatsAppBusinessAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#AssociateWhatsAppBusinessAccountInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#AssociateWhatsAppBusinessAccountOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>This is only used through the Amazon Web Services console during sign-up to associate your WhatsApp Business Account to your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/signup",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#AssociateWhatsAppBusinessAccountInput": {
+            "type": "structure",
+            "members": {
+                "signupCallback": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppSignupCallback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the callback access token.</p>"
+                    }
+                },
+                "setupFinalization": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppSetupFinalization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that contains the phone numbers and WhatsApp Business Account to link to your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#AssociateWhatsAppBusinessAccountOutput": {
+            "type": "structure",
+            "members": {
+                "signupCallbackResult": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppSignupCallbackResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains your WhatsApp registration status.</p>"
+                    }
+                },
+                "statusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code for the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMedia": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMediaInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMediaOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a media object from the WhatsApp service. If the object is still in an Amazon S3 bucket you should delete it from there too.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/whatsapp/media",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMediaInput": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppMediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the media file to delete. Use the <code>mediaId</code> returned from <a href=\"https://console.aws.amazon.com/social-messaging/latest/APIReference/API_PostWhatsAppMessageMedia.html\">PostWhatsAppMessageMedia</a>.</p>",
+                        "smithy.api#httpQuery": "mediaId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#httpQuery": "originationPhoneNumberId",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMediaOutput": {
+            "type": "structure",
+            "members": {
+                "success": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Success indicator for deleting the media file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DependencyException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when performing an action because a dependency would be broken.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccountInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccountOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociate a WhatsApp Business Account (WABA) from your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/whatsapp/waba/disassociate",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccountInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of your WhatsApp Business Account. WABA identifiers are formatted as\n         <code>waba-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html\">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs and their details.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccountOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.socialmessaging#EventDestinationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*:[a-z-]+([/:](.*))?$"
+            }
+        },
+        "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccount": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the details of your linked WhatsApp Business Account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/whatsapp/waba/details",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier, from Amazon Web Services, of the linked WhatsApp Business\n         Account. WABA identifiers are formatted as\n         <code>waba-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html\">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs and their details.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountOutput": {
+            "type": "structure",
+            "members": {
+                "account": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the linked WhatsApp Business Account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountPhoneNumber": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountPhoneNumberInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountPhoneNumberOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use your WhatsApp phone number id to get the WABA account id and phone number\n         details.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/whatsapp/waba/phone/details",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountPhoneNumberInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the phone number. Phone number\n         identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.\n         Use <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountPhoneNumberOutput": {
+            "type": "structure",
+            "members": {
+                "phoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail"
+                },
+                "linkedWhatsAppBusinessAccountId": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WABA identifier linked to the phone number, formatted as\n         <code>waba-01234567890123456789012345678901</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppMessageMedia": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageMediaInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageMediaOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get a media file from the WhatsApp service. On successful completion the media file is\n         retrieved from Meta and stored in the specified Amazon S3 bucket. Use either\n            <code>destinationS3File</code> or <code>destinationS3PresignedUrl</code> for the\n         destination. If both are used then an <code>InvalidParameterException</code> is\n         returned.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/media/get",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppMessageMediaInput": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppMediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the media file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number for the WhatsApp message media.\n         The phone number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "metadataOnly": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>True</code> to get only the metadata for the file.</p>"
+                    }
+                },
+                "destinationS3PresignedUrl": {
+                    "target": "com.amazonaws.socialmessaging#S3PresignedUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presign url of the media file.</p>"
+                    }
+                },
+                "destinationS3File": {
+                    "target": "com.amazonaws.socialmessaging#S3File",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>bucketName</code> and <code>key</code> of the S3 media file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#GetWhatsAppMessageMediaOutput": {
+            "type": "structure",
+            "members": {
+                "mimeType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the media.</p>"
+                    }
+                },
+                "fileSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file size of the media, in KB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#Headers": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.socialmessaging#InternalServiceException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception, or\n         failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#InvalidParametersException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more parameters provided to the action are not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.socialmessaging#IsoCountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedAccountWithIncompleteSetup": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId"
+            },
+            "value": {
+                "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountIdMetaData"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccount": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the linked WhatsApp Business Account, formatted as <code>waba-01234567890123456789012345678901</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "wabaId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WhatsApp Business Account ID from meta.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "registrationStatus": {
+                    "target": "com.amazonaws.socialmessaging#RegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration status of the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkDate": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountLinkDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the WhatsApp Business Account was linked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "wabaName": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventDestinations": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event destinations for the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumbers": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone numbers associated with the Linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of your linked WhatsApp Business Account.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*:waba/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "(^waba-.*$)|(^arn:.*:waba/[0-9a-zA-Z]+$)"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountIdMetaData": {
+            "type": "structure",
+            "members": {
+                "accountName": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of your account.</p>"
+                    }
+                },
+                "registrationStatus": {
+                    "target": "com.amazonaws.socialmessaging#RegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration status of the linked WhatsApp Business Account.</p>"
+                    }
+                },
+                "unregisteredWhatsAppPhoneNumbers": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for unregistered WhatsApp phone numbers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains your WhatsApp registration status and details of any unregistered WhatsApp\n         phone number.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource": {
+            "type": "resource",
+            "identifiers": {
+                "WabaId": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.socialmessaging#AssociateWhatsAppBusinessAccount"
+            },
+            "read": {
+                "target": "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccount"
+            },
+            "delete": {
+                "target": "com.amazonaws.socialmessaging#DisassociateWhatsAppBusinessAccount"
+            },
+            "list": {
+                "target": "com.amazonaws.socialmessaging#ListLinkedWhatsAppBusinessAccounts"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinations"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "waba/{WabaId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "waba",
+                    "relativeDocumentation": "managing-wabas.html"
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the linked WhatsApp Business Account, formatted as <code>waba-01234567890123456789012345678901</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "wabaId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WhatsApp Business Account ID provided by Meta.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "registrationStatus": {
+                    "target": "com.amazonaws.socialmessaging#RegistrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The registration status of the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "linkDate": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountLinkDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the WhatsApp Business Account was linked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "wabaName": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventDestinations": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event destinations for the linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a linked WhatsApp Business Account.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountSummary"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*:phone-number-id/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource": {
+            "type": "resource",
+            "identifiers": {
+                "OriginationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.socialmessaging#GetLinkedWhatsAppBusinessAccountPhoneNumber"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DeleteWhatsAppMessageMedia"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#GetWhatsAppMessageMedia"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#PostWhatsAppMessageMedia"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#SendWhatsAppMessage"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "phone-number-id/{OriginationPhoneNumberId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "phone-number-id",
+                    "relativeDocumentation": "managing-phone-numbers.html"
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#ListLinkedWhatsAppBusinessAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#ListLinkedWhatsAppBusinessAccountsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#ListLinkedWhatsAppBusinessAccountsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all WhatsApp Business Accounts linked to your Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/whatsapp/waba/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "items": "linkedAccounts"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListLinkedWhatsAppBusinessAccountsInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.socialmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token for pagination.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.socialmessaging#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListLinkedWhatsAppBusinessAccountsOutput": {
+            "type": "structure",
+            "members": {
+                "linkedAccounts": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of WhatsApp Business Accounts linked to your Amazon Web Services account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.socialmessaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token for pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all tags associated with a resource, such as a phone number or WABA.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/tags/list",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListTagsFailure",
+                        "params": {
+                            "resourceArn": "arn:aws:social-messaging:us-east-1:9923825:phone-number-id/45c1973a7577"
+                        },
+                        "expect": {
+                            "failure": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.socialmessaging#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.socialmessaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to retrieve the tags from.</p>",
+                        "smithy.api#httpQuery": "resourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code of the response.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.socialmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 600
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#PhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#PostWhatsAppMessageMedia": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#PostWhatsAppMessageMediaInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#PostWhatsAppMessageMediaOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedByMetaException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Upload a media file to the WhatsApp service. Only the specified\n            <code>originationPhoneNumberId</code> has the permissions to send the media file when\n         using <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_SendWhatsAppMessage.html\">SendWhatsAppMessage</a>. You must use either <code>sourceS3File</code>\n         or <code>sourceS3PresignedUrl</code> for the source. If both or neither are specified then an\n            <code>InvalidParameterException</code> is returned.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/media",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#PostWhatsAppMessageMediaInput": {
+            "type": "structure",
+            "members": {
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the phone number to associate with the WhatsApp media file. The phone number\n         identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>.\n         Use <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a>  to find a phone number's\n         id.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "sourceS3PresignedUrl": {
+                    "target": "com.amazonaws.socialmessaging#S3PresignedUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source presign url of the media file.</p>"
+                    }
+                },
+                "sourceS3File": {
+                    "target": "com.amazonaws.socialmessaging#S3File",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source S3 url for the media file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#PostWhatsAppMessageMediaOutput": {
+            "type": "structure",
+            "members": {
+                "mediaId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppMediaId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the posted WhatsApp message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add an event destination to log event data from WhatsApp for a WhatsApp Business Account (WABA). A WABA can only have one event destination at a time. All resources associated with the WABA use the same event destination.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/whatsapp/waba/eventdestinations",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinationsInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of your WhatsApp Business Account. WABA identifiers are formatted as\n         <code>waba-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_ListLinkedWhatsAppBusinessAccounts.html\">ListLinkedWhatsAppBusinessAccounts</a> to list all WABAs and their details.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "WabaId"
+                    }
+                },
+                "eventDestinations": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>WhatsAppBusinessAccountEventDestination</code> event destinations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#PutWhatsAppBusinessAccountEventDestinationsOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#RegistrationStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "INCOMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCOMPLETE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.socialmessaging#S3File": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket name.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[a-z0-9][a-z0-9.-]*[a-z0-9]$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key of the media file.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 1024
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for the S3 bucket that contains media files.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#S3PresignedUrl": {
+            "type": "structure",
+            "members": {
+                "url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The presign url to the object.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2000
+                        },
+                        "smithy.api#pattern": "^https://(.*)s3(.*).amazonaws.com/(.*)$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "headers": {
+                    "target": "com.amazonaws.socialmessaging#Headers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of headers and their values. You must specify the <code>Content-Type</code> header when using <code>PostWhatsAppMessageMedia</code>. For a list of common headers, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html\">Common Request Headers</a> in the <i>Amazon S3\n         API Reference</i>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can use presigned URLs to grant time-limited access to objects in Amazon S3 without updating your bucket policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html\">Working with presigned URLs</a> in the <i>Amazon S3\n         User Guide</i>.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#SendWhatsAppMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#SendWhatsAppMessageInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#SendWhatsAppMessageOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Send a WhatsApp message. For examples of sending a message using the Amazon Web Services\n         CLI, see <a href=\"https://docs.aws.amazon.com/social-messaging/latest/userguide/send-message.html\">Sending messages</a> in the\n         <i>\n               <i>Amazon Web Services End User Messaging Social User Guide</i>\n            </i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/whatsapp/send",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#SendWhatsAppMessageInput": {
+            "type": "structure",
+            "members": {
+                "originationPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the phone number used to send the WhatsApp message. If you are sending a media\n         file only the <code>originationPhoneNumberId</code> used to upload the file can be used.\n         Phone number identifiers are formatted as\n            <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "OriginationPhoneNumberId"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppMessageBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message to send through WhatsApp. The length is in KB. The message field passes through a WhatsApp\n         Message object, see <a href=\"https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages\">Messages</a> in the <i>WhatsApp Business Platform Cloud API\n               Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metaApiVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API version for the request formatted as <code>v{VersionNumber}</code>. For a list of supported API versions and Amazon Web Services Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/end-user-messaging.html\">\n               <i>Amazon Web Services End User Messaging Social API</i> Service Endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#SendWhatsAppMessageOutput": {
+            "type": "structure",
+            "members": {
+                "messageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#SocialMessaging": {
+            "type": "service",
+            "version": "2024-01-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.socialmessaging#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource"
+                }
+            ],
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SocialMessaging",
+                    "arnNamespace": "social-messaging",
+                    "cloudTrailEventSource": "social-messaging.amazonaws.com",
+                    "endpointPrefix": "social-messaging"
+                },
+                "aws.auth#sigv4": {
+                    "name": "social-messaging"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tags that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tags associated with the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by the tag keys that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "origin": "*",
+                    "additionalAllowedHeaders": [
+                        "authorization",
+                        "x-amz-date",
+                        "x-amz-security-token",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id",
+                        "content-length",
+                        "x-api-key",
+                        "amz-sdk-request",
+                        "amz-sdk-invocation-id",
+                        "Csrf-Token"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id",
+                        "Csrf-Token"
+                    ]
+                },
+                "smithy.api#documentation": "<p>\n            <i>Amazon Web Services End User Messaging Social</i>, also referred to as Social messaging, is a messaging service that enables\n         application developers to incorporate WhatsApp into their existing workflows. The <i>Amazon Web Services End User Messaging Social API</i> provides information about the\n         <i>Amazon Web Services End User Messaging Social API</i> resources, including supported HTTP methods, parameters, and schemas.</p>\n         <p>The <i>Amazon Web Services End User Messaging Social API</i> provides programmatic access to options that are unique to the WhatsApp Business Platform.</p>\n         <p>If you're new to the <i>Amazon Web Services End User Messaging Social API</i>, it's also helpful to review <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html\">What is\n               Amazon Web Services End User Messaging Social</a> in the <i>Amazon Web Services End User Messaging Social User Guide</i>. The\n         <i>Amazon Web Services End User Messaging Social User Guide</i> provides tutorials, code samples, and procedures that demonstrate how to use\n         <i>Amazon Web Services End User Messaging Social API</i> features programmatically and how to integrate functionality into applications.\n         The guide also provides key information, such as integration with other Amazon Web Services\n         services, and the quotas that apply to use of the service.</p>\n         <p>\n            <b>Regional availability</b>\n         </p>\n         <p>The <i>Amazon Web Services End User Messaging Social API</i> is available across several Amazon Web Services Regions and it provides a dedicated endpoint for each of these Regions. For a list of\n         all the Regions and endpoints where the API is currently available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region\">Amazon Web Services Service Endpoints</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/end-user-messaging.html\">Amazon Web Services End User Messaging endpoints and quotas</a> in the Amazon Web Services General Reference. To learn more about Amazon Web Services Regions, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing\n               Amazon Web Services Regions</a> in the Amazon Web Services General\n         Reference.</p>\n         <p>In each Region, Amazon Web Services maintains multiple Availability Zones. These\n         Availability Zones are physically isolated from each other, but are united by private,\n         low-latency, high-throughput, and highly redundant network connections. These Availability\n         Zones enable us to provide very high levels of availability and redundancy, while also\n         minimizing latency. To learn more about the number of Availability Zones that are available\n         in each Region, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/\">Amazon Web Services Global Infrastructure.</a>\n         </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#title": "AWS End User Messaging Social",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://social-messaging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://social-messaging-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://social-messaging.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://social-messaging.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://social-messaging.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.socialmessaging#Tag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value.</p>",
+                        "smithy.api#length": {
+                            "max": 256
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tag for a resource.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#Tag"
+            }
+        },
+        "com.amazonaws.socialmessaging#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified resource. When you specify\n         an existing tag key, the value is overwritten with the new value.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/tags/tag-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.socialmessaging#Arn",
+                    "traits": {
+                        "aws.api#data": "tagging",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.socialmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource",
+                        "ids": {
+                            "OriginationPhoneNumberId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource",
+                        "ids": {
+                            "WabaId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.socialmessaging#TagResourceOutput": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code of the tag resource operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ThrottledRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#TwoFactorPin": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.socialmessaging#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.socialmessaging#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.socialmessaging#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+                },
+                {
+                    "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes the specified tags from a resource. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/tags/untag-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.socialmessaging#Arn",
+                    "traits": {
+                        "aws.api#data": "tagging",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove tags from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.socialmessaging#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the tags to remove from the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource",
+                        "ids": {
+                            "OriginationPhoneNumberId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource",
+                        "ids": {
+                            "WabaId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.socialmessaging#UntagResourceOutput": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status code of the untag resource operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.socialmessaging#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request contains an invalid parameter value. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalization": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n         <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "twoFactorPin": {
+                    "target": "com.amazonaws.socialmessaging#TwoFactorPin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PIN to use for two-step verification. To reset your PIN follow the directions in\n         <a href=\"https://developers.facebook.com/docs/whatsapp/cloud-api/reference/two-step-verification/#updating-pin\">Updating PIN</a> in the <i>WhatsApp Business Platform Cloud API\n               Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataLocalizationRegion": {
+                    "target": "com.amazonaws.socialmessaging#IsoCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The two letter ISO region for the location of where Meta will store data.</p>\n         <p class=\"title\">\n            <b>Asia–Pacific (APAC)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Australia <b>AU</b>\n               </p>\n            </li>\n            <li>\n               <p>Indonesia <b>ID</b>\n               </p>\n            </li>\n            <li>\n               <p>India <b>IN</b>\n               </p>\n            </li>\n            <li>\n               <p>Japan <b>JP</b>\n               </p>\n            </li>\n            <li>\n               <p>Singapore <b>SG</b>\n               </p>\n            </li>\n            <li>\n               <p>South Korea <b>KR</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Europe</b>\n         </p>\n         <ul>\n            <li>\n               <p>Germany <b>DE</b>\n               </p>\n            </li>\n            <li>\n               <p>Switzerland <b>CH</b>\n               </p>\n            </li>\n            <li>\n               <p>United Kingdom <b>GB</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Latin America (LATAM)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Brazil <b>BR</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Middle East and Africa (MEA)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Bahrain <b>BH</b>\n               </p>\n            </li>\n            <li>\n               <p>South Africa <b>ZA</b>\n               </p>\n            </li>\n            <li>\n               <p>United Arab Emirates <b>AE</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>North America (NORAM)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Canada <b>CA</b>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.socialmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key and value pair tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The registration details for a linked phone number.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalizationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalization"
+            }
+        },
+        "com.amazonaws.socialmessaging#WabaSetupFinalization": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the linked WhatsApp Business Account, formatted as <code>waba-01234567890123456789012345678901</code>.</p>"
+                    }
+                },
+                "eventDestinations": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event destinations for the linked WhatsApp Business Account.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.socialmessaging#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key and value pair tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The registration details for a linked WhatsApp Business Account.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestination": {
+            "type": "structure",
+            "members": {
+                "eventDestinationArn": {
+                    "target": "com.amazonaws.socialmessaging#EventDestinationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the event destination.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on the event destination.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestination"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppBusinessAccountLinkDate": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.socialmessaging#WhatsAppBusinessAccountName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppMediaId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppMessageBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the WhatsApp phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number for sending WhatsApp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number ID. Phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metaPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number ID from Meta.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayPhoneNumberName": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for this phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayPhoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number that appears in the recipients display.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "qualityRating": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality rating of the phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of your WhatsApp phone number.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "(^phone-number-id-.*$)|(^arn:.*:phone-number-id/[0-9a-zA-Z]+$)"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) for the phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number associated with the Linked WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number ID. Phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metaPhoneNumberId": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number ID from Meta.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayPhoneNumberName": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for this phone number.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayPhoneNumber": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number that appears in the recipients display.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "qualityRating": {
+                    "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality rating of the phone number. This is from Meta.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a linked phone number.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummary"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppSetupFinalization": {
+            "type": "structure",
+            "members": {
+                "associateInProgressToken": {
+                    "target": "com.amazonaws.socialmessaging#AssociateInProgressToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Web Services access token generated by <code>WhatsAppSignupCallback</code> and used by <code>WhatsAppSetupFinalization</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumbers": {
+                    "target": "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalizationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of WabaPhoneNumberSetupFinalization objects containing the details of each phone number associated with the WhatsApp Business Account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "phoneNumberParent": {
+                    "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to add a new phone number to an existing WhatsApp Business Account. This field can't be used when the <code>waba</code> field is present.</p>"
+                    }
+                },
+                "waba": {
+                    "target": "com.amazonaws.socialmessaging#WabaSetupFinalization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to create a new WhatsApp Business Account and add a phone number. This field can't be used when the <code>phoneNumberParent</code> field is present.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of linking a WhatsApp Business Account to your Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppSignupCallback": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token for your WhatsApp Business Account. The <code>accessToken</code> value is provided by Meta.</p>",
+                        "smithy.api#length": {
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the <code>accessToken</code> provided by Meta during signup.</p>"
+            }
+        },
+        "com.amazonaws.socialmessaging#WhatsAppSignupCallbackResult": {
+            "type": "structure",
+            "members": {
+                "associateInProgressToken": {
+                    "target": "com.amazonaws.socialmessaging#AssociateInProgressToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Web Services access token generated by <code>WhatsAppSignupCallback</code> and used by <code>WhatsAppSetupFinalization</code>.</p>"
+                    }
+                },
+                "linkedAccountsWithIncompleteSetup": {
+                    "target": "com.amazonaws.socialmessaging#LinkedAccountWithIncompleteSetup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A LinkedWhatsAppBusinessAccountIdMetaData object map containing the details of any WhatsAppBusiness accounts that have incomplete setup.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results of WhatsAppSignupCallback.</p>"
+            }
+        }
+    }
+}

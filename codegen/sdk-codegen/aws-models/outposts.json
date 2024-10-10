@@ -3200,7 +3200,7 @@
                 "Status": {
                     "target": "com.amazonaws.outposts#OrderStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the order.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PREPARING</code> - Order is received and being prepared.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Order is either being built, shipped, or installed. To get\n          more details, see the line item status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - Order is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Order is cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - Customer should contact support.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The following status are deprecated: <code>RECEIVED</code>, <code>PENDING</code>,\n          <code>PROCESSING</code>, <code>INSTALLING</code>, and <code>FULFILLED</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the order.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PREPARING</code> - Order is received and being prepared.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Order is either being built or shipped. To get\n          more details, see the line item status.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELIVERED</code> - Order was delivered to the Outpost site.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - Order is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCELLED</code> - Order is cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - Customer should contact support.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The following status are deprecated: <code>RECEIVED</code>, <code>PENDING</code>,\n          <code>PROCESSING</code>, <code>INSTALLING</code>, and <code>FULFILLED</code>. </p>\n         </note>"
                     }
                 },
                 "LineItems": {
@@ -3303,6 +3303,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "DELIVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERED"
                     }
                 },
                 "COMPLETED": {
