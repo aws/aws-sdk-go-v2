@@ -1,0 +1,8 @@
+{
+    "id": "e72ce6b6-0b2c-4c8b-a3ba-5c5b3b9e5a82",
+    "type": "bugfix",
+    "description": " S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types",
+    "modules": [
+        "service/s3"
+    ]
+}
