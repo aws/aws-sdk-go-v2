@@ -758,6 +758,54 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 			Err: fmt.Errorf("invalid value for shared config profile field, account_id_endpoint_mode=blabla, must be preferred/required/disabled"),
 		},
+		"profile with request checksum calculation when supported": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_checksum_calculation_when_supported",
+			Expected: SharedConfig{
+				Profile:                    "request_checksum_calculation_when_supported",
+				RequestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
+			},
+		},
+		"profile with request checksum calculation when required": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_checksum_calculation_when_required",
+			Expected: SharedConfig{
+				Profile:                    "request_checksum_calculation_when_required",
+				RequestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
+			},
+		},
+		"profile with invalid request checksum calculation": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "request_checksum_calculation_error",
+			Expected: SharedConfig{
+				Profile: "request_checksum_calculation_error",
+			},
+			Err: fmt.Errorf("invalid value for shared config profile field, request_checksum_calculation=blabla, must be when_supported/when_required"),
+		},
+		"profile with response checksum validation when supported": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "response_checksum_validation_when_supported",
+			Expected: SharedConfig{
+				Profile:                    "response_checksum_validation_when_supported",
+				ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
+			},
+		},
+		"profile with response checksum validation when required": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "response_checksum_validation_when_required",
+			Expected: SharedConfig{
+				Profile:                    "response_checksum_validation_when_required",
+				ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
+			},
+		},
+		"profile with invalid response checksum validation": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "response_checksum_validation_error",
+			Expected: SharedConfig{
+				Profile: "response_checksum_validation_error",
+			},
+			Err: fmt.Errorf("invalid value for shared config profile field, response_checksum_validation=blabla, must be when_supported/when_required"),
+		},
 	}
 
 	for name, c := range cases {

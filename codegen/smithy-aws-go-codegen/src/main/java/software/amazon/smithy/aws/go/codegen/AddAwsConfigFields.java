@@ -84,6 +84,10 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private static final String SDK_ACCOUNTID_ENDPOINT_MODE = "AccountIDEndpointMode";
 
+    private static final String REQUEST_CHECKSUM_CALCULATION = "RequestChecksumCalculation";
+
+    private static final String RESPONSE_CHECKSUM_VALIDATION = "ResponseChecksumValidation";
+
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -244,6 +248,18 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(SdkGoTypes.Aws.AccountIDEndpointMode)
                     .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
                     .servicePredicate(AccountIDEndpointRouting::hasAccountIdEndpoints)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(REQUEST_CHECKSUM_CALCULATION)
+                    .type(SdkGoTypes.Aws.RequestChecksumCalculation)
+                    .documentation("Indicates how user opt-in/out request checksum calculation")
+                    .servicePredicate(AwsHttpChecksumGenerator::hasInputChecksumTrait)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(RESPONSE_CHECKSUM_VALIDATION)
+                    .type(SdkGoTypes.Aws.ResponseChecksumValidation)
+                    .documentation("Indicates how user opt-in/out response checksum validation")
+                    .servicePredicate(AwsHttpChecksumGenerator::hasOutputChecksumTrait)
                     .build()
     );
 

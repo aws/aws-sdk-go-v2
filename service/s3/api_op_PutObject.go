@@ -876,6 +876,7 @@ func addPutObjectInputChecksumMiddlewares(stack *middleware.Stack, options Optio
 	return internalChecksum.AddInputMiddleware(stack, internalChecksum.InputMiddlewareOptions{
 		GetAlgorithm:                     getPutObjectRequestAlgorithmMember,
 		RequireChecksum:                  false,
+		RequestChecksumCalculation:       options.RequestChecksumCalculation,
 		EnableTrailingChecksum:           true,
 		EnableComputeSHA256PayloadHash:   true,
 		EnableDecodedContentLengthHeader: true,

@@ -328,3 +328,22 @@ account_id_endpoint_mode = disabled
 
 [profile account_id_endpoint_mode_error]
 account_id_endpoint_mode = blabla
+
+[profile request_checksum_calculation_when_supported]
+request_checksum_calculation = when_supported
+
+[profile request_checksum_calculation_when_required]
+request_checksum_calculation = WHEN_REQUIRED
+
+[profile request_checksum_calculation_error]
+request_checksum_calculation = blabla
+
+[profile response_checksum_validation_when_supported]
+response_checksum_validation = When_SUPPORTED
+
+[profile response_checksum_validation_when_required]
+response_checksum_validation = when_required
+
+[profile response_checksum_validation_error]
+response_checksum_validation = blabla
+

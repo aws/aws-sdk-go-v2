@@ -794,6 +794,7 @@ func getGetObjectRequestValidationModeMember(input interface{}) (string, bool) {
 func addGetObjectOutputChecksumMiddlewares(stack *middleware.Stack, options Options) error {
 	return internalChecksum.AddOutputMiddleware(stack, internalChecksum.OutputMiddlewareOptions{
 		GetValidationMode:             getGetObjectRequestValidationModeMember,
+		ResponseChecksumValidation:    options.ResponseChecksumValidation,
 		ValidationAlgorithms:          []string{"CRC32", "CRC32C", "SHA256", "SHA1"},
 		IgnoreMultipartValidation:     true,
 		LogValidationSkipped:          true,

@@ -269,6 +269,80 @@ func TestResolveAccountIDEndpointMode(t *testing.T) {
 	}
 }
 
+func TestResolveRequestChecksumCalculation(t *testing.T) {
+	cases := map[string]struct {
+		RequestChecksumCalculation aws.RequestChecksumCalculation
+		ExpectCalculation          aws.RequestChecksumCalculation
+	}{
+		"checksum calculation when required": {
+			RequestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
+			ExpectCalculation:          aws.RequestChecksumCalculationWhenRequired,
+		},
+		"default when unset": {
+			ExpectCalculation: aws.RequestChecksumCalculationWhenSupported,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			optFns := []func(*LoadOptions) error{
+				WithRequestChecksumCalculation(c.RequestChecksumCalculation),
+			}
+
+			for _, optFn := range optFns {
+				optFn(&options)
+			}
+
+			configs := configs{options}
+			var cfg aws.Config
+			if err := resolveRequestChecksumCalculation(context.Background(), &cfg, configs); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := c.ExpectCalculation, cfg.RequestChecksumCalculation; e != a {
+				t.Errorf("expect RequestChecksumCalculation to be %v, got %v", e, a)
+			}
+		})
+	}
+}
+
+func TestResolveResponseChecksumValidation(t *testing.T) {
+	cases := map[string]struct {
+		ResponseChecksumValidation aws.ResponseChecksumValidation
+		ExpectValidation           aws.ResponseChecksumValidation
+	}{
+		"checksum validation when required": {
+			ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
+			ExpectValidation:           aws.ResponseChecksumValidationWhenRequired,
+		},
+		"default when unset": {
+			ExpectValidation: aws.ResponseChecksumValidationWhenSupported,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			optFns := []func(*LoadOptions) error{
+				WithResponseChecksumValidation(c.ResponseChecksumValidation),
+			}
+
+			for _, optFn := range optFns {
+				optFn(&options)
+			}
+
+			configs := configs{options}
+			var cfg aws.Config
+			if err := resolveResponseChecksumValidation(context.Background(), &cfg, configs); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := c.ExpectValidation, cfg.ResponseChecksumValidation; e != a {
+				t.Errorf("expect ResponseChecksumValidation to be %v, got %v", e, a)
+			}
+		})
+	}
+}
+
 func TestResolveCredentialsProvider(t *testing.T) {
 	var options LoadOptions
 	optFns := []func(options *LoadOptions) error{

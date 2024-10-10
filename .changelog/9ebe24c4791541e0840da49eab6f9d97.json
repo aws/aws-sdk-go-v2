@@ -1,0 +1,11 @@
+{
+    "id": "9ebe24c4-7915-41e0-840d-a49eab6f9d97",
+    "type": "feature",
+    "description": "Enable HTTP checksums in supported services by default. New config fields, RequestChecksumCalculation and ResponseChecksumValidation, allow the caller to opt-out of this new default behavior. This feature also replaces the default MD5 checksum with CRC32.",
+    "modules": [
+        ".",
+        "config",
+        "service/internal/checksum",
+        "service/s3"
+    ]
+}

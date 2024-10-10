@@ -514,11 +514,56 @@ func TestNewEnvConfig(t *testing.T) {
 			Config: EnvConfig{
 				AccountIDEndpointMode: aws.AccountIDEndpointModeRequired,
 			},
-			WantErr: false,
 		},
 		47: {
 			Env: map[string]string{
 				"AWS_ACCOUNT_ID_ENDPOINT_MODE": "blabla",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
+		48: {
+			Env: map[string]string{
+				"AWS_REQUEST_CHECKSUM_CALCULATION": "WHEN_SUPPORTED",
+			},
+			Config: EnvConfig{
+				RequestChecksumCalculation: aws.RequestChecksumCalculationWhenSupported,
+			},
+		},
+		49: {
+			Env: map[string]string{
+				"AWS_REQUEST_CHECKSUM_CALCULATION": "when_required",
+			},
+			Config: EnvConfig{
+				RequestChecksumCalculation: aws.RequestChecksumCalculationWhenRequired,
+			},
+		},
+		50: {
+			Env: map[string]string{
+				"AWS_REQUEST_CHECKSUM_CALCULATION": "blabla",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
+		51: {
+			Env: map[string]string{
+				"AWS_RESPONSE_CHECKSUM_VALIDATION": "WHEN_SUPPORTED",
+			},
+			Config: EnvConfig{
+				ResponseChecksumValidation: aws.ResponseChecksumValidationWhenSupported,
+			},
+		},
+		52: {
+			Env: map[string]string{
+				"AWS_RESPONSE_CHECKSUM_VALIDATION": "when_Required",
+			},
+			Config: EnvConfig{
+				ResponseChecksumValidation: aws.ResponseChecksumValidationWhenRequired,
+			},
+		},
+		53: {
+			Env: map[string]string{
+				"AWS_RESPONSE_CHECKSUM_VALIDATION": "blabla",
 			},
 			Config:  EnvConfig{},
 			WantErr: true,
