@@ -1,3 +1,7 @@
+# v1.37.3 (2024-10-10)
+
+* **Documentation**: Documentation updates for AWS Private CA.
+
 # v1.37.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "5d9e37c1-d667-4db2-a561-797c130c206f",
-    "type": "feature",
-    "description": "This release for AWS End User Messaging includes a public SDK, providing a suite of APIs that enable sending WhatsApp messages to end users.",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

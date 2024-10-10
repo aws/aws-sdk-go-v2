@@ -23,15 +23,15 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.50.2
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.2
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.42.2
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.36.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.181.2
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.182.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.2
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.47.2
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.47.3
 	github.com/aws/aws-sdk-go-v2/service/efs v1.33.2
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.2
@@ -62,7 +62,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.2
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.32.2
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.65.2
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.49.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.2

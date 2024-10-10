@@ -1,8 +1,0 @@
-{
-    "id": "c19754b7-17a5-49ca-b341-21d77b04616c",
-    "type": "feature",
-    "description": "Adding new \"DELIVERED\" enum value for Outposts Order status",
-    "modules": [
-        "service/outposts"
-    ]
-}

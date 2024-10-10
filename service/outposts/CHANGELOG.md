@@ -1,3 +1,7 @@
+# v1.45.0 (2024-10-10)
+
+* **Feature**: Adding new "DELIVERED" enum value for Outposts Order status
+
 # v1.44.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

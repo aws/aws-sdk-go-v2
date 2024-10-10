@@ -1,8 +1,0 @@
-{
-    "id": "f3b13e66-ea5e-4d93-aa78-ce0ac67db39b",
-    "type": "feature",
-    "description": "This release updates our regex based validation rules in regards to valid DbInstance and DbParameterGroup name.",
-    "modules": [
-        "service/timestreaminfluxdb"
-    ]
-}

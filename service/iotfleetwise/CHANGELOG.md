@@ -1,3 +1,7 @@
+# v1.20.0 (2024-10-10)
+
+* **Feature**: Refine campaign related API validations
+
 # v1.19.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

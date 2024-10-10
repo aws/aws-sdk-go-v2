@@ -1,3 +1,7 @@
+# v1.43.0 (2024-10-10)
+
+* **Feature**: Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.
+
 # v1.42.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

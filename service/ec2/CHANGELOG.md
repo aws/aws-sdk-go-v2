@@ -1,3 +1,7 @@
+# v1.182.0 (2024-10-10)
+
+* **Feature**: This release adds support for assigning the billing of shared Amazon EC2 On-Demand Capacity Reservations.
+
 # v1.181.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

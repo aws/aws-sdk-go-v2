@@ -1,3 +1,28 @@
+# Release (2024-10-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.37.3](service/acmpca/CHANGELOG.md#v1373-2024-10-10)
+  * **Documentation**: Documentation updates for AWS Private CA.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.43.0](service/databasemigrationservice/CHANGELOG.md#v1430-2024-10-10)
+  * **Feature**: Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.182.0](service/ec2/CHANGELOG.md#v11820-2024-10-10)
+  * **Feature**: This release adds support for assigning the billing of shared Amazon EC2 On-Demand Capacity Reservations.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.47.3](service/ecs/CHANGELOG.md#v1473-2024-10-10)
+  * **Documentation**: This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.23.3](service/elasticinference/CHANGELOG.md#v1233-2024-10-10)
+  * **Documentation**: Elastic Inference - Documentation update to add service shutdown notice.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.20.0](service/iotfleetwise/CHANGELOG.md#v1200-2024-10-10)
+  * **Feature**: Refine campaign related API validations
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.14.0](service/neptunegraph/CHANGELOG.md#v1140-2024-10-10)
+  * **Feature**: Support for 16 m-NCU graphs available through account allowlisting
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.45.0](service/outposts/CHANGELOG.md#v1450-2024-10-10)
+  * **Feature**: Adding new "DELIVERED" enum value for Outposts Order status
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.33.0](service/route53resolver/CHANGELOG.md#v1330-2024-10-10)
+  * **Feature**: Route 53 Resolver Forwarding Rules can now include a server name indication (SNI) in the target address for rules that use the DNS-over-HTTPS (DoH) protocol. When a DoH-enabled Outbound Resolver Endpoint forwards a request to a DoH server, it will provide the SNI in the TLS handshake.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.0.0](service/socialmessaging/CHANGELOG.md#v100-2024-10-10)
+  * **Release**: New AWS service client module
+  * **Feature**: This release for AWS End User Messaging includes a public SDK, providing a suite of APIs that enable sending WhatsApp messages to end users.
+
 # Release (2024-10-09)
 
 ## General Highlights

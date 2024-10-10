@@ -1,3 +1,7 @@
+# v1.47.3 (2024-10-10)
+
+* **Documentation**: This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.
+
 # v1.47.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
