@@ -576,7 +576,7 @@ type RobotApplicationSummary struct {
 	// The name of the robot application.
 	Name *string
 
-	// Information about a robot software suite (ROS distribution).
+	// Information about a robot software suite.
 	RobotSoftwareSuite *RobotSoftwareSuite
 
 	// The version of the robot application.
@@ -612,13 +612,14 @@ type RobotDeployment struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a robot software suite (ROS distribution).
+// Information about a robot software suite.
 type RobotSoftwareSuite struct {
 
-	// The name of the robot software suite (ROS distribution).
+	// The name of the robot software suite. General is the only supported value.
 	Name RobotSoftwareSuiteType
 
-	// The version of the robot software suite (ROS distribution).
+	// The version of the robot software suite. Not applicable for General software
+	// suite.
 	Version RobotSoftwareSuiteVersionType
 
 	noSmithyDocumentSerde
@@ -701,6 +702,8 @@ type SimulationApplicationConfig struct {
 	UseDefaultUploadConfigurations *bool
 
 	// A list of world configurations.
+	//
+	// This API is no longer supported and will throw an error if used.
 	WorldConfigs []WorldConfig
 
 	noSmithyDocumentSerde
@@ -719,7 +722,7 @@ type SimulationApplicationSummary struct {
 	// The name of the simulation application.
 	Name *string
 
-	// Information about a robot software suite (ROS distribution).
+	// Information about a robot software suite.
 	RobotSoftwareSuite *RobotSoftwareSuite
 
 	// Information about a simulation software suite.
@@ -963,10 +966,12 @@ type SimulationJobSummary struct {
 // Information about a simulation software suite.
 type SimulationSoftwareSuite struct {
 
-	// The name of the simulation software suite.
+	// The name of the simulation software suite. SimulationRuntime is the only
+	// supported value.
 	Name SimulationSoftwareSuiteType
 
-	// The version of the simulation software suite.
+	// The version of the simulation software suite. Not applicable for
+	// SimulationRuntime .
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1080,9 +1085,9 @@ type UploadConfiguration struct {
 	// A prefix that specifies where files will be uploaded in Amazon S3. It is
 	// appended to the simulation output location to determine the final path.
 	//
-	// For example, if your simulation output location is s3://my-bucket and your
-	// upload configuration name is robot-test , your files will be uploaded to
-	// s3://my-bucket///robot-test .
+	// For example, if your simulation output location is s3://amzn-s3-demo-bucket and
+	// your upload configuration name is robot-test , your files will be uploaded to
+	// s3://amzn-s3-demo-bucket///robot-test .
 	//
 	// This member is required.
 	Name *string

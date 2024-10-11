@@ -12,7 +12,15 @@ import (
 	"time"
 )
 
+// End of support notice: On September 10, 2025, Amazon Web Services will
+// discontinue support for Amazon Web Services RoboMaker. After September 10, 2025,
+// you will no longer be able to access the Amazon Web Services RoboMaker console
+// or Amazon Web Services RoboMaker resources. For more information on
+// transitioning to Batch to help run containerized simulations, visit [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/].
+//
 // Creates a simulation application.
+//
+// [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateSimulationApplication(ctx context.Context, params *CreateSimulationApplicationInput, optFns ...func(*Options)) (*CreateSimulationApplicationOutput, error) {
 	if params == nil {
 		params = &CreateSimulationApplicationInput{}
@@ -35,7 +43,7 @@ type CreateSimulationApplicationInput struct {
 	// This member is required.
 	Name *string
 
-	// The robot software suite (ROS distribution) used by the simulation application.
+	// The robot software suite used by the simulation application.
 	//
 	// This member is required.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
@@ -84,7 +92,7 @@ type CreateSimulationApplicationOutput struct {
 	// The revision id of the simulation application.
 	RevisionId *string
 
-	// Information about the robot software suite (ROS distribution).
+	// Information about the robot software suite.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
 	// The simulation software suite used by the simulation application.

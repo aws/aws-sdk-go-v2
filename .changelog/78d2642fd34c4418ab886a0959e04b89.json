@@ -1,0 +1,8 @@
+{
+    "id": "78d2642f-d34c-4418-ab88-6a0959e04b89",
+    "type": "documentation",
+    "description": "Documentation update: added support notices to each API action.",
+    "modules": [
+        "service/robomaker"
+    ]
+}

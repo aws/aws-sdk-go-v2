@@ -10,14 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters a robot.
+// End of support notice: On September 10, 2025, Amazon Web Services will
+// discontinue support for Amazon Web Services RoboMaker. After September 10, 2025,
+// you will no longer be able to access the Amazon Web Services RoboMaker console
+// or Amazon Web Services RoboMaker resources. For more information on
+// transitioning to Batch to help run containerized simulations, visit [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/].
 //
-// This API will no longer be supported as of May 2, 2022. Use it to remove
-// resources that were created for Deployment Service.
+// This API is no longer supported. For more information, see the May 2, 2022
+// update in the [Support policy]page.
+//
+// Deregisters a robot.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
 // https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+//
+// [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022
+// [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) DeregisterRobot(ctx context.Context, params *DeregisterRobotInput, optFns ...func(*Options)) (*DeregisterRobotOutput, error) {
 	if params == nil {
 		params = &DeregisterRobotInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "fde7124b-1b39-4253-8e23-66613b7882ef",
+    "type": "feature",
+    "description": "Added a new field for network connection details.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

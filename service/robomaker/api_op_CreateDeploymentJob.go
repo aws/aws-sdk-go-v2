@@ -12,9 +12,16 @@ import (
 	"time"
 )
 
-// Deploys a specific version of a robot application to robots in a fleet.
+// End of support notice: On September 10, 2025, Amazon Web Services will
+// discontinue support for Amazon Web Services RoboMaker. After September 10, 2025,
+// you will no longer be able to access the Amazon Web Services RoboMaker console
+// or Amazon Web Services RoboMaker resources. For more information on
+// transitioning to Batch to help run containerized simulations, visit [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/].
 //
-// This API is no longer supported and will throw an error if used.
+// This API is no longer supported and will throw an error if used. For more
+// information, see the January 31, 2022 update in the [Support policy]page.
+//
+// Deploys a specific version of a robot application to robots in a fleet.
 //
 // The robot application must have a numbered applicationVersion for consistency
 // reasons. To create a new version, use CreateRobotApplicationVersion or see [Creating a Robot Application Version].
@@ -27,6 +34,8 @@ import (
 // information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
 //
 // [Creating a Robot Application Version]: https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html
+// [Support policy]: https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022
+// [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeploymentJobInput, optFns ...func(*Options)) (*CreateDeploymentJobOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentJobInput{}

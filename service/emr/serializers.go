@@ -3875,6 +3875,11 @@ func awsAwsjson11_serializeDocumentInstanceFleetConfig(v *types.InstanceFleetCon
 	object := value.Object()
 	defer object.Close()
 
+	if v.Context != nil {
+		ok := object.Key("Context")
+		ok.String(*v.Context)
+	}
+
 	if len(v.InstanceFleetType) > 0 {
 		ok := object.Key("InstanceFleetType")
 		ok.String(string(v.InstanceFleetType))
@@ -3935,6 +3940,11 @@ func awsAwsjson11_serializeDocumentInstanceFleetConfigList(v []types.InstanceFle
 func awsAwsjson11_serializeDocumentInstanceFleetModifyConfig(v *types.InstanceFleetModifyConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Context != nil {
+		ok := object.Key("Context")
+		ok.String(*v.Context)
+	}
 
 	if v.InstanceFleetId != nil {
 		ok := object.Key("InstanceFleetId")

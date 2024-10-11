@@ -53,6 +53,21 @@ type Action struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the override status applied to a target.
+type AdministrativeOverride struct {
+
+	// A description of the override state that provides additional details.
+	Description *string
+
+	// The reason code for the state.
+	Reason TargetAdministrativeOverrideReasonEnum
+
+	// The state of the override.
+	State TargetAdministrativeOverrideStateEnum
+
+	noSmithyDocumentSerde
+}
+
 // Information about anomaly detection and mitigation.
 type AnomalyDetection struct {
 
@@ -669,6 +684,9 @@ type LoadBalancerAttribute struct {
 	//   availability_zone_affinity with 100 percent zonal affinity,
 	//   partial_availability_zone_affinity with 85 percent zonal affinity, and
 	//   any_availability_zone with 0 percent zonal affinity.
+	//
+	//   - zonal_shift.config.enabled - Indicates whether zonal shift is enabled. The
+	//   possible values are true and false . The default is false .
 	Key *string
 
 	// The value of the attribute.
@@ -1433,6 +1451,9 @@ type TargetHealth struct {
 
 // Information about the health of a target.
 type TargetHealthDescription struct {
+
+	// The administrative override information for the target.
+	AdministrativeOverride *AdministrativeOverride
 
 	// The anomaly detection result for the target.
 	//

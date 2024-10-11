@@ -8246,6 +8246,81 @@ func awsAwsquery_deserializeDocumentActionsUnwrapped(v *[]types.Action, decoder 
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentAdministrativeOverride(v **types.AdministrativeOverride, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.AdministrativeOverride
+	if *v == nil {
+		sv = &types.AdministrativeOverride{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Description", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Description = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Reason", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Reason = types.TargetAdministrativeOverrideReasonEnum(xtv)
+			}
+
+		case strings.EqualFold("State", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.State = types.TargetAdministrativeOverrideStateEnum(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentAllocationIdNotFoundException(v **types.AllocationIdNotFoundException, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14899,6 +14974,12 @@ func awsAwsquery_deserializeDocumentTargetHealthDescription(v **types.TargetHeal
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AdministrativeOverride", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAdministrativeOverride(&sv.AdministrativeOverride, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("AnomalyDetection", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentAnomalyDetection(&sv.AnomalyDetection, nodeDecoder); err != nil {

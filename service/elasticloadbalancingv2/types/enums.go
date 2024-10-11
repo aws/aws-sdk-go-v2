@@ -299,6 +299,54 @@ func (RevocationType) Values() []RevocationType {
 	}
 }
 
+type TargetAdministrativeOverrideReasonEnum string
+
+// Enum values for TargetAdministrativeOverrideReasonEnum
+const (
+	TargetAdministrativeOverrideReasonEnumInternalError            TargetAdministrativeOverrideReasonEnum = "AdministrativeOverride.Unknown"
+	TargetAdministrativeOverrideReasonEnumNoOverrideEngaged        TargetAdministrativeOverrideReasonEnum = "AdministrativeOverride.NoOverride"
+	TargetAdministrativeOverrideReasonEnumZonalShiftEngaged        TargetAdministrativeOverrideReasonEnum = "AdministrativeOverride.ZonalShiftActive"
+	TargetAdministrativeOverrideReasonEnumZonalShiftDelegatedToDns TargetAdministrativeOverrideReasonEnum = "AdministrativeOverride.ZonalShiftDelegatedToDns"
+)
+
+// Values returns all known values for TargetAdministrativeOverrideReasonEnum.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetAdministrativeOverrideReasonEnum) Values() []TargetAdministrativeOverrideReasonEnum {
+	return []TargetAdministrativeOverrideReasonEnum{
+		"AdministrativeOverride.Unknown",
+		"AdministrativeOverride.NoOverride",
+		"AdministrativeOverride.ZonalShiftActive",
+		"AdministrativeOverride.ZonalShiftDelegatedToDns",
+	}
+}
+
+type TargetAdministrativeOverrideStateEnum string
+
+// Enum values for TargetAdministrativeOverrideStateEnum
+const (
+	TargetAdministrativeOverrideStateEnumUnknown                  TargetAdministrativeOverrideStateEnum = "unknown"
+	TargetAdministrativeOverrideStateEnumNoOverride               TargetAdministrativeOverrideStateEnum = "no_override"
+	TargetAdministrativeOverrideStateEnumZonalShiftActive         TargetAdministrativeOverrideStateEnum = "zonal_shift_active"
+	TargetAdministrativeOverrideStateEnumZonalShiftDelegatedToDns TargetAdministrativeOverrideStateEnum = "zonal_shift_delegated_to_dns"
+)
+
+// Values returns all known values for TargetAdministrativeOverrideStateEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetAdministrativeOverrideStateEnum) Values() []TargetAdministrativeOverrideStateEnum {
+	return []TargetAdministrativeOverrideStateEnum{
+		"unknown",
+		"no_override",
+		"zonal_shift_active",
+		"zonal_shift_delegated_to_dns",
+	}
+}
+
 type TargetGroupIpAddressTypeEnum string
 
 // Enum values for TargetGroupIpAddressTypeEnum

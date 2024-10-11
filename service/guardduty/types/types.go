@@ -2062,6 +2062,9 @@ type NetworkConnectionAction struct {
 	// The local IP information of the connection.
 	LocalIpDetails *LocalIpDetails
 
+	// The EC2 instance's local elastic network interface utilized for the connection.
+	LocalNetworkInterface *string
+
 	// The local port information of the connection.
 	LocalPortDetails *LocalPortDetails
 

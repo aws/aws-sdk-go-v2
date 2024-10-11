@@ -911,6 +911,9 @@ type Instance struct {
 // and later, excluding 5.0.x versions.
 type InstanceFleet struct {
 
+	// Reserved.
+	Context *string
+
 	// The unique identifier of the instance fleet.
 	Id *string
 
@@ -997,6 +1000,9 @@ type InstanceFleetConfig struct {
 	// This member is required.
 	InstanceFleetType InstanceFleetType
 
+	// Reserved.
+	Context *string
+
 	// The instance type configurations that define the Amazon EC2 instances in the
 	// instance fleet.
 	InstanceTypeConfigs []InstanceTypeConfig
@@ -1059,6 +1065,9 @@ type InstanceFleetModifyConfig struct {
 	//
 	// This member is required.
 	InstanceFleetId *string
+
+	// Reserved.
+	Context *string
 
 	// An array of InstanceTypeConfig objects that specify how Amazon EMR provisions
 	// Amazon EC2 instances when it fulfills On-Demand and Spot capacities. For more

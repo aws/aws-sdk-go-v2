@@ -11,7 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// End of support notice: On September 10, 2025, Amazon Web Services will
+// discontinue support for Amazon Web Services RoboMaker. After September 10, 2025,
+// you will no longer be able to access the Amazon Web Services RoboMaker console
+// or Amazon Web Services RoboMaker resources. For more information on
+// transitioning to Batch to help run containerized simulations, visit [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/].
+//
 // Describes one or more simulation jobs.
+//
+// [https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/]: https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/
 func (c *Client) BatchDescribeSimulationJob(ctx context.Context, params *BatchDescribeSimulationJobInput, optFns ...func(*Options)) (*BatchDescribeSimulationJobOutput, error) {
 	if params == nil {
 		params = &BatchDescribeSimulationJobInput{}

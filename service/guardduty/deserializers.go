@@ -18521,6 +18521,15 @@ func awsRestjson1_deserializeDocumentNetworkConnectionAction(v **types.NetworkCo
 				return err
 			}
 
+		case "localNetworkInterface":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LocalNetworkInterface = ptr.String(jtv)
+			}
+
 		case "localPortDetails":
 			if err := awsRestjson1_deserializeDocumentLocalPortDetails(&sv.LocalPortDetails, value); err != nil {
 				return err
