@@ -1,8 +1,0 @@
-{
-    "id": "2e3535e4-f2c2-4457-ac81-705b2ab7fc40",
-    "type": "feature",
-    "description": "This release provides new parameter \"Context\" in instance fleet clusters.",
-    "modules": [
-        "service/emr"
-    ]
-}

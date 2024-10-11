@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.2
 	github.com/aws/aws-sdk-go-v2/config v1.27.43
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.31
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.17.32
 	github.com/aws/aws-sdk-go-v2/service/acm v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.33.2
@@ -36,10 +36,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.43.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.28.2
-	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.39.2
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.27.2
-	github.com/aws/aws-sdk-go-v2/service/emr v1.45.2
+	github.com/aws/aws-sdk-go-v2/service/emr v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.36.2
@@ -63,7 +63,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.33.0
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.65.2
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.65.3
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.49.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.34.2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.32.2

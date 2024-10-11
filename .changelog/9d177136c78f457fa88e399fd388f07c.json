@@ -1,8 +1,0 @@
-{
-    "id": "9d177136-c78f-457f-a88e-399fd388f07c",
-    "type": "documentation",
-    "description": "Doc only updates for clarification around OAuth2GrantType for Salesforce.",
-    "modules": [
-        "service/appflow"
-    ]
-}

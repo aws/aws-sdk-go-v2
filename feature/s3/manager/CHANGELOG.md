@@ -1,3 +1,7 @@
+# v1.17.32 (2024-10-11)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.31 (2024-10-09)
 
 * **Bug Fix**: Fixup some integration tests.

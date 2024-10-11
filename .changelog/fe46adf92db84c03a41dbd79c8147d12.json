@@ -1,8 +1,0 @@
-{
-    "id": "fe46adf9-2db8-4c03-a41d-bd79c8147d12",
-    "type": "feature",
-    "description": "Add zonal_shift.config.enabled attribute. Add new AdministrativeOverride construct in the describe-target-health API response to include information about the override status applied to a target.",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

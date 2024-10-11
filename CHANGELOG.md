@@ -1,3 +1,22 @@
+# Release (2024-10-11)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.45.3](service/appflow/CHANGELOG.md#v1453-2024-10-11)
+  * **Documentation**: Doc only updates for clarification around OAuth2GrantType for Salesforce.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.40.0](service/elasticloadbalancingv2/CHANGELOG.md#v1400-2024-10-11)
+  * **Feature**: Add zonal_shift.config.enabled attribute. Add new AdministrativeOverride construct in the describe-target-health API response to include information about the override status applied to a target.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.46.0](service/emr/CHANGELOG.md#v1460-2024-10-11)
+  * **Feature**: This release provides new parameter "Context" in instance fleet clusters.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.50.0](service/guardduty/CHANGELOG.md#v1500-2024-10-11)
+  * **Feature**: Added a new field for network connection details.
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.30.3](service/robomaker/CHANGELOG.md#v1303-2024-10-11)
+  * **Documentation**: Documentation update: added support notices to each API action.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.3](service/s3/CHANGELOG.md#v1653-2024-10-11)
+  * **Bug Fix**:  S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types
+
 # Release (2024-10-10)
 
 ## Module Highlights
