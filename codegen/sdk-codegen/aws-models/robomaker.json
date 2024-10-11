@@ -94,7 +94,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes one or more worlds in a batch operation.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Deletes one or more worlds in a batch operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/batchDeleteWorlds",
@@ -154,7 +154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more simulation jobs.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes one or more simulation jobs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/batchDescribeSimulationJob",
@@ -255,7 +255,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Cancels the specified deployment job.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Cancels the specified deployment job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cancelDeploymentJob",
@@ -314,7 +314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified simulation job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Cancels the specified simulation job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cancelSimulationJob",
@@ -345,7 +345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a simulation job batch. When you cancel a simulation job batch, you are also\n         cancelling all of the active simulation jobs created as part of the batch. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Cancels a simulation job batch. When you cancel a simulation job batch, you are also\n         cancelling all of the active simulation jobs created as part of the batch. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cancelSimulationJobBatch",
@@ -420,7 +420,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified export job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Cancels the specified export job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cancelWorldExportJob",
@@ -473,7 +473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified world generator job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Cancels the specified world generator job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cancelWorldGenerationJob",
@@ -646,7 +646,7 @@
                 "smithy.api#deprecated": {
                     "message": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Deploys a specific version of a robot application to robots in a fleet.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>\n         <p>The robot application must have a numbered <code>applicationVersion</code> for\n         consistency reasons. To create a new version, use\n            <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p>\n         <note>\n            <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be\n            accessible. </p>\n         </note>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported and will throw an error if used. For more information, see the January 31, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022\">Support policy</a> page.</p>\n         </important>\n         <p>Deploys a specific version of a robot application to robots in a fleet.</p>\n         <p>The robot application must have a numbered <code>applicationVersion</code> for\n               consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see \n            <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>.\n         </p>\n         <note>\n            <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be\n            accessible. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createDeploymentJob",
@@ -790,7 +790,7 @@
                 "smithy.api#deprecated": {
                     "message": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Creates a fleet, a logical group of robots running the same robot application.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported and will throw an error if used. For more information, see the January 31, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022\">Support policy</a> page.</p>\n         </important>\n         <p>Creates a fleet, a logical group of robots running the same robot application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createFleet",
@@ -886,7 +886,7 @@
                 "smithy.api#deprecated": {
                     "message": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Creates a robot.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported and will throw an error if used. For more information, see the January 31, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022\">Support policy</a> page.</p>\n         </important>\n         <p>Creates a robot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createRobot",
@@ -923,7 +923,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a robot application. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a robot application. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createRobotApplication",
@@ -950,7 +950,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribuition) used by the robot application.</p>",
+                        "smithy.api#documentation": "<p>The robot software suite used by the robot application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1001,7 +1001,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribution) used by the robot application.</p>"
+                        "smithy.api#documentation": "<p>The robot software suite used by the robot application.</p>"
                     }
                 },
                 "lastUpdatedAt": {
@@ -1059,7 +1059,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a version of a robot application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a version of a robot application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createRobotApplicationVersion",
@@ -1130,7 +1130,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribution) used by the robot application.</p>"
+                        "smithy.api#documentation": "<p>The robot software suite used by the robot application.</p>"
                     }
                 },
                 "lastUpdatedAt": {
@@ -1270,7 +1270,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a simulation application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a simulation application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createSimulationApplication",
@@ -1304,7 +1304,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribution) used by the simulation application.</p>",
+                        "smithy.api#documentation": "<p>The robot software suite used by the simulation application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1367,7 +1367,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>Information about the robot software suite.</p>"
                     }
                 },
                 "renderingEngine": {
@@ -1431,7 +1431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a simulation application with a specific revision id.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a simulation application with a specific revision id.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createSimulationApplicationVersion",
@@ -1508,7 +1508,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>Information about the robot software suite.</p>"
                     }
                 },
                 "renderingEngine": {
@@ -1572,7 +1572,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a simulation job.</p>\n         <note>\n            <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be\n            accessible. </p>\n         </note>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a simulation job.</p>\n         <note>\n            <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be\n            accessible. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createSimulationJob",
@@ -1823,7 +1823,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a world export job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a world export job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createWorldExportJob",
@@ -1957,7 +1957,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates worlds using the specified template.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates worlds using the specified template.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createWorldGenerationJob",
@@ -2097,7 +2097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a world template.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Creates a world template.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createWorldTemplate",
@@ -2333,7 +2333,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Deletes a fleet.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Deletes a fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/deleteFleet",
@@ -2392,7 +2392,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Deletes a robot.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Deletes a robot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/deleteRobot",
@@ -2420,7 +2420,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a robot application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Deletes a robot application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/deleteRobotApplication",
@@ -2504,7 +2504,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a simulation application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Deletes a simulation application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/deleteSimulationApplication",
@@ -2563,7 +2563,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a world template.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Deletes a world template.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/deleteWorldTemplate",
@@ -3003,7 +3003,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Deregisters a robot.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Deregisters a robot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/deregisterRobot",
@@ -3085,7 +3085,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Describes a deployment job.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Describes a deployment job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeDeploymentJob",
@@ -3208,7 +3208,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Describes a fleet.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Describes a fleet.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeFleet",
@@ -3319,7 +3319,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Describes a robot.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>Describes a robot.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeRobot",
@@ -3350,7 +3350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a robot application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a robot application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeRobotApplication",
@@ -3409,7 +3409,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribution) used by the robot application.</p>"
+                        "smithy.api#documentation": "<p>The robot software suite used by the robot application.</p>"
                     }
                 },
                 "revisionId": {
@@ -3559,7 +3559,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a simulation application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a simulation application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeSimulationApplication",
@@ -3624,7 +3624,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>Information about the robot software suite.</p>"
                     }
                 },
                 "renderingEngine": {
@@ -3691,7 +3691,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a simulation job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a simulation job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeSimulationJob",
@@ -3719,7 +3719,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a simulation job batch.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a simulation job batch.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeSimulationJobBatch",
@@ -3996,7 +3996,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a world.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a world.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeWorld",
@@ -4027,7 +4027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a world export job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a world export job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeWorldExportJob",
@@ -4138,7 +4138,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a world generation job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a world generation job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeWorldGenerationJob",
@@ -4317,7 +4317,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a world template.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Describes a world template.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeWorldTemplate",
@@ -4710,7 +4710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the world template body.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Gets the world template body.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getWorldTemplateBody",
@@ -4936,7 +4936,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>\n         Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listDeploymentJobs",
@@ -5028,7 +5028,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>\n         Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listFleets",
@@ -5114,7 +5114,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of robot application. You can optionally provide filters to retrieve\n         specific robot applications.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Returns a list of robot application. You can optionally provide filters to retrieve\n         specific robot applications.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listRobotApplications",
@@ -5206,7 +5206,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Returns a list of robots. You can optionally provide filters to retrieve specific robots.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>\n         Returns a list of robots. You can optionally provide filters to retrieve specific robots.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listRobots",
@@ -5292,7 +5292,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of simulation applications. You can optionally provide filters to\n         retrieve specific simulation applications. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Returns a list of simulation applications. You can optionally provide filters to\n         retrieve specific simulation applications. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listSimulationApplications",
@@ -5375,7 +5375,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list simulation job batches. You can optionally provide filters to retrieve\n         specific simulation batch jobs. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Returns a list simulation job batches. You can optionally provide filters to retrieve\n         specific simulation batch jobs. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listSimulationJobBatches",
@@ -5455,7 +5455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of simulation jobs. You can optionally provide filters to retrieve\n         specific simulation jobs. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Returns a list of simulation jobs. You can optionally provide filters to retrieve\n         specific simulation jobs. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listSimulationJobs",
@@ -5539,7 +5539,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags on a AWS RoboMaker resource.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Lists all tags on a AWS RoboMaker resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -5597,7 +5597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists world export jobs.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Lists world export jobs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listWorldExportJobs",
@@ -5678,7 +5678,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists world generator jobs.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Lists world generator jobs.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listWorldGenerationJobs",
@@ -5759,7 +5759,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists world templates.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Lists world templates.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listWorldTemplates",
@@ -5833,7 +5833,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists worlds.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Lists worlds.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listWorlds",
@@ -6154,7 +6154,7 @@
                 "smithy.api#deprecated": {
                     "message": "AWS RoboMaker is unable to process this request as the support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Registers a robot with a fleet.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Registers a robot with a fleet.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used. For more information, see the January 31, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-january2022\">Support policy</a> page.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/registerRobot",
@@ -6313,7 +6313,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Restarts a running simulation job.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Restarts a running simulation job.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/restartSimulationJob",
@@ -6533,7 +6533,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>Information about a robot software suite.</p>"
                     }
                 }
             },
@@ -6650,18 +6650,18 @@
                 "name": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuiteType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>The name of the robot software suite. <code>General</code> is the only supported value.</p>"
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuiteVersionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>The version of the robot software suite. Not applicable for General software suite.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a robot software suite (ROS distribution).</p>"
+                "smithy.api#documentation": "<p>Information about a robot software suite.</p>"
             }
         },
         "com.amazonaws.robomaker#RobotSoftwareSuiteType": {
@@ -6937,7 +6937,7 @@
                 "worldConfigs": {
                     "target": "com.amazonaws.robomaker#WorldConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of world configurations.</p>"
+                        "smithy.api#documentation": "<p>A list of world configurations.</p>\n         <important>\n            <p>This API is no longer supported and will throw an error if used.</p>\n         </important>"
                     }
                 },
                 "useDefaultUploadConfigurations": {
@@ -7029,7 +7029,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about a robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>Information about a robot software suite.</p>"
                     }
                 },
                 "simulationSoftwareSuite": {
@@ -7267,7 +7267,7 @@
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.robomaker#LastUpdatedAt",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the simulation job batch was last\n         updated.</p>"
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the simulation job batch was last updated.\n      </p>"
                     }
                 },
                 "createdAt": {
@@ -7717,13 +7717,13 @@
                 "name": {
                     "target": "com.amazonaws.robomaker#SimulationSoftwareSuiteType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the simulation software suite.</p>"
+                        "smithy.api#documentation": "<p>The name of the simulation software suite. <code>SimulationRuntime</code> is the only supported value.</p>"
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.robomaker#SimulationSoftwareSuiteVersionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the simulation software suite.</p>"
+                        "smithy.api#documentation": "<p>The version of the simulation software suite. Not applicable for <code>SimulationRuntime</code>.</p>"
                     }
                 }
             },
@@ -7875,7 +7875,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new simulation job batch. The batch is defined using one or more\n            <code>SimulationJobRequest</code> objects. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Starts a new simulation job batch. The batch is defined using one or more\n            <code>SimulationJobRequest</code> objects. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/startSimulationJobBatch",
@@ -8038,7 +8038,7 @@
                 "smithy.api#deprecated": {
                     "message": "Support for the AWS RoboMaker application deployment feature has ended. For additional information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html."
                 },
-                "smithy.api#documentation": "<p>Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.</p>\n         <important>\n            <p>This API will no longer be supported as of May 2, 2022. Use it to remove resources that were created for Deployment Service.</p>\n         </important>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <important>\n            <p>This API is no longer supported. For more information, see the May 2, 2022 update in the <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/chapter-support-policy.html#software-support-policy-may2022\">Support policy</a> page.</p>\n         </important>\n         <p>\n         Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/syncDeploymentJob",
@@ -8185,7 +8185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or edits tags for a AWS RoboMaker resource.</p>\n         <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both\n         required, but tag values can be empty strings. </p>\n         <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management\n            User Guide</i>. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Adds or edits tags for a AWS RoboMaker resource.</p>\n         <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both\n         required, but tag values can be empty strings. </p>\n         <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management\n            User Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -8407,7 +8407,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from the specified AWS RoboMaker resource.</p>\n         <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key,\n         use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html\">\n               <code>TagResource</code>\n            </a>. </p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Removes the specified tags from the specified AWS RoboMaker resource.</p>\n         <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key,\n         use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html\">\n               <code>TagResource</code>\n            </a>. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -8472,7 +8472,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a robot application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Updates a robot application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateRobotApplication",
@@ -8499,7 +8499,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribution) used by the robot application.</p>",
+                        "smithy.api#documentation": "<p>The robot software suite used by the robot application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8550,7 +8550,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>The robot software suite (ROS distribution) used by the robot application.</p>"
+                        "smithy.api#documentation": "<p>The robot software suite used by the robot application.</p>"
                     }
                 },
                 "lastUpdatedAt": {
@@ -8602,7 +8602,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a simulation application.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Updates a simulation application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateSimulationApplication",
@@ -8636,7 +8636,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the robot software suite (ROS distribution).</p>",
+                        "smithy.api#documentation": "<p>Information about the robot software suite.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8699,7 +8699,7 @@
                 "robotSoftwareSuite": {
                     "target": "com.amazonaws.robomaker#RobotSoftwareSuite",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the robot software suite (ROS distribution).</p>"
+                        "smithy.api#documentation": "<p>Information about the robot software suite.</p>"
                     }
                 },
                 "renderingEngine": {
@@ -8754,7 +8754,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a world template.</p>",
+                "smithy.api#documentation": "<important>\n            <p>End of support notice: On September 10, 2025, Amazon Web Services\n         will discontinue support for Amazon Web Services RoboMaker. After September 10, 2025, you will\n         no longer be able to access the Amazon Web Services RoboMaker console or Amazon Web Services RoboMaker resources. \n         For more information on transitioning to Batch to help run containerized\n         simulations, visit <a href=\"https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/\">https://aws.amazon.com/blogs/hpc/run-simulations-using-multiple-containers-in-a-single-aws-batch-job/</a>.\n      </p>\n         </important>\n         <p>Updates a world template.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/updateWorldTemplate",
@@ -8850,7 +8850,7 @@
                 "name": {
                     "target": "com.amazonaws.robomaker#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the\n         simulation output location to determine the final path. </p>\n         <p> For example, if your simulation output location is <code>s3://my-bucket</code> and your\n         upload configuration name is <code>robot-test</code>, your files will be uploaded to\n            <code>s3://my-bucket/<simid>/<runid>/robot-test</code>. </p>",
+                        "smithy.api#documentation": "<p>A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the\n         simulation output location to determine the final path. </p>\n         <p> For example, if your simulation output location is <code>s3://amzn-s3-demo-bucket</code> and your\n         upload configuration name is <code>robot-test</code>, your files will be uploaded to\n            <code>s3://amzn-s3-demo-bucket/<simid>/<runid>/robot-test</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },

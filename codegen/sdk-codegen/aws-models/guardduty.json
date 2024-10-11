@@ -11049,6 +11049,13 @@
                         "smithy.api#jsonName": "localIpDetails"
                     }
                 },
+                "LocalNetworkInterface": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance's local elastic network interface utilized for the connection.</p>",
+                        "smithy.api#jsonName": "localNetworkInterface"
+                    }
+                },
                 "RemoteIpDetails": {
                     "target": "com.amazonaws.guardduty#RemoteIpDetails",
                     "traits": {
