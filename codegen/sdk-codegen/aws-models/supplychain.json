@@ -24,6 +24,12 @@
                 "smithy.api#pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$"
             }
         },
+        "com.amazonaws.supplychain#AwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.supplychain#BillOfMaterialsImportJob": {
             "type": "structure",
             "members": {
@@ -822,6 +828,143 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of CreateDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#CreateInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#CreateInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new instance for AWS Supply Chain. This is an asynchronous operation. Upon receiving a CreateInstance request, AWS Supply Chain immediately returns the instance resource, with instance ID,  and the initializing state while simultaneously creating all required Amazon Web Services resources for an instance creation. You can use GetInstance to check the status of the instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful CreateInstance request with all input data",
+                        "input": {
+                            "instanceName": "example instance name",
+                            "instanceDescription": "example instance description",
+                            "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                            "tags": {
+                                "tagKey1": "tagValue1"
+                            }
+                        },
+                        "output": {
+                            "instance": {
+                                "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                "awsAccountId": "123456789012",
+                                "state": "Initializing",
+                                "createdTime": 172615383136,
+                                "lastModifiedTime": 172615383136,
+                                "instanceName": "example instance name",
+                                "instanceDescription": "example instance description",
+                                "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                "versionNumber": 2.0
+                            }
+                        }
+                    },
+                    {
+                        "title": "Successful CreateInstance request with no input data",
+                        "output": {
+                            "instance": {
+                                "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                "awsAccountId": "123456789012",
+                                "state": "Initializing",
+                                "createdTime": 172615383136,
+                                "lastModifiedTime": 172615383136,
+                                "instanceDescription": "",
+                                "kmsKeyArn": "arn:aws:kms:us-west-2:456789012345:key/7372eb6d-874c-4212-8d49-7804282d33a8",
+                                "versionNumber": 2.0
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/api/instance"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceName": {
+                    "target": "com.amazonaws.supplychain#InstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance name.</p>"
+                    }
+                },
+                "instanceDescription": {
+                    "target": "com.amazonaws.supplychain#InstanceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance description.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.supplychain#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon Web Services owned KMS key. If you don't provide anything here, AWS Supply Chain uses the Amazon Web Services owned KMS key.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.supplychain#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services tags of an instance to be created.</p>",
+                        "smithy.api#notProperty": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.supplychain#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token for idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for CreateInstance.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#CreateInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "instance": {
+                    "target": "com.amazonaws.supplychain#Instance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance resource data details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for CreateInstance.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -1994,6 +2137,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.supplychain#DeleteInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#DeleteInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#DeleteInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete the instance. This is an asynchronous operation. Upon receiving a DeleteInstance request, AWS Supply Chain immediately returns a response with the instance resource, delete state while cleaning up all Amazon Web Services resources created during the instance creation process. You can use the GetInstance action to check the instance status.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful DeleteInstance request",
+                        "input": {
+                            "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793"
+                        },
+                        "output": {
+                            "instance": {
+                                "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                "awsAccountId": "123456789012",
+                                "state": "Deleting",
+                                "createdTime": 172615383136,
+                                "lastModifiedTime": 172615383136,
+                                "instanceName": "updated example instance name",
+                                "instanceDescription": "updated example instance description",
+                                "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                "versionNumber": 2.0
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/api/instance/{instanceId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for DeleteInstance.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#DeleteInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "instance": {
+                    "target": "com.amazonaws.supplychain#Instance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance resource data details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for DeleteInstance.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.supplychain#GalaxyPublicAPIGateway": {
             "type": "service",
             "version": "2024-01-01",
@@ -2020,6 +2253,9 @@
                 },
                 {
                     "target": "com.amazonaws.supplychain#DataLakeDatasetResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InstanceResource"
                 }
             ],
             "errors": [
@@ -3270,6 +3506,341 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.supplychain#GetInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#GetInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#GetInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the AWS Supply Chain instance details.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful GetInstance request",
+                        "input": {
+                            "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793"
+                        },
+                        "output": {
+                            "instance": {
+                                "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                "awsAccountId": "123456789012",
+                                "state": "Active",
+                                "createdTime": 172615383136,
+                                "lastModifiedTime": 172615383136,
+                                "instanceName": "example instance name",
+                                "instanceDescription": "example instance description",
+                                "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                "versionNumber": 2.0
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/instance/{instanceId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for GetInstance.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#GetInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "instance": {
+                    "target": "com.amazonaws.supplychain#Instance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance resource data details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for GetInstance.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#Instance": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance identifier.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "instanceId"
+                    }
+                },
+                "awsAccountId": {
+                    "target": "com.amazonaws.supplychain#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.supplychain#InstanceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "webAppDnsDomain": {
+                    "target": "com.amazonaws.supplychain#InstanceWebAppDnsDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WebApp DNS domain name of the instance.</p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance creation timestamp.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance last modified timestamp.</p>"
+                    }
+                },
+                "instanceName": {
+                    "target": "com.amazonaws.supplychain#InstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance name.</p>"
+                    }
+                },
+                "instanceDescription": {
+                    "target": "com.amazonaws.supplychain#InstanceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Supply Chain instance description.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.supplychain#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you optionally provided for encryption. If you did not provide anything here, AWS Supply Chain uses the Amazon Web Services owned KMS key and nothing is returned.</p>"
+                    }
+                },
+                "versionNumber": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the instance.</p>"
+            }
+        },
+        "com.amazonaws.supplychain#InstanceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 501
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9., _ʼ'%-]){0,500}$"
+            }
+        },
+        "com.amazonaws.supplychain#InstanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#Instance"
+            }
+        },
+        "com.amazonaws.supplychain#InstanceMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 10,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.supplychain#InstanceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^(?![ _ʼ'%-])[a-zA-Z0-9 _ʼ'%-]{0,62}[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.supplychain#InstanceNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#InstanceName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.supplychain#InstanceNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.supplychain#InstanceResource": {
+            "type": "resource",
+            "identifiers": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID"
+                }
+            },
+            "properties": {
+                "awsAccountId": {
+                    "target": "com.amazonaws.supplychain#AwsAccountId"
+                },
+                "webAppDnsDomain": {
+                    "target": "com.amazonaws.supplychain#InstanceWebAppDnsDomain"
+                },
+                "state": {
+                    "target": "com.amazonaws.supplychain#InstanceState"
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp"
+                },
+                "instanceName": {
+                    "target": "com.amazonaws.supplychain#InstanceName"
+                },
+                "instanceDescription": {
+                    "target": "com.amazonaws.supplychain#InstanceDescription"
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.supplychain#KmsKeyArn"
+                },
+                "versionNumber": {
+                    "target": "smithy.api#Double"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.supplychain#CreateInstance"
+            },
+            "read": {
+                "target": "com.amazonaws.supplychain#GetInstance"
+            },
+            "update": {
+                "target": "com.amazonaws.supplychain#UpdateInstance"
+            },
+            "delete": {
+                "target": "com.amazonaws.supplychain#DeleteInstance"
+            },
+            "list": {
+                "target": "com.amazonaws.supplychain#ListInstances"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "instance/{instanceId}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#InstanceState": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Initializing"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreateFailed"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DeleteFailed"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleted"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.supplychain#InstanceStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.supplychain#InstanceState"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.supplychain#InstanceWebAppDnsDomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Za-z0-9]+(.[A-Za-z0-9]+)+$"
+            }
+        },
         "com.amazonaws.supplychain#InternalServerException": {
             "type": "structure",
             "members": {
@@ -3282,6 +3853,15 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.supplychain#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:kms:([a-z0-9][-.a-z0-9]{0,62})?:([a-z0-9][-.a-z0-9]{0,62})?:key/.{0,1019}$"
             }
         },
         "com.amazonaws.supplychain#ListDataIntegrationFlows": {
@@ -3799,6 +4379,203 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of ListDataLakeDatasets.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#ListInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#ListInstancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all the AWS Supply Chain instances in a paginated way.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful ListInstance request with no input data",
+                        "output": {
+                            "instances": [
+                                {
+                                    "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                    "awsAccountId": "123456789012",
+                                    "state": "Active",
+                                    "createdTime": 172615383136,
+                                    "lastModifiedTime": 172615383136,
+                                    "instanceName": "example instance name",
+                                    "instanceDescription": "example instance description",
+                                    "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                    "versionNumber": 2.0
+                                },
+                                {
+                                    "instanceId": "3ad8116a-644d-4172-8dcb-20e51d314c14",
+                                    "awsAccountId": "123456789012",
+                                    "state": "Initializing",
+                                    "createdTime": 17261674383136,
+                                    "lastModifiedTime": 17261674383136,
+                                    "instanceDescription": "example instance description",
+                                    "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                    "versionNumber": 2.0
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Successful ListInstance request with filters",
+                        "input": {
+                            "instanceNameFilter": [
+                                "example instance name"
+                            ],
+                            "instanceStateFilter": [
+                                "Active"
+                            ]
+                        },
+                        "output": {
+                            "instances": [
+                                {
+                                    "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                    "awsAccountId": "123456789012",
+                                    "state": "Active",
+                                    "createdTime": 172615383136,
+                                    "lastModifiedTime": 172615383136,
+                                    "instanceName": "example instance name",
+                                    "instanceDescription": "example instance description",
+                                    "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                    "versionNumber": 2.0
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Successful ListInstance request with maxResult override",
+                        "input": {
+                            "maxResults": 1
+                        },
+                        "output": {
+                            "instances": [
+                                {
+                                    "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                    "awsAccountId": "123456789012",
+                                    "state": "Active",
+                                    "createdTime": 172615383136,
+                                    "lastModifiedTime": 172615383136,
+                                    "instanceName": "example instance name",
+                                    "instanceDescription": "example instance description",
+                                    "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                    "versionNumber": 2.0
+                                }
+                            ],
+                            "nextToken": "AAQA-EFRSURBSGhtcng0c0dxbENwUHdnckVIbkFYNU1QVjRTZWN2ak5iMFVicC8zemlHOVF3SEpjSC9WTWJVVXBMV2Z1N3ZvZlQ0WEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTTJibW9LemgrSWZTY0RaZEdBZ0VRZ0R2dDhsQnVGbGJ0dnFTZityWmNSWEVPbG93emJoSjhxOGNMbGQ1UGMvY0VRbWlTR3pQUFd4N2RraXY5Y0ovcS9vSmFYZVBGdWVHaU0zWmd0dz09n-rC1ejA5--7ltJxpDT2xP_i8xGqDPMOZfjpp8q6l5NuP9_bnBURvwwYhdqDriMK5_f96LuPEnPbuML-ItfgEiCcUy0p2tApvpZkZqOG5fbqP-4C5aDYPTffHLyq-MMqvfrGVJzL1nvkpZcnTkVR9VJsu5b8I0qqDW0H8EMKGgTo78U9lr4sj3Usi9VMwZxgKCBmr03HhFLYXOW--XMbIx0CTZF0fYIcRxmA_sVS6J7gpaB9yMcnzs5VUKokoA5JTcAPY5d1Y1VyE8KKxv51cfPgXw8OYCDbFQncw8mZPmE-VqxjFbksmk_FmghpPn9j2Ppoe-zr0LQ%3D"
+                        }
+                    },
+                    {
+                        "title": "Successful ListInstance request with nextToken",
+                        "input": {
+                            "nextToken": "AAQA-EFRSURBSGhtcng0c0dxbENwUHdnckVIbkFYNU1QVjRTZWN2ak5iMFVicC8zemlHOVF3SEpjSC9WTWJVVXBMV2Z1N3ZvZlQ0WEFBQUFmakI4QmdrcWhraUc5dzBCQndhZ2J6QnRBZ0VBTUdnR0NTcUdTSWIzRFFFSEFUQWVCZ2xnaGtnQlpRTUVBUzR3RVFRTTJibW9LemgrSWZTY0RaZEdBZ0VRZ0R2dDhsQnVGbGJ0dnFTZityWmNSWEVPbG93emJoSjhxOGNMbGQ1UGMvY0VRbWlTR3pQUFd4N2RraXY5Y0ovcS9vSmFYZVBGdWVHaU0zWmd0dz09n-rC1ejA5--7ltJxpDT2xP_i8xGqDPMOZfjpp8q6l5NuP9_bnBURvwwYhdqDriMK5_f96LuPEnPbuML-ItfgEiCcUy0p2tApvpZkZqOG5fbqP-4C5aDYPTffHLyq-MMqvfrGVJzL1nvkpZcnTkVR9VJsu5b8I0qqDW0H8EMKGgTo78U9lr4sj3Usi9VMwZxgKCBmr03HhFLYXOW--XMbIx0CTZF0fYIcRxmA_sVS6J7gpaB9yMcnzs5VUKokoA5JTcAPY5d1Y1VyE8KKxv51cfPgXw8OYCDbFQncw8mZPmE-VqxjFbksmk_FmghpPn9j2Ppoe-zr0LQ%3D",
+                            "maxResults": 1
+                        },
+                        "output": {
+                            "instances": [
+                                {
+                                    "instanceId": "3ad8116a-644d-4172-8dcb-20e51d314c14",
+                                    "awsAccountId": "123456789012",
+                                    "state": "Initializing",
+                                    "createdTime": 17261674383136,
+                                    "lastModifiedTime": 17261674383136,
+                                    "instanceDescription": "example instance description",
+                                    "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                    "versionNumber": 2.0
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/api/instance"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "instances"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#InstanceNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch the next page of instances.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.supplychain#InstanceMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>Specify the maximum number of instances to fetch in this paginated request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "instanceNameFilter": {
+                    "target": "com.amazonaws.supplychain#InstanceNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter to ListInstances based on their names.</p>",
+                        "smithy.api#httpQuery": "instanceNameFilter"
+                    }
+                },
+                "instanceStateFilter": {
+                    "target": "com.amazonaws.supplychain#InstanceStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter to ListInstances based on their state.</p>",
+                        "smithy.api#httpQuery": "instanceStateFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for ListInstances.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#ListInstancesResponse": {
+            "type": "structure",
+            "members": {
+                "instances": {
+                    "target": "com.amazonaws.supplychain#InstanceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of instances resource data details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.supplychain#InstanceNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to fetch the next page of instances.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for ListInstances.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4989,6 +5766,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The response parameters of UpdateDataLakeDataset.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#UpdateInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#UpdateInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the instance.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful UpdateInstance request",
+                        "input": {
+                            "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                            "instanceName": "updated example instance name",
+                            "instanceDescription": "updated example instance description"
+                        },
+                        "output": {
+                            "instance": {
+                                "instanceId": "9e193580-7cc5-45f7-9609-c43ba0ada793",
+                                "awsAccountId": "123456789012",
+                                "state": "Active",
+                                "createdTime": 172615383136,
+                                "lastModifiedTime": 172615383136,
+                                "instanceName": "updated example instance name",
+                                "instanceDescription": "updated example instance description",
+                                "kmsKeyArn": "arn:aws:kms:us-west-2:123456789012:key/b14ffc39-b7d4-45ab-991a-6257a7f0d24d",
+                                "versionNumber": 2.0
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/api/instance/{instanceId}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#UpdateInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceName": {
+                    "target": "com.amazonaws.supplychain#InstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance name.</p>"
+                    }
+                },
+                "instanceDescription": {
+                    "target": "com.amazonaws.supplychain#InstanceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance description.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for UpdateInstance.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#UpdateInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "instance": {
+                    "target": "com.amazonaws.supplychain#Instance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance resource data details.</p>",
+                        "smithy.api#nestedProperties": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for UpdateInstance.</p>",
                 "smithy.api#output": {}
             }
         },
