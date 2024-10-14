@@ -45,6 +45,7 @@
         "api_op_ListCertificates.go",
         "api_op_ListConnectors.go",
         "api_op_ListExecutions.go",
+        "api_op_ListFileTransferResults.go",
         "api_op_ListHostKeys.go",
         "api_op_ListProfiles.go",
         "api_op_ListSecurityPolicies.go",

@@ -1,0 +1,8 @@
+{
+    "id": "181f81a2-6003-4055-9e85-29cfba991c5d",
+    "type": "feature",
+    "description": "AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

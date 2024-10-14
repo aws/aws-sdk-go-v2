@@ -100,10 +100,12 @@ type ArchiveStringEmailAttribute string
 
 // Enum values for ArchiveStringEmailAttribute
 const (
-	ArchiveStringEmailAttributeTo      ArchiveStringEmailAttribute = "TO"
-	ArchiveStringEmailAttributeFrom    ArchiveStringEmailAttribute = "FROM"
-	ArchiveStringEmailAttributeCc      ArchiveStringEmailAttribute = "CC"
-	ArchiveStringEmailAttributeSubject ArchiveStringEmailAttribute = "SUBJECT"
+	ArchiveStringEmailAttributeTo           ArchiveStringEmailAttribute = "TO"
+	ArchiveStringEmailAttributeFrom         ArchiveStringEmailAttribute = "FROM"
+	ArchiveStringEmailAttributeCc           ArchiveStringEmailAttribute = "CC"
+	ArchiveStringEmailAttributeSubject      ArchiveStringEmailAttribute = "SUBJECT"
+	ArchiveStringEmailAttributeEnvelopeTo   ArchiveStringEmailAttribute = "ENVELOPE_TO"
+	ArchiveStringEmailAttributeEnvelopeFrom ArchiveStringEmailAttribute = "ENVELOPE_FROM"
 )
 
 // Values returns all known values for ArchiveStringEmailAttribute. Note that this
@@ -116,6 +118,8 @@ func (ArchiveStringEmailAttribute) Values() []ArchiveStringEmailAttribute {
 		"FROM",
 		"CC",
 		"SUBJECT",
+		"ENVELOPE_TO",
+		"ENVELOPE_FROM",
 	}
 }
 

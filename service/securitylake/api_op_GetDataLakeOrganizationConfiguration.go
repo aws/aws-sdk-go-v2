@@ -35,7 +35,7 @@ type GetDataLakeOrganizationConfigurationInput struct {
 
 type GetDataLakeOrganizationConfigurationOutput struct {
 
-	// The configuration for new accounts.
+	// The configuration used for new accounts in Security Lake.
 	AutoEnableNewAccount []types.DataLakeAutoEnableNewAccountConfiguration
 
 	// Metadata pertaining to the operation's result.

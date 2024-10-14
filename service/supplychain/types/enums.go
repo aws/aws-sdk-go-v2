@@ -195,3 +195,30 @@ func (DataLakeDatasetSchemaFieldType) Values() []DataLakeDatasetSchemaFieldType 
 		"TIMESTAMP",
 	}
 }
+
+type InstanceState string
+
+// Enum values for InstanceState
+const (
+	InstanceStateInitializing InstanceState = "Initializing"
+	InstanceStateActive       InstanceState = "Active"
+	InstanceStateCreateFailed InstanceState = "CreateFailed"
+	InstanceStateDeleteFailed InstanceState = "DeleteFailed"
+	InstanceStateDeleting     InstanceState = "Deleting"
+	InstanceStateDeleted      InstanceState = "Deleted"
+)
+
+// Values returns all known values for InstanceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceState) Values() []InstanceState {
+	return []InstanceState{
+		"Initializing",
+		"Active",
+		"CreateFailed",
+		"DeleteFailed",
+		"Deleting",
+		"Deleted",
+	}
+}

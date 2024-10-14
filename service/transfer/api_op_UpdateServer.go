@@ -85,9 +85,9 @@ type UpdateServerInput struct {
 	// attaching Elastic IP addresses directly to it.
 	//
 	// After May 19, 2021, you won't be able to create a server using
-	// EndpointType=VPC_ENDPOINT in your Amazon Web Servicesaccount if your account
+	// EndpointType=VPC_ENDPOINT in your Amazon Web Services account if your account
 	// hasn't already done so before May 19, 2021. If you have already created servers
-	// with EndpointType=VPC_ENDPOINT in your Amazon Web Servicesaccount on or before
+	// with EndpointType=VPC_ENDPOINT in your Amazon Web Services account on or before
 	// May 19, 2021, you will not be affected. After this date, use EndpointType = VPC .
 	//
 	// For more information, see

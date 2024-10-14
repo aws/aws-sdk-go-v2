@@ -54,6 +54,9 @@ type StartArchiveExportInput struct {
 	// Criteria to filter which emails are included in the export.
 	Filters *types.ArchiveFilters
 
+	// Whether to include message metadata as JSON files in the export.
+	IncludeMetadata *bool
+
 	// The maximum number of email items to include in the export.
 	MaxResults *int32
 

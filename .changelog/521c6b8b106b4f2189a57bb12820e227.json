@@ -1,0 +1,8 @@
+{
+    "id": "521c6b8b-106b-4f21-89a5-7bb12820e227",
+    "type": "feature",
+    "description": "This release enables customers using SFTP connectors to query the transfer status of their files to meet their monitoring needs as well as orchestrate post transfer actions.",
+    "modules": [
+        "service/transfer"
+    ]
+}

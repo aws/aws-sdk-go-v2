@@ -11,7 +11,8 @@ import (
 )
 
 // Creates the specified notification subscription in Amazon Security Lake for the
-// organization you specify.
+// organization you specify. The notification subscription is created for
+// exceptions that cannot be resolved by Security Lake automatically.
 func (c *Client) CreateDataLakeExceptionSubscription(ctx context.Context, params *CreateDataLakeExceptionSubscriptionInput, optFns ...func(*Options)) (*CreateDataLakeExceptionSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateDataLakeExceptionSubscriptionInput{}
@@ -40,7 +41,8 @@ type CreateDataLakeExceptionSubscriptionInput struct {
 	// This member is required.
 	SubscriptionProtocol *string
 
-	// The expiration period and time-to-live (TTL).
+	// The expiration period and time-to-live (TTL). It is the duration of time until
+	// which the exception message remains.
 	ExceptionTimeToLive *int64
 
 	noSmithyDocumentSerde

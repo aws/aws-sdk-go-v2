@@ -7,15 +7,16 @@ import (
 	"time"
 )
 
-// The AWS identity.
+// The Amazon Web Services identity.
 type AwsIdentity struct {
 
-	// The external ID used to estalish trust relationship with the AWS identity.
+	// The external ID used to establish trust relationship with the Amazon Web
+	// Services identity.
 	//
 	// This member is required.
 	ExternalId *string
 
-	// The AWS identity principal.
+	// The Amazon Web Services identity principal.
 	//
 	// This member is required.
 	Principal *string
@@ -23,8 +24,8 @@ type AwsIdentity struct {
 	noSmithyDocumentSerde
 }
 
-// The Security Lake logs source configuration file describes the information
-// needed to generate Security Lake logs.
+// To add a natively-supported Amazon Web Services service as a log source, use
+// these parameters to specify the configuration settings for the log source.
 type AwsLogSourceConfiguration struct {
 
 	// Specify the Regions where you want to enable Security Lake.
@@ -32,8 +33,7 @@ type AwsLogSourceConfiguration struct {
 	// This member is required.
 	Regions []string
 
-	// The name for a Amazon Web Services source. This must be a Regionally unique
-	// value.
+	// The name for a Amazon Web Services source.
 	//
 	// This member is required.
 	SourceName AwsLogSourceName
@@ -42,8 +42,7 @@ type AwsLogSourceConfiguration struct {
 	// Security Lake.
 	Accounts []string
 
-	// The version for a Amazon Web Services source. This must be a Regionally unique
-	// value.
+	// The version for a Amazon Web Services source.
 	SourceVersion *string
 
 	noSmithyDocumentSerde
@@ -80,10 +79,10 @@ type CustomLogSourceAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for the third-party custom source.
+// The configuration used for the third-party custom source.
 type CustomLogSourceConfiguration struct {
 
-	// The configuration for the Glue Crawler for the third-party custom source.
+	// The configuration used for the Glue Crawler for a third-party custom source.
 	//
 	// This member is required.
 	CrawlerConfiguration *CustomLogSourceCrawlerConfiguration
@@ -96,7 +95,7 @@ type CustomLogSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for the Glue Crawler for the third-party custom source.
+// The configuration used for the Glue Crawler for a third-party custom source.
 type CustomLogSourceCrawlerConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
@@ -189,8 +188,8 @@ type DataLakeConfiguration struct {
 // Provides encryption details of Amazon Security Lake object.
 type DataLakeEncryptionConfiguration struct {
 
-	// The id of KMS encryption key used by Amazon Security Lake to encrypt the
-	// Security Lake object.
+	// The identifier of KMS encryption key used by Amazon Security Lake to encrypt
+	// the Security Lake object.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -294,7 +293,7 @@ type DataLakeResource struct {
 	// This member is required.
 	Region *string
 
-	// Retrieves the status of the configuration operation for an account in Amazon
+	// Retrieves the status of the CreateDatalake API call for an account in Amazon
 	// Security Lake.
 	CreateStatus DataLakeStatus
 
@@ -317,8 +316,8 @@ type DataLakeResource struct {
 }
 
 // Amazon Security Lake collects logs and events from supported Amazon Web
-// Services and custom sources. For the list of supported Amazon Web Services, see
-// the [Amazon Security Lake User Guide].
+// Services services and custom sources. For the list of supported Amazon Web
+// Services services, see the [Amazon Security Lake User Guide].
 //
 // [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
 type DataLakeSource struct {
@@ -389,9 +388,9 @@ type DataLakeSource struct {
 	//   - CLOUD_API
 	EventClasses []string
 
-	// The supported Amazon Web Services from which logs and events are collected.
-	// Amazon Security Lake supports log and event collection for natively supported
-	// Amazon Web Services.
+	// The supported Amazon Web Services services from which logs and events are
+	// collected. Amazon Security Lake supports log and event collection for natively
+	// supported Amazon Web Services services.
 	SourceName *string
 
 	// The log status for the Security Lake account.
@@ -447,7 +446,7 @@ type DataLakeUpdateStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The configurations for HTTPS subscriber notification.
+// The configurations used for HTTPS subscriber notification.
 type HttpsNotificationConfiguration struct {
 
 	// The subscription endpoint in Security Lake. If you prefer notification with an
@@ -495,7 +494,7 @@ type LogSource struct {
 }
 
 // The supported source types from which logs and events are collected in Amazon
-// Security Lake. For a list of supported Amazon Web Services, see the [Amazon Security Lake User Guide].
+// Security Lake. For a list of supported Amazon Web Services services, see the [Amazon Security Lake User Guide].
 //
 // The following types satisfy this interface:
 //
@@ -508,7 +507,7 @@ type LogSourceResource interface {
 }
 
 // Amazon Security Lake supports log and event collection for natively supported
-// Amazon Web Services. For more information, see the [Amazon Security Lake User Guide].
+// Amazon Web Services services. For more information, see the [Amazon Security Lake User Guide].
 //
 // [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
 type LogSourceResourceMemberAwsLogSource struct {
@@ -543,7 +542,7 @@ type NotificationConfiguration interface {
 	isNotificationConfiguration()
 }
 
-// The configurations for HTTPS subscriber notification.
+// The configurations used for HTTPS subscriber notification.
 type NotificationConfigurationMemberHttpsNotificationConfiguration struct {
 	Value HttpsNotificationConfiguration
 
@@ -561,7 +560,7 @@ type NotificationConfigurationMemberSqsNotificationConfiguration struct {
 
 func (*NotificationConfigurationMemberSqsNotificationConfiguration) isNotificationConfiguration() {}
 
-// The configurations for SQS subscriber notification.
+// The configurations used for EventBridge subscriber notification.
 type SqsNotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
@@ -572,7 +571,7 @@ type SqsNotificationConfiguration struct {
 type SubscriberResource struct {
 
 	// Amazon Security Lake supports log and event collection for natively supported
-	// Amazon Web Services. For more information, see the [Amazon Security Lake User Guide].
+	// Amazon Web Services services. For more information, see the [Amazon Security Lake User Guide].
 	//
 	// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html
 	//

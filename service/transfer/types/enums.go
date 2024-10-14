@@ -614,6 +614,29 @@ func (TlsSessionResumptionMode) Values() []TlsSessionResumptionMode {
 	}
 }
 
+type TransferTableStatus string
+
+// Enum values for TransferTableStatus
+const (
+	TransferTableStatusQueued     TransferTableStatus = "QUEUED"
+	TransferTableStatusInProgress TransferTableStatus = "IN_PROGRESS"
+	TransferTableStatusCompleted  TransferTableStatus = "COMPLETED"
+	TransferTableStatusFailed     TransferTableStatus = "FAILED"
+)
+
+// Values returns all known values for TransferTableStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TransferTableStatus) Values() []TransferTableStatus {
+	return []TransferTableStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type WorkflowStepType string
 
 // Enum values for WorkflowStepType

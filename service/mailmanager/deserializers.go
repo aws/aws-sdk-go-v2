@@ -6753,6 +6753,60 @@ func awsAwsjson10_deserializeDocumentEmailReceivedHeadersList(v *[]string, value
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentEnvelope(v **types.Envelope, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Envelope
+	if *v == nil {
+		sv = &types.Envelope{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "From":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.From = ptr.String(jtv)
+			}
+
+		case "Helo":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Helo = ptr.String(jtv)
+			}
+
+		case "To":
+			if err := awsAwsjson10_deserializeDocumentStringList(&sv.To, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentExportDestinationConfiguration(v *types.ExportDestinationConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7681,6 +7735,116 @@ func awsAwsjson10_deserializeDocumentMessageBody(v **types.MessageBody, value in
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentMetadata(v **types.Metadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Metadata
+	if *v == nil {
+		sv = &types.Metadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IngressPointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngressPointId to be of type string, got %T instead", value)
+				}
+				sv.IngressPointId = ptr.String(jtv)
+			}
+
+		case "RuleSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleSetId to be of type string, got %T instead", value)
+				}
+				sv.RuleSetId = ptr.String(jtv)
+			}
+
+		case "SenderHostname":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SenderHostname = ptr.String(jtv)
+			}
+
+		case "SenderIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SenderIpAddress to be of type string, got %T instead", value)
+				}
+				sv.SenderIpAddress = ptr.String(jtv)
+			}
+
+		case "Timestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Timestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "TlsCipherSuite":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TlsCipherSuite = ptr.String(jtv)
+			}
+
+		case "TlsProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TlsProtocol = ptr.String(jtv)
+			}
+
+		case "TrafficPolicyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrafficPolicyId to be of type string, got %T instead", value)
+				}
+				sv.TrafficPolicyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentNoAuthentication(v **types.NoAuthentication, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8263,6 +8427,11 @@ func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error
 				sv.Date = ptr.String(jtv)
 			}
 
+		case "Envelope":
+			if err := awsAwsjson10_deserializeDocumentEnvelope(&sv.Envelope, value); err != nil {
+				return err
+			}
+
 		case "From":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8279,6 +8448,15 @@ func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.HasAttachments = ptr.Bool(jtv)
+			}
+
+		case "IngressPointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngressPointId to be of type string, got %T instead", value)
+				}
+				sv.IngressPointId = ptr.String(jtv)
 			}
 
 		case "InReplyTo":
@@ -8318,6 +8496,24 @@ func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "SenderHostname":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SenderHostname = ptr.String(jtv)
+			}
+
+		case "SenderIpAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SenderIpAddress to be of type string, got %T instead", value)
+				}
+				sv.SenderIpAddress = ptr.String(jtv)
 			}
 
 		case "Subject":
@@ -11041,6 +11237,11 @@ func awsAwsjson10_deserializeOpDocumentGetArchiveMessageOutput(v **GetArchiveMes
 
 	for key, value := range shape {
 		switch key {
+		case "Envelope":
+			if err := awsAwsjson10_deserializeDocumentEnvelope(&sv.Envelope, value); err != nil {
+				return err
+			}
+
 		case "MessageDownloadLink":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11048,6 +11249,11 @@ func awsAwsjson10_deserializeOpDocumentGetArchiveMessageOutput(v **GetArchiveMes
 					return fmt.Errorf("expected S3PresignedURL to be of type string, got %T instead", value)
 				}
 				sv.MessageDownloadLink = ptr.String(jtv)
+			}
+
+		case "Metadata":
+			if err := awsAwsjson10_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
+				return err
 			}
 
 		default:

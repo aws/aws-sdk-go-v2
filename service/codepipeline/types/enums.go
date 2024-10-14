@@ -439,6 +439,8 @@ type Result string
 const (
 	ResultRollback Result = "ROLLBACK"
 	ResultFail     Result = "FAIL"
+	ResultRetry    Result = "RETRY"
+	ResultSkip     Result = "SKIP"
 )
 
 // Values returns all known values for Result. Note that this can be expanded in
@@ -449,6 +451,27 @@ func (Result) Values() []Result {
 	return []Result{
 		"ROLLBACK",
 		"FAIL",
+		"RETRY",
+		"SKIP",
+	}
+}
+
+type RetryTrigger string
+
+// Enum values for RetryTrigger
+const (
+	RetryTriggerAutomatedStageRetry RetryTrigger = "AutomatedStageRetry"
+	RetryTriggerManualStageRetry    RetryTrigger = "ManualStageRetry"
+)
+
+// Values returns all known values for RetryTrigger. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RetryTrigger) Values() []RetryTrigger {
+	return []RetryTrigger{
+		"AutomatedStageRetry",
+		"ManualStageRetry",
 	}
 }
 
@@ -564,6 +587,7 @@ const (
 	StageExecutionStatusStopped    StageExecutionStatus = "Stopped"
 	StageExecutionStatusStopping   StageExecutionStatus = "Stopping"
 	StageExecutionStatusSucceeded  StageExecutionStatus = "Succeeded"
+	StageExecutionStatusSkipped    StageExecutionStatus = "Skipped"
 )
 
 // Values returns all known values for StageExecutionStatus. Note that this can be
@@ -578,6 +602,7 @@ func (StageExecutionStatus) Values() []StageExecutionStatus {
 		"Stopped",
 		"Stopping",
 		"Succeeded",
+		"Skipped",
 	}
 }
 

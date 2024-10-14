@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details of exception notifications for the account in Amazon
-// Security Lake.
+// Retrieves the protocol and endpoint that were provided when subscribing to
+// Amazon SNS topics for exception notifications.
 func (c *Client) GetDataLakeExceptionSubscription(ctx context.Context, params *GetDataLakeExceptionSubscriptionInput, optFns ...func(*Options)) (*GetDataLakeExceptionSubscriptionOutput, error) {
 	if params == nil {
 		params = &GetDataLakeExceptionSubscriptionInput{}
@@ -33,7 +33,8 @@ type GetDataLakeExceptionSubscriptionInput struct {
 
 type GetDataLakeExceptionSubscriptionOutput struct {
 
-	// The expiration period and time-to-live (TTL).
+	// The expiration period and time-to-live (TTL). It is the duration of time until
+	// which the exception message remains.
 	ExceptionTimeToLive *int64
 
 	// The Amazon Web Services account where you receive exception notifications.

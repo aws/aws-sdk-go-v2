@@ -9551,6 +9551,11 @@ func awsAwsjson11_deserializeDocumentFailureConditions(v **types.FailureConditio
 				sv.Result = types.Result(jtv)
 			}
 
+		case "retryConfiguration":
+			if err := awsAwsjson11_deserializeDocumentRetryConfiguration(&sv.RetryConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12888,6 +12893,112 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRetryConfiguration(v **types.RetryConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryConfiguration
+	if *v == nil {
+		sv = &types.RetryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "retryMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StageRetryMode to be of type string, got %T instead", value)
+				}
+				sv.RetryMode = types.StageRetryMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRetryStageMetadata(v **types.RetryStageMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryStageMetadata
+	if *v == nil {
+		sv = &types.RetryStageMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoStageRetryAttempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetryAttempt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoStageRetryAttempt = ptr.Int32(int32(i64))
+			}
+
+		case "latestRetryTrigger":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetryTrigger to be of type string, got %T instead", value)
+				}
+				sv.LatestRetryTrigger = types.RetryTrigger(jtv)
+			}
+
+		case "manualStageRetryAttempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetryAttempt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ManualStageRetryAttempt = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRuleConfigurationMap(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14708,6 +14819,11 @@ func awsAwsjson11_deserializeDocumentStageState(v **types.StageState, value inte
 
 		case "onSuccessConditionState":
 			if err := awsAwsjson11_deserializeDocumentStageConditionState(&sv.OnSuccessConditionState, value); err != nil {
+				return err
+			}
+
+		case "retryStageMetadata":
+			if err := awsAwsjson11_deserializeDocumentRetryStageMetadata(&sv.RetryStageMetadata, value); err != nil {
 				return err
 			}
 

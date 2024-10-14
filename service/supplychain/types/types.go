@@ -321,4 +321,48 @@ type DataLakeDatasetSchemaField struct {
 	noSmithyDocumentSerde
 }
 
+// The details of the instance.
+type Instance struct {
+
+	// The Amazon Web Services account ID that owns the instance.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The Amazon Web Services Supply Chain instance identifier.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The state of the instance.
+	//
+	// This member is required.
+	State InstanceState
+
+	// The instance creation timestamp.
+	CreatedTime *time.Time
+
+	// The Amazon Web Services Supply Chain instance description.
+	InstanceDescription *string
+
+	// The Amazon Web Services Supply Chain instance name.
+	InstanceName *string
+
+	// The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
+	// optionally provided for encryption. If you did not provide anything here, AWS
+	// Supply Chain uses the Amazon Web Services owned KMS key and nothing is returned.
+	KmsKeyArn *string
+
+	// The instance last modified timestamp.
+	LastModifiedTime *time.Time
+
+	// The version number of the instance.
+	VersionNumber *float64
+
+	// The WebApp DNS domain name of the instance.
+	WebAppDnsDomain *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

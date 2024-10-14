@@ -1,0 +1,8 @@
+{
+    "id": "d7677729-7a32-4869-969f-c1264e87c884",
+    "type": "feature",
+    "description": "This release updates request validation regex for resource ARNs.",
+    "modules": [
+        "service/securitylake"
+    ]
+}

@@ -11,16 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a natively supported Amazon Web Service as an Amazon Security Lake source.
-// Enables source types for member accounts in required Amazon Web Services
-// Regions, based on the parameters you specify. You can choose any source type in
-// any Region for either accounts that are part of a trusted organization or
-// standalone accounts. Once you add an Amazon Web Service as a source, Security
-// Lake starts collecting logs and events from it.
+// Adds a natively supported Amazon Web Services service as an Amazon Security
+// Lake source. Enables source types for member accounts in required Amazon Web
+// Services Regions, based on the parameters you specify. You can choose any source
+// type in any Region for either accounts that are part of a trusted organization
+// or standalone accounts. Once you add an Amazon Web Services service as a source,
+// Security Lake starts collecting logs and events from it.
 //
-// You can use this API only to enable natively supported Amazon Web Services as a
-// source. Use CreateCustomLogSource to enable data collection from a custom
-// source.
+// You can use this API only to enable natively supported Amazon Web Services
+// services as a source. Use CreateCustomLogSource to enable data collection from
+// a custom source.
 func (c *Client) CreateAwsLogSource(ctx context.Context, params *CreateAwsLogSourceInput, optFns ...func(*Options)) (*CreateAwsLogSourceOutput, error) {
 	if params == nil {
 		params = &CreateAwsLogSourceInput{}
@@ -49,9 +49,9 @@ type CreateAwsLogSourceInput struct {
 
 type CreateAwsLogSourceOutput struct {
 
-	// Lists all accounts in which enabling a natively supported Amazon Web Service as
-	// a Security Lake source failed. The failure occurred as these accounts are not
-	// part of an organization.
+	// Lists all accounts in which enabling a natively supported Amazon Web Services
+	// service as a Security Lake source failed. The failure occurred as these accounts
+	// are not part of an organization.
 	Failed []string
 
 	// Metadata pertaining to the operation's result.
