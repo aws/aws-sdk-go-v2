@@ -1,3 +1,7 @@
+# v1.53.0 (2024-10-14)
+
+* **Feature**: This release enables customers using SFTP connectors to query the transfer status of their files to meet their monitoring needs as well as orchestrate post transfer actions.
+
 # v1.52.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

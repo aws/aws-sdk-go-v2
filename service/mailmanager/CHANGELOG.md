@@ -1,3 +1,7 @@
+# v1.6.0 (2024-10-14)
+
+* **Feature**: Mail Manager support for viewing and exporting metadata of archived messages.
+
 # v1.5.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

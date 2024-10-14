@@ -1,8 +1,0 @@
-{
-    "id": "6db4e0d3-37a4-4c96-beef-e8053122a031",
-    "type": "feature",
-    "description": "Mail Manager support for viewing and exporting metadata of archived messages.",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

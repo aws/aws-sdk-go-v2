@@ -1,3 +1,7 @@
+# v1.9.0 (2024-10-14)
+
+* **Feature**: This release adds AWS Supply Chain instance management functionality. Specifically adding CreateInstance, DeleteInstance, GetInstance, ListInstances, and UpdateInstance APIs.
+
 # v1.8.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

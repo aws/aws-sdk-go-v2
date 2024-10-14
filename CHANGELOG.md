@@ -1,3 +1,17 @@
+# Release (2024-10-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.36.0](service/codepipeline/CHANGELOG.md#v1360-2024-10-14)
+  * **Feature**: AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.6.0](service/mailmanager/CHANGELOG.md#v160-2024-10-14)
+  * **Feature**: Mail Manager support for viewing and exporting metadata of archived messages.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.19.0](service/securitylake/CHANGELOG.md#v1190-2024-10-14)
+  * **Feature**: This release updates request validation regex for resource ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.9.0](service/supplychain/CHANGELOG.md#v190-2024-10-14)
+  * **Feature**: This release adds AWS Supply Chain instance management functionality. Specifically adding CreateInstance, DeleteInstance, GetInstance, ListInstances, and UpdateInstance APIs.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.53.0](service/transfer/CHANGELOG.md#v1530-2024-10-14)
+  * **Feature**: This release enables customers using SFTP connectors to query the transfer status of their files to meet their monitoring needs as well as orchestrate post transfer actions.
+
 # Release (2024-10-11)
 
 ## General Highlights

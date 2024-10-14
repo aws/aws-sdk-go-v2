@@ -19,7 +19,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.2
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.35.0
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.50.2
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.2
