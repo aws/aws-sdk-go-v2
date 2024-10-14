@@ -15,7 +15,7 @@
 * `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.30.3](service/robomaker/CHANGELOG.md#v1303-2024-10-11)
   * **Documentation**: Documentation update: added support notices to each API action.
 * `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.3](service/s3/CHANGELOG.md#v1653-2024-10-11)
-  * **Bug Fix**:  S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types
+  * **Bug Fix**: **BREAKING CHANGE**: S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types
 
 # Release (2024-10-10)
 

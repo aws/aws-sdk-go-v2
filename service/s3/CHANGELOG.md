@@ -1,6 +1,6 @@
 # v1.65.3 (2024-10-11)
 
-* **Bug Fix**:  S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types
+* **Bug Fix**: **BREAKING CHANGE**: S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types
 
 # v1.65.2 (2024-10-08)
 
