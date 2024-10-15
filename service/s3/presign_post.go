@@ -300,9 +300,8 @@ func toBaseURL(fullURL string) string {
 
 	if len(pathSegments) > 1 {
 		return fmt.Sprintf("%s://%s/%s", parsedURL.Scheme, parsedURL.Host, pathSegments[0])
-	} else {
-		return fmt.Sprintf("%s://%s", parsedURL.Scheme, parsedURL.Host)
 	}
+	return fmt.Sprintf("%s://%s", parsedURL.Scheme, parsedURL.Host)
 }
 
 // Adapted from existing PresignConverter middleware
