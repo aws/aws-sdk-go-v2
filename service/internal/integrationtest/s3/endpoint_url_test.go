@@ -30,7 +30,7 @@ import (
 //   - The value resolved through the methods provided by the SDK or tool when
 //     no explicit endpoint URL is provided.
 
-func TestEndpointURL(t *testing.T) {
+func TestInteg_EndpointURL(t *testing.T) {
 	for name, tt := range map[string]struct {
 		Env          map[string]string
 		SharedConfig string
