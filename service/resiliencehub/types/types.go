@@ -94,6 +94,13 @@ type App struct {
 	// Assessment execution schedule with 'Daily' or 'Disabled' values.
 	AssessmentSchedule AppAssessmentScheduleType
 
+	// Amazon Resource Name (ARN) of Resource Groups group that is integrated with an
+	// AppRegistry application. For more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web
+	// Services General Reference guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	AwsApplicationArn *string
+
 	// Current status of compliance for the resiliency policy.
 	ComplianceStatus AppComplianceStatusType
 
@@ -217,8 +224,10 @@ type AppAssessment struct {
 	// Starting time for the action.
 	StartTime *time.Time
 
-	// Indicates a concise summary that provides an overview of the Resilience Hub
-	// assessment.
+	// Indicates the AI-generated summary for the Resilience Hub assessment, providing
+	// a concise overview that highlights the top risks and recommendations.
+	//
+	// This property is available only in the US East (N. Virginia) Region.
 	Summary *AssessmentSummary
 
 	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
@@ -406,6 +415,13 @@ type AppSummary struct {
 	//  Assessment execution schedule with 'Daily' or 'Disabled' values.
 	AssessmentSchedule AppAssessmentScheduleType
 
+	// Amazon Resource Name (ARN) of Resource Groups group that is integrated with an
+	// AppRegistry application. For more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web
+	// Services General Reference guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	AwsApplicationArn *string
+
 	// The current status of compliance for the resiliency policy.
 	ComplianceStatus AppComplianceStatusType
 
@@ -543,11 +559,6 @@ type BatchUpdateRecommendationStatusSuccessfulEntry struct {
 	// This member is required.
 	Excluded *bool
 
-	// The operational recommendation item.
-	//
-	// This member is required.
-	Item *UpdateRecommendationStatusItem
-
 	// Reference identifier of the operational recommendation.
 	//
 	// This member is required.
@@ -555,6 +566,9 @@ type BatchUpdateRecommendationStatusSuccessfulEntry struct {
 
 	// Indicates the reason for excluding an operational recommendation.
 	ExcludeReason ExcludeRecommendationReason
+
+	// The operational recommendation item.
+	Item *UpdateRecommendationStatusItem
 
 	noSmithyDocumentSerde
 }
@@ -772,6 +786,15 @@ type EksSourceClusterNamespace struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the error that was encountered while importing a resource.
+type ErrorDetail struct {
+
+	// Provides additional information about the error.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -1651,11 +1674,6 @@ type UpdateRecommendationStatusRequestEntry struct {
 	// This member is required.
 	Excluded *bool
 
-	// The operational recommendation item.
-	//
-	// This member is required.
-	Item *UpdateRecommendationStatusItem
-
 	// Reference identifier of the operational recommendation item.
 	//
 	// This member is required.
@@ -1663,6 +1681,9 @@ type UpdateRecommendationStatusRequestEntry struct {
 
 	// Indicates the reason for excluding an operational recommendation.
 	ExcludeReason ExcludeRecommendationReason
+
+	// The operational recommendation item.
+	Item *UpdateRecommendationStatusItem
 
 	noSmithyDocumentSerde
 }

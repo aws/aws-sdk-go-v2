@@ -75,7 +75,10 @@ type DescribeDraftAppVersionResourcesImportStatusOutput struct {
 	// This member is required.
 	StatusChangeTime *time.Time
 
-	// The returned error message for the request.
+	// List of errors that were encountered while importing resources.
+	ErrorDetails []types.ErrorDetail
+
+	// The error message returned for the resource request.
 	ErrorMessage *string
 
 	// Metadata pertaining to the operation's result.

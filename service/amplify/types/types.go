@@ -630,9 +630,13 @@ type JobSummary struct {
 	JobId *string
 
 	//  The type for the job. If the value is RELEASE , the job was manually released
-	// from its source by using the StartJob API. If the value is RETRY , the job was
-	// manually retried using the StartJob API. If the value is WEB_HOOK , the job was
-	// automatically triggered by webhooks.
+	// from its source by using the StartJob API. This value is available only for
+	// apps that are connected to a repository.
+	//
+	// If the value is RETRY , the job was manually retried using the StartJob API. If
+	// the value is WEB_HOOK , the job was automatically triggered by webhooks. If the
+	// value is MANUAL , the job is for a manually deployed app. Manually deployed apps
+	// are not connected to a Git repository.
 	//
 	// This member is required.
 	JobType JobType
@@ -649,6 +653,16 @@ type JobSummary struct {
 
 	//  The end date and time for the job.
 	EndTime *time.Time
+
+	// The source URL for the files to deploy. The source URL can be either an HTTP
+	// GET URL that is publicly accessible and downloads a single .zip file, or an
+	// Amazon S3 bucket and prefix.
+	SourceUrl *string
+
+	// The type of source specified by the sourceURL . If the value is ZIP , the source
+	// is a .zip file. If the value is BUCKET_PREFIX , the source is an Amazon S3
+	// bucket and prefix. If no value is specified, the default is ZIP .
+	SourceUrlType SourceUrlType
 
 	noSmithyDocumentSerde
 }

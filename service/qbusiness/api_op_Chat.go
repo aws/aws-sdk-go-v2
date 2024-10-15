@@ -48,7 +48,7 @@ type ChatInput struct {
 	// The identifier used to associate a user message with a AI generated response.
 	ParentMessageId *string
 
-	// The groups that a user associated with the chat input belongs to.
+	// The group names that a user associated with the chat input belongs to.
 	UserGroups []string
 
 	// The identifier of the user attached to the chat input.

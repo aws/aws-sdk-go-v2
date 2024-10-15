@@ -18,10 +18,10 @@ import (
 )
 
 // Returns the inputs for the change set and a list of changes that CloudFormation
-// will make if you execute the change set. For more information, see [Updating Stacks Using Change Sets]in the
+// will make if you execute the change set. For more information, see [Update CloudFormation stacks using change sets]in the
 // CloudFormation User Guide.
 //
-// [Updating Stacks Using Change Sets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
+// [Update CloudFormation stacks using change sets]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
 func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSetInput, optFns ...func(*Options)) (*DescribeChangeSetOutput, error) {
 	if params == nil {
 		params = &DescribeChangeSetInput{}
@@ -106,8 +106,8 @@ type DescribeChangeSetOutput struct {
 	// If there is no additional page, this value is null.
 	NextToken *string
 
-	// The ARNs of the Amazon Simple Notification Service (Amazon SNS) topics that
-	// will be associated with the stack if you execute the change set.
+	// The ARNs of the Amazon SNS topics that will be associated with the stack if you
+	// execute the change set.
 	NotificationARNs []string
 
 	// Determines what action will be taken if stack creation fails. When this

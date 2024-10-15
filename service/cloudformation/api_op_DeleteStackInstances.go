@@ -41,7 +41,7 @@ type DeleteStackInstancesInput struct {
 	//
 	// For more information, see [Stack set operation options].
 	//
-	// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
+	// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html#stackset-ops-options
 	//
 	// This member is required.
 	RetainStacks *bool

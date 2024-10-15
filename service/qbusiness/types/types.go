@@ -1976,7 +1976,7 @@ type PrincipalUser struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information about Amazon Q Apps. (preview feature)
+// Configuration information about Amazon Q Apps.
 type QAppsConfiguration struct {
 
 	// Status information about whether end users can create and use Amazon Q Apps in
@@ -2359,11 +2359,11 @@ type UserAlias struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about users and groups associated with a topic control
-// rule.
+// Provides information about users and group names associated with a topic
+// control rule.
 type UsersAndGroups struct {
 
-	// The user groups associated with a topic control rule.
+	// The user group names associated with a topic control rule.
 	UserGroups []string
 
 	// The user ids associated with a topic control rule.

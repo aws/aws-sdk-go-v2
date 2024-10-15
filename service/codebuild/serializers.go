@@ -3244,6 +3244,54 @@ func awsAwsjson11_serializeDocumentFleetNames(v []string, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFleetProxyRule(v *types.FleetProxyRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Effect) > 0 {
+		ok := object.Key("effect")
+		ok.String(string(v.Effect))
+	}
+
+	if v.Entities != nil {
+		ok := object.Key("entities")
+		if err := awsAwsjson11_serializeDocumentFleetProxyRuleEntities(v.Entities, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFleetProxyRuleEntities(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFleetProxyRules(v []types.FleetProxyRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentFleetProxyRule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGitSubmodulesConfig(v *types.GitSubmodulesConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3643,6 +3691,25 @@ func awsAwsjson11_serializeDocumentProjectSourceVersion(v *types.ProjectSourceVe
 	if v.SourceVersion != nil {
 		ok := object.Key("sourceVersion")
 		ok.String(*v.SourceVersion)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProxyConfiguration(v *types.ProxyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultBehavior) > 0 {
+		ok := object.Key("defaultBehavior")
+		ok.String(string(v.DefaultBehavior))
+	}
+
+	if v.OrderedProxyRules != nil {
+		ok := object.Key("orderedProxyRules")
+		if err := awsAwsjson11_serializeDocumentFleetProxyRules(v.OrderedProxyRules, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4140,6 +4207,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if len(v.OverflowBehavior) > 0 {
 		ok := object.Key("overflowBehavior")
 		ok.String(string(v.OverflowBehavior))
+	}
+
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("proxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScalingConfiguration != nil {
@@ -5451,6 +5525,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if len(v.OverflowBehavior) > 0 {
 		ok := object.Key("overflowBehavior")
 		ok.String(string(v.OverflowBehavior))
+	}
+
+	if v.ProxyConfiguration != nil {
+		ok := object.Key("proxyConfiguration")
+		if err := awsAwsjson11_serializeDocumentProxyConfiguration(v.ProxyConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ScalingConfiguration != nil {

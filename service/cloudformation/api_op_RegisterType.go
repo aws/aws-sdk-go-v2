@@ -22,7 +22,7 @@ import (
 //   - Making the extension available for use in your account.
 //
 // For more information about how to develop extensions and ready them for
-// registration, see [Creating Resource Providers]in the CloudFormation CLI User Guide.
+// registration, see [Creating resource types using the CloudFormation CLI]in the CloudFormation Command Line Interface (CLI) User Guide.
 //
 // You can have a maximum of 50 resource extension versions registered at a time.
 // This maximum is per account and per Region. Use [DeregisterType]to deregister specific
@@ -33,11 +33,11 @@ import (
 //
 // Once you have registered a private extension in your account and Region, use [SetTypeConfiguration]
 // to specify configuration properties for the extension. For more information, see
-// [Configuring extensions at the account level]in the CloudFormation User Guide.
+// [Edit configuration data for extensions in your account]in the CloudFormation User Guide.
 //
 // [SetTypeConfiguration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-// [Creating Resource Providers]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
-// [Configuring extensions at the account level]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
+// [Edit configuration data for extensions in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
+// [Creating resource types using the CloudFormation CLI]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
 // [DeregisterType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html
 func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, optFns ...func(*Options)) (*RegisterTypeOutput, error) {
 	if params == nil {
@@ -60,7 +60,8 @@ type RegisterTypeInput struct {
 	// the necessary files for the extension you want to register.
 	//
 	// For information about generating a schema handler package for the extension you
-	// want to register, see [submit]in the CloudFormation CLI User Guide.
+	// want to register, see [submit]in the CloudFormation Command Line Interface (CLI) User
+	// Guide.
 	//
 	// The user registering the extension must be able to access the package in the S3
 	// bucket. That's, the user needs to have [GetObject]permissions for the schema handler
@@ -78,11 +79,11 @@ type RegisterTypeInput struct {
 	//
 	// We suggest that extension names adhere to the following patterns:
 	//
-	//   - For resource types, company_or_organization::service::type.
+	//   - For resource types, company_or_organization::service::type .
 	//
-	//   - For modules, company_or_organization::service::type::MODULE.
+	//   - For modules, company_or_organization::service::type::MODULE .
 	//
-	//   - For hooks, MyCompany::Testing::MyTestHook.
+	//   - For hooks, MyCompany::Testing::MyTestHook .
 	//
 	// The following organization namespaces are reserved and can't be used in your
 	// extension names:

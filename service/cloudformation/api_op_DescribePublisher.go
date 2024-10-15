@@ -22,7 +22,7 @@ import (
 // [RegisterPublisher]
 //
 // [Publishing extensions to make them available for public use]
-//   - in the CloudFormation CLI User Guide
+//   - in the CloudFormation Command Line Interface (CLI) User Guide
 //
 // [Publishing extensions to make them available for public use]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
 // [RegisterPublisher]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html

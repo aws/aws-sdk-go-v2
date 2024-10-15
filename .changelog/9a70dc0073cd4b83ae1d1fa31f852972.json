@@ -1,0 +1,8 @@
+{
+    "id": "9a70dc00-73cd-4b83-ae1d-1fa31f852972",
+    "type": "feature",
+    "description": "On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.",
+    "modules": [
+        "service/ivs"
+    ]
+}

@@ -9,8 +9,8 @@ import (
 
 // One or more arguments to the StartStreamTranscription ,
 // StartMedicalStreamTranscription , or StartCallAnalyticsStreamTranscription
-// operation was not valid. For example, MediaEncoding or LanguageCode used not
-// valid values. Check the specified parameters and try your request again.
+// operation was not valid. For example, MediaEncoding or LanguageCode used
+// unsupported values. Check the specified parameters and try your request again.
 type BadRequestException struct {
 	Message *string
 

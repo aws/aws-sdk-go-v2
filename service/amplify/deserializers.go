@@ -8077,6 +8077,24 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				sv.JobType = types.JobType(jtv)
 			}
 
+		case "sourceUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceUrl to be of type string, got %T instead", value)
+				}
+				sv.SourceUrl = ptr.String(jtv)
+			}
+
+		case "sourceUrlType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceUrlType to be of type string, got %T instead", value)
+				}
+				sv.SourceUrlType = types.SourceUrlType(jtv)
+			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {

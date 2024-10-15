@@ -7313,6 +7313,15 @@ func awsRestjson1_deserializeDocumentStreamEvent(v **types.StreamEvent, value in
 
 	for key, value := range shape {
 		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
 		case "eventTime":
 			if value != nil {
 				jtv, ok := value.(string)

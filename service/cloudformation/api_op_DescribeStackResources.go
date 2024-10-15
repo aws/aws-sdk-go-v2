@@ -25,7 +25,7 @@ import (
 // You must specify either StackName or PhysicalResourceId , but not both. In
 // addition, you can specify LogicalResourceId to filter the returned result. For
 // more information about resources, the LogicalResourceId and PhysicalResourceId ,
-// go to the [CloudFormation User Guide].
+// see the [CloudFormation User Guide].
 //
 // A ValidationError is returned if you specify both StackName and
 // PhysicalResourceId in the same request.

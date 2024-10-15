@@ -169,6 +169,25 @@ func (RepositoryCloneMethod) Values() []RepositoryCloneMethod {
 	}
 }
 
+type SourceUrlType string
+
+// Enum values for SourceUrlType
+const (
+	SourceUrlTypeZip          SourceUrlType = "ZIP"
+	SourceUrlTypeBucketPrefix SourceUrlType = "BUCKET_PREFIX"
+)
+
+// Values returns all known values for SourceUrlType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceUrlType) Values() []SourceUrlType {
+	return []SourceUrlType{
+		"ZIP",
+		"BUCKET_PREFIX",
+	}
+}
+
 type Stage string
 
 // Enum values for Stage

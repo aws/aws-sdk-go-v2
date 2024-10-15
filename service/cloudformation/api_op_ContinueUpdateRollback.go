@@ -86,18 +86,18 @@ type ContinueUpdateRollbackInput struct {
 	//
 	// Don't confuse a child stack's name with its corresponding logical ID defined in
 	// the parent stack. For an example of a continue update rollback operation with
-	// nested stacks, see [Using ResourcesToSkip to recover a nested stacks hierarchy].
+	// nested stacks, see [Continue rolling back from failed nested stack updates].
 	//
 	// [troubleshoot]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
-	// [Using ResourcesToSkip to recover a nested stacks hierarchy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks
+	// [Continue rolling back from failed nested stack updates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html#nested-stacks
 	ResourcesToSkip []string
 
-	// The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role
-	// that CloudFormation assumes to roll back the stack. CloudFormation uses the
-	// role's credentials to make calls on your behalf. CloudFormation always uses this
-	// role for all future operations on the stack. Provided that users have permission
-	// to operate on the stack, CloudFormation uses this role even if the users don't
-	// have permission to pass it. Ensure that the role grants least permission.
+	// The Amazon Resource Name (ARN) of an IAM role that CloudFormation assumes to
+	// roll back the stack. CloudFormation uses the role's credentials to make calls on
+	// your behalf. CloudFormation always uses this role for all future operations on
+	// the stack. Provided that users have permission to operate on the stack,
+	// CloudFormation uses this role even if the users don't have permission to pass
+	// it. Ensure that the role grants least permission.
 	//
 	// If you don't specify a value, CloudFormation uses the role that was previously
 	// associated with the stack. If no role is available, CloudFormation uses a

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List of compliance drifts that were detected while running an assessment.
+// Indicates the list of compliance drifts that were detected while running an
+// assessment.
 func (c *Client) ListAppAssessmentComplianceDrifts(ctx context.Context, params *ListAppAssessmentComplianceDriftsInput, optFns ...func(*Options)) (*ListAppAssessmentComplianceDriftsOutput, error) {
 	if params == nil {
 		params = &ListAppAssessmentComplianceDriftsInput{}

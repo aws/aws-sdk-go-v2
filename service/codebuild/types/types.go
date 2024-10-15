@@ -998,6 +998,9 @@ type Fleet struct {
 	// [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
 	OverflowBehavior FleetOverflowBehavior
 
+	// The proxy configuration of the compute fleet.
+	ProxyConfiguration *ProxyConfiguration
+
 	// The scaling configuration of the compute fleet.
 	ScalingConfiguration *ScalingConfigurationOutput
 
@@ -1012,6 +1015,27 @@ type Fleet struct {
 
 	// Information about the VPC configuration that CodeBuild accesses.
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Information about the proxy rule for your reserved capacity instances.
+type FleetProxyRule struct {
+
+	// The behavior of the proxy rule.
+	//
+	// This member is required.
+	Effect FleetProxyRuleEffectType
+
+	// The destination of the proxy rule.
+	//
+	// This member is required.
+	Entities []string
+
+	// The type of proxy rule.
+	//
+	// This member is required.
+	Type FleetProxyRuleType
 
 	noSmithyDocumentSerde
 }
@@ -1985,6 +2009,20 @@ type ProjectSourceVersion struct {
 	//
 	// This member is required.
 	SourceVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the proxy configurations that apply network access control to
+// your reserved capacity instances.
+type ProxyConfiguration struct {
+
+	// The default behavior of outgoing traffic.
+	DefaultBehavior FleetProxyRuleBehavior
+
+	// An array of FleetProxyRule objects that represent the specified destination
+	// domains or IPs to allow or deny network access control to.
+	OrderedProxyRules []FleetProxyRule
 
 	noSmithyDocumentSerde
 }

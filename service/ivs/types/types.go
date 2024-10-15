@@ -529,6 +529,22 @@ type Stream struct {
 // [Using Amazon EventBridge with Amazon IVS]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
 type StreamEvent struct {
 
+	// Provides additional details about the stream event. There are several values;
+	// note that the long descriptions are provided in the IVS console but not
+	// delivered through the IVS API or EventBridge:
+	//
+	//   - StreamTakeoverMediaMismatch — The broadcast client attempted to take over
+	//   with different media properties (e.g., codec, resolution, or video track type)
+	//   from the original stream.
+	//
+	//   - StreamTakeoverInvalidPriority — The broadcast client attempted a takeover
+	//   with either a priority integer value equal to or lower than the original
+	//   stream's value or a value outside the allowed range of 1 to 2,147,483,647.
+	//
+	//   - StreamTakeoverLimitBreached — The broadcast client reached the maximum
+	//   allowed takeover attempts for this stream.
+	Code *string
+
 	// Time when the event occurred. This is an ISO 8601 timestamp; note that this is
 	// returned as a string.
 	EventTime *time.Time

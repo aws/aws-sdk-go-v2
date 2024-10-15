@@ -45,6 +45,13 @@ type ListAppsInput struct {
 	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AppArn *string
 
+	// Amazon Resource Name (ARN) of Resource Groups group that is integrated with an
+	// AppRegistry application. For more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web
+	// Services General Reference guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	AwsApplicationArn *string
+
 	// Indicates the lower limit of the range that is used to filter applications
 	// based on their last assessment times.
 	FromLastAssessmentTime *time.Time

@@ -14498,6 +14498,19 @@ func awsRestjson1_deserializeDocumentDeliveryOptions(v **types.DeliveryOptions, 
 
 	for key, value := range shape {
 		switch key {
+		case "MaxDeliverySeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxDeliverySeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxDeliverySeconds = ptr.Int64(i64)
+			}
+
 		case "SendingPoolName":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -358,6 +358,11 @@ func awsRestjson1_serializeOpDocumentCreateAppInput(v *CreateAppInput, value smi
 		ok.String(string(v.AssessmentSchedule))
 	}
 
+	if v.AwsApplicationArn != nil {
+		ok := object.Key("awsApplicationArn")
+		ok.String(*v.AwsApplicationArn)
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -3229,6 +3234,10 @@ func awsRestjson1_serializeOpHttpBindingsListAppsInput(v *ListAppsInput, encoder
 
 	if v.AppArn != nil {
 		encoder.SetQuery("appArn").String(*v.AppArn)
+	}
+
+	if v.AwsApplicationArn != nil {
+		encoder.SetQuery("awsApplicationArn").String(*v.AwsApplicationArn)
 	}
 
 	if v.FromLastAssessmentTime != nil {

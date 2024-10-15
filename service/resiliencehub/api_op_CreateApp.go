@@ -53,6 +53,13 @@ type CreateAppInput struct {
 	//  Assessment execution schedule with 'Daily' or 'Disabled' values.
 	AssessmentSchedule types.AppAssessmentScheduleType
 
+	// Amazon Resource Name (ARN) of Resource Groups group that is integrated with an
+	// AppRegistry application. For more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web
+	// Services General Reference guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	AwsApplicationArn *string
+
 	// Used for an idempotency token. A client token is a unique, case-sensitive
 	// string of up to 64 ASCII characters. You should not reuse the same client token
 	// for other API requests.

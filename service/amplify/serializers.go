@@ -2690,6 +2690,11 @@ func awsRestjson1_serializeOpDocumentStartDeploymentInput(v *StartDeploymentInpu
 		ok.String(*v.SourceUrl)
 	}
 
+	if len(v.SourceUrlType) > 0 {
+		ok := object.Key("sourceUrlType")
+		ok.String(string(v.SourceUrlType))
+	}
+
 	return nil
 }
 

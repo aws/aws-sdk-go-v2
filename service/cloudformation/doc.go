@@ -9,8 +9,8 @@
 // infrastructure deployments predictably and repeatedly. You can use
 // CloudFormation to leverage Amazon Web Services products, such as Amazon Elastic
 // Compute Cloud, Amazon Elastic Block Store, Amazon Simple Notification Service,
-// Elastic Load Balancing, and Auto Scaling to build highly reliable, highly
-// scalable, cost-effective applications without creating or configuring the
+// Elastic Load Balancing, and Amazon EC2 Auto Scaling to build highly reliable,
+// highly scalable, cost-effective applications without creating or configuring the
 // underlying Amazon Web Services infrastructure.
 //
 // With CloudFormation, you declare all your resources and dependencies in a

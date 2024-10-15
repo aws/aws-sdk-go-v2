@@ -1,0 +1,8 @@
+{
+    "id": "b16bf3e4-2198-49b4-9aef-fccd078c4c77",
+    "type": "feature",
+    "description": "Added sourceUrlType field to StartDeployment request",
+    "modules": [
+        "service/amplify"
+    ]
+}

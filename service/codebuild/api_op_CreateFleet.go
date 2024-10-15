@@ -150,6 +150,9 @@ type CreateFleetInput struct {
 	// [Example policy statement to allow CodeBuild access to Amazon Web Services services required to create a VPC network interface]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
 	OverflowBehavior types.FleetOverflowBehavior
 
+	// The proxy configuration of the compute fleet.
+	ProxyConfiguration *types.ProxyConfiguration
+
 	// The scaling configuration of the compute fleet.
 	ScalingConfiguration *types.ScalingConfigurationInput
 

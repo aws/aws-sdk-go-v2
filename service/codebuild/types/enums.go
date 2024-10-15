@@ -399,6 +399,63 @@ func (FleetOverflowBehavior) Values() []FleetOverflowBehavior {
 	}
 }
 
+type FleetProxyRuleBehavior string
+
+// Enum values for FleetProxyRuleBehavior
+const (
+	FleetProxyRuleBehaviorAllowAll FleetProxyRuleBehavior = "ALLOW_ALL"
+	FleetProxyRuleBehaviorDenyAll  FleetProxyRuleBehavior = "DENY_ALL"
+)
+
+// Values returns all known values for FleetProxyRuleBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetProxyRuleBehavior) Values() []FleetProxyRuleBehavior {
+	return []FleetProxyRuleBehavior{
+		"ALLOW_ALL",
+		"DENY_ALL",
+	}
+}
+
+type FleetProxyRuleEffectType string
+
+// Enum values for FleetProxyRuleEffectType
+const (
+	FleetProxyRuleEffectTypeAllow FleetProxyRuleEffectType = "ALLOW"
+	FleetProxyRuleEffectTypeDeny  FleetProxyRuleEffectType = "DENY"
+)
+
+// Values returns all known values for FleetProxyRuleEffectType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetProxyRuleEffectType) Values() []FleetProxyRuleEffectType {
+	return []FleetProxyRuleEffectType{
+		"ALLOW",
+		"DENY",
+	}
+}
+
+type FleetProxyRuleType string
+
+// Enum values for FleetProxyRuleType
+const (
+	FleetProxyRuleTypeDomain FleetProxyRuleType = "DOMAIN"
+	FleetProxyRuleTypeIp     FleetProxyRuleType = "IP"
+)
+
+// Values returns all known values for FleetProxyRuleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FleetProxyRuleType) Values() []FleetProxyRuleType {
+	return []FleetProxyRuleType{
+		"DOMAIN",
+		"IP",
+	}
+}
+
 type FleetScalingMetricType string
 
 // Enum values for FleetScalingMetricType
@@ -991,6 +1048,7 @@ const (
 	WebhookFilterTypeWorkflowName   WebhookFilterType = "WORKFLOW_NAME"
 	WebhookFilterTypeTagName        WebhookFilterType = "TAG_NAME"
 	WebhookFilterTypeReleaseName    WebhookFilterType = "RELEASE_NAME"
+	WebhookFilterTypeRepositoryName WebhookFilterType = "REPOSITORY_NAME"
 )
 
 // Values returns all known values for WebhookFilterType. Note that this can be
@@ -1008,6 +1066,7 @@ func (WebhookFilterType) Values() []WebhookFilterType {
 		"WORKFLOW_NAME",
 		"TAG_NAME",
 		"RELEASE_NAME",
+		"REPOSITORY_NAME",
 	}
 }
 

@@ -805,6 +805,22 @@ type DeleteClusterSnapshotMessage struct {
 	noSmithyDocumentSerde
 }
 
+// A set of elements to filter the returned integrations.
+type DescribeIntegrationsFilter struct {
+
+	// Specifies the type of integration filter.
+	//
+	// This member is required.
+	Name DescribeIntegrationsFilterName
+
+	// Specifies the values to filter on.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
 // Describes an Amazon EC2 security group.
 type EC2SecurityGroup struct {
 
@@ -1129,6 +1145,50 @@ type InboundIntegration struct {
 	Status ZeroETLIntegrationStatus
 
 	// The Amazon Resource Name (ARN) of the target of an inbound integration.
+	TargetArn *string
+
+	noSmithyDocumentSerde
+}
+
+type Integration struct {
+
+	// The encryption context for the integration. For more information, see [Encryption context] in the
+	// Amazon Web Services Key Management Service Developer Guide.
+	//
+	// [Encryption context]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+	AdditionalEncryptionContext map[string]string
+
+	// The time (UTC) when the integration was created.
+	CreateTime *time.Time
+
+	// The description of the integration.
+	Description *string
+
+	// Any errors associated with the integration.
+	Errors []IntegrationError
+
+	// The Amazon Resource Name (ARN) of the integration.
+	IntegrationArn *string
+
+	// The name of the integration.
+	IntegrationName *string
+
+	// The Key Management Service (KMS) key identifier for the key used to encrypt the
+	// integration.
+	KMSKeyId *string
+
+	// The Amazon Resource Name (ARN) of the database used as the source for
+	// replication.
+	SourceArn *string
+
+	// The current status of the integration.
+	Status ZeroETLIntegrationStatus
+
+	// The list of tags associated with the integration.
+	Tags []Tag
+
+	// The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use as
+	// the target for replication.
 	TargetArn *string
 
 	noSmithyDocumentSerde

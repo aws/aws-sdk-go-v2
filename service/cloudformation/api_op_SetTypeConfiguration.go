@@ -15,16 +15,16 @@ import (
 // the given account and Region.
 //
 // To view the current configuration data for an extension, refer to the
-// ConfigurationSchema element of [DescribeType]. For more information, see [Configuring extensions at the account level] in the
+// ConfigurationSchema element of [DescribeType]. For more information, see [Edit configuration data for extensions in your account] in the
 // CloudFormation User Guide.
 //
 // It's strongly recommended that you use dynamic references to restrict sensitive
 // configuration definitions, such as third-party credentials. For more details on
-// dynamic references, see [Using dynamic references to specify template values]in the CloudFormation User Guide.
+// dynamic references, see [Specify values stored in other services using dynamic references]in the CloudFormation User Guide.
 //
 // [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-// [Using dynamic references to specify template values]: https://docs.aws.amazon.com/
-// [Configuring extensions at the account level]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
+// [Edit configuration data for extensions in your account]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-set-configuration.html
+// [Specify values stored in other services using dynamic references]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
 		params = &SetTypeConfigurationInput{}
@@ -46,10 +46,10 @@ type SetTypeConfigurationInput struct {
 	//
 	// The configuration data must be formatted as JSON, and validate against the
 	// schema returned in the ConfigurationSchema response element of [DescribeType]. For more
-	// information, see [Defining account-level configuration data for an extension]in the CloudFormation CLI User Guide.
+	// information, see [Defining the account-level configuration of an extension]in the CloudFormation Command Line Interface (CLI) User Guide.
 	//
 	// [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
-	// [Defining account-level configuration data for an extension]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
+	// [Defining the account-level configuration of an extension]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
 	//
 	// This member is required.
 	Configuration *string

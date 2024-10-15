@@ -1,0 +1,8 @@
+{
+    "id": "6b12c882-adbe-4e17-bcf0-619d57064959",
+    "type": "feature",
+    "description": "Enable proxy for reserved capacity fleet.",
+    "modules": [
+        "service/codebuild"
+    ]
+}

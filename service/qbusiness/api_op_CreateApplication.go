@@ -81,7 +81,10 @@ type CreateApplicationInput struct {
 	QAppsConfiguration *types.QAppsConfiguration
 
 	//  The Amazon Resource Name (ARN) of an IAM role with permissions to access your
-	// Amazon CloudWatch logs and metrics.
+	// Amazon CloudWatch logs and metrics. If this property is not specified, Amazon Q
+	// Business will create a [service linked role (SLR)]and use it as the application's role.
+	//
+	// [service linked role (SLR)]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles.html#slr-permissions
 	RoleArn *string
 
 	// A list of key-value pairs that identify or categorize your Amazon Q Business

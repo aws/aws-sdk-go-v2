@@ -73,13 +73,21 @@ type DescribeResourceScanOutput struct {
 
 	// Status of the resource scan.
 	//
-	// INPROGRESS The resource scan is still in progress.
+	// INPROGRESS
 	//
-	// COMPLETE The resource scan is complete.
+	// The resource scan is still in progress.
 	//
-	// EXPIRED The resource scan has expired.
+	// COMPLETE
 	//
-	// FAILED The resource scan has failed.
+	// The resource scan is complete.
+	//
+	// EXPIRED
+	//
+	// The resource scan has expired.
+	//
+	// FAILED
+	//
+	// The resource scan has failed.
 	Status types.ResourceScanStatus
 
 	// The reason for the resource scan status, providing more information if a

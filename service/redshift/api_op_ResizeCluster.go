@@ -24,6 +24,8 @@ import (
 //
 //   - dc2.8xlarge
 //
+//   - ra3.large
+//
 //   - ra3.xlplus
 //
 //   - ra3.4xlarge
