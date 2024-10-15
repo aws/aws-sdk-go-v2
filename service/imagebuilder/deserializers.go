@@ -19703,7 +19703,7 @@ func awsRestjson1_deserializeDocumentLaunchTemplateConfiguration(v **types.Launc
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				sv.SetDefaultVersion = jtv
+				sv.SetDefaultVersion = ptr.Bool(jtv)
 			}
 
 		default:

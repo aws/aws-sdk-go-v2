@@ -1610,7 +1610,7 @@ type LaunchTemplateConfiguration struct {
 
 	// Set the specified Amazon EC2 launch template as the default launch template for
 	// the specified account.
-	SetDefaultVersion bool
+	SetDefaultVersion *bool
 
 	noSmithyDocumentSerde
 }
