@@ -4037,6 +4037,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Time when the event occurred. This is an ISO 8601 timestamp; <i>note that this is\n        returned as a string</i>.</p>"
                     }
+                },
+                "code": {
+                    "target": "com.amazonaws.ivs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional details about the stream event. There are several values; note that \n\t\t\tthe long descriptions are provided in the IVS console but not delivered through \n\t  \t    the IVS API or EventBridge:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>StreamTakeoverMediaMismatch</code> — The broadcast client attempted to take over \n\t\t\twith different media properties (e.g., codec, resolution, or video track type) from the \n\t\t\toriginal stream.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StreamTakeoverInvalidPriority</code> — The broadcast client attempted a takeover \n\t\t\twith either a priority integer value equal to or lower than the original stream's value or a value outside \n\t\t\tthe allowed range of 1 to 2,147,483,647.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StreamTakeoverLimitBreached</code> — The broadcast client reached the maximum allowed \n\t\t\ttakeover attempts for this stream.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {

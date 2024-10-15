@@ -1312,7 +1312,7 @@
                 "userGroups": {
                     "target": "com.amazonaws.qbusiness#UserGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The groups that a user associated with the chat input belongs to.</p>",
+                        "smithy.api#documentation": "<p>The group names that a user associated with the chat input belongs to.</p>",
                         "smithy.api#httpQuery": "userGroups"
                     }
                 },
@@ -1546,7 +1546,7 @@
                 "userGroups": {
                     "target": "com.amazonaws.qbusiness#UserGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The groups that a user associated with the chat input belongs to.</p>",
+                        "smithy.api#documentation": "<p>The group names that a user associated with the chat input belongs to.</p>",
                         "smithy.api#httpQuery": "userGroups"
                     }
                 },
@@ -1958,7 +1958,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.qbusiness#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of an IAM role with permissions to access your Amazon\n                CloudWatch logs and metrics.</p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of an IAM role with permissions to access your Amazon\n                CloudWatch logs and metrics. If this property is not specified, Amazon Q Business will create a <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/using-service-linked-roles.html#slr-permissions\">service linked role (SLR)</a> and use it as the\n            application's role.</p>"
                     }
                 },
                 "identityType": {
@@ -2746,6 +2746,12 @@
                     "target": "com.amazonaws.qbusiness#WebExperienceSamplePromptsControlMode",
                     "traits": {
                         "smithy.api#documentation": "<p>Determines whether sample prompts are enabled in the web experience for an end\n            user.</p>"
+                    }
+                },
+                "origins": {
+                    "target": "com.amazonaws.qbusiness#WebExperienceOrigins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the website domain origins that \n            are allowed to embed the Amazon Q Business web experience.\n            \n            The <i>domain origin</i> refers to the \n            base URL for accessing a website including the protocol \n            (<code>http/https</code>), the domain name, and the port number (if specified).\n        </p>\n         <note>\n            <p>You must only submit a <i>base URL</i> and \n            not a full path. For example, <code>https://docs.aws.amazon.com</code>.</p>\n         </note>"
                     }
                 },
                 "roleArn": {
@@ -6376,6 +6382,12 @@
                         "smithy.api#documentation": "<p>Determines whether sample prompts are enabled in the web experience for an end\n            user.</p>"
                     }
                 },
+                "origins": {
+                    "target": "com.amazonaws.qbusiness#WebExperienceOrigins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Gets the website domain origins that \n            are allowed to embed the Amazon Q Business web experience.\n            \n            The <i>domain origin</i> refers to the \n            base URL for accessing a website including the protocol \n            (<code>http/https</code>), the domain name, and the port number (if specified).\n        </p>"
+                    }
+                },
                 "roleArn": {
                     "target": "com.amazonaws.qbusiness#RoleArn",
                     "traits": {
@@ -8713,6 +8725,16 @@
                 "smithy.api#documentation": "<p>Information about the OIDC-compliant identity provider (IdP) used to authenticate end\n            users of an Amazon Q Business web experience.</p>"
             }
         },
+        "com.amazonaws.qbusiness#Origin": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(http://|https://)[a-zA-Z0-9-_.]+(?::[0-9]{1,5})?$"
+            }
+        },
         "com.amazonaws.qbusiness#Payload": {
             "type": "string",
             "traits": {
@@ -9290,13 +9312,13 @@
                 "qAppsControlMode": {
                     "target": "com.amazonaws.qbusiness#QAppsControlMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status information about whether end users can create and use Amazon Q Apps in the web experience.</p>",
+                        "smithy.api#documentation": "<p>Status information about whether end users can create and use Amazon Q Apps in the web\n            experience.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration information about Amazon Q Apps. (preview feature)</p>"
+                "smithy.api#documentation": "<p>Configuration information about Amazon Q Apps.</p>"
             }
         },
         "com.amazonaws.qbusiness#QAppsControlMode": {
@@ -11439,6 +11461,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the identity provider (IdP) used to authenticate end users of an\n                Amazon Q Business web experience.</p>"
                     }
+                },
+                "origins": {
+                    "target": "com.amazonaws.qbusiness#WebExperienceOrigins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the website domain origins that \n            are allowed to embed the Amazon Q Business web experience.\n            \n            The <i>domain origin</i> refers to the \n            <i>base URL</i> for accessing a website including the protocol \n            (<code>http/https</code>), the domain name, and the port number (if specified).</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Any values except <code>null</code> submitted as part of this \n                update will replace all previous values.</p>\n               </li>\n               <li>\n                  <p>You must only submit a <i>base URL</i> and \n                    not a full path. For example, <code>https://docs.aws.amazon.com</code>.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -11538,12 +11566,12 @@
                 "userGroups": {
                     "target": "com.amazonaws.qbusiness#UserGroups",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user groups associated with a topic control rule.</p>"
+                        "smithy.api#documentation": "<p>The user group names associated with a topic control rule.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about users and groups associated with a topic control\n            rule.</p>"
+                "smithy.api#documentation": "<p>Provides information about users and group names associated with a topic control\n            rule.</p>"
             }
         },
         "com.amazonaws.qbusiness#ValidationException": {
@@ -11694,6 +11722,18 @@
                     "max": 36
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]*$"
+            }
+        },
+        "com.amazonaws.qbusiness#WebExperienceOrigins": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qbusiness#Origin"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.qbusiness#WebExperienceResource": {

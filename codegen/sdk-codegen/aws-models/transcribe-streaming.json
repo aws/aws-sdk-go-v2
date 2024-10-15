@@ -108,7 +108,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>One or more arguments to the <code>StartStreamTranscription</code>, \n      <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> \n      operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> \n      used not valid values. Check the specified parameters and try your request again.</p>",
+                "smithy.api#documentation": "<p>One or more arguments to the <code>StartStreamTranscription</code>, \n      <code>StartMedicalStreamTranscription</code>, or <code>StartCallAnalyticsStreamTranscription</code> \n      operation was not valid. For example, <code>MediaEncoding</code> or <code>LanguageCode</code> \n      used unsupported values. Check the specified parameters and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -317,7 +317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains detailed information about your Call Analytics streaming session. These details are \n      provided in the <code>UtteranceEvent</code> and <code>CategoryEvent</code> objects.</p>",
+                "smithy.api#documentation": "<p>Contains detailed information about your real-time Call Analytics session. These details are \n      provided in the <code>UtteranceEvent</code> and <code>CategoryEvent</code> objects.</p>",
                 "smithy.api#streaming": {}
             }
         },
@@ -421,7 +421,7 @@
                 "PostCallAnalyticsSettings": {
                     "target": "com.amazonaws.transcribestreaming#PostCallAnalyticsSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides additional optional settings for your Call Analytics post-call request, including \n      encryption and output locations for your redacted and unredacted transcript.</p>"
+                        "smithy.api#documentation": "<p>Provides additional optional settings for your Call Analytics post-call request, including \n      encryption and output locations for your redacted transcript.</p>\n         <p>\n            <code>PostCallAnalyticsSettings</code> provides you with the same insights as a \n      Call Analytics post-call transcription. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html\">Post-call analytics</a> for more information \n      on this feature.</p>"
                     }
                 }
             },
@@ -732,16 +732,256 @@
                         "smithy.api#enumValue": "zh-CN"
                     }
                 },
+                "TH_TH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "th-TH"
+                    }
+                },
+                "ES_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-ES"
+                    }
+                },
+                "AR_SA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ar-SA"
+                    }
+                },
+                "PT_PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt-PT"
+                    }
+                },
+                "CA_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ca-ES"
+                    }
+                },
+                "AR_AE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ar-AE"
+                    }
+                },
                 "HI_IN": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "hi-IN"
                     }
                 },
-                "TH_TH": {
+                "ZH_HK": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "th-TH"
+                        "smithy.api#enumValue": "zh-HK"
+                    }
+                },
+                "NL_NL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nl-NL"
+                    }
+                },
+                "NO_NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no-NO"
+                    }
+                },
+                "SV_SE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sv-SE"
+                    }
+                },
+                "PL_PL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pl-PL"
+                    }
+                },
+                "FI_FI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fi-FI"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-TW"
+                    }
+                },
+                "EN_IN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-IN"
+                    }
+                },
+                "EN_IE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-IE"
+                    }
+                },
+                "EN_NZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-NZ"
+                    }
+                },
+                "EN_AB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-AB"
+                    }
+                },
+                "EN_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-ZA"
+                    }
+                },
+                "EN_WL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-WL"
+                    }
+                },
+                "DE_CH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de-CH"
+                    }
+                },
+                "AF_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "af-ZA"
+                    }
+                },
+                "EU_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-ES"
+                    }
+                },
+                "HR_HR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hr-HR"
+                    }
+                },
+                "CS_CZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cs-CZ"
+                    }
+                },
+                "DA_DK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "da-DK"
+                    }
+                },
+                "FA_IR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fa-IR"
+                    }
+                },
+                "GL_ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gl-ES"
+                    }
+                },
+                "EL_GR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "el-GR"
+                    }
+                },
+                "HE_IL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "he-IL"
+                    }
+                },
+                "ID_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "id-ID"
+                    }
+                },
+                "LV_LV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lv-LV"
+                    }
+                },
+                "MS_MY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ms-MY"
+                    }
+                },
+                "RO_RO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ro-RO"
+                    }
+                },
+                "RU_RU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ru-RU"
+                    }
+                },
+                "SR_RS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sr-RS"
+                    }
+                },
+                "SK_SK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sk-SK"
+                    }
+                },
+                "SO_SO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "so-SO"
+                    }
+                },
+                "TL_PH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tl-PH"
+                    }
+                },
+                "UK_UA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "uk-UA"
+                    }
+                },
+                "VI_VN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vi-VN"
+                    }
+                },
+                "ZU_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zu-ZA"
                     }
                 }
             }
@@ -1200,12 +1440,12 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribestreaming#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your Call Analytics post-call\n      output.</p>\n         <p>If using a key located in the <b>current</b>\n      Amazon Web Services account, you can specify your KMS key in one of four\n      ways:</p>\n         <ol>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n          <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n          <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For\n          example,\n          <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n          <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If using a key located in a <b>different</b>\n      Amazon Web Services account than the current Amazon Web Services account, you can specify\n      your KMS key in one of two ways:</p>\n         <ol>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n          <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n          <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>Note that the user making the  request must\n      have permission to use the specified KMS key.</p>"
+                        "smithy.api#documentation": "<p>The KMS key you want to use to encrypt your Call Analytics post-call\n      output.</p>\n         <p>If using a key located in the <b>current</b>\n      Amazon Web Services account, you can specify your KMS key in one of four\n      ways:</p>\n         <ol>\n            <li>\n               <p>Use the KMS key ID itself. For example,\n          <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use an alias for the KMS key ID. For example,\n          <code>alias/ExampleAlias</code>.</p>\n            </li>\n            <li>\n               <p>Use the Amazon Resource Name (ARN) for the KMS key ID. For\n          example,\n          <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n          <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>If using a key located in a <b>different</b>\n      Amazon Web Services account than the current Amazon Web Services account, you can specify\n      your KMS key in one of two ways:</p>\n         <ol>\n            <li>\n               <p>Use the ARN for the KMS key ID. For example,\n          <code>arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Use the ARN for the KMS key alias. For example,\n          <code>arn:aws:kms:region:account-ID:alias/ExampleAlias</code>.</p>\n            </li>\n         </ol>\n         <p>Note that the role making the \n      request must have permission to use the specified KMS key.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to specify additional settings for your streaming Call Analytics \n      post-call request, including output locations for your redacted and unredacted \n      transcript, which IAM role to use, and, optionally, which encryption key to \n      use.</p>\n         <p>\n            <code>ContentRedactionOutput</code>, <code>DataAccessRoleArn</code>, and\n      <code>OutputLocation</code> are required fields.</p>"
+                "smithy.api#documentation": "<p>Allows you to specify additional settings for your Call Analytics post-call request, \n      including output locations for your redacted transcript, which IAM role to use, \n      and which encryption key to use.</p>\n         <p>\n            <code>DataAccessRoleArn</code> and <code>OutputLocation</code> are required \n      fields.</p>\n         <p>\n            <code>PostCallAnalyticsSettings</code> provides you with the same insights as a \n      Call Analytics post-call transcription. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-post-call.html\">Post-call analytics</a> for more information \n      on this feature.</p>"
             }
         },
         "com.amazonaws.transcribestreaming#RequestId": {
@@ -1412,7 +1652,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribestreaming#CallAnalyticsLanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the language code that represents the language spoken in your audio.</p>\n         <p>If you're unsure of the language spoken in your audio, consider using \n      <code>IdentifyLanguage</code> to enable automatic language identification.</p>\n         <p>For a list of languages supported with streaming Call Analytics, refer to the \n      <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported \n        languages</a> table.</p>",
+                        "smithy.api#documentation": "<p>Specify the language code that represents the language spoken in your audio.</p>\n         <p>For a list of languages supported with real-time Call Analytics, refer to the \n      <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported \n        languages</a> table.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-code",
                         "smithy.api#required": {}
                     }
@@ -1443,13 +1683,14 @@
                 "SessionId": {
                     "target": "com.amazonaws.transcribestreaming#SessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a name for your Call Analytics transcription session. If you don't include this parameter\n      in your request, Amazon Transcribe generates an ID and returns it in the response.</p>\n         <p>You can use a session ID to retry a streaming session.</p>",
+                        "smithy.api#documentation": "<p>Specify a name for your Call Analytics transcription session. If you don't include this parameter\n      in your request, Amazon Transcribe generates an ID and returns it in the response.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
                     }
                 },
                 "AudioStream": {
                     "target": "com.amazonaws.transcribestreaming#AudioStream",
                     "traits": {
+                        "smithy.api#documentation": "<p>An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or WebSocket \n      data frames.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html\">Transcribing streaming audio</a>.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -1493,21 +1734,21 @@
                 "ContentIdentificationType": {
                     "target": "com.amazonaws.transcribestreaming#ContentIdentificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Labels all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content identification is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment.</p>\n         <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>\n      in the same request. If you set both, your request returns a\n      <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
+                        "smithy.api#documentation": "<p>Labels all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content identification is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment. If you don't\n      include <code>PiiEntityTypes</code> in your request, all PII is identified.</p>\n         <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>\n      in the same request. If you set both, your request returns a\n      <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-content-identification-type"
                     }
                 },
                 "ContentRedactionType": {
                     "target": "com.amazonaws.transcribestreaming#ContentRedactionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Redacts all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content redaction is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment.</p>\n         <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>\n      in the same request. If you set both, your request returns a\n      <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
+                        "smithy.api#documentation": "<p>Redacts all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content redaction is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment. If you don't\n      include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>\n         <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>\n      in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-content-redaction-type"
                     }
                 },
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.transcribestreaming#PiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>To include <code>PiiEntityTypes</code> in your Call Analytics request, you must also include \n      either <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>Values must be comma-separated and can include:\n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, \n      <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, \n      <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, \n      <code>SSN</code>, or <code>ALL</code>.</p>",
+                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, \n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n      <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, \n      <code>SSN</code>, or <code>ALL</code>.</p>\n         <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>If you include <code>ContentRedactionType</code> or \n      <code>ContentIdentificationType</code> in your request, but do not include \n      <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-pii-entity-types"
                     }
                 }
@@ -1522,7 +1763,7 @@
                 "RequestId": {
                     "target": "com.amazonaws.transcribestreaming#RequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier for your Call Analytics streaming request.</p>",
+                        "smithy.api#documentation": "<p>Provides the identifier for your real-time Call Analytics request.</p>",
                         "smithy.api#httpHeader": "x-amzn-request-id"
                     }
                 },
@@ -1564,7 +1805,7 @@
                 "CallAnalyticsTranscriptResultStream": {
                     "target": "com.amazonaws.transcribestreaming#CallAnalyticsTranscriptResultStream",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides detailed information about your Call Analytics streaming session.</p>",
+                        "smithy.api#documentation": "<p>Provides detailed information about your real-time Call Analytics session.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 },
@@ -1725,7 +1966,7 @@
                 "SessionId": {
                     "target": "com.amazonaws.transcribestreaming#SessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a name for your transcription session. If you don't include this parameter in \n            your request, Amazon Transcribe Medical generates an ID and returns it in the\n            response.</p>\n         <p>You can use a session ID to retry a streaming session.</p>",
+                        "smithy.api#documentation": "<p>Specify a name for your transcription session. If you don't include this parameter in \n            your request, Amazon Transcribe Medical generates an ID and returns it in the\n            response.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
                     }
                 },
@@ -1740,14 +1981,14 @@
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables channel identification in multi-channel audio.</p>\n         <p>Channel identification transcribes the audio on each channel independently, then appends\n            the output for each channel into one transcript.</p>\n         <p>If you have multi-channel audio and do not enable channel identification, your audio is \n            transcribed in a continuous manner and your transcript is not separated by channel.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html\">Transcribing multi-channel audio</a>.</p>",
+                        "smithy.api#documentation": "<p>Enables channel identification in multi-channel audio.</p>\n         <p>Channel identification transcribes the audio on each channel independently, then appends\n            the output for each channel into one transcript.</p>\n         <p>If you have multi-channel audio and do not enable channel identification, your audio is \n            transcribed in a continuous manner and your transcript is not separated by channel.</p>\n         <p>If you include <code>EnableChannelIdentification</code> in your request, you must also \n            include <code>NumberOfChannels</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html\">Transcribing multi-channel audio</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
                     }
                 },
                 "NumberOfChannels": {
                     "target": "com.amazonaws.transcribestreaming#NumberOfChannels",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the number of channels in your audio stream. Up to two channels are\n            supported.</p>",
+                        "smithy.api#documentation": "<p>Specify the number of channels in your audio stream. This value must be \n            <code>2</code>, as only two channels are supported. If your audio doesn't contain \n            multiple channels, do not include this parameter in your request.</p>\n         <p>If you include <code>NumberOfChannels</code> in your request, you must also \n            include <code>EnableChannelIdentification</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-number-of-channels"
                     }
                 },
@@ -1934,7 +2175,7 @@
                 "SessionId": {
                     "target": "com.amazonaws.transcribestreaming#SessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a name for your transcription session. If you don't include this parameter in your request, \n      Amazon Transcribe generates an ID and returns it in the response.</p>\n         <p>You can use a session ID to retry a streaming session.</p>",
+                        "smithy.api#documentation": "<p>Specify a name for your transcription session. If you don't include this parameter in your request, \n      Amazon Transcribe generates an ID and returns it in the response.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-session-id"
                     }
                 },
@@ -1972,14 +2213,14 @@
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables channel identification in multi-channel audio.</p>\n         <p>Channel identification transcribes the audio on each channel independently, then appends the \n      output for each channel into one transcript.</p>\n         <p>If you have multi-channel audio and do not enable channel identification, your audio is \n      transcribed in a continuous manner and your transcript is not separated by channel.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html\">Transcribing multi-channel audio</a>.</p>",
+                        "smithy.api#documentation": "<p>Enables channel identification in multi-channel audio.</p>\n         <p>Channel identification transcribes the audio on each channel independently, then appends the \n      output for each channel into one transcript.</p>\n         <p>If you have multi-channel audio and do not enable channel identification, your audio is \n      transcribed in a continuous manner and your transcript is not separated by channel.</p>\n         <p>If you include <code>EnableChannelIdentification</code> in your request, you must also \n      include <code>NumberOfChannels</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html\">Transcribing multi-channel audio</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
                     }
                 },
                 "NumberOfChannels": {
                     "target": "com.amazonaws.transcribestreaming#NumberOfChannels",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the number of channels in your audio stream. Up to two channels are\n      supported.</p>",
+                        "smithy.api#documentation": "<p>Specify the number of channels in your audio stream. This value must be \n      <code>2</code>, as only two channels are supported. If your audio doesn't contain \n      multiple channels, do not include this parameter in your request.</p>\n         <p>If you include <code>NumberOfChannels</code> in your request, you must also \n      include <code>EnableChannelIdentification</code>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-number-of-channels"
                     }
                 },
@@ -2001,21 +2242,21 @@
                 "ContentIdentificationType": {
                     "target": "com.amazonaws.transcribestreaming#ContentIdentificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Labels all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content identification is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment.</p>\n         <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>\n      in the same request. If you set both, your request returns a\n      <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
+                        "smithy.api#documentation": "<p>Labels all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content identification is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is flagged upon complete transcription of an audio segment. If you don't\n      include <code>PiiEntityTypes</code> in your request, all PII is identified.</p>\n         <p>You can’t set <code>ContentIdentificationType</code> and <code>ContentRedactionType</code>\n      in the same request. If you set both, your request returns a\n      <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-content-identification-type"
                     }
                 },
                 "ContentRedactionType": {
                     "target": "com.amazonaws.transcribestreaming#ContentRedactionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Redacts all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content redaction is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment.</p>\n         <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>\n      in the same request. If you set both, your request returns a\n      <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
+                        "smithy.api#documentation": "<p>Redacts all personally identifiable information (PII) identified in your transcript.</p>\n         <p>Content redaction is performed at the segment level; PII specified in \n      <code>PiiEntityTypes</code> is redacted upon complete transcription of an audio segment. If you don't\n      include <code>PiiEntityTypes</code> in your request, all PII is redacted.</p>\n         <p>You can’t set <code>ContentRedactionType</code> and <code>ContentIdentificationType</code>\n      in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/pii-redaction.html\">Redacting or identifying personally identifiable\n      information</a>.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-content-redaction-type"
                     }
                 },
                 "PiiEntityTypes": {
                     "target": "com.amazonaws.transcribestreaming#PiiEntityTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>To include <code>PiiEntityTypes</code> in your request, you must also include either \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>Values must be comma-separated and can include:\n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, \n      <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, \n      <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, \n      <code>SSN</code>, or <code>ALL</code>.</p>",
+                        "smithy.api#documentation": "<p>Specify which types of personally identifiable information (PII) you want to redact in your \n      transcript. You can include as many types as you'd like, or you can select \n      <code>ALL</code>.</p>\n         <p>Values must be comma-separated and can include: <code>ADDRESS</code>, \n      <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING</code>,\n      <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>,\n      <code>CREDIT_DEBIT_NUMBER</code>, <code>EMAIL</code>, \n      <code>NAME</code>, <code>PHONE</code>, <code>PIN</code>, \n      <code>SSN</code>, or <code>ALL</code>.</p>\n         <p>Note that if you include <code>PiiEntityTypes</code> in your request, you must also include \n      <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>\n         <p>If you include <code>ContentRedactionType</code> or \n      <code>ContentIdentificationType</code> in your request, but do not include \n      <code>PiiEntityTypes</code>, all PII is redacted or identified.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-pii-entity-types"
                     }
                 },
@@ -2030,14 +2271,14 @@
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables automatic language identification for your transcription.</p>\n         <p>If you include <code>IdentifyLanguage</code>, you can optionally include a list of \n      language codes, using <code>LanguageOptions</code>, that you think may be present in \n      your audio stream. Including language options can improve transcription accuracy.</p>\n         <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a \n      preferred language can help Amazon Transcribe identify the language faster than if you omit this \n      parameter.</p>\n         <p>If you have multi-channel audio that contains different languages on each channel, and you've \n      enabled channel identification, automatic language identification identifies the dominant language on \n      each audio channel.</p>\n         <p>Note that you must include either <code>LanguageCode</code> or \n      <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job\n      fails.</p>\n         <p>Streaming language identification can't be combined with custom language models or \n      redaction.</p>",
+                        "smithy.api#documentation": "<p>Enables automatic language identification for your transcription.</p>\n         <p>If you include <code>IdentifyLanguage</code>, you must include a list of\n      language codes, using <code>LanguageOptions</code>, that you think may be present in \n      your audio stream. </p>\n         <p>You can also include a preferred language using <code>PreferredLanguage</code>. Adding a \n      preferred language can help Amazon Transcribe identify the language faster than if you omit this \n      parameter.</p>\n         <p>If you have multi-channel audio that contains different languages on each channel, and you've \n      enabled channel identification, automatic language identification identifies the dominant language on \n      each audio channel.</p>\n         <p>Note that you must include either <code>LanguageCode</code> or \n      <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job\n      fails.</p>\n         <p>Streaming language identification can't be combined with custom language models or \n      redaction.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-identify-language"
                     }
                 },
                 "LanguageOptions": {
                     "target": "com.amazonaws.transcribestreaming#LanguageOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify two or more language codes that represent the languages you think may be present \n      in your media; including more than five is not recommended. If you're unsure what languages are present, do\n      not include this parameter.</p>\n         <p>Including language options can improve the accuracy of language identification.</p>\n         <p>If you include <code>LanguageOptions</code> in your request, you must also include \n      <code>IdentifyLanguage</code>.</p>\n         <p>For a list of languages supported with Amazon Transcribe streaming, refer to the \n      <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported \n        languages</a> table.</p>\n         <important>\n            <p>You can only include one language dialect per language per stream. For example, you\n        cannot include <code>en-US</code> and <code>en-AU</code> in the same request.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Specify two or more language codes that represent the languages you think may be present \n      in your media; including more than five is not recommended.</p>\n         <p>Including language options can improve the accuracy of language identification.</p>\n         <p>If you include <code>LanguageOptions</code> in your request, you must also include \n      <code>IdentifyLanguage</code> or <code>IdentifyMultipleLanguages</code>.</p>\n         <p>For a list of languages supported with Amazon Transcribe streaming, refer to the \n      <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported \n        languages</a> table.</p>\n         <important>\n            <p>You can only include one language dialect per language per stream. For example, you\n        cannot include <code>en-US</code> and <code>en-AU</code> in the same request.</p>\n         </important>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-language-options"
                     }
                 },
@@ -2052,7 +2293,7 @@
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Enables automatic multi-language identification in your transcription job request. Use this parameter if your stream contains more than one language. If your stream contains only one language, use IdentifyLanguage instead.</p>\n         <p>If you include <code>IdentifyMultipleLanguages</code>, you can optionally include a list of language codes, using <code>LanguageOptions</code>, that you think may be present in your stream. Including <code>LanguageOptions</code> restricts <code>IdentifyMultipleLanguages</code> to only the language options that you specify, which can improve transcription accuracy.</p>\n         <p>If you want to apply a custom vocabulary or a custom vocabulary filter to your automatic multiple language identification request, include <code>VocabularyNames</code> or <code>VocabularyFilterNames</code>.</p>\n         <p>Note that you must include one of <code>LanguageCode</code>, <code>IdentifyLanguage</code>, or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job fails.</p>",
+                        "smithy.api#documentation": "<p>Enables automatic multi-language identification in your transcription job request. Use this parameter if your stream contains more than one language. If your stream contains only one language, use IdentifyLanguage instead.</p>\n         <p>If you include <code>IdentifyMultipleLanguages</code>, you must include a list of language codes, using <code>LanguageOptions</code>, that you think may be present in your stream.</p>\n         <p>If you want to apply a custom vocabulary or a custom vocabulary filter to your automatic multiple language identification request, include <code>VocabularyNames</code> or <code>VocabularyFilterNames</code>.</p>\n         <p>Note that you must include one of <code>LanguageCode</code>, <code>IdentifyLanguage</code>, or <code>IdentifyMultipleLanguages</code> in your request. If you include more than one of these parameters, your transcription job fails.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-identify-multiple-languages"
                     }
                 },
@@ -2153,7 +2394,7 @@
                     "target": "com.amazonaws.transcribestreaming#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Shows whether  channel identification was enabled for your transcription.</p>",
+                        "smithy.api#documentation": "<p>Shows whether channel identification was enabled for your transcription.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-enable-channel-identification"
                     }
                 },

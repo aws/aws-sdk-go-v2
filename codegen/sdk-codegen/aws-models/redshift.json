@@ -2814,7 +2814,7 @@
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: \n                <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n                <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The node type to be provisioned for the cluster. For information about node types,\n            go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with\n                Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.large</code> |  <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3812,6 +3812,103 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#CreateIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#CreateIntegrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#Integration"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#IntegrationAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationConflictOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationSourceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationTargetNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidTagFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#TagLimitExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a zero-ETL integration with Amazon Redshift.</p>"
+            }
+        },
+        "com.amazonaws.redshift#CreateIntegrationMessage": {
+            "type": "structure",
+            "members": {
+                "SourceArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the database to use as the source for replication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use as the target for replication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrationName": {
+                    "target": "com.amazonaws.redshift#IntegrationName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KMSKeyId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Key Management Service (KMS) key identifier for the key to use to\n            encrypt the integration. If you don't specify an encryption key, the default\n            Amazon Web Services owned key is used.</p>"
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.redshift#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags.</p>"
+                    }
+                },
+                "AdditionalEncryptionContext": {
+                    "target": "com.amazonaws.redshift#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional set of non-secret key–value pairs that contains additional contextual\n            information about the data. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n                context</a> in the <i>Amazon Web Services Key Management Service Developer\n                    Guide</i>.</p>\n         <p>You can only include this parameter if you specify the <code>KMSKeyId</code> parameter.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.redshift#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#CreateRedshiftIdcApplication": {
@@ -5249,6 +5346,48 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#DeleteIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DeleteIntegrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#Integration"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#IntegrationConflictOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationConflictStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a zero-ETL integration with Amazon Redshift.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DeleteIntegrationMessage": {
+            "type": "structure",
+            "members": {
+                "IntegrationArn": {
+                    "target": "com.amazonaws.redshift#IntegrationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the integration to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#input": {}
             }
         },
@@ -7216,6 +7355,135 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.redshift#DescribeIntegrations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeIntegrationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#IntegrationsMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more zero-ETL integrations with Amazon Redshift.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Integrations",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeIntegrationsFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.redshift#DescribeIntegrationsFilterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the type of integration filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.redshift#DescribeIntegrationsFilterValueList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Specifies the values to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of elements to filter the returned integrations.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DescribeIntegrationsFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#DescribeIntegrationsFilter",
+                "traits": {
+                    "smithy.api#xmlName": "DescribeIntegrationsFilter"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeIntegrationsFilterName": {
+            "type": "enum",
+            "members": {
+                "INTEGRATION_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "integration-arn"
+                    }
+                },
+                "SOURCE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "source-arn"
+                    }
+                },
+                "SOURCE_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "source-types"
+                    }
+                },
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "status"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeIntegrationsFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#String",
+                "traits": {
+                    "smithy.api#xmlName": "Value"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeIntegrationsMessage": {
+            "type": "structure",
+            "members": {
+                "IntegrationArn": {
+                    "target": "com.amazonaws.redshift#IntegrationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the integration.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>\n         <p>Default: <code>100</code>\n         </p>\n         <p>Constraints: minimum 20, maximum 100.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeIntegrations</code>\n            request. If this parameter is specified, the response includes only records beyond the\n            marker, up to the value specified by <code>MaxRecords</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.redshift#DescribeIntegrationsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that specifies one or more resources to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.redshift#DescribeLoggingStatus": {
             "type": "operation",
             "input": {
@@ -8117,7 +8385,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource with which you want to view tags. Valid resource types are: </p>\n         <ul>\n            <li>\n               <p>Cluster</p>\n            </li>\n            <li>\n               <p>CIDR/IP</p>\n            </li>\n            <li>\n               <p>EC2 security group</p>\n            </li>\n            <li>\n               <p>Snapshot</p>\n            </li>\n            <li>\n               <p>Cluster security group</p>\n            </li>\n            <li>\n               <p>Subnet group</p>\n            </li>\n            <li>\n               <p>HSM connection</p>\n            </li>\n            <li>\n               <p>HSM certificate</p>\n            </li>\n            <li>\n               <p>Parameter group</p>\n            </li>\n            <li>\n               <p>Snapshot copy grant</p>\n            </li>\n         </ul>\n         <p>For more information about Amazon Redshift resource types and constructing ARNs, go to\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions\">Specifying Policy Elements: Actions, Effects, Resources, and Principals</a> in\n            the Amazon Redshift Cluster Management Guide. </p>"
+                        "smithy.api#documentation": "<p>The type of resource with which you want to view tags. Valid resource types are: </p>\n         <ul>\n            <li>\n               <p>Cluster</p>\n            </li>\n            <li>\n               <p>CIDR/IP</p>\n            </li>\n            <li>\n               <p>EC2 security group</p>\n            </li>\n            <li>\n               <p>Snapshot</p>\n            </li>\n            <li>\n               <p>Cluster security group</p>\n            </li>\n            <li>\n               <p>Subnet group</p>\n            </li>\n            <li>\n               <p>HSM connection</p>\n            </li>\n            <li>\n               <p>HSM certificate</p>\n            </li>\n            <li>\n               <p>Parameter group</p>\n            </li>\n            <li>\n               <p>Snapshot copy grant</p>\n            </li>\n            <li>\n               <p>Integration (zero-ETL integration)</p>\n               <note>\n                  <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>, \n                    instead specify the <code>ResourceName</code> of the integration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For more information about Amazon Redshift resource types and constructing ARNs, go to\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions\">Specifying Policy Elements: Actions, Effects, Resources, and Principals</a> in\n            the Amazon Redshift Cluster Management Guide. </p>"
                     }
                 },
                 "MaxRecords": {
@@ -8224,6 +8492,16 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshift#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^.*$"
             }
         },
         "com.amazonaws.redshift#DisableLogging": {
@@ -8628,6 +8906,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#EncryptionContextMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.redshift#String"
+            },
+            "value": {
+                "target": "com.amazonaws.redshift#String"
             }
         },
         "com.amazonaws.redshift#Endpoint": {
@@ -10172,6 +10459,148 @@
         "com.amazonaws.redshift#IntegerOptional": {
             "type": "integer"
         },
+        "com.amazonaws.redshift#Integration": {
+            "type": "structure",
+            "members": {
+                "IntegrationArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integration.</p>"
+                    }
+                },
+                "IntegrationName": {
+                    "target": "com.amazonaws.redshift#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the integration.</p>"
+                    }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the database used as the source for\n            replication.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use as the target for replication.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#ZeroETLIntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the integration.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.redshift#IntegrationErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any errors associated with the integration.</p>"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when the integration was created.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.redshift#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the integration.</p>"
+                    }
+                },
+                "KMSKeyId": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) key identifier for the key used to\n            encrypt the integration.</p>"
+                    }
+                },
+                "AdditionalEncryptionContext": {
+                    "target": "com.amazonaws.redshift#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption context for the integration. For more information, \n            see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>Amazon Web Services Key Management Service Developer\n                Guide</i>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.redshift#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the integration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#IntegrationAlreadyExistsFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IntegrationAlreadyExistsFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The integration you are trying to create already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#IntegrationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:redshift:[a-z0-9\\-]*:[0-9]*:integration:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.redshift#IntegrationConflictOperationFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IntegrationConflictOperationFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A conflicting conditional operation is currently in progress against this resource.\n            This typically occurs when there are multiple requests being made to the same resource at the same time,\n            and these requests conflict with each other.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#IntegrationConflictStateFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IntegrationConflictStateFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The integration is in an invalid state and can't perform the requested operation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#IntegrationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
         "com.amazonaws.redshift#IntegrationError": {
             "type": "structure",
             "members": {
@@ -10203,6 +10632,25 @@
                 }
             }
         },
+        "com.amazonaws.redshift#IntegrationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#Integration",
+                "traits": {
+                    "smithy.api#xmlName": "Integration"
+                }
+            }
+        },
+        "com.amazonaws.redshift#IntegrationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+            }
+        },
         "com.amazonaws.redshift#IntegrationNotFoundFault": {
             "type": "structure",
             "members": {
@@ -10218,6 +10666,77 @@
                 "smithy.api#documentation": "<p>The integration can't be found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshift#IntegrationQuotaExceededFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IntegrationQuotaExceededFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>You can't create any more zero-ETL integrations because the quota has been reached.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#IntegrationSourceNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IntegrationSourceNotFoundFault",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified integration source can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshift#IntegrationTargetNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "IntegrationTargetNotFoundFault",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>The specified integration target can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshift#IntegrationsMessage": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. \n            If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. \n            If the <code>Marker</code> field is empty, all response records have been retrieved for the request.</p>"
+                    }
+                },
+                "Integrations": {
+                    "target": "com.amazonaws.redshift#IntegrationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of integrations that are described.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#InvalidAuthenticationProfileRequestFault": {
@@ -11453,7 +11972,7 @@
                 "NodeType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also\n            specify the number of nodes parameter.</p>\n         <p>\nFor more information about resizing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also\n            specify the number of nodes parameter.</p>\n         <p>\nFor more information about resizing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>\n         <p>Valid Values: \n            <code>dc2.large</code> | <code>dc2.8xlarge</code> | \n            <code>ra3.large</code> |  <code>ra3.xlplus</code> |  <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code>\n         </p>"
                     }
                 },
                 "NumberOfNodes": {
@@ -12108,6 +12627,63 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#ModifyIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#ModifyIntegrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#Integration"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#IntegrationAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationConflictOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationConflictStateFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies a zero-ETL integration with Amazon Redshift.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ModifyIntegrationMessage": {
+            "type": "structure",
+            "members": {
+                "IntegrationArn": {
+                    "target": "com.amazonaws.redshift#IntegrationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the integration to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.redshift#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the integration.</p>"
+                    }
+                },
+                "IntegrationName": {
+                    "target": "com.amazonaws.redshift#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.redshift#ModifyRedshiftIdcApplication": {
@@ -13755,6 +14331,9 @@
                     "target": "com.amazonaws.redshift#CreateHsmConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.redshift#CreateIntegration"
+                },
+                {
                     "target": "com.amazonaws.redshift#CreateRedshiftIdcApplication"
                 },
                 {
@@ -13807,6 +14386,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DeleteHsmConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DeleteIntegration"
                 },
                 {
                     "target": "com.amazonaws.redshift#DeletePartner"
@@ -13903,6 +14485,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeInboundIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DescribeIntegrations"
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeLoggingStatus"
@@ -14026,6 +14611,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyEventSubscription"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ModifyIntegration"
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyRedshiftIdcApplication"
@@ -15789,7 +16377,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n         <p>Elastic resize operations have the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can only resize clusters of the following types:</p>\n               <ul>\n                  <li>\n                     <p>dc2.large</p>\n                  </li>\n                  <li>\n                     <p>dc2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.xlplus</p>\n                  </li>\n                  <li>\n                     <p>ra3.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.16xlarge</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n         <p>Elastic resize operations have the following restrictions:</p>\n         <ul>\n            <li>\n               <p>You can only resize clusters of the following types:</p>\n               <ul>\n                  <li>\n                     <p>dc2.large</p>\n                  </li>\n                  <li>\n                     <p>dc2.8xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.large</p>\n                  </li>\n                  <li>\n                     <p>ra3.xlplus</p>\n                  </li>\n                  <li>\n                     <p>ra3.4xlarge</p>\n                  </li>\n                  <li>\n                     <p>ra3.16xlarge</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.redshift#ResizeClusterMessage": {

@@ -2902,6 +2902,12 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
                 },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.codebuild#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy configuration of the compute fleet.</p>"
+                    }
+                },
                 "imageId": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
@@ -4145,6 +4151,12 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
                 },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.codebuild#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy configuration of the compute fleet.</p>"
+                    }
+                },
                 "imageId": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
@@ -4259,6 +4271,110 @@
                     "traits": {
                         "smithy.api#enumValue": "ON_DEMAND"
                     }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRule": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of proxy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleEffectType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The behavior of the proxy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "entities": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination of the proxy rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the proxy rule for your reserved capacity instances.</p>"
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleBehavior": {
+            "type": "enum",
+            "members": {
+                "ALLOW_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW_ALL"
+                    }
+                },
+                "DENY_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY_ALL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleEffectType": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleEntities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRuleType": {
+            "type": "enum",
+            "members": {
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOMAIN"
+                    }
+                },
+                "IP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetProxyRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codebuild#FleetProxyRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -6565,6 +6681,26 @@
                 "target": "com.amazonaws.codebuild#Project"
             }
         },
+        "com.amazonaws.codebuild#ProxyConfiguration": {
+            "type": "structure",
+            "members": {
+                "defaultBehavior": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRuleBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default behavior of outgoing traffic.</p>"
+                    }
+                },
+                "orderedProxyRules": {
+                    "target": "com.amazonaws.codebuild#FleetProxyRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>FleetProxyRule</code> objects that represent the specified destination domains or IPs to allow or deny network access control to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the proxy configurations that apply network access control to your reserved capacity instances.</p>"
+            }
+        },
         "com.amazonaws.codebuild#PutResourcePolicy": {
             "type": "operation",
             "input": {
@@ -8579,6 +8715,12 @@
                 "vpcConfig": {
                     "target": "com.amazonaws.codebuild#VpcConfig"
                 },
+                "proxyConfiguration": {
+                    "target": "com.amazonaws.codebuild#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proxy configuration of the compute fleet.</p>"
+                    }
+                },
                 "imageId": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
@@ -9188,6 +9330,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RELEASE_NAME"
+                    }
+                },
+                "REPOSITORY_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPOSITORY_NAME"
                     }
                 }
             }

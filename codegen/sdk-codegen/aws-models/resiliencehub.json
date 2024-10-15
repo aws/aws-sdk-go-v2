@@ -319,30 +319,38 @@
             }
         },
         "com.amazonaws.resiliencehub#AlarmType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Metric",
-                        "name": "METRIC"
-                    },
-                    {
-                        "value": "Composite",
-                        "name": "COMPOSITE"
-                    },
-                    {
-                        "value": "Canary",
-                        "name": "CANARY"
-                    },
-                    {
-                        "value": "Logs",
-                        "name": "LOGS"
-                    },
-                    {
-                        "value": "Event",
-                        "name": "EVENT"
+            "type": "enum",
+            "members": {
+                "METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Metric"
                     }
-                ]
+                },
+                "COMPOSITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Composite"
+                    }
+                },
+                "CANARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Canary"
+                    }
+                },
+                "LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Logs"
+                    }
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Event"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#App": {
@@ -458,6 +466,12 @@
                     "target": "com.amazonaws.resiliencehub#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Recovery Point Objective (RPO) in seconds.</p>"
+                    }
+                },
+                "awsApplicationArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of  Resource Groups group that is integrated with an AppRegistry application. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>Amazon Web Services General Reference</i> guide.</p>"
                     }
                 }
             },
@@ -582,7 +596,7 @@
                 "summary": {
                     "target": "com.amazonaws.resiliencehub#AssessmentSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates a concise summary that provides an overview of the Resilience Hub assessment.</p>"
+                        "smithy.api#documentation": "<p>Indicates the AI-generated summary for the Resilience Hub assessment, providing a concise overview that highlights the top risks and recommendations.</p>\n         <note>\n            <p>This property is available only in the US East (N. Virginia) Region.</p>\n         </note>"
                     }
                 }
             },
@@ -591,18 +605,20 @@
             }
         },
         "com.amazonaws.resiliencehub#AppAssessmentScheduleType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Disabled",
-                        "name": "DISABLED"
-                    },
-                    {
-                        "value": "Daily",
-                        "name": "DAILY"
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
                     }
-                ]
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Daily"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#AppAssessmentSummary": {
@@ -707,34 +723,44 @@
             }
         },
         "com.amazonaws.resiliencehub#AppComplianceStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PolicyBreached",
-                        "name": "POLICY_BREACHED"
-                    },
-                    {
-                        "value": "PolicyMet",
-                        "name": "POLICY_MET"
-                    },
-                    {
-                        "value": "NotAssessed",
-                        "name": "NOT_ASSESSED"
-                    },
-                    {
-                        "value": "ChangesDetected",
-                        "name": "CHANGES_DETECTED"
-                    },
-                    {
-                        "value": "NotApplicable",
-                        "name": "NOT_APPLICABLE"
-                    },
-                    {
-                        "value": "MissingPolicy",
-                        "name": "MISSING_POLICY"
+            "type": "enum",
+            "members": {
+                "POLICY_BREACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicyBreached"
                     }
-                ]
+                },
+                "POLICY_MET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicyMet"
+                    }
+                },
+                "NOT_ASSESSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotAssessed"
+                    }
+                },
+                "CHANGES_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ChangesDetected"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotApplicable"
+                    }
+                },
+                "MISSING_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingPolicy"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#AppComponent": {
@@ -828,22 +854,26 @@
             }
         },
         "com.amazonaws.resiliencehub#AppDriftStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NotChecked",
-                        "name": "NOT_CHECKED"
-                    },
-                    {
-                        "value": "NotDetected",
-                        "name": "NOT_DETECTED"
-                    },
-                    {
-                        "value": "Detected",
-                        "name": "DETECTED"
+            "type": "enum",
+            "members": {
+                "NOT_CHECKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotChecked"
                     }
-                ]
+                },
+                "NOT_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotDetected"
+                    }
+                },
+                "DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Detected"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#AppInputSource": {
@@ -899,18 +929,20 @@
             }
         },
         "com.amazonaws.resiliencehub#AppStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "Deleting",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Deleting"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#AppSummary": {
@@ -990,6 +1022,12 @@
                     "target": "com.amazonaws.resiliencehub#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Recovery Point Objective (RPO) in seconds.</p>"
+                    }
+                },
+                "awsApplicationArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of  Resource Groups group that is integrated with an AppRegistry application. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>Amazon Web Services General Reference</i> guide.</p>"
                     }
                 }
             },
@@ -1074,18 +1112,20 @@
             }
         },
         "com.amazonaws.resiliencehub#AssessmentInvoker": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "User",
-                        "name": "USER"
-                    },
-                    {
-                        "value": "System",
-                        "name": "SYSTEM"
+            "type": "enum",
+            "members": {
+                "USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "User"
                     }
-                ]
+                },
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "System"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#AssessmentRiskRecommendation": {
@@ -1121,26 +1161,32 @@
             }
         },
         "com.amazonaws.resiliencehub#AssessmentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "InProgress",
-                        "name": "INPROGRESS"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "Success",
-                        "name": "SUCCESS"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
                     }
-                ]
+                },
+                "INPROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#AssessmentStatusList": {
@@ -2400,8 +2446,7 @@
                 "item": {
                     "target": "com.amazonaws.resiliencehub#UpdateRecommendationStatusItem",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operational recommendation item.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The operational recommendation item.</p>"
                     }
                 },
                 "excluded": {
@@ -2510,26 +2555,32 @@
             }
         },
         "com.amazonaws.resiliencehub#ComplianceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PolicyBreached",
-                        "name": "POLICY_BREACHED"
-                    },
-                    {
-                        "value": "PolicyMet",
-                        "name": "POLICY_MET"
-                    },
-                    {
-                        "value": "NotApplicable",
-                        "name": "NOT_APPLICABLE"
-                    },
-                    {
-                        "value": "MissingPolicy",
-                        "name": "MISSING_POLICY"
+            "type": "enum",
+            "members": {
+                "POLICY_BREACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicyBreached"
                     }
-                ]
+                },
+                "POLICY_MET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PolicyMet"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotApplicable"
+                    }
+                },
+                "MISSING_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingPolicy"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ComponentCompliancesList": {
@@ -2651,34 +2702,44 @@
             }
         },
         "com.amazonaws.resiliencehub#ConfigRecommendationOptimizationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LeastCost",
-                        "name": "LEAST_COST"
-                    },
-                    {
-                        "value": "LeastChange",
-                        "name": "LEAST_CHANGE"
-                    },
-                    {
-                        "value": "BestAZRecovery",
-                        "name": "BEST_AZ_RECOVERY"
-                    },
-                    {
-                        "value": "LeastErrors",
-                        "name": "LEAST_ERRORS"
-                    },
-                    {
-                        "value": "BestAttainable",
-                        "name": "BEST_ATTAINABLE"
-                    },
-                    {
-                        "value": "BestRegionRecovery",
-                        "name": "BEST_REGION_RECOVERY"
+            "type": "enum",
+            "members": {
+                "LEAST_COST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LeastCost"
                     }
-                ]
+                },
+                "LEAST_CHANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LeastChange"
+                    }
+                },
+                "BEST_AZ_RECOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BestAZRecovery"
+                    }
+                },
+                "LEAST_ERRORS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LeastErrors"
+                    }
+                },
+                "BEST_ATTAINABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BestAttainable"
+                    }
+                },
+                "BEST_REGION_RECOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BestRegionRecovery"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ConflictException": {
@@ -2737,26 +2798,32 @@
             }
         },
         "com.amazonaws.resiliencehub#CostFrequency": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Hourly",
-                        "name": "HOURLY"
-                    },
-                    {
-                        "value": "Daily",
-                        "name": "DAILY"
-                    },
-                    {
-                        "value": "Monthly",
-                        "name": "MONTHLY"
-                    },
-                    {
-                        "value": "Yearly",
-                        "name": "YEARLY"
+            "type": "enum",
+            "members": {
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hourly"
                     }
-                ]
+                },
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Daily"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Monthly"
+                    }
+                },
+                "YEARLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Yearly"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#CreateApp": {
@@ -2850,6 +2917,12 @@
                     "target": "com.amazonaws.resiliencehub#EventSubscriptionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of events you would like to subscribe and get notification for. Currently,\n        Resilience Hub supports only <b>Drift detected</b> and\n        <b>Scheduled assessment failure</b> events notification.</p>"
+                    }
+                },
+                "awsApplicationArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of  Resource Groups group that is integrated with an AppRegistry application. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>Amazon Web Services General Reference</i> guide.</p>"
                     }
                 }
             }
@@ -3335,22 +3408,26 @@
             }
         },
         "com.amazonaws.resiliencehub#DataLocationConstraint": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AnyLocation",
-                        "name": "ANY_LOCATION"
-                    },
-                    {
-                        "value": "SameContinent",
-                        "name": "SAME_CONTINENT"
-                    },
-                    {
-                        "value": "SameCountry",
-                        "name": "SAME_COUNTRY"
+            "type": "enum",
+            "members": {
+                "ANY_LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AnyLocation"
                     }
-                ]
+                },
+                "SAME_CONTINENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SameContinent"
+                    }
+                },
+                "SAME_COUNTRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SameCountry"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#DeleteApp": {
@@ -4579,7 +4656,13 @@
                 "errorMessage": {
                     "target": "com.amazonaws.resiliencehub#String500",
                     "traits": {
-                        "smithy.api#documentation": "<p>The returned error message for the request.</p>"
+                        "smithy.api#documentation": "<p>The error message returned for the resource request.</p>"
+                    }
+                },
+                "errorDetails": {
+                    "target": "com.amazonaws.resiliencehub#ErrorDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of errors that were encountered while importing resources.</p>"
                     }
                 }
             }
@@ -4726,22 +4809,26 @@
             }
         },
         "com.amazonaws.resiliencehub#DifferenceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NotEqual",
-                        "name": "NOT_EQUAL"
-                    },
-                    {
-                        "value": "Added",
-                        "name": "ADDED"
-                    },
-                    {
-                        "value": "Removed",
-                        "name": "REMOVED"
+            "type": "enum",
+            "members": {
+                "NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEqual"
                     }
-                ]
+                },
+                "ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Added"
+                    }
+                },
+                "REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Removed"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#DisruptionCompliance": {
@@ -4836,26 +4923,32 @@
             }
         },
         "com.amazonaws.resiliencehub#DisruptionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Software",
-                        "name": "SOFTWARE"
-                    },
-                    {
-                        "value": "Hardware",
-                        "name": "HARDWARE"
-                    },
-                    {
-                        "value": "AZ",
-                        "name": "AZ"
-                    },
-                    {
-                        "value": "Region",
-                        "name": "REGION"
+            "type": "enum",
+            "members": {
+                "SOFTWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Software"
                     }
-                ]
+                },
+                "HARDWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hardware"
+                    }
+                },
+                "AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#DocumentName": {
@@ -4874,37 +4967,43 @@
             }
         },
         "com.amazonaws.resiliencehub#DriftStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NotChecked",
-                        "name": "NOT_CHECKED"
-                    },
-                    {
-                        "value": "NotDetected",
-                        "name": "NOT_DETECTED"
-                    },
-                    {
-                        "value": "Detected",
-                        "name": "DETECTED"
+            "type": "enum",
+            "members": {
+                "NOT_CHECKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotChecked"
                     }
-                ]
+                },
+                "NOT_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotDetected"
+                    }
+                },
+                "DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Detected"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#DriftType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ApplicationCompliance",
-                        "name": "APPLICATION_COMPLIANCE"
-                    },
-                    {
-                        "value": "AppComponentResiliencyComplianceStatus",
-                        "name": "APP_COMPONENT_RESILIENCY_COMPLIANCE_STATUS"
+            "type": "enum",
+            "members": {
+                "APPLICATION_COMPLIANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ApplicationCompliance"
                     }
-                ]
+                },
+                "APP_COMPONENT_RESILIENCY_COMPLIANCE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AppComponentResiliencyComplianceStatus"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#EksNamespace": {
@@ -5012,6 +5111,26 @@
                 "smithy.api#pattern": "^\\S{1,50}$"
             }
         },
+        "com.amazonaws.resiliencehub#ErrorDetail": {
+            "type": "structure",
+            "members": {
+                "errorMessage": {
+                    "target": "com.amazonaws.resiliencehub#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional information about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the error that was encountered while importing a resource.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehub#ErrorDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehub#ErrorDetail"
+            }
+        },
         "com.amazonaws.resiliencehub#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -5022,26 +5141,32 @@
             }
         },
         "com.amazonaws.resiliencehub#EstimatedCostTier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "L1",
-                        "name": "L1"
-                    },
-                    {
-                        "value": "L2",
-                        "name": "L2"
-                    },
-                    {
-                        "value": "L3",
-                        "name": "L3"
-                    },
-                    {
-                        "value": "L4",
-                        "name": "L4"
+            "type": "enum",
+            "members": {
+                "L1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "L1"
                     }
-                ]
+                },
+                "L2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "L2"
+                    }
+                },
+                "L3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "L3"
+                    }
+                },
+                "L4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "L4"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#EventSubscription": {
@@ -5085,37 +5210,43 @@
             }
         },
         "com.amazonaws.resiliencehub#EventType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ScheduledAssessmentFailure",
-                        "name": "SCHEDULED_ASSESSMENT_FAILURE"
-                    },
-                    {
-                        "value": "DriftDetected",
-                        "name": "DRIFT_DETECTED"
+            "type": "enum",
+            "members": {
+                "SCHEDULED_ASSESSMENT_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ScheduledAssessmentFailure"
                     }
-                ]
+                },
+                "DRIFT_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DriftDetected"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ExcludeRecommendationReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AlreadyImplemented",
-                        "name": "ALREADY_IMPLEMENTED"
-                    },
-                    {
-                        "value": "NotRelevant",
-                        "name": "NOT_RELEVANT"
-                    },
-                    {
-                        "value": "ComplexityOfImplementation",
-                        "name": "COMPLEXITY_OF_IMPLEMENTATION"
+            "type": "enum",
+            "members": {
+                "ALREADY_IMPLEMENTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AlreadyImplemented"
                     }
-                ]
+                },
+                "NOT_RELEVANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotRelevant"
+                    }
+                },
+                "COMPLEXITY_OF_IMPLEMENTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ComplexityOfImplementation"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#FailedGroupingRecommendationEntries": {
@@ -5271,18 +5402,20 @@
             }
         },
         "com.amazonaws.resiliencehub#GroupingRecommendationConfidenceLevel": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "HIGH",
-                        "value": "High"
-                    },
-                    {
-                        "name": "MEDIUM",
-                        "value": "Medium"
+            "type": "enum",
+            "members": {
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
                     }
-                ]
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#GroupingRecommendationList": {
@@ -5292,45 +5425,55 @@
             }
         },
         "com.amazonaws.resiliencehub#GroupingRecommendationRejectionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "DISTINCT_BUSINESS_PURPOSE",
-                        "value": "DistinctBusinessPurpose"
-                    },
-                    {
-                        "name": "SEPARATE_DATA_CONCERN",
-                        "value": "SeparateDataConcern"
-                    },
-                    {
-                        "name": "DISTINCT_USER_GROUP_HANDLING",
-                        "value": "DistinctUserGroupHandling"
-                    },
-                    {
-                        "name": "OTHER",
-                        "value": "Other"
+            "type": "enum",
+            "members": {
+                "DISTINCT_BUSINESS_PURPOSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DistinctBusinessPurpose"
                     }
-                ]
+                },
+                "SEPARATE_DATA_CONCERN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SeparateDataConcern"
+                    }
+                },
+                "DISTINCT_USER_GROUP_HANDLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DistinctUserGroupHandling"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Other"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#GroupingRecommendationStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "ACCEPTED",
-                        "value": "Accepted"
-                    },
-                    {
-                        "name": "REJECTED",
-                        "value": "Rejected"
-                    },
-                    {
-                        "name": "PENDING_DECISION",
-                        "value": "PendingDecision"
+            "type": "enum",
+            "members": {
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Accepted"
                     }
-                ]
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Rejected"
+                    }
+                },
+                "PENDING_DECISION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PendingDecision"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#GroupingResource": {
@@ -5383,30 +5526,38 @@
             }
         },
         "com.amazonaws.resiliencehub#HaArchitecture": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MultiSite",
-                        "name": "MULTI_SITE"
-                    },
-                    {
-                        "value": "WarmStandby",
-                        "name": "WARM_STANDBY"
-                    },
-                    {
-                        "value": "PilotLight",
-                        "name": "PILOT_LIGHT"
-                    },
-                    {
-                        "value": "BackupAndRestore",
-                        "name": "BACKUP_AND_RESTORE"
-                    },
-                    {
-                        "value": "NoRecoveryPlan",
-                        "name": "NO_RECOVERY_PLAN"
+            "type": "enum",
+            "members": {
+                "MULTI_SITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultiSite"
                     }
-                ]
+                },
+                "WARM_STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WarmStandby"
+                    }
+                },
+                "PILOT_LIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PilotLight"
+                    }
+                },
+                "BACKUP_AND_RESTORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BackupAndRestore"
+                    }
+                },
+                "NO_RECOVERY_PLAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NoRecoveryPlan"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#IamRoleArn": {
@@ -5679,7 +5830,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List of compliance drifts that were detected while running an assessment.</p>",
+                "smithy.api#documentation": "<p>Indicates the list of compliance drifts that were detected while running an\n      assessment.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-assessment-compliance-drifts",
@@ -6668,6 +6819,13 @@
                         "smithy.api#documentation": "<p>The application list is sorted based on the values of\n        <code>lastAppComplianceEvaluationTime</code> field. By default, application list is sorted\n      in ascending order. To sort the application list in descending order, set this field to\n        <code>True</code>.</p>",
                         "smithy.api#httpQuery": "reverseOrder"
                     }
+                },
+                "awsApplicationArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of  Resource Groups group that is integrated with an AppRegistry application. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>Amazon Web Services General Reference</i> guide.</p>",
+                        "smithy.api#httpQuery": "awsApplicationArn"
+                    }
                 }
             }
         },
@@ -7471,33 +7629,37 @@
             }
         },
         "com.amazonaws.resiliencehub#PermissionModelType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LegacyIAMUser",
-                        "name": "LEGACY_IAM_USER"
-                    },
-                    {
-                        "value": "RoleBased",
-                        "name": "ROLE_BASED"
+            "type": "enum",
+            "members": {
+                "LEGACY_IAM_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LegacyIAMUser"
                     }
-                ]
+                },
+                "ROLE_BASED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleBased"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#PhysicalIdentifierType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Arn",
-                        "name": "ARN"
-                    },
-                    {
-                        "value": "Native",
-                        "name": "NATIVE"
+            "type": "enum",
+            "members": {
+                "ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Arn"
                     }
-                ]
+                },
+                "NATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Native"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#PhysicalResource": {
@@ -7773,26 +7935,32 @@
             }
         },
         "com.amazonaws.resiliencehub#RecommendationComplianceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BreachedUnattainable",
-                        "name": "BREACHED_UNATTAINABLE"
-                    },
-                    {
-                        "value": "BreachedCanMeet",
-                        "name": "BREACHED_CAN_MEET"
-                    },
-                    {
-                        "value": "MetCanImprove",
-                        "name": "MET_CAN_IMPROVE"
-                    },
-                    {
-                        "value": "MissingPolicy",
-                        "name": "MISSING_POLICY"
+            "type": "enum",
+            "members": {
+                "BREACHED_UNATTAINABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BreachedUnattainable"
                     }
-                ]
+                },
+                "BREACHED_CAN_MEET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BreachedCanMeet"
+                    }
+                },
+                "MET_CAN_IMPROVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MetCanImprove"
+                    }
+                },
+                "MISSING_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissingPolicy"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#RecommendationDisruptionCompliance": {
@@ -7899,26 +8067,32 @@
             }
         },
         "com.amazonaws.resiliencehub#RecommendationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Implemented",
-                        "name": "IMPLEMENTED"
-                    },
-                    {
-                        "value": "Inactive",
-                        "name": "INACTIVE"
-                    },
-                    {
-                        "value": "NotImplemented",
-                        "name": "NOT_IMPLEMENTED"
-                    },
-                    {
-                        "value": "Excluded",
-                        "name": "EXCLUDED"
+            "type": "enum",
+            "members": {
+                "IMPLEMENTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Implemented"
                     }
-                ]
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                },
+                "NOT_IMPLEMENTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotImplemented"
+                    }
+                },
+                "EXCLUDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Excluded"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#RecommendationTemplate": {
@@ -8026,26 +8200,32 @@
             }
         },
         "com.amazonaws.resiliencehub#RecommendationTemplateStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "InProgress",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "Success",
-                        "name": "SUCCESS"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#RecommendationTemplateStatusList": {
@@ -8274,22 +8454,26 @@
             }
         },
         "com.amazonaws.resiliencehub#RenderRecommendationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Alarm",
-                        "name": "ALARM"
-                    },
-                    {
-                        "value": "Sop",
-                        "name": "SOP"
-                    },
-                    {
-                        "value": "Test",
-                        "name": "TEST"
+            "type": "enum",
+            "members": {
+                "ALARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Alarm"
                     }
-                ]
+                },
+                "SOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sop"
+                    }
+                },
+                "TEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Test"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#RenderRecommendationTypeList": {
@@ -8373,34 +8557,44 @@
             }
         },
         "com.amazonaws.resiliencehub#ResiliencyPolicyTier": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MissionCritical",
-                        "name": "MISSION_CRITICAL"
-                    },
-                    {
-                        "value": "Critical",
-                        "name": "CRITICAL"
-                    },
-                    {
-                        "value": "Important",
-                        "name": "IMPORTANT"
-                    },
-                    {
-                        "value": "CoreServices",
-                        "name": "CORE_SERVICES"
-                    },
-                    {
-                        "value": "NonCritical",
-                        "name": "NON_CRITICAL"
-                    },
-                    {
-                        "value": "NotApplicable",
-                        "name": "NOT_APPLICABLE"
+            "type": "enum",
+            "members": {
+                "MISSION_CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MissionCritical"
                     }
-                ]
+                },
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                },
+                "IMPORTANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Important"
+                    }
+                },
+                "CORE_SERVICES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CoreServices"
+                    }
+                },
+                "NON_CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NonCritical"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotApplicable"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResiliencyScore": {
@@ -8433,26 +8627,32 @@
             }
         },
         "com.amazonaws.resiliencehub#ResiliencyScoreType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Compliance",
-                        "name": "COMPLIANCE"
-                    },
-                    {
-                        "value": "Test",
-                        "name": "TEST"
-                    },
-                    {
-                        "value": "Alarm",
-                        "name": "ALARM"
-                    },
-                    {
-                        "value": "Sop",
-                        "name": "SOP"
+            "type": "enum",
+            "members": {
+                "COMPLIANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Compliance"
                     }
-                ]
+                },
+                "TEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Test"
+                    }
+                },
+                "ALARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Alarm"
+                    }
+                },
+                "SOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sop"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResolveAppVersionResources": {
@@ -8667,41 +8867,49 @@
             }
         },
         "com.amazonaws.resiliencehub#ResourceImportStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "PENDING",
-                        "value": "Pending"
-                    },
-                    {
-                        "name": "IN_PROGRESS",
-                        "value": "InProgress"
-                    },
-                    {
-                        "name": "FAILED",
-                        "value": "Failed"
-                    },
-                    {
-                        "name": "SUCCESS",
-                        "value": "Success"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResourceImportStrategyType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AddOnly",
-                        "name": "ADD_ONLY"
-                    },
-                    {
-                        "value": "ReplaceAll",
-                        "name": "REPLACE_ALL"
+            "type": "enum",
+            "members": {
+                "ADD_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AddOnly"
                     }
-                ]
+                },
+                "REPLACE_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplaceAll"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResourceMapping": {
@@ -8769,34 +8977,44 @@
             }
         },
         "com.amazonaws.resiliencehub#ResourceMappingType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CfnStack",
-                        "name": "CFN_STACK"
-                    },
-                    {
-                        "value": "Resource",
-                        "name": "RESOURCE"
-                    },
-                    {
-                        "value": "AppRegistryApp",
-                        "name": "APP_REGISTRY_APP"
-                    },
-                    {
-                        "value": "ResourceGroup",
-                        "name": "RESOURCE_GROUP"
-                    },
-                    {
-                        "value": "Terraform",
-                        "name": "TERRAFORM"
-                    },
-                    {
-                        "value": "EKS",
-                        "name": "EKS"
+            "type": "enum",
+            "members": {
+                "CFN_STACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CfnStack"
                     }
-                ]
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Resource"
+                    }
+                },
+                "APP_REGISTRY_APP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AppRegistryApp"
+                    }
+                },
+                "RESOURCE_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceGroup"
+                    }
+                },
+                "TERRAFORM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terraform"
+                    }
+                },
+                "EKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResourceNotFoundException": {
@@ -8825,41 +9043,49 @@
             }
         },
         "com.amazonaws.resiliencehub#ResourceResolutionStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "InProgress",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "Success",
-                        "name": "SUCCESS"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResourceSourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AppTemplate",
-                        "name": "APP_TEMPLATE"
-                    },
-                    {
-                        "value": "Discovered",
-                        "name": "DISCOVERED"
+            "type": "enum",
+            "members": {
+                "APP_TEMPLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AppTemplate"
                     }
-                ]
+                },
+                "DISCOVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Discovered"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ResourceType": {
@@ -8869,26 +9095,32 @@
             }
         },
         "com.amazonaws.resiliencehub#ResourcesGroupingRecGenStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "name": "PENDING",
-                        "value": "Pending"
-                    },
-                    {
-                        "name": "IN_PROGRESS",
-                        "value": "InProgress"
-                    },
-                    {
-                        "name": "FAILED",
-                        "value": "Failed"
-                    },
-                    {
-                        "name": "SUCCESS",
-                        "value": "Success"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#RetryAfterSeconds": {
@@ -9062,14 +9294,14 @@
             }
         },
         "com.amazonaws.resiliencehub#SopServiceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SSM",
-                        "name": "SSM"
+            "type": "enum",
+            "members": {
+                "SSM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSM"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.resiliencehub#SpecReferenceId": {
@@ -9421,18 +9653,20 @@
             }
         },
         "com.amazonaws.resiliencehub#TemplateFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CfnYaml",
-                        "name": "CFN_YAML"
-                    },
-                    {
-                        "value": "CfnJson",
-                        "name": "CFN_JSON"
+            "type": "enum",
+            "members": {
+                "CFN_YAML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CfnYaml"
                     }
-                ]
+                },
+                "CFN_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CfnJson"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#TerraformSource": {
@@ -9544,45 +9778,55 @@
             }
         },
         "com.amazonaws.resiliencehub#TestRisk": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Small",
-                        "name": "SMALL"
-                    },
-                    {
-                        "value": "Medium",
-                        "name": "MEDIUM"
-                    },
-                    {
-                        "value": "High",
-                        "name": "HIGH"
+            "type": "enum",
+            "members": {
+                "SMALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Small"
                     }
-                ]
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#TestType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Software",
-                        "name": "SOFTWARE"
-                    },
-                    {
-                        "value": "Hardware",
-                        "name": "HARDWARE"
-                    },
-                    {
-                        "value": "AZ",
-                        "name": "AZ"
-                    },
-                    {
-                        "value": "Region",
-                        "name": "REGION"
+            "type": "enum",
+            "members": {
+                "SOFTWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Software"
                     }
-                ]
+                },
+                "HARDWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hardware"
+                    }
+                },
+                "AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AZ"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Region"
+                    }
+                }
             }
         },
         "com.amazonaws.resiliencehub#ThrottlingException": {
@@ -9781,7 +10025,7 @@
                 "permissionModel": {
                     "target": "com.amazonaws.resiliencehub#PermissionModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the roles and credentials that Resilience Hub would use while creating\n      an\n      application, importing its resources, and running an assessment.</p>"
+                        "smithy.api#documentation": "<p>Defines the roles and credentials that Resilience Hub would use while creating an\n      application, importing its resources, and running an assessment.</p>"
                     }
                 },
                 "eventSubscriptions": {
@@ -10172,8 +10416,7 @@
                 "item": {
                     "target": "com.amazonaws.resiliencehub#UpdateRecommendationStatusItem",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operational recommendation item.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The operational recommendation item.</p>"
                     }
                 },
                 "excluded": {
