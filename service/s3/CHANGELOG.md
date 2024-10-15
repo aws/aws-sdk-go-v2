@@ -8,7 +8,7 @@
 
 # v1.65.1 (2024-10-07)
 
-* **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+* **Bug Fix**: **CHANGE IN BEHAVIOR**: Allow serialization of headers with empty string for prefix headers. We are deploying this fix because the behavior is actively preventing users from transmitting keys with empty values to the service. If you were setting metadata keys with empty values before this change, they will now actually be sent to the service.
 * **Dependency Update**: Updated to the latest SDK module versions
 
 # v1.65.0 (2024-10-04)

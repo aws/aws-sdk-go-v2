@@ -99,7 +99,7 @@
 * `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.49.0](service/redshift/CHANGELOG.md#v1490-2024-10-07)
   * **Feature**: Add validation pattern to S3KeyPrefix on the EnableLogging API
 * `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.65.1](service/s3/CHANGELOG.md#v1651-2024-10-07)
-  * **Bug Fix**: Allow serialization of headers with empty string for prefix headers
+  * **Bug Fix**: **CHANGE IN BEHAVIOR**: Allow serialization of headers with empty string for prefix headers. We are deploying this fix because the behavior is actively preventing users from transmitting keys with empty values to the service. If you were setting metadata keys with empty values before this change, they will now actually be sent to the service.
 
 # Release (2024-10-04)
 
