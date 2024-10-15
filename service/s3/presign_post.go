@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/url"
 	"strings"
 	"time"
@@ -166,6 +167,9 @@ type PresignPostOptions struct {
 	//
 	// [here]https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-HTTPPOSTConstructPolicy.html#sigv4-PolicyConditions
 	Conditions []interface{}
+
+	// BaseURLOverride provides an override for the presigner
+	BaseURLOverride *string
 }
 
 type presignPostConverter PresignPostOptions
@@ -177,6 +181,7 @@ type presignPostRequestMiddlewareOptions struct {
 	LogSigning          bool
 	ExpiresIn           time.Duration
 	Conditions          []interface{}
+	BaseURLOverride     *string
 }
 
 type presignPostRequestMiddleware struct {
@@ -185,6 +190,7 @@ type presignPostRequestMiddleware struct {
 	logSigning          bool
 	expiresIn           time.Duration
 	conditions          []interface{}
+	BaseURLOverride     *string
 }
 
 // newPresignPostRequestMiddleware returns a new presignPostRequestMiddleware
@@ -196,6 +202,7 @@ func newPresignPostRequestMiddleware(options presignPostRequestMiddlewareOptions
 		logSigning:          options.LogSigning,
 		expiresIn:           options.ExpiresIn,
 		conditions:          options.Conditions,
+		BaseURLOverride:     options.BaseURLOverride,
 	}
 }
 
@@ -267,6 +274,9 @@ func (s *presignPostRequestMiddleware) HandleFinalize(
 
 	// Other middlewares may set default values on the URL on the path or as query params. Remove them
 	baseURL := toBaseURL(u)
+	if s.BaseURLOverride != nil {
+		baseURL = *s.BaseURLOverride
+	}
 
 	out.Result = &PresignedPostRequest{
 		URL:    baseURL,
@@ -277,8 +287,22 @@ func (s *presignPostRequestMiddleware) HandleFinalize(
 }
 
 func toBaseURL(fullURL string) string {
-	a, _ := url.Parse(fullURL)
-	return a.Scheme + "://" + a.Host
+	parsedURL, err := url.Parse(fullURL)
+	if err != nil {
+		log.Printf("Invalid URL format: %v", err)
+		return ""
+	}
+	pathSegments := strings.Split(parsedURL.Path, "/")
+
+	if len(pathSegments) > 0 && pathSegments[0] == "" {
+		pathSegments = pathSegments[1:]
+	}
+
+	if len(pathSegments) > 1 {
+		return fmt.Sprintf("%s://%s/%s", parsedURL.Scheme, parsedURL.Host, pathSegments[0])
+	} else {
+		return fmt.Sprintf("%s://%s", parsedURL.Scheme, parsedURL.Host)
+	}
 }
 
 // Adapted from existing PresignConverter middleware
@@ -305,6 +329,7 @@ func (c presignPostConverter) ConvertToPresignMiddleware(stack *middleware.Stack
 		LogSigning:          options.ClientLogMode.IsSigning(),
 		ExpiresIn:           expiresIn,
 		Conditions:          c.Conditions,
+		BaseURLOverride:     c.BaseURLOverride,
 	})
 	if _, err := stack.Finalize.Swap("Signing", pmw); err != nil {
 		return err

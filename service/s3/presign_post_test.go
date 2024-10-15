@@ -19,11 +19,13 @@ func TestPresignPutObject(t *testing.T) {
 	defer mockTime(fixedTime)()
 
 	cases := map[string]struct {
-		input           PutObjectInput
-		options         []func(*PresignPostOptions)
-		expectedExpires time.Time
-		expectedURL     string
-		region          string
+		input            PutObjectInput
+		options          []func(*PresignPostOptions)
+		expectedExpires  time.Time
+		expectedURL      string
+		region           string
+		pathStyleEnabled bool
+		BaseEndpoint     string
 	}{
 		"sample": {
 			input: PutObjectInput{
@@ -66,6 +68,49 @@ func TestPresignPutObject(t *testing.T) {
 			},
 			expectedURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com",
 		},
+		"override base url": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			options: []func(o *PresignPostOptions){
+				func(o *PresignPostOptions) {
+					o.BaseURLOverride = aws.String("https://s3.custom-domain.com")
+				},
+			},
+			expectedURL: "https://s3.custom-domain.com",
+		},
+		"use path style bucket hosting pattern": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			expectedURL:      "https://s3.us-west-2.amazonaws.com/bucket",
+			pathStyleEnabled: true,
+		},
+		"use path style bucket with custom baseEndpoint": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			expectedURL:      "https://s3.custom-domain.com/bucket",
+			pathStyleEnabled: true,
+			BaseEndpoint:     "https://s3.custom-domain.com",
+		},
+		"path style with baseEndpoint with url override option": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			options: []func(o *PresignPostOptions){
+				func(o *PresignPostOptions) {
+					o.BaseURLOverride = aws.String("https://different-url.com")
+				},
+			},
+			expectedURL:      "https://different-url.com",
+			pathStyleEnabled: true,
+			BaseEndpoint:     "https://s3.custom-domain.com",
+		},
 	}
 	for name, tc := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -81,8 +126,12 @@ func TestPresignPutObject(t *testing.T) {
 					return aws.NopRetryer{}
 				},
 			}
-
-			presignClient := NewPresignClient(NewFromConfig(cfg))
+			presignClient := NewPresignClient(NewFromConfig(cfg, func(options *Options) {
+				options.UsePathStyle = tc.pathStyleEnabled
+				if tc.BaseEndpoint != "" {
+					options.BaseEndpoint = aws.String(tc.BaseEndpoint)
+				}
+			}))
 			postObject, err := presignClient.PresignPostObject(ctx, &tc.input, tc.options...)
 			if err != nil {
 				t.Error(err)
