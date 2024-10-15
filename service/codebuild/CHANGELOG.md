@@ -1,3 +1,7 @@
+# v1.46.0 (2024-10-15)
+
+* **Feature**: Enable proxy for reserved capacity fleet.
+
 # v1.45.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

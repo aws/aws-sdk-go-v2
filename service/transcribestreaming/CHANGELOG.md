@@ -1,3 +1,7 @@
+# v1.22.0 (2024-10-15)
+
+* **Feature**: We are expanding support for 40 new locales in AWS Transcribe Streaming.
+
 # v1.21.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

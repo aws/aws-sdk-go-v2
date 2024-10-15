@@ -1,3 +1,7 @@
+# v1.14.0 (2024-10-15)
+
+* **Feature**: Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
+
 # v1.13.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.37.0 (2024-10-15)
+
+* **Feature**: This release adds support for email maximum delivery seconds that allows senders to control the time within which their emails are attempted for delivery.
+
 # v1.36.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

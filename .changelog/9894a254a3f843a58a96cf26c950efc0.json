@@ -1,8 +1,0 @@
-{
-    "id": "9894a254-a3f8-43a5-8a96-cf26c950efc0",
-    "type": "feature",
-    "description": "AWS Resilience Hub now integrates with the myApplications platform, enabling customers to easily assess the resilience of applications defined in myApplications. The new Resiliency widget provides visibility into application resilience and actionable recommendations for improvement.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

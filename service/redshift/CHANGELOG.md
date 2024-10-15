@@ -1,3 +1,7 @@
+# v1.50.0 (2024-10-15)
+
+* **Feature**: This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.
+
 # v1.49.1 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

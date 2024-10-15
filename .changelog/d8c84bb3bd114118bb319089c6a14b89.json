@@ -1,8 +1,0 @@
-{
-    "id": "d8c84bb3-bd11-4118-bb31-9089c6a14b89",
-    "type": "feature",
-    "description": "Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

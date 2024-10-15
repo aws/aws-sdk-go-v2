@@ -1,3 +1,25 @@
+# Release (2024-10-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.27.0](service/amplify/CHANGELOG.md#v1270-2024-10-15)
+  * **Feature**: Added sourceUrlType field to StartDeployment request
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.55.3](service/cloudformation/CHANGELOG.md#v1553-2024-10-15)
+  * **Documentation**: Documentation update for AWS CloudFormation API Reference.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.46.0](service/codebuild/CHANGELOG.md#v1460-2024-10-15)
+  * **Feature**: Enable proxy for reserved capacity fleet.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.41.0](service/ivs/CHANGELOG.md#v1410-2024-10-15)
+  * **Feature**: On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.14.0](service/qbusiness/CHANGELOG.md#v1140-2024-10-15)
+  * **Feature**: Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.50.0](service/redshift/CHANGELOG.md#v1500-2024-10-15)
+  * **Feature**: This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.27.0](service/resiliencehub/CHANGELOG.md#v1270-2024-10-15)
+  * **Feature**: AWS Resilience Hub now integrates with the myApplications platform, enabling customers to easily assess the resilience of applications defined in myApplications. The new Resiliency widget provides visibility into application resilience and actionable recommendations for improvement.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.37.0](service/sesv2/CHANGELOG.md#v1370-2024-10-15)
+  * **Feature**: This release adds support for email maximum delivery seconds that allows senders to control the time within which their emails are attempted for delivery.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.22.0](service/transcribestreaming/CHANGELOG.md#v1220-2024-10-15)
+  * **Feature**: We are expanding support for 40 new locales in AWS Transcribe Streaming.
+
 # Release (2024-10-14)
 
 ## Module Highlights

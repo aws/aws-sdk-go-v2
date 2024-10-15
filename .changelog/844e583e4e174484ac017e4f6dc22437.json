@@ -1,8 +1,0 @@
-{
-    "id": "844e583e-4e17-4484-ac01-7e4f6dc22437",
-    "type": "documentation",
-    "description": "Documentation update for AWS CloudFormation API Reference.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

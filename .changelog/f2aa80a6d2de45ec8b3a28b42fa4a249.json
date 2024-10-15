@@ -1,8 +1,0 @@
-{
-    "id": "f2aa80a6-d2de-45ec-8b3a-28b42fa4a249",
-    "type": "feature",
-    "description": "This release launches the CreateIntegration, DeleteIntegration, DescribeIntegrations and ModifyIntegration APIs to create and manage Amazon Redshift Zero-ETL Integrations.",
-    "modules": [
-        "service/redshift"
-    ]
-}

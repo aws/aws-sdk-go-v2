@@ -1,3 +1,7 @@
+# v1.27.0 (2024-10-15)
+
+* **Feature**: AWS Resilience Hub now integrates with the myApplications platform, enabling customers to easily assess the resilience of applications defined in myApplications. The new Resiliency widget provides visibility into application resilience and actionable recommendations for improvement.
+
 # v1.26.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

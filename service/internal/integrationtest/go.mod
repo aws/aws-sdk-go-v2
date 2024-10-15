@@ -11,12 +11,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.47.2
 	github.com/aws/aws-sdk-go-v2/service/batch v1.46.2
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.55.2
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.55.3
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.40.2
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.44.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.42.2
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.45.2
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.36.0
@@ -58,7 +58,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/polly v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.87.2
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.49.1
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.50.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.45.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.2
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.32.2
 	github.com/aws/aws-sdk-go-v2/service/support v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.29.2
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.21.2
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.54.2

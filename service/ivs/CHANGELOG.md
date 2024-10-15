@@ -1,3 +1,7 @@
+# v1.41.0 (2024-10-15)
+
+* **Feature**: On a channel that you own, you can now replace an ongoing stream with a new stream by streaming up with the priority parameter appended to the stream key.
+
 # v1.40.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

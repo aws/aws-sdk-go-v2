@@ -1,8 +1,0 @@
-{
-    "id": "eff05dfe-4ecc-4010-8354-244d723a8772",
-    "type": "feature",
-    "description": "We are expanding support for 40 new locales in AWS Transcribe Streaming.",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.27.0 (2024-10-15)
+
+* **Feature**: Added sourceUrlType field to StartDeployment request
+
 # v1.26.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
