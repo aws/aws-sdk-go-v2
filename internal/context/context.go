@@ -10,6 +10,7 @@ import (
 type s3BackendKey struct{}
 type checksumInputAlgorithmKey struct{}
 type clockSkew struct{}
+type s3resolvedUri struct{}
 
 const (
 	// S3BackendS3Express identifies the S3Express backend
@@ -49,4 +50,15 @@ func SetAttemptSkewContext(ctx context.Context, v time.Duration) context.Context
 func GetAttemptSkewContext(ctx context.Context) time.Duration {
 	x, _ := middleware.GetStackValue(ctx, clockSkew{}).(time.Duration)
 	return x
+}
+
+// SetS3ResolvedURI sets the URI as resolved by the EndpointResolverV2
+func SetS3ResolvedURI(ctx context.Context, value string) context.Context {
+	return middleware.WithStackValue(ctx, s3resolvedUri{}, value)
+}
+
+// GetS3ResolvedURI gets the URI as resolved by EndpointResolverV2
+func GetS3ResolvedURI(ctx context.Context) string {
+	v, _ := middleware.GetStackValue(ctx, s3resolvedUri{}).(string)
+	return v
 }
