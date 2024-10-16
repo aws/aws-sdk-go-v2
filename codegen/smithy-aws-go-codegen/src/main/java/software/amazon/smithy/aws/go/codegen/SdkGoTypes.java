@@ -72,7 +72,6 @@ public final class SdkGoTypes {
 
         public static final class Context {
             public static final Symbol SetS3Backend = AwsGoDependency.INTERNAL_CONTEXT.valueSymbol("SetS3Backend");
-            public static final Symbol SetS3ResolvedUri = AwsGoDependency.INTERNAL_CONTEXT.valueSymbol("SetS3ResolvedUri");
         }
 
         public static final class Endpoints {
