@@ -152,7 +152,9 @@ endpoint_url = https://global-cfg.com
 			defer reset()
 
 			loadopts := append(tt.LoadOpts,
-				config.WithSharedConfigFiles([]string{"test_shared_config"}))
+				config.WithSharedConfigFiles([]string{"test_shared_config"}),
+				config.WithSharedConfigProfile("default"))
+
 			cfg, err := config.LoadDefaultConfig(context.Background(), loadopts...)
 			if err != nil {
 				t.Fatalf("load config: %v", err)
