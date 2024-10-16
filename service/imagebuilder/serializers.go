@@ -7397,9 +7397,9 @@ func awsRestjson1_serializeDocumentLaunchTemplateConfiguration(v *types.LaunchTe
 		ok.String(*v.LaunchTemplateId)
 	}
 
-	if v.SetDefaultVersion {
+	if v.SetDefaultVersion != nil {
 		ok := object.Key("setDefaultVersion")
-		ok.Boolean(v.SetDefaultVersion)
+		ok.Boolean(*v.SetDefaultVersion)
 	}
 
 	return nil
