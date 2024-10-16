@@ -1,8 +1,0 @@
-{
-    "id": "139b04a8-d612-4cb2-9dfb-9e66f9f70386",
-    "type": "bugfix",
-    "description": "**BREAKING CHANGE**: The type of LaunchTemplateConfiguration.SetDefaultVersion has been changed from `bool` to `*bool`. Before this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to express the full range of values for the field (true, false, and unset/nil), each of which have distinctly different behaviors.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

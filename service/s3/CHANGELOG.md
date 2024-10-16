@@ -1,3 +1,7 @@
+# v1.66.0 (2024-10-16)
+
+* **Feature**: Add support for the new optional bucket-region and prefix query parameters in the ListBuckets API. For ListBuckets requests that express pagination, Amazon S3 will now return both the bucket names and associated AWS regions in the response.
+
 # v1.65.3 (2024-10-11)
 
 * **Bug Fix**: **BREAKING CHANGE**: S3 ReplicationRuleFilter and LifecycleRuleFilter shapes are being changed from union to structure types

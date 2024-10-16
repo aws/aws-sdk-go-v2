@@ -1,3 +1,16 @@
+# Release (2024-10-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.28.0](config/CHANGELOG.md#v1280-2024-10-16)
+  * **Feature**: Adds the LoadOptions hook `WithBaseEndpoint` for setting global endpoint override in-code.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.37.3](service/imagebuilder/CHANGELOG.md#v1373-2024-10-16)
+  * **Bug Fix**: **BREAKING CHANGE**: The type of LaunchTemplateConfiguration.SetDefaultVersion has been changed from `bool` to `*bool`. Before this change, the field was incorrectly marked as having a default value of false by the service, which made it functionally impossible for users to express the full range of values for the field (true, false, and unset/nil), each of which have distinctly different behaviors.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.66.0](service/s3/CHANGELOG.md#v1660-2024-10-16)
+  * **Feature**: Add support for the new optional bucket-region and prefix query parameters in the ListBuckets API. For ListBuckets requests that express pagination, Amazon S3 will now return both the bucket names and associated AWS regions in the response.
+
 # Release (2024-10-15)
 
 ## Module Highlights

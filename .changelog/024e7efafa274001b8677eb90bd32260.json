@@ -1,8 +1,0 @@
-{
-    "id": "024e7efa-fa27-4001-b867-7eb90bd32260",
-    "type": "feature",
-    "description": "Adds the LoadOptions hook `WithBaseEndpoint` for setting global endpoint override in-code.",
-    "modules": [
-        "config"
-    ]
-}
