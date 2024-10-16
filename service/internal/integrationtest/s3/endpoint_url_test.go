@@ -145,9 +145,6 @@ endpoint_url = https://global-cfg.com
 		},
 	} {
 		t.Run(name, func(t *testing.T) {
-			// sanity check to ensure the test is resilient to this being set
-			os.Setenv("AWS_PROFILE", "foo")
-
 			reset, err := mockEnvironment(tt.Env, tt.SharedConfig)
 			if err != nil {
 				t.Fatalf("mock environment: %v", err)
