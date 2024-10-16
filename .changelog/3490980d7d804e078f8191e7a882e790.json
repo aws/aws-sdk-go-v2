@@ -1,0 +1,8 @@
+{
+    "id": "3490980d-7d80-4e07-8f81-91e7a882e790",
+    "type": "feature",
+    "description": "Add support for the new optional bucket-region and prefix query parameters in the ListBuckets API. For ListBuckets requests that express pagination, Amazon S3 will now return both the bucket names and associated AWS regions in the response.",
+    "modules": [
+        "service/s3"
+    ]
+}
