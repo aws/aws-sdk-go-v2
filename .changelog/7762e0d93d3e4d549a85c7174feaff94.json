@@ -1,0 +1,8 @@
+{
+    "id": "7762e0d9-3d3e-4d54-9a85-c7174feaff94",
+    "type": "bugfix",
+    "description": "Added support for path style urls and overrides in presigned post",
+    "modules": [
+        "service/s3"
+    ]
+}
