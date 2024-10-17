@@ -2870,6 +2870,26 @@ func (m *validateOpStartDashboardSnapshotJob) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDashboardSnapshotJobSchedule struct {
+}
+
+func (*validateOpStartDashboardSnapshotJobSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDashboardSnapshotJobSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDashboardSnapshotJobScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDashboardSnapshotJobScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -4180,6 +4200,10 @@ func addOpStartAssetBundleImportJobValidationMiddleware(stack *middleware.Stack)
 
 func addOpStartDashboardSnapshotJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDashboardSnapshotJob{}, middleware.After)
+}
+
+func addOpStartDashboardSnapshotJobScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDashboardSnapshotJobSchedule{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -21766,6 +21790,27 @@ func validateOpStartDashboardSnapshotJobInput(v *StartDashboardSnapshotJobInput)
 		if err := validateSnapshotConfiguration(v.SnapshotConfiguration); err != nil {
 			invalidParams.AddNested("SnapshotConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDashboardSnapshotJobScheduleInput(v *StartDashboardSnapshotJobScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDashboardSnapshotJobScheduleInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if v.ScheduleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,47 +11,44 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation lists your data sets. When listing by origin OWNED, results are
-// sorted by CreatedAt in descending order. When listing by origin ENTITLED, there
-// is no order.
-func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
+// This operation returns information about all received data grants.
+func (c *Client) ListReceivedDataGrants(ctx context.Context, params *ListReceivedDataGrantsInput, optFns ...func(*Options)) (*ListReceivedDataGrantsOutput, error) {
 	if params == nil {
-		params = &ListDataSetsInput{}
+		params = &ListReceivedDataGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDataSets", params, optFns, c.addOperationListDataSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListReceivedDataGrants", params, optFns, c.addOperationListReceivedDataGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListDataSetsOutput)
+	out := result.(*ListReceivedDataGrantsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListDataSetsInput struct {
+type ListReceivedDataGrantsInput struct {
 
-	// The maximum number of results returned by a single call.
-	MaxResults int32
+	// The acceptance state of the data grants to list.
+	AcceptanceState []types.AcceptanceStateFilterValue
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The maximum number of results to be included in the next page.
+	MaxResults *int32
+
+	// The pagination token used to retrieve the next page of results for this
+	// operation.
 	NextToken *string
-
-	// A property that defines the data set as OWNED by the account (for providers) or
-	// ENTITLED to the account (for subscribers).
-	Origin *string
 
 	noSmithyDocumentSerde
 }
 
-type ListDataSetsOutput struct {
+type ListReceivedDataGrantsOutput struct {
 
-	// The data set objects listed by the request.
-	DataSets []types.DataSetEntry
+	// An object that contains a list of received data grant information.
+	DataGrantSummaries []types.ReceivedDataGrantSummariesEntry
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token used to retrieve the next page of results for this
+	// operation.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -60,19 +57,19 @@ type ListDataSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListReceivedDataGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSets{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReceivedDataGrants{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSets{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReceivedDataGrants{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSets"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReceivedDataGrants"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -124,7 +121,7 @@ func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSets(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReceivedDataGrants(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -157,9 +154,10 @@ func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-// ListDataSetsPaginatorOptions is the paginator options for ListDataSets
-type ListDataSetsPaginatorOptions struct {
-	// The maximum number of results returned by a single call.
+// ListReceivedDataGrantsPaginatorOptions is the paginator options for
+// ListReceivedDataGrants
+type ListReceivedDataGrantsPaginatorOptions struct {
+	// The maximum number of results to be included in the next page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -167,31 +165,31 @@ type ListDataSetsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListDataSetsPaginator is a paginator for ListDataSets
-type ListDataSetsPaginator struct {
-	options   ListDataSetsPaginatorOptions
-	client    ListDataSetsAPIClient
-	params    *ListDataSetsInput
+// ListReceivedDataGrantsPaginator is a paginator for ListReceivedDataGrants
+type ListReceivedDataGrantsPaginator struct {
+	options   ListReceivedDataGrantsPaginatorOptions
+	client    ListReceivedDataGrantsAPIClient
+	params    *ListReceivedDataGrantsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListDataSetsPaginator returns a new ListDataSetsPaginator
-func NewListDataSetsPaginator(client ListDataSetsAPIClient, params *ListDataSetsInput, optFns ...func(*ListDataSetsPaginatorOptions)) *ListDataSetsPaginator {
+// NewListReceivedDataGrantsPaginator returns a new ListReceivedDataGrantsPaginator
+func NewListReceivedDataGrantsPaginator(client ListReceivedDataGrantsAPIClient, params *ListReceivedDataGrantsInput, optFns ...func(*ListReceivedDataGrantsPaginatorOptions)) *ListReceivedDataGrantsPaginator {
 	if params == nil {
-		params = &ListDataSetsInput{}
+		params = &ListReceivedDataGrantsInput{}
 	}
 
-	options := ListDataSetsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	options := ListReceivedDataGrantsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
 		fn(&options)
 	}
 
-	return &ListDataSetsPaginator{
+	return &ListReceivedDataGrantsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -201,12 +199,12 @@ func NewListDataSetsPaginator(client ListDataSetsAPIClient, params *ListDataSets
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListDataSetsPaginator) HasMorePages() bool {
+func (p *ListReceivedDataGrantsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListDataSets page.
-func (p *ListDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
+// NextPage retrieves the next ListReceivedDataGrants page.
+func (p *ListReceivedDataGrantsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListReceivedDataGrantsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -214,12 +212,16 @@ func (p *ListDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.ListDataSets(ctx, &params, optFns...)
+	result, err := p.client.ListReceivedDataGrants(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -238,17 +240,18 @@ func (p *ListDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	return result, nil
 }
 
-// ListDataSetsAPIClient is a client that implements the ListDataSets operation.
-type ListDataSetsAPIClient interface {
-	ListDataSets(context.Context, *ListDataSetsInput, ...func(*Options)) (*ListDataSetsOutput, error)
+// ListReceivedDataGrantsAPIClient is a client that implements the
+// ListReceivedDataGrants operation.
+type ListReceivedDataGrantsAPIClient interface {
+	ListReceivedDataGrants(context.Context, *ListReceivedDataGrantsInput, ...func(*Options)) (*ListReceivedDataGrantsOutput, error)
 }
 
-var _ ListDataSetsAPIClient = (*Client)(nil)
+var _ ListReceivedDataGrantsAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opListDataSets(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListReceivedDataGrants(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListDataSets",
+		OperationName: "ListReceivedDataGrants",
 	}
 }

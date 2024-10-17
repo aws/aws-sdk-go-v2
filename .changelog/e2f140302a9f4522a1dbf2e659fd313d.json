@@ -1,0 +1,8 @@
+{
+    "id": "e2f14030-2a9f-4522-a1db-f2e659fd313d",
+    "type": "documentation",
+    "description": "Updates Amazon RDS documentation for TAZ IAM support",
+    "modules": [
+        "service/rds"
+    ]
+}

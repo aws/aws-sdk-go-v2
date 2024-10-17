@@ -2619,10 +2619,6 @@ type PromptModelInferenceConfiguration struct {
 	// predictable outputs and a higher value for more surprising outputs.
 	Temperature *float32
 
-	// The number of most-likely candidates that the model considers for the next
-	// token during generation.
-	TopK *int32
-
 	// The percentage of most-likely candidates that the model considers for the next
 	// token.
 	TopP *float32
@@ -2729,6 +2725,11 @@ type PromptVariant struct {
 	// This member is required.
 	Name *string
 
+	// Contains configurations for the prompt template.
+	//
+	// This member is required.
+	TemplateConfiguration PromptTemplateConfiguration
+
 	// The type of prompt template to use.
 	//
 	// This member is required.
@@ -2748,9 +2749,6 @@ type PromptVariant struct {
 	//
 	// [inference profile]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 	ModelId *string
-
-	// Contains configurations for the prompt template.
-	TemplateConfiguration PromptTemplateConfiguration
 
 	noSmithyDocumentSerde
 }

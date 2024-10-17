@@ -1,0 +1,8 @@
+{
+    "id": "5f3856c0-b553-4dc1-9d7c-3e738cf6c119",
+    "type": "feature",
+    "description": "Add StartDashboardSnapshotJobSchedule API. RestoreAnalysis now supports restoring analysis to folders.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

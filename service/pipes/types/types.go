@@ -874,7 +874,7 @@ type PipeSourceActiveMQBrokerParameters struct {
 // The parameters for using a DynamoDB stream as a source.
 type PipeSourceDynamoDBStreamParameters struct {
 
-	// (Streams only) The position in a stream from which to start reading.
+	// The position in a stream from which to start reading.
 	//
 	// This member is required.
 	StartingPosition DynamoDBStreamStartPosition
@@ -888,24 +888,24 @@ type PipeSourceDynamoDBStreamParameters struct {
 	// The maximum length of a time to wait for events.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams only) Discard records older than the specified age. The default value
-	// is -1, which sets the maximum age to infinite. When the value is set to
-	// infinite, EventBridge never discards old records.
+	// Discard records older than the specified age. The default value is -1, which
+	// sets the maximum age to infinite. When the value is set to infinite, EventBridge
+	// never discards old records.
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams only) Discard records after the specified number of retries. The
-	// default value is -1, which sets the maximum number of retries to infinite. When
-	// MaximumRetryAttempts is infinite, EventBridge retries failed records until the
-	// record expires in the event source.
+	// Discard records after the specified number of retries. The default value is -1,
+	// which sets the maximum number of retries to infinite. When MaximumRetryAttempts
+	// is infinite, EventBridge retries failed records until the record expires in the
+	// event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT
-	// halves each batch and retry each half until all the records are processed or
-	// there is one failed message left in the batch.
+	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch
+	// and retry each half until all the records are processed or there is one failed
+	// message left in the batch.
 	OnPartialBatchItemFailure OnPartialBatchItemFailureStreams
 
-	// (Streams only) The number of batches to process concurrently from each shard.
-	// The default value is 1.
+	// The number of batches to process concurrently from each shard. The default
+	// value is 1.
 	ParallelizationFactor *int32
 
 	noSmithyDocumentSerde
@@ -914,7 +914,7 @@ type PipeSourceDynamoDBStreamParameters struct {
 // The parameters for using a Kinesis stream as a source.
 type PipeSourceKinesisStreamParameters struct {
 
-	// (Streams only) The position in a stream from which to start reading.
+	// The position in a stream from which to start reading.
 	//
 	// This member is required.
 	StartingPosition KinesisStreamStartPosition
@@ -928,24 +928,24 @@ type PipeSourceKinesisStreamParameters struct {
 	// The maximum length of a time to wait for events.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams only) Discard records older than the specified age. The default value
-	// is -1, which sets the maximum age to infinite. When the value is set to
-	// infinite, EventBridge never discards old records.
+	// Discard records older than the specified age. The default value is -1, which
+	// sets the maximum age to infinite. When the value is set to infinite, EventBridge
+	// never discards old records.
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams only) Discard records after the specified number of retries. The
-	// default value is -1, which sets the maximum number of retries to infinite. When
-	// MaximumRetryAttempts is infinite, EventBridge retries failed records until the
-	// record expires in the event source.
+	// Discard records after the specified number of retries. The default value is -1,
+	// which sets the maximum number of retries to infinite. When MaximumRetryAttempts
+	// is infinite, EventBridge retries failed records until the record expires in the
+	// event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT
-	// halves each batch and retry each half until all the records are processed or
-	// there is one failed message left in the batch.
+	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch
+	// and retry each half until all the records are processed or there is one failed
+	// message left in the batch.
 	OnPartialBatchItemFailure OnPartialBatchItemFailureStreams
 
-	// (Streams only) The number of batches to process concurrently from each shard.
-	// The default value is 1.
+	// The number of batches to process concurrently from each shard. The default
+	// value is 1.
 	ParallelizationFactor *int32
 
 	// With StartingPosition set to AT_TIMESTAMP , the time from which to start
@@ -975,7 +975,7 @@ type PipeSourceManagedStreamingKafkaParameters struct {
 	// The maximum length of a time to wait for events.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams only) The position in a stream from which to start reading.
+	// The position in a stream from which to start reading.
 	StartingPosition MSKStartPosition
 
 	noSmithyDocumentSerde
@@ -1089,7 +1089,7 @@ type PipeSourceSelfManagedKafkaParameters struct {
 	// The ARN of the Secrets Manager secret used for certification.
 	ServerRootCaCertificate *string
 
-	// (Streams only) The position in a stream from which to start reading.
+	// The position in a stream from which to start reading.
 	StartingPosition SelfManagedKafkaStartPosition
 
 	// This structure specifies the VPC subnets and security groups for the stream,
@@ -1546,7 +1546,7 @@ type PipeTargetTimestreamParameters struct {
 	// The default is EPOCH .
 	TimeFieldType TimeFieldType
 
-	// How to format the timestamps. For example, YYYY-MM-DDThh:mm:ss.sssTZD .
+	// How to format the timestamps. For example, yyyy-MM-dd'T'HH:mm:ss'Z' .
 	//
 	// Required if TimeFieldType is specified as TIMESTAMP_FORMAT .
 	TimestampFormat *string
@@ -1818,24 +1818,24 @@ type UpdatePipeSourceDynamoDBStreamParameters struct {
 	// The maximum length of a time to wait for events.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams only) Discard records older than the specified age. The default value
-	// is -1, which sets the maximum age to infinite. When the value is set to
-	// infinite, EventBridge never discards old records.
+	// Discard records older than the specified age. The default value is -1, which
+	// sets the maximum age to infinite. When the value is set to infinite, EventBridge
+	// never discards old records.
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams only) Discard records after the specified number of retries. The
-	// default value is -1, which sets the maximum number of retries to infinite. When
-	// MaximumRetryAttempts is infinite, EventBridge retries failed records until the
-	// record expires in the event source.
+	// Discard records after the specified number of retries. The default value is -1,
+	// which sets the maximum number of retries to infinite. When MaximumRetryAttempts
+	// is infinite, EventBridge retries failed records until the record expires in the
+	// event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT
-	// halves each batch and retry each half until all the records are processed or
-	// there is one failed message left in the batch.
+	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch
+	// and retry each half until all the records are processed or there is one failed
+	// message left in the batch.
 	OnPartialBatchItemFailure OnPartialBatchItemFailureStreams
 
-	// (Streams only) The number of batches to process concurrently from each shard.
-	// The default value is 1.
+	// The number of batches to process concurrently from each shard. The default
+	// value is 1.
 	ParallelizationFactor *int32
 
 	noSmithyDocumentSerde
@@ -1853,24 +1853,24 @@ type UpdatePipeSourceKinesisStreamParameters struct {
 	// The maximum length of a time to wait for events.
 	MaximumBatchingWindowInSeconds *int32
 
-	// (Streams only) Discard records older than the specified age. The default value
-	// is -1, which sets the maximum age to infinite. When the value is set to
-	// infinite, EventBridge never discards old records.
+	// Discard records older than the specified age. The default value is -1, which
+	// sets the maximum age to infinite. When the value is set to infinite, EventBridge
+	// never discards old records.
 	MaximumRecordAgeInSeconds *int32
 
-	// (Streams only) Discard records after the specified number of retries. The
-	// default value is -1, which sets the maximum number of retries to infinite. When
-	// MaximumRetryAttempts is infinite, EventBridge retries failed records until the
-	// record expires in the event source.
+	// Discard records after the specified number of retries. The default value is -1,
+	// which sets the maximum number of retries to infinite. When MaximumRetryAttempts
+	// is infinite, EventBridge retries failed records until the record expires in the
+	// event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams only) Define how to handle item process failures. AUTOMATIC_BISECT
-	// halves each batch and retry each half until all the records are processed or
-	// there is one failed message left in the batch.
+	// Define how to handle item process failures. AUTOMATIC_BISECT halves each batch
+	// and retry each half until all the records are processed or there is one failed
+	// message left in the batch.
 	OnPartialBatchItemFailure OnPartialBatchItemFailureStreams
 
-	// (Streams only) The number of batches to process concurrently from each shard.
-	// The default value is 1.
+	// The number of batches to process concurrently from each shard. The default
+	// value is 1.
 	ParallelizationFactor *int32
 
 	noSmithyDocumentSerde

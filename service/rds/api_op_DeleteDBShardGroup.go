@@ -29,7 +29,7 @@ func (c *Client) DeleteDBShardGroup(ctx context.Context, params *DeleteDBShardGr
 
 type DeleteDBShardGroupInput struct {
 
-	// Teh name of the DB shard group to delete.
+	// The name of the DB shard group to delete.
 	//
 	// This member is required.
 	DBShardGroupIdentifier *string

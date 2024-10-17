@@ -11,47 +11,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation lists your data sets. When listing by origin OWNED, results are
-// sorted by CreatedAt in descending order. When listing by origin ENTITLED, there
-// is no order.
-func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
+// This operation returns information about all data grants.
+func (c *Client) ListDataGrants(ctx context.Context, params *ListDataGrantsInput, optFns ...func(*Options)) (*ListDataGrantsOutput, error) {
 	if params == nil {
-		params = &ListDataSetsInput{}
+		params = &ListDataGrantsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDataSets", params, optFns, c.addOperationListDataSetsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDataGrants", params, optFns, c.addOperationListDataGrantsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListDataSetsOutput)
+	out := result.(*ListDataGrantsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListDataSetsInput struct {
+type ListDataGrantsInput struct {
 
-	// The maximum number of results returned by a single call.
-	MaxResults int32
+	// The maximum number of results to be included in the next page.
+	MaxResults *int32
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token used to retrieve the next page of results for this
+	// operation.
 	NextToken *string
-
-	// A property that defines the data set as OWNED by the account (for providers) or
-	// ENTITLED to the account (for subscribers).
-	Origin *string
 
 	noSmithyDocumentSerde
 }
 
-type ListDataSetsOutput struct {
+type ListDataGrantsOutput struct {
 
-	// The data set objects listed by the request.
-	DataSets []types.DataSetEntry
+	// An object that contains a list of data grant information.
+	DataGrantSummaries []types.DataGrantSummaryEntry
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
+	// The pagination token used to retrieve the next page of results for this
+	// operation.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -60,19 +54,19 @@ type ListDataSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListDataGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSets{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataGrants{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSets{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataGrants{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSets"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataGrants"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -124,7 +118,7 @@ func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, op
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSets(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataGrants(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -157,9 +151,9 @@ func (c *Client) addOperationListDataSetsMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-// ListDataSetsPaginatorOptions is the paginator options for ListDataSets
-type ListDataSetsPaginatorOptions struct {
-	// The maximum number of results returned by a single call.
+// ListDataGrantsPaginatorOptions is the paginator options for ListDataGrants
+type ListDataGrantsPaginatorOptions struct {
+	// The maximum number of results to be included in the next page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -167,31 +161,31 @@ type ListDataSetsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListDataSetsPaginator is a paginator for ListDataSets
-type ListDataSetsPaginator struct {
-	options   ListDataSetsPaginatorOptions
-	client    ListDataSetsAPIClient
-	params    *ListDataSetsInput
+// ListDataGrantsPaginator is a paginator for ListDataGrants
+type ListDataGrantsPaginator struct {
+	options   ListDataGrantsPaginatorOptions
+	client    ListDataGrantsAPIClient
+	params    *ListDataGrantsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListDataSetsPaginator returns a new ListDataSetsPaginator
-func NewListDataSetsPaginator(client ListDataSetsAPIClient, params *ListDataSetsInput, optFns ...func(*ListDataSetsPaginatorOptions)) *ListDataSetsPaginator {
+// NewListDataGrantsPaginator returns a new ListDataGrantsPaginator
+func NewListDataGrantsPaginator(client ListDataGrantsAPIClient, params *ListDataGrantsInput, optFns ...func(*ListDataGrantsPaginatorOptions)) *ListDataGrantsPaginator {
 	if params == nil {
-		params = &ListDataSetsInput{}
+		params = &ListDataGrantsInput{}
 	}
 
-	options := ListDataSetsPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	options := ListDataGrantsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
 		fn(&options)
 	}
 
-	return &ListDataSetsPaginator{
+	return &ListDataGrantsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -201,12 +195,12 @@ func NewListDataSetsPaginator(client ListDataSetsAPIClient, params *ListDataSets
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListDataSetsPaginator) HasMorePages() bool {
+func (p *ListDataGrantsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListDataSets page.
-func (p *ListDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
+// NextPage retrieves the next ListDataGrants page.
+func (p *ListDataGrantsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDataGrantsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -214,12 +208,16 @@ func (p *ListDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
 	}, optFns...)
-	result, err := p.client.ListDataSets(ctx, &params, optFns...)
+	result, err := p.client.ListDataGrants(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -238,17 +236,18 @@ func (p *ListDataSetsPaginator) NextPage(ctx context.Context, optFns ...func(*Op
 	return result, nil
 }
 
-// ListDataSetsAPIClient is a client that implements the ListDataSets operation.
-type ListDataSetsAPIClient interface {
-	ListDataSets(context.Context, *ListDataSetsInput, ...func(*Options)) (*ListDataSetsOutput, error)
+// ListDataGrantsAPIClient is a client that implements the ListDataGrants
+// operation.
+type ListDataGrantsAPIClient interface {
+	ListDataGrants(context.Context, *ListDataGrantsInput, ...func(*Options)) (*ListDataGrantsOutput, error)
 }
 
-var _ ListDataSetsAPIClient = (*Client)(nil)
+var _ ListDataGrantsAPIClient = (*Client)(nil)
 
-func newServiceMetadataMiddleware_opListDataSets(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListDataGrants(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListDataSets",
+		OperationName: "ListDataGrants",
 	}
 }

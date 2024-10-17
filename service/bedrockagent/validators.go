@@ -2683,7 +2683,9 @@ func validatePromptVariant(v *types.PromptVariant) error {
 	if len(v.TemplateType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateType"))
 	}
-	if v.TemplateConfiguration != nil {
+	if v.TemplateConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateConfiguration"))
+	} else if v.TemplateConfiguration != nil {
 		if err := validatePromptTemplateConfiguration(v.TemplateConfiguration); err != nil {
 			invalidParams.AddNested("TemplateConfiguration", err.(smithy.InvalidParamsError))
 		}

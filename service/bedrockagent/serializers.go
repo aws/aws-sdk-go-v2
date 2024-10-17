@@ -7622,11 +7622,6 @@ func awsRestjson1_serializeDocumentPromptModelInferenceConfiguration(v *types.Pr
 		}
 	}
 
-	if v.TopK != nil {
-		ok := object.Key("topK")
-		ok.Integer(*v.TopK)
-	}
-
 	if v.TopP != nil {
 		ok := object.Key("topP")
 		switch {

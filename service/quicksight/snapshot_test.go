@@ -1778,6 +1778,18 @@ func TestCheckSnapshot_StartDashboardSnapshotJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartDashboardSnapshotJobSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDashboardSnapshotJobSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDashboardSnapshotJobSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -3930,6 +3942,18 @@ func TestUpdateSnapshot_StartDashboardSnapshotJob(t *testing.T) {
 	_, err := svc.StartDashboardSnapshotJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartDashboardSnapshotJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDashboardSnapshotJobSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDashboardSnapshotJobSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDashboardSnapshotJobSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

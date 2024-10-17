@@ -13,9 +13,12 @@ import (
 )
 
 // Create a new registration attachment to use for uploading a file or a URL to a
-// file. The maximum file size is 1MiB and valid file extensions are PDF, JPEG and
+// file. The maximum file size is 500KB and valid file extensions are PDF, JPEG and
 // PNG. For example, many sender ID registrations require a signed “letter of
 // authorization” (LOA) to be submitted.
+//
+// Use either AttachmentUrl or AttachmentBody to upload your attachment. If both
+// are specified then an exception is returned.
 func (c *Client) CreateRegistrationAttachment(ctx context.Context, params *CreateRegistrationAttachmentInput, optFns ...func(*Options)) (*CreateRegistrationAttachmentOutput, error) {
 	if params == nil {
 		params = &CreateRegistrationAttachmentInput{}
@@ -33,12 +36,12 @@ func (c *Client) CreateRegistrationAttachment(ctx context.Context, params *Creat
 
 type CreateRegistrationAttachmentInput struct {
 
-	// The registration file to upload. The maximum file size is 1MiB and valid file
+	// The registration file to upload. The maximum file size is 500KB and valid file
 	// extensions are PDF, JPEG and PNG.
 	AttachmentBody []byte
 
-	// A URL to the required registration file. For example, you can provide the S3
-	// object URL.
+	// Registration files have to be stored in an Amazon S3 bucket. The URI to use
+	// when sending is in the format s3://BucketName/FileName .
 	AttachmentUrl *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of

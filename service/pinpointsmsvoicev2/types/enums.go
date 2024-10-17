@@ -838,14 +838,15 @@ type RegistrationStatus string
 
 // Enum values for RegistrationStatus
 const (
-	RegistrationStatusCreated         RegistrationStatus = "CREATED"
-	RegistrationStatusSubmitted       RegistrationStatus = "SUBMITTED"
-	RegistrationStatusReviewing       RegistrationStatus = "REVIEWING"
-	RegistrationStatusProvisioning    RegistrationStatus = "PROVISIONING"
-	RegistrationStatusComplete        RegistrationStatus = "COMPLETE"
-	RegistrationStatusRequiresUpdates RegistrationStatus = "REQUIRES_UPDATES"
-	RegistrationStatusClosed          RegistrationStatus = "CLOSED"
-	RegistrationStatusDeleted         RegistrationStatus = "DELETED"
+	RegistrationStatusCreated                RegistrationStatus = "CREATED"
+	RegistrationStatusSubmitted              RegistrationStatus = "SUBMITTED"
+	RegistrationStatusReviewing              RegistrationStatus = "REVIEWING"
+	RegistrationStatusRequiresAuthentication RegistrationStatus = "REQUIRES_AUTHENTICATION"
+	RegistrationStatusProvisioning           RegistrationStatus = "PROVISIONING"
+	RegistrationStatusComplete               RegistrationStatus = "COMPLETE"
+	RegistrationStatusRequiresUpdates        RegistrationStatus = "REQUIRES_UPDATES"
+	RegistrationStatusClosed                 RegistrationStatus = "CLOSED"
+	RegistrationStatusDeleted                RegistrationStatus = "DELETED"
 )
 
 // Values returns all known values for RegistrationStatus. Note that this can be
@@ -857,6 +858,7 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 		"CREATED",
 		"SUBMITTED",
 		"REVIEWING",
+		"REQUIRES_AUTHENTICATION",
 		"PROVISIONING",
 		"COMPLETE",
 		"REQUIRES_UPDATES",
@@ -906,14 +908,15 @@ type RegistrationVersionStatus string
 
 // Enum values for RegistrationVersionStatus
 const (
-	RegistrationVersionStatusDraft     RegistrationVersionStatus = "DRAFT"
-	RegistrationVersionStatusSubmitted RegistrationVersionStatus = "SUBMITTED"
-	RegistrationVersionStatusReviewing RegistrationVersionStatus = "REVIEWING"
-	RegistrationVersionStatusApproved  RegistrationVersionStatus = "APPROVED"
-	RegistrationVersionStatusDiscarded RegistrationVersionStatus = "DISCARDED"
-	RegistrationVersionStatusDenied    RegistrationVersionStatus = "DENIED"
-	RegistrationVersionStatusRevoked   RegistrationVersionStatus = "REVOKED"
-	RegistrationVersionStatusArchived  RegistrationVersionStatus = "ARCHIVED"
+	RegistrationVersionStatusDraft                  RegistrationVersionStatus = "DRAFT"
+	RegistrationVersionStatusSubmitted              RegistrationVersionStatus = "SUBMITTED"
+	RegistrationVersionStatusReviewing              RegistrationVersionStatus = "REVIEWING"
+	RegistrationVersionStatusRequiresAuthentication RegistrationVersionStatus = "REQUIRES_AUTHENTICATION"
+	RegistrationVersionStatusApproved               RegistrationVersionStatus = "APPROVED"
+	RegistrationVersionStatusDiscarded              RegistrationVersionStatus = "DISCARDED"
+	RegistrationVersionStatusDenied                 RegistrationVersionStatus = "DENIED"
+	RegistrationVersionStatusRevoked                RegistrationVersionStatus = "REVOKED"
+	RegistrationVersionStatusArchived               RegistrationVersionStatus = "ARCHIVED"
 )
 
 // Values returns all known values for RegistrationVersionStatus. Note that this
@@ -925,6 +928,7 @@ func (RegistrationVersionStatus) Values() []RegistrationVersionStatus {
 		"DRAFT",
 		"SUBMITTED",
 		"REVIEWING",
+		"REQUIRES_AUTHENTICATION",
 		"APPROVED",
 		"DISCARDED",
 		"DENIED",
@@ -1149,6 +1153,7 @@ const (
 	ValidationExceptionReasonRegistrationFieldCannotBeDeleted          ValidationExceptionReason = "REGISTRATION_FIELD_CANNOT_BE_DELETED"
 	ValidationExceptionReasonVerificationCodeMismatch                  ValidationExceptionReason = "VERIFICATION_CODE_MISMATCH"
 	ValidationExceptionReasonVoiceCapabilityNotAvailable               ValidationExceptionReason = "VOICE_CAPABILITY_NOT_AVAILABLE"
+	ValidationExceptionReasonUnspecifiedParameterNotSupported          ValidationExceptionReason = "UNSPECIFIED_PARAMETER_NOT_SUPPORTED"
 	ValidationExceptionReasonOther                                     ValidationExceptionReason = "OTHER"
 )
 
@@ -1196,6 +1201,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"REGISTRATION_FIELD_CANNOT_BE_DELETED",
 		"VERIFICATION_CODE_MISMATCH",
 		"VOICE_CAPABILITY_NOT_AVAILABLE",
+		"UNSPECIFIED_PARAMETER_NOT_SUPPORTED",
 		"OTHER",
 	}
 }

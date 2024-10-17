@@ -222,11 +222,13 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Management (IAM) accounts to database accounts. By default, mapping isn't
 	// enabled.
 	//
-	// For more information, see [IAM Database Authentication] in the Amazon Aurora User Guide.
+	// For more information, see [IAM Database Authentication] in the Amazon Aurora User Guide or [IAM database authentication for MariaDB, MySQL, and PostgreSQL] in the Amazon
+	// RDS User Guide.
 	//
-	// Valid for: Aurora DB clusters only
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// [IAM Database Authentication]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
+	// [IAM database authentication for MariaDB, MySQL, and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
 	// The life cycle type for this DB cluster.

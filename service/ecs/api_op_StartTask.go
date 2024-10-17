@@ -98,7 +98,8 @@ type StartTaskInput struct {
 	// to the task. If no value is specified, the tags aren't propagated.
 	PropagateTags types.PropagateTags
 
-	// The reference ID to use for the task.
+	// This parameter is only used by Amazon ECS. It is not intended for use by
+	// customers.
 	ReferenceId *string
 
 	// An optional tag specified when a task is started. For example, if you

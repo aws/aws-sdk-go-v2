@@ -214,8 +214,8 @@ type RunTaskInput struct {
 	// [TagResource]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
 	PropagateTags types.PropagateTags
 
-	// The reference ID to use for the task. The reference ID can have a maximum
-	// length of 1024 characters.
+	// This parameter is only used by Amazon ECS. It is not intended for use by
+	// customers.
 	ReferenceId *string
 
 	// An optional tag specified when a task is started. For example, if you

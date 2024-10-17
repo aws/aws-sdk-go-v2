@@ -151,6 +151,7 @@
         "api_op_StartAssetBundleExportJob.go",
         "api_op_StartAssetBundleImportJob.go",
         "api_op_StartDashboardSnapshotJob.go",
+        "api_op_StartDashboardSnapshotJobSchedule.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateAccountCustomization.go",

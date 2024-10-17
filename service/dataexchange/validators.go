@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptDataGrant struct {
+}
+
+func (*validateOpAcceptDataGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptDataGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptDataGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptDataGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelJob struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpCancelJob) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDataGrant struct {
+}
+
+func (*validateOpCreateDataGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataGrantInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +170,26 @@ func (m *validateOpDeleteAsset) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataGrant struct {
+}
+
+func (*validateOpDeleteDataGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataSet struct {
 }
 
@@ -210,6 +270,26 @@ func (m *validateOpGetAsset) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataGrant struct {
+}
+
+func (*validateOpGetDataGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataGrantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataSet struct {
 }
 
@@ -265,6 +345,26 @@ func (m *validateOpGetJob) HandleInitialize(ctx context.Context, in middleware.I
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetReceivedDataGrant struct {
+}
+
+func (*validateOpGetReceivedDataGrant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetReceivedDataGrant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetReceivedDataGrantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetReceivedDataGrantInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,8 +650,16 @@ func (m *validateOpUpdateRevision) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptDataGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptDataGrant{}, middleware.After)
+}
+
 func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
+}
+
+func addOpCreateDataGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataGrant{}, middleware.After)
 }
 
 func addOpCreateDataSetValidationMiddleware(stack *middleware.Stack) error {
@@ -574,6 +682,10 @@ func addOpDeleteAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAsset{}, middleware.After)
 }
 
+func addOpDeleteDataGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataGrant{}, middleware.After)
+}
+
 func addOpDeleteDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataSet{}, middleware.After)
 }
@@ -590,6 +702,10 @@ func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAsset{}, middleware.After)
 }
 
+func addOpGetDataGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataGrant{}, middleware.After)
+}
+
 func addOpGetDataSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSet{}, middleware.After)
 }
@@ -600,6 +716,10 @@ func addOpGetEventActionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJob{}, middleware.After)
+}
+
+func addOpGetReceivedDataGrantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetReceivedDataGrant{}, middleware.After)
 }
 
 func addOpGetRevisionValidationMiddleware(stack *middleware.Stack) error {
@@ -1474,6 +1594,21 @@ func validateTableLFTagPolicyAndPermissions(v *types.TableLFTagPolicyAndPermissi
 	}
 }
 
+func validateOpAcceptDataGrantInput(v *AcceptDataGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptDataGrantInput"}
+	if v.DataGrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataGrantArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelJobInput(v *CancelJobInput) error {
 	if v == nil {
 		return nil
@@ -1481,6 +1616,30 @@ func validateOpCancelJobInput(v *CancelJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CancelJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataGrantInput(v *CreateDataGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataGrantInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.GrantDistributionScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantDistributionScope"))
+	}
+	if v.ReceiverPrincipal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReceiverPrincipal"))
+	}
+	if v.SourceDataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDataSetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1594,6 +1753,21 @@ func validateOpDeleteAssetInput(v *DeleteAssetInput) error {
 	}
 }
 
+func validateOpDeleteDataGrantInput(v *DeleteDataGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataGrantInput"}
+	if v.DataGrantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataGrantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataSetInput(v *DeleteDataSetInput) error {
 	if v == nil {
 		return nil
@@ -1663,6 +1837,21 @@ func validateOpGetAssetInput(v *GetAssetInput) error {
 	}
 }
 
+func validateOpGetDataGrantInput(v *GetDataGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataGrantInput"}
+	if v.DataGrantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataGrantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataSetInput(v *GetDataSetInput) error {
 	if v == nil {
 		return nil
@@ -1700,6 +1889,21 @@ func validateOpGetJobInput(v *GetJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetReceivedDataGrantInput(v *GetReceivedDataGrantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetReceivedDataGrantInput"}
+	if v.DataGrantArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataGrantArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12494,6 +12494,10 @@ func awsRestjson1_serializeOpHttpBindingsRestoreAnalysisInput(v *RestoreAnalysis
 		}
 	}
 
+	if v.RestoreToFolders {
+		encoder.SetQuery("restore-to-folders").Boolean(v.RestoreToFolders)
+	}
+
 	return nil
 }
 
@@ -13529,6 +13533,95 @@ func awsRestjson1_serializeOpDocumentStartDashboardSnapshotJobInput(v *StartDash
 	if v.UserConfiguration != nil {
 		ok := object.Key("UserConfiguration")
 		if err := awsRestjson1_serializeDocumentSnapshotUserConfiguration(v.UserConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartDashboardSnapshotJobSchedule struct {
+}
+
+func (*awsRestjson1_serializeOpStartDashboardSnapshotJobSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartDashboardSnapshotJobSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartDashboardSnapshotJobScheduleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/dashboards/{DashboardId}/schedules/{ScheduleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartDashboardSnapshotJobScheduleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartDashboardSnapshotJobScheduleInput(v *StartDashboardSnapshotJobScheduleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardId == nil || len(*v.DashboardId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DashboardId must not be empty")}
+	}
+	if v.DashboardId != nil {
+		if err := encoder.SetURI("DashboardId").String(*v.DashboardId); err != nil {
+			return err
+		}
+	}
+
+	if v.ScheduleId == nil || len(*v.ScheduleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ScheduleId must not be empty")}
+	}
+	if v.ScheduleId != nil {
+		if err := encoder.SetURI("ScheduleId").String(*v.ScheduleId); err != nil {
 			return err
 		}
 	}
