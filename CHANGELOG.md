@@ -1,3 +1,21 @@
+# Release (2024-10-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.24.0](service/bedrockagent/CHANGELOG.md#v1240-2024-10-17)
+  * **Feature**: Removing support for topK property in PromptModelInferenceConfiguration object, Making PromptTemplateConfiguration property as required, Limiting the maximum PromptVariant to 1
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.33.0](service/dataexchange/CHANGELOG.md#v1330-2024-10-17)
+  * **Feature**: This release adds Data Grant support, through which customers can programmatically create data grants to share with other AWS accounts and accept data grants from other AWS accounts.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.47.4](service/ecs/CHANGELOG.md#v1474-2024-10-17)
+  * **Documentation**: This is an Amazon ECS documentation only update to address tickets.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.16.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1160-2024-10-17)
+  * **Feature**: Added the registrations status of REQUIRES_AUTHENTICATION
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.18.0](service/pipes/CHANGELOG.md#v1180-2024-10-17)
+  * **Feature**: This release adds validation to require specifying a SecurityGroup and Subnets in the Vpc object under PipesSourceSelfManagedKafkaParameters. It also adds support for iso-e, iso-f, and other non-commercial partitions in ARN parameters.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.77.0](service/quicksight/CHANGELOG.md#v1770-2024-10-17)
+  * **Feature**: Add StartDashboardSnapshotJobSchedule API. RestoreAnalysis now supports restoring analysis to folders.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.87.3](service/rds/CHANGELOG.md#v1873-2024-10-17)
+  * **Documentation**: Updates Amazon RDS documentation for TAZ IAM support
+
 # Release (2024-10-16)
 
 ## General Highlights

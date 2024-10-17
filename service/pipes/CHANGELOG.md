@@ -1,3 +1,7 @@
+# v1.18.0 (2024-10-17)
+
+* **Feature**: This release adds validation to require specifying a SecurityGroup and Subnets in the Vpc object under PipesSourceSelfManagedKafkaParameters. It also adds support for iso-e, iso-f, and other non-commercial partitions in ARN parameters.
+
 # v1.17.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "e514f10b-f3e4-4513-8bf7-821ed85baff9",
-    "type": "feature",
-    "description": "Added the registrations status of REQUIRES_AUTHENTICATION",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

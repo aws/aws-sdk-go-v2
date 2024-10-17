@@ -1,8 +1,0 @@
-{
-    "id": "f7b57089-1de6-467a-bdbc-c4df9fefa377",
-    "type": "feature",
-    "description": "Updated the DomainName pattern for Active Directory",
-    "modules": [
-        "service/workspaces"
-    ]
-}

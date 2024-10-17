@@ -1,8 +1,0 @@
-{
-    "id": "e7e7416c-bd7a-4719-9576-649f4acdb1e2",
-    "type": "feature",
-    "description": "This release adds validation to require specifying a SecurityGroup and Subnets in the Vpc object under PipesSourceSelfManagedKafkaParameters. It also adds support for iso-e, iso-f, and other non-commercial partitions in ARN parameters.",
-    "modules": [
-        "service/pipes"
-    ]
-}

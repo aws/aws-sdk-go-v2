@@ -1,3 +1,7 @@
+# v1.24.0 (2024-10-17)
+
+* **Feature**: Removing support for topK property in PromptModelInferenceConfiguration object, Making PromptTemplateConfiguration property as required, Limiting the maximum PromptVariant to 1
+
 # v1.23.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

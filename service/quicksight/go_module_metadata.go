@@ -3,4 +3,4 @@
 package quicksight
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.76.2"
+const goModuleVersion = "1.77.0"

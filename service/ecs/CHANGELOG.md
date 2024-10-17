@@ -1,3 +1,7 @@
+# v1.47.4 (2024-10-17)
+
+* **Documentation**: This is an Amazon ECS documentation only update to address tickets.
+
 # v1.47.3 (2024-10-10)
 
 * **Documentation**: This is a documentation only release that updates to documentation to let customers know that Amazon Elastic Inference is no longer available.

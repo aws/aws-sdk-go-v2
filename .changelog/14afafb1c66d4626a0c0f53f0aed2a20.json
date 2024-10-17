@@ -1,8 +1,0 @@
-{
-    "id": "14afafb1-c66d-4626-a0c0-f53f0aed2a20",
-    "type": "feature",
-    "description": "Removing support for topK property in PromptModelInferenceConfiguration object, Making PromptTemplateConfiguration property as required, Limiting the maximum PromptVariant to 1",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

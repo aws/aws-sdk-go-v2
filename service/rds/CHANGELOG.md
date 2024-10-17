@@ -1,3 +1,7 @@
+# v1.87.3 (2024-10-17)
+
+* **Documentation**: Updates Amazon RDS documentation for TAZ IAM support
+
 # v1.87.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

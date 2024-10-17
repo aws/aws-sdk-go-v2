@@ -1,8 +1,0 @@
-{
-    "id": "6a7fd547-971d-4c7c-9786-eab8bf5eec36",
-    "type": "feature",
-    "description": "This release adds Data Grant support, through which customers can programmatically create data grants to share with other AWS accounts and accept data grants from other AWS accounts.",
-    "modules": [
-        "service/dataexchange"
-    ]
-}
