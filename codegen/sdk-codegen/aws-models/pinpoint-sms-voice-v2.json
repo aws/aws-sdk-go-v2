@@ -1568,7 +1568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new registration attachment to use for uploading a file or a URL to a file. The maximum file size is 1MiB and valid file extensions are PDF, JPEG and PNG. For example, many sender ID registrations require a signed “letter of authorization” (LOA) to be submitted.</p>"
+                "smithy.api#documentation": "<p>Create a new registration attachment to use for uploading a file or a URL to a file.\n            The maximum file size is 500KB and valid file extensions are PDF, JPEG and PNG. For\n            example, many sender ID registrations require a signed “letter of authorization” (LOA)\n            to be submitted.</p>\n         <p>Use either <code>AttachmentUrl</code> or <code>AttachmentBody</code> to upload your attachment. If both are specified then an exception is returned.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#CreateRegistrationAttachmentRequest": {
@@ -1577,13 +1577,13 @@
                 "AttachmentBody": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#AttachmentBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registration file to upload. The maximum file size is 1MiB and valid file extensions are PDF, JPEG and PNG.</p>"
+                        "smithy.api#documentation": "<p>The registration file to upload. The maximum file size is 500KB and valid file extensions are PDF, JPEG and PNG.</p>"
                     }
                 },
                 "AttachmentUrl": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#AttachmentUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL to the required registration file.  For example, you can provide the S3 object URL.</p>"
+                        "smithy.api#documentation": "<p>Registration files have to be stored in an Amazon S3 bucket. The URI to use when sending is in the format <code>s3://BucketName/FileName</code>.</p>"
                     }
                 },
                 "Tags": {
@@ -3826,7 +3826,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified opted out destination numbers or all opted out destination\n            numbers in an opt-out list.</p>\n         <p>If you specify opted out numbers, the output includes information for only the\n            specified opted out numbers. If you specify filters, the output includes information for\n            only those opted out numbers that meet the filter criteria. If you don't specify opted\n            out numbers or filters, the output includes information for all opted out destination\n            numbers in your opt-out list.</p>\n         <p>If you specify an opted out number that isn't valid, an error is returned.</p>",
+                "smithy.api#documentation": "<p>Describes the specified opted out destination numbers or all opted out destination\n            numbers in an opt-out list.</p>\n         <p>If you specify opted out numbers, the output includes information for only the\n            specified opted out numbers. If you specify filters, the output includes information for\n            only those opted out numbers that meet the filter criteria. If you don't specify opted\n            out numbers or filters, the output includes information for all opted out destination\n            numbers in your opt-out list.</p>\n         <p>If you specify an opted out number that isn't valid, an exception is returned.</p>",
                 "smithy.api#paginated": {
                     "items": "OptedOutNumbers"
                 }
@@ -3845,7 +3845,7 @@
                 "OptedOutNumbers": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#OptedOutNumberList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of phone numbers to search for in the OptOutList.</p>"
+                        "smithy.api#documentation": "<p>An array of phone numbers to search for in the OptOutList.</p>\n         <p>If you specify an opted out number that isn't valid, an exception is returned.</p>"
                     }
                 },
                 "Filters": {
@@ -9686,6 +9686,10 @@
                         "name": "REVIEWING"
                     },
                     {
+                        "value": "REQUIRES_AUTHENTICATION",
+                        "name": "REQUIRES_AUTHENTICATION"
+                    },
+                    {
                         "value": "PROVISIONING",
                         "name": "PROVISIONING"
                     },
@@ -9970,6 +9974,10 @@
                     {
                         "value": "REVIEWING",
                         "name": "REVIEWING"
+                    },
+                    {
+                        "value": "REQUIRES_AUTHENTICATION",
+                        "name": "REQUIRES_AUTHENTICATION"
                     },
                     {
                         "value": "APPROVED",
@@ -13596,6 +13604,10 @@
                     {
                         "value": "VOICE_CAPABILITY_NOT_AVAILABLE",
                         "name": "VOICE_CAPABILITY_NOT_AVAILABLE"
+                    },
+                    {
+                        "value": "UNSPECIFIED_PARAMETER_NOT_SUPPORTED",
+                        "name": "UNSPECIFIED_PARAMETER_NOT_SUPPORTED"
                     },
                     {
                         "value": "OTHER",

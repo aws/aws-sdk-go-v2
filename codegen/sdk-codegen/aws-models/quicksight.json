@@ -18115,7 +18115,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that describes the principals and the resource-level permissions on an\n            analysis.</p>"
                     }
@@ -18785,7 +18785,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains the permissions for the dashboard.</p>"
                     }
@@ -21286,7 +21286,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of resource permissions to be set on the template. </p>"
                     }
@@ -21590,7 +21590,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of resource permissions set on the theme. </p>"
                     }
@@ -38836,6 +38836,9 @@
                     "target": "com.amazonaws.quicksight#StartDashboardSnapshotJob"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#StartDashboardSnapshotJobSchedule"
+                },
+                {
                     "target": "com.amazonaws.quicksight#TagResource"
                 },
                 {
@@ -41554,6 +41557,12 @@
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ResourceNotFoundException"
                 },
                 {
@@ -41590,6 +41599,14 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "RestoreToFolders": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean value that determines if the analysis will be restored to folders that it previously resided in. A <code>True</code> value restores analysis back to all folders that it previously resided in. A <code>False</code> value restores the analysis but does not restore the analysis back to all previously resided folders. Restoring a restricted analysis requires this parameter to be set to <code>True</code>.</p>",
+                        "smithy.api#httpQuery": "restore-to-folders"
+                    }
                 }
             },
             "traits": {
@@ -41623,6 +41640,12 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "RestorationFailedFolderArns": {
+                    "target": "com.amazonaws.quicksight#FolderArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of folder arns thatthe analysis failed to be restored to.</p>"
                     }
                 }
             },
@@ -45866,6 +45889,100 @@
                         "smithy.api#documentation": "<p>The ID of the job. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.</p>"
                     }
                 },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The Amazon Web Services request ID for this operation.\n        </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartDashboardSnapshotJobSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#StartDashboardSnapshotJobScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#StartDashboardSnapshotJobScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an asynchronous job that runs an existing dashboard schedule and sends the dashboard snapshot through email. </p>\n         <p>Only one job can run simultaneously in a given schedule. Repeated requests are skipped with a <code>202</code> HTTP status code.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sending-reports.html\">Scheduling and sending Amazon QuickSight reports by email</a> and <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/email-reports-from-dashboard.html\">Configuring email report settings for a Amazon QuickSight dashboard</a> in the <i>Amazon QuickSight User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/schedules/{ScheduleId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StartDashboardSnapshotJobScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that you want to start a snapshot job schedule for.\n        </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the schedule that you want to start a snapshot job schedule for. The schedule ID can be found in the Amazon QuickSight console in the <b>Schedules</b> pane of the dashboard that the schedule is configured for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartDashboardSnapshotJobScheduleResponse": {
+            "type": "structure",
+            "members": {
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#NonEmptyString",
                     "traits": {
@@ -51815,7 +51932,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that describes the principals and the resource-level permissions on an\n            analysis.</p>"
                     }
@@ -52189,7 +52306,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the permissions on the dashboard.</p>"
                     }
@@ -54427,7 +54544,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of resource permissions to be set on the template.</p>"
                     }
@@ -54793,7 +54910,7 @@
                     }
                 },
                 "Permissions": {
-                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "target": "com.amazonaws.quicksight#UpdateResourcePermissionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The resulting list of resource permissions for the theme.</p>"
                     }

@@ -9643,7 +9643,7 @@
                 "referenceId": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference ID to use for the task. The reference ID can have a maximum length of\n\t\t\t1024 characters.</p>"
+                        "smithy.api#documentation": "<p>This parameter is only used by Amazon ECS. It is not intended for use by customers.</p>"
                     }
                 },
                 "startedBy": {
@@ -10692,13 +10692,13 @@
                 "referenceId": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reference ID to use for the task.</p>"
+                        "smithy.api#documentation": "<p>This parameter is only used by Amazon ECS. It is not intended for use by customers.</p>"
                     }
                 },
                 "startedBy": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional tag specified when a task is started. For example, if you automatically\n\t\t\ttrigger a task to run a batch process job, you could apply a unique identifier for that\n\t\t\tjob to your task with the <code>startedBy</code> parameter. You can then identify which\n\t\t\ttasks belong to that job by filtering the results of a <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html\">ListTasks</a> call with\n\t\t\tthe <code>startedBy</code> value. Up to 36 letters (uppercase and lowercase), numbers,\n\t\t\thyphens (-), forward slash (/), and underscores (_) are allowed.</p>\n         <p>If a task is started by an Amazon ECS service, the <code>startedBy</code> parameter\n\t\t\tcontains the deployment ID of the service that starts it.</p>"
+                        "smithy.api#documentation": "<p>An optional tag specified when a task is started. For example, if you automatically trigger\n\t\t\ta task to run a batch process job, you could apply a unique identifier for that job to\n\t\t\tyour task with the <code>startedBy</code> parameter. You can then identify which tasks\n\t\t\tbelong to that job by filtering the results of a <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html\">ListTasks</a> call with\n\t\t\tthe <code>startedBy</code> value. Up to 36 letters (uppercase and lowercase), numbers,\n\t\t\thyphens (-), forward slash (/), and underscores (_) are allowed.</p>\n         <p>If a task is started by an Amazon ECS service, the <code>startedBy</code> parameter\n\t\t\tcontains the deployment ID of the service that starts it.</p>"
                     }
                 },
                 "tags": {

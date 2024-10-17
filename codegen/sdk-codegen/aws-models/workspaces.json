@@ -5464,7 +5464,7 @@
         "com.amazonaws.workspaces#DomainName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([a-zA-Z0-9]+[\\\\.-])+([a-zA-Z0-9])+$"
+                "smithy.api#pattern": "^([a-zA-Z0-9]+[.-])+([a-zA-Z0-9])+$"
             }
         },
         "com.amazonaws.workspaces#Ec2ImageId": {

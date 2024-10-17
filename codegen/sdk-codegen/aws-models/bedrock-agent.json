@@ -7154,7 +7154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a data ingestion job. Data sources are ingested into your knowledge base so that Large Lanaguage Models (LLMs) can use your data.</p>",
+                "smithy.api#documentation": "<p>Gets information about a data ingestion job. Data sources are ingested into your knowledge base so that Large Language Models (LLMs) can use your data.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -10620,12 +10620,6 @@
                         "smithy.api#documentation": "<p>The percentage of most-likely candidates that the model considers for the next token.</p>"
                     }
                 },
-                "topK": {
-                    "target": "com.amazonaws.bedrockagent#TopK",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The number of most-likely candidates that the model considers for the next token during generation.</p>"
-                    }
-                },
                 "maxTokens": {
                     "target": "com.amazonaws.bedrockagent#MaximumLength",
                     "traits": {
@@ -10862,7 +10856,8 @@
                 "templateConfiguration": {
                     "target": "com.amazonaws.bedrockagent#PromptTemplateConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configurations for the prompt template.</p>"
+                        "smithy.api#documentation": "<p>Contains configurations for the prompt template.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "modelId": {
@@ -10896,7 +10891,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 3
+                    "max": 1
                 },
                 "smithy.api#sensitive": {}
             }

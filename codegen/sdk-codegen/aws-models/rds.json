@@ -4324,7 +4324,7 @@
                 "EnableIAMDatabaseAuthentication": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\">\n                IAM Database Authentication</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\"> IAM Database\n                Authentication</a> in the <i>Amazon Aurora User Guide</i> or\n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\">IAM database\n                authentication for MariaDB, MySQL, and PostgreSQL</a> in the <i>Amazon\n                RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "BacktrackWindow": {
@@ -12761,7 +12761,7 @@
                     "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Teh name of the DB shard group to delete.</p>",
+                        "smithy.api#documentation": "<p>The name of the DB shard group to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -15945,7 +15945,7 @@
                 "DBShardGroupIdentifier": {
                     "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user-supplied DB shard group identifier or the Amazon Resource Name (ARN) of the DB shard group. If this parameter is specified, \n            information for only the specific DB shard group is returned. This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match an existing DB shard group identifier.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The user-supplied DB shard group identifier. If this parameter is specified, information for only the specific DB shard group is returned. \n            This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match an existing DB shard group identifier.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filters": {
@@ -21654,7 +21654,7 @@
                 "EnableIAMDatabaseAuthentication": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\">\n                IAM Database Authentication</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\"> IAM Database\n                Authentication</a> in the <i>Amazon Aurora User Guide</i> or\n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\">IAM database\n                authentication for MariaDB, MySQL, and PostgreSQL</a> in the <i>Amazon\n                RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "BacktrackWindow": {
@@ -21774,7 +21774,7 @@
                 "EnablePerformanceInsights": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to turn on Performance Insights for the DB cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">\n            Using Amazon Performance Insights</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to turn on Performance Insights for the DB cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">\n            Using Amazon Performance Insights</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "PerformanceInsightsKMSKeyId": {
@@ -27301,7 +27301,7 @@
                 "EnableIAMDatabaseAuthentication": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\">\n                IAM Database Authentication</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\"> IAM Database\n                Authentication</a> in the <i>Amazon Aurora User Guide</i> or\n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\"> IAM database\n                authentication for MariaDB, MySQL, and PostgreSQL</a> in the <i>Amazon\n                RDS User Guide</i>.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "BacktrackWindow": {
@@ -27624,7 +27624,7 @@
                 "EnableIAMDatabaseAuthentication": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\">\n                IAM Database Authentication</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable mapping of Amazon Web Services Identity and Access\n            Management (IAM) accounts to database accounts. By default, mapping isn't\n            enabled.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html\"> IAM Database\n                Authentication</a> in the <i>Amazon Aurora User Guide</i> or\n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html\"> IAM database\n                authentication for MariaDB, MySQL, and PostgreSQL</a> in the <i>Amazon\n                RDS User Guide</i>.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "BacktrackWindow": {
@@ -30639,7 +30639,7 @@
                     "target": "com.amazonaws.rds#BlueGreenDeploymentIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The unique identifier of the blue/green deployment.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The resource ID of the blue/green deployment.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment resource ID.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
