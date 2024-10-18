@@ -1,8 +1,0 @@
-{
-    "id": "9603e112-d9e2-4400-a3d9-a32bb3693a66",
-    "type": "feature",
-    "description": "Removing FEDERATED from Create/List/Delete/GetDataCatalog API",
-    "modules": [
-        "service/athena"
-    ]
-}

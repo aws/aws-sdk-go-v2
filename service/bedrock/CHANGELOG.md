@@ -1,3 +1,7 @@
+# v1.21.0 (2024-10-18)
+
+* **Feature**: Adding converse support to CMI API's
+
 # v1.20.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

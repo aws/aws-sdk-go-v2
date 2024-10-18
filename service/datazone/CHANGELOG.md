@@ -1,3 +1,7 @@
+# v1.23.0 (2024-10-18)
+
+* **Feature**: Adding the following project member designations: PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER and PROJECT_CATALOG_STEWARD in the CreateProjectMembership API and PROJECT_CATALOG_STEWARD designation in the AddPolicyGrant API.
+
 # v1.22.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

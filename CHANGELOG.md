@@ -1,3 +1,15 @@
+# Release (2024-10-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.48.0](service/athena/CHANGELOG.md#v1480-2024-10-18)
+  * **Feature**: Removing FEDERATED from Create/List/Delete/GetDataCatalog API
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.21.0](service/bedrock/CHANGELOG.md#v1210-2024-10-18)
+  * **Feature**: Adding converse support to CMI API's
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.23.0](service/datazone/CHANGELOG.md#v1230-2024-10-18)
+  * **Feature**: Adding the following project member designations: PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER and PROJECT_CATALOG_STEWARD in the CreateProjectMembership API and PROJECT_CATALOG_STEWARD designation in the AddPolicyGrant API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.183.0](service/ec2/CHANGELOG.md#v11830-2024-10-18)
+  * **Feature**: RequestSpotInstances and RequestSpotFleet feature release.
+
 # Release (2024-10-17)
 
 ## Module Highlights

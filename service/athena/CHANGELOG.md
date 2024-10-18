@@ -1,3 +1,7 @@
+# v1.48.0 (2024-10-18)
+
+* **Feature**: Removing FEDERATED from Create/List/Delete/GetDataCatalog API
+
 # v1.47.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
