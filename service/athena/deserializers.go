@@ -9332,15 +9332,6 @@ func awsAwsjson11_deserializeDocumentDataCatalog(v **types.DataCatalog, value in
 
 	for key, value := range shape {
 		switch key {
-		case "ConnectionType":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ConnectionType to be of type string, got %T instead", value)
-				}
-				sv.ConnectionType = types.ConnectionType(jtv)
-			}
-
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9348,15 +9339,6 @@ func awsAwsjson11_deserializeDocumentDataCatalog(v **types.DataCatalog, value in
 					return fmt.Errorf("expected DescriptionString to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
-			}
-
-		case "Error":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
-				}
-				sv.Error = ptr.String(jtv)
 			}
 
 		case "Name":
@@ -9371,15 +9353,6 @@ func awsAwsjson11_deserializeDocumentDataCatalog(v **types.DataCatalog, value in
 		case "Parameters":
 			if err := awsAwsjson11_deserializeDocumentParametersMap(&sv.Parameters, value); err != nil {
 				return err
-			}
-
-		case "Status":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected DataCatalogStatus to be of type string, got %T instead", value)
-				}
-				sv.Status = types.DataCatalogStatus(jtv)
 			}
 
 		case "Type":
@@ -9429,33 +9402,6 @@ func awsAwsjson11_deserializeDocumentDataCatalogSummary(v **types.DataCatalogSum
 					return fmt.Errorf("expected CatalogNameString to be of type string, got %T instead", value)
 				}
 				sv.CatalogName = ptr.String(jtv)
-			}
-
-		case "ConnectionType":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ConnectionType to be of type string, got %T instead", value)
-				}
-				sv.ConnectionType = types.ConnectionType(jtv)
-			}
-
-		case "Error":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
-				}
-				sv.Error = ptr.String(jtv)
-			}
-
-		case "Status":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected DataCatalogStatus to be of type string, got %T instead", value)
-				}
-				sv.Status = types.DataCatalogStatus(jtv)
 			}
 
 		case "Type":
@@ -13710,11 +13656,6 @@ func awsAwsjson11_deserializeOpDocumentCreateDataCatalogOutput(v **CreateDataCat
 
 	for key, value := range shape {
 		switch key {
-		case "DataCatalog":
-			if err := awsAwsjson11_deserializeDocumentDataCatalog(&sv.DataCatalog, value); err != nil {
-				return err
-			}
-
 		default:
 			_, _ = key, value
 
@@ -13981,11 +13922,6 @@ func awsAwsjson11_deserializeOpDocumentDeleteDataCatalogOutput(v **DeleteDataCat
 
 	for key, value := range shape {
 		switch key {
-		case "DataCatalog":
-			if err := awsAwsjson11_deserializeDocumentDataCatalog(&sv.DataCatalog, value); err != nil {
-				return err
-			}
-
 		default:
 			_, _ = key, value
 

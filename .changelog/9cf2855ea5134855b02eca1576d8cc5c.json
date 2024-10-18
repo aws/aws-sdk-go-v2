@@ -1,0 +1,8 @@
+{
+    "id": "9cf2855e-a513-4855-b02e-ca1576d8cc5c",
+    "type": "feature",
+    "description": "Adding converse support to CMI API's",
+    "modules": [
+        "service/bedrock"
+    ]
+}

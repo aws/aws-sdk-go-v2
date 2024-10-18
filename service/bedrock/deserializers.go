@@ -3301,6 +3301,15 @@ func awsRestjson1_deserializeOpDocumentGetImportedModelOutput(v **GetImportedMod
 				sv.CreationTime = ptr.Time(t)
 			}
 
+		case "instructSupported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected InstructSupported to be of type *bool, got %T instead", value)
+				}
+				sv.InstructSupported = ptr.Bool(jtv)
+			}
+
 		case "jobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11205,6 +11214,24 @@ func awsRestjson1_deserializeDocumentImportedModelSummary(v **types.ImportedMode
 					return err
 				}
 				sv.CreationTime = ptr.Time(t)
+			}
+
+		case "instructSupported":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected InstructSupported to be of type *bool, got %T instead", value)
+				}
+				sv.InstructSupported = ptr.Bool(jtv)
+			}
+
+		case "modelArchitecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelArchitecture to be of type string, got %T instead", value)
+				}
+				sv.ModelArchitecture = ptr.String(jtv)
 			}
 
 		case "modelArn":

@@ -1,0 +1,8 @@
+{
+    "id": "3d6f2f49-5ae0-45b2-ab73-21e5b2e0b0ef",
+    "type": "feature",
+    "description": "RequestSpotInstances and RequestSpotFleet feature release.",
+    "modules": [
+        "service/ec2"
+    ]
+}

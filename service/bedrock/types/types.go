@@ -1204,7 +1204,7 @@ type HumanWorkflowConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about tne imported model.
+// Information about the imported model.
 type ImportedModelSummary struct {
 
 	// Creation time of the imported model.
@@ -1221,6 +1221,12 @@ type ImportedModelSummary struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	// Specifies if the imported model supports fine tuning.
+	InstructSupported *bool
+
+	// The architecture of the imported model.
+	ModelArchitecture *string
 
 	noSmithyDocumentSerde
 }

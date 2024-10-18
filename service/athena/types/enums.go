@@ -119,122 +119,13 @@ func (ColumnNullable) Values() []ColumnNullable {
 	}
 }
 
-type ConnectionType string
-
-// Enum values for ConnectionType
-const (
-	ConnectionTypeDynamodb           ConnectionType = "DYNAMODB"
-	ConnectionTypeMysql              ConnectionType = "MYSQL"
-	ConnectionTypePostgresql         ConnectionType = "POSTGRESQL"
-	ConnectionTypeRedshift           ConnectionType = "REDSHIFT"
-	ConnectionTypeOracle             ConnectionType = "ORACLE"
-	ConnectionTypeSynapse            ConnectionType = "SYNAPSE"
-	ConnectionTypeSqlserver          ConnectionType = "SQLSERVER"
-	ConnectionTypeDb2                ConnectionType = "DB2"
-	ConnectionTypeOpensearch         ConnectionType = "OPENSEARCH"
-	ConnectionTypeBigquery           ConnectionType = "BIGQUERY"
-	ConnectionTypeGooglecloudstorage ConnectionType = "GOOGLECLOUDSTORAGE"
-	ConnectionTypeHbase              ConnectionType = "HBASE"
-	ConnectionTypeDocumentdb         ConnectionType = "DOCUMENTDB"
-	ConnectionTypeMsk                ConnectionType = "MSK"
-	ConnectionTypeNeptune            ConnectionType = "NEPTUNE"
-	ConnectionTypeCmdb               ConnectionType = "CMDB"
-	ConnectionTypeTpcds              ConnectionType = "TPCDS"
-	ConnectionTypeRedis              ConnectionType = "REDIS"
-	ConnectionTypeCloudwatch         ConnectionType = "CLOUDWATCH"
-	ConnectionTypeTimestream         ConnectionType = "TIMESTREAM"
-	ConnectionTypeSaphana            ConnectionType = "SAPHANA"
-	ConnectionTypeSnowflake          ConnectionType = "SNOWFLAKE"
-	ConnectionTypeTeradata           ConnectionType = "TERADATA"
-	ConnectionTypeVertica            ConnectionType = "VERTICA"
-	ConnectionTypeClouderaimpala     ConnectionType = "CLOUDERAIMPALA"
-	ConnectionTypeClouderahive       ConnectionType = "CLOUDERAHIVE"
-	ConnectionTypeHortonworkshive    ConnectionType = "HORTONWORKSHIVE"
-	ConnectionTypeDatalakegen2       ConnectionType = "DATALAKEGEN2"
-	ConnectionTypeDb2as400           ConnectionType = "DB2AS400"
-	ConnectionTypeCloudwatchmetrics  ConnectionType = "CLOUDWATCHMETRICS"
-)
-
-// Values returns all known values for ConnectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (ConnectionType) Values() []ConnectionType {
-	return []ConnectionType{
-		"DYNAMODB",
-		"MYSQL",
-		"POSTGRESQL",
-		"REDSHIFT",
-		"ORACLE",
-		"SYNAPSE",
-		"SQLSERVER",
-		"DB2",
-		"OPENSEARCH",
-		"BIGQUERY",
-		"GOOGLECLOUDSTORAGE",
-		"HBASE",
-		"DOCUMENTDB",
-		"MSK",
-		"NEPTUNE",
-		"CMDB",
-		"TPCDS",
-		"REDIS",
-		"CLOUDWATCH",
-		"TIMESTREAM",
-		"SAPHANA",
-		"SNOWFLAKE",
-		"TERADATA",
-		"VERTICA",
-		"CLOUDERAIMPALA",
-		"CLOUDERAHIVE",
-		"HORTONWORKSHIVE",
-		"DATALAKEGEN2",
-		"DB2AS400",
-		"CLOUDWATCHMETRICS",
-	}
-}
-
-type DataCatalogStatus string
-
-// Enum values for DataCatalogStatus
-const (
-	DataCatalogStatusCreateInProgress              DataCatalogStatus = "CREATE_IN_PROGRESS"
-	DataCatalogStatusCreateComplete                DataCatalogStatus = "CREATE_COMPLETE"
-	DataCatalogStatusCreateFailed                  DataCatalogStatus = "CREATE_FAILED"
-	DataCatalogStatusCreateFailedCleanupInProgress DataCatalogStatus = "CREATE_FAILED_CLEANUP_IN_PROGRESS"
-	DataCatalogStatusCreateFailedCleanupComplete   DataCatalogStatus = "CREATE_FAILED_CLEANUP_COMPLETE"
-	DataCatalogStatusCreateFailedCleanupFailed     DataCatalogStatus = "CREATE_FAILED_CLEANUP_FAILED"
-	DataCatalogStatusDeleteInProgress              DataCatalogStatus = "DELETE_IN_PROGRESS"
-	DataCatalogStatusDeleteComplete                DataCatalogStatus = "DELETE_COMPLETE"
-	DataCatalogStatusDeleteFailed                  DataCatalogStatus = "DELETE_FAILED"
-)
-
-// Values returns all known values for DataCatalogStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client.
-//
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (DataCatalogStatus) Values() []DataCatalogStatus {
-	return []DataCatalogStatus{
-		"CREATE_IN_PROGRESS",
-		"CREATE_COMPLETE",
-		"CREATE_FAILED",
-		"CREATE_FAILED_CLEANUP_IN_PROGRESS",
-		"CREATE_FAILED_CLEANUP_COMPLETE",
-		"CREATE_FAILED_CLEANUP_FAILED",
-		"DELETE_IN_PROGRESS",
-		"DELETE_COMPLETE",
-		"DELETE_FAILED",
-	}
-}
-
 type DataCatalogType string
 
 // Enum values for DataCatalogType
 const (
-	DataCatalogTypeLambda    DataCatalogType = "LAMBDA"
-	DataCatalogTypeGlue      DataCatalogType = "GLUE"
-	DataCatalogTypeHive      DataCatalogType = "HIVE"
-	DataCatalogTypeFederated DataCatalogType = "FEDERATED"
+	DataCatalogTypeLambda DataCatalogType = "LAMBDA"
+	DataCatalogTypeGlue   DataCatalogType = "GLUE"
+	DataCatalogTypeHive   DataCatalogType = "HIVE"
 )
 
 // Values returns all known values for DataCatalogType. Note that this can be
@@ -246,7 +137,6 @@ func (DataCatalogType) Values() []DataCatalogType {
 		"LAMBDA",
 		"GLUE",
 		"HIVE",
-		"FEDERATED",
 	}
 }
 

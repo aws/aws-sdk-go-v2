@@ -70,7 +70,8 @@ type GetQueryResultsOutput struct {
 	// The results of the query execution.
 	ResultSet *types.ResultSet
 
-	// The number of rows inserted with a CREATE TABLE AS SELECT statement.
+	// The number of rows inserted with a CREATE TABLE AS SELECT , INSERT INTO , or
+	// UPDATE statement.
 	UpdateCount *int64
 
 	// Metadata pertaining to the operation's result.

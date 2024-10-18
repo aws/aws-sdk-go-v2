@@ -1,0 +1,8 @@
+{
+    "id": "c0f2f6df-5c80-4ede-bd07-c74c7be56323",
+    "type": "feature",
+    "description": "Adding the following project member designations: PROJECT_CATALOG_VIEWER, PROJECT_CATALOG_CONSUMER and PROJECT_CATALOG_STEWARD in the CreateProjectMembership API and PROJECT_CATALOG_STEWARD designation in the AddPolicyGrant API.",
+    "modules": [
+        "service/datazone"
+    ]
+}
