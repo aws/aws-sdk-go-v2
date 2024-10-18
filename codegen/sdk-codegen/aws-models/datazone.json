@@ -21325,6 +21325,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CONTRIBUTOR"
                     }
+                },
+                "PROJECT_CATALOG_STEWARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT_CATALOG_STEWARD"
+                    }
                 }
             }
         },
@@ -28652,6 +28658,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PROJECT_CONTRIBUTOR"
+                    }
+                },
+                "PROJECT_CATALOG_VIEWER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT_CATALOG_VIEWER"
+                    }
+                },
+                "PROJECT_CATALOG_CONSUMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT_CATALOG_CONSUMER"
+                    }
+                },
+                "PROJECT_CATALOG_STEWARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROJECT_CATALOG_STEWARD"
                     }
                 }
             }

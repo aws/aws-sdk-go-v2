@@ -35,13 +35,13 @@
                 "S3AclOption": {
                     "target": "com.amazonaws.athena#S3AclOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 canned ACL that Athena should specify when storing\n            query results. Currently the only supported canned ACL is\n                <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the\n            workgroup overrides client-side settings, then the Amazon S3 canned ACL\n            specified in the workgroup's settings is used for all queries that run in the workgroup.\n            For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 canned ACL that Athena should specify when storing\n            query results, including data files inserted by Athena as the result\n            of statements like CTAS or INSERT INTO. Currently the only supported canned ACL is\n                <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the\n            workgroup overrides client-side settings, then the Amazon S3 canned ACL\n            specified in the workgroup's settings is used for all queries that run in the workgroup.\n            For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of\n            stored query results. When Athena stores query results in Amazon S3,\n            the canned ACL is set with the <code>x-amz-acl</code> request header. For more\n            information about S3 Object Ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview\">Object Ownership settings</a> in the <i>Amazon S3 User\n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of\n            stored query results, including data files inserted by Athena as the result\n            of statements like CTAS or INSERT INTO. When Athena stores query results in\n                Amazon S3, the canned ACL is set with the <code>x-amz-acl</code> request\n            header. For more information about S3 Object Ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview\">Object Ownership settings</a> in the <i>Amazon S3 User\n                Guide</i>.</p>"
             }
         },
         "com.amazonaws.athena#Age": {
@@ -2172,191 +2172,6 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
-        "com.amazonaws.athena#ConnectionType": {
-            "type": "enum",
-            "members": {
-                "DYNAMODB": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DYNAMODB"
-                    }
-                },
-                "MYSQL": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "MYSQL"
-                    }
-                },
-                "POSTGRESQL": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "POSTGRESQL"
-                    }
-                },
-                "REDSHIFT": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "REDSHIFT"
-                    }
-                },
-                "ORACLE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ORACLE"
-                    }
-                },
-                "SYNAPSE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SYNAPSE"
-                    }
-                },
-                "SQLSERVER": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SQLSERVER"
-                    }
-                },
-                "DB2": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DB2"
-                    }
-                },
-                "OPENSEARCH": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "OPENSEARCH"
-                    }
-                },
-                "BIGQUERY": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "BIGQUERY"
-                    }
-                },
-                "GOOGLECLOUDSTORAGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "GOOGLECLOUDSTORAGE"
-                    }
-                },
-                "HBASE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "HBASE"
-                    }
-                },
-                "DOCUMENTDB": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DOCUMENTDB"
-                    }
-                },
-                "MSK": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "MSK"
-                    }
-                },
-                "NEPTUNE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "NEPTUNE"
-                    }
-                },
-                "CMDB": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CMDB"
-                    }
-                },
-                "TPCDS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "TPCDS"
-                    }
-                },
-                "REDIS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "REDIS"
-                    }
-                },
-                "CLOUDWATCH": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CLOUDWATCH"
-                    }
-                },
-                "TIMESTREAM": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "TIMESTREAM"
-                    }
-                },
-                "SAPHANA": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SAPHANA"
-                    }
-                },
-                "SNOWFLAKE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "SNOWFLAKE"
-                    }
-                },
-                "TERADATA": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "TERADATA"
-                    }
-                },
-                "VERTICA": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "VERTICA"
-                    }
-                },
-                "CLOUDERAIMPALA": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CLOUDERAIMPALA"
-                    }
-                },
-                "CLOUDERAHIVE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CLOUDERAHIVE"
-                    }
-                },
-                "HORTONWORKSHIVE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "HORTONWORKSHIVE"
-                    }
-                },
-                "DATALAKEGEN2": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DATALAKEGEN2"
-                    }
-                },
-                "DB2AS400": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DB2AS400"
-                    }
-                },
-                "CLOUDWATCHMETRICS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CLOUDWATCHMETRICS"
-                    }
-                }
-            }
-        },
         "com.amazonaws.athena#CoordinatorDpuSize": {
             "type": "integer",
             "traits": {
@@ -2455,7 +2270,7 @@
                 "Type": {
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>GLUE</code> for an Glue Data Catalog, and <code>HIVE</code> for an\n            external Apache Hive metastore. <code>FEDERATED</code> is a federated catalog for which\n                Athena creates the connection and the Lambda function for\n            you based on the parameters that you pass.</p>",
+                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>HIVE</code> for an external hive metastore, or <code>GLUE</code> for an\n                Glue Data Catalog.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2468,7 +2283,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.athena#ParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for creating the data\n            catalog. This is a mapping whose values depend on the catalog type. </p>\n         <ul>\n            <li>\n               <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n               <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n               <ul>\n                  <li>\n                     <p>If you have one Lambda function that processes metadata\n                            and another for reading the actual data, use the following syntax. Both\n                            parameters are required.</p>\n                     <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p> If you have a composite Lambda function that processes\n                            both metadata and data, use the following syntax to specify your Lambda function.</p>\n                     <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>GLUE</code> type takes a catalog ID parameter and is required. The\n                            <code>\n                     <i>catalog_id</i>\n                  </code> is the account ID of the\n                        Amazon Web Services account to which the Glue Data Catalog\n                    belongs.</p>\n               <p>\n                  <code>catalog-id=<i>catalog_id</i>\n                  </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>The <code>GLUE</code> data catalog type also applies to the default\n                                <code>AwsDataCatalog</code> that already exists in your account, of\n                            which you can have only one and cannot modify.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>FEDERATED</code> data catalog type uses one of the following\n                    parameters, but not both. Use <code>connection-arn</code> for an existing\n                        Glue connection. Use <code>connection-type</code> and\n                        <code>connection-properties</code> to specify the configuration setting for\n                    a new connection.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>connection-arn:<i><glue_connection_arn_to_reuse></i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>lambda-role-arn</code> (optional): The execution role to use for the\n                            Lambda function. If not provided, one is created.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>connection-type:MYSQL|REDSHIFT|....,\n                                    connection-properties:\"<i><json_string></i>\"</code>\n                     </p>\n                     <p>For <i>\n                           <code><json_string></code>\n                        </i>, use escaped\n                            JSON text, as in the following example.</p>\n                     <p>\n                        <code>\"{\\\"spill_bucket\\\":\\\"my_spill\\\",\\\"spill_prefix\\\":\\\"athena-spill\\\",\\\"host\\\":\\\"abc12345.snowflakecomputing.com\\\",\\\"port\\\":\\\"1234\\\",\\\"warehouse\\\":\\\"DEV_WH\\\",\\\"database\\\":\\\"TEST\\\",\\\"schema\\\":\\\"PUBLIC\\\",\\\"SecretArn\\\":\\\"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j\\\"}\"</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for creating the data\n            catalog. This is a mapping whose values depend on the catalog type. </p>\n         <ul>\n            <li>\n               <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n               <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n               <ul>\n                  <li>\n                     <p>If you have one Lambda function that processes metadata\n                            and another for reading the actual data, use the following syntax. Both\n                            parameters are required.</p>\n                     <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p> If you have a composite Lambda function that processes\n                            both metadata and data, use the following syntax to specify your Lambda function.</p>\n                     <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>GLUE</code> type takes a catalog ID parameter and is required. The\n                            <code>\n                     <i>catalog_id</i>\n                  </code> is the account ID of the\n                        Amazon Web Services account to which the Glue Data Catalog\n                    belongs.</p>\n               <p>\n                  <code>catalog-id=<i>catalog_id</i>\n                  </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>The <code>GLUE</code> data catalog type also applies to the default\n                                <code>AwsDataCatalog</code> that already exists in your account, of\n                            which you can have only one and cannot modify.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -2484,11 +2299,7 @@
         },
         "com.amazonaws.athena#CreateDataCatalogOutput": {
             "type": "structure",
-            "members": {
-                "DataCatalog": {
-                    "target": "com.amazonaws.athena#DataCatalog"
-                }
-            },
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -2864,96 +2675,19 @@
                 "Type": {
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>GLUE</code> for an Glue Data Catalog, and <code>HIVE</code> for an\n            external Apache Hive metastore. <code>FEDERATED</code> is a federated catalog for which\n                Athena creates the connection and the Lambda function for\n            you based on the parameters that you pass.</p>",
+                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>HIVE</code> for an external hive metastore, or <code>GLUE</code> for an\n                Glue Data Catalog.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Parameters": {
                     "target": "com.amazonaws.athena#ParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for the data catalog.\n            This is a mapping whose values depend on the catalog type. </p>\n         <ul>\n            <li>\n               <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n               <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n               <ul>\n                  <li>\n                     <p>If you have one Lambda function that processes metadata\n                            and another for reading the actual data, use the following syntax. Both\n                            parameters are required.</p>\n                     <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p> If you have a composite Lambda function that processes\n                            both metadata and data, use the following syntax to specify your Lambda function.</p>\n                     <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>GLUE</code> type takes a catalog ID parameter and is required. The\n                            <code>\n                     <i>catalog_id</i>\n                  </code> is the account ID of the\n                        Amazon Web Services account to which the Glue catalog\n                    belongs.</p>\n               <p>\n                  <code>catalog-id=<i>catalog_id</i>\n                  </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>The <code>GLUE</code> data catalog type also applies to the default\n                                <code>AwsDataCatalog</code> that already exists in your account, of\n                            which you can have only one and cannot modify.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>FEDERATED</code> data catalog type uses one of the following\n                    parameters, but not both. Use <code>connection-arn</code> for an existing\n                        Glue connection. Use <code>connection-type</code> and\n                        <code>connection-properties</code> to specify the configuration setting for\n                    a new connection.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>connection-arn:<i><glue_connection_arn_to_reuse></i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>connection-type:MYSQL|REDSHIFT|....,\n                                    connection-properties:\"<i><json_string></i>\"</code>\n                     </p>\n                     <p>For <i>\n                           <code><json_string></code>\n                        </i>, use escaped\n                            JSON text, as in the following example.</p>\n                     <p>\n                        <code>\"{\\\"spill_bucket\\\":\\\"my_spill\\\",\\\"spill_prefix\\\":\\\"athena-spill\\\",\\\"host\\\":\\\"abc12345.snowflakecomputing.com\\\",\\\"port\\\":\\\"1234\\\",\\\"warehouse\\\":\\\"DEV_WH\\\",\\\"database\\\":\\\"TEST\\\",\\\"schema\\\":\\\"PUBLIC\\\",\\\"SecretArn\\\":\\\"arn:aws:secretsmanager:ap-south-1:111122223333:secret:snowflake-XHb67j\\\"}\"</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
-                    }
-                },
-                "Status": {
-                    "target": "com.amazonaws.athena#DataCatalogStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of the creation or deletion of the data catalog.</p>\n         <ul>\n            <li>\n               <p>The <code>LAMBDA</code>, <code>GLUE</code>, and <code>HIVE</code> data catalog\n                    types are created synchronously. Their status is either\n                        <code>CREATE_COMPLETE</code> or <code>CREATE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>The <code>FEDERATED</code> data catalog type is created asynchronously.</p>\n            </li>\n         </ul>\n         <p>Data catalog creation status:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code>: Federated data catalog creation in\n                    progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_COMPLETE</code>: Data catalog creation complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>: Data catalog could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED_CLEANUP_IN_PROGRESS</code>: Federated data catalog\n                    creation failed and is being removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED_CLEANUP_COMPLETE</code>: Federated data catalog creation\n                    failed and was removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED_CLEANUP_FAILED</code>: Federated data catalog creation\n                    failed but could not be removed.</p>\n            </li>\n         </ul>\n         <p>Data catalog deletion status:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code>: Federated data catalog deletion in\n                    progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_COMPLETE</code>: Federated data catalog deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code>: Federated data catalog could not be\n                    deleted.</p>\n            </li>\n         </ul>"
-                    }
-                },
-                "ConnectionType": {
-                    "target": "com.amazonaws.athena#ConnectionType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The type of connection for a <code>FEDERATED</code> data catalog (for example,\n                <code>REDSHIFT</code>, <code>MYSQL</code>, or <code>SQLSERVER</code>). For\n            information about individual connectors, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html\">Available data source\n                connectors</a>.</p>"
-                    }
-                },
-                "Error": {
-                    "target": "com.amazonaws.athena#ErrorMessage",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Text of the error that occurred during data catalog creation or deletion.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for the data catalog.\n            This is a mapping whose values depend on the catalog type. </p>\n         <ul>\n            <li>\n               <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n               <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n               <ul>\n                  <li>\n                     <p>If you have one Lambda function that processes metadata\n                            and another for reading the actual data, use the following syntax. Both\n                            parameters are required.</p>\n                     <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n                  <li>\n                     <p> If you have a composite Lambda function that processes\n                            both metadata and data, use the following syntax to specify your Lambda function.</p>\n                     <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The <code>GLUE</code> type takes a catalog ID parameter and is required. The\n                            <code>\n                     <i>catalog_id</i>\n                  </code> is the account ID of the\n                        Amazon Web Services account to which the Glue catalog\n                    belongs.</p>\n               <p>\n                  <code>catalog-id=<i>catalog_id</i>\n                  </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>The <code>GLUE</code> data catalog type also applies to the default\n                                <code>AwsDataCatalog</code> that already exists in your account, of\n                            which you can have only one and cannot modify.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about a data catalog in an Amazon Web Services account.</p>\n         <note>\n            <p>In the Athena console, data catalogs are listed as \"data sources\" on\n                the <b>Data sources</b> page under the <b>Data source name</b> column.</p>\n         </note>"
-            }
-        },
-        "com.amazonaws.athena#DataCatalogStatus": {
-            "type": "enum",
-            "members": {
-                "CREATE_IN_PROGRESS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
-                    }
-                },
-                "CREATE_COMPLETE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CREATE_COMPLETE"
-                    }
-                },
-                "CREATE_FAILED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CREATE_FAILED"
-                    }
-                },
-                "CREATE_FAILED_CLEANUP_IN_PROGRESS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CREATE_FAILED_CLEANUP_IN_PROGRESS"
-                    }
-                },
-                "CREATE_FAILED_CLEANUP_COMPLETE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CREATE_FAILED_CLEANUP_COMPLETE"
-                    }
-                },
-                "CREATE_FAILED_CLEANUP_FAILED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "CREATE_FAILED_CLEANUP_FAILED"
-                    }
-                },
-                "DELETE_IN_PROGRESS": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
-                    }
-                },
-                "DELETE_COMPLETE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DELETE_COMPLETE"
-                    }
-                },
-                "DELETE_FAILED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DELETE_FAILED"
-                    }
-                }
             }
         },
         "com.amazonaws.athena#DataCatalogSummary": {
@@ -2969,24 +2703,6 @@
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
                         "smithy.api#documentation": "<p>The data catalog type.</p>"
-                    }
-                },
-                "Status": {
-                    "target": "com.amazonaws.athena#DataCatalogStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of the creation or deletion of the data catalog.</p>\n         <ul>\n            <li>\n               <p>The <code>LAMBDA</code>, <code>GLUE</code>, and <code>HIVE</code> data catalog\n                    types are created synchronously. Their status is either\n                        <code>CREATE_COMPLETE</code> or <code>CREATE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>The <code>FEDERATED</code> data catalog type is created asynchronously.</p>\n            </li>\n         </ul>\n         <p>Data catalog creation status:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code>: Federated data catalog creation in\n                    progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_COMPLETE</code>: Data catalog creation complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>: Data catalog could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED_CLEANUP_IN_PROGRESS</code>: Federated data catalog\n                    creation failed and is being removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED_CLEANUP_COMPLETE</code>: Federated data catalog creation\n                    failed and was removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED_CLEANUP_FAILED</code>: Federated data catalog creation\n                    failed but could not be removed.</p>\n            </li>\n         </ul>\n         <p>Data catalog deletion status:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE_IN_PROGRESS</code>: Federated data catalog deletion in\n                    progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_COMPLETE</code>: Federated data catalog deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code>: Federated data catalog could not be\n                    deleted.</p>\n            </li>\n         </ul>"
-                    }
-                },
-                "ConnectionType": {
-                    "target": "com.amazonaws.athena#ConnectionType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The type of connection for a <code>FEDERATED</code> data catalog (for example,\n                <code>REDSHIFT</code>, <code>MYSQL</code>, or <code>SQLSERVER</code>). For\n            information about individual connectors, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/connectors-available.html\">Available data source\n                connectors</a>.</p>"
-                    }
-                },
-                "Error": {
-                    "target": "com.amazonaws.athena#ErrorMessage",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Text of the error that occurred during data catalog creation or deletion.</p>"
                     }
                 }
             },
@@ -3019,12 +2735,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "HIVE"
-                    }
-                },
-                "FEDERATED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "FEDERATED"
                     }
                 }
             }
@@ -3177,11 +2887,7 @@
         },
         "com.amazonaws.athena#DeleteDataCatalogOutput": {
             "type": "structure",
-            "members": {
-                "DataCatalog": {
-                    "target": "com.amazonaws.athena#DataCatalog"
-                }
-            },
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -4445,7 +4151,7 @@
                 "UpdateCount": {
                     "target": "com.amazonaws.athena#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of rows inserted with a <code>CREATE TABLE AS SELECT</code> statement.\n        </p>"
+                        "smithy.api#documentation": "<p>The number of rows inserted with a <code>CREATE TABLE AS SELECT</code>, <code>INSERT\n                INTO</code>, or <code>UPDATE</code> statement. </p>"
                     }
                 },
                 "ResultSet": {

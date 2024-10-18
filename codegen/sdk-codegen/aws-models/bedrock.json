@@ -2720,7 +2720,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:inference-profile/(([a-z]{2}.)[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))))|(([a-z]{2}[.]{1})([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:((:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:inference-profile/(([a-z]{2}.)[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))))|(([a-z]{2}[.]{1})([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))$"
             }
         },
         "com.amazonaws.bedrock#EvaluationModelIdentifiers": {
@@ -3756,6 +3756,12 @@
                     "target": "com.amazonaws.bedrock#KmsKeyArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The imported model is encrypted at rest using this key.</p>"
+                    }
+                },
+                "instructSupported": {
+                    "target": "com.amazonaws.bedrock#InstructSupported",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the imported model supports fine tuning.</p>"
                     }
                 }
             },
@@ -6189,10 +6195,22 @@
                         "smithy.api#documentation": "<p>Creation time of the imported model.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "instructSupported": {
+                    "target": "com.amazonaws.bedrock#InstructSupported",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the imported model supports fine tuning.</p>"
+                    }
+                },
+                "modelArchitecture": {
+                    "target": "com.amazonaws.bedrock#ModelArchitecture",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture of the imported model.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about tne imported model.</p>"
+                "smithy.api#documentation": "<p>Information about the imported model.</p>"
             }
         },
         "com.amazonaws.bedrock#ImportedModelSummaryList": {
@@ -6409,6 +6427,9 @@
             "member": {
                 "target": "com.amazonaws.bedrock#InferenceType"
             }
+        },
+        "com.amazonaws.bedrock#InstructSupported": {
+            "type": "boolean"
         },
         "com.amazonaws.bedrock#InternalServerException": {
             "type": "structure",
@@ -7865,6 +7886,9 @@
         },
         "com.amazonaws.bedrock#MetricFloat": {
             "type": "float"
+        },
+        "com.amazonaws.bedrock#ModelArchitecture": {
+            "type": "string"
         },
         "com.amazonaws.bedrock#ModelArn": {
             "type": "string",
