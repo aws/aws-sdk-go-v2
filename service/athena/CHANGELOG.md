@@ -1,6 +1,6 @@
 # v1.48.0 (2024-10-18)
 
-* **Feature**: Removing FEDERATED from Create/List/Delete/GetDataCatalog API
+* **Feature**: **BREAKING CHANGE**: Remove DataCatalog from Create/DeleteDataCatalog. Remove Status, ConnectionType, and Error from DataCatalog and DataCatalogSummary. These were released inadvertently with no functionality. They were not populated or populated with a default value. Code related to these changes can be safely removed.
 
 # v1.47.2 (2024-10-08)
 

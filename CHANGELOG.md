@@ -24,7 +24,7 @@
 
 ## Module Highlights
 * `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.48.0](service/athena/CHANGELOG.md#v1480-2024-10-18)
-  * **Feature**: Removing FEDERATED from Create/List/Delete/GetDataCatalog API
+  * **Feature**: **BREAKING CHANGE**: Remove DataCatalog from Create/DeleteDataCatalog. Remove Status, ConnectionType, and Error from DataCatalog and DataCatalogSummary. These were released inadvertently with no functionality. They were not populated or populated with a default value. Code related to these changes can be safely removed.
 * `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.21.0](service/bedrock/CHANGELOG.md#v1210-2024-10-18)
   * **Feature**: Adding converse support to CMI API's
 * `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.23.0](service/datazone/CHANGELOG.md#v1230-2024-10-18)
