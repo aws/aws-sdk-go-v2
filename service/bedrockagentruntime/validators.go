@@ -619,9 +619,7 @@ func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "OrchestrationConfiguration"}
-	if v.QueryTransformationConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryTransformationConfiguration"))
-	} else if v.QueryTransformationConfiguration != nil {
+	if v.QueryTransformationConfiguration != nil {
 		if err := validateQueryTransformationConfiguration(v.QueryTransformationConfiguration); err != nil {
 			invalidParams.AddNested("QueryTransformationConfiguration", err.(smithy.InvalidParamsError))
 		}

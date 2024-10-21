@@ -38,6 +38,8 @@ type GetViolationDetailsInput struct {
 	// The ID of the Firewall Manager policy that you want the details for. You can
 	// get violation details for the following policy types:
 	//
+	//   - WAF
+	//
 	//   - DNS Firewall
 	//
 	//   - Imported Network Firewall
@@ -59,8 +61,8 @@ type GetViolationDetailsInput struct {
 	ResourceId *string
 
 	// The resource type. This is in the format shown in the [Amazon Web Services Resource Types Reference]. Supported resource
-	// types are: AWS::EC2::Instance , AWS::EC2::NetworkInterface ,
-	// AWS::EC2::SecurityGroup , AWS::NetworkFirewall::FirewallPolicy , and
+	// types are: AWS::WAFv2::WebACL , AWS::EC2::Instance , AWS::EC2::NetworkInterface
+	// , AWS::EC2::SecurityGroup , AWS::NetworkFirewall::FirewallPolicy , and
 	// AWS::EC2::Subnet .
 	//
 	// [Amazon Web Services Resource Types Reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html

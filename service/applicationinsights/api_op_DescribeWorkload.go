@@ -44,7 +44,7 @@ type DescribeWorkloadInput struct {
 	// This member is required.
 	WorkloadId *string
 
-	// The AWS account ID for the workload owner.
+	// The Amazon Web Services account ID for the workload owner.
 	AccountId *string
 
 	noSmithyDocumentSerde

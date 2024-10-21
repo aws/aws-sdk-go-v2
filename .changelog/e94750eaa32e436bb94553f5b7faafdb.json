@@ -1,0 +1,8 @@
+{
+    "id": "e94750ea-a32e-436b-b945-53f5b7faafdb",
+    "type": "feature",
+    "description": "Add a property to WebACL to indicate whether it's been retrofitted by Firewall Manager.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

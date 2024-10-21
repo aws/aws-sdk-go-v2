@@ -1,0 +1,8 @@
+{
+    "id": "f952d2e1-5c5a-409d-9e70-9603fde12797",
+    "type": "feature",
+    "description": "This feature enables customers to specify SNS Topic ARN. CloudWatch Application Insights (CWAI) will utilize this ARN to send problem notifications.",
+    "modules": [
+        "service/applicationinsights"
+    ]
+}

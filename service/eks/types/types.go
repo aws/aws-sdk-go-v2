@@ -420,6 +420,9 @@ type Cluster struct {
 	// The Kubernetes server version for the cluster.
 	Version *string
 
+	// The configuration for zonal shift for the cluster.
+	ZonalShiftConfig *ZonalShiftConfigResponse
+
 	noSmithyDocumentSerde
 }
 
@@ -1893,6 +1896,25 @@ type VpcConfigResponse struct {
 
 	// The VPC associated with your cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for zonal shift for the cluster.
+type ZonalShiftConfigRequest struct {
+
+	// If zonal shift is enabled, Amazon Web Services configures zonal autoshift for
+	// the cluster.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The status of zonal shift configuration for the cluster
+type ZonalShiftConfigResponse struct {
+
+	// Whether the zonal shift is enabled.
+	Enabled *bool
 
 	noSmithyDocumentSerde
 }

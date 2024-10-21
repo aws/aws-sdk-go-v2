@@ -3415,8 +3415,8 @@ type EbsBlockDevice struct {
 	// [instances built on the Nitro System]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
 	Iops *int32
 
-	// Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK
-	// under which the EBS volume is encrypted.
+	// Identifier (key ID, key alias, key ARN, or alias ARN) of the customer managed
+	// KMS key to use for EBS encryption.
 	//
 	// This parameter is only supported on BlockDeviceMapping objects called by [RunInstances], [RequestSpotFleet],
 	// and [RequestSpotInstances].
@@ -7235,14 +7235,13 @@ type InstancePrivateIpAddress struct {
 // use the launch template in the [launch instance wizard]or with the [RunInstances API], you can't specify
 // InstanceRequirements .
 //
-// For more information, see [Create a mixed instances group using attribute-based instance type selection] in the Amazon EC2 Auto Scaling User Guide, and also [Attribute-based instance type selection for EC2 Fleet]
-// , [Attribute-based instance type selection for Spot Fleet], and [Spot placement score] in the Amazon EC2 User Guide.
+// For more information, see [Create mixed instances group using attribute-based instance type selection] in the Amazon EC2 Auto Scaling User Guide, and also [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]
+// and [Spot placement score]in the Amazon EC2 User Guide.
 //
-// [Attribute-based instance type selection for EC2 Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+// [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
 // [RunInstances API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+// [Create mixed instances group using attribute-based instance type selection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
 // [Spot placement score]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-// [Create a mixed instances group using attribute-based instance type selection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
-// [Attribute-based instance type selection for Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
 // [launch instance wizard]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
 type InstanceRequirements struct {
 
@@ -7583,13 +7582,12 @@ type InstanceRequirements struct {
 // use the launch template in the [launch instance wizard], or with the [RunInstances] API or [AWS::EC2::Instance] Amazon Web Services
 // CloudFormation resource, you can't specify InstanceRequirements .
 //
-// For more information, see [Attribute-based instance type selection for EC2 Fleet], [Attribute-based instance type selection for Spot Fleet], and [Spot placement score] in the Amazon EC2 User Guide.
+// For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet] and [Spot placement score] in the Amazon EC2 User Guide.
 //
-// [Attribute-based instance type selection for EC2 Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+// [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
 // [AWS::EC2::Instance]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 // [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 // [Spot placement score]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-// [Attribute-based instance type selection for Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
 // [launch instance wizard]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
 type InstanceRequirementsRequest struct {
 
@@ -13897,13 +13895,12 @@ type RequestLaunchTemplateData struct {
 	// use the launch template in the [launch instance wizard], or with the [RunInstances] API or [AWS::EC2::Instance] Amazon Web Services
 	// CloudFormation resource, you can't specify InstanceRequirements .
 	//
-	// For more information, see [Attribute-based instance type selection for EC2 Fleet], [Attribute-based instance type selection for Spot Fleet], and [Spot placement score] in the Amazon EC2 User Guide.
+	// For more information, see [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet] and [Spot placement score] in the Amazon EC2 User Guide.
 	//
-	// [Attribute-based instance type selection for EC2 Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+	// [Specify attributes for instance type selection for EC2 Fleet or Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
 	// [AWS::EC2::Instance]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
 	// [RunInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
 	// [Spot placement score]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
-	// [Attribute-based instance type selection for Spot Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
 	// [launch instance wizard]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
 	InstanceRequirements *InstanceRequirementsRequest
 

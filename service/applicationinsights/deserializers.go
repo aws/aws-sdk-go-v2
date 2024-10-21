@@ -4471,6 +4471,15 @@ func awsAwsjson11_deserializeDocumentApplicationInfo(v **types.ApplicationInfo, 
 				sv.ResourceGroupName = ptr.String(jtv)
 			}
 
+		case "SNSNotificationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SNSNotificationArn to be of type string, got %T instead", value)
+				}
+				sv.SNSNotificationArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5620,6 +5629,15 @@ func awsAwsjson11_deserializeDocumentProblem(v **types.Problem, value interface{
 				sv.SeverityLevel = types.SeverityLevel(jtv)
 			}
 
+		case "ShortName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortName to be of type string, got %T instead", value)
+				}
+				sv.ShortName = ptr.String(jtv)
+			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6099,6 +6117,15 @@ func awsAwsjson11_deserializeDocumentWorkload(v **types.Workload, value interfac
 					return fmt.Errorf("expected ComponentName to be of type string, got %T instead", value)
 				}
 				sv.ComponentName = ptr.String(jtv)
+			}
+
+		case "MissingWorkloadConfig":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MissingWorkloadConfig to be of type *bool, got %T instead", value)
+				}
+				sv.MissingWorkloadConfig = ptr.Bool(jtv)
 			}
 
 		case "Tier":
@@ -6850,6 +6877,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeProblemOutput(v **DescribeProblem
 		case "Problem":
 			if err := awsAwsjson11_deserializeDocumentProblem(&sv.Problem, value); err != nil {
 				return err
+			}
+
+		case "SNSNotificationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SNSNotificationArn to be of type string, got %T instead", value)
+				}
+				sv.SNSNotificationArn = ptr.String(jtv)
 			}
 
 		default:

@@ -2171,6 +2171,11 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.ResourceGroupName)
 	}
 
+	if v.SNSNotificationArn != nil {
+		ok := object.Key("SNSNotificationArn")
+		ok.String(*v.SNSNotificationArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -2824,6 +2829,11 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	if v.ResourceGroupName != nil {
 		ok := object.Key("ResourceGroupName")
 		ok.String(*v.ResourceGroupName)
+	}
+
+	if v.SNSNotificationArn != nil {
+		ok := object.Key("SNSNotificationArn")
+		ok.String(*v.SNSNotificationArn)
 	}
 
 	return nil

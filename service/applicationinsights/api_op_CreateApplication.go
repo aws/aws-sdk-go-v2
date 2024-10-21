@@ -62,6 +62,9 @@ type CreateApplicationInput struct {
 	// The name of the resource group.
 	ResourceGroupName *string
 
+	//  The SNS notification topic ARN.
+	SNSNotificationArn *string
+
 	// List of tags to add to the application. tag key ( Key ) and an associated tag
 	// value ( Value ). The maximum length of a tag key is 128 characters. The maximum
 	// length of a tag value is 256 characters.

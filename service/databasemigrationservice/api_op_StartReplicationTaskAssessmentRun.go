@@ -106,6 +106,10 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// this assessment run.
 	ResultLocationFolder *string
 
+	// One or more tags to be assigned to the premigration assessment run that you
+	// want to start.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

@@ -34,7 +34,8 @@ type DescribeProblemInput struct {
 	// This member is required.
 	ProblemId *string
 
-	// The AWS account ID for the owner of the resource group affected by the problem.
+	// The Amazon Web Services account ID for the owner of the resource group affected
+	// by the problem.
 	AccountId *string
 
 	noSmithyDocumentSerde
@@ -44,6 +45,9 @@ type DescribeProblemOutput struct {
 
 	// Information about the problem.
 	Problem *types.Problem
+
+	//  The SNS notification topic ARN of the problem.
+	SNSNotificationArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

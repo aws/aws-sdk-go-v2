@@ -12421,6 +12421,13 @@ func awsAwsjson11_serializeOpDocumentStartReplicationTaskAssessmentRunInput(v *S
 		ok.String(*v.ServiceAccessRoleArn)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

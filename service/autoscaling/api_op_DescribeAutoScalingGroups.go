@@ -25,8 +25,10 @@ import (
 // information for all Auto Scaling groups.
 //
 // This operation also returns information about instances in Auto Scaling groups.
-// To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool
+// To retrieve information about the instances in a warm pool, you must call the [DescribeWarmPool]
 // API.
+//
+// [DescribeWarmPool]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeWarmPool.html
 func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *DescribeAutoScalingGroupsInput, optFns ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeAutoScalingGroupsInput{}

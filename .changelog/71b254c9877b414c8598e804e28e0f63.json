@@ -1,0 +1,8 @@
+{
+    "id": "71b254c9-877b-414c-8598-e804e28e0f63",
+    "type": "feature",
+    "description": "Adding new API to generate authenticated scripts for EMV pin change use cases.",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}

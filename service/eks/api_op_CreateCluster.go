@@ -69,7 +69,11 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// The unique name to give to your cluster.
+	// The unique name to give to your cluster. The name can contain only alphanumeric
+	// characters (case-sensitive), hyphens, and underscores. It must start with an
+	// alphanumeric character and can't be longer than 100 characters. The name must be
+	// unique within the Amazon Web Services Region and Amazon Web Services account
+	// that you're creating the cluster in.
 	//
 	// This member is required.
 	Name *string
@@ -150,6 +154,25 @@ type CreateClusterInput struct {
 	//
 	// The default version might not be the latest version available.
 	Version *string
+
+	// Enable or disable ARC zonal shift for the cluster. If zonal shift is enabled,
+	// Amazon Web Services configures zonal autoshift for the cluster.
+	//
+	// Zonal shift is a feature of Amazon Application Recovery Controller (ARC). ARC
+	// zonal shift is designed to be a temporary measure that allows you to move
+	// traffic for a resource away from an impaired AZ until the zonal shift expires or
+	// you cancel it. You can extend the zonal shift if necessary.
+	//
+	// You can start a zonal shift for an EKS cluster, or you can allow Amazon Web
+	// Services to do it for you by enabling zonal autoshift. This shift updates the
+	// flow of east-to-west network traffic in your cluster to only consider network
+	// endpoints for Pods running on worker nodes in healthy AZs. Additionally, any ALB
+	// or NLB handling ingress traffic for applications in your EKS cluster will
+	// automatically route traffic to targets in the healthy AZs. For more information
+	// about zonal shift in EKS, see [Learn about Amazon Application Recovery Controller (ARC) Zonal Shift in Amazon EKS]in the Amazon EKS User Guide .
+	//
+	// [Learn about Amazon Application Recovery Controller (ARC) Zonal Shift in Amazon EKS]: https://docs.aws.amazon.com/eks/latest/userguide/zone-shift.html
+	ZonalShiftConfig *types.ZonalShiftConfigRequest
 
 	noSmithyDocumentSerde
 }

@@ -16369,6 +16369,15 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 				return err
 			}
 
+		case "RetrofittedByFirewallManager":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RetrofittedByFirewallManager = jtv
+			}
+
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentRules(&sv.Rules, value); err != nil {
 				return err

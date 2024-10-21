@@ -226,6 +226,28 @@ func (PaddingType) Values() []PaddingType {
 	}
 }
 
+type PinBlockFormatForEmvPinChange string
+
+// Enum values for PinBlockFormatForEmvPinChange
+const (
+	PinBlockFormatForEmvPinChangeIsoFormat0 PinBlockFormatForEmvPinChange = "ISO_FORMAT_0"
+	PinBlockFormatForEmvPinChangeIsoFormat1 PinBlockFormatForEmvPinChange = "ISO_FORMAT_1"
+	PinBlockFormatForEmvPinChangeIsoFormat3 PinBlockFormatForEmvPinChange = "ISO_FORMAT_3"
+)
+
+// Values returns all known values for PinBlockFormatForEmvPinChange. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PinBlockFormatForEmvPinChange) Values() []PinBlockFormatForEmvPinChange {
+	return []PinBlockFormatForEmvPinChange{
+		"ISO_FORMAT_0",
+		"ISO_FORMAT_1",
+		"ISO_FORMAT_3",
+	}
+}
+
 type PinBlockFormatForPinData string
 
 // Enum values for PinBlockFormatForPinData
@@ -242,6 +264,44 @@ func (PinBlockFormatForPinData) Values() []PinBlockFormatForPinData {
 	return []PinBlockFormatForPinData{
 		"ISO_FORMAT_0",
 		"ISO_FORMAT_3",
+	}
+}
+
+type PinBlockLengthPosition string
+
+// Enum values for PinBlockLengthPosition
+const (
+	PinBlockLengthPositionNone            PinBlockLengthPosition = "NONE"
+	PinBlockLengthPositionFrontOfPinBlock PinBlockLengthPosition = "FRONT_OF_PIN_BLOCK"
+)
+
+// Values returns all known values for PinBlockLengthPosition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PinBlockLengthPosition) Values() []PinBlockLengthPosition {
+	return []PinBlockLengthPosition{
+		"NONE",
+		"FRONT_OF_PIN_BLOCK",
+	}
+}
+
+type PinBlockPaddingType string
+
+// Enum values for PinBlockPaddingType
+const (
+	PinBlockPaddingTypeNoPadding   PinBlockPaddingType = "NO_PADDING"
+	PinBlockPaddingTypeIsoIec78164 PinBlockPaddingType = "ISO_IEC_7816_4"
+)
+
+// Values returns all known values for PinBlockPaddingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PinBlockPaddingType) Values() []PinBlockPaddingType {
+	return []PinBlockPaddingType{
+		"NO_PADDING",
+		"ISO_IEC_7816_4",
 	}
 }
 

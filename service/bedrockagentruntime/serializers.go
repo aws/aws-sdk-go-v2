@@ -1273,6 +1273,27 @@ func awsRestjson1_serializeDocumentOrchestrationConfiguration(v *types.Orchestra
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentAdditionalModelRequestFields(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InferenceConfig != nil {
+		ok := object.Key("inferenceConfig")
+		if err := awsRestjson1_serializeDocumentInferenceConfig(v.InferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PromptTemplate != nil {
+		ok := object.Key("promptTemplate")
+		if err := awsRestjson1_serializeDocumentPromptTemplate(v.PromptTemplate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QueryTransformationConfiguration != nil {
 		ok := object.Key("queryTransformationConfiguration")
 		if err := awsRestjson1_serializeDocumentQueryTransformationConfiguration(v.QueryTransformationConfiguration, ok); err != nil {

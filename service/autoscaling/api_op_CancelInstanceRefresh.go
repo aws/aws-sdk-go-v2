@@ -19,9 +19,10 @@ import (
 // changes.
 //
 // When you cancel an instance refresh, this does not roll back any changes that
-// it made. Use the RollbackInstanceRefreshAPI to roll back instead.
+// it made. Use the [RollbackInstanceRefresh]API to roll back instead.
 //
 // [instance refresh feature]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
+// [RollbackInstanceRefresh]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RollbackInstanceRefresh.html
 func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstanceRefreshInput, optFns ...func(*Options)) (*CancelInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &CancelInstanceRefreshInput{}

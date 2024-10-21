@@ -6324,9 +6324,10 @@ type NetworkInterfaceCreationType string
 
 // Enum values for NetworkInterfaceCreationType
 const (
-	NetworkInterfaceCreationTypeEfa    NetworkInterfaceCreationType = "efa"
-	NetworkInterfaceCreationTypeBranch NetworkInterfaceCreationType = "branch"
-	NetworkInterfaceCreationTypeTrunk  NetworkInterfaceCreationType = "trunk"
+	NetworkInterfaceCreationTypeEfa     NetworkInterfaceCreationType = "efa"
+	NetworkInterfaceCreationTypeEfaOnly NetworkInterfaceCreationType = "efa-only"
+	NetworkInterfaceCreationTypeBranch  NetworkInterfaceCreationType = "branch"
+	NetworkInterfaceCreationTypeTrunk   NetworkInterfaceCreationType = "trunk"
 )
 
 // Values returns all known values for NetworkInterfaceCreationType. Note that
@@ -6337,6 +6338,7 @@ const (
 func (NetworkInterfaceCreationType) Values() []NetworkInterfaceCreationType {
 	return []NetworkInterfaceCreationType{
 		"efa",
+		"efa-only",
 		"branch",
 		"trunk",
 	}
@@ -6398,6 +6400,7 @@ const (
 	NetworkInterfaceTypeInterface                     NetworkInterfaceType = "interface"
 	NetworkInterfaceTypeNatGateway                    NetworkInterfaceType = "natGateway"
 	NetworkInterfaceTypeEfa                           NetworkInterfaceType = "efa"
+	NetworkInterfaceTypeEfaOnly                       NetworkInterfaceType = "efa-only"
 	NetworkInterfaceTypeTrunk                         NetworkInterfaceType = "trunk"
 	NetworkInterfaceTypeLoadBalancer                  NetworkInterfaceType = "load_balancer"
 	NetworkInterfaceTypeNetworkLoadBalancer           NetworkInterfaceType = "network_load_balancer"
@@ -6423,6 +6426,7 @@ func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 		"interface",
 		"natGateway",
 		"efa",
+		"efa-only",
 		"trunk",
 		"load_balancer",
 		"network_load_balancer",

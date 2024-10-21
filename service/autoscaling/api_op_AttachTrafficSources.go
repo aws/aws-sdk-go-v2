@@ -28,9 +28,12 @@ import (
 // This operation is additive and does not detach existing traffic sources from
 // the Auto Scaling group.
 //
-// After the operation completes, use the DescribeTrafficSources API to return details about the state
+// After the operation completes, use the [DescribeTrafficSources] API to return details about the state
 // of the attachments between traffic sources and your Auto Scaling group. To
-// detach a traffic source from the Auto Scaling group, call the DetachTrafficSourcesAPI.
+// detach a traffic source from the Auto Scaling group, call the [DetachTrafficSources]API.
+//
+// [DescribeTrafficSources]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html
+// [DetachTrafficSources]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html
 func (c *Client) AttachTrafficSources(ctx context.Context, params *AttachTrafficSourcesInput, optFns ...func(*Options)) (*AttachTrafficSourcesOutput, error) {
 	if params == nil {
 		params = &AttachTrafficSourcesInput{}

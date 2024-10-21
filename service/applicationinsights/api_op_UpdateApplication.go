@@ -57,6 +57,10 @@ type UpdateApplicationInput struct {
 	//  Disassociates the SNS topic from the opsItem created for detected problems.
 	RemoveSNSTopic *bool
 
+	//  The SNS topic ARN. Allows you to receive SNS notifications for updates and
+	// issues with an application.
+	SNSNotificationArn *string
+
 	noSmithyDocumentSerde
 }
 

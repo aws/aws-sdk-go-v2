@@ -11115,6 +11115,11 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				sv.Version = ptr.String(jtv)
 			}
 
+		case "zonalShiftConfig":
+			if err := awsRestjson1_deserializeDocumentZonalShiftConfigResponse(&sv.ZonalShiftConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -15463,6 +15468,46 @@ func awsRestjson1_deserializeDocumentVpcConfigResponse(v **types.VpcConfigRespon
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentZonalShiftConfigResponse(v **types.ZonalShiftConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZonalShiftConfigResponse
+	if *v == nil {
+		sv = &types.ZonalShiftConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
 			}
 
 		default:

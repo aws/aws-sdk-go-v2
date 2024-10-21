@@ -1399,10 +1399,21 @@ type Observation struct {
 // generation.
 type OrchestrationConfiguration struct {
 
+	//  Additional model parameters and corresponding values not included in the
+	// textInferenceConfig structure for a knowledge base. This allows users to provide
+	// custom model parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	//  Configuration settings for inference when using RetrieveAndGenerate to
+	// generate responses while using a knowledge base as a source.
+	InferenceConfig *InferenceConfig
+
+	// Contains the template for the prompt that's sent to the model for response
+	// generation.
+	PromptTemplate *PromptTemplate
+
 	// To split up the prompt and retrieve multiple sources, set the transformation
 	// type to QUERY_DECOMPOSITION .
-	//
-	// This member is required.
 	QueryTransformationConfiguration *QueryTransformationConfiguration
 
 	noSmithyDocumentSerde
@@ -1411,7 +1422,8 @@ type OrchestrationConfiguration struct {
 // The foundation model output from the orchestration step.
 type OrchestrationModelInvocationOutput struct {
 
-	// Contains information about the foundation model output.
+	// Contains information about the foundation model output from the orchestration
+	// step.
 	Metadata *Metadata
 
 	// Contains details of the raw response from the foundation model output.
@@ -1540,14 +1552,15 @@ type PayloadPart struct {
 // The foundation model output from the post-processing step.
 type PostProcessingModelInvocationOutput struct {
 
-	// Provides details of the foundation model.
+	//  Contains information about the foundation model output from the
+	// post-processing step.
 	Metadata *Metadata
 
 	// Details about the response from the Lambda parsing of the output of the
 	// post-processing step.
 	ParsedResponse *PostProcessingParsedResponse
 
-	// Contains the raw output from the foundation model.
+	//  Details of the raw response from the foundation model output.
 	RawResponse *RawResponse
 
 	// The unique identifier of the trace.
@@ -1606,14 +1619,15 @@ func (*PostProcessingTraceMemberModelInvocationOutput) isPostProcessingTrace() {
 // The foundation model output from the pre-processing step.
 type PreProcessingModelInvocationOutput struct {
 
-	// Provides details of the foundation model.
+	//  Contains information about the foundation model output from the pre-processing
+	// step.
 	Metadata *Metadata
 
 	// Details about the response from the Lambda parsing of the output of the
 	// pre-processing step.
 	ParsedResponse *PreProcessingParsedResponse
 
-	// Contains the raw output from the foundation model.
+	//  Details of the raw response from the foundation model output.
 	RawResponse *RawResponse
 
 	// The unique identifier of the trace.

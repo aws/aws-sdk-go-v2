@@ -13,7 +13,7 @@ import (
 
 // Deletes the specified WebACL.
 //
-// You can only use this if ManagedByFirewallManager is false in the specified WebACL.
+// You can only use this if ManagedByFirewallManager is false in the web ACL.
 //
 // Before deleting any web ACL, first disassociate it from all resources.
 //

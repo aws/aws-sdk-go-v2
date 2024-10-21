@@ -49,9 +49,13 @@ import (
 //     DesiredCapacity , and the new MaxSize is smaller than the current size of the
 //     group, this sets the group's DesiredCapacity to the new MaxSize value.
 //
-// To see which properties have been set, call the DescribeAutoScalingGroups API. To view the scaling
-// policies for an Auto Scaling group, call the DescribePoliciesAPI. If the group has scaling
-// policies, you can update them by calling the PutScalingPolicyAPI.
+// To see which properties have been set, call the [DescribeAutoScalingGroups] API. To view the scaling
+// policies for an Auto Scaling group, call the [DescribePolicies]API. If the group has scaling
+// policies, you can update them by calling the [PutScalingPolicy]API.
+//
+// [DescribeAutoScalingGroups]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html
+// [DescribePolicies]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribePolicies.html
+// [PutScalingPolicy]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html
 func (c *Client) UpdateAutoScalingGroup(ctx context.Context, params *UpdateAutoScalingGroupInput, optFns ...func(*Options)) (*UpdateAutoScalingGroupOutput, error) {
 	if params == nil {
 		params = &UpdateAutoScalingGroupInput{}
@@ -205,8 +209,10 @@ type UpdateAutoScalingGroupInput struct {
 	// [Use instance scale-in protection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
 	NewInstancesProtectedFromScaleIn *bool
 
-	// The name of an existing placement group into which to launch your instances.
-	// For more information, see [Placement groups]in the Amazon EC2 User Guide for Linux Instances.
+	// The name of an existing placement group into which to launch your instances. To
+	// remove the placement group setting, pass an empty string for placement-group .
+	// For more information about placement groups, see [Placement groups]in the Amazon EC2 User Guide
+	// for Linux Instances.
 	//
 	// A cluster placement group is a logical grouping of instances within a single
 	// Availability Zone. You cannot specify multiple Availability Zones and a cluster

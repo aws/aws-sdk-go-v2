@@ -15505,6 +15505,11 @@ func awsAwsjson11_deserializeDocumentDataMigration(v **types.DataMigration, valu
 				sv.DataMigrationArn = ptr.String(jtv)
 			}
 
+		case "DataMigrationCidrBlocks":
+			if err := awsAwsjson11_deserializeDocumentDataMigrationCidrBlock(&sv.DataMigrationCidrBlocks, value); err != nil {
+				return err
+			}
+
 		case "DataMigrationCreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15633,6 +15638,42 @@ func awsAwsjson11_deserializeDocumentDataMigration(v **types.DataMigration, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDataMigrationCidrBlock(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -25110,6 +25151,15 @@ func awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRun(v **types.Repl
 				sv.AssessmentRunName = ptr.String(jtv)
 			}
 
+		case "IsLatestTaskAssessmentRun":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsLatestTaskAssessmentRun = jtv
+			}
+
 		case "LastFailureMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -25187,6 +25237,11 @@ func awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRun(v **types.Repl
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ResultLocationFolder = ptr.String(jtv)
+			}
+
+		case "ResultStatistic":
+			if err := awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRunResultStatistic(&sv.ResultStatistic, value); err != nil {
+				return err
 			}
 
 		case "ServiceAccessRoleArn":
@@ -25296,6 +25351,102 @@ func awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRunProgress(v **ty
 					return err
 				}
 				sv.IndividualAssessmentCount = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReplicationTaskAssessmentRunResultStatistic(v **types.ReplicationTaskAssessmentRunResultStatistic, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicationTaskAssessmentRunResultStatistic
+	if *v == nil {
+		sv = &types.ReplicationTaskAssessmentRunResultStatistic{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Cancelled":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Cancelled = int32(i64)
+			}
+
+		case "Error":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Error = int32(i64)
+			}
+
+		case "Failed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Failed = int32(i64)
+			}
+
+		case "Passed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Passed = int32(i64)
+			}
+
+		case "Warning":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Warning = int32(i64)
 			}
 
 		default:

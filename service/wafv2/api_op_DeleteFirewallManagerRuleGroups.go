@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes all rule groups that are managed by Firewall Manager for the specified
-// web ACL.
+// Deletes all rule groups that are managed by Firewall Manager from the specified WebACL
+// .
 //
-// You can only use this if ManagedByFirewallManager is false in the specified WebACL.
+// You can only use this if ManagedByFirewallManager and
+// RetrofittedByFirewallManager are both false in the web ACL.
 func (c *Client) DeleteFirewallManagerRuleGroups(ctx context.Context, params *DeleteFirewallManagerRuleGroupsInput, optFns ...func(*Options)) (*DeleteFirewallManagerRuleGroupsOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallManagerRuleGroupsInput{}

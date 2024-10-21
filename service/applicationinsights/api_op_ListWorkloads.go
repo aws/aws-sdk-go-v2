@@ -39,7 +39,7 @@ type ListWorkloadsInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// The AWS account ID of the owner of the workload.
+	// The Amazon Web Services account ID of the owner of the workload.
 	AccountId *string
 
 	// The maximum number of results to return in a single call. To retrieve the
