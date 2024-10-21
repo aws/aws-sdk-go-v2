@@ -7,6 +7,7 @@ import (
 	"hash"
 	"io"
 	"strconv"
+	"strings"
 
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
@@ -129,13 +130,12 @@ func (m *computeInputPayloadChecksum) HandleFinalize(
 		})
 	}()
 
-	// If the checksum header is already set nothing to do.
-	for _, supportedAlgorithm := range supportedAlgorithms {
-		header := AlgorithmHTTPHeader(supportedAlgorithm)
-		if cs := req.Header.Get(header); cs != "" {
-			// need to add header value to metadata
-			algorithm = supportedAlgorithm
-			checksum = cs
+	// If any checksum header is already set nothing to do.
+	for header, _ := range req.Header {
+		h := strings.ToUpper(header)
+		if strings.HasPrefix(h, "X-AMZ-CHECKSUM-") {
+			algorithm = Algorithm(strings.TrimPrefix(h, "X-AMZ-CHECKSUM-"))
+			checksum = req.Header.Get(header)
 			return next.HandleFinalize(ctx, in)
 		}
 	}
@@ -271,6 +271,13 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 	if !req.IsHTTPS() {
 		return out, metadata, computeInputTrailingChecksumError{
 			Msg: "HTTPS required",
+		}
+	}
+
+	// If any checksum header is already set nothing to do.
+	for header, _ := range req.Header {
+		if strings.HasPrefix(strings.ToLower(header), "x-amz-checksum-") {
+			return next.HandleFinalize(ctx, in)
 		}
 	}
 

@@ -138,6 +138,52 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 				expectHeader:        http.Header{},
 				expectPayload:       []byte("hello world"),
 			},
+			"http crc64 checksum header preset": {
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("http://example.aws")
+						r.ContentLength = 11
+						r.Header.Set(AlgorithmHTTPHeader(AlgorithmCRC64NVME), "S2Zv/ZHmbVs=")
+						r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Crc64nvme": []string{"S2Zv/ZHmbVs="},
+				},
+				expectContentLength: 11,
+				expectPayload:       []byte("hello world"),
+				expectChecksumMetadata: map[string]string{
+					"CRC64NVME": "S2Zv/ZHmbVs=",
+				},
+			},
+			"https crc64 checksum header preset": {
+				initContext: func(ctx context.Context) context.Context {
+					return internalcontext.SetChecksumInputAlgorithm(ctx, string(AlgorithmCRC32))
+				},
+				buildInput: middleware.BuildInput{
+					Request: func() *smithyhttp.Request {
+						r := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+						r.URL, _ = url.Parse("https://example.aws")
+						r.ContentLength = 11
+						r.Header.Set(AlgorithmHTTPHeader(AlgorithmCRC64NVME), "S2Zv/ZHmbVs=")
+						r = requestMust(r.SetStream(bytes.NewReader([]byte("hello world"))))
+						return r
+					}(),
+				},
+				expectHeader: http.Header{
+					"X-Amz-Checksum-Crc64nvme": []string{"S2Zv/ZHmbVs="},
+				},
+				expectContentLength: 11,
+				expectPayload:       []byte("hello world"),
+				expectChecksumMetadata: map[string]string{
+					"CRC64NVME": "S2Zv/ZHmbVs=",
+				},
+			},
 		},
 
 		"build handled": {
