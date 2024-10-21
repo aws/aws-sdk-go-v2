@@ -1064,7 +1064,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))))|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]{1,10})?:bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]{1,20}/)?)?([a-z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
             }
         },
         "com.amazonaws.bedrockagentruntime#ByteContentBlob": {
@@ -4012,11 +4012,28 @@
         "com.amazonaws.bedrockagentruntime#OrchestrationConfiguration": {
             "type": "structure",
             "members": {
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation.</p>"
+                    }
+                },
+                "inferenceConfig": {
+                    "target": "com.amazonaws.bedrockagentruntime#InferenceConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Configuration settings for inference when using RetrieveAndGenerate to generate responses while using a knowledge base as a source. </p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "com.amazonaws.bedrockagentruntime#AdditionalModelRequestFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Additional model parameters and corresponding values not included in the textInferenceConfig structure for a knowledge base. This allows users to provide custom model parameters specific to the language model being used. </p>"
+                    }
+                },
                 "queryTransformationConfiguration": {
                     "target": "com.amazonaws.bedrockagentruntime#QueryTransformationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>To split up the prompt and retrieve multiple sources, set the transformation type to\n    <code>QUERY_DECOMPOSITION</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>To split up the prompt and retrieve multiple sources, set the transformation type to\n    <code>QUERY_DECOMPOSITION</code>.</p>"
                     }
                 }
             },
@@ -4042,7 +4059,7 @@
                 "metadata": {
                     "target": "com.amazonaws.bedrockagentruntime#Metadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the foundation model output.</p>"
+                        "smithy.api#documentation": "<p>Contains information about the foundation model output from the orchestration step.</p>"
                     }
                 }
             },
@@ -4219,10 +4236,16 @@
                     }
                 },
                 "rawResponse": {
-                    "target": "com.amazonaws.bedrockagentruntime#RawResponse"
+                    "target": "com.amazonaws.bedrockagentruntime#RawResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Details of the raw response from the foundation model output.\n        </p>"
+                    }
                 },
                 "metadata": {
-                    "target": "com.amazonaws.bedrockagentruntime#Metadata"
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the foundation model output from the post-processing step.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -4282,10 +4305,16 @@
                     }
                 },
                 "rawResponse": {
-                    "target": "com.amazonaws.bedrockagentruntime#RawResponse"
+                    "target": "com.amazonaws.bedrockagentruntime#RawResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Details of the raw response from the foundation model output.\n        </p>"
+                    }
                 },
                 "metadata": {
-                    "target": "com.amazonaws.bedrockagentruntime#Metadata"
+                    "target": "com.amazonaws.bedrockagentruntime#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Contains information about the foundation model output from the pre-processing step.\n        </p>"
+                    }
                 }
             },
             "traits": {

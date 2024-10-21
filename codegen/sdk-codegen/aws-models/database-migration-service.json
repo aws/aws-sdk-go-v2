@@ -4182,6 +4182,12 @@
                         "smithy.api#documentation": "<p>The IP addresses of the endpoints for the data migration.</p>"
                     }
                 },
+                "DataMigrationCidrBlocks": {
+                    "target": "com.amazonaws.databasemigrationservice#DataMigrationCidrBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR blocks of the endpoints for the data migration.</p>"
+                    }
+                },
                 "LastFailureMessage": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
@@ -4197,6 +4203,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This object provides information about a DMS data migration.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DataMigrationCidrBlock": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
             }
         },
         "com.amazonaws.databasemigrationservice#DataMigrationSettings": {
@@ -16772,6 +16784,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique name of the assessment run.</p>"
                     }
+                },
+                "IsLatestTaskAssessmentRun": {
+                    "target": "com.amazonaws.databasemigrationservice#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates that the following PreflightAssessmentRun is the latest for the ReplicationTask. The status is either true or false.</p>"
+                    }
+                },
+                "ResultStatistic": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationTaskAssessmentRunResultStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Result statistics for a completed assessment run, showing aggregated statistics of IndividualAssessments for how many assessments were passed, failed, or encountered issues such as errors or warnings.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -16804,6 +16829,49 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The progress values reported by the <code>AssessmentProgress</code> response\n         element.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationTaskAssessmentRunResultStatistic": {
+            "type": "structure",
+            "members": {
+                "Passed": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of individual assessments that successfully passed all checks in the assessment run.</p>"
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of individual assessments that failed to meet the criteria defined in the assessment run.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of individual assessments that encountered a critical error and could not complete properly.</p>"
+                    }
+                },
+                "Warning": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Indicates that the recent completed AssessmentRun triggered a warning.</p>"
+                    }
+                },
+                "Cancelled": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The number of individual assessments that were cancelled during the assessment run.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object containing the result statistics for a completed assessment run.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationTaskIndividualAssessment": {
@@ -18652,6 +18720,12 @@
                     "target": "com.amazonaws.databasemigrationservice#ExcludeTestList",
                     "traits": {
                         "smithy.api#documentation": "<p>Space-separated list of names for specific individual assessments that you want to\n         exclude. These names come from the default list of individual assessments that DMS\n         supports for the associated migration task. This task is specified by\n            <code>ReplicationTaskArn</code>.</p>\n         <note>\n            <p>You can't set a value for <code>Exclude</code> if you also set a value for\n            <code>IncludeOnly</code> in the API operation.</p>\n            <p>To identify the names of the default individual assessments that DMS\n            supports for the associated migration task, run the\n            <code>DescribeApplicableIndividualAssessments</code> operation using its own\n            <code>ReplicationTaskArn</code> request parameter.</p>\n         </note>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databasemigrationservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags to be assigned to the premigration assessment run that you want to start.</p>"
                     }
                 }
             },
