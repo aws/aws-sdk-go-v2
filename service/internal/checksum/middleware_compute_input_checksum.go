@@ -281,14 +281,6 @@ func (m *addInputChecksumTrailer) HandleFinalize(
 		}
 	}
 
-	// If the checksum header is already set nothing to do.
-	for _, supportedAlgorithm := range supportedAlgorithms {
-		header := AlgorithmHTTPHeader(supportedAlgorithm)
-		if req.Header.Get(header) != "" {
-			return next.HandleFinalize(ctx, in)
-		}
-	}
-
 	stream := req.GetStream()
 	streamLength, err := getRequestStreamLength(req)
 	if err != nil {
