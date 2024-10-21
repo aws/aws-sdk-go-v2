@@ -1,8 +1,0 @@
-{
-    "id": "59a17c34-1f4b-49c0-a63e-82de6c037233",
-    "type": "feature",
-    "description": "Update AWS WAF policy - add the option to retrofit existing web ACLs instead of creating all new web ACLs.",
-    "modules": [
-        "service/fms"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "a36762de-3277-4242-b9d0-e56b712c84dd",
-    "type": "feature",
-    "description": "Knowledge Bases for Amazon Bedrock now supports custom prompts and model parameters in the orchestrationConfiguration of the RetrieveAndGenerate API. The modelArn field accepts Custom Models and Imported Models ARNs.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

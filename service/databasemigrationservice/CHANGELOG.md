@@ -1,3 +1,7 @@
+# v1.44.0 (2024-10-21)
+
+* **Feature**: Added support for tagging in StartReplicationTaskAssessmentRun API and introduced IsLatestTaskAssessmentRun and ResultStatistic fields for enhanced tracking and assessment result statistics.
+
 # v1.43.0 (2024-10-10)
 
 * **Feature**: Introduces DescribeDataMigrations, CreateDataMigration, ModifyDataMigration, DeleteDataMigration, StartDataMigration, StopDataMigration operations to SDK. Provides FailedDependencyFault error message.

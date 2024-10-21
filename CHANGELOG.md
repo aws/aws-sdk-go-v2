@@ -1,3 +1,25 @@
+# Release (2024-10-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.29.0](service/applicationinsights/CHANGELOG.md#v1290-2024-10-21)
+  * **Feature**: This feature enables customers to specify SNS Topic ARN. CloudWatch Application Insights (CWAI) will utilize this ARN to send problem notifications.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.46.0](service/autoscaling/CHANGELOG.md#v1460-2024-10-21)
+  * **Feature**: Adds support for removing the PlacementGroup setting on an Auto Scaling Group through the UpdateAutoScalingGroup API.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.23.0](service/bedrockagentruntime/CHANGELOG.md#v1230-2024-10-21)
+  * **Feature**: Knowledge Bases for Amazon Bedrock now supports custom prompts and model parameters in the orchestrationConfiguration of the RetrieveAndGenerate API. The modelArn field accepts Custom Models and Imported Models ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.44.0](service/databasemigrationservice/CHANGELOG.md#v1440-2024-10-21)
+  * **Feature**: Added support for tagging in StartReplicationTaskAssessmentRun API and introduced IsLatestTaskAssessmentRun and ResultStatistic fields for enhanced tracking and assessment result statistics.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.184.0](service/ec2/CHANGELOG.md#v11840-2024-10-21)
+  * **Feature**: Amazon EC2 now allows you to create network interfaces with just the EFA driver and no ENA driver by specifying the network interface type as efa-only.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.51.0](service/eks/CHANGELOG.md#v1510-2024-10-21)
+  * **Feature**: This release adds support for Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift with EKS that enhances the resiliency of multi-AZ cluster environments
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.38.0](service/fms/CHANGELOG.md#v1380-2024-10-21)
+  * **Feature**: Update AWS WAF policy - add the option to retrofit existing web ACLs instead of creating all new web ACLs.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.15.0](service/paymentcryptographydata/CHANGELOG.md#v1150-2024-10-21)
+  * **Feature**: Adding new API to generate authenticated scripts for EMV pin change use cases.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.55.0](service/wafv2/CHANGELOG.md#v1550-2024-10-21)
+  * **Feature**: Add a property to WebACL to indicate whether it's been retrofitted by Firewall Manager.
+
 # Release (2024-10-18)
 
 ## Module Highlights

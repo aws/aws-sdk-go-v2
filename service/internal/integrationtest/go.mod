@@ -23,13 +23,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.50.2
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.28.2
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.43.0
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.28.2
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.36.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.183.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.184.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.47.4
 	github.com/aws/aws-sdk-go-v2/service/efs v1.33.2
@@ -80,7 +80,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.25.2
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.54.2
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.55.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.48.2
 	github.com/aws/smithy-go v1.22.0
 )

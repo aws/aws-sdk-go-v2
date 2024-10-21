@@ -1,3 +1,7 @@
+# v1.29.0 (2024-10-21)
+
+* **Feature**: This feature enables customers to specify SNS Topic ARN. CloudWatch Application Insights (CWAI) will utilize this ARN to send problem notifications.
+
 # v1.28.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

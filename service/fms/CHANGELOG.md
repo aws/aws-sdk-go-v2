@@ -1,3 +1,7 @@
+# v1.38.0 (2024-10-21)
+
+* **Feature**: Update AWS WAF policy - add the option to retrofit existing web ACLs instead of creating all new web ACLs.
+
 # v1.37.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

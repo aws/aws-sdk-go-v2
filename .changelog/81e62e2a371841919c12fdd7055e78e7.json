@@ -1,8 +1,0 @@
-{
-    "id": "81e62e2a-3718-4191-9c12-fdd7055e78e7",
-    "type": "feature",
-    "description": "Amazon EC2 now allows you to create network interfaces with just the EFA driver and no ENA driver by specifying the network interface type as efa-only.",
-    "modules": [
-        "service/ec2"
-    ]
-}

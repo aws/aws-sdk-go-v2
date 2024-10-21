@@ -1,3 +1,7 @@
+# v1.15.0 (2024-10-21)
+
+* **Feature**: Adding new API to generate authenticated scripts for EMV pin change use cases.
+
 # v1.14.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "a0bd2bfe-608d-4d68-b7b0-889e44f71bb9",
-    "type": "feature",
-    "description": "This release adds support for Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift with EKS that enhances the resiliency of multi-AZ cluster environments",
-    "modules": [
-        "service/eks"
-    ]
-}

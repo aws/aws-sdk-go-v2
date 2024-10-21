@@ -1,3 +1,7 @@
+# v1.46.0 (2024-10-21)
+
+* **Feature**: Adds support for removing the PlacementGroup setting on an Auto Scaling Group through the UpdateAutoScalingGroup API.
+
 # v1.45.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

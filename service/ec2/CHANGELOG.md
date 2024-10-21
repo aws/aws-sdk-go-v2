@@ -1,3 +1,7 @@
+# v1.184.0 (2024-10-21)
+
+* **Feature**: Amazon EC2 now allows you to create network interfaces with just the EFA driver and no ENA driver by specifying the network interface type as efa-only.
+
 # v1.183.0 (2024-10-18)
 
 * **Feature**: RequestSpotInstances and RequestSpotFleet feature release.

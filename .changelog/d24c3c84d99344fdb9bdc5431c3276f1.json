@@ -1,8 +1,0 @@
-{
-    "id": "d24c3c84-d993-44fd-b9bd-c5431c3276f1",
-    "type": "feature",
-    "description": "Added support for tagging in StartReplicationTaskAssessmentRun API and introduced IsLatestTaskAssessmentRun and ResultStatistic fields for enhanced tracking and assessment result statistics.",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.51.0 (2024-10-21)
+
+* **Feature**: This release adds support for Amazon Application Recovery Controller (ARC) zonal shift and zonal autoshift with EKS that enhances the resiliency of multi-AZ cluster environments
+
 # v1.50.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
