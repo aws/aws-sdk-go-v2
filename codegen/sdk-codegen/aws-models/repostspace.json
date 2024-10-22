@@ -43,6 +43,215 @@
                 }
             }
         },
+        "com.amazonaws.repostspace#BatchAddRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#BatchAddRoleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#BatchAddRoleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add role to multiple users or groups in a private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/spaces/{spaceId}/roles",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchAddRoleInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or group accessor identifiers to add the role to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "role": {
+                    "target": "com.amazonaws.repostspace#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role to add to the users or groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchAddRoleOutput": {
+            "type": "structure",
+            "members": {
+                "addedAccessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of successfully updated accessor identifiers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.repostspace#BatchErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of errors that occurred when roles were added.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchError": {
+            "type": "structure",
+            "members": {
+                "accessorId": {
+                    "target": "com.amazonaws.repostspace#AccessorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accessor identifier that's related to the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.repostspace#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.repostspace#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that occurred during a batch operation.</p>"
+            }
+        },
+        "com.amazonaws.repostspace#BatchErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#BatchError"
+            }
+        },
+        "com.amazonaws.repostspace#BatchRemoveRole": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.repostspace#BatchRemoveRoleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.repostspace#BatchRemoveRoleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.repostspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove role from multiple users or groups in a private re:Post.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/spaces/{spaceId}/roles",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchRemoveRoleInput": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.repostspace#SpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the private re:Post.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "accessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or group accessor identifiers to remove the role from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "role": {
+                    "target": "com.amazonaws.repostspace#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role to remove from the users or groups.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.repostspace#BatchRemoveRoleOutput": {
+            "type": "structure",
+            "members": {
+                "removedAccessorIds": {
+                    "target": "com.amazonaws.repostspace#AccessorIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of successfully updated accessor identifiers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.repostspace#BatchErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of errors that occurred when roles were removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.repostspace#ClientId": {
             "type": "string"
         },
@@ -315,6 +524,12 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.repostspace#ErrorCode": {
+            "type": "integer"
+        },
+        "com.amazonaws.repostspace#ErrorMessage": {
+            "type": "string"
+        },
         "com.amazonaws.repostspace#GetSpace": {
             "type": "operation",
             "input": {
@@ -476,13 +691,25 @@
                 "userAdmins": {
                     "target": "com.amazonaws.repostspace#UserAdmins",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property has been depracted and will be replaced by the roles property."
+                        },
                         "smithy.api#documentation": "<p>The list of users that are administrators of the private re:Post.</p>"
                     }
                 },
                 "groupAdmins": {
                     "target": "com.amazonaws.repostspace#GroupAdmins",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property has been depracted and will be replaced by the roles property."
+                        },
                         "smithy.api#documentation": "<p>The list of groups that are administrators of the private re:Post.</p>"
+                    }
+                },
+                "roles": {
+                    "target": "com.amazonaws.repostspace#Roles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of accessor identifiers and their roles.</p>"
                     }
                 },
                 "userKMSKey": {
@@ -789,6 +1016,12 @@
             "type": "service",
             "version": "2022-05-13",
             "operations": [
+                {
+                    "target": "com.amazonaws.repostspace#BatchAddRole"
+                },
+                {
+                    "target": "com.amazonaws.repostspace#BatchRemoveRole"
+                },
                 {
                     "target": "com.amazonaws.repostspace#CreateSpace"
                 },
@@ -1549,6 +1782,50 @@
                 "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.repostspace#Role": {
+            "type": "enum",
+            "members": {
+                "EXPERT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPERT"
+                    }
+                },
+                "MODERATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODERATOR"
+                    }
+                },
+                "ADMINISTRATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMINISTRATOR"
+                    }
+                },
+                "SUPPORTREQUESTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPPORTREQUESTOR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.repostspace#RoleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.repostspace#Role"
+            }
+        },
+        "com.amazonaws.repostspace#Roles": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.repostspace#AccessorId"
+            },
+            "value": {
+                "target": "com.amazonaws.repostspace#RoleList"
             }
         },
         "com.amazonaws.repostspace#SendInvites": {

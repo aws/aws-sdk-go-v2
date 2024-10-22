@@ -1499,7 +1499,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies which KMS key is used to encrypt the container image.</p>"
+                        "smithy.api#documentation": "<p>Identifies which KMS key is used to encrypt the Dockerfile template.</p>"
                     }
                 },
                 "clientToken": {
@@ -2256,7 +2256,7 @@
                 "resourceTags": {
                     "target": "com.amazonaws.imagebuilder#ResourceTagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags attached to the resource created by Image Builder.</p>"
+                        "smithy.api#documentation": "<p>The metadata tags to assign to the Amazon EC2 instance that Image Builder launches during the build process. \n\t\t\tTags are formatted as key value pairs.</p>"
                     }
                 },
                 "instanceMetadataOptions": {
@@ -2268,7 +2268,13 @@
                 "tags": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags of the infrastructure configuration.</p>"
+                        "smithy.api#documentation": "<p>The metadata tags to assign to the infrastructure configuration resource that Image Builder \n\t\t\tcreates as output. Tags are formatted as key value pairs.</p>"
+                    }
+                },
+                "placement": {
+                    "target": "com.amazonaws.imagebuilder#Placement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance placement settings that define where the instances that are launched \n\t\t\tfrom your image will run.</p>"
                     }
                 },
                 "clientToken": {
@@ -3732,7 +3738,7 @@
                 "containerTags": {
                     "target": "com.amazonaws.imagebuilder#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags for Image Builder to apply to the output container image that &INS; scans. Tags can\n\t\t\thelp you identify and manage your scanned images.</p>"
+                        "smithy.api#documentation": "<p>Tags for Image Builder to apply to the output container image that Amazon Inspector scans. Tags can\n\t\t\thelp you identify and manage your scanned images.</p>"
                     }
                 }
             },
@@ -6815,6 +6821,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags of the infrastructure configuration.</p>"
                     }
+                },
+                "placement": {
+                    "target": "com.amazonaws.imagebuilder#Placement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance placement settings that define where the instances that are launched \n\t\t\tfrom your image will run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6882,6 +6894,12 @@
                     "target": "com.amazonaws.imagebuilder#InstanceProfileNameType",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance profile of the infrastructure configuration.</p>"
+                    }
+                },
+                "placement": {
+                    "target": "com.amazonaws.imagebuilder#Placement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance placement settings that define where the instances that are launched \n\t\t\tfrom your image will run.</p>"
                     }
                 }
             },
@@ -8119,7 +8137,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the list of component build versions for the specified semantic\n\t\t\tversion.</p>\n         <note>\n            <p>The semantic version has four nodes: <major>.<minor>.<patch>/<build>. \n\tYou can assign values for the first three, and can filter on all of them.</p>\n            <p>\n               <b>Filtering:</b> With semantic versioning, you have the flexibility to use wildcards (x) \n\tto specify the most recent versions or nodes when selecting the base image or components for your \n\trecipe. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be \n\twildcards.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the list of component build versions for the specified component \n\t\t\tversion Amazon Resource Name (ARN).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListComponentBuildVersions",
@@ -10598,6 +10616,38 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#Placement": {
+            "type": "structure",
+            "members": {
+                "availabilityZone": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone where your build and test instances will launch.</p>"
+                    }
+                },
+                "tenancy": {
+                    "target": "com.amazonaws.imagebuilder#TenancyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenancy of the instance. An instance with a tenancy of <code>dedicated</code> \n\t\t\truns on single-tenant hardware. An instance with a tenancy of <code>host</code> runs \n\t\t\ton a Dedicated Host.</p>\n         <p>If tenancy is set to <code>host</code>, then you can optionally specify one target \n\t\t\tfor placement – either host ID or host resource group ARN. If automatic placement \n\t\t\tis enabled for your host, and you don't specify any placement target, Amazon EC2 will try to \n\t\t\tfind an available host for your build and test instances.</p>"
+                    }
+                },
+                "hostId": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Dedicated Host on which build and test instances run. This only \n\t\t\tapplies if <code>tenancy</code> is <code>host</code>. If you specify the host ID, you \n\t\t\tmust not specify the resource group ARN. If you specify both, Image Builder returns an error.</p>"
+                    }
+                },
+                "hostResourceGroupArn": {
+                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host resource group in which to launch build and test instances. \n\t\t\tThis only applies if <code>tenancy</code> is <code>host</code>. If you specify the resource \n\t\t\tgroup ARN, you must not specify the host ID. If you specify both, Image Builder returns an error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>By default, EC2 instances run on shared tenancy hardware. This means that multiple \n\t\t\tAmazon Web Services accounts might share the same physical hardware. When you use dedicated hardware, \n\t\t\tthe physical server that hosts your instances is dedicated to your Amazon Web Services account. \n\t\t\tInstance placement settings contain the details for the physical hardware where \n\t\t\tinstances that Image Builder launches during image creation will run.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#Platform": {
             "type": "enum",
             "members": {
@@ -10611,6 +10661,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Linux"
+                    }
+                },
+                "MACOS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "macOS"
                     }
                 }
             }
@@ -11837,6 +11893,29 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#TenancyType": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "DEDICATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dedicated"
+                    }
+                },
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "host"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#Timezone": {
             "type": "string",
             "traits": {
@@ -12287,14 +12366,6 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the SNS topic to which we send image build event\n\t\t\tnotifications.</p>\n         <note>\n            <p>EC2 Image Builder is unable to send notifications to SNS topics that are encrypted using keys \n\t\t\t\tfrom other accounts. The key that is used to encrypt the SNS topic must reside in the \n\t\t\t\taccount that the Image Builder service runs under.</p>\n         </note>"
                     }
                 },
-                "clientToken": {
-                    "target": "com.amazonaws.imagebuilder#ClientToken",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
-                        "smithy.api#idempotencyToken": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "resourceTags": {
                     "target": "com.amazonaws.imagebuilder#ResourceTagMap",
                     "traits": {
@@ -12305,6 +12376,20 @@
                     "target": "com.amazonaws.imagebuilder#InstanceMetadataOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance metadata options that you can set for the HTTP requests that pipeline\n\t\t\tbuilds use to launch EC2 build and test instances. For more information about instance\n\t\t\tmetadata options, see one of the following links:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html\">Configure the instance metadata options</a> in the\n\t\t\t\t\t\t<i>\n                     <i>Amazon EC2 User Guide</i>\n                  </i> for Linux instances.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html\">Configure the instance metadata options</a> in the\n\t\t\t\t\t\t<i>\n                     <i>Amazon EC2 Windows Guide</i>\n                  </i> for Windows instances.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "placement": {
+                    "target": "com.amazonaws.imagebuilder#Placement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance placement settings that define where the instances that are launched \n\t\t\tfrom your image will run.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.imagebuilder#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
                     }
                 }
             },

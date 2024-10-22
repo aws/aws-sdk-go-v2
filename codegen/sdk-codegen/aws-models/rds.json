@@ -19527,6 +19527,12 @@
                         "smithy.api#documentation": "<p>The list of primary and secondary clusters within the global database cluster.</p>"
                     }
                 },
+                "Endpoint": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The writer endpoint for the new global database cluster. This endpoint always \n         points to the writer DB instance in the current primary cluster.\n       </p>"
+                    }
+                },
                 "FailoverState": {
                     "target": "com.amazonaws.rds#FailoverState",
                     "traits": {
@@ -19553,7 +19559,7 @@
                     "code": "GlobalClusterAlreadyExistsFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The <code>GlobalClusterIdentifier</code> already exists. Choose a new global database identifier (unique name) to create a new global database cluster.</p>",
+                "smithy.api#documentation": "<p>The <code>GlobalClusterIdentifier</code> already exists. Specify a new global database identifier \n        (unique name) to create a new global database cluster or to rename an existing one.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -23402,6 +23408,9 @@
                 "target": "com.amazonaws.rds#ModifyGlobalClusterResult"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.rds#GlobalClusterAlreadyExistsFault"
+                },
                 {
                     "target": "com.amazonaws.rds#GlobalClusterNotFoundFault"
                 },
