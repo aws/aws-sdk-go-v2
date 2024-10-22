@@ -7,6 +7,27 @@ import (
 	"time"
 )
 
+// An error that occurred during a batch operation.
+type BatchError struct {
+
+	// The accessor identifier that's related to the error.
+	//
+	// This member is required.
+	AccessorId *string
+
+	// The error code.
+	//
+	// This member is required.
+	Error *int32
+
+	// Description of the error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // A structure that contains some information about a private re:Post in the
 // account.
 type SpaceData struct {

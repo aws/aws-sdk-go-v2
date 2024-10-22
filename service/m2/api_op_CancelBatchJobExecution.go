@@ -38,6 +38,10 @@ type CancelBatchJobExecutionInput struct {
 	// This member is required.
 	ExecutionId *string
 
+	// The Amazon Web Services Secrets Manager containing user's credentials for
+	// authentication and authorization for Cancel Batch Job Execution operation.
+	AuthSecretsManagerArn *string
+
 	noSmithyDocumentSerde
 }
 

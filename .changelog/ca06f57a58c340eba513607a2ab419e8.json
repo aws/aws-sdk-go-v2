@@ -1,0 +1,8 @@
+{
+    "id": "ca06f57a-58c3-40eb-a513-607a2ab419e8",
+    "type": "feature",
+    "description": "This release adds support for Query Insights, a feature that provides details of query execution, enabling users to identify areas for improvement to optimize their queries, resulting in improved query performance and lower query costs.",
+    "modules": [
+        "service/timestreamquery"
+    ]
+}

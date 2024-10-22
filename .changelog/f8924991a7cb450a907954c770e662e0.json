@@ -1,0 +1,8 @@
+{
+    "id": "f8924991-a7cb-450a-9079-54c770e662e0",
+    "type": "feature",
+    "description": "Add macOS platform and instance placement options",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

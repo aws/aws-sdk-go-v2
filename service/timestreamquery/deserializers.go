@@ -3180,6 +3180,42 @@ func awsAwsjson10_deserializeDocumentParameterMappingList(v *[]types.ParameterMa
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentPartitionKeyList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PartitionKey to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentQueryExecutionException(v **types.QueryExecutionException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3209,6 +3245,240 @@ func awsAwsjson10_deserializeDocumentQueryExecutionException(v **types.QueryExec
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsightsResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryInsightsResponse
+	if *v == nil {
+		sv = &types.QueryInsightsResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OutputBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputBytes = ptr.Int64(i64)
+			}
+
+		case "OutputRows":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputRows = ptr.Int64(i64)
+			}
+
+		case "QuerySpatialCoverage":
+			if err := awsAwsjson10_deserializeDocumentQuerySpatialCoverage(&sv.QuerySpatialCoverage, value); err != nil {
+				return err
+			}
+
+		case "QueryTableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueryTableCount = ptr.Int64(i64)
+			}
+
+		case "QueryTemporalRange":
+			if err := awsAwsjson10_deserializeDocumentQueryTemporalRange(&sv.QueryTemporalRange, value); err != nil {
+				return err
+			}
+
+		case "UnloadPartitionCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnloadPartitionCount = ptr.Int64(i64)
+			}
+
+		case "UnloadWrittenBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnloadWrittenBytes = ptr.Int64(i64)
+			}
+
+		case "UnloadWrittenRows":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnloadWrittenRows = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentQuerySpatialCoverage(v **types.QuerySpatialCoverage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuerySpatialCoverage
+	if *v == nil {
+		sv = &types.QuerySpatialCoverage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Max":
+			if err := awsAwsjson10_deserializeDocumentQuerySpatialCoverageMax(&sv.Max, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentQuerySpatialCoverageMax(v **types.QuerySpatialCoverageMax, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QuerySpatialCoverageMax
+	if *v == nil {
+		sv = &types.QuerySpatialCoverageMax{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PartitionKey":
+			if err := awsAwsjson10_deserializeDocumentPartitionKeyList(&sv.PartitionKey, value); err != nil {
+				return err
+			}
+
+		case "TableArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonResourceName to be of type string, got %T instead", value)
+				}
+				sv.TableArn = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Value = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Value = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -3300,6 +3570,95 @@ func awsAwsjson10_deserializeDocumentQueryStatus(v **types.QueryStatus, value in
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentQueryTemporalRange(v **types.QueryTemporalRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryTemporalRange
+	if *v == nil {
+		sv = &types.QueryTemporalRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Max":
+			if err := awsAwsjson10_deserializeDocumentQueryTemporalRangeMax(&sv.Max, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentQueryTemporalRangeMax(v **types.QueryTemporalRangeMax, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.QueryTemporalRangeMax
+	if *v == nil {
+		sv = &types.QueryTemporalRangeMax{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TableArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonResourceName to be of type string, got %T instead", value)
+				}
+				sv.TableArn = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = i64
 			}
 
 		default:
@@ -3865,6 +4224,86 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentScheduledQueryInsightsResponse(v **types.ScheduledQueryInsightsResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScheduledQueryInsightsResponse
+	if *v == nil {
+		sv = &types.ScheduledQueryInsightsResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OutputBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputBytes = ptr.Int64(i64)
+			}
+
+		case "OutputRows":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OutputRows = ptr.Int64(i64)
+			}
+
+		case "QuerySpatialCoverage":
+			if err := awsAwsjson10_deserializeDocumentQuerySpatialCoverage(&sv.QuerySpatialCoverage, value); err != nil {
+				return err
+			}
+
+		case "QueryTableCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueryTableCount = ptr.Int64(i64)
+			}
+
+		case "QueryTemporalRange":
+			if err := awsAwsjson10_deserializeDocumentQueryTemporalRange(&sv.QueryTemporalRange, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentScheduledQueryList(v *[]types.ScheduledQuery, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3954,6 +4393,11 @@ func awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(v **types.Schedule
 					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "QueryInsightsResponse":
+			if err := awsAwsjson10_deserializeDocumentScheduledQueryInsightsResponse(&sv.QueryInsightsResponse, value); err != nil {
+				return err
 			}
 
 		case "RunStatus":
@@ -5098,6 +5542,11 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 					return fmt.Errorf("expected QueryId to be of type string, got %T instead", value)
 				}
 				sv.QueryId = ptr.String(jtv)
+			}
+
+		case "QueryInsightsResponse":
+			if err := awsAwsjson10_deserializeDocumentQueryInsightsResponse(&sv.QueryInsightsResponse, value); err != nil {
+				return err
 			}
 
 		case "QueryStatus":

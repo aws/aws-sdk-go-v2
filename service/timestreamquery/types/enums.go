@@ -44,6 +44,25 @@ func (MeasureValueType) Values() []MeasureValueType {
 	}
 }
 
+type QueryInsightsMode string
+
+// Enum values for QueryInsightsMode
+const (
+	QueryInsightsModeEnabledWithRateControl QueryInsightsMode = "ENABLED_WITH_RATE_CONTROL"
+	QueryInsightsModeDisabled               QueryInsightsMode = "DISABLED"
+)
+
+// Values returns all known values for QueryInsightsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QueryInsightsMode) Values() []QueryInsightsMode {
+	return []QueryInsightsMode{
+		"ENABLED_WITH_RATE_CONTROL",
+		"DISABLED",
+	}
+}
+
 type QueryPricingModel string
 
 // Enum values for QueryPricingModel
@@ -141,6 +160,25 @@ func (ScalarType) Values() []ScalarType {
 		"INTERVAL_YEAR_TO_MONTH",
 		"UNKNOWN",
 		"INTEGER",
+	}
+}
+
+type ScheduledQueryInsightsMode string
+
+// Enum values for ScheduledQueryInsightsMode
+const (
+	ScheduledQueryInsightsModeEnabledWithRateControl ScheduledQueryInsightsMode = "ENABLED_WITH_RATE_CONTROL"
+	ScheduledQueryInsightsModeDisabled               ScheduledQueryInsightsMode = "DISABLED"
+)
+
+// Values returns all known values for ScheduledQueryInsightsMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduledQueryInsightsMode) Values() []ScheduledQueryInsightsMode {
+	return []ScheduledQueryInsightsMode{
+		"ENABLED_WITH_RATE_CONTROL",
+		"DISABLED",
 	}
 }
 

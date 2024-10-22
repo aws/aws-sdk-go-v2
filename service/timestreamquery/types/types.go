@@ -229,6 +229,147 @@ type ParameterMapping struct {
 	noSmithyDocumentSerde
 }
 
+// QueryInsights is a performance tuning feature that helps you optimize your
+// queries, reducing costs and improving performance. With QueryInsights , you can
+// assess the pruning efficiency of your queries and identify areas for improvement
+// to enhance query performance. With QueryInsights , you can also analyze the
+// effectiveness of your queries in terms of temporal and spatial pruning, and
+// identify opportunities to improve performance. Specifically, you can evaluate
+// how well your queries use time-based and partition key-based indexing strategies
+// to optimize data retrieval. To optimize query performance, it's essential that
+// you fine-tune both the temporal and spatial parameters that govern query
+// execution.
+//
+// The key metrics provided by QueryInsights are QuerySpatialCoverage and
+// QueryTemporalRange . QuerySpatialCoverage indicates how much of the spatial
+// axis the query scans, with lower values being more efficient. QueryTemporalRange
+// shows the time range scanned, with narrower ranges being more performant.
+//
+// # Benefits of QueryInsights
+//
+// The following are the key benefits of using QueryInsights :
+//
+//   - Identifying inefficient queries – QueryInsights provides information on the
+//     time-based and attribute-based pruning of the tables accessed by the query. This
+//     information helps you identify the tables that are sub-optimally accessed.
+//
+//   - Optimizing your data model and partitioning – You can use the QueryInsights
+//     information to access and fine-tune your data model and partitioning strategy.
+//
+//   - Tuning queries – QueryInsights highlights opportunities to use indexes more
+//     effectively.
+//
+// The maximum number of Query API requests you're allowed to make with
+// QueryInsights enabled is 1 query per second (QPS). If you exceed this query
+// rate, it might result in throttling.
+type QueryInsights struct {
+
+	// Provides the following modes to enable QueryInsights :
+	//
+	//   - ENABLED_WITH_RATE_CONTROL – Enables QueryInsights for the queries being
+	//   processed. This mode also includes a rate control mechanism, which limits the
+	//   QueryInsights feature to 1 query per second (QPS).
+	//
+	//   - DISABLED – Disables QueryInsights .
+	//
+	// This member is required.
+	Mode QueryInsightsMode
+
+	noSmithyDocumentSerde
+}
+
+// Provides various insights and metrics related to the query that you executed.
+type QueryInsightsResponse struct {
+
+	// Indicates the size of query result set in bytes. You can use this data to
+	// validate if the result set has changed as part of the query tuning exercise.
+	OutputBytes *int64
+
+	// Indicates the total number of rows returned as part of the query result set.
+	// You can use this data to validate if the number of rows in the result set have
+	// changed as part of the query tuning exercise.
+	OutputRows *int64
+
+	// Provides insights into the spatial coverage of the query, including the table
+	// with sub-optimal (max) spatial pruning. This information can help you identify
+	// areas for improvement in your partitioning strategy to enhance spatial pruning.
+	QuerySpatialCoverage *QuerySpatialCoverage
+
+	// Indicates the number of tables in the query.
+	QueryTableCount *int64
+
+	// Provides insights into the temporal range of the query, including the table
+	// with the largest (max) time range. Following are some of the potential options
+	// for optimizing time-based pruning:
+	//
+	//   - Add missing time-predicates.
+	//
+	//   - Remove functions around the time predicates.
+	//
+	//   - Add time predicates to all the sub-queries.
+	QueryTemporalRange *QueryTemporalRange
+
+	// Indicates the partitions created by the Unload operation.
+	UnloadPartitionCount *int64
+
+	// Indicates the size, in bytes, written by the Unload operation.
+	UnloadWrittenBytes *int64
+
+	// Indicates the rows written by the Unload query.
+	UnloadWrittenRows *int64
+
+	noSmithyDocumentSerde
+}
+
+// Provides insights into the spatial coverage of the query, including the table
+// with sub-optimal (max) spatial pruning. This information can help you identify
+// areas for improvement in your partitioning strategy to enhance spatial pruning
+//
+// For example, you can do the following with the QuerySpatialCoverage information:
+//
+//   - Add measure_name or use [customer-defined partition key](CDPK) predicates.
+//
+//   - If you've already done the preceding action, remove functions around them
+//     or clauses, such as LIKE .
+//
+// [customer-defined partition key]: https://docs.aws.amazon.com/timestream/latest/developerguide/customer-defined-partition-keys.html
+type QuerySpatialCoverage struct {
+
+	// Provides insights into the spatial coverage of the executed query and the table
+	// with the most inefficient spatial pruning.
+	//
+	//   - Value – The maximum ratio of spatial coverage.
+	//
+	//   - TableArn – The Amazon Resource Name (ARN) of the table with sub-optimal
+	//   spatial pruning.
+	//
+	//   - PartitionKey – The partition key used for partitioning, which can be a
+	//   default measure_name or a CDPK.
+	Max *QuerySpatialCoverageMax
+
+	noSmithyDocumentSerde
+}
+
+// Provides insights into the table with the most sub-optimal spatial range
+// scanned by your query.
+type QuerySpatialCoverageMax struct {
+
+	// The partition key used for partitioning, which can be a default measure_name or
+	// a [customer defined partition key].
+	//
+	// [customer defined partition key]: https://docs.aws.amazon.com/timestream/latest/developerguide/customer-defined-partition-keys.html
+	PartitionKey []string
+
+	// The Amazon Resource Name (ARN) of the table with the most sub-optimal spatial
+	// pruning.
+	TableArn *string
+
+	// The maximum ratio of spatial coverage.
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
 // Information about the status of the query, including progress and bytes scanned.
 type QueryStatus struct {
 
@@ -245,6 +386,37 @@ type QueryStatus struct {
 
 	// The progress of the query, expressed as a percentage.
 	ProgressPercentage float64
+
+	noSmithyDocumentSerde
+}
+
+// Provides insights into the temporal range of the query, including the table
+// with the largest (max) time range.
+type QueryTemporalRange struct {
+
+	// Encapsulates the following properties that provide insights into the most
+	// sub-optimal performing table on the temporal axis:
+	//
+	//   - Value – The maximum duration in nanoseconds between the start and end of the
+	//   query.
+	//
+	//   - TableArn – The Amazon Resource Name (ARN) of the table which is queried with
+	//   the largest time range.
+	Max *QueryTemporalRangeMax
+
+	noSmithyDocumentSerde
+}
+
+// Provides insights into the table with the most sub-optimal temporal pruning
+// scanned by your query.
+type QueryTemporalRangeMax struct {
+
+	// The Amazon Resource Name (ARN) of the table which is queried with the largest
+	// time range.
+	TableArn *string
+
+	// The maximum duration in nanoseconds between the start and end of the query.
+	Value int64
 
 	noSmithyDocumentSerde
 }
@@ -405,6 +577,59 @@ type ScheduledQueryDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Encapsulates settings for enabling QueryInsights on an
+// ExecuteScheduledQueryRequest .
+type ScheduledQueryInsights struct {
+
+	// Provides the following modes to enable ScheduledQueryInsights :
+	//
+	//   - ENABLED_WITH_RATE_CONTROL – Enables ScheduledQueryInsights for the queries
+	//   being processed. This mode also includes a rate control mechanism, which limits
+	//   the QueryInsights feature to 1 query per second (QPS).
+	//
+	//   - DISABLED – Disables ScheduledQueryInsights .
+	//
+	// This member is required.
+	Mode ScheduledQueryInsightsMode
+
+	noSmithyDocumentSerde
+}
+
+// Provides various insights and metrics related to the
+// ExecuteScheduledQueryRequest that was executed.
+type ScheduledQueryInsightsResponse struct {
+
+	// Indicates the size of query result set in bytes. You can use this data to
+	// validate if the result set has changed as part of the query tuning exercise.
+	OutputBytes *int64
+
+	// Indicates the total number of rows returned as part of the query result set.
+	// You can use this data to validate if the number of rows in the result set have
+	// changed as part of the query tuning exercise.
+	OutputRows *int64
+
+	// Provides insights into the spatial coverage of the query, including the table
+	// with sub-optimal (max) spatial pruning. This information can help you identify
+	// areas for improvement in your partitioning strategy to enhance spatial pruning.
+	QuerySpatialCoverage *QuerySpatialCoverage
+
+	// Indicates the number of tables in the query.
+	QueryTableCount *int64
+
+	// Provides insights into the temporal range of the query, including the table
+	// with the largest (max) time range. Following are some of the potential options
+	// for optimizing time-based pruning:
+	//
+	//   - Add missing time-predicates.
+	//
+	//   - Remove functions around the time predicates.
+	//
+	//   - Add time predicates to all the sub-queries.
+	QueryTemporalRange *QueryTemporalRange
+
+	noSmithyDocumentSerde
+}
+
 // Run summary for the scheduled query
 type ScheduledQueryRunSummary struct {
 
@@ -421,6 +646,10 @@ type ScheduledQueryRunSummary struct {
 	// InvocationTime for this run. This is the time at which the query is scheduled
 	// to run. Parameter @scheduled_runtime can be used in the query to get the value.
 	InvocationTime *time.Time
+
+	// Provides various insights and metrics related to the run summary of the
+	// scheduled query.
+	QueryInsightsResponse *ScheduledQueryInsightsResponse
 
 	// The status of a scheduled query run.
 	RunStatus ScheduledQueryRunStatus

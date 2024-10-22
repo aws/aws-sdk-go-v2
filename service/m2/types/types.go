@@ -215,8 +215,8 @@ type BatchJobIdentifierMemberFileBatchJobIdentifier struct {
 
 func (*BatchJobIdentifierMemberFileBatchJobIdentifier) isBatchJobIdentifier() {}
 
-// Specifies the required information for restart, including execution ID and
-// jobsteprestartmarker.
+// Specifies the required information for restart, including executionId and
+// JobStepRestartMarker .
 type BatchJobIdentifierMemberRestartBatchJobIdentifier struct {
 	Value RestartBatchJobIdentifier
 
@@ -826,21 +826,21 @@ type JobStep struct {
 	noSmithyDocumentSerde
 }
 
-// Provides restart step information for the most recent restart operation.
+// Provides step/procedure step information for a restart batch job operation.
 type JobStepRestartMarker struct {
 
-	// The step name that a batch job restart was from.
+	// The step name that a batch job was restarted from.
 	//
 	// This member is required.
 	FromStep *string
 
-	// The procedure step name that a job was restarted from.
+	// The procedure step name that a batch job was restarted from.
 	FromProcStep *string
 
 	// The procedure step name that a batch job was restarted to.
 	ToProcStep *string
 
-	// The step name that a job was restarted to.
+	// The step name that a batch job was restarted to.
 	ToStep *string
 
 	noSmithyDocumentSerde
@@ -1000,7 +1000,7 @@ type RestartBatchJobIdentifier struct {
 	// This member is required.
 	ExecutionId *string
 
-	// The restart step information for the most recent restart operation.
+	// The step/procedure step information for a restart batch job operation.
 	//
 	// This member is required.
 	JobStepRestartMarker *JobStepRestartMarker

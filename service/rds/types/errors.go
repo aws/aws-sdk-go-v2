@@ -1850,8 +1850,9 @@ func (e *ExportTaskNotFoundFault) ErrorCode() string {
 }
 func (e *ExportTaskNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The GlobalClusterIdentifier already exists. Choose a new global database
-// identifier (unique name) to create a new global database cluster.
+// The GlobalClusterIdentifier already exists. Specify a new global database
+// identifier (unique name) to create a new global database cluster or to rename an
+// existing one.
 type GlobalClusterAlreadyExistsFault struct {
 	Message *string
 

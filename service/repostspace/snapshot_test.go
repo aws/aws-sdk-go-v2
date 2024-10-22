@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchAddRole(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAddRole(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchAddRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchRemoveRole(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRemoveRole(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchRemoveRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSpace(context.Background(), nil, func(o *Options) {
@@ -193,6 +217,30 @@ func TestCheckSnapshot_UpdateSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchAddRole(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchAddRole(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchAddRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchRemoveRole(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchRemoveRole(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchRemoveRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSpace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSpace(context.Background(), nil, func(o *Options) {

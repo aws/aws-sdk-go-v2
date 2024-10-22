@@ -9,6 +9,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchAddRole struct {
+}
+
+func (*validateOpBatchAddRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchAddRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchAddRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchAddRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchRemoveRole struct {
+}
+
+func (*validateOpBatchRemoveRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchRemoveRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchRemoveRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchRemoveRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSpace struct {
 }
 
@@ -209,6 +249,14 @@ func (m *validateOpUpdateSpace) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchAddRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchAddRole{}, middleware.After)
+}
+
+func addOpBatchRemoveRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchRemoveRole{}, middleware.After)
+}
+
 func addOpCreateSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSpace{}, middleware.After)
 }
@@ -247,6 +295,48 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSpace{}, middleware.After)
+}
+
+func validateOpBatchAddRoleInput(v *BatchAddRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchAddRoleInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.AccessorIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorIds"))
+	}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchRemoveRoleInput(v *BatchRemoveRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchRemoveRoleInput"}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.AccessorIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessorIds"))
+	}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateSpaceInput(v *CreateSpaceInput) error {

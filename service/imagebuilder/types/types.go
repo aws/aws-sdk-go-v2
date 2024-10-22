@@ -707,8 +707,8 @@ type EbsInstanceBlockDeviceSpecification struct {
 // container images that Amazon Inspector scans.
 type EcrConfiguration struct {
 
-	// Tags for Image Builder to apply to the output container image that &INS; scans.
-	// Tags can help you identify and manage your scanned images.
+	// Tags for Image Builder to apply to the output container image that Amazon
+	// Inspector scans. Tags can help you identify and manage your scanned images.
 	ContainerTags []string
 
 	// The name of the container repository that Amazon Inspector scans to identify
@@ -1432,6 +1432,10 @@ type InfrastructureConfiguration struct {
 	// The name of the infrastructure configuration.
 	Name *string
 
+	// The instance placement settings that define where the instances that are
+	// launched from your image will run.
+	Placement *Placement
+
 	// The tags attached to the resource created by Image Builder.
 	ResourceTags map[string]string
 
@@ -1482,6 +1486,10 @@ type InfrastructureConfigurationSummary struct {
 
 	// The name of the infrastructure configuration.
 	Name *string
+
+	// The instance placement settings that define where the instances that are
+	// launched from your image will run.
+	Placement *Placement
 
 	// The tags attached to the image created by Image Builder.
 	ResourceTags map[string]string
@@ -2060,6 +2068,41 @@ type PackageVulnerabilityDetails struct {
 
 	// The packages that this vulnerability impacts.
 	VulnerablePackages []VulnerablePackage
+
+	noSmithyDocumentSerde
+}
+
+// By default, EC2 instances run on shared tenancy hardware. This means that
+// multiple Amazon Web Services accounts might share the same physical hardware.
+// When you use dedicated hardware, the physical server that hosts your instances
+// is dedicated to your Amazon Web Services account. Instance placement settings
+// contain the details for the physical hardware where instances that Image Builder
+// launches during image creation will run.
+type Placement struct {
+
+	// The Availability Zone where your build and test instances will launch.
+	AvailabilityZone *string
+
+	// The ID of the Dedicated Host on which build and test instances run. This only
+	// applies if tenancy is host . If you specify the host ID, you must not specify
+	// the resource group ARN. If you specify both, Image Builder returns an error.
+	HostId *string
+
+	// The Amazon Resource Name (ARN) of the host resource group in which to launch
+	// build and test instances. This only applies if tenancy is host . If you specify
+	// the resource group ARN, you must not specify the host ID. If you specify both,
+	// Image Builder returns an error.
+	HostResourceGroupArn *string
+
+	// The tenancy of the instance. An instance with a tenancy of dedicated runs on
+	// single-tenant hardware. An instance with a tenancy of host runs on a Dedicated
+	// Host.
+	//
+	// If tenancy is set to host , then you can optionally specify one target for
+	// placement – either host ID or host resource group ARN. If automatic placement is
+	// enabled for your host, and you don't specify any placement target, Amazon EC2
+	// will try to find an available host for your build and test instances.
+	Tenancy TenancyType
 
 	noSmithyDocumentSerde
 }

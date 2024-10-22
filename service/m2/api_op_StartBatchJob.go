@@ -41,6 +41,10 @@ type StartBatchJobInput struct {
 	// This member is required.
 	BatchJobIdentifier types.BatchJobIdentifier
 
+	// The Amazon Web Services Secrets Manager containing user's credentials for
+	// authentication and authorization for Start Batch Job execution operation.
+	AuthSecretsManagerArn *string
+
 	// The collection of batch job parameters. For details about limits for keys and
 	// values, see [Coding variables in JCL].
 	//

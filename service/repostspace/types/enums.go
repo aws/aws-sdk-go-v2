@@ -21,6 +21,29 @@ func (ConfigurationStatus) Values() []ConfigurationStatus {
 	}
 }
 
+type Role string
+
+// Enum values for Role
+const (
+	RoleExpert           Role = "EXPERT"
+	RoleModerator        Role = "MODERATOR"
+	RoleAdministrator    Role = "ADMINISTRATOR"
+	RoleSupportrequestor Role = "SUPPORTREQUESTOR"
+)
+
+// Values returns all known values for Role. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Role) Values() []Role {
+	return []Role{
+		"EXPERT",
+		"MODERATOR",
+		"ADMINISTRATOR",
+		"SUPPORTREQUESTOR",
+	}
+}
+
 type TierLevel string
 
 // Enum values for TierLevel

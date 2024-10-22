@@ -14704,6 +14704,9 @@ func awsAwsquery_deserializeOpErrorModifyGlobalCluster(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("GlobalClusterAlreadyExistsFault", errorCode):
+		return awsAwsquery_deserializeErrorGlobalClusterAlreadyExistsFault(response, errorBody)
+
 	case strings.EqualFold("GlobalClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorGlobalClusterNotFoundFault(response, errorBody)
 
@@ -42345,6 +42348,19 @@ func awsAwsquery_deserializeDocumentGlobalCluster(v **types.GlobalCluster, decod
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
 				}
 				sv.DeletionProtection = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("Endpoint", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Endpoint = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Engine", t.Name.Local):

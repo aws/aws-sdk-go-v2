@@ -7,12 +7,17 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// You can use this API to run a scheduled query manually.
+//	You can use this API to run a scheduled query manually.
+//
+// If you enabled QueryInsights , this API also returns insights and metrics
+// related to the query that you executed as part of an Amazon SNS notification.
+// QueryInsights helps with performance tuning of your query.
 func (c *Client) ExecuteScheduledQuery(ctx context.Context, params *ExecuteScheduledQueryInput, optFns ...func(*Options)) (*ExecuteScheduledQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteScheduledQueryInput{}
@@ -42,6 +47,13 @@ type ExecuteScheduledQueryInput struct {
 
 	// Not used.
 	ClientToken *string
+
+	// Encapsulates settings for enabling QueryInsights .
+	//
+	// Enabling QueryInsights returns insights and metrics as a part of the Amazon SNS
+	// notification for the query that you executed. You can use QueryInsights to tune
+	// your query performance and cost.
+	QueryInsights *types.ScheduledQueryInsights
 
 	noSmithyDocumentSerde
 }

@@ -438,6 +438,21 @@ func validateNotificationConfiguration(v *types.NotificationConfiguration) error
 	}
 }
 
+func validateQueryInsights(v *types.QueryInsights) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryInsights"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Configuration(v *types.S3Configuration) error {
 	if v == nil {
 		return nil
@@ -460,6 +475,21 @@ func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
 	if v.ScheduleExpression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledQueryInsights(v *types.ScheduledQueryInsights) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledQueryInsights"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -683,6 +713,11 @@ func validateOpExecuteScheduledQueryInput(v *ExecuteScheduledQueryInput) error {
 	if v.InvocationTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvocationTime"))
 	}
+	if v.QueryInsights != nil {
+		if err := validateScheduledQueryInsights(v.QueryInsights); err != nil {
+			invalidParams.AddNested("QueryInsights", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -727,6 +762,11 @@ func validateOpQueryInput(v *QueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "QueryInput"}
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.QueryInsights != nil {
+		if err := validateQueryInsights(v.QueryInsights); err != nil {
+			invalidParams.AddNested("QueryInsights", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

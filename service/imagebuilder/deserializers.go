@@ -18914,6 +18914,11 @@ func awsRestjson1_deserializeDocumentInfrastructureConfiguration(v **types.Infra
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "placement":
+			if err := awsRestjson1_deserializeDocumentPlacement(&sv.Placement, value); err != nil {
+				return err
+			}
+
 		case "resourceTags":
 			if err := awsRestjson1_deserializeDocumentResourceTagMap(&sv.ResourceTags, value); err != nil {
 				return err
@@ -19044,6 +19049,11 @@ func awsRestjson1_deserializeDocumentInfrastructureConfigurationSummary(v **type
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "placement":
+			if err := awsRestjson1_deserializeDocumentPlacement(&sv.Placement, value); err != nil {
+				return err
 			}
 
 		case "resourceTags":
@@ -21505,6 +21515,73 @@ func awsRestjson1_deserializeDocumentPackageVulnerabilityDetails(v **types.Packa
 		case "vulnerablePackages":
 			if err := awsRestjson1_deserializeDocumentVulnerablePackageList(&sv.VulnerablePackages, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPlacement(v **types.Placement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Placement
+	if *v == nil {
+		sv = &types.Placement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "availabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZone = ptr.String(jtv)
+			}
+
+		case "hostId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HostId = ptr.String(jtv)
+			}
+
+		case "hostResourceGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.HostResourceGroupArn = ptr.String(jtv)
+			}
+
+		case "tenancy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TenancyType to be of type string, got %T instead", value)
+				}
+				sv.Tenancy = types.TenancyType(jtv)
 			}
 
 		default:

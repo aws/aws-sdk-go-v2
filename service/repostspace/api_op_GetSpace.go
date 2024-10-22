@@ -115,9 +115,18 @@ type GetSpaceOutput struct {
 	Description *string
 
 	// The list of groups that are administrators of the private re:Post.
+	//
+	// Deprecated: This property has been depracted and will be replaced by the roles
+	// property.
 	GroupAdmins []string
 
+	// A map of accessor identifiers and their roles.
+	Roles map[string][]types.Role
+
 	// The list of users that are administrators of the private re:Post.
+	//
+	// Deprecated: This property has been depracted and will be replaced by the roles
+	// property.
 	UserAdmins []string
 
 	// The number of users that have onboarded to the private re:Post.

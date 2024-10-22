@@ -1090,6 +1090,18 @@ func awsAwsjson10_serializeDocumentNotificationConfiguration(v *types.Notificati
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentQueryInsights(v *types.QueryInsights, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentS3Configuration(v *types.S3Configuration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1119,6 +1131,18 @@ func awsAwsjson10_serializeDocumentScheduleConfiguration(v *types.ScheduleConfig
 	if v.ScheduleExpression != nil {
 		ok := object.Key("ScheduleExpression")
 		ok.String(*v.ScheduleExpression)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentScheduledQueryInsights(v *types.ScheduledQueryInsights, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil
@@ -1370,6 +1394,13 @@ func awsAwsjson10_serializeOpDocumentExecuteScheduledQueryInput(v *ExecuteSchedu
 		ok.Double(smithytime.FormatEpochSeconds(*v.InvocationTime))
 	}
 
+	if v.QueryInsights != nil {
+		ok := object.Key("QueryInsights")
+		if err := awsAwsjson10_serializeDocumentScheduledQueryInsights(v.QueryInsights, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScheduledQueryArn != nil {
 		ok := object.Key("ScheduledQueryArn")
 		ok.String(*v.ScheduledQueryArn)
@@ -1451,6 +1482,13 @@ func awsAwsjson10_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.QueryInsights != nil {
+		ok := object.Key("QueryInsights")
+		if err := awsAwsjson10_serializeDocumentQueryInsights(v.QueryInsights, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.QueryString != nil {

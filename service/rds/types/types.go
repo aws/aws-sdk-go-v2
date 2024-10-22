@@ -3436,6 +3436,10 @@ type GlobalCluster struct {
 	// The deletion protection setting for the new global database cluster.
 	DeletionProtection *bool
 
+	//  The writer endpoint for the new global database cluster. This endpoint always
+	// points to the writer DB instance in the current primary cluster.
+	Endpoint *string
+
 	// The Aurora database engine used by the global database cluster.
 	Engine *string
 
