@@ -1,3 +1,17 @@
+# Release (2024-10-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.38.0](service/imagebuilder/CHANGELOG.md#v1380-2024-10-22)
+  * **Feature**: Add macOS platform and instance placement options
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.18.0](service/m2/CHANGELOG.md#v1180-2024-10-22)
+  * **Feature**: Add AuthSecretsManagerArn optional parameter to batch job APIs, expand batch parameter limits, and introduce clientToken constraints.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.88.0](service/rds/CHANGELOG.md#v1880-2024-10-22)
+  * **Feature**: Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.8.0](service/repostspace/CHANGELOG.md#v180-2024-10-22)
+  * **Feature**: Adds the BatchAddRole and BatchRemoveRole APIs.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.28.0](service/timestreamquery/CHANGELOG.md#v1280-2024-10-22)
+  * **Feature**: This release adds support for Query Insights, a feature that provides details of query execution, enabling users to identify areas for improvement to optimize their queries, resulting in improved query performance and lower query costs.
+
 # Release (2024-10-21)
 
 ## Module Highlights

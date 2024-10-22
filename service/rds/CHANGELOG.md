@@ -1,3 +1,7 @@
+# v1.88.0 (2024-10-22)
+
+* **Feature**: Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.
+
 # v1.87.3 (2024-10-17)
 
 * **Documentation**: Updates Amazon RDS documentation for TAZ IAM support

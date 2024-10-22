@@ -1,8 +1,0 @@
-{
-    "id": "96ffb789-922d-4614-8af9-ac8dff36dd71",
-    "type": "feature",
-    "description": "Updating invoke regex to support imported models for converse API",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

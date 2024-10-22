@@ -1,8 +1,0 @@
-{
-    "id": "15e30fa9-a558-40e1-9d16-135709d88ee0",
-    "type": "feature",
-    "description": "Adds the BatchAddRole and BatchRemoveRole APIs.",
-    "modules": [
-        "service/repostspace"
-    ]
-}
