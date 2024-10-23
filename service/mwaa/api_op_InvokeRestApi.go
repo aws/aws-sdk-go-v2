@@ -6,57 +6,90 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/document"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
-// environment.
-func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
+// Invokes the Apache Airflow REST API on the webserver with the specified inputs.
+// To learn more, see [Using the Apache Airflow REST API]
+//
+// [Using the Apache Airflow REST API]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-mwaa-apache-airflow-rest-api.html
+func (c *Client) InvokeRestApi(ctx context.Context, params *InvokeRestApiInput, optFns ...func(*Options)) (*InvokeRestApiOutput, error) {
 	if params == nil {
-		params = &DeleteEnvironmentInput{}
+		params = &InvokeRestApiInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteEnvironment", params, optFns, c.addOperationDeleteEnvironmentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "InvokeRestApi", params, optFns, c.addOperationInvokeRestApiMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteEnvironmentOutput)
+	out := result.(*InvokeRestApiOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteEnvironmentInput struct {
+type InvokeRestApiInput struct {
+
+	// The HTTP method used for making Airflow REST API calls. For example, POST .
+	//
+	// This member is required.
+	Method types.RestApiMethod
 
 	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment .
 	//
 	// This member is required.
 	Name *string
 
+	// The Apache Airflow REST API endpoint path to be called. For example,
+	// /dags/123456/clearTaskInstances . For more information, see [Apache Airflow API]
+	//
+	// [Apache Airflow API]: https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html
+	//
+	// This member is required.
+	Path *string
+
+	// The request body for the Apache Airflow REST API call, provided as a JSON
+	// object.
+	Body document.Interface
+
+	// Query parameters to be included in the Apache Airflow REST API call, provided
+	// as a JSON object.
+	QueryParameters document.Interface
+
 	noSmithyDocumentSerde
 }
 
-type DeleteEnvironmentOutput struct {
+type InvokeRestApiOutput struct {
+
+	// The response data from the Apache Airflow REST API call, provided as a JSON
+	// object.
+	RestApiResponse document.Interface
+
+	// The HTTP status code returned by the Apache Airflow REST API call.
+	RestApiStatusCode *int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationInvokeRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEnvironment{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeRestApi{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEnvironment{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeRestApi{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEnvironment"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeRestApi"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,13 +141,13 @@ func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opDeleteEnvironmentMiddleware(stack); err != nil {
+	if err = addEndpointPrefix_opInvokeRestApiMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteEnvironmentValidationMiddleware(stack); err != nil {
+	if err = addOpInvokeRestApiValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEnvironment(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeRestApi(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -147,14 +180,14 @@ func (c *Client) addOperationDeleteEnvironmentMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-type endpointPrefix_opDeleteEnvironmentMiddleware struct {
+type endpointPrefix_opInvokeRestApiMiddleware struct {
 }
 
-func (*endpointPrefix_opDeleteEnvironmentMiddleware) ID() string {
+func (*endpointPrefix_opInvokeRestApiMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opDeleteEnvironmentMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
+func (m *endpointPrefix_opInvokeRestApiMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
@@ -166,18 +199,18 @@ func (m *endpointPrefix_opDeleteEnvironmentMiddleware) HandleFinalize(ctx contex
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "api." + req.URL.Host
+	req.URL.Host = "env." + req.URL.Host
 
 	return next.HandleFinalize(ctx, in)
 }
-func addEndpointPrefix_opDeleteEnvironmentMiddleware(stack *middleware.Stack) error {
-	return stack.Finalize.Insert(&endpointPrefix_opDeleteEnvironmentMiddleware{}, "ResolveEndpointV2", middleware.After)
+func addEndpointPrefix_opInvokeRestApiMiddleware(stack *middleware.Stack) error {
+	return stack.Finalize.Insert(&endpointPrefix_opInvokeRestApiMiddleware{}, "ResolveEndpointV2", middleware.After)
 }
 
-func newServiceMetadataMiddleware_opDeleteEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opInvokeRestApi(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteEnvironment",
+		OperationName: "InvokeRestApi",
 	}
 }

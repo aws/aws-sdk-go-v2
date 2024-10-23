@@ -18,7 +18,7 @@ import (
 // It has new metrics, offers filtering at a metric level, and offers the ability
 // to filter and group data by channels, queues, routing profiles, agents, and
 // agent hierarchy levels. It can retrieve historical data for the last 3 months,
-// at varying intervals.
+// at varying intervals. It does not support agent queues.
 //
 // For a description of the historical metrics that are supported by
 // GetMetricDataV2 and GetMetricData , see [Historical metrics definitions] in the Amazon Connect Administrator
@@ -239,7 +239,7 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average agent API connecting time]
 	//
-	// The Negate key in Metric Level Filters is not applicable for this metric.
+	// The Negate key in metric-level filters is not applicable for this metric.
 	//
 	// AVG_AGENT_PAUSE_TIME Unit: Seconds
 	//
@@ -581,7 +581,7 @@ type GetMetricDataV2Input struct {
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
 	// contact/segmentAttributes/connect:Subtype, Q in Connect
 	//
-	// Threshold: For ThresholdValue enter any whole number from 1 to 604800
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
 	// (inclusive), in seconds. For Comparison , you can use LT (for "Less than") or
 	// LTE (for "Less than equal").
 	//
@@ -824,7 +824,7 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Agent API connecting time]
 	//
-	// The Negate key in Metric Level Filters is not applicable for this metric.
+	// The Negate key in metric-level filters is not applicable for this metric.
 	//
 	// CONTACTS_ABANDONED Unit: Count
 	//

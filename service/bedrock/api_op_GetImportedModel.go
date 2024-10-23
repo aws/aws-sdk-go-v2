@@ -43,7 +43,7 @@ type GetImportedModelOutput struct {
 	// Creation time of the imported model.
 	CreationTime *time.Time
 
-	// Specifies if the imported model supports fine tuning.
+	// Specifies if the imported model supports converse.
 	InstructSupported *bool
 
 	// Job Amazon Resource Name (ARN) associated with the imported model.

@@ -2272,6 +2272,23 @@ func (RulePublishStatus) Values() []RulePublishStatus {
 	}
 }
 
+type ScreenShareCapability string
+
+// Enum values for ScreenShareCapability
+const (
+	ScreenShareCapabilitySend ScreenShareCapability = "SEND"
+)
+
+// Values returns all known values for ScreenShareCapability. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScreenShareCapability) Values() []ScreenShareCapability {
+	return []ScreenShareCapability{
+		"SEND",
+	}
+}
+
 type SearchableQueueType string
 
 // Enum values for SearchableQueueType

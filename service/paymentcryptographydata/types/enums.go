@@ -155,6 +155,46 @@ func (KeyCheckValueAlgorithm) Values() []KeyCheckValueAlgorithm {
 	}
 }
 
+type KeyDerivationFunction string
+
+// Enum values for KeyDerivationFunction
+const (
+	KeyDerivationFunctionNistSp800 KeyDerivationFunction = "NIST_SP800"
+	KeyDerivationFunctionAnsiX963  KeyDerivationFunction = "ANSI_X963"
+)
+
+// Values returns all known values for KeyDerivationFunction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyDerivationFunction) Values() []KeyDerivationFunction {
+	return []KeyDerivationFunction{
+		"NIST_SP800",
+		"ANSI_X963",
+	}
+}
+
+type KeyDerivationHashAlgorithm string
+
+// Enum values for KeyDerivationHashAlgorithm
+const (
+	KeyDerivationHashAlgorithmSha256 KeyDerivationHashAlgorithm = "SHA_256"
+	KeyDerivationHashAlgorithmSha384 KeyDerivationHashAlgorithm = "SHA_384"
+	KeyDerivationHashAlgorithmSha512 KeyDerivationHashAlgorithm = "SHA_512"
+)
+
+// Values returns all known values for KeyDerivationHashAlgorithm. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyDerivationHashAlgorithm) Values() []KeyDerivationHashAlgorithm {
+	return []KeyDerivationHashAlgorithm{
+		"SHA_256",
+		"SHA_384",
+		"SHA_512",
+	}
+}
+
 type MacAlgorithm string
 
 // Enum values for MacAlgorithm
@@ -254,6 +294,7 @@ type PinBlockFormatForPinData string
 const (
 	PinBlockFormatForPinDataIsoFormat0 PinBlockFormatForPinData = "ISO_FORMAT_0"
 	PinBlockFormatForPinDataIsoFormat3 PinBlockFormatForPinData = "ISO_FORMAT_3"
+	PinBlockFormatForPinDataIsoFormat4 PinBlockFormatForPinData = "ISO_FORMAT_4"
 )
 
 // Values returns all known values for PinBlockFormatForPinData. Note that this
@@ -264,6 +305,7 @@ func (PinBlockFormatForPinData) Values() []PinBlockFormatForPinData {
 	return []PinBlockFormatForPinData{
 		"ISO_FORMAT_0",
 		"ISO_FORMAT_3",
+		"ISO_FORMAT_4",
 	}
 }
 
@@ -327,6 +369,31 @@ func (SessionKeyDerivationMode) Values() []SessionKeyDerivationMode {
 		"AMEX",
 		"MASTERCARD_SESSION_KEY",
 		"VISA",
+	}
+}
+
+type SymmetricKeyAlgorithm string
+
+// Enum values for SymmetricKeyAlgorithm
+const (
+	SymmetricKeyAlgorithmTdes2key SymmetricKeyAlgorithm = "TDES_2KEY"
+	SymmetricKeyAlgorithmTdes3key SymmetricKeyAlgorithm = "TDES_3KEY"
+	SymmetricKeyAlgorithmAes128   SymmetricKeyAlgorithm = "AES_128"
+	SymmetricKeyAlgorithmAes192   SymmetricKeyAlgorithm = "AES_192"
+	SymmetricKeyAlgorithmAes256   SymmetricKeyAlgorithm = "AES_256"
+)
+
+// Values returns all known values for SymmetricKeyAlgorithm. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SymmetricKeyAlgorithm) Values() []SymmetricKeyAlgorithm {
+	return []SymmetricKeyAlgorithm{
+		"TDES_2KEY",
+		"TDES_3KEY",
+		"AES_128",
+		"AES_192",
+		"AES_256",
 	}
 }
 

@@ -618,6 +618,13 @@ func awsRestjson1_serializeOpDocumentGeneratePinDataInput(v *GeneratePinDataInpu
 		ok.String(*v.EncryptionKeyIdentifier)
 	}
 
+	if v.EncryptionWrappedKey != nil {
+		ok := object.Key("EncryptionWrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.EncryptionWrappedKey, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.GenerationAttributes != nil {
 		ok := object.Key("GenerationAttributes")
 		if err := awsRestjson1_serializeDocumentPinGenerationAttributes(v.GenerationAttributes, ok); err != nil {
@@ -1309,6 +1316,13 @@ func awsRestjson1_serializeOpDocumentVerifyPinDataInput(v *VerifyPinDataInput, v
 		ok.String(*v.EncryptionKeyIdentifier)
 	}
 
+	if v.EncryptionWrappedKey != nil {
+		ok := object.Key("EncryptionWrappedKey")
+		if err := awsRestjson1_serializeDocumentWrappedKey(v.EncryptionWrappedKey, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.PinBlockFormat) > 0 {
 		ok := object.Key("PinBlockFormat")
 		ok.String(string(v.PinBlockFormat))
@@ -1838,6 +1852,43 @@ func awsRestjson1_serializeDocumentDynamicCardVerificationValue(v *types.Dynamic
 	if v.ServiceCode != nil {
 		ok := object.Key("ServiceCode")
 		ok.String(*v.ServiceCode)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEcdhDerivationAttributes(v *types.EcdhDerivationAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CertificateAuthorityPublicKeyIdentifier != nil {
+		ok := object.Key("CertificateAuthorityPublicKeyIdentifier")
+		ok.String(*v.CertificateAuthorityPublicKeyIdentifier)
+	}
+
+	if len(v.KeyAlgorithm) > 0 {
+		ok := object.Key("KeyAlgorithm")
+		ok.String(string(v.KeyAlgorithm))
+	}
+
+	if len(v.KeyDerivationFunction) > 0 {
+		ok := object.Key("KeyDerivationFunction")
+		ok.String(string(v.KeyDerivationFunction))
+	}
+
+	if len(v.KeyDerivationHashAlgorithm) > 0 {
+		ok := object.Key("KeyDerivationHashAlgorithm")
+		ok.String(string(v.KeyDerivationHashAlgorithm))
+	}
+
+	if v.PublicKeyCertificate != nil {
+		ok := object.Key("PublicKeyCertificate")
+		ok.String(*v.PublicKeyCertificate)
+	}
+
+	if v.SharedInformation != nil {
+		ok := object.Key("SharedInformation")
+		ok.String(*v.SharedInformation)
 	}
 
 	return nil
@@ -2682,6 +2733,12 @@ func awsRestjson1_serializeDocumentWrappedKeyMaterial(v types.WrappedKeyMaterial
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.WrappedKeyMaterialMemberDiffieHellmanSymmetricKey:
+		av := object.Key("DiffieHellmanSymmetricKey")
+		if err := awsRestjson1_serializeDocumentEcdhDerivationAttributes(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.WrappedKeyMaterialMemberTr31KeyBlock:
 		av := object.Key("Tr31KeyBlock")
 		av.String(uv.Value)

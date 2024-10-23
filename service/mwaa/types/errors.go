@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/document"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -87,6 +88,66 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An exception indicating that a client-side error occurred during the Apache
+// Airflow REST API call.
+type RestApiClientException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RestApiStatusCode *int32
+	RestApiResponse   document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (e *RestApiClientException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RestApiClientException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RestApiClientException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RestApiClientException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RestApiClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An exception indicating that a server-side error occurred during the Apache
+// Airflow REST API call.
+type RestApiServerException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	RestApiStatusCode *int32
+	RestApiResponse   document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (e *RestApiServerException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RestApiServerException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RestApiServerException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RestApiServerException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RestApiServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // ValidationException: The provided input is not valid.
 type ValidationException struct {

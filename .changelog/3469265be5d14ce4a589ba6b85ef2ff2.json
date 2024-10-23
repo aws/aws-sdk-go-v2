@@ -1,0 +1,8 @@
+{
+    "id": "3469265b-e5d1-4ce4-a589-ba6b85ef2ff2",
+    "type": "documentation",
+    "description": "Doc updates for supporting converse",
+    "modules": [
+        "service/bedrock"
+    ]
+}

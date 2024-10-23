@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+// Creates an Amazon Managed Workflows for Apache Airflow (Amazon MWAA)
+// environment.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -27,9 +28,9 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 	return out, nil
 }
 
-// This section contains the Amazon Managed Workflows for Apache Airflow (MWAA)
-// API reference documentation to create an environment. For more information, see [Get started with Amazon Managed Workflows for Apache Airflow]
-// .
+// This section contains the Amazon Managed Workflows for Apache Airflow (Amazon
+// MWAA) API reference documentation to create an environment. For more
+// information, see [Get started with Amazon Managed Workflows for Apache Airflow].
 //
 // [Get started with Amazon Managed Workflows for Apache Airflow]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
 type CreateEnvironmentInput struct {
@@ -83,12 +84,12 @@ type CreateEnvironmentInput struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version for your environment. If no value is specified, it
-	// defaults to the latest version. For more information, see [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)].
+	// defaults to the latest version. For more information, see [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)].
 	//
-	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2
-	//     2.8.1
+	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 ,
+	// 2.9.2 , and 2.10.1 .
 	//
-	// [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
+	// [Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
 	AirflowVersion *string
 
 	// Defines whether the VPC endpoints configured for the environment are created,

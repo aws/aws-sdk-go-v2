@@ -36,21 +36,24 @@
 //
 // [CreateWebLoginToken]
 //
+// [InvokeRestApi]
+//
 // # Regions
 //
 // For a list of supported regions, see [Amazon MWAA endpoints and quotas] in the Amazon Web Services General
 // Reference.
 //
-// [CreateWebLoginToken]: https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html
-// [CreateEnvironment]: https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html
 // [GetEnvironment]: https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html
 // [ListEnvironments]: https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html
+// [TagResource]: https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html
+// [InvokeRestApi]: https://docs.aws.amazon.com/mwaa/latest/API/API_InvokeRestApi.html
+// [CreateCliToken]: https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html
+// [CreateWebLoginToken]: https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html
+// [CreateEnvironment]: https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html
 // [Amazon MWAA endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/mwaa.html
 // [DeleteEnvironment]: https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html
-// [TagResource]: https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html
 // [UntagResource]: https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html
 // [What is Amazon MWAA?]: https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html
 // [UpdateEnvironment]: https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html
 // [ListTagsForResource]: https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html
-// [CreateCliToken]: https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html
 package mwaa

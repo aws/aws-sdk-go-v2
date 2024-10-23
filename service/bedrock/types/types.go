@@ -1222,7 +1222,7 @@ type ImportedModelSummary struct {
 	// This member is required.
 	ModelName *string
 
-	// Specifies if the imported model supports fine tuning.
+	// Specifies if the imported model supports converse.
 	InstructSupported *bool
 
 	// The architecture of the imported model.

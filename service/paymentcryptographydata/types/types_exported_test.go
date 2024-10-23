@@ -405,6 +405,9 @@ func ExampleWrappedKeyMaterial_outputUsage() {
 	var union types.WrappedKeyMaterial
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.WrappedKeyMaterialMemberDiffieHellmanSymmetricKey:
+		_ = v.Value // Value is types.EcdhDerivationAttributes
+
 	case *types.WrappedKeyMaterialMemberTr31KeyBlock:
 		_ = v.Value // Value is string
 
@@ -418,3 +421,4 @@ func ExampleWrappedKeyMaterial_outputUsage() {
 }
 
 var _ *string
+var _ *types.EcdhDerivationAttributes

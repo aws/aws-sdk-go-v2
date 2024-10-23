@@ -748,6 +748,36 @@ func validateDynamicCardVerificationValue(v *types.DynamicCardVerificationValue)
 	}
 }
 
+func validateEcdhDerivationAttributes(v *types.EcdhDerivationAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EcdhDerivationAttributes"}
+	if v.CertificateAuthorityPublicKeyIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityPublicKeyIdentifier"))
+	}
+	if v.PublicKeyCertificate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyCertificate"))
+	}
+	if len(v.KeyAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyAlgorithm"))
+	}
+	if len(v.KeyDerivationFunction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationFunction"))
+	}
+	if len(v.KeyDerivationHashAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyDerivationHashAlgorithm"))
+	}
+	if v.SharedInformation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedInformation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEmv2000Attributes(v *types.Emv2000Attributes) error {
 	if v == nil {
 		return nil
@@ -1457,6 +1487,29 @@ func validateWrappedKey(v *types.WrappedKey) error {
 	invalidParams := smithy.InvalidParamsError{Context: "WrappedKey"}
 	if v.WrappedKeyMaterial == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WrappedKeyMaterial"))
+	} else if v.WrappedKeyMaterial != nil {
+		if err := validateWrappedKeyMaterial(v.WrappedKeyMaterial); err != nil {
+			invalidParams.AddNested("WrappedKeyMaterial", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWrappedKeyMaterial(v types.WrappedKeyMaterial) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WrappedKeyMaterial"}
+	switch uv := v.(type) {
+	case *types.WrappedKeyMaterialMemberDiffieHellmanSymmetricKey:
+		if err := validateEcdhDerivationAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[DiffieHellmanSymmetricKey]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1635,6 +1688,11 @@ func validateOpGeneratePinDataInput(v *GeneratePinDataInput) error {
 	}
 	if len(v.PinBlockFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PinBlockFormat"))
+	}
+	if v.EncryptionWrappedKey != nil {
+		if err := validateWrappedKey(v.EncryptionWrappedKey); err != nil {
+			invalidParams.AddNested("EncryptionWrappedKey", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1865,6 +1923,11 @@ func validateOpVerifyPinDataInput(v *VerifyPinDataInput) error {
 	if v.DukptAttributes != nil {
 		if err := validateDukptAttributes(v.DukptAttributes); err != nil {
 			invalidParams.AddNested("DukptAttributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionWrappedKey != nil {
+		if err := validateWrappedKey(v.EncryptionWrappedKey); err != nil {
+			invalidParams.AddNested("EncryptionWrappedKey", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

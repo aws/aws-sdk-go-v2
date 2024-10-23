@@ -85,6 +85,31 @@ func (LoggingLevel) Values() []LoggingLevel {
 	}
 }
 
+type RestApiMethod string
+
+// Enum values for RestApiMethod
+const (
+	RestApiMethodGet    RestApiMethod = "GET"
+	RestApiMethodPut    RestApiMethod = "PUT"
+	RestApiMethodPost   RestApiMethod = "POST"
+	RestApiMethodPatch  RestApiMethod = "PATCH"
+	RestApiMethodDelete RestApiMethod = "DELETE"
+)
+
+// Values returns all known values for RestApiMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RestApiMethod) Values() []RestApiMethod {
+	return []RestApiMethod{
+		"GET",
+		"PUT",
+		"POST",
+		"PATCH",
+		"DELETE",
+	}
+}
+
 type Unit string
 
 // Enum values for Unit

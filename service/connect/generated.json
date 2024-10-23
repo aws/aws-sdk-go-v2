@@ -205,6 +205,7 @@
         "api_op_StartContactStreaming.go",
         "api_op_StartOutboundChatContact.go",
         "api_op_StartOutboundVoiceContact.go",
+        "api_op_StartScreenSharing.go",
         "api_op_StartTaskContact.go",
         "api_op_StartWebRTCContact.go",
         "api_op_StopContact.go",

@@ -21,6 +21,13 @@ import (
 // transmission from Amazon Web Services Payment Cryptography. This operation uses
 // a separate Pin Verification Key (PVK) for VISA PVV generation.
 //
+// Using ECDH key exchange, you can receive cardholder selectable PINs into Amazon
+// Web Services Payment Cryptography. The ECDH derived key protects the incoming
+// PIN block. You can also use it for reveal PIN, wherein the generated PIN block
+// is protected by the ECDH derived key before transmission from Amazon Web
+// Services Payment Cryptography. For more information on establishing ECDH derived
+// keys, see the [Generating keys]in the Amazon Web Services Payment Cryptography User Guide.
+//
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
@@ -38,6 +45,7 @@ import (
 // [Generate PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/generate-pin-data.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Generating keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
 func (c *Client) GeneratePinData(ctx context.Context, params *GeneratePinDataInput, optFns ...func(*Options)) (*GeneratePinDataOutput, error) {
 	if params == nil {
 		params = &GeneratePinDataInput{}
@@ -56,7 +64,7 @@ func (c *Client) GeneratePinData(ctx context.Context, params *GeneratePinDataInp
 type GeneratePinDataInput struct {
 
 	// The keyARN of the PEK that Amazon Web Services Payment Cryptography uses to
-	// encrypt the PIN Block.
+	// encrypt the PIN Block. For ECDH, it is the keyARN of the asymmetric ECC key.
 	//
 	// This member is required.
 	EncryptionKeyIdentifier *string
@@ -91,6 +99,9 @@ type GeneratePinDataInput struct {
 	// This member is required.
 	PrimaryAccountNumber *string
 
+	// Parameter information of a WrappedKeyBlock for encryption key exchange.
+	EncryptionWrappedKey *types.WrappedKey
+
 	// The length of PIN under generation.
 	PinDataLength *int32
 
@@ -108,7 +119,8 @@ type GeneratePinDataOutput struct {
 	EncryptedPinBlock *string
 
 	// The keyARN of the PEK that Amazon Web Services Payment Cryptography uses for
-	// encrypted pin block generation.
+	// encrypted pin block generation. For ECDH, it is the keyARN of the asymmetric
+	// ECC key.
 	//
 	// This member is required.
 	EncryptionKeyArn *string

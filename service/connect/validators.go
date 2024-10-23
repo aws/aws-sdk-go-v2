@@ -3890,6 +3890,26 @@ func (m *validateOpStartOutboundVoiceContact) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartScreenSharing struct {
+}
+
+func (*validateOpStartScreenSharing) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartScreenSharing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartScreenSharingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartScreenSharingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartTaskContact struct {
 }
 
@@ -5844,6 +5864,10 @@ func addOpStartOutboundChatContactValidationMiddleware(stack *middleware.Stack) 
 
 func addOpStartOutboundVoiceContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartOutboundVoiceContact{}, middleware.After)
+}
+
+func addOpStartScreenSharingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartScreenSharing{}, middleware.After)
 }
 
 func addOpStartTaskContactValidationMiddleware(stack *middleware.Stack) error {
@@ -11466,6 +11490,24 @@ func validateOpStartOutboundVoiceContactInput(v *StartOutboundVoiceContactInput)
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartScreenSharingInput(v *StartScreenSharingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartScreenSharingInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

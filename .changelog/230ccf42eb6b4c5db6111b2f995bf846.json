@@ -1,0 +1,8 @@
+{
+    "id": "230ccf42-eb6b-4c5d-b611-1b2f995bf846",
+    "type": "feature",
+    "description": "Add ECDH support on PIN operations.",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}

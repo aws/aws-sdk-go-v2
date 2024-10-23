@@ -1,0 +1,8 @@
+{
+    "id": "773f1780-3f19-415d-b2c5-20ab17e2f086",
+    "type": "feature",
+    "description": "Introducing InvokeRestApi which allows users to invoke the Apache Airflow REST API on the webserver with the specified inputs.",
+    "modules": [
+        "service/mwaa"
+    ]
+}

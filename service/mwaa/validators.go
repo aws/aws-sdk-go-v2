@@ -110,6 +110,26 @@ func (m *validateOpGetEnvironment) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeRestApi struct {
+}
+
+func (*validateOpInvokeRestApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeRestApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeRestApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeRestApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -228,6 +248,10 @@ func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnvironment{}, middleware.After)
+}
+
+func addOpInvokeRestApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeRestApi{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -479,6 +503,27 @@ func validateOpGetEnvironmentInput(v *GetEnvironmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetEnvironmentInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeRestApiInput(v *InvokeRestApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeRestApiInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if len(v.Method) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Method"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

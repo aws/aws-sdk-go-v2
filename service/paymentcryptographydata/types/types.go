@@ -625,6 +625,49 @@ type DynamicCardVerificationValue struct {
 	noSmithyDocumentSerde
 }
 
+// Parameters required to establish ECDH based key exchange.
+type EcdhDerivationAttributes struct {
+
+	// The keyArn of the certificate that signed the client's PublicKeyCertificate .
+	//
+	// This member is required.
+	CertificateAuthorityPublicKeyIdentifier *string
+
+	// The key algorithm of the derived ECDH key.
+	//
+	// This member is required.
+	KeyAlgorithm SymmetricKeyAlgorithm
+
+	// The key derivation function to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationFunction KeyDerivationFunction
+
+	// The hash type to use for deriving a key using ECDH.
+	//
+	// This member is required.
+	KeyDerivationHashAlgorithm KeyDerivationHashAlgorithm
+
+	// The client's public key certificate in PEM format (base64 encoded) to use for
+	// ECDH key derivation.
+	//
+	// This member is required.
+	PublicKeyCertificate *string
+
+	// A byte string containing information that binds the ECDH derived key to the two
+	// parties involved or to the context of the key.
+	//
+	// It may include details like identities of the two parties deriving the key,
+	// context of the operation, session IDs, and optionally a nonce. It must not
+	// contain zero bytes, and re-using shared information for multiple ECDH key
+	// derivations is not recommended.
+	//
+	// This member is required.
+	SharedInformation *string
+
+	noSmithyDocumentSerde
+}
+
 // Parameters to derive the confidentiality and integrity keys for a payment card
 // using EMV2000 deruv.
 type Emv2000Attributes struct {
@@ -1685,10 +1728,20 @@ type WrappedKey struct {
 //
 // The following types satisfy this interface:
 //
+//	WrappedKeyMaterialMemberDiffieHellmanSymmetricKey
 //	WrappedKeyMaterialMemberTr31KeyBlock
 type WrappedKeyMaterial interface {
 	isWrappedKeyMaterial()
 }
+
+// The parameter information for deriving a ECDH shared key.
+type WrappedKeyMaterialMemberDiffieHellmanSymmetricKey struct {
+	Value EcdhDerivationAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*WrappedKeyMaterialMemberDiffieHellmanSymmetricKey) isWrappedKeyMaterial() {}
 
 // The TR-31 wrapped key block.
 type WrappedKeyMaterialMemberTr31KeyBlock struct {

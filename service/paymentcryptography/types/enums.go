@@ -6,14 +6,16 @@ type KeyAlgorithm string
 
 // Enum values for KeyAlgorithm
 const (
-	KeyAlgorithmTdes2key KeyAlgorithm = "TDES_2KEY"
-	KeyAlgorithmTdes3key KeyAlgorithm = "TDES_3KEY"
-	KeyAlgorithmAes128   KeyAlgorithm = "AES_128"
-	KeyAlgorithmAes192   KeyAlgorithm = "AES_192"
-	KeyAlgorithmAes256   KeyAlgorithm = "AES_256"
-	KeyAlgorithmRsa2048  KeyAlgorithm = "RSA_2048"
-	KeyAlgorithmRsa3072  KeyAlgorithm = "RSA_3072"
-	KeyAlgorithmRsa4096  KeyAlgorithm = "RSA_4096"
+	KeyAlgorithmTdes2key    KeyAlgorithm = "TDES_2KEY"
+	KeyAlgorithmTdes3key    KeyAlgorithm = "TDES_3KEY"
+	KeyAlgorithmAes128      KeyAlgorithm = "AES_128"
+	KeyAlgorithmAes192      KeyAlgorithm = "AES_192"
+	KeyAlgorithmAes256      KeyAlgorithm = "AES_256"
+	KeyAlgorithmRsa2048     KeyAlgorithm = "RSA_2048"
+	KeyAlgorithmRsa3072     KeyAlgorithm = "RSA_3072"
+	KeyAlgorithmRsa4096     KeyAlgorithm = "RSA_4096"
+	KeyAlgorithmEccNistP256 KeyAlgorithm = "ECC_NIST_P256"
+	KeyAlgorithmEccNistP384 KeyAlgorithm = "ECC_NIST_P384"
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be
@@ -30,6 +32,8 @@ func (KeyAlgorithm) Values() []KeyAlgorithm {
 		"RSA_2048",
 		"RSA_3072",
 		"RSA_4096",
+		"ECC_NIST_P256",
+		"ECC_NIST_P384",
 	}
 }
 
