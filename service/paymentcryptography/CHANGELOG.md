@@ -1,3 +1,7 @@
+# v1.15.0 (2024-10-23)
+
+* **Feature**: Add support for ECC P-256 and P-384 Keys.
+
 # v1.14.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

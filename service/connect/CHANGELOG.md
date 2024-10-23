@@ -1,3 +1,7 @@
+# v1.114.0 (2024-10-23)
+
+* **Feature**: Amazon Connect Service Feature: Add support to start screen sharing for a web calling contact.
+
 # v1.113.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

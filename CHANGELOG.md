@@ -1,3 +1,19 @@
+# Release (2024-10-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.21.1](service/bedrock/CHANGELOG.md#v1211-2024-10-23)
+  * **Documentation**: Doc updates for supporting converse
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.114.0](service/connect/CHANGELOG.md#v11140-2024-10-23)
+  * **Feature**: Amazon Connect Service Feature: Add support to start screen sharing for a web calling contact.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.185.0](service/ec2/CHANGELOG.md#v11850-2024-10-23)
+  * **Feature**: Amazon EC2 X8g, C8g and M8g instances are powered by AWS Graviton4 processors. X8g provide the lowest cost per GiB of memory among Graviton4 instances. C8g provide the best price performance for compute-intensive workloads. M8g provide the best price performance in for general purpose workloads.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.32.0](service/mwaa/CHANGELOG.md#v1320-2024-10-23)
+  * **Feature**: Introducing InvokeRestApi which allows users to invoke the Apache Airflow REST API on the webserver with the specified inputs.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.15.0](service/paymentcryptography/CHANGELOG.md#v1150-2024-10-23)
+  * **Feature**: Add support for ECC P-256 and P-384 Keys.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.16.0](service/paymentcryptographydata/CHANGELOG.md#v1160-2024-10-23)
+  * **Feature**: Add ECDH support on PIN operations.
+
 # Release (2024-10-22)
 
 ## Module Highlights

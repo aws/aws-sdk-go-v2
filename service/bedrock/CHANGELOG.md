@@ -1,3 +1,7 @@
+# v1.21.1 (2024-10-23)
+
+* **Documentation**: Doc updates for supporting converse
+
 # v1.21.0 (2024-10-18)
 
 * **Feature**: Adding converse support to CMI API's

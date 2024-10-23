@@ -1,3 +1,7 @@
+# v1.16.0 (2024-10-23)
+
+* **Feature**: Add ECDH support on PIN operations.
+
 # v1.15.0 (2024-10-21)
 
 * **Feature**: Adding new API to generate authenticated scripts for EMV pin change use cases.
