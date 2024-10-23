@@ -1564,6 +1564,14 @@
                     {
                         "value": "RSA_4096",
                         "name": "RSA_4096"
+                    },
+                    {
+                        "value": "ECC_NIST_P256",
+                        "name": "ECC_NIST_P256"
+                    },
+                    {
+                        "value": "ECC_NIST_P384",
+                        "name": "ECC_NIST_P384"
                     }
                 ]
             }

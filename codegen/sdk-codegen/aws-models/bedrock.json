@@ -3761,7 +3761,7 @@
                 "instructSupported": {
                     "target": "com.amazonaws.bedrock#InstructSupported",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if the imported model supports fine tuning.</p>"
+                        "smithy.api#documentation": "<p>Specifies if the imported model supports converse.</p>"
                     }
                 }
             },
@@ -6199,7 +6199,7 @@
                 "instructSupported": {
                     "target": "com.amazonaws.bedrock#InstructSupported",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if the imported model supports fine tuning.</p>"
+                        "smithy.api#documentation": "<p>Specifies if the imported model supports converse.</p>"
                     }
                 },
                 "modelArchitecture": {

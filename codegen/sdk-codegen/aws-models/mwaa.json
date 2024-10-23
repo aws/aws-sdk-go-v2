@@ -65,6 +65,9 @@
                     "target": "com.amazonaws.mwaa#GetEnvironment"
                 },
                 {
+                    "target": "com.amazonaws.mwaa#InvokeRestApi"
+                },
+                {
                     "target": "com.amazonaws.mwaa#ListEnvironments"
                 },
                 {
@@ -92,7 +95,7 @@
                     "name": "airflow"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What is Amazon MWAA?</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html\">CreateEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html\">DeleteEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html\">GetEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html\">ListEnvironments</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html\">UpdateEnvironment</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html \">CreateCliToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html\">CreateWebLoginToken</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Regions</b>\n         </p>\n         <p>For a list of supported regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/mwaa.html\">Amazon MWAA endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What is Amazon MWAA?</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html\">CreateEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html\">DeleteEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html\">GetEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html\">ListEnvironments</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html\">UpdateEnvironment</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html \">CreateCliToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html\">CreateWebLoginToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_InvokeRestApi.html\">InvokeRestApi</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Regions</b>\n         </p>\n         <p>For a list of supported regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/mwaa.html\">Amazon MWAA endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "AmazonMWAA",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1019,7 +1022,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Managed Workflows for Apache Airflow (Amazon MWAA) environment.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -1133,7 +1136,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>\n            <code>2.8.1</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (Amazon MWAA)</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n                <code>2.8.1</code>, <code>2.9.2</code>, and <code>2.10.1</code>.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -1192,7 +1195,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation to create an environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html\">Get started with Amazon Managed Workflows for Apache Airflow</a>.</p>"
+                "smithy.api#documentation": "<p>This section contains the Amazon Managed Workflows for Apache Airflow (Amazon MWAA) API reference documentation to create an environment. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html\">Get started with Amazon Managed Workflows for Apache Airflow</a>.</p>"
             }
         },
         "com.amazonaws.mwaa#CreateEnvironmentOutput": {
@@ -1306,7 +1309,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.</p>",
+                "smithy.api#documentation": "<p>Deletes an Amazon Managed Workflows for Apache Airflow (Amazon MWAA) environment.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -1440,7 +1443,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>, <code>2.8.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n                <code>2.8.1</code>, <code>2.9.2</code>, and <code>2.10.1</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
@@ -1791,6 +1794,132 @@
                 "smithy.api#documentation": "<p>InternalServerException: An internal error has occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.mwaa#InvokeRestApi": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mwaa#InvokeRestApiRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mwaa#InvokeRestApiResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mwaa#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#RestApiClientException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#RestApiServerException"
+                },
+                {
+                    "target": "com.amazonaws.mwaa#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Invokes the Apache Airflow REST API on the webserver with the specified inputs. To\n            learn more, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/access-mwaa-apache-airflow-rest-api.html\">Using the Apache Airflow REST API</a>\n         </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "env."
+                },
+                "smithy.api#examples": [
+                    {
+                        "title": "Listing Airflow variables.",
+                        "input": {
+                            "Name": "MyEnvironment",
+                            "Path": "/variables",
+                            "Method": "GET"
+                        },
+                        "output": {
+                            "RestApiStatusCode": 200,
+                            "RestApiResponse": {
+                                "total_entries": 1,
+                                "variables": [
+                                    {
+                                        "description": "Example variable",
+                                        "key": "test-variable",
+                                        "value": "123"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/restapi/{Name}",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mwaa#InvokeRestApiRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.mwaa#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon MWAA environment. For example, <code>MyMWAAEnvironment</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.mwaa#RestApiPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Apache Airflow REST API endpoint path to be called. For example,\n            <code>/dags/123456/clearTaskInstances</code>. For more information, see <a href=\"https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html\">Apache Airflow API</a>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Method": {
+                    "target": "com.amazonaws.mwaa#RestApiMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method used for making Airflow REST API calls. For example,\n            <code>POST</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryParameters": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Query parameters to be included in the Apache Airflow REST API call, provided as a\n            JSON object. </p>"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.mwaa#RestApiRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body for the Apache Airflow REST API call, provided as a JSON\n            object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mwaa#InvokeRestApiResponse": {
+            "type": "structure",
+            "members": {
+                "RestApiStatusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code returned by the Apache Airflow REST API call.</p>"
+                    }
+                },
+                "RestApiResponse": {
+                    "target": "com.amazonaws.mwaa#RestApiResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response data from the Apache Airflow REST API call, provided as a JSON\n            object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mwaa#KmsKey": {
@@ -2329,6 +2458,98 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.mwaa#RestApiClientException": {
+            "type": "structure",
+            "members": {
+                "RestApiStatusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code returned by the Apache Airflow REST API call.</p>"
+                    }
+                },
+                "RestApiResponse": {
+                    "target": "com.amazonaws.mwaa#RestApiResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error response data from the Apache Airflow REST API call, provided as a JSON\n            object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception indicating that a client-side error occurred during the Apache Airflow\n            REST API call.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.mwaa#RestApiMethod": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GET",
+                        "name": "GET"
+                    },
+                    {
+                        "value": "PUT",
+                        "name": "PUT"
+                    },
+                    {
+                        "value": "POST",
+                        "name": "POST"
+                    },
+                    {
+                        "value": "PATCH",
+                        "name": "PATCH"
+                    },
+                    {
+                        "value": "DELETE",
+                        "name": "DELETE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mwaa#RestApiPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.mwaa#RestApiRequestBody": {
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.mwaa#RestApiResponse": {
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.mwaa#RestApiServerException": {
+            "type": "structure",
+            "members": {
+                "RestApiStatusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code returned by the Apache Airflow REST API call.</p>"
+                    }
+                },
+                "RestApiResponse": {
+                    "target": "com.amazonaws.mwaa#RestApiResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error response data from the Apache Airflow REST API call, provided as a JSON\n            object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception indicating that a server-side error occurred during the Apache Airflow\n            REST API call.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.mwaa#S3BucketArn": {
             "type": "string",
             "traits": {
@@ -2768,7 +2989,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>, <code>2.8.1</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>,\n                <code>2.4.3</code>, <code>2.5.1</code>, <code>2.6.3</code>, <code>2.7.2</code>,\n                <code>2.8.1</code>, <code>2.9.2</code>, and <code>2.10.1</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
