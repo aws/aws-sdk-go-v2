@@ -19,16 +19,24 @@ func TestPresignPutObject(t *testing.T) {
 	defer mockTime(fixedTime)()
 
 	cases := map[string]struct {
-		input           PutObjectInput
-		options         []func(*PresignPostOptions)
-		expectedExpires time.Time
-		expectedURL     string
-		region          string
+		input            PutObjectInput
+		options          []func(*PresignPostOptions)
+		expectedExpires  time.Time
+		expectedURL      string
+		region           string
+		pathStyleEnabled bool
+		BaseEndpoint     string
 	}{
 		"sample": {
 			input: PutObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),
+			},
+		},
+		"bucket and key have the same value": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("bucket"),
 			},
 		},
 		"expires override": {
@@ -66,6 +74,40 @@ func TestPresignPutObject(t *testing.T) {
 			},
 			expectedURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com",
 		},
+		"use path style bucket hosting pattern": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			expectedURL:      "https://s3.us-west-2.amazonaws.com/bucket",
+			pathStyleEnabled: true,
+		},
+		"use path style bucket and key have the same value ": {
+			input: PutObjectInput{
+				Bucket: aws.String("value"),
+				Key:    aws.String("value"),
+			},
+			expectedURL:      "https://s3.us-west-2.amazonaws.com/value",
+			pathStyleEnabled: true,
+		},
+		"use path style bucket with custom baseEndpoint": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			expectedURL:      "https://s3.custom-domain.com/bucket",
+			pathStyleEnabled: true,
+			BaseEndpoint:     "https://s3.custom-domain.com",
+		},
+		"use path style bucket with custom baseEndpoint with path": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			BaseEndpoint:     "https://my-custom-domain.com/path_my_path",
+			pathStyleEnabled: true,
+			expectedURL:      "https://my-custom-domain.com/path_my_path/bucket",
+		},
 	}
 	for name, tc := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -81,8 +123,12 @@ func TestPresignPutObject(t *testing.T) {
 					return aws.NopRetryer{}
 				},
 			}
-
-			presignClient := NewPresignClient(NewFromConfig(cfg))
+			presignClient := NewPresignClient(NewFromConfig(cfg, func(options *Options) {
+				options.UsePathStyle = tc.pathStyleEnabled
+				if tc.BaseEndpoint != "" {
+					options.BaseEndpoint = aws.String(tc.BaseEndpoint)
+				}
+			}))
 			postObject, err := presignClient.PresignPostObject(ctx, &tc.input, tc.options...)
 			if err != nil {
 				t.Error(err)
