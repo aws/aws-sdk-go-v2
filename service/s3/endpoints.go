@@ -5849,7 +5849,7 @@ func (m *resolveEndpointV2Middleware) HandleFinalize(ctx context.Context, in mid
 		rscheme.SignerProperties.SetAll(&o.SignerProperties)
 	}
 
-	ctx = internalcontext.SetS3ResolvedURI(ctx, endpt.URI.String())
+	ctx = setS3ResolvedURI(ctx, endpt.URI.String())
 
 	backend := s3cust.GetPropertiesBackend(&endpt.Properties)
 	ctx = internalcontext.SetS3Backend(ctx, backend)

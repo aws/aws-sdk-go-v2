@@ -33,6 +33,12 @@ func TestPresignPutObject(t *testing.T) {
 				Key:    aws.String("key"),
 			},
 		},
+		"bucket and key have the same value": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("bucket"),
+			},
+		},
 		"expires override": {
 			input: PutObjectInput{
 				Bucket: aws.String("bucket"),
@@ -76,6 +82,14 @@ func TestPresignPutObject(t *testing.T) {
 			expectedURL:      "https://s3.us-west-2.amazonaws.com/bucket",
 			pathStyleEnabled: true,
 		},
+		"use path style bucket and key have the same value ": {
+			input: PutObjectInput{
+				Bucket: aws.String("value"),
+				Key:    aws.String("value"),
+			},
+			expectedURL:      "https://s3.us-west-2.amazonaws.com/value",
+			pathStyleEnabled: true,
+		},
 		"use path style bucket with custom baseEndpoint": {
 			input: PutObjectInput{
 				Bucket: aws.String("bucket"),
@@ -84,6 +98,15 @@ func TestPresignPutObject(t *testing.T) {
 			expectedURL:      "https://s3.custom-domain.com/bucket",
 			pathStyleEnabled: true,
 			BaseEndpoint:     "https://s3.custom-domain.com",
+		},
+		"use path style bucket with custom baseEndpoint with path": {
+			input: PutObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			},
+			BaseEndpoint:     "https://my-custom-domain.com/path_my_path",
+			pathStyleEnabled: true,
+			expectedURL:      "https://my-custom-domain.com/path_my_path/bucket",
 		},
 	}
 	for name, tc := range cases {

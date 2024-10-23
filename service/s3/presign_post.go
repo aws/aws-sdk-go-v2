@@ -225,7 +225,7 @@ func (s *presignPostRequestMiddleware) HandleFinalize(
 		return out, metadata, fmt.Errorf("PutObject input does not have a key input")
 	}
 
-	uri := internalcontext.GetS3ResolvedURI(ctx)
+	uri := getS3ResolvedURI(ctx)
 
 	signingName := awsmiddleware.GetSigningName(ctx)
 	signingRegion := awsmiddleware.GetSigningRegion(ctx)

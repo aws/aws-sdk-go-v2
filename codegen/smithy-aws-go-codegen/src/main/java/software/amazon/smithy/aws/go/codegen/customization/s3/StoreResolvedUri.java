@@ -33,11 +33,10 @@ public class StoreResolvedUri implements GoIntegration {
         if (!S3ModelUtils.isServiceS3(model, settings.getService(model))) return;
         writer.writeGoTemplate(
                 """
-                        ctx = $internalContext:L.$setFunc:L(ctx, endpt.URI.String())
+                        ctx = $setFunc:L(ctx, endpt.URI.String())
                         """,
                 Map.of(
-                        "internalContext", AwsGoDependency.INTERNAL_CONTEXT.getAlias(),
-                        "setFunc", "SetS3ResolvedURI")
+                        "setFunc", "setS3ResolvedURI")
         );
     }
 }
