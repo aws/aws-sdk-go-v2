@@ -363,6 +363,12 @@
                         "smithy.api#documentation": "<p>The expected data format for the action review input field value. For example, in PTO\n            request, <code>from</code> and <code>to</code> would be of <code>datetime</code> allowed\n            format. </p>"
                     }
                 },
+                "arrayItemJsonSchema": {
+                    "target": "com.amazonaws.qbusiness#ActionReviewPayloadFieldArrayItemJsonSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use to create a custom form with array fields (fields with nested objects inside an\n            array). </p>"
+                    }
+                },
                 "required": {
                     "target": "smithy.api#Boolean",
                     "traits": {
@@ -399,6 +405,9 @@
             "member": {
                 "target": "com.amazonaws.qbusiness#ActionReviewPayloadFieldAllowedValue"
             }
+        },
+        "com.amazonaws.qbusiness#ActionReviewPayloadFieldArrayItemJsonSchema": {
+            "type": "document"
         },
         "com.amazonaws.qbusiness#AmazonResourceName": {
             "type": "string",

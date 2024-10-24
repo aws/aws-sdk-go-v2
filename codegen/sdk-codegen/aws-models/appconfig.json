@@ -3028,6 +3028,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DEPLOYMENT_COMPLETED"
                     }
+                },
+                "REVERT_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVERT_COMPLETED"
+                    }
                 }
             }
         },
@@ -3080,6 +3086,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ROLLED_BACK"
+                    }
+                },
+                "REVERTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVERTED"
                     }
                 }
             }
@@ -3370,6 +3382,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ROLLED_BACK"
+                    }
+                },
+                "REVERTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVERTED"
                     }
                 }
             }
@@ -3840,7 +3858,7 @@
                 "ClientConfigurationVersion": {
                     "target": "com.amazonaws.appconfig#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration version returned in the most recent <a>GetConfiguration</a>\n         response.</p>\n         <important>\n            <p>AppConfig uses the value of the <code>ClientConfigurationVersion</code>\n            parameter to identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to <a>GetConfiguration</a>, your clients receive the current configuration. You are\n            charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend you use the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs, which track the client configuration version on\n            your behalf. If you choose to continue using <a>GetConfiguration</a>, we\n            recommend that you include the <code>ClientConfigurationVersion</code> value with every\n            call to <a>GetConfiguration</a>. The value to use for\n               <code>ClientConfigurationVersion</code> comes from the\n               <code>ConfigurationVersion</code> attribute returned by <a>GetConfiguration</a> when there is new or updated data, and should be saved\n            for subsequent calls to <a>GetConfiguration</a>.</p>\n         </important>\n         <p>For more information about working with configurations, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html\">Retrieving the\n            Configuration</a> in the <i>AppConfig User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The configuration version returned in the most recent <a>GetConfiguration</a>\n         response.</p>\n         <important>\n            <p>AppConfig uses the value of the <code>ClientConfigurationVersion</code>\n            parameter to identify the configuration version on your clients. If you don’t send\n               <code>ClientConfigurationVersion</code> with each call to <a>GetConfiguration</a>, your clients receive the current configuration. You are\n            charged each time your clients receive a configuration.</p>\n            <p>To avoid excess charges, we recommend you use the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html\">StartConfigurationSession</a> and <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html\">GetLatestConfiguration</a> APIs, which track the client configuration version on\n            your behalf. If you choose to continue using <a>GetConfiguration</a>, we\n            recommend that you include the <code>ClientConfigurationVersion</code> value with every\n            call to <a>GetConfiguration</a>. The value to use for\n               <code>ClientConfigurationVersion</code> comes from the\n               <code>ConfigurationVersion</code> attribute returned by <a>GetConfiguration</a> when there is new or updated data, and should be saved\n            for subsequent calls to <a>GetConfiguration</a>.</p>\n         </important>\n         <p>For more information about working with configurations, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/retrieving-feature-flags.html\">Retrieving feature flags and\n            configuration data in AppConfig</a> in the <i>AppConfig\n            User Guide</i>.</p>",
                         "smithy.api#httpQuery": "client_configuration_version"
                     }
                 }
@@ -5529,7 +5547,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops a deployment. This API action works only on deployments that have a status of\n            <code>DEPLOYING</code>. This action moves the deployment to a status of\n            <code>ROLLED_BACK</code>.</p>",
+                "smithy.api#documentation": "<p>Stops a deployment. This API action works only on deployments that have a status of\n            <code>DEPLOYING</code>, unless an <code>AllowRevert</code> parameter is supplied. If the\n            <code>AllowRevert</code> parameter is supplied, the status of an in-progress deployment\n         will be <code>ROLLED_BACK</code>. The status of a completed deployment will be\n            <code>REVERTED</code>. AppConfig only allows a revert within 72 hours of\n         deployment completion.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To stop configuration deployment",
@@ -5581,6 +5599,14 @@
                         "smithy.api#documentation": "<p>The sequence number of the deployment.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "AllowRevert": {
+                    "target": "com.amazonaws.appconfig#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>A Boolean that enables AppConfig to rollback a <code>COMPLETED</code>\n         deployment to the previous configuration version. This action moves the deployment to a\n         status of <code>REVERTED</code>.</p>",
+                        "smithy.api#httpHeader": "Allow-Revert"
                     }
                 }
             },

@@ -6284,7 +6284,7 @@
                 "command": {
                     "target": "com.amazonaws.ecs#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string array representing the command that the container runs to determine if it is\n\t\t\thealthy. The string array must start with <code>CMD</code> to run the command arguments\n\t\t\tdirectly, or <code>CMD-SHELL</code> to run the command with the container's default\n\t\t\tshell. </p>\n         <p> When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, enclose the list\n\t\t\tof commands in double quotes and brackets.</p>\n         <p>\n            <code>[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]</code>\n         </p>\n         <p>You don't include the double quotes and brackets when you use the Amazon Web Services Management Console.</p>\n         <p>\n            <code> CMD-SHELL, curl -f http://localhost/ || exit 1</code>\n         </p>\n         <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For\n\t\t\tmore information, see <code>HealthCheck</code> in the docker container create command</p>",
+                        "smithy.api#documentation": "<p>A string array representing the command that the container runs to determine if it is\n\t\t\thealthy. The string array must start with <code>CMD</code> to run the command arguments\n\t\t\tdirectly, or <code>CMD-SHELL</code> to run the command with the container's default\n\t\t\tshell. </p>\n         <p> When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, enclose the list\n\t\t\tof commands in double quotes and brackets.</p>\n         <p>\n            <code>[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]</code>\n         </p>\n         <p>You don't include the double quotes and brackets when you use the Amazon Web Services Management Console.</p>\n         <p>\n            <code> CMD-SHELL, curl -f http://localhost/ || exit 1</code>\n         </p>\n         <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For\n\t\t\tmore information, see <code>HealthCheck</code> in the docker container create command.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10323,12 +10323,12 @@
                 "filesystemType": {
                     "target": "com.amazonaws.ecs#TaskFilesystemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Linux filesystem type for the volume. For volumes created from a snapshot, you\n\t\t\tmust specify the same filesystem type that the volume was using when the snapshot was\n\t\t\tcreated. If there is a filesystem type mismatch, the task will fail to start.</p>\n         <p>The available filesystem types are\u2028 <code>ext3</code>, <code>ext4</code>, and\n\t\t\t\t<code>xfs</code>. If no value is specified, the <code>xfs</code> filesystem type is\n\t\t\tused by default.</p>"
+                        "smithy.api#documentation": "<p>The filesystem type for the volume. For volumes created from a snapshot, you must specify\n\t\t\tthe same filesystem type that the volume was using when the snapshot was created. If\n\t\t\tthere is a filesystem type mismatch, the task will fail to start.</p>\n         <p>The available Linux filesystem types are\u2028 <code>ext3</code>, <code>ext4</code>, and\n\t\t\t\t<code>xfs</code>. If no value is specified, the <code>xfs</code> filesystem type is\n\t\t\tused by default.</p>\n         <p>The available Windows filesystem types are <code>NTFS</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf.\n\t\t\tThese settings are used to create each Amazon EBS volume, with one volume created for each\n\t\t\ttask in the service.</p>\n         <p>Many of these parameters map 1:1 with the Amazon EBS <code>CreateVolume</code> API request\n\t\t\tparameters.</p>"
+                "smithy.api#documentation": "<p>The configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. These\n\t\t\tsettings are used to create each Amazon EBS volume, with one volume created for each task in\n\t\t\tthe service. For information about the supported launch types and operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration\">Supported operating systems and launch types</a>\n\t\t\tin the<i> Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Many of these parameters map 1:1 with the Amazon EBS <code>CreateVolume</code> API request\n\t\t\tparameters.</p>"
             }
         },
         "com.amazonaws.ecs#ServiceNotActiveException": {
@@ -11845,6 +11845,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "xfs"
+                    }
+                },
+                "NTFS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ntfs"
                     }
                 }
             }
