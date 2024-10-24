@@ -11,12 +11,12 @@ import (
 )
 
 // IsErrorRetryable provides the interface of an implementation to determine if
-// a error as the result of an operation is retryable.
+// an error as the result of an operation is retryable.
 type IsErrorRetryable interface {
 	IsErrorRetryable(error) aws.Ternary
 }
 
-// IsErrorRetryables is a collection of checks to determine of the error is
+// IsErrorRetryables is a collection of checks to determine if the error is
 // retryable.  Iterates through the checks and returns the state of retryable
 // if any check returns something other than unknown.
 type IsErrorRetryables []IsErrorRetryable
