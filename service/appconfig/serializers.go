@@ -3052,6 +3052,11 @@ func awsRestjson1_serializeOpHttpBindingsStopDeploymentInput(v *StopDeploymentIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AllowRevert != nil {
+		locationName := "Allow-Revert"
+		encoder.SetHeader(locationName).Boolean(*v.AllowRevert)
+	}
+
 	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
 	}

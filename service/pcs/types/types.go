@@ -81,7 +81,9 @@ type ClusterSlurmConfiguration struct {
 	// The shared Slurm key for authentication, also known as the cluster secret.
 	AuthKey *SlurmAuthKey
 
-	// The time before an idle node is scaled down.
+	// The time (in seconds) before an idle node is scaled down.
+	//
+	// Default: 600
 	ScaleDownIdleTimeInSeconds *int32
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
@@ -93,7 +95,9 @@ type ClusterSlurmConfiguration struct {
 // Additional options related to the Slurm scheduler.
 type ClusterSlurmConfigurationRequest struct {
 
-	// The time before an idle node is scaled down.
+	// The time (in seconds) before an idle node is scaled down.
+	//
+	// Default: 600
 	ScaleDownIdleTimeInSeconds *int32
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.

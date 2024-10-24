@@ -1173,6 +1173,7 @@ const (
 	TaskFilesystemTypeExt3 TaskFilesystemType = "ext3"
 	TaskFilesystemTypeExt4 TaskFilesystemType = "ext4"
 	TaskFilesystemTypeXfs  TaskFilesystemType = "xfs"
+	TaskFilesystemTypeNtfs TaskFilesystemType = "ntfs"
 )
 
 // Values returns all known values for TaskFilesystemType. Note that this can be
@@ -1184,6 +1185,7 @@ func (TaskFilesystemType) Values() []TaskFilesystemType {
 		"ext3",
 		"ext4",
 		"xfs",
+		"ntfs",
 	}
 }
 

@@ -9315,6 +9315,11 @@ func awsRestjson1_deserializeDocumentActionReviewPayloadField(v **types.ActionRe
 				return err
 			}
 
+		case "arrayItemJsonSchema":
+			if err := awsRestjson1_deserializeDocumentActionReviewPayloadFieldArrayItemJsonSchema(&sv.ArrayItemJsonSchema, value); err != nil {
+				return err
+			}
+
 		case "displayDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9450,6 +9455,14 @@ func awsRestjson1_deserializeDocumentActionReviewPayloadFieldAllowedValues(v *[]
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentActionReviewPayloadFieldArrayItemJsonSchema(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }
 

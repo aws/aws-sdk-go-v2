@@ -82,12 +82,12 @@ type GetConfigurationInput struct {
 	// ConfigurationVersion attribute returned by GetConfiguration when there is new or updated data,
 	// and should be saved for subsequent calls to GetConfiguration.
 	//
-	// For more information about working with configurations, see [Retrieving the Configuration] in the AppConfig
+	// For more information about working with configurations, see [Retrieving feature flags and configuration data in AppConfig] in the AppConfig
 	// User Guide.
 	//
 	// [GetLatestConfiguration]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/GetLatestConfiguration.html
+	// [Retrieving feature flags and configuration data in AppConfig]: http://docs.aws.amazon.com/appconfig/latest/userguide/retrieving-feature-flags.html
 	// [StartConfigurationSession]: https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/StartConfigurationSession.html
-	// [Retrieving the Configuration]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration.html
 	ClientConfigurationVersion *string
 
 	noSmithyDocumentSerde

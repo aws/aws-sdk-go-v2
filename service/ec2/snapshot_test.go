@@ -3362,6 +3362,18 @@ func TestCheckSnapshot_DescribeInstanceEventWindows(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInstanceImageMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceImageMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInstanceImageMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeInstances(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstances(context.Background(), nil, func(o *Options) {
@@ -10950,6 +10962,18 @@ func TestUpdateSnapshot_DescribeInstanceEventWindows(t *testing.T) {
 	_, err := svc.DescribeInstanceEventWindows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeInstanceEventWindows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeInstanceImageMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceImageMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInstanceImageMetadata")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

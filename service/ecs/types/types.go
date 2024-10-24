@@ -2417,7 +2417,7 @@ type HealthCheck struct {
 	//     CMD-SHELL, curl -f http://localhost/ || exit 1
 	//
 	// An exit code of 0 indicates success, and non-zero exit code indicates failure.
-	// For more information, see HealthCheck in the docker container create command
+	// For more information, see HealthCheck in the docker container create command.
 	//
 	// This member is required.
 	Command []string
@@ -4116,10 +4116,14 @@ type ServiceEvent struct {
 
 // The configuration for the Amazon EBS volume that Amazon ECS creates and manages
 // on your behalf. These settings are used to create each Amazon EBS volume, with
-// one volume created for each task in the service.
+// one volume created for each task in the service. For information about the
+// supported launch types and operating systems, see [Supported operating systems and launch types]in the Amazon Elastic
+// Container Service Developer Guide.
 //
 // Many of these parameters map 1:1 with the Amazon EBS CreateVolume API request
 // parameters.
+//
+// [Supported operating systems and launch types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volumes-configuration
 type ServiceManagedEBSVolumeConfiguration struct {
 
 	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS
@@ -4140,13 +4144,15 @@ type ServiceManagedEBSVolumeConfiguration struct {
 	// [CreateVolume API]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html
 	Encrypted *bool
 
-	// The Linux filesystem type for the volume. For volumes created from a snapshot,
-	// you must specify the same filesystem type that the volume was using when the
+	// The filesystem type for the volume. For volumes created from a snapshot, you
+	// must specify the same filesystem type that the volume was using when the
 	// snapshot was created. If there is a filesystem type mismatch, the task will fail
 	// to start.
 	//
-	// The available filesystem types are  ext3 , ext4 , and xfs . If no value is
+	// The available Linux filesystem types are  ext3 , ext4 , and xfs . If no value is
 	// specified, the xfs filesystem type is used by default.
+	//
+	// The available Windows filesystem types are NTFS .
 	FilesystemType TaskFilesystemType
 
 	// The number of I/O operations per second (IOPS). For gp3 , io1 , and io2

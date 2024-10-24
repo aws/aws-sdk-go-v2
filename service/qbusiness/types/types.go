@@ -166,6 +166,10 @@ type ActionReviewPayloadField struct {
 	// Amazon Q Business for Amazon Q Business to perform the requested plugin action.
 	AllowedValues []ActionReviewPayloadFieldAllowedValue
 
+	// Use to create a custom form with array fields (fields with nested objects
+	// inside an array).
+	ArrayItemJsonSchema document.Interface
+
 	// The field level description of each action review input field. This could be an
 	// explanation of the field. In the Amazon Q Business web experience, these
 	// descriptions could be used to display as tool tips to help users understand the

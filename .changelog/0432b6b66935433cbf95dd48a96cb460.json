@@ -1,0 +1,8 @@
+{
+    "id": "0432b6b6-6935-433c-bf95-dd48a96cb460",
+    "type": "documentation",
+    "description": "Documentation update: added the default value of the Slurm configuration parameter scaleDownIdleTimeInSeconds to its description.",
+    "modules": [
+        "service/pcs"
+    ]
+}

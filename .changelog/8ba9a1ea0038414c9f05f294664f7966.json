@@ -1,0 +1,8 @@
+{
+    "id": "8ba9a1ea-0038-414c-9f05-f294664f7966",
+    "type": "feature",
+    "description": "This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.",
+    "modules": [
+        "service/ecs"
+    ]
+}

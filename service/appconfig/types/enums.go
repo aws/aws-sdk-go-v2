@@ -96,6 +96,7 @@ const (
 	DeploymentEventTypeBakeTimeStarted     DeploymentEventType = "BAKE_TIME_STARTED"
 	DeploymentEventTypeDeploymentStarted   DeploymentEventType = "DEPLOYMENT_STARTED"
 	DeploymentEventTypeDeploymentCompleted DeploymentEventType = "DEPLOYMENT_COMPLETED"
+	DeploymentEventTypeRevertCompleted     DeploymentEventType = "REVERT_COMPLETED"
 )
 
 // Values returns all known values for DeploymentEventType. Note that this can be
@@ -110,6 +111,7 @@ func (DeploymentEventType) Values() []DeploymentEventType {
 		"BAKE_TIME_STARTED",
 		"DEPLOYMENT_STARTED",
 		"DEPLOYMENT_COMPLETED",
+		"REVERT_COMPLETED",
 	}
 }
 
@@ -123,6 +125,7 @@ const (
 	DeploymentStateComplete    DeploymentState = "COMPLETE"
 	DeploymentStateRollingBack DeploymentState = "ROLLING_BACK"
 	DeploymentStateRolledBack  DeploymentState = "ROLLED_BACK"
+	DeploymentStateReverted    DeploymentState = "REVERTED"
 )
 
 // Values returns all known values for DeploymentState. Note that this can be
@@ -137,6 +140,7 @@ func (DeploymentState) Values() []DeploymentState {
 		"COMPLETE",
 		"ROLLING_BACK",
 		"ROLLED_BACK",
+		"REVERTED",
 	}
 }
 
@@ -148,6 +152,7 @@ const (
 	EnvironmentStateDeploying          EnvironmentState = "DEPLOYING"
 	EnvironmentStateRollingBack        EnvironmentState = "ROLLING_BACK"
 	EnvironmentStateRolledBack         EnvironmentState = "ROLLED_BACK"
+	EnvironmentStateReverted           EnvironmentState = "REVERTED"
 )
 
 // Values returns all known values for EnvironmentState. Note that this can be
@@ -160,6 +165,7 @@ func (EnvironmentState) Values() []EnvironmentState {
 		"DEPLOYING",
 		"ROLLING_BACK",
 		"ROLLED_BACK",
+		"REVERTED",
 	}
 }
 

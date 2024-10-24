@@ -286,6 +286,7 @@
         "api_op_DescribeInstanceCreditSpecifications.go",
         "api_op_DescribeInstanceEventNotificationAttributes.go",
         "api_op_DescribeInstanceEventWindows.go",
+        "api_op_DescribeInstanceImageMetadata.go",
         "api_op_DescribeInstanceStatus.go",
         "api_op_DescribeInstanceTopology.go",
         "api_op_DescribeInstanceTypeOfferings.go",
