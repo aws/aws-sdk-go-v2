@@ -1,3 +1,17 @@
+# Release (2024-10-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.35.0](service/appconfig/CHANGELOG.md#v1350-2024-10-24)
+  * **Feature**: This release improves deployment safety by granting customers the ability to REVERT completed deployments, to the last known good state.In the StopDeployment API revert case the status of a COMPLETE deployment will be REVERTED. AppConfig only allows a revert within 72 hours of deployment completion.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.186.0](service/ec2/CHANGELOG.md#v11860-2024-10-24)
+  * **Feature**: This release includes a new API to describe some details of the Amazon Machine Images (AMIs) that were used to launch EC2 instances, even if those AMIs are no longer available for use.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.48.0](service/ecs/CHANGELOG.md#v1480-2024-10-24)
+  * **Feature**: This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.2.3](service/pcs/CHANGELOG.md#v123-2024-10-24)
+  * **Documentation**: Documentation update: added the default value of the Slurm configuration parameter scaleDownIdleTimeInSeconds to its description.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.15.0](service/qbusiness/CHANGELOG.md#v1150-2024-10-24)
+  * **Feature**: Add a new field in chat response. This field can be used to support nested schemas in array fields
+
 # Release (2024-10-23)
 
 ## Module Highlights

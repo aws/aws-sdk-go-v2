@@ -1,3 +1,7 @@
+# v1.48.0 (2024-10-24)
+
+* **Feature**: This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.
+
 # v1.47.4 (2024-10-17)
 
 * **Documentation**: This is an Amazon ECS documentation only update to address tickets.

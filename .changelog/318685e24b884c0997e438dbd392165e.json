@@ -1,8 +1,0 @@
-{
-    "id": "318685e2-4b88-4c09-97e4-38dbd392165e",
-    "type": "feature",
-    "description": "This release improves deployment safety by granting customers the ability to REVERT completed deployments, to the last known good state.In the StopDeployment API revert case the status of a COMPLETE deployment will be REVERTED. AppConfig only allows a revert within 72 hours of deployment completion.",
-    "modules": [
-        "service/appconfig"
-    ]
-}

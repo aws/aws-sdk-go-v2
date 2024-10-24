@@ -1,8 +1,0 @@
-{
-    "id": "d58a4c46-7a9a-486b-9766-892b17cdc108",
-    "type": "feature",
-    "description": "Add a new field in chat response. This field can be used to support nested schemas in array fields",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

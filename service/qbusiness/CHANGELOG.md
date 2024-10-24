@@ -1,3 +1,7 @@
+# v1.15.0 (2024-10-24)
+
+* **Feature**: Add a new field in chat response. This field can be used to support nested schemas in array fields
+
 # v1.14.0 (2024-10-15)
 
 * **Feature**: Amazon Q Business now supports embedding the Amazon Q Business web experience on third-party websites.
