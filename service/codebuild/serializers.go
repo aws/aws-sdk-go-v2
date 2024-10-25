@@ -4251,6 +4251,11 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 		}
 	}
 
+	if v.AutoRetryLimit != nil {
+		ok := object.Key("autoRetryLimit")
+		ok.Integer(*v.AutoRetryLimit)
+	}
+
 	if v.BadgeEnabled != nil {
 		ok := object.Key("badgeEnabled")
 		ok.Boolean(*v.BadgeEnabled)
@@ -5284,6 +5289,11 @@ func awsAwsjson11_serializeOpDocumentStartBuildInput(v *StartBuildInput, value s
 		}
 	}
 
+	if v.AutoRetryLimitOverride != nil {
+		ok := object.Key("autoRetryLimitOverride")
+		ok.Integer(*v.AutoRetryLimitOverride)
+	}
+
 	if v.BuildspecOverride != nil {
 		ok := object.Key("buildspecOverride")
 		ok.String(*v.BuildspecOverride)
@@ -5567,6 +5577,11 @@ func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 		if err := awsAwsjson11_serializeDocumentProjectArtifacts(v.Artifacts, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.AutoRetryLimit != nil {
+		ok := object.Key("autoRetryLimit")
+		ok.Integer(*v.AutoRetryLimit)
 	}
 
 	if v.BadgeEnabled != nil {

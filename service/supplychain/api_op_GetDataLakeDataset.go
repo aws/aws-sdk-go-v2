@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a data lake dataset.
+// Enables you to programmatically view an Amazon Web Services Supply Chain data
+// lake dataset. Developers can view the data lake dataset information such as
+// namespace, schema, and so on for a given instance ID, namespace, and dataset
+// name.
 func (c *Client) GetDataLakeDataset(ctx context.Context, params *GetDataLakeDatasetInput, optFns ...func(*Options)) (*GetDataLakeDatasetOutput, error) {
 	if params == nil {
 		params = &GetDataLakeDatasetInput{}

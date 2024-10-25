@@ -7,6 +7,29 @@ import (
 	"time"
 )
 
+// Information about the auto-retry configuration for the build.
+type AutoRetryConfig struct {
+
+	// The maximum number of additional automatic retries after a failed build. For
+	// example, if the auto-retry limit is set to 2, CodeBuild will call the RetryBuild
+	// API to automatically retry your build for up to 2 additional times.
+	AutoRetryLimit *int32
+
+	// The number of times that the build has been retried. The initial build will
+	// have an auto-retry number of 0.
+	AutoRetryNumber *int32
+
+	// The build ARN of the auto-retried build triggered by the current build. The
+	// next auto-retry will be null for builds that don't trigger an auto-retry.
+	NextAutoRetry *string
+
+	// The build ARN of the build that triggered the current auto-retry build. The
+	// previous auto-retry will be null for the initial build.
+	PreviousAutoRetry *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies restrictions for the batch build.
 type BatchRestrictions struct {
 
@@ -30,6 +53,9 @@ type Build struct {
 
 	// Information about the output artifacts for the build.
 	Artifacts *BuildArtifacts
+
+	// Information about the auto-retry configuration for the build.
+	AutoRetryConfig *AutoRetryConfig
 
 	// The ARN of the batch build that this build is a member of, if applicable.
 	BuildBatchArn *string
@@ -1179,6 +1205,11 @@ type Project struct {
 
 	// Information about the build output artifacts for the build project.
 	Artifacts *ProjectArtifacts
+
+	// The maximum number of additional automatic retries after a failed build. For
+	// example, if the auto-retry limit is set to 2, CodeBuild will call the RetryBuild
+	// API to automatically retry your build for up to 2 additional times.
+	AutoRetryLimit *int32
 
 	// Information about the build badge for the build project.
 	Badge *ProjectBadge

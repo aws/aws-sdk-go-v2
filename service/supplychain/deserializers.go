@@ -4939,6 +4939,15 @@ func awsRestjson1_deserializeDocumentInstance(v **types.Instance, value interfac
 				}
 			}
 
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
 		case "instanceDescription":
 			if value != nil {
 				jtv, ok := value.(string)

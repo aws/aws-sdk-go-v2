@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -2510,6 +2511,12 @@ type PromptFlowNodeInlineConfiguration struct {
 	// This member is required.
 	TemplateType PromptTemplateType
 
+	// Contains model-specific inference configurations that aren't in the
+	// inferenceConfiguration field. To see model-specific inference parameters, see [Inference request parameters and response fields for foundation models].
+	//
+	// [Inference request parameters and response fields for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	AdditionalModelRequestFields document.Interface
+
 	// Contains inference configurations for the prompt.
 	InferenceConfiguration PromptInferenceConfiguration
 
@@ -2734,6 +2741,12 @@ type PromptVariant struct {
 	//
 	// This member is required.
 	TemplateType PromptTemplateType
+
+	// Contains model-specific inference configurations that aren't in the
+	// inferenceConfiguration field. To see model-specific inference parameters, see [Inference request parameters and response fields for foundation models].
+	//
+	// [Inference request parameters and response fields for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	AdditionalModelRequestFields document.Interface
 
 	// Contains inference configurations for the prompt variant.
 	InferenceConfiguration PromptInferenceConfiguration

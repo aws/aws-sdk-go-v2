@@ -14,7 +14,7 @@ import (
 // Lists the specified log groups. You can list all your log groups or filter the
 // results by prefix. The results are ASCII-sorted by log group name.
 //
-// CloudWatch Logs doesn’t support IAM policies that control access to the
+// CloudWatch Logs doesn't support IAM policies that control access to the
 // DescribeLogGroups action by using the aws:ResourceTag/key-name  condition key.
 // Other CloudWatch Logs actions do support the use of the
 // aws:ResourceTag/key-name condition key to control access. For more information

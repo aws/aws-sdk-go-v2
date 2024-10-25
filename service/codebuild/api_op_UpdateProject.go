@@ -40,6 +40,11 @@ type UpdateProjectInput struct {
 	// project.
 	Artifacts *types.ProjectArtifacts
 
+	// The maximum number of additional automatic retries after a failed build. For
+	// example, if the auto-retry limit is set to 2, CodeBuild will call the RetryBuild
+	// API to automatically retry your build for up to 2 additional times.
+	AutoRetryLimit *int32
+
 	// Set this to true to generate a publicly accessible URL for your project's build
 	// badge.
 	BadgeEnabled *bool

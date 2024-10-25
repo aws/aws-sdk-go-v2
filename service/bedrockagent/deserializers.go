@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockagent/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -18066,6 +18068,11 @@ func awsRestjson1_deserializeDocumentPromptFlowNodeInlineConfiguration(v **types
 
 	for key, value := range shape {
 		switch key {
+		case "additionalModelRequestFields":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalModelRequestFields, value); err != nil {
+				return err
+			}
+
 		case "inferenceConfiguration":
 			if err := awsRestjson1_deserializeDocumentPromptInferenceConfiguration(&sv.InferenceConfiguration, value); err != nil {
 				return err
@@ -18750,6 +18757,11 @@ func awsRestjson1_deserializeDocumentPromptVariant(v **types.PromptVariant, valu
 
 	for key, value := range shape {
 		switch key {
+		case "additionalModelRequestFields":
+			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalModelRequestFields, value); err != nil {
+				return err
+			}
+
 		case "inferenceConfiguration":
 			if err := awsRestjson1_deserializeDocumentPromptInferenceConfiguration(&sv.InferenceConfiguration, value); err != nil {
 				return err
@@ -20940,5 +20952,13 @@ func awsRestjson1_deserializeDocumentWebSourceConfiguration(v **types.WebSourceC
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDocument(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }

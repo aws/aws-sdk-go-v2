@@ -17,7 +17,7 @@ import (
 //
 // To list the tags for a log group, use [ListTagsForResource]. To add tags, use [TagResource].
 //
-// CloudWatch Logs doesn’t support IAM policies that prevent users from assigning
+// CloudWatch Logs doesn't support IAM policies that prevent users from assigning
 // specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys
 // condition keys.
 //

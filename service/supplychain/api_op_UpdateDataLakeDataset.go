@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a data lake dataset.
+// Enables you to programmatically update an Amazon Web Services Supply Chain data
+// lake dataset. Developers can update the description of a data lake dataset for a
+// given instance ID, namespace, and dataset name.
 func (c *Client) UpdateDataLakeDataset(ctx context.Context, params *UpdateDataLakeDatasetInput, optFns ...func(*Options)) (*UpdateDataLakeDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDataLakeDatasetInput{}

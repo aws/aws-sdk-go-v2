@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockagent/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -7452,6 +7454,13 @@ func awsRestjson1_serializeDocumentPromptFlowNodeInlineConfiguration(v *types.Pr
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InferenceConfiguration != nil {
 		ok := object.Key("inferenceConfiguration")
 		if err := awsRestjson1_serializeDocumentPromptInferenceConfiguration(v.InferenceConfiguration, ok); err != nil {
@@ -7683,6 +7692,13 @@ func awsRestjson1_serializeDocumentPromptTemplateConfiguration(v types.PromptTem
 func awsRestjson1_serializeDocumentPromptVariant(v *types.PromptVariant, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalModelRequestFields != nil {
+		ok := object.Key("additionalModelRequestFields")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalModelRequestFields, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.InferenceConfiguration != nil {
 		ok := object.Key("inferenceConfiguration")
@@ -8485,5 +8501,20 @@ func awsRestjson1_serializeDocumentWebSourceConfiguration(v *types.WebSourceConf
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }

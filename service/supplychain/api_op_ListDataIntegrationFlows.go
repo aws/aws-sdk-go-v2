@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the DataIntegrationFlows in a paginated way.
+// Enables you to programmatically list all data pipelines for the provided Amazon
+// Web Services Supply Chain instance.
 func (c *Client) ListDataIntegrationFlows(ctx context.Context, params *ListDataIntegrationFlowsInput, optFns ...func(*Options)) (*ListDataIntegrationFlowsOutput, error) {
 	if params == nil {
 		params = &ListDataIntegrationFlowsInput{}

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the instance.
+// Enables you to programmatically update an Amazon Web Services Supply Chain
+// instance description by providing all the relevant information such as account
+// ID, instance ID and so on without using the AWS console.
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceInput{}

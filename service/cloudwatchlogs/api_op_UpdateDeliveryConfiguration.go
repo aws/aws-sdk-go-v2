@@ -43,10 +43,10 @@ type UpdateDeliveryConfigurationInput struct {
 	FieldDelimiter *string
 
 	// The list of record fields to be delivered to the destination, in order. If the
-	// delivery’s log source has mandatory fields, they must be included in this list.
+	// delivery's log source has mandatory fields, they must be included in this list.
 	RecordFields []string
 
-	// This structure contains parameters that are valid only when the delivery’s
+	// This structure contains parameters that are valid only when the delivery's
 	// delivery destination is an S3 bucket.
 	S3DeliveryConfiguration *types.S3DeliveryConfiguration
 

@@ -5903,6 +5903,81 @@ func awsAwsjson11_deserializeDocumentAccountLimitExceededException(v **types.Acc
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutoRetryConfig(v **types.AutoRetryConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoRetryConfig
+	if *v == nil {
+		sv = &types.AutoRetryConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoRetryLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoRetryLimit = ptr.Int32(int32(i64))
+			}
+
+		case "autoRetryNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoRetryNumber = ptr.Int32(int32(i64))
+			}
+
+		case "nextAutoRetry":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextAutoRetry = ptr.String(jtv)
+			}
+
+		case "previousAutoRetry":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PreviousAutoRetry = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchRestrictions(v **types.BatchRestrictions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5985,6 +6060,11 @@ func awsAwsjson11_deserializeDocumentBuild(v **types.Build, value interface{}) e
 
 		case "artifacts":
 			if err := awsAwsjson11_deserializeDocumentBuildArtifacts(&sv.Artifacts, value); err != nil {
+				return err
+			}
+
+		case "autoRetryConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoRetryConfig(&sv.AutoRetryConfig, value); err != nil {
 				return err
 			}
 
@@ -9385,6 +9465,19 @@ func awsAwsjson11_deserializeDocumentProject(v **types.Project, value interface{
 		case "artifacts":
 			if err := awsAwsjson11_deserializeDocumentProjectArtifacts(&sv.Artifacts, value); err != nil {
 				return err
+			}
+
+		case "autoRetryLimit":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperInt to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutoRetryLimit = ptr.Int32(int32(i64))
 			}
 
 		case "badge":

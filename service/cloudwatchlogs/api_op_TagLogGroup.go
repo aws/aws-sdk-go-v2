@@ -19,7 +19,7 @@ import (
 //
 // For more information about tags, see [Tag Log Groups in Amazon CloudWatch Logs] in the Amazon CloudWatch Logs User Guide.
 //
-// CloudWatch Logs doesn’t support IAM policies that prevent users from assigning
+// CloudWatch Logs doesn't support IAM policies that prevent users from assigning
 // specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys
 // condition keys. For more information about using tags to control access, see [Controlling access to Amazon Web Services resources using tags].
 //

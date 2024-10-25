@@ -13162,6 +13162,15 @@ func awsAwsjson11_deserializeDocumentPatternToken(v **types.PatternToken, value 
 				return err
 			}
 
+		case "inferredTokenName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InferredTokenName to be of type string, got %T instead", value)
+				}
+				sv.InferredTokenName = ptr.String(jtv)
+			}
+
 		case "isDynamic":
 			if value != nil {
 				jtv, ok := value.(bool)

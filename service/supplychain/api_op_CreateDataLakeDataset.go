@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a data lake dataset.
+// Enables you to programmatically create an Amazon Web Services Supply Chain data
+// lake dataset. Developers can create the datasets using their pre-defined or
+// custom schema for a given instance ID, namespace, and dataset name.
 func (c *Client) CreateDataLakeDataset(ctx context.Context, params *CreateDataLakeDatasetInput, optFns ...func(*Options)) (*CreateDataLakeDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDataLakeDatasetInput{}

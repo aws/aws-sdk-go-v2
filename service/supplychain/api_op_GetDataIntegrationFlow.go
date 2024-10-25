@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// View the DataIntegrationFlow details.
+// Enables you to programmatically view a specific data pipeline for the provided
+// Amazon Web Services Supply Chain instance and DataIntegrationFlow name.
 func (c *Client) GetDataIntegrationFlow(ctx context.Context, params *GetDataIntegrationFlowInput, optFns ...func(*Options)) (*GetDataIntegrationFlowOutput, error) {
 	if params == nil {
 		params = &GetDataIntegrationFlowInput{}

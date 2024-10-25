@@ -45,7 +45,35 @@ type UpdateAgentInput struct {
 	// This member is required.
 	AgentResourceRoleArn *string
 
-	// Specifies a new foundation model to be used for orchestration by the agent.
+	// The identifier for the model that you want to be used for orchestration by the
+	// agent you create.
+	//
+	// The modelId to provide depends on the type of model or throughput that you use:
+	//
+	//   - If you use a base model, specify the model ID or its ARN. For a list of
+	//   model IDs for base models, see [Amazon Bedrock base model IDs (on-demand throughput)]in the Amazon Bedrock User Guide.
+	//
+	//   - If you use an inference profile, specify the inference profile ID or its
+	//   ARN. For a list of inference profile IDs, see [Supported Regions and models for cross-region inference]in the Amazon Bedrock User
+	//   Guide.
+	//
+	//   - If you use a provisioned model, specify the ARN of the Provisioned
+	//   Throughput. For more information, see [Run inference using a Provisioned Throughput]in the Amazon Bedrock User Guide.
+	//
+	//   - If you use a custom model, first purchase Provisioned Throughput for it.
+	//   Then specify the ARN of the resulting provisioned model. For more information,
+	//   see [Use a custom model in Amazon Bedrock]in the Amazon Bedrock User Guide.
+	//
+	//   - If you use an [imported model], specify the ARN of the imported model. You can get the
+	//   model ARN from a successful call to [CreateModelImportJob]or from the Imported models page in the
+	//   Amazon Bedrock console.
+	//
+	// [Run inference using a Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+	// [Use a custom model in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+	// [imported model]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html
+	// [CreateModelImportJob]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html
+	// [Supported Regions and models for cross-region inference]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html
+	// [Amazon Bedrock base model IDs (on-demand throughput)]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
 	//
 	// This member is required.
 	FoundationModel *string

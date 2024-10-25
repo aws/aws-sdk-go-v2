@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List all the AWS Supply Chain instances in a paginated way.
+// List all Amazon Web Services Supply Chain instances for a specific account.
+// Enables you to programmatically list all Amazon Web Services Supply Chain
+// instances based on their account ID, instance name, and state of the instance
+// (active or delete).
 func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, optFns ...func(*Options)) (*ListInstancesOutput, error) {
 	if params == nil {
 		params = &ListInstancesInput{}

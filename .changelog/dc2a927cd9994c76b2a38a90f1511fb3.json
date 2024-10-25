@@ -1,0 +1,8 @@
+{
+    "id": "dc2a927c-d999-4c76-b2a3-8a90f1511fb3",
+    "type": "feature",
+    "description": "AWS CodeBuild now supports automatically retrying failed builds",
+    "modules": [
+        "service/codebuild"
+    ]
+}

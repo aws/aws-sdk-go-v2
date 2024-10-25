@@ -4303,6 +4303,11 @@ func awsRestjson1_deserializeOpDocumentGetFunctionOutput(v **GetFunctionOutput, 
 				return err
 			}
 
+		case "TagsError":
+			if err := awsRestjson1_deserializeDocumentTagsError(&sv.TagsError, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21202,6 +21207,55 @@ func awsRestjson1_deserializeDocumentTags(v *map[string]string, value interface{
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTagsError(v **types.TagsError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TagsError
+	if *v == nil {
+		sv = &types.TagsError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagsErrorCode to be of type string, got %T instead", value)
+				}
+				sv.ErrorCode = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TagsErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

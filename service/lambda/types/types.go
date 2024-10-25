@@ -1268,6 +1268,22 @@ type SourceAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains details about an error related to retrieving tags.
+type TagsError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // The function's [X-Ray] tracing configuration. To sample and record incoming requests,
 // set Mode to Active .
 //

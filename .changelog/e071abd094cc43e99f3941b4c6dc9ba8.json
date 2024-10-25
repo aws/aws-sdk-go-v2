@@ -1,0 +1,8 @@
+{
+    "id": "e071abd0-94cc-43e9-9f39-41b4c6dc9ba8",
+    "type": "feature",
+    "description": "Add TagsError field in Lambda GetFunctionResponse. The TagsError field contains details related to errors retrieving tags.",
+    "modules": [
+        "service/lambda"
+    ]
+}

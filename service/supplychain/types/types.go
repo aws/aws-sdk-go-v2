@@ -342,6 +342,12 @@ type Instance struct {
 	// The instance creation timestamp.
 	CreatedTime *time.Time
 
+	// The Amazon Web Services Supply Chain instance error message. If the instance
+	// results in an unhealthy state, customers need to check the error message, delete
+	// the current instance, and recreate a new one based on the mitigation from the
+	// error message.
+	ErrorMessage *string
+
 	// The Amazon Web Services Supply Chain instance description.
 	InstanceDescription *string
 

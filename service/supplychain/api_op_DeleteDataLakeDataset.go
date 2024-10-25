@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a data lake dataset.
+// Enables you to programmatically delete an Amazon Web Services Supply Chain data
+// lake dataset. Developers can delete the existing datasets for a given instance
+// ID, namespace, and instance name.
 func (c *Client) DeleteDataLakeDataset(ctx context.Context, params *DeleteDataLakeDatasetInput, optFns ...func(*Options)) (*DeleteDataLakeDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDataLakeDatasetInput{}

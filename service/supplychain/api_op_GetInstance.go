@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the AWS Supply Chain instance details.
+// Enables you to programmatically retrieve the information related to an Amazon
+// Web Services Supply Chain instance ID.
 func (c *Client) GetInstance(ctx context.Context, params *GetInstanceInput, optFns ...func(*Options)) (*GetInstanceOutput, error) {
 	if params == nil {
 		params = &GetInstanceInput{}
