@@ -2617,7 +2617,7 @@
                 "foundationModel": {
                     "target": "com.amazonaws.bedrockagent#ModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the foundation model to be used for orchestration by the agent you create.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the model that you want to be used for orchestration by the agent you create.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "description": {
@@ -5349,8 +5349,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a condition in the condition node.</p>",
-                "smithy.api#sensitive": {}
+                "smithy.api#documentation": "<p>Defines a condition in the condition node.</p>"
             }
         },
         "com.amazonaws.bedrockagent#FlowConditionExpression": {
@@ -5393,8 +5392,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
-                },
-                "smithy.api#sensitive": {}
+                }
             }
         },
         "com.amazonaws.bedrockagent#FlowConnection": {
@@ -5532,7 +5530,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The definition of the nodes and connections between nodes in the flow.</p>"
+                "smithy.api#documentation": "<p>The definition of the nodes and connections between nodes in the flow.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagent#FlowDescription": {
@@ -5912,8 +5911,7 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 20
-                },
-                "smithy.api#sensitive": {}
+                }
             }
         },
         "com.amazonaws.bedrockagent#FlowResource": {
@@ -8141,11 +8139,12 @@
         "com.amazonaws.bedrockagent#KnowledgeBaseModelIdentifier": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a jumpstart model or imported model, or a provisioned throughput ARN for custom models.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(model-gateway|inference-profile)/[a-zA-Z0-9-:.]+)|([a-zA-Z0-9-:.]+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)|([a-zA-Z0-9-:.]+)$"
             }
         },
         "com.amazonaws.bedrockagent#KnowledgeBaseResource": {
@@ -9663,11 +9662,12 @@
         "com.amazonaws.bedrockagent#ModelIdentifier": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a jumpstart model or imported model, or a provisioned throughput ARN for custom models.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]{1,12})?:(bedrock|sagemaker):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$"
             }
         },
         "com.amazonaws.bedrockagent#MongoDbAtlasCollectionName": {
@@ -10439,6 +10439,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains inference configurations for the prompt.</p>"
                     }
+                },
+                "additionalModelRequestFields": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains model-specific inference configurations that aren't in the <code>inferenceConfiguration</code> field. To see model-specific inference parameters, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference request parameters and response fields for foundation models</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10598,11 +10604,12 @@
         "com.amazonaws.bedrockagent#PromptModelIdentifier": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a jumpstart model or imported model, or a provisioned throughput ARN for custom models.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(model-gateway|inference-profile)/[a-zA-Z0-9-:.]+)|([a-zA-Z0-9-:.]+)$"
+                "smithy.api#pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)|([a-zA-Z0-9-:.]+)$"
             }
         },
         "com.amazonaws.bedrockagent#PromptModelInferenceConfiguration": {
@@ -10876,6 +10883,12 @@
                     "target": "com.amazonaws.bedrockagent#PromptMetadataList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects, each containing a key-value pair that defines a metadata tag and value to attach to a prompt variant. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-create.html\">Create a prompt using Prompt management</a>.</p>"
+                    }
+                },
+                "additionalModelRequestFields": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains model-specific inference configurations that aren't in the <code>inferenceConfiguration</code> field. To see model-specific inference parameters, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference request parameters and response fields for foundation models</a>.</p>"
                     }
                 }
             },
@@ -12728,7 +12741,7 @@
                     "target": "com.amazonaws.bedrockagent#ModelIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Specifies a new foundation model to be used for orchestration by the agent.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the model that you want to be used for orchestration by the agent you create.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model or throughput that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for cross-region inference</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use an <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html\">imported model</a>, specify the ARN of the imported model. You can get the model ARN from a successful call to <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html\">CreateModelImportJob</a> or from the Imported models page in the Amazon Bedrock console.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

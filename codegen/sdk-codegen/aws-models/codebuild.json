@@ -133,6 +133,38 @@
                 }
             }
         },
+        "com.amazonaws.codebuild#AutoRetryConfig": {
+            "type": "structure",
+            "members": {
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n            auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n            retry your build for up to 2 additional times.</p>"
+                    }
+                },
+                "autoRetryNumber": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times that the build has been retried. The initial build will have an auto-retry number of 0.</p>"
+                    }
+                },
+                "nextAutoRetry": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The build ARN of the auto-retried build triggered by the current build. The next auto-retry \n            will be <code>null</code> for builds that don't trigger an auto-retry.</p>"
+                    }
+                },
+                "previousAutoRetry": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The build ARN of the build that triggered the current auto-retry build. The previous auto-retry will be \n            <code>null</code> for the initial build.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the auto-retry configuration for the build.</p>"
+            }
+        },
         "com.amazonaws.codebuild#BatchDeleteBuilds": {
             "type": "operation",
             "input": {
@@ -760,6 +792,12 @@
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the batch build that this build is a member of, if applicable.</p>"
+                    }
+                },
+                "autoRetryConfig": {
+                    "target": "com.amazonaws.codebuild#AutoRetryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the auto-retry configuration for the build.</p>"
                     }
                 }
             },
@@ -3100,6 +3138,12 @@
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>"
+                    }
+                },
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n      auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n      retry your build for up to 2 additional times.</p>"
                     }
                 }
             },
@@ -6175,6 +6219,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for\n      the project's builds.</p>"
                     }
+                },
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n      auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n      retry your build for up to 2 additional times.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8297,6 +8347,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A ProjectFleet object specified for this build that overrides the one defined in the\n            build project.</p>"
                     }
+                },
+                "autoRetryLimitOverride": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n            auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n            retry your build for up to 2 additional times.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8903,6 +8959,12 @@
                     "target": "com.amazonaws.codebuild#WrapperInt",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>\n         <p>To remove this limit, set this value to -1.</p>"
+                    }
+                },
+                "autoRetryLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of additional automatic retries after a failed build. For example, if the \n      auto-retry limit is set to 2, CodeBuild will call the <code>RetryBuild</code> API to automatically \n      retry your build for up to 2 additional times.</p>"
                     }
                 }
             },

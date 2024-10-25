@@ -5926,7 +5926,13 @@
                 "Tags": {
                     "target": "com.amazonaws.lambda#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a>.</p>"
+                        "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/tagging.html\">tags</a>. Lambda\n      returns tag data only if you have explicit allow permissions for <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/lambda/latest/api/API_ListTags.html\">lambda:ListTags</a>.</p>"
+                    }
+                },
+                "TagsError": {
+                    "target": "com.amazonaws.lambda#TagsError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about an error related to retrieving tags.</p>"
                     }
                 },
                 "Concurrency": {
@@ -11979,6 +11985,48 @@
             },
             "value": {
                 "target": "com.amazonaws.lambda#TagValue"
+            }
+        },
+        "com.amazonaws.lambda#TagsError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.lambda#TagsErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#TagsErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about an error related to retrieving tags.</p>"
+            }
+        },
+        "com.amazonaws.lambda#TagsErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^[A-Za-z]+Exception$"
+            }
+        },
+        "com.amazonaws.lambda#TagsErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 84,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^.*$"
             }
         },
         "com.amazonaws.lambda#ThrottleReason": {
