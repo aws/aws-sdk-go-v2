@@ -1,0 +1,8 @@
+{
+    "id": "5702f383-099a-47a5-860f-5ab25cda67a1",
+    "type": "bugfix",
+    "description": "Update presign post URL resolution to use the exact result from EndpointResolverV2",
+    "modules": [
+        "service/s3"
+    ]
+}
