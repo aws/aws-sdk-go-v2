@@ -19,6 +19,8 @@ import (
 //
 // Invoke this operation to poll for a streaming session state while creating or
 // deleting a session.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetStreamingSession(ctx context.Context, params *GetStreamingSessionInput, optFns ...func(*Options)) (*GetStreamingSessionOutput, error) {
 	if params == nil {
 		params = &GetStreamingSessionInput{}
@@ -39,11 +41,15 @@ type GetStreamingSessionInput struct {
 	// The streaming session ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -52,6 +58,8 @@ type GetStreamingSessionInput struct {
 type GetStreamingSessionOutput struct {
 
 	// The session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Session *types.StreamingSession
 
 	// Metadata pertaining to the operation's result.

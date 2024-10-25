@@ -10,4 +10,6 @@
 // Nimble Studio is a virtual studio that empowers visual effects, animation, and
 // interactive content teams to create content securely within a scalable, private
 // cloud service.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 package nimble

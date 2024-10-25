@@ -12,6 +12,8 @@ import (
 )
 
 // Deletes a studio component resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteStudioComponent(ctx context.Context, params *DeleteStudioComponentInput, optFns ...func(*Options)) (*DeleteStudioComponentOutput, error) {
 	if params == nil {
 		params = &DeleteStudioComponentInput{}
@@ -32,17 +34,23 @@ type DeleteStudioComponentInput struct {
 	// The studio component ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,6 +59,8 @@ type DeleteStudioComponentInput struct {
 type DeleteStudioComponentOutput struct {
 
 	// Information about the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponent *types.StudioComponent
 
 	// Metadata pertaining to the operation's result.

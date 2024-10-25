@@ -12,6 +12,8 @@ import (
 )
 
 // Create a launch profile.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateLaunchProfile(ctx context.Context, params *CreateLaunchProfileInput, optFns ...func(*Options)) (*CreateLaunchProfileOutput, error) {
 	if params == nil {
 		params = &CreateLaunchProfileInput{}
@@ -33,46 +35,64 @@ type CreateLaunchProfileInput struct {
 	// accessible from. These subnets must support the specified instance types.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2SubnetIds []string
 
 	// The version number of the protocol that is used by the launch profile. The only
 	// valid version is "2021-03-31".
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileProtocolVersions []string
 
 	// The name for the launch profile.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A configuration for a streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamConfiguration *types.StreamConfigurationCreate
 
 	// Unique identifiers for a collection of studio components that can be used with
 	// this launch profile.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentIds []string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -81,6 +101,8 @@ type CreateLaunchProfileInput struct {
 type CreateLaunchProfileOutput struct {
 
 	// The launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfile *types.LaunchProfile
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // Lists the backups of a streaming session in a studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListStreamingSessionBackups(ctx context.Context, params *ListStreamingSessionBackupsInput, optFns ...func(*Options)) (*ListStreamingSessionBackupsOutput, error) {
 	if params == nil {
 		params = &ListStreamingSessionBackupsInput{}
@@ -32,12 +34,18 @@ type ListStreamingSessionBackupsInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The user ID of the user that owns the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnedBy *string
 
 	noSmithyDocumentSerde
@@ -46,9 +54,13 @@ type ListStreamingSessionBackupsInput struct {
 type ListStreamingSessionBackupsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Information about the streaming session backups.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingSessionBackups []types.StreamingSessionBackup
 
 	// Metadata pertaining to the operation's result.

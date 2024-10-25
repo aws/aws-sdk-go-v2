@@ -14,6 +14,8 @@ import (
 // Transitions sessions from the READY state into the STOPPED state. The
 // STOP_IN_PROGRESS state is the intermediate state between the READY and STOPPED
 // states.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StopStreamingSession(ctx context.Context, params *StopStreamingSessionInput, optFns ...func(*Options)) (*StopStreamingSessionOutput, error) {
 	if params == nil {
 		params = &StopStreamingSessionInput{}
@@ -34,21 +36,29 @@ type StopStreamingSessionInput struct {
 	// The streaming session ID for the StopStreamingSessionRequest .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// The studioId for the StopStreamingSessionRequest.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// Adds additional instructions to a streaming session stop action to either
 	// retain the EBS volumes or delete the EBS volumes.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeRetentionMode types.VolumeRetentionMode
 
 	noSmithyDocumentSerde
@@ -58,6 +68,8 @@ type StopStreamingSessionOutput struct {
 
 	// A streaming session is a virtual workstation created using a particular launch
 	// profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Session *types.StreamingSession
 
 	// Metadata pertaining to the operation's result.

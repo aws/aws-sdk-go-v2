@@ -16,6 +16,8 @@ import (
 )
 
 // Get a studio resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetStudio(ctx context.Context, params *GetStudioInput, optFns ...func(*Options)) (*GetStudioOutput, error) {
 	if params == nil {
 		params = &GetStudioInput{}
@@ -36,6 +38,8 @@ type GetStudioInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -46,6 +50,8 @@ type GetStudioOutput struct {
 	// Information about a studio.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Studio *types.Studio
 
 	// Metadata pertaining to the operation's result.

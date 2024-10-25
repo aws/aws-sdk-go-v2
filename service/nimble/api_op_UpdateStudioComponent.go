@@ -12,6 +12,8 @@ import (
 )
 
 // Updates a studio component resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateStudioComponent(ctx context.Context, params *UpdateStudioComponentInput, optFns ...func(*Options)) (*UpdateStudioComponentOutput, error) {
 	if params == nil {
 		params = &UpdateStudioComponentInput{}
@@ -32,51 +34,77 @@ type UpdateStudioComponentInput struct {
 	// The studio component ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The configuration of the studio component, based on component type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Configuration *types.StudioComponentConfiguration
 
 	// The description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The EC2 security groups that control access to the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2SecurityGroupIds []string
 
 	// Initialization scripts for studio components.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationScripts []types.StudioComponentInitializationScript
 
 	// The name for the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// An IAM role attached to a Studio Component that gives the studio component
 	// access to Amazon Web Services resources at anytime while the instance is
 	// running.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeRoleArn *string
 
 	// Parameters for the studio component scripts.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptParameters []types.ScriptParameterKeyValue
 
 	// An IAM role attached to Studio Component when the system initialization script
 	// runs which give the studio component access to Amazon Web Services resources
 	// when the system initialization script runs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecureInitializationRoleArn *string
 
 	// The specific subtype of a studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subtype types.StudioComponentSubtype
 
 	// The type of the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type types.StudioComponentType
 
 	noSmithyDocumentSerde
@@ -85,6 +113,8 @@ type UpdateStudioComponentInput struct {
 type UpdateStudioComponentOutput struct {
 
 	// Information about the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponent *types.StudioComponent
 
 	// Metadata pertaining to the operation's result.

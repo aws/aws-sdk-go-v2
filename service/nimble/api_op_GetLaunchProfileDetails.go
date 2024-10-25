@@ -16,6 +16,8 @@ import (
 // This includes the name and description of all studio components used by the
 // launch profiles, and the name and description of streaming images that can be
 // used with this launch profile.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetLaunchProfileDetails(ctx context.Context, params *GetLaunchProfileDetailsInput, optFns ...func(*Options)) (*GetLaunchProfileDetailsOutput, error) {
 	if params == nil {
 		params = &GetLaunchProfileDetailsInput{}
@@ -36,11 +38,15 @@ type GetLaunchProfileDetailsInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -49,12 +55,18 @@ type GetLaunchProfileDetailsInput struct {
 type GetLaunchProfileDetailsOutput struct {
 
 	// The launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfile *types.LaunchProfile
 
 	// A collection of streaming images.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImages []types.StreamingImage
 
 	// A collection of studio component summaries.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentSummaries []types.StudioComponentSummary
 
 	// Metadata pertaining to the operation's result.

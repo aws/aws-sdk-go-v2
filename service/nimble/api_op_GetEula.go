@@ -12,6 +12,8 @@ import (
 )
 
 // Get EULA.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetEula(ctx context.Context, params *GetEulaInput, optFns ...func(*Options)) (*GetEulaOutput, error) {
 	if params == nil {
 		params = &GetEulaInput{}
@@ -32,6 +34,8 @@ type GetEulaInput struct {
 	// The EULA ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaId *string
 
 	noSmithyDocumentSerde
@@ -40,6 +44,8 @@ type GetEulaInput struct {
 type GetEulaOutput struct {
 
 	// The EULA.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Eula *types.Eula
 
 	// Metadata pertaining to the operation's result.

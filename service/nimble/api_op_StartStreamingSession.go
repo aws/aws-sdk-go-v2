@@ -14,6 +14,8 @@ import (
 // Transitions sessions from the STOPPED state into the READY state. The
 // START_IN_PROGRESS state is the intermediate state between the STOPPED and READY
 // states.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartStreamingSession(ctx context.Context, params *StartStreamingSessionInput, optFns ...func(*Options)) (*StartStreamingSessionOutput, error) {
 	if params == nil {
 		params = &StartStreamingSessionInput{}
@@ -34,20 +36,28 @@ type StartStreamingSessionInput struct {
 	// The streaming session ID for the StartStreamingSessionRequest .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// The studio ID for the StartStreamingSessionRequest.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The ID of the backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -57,6 +67,8 @@ type StartStreamingSessionOutput struct {
 
 	// A streaming session is a virtual workstation created using a particular launch
 	// profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Session *types.StreamingSession
 
 	// Metadata pertaining to the operation's result.

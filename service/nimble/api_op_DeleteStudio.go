@@ -12,6 +12,8 @@ import (
 )
 
 // Delete a studio resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteStudio(ctx context.Context, params *DeleteStudioInput, optFns ...func(*Options)) (*DeleteStudioOutput, error) {
 	if params == nil {
 		params = &DeleteStudioInput{}
@@ -32,12 +34,16 @@ type DeleteStudioInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -48,6 +54,8 @@ type DeleteStudioOutput struct {
 	// Information about a studio.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Studio *types.Studio
 
 	// Metadata pertaining to the operation's result.

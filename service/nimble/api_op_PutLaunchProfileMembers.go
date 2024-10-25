@@ -12,6 +12,8 @@ import (
 )
 
 // Add/update users with given persona to launch profile membership.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) PutLaunchProfileMembers(ctx context.Context, params *PutLaunchProfileMembersInput, optFns ...func(*Options)) (*PutLaunchProfileMembersOutput, error) {
 	if params == nil {
 		params = &PutLaunchProfileMembersInput{}
@@ -32,27 +34,37 @@ type PutLaunchProfileMembersInput struct {
 	// The ID of the identity store.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IdentityStoreId *string
 
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// A list of members.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Members []types.NewLaunchProfileMember
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -12,6 +12,8 @@ import (
 )
 
 // Get a launch profile initialization.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetLaunchProfileInitialization(ctx context.Context, params *GetLaunchProfileInitializationInput, optFns ...func(*Options)) (*GetLaunchProfileInitializationOutput, error) {
 	if params == nil {
 		params = &GetLaunchProfileInitializationInput{}
@@ -32,26 +34,36 @@ type GetLaunchProfileInitializationInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The launch profile protocol versions supported by the client.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileProtocolVersions []string
 
 	// The launch purpose.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchPurpose *string
 
 	// The platform where this Launch Profile will be used, either Windows or Linux.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Platform *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -60,6 +72,8 @@ type GetLaunchProfileInitializationInput struct {
 type GetLaunchProfileInitializationOutput struct {
 
 	// The launch profile initialization.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileInitialization *types.LaunchProfileInitialization
 
 	// Metadata pertaining to the operation's result.

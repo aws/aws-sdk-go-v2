@@ -16,6 +16,8 @@ import (
 )
 
 // Get streaming image.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetStreamingImage(ctx context.Context, params *GetStreamingImageInput, optFns ...func(*Options)) (*GetStreamingImageOutput, error) {
 	if params == nil {
 		params = &GetStreamingImageInput{}
@@ -36,11 +38,15 @@ type GetStreamingImageInput struct {
 	// The streaming image ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -49,6 +55,8 @@ type GetStreamingImageInput struct {
 type GetStreamingImageOutput struct {
 
 	// The streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImage *types.StreamingImage
 
 	// Metadata pertaining to the operation's result.

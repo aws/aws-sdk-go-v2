@@ -12,6 +12,8 @@ import (
 )
 
 // List EULAs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListEulas(ctx context.Context, params *ListEulasInput, optFns ...func(*Options)) (*ListEulasOutput, error) {
 	if params == nil {
 		params = &ListEulasInput{}
@@ -30,9 +32,13 @@ func (c *Client) ListEulas(ctx context.Context, params *ListEulasInput, optFns .
 type ListEulasInput struct {
 
 	// The list of EULA IDs that should be returned
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaIds []string
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,9 +47,13 @@ type ListEulasInput struct {
 type ListEulasOutput struct {
 
 	// A collection of EULA resources.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Eulas []types.Eula
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

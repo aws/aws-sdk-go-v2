@@ -22,6 +22,8 @@ import (
 //
 // After the IAM Identity Center application is repaired, you must use the Amazon
 // Nimble Studio console to add administrators and users to your studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) StartStudioSSOConfigurationRepair(ctx context.Context, params *StartStudioSSOConfigurationRepairInput, optFns ...func(*Options)) (*StartStudioSSOConfigurationRepairOutput, error) {
 	if params == nil {
 		params = &StartStudioSSOConfigurationRepairInput{}
@@ -42,12 +44,16 @@ type StartStudioSSOConfigurationRepairInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -58,6 +64,8 @@ type StartStudioSSOConfigurationRepairOutput struct {
 	// Information about a studio.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Studio *types.Studio
 
 	// Metadata pertaining to the operation's result.

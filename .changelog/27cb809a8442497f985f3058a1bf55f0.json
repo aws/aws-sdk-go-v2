@@ -1,0 +1,8 @@
+{
+    "id": "27cb809a-8442-497f-985f-3058a1bf55f0",
+    "type": "feature",
+    "description": "Mark service/nimble as deprecated. This service is no longer available for use. See https://aws.amazon.com/nimble-studio/faqs/.",
+    "modules": [
+        "service/nimble"
+    ]
+}

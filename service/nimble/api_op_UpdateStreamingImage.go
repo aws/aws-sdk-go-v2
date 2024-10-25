@@ -12,6 +12,8 @@ import (
 )
 
 // Update streaming image.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateStreamingImage(ctx context.Context, params *UpdateStreamingImageInput, optFns ...func(*Options)) (*UpdateStreamingImageOutput, error) {
 	if params == nil {
 		params = &UpdateStreamingImageInput{}
@@ -32,23 +34,33 @@ type UpdateStreamingImageInput struct {
 	// The streaming image ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The name for the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -67,6 +79,8 @@ type UpdateStreamingImageOutput struct {
 	// You can create your own streaming images using an Amazon EC2 machine image that
 	// you create for this purpose. You can also include software that your users
 	// require.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImage *types.StreamingImage
 
 	// Metadata pertaining to the operation's result.

@@ -15,6 +15,8 @@ import (
 //
 // This list will contain both images provided by Amazon Web Services, as well as
 // streaming images that you have created in your studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListStreamingImages(ctx context.Context, params *ListStreamingImagesInput, optFns ...func(*Options)) (*ListStreamingImagesOutput, error) {
 	if params == nil {
 		params = &ListStreamingImagesInput{}
@@ -35,12 +37,18 @@ type ListStreamingImagesInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Filter this request to streaming images with the given owner
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Owner *string
 
 	noSmithyDocumentSerde
@@ -49,9 +57,13 @@ type ListStreamingImagesInput struct {
 type ListStreamingImagesOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A collection of streaming images.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImages []types.StreamingImage
 
 	// Metadata pertaining to the operation's result.
