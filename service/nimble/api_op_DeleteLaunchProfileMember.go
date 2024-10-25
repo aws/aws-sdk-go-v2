@@ -11,6 +11,8 @@ import (
 )
 
 // Delete a user from launch profile membership.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteLaunchProfileMember(ctx context.Context, params *DeleteLaunchProfileMemberInput, optFns ...func(*Options)) (*DeleteLaunchProfileMemberOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchProfileMemberInput{}
@@ -31,22 +33,30 @@ type DeleteLaunchProfileMemberInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The principal ID. This currently supports a IAM Identity Center UserId.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde

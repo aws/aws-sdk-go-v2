@@ -12,6 +12,8 @@ import (
 )
 
 // Get all users in a given launch profile membership.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListLaunchProfileMembers(ctx context.Context, params *ListLaunchProfileMembersInput, optFns ...func(*Options)) (*ListLaunchProfileMembersOutput, error) {
 	if params == nil {
 		params = &ListLaunchProfileMembersInput{}
@@ -32,17 +34,25 @@ type ListLaunchProfileMembersInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The max number of results to return in the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,9 +61,13 @@ type ListLaunchProfileMembersInput struct {
 type ListLaunchProfileMembersOutput struct {
 
 	// A list of members.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Members []types.LaunchProfileMembership
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

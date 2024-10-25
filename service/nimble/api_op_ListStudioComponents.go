@@ -12,6 +12,8 @@ import (
 )
 
 // Lists the StudioComponents in a studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListStudioComponents(ctx context.Context, params *ListStudioComponentsInput, optFns ...func(*Options)) (*ListStudioComponentsOutput, error) {
 	if params == nil {
 		params = &ListStudioComponentsInput{}
@@ -32,18 +34,28 @@ type ListStudioComponentsInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The max number of results to return in the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Filters the request to studio components that are in one of the given states.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	States []types.StudioComponentState
 
 	// Filters the request to studio components that are of one of the given types.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Types []types.StudioComponentType
 
 	noSmithyDocumentSerde
@@ -52,9 +64,13 @@ type ListStudioComponentsInput struct {
 type ListStudioComponentsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A collection of studio components.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponents []types.StudioComponent
 
 	// Metadata pertaining to the operation's result.

@@ -12,6 +12,8 @@ import (
 )
 
 // List all the launch profiles a studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListLaunchProfiles(ctx context.Context, params *ListLaunchProfilesInput, optFns ...func(*Options)) (*ListLaunchProfilesOutput, error) {
 	if params == nil {
 		params = &ListLaunchProfilesInput{}
@@ -32,18 +34,28 @@ type ListLaunchProfilesInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The max number of results to return in the response.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// The principal ID. This currently supports a IAM Identity Center UserId.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	// Filter this request to launch profiles in any of the given states.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	States []types.LaunchProfileState
 
 	noSmithyDocumentSerde
@@ -52,9 +64,13 @@ type ListLaunchProfilesInput struct {
 type ListLaunchProfilesOutput struct {
 
 	// A collection of launch profiles.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfiles []types.LaunchProfile
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

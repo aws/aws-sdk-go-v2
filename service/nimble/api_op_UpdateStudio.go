@@ -14,6 +14,8 @@ import (
 // Update a Studio resource.
 //
 // Currently, this operation only supports updating the displayName of your studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateStudio(ctx context.Context, params *UpdateStudioInput, optFns ...func(*Options)) (*UpdateStudioOutput, error) {
 	if params == nil {
 		params = &UpdateStudioInput{}
@@ -34,23 +36,33 @@ type UpdateStudioInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The IAM role that Studio Admins will assume when logging in to the Nimble
 	// Studio portal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AdminRoleArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A friendly name for the studio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisplayName *string
 
 	// The IAM role that Studio Users will assume when logging in to the Nimble Studio
 	// portal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserRoleArn *string
 
 	noSmithyDocumentSerde
@@ -61,6 +73,8 @@ type UpdateStudioOutput struct {
 	// Information about a studio.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Studio *types.Studio
 
 	// Metadata pertaining to the operation's result.

@@ -15,6 +15,8 @@ import (
 //
 // Invoke this operation to poll for a streaming session backup while stopping a
 // streaming session.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetStreamingSessionBackup(ctx context.Context, params *GetStreamingSessionBackupInput, optFns ...func(*Options)) (*GetStreamingSessionBackupOutput, error) {
 	if params == nil {
 		params = &GetStreamingSessionBackupInput{}
@@ -35,11 +37,15 @@ type GetStreamingSessionBackupInput struct {
 	// The ID of the backup.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -48,6 +54,8 @@ type GetStreamingSessionBackupInput struct {
 type GetStreamingSessionBackupOutput struct {
 
 	// Information about the streaming session backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingSessionBackup *types.StreamingSessionBackup
 
 	// Metadata pertaining to the operation's result.

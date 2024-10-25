@@ -12,6 +12,8 @@ import (
 )
 
 // Lists the streaming sessions in a studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListStreamingSessions(ctx context.Context, params *ListStreamingSessionsInput, optFns ...func(*Options)) (*ListStreamingSessionsOutput, error) {
 	if params == nil {
 		params = &ListStreamingSessionsInput{}
@@ -32,18 +34,28 @@ type ListStreamingSessionsInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Filters the request to streaming sessions created by the given user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedBy *string
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Filters the request to streaming session owned by the given user
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnedBy *string
 
 	// Filters the request to only the provided session IDs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionIds *string
 
 	noSmithyDocumentSerde
@@ -52,9 +64,13 @@ type ListStreamingSessionsInput struct {
 type ListStreamingSessionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// A collection of streaming sessions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sessions []types.StreamingSession
 
 	// Metadata pertaining to the operation's result.

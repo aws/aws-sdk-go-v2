@@ -12,6 +12,8 @@ import (
 )
 
 // List EULA acceptances.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListEulaAcceptances(ctx context.Context, params *ListEulaAcceptancesInput, optFns ...func(*Options)) (*ListEulaAcceptancesOutput, error) {
 	if params == nil {
 		params = &ListEulaAcceptancesInput{}
@@ -32,12 +34,18 @@ type ListEulaAcceptancesInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The list of EULA IDs that have been previously accepted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaIds []string
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,9 +54,13 @@ type ListEulaAcceptancesInput struct {
 type ListEulaAcceptancesOutput struct {
 
 	// A collection of EULA acceptances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaAcceptances []types.EulaAcceptance
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

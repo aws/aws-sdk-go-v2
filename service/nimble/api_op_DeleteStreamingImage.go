@@ -12,6 +12,8 @@ import (
 )
 
 // Delete streaming image.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteStreamingImage(ctx context.Context, params *DeleteStreamingImageInput, optFns ...func(*Options)) (*DeleteStreamingImageOutput, error) {
 	if params == nil {
 		params = &DeleteStreamingImageInput{}
@@ -32,17 +34,23 @@ type DeleteStreamingImageInput struct {
 	// The streaming image ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,6 +59,8 @@ type DeleteStreamingImageInput struct {
 type DeleteStreamingImageOutput struct {
 
 	// The streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImage *types.StreamingImage
 
 	// Metadata pertaining to the operation's result.

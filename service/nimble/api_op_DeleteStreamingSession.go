@@ -18,6 +18,8 @@ import (
 //
 // A streaming session will count against your streaming session quota until it is
 // marked DELETED .
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteStreamingSession(ctx context.Context, params *DeleteStreamingSessionInput, optFns ...func(*Options)) (*DeleteStreamingSessionOutput, error) {
 	if params == nil {
 		params = &DeleteStreamingSessionInput{}
@@ -38,17 +40,23 @@ type DeleteStreamingSessionInput struct {
 	// The streaming session ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -57,6 +65,8 @@ type DeleteStreamingSessionInput struct {
 type DeleteStreamingSessionOutput struct {
 
 	// The session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Session *types.StreamingSession
 
 	// Metadata pertaining to the operation's result.

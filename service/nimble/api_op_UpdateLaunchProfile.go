@@ -12,6 +12,8 @@ import (
 )
 
 // Update a launch profile.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UpdateLaunchProfile(ctx context.Context, params *UpdateLaunchProfileInput, optFns ...func(*Options)) (*UpdateLaunchProfileOutput, error) {
 	if params == nil {
 		params = &UpdateLaunchProfileInput{}
@@ -32,34 +34,50 @@ type UpdateLaunchProfileInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The version number of the protocol that is used by the launch profile. The only
 	// valid version is "2021-03-31".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileProtocolVersions []string
 
 	// The name for the launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// A configuration for a streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamConfiguration *types.StreamConfigurationCreate
 
 	// Unique identifiers for a collection of studio components that can be used with
 	// this launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentIds []string
 
 	noSmithyDocumentSerde
@@ -68,6 +86,8 @@ type UpdateLaunchProfileInput struct {
 type UpdateLaunchProfileOutput struct {
 
 	// The launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfile *types.LaunchProfile
 
 	// Metadata pertaining to the operation's result.

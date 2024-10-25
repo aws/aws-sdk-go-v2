@@ -16,6 +16,8 @@ import (
 )
 
 // Get a launch profile.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetLaunchProfile(ctx context.Context, params *GetLaunchProfileInput, optFns ...func(*Options)) (*GetLaunchProfileOutput, error) {
 	if params == nil {
 		params = &GetLaunchProfileInput{}
@@ -36,11 +38,15 @@ type GetLaunchProfileInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -49,6 +55,8 @@ type GetLaunchProfileInput struct {
 type GetLaunchProfileOutput struct {
 
 	// The launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfile *types.LaunchProfile
 
 	// Metadata pertaining to the operation's result.

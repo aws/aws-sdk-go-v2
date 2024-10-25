@@ -39,6 +39,8 @@ import (
 // portal users.
 //
 // If you delete the studio KMS key, your studio will no longer be accessible.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateStudio(ctx context.Context, params *CreateStudioInput, optFns ...func(*Options)) (*CreateStudioOutput, error) {
 	if params == nil {
 		params = &CreateStudioInput{}
@@ -60,36 +62,50 @@ type CreateStudioInput struct {
 	// Studio portal.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AdminRoleArn *string
 
 	// A friendly name for the studio.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisplayName *string
 
 	// The studio name that is used in the URL of the Nimble Studio portal when
 	// accessed by Nimble Studio users.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioName *string
 
 	// The IAM role that studio users will assume when logging in to the Nimble Studio
 	// portal.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserRoleArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The studio encryption configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioEncryptionConfiguration *types.StudioEncryptionConfiguration
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -98,6 +114,8 @@ type CreateStudioInput struct {
 type CreateStudioOutput struct {
 
 	// Information about a studio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Studio *types.Studio
 
 	// Metadata pertaining to the operation's result.

@@ -13,6 +13,8 @@ import (
 
 // List studios in your Amazon Web Services accounts in the requested Amazon Web
 // Services Region.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optFns ...func(*Options)) (*ListStudiosOutput, error) {
 	if params == nil {
 		params = &ListStudiosInput{}
@@ -31,6 +33,8 @@ func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optF
 type ListStudiosInput struct {
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,9 +45,13 @@ type ListStudiosOutput struct {
 	// A collection of studios.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Studios []types.Studio
 
 	// The token for the next set of results, or null if there are no more results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -16,6 +16,8 @@ import (
 // support tags, including studio, studio component, launch profile, streaming
 // image, and streaming session. All resources that can be tagged will contain an
 // ARN property, so you do not have to create this ARN yourself.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -36,6 +38,8 @@ type ListTagsForResourceInput struct {
 	// The Amazon Resource Name (ARN) of the resource for which you want to list tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -45,6 +49,8 @@ type ListTagsForResourceOutput struct {
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

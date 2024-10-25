@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the tags for a resource.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -31,11 +33,15 @@ type UntagResourceInput struct {
 	// Identifies the Amazon Resource Name(ARN) key from which you are removing tags.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// One or more tag keys. Specify only the tag keys, not the tag values.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TagKeys []string
 
 	noSmithyDocumentSerde

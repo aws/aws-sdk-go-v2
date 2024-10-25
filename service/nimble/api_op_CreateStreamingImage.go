@@ -12,6 +12,8 @@ import (
 )
 
 // Creates a streaming image resource in a studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateStreamingImage(ctx context.Context, params *CreateStreamingImageInput, optFns ...func(*Options)) (*CreateStreamingImageOutput, error) {
 	if params == nil {
 		params = &CreateStreamingImageInput{}
@@ -32,29 +34,41 @@ type CreateStreamingImageInput struct {
 	// The ID of an EC2 machine image with which to create this streaming image.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2ImageId *string
 
 	// A friendly name for a streaming image resource.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// A human-readable description of the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -63,6 +77,8 @@ type CreateStreamingImageInput struct {
 type CreateStreamingImageOutput struct {
 
 	// The streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImage *types.StreamingImage
 
 	// Metadata pertaining to the operation's result.

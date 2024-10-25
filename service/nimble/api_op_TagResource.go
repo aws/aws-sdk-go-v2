@@ -11,6 +11,8 @@ import (
 )
 
 // Creates tags for a resource, given its ARN.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -31,10 +33,14 @@ type TagResourceInput struct {
 	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ResourceArn *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

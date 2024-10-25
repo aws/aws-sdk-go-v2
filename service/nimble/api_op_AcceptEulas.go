@@ -12,6 +12,8 @@ import (
 )
 
 // Accept EULAs.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) AcceptEulas(ctx context.Context, params *AcceptEulasInput, optFns ...func(*Options)) (*AcceptEulasOutput, error) {
 	if params == nil {
 		params = &AcceptEulasInput{}
@@ -32,15 +34,21 @@ type AcceptEulasInput struct {
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The EULA ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaIds []string
 
 	noSmithyDocumentSerde
@@ -49,6 +57,8 @@ type AcceptEulasInput struct {
 type AcceptEulasOutput struct {
 
 	// A collection of EULA acceptances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaAcceptances []types.EulaAcceptance
 
 	// Metadata pertaining to the operation's result.

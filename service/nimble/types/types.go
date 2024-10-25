@@ -12,9 +12,13 @@ import (
 type ActiveDirectoryComputerAttribute struct {
 
 	// The name for the LDAP attribute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The value for the LDAP attribute.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -25,14 +29,20 @@ type ActiveDirectoryComputerAttribute struct {
 type ActiveDirectoryConfiguration struct {
 
 	// A collection of custom attributes for an Active Directory computer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputerAttributes []ActiveDirectoryComputerAttribute
 
 	// The directory ID of the Directory Service for Microsoft Active Directory to
 	// access using this studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DirectoryId *string
 
 	// The distinguished name (DN) and organizational unit (OU) of an Active Directory
 	// computer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrganizationalUnitDistinguishedName *string
 
 	noSmithyDocumentSerde
@@ -43,10 +53,14 @@ type ComputeFarmConfiguration struct {
 
 	// The name of an Active Directory user that is used on ComputeFarm worker
 	// instances.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveDirectoryUser *string
 
 	// The endpoint of the ComputeFarm that is accessed by the studio component
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Endpoint *string
 
 	noSmithyDocumentSerde
@@ -56,18 +70,28 @@ type ComputeFarmConfiguration struct {
 type Eula struct {
 
 	// The EULA content.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Content *string
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The EULA ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaId *string
 
 	// The name for the EULA.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The ISO timestamp in seconds for when the resource was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -77,18 +101,28 @@ type Eula struct {
 type EulaAcceptance struct {
 
 	// The ISO timestamp in seconds for when the EULA was accepted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceptedAt *time.Time
 
 	// The ID of the person who accepted the EULA.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AcceptedBy *string
 
 	// The ID of the acceptee.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AccepteeId *string
 
 	// The EULA acceptance ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaAcceptanceId *string
 
 	// The EULA ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaId *string
 
 	noSmithyDocumentSerde
@@ -107,57 +141,91 @@ type LaunchProfile struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
 	// uniquely identifies it. ARNs are unique across all Regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedBy *string
 
 	// A human-readable description of the launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// Unique identifiers for a collection of EC2 subnets.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2SubnetIds []string
 
 	// The ID of the launch profile used to control access from the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The version number of the protocol that is used by the launch profile. The only
 	// valid version is "2021-03-31".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileProtocolVersions []string
 
 	// A friendly name for the launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The current state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State LaunchProfileState
 
 	// The status code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode LaunchProfileStatusCode
 
 	// The status message for the launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// A configuration for a streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamConfiguration *StreamConfiguration
 
 	// Unique identifiers for a collection of studio components that can be used with
 	// this launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentIds []string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The ISO timestamp in seconds for when the resource was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedBy *string
 
 	// The list of the latest validation results.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ValidationResults []ValidationResult
 
 	noSmithyDocumentSerde
@@ -171,31 +239,49 @@ type LaunchProfile struct {
 type LaunchProfileInitialization struct {
 
 	// A LaunchProfileInitializationActiveDirectory resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveDirectory *LaunchProfileInitializationActiveDirectory
 
 	// The EC2 security groups that control access to the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2SecurityGroupIds []string
 
 	// The ID of the launch profile used to control access from the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The version number of the protocol that is used by the launch profile. The only
 	// valid version is "2021-03-31".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileProtocolVersion *string
 
 	// The launch purpose.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchPurpose *string
 
 	// The name for the launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The platform of the launch platform, either Windows or Linux.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Platform LaunchProfilePlatform
 
 	// The system initializtion scripts.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SystemInitializationScripts []LaunchProfileInitializationScript
 
 	// The user initializtion scripts.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserInitializationScripts []LaunchProfileInitializationScript
 
 	noSmithyDocumentSerde
@@ -206,25 +292,39 @@ type LaunchProfileInitialization struct {
 type LaunchProfileInitializationActiveDirectory struct {
 
 	// A collection of custom attributes for an Active Directory computer.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputerAttributes []ActiveDirectoryComputerAttribute
 
 	// The directory ID of the Directory Service for Microsoft Active Directory to
 	// access using this launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DirectoryId *string
 
 	// The directory name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DirectoryName *string
 
 	// The DNS IP address.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DnsIpAddresses []string
 
 	// The name for the organizational unit distinguished name.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OrganizationalUnitDistinguishedName *string
 
 	// The unique identifier for a studio component resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentId *string
 
 	// The name for the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentName *string
 
 	noSmithyDocumentSerde
@@ -237,20 +337,30 @@ type LaunchProfileInitializationScript struct {
 	// An IAM role attached to a Studio Component that gives the studio component
 	// access to Amazon Web Services resources at anytime while the instance is
 	// running.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeRoleArn *string
 
 	// The initialization script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Script *string
 
 	// An IAM role attached to Studio Component when the system initialization script
 	// runs which give the studio component access to Amazon Web Services resources
 	// when the system initialization script runs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecureInitializationRoleArn *string
 
 	// The unique identifier for a studio component resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentId *string
 
 	// The name for the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentName *string
 
 	noSmithyDocumentSerde
@@ -278,15 +388,23 @@ type LaunchProfileInitializationScript struct {
 type LaunchProfileMembership struct {
 
 	// The ID of the identity store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IdentityStoreId *string
 
 	// The persona.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Persona LaunchProfilePersona
 
 	// The principal ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	// The Active Directory Security Identifier for this user, if available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sid *string
 
 	noSmithyDocumentSerde
@@ -298,6 +416,8 @@ type LicenseServiceConfiguration struct {
 
 	// The endpoint of the license service that is accessed by the studio component
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Endpoint *string
 
 	noSmithyDocumentSerde
@@ -309,11 +429,15 @@ type NewLaunchProfileMember struct {
 	// The persona.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Persona LaunchProfilePersona
 
 	// The principal ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	noSmithyDocumentSerde
@@ -325,11 +449,15 @@ type NewStudioMember struct {
 	// The persona.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Persona StudioPersona
 
 	// The principal ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	noSmithyDocumentSerde
@@ -339,9 +467,13 @@ type NewStudioMember struct {
 type ScriptParameterKeyValue struct {
 
 	// A script parameter key.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Key *string
 
 	// A script parameter value.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -353,18 +485,28 @@ type SharedFileSystemConfiguration struct {
 
 	// The endpoint of the shared file system that is accessed by the studio component
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Endpoint *string
 
 	// The unique identifier for a file system.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	FileSystemId *string
 
 	// The mount location for a shared file system on a Linux virtual workstation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LinuxMountPoint *string
 
 	// The name of the file share.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ShareName *string
 
 	// The mount location for a shared file system on a Windows virtual workstation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	WindowsMountDrive *string
 
 	noSmithyDocumentSerde
@@ -377,18 +519,24 @@ type StreamConfiguration struct {
 	// the streaming session and streaming client.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClipboardMode StreamingClipboardMode
 
 	// The EC2 instance types that users can select from when launching a streaming
 	// session with this launch profile.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2InstanceTypes []StreamingInstanceType
 
 	// The streaming images that users can select from when launching a streaming
 	// session with this launch profile.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageIds []string
 
 	// Indicates if a streaming session created from this launch profile should be
@@ -404,12 +552,16 @@ type StreamConfiguration struct {
 	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED . When
 	// allowed, the default value for this parameter is DEACTIVATED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutomaticTerminationMode AutomaticTerminationMode
 
 	// The length of time, in minutes, that a streaming session can be active before
 	// it is stopped or terminated. After this point, Nimble Studio automatically
 	// terminates or stops the session. The default length of time is 690 minutes, and
 	// the maximum length of time is 30 days.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxSessionLengthInMinutes *int32
 
 	// Integer that determines if you can start and stop your sessions and how long a
@@ -428,23 +580,33 @@ type StreamConfiguration struct {
 	// call StopStreamingSession to stop sessions in the READY state. If the time that
 	// a session stays in the READY state exceeds the maxSessionLengthInMinutes value,
 	// the session will automatically be stopped (instead of terminated).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxStoppedSessionLengthInMinutes int32
 
 	// Information about the streaming session backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionBackup *StreamConfigurationSessionBackup
 
 	// Determine if a streaming session created from this launch profile can configure
 	// persistent storage. This means that volumeConfiguration and
 	// automaticTerminationMode are configured.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionPersistenceMode SessionPersistenceMode
 
 	// The upload storage for a streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionStorage *StreamConfigurationSessionStorage
 
 	// Custom volume configuration for the root volumes that are attached to streaming
 	// sessions.
 	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeConfiguration *VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -457,18 +619,24 @@ type StreamConfigurationCreate struct {
 	// the streaming session and streaming client.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClipboardMode StreamingClipboardMode
 
 	// The EC2 instance types that users can select from when launching a streaming
 	// session with this launch profile.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2InstanceTypes []StreamingInstanceType
 
 	// The streaming images that users can select from when launching a streaming
 	// session with this launch profile.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageIds []string
 
 	// Indicates if a streaming session created from this launch profile should be
@@ -484,12 +652,16 @@ type StreamConfigurationCreate struct {
 	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED . When
 	// allowed, the default value for this parameter is DEACTIVATED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutomaticTerminationMode AutomaticTerminationMode
 
 	// The length of time, in minutes, that a streaming session can be active before
 	// it is stopped or terminated. After this point, Nimble Studio automatically
 	// terminates or stops the session. The default length of time is 690 minutes, and
 	// the maximum length of time is 30 days.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxSessionLengthInMinutes *int32
 
 	// Integer that determines if you can start and stop your sessions and how long a
@@ -508,25 +680,35 @@ type StreamConfigurationCreate struct {
 	// call StopStreamingSession to stop sessions in the READY state. If the time that
 	// a session stays in the READY state exceeds the maxSessionLengthInMinutes value,
 	// the session will automatically be stopped (instead of terminated).
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxStoppedSessionLengthInMinutes int32
 
 	// Configures how streaming sessions are backed up when launched from this launch
 	// profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionBackup *StreamConfigurationSessionBackup
 
 	// Determine if a streaming session created from this launch profile can configure
 	// persistent storage. This means that volumeConfiguration and
 	// automaticTerminationMode are configured.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionPersistenceMode SessionPersistenceMode
 
 	// The upload storage for a streaming workstation that is created using this
 	// launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionStorage *StreamConfigurationSessionStorage
 
 	// Custom volume configuration for the root volumes that are attached to streaming
 	// sessions.
 	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeConfiguration *VolumeConfiguration
 
 	noSmithyDocumentSerde
@@ -538,6 +720,8 @@ type StreamConfigurationSessionBackup struct {
 
 	// The maximum number of backups that each streaming session created from this
 	// launch profile can have.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxBackupsToRetain int32
 
 	// Specifies how artists sessions are backed up.
@@ -545,6 +729,8 @@ type StreamConfigurationSessionBackup struct {
 	// Configures backups for streaming sessions launched with this launch profile.
 	// The default value is DEACTIVATED , which means that backups are deactivated. To
 	// allow backups, set this value to AUTOMATIC .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Mode SessionBackupMode
 
 	noSmithyDocumentSerde
@@ -557,9 +743,13 @@ type StreamConfigurationSessionStorage struct {
 	// UPLOAD .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Mode []StreamingSessionStorageMode
 
 	// The configuration for the upload storage root of the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Root *StreamingSessionStorageRoot
 
 	noSmithyDocumentSerde
@@ -580,45 +770,71 @@ type StreamingImage struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
 	// uniquely identifies it. ARNs are unique across all Regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// A human-readable description of the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The ID of an EC2 machine image with which to create the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2ImageId *string
 
 	// The encryption configuration.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EncryptionConfiguration *StreamingImageEncryptionConfiguration
 
 	// The list of EULAs that must be accepted before a Streaming Session can be
 	// started using this streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	EulaIds []string
 
 	// A friendly name for a streaming image resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The owner of the streaming image, either the studioId that contains the
 	// streaming image, or amazon for images that are provided by Amazon Nimble Studio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Owner *string
 
 	// The platform of the streaming image, either Windows or Linux.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Platform *string
 
 	// The current state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State StreamingImageState
 
 	// The status code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode StreamingImageStatusCode
 
 	// The status message for the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The ID of the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageId *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -630,9 +846,13 @@ type StreamingImageEncryptionConfiguration struct {
 	// The type of KMS key that is used to encrypt studio data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyType StreamingImageEncryptionConfigurationKeyType
 
 	// The ARN for a KMS key that is used to encrypt studio data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyArn *string
 
 	noSmithyDocumentSerde
@@ -644,6 +864,8 @@ type StreamingSession struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
 	// uniquely identifies it. ARNs are unique across all Regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// Indicates if a streaming session created from this launch profile should be
@@ -659,93 +881,145 @@ type StreamingSession struct {
 	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED . When
 	// allowed, the default value for this parameter is DEACTIVATED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AutomaticTerminationMode AutomaticTerminationMode
 
 	// Shows the current backup setting of the session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupMode SessionBackupMode
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedBy *string
 
 	// The EC2 Instance type used for the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2InstanceType *string
 
 	// The ID of the launch profile used to control access from the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The maximum number of backups of a streaming session that you can have. When
 	// the maximum number of backups is reached, the oldest backup is deleted.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	MaxBackupsToRetain int32
 
 	// The user ID of the user that owns the streaming session. The user that owns the
 	// session will be logging into the session and interacting with the virtual
 	// workstation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnedBy *string
 
 	// The session ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// Determine if a streaming session created from this launch profile can configure
 	// persistent storage. This means that volumeConfiguration and
 	// automaticTerminationMode are configured.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionPersistenceMode SessionPersistenceMode
 
 	// The time the session entered START_IN_PROGRESS state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartedAt *time.Time
 
 	// The user ID of the user that started the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartedBy *string
 
 	// The backup ID used to restore a streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StartedFromBackupId *string
 
 	// The current state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State StreamingSessionState
 
 	// The status code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode StreamingSessionStatusCode
 
 	// The status message for the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The time the streaming session will automatically be stopped if the user
 	// doesn’t stop the session themselves.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StopAt *time.Time
 
 	// The time the session entered STOP_IN_PROGRESS state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StoppedAt *time.Time
 
 	// The user ID of the user that stopped the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StoppedBy *string
 
 	// The ID of the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageId *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The time the streaming session will automatically terminate if not terminated
 	// by the user.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	TerminateAt *time.Time
 
 	// The ISO timestamp in seconds for when the resource was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedBy *string
 
 	// Custom volume configuration for the root volumes that are attached to streaming
 	// sessions.
 	//
 	// This parameter is only allowed when sessionPersistenceMode is ACTIVATED .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeConfiguration *VolumeConfiguration
 
 	// Determine if an EBS volume created from this streaming session will be backed
 	// up.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	VolumeRetentionMode VolumeRetentionMode
 
 	noSmithyDocumentSerde
@@ -756,35 +1030,55 @@ type StreamingSessionBackup struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
 	// uniquely identifies it. ARNs are unique across all Regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The ID of the backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	BackupId *string
 
 	// The ISO timestamp in for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The ID of the launch profile which allowed the backups for the streaming
 	// session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The user ID of the user that owns the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnedBy *string
 
 	// The streaming session ID for the StreamingSessionBackup .
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// The streaming session state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State StreamingSessionState
 
 	// The status code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode StreamingSessionStatusCode
 
 	// The status message for the streaming session backup.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -795,9 +1089,13 @@ type StreamingSessionBackup struct {
 type StreamingSessionStorageRoot struct {
 
 	// The folder path in Linux workstations where files are uploaded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Linux *string
 
 	// The folder path in Windows workstations where files are uploaded.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Windows *string
 
 	noSmithyDocumentSerde
@@ -810,29 +1108,45 @@ type StreamingSessionStorageRoot struct {
 type StreamingSessionStream struct {
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the streaming session stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedBy *string
 
 	// The ISO timestamp in seconds for when the resource expires.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ExpiresAt *time.Time
 
 	// The user ID of the user that owns the streaming session. The user that owns the
 	// session will be logging into the session and interacting with the virtual
 	// workstation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnedBy *string
 
 	// The current state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State StreamingSessionStreamState
 
 	// The streaming session stream status code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode StreamingSessionStreamStatusCode
 
 	// The stream ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	// The URL to connect to this stream using the DCV client.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Url *string
 
 	noSmithyDocumentSerde
@@ -860,58 +1174,90 @@ type Studio struct {
 
 	// The IAM role that studio admins assume when logging in to the Nimble Studio
 	// portal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	AdminRoleArn *string
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
 	// uniquely identifies it. ARNs are unique across all Regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// A friendly name for the studio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	DisplayName *string
 
 	// The Amazon Web Services Region where the studio resource is located.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	HomeRegion *string
 
 	// The IAM Identity Center application client ID used to integrate with IAM
 	// Identity Center. This ID allows IAM Identity Center users to log in to Nimble
 	// Studio portal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SsoClientId *string
 
 	// The current state of the studio resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State StudioState
 
 	// Status codes that provide additional detail on the studio state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode StudioStatusCode
 
 	// Additional detail on the studio state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// Configuration of the encryption method that is used for the studio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioEncryptionConfiguration *StudioEncryptionConfiguration
 
 	// The unique identifier for a studio resource. In Nimble Studio, all other
 	// resources are contained in a studio resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// The name of the studio, as included in the URL when accessing it in the Nimble
 	// Studio portal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioName *string
 
 	// The address of the web page for the studio.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioUrl *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The ISO timestamp in seconds for when the resource was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedAt *time.Time
 
 	// The IAM role that studio users assume when logging in to the Nimble Studio
 	// portal.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UserRoleArn *string
 
 	noSmithyDocumentSerde
@@ -932,68 +1278,108 @@ type StudioComponent struct {
 
 	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
 	// uniquely identifies it. ARNs are unique across all Regions.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Arn *string
 
 	// The configuration of the studio component, based on component type.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Configuration *StudioComponentConfiguration
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedBy *string
 
 	// A human-readable description for the studio component resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The EC2 security groups that control access to the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2SecurityGroupIds []string
 
 	// Initialization scripts for studio components.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	InitializationScripts []StudioComponentInitializationScript
 
 	// A friendly name for the studio component resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// An IAM role attached to a Studio Component that gives the studio component
 	// access to Amazon Web Services resources at anytime while the instance is
 	// running.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RuntimeRoleArn *string
 
 	// Parameters for the studio component scripts.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ScriptParameters []ScriptParameterKeyValue
 
 	// An IAM role attached to Studio Component when the system initialization script
 	// runs which give the studio component access to Amazon Web Services resources
 	// when the system initialization script runs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SecureInitializationRoleArn *string
 
 	// The current state.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State StudioComponentState
 
 	// The status code.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode StudioComponentStatusCode
 
 	// The status message for the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The unique identifier for a studio component resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentId *string
 
 	// The specific subtype of a studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subtype StudioComponentSubtype
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	// The type of the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type StudioComponentType
 
 	// The ISO timestamp in seconds for when the resource was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedBy *string
 
 	noSmithyDocumentSerde
@@ -1004,17 +1390,25 @@ type StudioComponentConfiguration struct {
 
 	// The configuration for a Directory Service for Microsoft Active Directory studio
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ActiveDirectoryConfiguration *ActiveDirectoryConfiguration
 
 	// The configuration for a render farm that is associated with a studio resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ComputeFarmConfiguration *ComputeFarmConfiguration
 
 	// The configuration for a license service that is associated with a studio
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LicenseServiceConfiguration *LicenseServiceConfiguration
 
 	// The configuration for a shared file storage system that is associated with a
 	// studio resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SharedFileSystemConfiguration *SharedFileSystemConfiguration
 
 	noSmithyDocumentSerde
@@ -1025,15 +1419,23 @@ type StudioComponentInitializationScript struct {
 
 	// The version number of the protocol that is used by the launch profile. The only
 	// valid version is "2021-03-31".
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileProtocolVersion *string
 
 	// The platform of the initialization script, either Windows or Linux.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Platform LaunchProfilePlatform
 
 	// The method to use when running the initialization script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	RunContext StudioComponentInitializationScriptRunContext
 
 	// The initialization script.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Script *string
 
 	noSmithyDocumentSerde
@@ -1043,30 +1445,48 @@ type StudioComponentInitializationScript struct {
 type StudioComponentSummary struct {
 
 	// The ISO timestamp in seconds for when the resource was created.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	CreatedBy *string
 
 	// The description.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Description *string
 
 	// The name for the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Name *string
 
 	// The unique identifier for a studio component resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioComponentId *string
 
 	// The specific subtype of a studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Subtype StudioComponentSubtype
 
 	// The type of the studio component.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type StudioComponentType
 
 	// The ISO timestamp in seconds for when the resource was updated.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	UpdatedBy *string
 
 	noSmithyDocumentSerde
@@ -1078,9 +1498,13 @@ type StudioEncryptionConfiguration struct {
 	// The type of KMS key that is used to encrypt studio data.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyType StudioEncryptionConfigurationKeyType
 
 	// The ARN for a KMS key that is used to encrypt studio data.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	KeyArn *string
 
 	noSmithyDocumentSerde
@@ -1101,15 +1525,23 @@ type StudioEncryptionConfiguration struct {
 type StudioMembership struct {
 
 	// The ID of the identity store.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	IdentityStoreId *string
 
 	// The persona.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Persona StudioPersona
 
 	// The principal ID.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	// The Active Directory Security Identifier for this user, if available.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Sid *string
 
 	noSmithyDocumentSerde
@@ -1121,22 +1553,30 @@ type ValidationResult struct {
 	// The current state.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	State LaunchProfileValidationState
 
 	// The status code. This will contain the failure reason if the state is
 	// VALIDATION_FAILED .
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusCode LaunchProfileValidationStatusCode
 
 	// The status message for the validation result.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StatusMessage *string
 
 	// The type of the validation result.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Type LaunchProfileValidationType
 
 	noSmithyDocumentSerde
@@ -1150,14 +1590,20 @@ type VolumeConfiguration struct {
 
 	// The number of I/O operations per second for the root volume that is attached to
 	// streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Iops *int32
 
 	// The size of the root volume that is attached to the streaming session. The root
 	// volume size is measured in GiBs.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Size *int32
 
 	// The throughput to provision for the root volume that is attached to the
 	// streaming session. The throughput is measured in MiB/s.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Throughput *int32
 
 	noSmithyDocumentSerde

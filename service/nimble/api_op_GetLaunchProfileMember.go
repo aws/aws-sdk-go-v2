@@ -12,6 +12,8 @@ import (
 )
 
 // Get a user persona in launch profile membership.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetLaunchProfileMember(ctx context.Context, params *GetLaunchProfileMemberInput, optFns ...func(*Options)) (*GetLaunchProfileMemberOutput, error) {
 	if params == nil {
 		params = &GetLaunchProfileMemberInput{}
@@ -32,16 +34,22 @@ type GetLaunchProfileMemberInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The principal ID. This currently supports a IAM Identity Center UserId.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -50,6 +58,8 @@ type GetLaunchProfileMemberInput struct {
 type GetLaunchProfileMemberOutput struct {
 
 	// The member.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Member *types.LaunchProfileMembership
 
 	// Metadata pertaining to the operation's result.

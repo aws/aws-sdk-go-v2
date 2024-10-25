@@ -15,6 +15,8 @@ import (
 //
 // After invoking this operation, you must poll GetStreamingSession until the
 // streaming session is in the READY state.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) CreateStreamingSession(ctx context.Context, params *CreateStreamingSessionInput, optFns ...func(*Options)) (*CreateStreamingSessionOutput, error) {
 	if params == nil {
 		params = &CreateStreamingSessionInput{}
@@ -35,32 +37,46 @@ type CreateStreamingSessionInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	// The EC2 Instance type used for the streaming session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Ec2InstanceType types.StreamingInstanceType
 
 	// The user ID of the user that owns the streaming session. The user that owns the
 	// session will be logging into the session and interacting with the virtual
 	// workstation.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	OwnedBy *string
 
 	// The ID of the streaming image.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamingImageId *string
 
 	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -69,6 +85,8 @@ type CreateStreamingSessionInput struct {
 type CreateStreamingSessionOutput struct {
 
 	// The session.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Session *types.StreamingSession
 
 	// Metadata pertaining to the operation's result.

@@ -17,6 +17,7 @@ public class DeprecateService implements GoIntegration {
     private static final String DEPRECATION_MESSAGE =
             "AWS has deprecated this service. It is no longer available for use.";
     private static final Set<String> DEPRECATED = Set.of(
+            "com.amazonaws.nimble#nimble"
     );
 
     @Override

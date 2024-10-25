@@ -12,6 +12,8 @@ import (
 )
 
 // Permanently delete a launch profile.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) DeleteLaunchProfile(ctx context.Context, params *DeleteLaunchProfileInput, optFns ...func(*Options)) (*DeleteLaunchProfileOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchProfileInput{}
@@ -32,17 +34,23 @@ type DeleteLaunchProfileInput struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfileId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. If you don’t specify a client token, the Amazon Web Services SDK
 	// automatically generates a client token and uses it for the request to ensure
 	// idempotency.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -51,6 +59,8 @@ type DeleteLaunchProfileInput struct {
 type DeleteLaunchProfileOutput struct {
 
 	// The launch profile.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	LaunchProfile *types.LaunchProfile
 
 	// Metadata pertaining to the operation's result.

@@ -22,6 +22,8 @@ import (
 //
 // After the StreamingSessionStream changes to the READY state, the url property
 // will contain a stream to be used with the DCV streaming client.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetStreamingSessionStream(ctx context.Context, params *GetStreamingSessionStreamInput, optFns ...func(*Options)) (*GetStreamingSessionStreamOutput, error) {
 	if params == nil {
 		params = &GetStreamingSessionStreamInput{}
@@ -42,16 +44,22 @@ type GetStreamingSessionStreamInput struct {
 	// The streaming session ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	SessionId *string
 
 	// The streaming session stream ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StreamId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -60,6 +68,8 @@ type GetStreamingSessionStreamInput struct {
 type GetStreamingSessionStreamOutput struct {
 
 	// The stream.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Stream *types.StreamingSessionStream
 
 	// Metadata pertaining to the operation's result.

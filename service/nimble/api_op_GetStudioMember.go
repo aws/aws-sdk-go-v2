@@ -12,6 +12,8 @@ import (
 )
 
 // Get a user's membership in a studio.
+//
+// Deprecated: AWS has deprecated this service. It is no longer available for use.
 func (c *Client) GetStudioMember(ctx context.Context, params *GetStudioMemberInput, optFns ...func(*Options)) (*GetStudioMemberOutput, error) {
 	if params == nil {
 		params = &GetStudioMemberInput{}
@@ -32,11 +34,15 @@ type GetStudioMemberInput struct {
 	// The principal ID. This currently supports a IAM Identity Center UserId.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	PrincipalId *string
 
 	// The studio ID.
 	//
 	// This member is required.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	StudioId *string
 
 	noSmithyDocumentSerde
@@ -45,6 +51,8 @@ type GetStudioMemberInput struct {
 type GetStudioMemberOutput struct {
 
 	// The member.
+	//
+	// Deprecated: AWS has deprecated this service. It is no longer available for use.
 	Member *types.StudioMembership
 
 	// Metadata pertaining to the operation's result.
