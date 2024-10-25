@@ -1,8 +1,0 @@
-{
-    "id": "f2ad1ab9-3532-422a-b868-17d8be4ec645",
-    "type": "feature",
-    "description": "API doc updates, and also support showing error message on a failed instance",
-    "modules": [
-        "service/supplychain"
-    ]
-}

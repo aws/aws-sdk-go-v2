@@ -1,3 +1,24 @@
+# Release (2024-10-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.25.0](service/bedrockagent/CHANGELOG.md#v1250-2024-10-25)
+  * **Feature**: Add support of new model types for Bedrock Agents, Adding inference profile support for Flows and Prompt Management, Adding new field to configure additional inference configurations for Flows and Prompt Management
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.42.0](service/cloudwatchlogs/CHANGELOG.md#v1420-2024-10-25)
+  * **Feature**: Adding inferred token name for dynamic tokens in Anomalies.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.47.0](service/codebuild/CHANGELOG.md#v1470-2024-10-25)
+  * **Feature**: AWS CodeBuild now supports automatically retrying failed builds
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.64.0](service/lambda/CHANGELOG.md#v1640-2024-10-25)
+  * **Feature**: Add TagsError field in Lambda GetFunctionResponse. The TagsError field contains details related to errors retrieving tags.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.29.0](service/nimble/CHANGELOG.md#v1290-2024-10-25)
+  * **Feature**: Mark service/nimble as deprecated. This service is no longer available for use. See https://aws.amazon.com/nimble-studio/faqs/.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.66.1](service/s3/CHANGELOG.md#v1661-2024-10-25)
+  * **Bug Fix**: Update presign post URL resolution to use the exact result from EndpointResolverV2
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.10.0](service/supplychain/CHANGELOG.md#v1100-2024-10-25)
+  * **Feature**: API doc updates, and also support showing error message on a failed instance
+
 # Release (2024-10-24)
 
 ## Module Highlights

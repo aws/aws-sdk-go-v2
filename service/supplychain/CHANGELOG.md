@@ -1,3 +1,7 @@
+# v1.10.0 (2024-10-25)
+
+* **Feature**: API doc updates, and also support showing error message on a failed instance
+
 # v1.9.0 (2024-10-14)
 
 * **Feature**: This release adds AWS Supply Chain instance management functionality. Specifically adding CreateInstance, DeleteInstance, GetInstance, ListInstances, and UpdateInstance APIs.

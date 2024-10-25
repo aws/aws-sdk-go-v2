@@ -1,8 +1,0 @@
-{
-    "id": "7ebb8190-3b72-4db8-ba09-7b92ed5d5006",
-    "type": "feature",
-    "description": "Adding inferred token name for dynamic tokens in Anomalies.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

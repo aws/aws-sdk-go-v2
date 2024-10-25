@@ -1,3 +1,7 @@
+# v1.25.0 (2024-10-25)
+
+* **Feature**: Add support of new model types for Bedrock Agents, Adding inference profile support for Flows and Prompt Management, Adding new field to configure additional inference configurations for Flows and Prompt Management
+
 # v1.24.0 (2024-10-17)
 
 * **Feature**: Removing support for topK property in PromptModelInferenceConfiguration object, Making PromptTemplateConfiguration property as required, Limiting the maximum PromptVariant to 1

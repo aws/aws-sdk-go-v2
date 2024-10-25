@@ -1,3 +1,7 @@
+# v1.64.0 (2024-10-25)
+
+* **Feature**: Add TagsError field in Lambda GetFunctionResponse. The TagsError field contains details related to errors retrieving tags.
+
 # v1.63.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

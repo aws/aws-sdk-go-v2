@@ -1,8 +1,0 @@
-{
-    "id": "d3294fd4-1862-4660-881b-97ced3532c49",
-    "type": "feature",
-    "description": "Add support of new model types for Bedrock Agents, Adding inference profile support for Flows and Prompt Management, Adding new field to configure additional inference configurations for Flows and Prompt Management",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

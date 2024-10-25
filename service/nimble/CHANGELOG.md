@@ -1,3 +1,7 @@
+# v1.29.0 (2024-10-25)
+
+* **Feature**: Mark service/nimble as deprecated. This service is no longer available for use. See https://aws.amazon.com/nimble-studio/faqs/.
+
 # v1.28.3 (2024-10-24)
 
 * No change notes available for this release.

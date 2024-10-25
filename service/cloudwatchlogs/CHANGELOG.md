@@ -1,3 +1,7 @@
+# v1.42.0 (2024-10-25)
+
+* **Feature**: Adding inferred token name for dynamic tokens in Anomalies.
+
 # v1.41.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions
