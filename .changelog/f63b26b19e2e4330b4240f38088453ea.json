@@ -1,0 +1,8 @@
+{
+    "id": "f63b26b1-9e2e-4330-b424-0f38088453ea",
+    "type": "bugfix",
+    "description": "Adding logic to omit whitespaces in the signature, and test coverage",
+    "modules": [
+        "."
+    ]
+}
