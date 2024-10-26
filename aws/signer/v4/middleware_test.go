@@ -3,6 +3,7 @@ package v4
 import (
 	"bytes"
 	"context"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
@@ -367,6 +368,62 @@ func TestUseDynamicPayloadSigningMiddleware(t *testing.T) {
 				}
 			} else if err == nil && tt.expectedErr != nil {
 				t.Errorf("expected error, got nil")
+			}
+		})
+	}
+}
+
+func TestGetSignedRequestSignature(t *testing.T) {
+	testCases := map[string]struct {
+		authHeader     string
+		expectedSig    string
+		expectedErrMsg string
+	}{
+		"Valid signature": {
+			authHeader:  "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20150830/us-east-1/service/aws4_request, SignedHeaders=host;x-amz-date, Signature=fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024",
+			expectedSig: "fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024",
+		},
+		"Whitespace after Signature": {
+			authHeader:  "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20150830/us-east-1/service/aws4_request, SignedHeaders=host;x-amz-date, Signature=fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024 ",
+			expectedSig: "fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024",
+		},
+		"Whitespaces before Signature": {
+			authHeader:  "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20150830/us-east-1/service/aws4_request, SignedHeaders=host;x-amz-date,     Signature=fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024 ",
+			expectedSig: "fe5f80f77d5fa3beca038a248ff027d0445342fe2855ddc963176630326f1024",
+		},
+		"Empty signature": {
+			authHeader:     "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20150830/us-east-1/service/aws4_request, SignedHeaders=host;x-amz-date, Signature=",
+			expectedErrMsg: "invalid request signature authorization header",
+		},
+		"Missing signature": {
+			authHeader:     "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20150830/us-east-1/service/aws4_request, SignedHeaders=host;x-amz-date",
+			expectedErrMsg: "request not signed",
+		},
+	}
+
+	for name, tc := range testCases {
+		t.Run(name, func(t *testing.T) {
+			r, err := http.NewRequest("GET", "/", nil)
+			if err != nil {
+				t.Fatalf("Failed to create request: %v", err)
+			}
+			r.Header.Set("Authorization", tc.authHeader)
+
+			sig, err := GetSignedRequestSignature(r)
+
+			if tc.expectedErrMsg != "" {
+				if err == nil {
+					t.Errorf("Expected error with message '%s', but got no error", tc.expectedErrMsg)
+				} else if err.Error() != tc.expectedErrMsg {
+					t.Errorf("Expected error message '%s', but got '%s'", tc.expectedErrMsg, err.Error())
+				}
+			} else {
+				if err != nil {
+					t.Errorf("Unexpected error: %v", err)
+				}
+				if hex.EncodeToString(sig) != tc.expectedSig {
+					t.Errorf("Expected signature '%s', but got '%s'", tc.expectedSig, hex.EncodeToString(sig))
+				}
 			}
 		})
 	}
