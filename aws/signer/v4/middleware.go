@@ -374,7 +374,7 @@ func GetSignedRequestSignature(r *http.Request) ([]byte, error) {
 	if auth := r.Header.Get(authorizationHeader); len(auth) != 0 {
 		ps := strings.Split(auth, ",")
 		for _, p := range ps {
-			p = strings.Trim(p, " ")
+			p = strings.TrimSpace(p)
 			if idx := strings.Index(p, authHeaderSignatureElem); idx >= 0 {
 				sig := p[len(authHeaderSignatureElem):]
 				if len(sig) == 0 {
