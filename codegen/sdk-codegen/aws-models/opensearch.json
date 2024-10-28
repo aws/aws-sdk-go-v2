@@ -2942,6 +2942,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html\">Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. </p>"
                     }
+                },
+                "NodeOptions": {
+                    "target": "com.amazonaws.opensearch#NodeOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of node options for the domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9203,12 +9209,75 @@
                 "smithy.api#documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of\n    <code>nextToken</code> is a unique pagination token for each page. Send the request again using the\n   returned token to retrieve the next page.</p>"
             }
         },
+        "com.amazonaws.opensearch#NodeConfig": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean that indicates whether a particular node type is enabled or not.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.opensearch#OpenSearchPartitionInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of a particular node type in the cluster.</p>"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.opensearch#IntegerClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes of a particular node type in the cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for specifying configuration of any node type.</p>"
+            }
+        },
         "com.amazonaws.opensearch#NodeId": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 10,
                     "max": 40
+                }
+            }
+        },
+        "com.amazonaws.opensearch#NodeOption": {
+            "type": "structure",
+            "members": {
+                "NodeType": {
+                    "target": "com.amazonaws.opensearch#NodeOptionsNodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for node type like coordinating.</p>"
+                    }
+                },
+                "NodeConfig": {
+                    "target": "com.amazonaws.opensearch#NodeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for specifying configuration of any node type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for specifying node type.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#NodeOptionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.opensearch#NodeOption"
+            }
+        },
+        "com.amazonaws.opensearch#NodeOptionsNodeType": {
+            "type": "enum",
+            "members": {
+                "COORDINATOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "coordinator"
+                    }
                 }
             }
         },

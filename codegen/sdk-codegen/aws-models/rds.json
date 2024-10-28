@@ -2081,7 +2081,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid Values: <code>system-update</code>, <code>db-upgrade</code>, \n          <code>hardware-maintenance</code>, <code>ca-certificate-rotation</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The pending maintenance action to apply to this resource.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ca-certificate-rotation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hardware-maintenance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>os-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>system-update</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about these actions, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora\">Maintenance actions for Amazon Aurora</a> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds\">Maintenance actions for Amazon RDS</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4468,7 +4468,7 @@
                 "EnableLimitlessDatabase": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group.</p>\n         <p>Valid for: Aurora DB clusters only</p>\n         <note>\n            <p>This setting is no longer used. Instead use the <code>ClusterScalabilityType</code> setting.</p>\n         </note>"
                     }
                 },
                 "ServerlessV2ScalingConfiguration": {
@@ -21849,7 +21849,7 @@
                 "EnableLimitlessDatabase": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group.</p>\n         <p>Valid for: Aurora DB clusters only</p>\n         <note>\n            <p>This setting is no longer used. Instead use the <code>ClusterScalabilityType</code> setting when you create your Aurora Limitless Database DB cluster.</p>\n         </note>"
                     }
                 },
                 "CACertificateIdentifier": {
@@ -24779,7 +24779,7 @@
                 "Action": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of pending maintenance action that is available for the resource. </p>\n         <p>For more information about maintenance actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html\">Maintaining a DB instance</a>.</p>\n         <p>Valid Values:<code> system-update | db-upgrade | hardware-maintenance | ca-certificate-rotation</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of pending maintenance action that is available for the resource. </p>\n         <p>For more information about maintenance actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html\">Maintaining a DB instance</a>.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ca-certificate-rotation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>hardware-maintenance</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>os-upgrade</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>system-update</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information about these actions, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora\">Maintenance actions for Amazon Aurora</a> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds\">Maintenance actions for Amazon RDS</a>.</p>"
                     }
                 },
                 "AutoAppliedAfterDate": {
@@ -27406,6 +27406,36 @@
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 },
+                "MonitoringInterval": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off \n            collecting Enhanced Monitoring metrics, specify <code>0</code>.</p>\n         <p>If <code>MonitoringRoleArn</code> is specified, also set <code>MonitoringInterval</code> to a value other than <code>0</code>.</p>\n         <p>Valid Values: <code>0 | 1 | 5 | 10 | 15 | 30 | 60</code>\n         </p>\n         <p>Default: <code>0</code>\n         </p>"
+                    }
+                },
+                "MonitoringRoleArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. \n            An example is <code>arn:aws:iam:123456789012:role/emaccess</code>.</p>\n         <p>If <code>MonitoringInterval</code> is set to a value other than <code>0</code>, supply a <code>MonitoringRoleArn</code> value.</p>"
+                    }
+                },
+                "EnablePerformanceInsights": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to turn on Performance Insights for the DB cluster.</p>"
+                    }
+                },
+                "PerformanceInsightsKMSKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for encryption of Performance Insights data.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p>\n         <p>If you don't specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default KMS key. \n            There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "PerformanceInsightsRetentionPeriod": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain Performance Insights data.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>7</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>month</i> * 31, where <i>month</i> is a number of months from 1-23. \n                    Examples: <code>93</code> (3 months * 31), <code>341</code> (11 months * 31), <code>589</code> (19 months * 31)</p>\n            </li>\n            <li>\n               <p>\n                  <code>731</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: <code>7</code> days</p>\n         <p>If you specify a retention period that isn't valid, such as <code>94</code>,  Amazon RDS issues an error.</p>"
+                    }
+                },
                 "EngineLifecycleSupport": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
@@ -27733,6 +27763,36 @@
                     "target": "com.amazonaws.rds#RdsCustomClusterConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "MonitoringInterval": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off \n            collecting Enhanced Monitoring metrics, specify <code>0</code>.</p>\n         <p>If <code>MonitoringRoleArn</code> is specified, also set <code>MonitoringInterval</code> to a value other than <code>0</code>.</p>\n         <p>Valid Values: <code>0 | 1 | 5 | 10 | 15 | 30 | 60</code>\n         </p>\n         <p>Default: <code>0</code>\n         </p>"
+                    }
+                },
+                "MonitoringRoleArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs. \n            An example is <code>arn:aws:iam:123456789012:role/emaccess</code>.</p>\n         <p>If <code>MonitoringInterval</code> is set to a value other than <code>0</code>, supply a <code>MonitoringRoleArn</code> value.</p>"
+                    }
+                },
+                "EnablePerformanceInsights": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to turn on Performance Insights for the DB cluster.</p>"
+                    }
+                },
+                "PerformanceInsightsKMSKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for encryption of Performance Insights data.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p>\n         <p>If you don't specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default KMS key. \n            There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "PerformanceInsightsRetentionPeriod": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain Performance Insights data.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>7</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>month</i> * 31, where <i>month</i> is a number of months from 1-23. \n                    Examples: <code>93</code> (3 months * 31), <code>341</code> (11 months * 31), <code>589</code> (19 months * 31)</p>\n            </li>\n            <li>\n               <p>\n                  <code>731</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: <code>7</code> days</p>\n         <p>If you specify a retention period that isn't valid, such as <code>94</code>,  Amazon RDS issues an error.</p>"
                     }
                 },
                 "EngineLifecycleSupport": {

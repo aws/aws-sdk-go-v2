@@ -42,6 +42,112 @@
                 }
             }
         },
+        "com.amazonaws.mediapackagev2#CancelHarvestJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediapackagev2#CancelHarvestJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediapackagev2#CancelHarvestJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediapackagev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to cancel a harvest job on an endpoint",
+                "smithy.api#documentation": "<p>Cancels an in-progress harvest job.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Cancel a Harvest Job",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName",
+                            "HarvestJobName": "HarvestJobName"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#CancelHarvestJobRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group containing the channel from which the harvest job is running.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel from which the harvest job is running.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint that the harvest job is harvesting from. This cannot be changed after the harvest job is submitted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvest job to cancel. This name must be unique within the channel and cannot be changed after the harvest job is submitted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.mediapackagev2#EntityTag",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The current Entity Tag (ETag) associated with the harvest job. Used for concurrency control.</p>",
+                        "smithy.api#httpHeader": "x-amzn-update-if-match"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#CancelHarvestJobResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mediapackagev2#ChannelGroupListConfiguration": {
             "type": "structure",
             "members": {
@@ -109,6 +215,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.mediapackagev2#ChannelResource"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#HarvestJobResource"
                 }
             ],
             "traits": {
@@ -819,6 +928,324 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediapackagev2#CreateDashManifestConfiguration"
+            }
+        },
+        "com.amazonaws.mediapackagev2#CreateHarvestJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediapackagev2#CreateHarvestJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediapackagev2#CreateHarvestJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediapackagev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to create a HarvestJob",
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Creates a new harvest job to export content from a MediaPackage v2 channel to an S3 bucket.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Creating a Harvest Job",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName",
+                            "Description": "Example HarvestJob description",
+                            "HarvestedManifests": {
+                                "HlsManifests": [
+                                    {
+                                        "ManifestName": "HlsManifest"
+                                    }
+                                ],
+                                "DashManifests": [
+                                    {
+                                        "ManifestName": "DashManifest"
+                                    }
+                                ],
+                                "LowLatencyHlsManifests": [
+                                    {
+                                        "ManifestName": "LowLatencyHlsManifest"
+                                    }
+                                ]
+                            },
+                            "ScheduleConfiguration": {
+                                "StartTime": "2024-05-28T06:00:00.00Z",
+                                "EndTime": "2024-05-28T12:00:00.00Z"
+                            },
+                            "Destination": {
+                                "S3Destination": {
+                                    "BucketName": "harvestJobS3DestinationBucket",
+                                    "DestinationPath": "manifests"
+                                }
+                            }
+                        },
+                        "output": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName",
+                            "Destination": {
+                                "S3Destination": {
+                                    "BucketName": "harvestJobS3DestinationBucket",
+                                    "DestinationPath": "manifests"
+                                }
+                            },
+                            "HarvestJobName": "HarvestJobName",
+                            "HarvestedManifests": {
+                                "HlsManifests": [
+                                    {
+                                        "ManifestName": "HlsManifest"
+                                    }
+                                ],
+                                "DashManifests": [
+                                    {
+                                        "ManifestName": "DashManifest"
+                                    }
+                                ],
+                                "LowLatencyHlsManifests": [
+                                    {
+                                        "ManifestName": "LowLatencyHlsManifest"
+                                    }
+                                ]
+                            },
+                            "Description": "Example HarvestJob description",
+                            "ScheduleConfiguration": {
+                                "StartTime": "2024-05-28T06:00:00.00Z",
+                                "EndTime": "2024-05-28T12:00:00.00Z"
+                            },
+                            "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName",
+                            "CreatedAt": "2024-05-28T09:36:00.00Z",
+                            "ModifiedAt": "2024-05-28T09:36:00.00Z",
+                            "Status": "QUEUED",
+                            "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#CreateHarvestJobRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group containing the channel from which to harvest content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel from which to harvest content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint from which to harvest content.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description for the harvest job.</p>"
+                    }
+                },
+                "HarvestedManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of manifests to be harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#HarvesterScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for when the harvest job should run, including start and end times.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.mediapackagev2#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 destination where the harvested content will be placed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.mediapackagev2#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-client-token",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the harvest job. This name must be unique within the channel.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediapackagev2#TagMap",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A collection of tags associated with the harvest job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request object for creating a new harvest job.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#CreateHarvestJobResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group containing the channel from which content is being harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel from which content is being harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint from which content is being harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.mediapackagev2#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 destination where the harvested content will be placed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the created harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestedManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of manifests that will be harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the harvest job, if provided.</p>"
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#HarvesterScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for when the harvest job will run, including start and end times.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the harvest job was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the harvest job was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the harvest job (e.g., CREATED, IN_PROGRESS, ABORTED, COMPLETED, FAILED).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message if the harvest job creation failed.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.mediapackagev2#EntityTag",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The current version of the harvest job. Used for concurrency control.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediapackagev2#TagMap",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A collection of tags associated with the harvest job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object returned after creating a harvest job.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackagev2#CreateHlsManifestConfiguration": {
@@ -2171,6 +2598,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediapackagev2#Destination": {
+            "type": "structure",
+            "members": {
+                "S3Destination": {
+                    "target": "com.amazonaws.mediapackagev2#S3DestinationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for exporting harvested content to an S3 bucket. This includes details such as the bucket name and destination path within the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the destination where the harvested content will be exported.</p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#DrmSystem": {
             "type": "enum",
             "members": {
@@ -2889,6 +3331,305 @@
                 "target": "com.amazonaws.mediapackagev2#GetDashManifestConfiguration"
             }
         },
+        "com.amazonaws.mediapackagev2#GetHarvestJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediapackagev2#GetHarvestJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediapackagev2#GetHarvestJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediapackagev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve a HarvestJob",
+                "smithy.api#documentation": "<p>Retrieves the details of a specific harvest job.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Getting a Harvest Job",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName",
+                            "HarvestJobName": "HarvestJobName"
+                        },
+                        "output": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName",
+                            "Destination": {
+                                "S3Destination": {
+                                    "BucketName": "harvestJobS3DestinationBucket",
+                                    "DestinationPath": "manifests"
+                                }
+                            },
+                            "HarvestJobName": "HarvestJobName",
+                            "HarvestedManifests": {
+                                "HlsManifests": [
+                                    {
+                                        "ManifestName": "HlsManifest"
+                                    }
+                                ],
+                                "DashManifests": [
+                                    {
+                                        "ManifestName": "DashManifest"
+                                    }
+                                ],
+                                "LowLatencyHlsManifests": [
+                                    {
+                                        "ManifestName": "LowLatencyHlsManifest"
+                                    }
+                                ]
+                            },
+                            "Description": "Example HarvestJob description",
+                            "ScheduleConfiguration": {
+                                "StartTime": "2024-05-28T06:00:00.00Z",
+                                "EndTime": "2024-05-28T12:00:00.00Z"
+                            },
+                            "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName",
+                            "CreatedAt": "2024-05-28T09:36:00.00Z",
+                            "ModifiedAt": "2024-05-28T09:36:00.00Z",
+                            "Status": "QUEUED",
+                            "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                            "Tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}"
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "HarvestJobFinished": {
+                        "description": "Waits for the HarvestJob to conclude to return",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "COMPLETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "CANCELLED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "QUEUED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Status",
+                                        "expected": "IN_PROGRESS",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#GetHarvestJobRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group containing the channel associated with the harvest job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel associated with the harvest job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint associated with the harvest job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvest job to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request object for retrieving a specific harvest job.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#GetHarvestJobResponse": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group containing the channel associated with the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel associated with the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint associated with the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.mediapackagev2#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 destination where the harvested content is being placed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestedManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of manifests that are being or have been harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the harvest job, if provided.</p>"
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#HarvesterScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for when the harvest job is scheduled to run, including start and end times.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the harvest job was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the harvest job was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the harvest job (e.g., QUEUED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message if the harvest job encountered any issues.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.mediapackagev2#EntityTag",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The current version of the harvest job. Used for concurrency control.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.mediapackagev2#TagMap",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A collection of tags associated with the harvest job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object containing the details of the requested harvest job.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mediapackagev2#GetHlsManifestConfiguration": {
             "type": "structure",
             "members": {
@@ -3408,6 +4149,301 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediapackagev2#HarvestJob": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group containing the channel associated with this harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel associated with this harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint associated with this harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.mediapackagev2#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 destination where the harvested content will be placed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HarvestedManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of manifests that are being or have been harvested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the harvest job.</p>"
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#HarvesterScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for when the harvest job is scheduled to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the harvest job was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the harvest job was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the harvest job (e.g., QUEUED, IN_PROGRESS, CANCELLED, COMPLETED, FAILED).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message if the harvest job encountered any issues.</p>"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.mediapackagev2#EntityTag",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The current version of the harvest job. Used for concurrency control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a harvest job resource in MediaPackage v2, which is used to export content from an origin endpoint to an S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestJobResource": {
+            "type": "resource",
+            "identifiers": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName"
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName"
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName"
+                },
+                "HarvestJobName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.mediapackagev2#CreateHarvestJob"
+            },
+            "read": {
+                "target": "com.amazonaws.mediapackagev2#GetHarvestJob"
+            },
+            "update": {
+                "target": "com.amazonaws.mediapackagev2#CancelHarvestJob"
+            },
+            "list": {
+                "target": "com.amazonaws.mediapackagev2#ListHarvestJobs"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "smithy.api#documentation": "<p>A HarvestJob resource represents a request to export content from a MediaPackage v2 channel to an S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestJobStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestJobsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#HarvestJob"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedDashManifest": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvested DASH manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a harvested DASH manifest.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedDashManifestsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#HarvestedDashManifest"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedHlsManifest": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvested HLS manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a harvested HLS manifest.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedHlsManifestsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#HarvestedHlsManifest"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedLowLatencyHlsManifest": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the harvested Low-Latency HLS manifest.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a harvested Low-Latency HLS manifest.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedLowLatencyHlsManifestsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#HarvestedLowLatencyHlsManifest"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvestedManifests": {
+            "type": "structure",
+            "members": {
+                "HlsManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedHlsManifestsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of harvested HLS manifests.</p>"
+                    }
+                },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedDashManifestsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of harvested DASH manifests.</p>"
+                    }
+                },
+                "LowLatencyHlsManifests": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestedLowLatencyHlsManifestsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of harvested Low-Latency HLS manifests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of harvested manifests of different types.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#HarvesterScheduleConfiguration": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time for the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time for the harvest job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the schedule configuration for a harvest job.</p>"
+            }
+        },
         "com.amazonaws.mediapackagev2#IdempotencyToken": {
             "type": "string",
             "traits": {
@@ -3727,6 +4763,446 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediapackagev2#ListDashManifestConfiguration"
+            }
+        },
+        "com.amazonaws.mediapackagev2#ListHarvestJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mediapackagev2#ListHarvestJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mediapackagev2#ListHarvestJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mediapackagev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.mediapackagev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list all harvest jobs of a ChannelGroup, Channel, or OriginEndpoint",
+                "smithy.api#documentation": "<p>Retrieves a list of harvest jobs that match the specified criteria.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListHarvestJobs: Specify ChannelGroup only",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup"
+                        },
+                        "output": {
+                            "Items": [
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannelName",
+                                    "OriginEndpointName": "exampleOriginEndpointName",
+                                    "Destination": {
+                                        "S3Destination": {
+                                            "BucketName": "harvestJobS3DestinationBucket",
+                                            "DestinationPath": "manifests"
+                                        }
+                                    },
+                                    "HarvestJobName": "HarvestJobName",
+                                    "HarvestedManifests": {
+                                        "HlsManifests": [
+                                            {
+                                                "ManifestName": "HlsManifest"
+                                            }
+                                        ],
+                                        "DashManifests": [
+                                            {
+                                                "ManifestName": "DashManifest"
+                                            }
+                                        ],
+                                        "LowLatencyHlsManifests": [
+                                            {
+                                                "ManifestName": "LowLatencyHlsManifest"
+                                            }
+                                        ]
+                                    },
+                                    "Description": "Example HarvestJob description",
+                                    "ScheduleConfiguration": {
+                                        "StartTime": "2024-05-28T06:00:00.00Z",
+                                        "EndTime": "2024-05-28T12:00:00.00Z"
+                                    },
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName",
+                                    "CreatedAt": "2024-05-28T09:36:00.00Z",
+                                    "ModifiedAt": "2024-05-28T09:36:00.00Z",
+                                    "Status": "QUEUED",
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                                    "Tags": {
+                                        "key1": "value1",
+                                        "key2": "value2"
+                                    }
+                                },
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannelName2",
+                                    "OriginEndpointName": "exampleOriginEndpointName2",
+                                    "Destination": {
+                                        "S3Destination": {
+                                            "BucketName": "harvestJobS3DestinationBucket",
+                                            "DestinationPath": "manifests"
+                                        }
+                                    },
+                                    "HarvestJobName": "HarvestJobName2",
+                                    "HarvestedManifests": {
+                                        "HlsManifests": [
+                                            {
+                                                "ManifestName": "HlsManifest"
+                                            }
+                                        ],
+                                        "DashManifests": [
+                                            {
+                                                "ManifestName": "DashManifest"
+                                            }
+                                        ],
+                                        "LowLatencyHlsManifests": [
+                                            {
+                                                "ManifestName": "LowLatencyHlsManifest"
+                                            }
+                                        ]
+                                    },
+                                    "Description": "Example HarvestJob2 description",
+                                    "ScheduleConfiguration": {
+                                        "StartTime": "2024-05-28T02:00:00.00Z",
+                                        "EndTime": "2024-05-28T12:00:00.00Z"
+                                    },
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName2/originEndpoint/exampleOriginEndpointName2/harvestJob/HarvestJobName2",
+                                    "CreatedAt": "2024-05-28T15:30:00.00Z",
+                                    "ModifiedAt": "2024-05-28T15:30:00.00Z",
+                                    "Status": "IN_PROGRESS",
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                                    "Tags": {
+                                        "key1": "value1",
+                                        "key2": "value2"
+                                    }
+                                }
+                            ],
+                            "NextToken": "someTokenValue"
+                        }
+                    },
+                    {
+                        "title": "ListHarvestJobs: Specify ChannelGroup, Channel only",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName"
+                        },
+                        "output": {
+                            "Items": [
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannelName",
+                                    "OriginEndpointName": "exampleOriginEndpointName",
+                                    "Destination": {
+                                        "S3Destination": {
+                                            "BucketName": "harvestJobS3DestinationBucket",
+                                            "DestinationPath": "manifests"
+                                        }
+                                    },
+                                    "HarvestJobName": "HarvestJobName",
+                                    "HarvestedManifests": {
+                                        "HlsManifests": [
+                                            {
+                                                "ManifestName": "HlsManifest"
+                                            }
+                                        ],
+                                        "DashManifests": [
+                                            {
+                                                "ManifestName": "DashManifest"
+                                            }
+                                        ],
+                                        "LowLatencyHlsManifests": [
+                                            {
+                                                "ManifestName": "LowLatencyHlsManifest"
+                                            }
+                                        ]
+                                    },
+                                    "Description": "Example HarvestJob description",
+                                    "ScheduleConfiguration": {
+                                        "StartTime": "2024-05-28T06:00:00.00Z",
+                                        "EndTime": "2024-05-28T12:00:00.00Z"
+                                    },
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName",
+                                    "CreatedAt": "2024-05-28T09:36:00.00Z",
+                                    "ModifiedAt": "2024-05-28T09:36:00.00Z",
+                                    "Status": "QUEUED",
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
+                                    "Tags": {
+                                        "key1": "value1",
+                                        "key2": "value2"
+                                    }
+                                },
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannelName",
+                                    "OriginEndpointName": "exampleOriginEndpointName2",
+                                    "Destination": {
+                                        "S3Destination": {
+                                            "BucketName": "harvestJobS3DestinationBucket",
+                                            "DestinationPath": "manifests"
+                                        }
+                                    },
+                                    "HarvestJobName": "HarvestJobName2",
+                                    "HarvestedManifests": {
+                                        "HlsManifests": [
+                                            {
+                                                "ManifestName": "HlsManifest"
+                                            }
+                                        ],
+                                        "DashManifests": [
+                                            {
+                                                "ManifestName": "DashManifest"
+                                            }
+                                        ],
+                                        "LowLatencyHlsManifests": [
+                                            {
+                                                "ManifestName": "LowLatencyHlsManifest"
+                                            }
+                                        ]
+                                    },
+                                    "Description": "Example HarvestJob2 description",
+                                    "ScheduleConfiguration": {
+                                        "StartTime": "2024-05-28T02:00:00.00Z",
+                                        "EndTime": "2024-05-28T12:00:00.00Z"
+                                    },
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName2/harvestJob/HarvestJobName2",
+                                    "CreatedAt": "2024-05-28T15:30:00.00Z",
+                                    "ModifiedAt": "2024-05-28T15:30:00.00Z",
+                                    "Status": "IN_PROGRESS",
+                                    "Tags": {
+                                        "key1": "value1",
+                                        "key2": "value2"
+                                    }
+                                }
+                            ],
+                            "NextToken": "someTokenValue"
+                        }
+                    },
+                    {
+                        "title": "ListHarvestJobs: Specify ChannelGroup, Channel, OriginEndpoint",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName"
+                        },
+                        "output": {
+                            "Items": [
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannelName",
+                                    "OriginEndpointName": "exampleOriginEndpointName",
+                                    "Destination": {
+                                        "S3Destination": {
+                                            "BucketName": "harvestJobS3DestinationBucket",
+                                            "DestinationPath": "manifests"
+                                        }
+                                    },
+                                    "HarvestJobName": "HarvestJobName",
+                                    "HarvestedManifests": {
+                                        "HlsManifests": [
+                                            {
+                                                "ManifestName": "HlsManifest"
+                                            }
+                                        ],
+                                        "DashManifests": [
+                                            {
+                                                "ManifestName": "DashManifest"
+                                            }
+                                        ],
+                                        "LowLatencyHlsManifests": [
+                                            {
+                                                "ManifestName": "LowLatencyHlsManifest"
+                                            }
+                                        ]
+                                    },
+                                    "Description": "Example HarvestJob description",
+                                    "ScheduleConfiguration": {
+                                        "StartTime": "2024-05-28T06:00:00.00Z",
+                                        "EndTime": "2024-05-28T12:00:00.00Z"
+                                    },
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName",
+                                    "CreatedAt": "2024-05-28T09:36:00.00Z",
+                                    "ModifiedAt": "2024-05-28T09:36:00.00Z",
+                                    "Status": "QUEUED",
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk="
+                                }
+                            ],
+                            "NextToken": "someTokenValue"
+                        }
+                    },
+                    {
+                        "title": "ListHarvestJobs: Specify ChannelGroup, Channel, OriginEndpoint + Status filter",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName",
+                            "Status": "QUEUED"
+                        },
+                        "output": {
+                            "Items": [
+                                {
+                                    "ChannelGroupName": "exampleChannelGroup",
+                                    "ChannelName": "exampleChannelName",
+                                    "OriginEndpointName": "exampleOriginEndpointName",
+                                    "Destination": {
+                                        "S3Destination": {
+                                            "BucketName": "harvestJobS3DestinationBucket",
+                                            "DestinationPath": "manifests"
+                                        }
+                                    },
+                                    "HarvestJobName": "HarvestJobName",
+                                    "HarvestedManifests": {
+                                        "HlsManifests": [
+                                            {
+                                                "ManifestName": "HlsManifest"
+                                            }
+                                        ],
+                                        "DashManifests": [
+                                            {
+                                                "ManifestName": "DashManifest"
+                                            }
+                                        ],
+                                        "LowLatencyHlsManifests": [
+                                            {
+                                                "ManifestName": "LowLatencyHlsManifest"
+                                            }
+                                        ]
+                                    },
+                                    "Description": "Example HarvestJob description",
+                                    "ScheduleConfiguration": {
+                                        "StartTime": "2024-05-28T06:00:00.00Z",
+                                        "EndTime": "2024-05-28T12:00:00.00Z"
+                                    },
+                                    "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannelName/originEndpoint/exampleOriginEndpointName/harvestJob/HarvestJobName",
+                                    "CreatedAt": "2024-05-28T09:36:00.00Z",
+                                    "ModifiedAt": "2024-05-28T09:36:00.00Z",
+                                    "Status": "QUEUED",
+                                    "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk="
+                                }
+                            ],
+                            "NextToken": "someTokenValue"
+                        }
+                    },
+                    {
+                        "title": "ListHarvestJobs: Empty response",
+                        "input": {
+                            "ChannelGroupName": "exampleChannelGroup",
+                            "ChannelName": "exampleChannelName",
+                            "OriginEndpointName": "exampleOriginEndpointName"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/channelGroup/{ChannelGroupName}/harvestJob",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#ListHarvestJobsRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelGroupName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel group to filter the harvest jobs by. If specified, only harvest jobs associated with channels in this group will be returned.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel to filter the harvest jobs by. If specified, only harvest jobs associated with this channel will be returned.</p>",
+                        "smithy.api#httpQuery": "channelName",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                    }
+                },
+                "OriginEndpointName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the origin endpoint to filter the harvest jobs by. If specified, only harvest jobs associated with this origin endpoint will be returned.</p>",
+                        "smithy.api#httpQuery": "originEndpointName",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 256
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status to filter the harvest jobs by. If specified, only harvest jobs with this status will be returned.</p>",
+                        "smithy.api#httpQuery": "includeStatus"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.mediapackagev2#ListResourceMaxResults",
+                    "traits": {
+                        "smithy.api#default": 10,
+                        "smithy.api#documentation": "<p>The maximum number of harvest jobs to return in a single request. If not specified, a default value will be used.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination. Provide this value in subsequent requests to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request object for listing harvest jobs.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#ListHarvestJobsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.mediapackagev2#HarvestJobsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of harvest job objects that match the specified criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token used for pagination. Include this value in subsequent requests to retrieve the next set of results. If null, there are no more results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response object containing the list of harvest jobs that match the specified criteria.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.mediapackagev2#ListHlsManifestConfiguration": {
@@ -4609,7 +6085,54 @@
                     "traits": {
                         "smithy.api#enumValue": "ORIGIN_ENDPOINT"
                     }
+                },
+                "HARVEST_JOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVEST_JOB"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.mediapackagev2#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#S3DestinationConfig": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.mediapackagev2#S3BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an S3 bucket within which harvested content will be exported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationPath": {
+                    "target": "com.amazonaws.mediapackagev2#S3DestinationPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path within the specified S3 bucket where the harvested content will be placed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration parameters for where in an S3 bucket to place the harvested content.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#S3DestinationPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\S]+$"
             }
         },
         "com.amazonaws.mediapackagev2#Scte": {
@@ -6141,6 +7664,54 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
+                    }
+                },
+                "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION"
+                    }
+                },
+                "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT"
+                    }
+                },
+                "TOO_MANY_IN_PROGRESS_HARVEST_JOBS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOO_MANY_IN_PROGRESS_HARVEST_JOBS"
+                    }
+                },
+                "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION"
+                    }
+                },
+                "INVALID_HARVEST_JOB_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_HARVEST_JOB_DURATION"
+                    }
+                },
+                "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE"
+                    }
+                },
+                "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION"
+                    }
+                },
+                "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED"
                     }
                 },
                 "CLIP_START_TIME_WITH_START_OR_END": {
