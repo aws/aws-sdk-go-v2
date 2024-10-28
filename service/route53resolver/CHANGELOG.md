@@ -1,3 +1,7 @@
+# v1.33.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2024-10-10)
 
 * **Feature**: Route 53 Resolver Forwarding Rules can now include a server name indication (SNI) in the target address for rules that use the DNS-over-HTTPS (DoH) protocol. When a DoH-enabled Outbound Resolver Endpoint forwards a request to a DoH server, it will provide the SNI in the TLS handshake.

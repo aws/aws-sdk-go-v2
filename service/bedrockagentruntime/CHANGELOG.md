@@ -1,3 +1,7 @@
+# v1.23.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2024-10-21)
 
 * **Feature**: Knowledge Bases for Amazon Bedrock now supports custom prompts and model parameters in the orchestrationConfiguration of the RetrieveAndGenerate API. The modelArn field accepts Custom Models and Imported Models ARNs.

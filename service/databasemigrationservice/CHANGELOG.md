@@ -1,3 +1,7 @@
+# v1.44.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-10-21)
 
 * **Feature**: Added support for tagging in StartReplicationTaskAssessmentRun API and introduced IsLatestTaskAssessmentRun and ResultStatistic fields for enhanced tracking and assessment result statistics.

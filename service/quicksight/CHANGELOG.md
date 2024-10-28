@@ -1,3 +1,7 @@
+# v1.77.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.0 (2024-10-17)
 
 * **Feature**: Add StartDashboardSnapshotJobSchedule API. RestoreAnalysis now supports restoring analysis to folders.

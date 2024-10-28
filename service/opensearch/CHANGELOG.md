@@ -1,3 +1,8 @@
+# v1.42.0 (2024-10-28)
+
+* **Feature**: Adds support for provisioning dedicated coordinator nodes. Coordinator nodes can be specified using the new NodeOptions parameter in ClusterConfig.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

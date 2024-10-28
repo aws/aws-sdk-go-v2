@@ -1,3 +1,7 @@
+# v1.48.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2024-10-18)
 
 * **Feature**: **BREAKING CHANGE**: Remove DataCatalog from Create/DeleteDataCatalog. Remove Status, ConnectionType, and Error from DataCatalog and DataCatalogSummary. These were released inadvertently with no functionality. They were not populated or populated with a default value. Code related to these changes can be safely removed.

@@ -1,3 +1,7 @@
+# v1.40.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2024-10-11)
 
 * **Feature**: Add zonal_shift.config.enabled attribute. Add new AdministrativeOverride construct in the describe-target-health API response to include information about the override status applied to a target.

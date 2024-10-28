@@ -1,3 +1,7 @@
+# v1.16.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2024-10-17)
 
 * **Feature**: Added the registrations status of REQUIRES_AUTHENTICATION

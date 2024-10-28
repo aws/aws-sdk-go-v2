@@ -1,3 +1,7 @@
+# v1.48.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.48.0 (2024-10-24)
 
 * **Feature**: This release adds support for EBS volumes attached to Amazon ECS Windows tasks running on EC2 instances.

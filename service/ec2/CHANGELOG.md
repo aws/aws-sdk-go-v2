@@ -1,3 +1,7 @@
+# v1.186.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.186.0 (2024-10-24)
 
 * **Feature**: This release includes a new API to describe some details of the Amazon Machine Images (AMIs) that were used to launch EC2 instances, even if those AMIs are no longer available for use.

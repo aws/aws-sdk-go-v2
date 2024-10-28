@@ -1,3 +1,7 @@
+# v1.23.4 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.3 (2024-10-10)
 
 * **Documentation**: Elastic Inference - Documentation update to add service shutdown notice.

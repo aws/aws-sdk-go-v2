@@ -1,3 +1,7 @@
+# v1.21.2 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.1 (2024-10-23)
 
 * **Documentation**: Doc updates for supporting converse

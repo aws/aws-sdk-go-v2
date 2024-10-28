@@ -1,3 +1,7 @@
+# v1.32.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2024-10-23)
 
 * **Feature**: Introducing InvokeRestApi which allows users to invoke the Apache Airflow REST API on the webserver with the specified inputs.

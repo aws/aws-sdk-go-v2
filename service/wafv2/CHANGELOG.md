@@ -1,3 +1,7 @@
+# v1.55.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2024-10-21)
 
 * **Feature**: Add a property to WebACL to indicate whether it's been retrofitted by Firewall Manager.

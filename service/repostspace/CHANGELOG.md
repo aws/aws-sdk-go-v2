@@ -1,3 +1,7 @@
+# v1.8.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2024-10-22)
 
 * **Feature**: Adds the BatchAddRole and BatchRemoveRole APIs.

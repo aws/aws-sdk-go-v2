@@ -1,3 +1,7 @@
+# v1.10.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2024-10-25)
 
 * **Feature**: API doc updates, and also support showing error message on a failed instance

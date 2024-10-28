@@ -1,3 +1,7 @@
+# v1.46.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.0 (2024-10-11)
 
 * **Feature**: This release provides new parameter "Context" in instance fleet clusters.

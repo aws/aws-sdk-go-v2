@@ -1,3 +1,7 @@
+# v1.19.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2024-10-14)
 
 * **Feature**: This release updates request validation regex for resource ARNs.

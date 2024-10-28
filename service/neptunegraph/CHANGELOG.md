@@ -1,3 +1,7 @@
+# v1.14.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2024-10-10)
 
 * **Feature**: Support for 16 m-NCU graphs available through account allowlisting

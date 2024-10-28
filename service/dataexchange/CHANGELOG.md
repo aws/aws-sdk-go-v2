@@ -1,3 +1,7 @@
+# v1.33.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2024-10-17)
 
 * **Feature**: This release adds Data Grant support, through which customers can programmatically create data grants to share with other AWS accounts and accept data grants from other AWS accounts.

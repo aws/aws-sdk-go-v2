@@ -1,3 +1,8 @@
+# v1.89.0 (2024-10-28)
+
+* **Feature**: This release adds support for Enhanced Monitoring and Performance Insights when restoring Aurora Limitless Database DB clusters. It also adds support for the os-upgrade pending maintenance action.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.88.0 (2024-10-22)
 
 * **Feature**: Global clusters now expose the Endpoint attribute as one of its fields. It is a Read/Write endpoint for the global cluster which resolves to the Global Cluster writer instance.

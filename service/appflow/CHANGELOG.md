@@ -1,3 +1,7 @@
+# v1.45.4 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.3 (2024-10-11)
 
 * **Documentation**: Doc only updates for clarification around OAuth2GrantType for Salesforce.

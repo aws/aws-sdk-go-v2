@@ -1,3 +1,7 @@
+# v1.2.4 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.3 (2024-10-24)
 
 * **Documentation**: Documentation update: added the default value of the Slurm configuration parameter scaleDownIdleTimeInSeconds to its description.

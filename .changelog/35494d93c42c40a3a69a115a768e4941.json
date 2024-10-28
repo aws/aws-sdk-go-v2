@@ -1,8 +1,0 @@
-{
-    "id": "35494d93-c42c-40a3-a69a-115a768e4941",
-    "type": "feature",
-    "description": "Adds support for provisioning dedicated coordinator nodes. Coordinator nodes can be specified using the new NodeOptions parameter in ClusterConfig.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

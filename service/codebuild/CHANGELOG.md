@@ -1,3 +1,7 @@
+# v1.47.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.0 (2024-10-25)
 
 * **Feature**: AWS CodeBuild now supports automatically retrying failed builds

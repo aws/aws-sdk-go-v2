@@ -1,3 +1,7 @@
+# v1.15.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2024-10-24)
 
 * **Feature**: Add a new field in chat response. This field can be used to support nested schemas in array fields

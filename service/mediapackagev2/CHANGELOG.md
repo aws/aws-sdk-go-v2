@@ -1,3 +1,8 @@
+# v1.19.0 (2024-10-28)
+
+* **Feature**: MediaPackage V2 Live to VOD Harvester is a MediaPackage V2 feature, which is used to export content from an origin endpoint to a S3 bucket.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2024-10-08)
 
 * **Dependency Update**: Updated to the latest SDK module versions

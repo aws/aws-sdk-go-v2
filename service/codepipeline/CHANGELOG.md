@@ -1,3 +1,7 @@
+# v1.36.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2024-10-14)
 
 * **Feature**: AWS CodePipeline V2 type pipelines now support automatically retrying failed stages and skipping stage for failed entry conditions.

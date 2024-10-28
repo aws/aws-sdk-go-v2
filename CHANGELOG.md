@@ -1,3 +1,20 @@
+# Release (2024-10-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.32.3
+  * **Bug Fix**: Improve handling of whitespace (or lack thereof) in sigv4 GetSignedRequestSignature.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.19.0](service/mediapackagev2/CHANGELOG.md#v1190-2024-10-28)
+  * **Feature**: MediaPackage V2 Live to VOD Harvester is a MediaPackage V2 feature, which is used to export content from an origin endpoint to a S3 bucket.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.42.0](service/opensearch/CHANGELOG.md#v1420-2024-10-28)
+  * **Feature**: Adds support for provisioning dedicated coordinator nodes. Coordinator nodes can be specified using the new NodeOptions parameter in ClusterConfig.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.89.0](service/rds/CHANGELOG.md#v1890-2024-10-28)
+  * **Feature**: This release adds support for Enhanced Monitoring and Performance Insights when restoring Aurora Limitless Database DB clusters. It also adds support for the os-upgrade pending maintenance action.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.34.3](service/storagegateway/CHANGELOG.md#v1343-2024-10-28)
+  * **Documentation**: Documentation update: Amazon FSx File Gateway will no longer be available to new customers.
+
 # Release (2024-10-25)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.50.1 (2024-10-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2024-10-11)
 
 * **Feature**: Added a new field for network connection details.
