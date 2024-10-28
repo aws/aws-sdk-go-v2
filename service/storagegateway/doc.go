@@ -5,6 +5,10 @@
 //
 // # Storage Gateway Service
 //
+// Amazon FSx File Gateway is no longer available to new customers. Existing
+// customers of FSx File Gateway can continue to use the service normally. For
+// capabilities similar to FSx File Gateway, visit [this blog post].
+//
 // Storage Gateway is the service that connects an on-premises software appliance
 // with cloud-based storage to provide seamless and secure integration between an
 // organization's on-premises IT environment and the Amazon Web Services storage
@@ -62,6 +66,7 @@
 // [Storage Gateway endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/sg.html
 // [Signing requests]: https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests
 // [Error responses]: https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses
+// [this blog post]: https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/
 // [Operations in Storage Gateway]: https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html
 // [Announcement: Heads-up – Longer Storage Gateway volume and snapshot IDs coming in 2016]: http://forums.aws.amazon.com/ann.jspa?annID=3557
 // [Longer EC2 and EBS resource IDs]: http://aws.amazon.com/ec2/faqs/#longer-ids

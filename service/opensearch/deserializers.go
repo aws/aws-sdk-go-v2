@@ -12893,6 +12893,11 @@ func awsRestjson1_deserializeDocumentClusterConfig(v **types.ClusterConfig, valu
 				sv.MultiAZWithStandbyEnabled = ptr.Bool(jtv)
 			}
 
+		case "NodeOptions":
+			if err := awsRestjson1_deserializeDocumentNodeOptionsList(&sv.NodeOptions, value); err != nil {
+				return err
+			}
+
 		case "WarmCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16333,6 +16338,147 @@ func awsRestjson1_deserializeDocumentNaturalLanguageQueryGenerationOptionsOutput
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeConfig(v **types.NodeConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeConfig
+	if *v == nil {
+		sv = &types.NodeConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerClass to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int32(int32(i64))
+			}
+
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OpenSearchPartitionInstanceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.OpenSearchPartitionInstanceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeOption(v **types.NodeOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NodeOption
+	if *v == nil {
+		sv = &types.NodeOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NodeConfig":
+			if err := awsRestjson1_deserializeDocumentNodeConfig(&sv.NodeConfig, value); err != nil {
+				return err
+			}
+
+		case "NodeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NodeOptionsNodeType to be of type string, got %T instead", value)
+				}
+				sv.NodeType = types.NodeOptionsNodeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNodeOptionsList(v *[]types.NodeOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NodeOption
+	if *v == nil {
+		cv = []types.NodeOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NodeOption
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentNodeOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

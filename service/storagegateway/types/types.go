@@ -70,12 +70,13 @@ type AutomaticTapeCreationRule struct {
 	noSmithyDocumentSerde
 }
 
-//	Describes a bandwidth rate limit interval for a gateway. A bandwidth rate
+// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
+// schedule consists of one or more bandwidth rate limit intervals. A bandwidth
+// rate limit interval defines a period of time on one or more days of the week,
+// during which bandwidth rate limits are specified for uploading, downloading, or
+// both.
 //
-// limit schedule consists of one or more bandwidth rate limit intervals. A
-// bandwidth rate limit interval defines a period of time on one or more days of
-// the week, during which bandwidth rate limits are specified for uploading,
-// downloading, or both.
+// FSx File Gateway does not support this feature.
 type BandwidthRateLimitInterval struct {
 
 	//  The days of the week component of the bandwidth rate limit interval,
@@ -113,6 +114,8 @@ type BandwidthRateLimitInterval struct {
 	//  The average download rate limit component of the bandwidth rate limit
 	// interval, in bits per second. This field does not appear in the response if the
 	// download rate limit is not set.
+	//
+	// S3 File Gateway does not support this feature.
 	AverageDownloadRateLimitInBitsPerSec *int64
 
 	//  The average upload rate limit component of the bandwidth rate limit interval,
@@ -121,7 +124,7 @@ type BandwidthRateLimitInterval struct {
 	//
 	// For Tape Gateway and Volume Gateway, the minimum value is 51200 .
 	//
-	// For S3 File Gateway and FSx File Gateway, the minimum value is 104857600 .
+	// This field is required for S3 File Gateway, and the minimum value is 104857600 .
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	noSmithyDocumentSerde
@@ -440,6 +443,12 @@ type GatewayInfo struct {
 	GatewayOperationalState *string
 
 	// The type of the gateway.
+	//
+	// Amazon FSx File Gateway is no longer available to new customers. Existing
+	// customers of FSx File Gateway can continue to use the service normally. For
+	// capabilities similar to FSx File Gateway, visit [this blog post].
+	//
+	// [this blog post]: https://aws.amazon.com/blogs/storage/switch-your-file-share-access-from-amazon-fsx-file-gateway-to-amazon-fsx-for-windows-file-server/
 	GatewayType *string
 
 	// The type of hardware or software platform on which the gateway is running.
@@ -604,7 +613,7 @@ type NFSFileShareInfo struct {
 	//
 	// Bucket ARN:
 	//
-	//     arn:aws:s3:::my-bucket/prefix/
+	//     arn:aws:s3:::amzn-s3-demo-bucket/prefix/
 	//
 	// Access point ARN:
 	//
@@ -864,7 +873,7 @@ type SMBFileShareInfo struct {
 	//
 	// Bucket ARN:
 	//
-	//     arn:aws:s3:::my-bucket/prefix/
+	//     arn:aws:s3:::amzn-s3-demo-bucket/prefix/
 	//
 	// Access point ARN:
 	//

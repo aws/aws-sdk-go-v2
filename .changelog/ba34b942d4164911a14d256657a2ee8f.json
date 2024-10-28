@@ -1,0 +1,8 @@
+{
+    "id": "ba34b942-d416-4911-a14d-256657a2ee8f",
+    "type": "documentation",
+    "description": "Documentation update: Amazon FSx File Gateway will no longer be available to new customers.",
+    "modules": [
+        "service/storagegateway"
+    ]
+}

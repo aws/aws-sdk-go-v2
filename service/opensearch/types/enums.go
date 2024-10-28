@@ -602,6 +602,23 @@ func (NaturalLanguageQueryGenerationDesiredState) Values() []NaturalLanguageQuer
 	}
 }
 
+type NodeOptionsNodeType string
+
+// Enum values for NodeOptionsNodeType
+const (
+	NodeOptionsNodeTypeCoordinator NodeOptionsNodeType = "coordinator"
+)
+
+// Values returns all known values for NodeOptionsNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NodeOptionsNodeType) Values() []NodeOptionsNodeType {
+	return []NodeOptionsNodeType{
+		"coordinator",
+	}
+}
+
 type NodeStatus string
 
 // Enum values for NodeStatus

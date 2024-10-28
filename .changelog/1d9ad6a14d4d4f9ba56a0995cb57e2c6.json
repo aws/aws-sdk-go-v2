@@ -1,0 +1,8 @@
+{
+    "id": "1d9ad6a1-4d4d-4f9b-a56a-0995cb57e2c6",
+    "type": "feature",
+    "description": "This release adds support for Enhanced Monitoring and Performance Insights when restoring Aurora Limitless Database DB clusters. It also adds support for the os-upgrade pending maintenance action.",
+    "modules": [
+        "service/rds"
+    ]
+}

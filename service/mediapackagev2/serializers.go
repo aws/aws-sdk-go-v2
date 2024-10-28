@@ -17,6 +17,109 @@ import (
 	"math"
 )
 
+type awsRestjson1_serializeOpCancelHarvestJob struct {
+}
+
+func (*awsRestjson1_serializeOpCancelHarvestJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCancelHarvestJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CancelHarvestJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCancelHarvestJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCancelHarvestJobInput(v *CancelHarvestJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelGroupName == nil || len(*v.ChannelGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelGroupName must not be empty")}
+	}
+	if v.ChannelGroupName != nil {
+		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
+			return err
+		}
+	}
+
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelName must not be empty")}
+	}
+	if v.ChannelName != nil {
+		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	if v.ETag != nil {
+		locationName := "X-Amzn-Update-If-Match"
+		encoder.SetHeader(locationName).String(*v.ETag)
+	}
+
+	if v.HarvestJobName == nil || len(*v.HarvestJobName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HarvestJobName must not be empty")}
+	}
+	if v.HarvestJobName != nil {
+		if err := encoder.SetURI("HarvestJobName").String(*v.HarvestJobName); err != nil {
+			return err
+		}
+	}
+
+	if v.OriginEndpointName == nil || len(*v.OriginEndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OriginEndpointName must not be empty")}
+	}
+	if v.OriginEndpointName != nil {
+		if err := encoder.SetURI("OriginEndpointName").String(*v.OriginEndpointName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateChannel struct {
 }
 
@@ -227,6 +330,156 @@ func awsRestjson1_serializeOpDocumentCreateChannelGroupInput(v *CreateChannelGro
 
 	if v.Tags != nil {
 		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateHarvestJob struct {
+}
+
+func (*awsRestjson1_serializeOpCreateHarvestJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateHarvestJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateHarvestJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateHarvestJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateHarvestJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateHarvestJobInput(v *CreateHarvestJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelGroupName == nil || len(*v.ChannelGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelGroupName must not be empty")}
+	}
+	if v.ChannelGroupName != nil {
+		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
+			return err
+		}
+	}
+
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelName must not be empty")}
+	}
+	if v.ChannelName != nil {
+		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		locationName := "X-Amzn-Client-Token"
+		encoder.SetHeader(locationName).String(*v.ClientToken)
+	}
+
+	if v.OriginEndpointName == nil || len(*v.OriginEndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OriginEndpointName must not be empty")}
+	}
+	if v.OriginEndpointName != nil {
+		if err := encoder.SetURI("OriginEndpointName").String(*v.OriginEndpointName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateHarvestJobInput(v *CreateHarvestJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Destination != nil {
+		ok := object.Key("Destination")
+		if err := awsRestjson1_serializeDocumentDestination(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HarvestedManifests != nil {
+		ok := object.Key("HarvestedManifests")
+		if err := awsRestjson1_serializeDocumentHarvestedManifests(v.HarvestedManifests, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HarvestJobName != nil {
+		ok := object.Key("HarvestJobName")
+		ok.String(*v.HarvestJobName)
+	}
+
+	if v.ScheduleConfiguration != nil {
+		ok := object.Key("ScheduleConfiguration")
+		if err := awsRestjson1_serializeDocumentHarvesterScheduleConfiguration(v.ScheduleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
 			return err
 		}
@@ -1040,6 +1293,104 @@ func awsRestjson1_serializeOpHttpBindingsGetChannelPolicyInput(v *GetChannelPoli
 	return nil
 }
 
+type awsRestjson1_serializeOpGetHarvestJob struct {
+}
+
+func (*awsRestjson1_serializeOpGetHarvestJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetHarvestJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetHarvestJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetHarvestJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetHarvestJobInput(v *GetHarvestJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelGroupName == nil || len(*v.ChannelGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelGroupName must not be empty")}
+	}
+	if v.ChannelGroupName != nil {
+		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
+			return err
+		}
+	}
+
+	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelName must not be empty")}
+	}
+	if v.ChannelName != nil {
+		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
+			return err
+		}
+	}
+
+	if v.HarvestJobName == nil || len(*v.HarvestJobName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member HarvestJobName must not be empty")}
+	}
+	if v.HarvestJobName != nil {
+		if err := encoder.SetURI("HarvestJobName").String(*v.HarvestJobName); err != nil {
+			return err
+		}
+	}
+
+	if v.OriginEndpointName == nil || len(*v.OriginEndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OriginEndpointName must not be empty")}
+	}
+	if v.OriginEndpointName != nil {
+		if err := encoder.SetURI("OriginEndpointName").String(*v.OriginEndpointName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetOriginEndpoint struct {
 }
 
@@ -1362,6 +1713,97 @@ func awsRestjson1_serializeOpHttpBindingsListChannelsInput(v *ListChannelsInput,
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListHarvestJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListHarvestJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListHarvestJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListHarvestJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channelGroup/{ChannelGroupName}/harvestJob")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListHarvestJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListHarvestJobsInput(v *ListHarvestJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelGroupName == nil || len(*v.ChannelGroupName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelGroupName must not be empty")}
+	}
+	if v.ChannelGroupName != nil {
+		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
+			return err
+		}
+	}
+
+	if v.ChannelName != nil {
+		encoder.SetQuery("channelName").String(*v.ChannelName)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.OriginEndpointName != nil {
+		encoder.SetQuery("originEndpointName").String(*v.OriginEndpointName)
+	}
+
+	if len(v.Status) > 0 {
+		encoder.SetQuery("includeStatus").String(string(v.Status))
 	}
 
 	return nil
@@ -2516,6 +2958,20 @@ func awsRestjson1_serializeDocumentDashUtcTiming(v *types.DashUtcTiming, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDestination(v *types.Destination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Destination != nil {
+		ok := object.Key("S3Destination")
+		if err := awsRestjson1_serializeDocumentS3DestinationConfig(v.S3Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDrmSystems(v []types.DrmSystem, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2644,6 +3100,143 @@ func awsRestjson1_serializeDocumentForceEndpointErrorConfiguration(v *types.Forc
 		if err := awsRestjson1_serializeDocumentEndpointErrorConditions(v.EndpointErrorConditions, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedDashManifest(v *types.HarvestedDashManifest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManifestName != nil {
+		ok := object.Key("ManifestName")
+		ok.String(*v.ManifestName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedDashManifestsList(v []types.HarvestedDashManifest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentHarvestedDashManifest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedHlsManifest(v *types.HarvestedHlsManifest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManifestName != nil {
+		ok := object.Key("ManifestName")
+		ok.String(*v.ManifestName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedHlsManifestsList(v []types.HarvestedHlsManifest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentHarvestedHlsManifest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedLowLatencyHlsManifest(v *types.HarvestedLowLatencyHlsManifest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ManifestName != nil {
+		ok := object.Key("ManifestName")
+		ok.String(*v.ManifestName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedLowLatencyHlsManifestsList(v []types.HarvestedLowLatencyHlsManifest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentHarvestedLowLatencyHlsManifest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvestedManifests(v *types.HarvestedManifests, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DashManifests != nil {
+		ok := object.Key("DashManifests")
+		if err := awsRestjson1_serializeDocumentHarvestedDashManifestsList(v.DashManifests, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HlsManifests != nil {
+		ok := object.Key("HlsManifests")
+		if err := awsRestjson1_serializeDocumentHarvestedHlsManifestsList(v.HlsManifests, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LowLatencyHlsManifests != nil {
+		ok := object.Key("LowLatencyHlsManifests")
+		if err := awsRestjson1_serializeDocumentHarvestedLowLatencyHlsManifestsList(v.LowLatencyHlsManifests, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarvesterScheduleConfiguration(v *types.HarvesterScheduleConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndTime != nil {
+		ok := object.Key("EndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndTime))
+	}
+
+	if v.StartTime != nil {
+		ok := object.Key("StartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3DestinationConfig(v *types.S3DestinationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.DestinationPath != nil {
+		ok := object.Key("DestinationPath")
+		ok.String(*v.DestinationPath)
 	}
 
 	return nil

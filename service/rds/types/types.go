@@ -4202,10 +4202,23 @@ type PendingMaintenanceAction struct {
 	//
 	// For more information about maintenance actions, see [Maintaining a DB instance].
 	//
-	// Valid Values: system-update | db-upgrade | hardware-maintenance |
-	// ca-certificate-rotation
+	// Valid Values:
 	//
+	//   - ca-certificate-rotation
+	//
+	//   - db-upgrade
+	//
+	//   - hardware-maintenance
+	//
+	//   - os-upgrade
+	//
+	//   - system-update
+	//
+	// For more information about these actions, see [Maintenance actions for Amazon Aurora] or [Maintenance actions for Amazon RDS].
+	//
+	// [Maintenance actions for Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-rds
 	// [Maintaining a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
+	// [Maintenance actions for Amazon Aurora]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#maintenance-actions-aurora
 	Action *string
 
 	// The date of the maintenance window when the action is applied. The maintenance

@@ -5696,6 +5696,13 @@ func awsRestjson1_serializeDocumentClusterConfig(v *types.ClusterConfig, value s
 		ok.Boolean(*v.MultiAZWithStandbyEnabled)
 	}
 
+	if v.NodeOptions != nil {
+		ok := object.Key("NodeOptions")
+		if err := awsRestjson1_serializeDocumentNodeOptionsList(v.NodeOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.WarmCount != nil {
 		ok := object.Key("WarmCount")
 		ok.Integer(*v.WarmCount)
@@ -6101,6 +6108,60 @@ func awsRestjson1_serializeDocumentNaturalLanguageQueryGenerationOptionsInput(v 
 		ok.String(string(v.DesiredState))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeConfig(v *types.NodeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Count != nil {
+		ok := object.Key("Count")
+		ok.Integer(*v.Count)
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeOption(v *types.NodeOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NodeConfig != nil {
+		ok := object.Key("NodeConfig")
+		if err := awsRestjson1_serializeDocumentNodeConfig(v.NodeConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NodeType) > 0 {
+		ok := object.Key("NodeType")
+		ok.String(string(v.NodeType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNodeOptionsList(v []types.NodeOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNodeOption(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

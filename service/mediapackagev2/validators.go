@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCancelHarvestJob struct {
+}
+
+func (*validateOpCancelHarvestJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelHarvestJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelHarvestJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelHarvestJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateChannelGroup struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateHarvestJob struct {
+}
+
+func (*validateOpCreateHarvestJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHarvestJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHarvestJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHarvestJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +270,26 @@ func (m *validateOpGetChannelPolicy) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetHarvestJob struct {
+}
+
+func (*validateOpGetHarvestJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHarvestJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHarvestJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHarvestJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOriginEndpoint struct {
 }
 
@@ -285,6 +345,26 @@ func (m *validateOpListChannels) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListChannelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHarvestJobs struct {
+}
+
+func (*validateOpListHarvestJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHarvestJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHarvestJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHarvestJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,12 +550,20 @@ func (m *validateOpUpdateOriginEndpoint) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCancelHarvestJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelHarvestJob{}, middleware.After)
+}
+
 func addOpCreateChannelGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannelGroup{}, middleware.After)
 }
 
 func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
+}
+
+func addOpCreateHarvestJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHarvestJob{}, middleware.After)
 }
 
 func addOpCreateOriginEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -514,6 +602,10 @@ func addOpGetChannelPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannelPolicy{}, middleware.After)
 }
 
+func addOpGetHarvestJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHarvestJob{}, middleware.After)
+}
+
 func addOpGetOriginEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOriginEndpoint{}, middleware.After)
 }
@@ -524,6 +616,10 @@ func addOpGetOriginEndpointPolicyValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListChannelsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListChannels{}, middleware.After)
+}
+
+func addOpListHarvestJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHarvestJobs{}, middleware.After)
 }
 
 func addOpListOriginEndpointsValidationMiddleware(stack *middleware.Stack) error {
@@ -668,6 +764,25 @@ func validateCreateLowLatencyHlsManifests(v []types.CreateLowLatencyHlsManifestC
 	}
 }
 
+func validateDestination(v *types.Destination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Destination"}
+	if v.S3Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Destination"))
+	} else if v.S3Destination != nil {
+		if err := validateS3DestinationConfig(v.S3Destination); err != nil {
+			invalidParams.AddNested("S3Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryption(v *types.Encryption) error {
 	if v == nil {
 		return nil
@@ -700,6 +815,165 @@ func validateEncryptionContractConfiguration(v *types.EncryptionContractConfigur
 	}
 	if len(v.PresetSpeke20Video) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PresetSpeke20Video"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedDashManifest(v *types.HarvestedDashManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedDashManifest"}
+	if v.ManifestName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedDashManifestsList(v []types.HarvestedDashManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedDashManifestsList"}
+	for i := range v {
+		if err := validateHarvestedDashManifest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedHlsManifest(v *types.HarvestedHlsManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedHlsManifest"}
+	if v.ManifestName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedHlsManifestsList(v []types.HarvestedHlsManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedHlsManifestsList"}
+	for i := range v {
+		if err := validateHarvestedHlsManifest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedLowLatencyHlsManifest(v *types.HarvestedLowLatencyHlsManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedLowLatencyHlsManifest"}
+	if v.ManifestName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedLowLatencyHlsManifestsList(v []types.HarvestedLowLatencyHlsManifest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedLowLatencyHlsManifestsList"}
+	for i := range v {
+		if err := validateHarvestedLowLatencyHlsManifest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvestedManifests(v *types.HarvestedManifests) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvestedManifests"}
+	if v.HlsManifests != nil {
+		if err := validateHarvestedHlsManifestsList(v.HlsManifests); err != nil {
+			invalidParams.AddNested("HlsManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashManifests != nil {
+		if err := validateHarvestedDashManifestsList(v.DashManifests); err != nil {
+			invalidParams.AddNested("DashManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LowLatencyHlsManifests != nil {
+		if err := validateHarvestedLowLatencyHlsManifestsList(v.LowLatencyHlsManifests); err != nil {
+			invalidParams.AddNested("LowLatencyHlsManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarvesterScheduleConfiguration(v *types.HarvesterScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarvesterScheduleConfiguration"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DestinationConfig(v *types.S3DestinationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfig"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if v.DestinationPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -771,6 +1045,30 @@ func validateStartTag(v *types.StartTag) error {
 	}
 }
 
+func validateOpCancelHarvestJobInput(v *CancelHarvestJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelHarvestJobInput"}
+	if v.ChannelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.OriginEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointName"))
+	}
+	if v.HarvestJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarvestJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateChannelGroupInput(v *CreateChannelGroupInput) error {
 	if v == nil {
 		return nil
@@ -796,6 +1094,48 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateHarvestJobInput(v *CreateHarvestJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHarvestJobInput"}
+	if v.ChannelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.OriginEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointName"))
+	}
+	if v.HarvestedManifests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarvestedManifests"))
+	} else if v.HarvestedManifests != nil {
+		if err := validateHarvestedManifests(v.HarvestedManifests); err != nil {
+			invalidParams.AddNested("HarvestedManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScheduleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfiguration"))
+	} else if v.ScheduleConfiguration != nil {
+		if err := validateHarvesterScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -992,6 +1332,30 @@ func validateOpGetChannelPolicyInput(v *GetChannelPolicyInput) error {
 	}
 }
 
+func validateOpGetHarvestJobInput(v *GetHarvestJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHarvestJobInput"}
+	if v.ChannelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
+	}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.OriginEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginEndpointName"))
+	}
+	if v.HarvestJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarvestJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetOriginEndpointInput(v *GetOriginEndpointInput) error {
 	if v == nil {
 		return nil
@@ -1039,6 +1403,21 @@ func validateOpListChannelsInput(v *ListChannelsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListChannelsInput"}
+	if v.ChannelGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHarvestJobsInput(v *ListHarvestJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHarvestJobsInput"}
 	if v.ChannelGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelGroupName"))
 	}

@@ -556,6 +556,9 @@ type ClusterConfig struct {
 	// [Configuring a multi-AZ domain in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html
 	MultiAZWithStandbyEnabled *bool
 
+	// List of node options for the domain.
+	NodeOptions []NodeOption
+
 	// The number of warm nodes in the cluster.
 	WarmCount *int32
 
@@ -1569,6 +1572,33 @@ type NaturalLanguageQueryGenerationOptionsOutput struct {
 	// The desired state of the natural language query generation feature. Valid
 	// values are ENABLED and DISABLED.
 	DesiredState NaturalLanguageQueryGenerationDesiredState
+
+	noSmithyDocumentSerde
+}
+
+// Container for specifying configuration of any node type.
+type NodeConfig struct {
+
+	// The number of nodes of a particular node type in the cluster.
+	Count *int32
+
+	// A boolean that indicates whether a particular node type is enabled or not.
+	Enabled *bool
+
+	// The instance type of a particular node type in the cluster.
+	Type OpenSearchPartitionInstanceType
+
+	noSmithyDocumentSerde
+}
+
+// Container for specifying node type.
+type NodeOption struct {
+
+	// Container for specifying configuration of any node type.
+	NodeConfig *NodeConfig
+
+	// Container for node type like coordinating.
+	NodeType NodeOptionsNodeType
 
 	noSmithyDocumentSerde
 }

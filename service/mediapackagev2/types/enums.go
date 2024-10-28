@@ -231,6 +231,31 @@ func (EndpointErrorCondition) Values() []EndpointErrorCondition {
 	}
 }
 
+type HarvestJobStatus string
+
+// Enum values for HarvestJobStatus
+const (
+	HarvestJobStatusQueued     HarvestJobStatus = "QUEUED"
+	HarvestJobStatusInProgress HarvestJobStatus = "IN_PROGRESS"
+	HarvestJobStatusCancelled  HarvestJobStatus = "CANCELLED"
+	HarvestJobStatusCompleted  HarvestJobStatus = "COMPLETED"
+	HarvestJobStatusFailed     HarvestJobStatus = "FAILED"
+)
+
+// Values returns all known values for HarvestJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarvestJobStatus) Values() []HarvestJobStatus {
+	return []HarvestJobStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"CANCELLED",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type InputType string
 
 // Enum values for InputType
@@ -317,6 +342,7 @@ const (
 	ResourceTypeNotFoundChannelGroup   ResourceTypeNotFound = "CHANNEL_GROUP"
 	ResourceTypeNotFoundChannel        ResourceTypeNotFound = "CHANNEL"
 	ResourceTypeNotFoundOriginEndpoint ResourceTypeNotFound = "ORIGIN_ENDPOINT"
+	ResourceTypeNotFoundHarvestJob     ResourceTypeNotFound = "HARVEST_JOB"
 )
 
 // Values returns all known values for ResourceTypeNotFound. Note that this can be
@@ -328,6 +354,7 @@ func (ResourceTypeNotFound) Values() []ResourceTypeNotFound {
 		"CHANNEL_GROUP",
 		"CHANNEL",
 		"ORIGIN_ENDPOINT",
+		"HARVEST_JOB",
 	}
 }
 
@@ -434,6 +461,14 @@ const (
 	ValidationExceptionTypeDrmSignalingMismatchSegmentEncryptionStatus           ValidationExceptionType = "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
 	ValidationExceptionTypeOnlyCmafInputTypeAllowForceEndpointErrorConfiguration ValidationExceptionType = "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION"
 	ValidationExceptionTypeSourceDisruptionsEnabledIncorrectly                   ValidationExceptionType = "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY"
+	ValidationExceptionTypeHarvestedManifestHasStartEndFilterConfiguration       ValidationExceptionType = "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION"
+	ValidationExceptionTypeHarvestedManifestNotFoundOnEndpoint                   ValidationExceptionType = "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT"
+	ValidationExceptionTypeTooManyInProgressHarvestJobs                          ValidationExceptionType = "TOO_MANY_IN_PROGRESS_HARVEST_JOBS"
+	ValidationExceptionTypeHarvestJobIneligibleForCancellation                   ValidationExceptionType = "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION"
+	ValidationExceptionTypeInvalidHarvestJobDuration                             ValidationExceptionType = "INVALID_HARVEST_JOB_DURATION"
+	ValidationExceptionTypeHarvestJobS3DestinationMissingOrIncomplete            ValidationExceptionType = "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE"
+	ValidationExceptionTypeHarvestJobUnableToWriteToS3Destination                ValidationExceptionType = "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION"
+	ValidationExceptionTypeHarvestJobCustomerEndpointReadAccessDenied            ValidationExceptionType = "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED"
 	ValidationExceptionTypeClipStartTimeWithStartOrEnd                           ValidationExceptionType = "CLIP_START_TIME_WITH_START_OR_END"
 	ValidationExceptionTypeStartTagTimeOffsetInvalid                             ValidationExceptionType = "START_TAG_TIME_OFFSET_INVALID"
 )
@@ -491,6 +526,14 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS",
 		"ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION",
 		"SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY",
+		"HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION",
+		"HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT",
+		"TOO_MANY_IN_PROGRESS_HARVEST_JOBS",
+		"HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION",
+		"INVALID_HARVEST_JOB_DURATION",
+		"HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE",
+		"HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION",
+		"HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED",
 		"CLIP_START_TIME_WITH_START_OR_END",
 		"START_TAG_TIME_OFFSET_INVALID",
 	}

@@ -94,6 +94,9 @@ type UpdateSMBFileShareInput struct {
 	//
 	// FileShareName must be set if an S3 prefix name is set in LocationARN , or if an
 	// access point or access point alias is used.
+	//
+	// A valid SMB file share name cannot contain the following characters: [ , ] , # ,
+	// ; , < , > , : , " , \ , / , | , ? , * , + , or ASCII control characters 1-31 .
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on

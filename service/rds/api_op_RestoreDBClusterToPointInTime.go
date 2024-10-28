@@ -192,6 +192,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// [IAM database authentication for MariaDB, MySQL, and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
+	// Specifies whether to turn on Performance Insights for the DB cluster.
+	EnablePerformanceInsights *bool
+
 	// The life cycle type for this DB cluster.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
@@ -270,6 +273,26 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	KmsKeyId *string
 
+	// The interval, in seconds, between points when Enhanced Monitoring metrics are
+	// collected for the DB cluster. To turn off collecting Enhanced Monitoring
+	// metrics, specify 0 .
+	//
+	// If MonitoringRoleArn is specified, also set MonitoringInterval to a value other
+	// than 0 .
+	//
+	// Valid Values: 0 | 1 | 5 | 10 | 15 | 30 | 60
+	//
+	// Default: 0
+	MonitoringInterval *int32
+
+	// The Amazon Resource Name (ARN) for the IAM role that permits RDS to send
+	// Enhanced Monitoring metrics to Amazon CloudWatch Logs. An example is
+	// arn:aws:iam:123456789012:role/emaccess .
+	//
+	// If MonitoringInterval is set to a value other than 0 , supply a
+	// MonitoringRoleArn value.
+	MonitoringRoleArn *string
+
 	// The network type of the DB cluster.
 	//
 	// Valid Values:
@@ -293,6 +316,35 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// DB clusters are associated with a default option group that can't be modified.
 	OptionGroupName *string
+
+	// The Amazon Web Services KMS key identifier for encryption of Performance
+	// Insights data.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key.
+	//
+	// If you don't specify a value for PerformanceInsightsKMSKeyId , then Amazon RDS
+	// uses your default KMS key. There is a default KMS key for your Amazon Web
+	// Services account. Your Amazon Web Services account has a different default KMS
+	// key for each Amazon Web Services Region.
+	PerformanceInsightsKMSKeyId *string
+
+	// The number of days to retain Performance Insights data.
+	//
+	// Valid Values:
+	//
+	//   - 7
+	//
+	//   - month * 31, where month is a number of months from 1-23. Examples: 93 (3
+	//   months * 31), 341 (11 months * 31), 589 (19 months * 31)
+	//
+	//   - 731
+	//
+	// Default: 7 days
+	//
+	// If you specify a retention period that isn't valid, such as 94 , Amazon RDS
+	// issues an error.
+	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the new DB cluster accepts connections.
 	//

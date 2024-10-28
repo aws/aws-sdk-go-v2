@@ -280,6 +280,9 @@ type ModifyDBClusterInput struct {
 	// Limitless Database to create a DB shard group.
 	//
 	// Valid for: Aurora DB clusters only
+	//
+	// This setting is no longer used. Instead use the ClusterScalabilityType setting
+	// when you create your Aurora Limitless Database DB cluster.
 	EnableLimitlessDatabase *bool
 
 	// Specifies whether read replicas can forward write operations to the writer DB
