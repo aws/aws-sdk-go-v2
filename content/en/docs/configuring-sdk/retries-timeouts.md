@@ -60,6 +60,7 @@ For example, you can the following code to wrap the standard client retryer with
 
 ```go
 import "context"
+import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/aws/retry"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -86,6 +87,7 @@ For example, you can the following code to wrap the standard client retryer with
 ```go
 import "context"
 import "time"
+import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/aws/retry"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -113,6 +115,7 @@ For example, you can the following code to wrap the standard client retryer to i
 ```go
 import "context"
 import "time"
+import "github.com/aws/aws-sdk-go-v2/aws"
 import "github.com/aws/aws-sdk-go-v2/aws/retry"
 import "github.com/aws/aws-sdk-go-v2/config"
 import "github.com/aws/aws-sdk-go-v2/service/s3"
