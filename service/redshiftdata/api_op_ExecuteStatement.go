@@ -89,6 +89,10 @@ type ExecuteStatementInput struct {
 	// The parameters for the SQL statement.
 	Parameters []types.SqlParameter
 
+	// The data format of the result of the SQL statement. If no format is specified,
+	// the default is JSON.
+	ResultFormat types.ResultFormatString
+
 	// The name or ARN of the secret that enables access to the database. This
 	// parameter is required when authenticating using Secrets Manager.
 	SecretArn *string

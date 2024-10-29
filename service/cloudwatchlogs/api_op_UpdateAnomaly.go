@@ -53,6 +53,14 @@ type UpdateAnomalyInput struct {
 	// [ListAnomalies]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html
 	AnomalyId *string
 
+	// Set this to true to prevent CloudWatch Logs from displaying this behavior as an
+	// anomaly in the future. The behavior is then treated as baseline behavior.
+	// However, if similar but more severe occurrences of this behavior occur in the
+	// future, those will still be reported as anomalies.
+	//
+	// The default is false
+	Baseline *bool
+
 	// If you are suppressing or unsuppressing an pattern, specify its unique ID here.
 	// You can find pattern IDs by using the [ListAnomalies]operation.
 	//

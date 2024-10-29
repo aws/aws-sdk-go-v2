@@ -120,6 +120,24 @@ type FieldMemberStringValue struct {
 
 func (*FieldMemberStringValue) isField() {}
 
+// The results of the SQL statement.
+//
+// The following types satisfy this interface:
+//
+//	QueryRecordsMemberCSVRecords
+type QueryRecords interface {
+	isQueryRecords()
+}
+
+// The results of the SQL statement in CSV format.
+type QueryRecordsMemberCSVRecords struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*QueryRecordsMemberCSVRecords) isQueryRecords() {}
+
 // A parameter used in a SQL statement.
 type SqlParameter struct {
 
@@ -164,6 +182,9 @@ type StatementData struct {
 	// One or more SQL statements. Each query string in the array corresponds to one
 	// of the queries in a batch query request.
 	QueryStrings []string
+
+	// The data format of the result of the SQL statement.
+	ResultFormat ResultFormatString
 
 	// The name or Amazon Resource Name (ARN) of the secret that enables access to the
 	// database.
@@ -263,4 +284,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isField() {}
+func (*UnknownUnionMember) isField()        {}
+func (*UnknownUnionMember) isQueryRecords() {}

@@ -408,9 +408,8 @@ type AnnotationConsolidationConfig struct {
 	// The Amazon Resource Name (ARN) of a Lambda function implements the logic for [annotation consolidation]
 	// and to process output data.
 	//
-	// This parameter is required for all labeling jobs. For [built-in task types], use one of the
-	// following Amazon SageMaker Ground Truth Lambda function ARNs for
-	// AnnotationConsolidationLambdaArn . For custom labeling workflows, see [Post-annotation Lambda].
+	// For [built-in task types], use one of the following Amazon SageMaker Ground Truth Lambda function
+	// ARNs for AnnotationConsolidationLambdaArn . For custom labeling workflows, see [Post-annotation Lambda].
 	//
 	// Bounding box - Finds the most similar boxes from different workers based on the
 	// Jaccard index of the boxes.
@@ -4434,7 +4433,10 @@ type DefaultEbsStorageSettings struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of settings that apply to spaces created in the domain.
+// The default settings for shared spaces that users create in the domain.
+//
+// SageMaker applies these settings only to shared spaces. It doesn't apply them
+// to private spaces.
 type DefaultSpaceSettings struct {
 
 	// The settings for assigning a custom file system to a domain. Permitted users
@@ -13003,21 +13005,6 @@ type OutputConfig struct {
 	//   tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"} .
 	//   Labels inside the txt file should be separated by newlines.
 	//
-	//   - EIA : Compilation for the Elastic Inference Accelerator supports the
-	//   following compiler options:
-	//
-	//   - precision_mode : Specifies the precision of compiled artifacts. Supported
-	//   values are "FP16" and "FP32" . Default is "FP32" .
-	//
-	//   - signature_def_key : Specifies the signature to use for models in SavedModel
-	//   format. Defaults is TensorFlow's default signature def key.
-	//
-	//   - output_names : Specifies a list of output tensor names for models in
-	//   FrozenGraph format. Set at most one API field, either: signature_def_key or
-	//   output_names .
-	//
-	// For example: {"precision_mode": "FP32", "output_names": ["output:0"]}
-	//
 	// [OutputConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OutputConfig.html
 	// [Neuron Compiler CLI Reference Guide]: https://awsdocs-neuron.readthedocs-hosted.com/en/latest/compiler/neuronx-cc/api-reference-guide/neuron-compiler-cli-reference-guide.html
 	CompilerOptions *string
@@ -13342,11 +13329,11 @@ type PendingProductionVariantSummary struct {
 	// This member is required.
 	VariantName *string
 
-	// The size of the Elastic Inference (EI) instance to use for the production
-	// variant. EI instances provide on-demand GPU computing for inference. For more
-	// information, see [Using Elastic Inference in Amazon SageMaker].
+	// This parameter is no longer supported. Elastic Inference (EI) is no longer
+	// available.
 	//
-	// [Using Elastic Inference in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+	// This parameter was used to specify the size of the EI instance to use for the
+	// production variant.
 	AcceleratorType ProductionVariantAcceleratorType
 
 	// The number of instances associated with the variant.
@@ -14147,11 +14134,11 @@ type ProductionVariant struct {
 	// This member is required.
 	VariantName *string
 
-	// The size of the Elastic Inference (EI) instance to use for the production
-	// variant. EI instances provide on-demand GPU computing for inference. For more
-	// information, see [Using Elastic Inference in Amazon SageMaker].
+	// This parameter is no longer supported. Elastic Inference (EI) is no longer
+	// available.
 	//
-	// [Using Elastic Inference in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+	// This parameter was used to specify the size of the EI instance to use for the
+	// production variant.
 	AcceleratorType ProductionVariantAcceleratorType
 
 	// The timeout value, in seconds, for your inference container to pass health
@@ -19135,19 +19122,34 @@ type UserSettings struct {
 	// Indicates whether auto-mounting of an EFS volume is supported for the user
 	// profile. The DefaultAsDomain value is only supported for user profiles. Do not
 	// use the DefaultAsDomain value when setting this parameter for a domain.
+	//
+	// SageMaker applies this setting only to private spaces that the user creates in
+	// the domain. SageMaker doesn't apply this setting to shared spaces.
 	AutoMountHomeEFS AutoMountHomeEFS
 
 	// The Canvas app settings.
+	//
+	// SageMaker applies these settings only to private spaces that SageMaker creates
+	// for the Canvas app.
 	CanvasAppSettings *CanvasAppSettings
 
 	// The Code Editor application settings.
+	//
+	// SageMaker applies these settings only to private spaces that the user creates
+	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	CodeEditorAppSettings *CodeEditorAppSettings
 
 	// The settings for assigning a custom file system to a user profile. Permitted
 	// users can access this file system in Amazon SageMaker Studio.
+	//
+	// SageMaker applies these settings only to private spaces that the user creates
+	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	CustomFileSystemConfigs []CustomFileSystemConfig
 
 	// Details about the POSIX identity that is used for file system operations.
+	//
+	// SageMaker applies these settings only to private spaces that the user creates
+	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	CustomPosixUserConfig *CustomPosixUserConfig
 
 	// The default experience that the user is directed to when accessing the domain.
@@ -19160,9 +19162,15 @@ type UserSettings struct {
 	DefaultLandingUri *string
 
 	// The execution role for the user.
+	//
+	// SageMaker applies this setting only to private spaces that the user creates in
+	// the domain. SageMaker doesn't apply this setting to shared spaces.
 	ExecutionRole *string
 
 	// The settings for the JupyterLab application.
+	//
+	// SageMaker applies these settings only to private spaces that the user creates
+	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	JupyterLabAppSettings *JupyterLabAppSettings
 
 	// The Jupyter server's app settings.
@@ -19190,12 +19198,18 @@ type UserSettings struct {
 	// Amazon SageMaker adds a security group to allow NFS traffic from Amazon
 	// SageMaker Studio. Therefore, the number of security groups that you can specify
 	// is one less than the maximum number shown.
+	//
+	// SageMaker applies these settings only to private spaces that the user creates
+	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	SecurityGroups []string
 
 	// Specifies options for sharing Amazon SageMaker Studio notebooks.
 	SharingSettings *SharingSettings
 
 	// The storage settings for a space.
+	//
+	// SageMaker applies these settings only to private spaces that the user creates
+	// in the domain. SageMaker doesn't apply these settings to shared spaces.
 	SpaceStorageSettings *DefaultSpaceStorageSettings
 
 	// Whether the user can access Studio. If this value is set to DISABLED , the user

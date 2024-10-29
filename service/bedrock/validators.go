@@ -90,6 +90,26 @@ func (m *validateOpCreateGuardrailVersion) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInferenceProfile struct {
+}
+
+func (*validateOpCreateInferenceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInferenceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInferenceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInferenceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateModelCopyJob struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpDeleteImportedModel) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteImportedModelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteInferenceProfile struct {
+}
+
+func (*validateOpDeleteInferenceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInferenceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInferenceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInferenceProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -686,6 +726,10 @@ func addOpCreateGuardrailVersionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateGuardrailVersion{}, middleware.After)
 }
 
+func addOpCreateInferenceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInferenceProfile{}, middleware.After)
+}
+
 func addOpCreateModelCopyJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateModelCopyJob{}, middleware.After)
 }
@@ -716,6 +760,10 @@ func addOpDeleteGuardrailValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteImportedModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteImportedModel{}, middleware.After)
+}
+
+func addOpDeleteInferenceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInferenceProfile{}, middleware.After)
 }
 
 func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
@@ -1839,6 +1887,29 @@ func validateOpCreateGuardrailVersionInput(v *CreateGuardrailVersionInput) error
 	}
 }
 
+func validateOpCreateInferenceProfileInput(v *CreateInferenceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInferenceProfileInput"}
+	if v.InferenceProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceProfileName"))
+	}
+	if v.ModelSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSource"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateModelCopyJobInput(v *CreateModelCopyJobInput) error {
 	if v == nil {
 		return nil
@@ -2074,6 +2145,21 @@ func validateOpDeleteImportedModelInput(v *DeleteImportedModelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteImportedModelInput"}
 	if v.ModelIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInferenceProfileInput(v *DeleteInferenceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInferenceProfileInput"}
+	if v.InferenceProfileIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InferenceProfileIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

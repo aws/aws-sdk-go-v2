@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of inference profiles that you can use.
+// Returns a list of inference profiles that you can use. For more information,
+// see [Increase throughput and resilience with cross-region inference in Amazon Bedrock]. in the Amazon Bedrock User Guide.
+//
+// [Increase throughput and resilience with cross-region inference in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 func (c *Client) ListInferenceProfiles(ctx context.Context, params *ListInferenceProfilesInput, optFns ...func(*Options)) (*ListInferenceProfilesOutput, error) {
 	if params == nil {
 		params = &ListInferenceProfilesInput{}
@@ -39,6 +42,16 @@ type ListInferenceProfilesInput struct {
 	// the request, enter the token returned in the nextToken field in the response in
 	// this field to return the next batch of results.
 	NextToken *string
+
+	// Filters for inference profiles that match the type you specify.
+	//
+	//   - SYSTEM_DEFINED – The inference profile is defined by Amazon Bedrock. You can
+	//   route inference requests across regions with these inference profiles.
+	//
+	//   - APPLICATION – The inference profile was created by a user. This type of
+	//   inference profile can track metrics and costs when invoking the model in it. The
+	//   inference profile may route requests to one or multiple regions.
+	TypeEquals types.InferenceProfileType
 
 	noSmithyDocumentSerde
 }

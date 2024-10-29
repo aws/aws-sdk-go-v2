@@ -501,6 +501,11 @@ func awsRestjson1_serializeOpDocumentCreateCollaborationInput(v *CreateCollabora
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AnalyticsEngine) > 0 {
+		ok := object.Key("analyticsEngine")
+		ok.String(string(v.AnalyticsEngine))
+	}
+
 	if v.CreatorDisplayName != nil {
 		ok := object.Key("creatorDisplayName")
 		ok.String(*v.CreatorDisplayName)
@@ -5697,6 +5702,13 @@ func awsRestjson1_serializeOpDocumentStartProtectedQueryInput(v *StartProtectedQ
 	object := value.Object()
 	defer object.Close()
 
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsRestjson1_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResultConfiguration != nil {
 		ok := object.Key("resultConfiguration")
 		if err := awsRestjson1_serializeDocumentProtectedQueryResultConfiguration(v.ResultConfiguration, ok); err != nil {
@@ -7503,6 +7515,24 @@ func awsRestjson1_serializeDocumentAnalysisTemplateArnList(v []string, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentComputeConfiguration(v types.ComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ComputeConfigurationMemberWorker:
+		av := object.Key("worker")
+		if err := awsRestjson1_serializeDocumentWorkerComputeConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConfiguredTableAnalysisRulePolicy(v types.ConfiguredTableAnalysisRulePolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8119,6 +8149,11 @@ func awsRestjson1_serializeDocumentProtectedQueryS3OutputConfiguration(v *types.
 		ok.String(string(v.ResultFormat))
 	}
 
+	if v.SingleFileOutput != nil {
+		ok := object.Key("singleFileOutput")
+		ok.Boolean(*v.SingleFileOutput)
+	}
+
 	return nil
 }
 
@@ -8236,5 +8271,22 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkerComputeConfiguration(v *types.WorkerComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Number != nil {
+		ok := object.Key("number")
+		ok.Integer(*v.Number)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }

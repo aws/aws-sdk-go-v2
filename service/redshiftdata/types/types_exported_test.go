@@ -43,3 +43,21 @@ var _ *bool
 var _ *int64
 var _ *float64
 var _ []byte
+
+func ExampleQueryRecords_outputUsage() {
+	var union types.QueryRecords
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.QueryRecordsMemberCSVRecords:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string

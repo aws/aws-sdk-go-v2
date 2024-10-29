@@ -1,0 +1,8 @@
+{
+    "id": "19f55fd9-f72d-4fbe-b887-1e730edf88fe",
+    "type": "feature",
+    "description": "Adding `notebook-al2-v3` as allowed value to SageMaker NotebookInstance PlatformIdentifier attribute",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -134,6 +134,18 @@ func TestCheckSnapshot_GetStatementResult(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetStatementResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStatementResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStatementResultV2")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDatabases(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDatabases(context.Background(), nil, func(o *Options) {
@@ -246,6 +258,18 @@ func TestUpdateSnapshot_GetStatementResult(t *testing.T) {
 	_, err := svc.GetStatementResult(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetStatementResult")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetStatementResultV2(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStatementResultV2(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStatementResultV2")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

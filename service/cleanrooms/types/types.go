@@ -560,6 +560,19 @@ type BatchGetSchemaError struct {
 	noSmithyDocumentSerde
 }
 
+//	Information related to the utilization of resources that have been billed or
+//
+// charged for in a given context, such as a protected query.
+type BilledResourceUtilization struct {
+
+	//  The number of Clean Rooms Processing Unit (CRPU) hours that have been billed.
+	//
+	// This member is required.
+	Units *float64
+
+	noSmithyDocumentSerde
+}
+
 // The multi-party data share environment. The collaboration contains metadata
 // about its purpose and participants.
 type Collaboration struct {
@@ -611,6 +624,9 @@ type Collaboration struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	//  The analytics engine for the collaboration.
+	AnalyticsEngine AnalyticsEngine
 
 	// The settings for client-side encryption for cryptographic computing.
 	DataEncryptionMetadata *DataEncryptionMetadata
@@ -782,7 +798,7 @@ type CollaborationConfiguredAudienceModelAssociation struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -834,7 +850,7 @@ type CollaborationConfiguredAudienceModelAssociationSummary struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Only supports
-	// AWS account ID.
+	// Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -1216,6 +1232,9 @@ type CollaborationSummary struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	//  The analytics engine.
+	AnalyticsEngine AnalyticsEngine
+
 	// The ARN of a member in a collaboration.
 	MembershipArn *string
 
@@ -1240,6 +1259,26 @@ type Column struct {
 
 	noSmithyDocumentSerde
 }
+
+//	The configuration of the compute resources for an analysis with the Spark
+//
+// analytics engine.
+//
+// The following types satisfy this interface:
+//
+//	ComputeConfigurationMemberWorker
+type ComputeConfiguration interface {
+	isComputeConfiguration()
+}
+
+// The worker configuration for the compute environment.
+type ComputeConfigurationMemberWorker struct {
+	Value WorkerComputeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ComputeConfigurationMemberWorker) isComputeConfiguration() {}
 
 //	The configuration details.
 //
@@ -3171,6 +3210,9 @@ type ProtectedQuery struct {
 	// This member is required.
 	Status ProtectedQueryStatus
 
+	//  The compute configuration for the protected query.
+	ComputeConfiguration ComputeConfiguration
+
 	// The sensitivity parameters of the differential privacy results of the protected
 	// query.
 	DifferentialPrivacy *DifferentialPrivacyParameters
@@ -3326,6 +3368,11 @@ type ProtectedQueryS3OutputConfiguration struct {
 	// The S3 prefix to unload the protected query results.
 	KeyPrefix *string
 
+	// Indicates whether files should be output as a single file ( TRUE ) or output as
+	// multiple files ( FALSE ). This parameter is only supported for analyses with the
+	// Spark analytics engine.
+	SingleFileOutput *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -3359,6 +3406,9 @@ type ProtectedQuerySQLParameters struct {
 
 // Contains statistics about the execution of the protected query.
 type ProtectedQueryStatistics struct {
+
+	//  The billed resource utilization.
+	BilledResourceUtilization *BilledResourceUtilization
 
 	// The duration of the protected query, from creation until query completion.
 	TotalDurationInMillis *int64
@@ -3394,8 +3444,7 @@ type ProtectedQuerySummary struct {
 	// This member is required.
 	ReceiverConfigurations []ReceiverConfiguration
 
-	// The status of the protected query. Value values are `SUBMITTED`, `STARTED`,
-	// `CANCELLED`, `CANCELLING`, `FAILED`, `SUCCESS`, `TIMED_OUT`.
+	// The status of the protected query.
 	//
 	// This member is required.
 	Status ProtectedQueryStatus
@@ -3473,13 +3522,14 @@ type ReceiverConfiguration struct {
 // A schema is a relation within a collaboration.
 type Schema struct {
 
-	// The analysis rule types associated with the schema. Currently, only one entry
-	// is present.
+	// The analysis rule types that are associated with the schema. Currently, only
+	// one entry is present.
 	//
 	// This member is required.
 	AnalysisRuleTypes []AnalysisRuleType
 
-	// The unique ARN for the collaboration that the schema belongs to.
+	// The unique Amazon Resource Name (ARN) for the collaboration that the schema
+	// belongs to.
 	//
 	// This member is required.
 	CollaborationArn *string
@@ -3489,12 +3539,12 @@ type Schema struct {
 	// This member is required.
 	CollaborationId *string
 
-	// The columns for the relation this schema represents.
+	// The columns for the relation that this schema represents.
 	//
 	// This member is required.
 	Columns []Column
 
-	// The time the schema was created.
+	// The time at which the schema was created.
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -3525,18 +3575,18 @@ type Schema struct {
 	// This member is required.
 	SchemaStatusDetails []SchemaStatusDetail
 
-	// The type of schema. The only valid value is currently `TABLE`.
+	// The type of schema.
 	//
 	// This member is required.
 	Type SchemaType
 
-	// The time the schema was last updated.
+	// The most recent time at which the schema was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
 	// The analysis method for the schema. The only valid value is currently
-	// DIRECT_QUERY.
+	// DIRECT_QUERY .
 	AnalysisMethod AnalysisMethod
 
 	// The schema type properties.
@@ -3643,7 +3693,7 @@ type SchemaSummary struct {
 	// This member is required.
 	Name *string
 
-	// The type of schema object. The only valid schema type is currently `TABLE`.
+	// The type of schema object.
 	//
 	// This member is required.
 	Type SchemaType
@@ -3713,6 +3763,20 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+//	The configuration of the compute resources for workers running an analysis
+//
+// with the Clean Rooms SQL analytics engine.
+type WorkerComputeConfiguration struct {
+
+	//  The number of workers.
+	Number *int32
+
+	//  The worker compute configuration type.
+	Type WorkerComputeType
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -3727,6 +3791,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAnalysisRulePolicy()                             {}
 func (*UnknownUnionMember) isAnalysisRulePolicyV1()                           {}
 func (*UnknownUnionMember) isAnalysisSource()                                 {}
+func (*UnknownUnionMember) isComputeConfiguration()                           {}
 func (*UnknownUnionMember) isConfigurationDetails()                           {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicy()              {}
 func (*UnknownUnionMember) isConfiguredTableAnalysisRulePolicyV1()            {}

@@ -12,8 +12,10 @@ import (
 	"time"
 )
 
-// Gets information about an inference profile. For more information, see the
+// Gets information about an inference profile. For more information, see [Increase throughput and resilience with cross-region inference in Amazon Bedrock]. in the
 // Amazon Bedrock User Guide.
+//
+// [Increase throughput and resilience with cross-region inference in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
 func (c *Client) GetInferenceProfile(ctx context.Context, params *GetInferenceProfileInput, optFns ...func(*Options)) (*GetInferenceProfileOutput, error) {
 	if params == nil {
 		params = &GetInferenceProfileInput{}
@@ -31,7 +33,7 @@ func (c *Client) GetInferenceProfile(ctx context.Context, params *GetInferencePr
 
 type GetInferenceProfileInput struct {
 
-	// The unique identifier of the inference profile.
+	// The ID or Amazon Resource Name (ARN) of the inference profile.
 	//
 	// This member is required.
 	InferenceProfileIdentifier *string
@@ -62,13 +64,19 @@ type GetInferenceProfileOutput struct {
 	Models []types.InferenceProfileModel
 
 	// The status of the inference profile. ACTIVE means that the inference profile is
-	// available to use.
+	// ready to be used.
 	//
 	// This member is required.
 	Status types.InferenceProfileStatus
 
-	// The type of the inference profile. SYSTEM_DEFINED means that the inference
-	// profile is defined by Amazon Bedrock.
+	// The type of the inference profile. The following types are possible:
+	//
+	//   - SYSTEM_DEFINED – The inference profile is defined by Amazon Bedrock. You can
+	//   route inference requests across regions with these inference profiles.
+	//
+	//   - APPLICATION – The inference profile was created by a user. This type of
+	//   inference profile can track metrics and costs when invoking the model in it. The
+	//   inference profile may route requests to one or multiple regions.
 	//
 	// This member is required.
 	Type types.InferenceProfileType

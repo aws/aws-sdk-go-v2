@@ -1,0 +1,8 @@
+{
+    "id": "bc32758c-5c42-4079-963e-1357287e9c89",
+    "type": "feature",
+    "description": "Adding a new API GetStatementResultV2 that supports CSV formatted results from ExecuteStatement and BatchExecuteStatement calls.",
+    "modules": [
+        "service/redshiftdata"
+    ]
+}

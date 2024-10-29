@@ -1,0 +1,8 @@
+{
+    "id": "390ae55c-6558-4a0c-a1c5-aab76acf2f51",
+    "type": "feature",
+    "description": "Update Application Inference Profile",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

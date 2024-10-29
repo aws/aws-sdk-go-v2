@@ -1,0 +1,8 @@
+{
+    "id": "e36a67b1-5cc8-407f-a7d6-7c05c29f0320",
+    "type": "feature",
+    "description": "This release adds the option for customers to configure analytics engine when creating a collaboration, and introduces the new SPARK analytics engine type in addition to maintaining the legacy CLEAN_ROOMS_SQL engine type.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

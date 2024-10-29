@@ -6,65 +6,60 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate tags with a resource. For more information, see [Tagging resources] in the [Amazon Bedrock User Guide].
+// Deletes an application inference profile. For more information, see [Increase throughput and resilience with cross-region inference in Amazon Bedrock]. in the
+// Amazon Bedrock User Guide.
 //
-// [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
-// [Tagging resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
-func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
+// [Increase throughput and resilience with cross-region inference in Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html
+func (c *Client) DeleteInferenceProfile(ctx context.Context, params *DeleteInferenceProfileInput, optFns ...func(*Options)) (*DeleteInferenceProfileOutput, error) {
 	if params == nil {
-		params = &TagResourceInput{}
+		params = &DeleteInferenceProfileInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TagResource", params, optFns, c.addOperationTagResourceMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteInferenceProfile", params, optFns, c.addOperationDeleteInferenceProfileMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*TagResourceOutput)
+	out := result.(*DeleteInferenceProfileOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type TagResourceInput struct {
+type DeleteInferenceProfileInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to tag.
+	// The Amazon Resource Name (ARN) or ID of the application inference profile to
+	// delete.
 	//
 	// This member is required.
-	ResourceARN *string
-
-	// Tags to associate with the resource.
-	//
-	// This member is required.
-	Tags []types.Tag
+	InferenceProfileIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-type TagResourceOutput struct {
+type DeleteInferenceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteInferenceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTagResource{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInferenceProfile{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTagResource{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInferenceProfile{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TagResource"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteInferenceProfile"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -116,10 +111,10 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteInferenceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInferenceProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -152,10 +147,10 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opTagResource(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteInferenceProfile(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "TagResource",
+		OperationName: "DeleteInferenceProfile",
 	}
 }
