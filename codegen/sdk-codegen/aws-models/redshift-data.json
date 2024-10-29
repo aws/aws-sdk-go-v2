@@ -149,6 +149,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
+                },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>"
+                    }
                 }
             },
             "traits": {
@@ -299,8 +305,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 63
-                },
-                "smithy.api#pattern": "^[a-z]([a-z0-9]|-[a-z0-9])*$"
+                }
             }
         },
         "com.amazonaws.redshiftdata#ColumnList": {
@@ -603,6 +608,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
+                },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement.</p>"
+                    }
                 }
             },
             "traits": {
@@ -867,6 +878,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
                     }
+                },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement. If no format is specified, the default is JSON.</p>"
+                    }
                 }
             },
             "traits": {
@@ -985,6 +1002,12 @@
                 "target": "com.amazonaws.redshiftdata#Field"
             }
         },
+        "com.amazonaws.redshiftdata#FormattedSqlRecords": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshiftdata#QueryRecords"
+            }
+        },
         "com.amazonaws.redshiftdata#GetStatementResult": {
             "type": "operation",
             "input": {
@@ -1005,7 +1028,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement. \n       A token is returned to page through the statement results. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement in JSON format. \n       The <code>ExecuteStatement</code> or <code>BatchExecuteStatement</code> operation that ran the SQL statement must have specified <code>ResultFormat</code> as <code>JSON</code>\n       , or let the format default to JSON.\n       A token is returned to page through the statement results.</p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1041,7 +1064,7 @@
                 "Records": {
                     "target": "com.amazonaws.redshiftdata#SqlRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The results of the SQL statement.</p>",
+                        "smithy.api#documentation": "<p>The results of the SQL statement in JSON format.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1056,6 +1079,96 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. \n       You can use this number to estimate the number of calls to the <code>GetStatementResult</code> operation needed to page through the results. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#GetStatementResultV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshiftdata#GetStatementResultV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.redshiftdata#GetStatementResultV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshiftdata#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftdata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.redshiftdata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement in CSV format. \n      The <code>ExecuteStatement</code> or <code>BatchExecuteStatement</code> operation that ran the SQL statement must have specified <code>ResultFormat</code> as <code>CSV</code>.\n      A token is returned to page through the statement results.</p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n      <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Records"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#GetStatementResultV2Request": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.redshiftdata#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the SQL statement whose results are to be fetched. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. \n      A suffix indicates then number of the SQL statement.\n      For example, <code>d9b6c0c9-0747-4bf4-b142-e8883122f766:2</code> has a suffix of <code>:2</code> that indicates the second SQL statement of a batch query.\n      This identifier is returned by <code>BatchExecuteStatment</code>, <code>ExecuteStatment</code>, and <code>ListStatements</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned NextToken value in the next NextToken parameter and retrying the command. If the NextToken field is empty, all response records have been retrieved for the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.redshiftdata#GetStatementResultV2Response": {
+            "type": "structure",
+            "members": {
+                "Records": {
+                    "target": "com.amazonaws.redshiftdata#FormattedSqlRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the SQL statement in CSV format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ColumnMetadata": {
+                    "target": "com.amazonaws.redshiftdata#ColumnMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties (metadata) of a column.</p>"
+                    }
+                },
+                "TotalNumRows": {
+                    "target": "com.amazonaws.redshiftdata#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. \n      You can use this number to estimate the number of calls to the <code>GetStatementResultV2</code> operation needed to page through the results. </p>"
+                    }
+                },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement.</p>"
                     }
                 },
                 "NextToken": {
@@ -1564,6 +1677,20 @@
                 }
             }
         },
+        "com.amazonaws.redshiftdata#QueryRecords": {
+            "type": "union",
+            "members": {
+                "CSVRecords": {
+                    "target": "com.amazonaws.redshiftdata#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the SQL statement in CSV format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results of the SQL statement.</p>"
+            }
+        },
         "com.amazonaws.redshiftdata#QueryTimeoutException": {
             "type": "structure",
             "members": {
@@ -1598,6 +1725,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshiftdata#GetStatementResult"
+                },
+                {
+                    "target": "com.amazonaws.redshiftdata#GetStatementResultV2"
                 },
                 {
                     "target": "com.amazonaws.redshiftdata#ListDatabases"
@@ -2278,6 +2408,21 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.redshiftdata#ResultFormatString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "JSON",
+                        "value": "JSON"
+                    },
+                    {
+                        "name": "CSV",
+                        "value": "CSV"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshiftdata#SchemaList": {
             "type": "list",
             "member": {
@@ -2415,6 +2560,12 @@
                     "target": "com.amazonaws.redshiftdata#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The session identifier of the query.</p>"
+                    }
+                },
+                "ResultFormat": {
+                    "target": "com.amazonaws.redshiftdata#ResultFormatString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the result of the SQL statement.</p>"
                     }
                 }
             },

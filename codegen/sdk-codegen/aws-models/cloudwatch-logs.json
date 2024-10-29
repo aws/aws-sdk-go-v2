@@ -497,6 +497,9 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudwatchlogs#Baseline": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudwatchlogs#Boolean": {
             "type": "boolean"
         },
@@ -9871,6 +9874,12 @@
                     "target": "com.amazonaws.cloudwatchlogs#SuppressionPeriod",
                     "traits": {
                         "smithy.api#documentation": "<p>If you are temporarily suppressing an anomaly or pattern, use this structure to specify\n      how long the suppression is to last.</p>"
+                    }
+                },
+                "baseline": {
+                    "target": "com.amazonaws.cloudwatchlogs#Baseline",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this to <code>true</code> to prevent CloudWatch Logs from displaying this behavior as an anomaly in the future. The behavior is then treated as \n      baseline behavior. However, if similar but \n    more severe occurrences of this behavior occur in the future, those will still be reported as anomalies. </p>\n         <p>The default is <code>false</code>\n         </p>"
                     }
                 }
             },
