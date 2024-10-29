@@ -1,3 +1,19 @@
+# Release (2024-10-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.22.0](service/bedrock/CHANGELOG.md#v1220-2024-10-29)
+  * **Feature**: Update Application Inference Profile
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.19.0](service/cleanrooms/CHANGELOG.md#v1190-2024-10-29)
+  * **Feature**: This release adds the option for customers to configure analytics engine when creating a collaboration, and introduces the new SPARK analytics engine type in addition to maintaining the legacy CLEAN_ROOMS_SQL engine type.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.43.0](service/cloudwatchlogs/CHANGELOG.md#v1430-2024-10-29)
+  * **Feature**: Added support for new optional baseline parameter in the UpdateAnomaly API. For UpdateAnomaly requests with baseline set to True, The anomaly behavior is then treated as baseline behavior. However, more severe occurrences of this behavior will still be reported as anomalies.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.21.0](service/iotfleetwise/CHANGELOG.md#v1210-2024-10-29)
+  * **Feature**: Updated BatchCreateVehicle and BatchUpdateVehicle APIs: LimitExceededException has been added and the maximum number of vehicles in a batch has been set to 10 explicitly
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.31.0](service/redshiftdata/CHANGELOG.md#v1310-2024-10-29)
+  * **Feature**: Adding a new API GetStatementResultV2 that supports CSV formatted results from ExecuteStatement and BatchExecuteStatement calls.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.164.0](service/sagemaker/CHANGELOG.md#v11640-2024-10-29)
+  * **Feature**: Adding `notebook-al2-v3` as allowed value to SageMaker NotebookInstance PlatformIdentifier attribute
+
 # Release (2024-10-28)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "9e300e83-7591-4fdc-a3f0-281e75e765de",
-    "type": "feature",
-    "description": "Added support for new optional baseline parameter in the UpdateAnomaly API. For UpdateAnomaly requests with baseline set to True, The anomaly behavior is then treated as baseline behavior. However, more severe occurrences of this behavior will still be reported as anomalies.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

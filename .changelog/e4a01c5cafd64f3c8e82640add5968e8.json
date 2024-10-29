@@ -1,8 +1,0 @@
-{
-    "id": "e4a01c5c-afd6-4f3c-8e82-640add5968e8",
-    "type": "feature",
-    "description": "Update Application Inference Profile",
-    "modules": [
-        "service/bedrock"
-    ]
-}
