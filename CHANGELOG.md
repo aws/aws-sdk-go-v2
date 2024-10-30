@@ -1,3 +1,44 @@
+# Release (2024-10-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.39.0](service/appsync/CHANGELOG.md#v1390-2024-10-30)
+  * **Feature**: This release adds support for AppSync Event APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.115.0](service/connect/CHANGELOG.md#v11150-2024-10-30)
+  * **Feature**: Updated the public documentation for the UserIdentityInfo object to accurately reflect the character limits for the FirstName and LastName fields, which were previously listed as 1-100 characters.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.43.0](service/datasync/CHANGELOG.md#v1430-2024-10-30)
+  * **Feature**: AWS DataSync now supports Enhanced mode tasks. This task mode supports transfer of virtually unlimited numbers of objects with enhanced metrics, more detailed logs, and higher performance than Basic mode. This mode currently supports transfers between Amazon S3 locations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.187.0](service/ec2/CHANGELOG.md#v11870-2024-10-30)
+  * **Feature**: This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.49.0](service/ecs/CHANGELOG.md#v1490-2024-10-30)
+  * **Feature**: This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.0.0](service/geomaps/CHANGELOG.md#v100-2024-10-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Release of Amazon Location Maps API. Maps enables you to build digital maps that showcase your locations, visualize your data, and unlock insights to drive your business
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.0.0](service/geoplaces/CHANGELOG.md#v100-2024-10-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Release of Amazon Location Places API. Places enables you to quickly search, display, and filter places, businesses, and locations based on proximity, category, and name
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.0.0](service/georoutes/CHANGELOG.md#v100-2024-10-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Release of Amazon Location Routes API. Routes enables you to plan efficient routes and streamline deliveries by leveraging real-time traffic, vehicle restrictions, and turn-by-turn directions.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.15.0](service/keyspaces/CHANGELOG.md#v1150-2024-10-30)
+  * **Feature**: Adds support for interacting with user-defined types (UDTs) through the following new operations: Create-Type, Delete-Type, List-Types, Get-Type.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.44.0](service/networkfirewall/CHANGELOG.md#v1440-2024-10-30)
+  * **Feature**: AWS Network Firewall now supports configuring TCP idle timeout
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.43.0](service/opensearch/CHANGELOG.md#v1430-2024-10-30)
+  * **Feature**: This release introduces the new OpenSearch user interface (Dashboards), a new web-based application that can be associated with multiple data sources across OpenSearch managed clusters, serverless collections, and Amazon S3, so that users can gain a comprehensive insights in an unified interface.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.17.0](service/opensearchserverless/CHANGELOG.md#v1170-2024-10-30)
+  * **Feature**: Neo Integration via IAM Identity Center (IdC)
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.51.0](service/redshift/CHANGELOG.md#v1510-2024-10-30)
+  * **Feature**: This release launches S3 event integrations to create and manage integrations from an Amazon S3 source into an Amazon Redshift database.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.24.0](service/redshiftserverless/CHANGELOG.md#v1240-2024-10-30)
+  * **Feature**: Adds and updates API members for the Redshift Serverless AI-driven scaling and optimization feature using the price-performance target setting.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.46.0](service/route53/CHANGELOG.md#v1460-2024-10-30)
+  * **Feature**: This release adds support for TLSA, SSHFP, SVCB, and HTTPS record types.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.165.0](service/sagemaker/CHANGELOG.md#v11650-2024-10-30)
+  * **Feature**: Added support for Model Registry Staging construct. Users can define series of stages that models can progress through for model workflows and lifecycle. This simplifies tracking and managing models as they transition through development, testing, and production stages.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.30.0](service/workmail/CHANGELOG.md#v1300-2024-10-30)
+  * **Feature**: This release adds support for Multi-Factor Authentication (MFA) and Personal Access Tokens through integration with AWS IAM Identity Center.
+
 # Release (2024-10-29)
 
 ## Module Highlights

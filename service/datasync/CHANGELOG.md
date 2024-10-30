@@ -1,3 +1,7 @@
+# v1.43.0 (2024-10-30)
+
+* **Feature**: AWS DataSync now supports Enhanced mode tasks. This task mode supports transfer of virtually unlimited numbers of objects with enhanced metrics, more detailed logs, and higher performance than Basic mode. This mode currently supports transfers between Amazon S3 locations.
+
 # v1.42.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

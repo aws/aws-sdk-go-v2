@@ -1,8 +1,0 @@
-{
-    "id": "69e55b97-52c6-45a4-adc0-bacc5ef30913",
-    "type": "feature",
-    "description": "Release of Amazon Location Places API. Places enables you to quickly search, display, and filter places, businesses, and locations based on proximity, category, and name",
-    "modules": [
-        "service/geoplaces"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.49.0 (2024-10-30)
+
+* **Feature**: This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.
+
 # v1.48.1 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

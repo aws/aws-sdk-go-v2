@@ -1,8 +1,0 @@
-{
-    "id": "ea67cb41-53e5-41b9-b977-dcdf5d077ab2",
-    "type": "feature",
-    "description": "This release adds support for AppSync Event APIs.",
-    "modules": [
-        "service/appsync"
-    ]
-}

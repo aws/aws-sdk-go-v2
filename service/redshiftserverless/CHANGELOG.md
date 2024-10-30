@@ -1,3 +1,7 @@
+# v1.24.0 (2024-10-30)
+
+* **Feature**: Adds and updates API members for the Redshift Serverless AI-driven scaling and optimization feature using the price-performance target setting.
+
 # v1.23.4 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

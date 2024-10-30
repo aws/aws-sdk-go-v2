@@ -1,8 +1,0 @@
-{
-    "id": "b19af23f-9bfb-4402-8e0c-1a16cf400e8a",
-    "type": "feature",
-    "description": "This release supports service deployments and service revisions which provide a comprehensive view of your Amazon ECS service history.",
-    "modules": [
-        "service/ecs"
-    ]
-}

@@ -29,9 +29,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.30.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.39.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.36.3
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.186.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.187.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.36.3
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.48.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.33.3
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.28.3
@@ -58,9 +58,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/polly v1.45.3
 	github.com/aws/aws-sdk-go-v2/service/rds v1.89.0
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.50.1
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.3
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.45.3
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.66.2

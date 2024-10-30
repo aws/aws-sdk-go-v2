@@ -1,3 +1,7 @@
+# v1.44.0 (2024-10-30)
+
+* **Feature**: AWS Network Firewall now supports configuring TCP idle timeout
+
 # v1.43.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

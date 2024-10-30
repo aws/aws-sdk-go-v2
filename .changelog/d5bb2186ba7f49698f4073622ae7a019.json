@@ -1,8 +1,0 @@
-{
-    "id": "d5bb2186-ba7f-4969-8f40-73622ae7a019",
-    "type": "feature",
-    "description": "This release launches S3 event integrations to create and manage integrations from an Amazon S3 source into an Amazon Redshift database.",
-    "modules": [
-        "service/redshift"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "bbcdb2cb-47da-4a23-bd0a-daed6937b057",
-    "type": "feature",
-    "description": "AWS Network Firewall now supports configuring TCP idle timeout",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

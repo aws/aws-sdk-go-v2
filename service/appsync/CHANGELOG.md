@@ -1,3 +1,7 @@
+# v1.39.0 (2024-10-30)
+
+* **Feature**: This release adds support for AppSync Event APIs.
+
 # v1.38.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

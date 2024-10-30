@@ -1,8 +1,0 @@
-{
-    "id": "b3fdaf98-18da-4d22-9146-b744ec30a8a0",
-    "type": "feature",
-    "description": "Updated the public documentation for the UserIdentityInfo object to accurately reflect the character limits for the FirstName and LastName fields, which were previously listed as 1-100 characters.",
-    "modules": [
-        "service/connect"
-    ]
-}
