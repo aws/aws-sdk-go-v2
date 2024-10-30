@@ -24,7 +24,7 @@ type CookieOptions struct {
 	Domain   string
 	Secure   bool
 	SameSite http.SameSite
-	Expire   *AWSEpochTime `json:",omitempty"`
+	Expire   *AWSEpochTime
 }
 
 // apply will integration the options provided into the base cookie options
