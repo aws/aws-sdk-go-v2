@@ -112,6 +112,9 @@ type CreateModelPackageInput struct {
 	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
 	ModelCard *types.ModelPackageModelCard
 
+	//  A structure describing the current state of the model in its life cycle.
+	ModelLifeCycle *types.ModelLifeCycle
+
 	// A structure that contains model metrics reports.
 	ModelMetrics *types.ModelMetrics
 

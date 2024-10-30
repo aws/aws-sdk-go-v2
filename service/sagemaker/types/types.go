@@ -11013,6 +11013,25 @@ type ModelLatencyThreshold struct {
 	noSmithyDocumentSerde
 }
 
+// A structure describing the current state of the model in its life cycle.
+type ModelLifeCycle struct {
+
+	//  The current stage in the model life cycle.
+	//
+	// This member is required.
+	Stage *string
+
+	//  The current status of a stage in model life cycle.
+	//
+	// This member is required.
+	StageStatus *string
+
+	//  Describes the stage related details.
+	StageDescription *string
+
+	noSmithyDocumentSerde
+}
+
 // Part of the search expression. You can specify the name and value (domain,
 // task, framework, framework version, task, and model).
 type ModelMetadataFilter struct {
@@ -11158,6 +11177,9 @@ type ModelPackage struct {
 	// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
 	ModelCard *ModelPackageModelCard
+
+	//  A structure describing the current state of the model in its life cycle.
+	ModelLifeCycle *ModelLifeCycle
 
 	// Metrics for the model.
 	ModelMetrics *ModelMetrics

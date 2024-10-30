@@ -1594,8 +1594,8 @@ func (e *IntegrationNotFoundFault) ErrorCode() string {
 }
 func (e *IntegrationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You can't create any more zero-ETL integrations because the quota has been
-// reached.
+// You can't create any more zero-ETL or S3 event integrations because the quota
+// has been reached.
 type IntegrationQuotaExceededFault struct {
 	Message *string
 

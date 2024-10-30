@@ -254,6 +254,30 @@ func TestCheckSnapshot_DescribeContainerInstances(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeServiceDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeServiceDeployments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeServiceRevisions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceRevisions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeServiceRevisions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeServices(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeServices(context.Background(), nil, func(o *Options) {
@@ -379,6 +403,18 @@ func TestCheckSnapshot_ListContainerInstances(t *testing.T) {
 	_, err := svc.ListContainerInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListContainerInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListServiceDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListServiceDeployments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -925,6 +961,30 @@ func TestUpdateSnapshot_DescribeContainerInstances(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeServiceDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeServiceDeployments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeServiceRevisions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeServiceRevisions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeServiceRevisions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeServices(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeServices(context.Background(), nil, func(o *Options) {
@@ -1050,6 +1110,18 @@ func TestUpdateSnapshot_ListContainerInstances(t *testing.T) {
 	_, err := svc.ListContainerInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListContainerInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListServiceDeployments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListServiceDeployments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListServiceDeployments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

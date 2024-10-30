@@ -15,8 +15,8 @@ import (
 // Returns information about the table, including the table's name and current
 // status, the keyspace name, configuration settings, and metadata.
 //
-// To read table metadata using GetTable , Select action permissions for the table
-// and system tables are required to complete the operation.
+// To read table metadata using GetTable , the IAM principal needs Select action
+// permissions for the table and the system keyspace.
 func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...func(*Options)) (*GetTableOutput, error) {
 	if params == nil {
 		params = &GetTableInput{}

@@ -579,6 +579,26 @@ type FirewallStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the amount of time that can pass without any traffic sent through the
+// firewall before the firewall determines that the connection is idle and Network
+// Firewall removes the flow entry from its flow table. Existing connections and
+// flows are not impacted when you update this value. Only new connections after
+// you update this value are impacted.
+type FlowTimeouts struct {
+
+	// The number of seconds that can pass without any TCP traffic sent through the
+	// firewall before the firewall determines that the connection is idle. After the
+	// idle timeout passes, data packets are dropped, however, the next TCP SYN packet
+	// is considered a new flow and is processed by the firewall. Clients or targets
+	// can use TCP keepalive packets to reset the idle timeout.
+	//
+	// You can define the TcpIdleTimeoutSeconds value to be between 60 and 6000
+	// seconds. If no value is provided, it defaults to 350 seconds.
+	TcpIdleTimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The basic rule criteria for Network Firewall to use to inspect packet headers
 // in stateful traffic flow inspection. Traffic flows that match the criteria are a
 // match for the corresponding StatefulRule.
@@ -1341,6 +1361,10 @@ type SourceMetadata struct {
 // Configuration settings for the handling of the stateful rule groups in a
 // firewall policy.
 type StatefulEngineOptions struct {
+
+	// Configures the amount of time that can pass without any traffic sent through
+	// the firewall before the firewall determines that the connection is idle.
+	FlowTimeouts *FlowTimeouts
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy.
 	// STRICT_ORDER is the default and recommended option. With STRICT_ORDER , provide

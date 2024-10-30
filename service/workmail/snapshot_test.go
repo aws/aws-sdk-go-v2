@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateIdentityCenterApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdentityCenterApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIdentityCenterApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateImpersonationRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateImpersonationRole(context.Background(), nil, func(o *Options) {
@@ -266,6 +278,30 @@ func TestCheckSnapshot_DeleteGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIdentityCenterApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdentityCenterApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIdentityCenterApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteIdentityProviderConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdentityProviderConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIdentityProviderConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteImpersonationRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteImpersonationRole(context.Background(), nil, func(o *Options) {
@@ -319,6 +355,18 @@ func TestCheckSnapshot_DeleteOrganization(t *testing.T) {
 	_, err := svc.DeleteOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePersonalAccessToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePersonalAccessToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePersonalAccessToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -415,6 +463,18 @@ func TestCheckSnapshot_DescribeGroup(t *testing.T) {
 	_, err := svc.DescribeGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIdentityProviderConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIdentityProviderConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIdentityProviderConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -602,6 +662,18 @@ func TestCheckSnapshot_GetMobileDeviceAccessOverride(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPersonalAccessTokenMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPersonalAccessTokenMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPersonalAccessTokenMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAccessControlRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessControlRules(context.Background(), nil, func(o *Options) {
@@ -758,6 +830,18 @@ func TestCheckSnapshot_ListOrganizations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPersonalAccessTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPersonalAccessTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPersonalAccessTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListResourceDelegates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourceDelegates(context.Background(), nil, func(o *Options) {
@@ -823,6 +907,18 @@ func TestCheckSnapshot_PutEmailMonitoringConfiguration(t *testing.T) {
 	_, err := svc.PutEmailMonitoringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutEmailMonitoringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutIdentityProviderConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutIdentityProviderConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutIdentityProviderConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1153,6 +1249,18 @@ func TestUpdateSnapshot_CreateGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateIdentityCenterApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdentityCenterApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIdentityCenterApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateImpersonationRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateImpersonationRole(context.Background(), nil, func(o *Options) {
@@ -1273,6 +1381,30 @@ func TestUpdateSnapshot_DeleteGroup(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIdentityCenterApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdentityCenterApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIdentityCenterApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteIdentityProviderConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdentityProviderConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIdentityProviderConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteImpersonationRole(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteImpersonationRole(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1458,18 @@ func TestUpdateSnapshot_DeleteOrganization(t *testing.T) {
 	_, err := svc.DeleteOrganization(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOrganization")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePersonalAccessToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePersonalAccessToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePersonalAccessToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1422,6 +1566,18 @@ func TestUpdateSnapshot_DescribeGroup(t *testing.T) {
 	_, err := svc.DescribeGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIdentityProviderConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIdentityProviderConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIdentityProviderConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1609,6 +1765,18 @@ func TestUpdateSnapshot_GetMobileDeviceAccessOverride(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPersonalAccessTokenMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPersonalAccessTokenMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPersonalAccessTokenMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAccessControlRules(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessControlRules(context.Background(), nil, func(o *Options) {
@@ -1765,6 +1933,18 @@ func TestUpdateSnapshot_ListOrganizations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPersonalAccessTokens(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPersonalAccessTokens(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPersonalAccessTokens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListResourceDelegates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListResourceDelegates(context.Background(), nil, func(o *Options) {
@@ -1830,6 +2010,18 @@ func TestUpdateSnapshot_PutEmailMonitoringConfiguration(t *testing.T) {
 	_, err := svc.PutEmailMonitoringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutEmailMonitoringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutIdentityProviderConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutIdentityProviderConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutIdentityProviderConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

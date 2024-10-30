@@ -147,6 +147,26 @@ func (FolderName) Values() []FolderName {
 	}
 }
 
+type IdentityProviderAuthenticationMode string
+
+// Enum values for IdentityProviderAuthenticationMode
+const (
+	IdentityProviderAuthenticationModeIdentityProviderOnly         IdentityProviderAuthenticationMode = "IDENTITY_PROVIDER_ONLY"
+	IdentityProviderAuthenticationModeIdentityProviderAndDirectory IdentityProviderAuthenticationMode = "IDENTITY_PROVIDER_AND_DIRECTORY"
+)
+
+// Values returns all known values for IdentityProviderAuthenticationMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentityProviderAuthenticationMode) Values() []IdentityProviderAuthenticationMode {
+	return []IdentityProviderAuthenticationMode{
+		"IDENTITY_PROVIDER_ONLY",
+		"IDENTITY_PROVIDER_AND_DIRECTORY",
+	}
+}
+
 type ImpersonationRoleType string
 
 // Enum values for ImpersonationRoleType
@@ -246,6 +266,26 @@ func (PermissionType) Values() []PermissionType {
 		"FULL_ACCESS",
 		"SEND_AS",
 		"SEND_ON_BEHALF",
+	}
+}
+
+type PersonalAccessTokenConfigurationStatus string
+
+// Enum values for PersonalAccessTokenConfigurationStatus
+const (
+	PersonalAccessTokenConfigurationStatusActive   PersonalAccessTokenConfigurationStatus = "ACTIVE"
+	PersonalAccessTokenConfigurationStatusInactive PersonalAccessTokenConfigurationStatus = "INACTIVE"
+)
+
+// Values returns all known values for PersonalAccessTokenConfigurationStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PersonalAccessTokenConfigurationStatus) Values() []PersonalAccessTokenConfigurationStatus {
+	return []PersonalAccessTokenConfigurationStatus{
+		"ACTIVE",
+		"INACTIVE",
 	}
 }
 

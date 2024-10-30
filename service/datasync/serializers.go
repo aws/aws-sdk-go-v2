@@ -5137,6 +5137,11 @@ func awsAwsjson11_serializeOpDocumentCreateTaskInput(v *CreateTaskInput, value s
 		}
 	}
 
+	if len(v.TaskMode) > 0 {
+		ok := object.Key("TaskMode")
+		ok.String(string(v.TaskMode))
+	}
+
 	if v.TaskReportConfig != nil {
 		ok := object.Key("TaskReportConfig")
 		if err := awsAwsjson11_serializeDocumentTaskReportConfig(v.TaskReportConfig, ok); err != nil {

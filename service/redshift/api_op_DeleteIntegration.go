@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Deletes a zero-ETL integration with Amazon Redshift.
+// Deletes a zero-ETL integration or S3 event integration with Amazon Redshift.
 func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegrationInput, optFns ...func(*Options)) (*DeleteIntegrationOutput, error) {
 	if params == nil {
 		params = &DeleteIntegrationInput{}

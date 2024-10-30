@@ -7356,7 +7356,6 @@ const (
 	TrainingInstanceTypeMlP4de24xlarge  TrainingInstanceType = "ml.p4de.24xlarge"
 	TrainingInstanceTypeMlP548xlarge    TrainingInstanceType = "ml.p5.48xlarge"
 	TrainingInstanceTypeMlP5e48xlarge   TrainingInstanceType = "ml.p5e.48xlarge"
-	TrainingInstanceTypeMlP5en48xlarge  TrainingInstanceType = "ml.p5en.48xlarge"
 	TrainingInstanceTypeMlC5Xlarge      TrainingInstanceType = "ml.c5.xlarge"
 	TrainingInstanceTypeMlC52xlarge     TrainingInstanceType = "ml.c5.2xlarge"
 	TrainingInstanceTypeMlC54xlarge     TrainingInstanceType = "ml.c5.4xlarge"
@@ -7378,7 +7377,6 @@ const (
 	TrainingInstanceTypeMlTrn12xlarge   TrainingInstanceType = "ml.trn1.2xlarge"
 	TrainingInstanceTypeMlTrn132xlarge  TrainingInstanceType = "ml.trn1.32xlarge"
 	TrainingInstanceTypeMlTrn1n32xlarge TrainingInstanceType = "ml.trn1n.32xlarge"
-	TrainingInstanceTypeMlTrn248xlarge  TrainingInstanceType = "ml.trn2.48xlarge"
 	TrainingInstanceTypeMlM6iLarge      TrainingInstanceType = "ml.m6i.large"
 	TrainingInstanceTypeMlM6iXlarge     TrainingInstanceType = "ml.m6i.xlarge"
 	TrainingInstanceTypeMlM6i2xlarge    TrainingInstanceType = "ml.m6i.2xlarge"
@@ -7456,7 +7454,6 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.p4de.24xlarge",
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
-		"ml.p5en.48xlarge",
 		"ml.c5.xlarge",
 		"ml.c5.2xlarge",
 		"ml.c5.4xlarge",
@@ -7478,7 +7475,6 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
-		"ml.trn2.48xlarge",
 		"ml.m6i.large",
 		"ml.m6i.xlarge",
 		"ml.m6i.2xlarge",

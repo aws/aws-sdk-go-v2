@@ -14,7 +14,7 @@ import (
 // Starts an DataSync transfer task. For each task, you can only run one task
 // execution at a time.
 //
-// There are several phases to a task execution. For more information, see [Task execution statuses].
+// There are several steps to a task execution. For more information, see [Task execution statuses].
 //
 // If you're planning to transfer data to or from an Amazon S3 location, review [how DataSync can affect your S3 request charges]
 // and the [DataSync pricing page]before you begin.

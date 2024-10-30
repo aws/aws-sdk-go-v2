@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of keyspaces.
+// The ListKeyspaces operation returns a list of keyspaces.
 func (c *Client) ListKeyspaces(ctx context.Context, params *ListKeyspacesInput, optFns ...func(*Options)) (*ListKeyspacesOutput, error) {
 	if params == nil {
 		params = &ListKeyspacesInput{}

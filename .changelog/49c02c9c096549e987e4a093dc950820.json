@@ -1,0 +1,8 @@
+{
+    "id": "49c02c9c-0965-49e9-87e4-a093dc950820",
+    "type": "feature",
+    "description": "Adds and updates API members for the Redshift Serverless AI-driven scaling and optimization feature using the price-performance target setting.",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

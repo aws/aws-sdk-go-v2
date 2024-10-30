@@ -3452,6 +3452,23 @@ func awsAwsjson11_serializeDocumentLogExportList(v []types.LogExport, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPerformanceTarget(v *types.PerformanceTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Level != nil {
+		ok := object.Key("level")
+		ok.Integer(*v.Level)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSchedule(v types.Schedule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3907,6 +3924,13 @@ func awsAwsjson11_serializeOpDocumentCreateWorkgroupInput(v *CreateWorkgroupInpu
 	if v.Port != nil {
 		ok := object.Key("port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.PricePerformanceTarget != nil {
+		ok := object.Key("pricePerformanceTarget")
+		if err := awsAwsjson11_serializeDocumentPerformanceTarget(v.PricePerformanceTarget, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PubliclyAccessible != nil {
@@ -4986,6 +5010,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkgroupInput(v *UpdateWorkgroupInpu
 	if v.Port != nil {
 		ok := object.Key("port")
 		ok.Integer(*v.Port)
+	}
+
+	if v.PricePerformanceTarget != nil {
+		ok := object.Key("pricePerformanceTarget")
+		if err := awsAwsjson11_serializeDocumentPerformanceTarget(v.PricePerformanceTarget, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PubliclyAccessible != nil {

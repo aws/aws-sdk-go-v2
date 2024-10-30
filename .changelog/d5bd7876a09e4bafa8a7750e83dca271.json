@@ -1,0 +1,8 @@
+{
+    "id": "d5bd7876-a09e-4baf-a8a7-750e83dca271",
+    "type": "feature",
+    "description": "This release introduces the new OpenSearch user interface (Dashboards), a new web-based application that can be associated with multiple data sources across OpenSearch managed clusters, serverless collections, and Amazon S3, so that users can gain a comprehensive insights in an unified interface.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

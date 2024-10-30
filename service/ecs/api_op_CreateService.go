@@ -14,7 +14,7 @@ import (
 // Runs and maintains your desired number of tasks from a specified task
 // definition. If the number of tasks running in a service drops below the
 // desiredCount , Amazon ECS runs another copy of the task in the specified
-// cluster. To update an existing service, use [UpdateService].
+// cluster. To update an existing service, see the UpdateServiceaction.
 //
 // On March 21, 2024, a change was made to resolve the task definition revision
 // before authorization. When a task definition revision is not specified,
@@ -159,7 +159,7 @@ type CreateServiceInput struct {
 	Cluster *string
 
 	// Optional deployment parameters that control how many tasks run during the
-	// deployment and the ordering of stopping and starting tasks.
+	// deployment and the failure detection methods.
 	DeploymentConfiguration *types.DeploymentConfiguration
 
 	// The deployment controller to use for the service. If no deployment controller

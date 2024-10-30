@@ -38,9 +38,9 @@ type GetDataSourceIntrospectionInput struct {
 	IntrospectionId *string
 
 	// A boolean flag that determines whether SDL should be generated for introspected
-	// types or not. If set to true , each model will contain an sdl property that
-	// contains the SDL for that type. The SDL only contains the type data and no
-	// additional metadata or directives.
+	// types. If set to true , each model will contain an sdl property that contains
+	// the SDL for that type. The SDL only contains the type data and no additional
+	// metadata or directives.
 	IncludeModelsSDL bool
 
 	// The maximum number of introspected types that will be returned in a single

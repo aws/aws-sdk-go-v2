@@ -35,8 +35,8 @@ func (c *Client) CreateLocationSmb(ctx context.Context, params *CreateLocationSm
 // CreateLocationSmbRequest
 type CreateLocationSmbInput struct {
 
-	// Specifies the DataSync agent (or agents) which you want to connect to your SMB
-	// file server. You specify an agent by using its Amazon Resource Name (ARN).
+	// Specifies the DataSync agent (or agents) that can connect to your SMB file
+	// server. You specify an agent by using its Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	AgentArns []string

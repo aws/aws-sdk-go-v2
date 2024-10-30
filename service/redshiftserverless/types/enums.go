@@ -44,6 +44,25 @@ func (NamespaceStatus) Values() []NamespaceStatus {
 	}
 }
 
+type PerformanceTargetStatus string
+
+// Enum values for PerformanceTargetStatus
+const (
+	PerformanceTargetStatusEnabled  PerformanceTargetStatus = "ENABLED"
+	PerformanceTargetStatusDisabled PerformanceTargetStatus = "DISABLED"
+)
+
+// Values returns all known values for PerformanceTargetStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerformanceTargetStatus) Values() []PerformanceTargetStatus {
+	return []PerformanceTargetStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type SnapshotStatus string
 
 // Enum values for SnapshotStatus

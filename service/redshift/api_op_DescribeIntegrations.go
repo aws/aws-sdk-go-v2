@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more zero-ETL integrations with Amazon Redshift.
+// Describes one or more zero-ETL or S3 event integrations with Amazon Redshift.
 func (c *Client) DescribeIntegrations(ctx context.Context, params *DescribeIntegrationsInput, optFns ...func(*Options)) (*DescribeIntegrationsOutput, error) {
 	if params == nil {
 		params = &DescribeIntegrationsInput{}

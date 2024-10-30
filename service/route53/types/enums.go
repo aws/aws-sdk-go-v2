@@ -474,6 +474,10 @@ const (
 	RRTypeAaaa  RRType = "AAAA"
 	RRTypeCaa   RRType = "CAA"
 	RRTypeDs    RRType = "DS"
+	RRTypeTlsa  RRType = "TLSA"
+	RRTypeSshfp RRType = "SSHFP"
+	RRTypeSvcb  RRType = "SVCB"
+	RRTypeHttps RRType = "HTTPS"
 )
 
 // Values returns all known values for RRType. Note that this can be expanded in
@@ -495,6 +499,10 @@ func (RRType) Values() []RRType {
 		"AAAA",
 		"CAA",
 		"DS",
+		"TLSA",
+		"SSHFP",
+		"SVCB",
+		"HTTPS",
 	}
 }
 
@@ -575,6 +583,7 @@ const (
 	VPCRegionSaEast1      VPCRegion = "sa-east-1"
 	VPCRegionCaCentral1   VPCRegion = "ca-central-1"
 	VPCRegionCnNorth1     VPCRegion = "cn-north-1"
+	VPCRegionCnNorthwest1 VPCRegion = "cn-northwest-1"
 	VPCRegionAfSouth1     VPCRegion = "af-south-1"
 	VPCRegionEuSouth1     VPCRegion = "eu-south-1"
 	VPCRegionEuSouth2     VPCRegion = "eu-south-2"
@@ -619,6 +628,7 @@ func (VPCRegion) Values() []VPCRegion {
 		"sa-east-1",
 		"ca-central-1",
 		"cn-north-1",
+		"cn-northwest-1",
 		"af-south-1",
 		"eu-south-1",
 		"eu-south-2",

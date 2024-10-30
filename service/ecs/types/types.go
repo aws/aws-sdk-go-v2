@@ -1306,6 +1306,33 @@ type ContainerDependency struct {
 	noSmithyDocumentSerde
 }
 
+// The details about the container image a service revision uses.
+//
+// To ensure that all tasks in a service use the same container image, Amazon ECS
+// resolves container image names and any image tags specified in the task
+// definition to container image digests.
+//
+// After the container image digest has been established, Amazon ECS uses the
+// digest to start any other desired tasks, and for any future service and service
+// revision updates. This leads to all tasks in a service always running identical
+// container images, resulting in version consistency for your software. For more
+// information, see [Container image resolution]in the Amazon ECS Developer Guide.
+//
+// [Container image resolution]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability
+type ContainerImage struct {
+
+	// The name of the container.
+	ContainerName *string
+
+	// The container image.
+	Image *string
+
+	// The container image digest.
+	ImageDigest *string
+
+	noSmithyDocumentSerde
+}
+
 // An Amazon EC2 or External instance that's running the Amazon ECS agent and has
 // been registered with a cluster.
 type ContainerInstance struct {
@@ -1565,6 +1592,23 @@ type ContainerStateChange struct {
 	noSmithyDocumentSerde
 }
 
+// The optional filter to narrow the ListServiceDeployment results.
+//
+// If you do not specify a value, service deployments that were created before the
+// current time are included in the result.
+type CreatedAt struct {
+
+	// Include service deployments in the result that were created after this time.
+	// The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	After *time.Time
+
+	// Include service deployments in the result that were created before this time.
+	// The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	Before *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The details of an Amazon ECS service deployment. This is used only when a
 // service uses the ECS deployment controller type.
 type Deployment struct {
@@ -1760,8 +1804,8 @@ type DeploymentCircuitBreaker struct {
 	noSmithyDocumentSerde
 }
 
-// Optional deployment parameters that control how many tasks run during a
-// deployment and the ordering of stopping and starting tasks.
+// Optional deployment parameters that control how many tasks run during the
+// deployment and the failure detection methods.
 type DeploymentConfiguration struct {
 
 	// Information about the CloudWatch alarms.
@@ -1907,8 +1951,8 @@ type DeploymentController struct {
 // The amount of ephemeral storage to allocate for the deployment.
 type DeploymentEphemeralStorage struct {
 
-	// Specify an Key Management Service key ID to encrypt the ephemeral storage for
-	// deployment.
+	// Specify an Amazon Web Services Key Management Service key ID to encrypt the
+	// ephemeral storage for deployment.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2705,8 +2749,7 @@ type LoadBalancer struct {
 	// mapping.
 	ContainerPort *int32
 
-	// The name of the load balancer to associate with the Amazon ECS service or task
-	// set.
+	// The name of the load balancer to associate with the service or task set.
 	//
 	// If you are using an Application Load Balancer or a Network Load Balancer the
 	// load balancer name parameter should be omitted.
@@ -3029,8 +3072,7 @@ type ManagedScaling struct {
 	MaximumScalingStepSize *int32
 
 	// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at
-	// one time. The scale in process is not affected by this parameter If this
-	// parameter is omitted, the default value of 1 is used.
+	// one time. If this parameter is omitted, the default value of 1 is used.
 	//
 	// When additional capacity is required, Amazon ECS will scale up the minimum
 	// scaling step size even if the actual demand is less than the minimum scaling
@@ -3062,7 +3104,8 @@ type ManagedStorageConfiguration struct {
 	// Specify the Key Management Service key ID for the Fargate ephemeral storage.
 	FargateEphemeralStorageKmsKeyId *string
 
-	// Specify a Key Management Service key ID to encrypt the managed storage.
+	// Specify a Amazon Web Services Key Management Service key ID to encrypt the
+	// managed storage.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -3263,13 +3306,14 @@ type PlatformDevice struct {
 	noSmithyDocumentSerde
 }
 
-// Port mappings allow containers to access ports on the host container instance
-// to send or receive traffic. Port mappings are specified as part of the container
-// definition.
+// Port mappings expose your container's network ports to the outside world. this
+// allows clients to access your application. It's also used for inter-container
+// communication within the same task.
 //
-// If you use containers in a task with the awsvpc or host network mode, specify
-// the exposed ports using containerPort . The hostPort can be left blank or it
-// must be the same value as the containerPort .
+// For task definitions (both the Fargate and EC2 launch type) that use the awsvpc
+// network mode, only specify the containerPort . The hostPort is always ignored,
+// and the container port is automatically mapped to a random high-numbered port on
+// the host.
 //
 // Most fields of this parameter ( containerPort , hostPort , protocol ) maps to
 // PortBindings in the docker container create command and the --publish option to
@@ -3312,14 +3356,17 @@ type PortMapping struct {
 	// The port number on the container that's bound to the user-specified or
 	// automatically assigned host port.
 	//
-	// If you use containers in a task with the awsvpc or host network mode, specify
-	// the exposed ports using containerPort .
+	// For tasks that use the Fargate launch type or EC2 tasks that use the awsvpc
+	// network mode, you use containerPort to specify the exposed ports.
 	//
-	// If you use containers in a task with the bridge network mode and you specify a
-	// container port and not a host port, your container automatically receives a host
-	// port in the ephemeral port range. For more information, see hostPort . Port
-	// mappings that are automatically assigned in this way do not count toward the 100
-	// reserved ports limit of a container instance.
+	// For Windows containers on Fargate, you can't use port 3150 for the containerPort
+	// . This is because it's reserved.
+	//
+	// Suppose that you're using containers in a task with the EC2 launch type and you
+	// specify a container port and not a host port. Then, your container automatically
+	// receives a host port in the ephemeral port range. For more information, see
+	// hostPort . Port mappings that are automatically assigned in this way don't count
+	// toward the 100 reserved ports quota of a container instance.
 	ContainerPort *int32
 
 	// The port number range on the container that's bound to the dynamically mapped
@@ -3586,6 +3633,32 @@ type ResourceRequirement struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the service deployment rollback.
+type Rollback struct {
+
+	// The reason the rollback happened. For example, the circuit breaker initiated
+	// the rollback operation.
+	Reason *string
+
+	// The ARN of the service revision deployed as part of the rollback.
+	//
+	// When the type is GPU , the value is the number of physical GPUs the Amazon ECS
+	// container agent reserves for the container. The number of GPUs that's reserved
+	// for all containers in a task can't exceed the number of available GPUs on the
+	// container instance that the task is launched on.
+	//
+	// When the type is InferenceAccelerator , the value matches the deviceName for an [InferenceAccelerator]
+	// specified in a task definition.
+	//
+	// [InferenceAccelerator]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html
+	ServiceRevisionArn *string
+
+	// Time time that the rollback started. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.
+	StartedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about the platform for the Amazon ECS service or task.
 //
 // For more information about RuntimePlatform , see [RuntimePlatform] in the Amazon Elastic
@@ -3599,9 +3672,13 @@ type RuntimePlatform struct {
 	// You can run your Linux tasks on an ARM-based platform by setting the value to
 	// ARM64 . This option is available for tasks that run on Linux Amazon EC2 instance
 	// or Linux containers on Fargate.
+	//
+	// The default is X86_64 .
 	CpuArchitecture CPUArchitecture
 
 	// The operating system.
+	//
+	// The default is Linux .
 	OperatingSystemFamily OSFamily
 
 	noSmithyDocumentSerde
@@ -3665,9 +3742,8 @@ type Secret struct {
 // Details on a service within a cluster.
 type Service struct {
 
-	// The capacity provider strategy the service uses. When using the
-	// DescribeServices API, this field is omitted if the service was created using a
-	// launch type.
+	// The capacity provider strategy the service uses. When using DescribeServices ,
+	// this field is omitted if the service was created using a launch type.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// The Amazon Resource Name (ARN) of the cluster that hosts the service.
@@ -3809,7 +3885,7 @@ type Service struct {
 	Status *string
 
 	// The metadata that you apply to the service to help you categorize and organize
-	// them. Each tag consists of a key and an optional value. You define bot the key
+	// them. Each tag consists of a key and an optional value. You define both the key
 	// and value.
 	//
 	// The following basic restrictions apply to tags:
@@ -4099,6 +4175,176 @@ type ServiceConnectTlsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the service deployment.
+//
+// Service deployments provide a comprehensive view of your deployments. For
+// information about service deployments, see [View service history using Amazon ECS service deployments]in the Amazon Elastic Container
+// Service Developer Guide .
+//
+// [View service history using Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html
+type ServiceDeployment struct {
+
+	// The CloudWatch alarms that determine when a service deployment fails.
+	Alarms *ServiceDeploymentAlarms
+
+	// The ARN of the cluster that hosts the service.
+	ClusterArn *string
+
+	// The time the service deployment was created. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	CreatedAt *time.Time
+
+	// The circuit breaker configuration that determines a service deployment failed.
+	DeploymentCircuitBreaker *ServiceDeploymentCircuitBreaker
+
+	// Optional deployment parameters that control how many tasks run during the
+	// deployment and the failure detection methods.
+	DeploymentConfiguration *DeploymentConfiguration
+
+	// The time the service deployment finished. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	FinishedAt *time.Time
+
+	// The rollback options the service deployment uses when the deployment fails.
+	Rollback *Rollback
+
+	// The ARN of the service for this service deployment.
+	ServiceArn *string
+
+	// The ARN of the service deployment.
+	ServiceDeploymentArn *string
+
+	// The currently deployed workload configuration.
+	SourceServiceRevisions []ServiceRevisionSummary
+
+	// The time the service deployment statred. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	StartedAt *time.Time
+
+	// The service deployment state.
+	Status ServiceDeploymentStatus
+
+	// Information about why the service deployment is in the current status. For
+	// example, the circuit breaker detected a failure.
+	StatusReason *string
+
+	// The time the service deployment stopped. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	//
+	// The service deployment stops when any of the following actions happen:
+	//
+	//   - A user manually stops the deployment
+	//
+	//   - The rollback option is not in use for the failure detection mechanism (the
+	//   circuit breaker or alarm-based) and the service fails.
+	StoppedAt *time.Time
+
+	// The workload configuration being deployed.
+	TargetServiceRevision *ServiceRevisionSummary
+
+	// The time that the service deployment was last updated. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The CloudWatch alarms used to determine a service deployment failed.
+//
+// Amazon ECS considers the service deployment as failed when any of the alarms
+// move to the ALARM state. For more information, see [How CloudWatch alarms detect Amazon ECS deployment failures] in the Amazon ECS Developer
+// Guide.
+//
+// [How CloudWatch alarms detect Amazon ECS deployment failures]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-alarm-failure.html
+type ServiceDeploymentAlarms struct {
+
+	// The name of the CloudWatch alarms that determine when a service deployment
+	// failed. A "," separates the alarms.
+	AlarmNames []string
+
+	// The status of the alarms check. Amazon ECS is not using alarms for service
+	// deployment failures when the status is DISABLED .
+	Status ServiceDeploymentRollbackMonitorsStatus
+
+	// One or more CloudWatch alarm names that have been triggered during the service
+	// deployment. A "," separates the alarm names.
+	TriggeredAlarmNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The service deployment properties that are retured when you call
+// ListServiceDeployments .
+//
+// This provides a high-level overview of the service deployment.
+type ServiceDeploymentBrief struct {
+
+	// The ARN of the cluster that hosts the service.
+	ClusterArn *string
+
+	// The time that the service deployment was created. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	CreatedAt *time.Time
+
+	// The time that the service deployment completed. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	FinishedAt *time.Time
+
+	// The ARN of the service for this service deployment.
+	ServiceArn *string
+
+	// The ARN of the service deployment.
+	ServiceDeploymentArn *string
+
+	// The time that the service deployment statred. The format is yyyy-MM-dd
+	// HH:mm:ss.SSSSSS.
+	StartedAt *time.Time
+
+	// The status of the service deployment
+	Status ServiceDeploymentStatus
+
+	// Information about why the service deployment is in the current status. For
+	// example, the circuit breaker detected a deployment failure.
+	StatusReason *string
+
+	// The ARN of the service revision being deplyed.
+	TargetServiceRevisionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the circuit breaker used to determine when a service
+// deployment has failed.
+//
+// The deployment circuit breaker is the rolling update mechanism that determines
+// if the tasks reach a steady state. The deployment circuit breaker has an option
+// that will automatically roll back a failed deployment to the last cpompleted
+// service revision. For more information, see [How the Amazon ECS deployment circuit breaker detects failures]in the Amazon ECS Developer Guide.
+//
+// [How the Amazon ECS deployment circuit breaker detects failures]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html
+type ServiceDeploymentCircuitBreaker struct {
+
+	// The number of times the circuit breaker detected a service deploymeny failure.
+	FailureCount int32
+
+	// The circuit breaker status. Amazon ECS is not using the circuit breaker for
+	// service deployment failures when the status is DISABLED .
+	Status ServiceDeploymentRollbackMonitorsStatus
+
+	// The threshhold which determines that the service deployment failed.
+	//
+	// The deployment circuit breaker calculates the threshold value, and then uses
+	// the value to determine when to move the deployment to a FAILED state. The
+	// deployment circuit breaker has a minimum threshold of 3 and a maximum threshold
+	// of 200. and uses the values in the following formula to determine the deployment
+	// failure.
+	//
+	//     0.5 * desired task count
+	Threshold int32
+
+	noSmithyDocumentSerde
+}
+
 // The details for an event that's associated with a service.
 type ServiceEvent struct {
 
@@ -4297,6 +4543,102 @@ type ServiceRegistry struct {
 	//
 	// [CreateService]: https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
 	RegistryArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the service revision.
+//
+// A service revision contains a record of the workload configuration Amazon ECS
+// is attempting to deploy. Whenever you create or deploy a service, Amazon ECS
+// automatically creates and captures the configuration that you're trying to
+// deploy in the service revision. For information about service revisions, see [Amazon ECS service revisions]in
+// the Amazon Elastic Container Service Developer Guide .
+//
+// [Amazon ECS service revisions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html
+type ServiceRevision struct {
+
+	// The capacity provider strategy the service revision uses.
+	CapacityProviderStrategy []CapacityProviderStrategyItem
+
+	// The ARN of the cluster that hosts the service.
+	ClusterArn *string
+
+	// The container images the service revision uses.
+	ContainerImages []ContainerImage
+
+	// The time that the service revision was created. The format is yyyy-mm-dd
+	// HH:mm:ss.SSSSS.
+	CreatedAt *time.Time
+
+	// The amount of ephemeral storage to allocate for the deployment.
+	FargateEphemeralStorage *DeploymentEphemeralStorage
+
+	// Indicates whether Runtime Monitoring is turned on.
+	GuardDutyEnabled bool
+
+	// The launch type the service revision uses.
+	LaunchType LaunchType
+
+	// The load balancers the service revision uses.
+	LoadBalancers []LoadBalancer
+
+	// The network configuration for a task or service.
+	NetworkConfiguration *NetworkConfiguration
+
+	// The platform family the service revision uses.
+	PlatformFamily *string
+
+	// For the Fargate launch type, the platform version the service revision uses.
+	PlatformVersion *string
+
+	// The ARN of the service for the service revision.
+	ServiceArn *string
+
+	// The Service Connect configuration of your Amazon ECS service. The configuration
+	// for this service to discover and connect to services, and be discovered by, and
+	// connected from, other services within a namespace.
+	//
+	// Tasks that run in a namespace can use short names to connect to services in the
+	// namespace. Tasks can connect to services across all of the clusters in the
+	// namespace. Tasks connect through a managed proxy container that collects logs
+	// and metrics for increased visibility. Only the tasks that Amazon ECS services
+	// create are supported with Service Connect. For more information, see [Service Connect]in the
+	// Amazon Elastic Container Service Developer Guide.
+	//
+	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+	ServiceConnectConfiguration *ServiceConnectConfiguration
+
+	// The service registries (for Service Discovery) the service revision uses.
+	ServiceRegistries []ServiceRegistry
+
+	// The ARN of the service revision.
+	ServiceRevisionArn *string
+
+	// The task definition the service revision uses.
+	TaskDefinition *string
+
+	// The volumes that are configured at deployment that the service revision uses.
+	VolumeConfigurations []ServiceVolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The information about the number of requested, pending, and running tasks for a
+// service revision.
+type ServiceRevisionSummary struct {
+
+	// The ARN of the service revision.
+	Arn *string
+
+	// The number of pending tasks for the service revision.
+	PendingTaskCount int32
+
+	// The number of requested tasks for the service revision.
+	RequestedTaskCount int32
+
+	// The number of running tasks for the service revision.
+	RunningTaskCount int32
 
 	noSmithyDocumentSerde
 }
@@ -4802,10 +5144,11 @@ type TaskDefinition struct {
 	// resources. If none is specified, then IPC resources within the containers of a
 	// task are private and not shared with other containers in a task or on the
 	// container instance. If no value is specified, then the IPC resource namespace
-	// sharing depends on the Docker daemon setting on the container instance.
+	// sharing depends on the Docker daemon setting on the container instance. For more
+	// information, see [IPC settings]in the Docker run reference.
 	//
 	// If the host IPC mode is used, be aware that there is a heightened risk of
-	// undesired IPC namespace expose.
+	// undesired IPC namespace expose. For more information, see [Docker security].
 	//
 	// If you are setting namespaced kernel parameters using systemControls for the
 	// containers in the task, the following will apply to your IPC resource namespace.
@@ -4821,6 +5164,8 @@ type TaskDefinition struct {
 	// This parameter is not supported for Windows containers or tasks run on Fargate.
 	//
 	// [System Controls]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
+	// [Docker security]: https://docs.docker.com/engine/security/security/
+	// [IPC settings]: https://docs.docker.com/engine/reference/run/#ipc-settings---ipc
 	IpcMode IpcMode
 
 	// The amount (in MiB) of memory used by the task.
@@ -4884,15 +5229,17 @@ type TaskDefinition struct {
 	// user (UID 0). It is considered best practice to use a non-root user.
 	//
 	// If the network mode is awsvpc , the task is allocated an elastic network
-	// interface, and you must specify a [NetworkConfiguration]value when you create a service or run a task
+	// interface, and you must specify a NetworkConfigurationvalue when you create a service or run a task
 	// with the task definition. For more information, see [Task Networking]in the Amazon Elastic
 	// Container Service Developer Guide.
 	//
 	// If the network mode is host , you cannot run multiple instantiations of the same
 	// task on a single container instance when port mappings are used.
 	//
+	// For more information, see [Network settings] in the Docker run reference.
+	//
 	// [Task Networking]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
-	// [NetworkConfiguration]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html
+	// [Network settings]: https://docs.docker.com/engine/reference/run/#network-settings
 	NetworkMode NetworkMode
 
 	// The process namespace to use for the containers in the task. The valid values
@@ -4907,16 +5254,20 @@ type TaskDefinition struct {
 	// If task is specified, all containers within the specified task share the same
 	// process namespace.
 	//
-	// If no value is specified, the default is a private namespace for each container.
+	// If no value is specified, the default is a private namespace for each
+	// container. For more information, see [PID settings]in the Docker run reference.
 	//
 	// If the host PID mode is used, there's a heightened risk of undesired process
-	// namespace exposure.
+	// namespace exposure. For more information, see [Docker security].
 	//
 	// This parameter is not supported for Windows containers.
 	//
 	// This parameter is only supported for tasks that are hosted on Fargate if the
 	// tasks are using platform version 1.4.0 or later (Linux). This isn't supported
 	// for Windows containers on Fargate.
+	//
+	// [PID settings]: https://docs.docker.com/engine/reference/run/#pid-settings---pid
+	// [Docker security]: https://docs.docker.com/engine/security/security/
 	PidMode PidMode
 
 	// An array of placement constraint objects to use for tasks.
@@ -5026,8 +5377,8 @@ type TaskDefinitionPlacementConstraint struct {
 // The amount of ephemeral storage to allocate for the task.
 type TaskEphemeralStorage struct {
 
-	// Specify an Key Management Service key ID to encrypt the ephemeral storage for
-	// the task.
+	// Specify an Amazon Web Services Key Management Service key ID to encrypt the
+	// ephemeral storage for the task.
 	KmsKeyId *string
 
 	// The total amount, in GiB, of the ephemeral storage to set for the task. The

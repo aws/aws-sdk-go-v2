@@ -1,0 +1,8 @@
+{
+    "id": "60382073-c4c9-47cd-9700-acdcdec81fad",
+    "type": "feature",
+    "description": "This release adds two new capabilities to VPC Security Groups: Security Group VPC Associations and Shared Security Groups.",
+    "modules": [
+        "service/ec2"
+    ]
+}

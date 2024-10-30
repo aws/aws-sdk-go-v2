@@ -2431,6 +2431,18 @@ func awsAwsjson10_serializeDocumentFlags(v []types.TCPFlag, value smithyjson.Val
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentFlowTimeouts(v *types.FlowTimeouts, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TcpIdleTimeoutSeconds != nil {
+		ok := object.Key("TcpIdleTimeoutSeconds")
+		ok.Integer(*v.TcpIdleTimeoutSeconds)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentHeader(v *types.Header, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3091,6 +3103,13 @@ func awsAwsjson10_serializeDocumentStatefulActions(v []string, value smithyjson.
 func awsAwsjson10_serializeDocumentStatefulEngineOptions(v *types.StatefulEngineOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FlowTimeouts != nil {
+		ok := object.Key("FlowTimeouts")
+		if err := awsAwsjson10_serializeDocumentFlowTimeouts(v.FlowTimeouts, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.RuleOrder) > 0 {
 		ok := object.Key("RuleOrder")

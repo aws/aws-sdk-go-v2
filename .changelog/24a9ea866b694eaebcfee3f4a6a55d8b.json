@@ -1,0 +1,8 @@
+{
+    "id": "24a9ea86-6b69-4eae-bcfe-e3f4a6a55d8b",
+    "type": "feature",
+    "description": "This release adds support for TLSA, SSHFP, SVCB, and HTTPS record types.",
+    "modules": [
+        "service/route53"
+    ]
+}

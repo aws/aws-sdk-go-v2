@@ -1,0 +1,8 @@
+{
+    "id": "cf2a79e2-8f90-4882-a8c5-9a5d7c29aa6f",
+    "type": "feature",
+    "description": "Added support for Model Registry Staging construct. Users can define series of stages that models can progress through for model workflows and lifecycle. This simplifies tracking and managing models as they transition through development, testing, and production stages.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

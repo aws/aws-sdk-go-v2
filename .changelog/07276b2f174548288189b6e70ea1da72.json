@@ -1,0 +1,8 @@
+{
+    "id": "07276b2f-1745-4828-8189-b6e70ea1da72",
+    "type": "feature",
+    "description": "Neo Integration via IAM Identity Center (IdC)",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

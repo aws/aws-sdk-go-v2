@@ -87,6 +87,16 @@ type DescribeUserOutput struct {
 	// If enabled, the user is hidden from the global address list.
 	HiddenFromGlobalAddressList bool
 
+	//  Identity Store ID from the IAM Identity Center. If this parameter is empty it
+	// will be updated automatically when the user logs in for the first time to the
+	// mailbox associated with WorkMail.
+	IdentityProviderIdentityStoreId *string
+
+	// User ID from the IAM Identity Center. If this parameter is empty it will be
+	// updated automatically when the user logs in for the first time to the mailbox
+	// associated with WorkMail.
+	IdentityProviderUserId *string
+
 	// Initials of the user.
 	Initials *string
 

@@ -67,6 +67,10 @@ type UpdateWorkgroupInput struct {
 	// 5431-5455 and 8191-8215. The default is 5439.
 	Port *int32
 
+	// An object that represents the price performance target settings for the
+	// workgroup.
+	PricePerformanceTarget *types.PerformanceTarget
+
 	// A value that specifies whether the workgroup can be accessible from a public
 	// network.
 	PubliclyAccessible *bool

@@ -46,21 +46,31 @@ type DescribeLocationEfsOutput struct {
 
 	// The ARN of the access point that DataSync uses to access the Amazon EFS file
 	// system.
+	//
+	// For more information, see [Accessing restricted file systems].
+	//
+	// [Accessing restricted file systems]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam
 	AccessPointArn *string
 
 	// The time that the location was created.
 	CreationTime *time.Time
 
-	// The subnet and security groups that DataSync uses to access your Amazon EFS
-	// file system.
+	// The subnet and security groups that DataSync uses to connect to one of your
+	// Amazon EFS file system's [mount targets].
+	//
+	// [mount targets]: https://docs.aws.amazon.com/efs/latest/ug/accessing-fs.html
 	Ec2Config *types.Ec2Config
 
-	// The Identity and Access Management (IAM) role that DataSync assumes when
-	// mounting the Amazon EFS file system.
+	// The Identity and Access Management (IAM) role that allows DataSync to access
+	// your Amazon EFS file system.
+	//
+	// For more information, see [Creating a DataSync IAM role for file system access].
+	//
+	// [Creating a DataSync IAM role for file system access]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html#create-efs-location-iam-role
 	FileSystemAccessRoleArn *string
 
-	// Describes whether DataSync uses Transport Layer Security (TLS) encryption when
-	// copying data to or from the Amazon EFS file system.
+	// Indicates whether DataSync uses Transport Layer Security (TLS) encryption when
+	// transferring data to or from the Amazon EFS file system.
 	InTransitEncryption types.EfsInTransitEncryption
 
 	// The ARN of the Amazon EFS file system location.

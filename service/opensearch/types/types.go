@@ -198,6 +198,50 @@ type AIMLOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Configurations of the OpenSearch Application.
+type AppConfig struct {
+
+	// Specify the item to configure, such as admin role for the OpenSearch
+	// Application.
+	Key AppConfigType
+
+	// Specifies the value to configure for the key, such as an IAM user ARN.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Basic information of the OpenSearch Application.
+type ApplicationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	Arn *string
+
+	// Timestamp at which an OpenSearch Application was created.
+	CreatedAt *time.Time
+
+	// Endpoint URL of an OpenSearch Application.
+	Endpoint *string
+
+	// Unique identifier for an OpenSearch application.
+	Id *string
+
+	// Timestamp at which an OpenSearch Application was last updated.
+	LastUpdatedAt *time.Time
+
+	// Name of an OpenSearch Application.
+	Name *string
+
+	// Status of an OpenSearch Application. Possible values are CREATING , UPDATING ,
+	// DELETING , FAILED , ACTIVE , and DELETED .
+	Status ApplicationStatus
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Amazon Web Services account or service that has access to
 // an Amazon OpenSearch Service domain through the use of an interface VPC
 // endpoint.
@@ -692,6 +736,21 @@ type CrossClusterSearchConnectionProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Data sources that are associated with an OpenSearch Application.
+type DataSource struct {
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	DataSourceArn *string
+
+	// Detailed description of a data source.
+	DataSourceDescription *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about a direct-query data source.
 type DataSourceDetails struct {
 
@@ -789,6 +848,9 @@ type DomainConfig struct {
 	// recommended option. If you set your IP address type to dual stack, you can't
 	// change your address type later.
 	IPAddressType *IPAddressTypeStatus
+
+	// Container for IAM Identity Center Option control for the domain.
+	IdentityCenterOptions *IdentityCenterOptionsStatus
 
 	// Key-value pairs to configure log publishing.
 	LogPublishingOptions *LogPublishingOptionsStatus
@@ -1086,6 +1148,9 @@ type DomainStatus struct {
 	// The type of IP addresses supported by the endpoint for the domain.
 	IPAddressType IPAddressType
 
+	// Container for IAM Identity Center Option control for the domain.
+	IdentityCenterOptions *IdentityCenterOptions
+
 	// Log publishing options for the domain.
 	LogPublishingOptions map[string]LogPublishingOption
 
@@ -1295,6 +1360,113 @@ type Filter struct {
 
 	// One or more values for the filter.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for IAM Identity Center for an OpenSearch Application.
+type IamIdentityCenterOptions struct {
+
+	// IAM Identity Center is enabled for the OpenSearch Application.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	IamIdentityCenterApplicationArn *string
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	IamIdentityCenterInstanceArn *string
+
+	// Amazon Resource Name of the IAM Identity Center's Application created for the
+	// OpenSearch Application after enabling IAM Identity Center.
+	IamRoleForIdentityCenterApplicationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings for IAM Identity Center.
+type IamIdentityCenterOptionsInput struct {
+
+	// Enable/disable settings for IAM Identity Center.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the domain. See [Identifiers for IAM Entities] in Using Amazon Web Services
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: https://docs.aws.amazon.com/IAM/latest/UserGuide/index.html
+	IamIdentityCenterInstanceArn *string
+
+	// Amazon Resource Name of IAM Identity Center's application.
+	IamRoleForIdentityCenterApplicationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Container for IAM Identity Center Options settings.
+type IdentityCenterOptions struct {
+
+	// True to enable IAM Identity Center for API access in Amazon OpenSearch Service.
+	EnabledAPIAccess *bool
+
+	// The ARN for IAM Identity Center Application which will integrate with Amazon
+	// OpenSearch Service.
+	IdentityCenterApplicationARN *string
+
+	// The ARN for IAM Identity Center Instance.
+	IdentityCenterInstanceARN *string
+
+	// The ID of IAM Identity Store.
+	IdentityStoreId *string
+
+	// Specify the attribute that contains the backend role (groupName, groupID) of
+	// IAM Identity Center
+	RolesKey RolesKeyIdCOption
+
+	// Specify the attribute that contains the subject (username, userID, email) of
+	// IAM Identity Center.
+	SubjectKey SubjectKeyIdCOption
+
+	noSmithyDocumentSerde
+}
+
+// Container for IAM Identity Center Options settings.
+type IdentityCenterOptionsInput struct {
+
+	// True to enable IAM Identity Center for API access in Amazon OpenSearch Service.
+	EnabledAPIAccess *bool
+
+	// The ARN for IAM Identity Center Instance which will be used for IAM Identity
+	// Center Application creation.
+	IdentityCenterInstanceARN *string
+
+	// Specify the attribute that contains the backend role (groupName, groupID) of
+	// IAM Identity Center
+	RolesKey RolesKeyIdCOption
+
+	// Specify the attribute that contains the subject (username, userID, email) of
+	// IAM Identity Center.
+	SubjectKey SubjectKeyIdCOption
+
+	noSmithyDocumentSerde
+}
+
+// The status of IAM Identity Center Options settings for a domain.
+type IdentityCenterOptionsStatus struct {
+
+	// Container for IAM Identity Center Options settings.
+	//
+	// This member is required.
+	Options *IdentityCenterOptions
+
+	// The status of IAM Identity Center Options settings for a domain.
+	//
+	// This member is required.
+	Status *OptionStatus
 
 	noSmithyDocumentSerde
 }

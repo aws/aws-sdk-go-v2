@@ -1,0 +1,8 @@
+{
+    "id": "9a64f034-9132-4848-a391-306721e3ce4a",
+    "type": "feature",
+    "description": "Release of Amazon Location Routes API. Routes enables you to plan efficient routes and streamline deliveries by leveraging real-time traffic, vehicle restrictions, and turn-by-turn directions.",
+    "modules": [
+        "service/georoutes"
+    ]
+}

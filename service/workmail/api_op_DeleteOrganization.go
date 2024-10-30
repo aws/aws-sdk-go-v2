@@ -47,6 +47,10 @@ type DeleteOrganizationInput struct {
 	// The idempotency token associated with the request.
 	ClientToken *string
 
+	// Deletes IAM Identity Center application for WorkMail. This action does not
+	// affect authentication settings for any organization.
+	DeleteIdentityCenterApplication bool
+
 	// Deletes a WorkMail organization even if the organization has enabled users.
 	ForceDelete bool
 

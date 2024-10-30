@@ -50,6 +50,26 @@ func (m *validateOpCreateTable) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateType struct {
+}
+
+func (*validateOpCreateType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKeyspace struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpDeleteTable) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteType struct {
+}
+
+func (*validateOpDeleteType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTypeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +190,26 @@ func (m *validateOpGetTable) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetType struct {
+}
+
+func (*validateOpGetType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTables struct {
 }
 
@@ -185,6 +245,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTypes struct {
+}
+
+func (*validateOpListTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTypesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -278,12 +358,20 @@ func addOpCreateTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTable{}, middleware.After)
 }
 
+func addOpCreateTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateType{}, middleware.After)
+}
+
 func addOpDeleteKeyspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKeyspace{}, middleware.After)
 }
 
 func addOpDeleteTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTable{}, middleware.After)
+}
+
+func addOpDeleteTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteType{}, middleware.After)
 }
 
 func addOpGetKeyspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -298,12 +386,20 @@ func addOpGetTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTable{}, middleware.After)
 }
 
+func addOpGetTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetType{}, middleware.After)
+}
+
 func addOpListTablesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTables{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTypes{}, middleware.After)
 }
 
 func addOpRestoreTableValidationMiddleware(stack *middleware.Stack) error {
@@ -500,6 +596,41 @@ func validateEncryptionSpecification(v *types.EncryptionSpecification) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionSpecification"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldDefinition(v *types.FieldDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFieldList(v []types.FieldDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FieldList"}
+	for i := range v {
+		if err := validateFieldDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -832,6 +963,31 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	}
 }
 
+func validateOpCreateTypeInput(v *CreateTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTypeInput"}
+	if v.KeyspaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyspaceName"))
+	}
+	if v.TypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
+	}
+	if v.FieldDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldDefinitions"))
+	} else if v.FieldDefinitions != nil {
+		if err := validateFieldList(v.FieldDefinitions); err != nil {
+			invalidParams.AddNested("FieldDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteKeyspaceInput(v *DeleteKeyspaceInput) error {
 	if v == nil {
 		return nil
@@ -857,6 +1013,24 @@ func validateOpDeleteTableInput(v *DeleteTableInput) error {
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTypeInput(v *DeleteTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTypeInput"}
+	if v.KeyspaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyspaceName"))
+	}
+	if v.TypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -916,6 +1090,24 @@ func validateOpGetTableInput(v *GetTableInput) error {
 	}
 }
 
+func validateOpGetTypeInput(v *GetTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTypeInput"}
+	if v.KeyspaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyspaceName"))
+	}
+	if v.TypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTablesInput(v *ListTablesInput) error {
 	if v == nil {
 		return nil
@@ -938,6 +1130,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTypesInput(v *ListTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTypesInput"}
+	if v.KeyspaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyspaceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

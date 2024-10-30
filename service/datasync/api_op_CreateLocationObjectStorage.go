@@ -37,7 +37,7 @@ func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *Create
 type CreateLocationObjectStorageInput struct {
 
 	// Specifies the Amazon Resource Names (ARNs) of the DataSync agents that can
-	// securely connect with your location.
+	// connect with your object storage system.
 	//
 	// This member is required.
 	AgentArns []string

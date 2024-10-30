@@ -195,7 +195,7 @@ type UpdateServiceInput struct {
 	Cluster *string
 
 	// Optional deployment parameters that control how many tasks run during the
-	// deployment and the ordering of stopping and starting tasks.
+	// deployment and the failure detection methods.
 	DeploymentConfiguration *types.DeploymentConfiguration
 
 	// The number of instantiations of the task to place and keep running in your
