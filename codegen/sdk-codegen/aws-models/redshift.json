@@ -3852,14 +3852,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a zero-ETL integration with Amazon Redshift.</p>"
+                "smithy.api#documentation": "<p>Creates a zero-ETL integration or S3 event integration with Amazon Redshift.</p>"
             }
         },
         "com.amazonaws.redshift#CreateIntegrationMessage": {
             "type": "structure",
             "members": {
                 "SourceArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#SourceArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the database to use as the source for replication.</p>",
@@ -3867,7 +3867,7 @@
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#TargetArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use as the target for replication.</p>",
@@ -5372,7 +5372,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a zero-ETL integration with Amazon Redshift.</p>"
+                "smithy.api#documentation": "<p>Deletes a zero-ETL integration or S3 event integration with Amazon Redshift.</p>"
             }
         },
         "com.amazonaws.redshift#DeleteIntegrationMessage": {
@@ -7327,13 +7327,13 @@
             "type": "structure",
             "members": {
                 "IntegrationArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#InboundIntegrationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inbound integration.</p>"
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#TargetArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target of an inbound integration.</p>"
                     }
@@ -7372,7 +7372,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more zero-ETL integrations with Amazon Redshift.</p>",
+                "smithy.api#documentation": "<p>Describes one or more zero-ETL or S3 event integrations with Amazon Redshift.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -8385,7 +8385,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource with which you want to view tags. Valid resource types are: </p>\n         <ul>\n            <li>\n               <p>Cluster</p>\n            </li>\n            <li>\n               <p>CIDR/IP</p>\n            </li>\n            <li>\n               <p>EC2 security group</p>\n            </li>\n            <li>\n               <p>Snapshot</p>\n            </li>\n            <li>\n               <p>Cluster security group</p>\n            </li>\n            <li>\n               <p>Subnet group</p>\n            </li>\n            <li>\n               <p>HSM connection</p>\n            </li>\n            <li>\n               <p>HSM certificate</p>\n            </li>\n            <li>\n               <p>Parameter group</p>\n            </li>\n            <li>\n               <p>Snapshot copy grant</p>\n            </li>\n            <li>\n               <p>Integration (zero-ETL integration)</p>\n               <note>\n                  <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>, \n                    instead specify the <code>ResourceName</code> of the integration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For more information about Amazon Redshift resource types and constructing ARNs, go to\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions\">Specifying Policy Elements: Actions, Effects, Resources, and Principals</a> in\n            the Amazon Redshift Cluster Management Guide. </p>"
+                        "smithy.api#documentation": "<p>The type of resource with which you want to view tags. Valid resource types are: </p>\n         <ul>\n            <li>\n               <p>Cluster</p>\n            </li>\n            <li>\n               <p>CIDR/IP</p>\n            </li>\n            <li>\n               <p>EC2 security group</p>\n            </li>\n            <li>\n               <p>Snapshot</p>\n            </li>\n            <li>\n               <p>Cluster security group</p>\n            </li>\n            <li>\n               <p>Subnet group</p>\n            </li>\n            <li>\n               <p>HSM connection</p>\n            </li>\n            <li>\n               <p>HSM certificate</p>\n            </li>\n            <li>\n               <p>Parameter group</p>\n            </li>\n            <li>\n               <p>Snapshot copy grant</p>\n            </li>\n            <li>\n               <p>Integration (zero-ETL integration or S3 event integration)</p>\n               <note>\n                  <p>To describe the tags associated with an <code>integration</code>, don't specify <code>ResourceType</code>, \n                    instead specify the <code>ResourceName</code> of the integration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For more information about Amazon Redshift resource types and constructing ARNs, go to\n                <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions\">Specifying Policy Elements: Actions, Effects, Resources, and Principals</a> in\n            the Amazon Redshift Cluster Management Guide. </p>"
                     }
                 },
                 "MaxRecords": {
@@ -10333,7 +10333,7 @@
             "type": "structure",
             "members": {
                 "IntegrationArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#InboundIntegrationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an inbound integration.</p>"
                     }
@@ -10345,7 +10345,7 @@
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#TargetArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target of an inbound integration.</p>"
                     }
@@ -10371,6 +10371,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The content of an inbound integration.</p>"
+            }
+        },
+        "com.amazonaws.redshift#InboundIntegrationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:.+:[a-z0-9\\-]*:[0-9]*:integration:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.redshift#InboundIntegrationList": {
@@ -10463,7 +10473,7 @@
             "type": "structure",
             "members": {
                 "IntegrationArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#IntegrationArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integration.</p>"
                     }
@@ -10475,13 +10485,13 @@
                     }
                 },
                 "SourceArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#SourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the database used as the source for\n            replication.</p>"
                     }
                 },
                 "TargetArn": {
-                    "target": "com.amazonaws.redshift#String",
+                    "target": "com.amazonaws.redshift#TargetArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Redshift data warehouse to use as the target for replication.</p>"
                     }
@@ -10680,7 +10690,7 @@
                     "code": "IntegrationQuotaExceededFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>You can't create any more zero-ETL integrations because the quota has been reached.</p>",
+                "smithy.api#documentation": "<p>You can't create any more zero-ETL or S3 event integrations because the quota has been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -12655,7 +12665,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies a zero-ETL integration with Amazon Redshift.</p>"
+                "smithy.api#documentation": "<p>Modifies a zero-ETL integration or S3 event integration with Amazon Redshift.</p>"
             }
         },
         "com.amazonaws.redshift#ModifyIntegrationMessage": {
@@ -18623,6 +18633,16 @@
                 }
             }
         },
+        "com.amazonaws.redshift#SourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:(s3|dynamodb):.*:.*:[a-zA-Z0-9._\\-\\/]+$"
+            }
+        },
         "com.amazonaws.redshift#SourceIdsList": {
             "type": "list",
             "member": {
@@ -19197,6 +19217,16 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#TargetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:redshift(-serverless)?:[a-z0-9\\-]+:[0-9]{12}:(namespace\\/|namespace:)[a-z0-9\\-]+$"
             }
         },
         "com.amazonaws.redshift#TrackList": {

@@ -1,0 +1,2181 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.geomaps#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because of insufficient access or permissions. Check with an administrator to verify your permissions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.geomaps#ApiKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#externalDocumentation": {
+                    "Implementation Guide": "https://github.com/paseto-standard/paseto-spec/blob/master/docs/02-Implementation-Guide/03-Algorithm-Lucidity.md"
+                },
+                "smithy.api#length": {
+                    "max": 1000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.geomaps#ColorScheme": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "LIGHT",
+                        "value": "Light"
+                    },
+                    {
+                        "name": "DARK",
+                        "value": "Dark"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#CompactOverlay": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7000
+                }
+            }
+        },
+        "com.amazonaws.geomaps#CountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 3
+                },
+                "smithy.api#pattern": "^([A-Z]{2}|[A-Z]{3})$"
+            }
+        },
+        "com.amazonaws.geomaps#DistanceMeters": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 4294967295
+                }
+            }
+        },
+        "com.amazonaws.geomaps#GeoJsonOverlay": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7000
+                }
+            }
+        },
+        "com.amazonaws.geomaps#GetGlyphs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.geomaps#GetGlyphsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.geomaps#GetGlyphsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the map's glyphs.</p>",
+                "smithy.api#http": {
+                    "uri": "/glyphs/{FontStack}/{FontUnicodeRange}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetGlyphsSuccess",
+                        "params": {
+                            "FontStack": "Amazon Ember Regular",
+                            "FontUnicodeRange": "0-255.pbf"
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#GetGlyphsRequest": {
+            "type": "structure",
+            "members": {
+                "FontStack": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the <code>FontStack</code> to retrieve. </p>\n         <p>Example: <code>Amazon Ember Bold,Noto Sans Bold</code>.</p>\n         <p>The supported font stacks are as follows:</p>\n         <ul>\n            <li>\n               <p>Amazon Ember Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold,Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC BdItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold,Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Light</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Light Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC LtItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular,Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC RgItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC ThItalic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Thin</p>\n            </li>\n            <li>\n               <p>Amazon Ember Condensed RC Thin Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Heavy</p>\n            </li>\n            <li>\n               <p>Amazon Ember Heavy Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Light</p>\n            </li>\n            <li>\n               <p>Amazon Ember Light Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium,Noto Sans Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic,Noto Sans Italic</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular,Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular</p>\n            </li>\n            <li>\n               <p>Amazon Ember Thin</p>\n            </li>\n            <li>\n               <p>Amazon Ember Thin Italic</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Bd</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_BdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Lt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_LtIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Rg</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_RgIt</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_Th</p>\n            </li>\n            <li>\n               <p>AmazonEmberCdRC_ThIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Bd</p>\n            </li>\n            <li>\n               <p>AmazonEmber_BdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_He</p>\n            </li>\n            <li>\n               <p>AmazonEmber_HeIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Lt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_LtIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Md</p>\n            </li>\n            <li>\n               <p>AmazonEmber_MdIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Rg</p>\n            </li>\n            <li>\n               <p>AmazonEmber_RgIt</p>\n            </li>\n            <li>\n               <p>AmazonEmber_Th</p>\n            </li>\n            <li>\n               <p>AmazonEmber_ThIt</p>\n            </li>\n            <li>\n               <p>Noto Sans Black</p>\n            </li>\n            <li>\n               <p>Noto Sans Black Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Light</p>\n            </li>\n            <li>\n               <p>Noto Sans Extra Light Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Light</p>\n            </li>\n            <li>\n               <p>Noto Sans Light Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Medium</p>\n            </li>\n            <li>\n               <p>Noto Sans Medium Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Regular</p>\n            </li>\n            <li>\n               <p>Noto Sans Semi Bold</p>\n            </li>\n            <li>\n               <p>Noto Sans Semi Bold Italic</p>\n            </li>\n            <li>\n               <p>Noto Sans Thin</p>\n            </li>\n            <li>\n               <p>Noto Sans Thin Italic</p>\n            </li>\n            <li>\n               <p>NotoSans-Bold</p>\n            </li>\n            <li>\n               <p>NotoSans-Italic</p>\n            </li>\n            <li>\n               <p>NotoSans-Medium</p>\n            </li>\n            <li>\n               <p>NotoSans-Regular</p>\n            </li>\n            <li>\n               <p>Open Sans Regular,Arial Unicode MS Regular</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#length": {
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "FontUnicodeRange": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Unicode range of characters to download glyphs for. This must be aligned to multiples\n         of 256. </p>\n         <p>Example: <code>0-255.pdf</code>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^[0-9]+-[0-9]+\\.pbf$",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetGlyphsResponse": {
+            "type": "structure",
+            "members": {
+                "Blob": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glyph, as a binary blob.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that instructs caching configuration for the client.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "ETag": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The glyph's Etag.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetSprites": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.geomaps#GetSpritesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.geomaps#GetSpritesResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the map's sprites.</p>",
+                "smithy.api#http": {
+                    "uri": "/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetSpritesSuccess",
+                        "params": {
+                            "Style": "Standard",
+                            "ColorScheme": "Light",
+                            "Variant": "Default",
+                            "FileName": "sprites.json"
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#GetSpritesRequest": {
+            "type": "structure",
+            "members": {
+                "FileName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>Sprites</code> API: The name of the sprite ﬁle to retrieve, following pattern\n            <code>sprites(@2x)?\\.(png|json)</code>.</p>\n         <p>Example: <code>sprites.png</code>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^sprites(@2x)?\\.(png|json)$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Style": {
+                    "target": "com.amazonaws.geomaps#MapStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Style specifies the desired map style for the <code>Sprites</code> APIs.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ColorScheme": {
+                    "target": "com.amazonaws.geomaps#ColorScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets color tone for map such as dark and light for specific map styles. It applies to only vector map styles such as Standard and Monochrome.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for ColorScheme are case sensitive.</p>\n         </note>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Variant": {
+                    "target": "com.amazonaws.geomaps#Variant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optimizes map styles for specific use case or industry. You can choose allowed variant only with Standard map style.</p>\n         <p>Example: <code>Default</code>\n         </p>\n         <note>\n            <p>Valid values for Variant are case sensitive.</p>\n         </note>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetSpritesResponse": {
+            "type": "structure",
+            "members": {
+                "Blob": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the sprite sheet or JSON offset file (image/png or application/json,\n         depending on input).</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that instructs caching configuration for the client.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "ETag": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sprite's Etag.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetStaticMap": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.geomaps#GetStaticMapRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.geomaps#GetStaticMapResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.geomaps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Provides high-quality static map images with customizable options. You can modify the map's appearance and overlay additional information. It's an ideal solution for applications requiring tailored static map snapshots.</p>",
+                "smithy.api#http": {
+                    "uri": "/static/{FileName}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetStaticMapSuccess",
+                        "params": {
+                            "FileName": "map",
+                            "Width": 800,
+                            "Height": 900,
+                            "Center": "-123.144847,49.303609",
+                            "Style": "Satellite",
+                            "Zoom": 10.0
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#GetStaticMapRequest": {
+            "type": "structure",
+            "members": {
+                "BoundingBox": {
+                    "target": "com.amazonaws.geomaps#PositionListString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Takes in two pairs of coordinates, [Lon, Lat], denoting south-westerly and\n         north-easterly edges of the image. The underlying area becomes the view of the image. </p>\n         <p>Example: -123.17075,49.26959,-123.08125,49.31429</p>",
+                        "smithy.api#httpQuery": "bounding-box"
+                    }
+                },
+                "BoundedPositions": {
+                    "target": "com.amazonaws.geomaps#PositionListString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Takes in two or more pair of coordinates, [Lon, Lat], with each coordinate separated by\n         a comma. The API will generate an image to encompass all of the provided coordinates. </p>\n         <note>\n            <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code>\n            </p>\n         </note>\n         <p>Example: 97.170451,78.039098,99.045536,27.176178</p>",
+                        "smithy.api#httpQuery": "bounded-positions"
+                    }
+                },
+                "Center": {
+                    "target": "com.amazonaws.geomaps#PositionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Takes in a pair of coordinates, [Lon, Lat], which becomes the center point of the image.\n         This parameter requires that either zoom or radius is set.</p>\n         <note>\n            <p>Cannot be used with <code>Zoom</code> and or <code>Radius</code>\n            </p>\n         </note>\n         <p>Example: 49.295,-123.108</p>",
+                        "smithy.api#httpQuery": "center"
+                    }
+                },
+                "CompactOverlay": {
+                    "target": "com.amazonaws.geomaps#CompactOverlay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Takes in a string to draw geometries on the image. The input is a comma separated format as follows format:\n         <code>[Lon, Lat]</code>\n         </p>\n         <p>Example:\n         <code>line:-122.407653,37.798557,-122.413291,37.802443;color=%23DD0000;width=7;outline-color=#00DD00;outline-width=5yd|point:-122.40572,37.80004;label=Fog Hill Market;size=large;text-color=%23DD0000;color=#EE4B2B</code>\n         </p>\n         <note>\n            <p>Currently it supports the following geometry types: point, line and polygon. It does not support multiPoint , multiLine and multiPolgyon.</p>\n         </note>",
+                        "smithy.api#httpQuery": "compact-overlay"
+                    }
+                },
+                "GeoJsonOverlay": {
+                    "target": "com.amazonaws.geomaps#GeoJsonOverlay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Takes in a string to draw geometries on the image. The input is a valid GeoJSON\n         collection object. </p>\n         <p>Example:\n            <code>{\"type\":\"FeatureCollection\",\"features\": [{\"type\":\"Feature\",\"geometry\":{\"type\":\"MultiPoint\",\"coordinates\": [[-90.076345,51.504107],[-0.074451,51.506892]]},\"properties\": {\"color\":\"#00DD00\"}}]}</code>\n         </p>",
+                        "smithy.api#httpQuery": "geojson-overlay"
+                    }
+                },
+                "Height": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the height of the map image.</p>",
+                        "smithy.api#httpQuery": "height",
+                        "smithy.api#range": {
+                            "min": 64,
+                            "max": 1400
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.geomaps#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional: The API key to be used for authorization. Either an API key or valid SigV4\n         signature must be provided when making a request. </p>",
+                        "smithy.api#httpQuery": "key"
+                    }
+                },
+                "Padding": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies additional space (in pixels) around overlay feature to prevent them from being\n         cut or obscured.</p>\n         <note>\n            <p>Value for max and min is determined by:</p>\n            <p>Min: <code>1</code>\n            </p>\n            <p>Max: <code>min(height, width)/4</code>\n            </p>\n         </note>\n         <p>Example: <code>100</code>\n         </p>",
+                        "smithy.api#httpQuery": "padding"
+                    }
+                },
+                "Radius": {
+                    "target": "com.amazonaws.geomaps#DistanceMeters",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Used with center parameter, it specifies the zoom of the image where you can control it\n         on a granular level. Takes in any value <code>&gt;= 1</code>. </p>\n         <p>Example: <code>1500</code>\n         </p>\n         <note>\n            <p>Cannot be used with <code>Zoom</code>.</p>\n         </note>\n         <p>\n            <b>Unit</b>: <code>Meters</code>\n         </p>\n         <p/>",
+                        "smithy.api#httpQuery": "radius"
+                    }
+                },
+                "FileName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map scaling parameter to size the image, icons, and labels. It follows the pattern\n         of <code>^map(@2x)?$</code>.</p>\n         <p>Example: <code>map, map@2x</code>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^map(@2x)?$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScaleBarUnit": {
+                    "target": "com.amazonaws.geomaps#ScaleBarUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays a scale on the bottom right of the map image with the unit specified in the\n         input. </p>\n         <p>Example: <code>KilometersMiles, Miles, Kilometers, MilesKilometers</code>\n         </p>",
+                        "smithy.api#httpQuery": "scale-unit"
+                    }
+                },
+                "Style": {
+                    "target": "com.amazonaws.geomaps#StaticMapStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Style specifies the desired map style for the <code>Style</code> APIs.</p>",
+                        "smithy.api#httpQuery": "style"
+                    }
+                },
+                "Width": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the width of the map image.</p>",
+                        "smithy.api#httpQuery": "width",
+                        "smithy.api#range": {
+                            "min": 64,
+                            "max": 1400
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "Zoom": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Specifies the zoom level of the map image.</p>\n         <note>\n            <p>Cannot be used with <code>Radius</code>.</p>\n         </note>",
+                        "smithy.api#httpQuery": "zoom",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 20
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetStaticMapResponse": {
+            "type": "structure",
+            "members": {
+                "Blob": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blob represents a map image as a <code>jpeg</code> for\n         the <code>GetStaticMap</code> API.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that instructs caching configuration for the client.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "ETag": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static map's Etag.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                },
+                "PricingBucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing bucket for which the request is charged at.</p>",
+                        "smithy.api#httpHeader": "x-amz-geo-pricing-bucket",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetStyleDescriptor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.geomaps#GetStyleDescriptorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.geomaps#GetStyleDescriptorResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the style.</p>",
+                "smithy.api#http": {
+                    "uri": "/styles/{Style}/descriptor",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetStyleDescriptorSuccess",
+                        "params": {
+                            "Style": "Standard"
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#GetStyleDescriptorRequest": {
+            "type": "structure",
+            "members": {
+                "Style": {
+                    "target": "com.amazonaws.geomaps#MapStyle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Style specifies the desired map style.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ColorScheme": {
+                    "target": "com.amazonaws.geomaps#ColorScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets color tone for map such as dark and light for specific map styles. It applies to only vector map styles such as Standard and Monochrome.</p>\n         <p>Example: <code>Light</code>\n         </p>\n         <p>Default value: <code>Light</code>\n         </p>\n         <note>\n            <p>Valid values for ColorScheme are case sensitive.</p>\n         </note>",
+                        "smithy.api#httpQuery": "color-scheme"
+                    }
+                },
+                "PoliticalView": {
+                    "target": "com.amazonaws.geomaps#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.</p>\n         <p>The following political views are currently supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ARG</code>: Argentina's view on the Southern Patagonian Ice Field and Tierra Del Fuego, including the Falkland Islands, South Georgia, and South Sandwich Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>EGY</code>: Egypt's view on Bir Tawil</p>\n            </li>\n            <li>\n               <p>\n                  <code>IND</code>: India's view on Gilgit-Baltistan</p>\n            </li>\n            <li>\n               <p>\n                  <code>KEN</code>: Kenya's view on the Ilemi Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAR</code>: Morocco's view on Western Sahara</p>\n            </li>\n            <li>\n               <p>\n                  <code>PAK</code>: Pakistan's view on Jammu and Kashmir and the Junagadh Area</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUS</code>: Russia's view on Crimea</p>\n            </li>\n            <li>\n               <p>\n                  <code>SDN</code>: Sudan's view on the Halaib Triangle</p>\n            </li>\n            <li>\n               <p>\n                  <code>SRB</code>: Serbia's view on Kosovo, Vukovar, and Sarengrad Islands</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUR</code>: Suriname's view on the Courantyne Headwaters and Lawa Headwaters</p>\n            </li>\n            <li>\n               <p>\n                  <code>SYR</code>: Syria's view on the Golan Heights</p>\n            </li>\n            <li>\n               <p>\n                  <code>TUR</code>: Turkey's view on Cyprus and Northern Cyprus</p>\n            </li>\n            <li>\n               <p>\n                  <code>TZA</code>: Tanzania's view on Lake Malawi</p>\n            </li>\n            <li>\n               <p>\n                  <code>URY</code>: Uruguay's view on Rincon de Artigas</p>\n            </li>\n            <li>\n               <p>\n                  <code>VNM</code>: Vietnam's view on the Paracel Islands and Spratly Islands</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "political-view"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.geomaps#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional: The API key to be used for authorization. Either an API key or valid SigV4\n         signature must be provided when making a request. </p>",
+                        "smithy.api#httpQuery": "key"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetStyleDescriptorResponse": {
+            "type": "structure",
+            "members": {
+                "Blob": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This Blob contains the body of the style descriptor which is in application/json format.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that instructs caching configuration for the client.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "ETag": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The style descriptor's Etag.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetTile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.geomaps#GetTileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.geomaps#GetTileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.geomaps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Returns a tile. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.</p>",
+                "smithy.api#http": {
+                    "uri": "/tiles/{Tileset}/{Z}/{X}/{Y}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetTileSuccess",
+                        "params": {
+                            "Tileset": "vector.basemap",
+                            "X": "5190",
+                            "Y": "11218",
+                            "Z": "15"
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#GetTileRequest": {
+            "type": "structure",
+            "members": {
+                "Tileset": {
+                    "target": "com.amazonaws.geomaps#Tileset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the desired tile set.</p>\n         <p>Valid Values: <code>raster.satellite | vector.basemap</code>\n         </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Z": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zoom value for the map tile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "\\d+",
+                        "smithy.api#required": {}
+                    }
+                },
+                "X": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The X axis value for the map tile. Must be between 0 and 19.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "\\d+",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Y": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Y axis value for the map tile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "\\d+",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.geomaps#ApiKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional: The API key to be used for authorization. Either an API key or valid SigV4\n         signature must be provided when making a request. </p>",
+                        "smithy.api#httpQuery": "key"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.geomaps#GetTileResponse": {
+            "type": "structure",
+            "members": {
+                "Blob": {
+                    "target": "smithy.api#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blob represents a vector tile in <code>mvt</code> format for the\n            <code>GetTile</code> API.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that represents the format of the response. The response returns the following as the HTTP body.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "CacheControl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Header that instructs caching configuration for the client.</p>",
+                        "smithy.api#httpHeader": "Cache-Control"
+                    }
+                },
+                "ETag": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing bucket for which the request is charged at.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                },
+                "PricingBucket": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing bucket for which the request is charged at.</p>",
+                        "smithy.api#httpHeader": "x-amz-geo-pricing-bucket",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.geomaps#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.geomaps#MapStyle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STANDARD",
+                        "value": "Standard"
+                    },
+                    {
+                        "name": "MONOCHROME",
+                        "value": "Monochrome"
+                    },
+                    {
+                        "name": "HYBRID",
+                        "value": "Hybrid"
+                    },
+                    {
+                        "name": "SATELLITE",
+                        "value": "Satellite"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#MapsService": {
+            "type": "service",
+            "version": "2020-11-19",
+            "resources": [
+                {
+                    "target": "com.amazonaws.geomaps#ProviderResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Geo Maps",
+                    "arnNamespace": "geo-maps",
+                    "cloudTrailEventSource": "geo-maps.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "geo-maps"
+                },
+                "aws.endpoints#standardRegionalEndpoints": {
+                    "partitionSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://maps.geo.{region}.{dnsSuffix}/v2"
+                            },
+                            {
+                                "endpoint": "https://maps.geo-fips.{region}.{dualStackDnsSuffix}/v2",
+                                "fips": true,
+                                "dualStack": true
+                            },
+                            {
+                                "endpoint": "https://maps.geo-fips.{region}.{dnsSuffix}/v2",
+                                "fips": true,
+                                "dualStack": false
+                            },
+                            {
+                                "endpoint": "https://maps.geo.{region}.{dualStackDnsSuffix}/v2",
+                                "fips": false,
+                                "dualStack": true
+                            }
+                        ],
+                        "aws-us-gov": [
+                            {
+                                "endpoint": "https://maps.geo.{region}.us-gov.{dnsSuffix}/v2"
+                            },
+                            {
+                                "endpoint": "https://maps.geo-fips.{region}.us-gov.{dualStackDnsSuffix}/v2",
+                                "fips": true,
+                                "dualStack": true
+                            },
+                            {
+                                "endpoint": "https://maps.geo-fips.{region}.us-gov.{dnsSuffix}/v2",
+                                "fips": true,
+                                "dualStack": false
+                            },
+                            {
+                                "endpoint": "https://maps.geo.{region}.us-gov.{dualStackDnsSuffix}/v2",
+                                "fips": false,
+                                "dualStack": true
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "content-type"
+                    ],
+                    "additionalExposedHeaders": [
+                        "age",
+                        "date",
+                        "x-amz-apigw-id",
+                        "x-amz-cf-id",
+                        "x-amz-cf-pop",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id",
+                        "x-cache"
+                    ]
+                },
+                "smithy.api#documentation": "<p>\n         Integrate high-quality base map data into your applications using \n         <a href=\"https://maplibre.org\">MapLibre</a>. Capabilities include:\n     </p>\n         <ul>\n            <li>\n               <p>Access to comprehensive base map data, allowing you to tailor the map display to your specific needs.</p>\n            </li>\n            <li>\n               <p>Multiple pre-designed map styles suited for various application types, such as navigation, logistics, or data visualization.</p>\n            </li>\n            <li>\n               <p>Generation of static map images for scenarios where interactive maps aren't suitable, such as:</p>\n               <ul>\n                  <li>\n                     <p>Embedding in emails or documents</p>\n                  </li>\n                  <li>\n                     <p>Displaying in low-bandwidth environments</p>\n                  </li>\n                  <li>\n                     <p>Creating printable maps</p>\n                  </li>\n                  <li>\n                     <p>Enhancing application performance by reducing client-side rendering</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon Location Service Maps V2",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo.{Region}.{PartitionResult#dnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo-fips.{Region}.{PartitionResult#dnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo.{Region}.us-gov.{PartitionResult#dnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo-fips.{Region}.us-gov.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo-fips.{Region}.us-gov.{PartitionResult#dnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://maps.geo.{Region}.us-gov.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://geo-maps-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://geo-maps-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://geo-maps.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {},
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://geo-maps.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo-fips.us-east-1.api.aws/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo-fips.us-east-1.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo.us-east-1.api.aws/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo.us-east-1.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo-fips.us-gov-west-1.us-gov.api.aws/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo-fips.us-gov-west-1.us-gov.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo.us-gov-west-1.us-gov.api.aws/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://maps.geo.us-gov-west-1.us-gov.amazonaws.com/v2"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps.eu-isoe-west-1.cloud.adc-e.uk"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-isoe-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps-fips.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://geo-maps.us-isof-south-1.csp.hci.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isof-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.geomaps#PositionListString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7
+                },
+                "smithy.api#pattern": "^(-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?)(,(-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?))*$"
+            }
+        },
+        "com.amazonaws.geomaps#PositionString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^-?\\d{1,3}(\\.\\d{1,14})?,-?\\d{1,2}(\\.\\d{1,14})?$"
+            }
+        },
+        "com.amazonaws.geomaps#ProviderResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.geomaps#GetGlyphs"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#GetSprites"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#GetStaticMap"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#GetStyleDescriptor"
+                },
+                {
+                    "target": "com.amazonaws.geomaps#GetTile"
+                }
+            ]
+        },
+        "com.amazonaws.geomaps#ScaleBarUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "KILOMETERS",
+                        "value": "Kilometers"
+                    },
+                    {
+                        "name": "KILOMETERS_MILES",
+                        "value": "KilometersMiles"
+                    },
+                    {
+                        "name": "MILES",
+                        "value": "Miles"
+                    },
+                    {
+                        "name": "MILES_KILOMETERS",
+                        "value": "MilesKilometers"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#StaticMapStyle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SATELLITE",
+                        "value": "Satellite"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.geomaps#Tileset": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[-.\\w]+$"
+            }
+        },
+        "com.amazonaws.geomaps#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.geomaps#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field where thebb invalid entry was detected.</p>",
+                        "smithy.api#jsonName": "reason",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldList": {
+                    "target": "com.amazonaws.geomaps#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message with the reason for the validation exception error.</p>",
+                        "smithy.api#jsonName": "fieldList",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.geomaps#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>",
+                        "smithy.api#jsonName": "name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>",
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Location service.</p>"
+            }
+        },
+        "com.amazonaws.geomaps#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.geomaps#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.geomaps#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "UNKNOWN_OPERATION",
+                        "value": "UnknownOperation",
+                        "documentation": "No such operation is supported."
+                    },
+                    {
+                        "name": "MISSING",
+                        "value": "Missing",
+                        "documentation": "The required input is missing."
+                    },
+                    {
+                        "name": "CANNOT_PARSE",
+                        "value": "CannotParse",
+                        "documentation": "    The input cannot be parsed. For example a required JSON document, ARN identifier,\n    date value, or numeric field cannot be parsed.\n"
+                    },
+                    {
+                        "name": "FIELD_VALIDATION_FAILED",
+                        "value": "FieldValidationFailed",
+                        "documentation": "    The input is present and parsable, but it is otherwise invalid. For example, a\n    required numeric argument is outside the allowed range.\n"
+                    },
+                    {
+                        "name": "OTHER",
+                        "value": "Other",
+                        "documentation": "The input is invalid but no more specific reason is applicable."
+                    },
+                    {
+                        "name": "UNKNOWN_FIELD",
+                        "value": "UnknownField",
+                        "documentation": "No such field is supported."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.geomaps#Variant": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "DEFAULT",
+                        "value": "Default"
+                    }
+                ]
+            }
+        }
+    }
+}

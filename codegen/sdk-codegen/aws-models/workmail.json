@@ -231,6 +231,16 @@
                 "smithy.api#pattern": "^arn:aws:workmail:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
             }
         },
+        "com.amazonaws.workmail#ApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
         "com.amazonaws.workmail#AssociateDelegateToResource": {
             "type": "operation",
             "input": {
@@ -850,6 +860,67 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#CreateIdentityCenterApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#CreateIdentityCenterApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#CreateIdentityCenterApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Creates the WorkMail application in IAM Identity Center that can be used later in the WorkMail - IdC integration. For more information, see PutIdentityProviderConfiguration. This action does not affect the authentication settings for any WorkMail organizations.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#CreateIdentityCenterApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.workmail#IdentityCenterApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the IAM Identity Center application.\n         \n         \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceArn": {
+                    "target": "com.amazonaws.workmail#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the instance.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workmail#IdempotencyClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The idempotency token associated with the request.\n         \n         \n      </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#CreateIdentityCenterApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationArn": {
+                    "target": "com.amazonaws.workmail#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the application.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#CreateImpersonationRole": {
             "type": "operation",
             "input": {
@@ -1357,6 +1428,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If this parameter is enabled, the user will be hidden from the address book.</p>"
                     }
+                },
+                "IdentityProviderUserId": {
+                    "target": "com.amazonaws.workmail#IdentityProviderUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1675,6 +1752,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#DeleteIdentityCenterApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DeleteIdentityCenterApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DeleteIdentityCenterApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Deletes the IAM Identity Center application from WorkMail. This action does not affect the authentication settings for any WorkMail organizations.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DeleteIdentityCenterApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationArn": {
+                    "target": "com.amazonaws.workmail#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the application.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#DeleteIdentityCenterApplicationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workmail#DeleteIdentityProviderConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DeleteIdentityProviderConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DeleteIdentityProviderConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Disables the integration between IdC and WorkMail. Authentication will continue with the directory as it was before the IdC integration. You might have to reset your directory passwords and reconfigure your desktop and mobile email clients.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DeleteIdentityProviderConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe Organization ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#DeleteIdentityProviderConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#DeleteImpersonationRole": {
             "type": "operation",
             "input": {
@@ -1962,6 +2128,13 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Deletes a WorkMail organization even if the organization has enabled users.</p>"
                     }
+                },
+                "DeleteIdentityCenterApplication": {
+                    "target": "com.amazonaws.workmail#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Deletes IAM Identity Center application for WorkMail. This action does not affect authentication settings for any organization.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1984,6 +2157,59 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workmail#DeletePersonalAccessToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DeletePersonalAccessTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DeletePersonalAccessTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Deletes the Personal Access Token from the provided WorkMail Organization.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DeletePersonalAccessTokenRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Organization ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PersonalAccessTokenId": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The Personal Access Token ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#DeletePersonalAccessTokenResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -2520,6 +2746,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#DescribeIdentityProviderConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DescribeIdentityProviderConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DescribeIdentityProviderConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns detailed information on the current IdC setup for the WorkMail organization.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#DescribeIdentityProviderConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Organization ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#DescribeIdentityProviderConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "AuthenticationMode": {
+                    "target": "com.amazonaws.workmail#IdentityProviderAuthenticationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe authentication mode used in WorkMail.</p>"
+                    }
+                },
+                "IdentityCenterConfiguration": {
+                    "target": "com.amazonaws.workmail#IdentityCenterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The details of the IAM Identity Center configuration.  \n      </p>"
+                    }
+                },
+                "PersonalAccessTokenConfiguration": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The details of the Personal Access Token configuration.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#DescribeInboundDmarcSettings": {
             "type": "operation",
             "input": {
@@ -2943,6 +3237,12 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.workmail#DirectoryServiceAuthenticationFailedException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DirectoryUnavailableException"
+                },
+                {
                     "target": "com.amazonaws.workmail#EntityNotFoundException"
                 },
                 {
@@ -3122,6 +3422,18 @@
                     "target": "com.amazonaws.workmail#UserAttribute",
                     "traits": {
                         "smithy.api#documentation": "<p>Office where the user is located.</p>"
+                    }
+                },
+                "IdentityProviderUserId": {
+                    "target": "com.amazonaws.workmail#IdentityProviderUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>"
+                    }
+                },
+                "IdentityProviderIdentityStoreId": {
+                    "target": "com.amazonaws.workmail#IdentityProviderIdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Identity Store ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.\n      </p>"
                     }
                 }
             },
@@ -4442,6 +4754,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#GetPersonalAccessTokenMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#GetPersonalAccessTokenMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#GetPersonalAccessTokenMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Requests details of a specific Personal Access Token within the WorkMail organization.\n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#GetPersonalAccessTokenMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Organization ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PersonalAccessTokenId": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Personal Access Token ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#GetPersonalAccessTokenMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "PersonalAccessTokenId": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Personal Access Token ID.</p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The WorkMail User ID. \n      </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Personal Access Token name.\n      </p>"
+                    }
+                },
+                "DateCreated": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The date when the Personal Access Token ID was created.\n      </p>"
+                    }
+                },
+                "DateLastUsed": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The date when the Personal Access Token ID was last used.\n      </p>"
+                    }
+                },
+                "ExpiresTime": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The time when the Personal Access Token ID will expire.\n      </p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Lists all the Personal Access Token permissions for a mailbox.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#Group": {
             "type": "structure",
             "members": {
@@ -4546,6 +4957,95 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[\\x21-\\x7e]+$"
+            }
+        },
+        "com.amazonaws.workmail#IdentityCenterApplicationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\w+=,.@-]+$"
+            }
+        },
+        "com.amazonaws.workmail#IdentityCenterConfiguration": {
+            "type": "structure",
+            "members": {
+                "InstanceArn": {
+                    "target": "com.amazonaws.workmail#InstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the  of IAM Identity Center instance. Must be in the same AWS account and region as WorkMail organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.workmail#ApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of IAMIdentity Center Application for WorkMail. Must be created by the WorkMail API, see CreateIdentityCenterApplication.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The IAM Identity Center configuration.\n      </p>"
+            }
+        },
+        "com.amazonaws.workmail#IdentityProviderAuthenticationMode": {
+            "type": "enum",
+            "members": {
+                "IDENTITY_PROVIDER_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTITY_PROVIDER_ONLY"
+                    }
+                },
+                "IDENTITY_PROVIDER_AND_DIRECTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTITY_PROVIDER_AND_DIRECTORY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#IdentityProviderIdentityStoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}\\\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\\\b[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.workmail#IdentityProviderUserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.workmail#IdentityProviderUserIdForUpdate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^$|^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.workmail#IdentityProviderUserIdPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 47
+                },
+                "smithy.api#pattern": "^[A-Fa-f0-9-]+$"
             }
         },
         "com.amazonaws.workmail#ImpersonationMatchedRule": {
@@ -4785,6 +5285,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[\\x21-\\x7e]+$"
+            }
+        },
+        "com.amazonaws.workmail#InstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1124
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
         "com.amazonaws.workmail#InvalidConfigurationException": {
@@ -5067,6 +5577,9 @@
                 "target": "com.amazonaws.workmail#ListAvailabilityConfigurationsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
                 {
                     "target": "com.amazonaws.workmail#OrganizationNotFoundException"
                 },
@@ -5958,6 +6471,95 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workmail#ListPersonalAccessTokens": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#ListPersonalAccessTokensRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#ListPersonalAccessTokensResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#EntityStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Returns a summary of your Personal Access Tokens.\n      </p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PersonalAccessTokenSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.workmail#ListPersonalAccessTokensRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Organization ID. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.workmail#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The WorkMail User ID. \n      </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workmail#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The token from the previous response to query the next page.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.workmail#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The maximum amount of items that should be returned in a response.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#ListPersonalAccessTokensResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.workmail#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The token from the previous response to query the next page.</p>"
+                    }
+                },
+                "PersonalAccessTokenSummaries": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Lists all the personal tokens in an organization or user, if user ID is provided. \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workmail#ListResourceDelegates": {
             "type": "operation",
             "input": {
@@ -6261,6 +6863,12 @@
                     "target": "com.amazonaws.workmail#EntityState",
                     "traits": {
                         "smithy.api#documentation": "<p>Filters only users with the provided state.</p>"
+                    }
+                },
+                "IdentityProviderUserIdPrefix": {
+                    "target": "com.amazonaws.workmail#IdentityProviderUserIdPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters only users with the ID from the IAM Identity Center.</p>"
                     }
                 }
             },
@@ -6850,7 +7458,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 64
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workmail#NextToken": {
@@ -7034,6 +7643,151 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workmail#Permission"
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenConfiguration": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of the Personal Access Token allowed for the organization.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <i>Active</i> - Mailbox users can login to the web application and choose <i>Settings</i> to see the new <i>Personal Access Tokens</i> page to \n            create and delete the Personal Access Tokens. Mailbox users can use the Personal Access Tokens to set up mailbox connection from desktop or mobile email clients.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Inactive</i> - Personal Access Tokens are disabled for your organization. Mailbox users can’t create, list, or delete Personal Access Tokens and can’t use them to connect to \n            their mailboxes from desktop or mobile email clients.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LifetimeInDays": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenLifetimeInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The validity of the Personal Access Token status in days.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Displays the Personal Access Token status.\n      </p>"
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenLifetimeInDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3653
+                }
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F\\x3C\\x3E\\x5C]+$"
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenScope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F\\x3C\\x3E\\x5C]+$"
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenScopeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#PersonalAccessTokenScope"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenSummary": {
+            "type": "structure",
+            "members": {
+                "PersonalAccessTokenId": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the Personal Access Token.\n         </p>"
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.workmail#WorkMailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The user ID of the WorkMail user associated with the Personal Access Token.\n      </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the Personal Access Token.\n      </p>"
+                    }
+                },
+                "DateCreated": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The date when the Personal Access Token was created.\n      </p>"
+                    }
+                },
+                "DateLastUsed": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The date when the Personal Access Token was last used.\n      </p>"
+                    }
+                },
+                "ExpiresTime": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The date when the Personal Access Token will expire.\n      </p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Lists all the Personal Access Token permissions for a mailbox.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The summary of the Personal Access Token.\n      </p>"
+            }
+        },
+        "com.amazonaws.workmail#PersonalAccessTokenSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#PersonalAccessTokenSummary"
             }
         },
         "com.amazonaws.workmail#PolicyDescription": {
@@ -7227,6 +7981,76 @@
             }
         },
         "com.amazonaws.workmail#PutEmailMonitoringConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workmail#PutIdentityProviderConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#PutIdentityProviderConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#PutIdentityProviderConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Enables integration between IAM Identity Center (IdC) and WorkMail to proxy authentication requests for mailbox users. You can connect your IdC directory or your external directory to WorkMail through \n         IdC and manage access to WorkMail mailboxes in a single place. For enhanced protection, you could enable Multifactor Authentication (MFA) and Personal Access Tokens.\n         \n      </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.workmail#PutIdentityProviderConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the WorkMail Organization. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthenticationMode": {
+                    "target": "com.amazonaws.workmail#IdentityProviderAuthenticationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The authentication mode used in WorkMail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdentityCenterConfiguration": {
+                    "target": "com.amazonaws.workmail#IdentityCenterConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The details of the IAM Identity Center configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PersonalAccessTokenConfiguration": {
+                    "target": "com.amazonaws.workmail#PersonalAccessTokenConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The details of the Personal Access Token configuration. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workmail#PutIdentityProviderConfigurationResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -7837,7 +8661,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workmail#ResourceId": {
@@ -8520,7 +9345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates attibutes in a group.</p>",
+                "smithy.api#documentation": "<p>Updates attributes in a group.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -9158,7 +9983,7 @@
                 "ZipCode": {
                     "target": "com.amazonaws.workmail#UserAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates the user's zipcode.</p>"
+                        "smithy.api#documentation": "<p>Updates the user's zip code.</p>"
                     }
                 },
                 "Department": {
@@ -9177,6 +10002,12 @@
                     "target": "com.amazonaws.workmail#UserAttribute",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the user's office.</p>"
+                    }
+                },
+                "IdentityProviderUserId": {
+                    "target": "com.amazonaws.workmail#IdentityProviderUserIdForUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>"
                     }
                 }
             },
@@ -9250,6 +10081,18 @@
                     "target": "com.amazonaws.workmail#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date indicating when the user was disabled from WorkMail use.</p>"
+                    }
+                },
+                "IdentityProviderUserId": {
+                    "target": "com.amazonaws.workmail#IdentityProviderUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>"
+                    }
+                },
+                "IdentityProviderIdentityStoreId": {
+                    "target": "com.amazonaws.workmail#IdentityProviderIdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identity store ID from the IAM Identity Center. If this parameter is empty it will be updated automatically when the user logs in for the first time to the mailbox associated with WorkMail.</p>"
                     }
                 }
             },
@@ -9369,6 +10212,9 @@
                     "target": "com.amazonaws.workmail#CreateGroup"
                 },
                 {
+                    "target": "com.amazonaws.workmail#CreateIdentityCenterApplication"
+                },
+                {
                     "target": "com.amazonaws.workmail#CreateImpersonationRole"
                 },
                 {
@@ -9399,6 +10245,12 @@
                     "target": "com.amazonaws.workmail#DeleteGroup"
                 },
                 {
+                    "target": "com.amazonaws.workmail#DeleteIdentityCenterApplication"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DeleteIdentityProviderConfiguration"
+                },
+                {
                     "target": "com.amazonaws.workmail#DeleteImpersonationRole"
                 },
                 {
@@ -9412,6 +10264,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#DeleteOrganization"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DeletePersonalAccessToken"
                 },
                 {
                     "target": "com.amazonaws.workmail#DeleteResource"
@@ -9436,6 +10291,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#DescribeGroup"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DescribeIdentityProviderConfiguration"
                 },
                 {
                     "target": "com.amazonaws.workmail#DescribeInboundDmarcSettings"
@@ -9483,6 +10341,9 @@
                     "target": "com.amazonaws.workmail#GetMobileDeviceAccessOverride"
                 },
                 {
+                    "target": "com.amazonaws.workmail#GetPersonalAccessTokenMetadata"
+                },
+                {
                     "target": "com.amazonaws.workmail#ListAccessControlRules"
                 },
                 {
@@ -9522,6 +10383,9 @@
                     "target": "com.amazonaws.workmail#ListOrganizations"
                 },
                 {
+                    "target": "com.amazonaws.workmail#ListPersonalAccessTokens"
+                },
+                {
                     "target": "com.amazonaws.workmail#ListResourceDelegates"
                 },
                 {
@@ -9538,6 +10402,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#PutEmailMonitoringConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.workmail#PutIdentityProviderConfiguration"
                 },
                 {
                     "target": "com.amazonaws.workmail#PutInboundDmarcSettings"
@@ -9656,7 +10523,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -9699,7 +10565,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -9712,7 +10579,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -9726,7 +10592,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -9749,7 +10614,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -9784,7 +10648,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -9795,14 +10658,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -9816,14 +10681,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -9832,11 +10695,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -9847,14 +10710,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -9868,7 +10733,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -9888,7 +10752,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -9899,14 +10762,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -9917,9 +10782,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],

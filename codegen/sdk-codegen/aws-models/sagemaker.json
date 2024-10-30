@@ -7624,7 +7624,7 @@
                 "BuiltInLifecycleConfigArn": {
                     "target": "com.amazonaws.sagemaker#StudioLifecycleConfigArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default \n      lifecycle configuration.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration. It can\n      override changes made in the default lifecycle configuration.</p>"
                     }
                 }
             },
@@ -9922,7 +9922,7 @@
                 "TagPropagation": {
                     "target": "com.amazonaws.sagemaker#TagPropagation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain. Defaults to\n        <code>DISABLED</code>.</p>"
                     }
                 },
                 "DefaultSpaceSettings": {
@@ -12319,6 +12319,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n           tied to a model package, it is a specific usage of a model card and its schema is\n           simplified compared to the schema of <code>ModelCard</code>. The \n           <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n           and <code>model_overview</code> is composed of the <code>model_creator</code> and\n           <code>model_artifact</code> properties. For more information about the model package model\n           card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n               package model card schema</a>. For more information about\n           the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n               the Details of a Model Version</a>.</p>"
                     }
+                },
+                "ModelLifeCycle": {
+                    "target": "com.amazonaws.sagemaker#ModelLifeCycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -12955,7 +12961,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the\n      user will be automatically signed in to the domain, and granted access to all of the Apps and\n      files associated with the Domain's Amazon Elastic File System volume. This operation can only be\n      called when the authentication mode equals IAM. </p>\n         <p>The IAM role or user passed to this API defines the permissions to access\n      the app. Once the presigned URL is created, no additional permission is required to access\n      this URL. IAM authorization policies for this API are also enforced for every\n      HTTP request and WebSocket frame that attempts to connect to the app.</p>\n         <p>You can restrict access to this API and to the URL that it returns to a list of IP\n      addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html\">Connect to Amazon SageMaker\n        Studio Through an Interface VPC Endpoint</a> .</p>\n         <note>\n            <p>The URL that you get from a call to <code>CreatePresignedDomainUrl</code> has a default\n        timeout of 5 minutes. You can configure this value using <code>ExpiresInSeconds</code>. If\n        you try to use the URL after the timeout limit expires, you are directed to the Amazon Web Services console sign-in page.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the\n      user will be automatically signed in to the domain, and granted access to all of the Apps and\n      files associated with the Domain's Amazon Elastic File System volume. This operation can only be\n      called when the authentication mode equals IAM. </p>\n         <p>The IAM role or user passed to this API defines the permissions to access\n      the app. Once the presigned URL is created, no additional permission is required to access\n      this URL. IAM authorization policies for this API are also enforced for every\n      HTTP request and WebSocket frame that attempts to connect to the app.</p>\n         <p>You can restrict access to this API and to the URL that it returns to a list of IP\n      addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html\">Connect to Amazon SageMaker\n        Studio Through an Interface VPC Endpoint</a> .</p>\n         <note>\n            <ul>\n               <li>\n                  <p>The URL that you get from a call to <code>CreatePresignedDomainUrl</code> has a\n            default timeout of 5 minutes. You can configure this value using\n              <code>ExpiresInSeconds</code>. If you try to use the URL after the timeout limit\n            expires, you are directed to the Amazon Web Services console sign-in page.</p>\n               </li>\n               <li>\n                  <p>The JupyterLab session default expiration time is 12 hours. You can configure this\n            value using SessionExpirationDurationInSeconds.</p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreatePresignedDomainUrlRequest": {
@@ -14281,7 +14287,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A file system, created by you, that you assign to a user profile or space for an\n      Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
+                "smithy.api#documentation": "<p>A file system, created by you, that you assign to a user profile or space for an Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker\n      Studio.</p>"
             }
         },
         "com.amazonaws.sagemaker#CustomFileSystemConfig": {
@@ -14295,7 +14301,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings for assigning a custom file system to a user profile or space for an\n      Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
+                "smithy.api#documentation": "<p>The settings for assigning a custom file system to a user profile or space for an Amazon SageMaker Domain. Permitted users can access this file system in Amazon SageMaker\n      Studio.</p>"
             }
         },
         "com.amazonaws.sagemaker#CustomFileSystemConfigs": {
@@ -15085,7 +15091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The default settings for shared spaces that users create in the domain.</p>\n         <p>SageMaker applies these settings only to shared spaces. It doesn't apply them to private spaces.</p>"
+                "smithy.api#documentation": "<p>The default settings for shared spaces that users create in the domain.</p>\n         <p>SageMaker applies these settings only to shared spaces. It doesn't apply them to private\n      spaces.</p>"
             }
         },
         "com.amazonaws.sagemaker#DefaultSpaceStorageSettings": {
@@ -23010,6 +23016,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
                     }
+                },
+                "ModelLifeCycle": {
+                    "target": "com.amazonaws.sagemaker#ModelLifeCycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -26747,7 +26759,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A file system, created by you in Amazon EFS, that you assign to a user profile\n      or space for an Amazon SageMaker Domain. Permitted users can access this file\n      system in Amazon SageMaker Studio.</p>"
+                "smithy.api#documentation": "<p>A file system, created by you in Amazon EFS, that you assign to a user profile or\n      space for an Amazon SageMaker Domain. Permitted users can access this file system in\n        Amazon SageMaker Studio.</p>"
             }
         },
         "com.amazonaws.sagemaker#EFSFileSystemConfig": {
@@ -26764,12 +26776,12 @@
                 "FileSystemPath": {
                     "target": "com.amazonaws.sagemaker#FileSystemPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the file system directory that is accessible in Amazon SageMaker\n      Studio. Permitted users can access only this directory and below.</p>"
+                        "smithy.api#documentation": "<p>The path to the file system directory that is accessible in Amazon SageMaker Studio.\n      Permitted users can access only this directory and below.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The settings for assigning a custom Amazon EFS file system to a user profile\n      or space for an Amazon SageMaker Domain.</p>"
+                "smithy.api#documentation": "<p>The settings for assigning a custom Amazon EFS file system to a user profile or\n      space for an Amazon SageMaker Domain.</p>"
             }
         },
         "com.amazonaws.sagemaker#EMRStepMetadata": {
@@ -30395,13 +30407,13 @@
                 "SageMakerImageName": {
                     "target": "com.amazonaws.sagemaker#SageMakerImageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The SageMaker image name that you are hiding from the Studio user interface.\n    </p>"
+                        "smithy.api#documentation": "<p> The SageMaker image name that you are hiding from the Studio user interface. </p>"
                     }
                 },
                 "VersionAliases": {
                     "target": "com.amazonaws.sagemaker#VersionAliasesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The version aliases you are hiding from the Studio user interface.\n    </p>"
+                        "smithy.api#documentation": "<p> The version aliases you are hiding from the Studio user interface. </p>"
                     }
                 }
             },
@@ -35569,7 +35581,7 @@
                 "BuiltInLifecycleConfigArn": {
                     "target": "com.amazonaws.sagemaker#StudioLifecycleConfigArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default \n      lifecycle configuration.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle configuration that runs before the default lifecycle configuration. It can\n      override changes made in the default lifecycle configuration.</p>"
                     }
                 }
             },
@@ -46108,6 +46120,36 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#ModelLifeCycle": {
+            "type": "structure",
+            "members": {
+                "Stage": {
+                    "target": "com.amazonaws.sagemaker#EntityName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The current stage in the model life cycle.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StageStatus": {
+                    "target": "com.amazonaws.sagemaker#EntityName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\n            The current status of a stage in model life cycle.\n        </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StageDescription": {
+                    "target": "com.amazonaws.sagemaker#StageDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes the stage related details.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+            }
+        },
         "com.amazonaws.sagemaker#ModelMetadataFilter": {
             "type": "structure",
             "members": {
@@ -46445,6 +46487,12 @@
                 },
                 "ModelCard": {
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard"
+                },
+                "ModelLifeCycle": {
+                    "target": "com.amazonaws.sagemaker#ModelLifeCycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                    }
                 },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
@@ -61189,7 +61237,7 @@
                 "CustomFileSystems": {
                     "target": "com.amazonaws.sagemaker#CustomFileSystems",
                     "traits": {
-                        "smithy.api#documentation": "<p>A file system, created by you, that you assign to a space for an Amazon SageMaker\n      Domain. Permitted users can access this file system in Amazon SageMaker\n      Studio.</p>"
+                        "smithy.api#documentation": "<p>A file system, created by you, that you assign to a space for an Amazon SageMaker\n      Domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
                     }
                 }
             },
@@ -61360,6 +61408,16 @@
                         "smithy.api#enumValue": "TFRecord"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#StageDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.{0,1024}$"
             }
         },
         "com.amazonaws.sagemaker#StageStatus": {
@@ -62755,13 +62813,13 @@
                 "HiddenInstanceTypes": {
                     "target": "com.amazonaws.sagemaker#HiddenInstanceTypesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The instance types you are hiding from the Studio user interface.\n    </p>"
+                        "smithy.api#documentation": "<p> The instance types you are hiding from the Studio user interface. </p>"
                     }
                 },
                 "HiddenSageMakerImageVersionAliases": {
                     "target": "com.amazonaws.sagemaker#HiddenSageMakerImageVersionAliasesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The version aliases you are hiding from the Studio user interface.\n    </p>"
+                        "smithy.api#documentation": "<p> The version aliases you are hiding from the Studio user interface. </p>"
                     }
                 }
             },
@@ -64617,12 +64675,6 @@
                         "smithy.api#enumValue": "ml.p5e.48xlarge"
                     }
                 },
-                "ML_P5EN_48XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.p5en.48xlarge"
-                    }
-                },
                 "ML_C5_XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -64747,12 +64799,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.trn1n.32xlarge"
-                    }
-                },
-                "ML_TRN2_48XLARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ml.trn2.48xlarge"
                     }
                 },
                 "ML_M6I_LARGE": {
@@ -68219,7 +68265,7 @@
                 "TagPropagation": {
                     "target": "com.amazonaws.sagemaker#TagPropagation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain. Defaults to <code>DISABLED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether custom tag propagation is supported for the domain. Defaults to\n        <code>DISABLED</code>.</p>"
                     }
                 }
             },
@@ -69242,6 +69288,18 @@
                     "target": "com.amazonaws.sagemaker#ModelPackageModelCard",
                     "traits": {
                         "smithy.api#documentation": "<p>The model card associated with the model package. Since <code>ModelPackageModelCard</code> is\n            tied to a model package, it is a specific usage of a model card and its schema is\n            simplified compared to the schema of <code>ModelCard</code>. The \n            <code>ModelPackageModelCard</code> schema does not include <code>model_package_details</code>,\n            and <code>model_overview</code> is composed of the <code>model_creator</code> and\n            <code>model_artifact</code> properties. For more information about the model package model\n            card schema, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema\">Model\n                package model card schema</a>. For more information about\n            the model card associated with the model package, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html\">View\n                the Details of a Model Version</a>.</p>"
+                    }
+                },
+                "ModelLifeCycle": {
+                    "target": "com.amazonaws.sagemaker#ModelLifeCycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A structure describing the current state of the model in its life cycle.\n        </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.sagemaker#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            A unique token that guarantees that the call to this API is idempotent.\n        </p>"
                     }
                 }
             },
@@ -70544,7 +70602,7 @@
                 "CanvasAppSettings": {
                     "target": "com.amazonaws.sagemaker#CanvasAppSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Canvas app settings.</p>\n         <p>SageMaker applies these settings only to private spaces that SageMaker creates for the Canvas app.</p>"
+                        "smithy.api#documentation": "<p>The Canvas app settings.</p>\n         <p>SageMaker applies these settings only to private spaces that SageMaker creates for the Canvas\n      app.</p>"
                     }
                 },
                 "CodeEditorAppSettings": {
@@ -70828,7 +70886,7 @@
                     "min": 1,
                     "max": 176
                 },
-                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\\/[0-9]{1,5})?$"
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:[a-z\\-]*\\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\\/[0-9]{1,9})?$"
             }
         },
         "com.amazonaws.sagemaker#Vertex": {

@@ -138,6 +138,12 @@
                     "target": "com.amazonaws.ecs#DescribeContainerInstances"
                 },
                 {
+                    "target": "com.amazonaws.ecs#DescribeServiceDeployments"
+                },
+                {
+                    "target": "com.amazonaws.ecs#DescribeServiceRevisions"
+                },
+                {
                     "target": "com.amazonaws.ecs#DescribeServices"
                 },
                 {
@@ -169,6 +175,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#ListContainerInstances"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ListServiceDeployments"
                 },
                 {
                     "target": "com.amazonaws.ecs#ListServices"
@@ -1762,7 +1771,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>These errors are usually caused by a client action. This client action might be using\n\t\t\tan action or resource on behalf of a user that doesn't have permissions to use the\n\t\t\taction or resource. Or, it might be specifying an identifier that isn't valid.</p>\n         <p>The following list includes additional causes for the error:</p>\n         <ul>\n            <li>\n               <p>The <code>RunTask</code> could not be processed because you use managed\n\t\t\t\t\tscaling and there is a capacity error because the quota of tasks in the\n\t\t\t\t\t\t<code>PROVISIONING</code> per cluster has been reached. For information\n\t\t\t\t\tabout the service quotas, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html\">Amazon ECS\n\t\t\t\t\t\tservice quotas</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>These errors are usually caused by a client action. This client action might be using\n\t\t\tan action or resource on behalf of a user that doesn't have permissions to use the\n\t\t\taction or resource. Or, it might be specifying an identifier that isn't valid.</p>\n         <p>The following list includes additional causes for the error:</p>\n         <ul>\n            <li>\n               <p>The <code>RunTask</code> could not be processed because you use managed\n\t\t\t\t\tscaling and there is a capacity error because the quota of tasks in the\n\t\t\t\t\t<code>PROVISIONING</code> per cluster has been reached. For information\n\t\t\t\t\tabout the service quotas, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html\">Amazon ECS\n\t\t\t\t\t\tservice quotas</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -2562,6 +2571,38 @@
                 "smithy.api#documentation": "<p>The dependencies defined for container startup and shutdown. A container can contain\n\t\t\tmultiple dependencies. When a dependency is defined for container startup, for container\n\t\t\tshutdown it is reversed.</p>\n         <p>Your Amazon ECS container instances require at least version 1.26.0 of the container agent\n\t\t\tto use container dependencies. However, we recommend using the latest container agent\n\t\t\tversion. For information about checking your agent version and updating to the latest\n\t\t\tversion, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the Amazon ECS\n\t\t\t\tContainer Agent</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. If you're using an Amazon ECS-optimized Linux AMI,\n\t\t\tyour instance needs at least version 1.26.0-1 of the <code>ecs-init</code> package. If\n\t\t\tyour container instances are launched from version <code>20190301</code> or later, then\n\t\t\tthey contain the required versions of the container agent and <code>ecs-init</code>. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized Linux AMI</a>\n\t\t\tin the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>For tasks that use the Fargate launch type, the task or service\n\t\t\t\trequires the following platforms:</p>\n            <ul>\n               <li>\n                  <p>Linux platform version <code>1.3.0</code> or later.</p>\n               </li>\n               <li>\n                  <p>Windows platform version <code>1.0.0</code> or later.</p>\n               </li>\n            </ul>\n         </note>\n         <p>For more information about how to create a container dependency, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html#example_task_definition-containerdependency\">Container dependency</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
+        "com.amazonaws.ecs#ContainerImage": {
+            "type": "structure",
+            "members": {
+                "containerName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the container.</p>"
+                    }
+                },
+                "imageDigest": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image digest.</p>"
+                    }
+                },
+                "image": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container image. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details about the container image a service revision uses. </p>\n         <p>To ensure that all tasks in a service use the same container image, Amazon ECS resolves\n\t\t\tcontainer image names and any image tags specified in the task definition to container\n\t\t\timage digests. </p>\n         <p>After the container image digest has been established, Amazon ECS uses the digest to start\n\t\t\tany other desired tasks, and for any future service and service revision updates. This\n\t\t\tleads to all tasks in a service always running identical container images, resulting in\n\t\t\tversion consistency for your software. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-container-image-stability\">Container image resolution</a> in the Amazon ECS Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ContainerImages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ContainerImage"
+            }
+        },
         "com.amazonaws.ecs#ContainerInstance": {
             "type": "structure",
             "members": {
@@ -3011,7 +3052,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code>\n\t\t\tcluster when you launch your first container instance. However, you can create your own\n\t\t\tcluster with a unique name.</p>\n         <note>\n            <p>When you call the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html\">CreateCluster</a> API operation, Amazon ECS attempts to\n\t\t\t\tcreate the Amazon ECS service-linked role for your account. This is so that it can manage\n\t\t\t\trequired resources in other Amazon Web Services services on your behalf. However, if the user that\n\t\t\t\tmakes the call doesn't have permissions to create the service-linked role, it isn't\n\t\t\t\tcreated. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using\n\t\t\t\t\tservice-linked roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a new Amazon ECS cluster. By default, your account receives a <code>default</code>\n\t\t\tcluster when you launch your first container instance. However, you can create your own\n\t\t\tcluster with a unique name.</p>\n         <note>\n            <p>When you call the <a>CreateCluster</a> API operation, Amazon ECS attempts to\n\t\t\t\tcreate the Amazon ECS service-linked role for your account. This is so that it can manage\n\t\t\t\trequired resources in other Amazon Web Services services on your behalf. However, if the user that\n\t\t\t\tmakes the call doesn't have permissions to create the service-linked role, it isn't\n\t\t\t\tcreated. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html\">Using\n\t\t\t\t\tservice-linked roles for Amazon ECS</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new cluster",
@@ -3136,7 +3177,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a>.</p>\n         <note>\n            <p>On March 21, 2024, a change was made to resolve the task definition revision before authorization. When a task definition revision is not specified, authorization will occur using the latest revision of a task definition.</p>\n         </note>\n         <note>\n            <p>Amazon Elastic Inference (EI) is no longer available to customers.</p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when creating or\n\t\t\tupdating a service. <code>volumeConfigurations</code> is only supported for REPLICA\n\t\t\tservice and not DAEMON service. For more infomation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. You can use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a>. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html\">CreateTaskSet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>",
+                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n         <note>\n            <p>On March 21, 2024, a change was made to resolve the task definition revision before authorization. When a task definition revision is not specified, authorization will occur using the latest revision of a task definition.</p>\n         </note>\n         <note>\n            <p>Amazon Elastic Inference (EI) is no longer available to customers.</p>\n         </note>\n         <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>You can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when creating or\n\t\t\tupdating a service. <code>volumeConfigurations</code> is only supported for REPLICA\n\t\t\tservice and not DAEMON service. For more infomation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types\">Amazon EBS volumes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n         <p>There are two service scheduler strategies available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. You can use <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html\">UpdateService</a>. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n         <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n         <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n         <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html\">CreateTaskSet</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>\n         </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a new service",
@@ -3319,7 +3360,7 @@
                 "deploymentConfiguration": {
                     "target": "com.amazonaws.ecs#DeploymentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment\n\t\t\tand the ordering of stopping and starting tasks.</p>"
+                        "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment and the\n\t\t\tfailure detection methods.</p>"
                     }
                 },
                 "placementConstraints": {
@@ -3343,7 +3384,7 @@
                 "healthCheckGracePeriodSeconds": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy\n\t\t\tElastic Load Balancing target health checks after a task has first started. This is only used when your\n\t\t\tservice is configured to use a load balancer. If your service has a load balancer\n\t\t\tdefined and you don't specify a health check grace period value, the default value of\n\t\t\t\t<code>0</code> is used.</p>\n         <p>If you do not use an Elastic Load Balancing, we recommend that you use the <code>startPeriod</code> in\n\t\t\tthe task definition health check parameters. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html\">Health\n\t\t\t\tcheck</a>.</p>\n         <p>If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you\n\t\t\tcan specify a health check grace period of up to 2,147,483,647 seconds (about 69 years).\n\t\t\tDuring that time, the Amazon ECS service scheduler ignores health check status. This grace\n\t\t\tperiod can prevent the service scheduler from marking tasks as unhealthy and stopping\n\t\t\tthem before they have time to come up.</p>"
+                        "smithy.api#documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy\n\t\t\tElastic Load Balancing target health checks after a task has first started. This is only used when your\n\t\t\tservice is configured to use a load balancer. If your service has a load balancer\n\t\t\tdefined and you don't specify a health check grace period value, the default value of\n\t\t\t\t<code>0</code> is used.</p>\n         <p>If you do not use an Elastic Load Balancing, we recommend that you use the <code>startPeriod</code> in\n\t\t\tthe task definition health check parameters. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html\">Health\n\t\t\t\tcheck</a>.</p>\n         <p>If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can\n\t\t\tspecify a health check grace period of up to 2,147,483,647 seconds (about 69 years).\n\t\t\tDuring that time, the Amazon ECS service scheduler ignores health check status. This grace\n\t\t\tperiod can prevent the service scheduler from marking tasks as unhealthy and stopping\n\t\t\tthem before they have time to come up.</p>"
                     }
                 },
                 "schedulingStrategy": {
@@ -3563,6 +3604,26 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#CreatedAt": {
+            "type": "structure",
+            "members": {
+                "before": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include service deployments in the result that were created before this time. The format is yyyy-MM-dd\n\t\t\tHH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "after": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include service deployments in the result that were created after this time. The format is yyyy-MM-dd\n\t\t\tHH:mm:ss.SSSSSS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The optional filter to narrow the <code>ListServiceDeployment</code> results.</p>\n         <p> If you do not specify a value, service deployments that were created before the current\n\t\t\ttime are included in the result.</p>"
             }
         },
         "com.amazonaws.ecs#DeleteAccountSetting": {
@@ -4224,19 +4285,19 @@
                         "smithy.api#required": {}
                     }
                 },
-                "enable": {
-                    "target": "com.amazonaws.ecs#Boolean",
-                    "traits": {
-                        "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether to use the CloudWatch alarm option in the service deployment\n\t\t\tprocess.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "rollback": {
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether to configure Amazon ECS to roll back the service if a service deployment\n\t\t\tfails. If rollback is used, when a service deployment fails, the service is rolled back\n\t\t\tto the last deployment that completed successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enable": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether to use the CloudWatch alarm option in the service deployment\n\t\t\tprocess.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4298,7 +4359,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during a deployment and\n\t\t\tthe ordering of stopping and starting tasks.</p>"
+                "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment and the\n\t\t\tfailure detection methods.</p>"
             }
         },
         "com.amazonaws.ecs#DeploymentController": {
@@ -4345,7 +4406,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify an Key Management Service key ID to encrypt the ephemeral storage for\n\t\t\tdeployment.</p>"
+                        "smithy.api#documentation": "<p>Specify an Amazon Web Services Key Management Service key ID to encrypt the ephemeral storage for\n\t\t\tdeployment.</p>"
                     }
                 }
             },
@@ -4822,6 +4883,146 @@
                     "target": "com.amazonaws.ecs#ContainerInstances",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of container instances.</p>"
+                    }
+                },
+                "failures": {
+                    "target": "com.amazonaws.ecs#Failures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any failures associated with the call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeServiceDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeServiceDeploymentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeServiceDeploymentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more of your service deployments.</p>\n         <p>A service deployment happens when you release a software update for the service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployments.html\">Amazon ECS service deployments</a>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DescribeServiceDeploymentsRequest": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service deployment.</p>\n         <p>You can specify a maximum of 20 ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeServiceDeploymentsResponse": {
+            "type": "structure",
+            "members": {
+                "serviceDeployments": {
+                    "target": "com.amazonaws.ecs#ServiceDeployments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of service deployments described.</p>"
+                    }
+                },
+                "failures": {
+                    "target": "com.amazonaws.ecs#Failures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any failures associated with the call.</p>\n         <p>If you decsribe a deployment with a service revision created before October 25, 2024, the\n\t\t\tcall fails. The failure includes the service revision ARN and the reason set to\n\t\t\t\t<code>MISSING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeServiceRevisions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#DescribeServiceRevisionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#DescribeServiceRevisionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClusterNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes one or more service revisions.</p>\n         <p>A service revision is a version of the service that includes the values for the Amazon ECS\n\t\t\tresources (for example, task definition) and the environment resources (for example,\n\t\t\tload balancers, subnets, and security groups). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html\">Amazon ECS service revisions</a>.</p>\n         <p>You can't describe a service revision that was created before October 25, 2024.</p>"
+            }
+        },
+        "com.amazonaws.ecs#DescribeServiceRevisionsRequest": {
+            "type": "structure",
+            "members": {
+                "serviceRevisionArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service revision. </p>\n         <p>You can specify a maximum of 20 ARNs.</p>\n         <p>You can call <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServiceDeployments.html\">ListServiceDeployments</a> to\n\t\t\tget the ARNs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#DescribeServiceRevisionsResponse": {
+            "type": "structure",
+            "members": {
+                "serviceRevisions": {
+                    "target": "com.amazonaws.ecs#ServiceRevisions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of service revisions described.</p>"
                     }
                 },
                 "failures": {
@@ -7135,6 +7336,103 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ecs#ListServiceDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListServiceDeploymentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListServiceDeploymentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServiceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#UnsupportedFeatureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation lists all the service deployments that meet the specified filter criteria.</p>\n         <p>A service deployment happens when you release a softwre update for the service. You\n\t\t\troute traffic from the running service revisions to the new service revison and control\n\t\t\tthe number of running tasks. </p>\n         <p>This API returns the values that you use for the request parameters in <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceRevisions.html\">DescribeServiceRevisions</a>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ListServiceDeploymentsRequest": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN or name of the service</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cluster": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster that hosts the service. This can either be the cluster name or ARN. Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performanceIf you don't\n\t\t\tspecify a cluster, <code>deault</code> is used.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentStatusList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter you can use to narrow the results. If you do not specify a status, then\n\t\t\tall status values are included in the result.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter you can use to narrow the results by the service creation date. If you do\n\t\t\tnot specify a value, the result includes all services created before the current\n\t\t\ttime. The\n\t\t\tformat is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a <code>ListServiceDeployments</code> request indicating that more results are available to fulfill the request and further calls are needed. If you provided <code>maxResults</code>, it's possible the number of results is fewer than <code>maxResults</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of service deployment results that <code>ListServiceDeployments</code>\n\t\t\treturned in paginated output. When this parameter is used,\n\t\t\t\t<code>ListServiceDeployments</code> only returns <code>maxResults</code> results in\n\t\t\ta single page along with a <code>nextToken</code> response element. The remaining\n\t\t\tresults of the initial request can be seen by sending another\n\t\t\t\t<code>ListServiceDeployments</code> request with the returned <code>nextToken</code>\n\t\t\tvalue. This value can be between 1 and 100. If this parameter isn't used, then\n\t\t\t\t<code>ListServiceDeployments</code> returns up to 20 results and a\n\t\t\t\t<code>nextToken</code> value if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ecs#ListServiceDeploymentsResponse": {
+            "type": "structure",
+            "members": {
+                "serviceDeployments": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentsBrief",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An overview of the service deployment, including the following\n\t\t\tproperties:</p>\n         <ul>\n            <li>\n               <p>The ARN of the service deployment.</p>\n            </li>\n            <li>\n               <p>The ARN of the service being deployed.</p>\n            </li>\n            <li>\n               <p>The ARN  of the cluster that hosts the service in the service deployment.</p>\n            </li>\n            <li>\n               <p>The time that the service deployment started.</p>\n            </li>\n            <li>\n               <p>The time that the service deployment completed.</p>\n            </li>\n            <li>\n               <p>The service deployment status.</p>\n            </li>\n            <li>\n               <p>Information about why the service deployment is in the current state.</p>\n            </li>\n            <li>\n               <p>The ARN of the service revision that is being deployed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListServiceDeployments</code> request. When the results of a <code>ListServiceDeployments</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ecs#ListServices": {
             "type": "operation",
             "input": {
@@ -7770,7 +8068,7 @@
                 "loadBalancerName": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the load balancer to associate with the Amazon ECS service or task set.</p>\n         <p>If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be\n\t\t\tomitted.</p>"
+                        "smithy.api#documentation": "<p>The name of the load balancer to associate with the service or task set.</p>\n         <p>If you are using an Application Load Balancer or a Network Load Balancer the load balancer name parameter should be\n\t\t\tomitted.</p>"
                     }
                 },
                 "containerName": {
@@ -8016,7 +8314,7 @@
                 "minimumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale\n\t\t\tin process is not affected by this parameter If this parameter is omitted, the default\n\t\t\tvalue of <code>1</code> is used.</p>\n         <p>When additional capacity is required, Amazon ECS will scale up the minimum scaling step\n\t\t\tsize even if the actual demand is less than the minimum scaling step size.</p>\n         <p>If you use a capacity provider with an Auto Scaling group configured with more than\n\t\t\tone Amazon EC2 instance type or Availability Zone, Amazon ECS will scale up by the exact minimum\n\t\t\tscaling step size value and will ignore both the maximum scaling step size as well as\n\t\t\tthe capacity demand.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one time. If this parameter is omitted, the default\n\t\t\tvalue of <code>1</code> is used.</p>\n         <p>When additional capacity is required, Amazon ECS will scale up the minimum scaling step\n\t\t\tsize even if the actual demand is less than the minimum scaling step size.</p>\n         <p>If you use a capacity provider with an Auto Scaling group configured with more than\n\t\t\tone Amazon EC2 instance type or Availability Zone, Amazon ECS will scale up by the exact minimum\n\t\t\tscaling step size value and will ignore both the maximum scaling step size as well as\n\t\t\tthe capacity demand.</p>"
                     }
                 },
                 "maximumScalingStepSize": {
@@ -8086,7 +8384,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a Key Management Service key ID to encrypt the managed storage.</p>"
+                        "smithy.api#documentation": "<p>Specify a Amazon Web Services Key Management Service key ID to encrypt the managed storage.</p>"
                     }
                 },
                 "fargateEphemeralStorageKmsKeyId": {
@@ -8556,7 +8854,7 @@
                 "containerPort": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number on the container that's bound to the user-specified or automatically\n\t\t\tassigned host port.</p>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, specify the exposed ports using <code>containerPort</code>.</p>\n         <p>If you use containers in a task with the <code>bridge</code> network mode and you\n\t\t\tspecify a container port and not a host port, your container automatically receives a\n\t\t\thost port in the ephemeral port range. For more information, see <code>hostPort</code>.\n\t\t\tPort mappings that are automatically assigned in this way do not count toward the 100\n\t\t\treserved ports limit of a container instance.</p>"
+                        "smithy.api#documentation": "<p>The port number on the container that's bound to the user-specified or automatically\n\t\t\tassigned host port.</p>\n         <p>For tasks that use the Fargate launch type or EC2 tasks that use the\n\t\t\t\t<code>awsvpc</code> network mode, you use <code>containerPort</code> to specify the\n\t\t\texposed ports.</p>\n         <p>For Windows containers on Fargate, you can't use port 3150 for the\n\t\t\t\t<code>containerPort</code>. This is because it's reserved.</p>\n         <p>Suppose that you're using containers in a task with the EC2 launch type\n\t\t\tand you specify a container port and not a host port. Then, your container automatically\n\t\t\treceives a host port in the ephemeral port range. For more information, see\n\t\t\t\t<code>hostPort</code>. Port mappings that are automatically assigned in this way\n\t\t\tdon't count toward the 100 reserved ports quota of a container instance.</p>"
                     }
                 },
                 "hostPort": {
@@ -8591,7 +8889,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Port mappings allow containers to access ports on the host container instance to send\n\t\t\tor receive traffic. Port mappings are specified as part of the container\n\t\t\tdefinition.</p>\n         <p>If you use containers in a task with the <code>awsvpc</code> or <code>host</code>\n\t\t\tnetwork mode, specify the exposed ports using <code>containerPort</code>. The\n\t\t\t\t<code>hostPort</code> can be left blank or it must be the same value as the\n\t\t\t\t<code>containerPort</code>.</p>\n         <p>Most fields of this parameter (<code>containerPort</code>, <code>hostPort</code>,\n\t\t\t<code>protocol</code>) maps to <code>PortBindings</code> in the docker container create command and the\n\t\t\t\t<code>--publish</code> option to <code>docker\n\t\t\t\t\trun</code>. If the network mode of a task definition is set to\n\t\t\t\t<code>host</code>, host ports must either be undefined or match the container port\n\t\t\tin the port mapping.</p>\n         <note>\n            <p>You can't expose the same container port for multiple protocols. If you attempt\n\t\t\t\tthis, an error is returned.</p>\n         </note>\n         <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and\n\t\t\tcontainer port assignments are visible in the <code>networkBindings</code> section of\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html\">DescribeTasks</a> API responses.</p>"
+                "smithy.api#documentation": "<p>Port mappings expose your container's network ports to the outside world. this allows\n\t\t\tclients to access your application. It's also used for inter-container communication\n\t\t\twithin the same task.</p>\n         <p>For task definitions (both the Fargate and EC2 launch type) that use the\n\t\t\t\t<code>awsvpc</code> network mode, only specify the <code>containerPort</code>. The\n\t\t\t\t<code>hostPort</code> is always ignored, and the container port is automatically\n\t\t\tmapped to a random high-numbered port on the host.</p>\n         <p>Most fields of this parameter (<code>containerPort</code>, <code>hostPort</code>,\n\t\t\t<code>protocol</code>) maps to <code>PortBindings</code> in the docker container create command and the\n\t\t\t\t<code>--publish</code> option to <code>docker\n\t\t\t\t\trun</code>. If the network mode of a task definition is set to\n\t\t\t\t<code>host</code>, host ports must either be undefined or match the container port\n\t\t\tin the port mapping.</p>\n         <note>\n            <p>You can't expose the same container port for multiple protocols. If you attempt\n\t\t\t\tthis, an error is returned.</p>\n         </note>\n         <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and\n\t\t\tcontainer port assignments are visible in the <code>networkBindings</code> section of\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html\">DescribeTasks</a> API responses.</p>"
             }
         },
         "com.amazonaws.ecs#PortMappingList": {
@@ -9215,7 +9513,7 @@
                 "networkMode": {
                     "target": "com.amazonaws.ecs#NetworkMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n         <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n         <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n         <important>\n            <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n         </important>\n         <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html\">NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>"
+                        "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n         <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n         <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n         <important>\n            <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n         </important>\n         <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a>NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>\n         <p>For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#network-settings\">Network\n                settings</a> in the <i>Docker run reference</i>.</p>"
                     }
                 },
                 "containerDefinitions": {
@@ -9264,13 +9562,13 @@
                 "pidMode": {
                     "target": "com.amazonaws.ecs#PidMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. The valid\n                            values are <code>host</code> or <code>task</code>. On Fargate for\n                            Linux containers, the only valid value is <code>task</code>. For\n                            example, monitoring sidecars might need <code>pidMode</code> to access\n                            information about other containers running in the same task.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks\n                            that specified the <code>host</code> PID mode on the same container\n                            instance share the same process namespace with the host Amazon EC2\n                            instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified\n                            task share the same process namespace.</p>\n         <p>If no value is specified, the\n                            default is a private namespace for each container.</p>\n         <p>If the <code>host</code> PID mode is used, there's a heightened risk\n                            of undesired process namespace exposure.</p>\n         <note>\n            <p>This parameter is not supported for Windows containers.</p>\n         </note>\n         <note>\n            <p>This parameter is only supported for tasks that are hosted on\n        Fargate if the tasks are using platform version <code>1.4.0</code> or later\n        (Linux). This isn't supported for Windows containers on\n        Fargate.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. The valid\n                            values are <code>host</code> or <code>task</code>. On Fargate for\n                            Linux containers, the only valid value is <code>task</code>. For\n                            example, monitoring sidecars might need <code>pidMode</code> to access\n                            information about other containers running in the same task.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks\n                            that specified the <code>host</code> PID mode on the same container\n                            instance share the same process namespace with the host Amazon EC2\n                            instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified\n                            task share the same process namespace.</p>\n         <p>If no value is specified, the\n                            default is a private namespace for each container. For more information,\n                            see <a href=\"https://docs.docker.com/engine/reference/run/#pid-settings---pid\">PID settings</a> in the <i>Docker run\n                                reference</i>.</p>\n         <p>If the <code>host</code> PID mode is used, there's a heightened risk\n                            of undesired process namespace exposure. For more information, see\n                                <a href=\"https://docs.docker.com/engine/security/security/\">Docker security</a>.</p>\n         <note>\n            <p>This parameter is not supported for Windows containers.</p>\n         </note>\n         <note>\n            <p>This parameter is only supported for tasks that are hosted on\n        Fargate if the tasks are using platform version <code>1.4.0</code> or later\n        (Linux). This isn't supported for Windows containers on\n        Fargate.</p>\n         </note>"
                     }
                 },
                 "ipcMode": {
                     "target": "com.amazonaws.ecs#IpcMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are\n                <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is\n            specified, then all containers within the tasks that specified the <code>host</code> IPC\n            mode on the same container instance share the same IPC resources with the host Amazon EC2\n            instance. If <code>task</code> is specified, all containers within the specified task\n            share the same IPC resources. If <code>none</code> is specified, then IPC resources\n            within the containers of a task are private and not shared with other containers in a\n            task or on the container instance. If no value is specified, then the IPC resource\n            namespace sharing depends on the Docker daemon setting on the container instance.</p>\n         <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of\n            undesired IPC namespace expose.</p>\n         <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for\n            the containers in the task, the following will apply to your IPC resource namespace. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System\n                Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> are not supported.</p>\n            </li>\n            <li>\n               <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> will apply to all containers within a\n                    task.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are\n                <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is\n            specified, then all containers within the tasks that specified the <code>host</code> IPC\n            mode on the same container instance share the same IPC resources with the host Amazon EC2\n            instance. If <code>task</code> is specified, all containers within the specified task\n            share the same IPC resources. If <code>none</code> is specified, then IPC resources\n            within the containers of a task are private and not shared with other containers in a\n            task or on the container instance. If no value is specified, then the IPC resource\n            namespace sharing depends on the Docker daemon setting on the container instance. For\n            more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC\n                settings</a> in the <i>Docker run reference</i>.</p>\n         <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of\n            undesired IPC namespace expose. For more information, see <a href=\"https://docs.docker.com/engine/security/security/\">Docker\n            security</a>.</p>\n         <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for\n            the containers in the task, the following will apply to your IPC resource namespace. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System\n                Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> are not supported.</p>\n            </li>\n            <li>\n               <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> will apply to all containers within a\n                    task.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>\n         </note>"
                     }
                 },
                 "proxyConfiguration": {
@@ -9432,7 +9730,7 @@
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value for the specified resource type.</p>\n         <p>When the type is <code>GPU</code>, the value is the number of physical\n\t\t\t\t<code>GPUs</code> the Amazon ECS container agent reserves for the container. The number\n\t\t\tof GPUs that's reserved for all containers in a task can't exceed the number of\n\t\t\tavailable GPUs on the container instance that the task is launched on.</p>\n         <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches the\n\t\t\t\t<code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a task definition.</p>",
+                        "smithy.api#documentation": "<p>The value for the specified resource type.</p>\n         <p>When the type is <code>GPU</code>, the value is the number of physical <code>GPUs</code> the\n\t\t\tAmazon ECS container agent reserves for the container. The number of GPUs that's reserved for\n\t\t\tall containers in a task can't exceed the number of available GPUs on the container\n\t\t\tinstance that the task is launched on.</p>\n         <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches\n\t\t\tthe <code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a task definition.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9475,6 +9773,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#Resource"
+            }
+        },
+        "com.amazonaws.ecs#Rollback": {
+            "type": "structure",
+            "members": {
+                "reason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the rollback happened. For example, the circuit breaker initiated the rollback operation.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time time that the rollback started. The format is  yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "serviceRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service revision deployed as part of the rollback.</p>\n         <p>When the type is <code>GPU</code>, the value is the number of physical\n\t\t\t\t<code>GPUs</code> the Amazon ECS container agent reserves for the container. The number\n\t\t\tof GPUs that's reserved for all containers in a task can't exceed the number of\n\t\t\tavailable GPUs on the container instance that the task is launched on.</p>\n         <p>When the type is <code>InferenceAccelerator</code>, the <code>value</code> matches the\n\t\t\t\t<code>deviceName</code> for an <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html\">InferenceAccelerator</a> specified in a task definition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the service deployment rollback.</p>"
             }
         },
         "com.amazonaws.ecs#RunTask": {
@@ -9709,13 +10033,13 @@
                 "cpuArchitecture": {
                     "target": "com.amazonaws.ecs#CPUArchitecture",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CPU architecture.</p>\n         <p>You can run your Linux tasks on an ARM-based platform by setting the value to\n\t\t\t\t<code>ARM64</code>. This option is available for tasks that run on Linux Amazon EC2\n\t\t\tinstance or Linux containers on Fargate.</p>"
+                        "smithy.api#documentation": "<p>The CPU architecture.</p>\n         <p>You can run your Linux tasks on an ARM-based platform by setting the value to\n\t\t\t\t<code>ARM64</code>. This option is available for tasks that run on Linux Amazon EC2\n\t\t\tinstance or Linux containers on Fargate.</p>\n         <p>The default is <code>X86_64</code>.</p>"
                     }
                 },
                 "operatingSystemFamily": {
                     "target": "com.amazonaws.ecs#OSFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system.</p>"
+                        "smithy.api#documentation": "<p>The operating system.</p>\n         <p>The default is <code>Linux</code>.</p>"
                     }
                 }
             },
@@ -9907,7 +10231,7 @@
                 "capacityProviderStrategy": {
                     "target": "com.amazonaws.ecs#CapacityProviderStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The capacity provider strategy the service uses. When using the DescribeServices API,\n\t\t\tthis field is omitted if the service was created using a launch type.</p>"
+                        "smithy.api#documentation": "<p>The capacity provider strategy the service uses. When using <code>DescribeServices</code>,\n\t\t\tthis field is omitted if the service was created using a launch type.</p>"
                     }
                 },
                 "platformVersion": {
@@ -10003,7 +10327,7 @@
                 "tags": {
                     "target": "com.amazonaws.ecs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata that you apply to the service to help you categorize and organize them.\n\t\t\tEach tag consists of a key and an optional value. You define bot the key and\n\t\t\tvalue.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only\n                    one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources,\n                    remember that other services may have restrictions on allowed characters.\n                    Generally allowed characters are: letters, numbers, and spaces representable in\n                    UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case-sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase\n                    combination of such as a prefix for either keys or values as it is reserved for\n                    Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with\n                    this prefix do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The metadata that you apply to the service to help you categorize and organize them. Each\n\t\t\ttag consists of a key and an optional value. You define both the key and value.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only\n                    one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources,\n                    remember that other services may have restrictions on allowed characters.\n                    Generally allowed characters are: letters, numbers, and spaces representable in\n                    UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case-sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase\n                    combination of such as a prefix for either keys or values as it is reserved for\n                    Amazon Web Services use. You cannot edit or delete tag keys or values with this prefix. Tags with\n                    this prefix do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "createdBy": {
@@ -10213,6 +10537,323 @@
                 "smithy.api#documentation": "<p>The key that encrypts and decrypts your resources for Service Connect TLS.</p>"
             }
         },
+        "com.amazonaws.ecs#ServiceDeployment": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service deployment.</p>"
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service for this service deployment.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the cluster that hosts the service.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the service deployment was created. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the service deployment statred. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "finishedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the service deployment finished. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "stoppedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the service deployment stopped. The format is yyyy-MM-dd HH:mm:ss.SSSSSS.</p>\n         <p>The service deployment stops when any of the following actions happen:</p>\n         <ul>\n            <li>\n               <p>A user manually stops the deployment</p>\n            </li>\n            <li>\n               <p>The rollback option is not in use for the failure detection mechanism (the\n\t\t\t\t\tcircuit breaker or alarm-based) and the service fails.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the service deployment was last updated. The format is yyyy-MM-dd\n\t\t\tHH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "sourceServiceRevisions": {
+                    "target": "com.amazonaws.ecs#ServiceRevisionsSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The currently deployed workload configuration.</p>"
+                    }
+                },
+                "targetServiceRevision": {
+                    "target": "com.amazonaws.ecs#ServiceRevisionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workload configuration being deployed.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service deployment state.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the service deployment is in the current status. For example, the circuit breaker detected a failure.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.ecs#DeploymentConfiguration"
+                },
+                "rollback": {
+                    "target": "com.amazonaws.ecs#Rollback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rollback options the service deployment uses when the deployment fails.</p>"
+                    }
+                },
+                "deploymentCircuitBreaker": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentCircuitBreaker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The circuit breaker configuration that determines a service deployment failed.</p>"
+                    }
+                },
+                "alarms": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentAlarms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch alarms that determine when a service deployment fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the service deployment.</p>\n         <p>Service deployments provide a comprehensive view of your deployments. For information\n\t\t\tabout service deployments, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployment.html\">View service history using Amazon ECS service deployments</a>\n\t\t\tin the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentAlarms": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentRollbackMonitorsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the alarms check. Amazon ECS is not using alarms for service deployment failures when the status is <code>DISABLED</code>.</p>"
+                    }
+                },
+                "alarmNames": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch alarms that determine when a service deployment failed. A \",\" separates the alarms.</p>"
+                    }
+                },
+                "triggeredAlarmNames": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more CloudWatch alarm names that have been triggered during the service deployment. A \",\"\n\t\t\tseparates the alarm names.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CloudWatch alarms used to determine a service deployment failed. </p>\n         <p>Amazon ECS considers the service deployment as failed when any of the alarms move to the <code>ALARM</code> state. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-alarm-failure.html\">How CloudWatch alarms detect Amazon ECS deployment failures</a> in the Amazon ECS Developer Guide.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentBrief": {
+            "type": "structure",
+            "members": {
+                "serviceDeploymentArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service deployment.</p>"
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service for this service deployment.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the cluster that hosts the service.</p>"
+                    }
+                },
+                "startedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the service deployment statred. The format is yyyy-MM-dd\n\t\t\tHH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the service deployment was created. The format is yyyy-MM-dd\n\t\t\tHH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "finishedAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the service deployment completed. The format is yyyy-MM-dd\n\t\t\tHH:mm:ss.SSSSSS.</p>"
+                    }
+                },
+                "targetServiceRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service revision being deplyed.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the service deployment</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about why the service deployment is in the current status. For example, the circuit breaker detected a deployment failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service deployment properties that are retured when you call <code>ListServiceDeployments</code>.</p>\n         <p>This provides a high-level overview of the service deployment. </p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentCircuitBreaker": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.ecs#ServiceDeploymentRollbackMonitorsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The circuit breaker status.  Amazon ECS is not using the circuit breaker for service deployment failures when the status is <code>DISABLED</code>.</p>"
+                    }
+                },
+                "failureCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of times the circuit breaker detected a service deploymeny failure.</p>"
+                    }
+                },
+                "threshold": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The threshhold which determines that the service deployment failed.</p>\n         <p>The deployment circuit breaker calculates the threshold value, and then uses the value to\n\t\t\tdetermine when to move the deployment to a FAILED state. The deployment circuit breaker\n\t\t\thas a minimum threshold of 3 and a maximum threshold of 200. and uses the values in the\n\t\t\tfollowing formula to determine the deployment failure.</p>\n         <p>\n            <code>0.5 * desired task count</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the circuit breaker used to determine when a service deployment has\n\t\t\tfailed.</p>\n         <p>The deployment circuit breaker is the rolling update mechanism that determines if the\n\t\t\ttasks reach a steady state. The deployment circuit breaker has an option that will\n\t\t\tautomatically roll back a failed deployment to the last cpompleted service\n\t\t\trevision. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-circuit-breaker.html\">How the Amazon ECS\n\t\t\tdeployment circuit breaker detects failures</a> in the<i> Amazon ECS Developer\n\t\t\t\tGuide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentRollbackMonitorsStatus": {
+            "type": "enum",
+            "members": {
+                "TRIGGERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRIGGERED"
+                    }
+                },
+                "MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITORING"
+                    }
+                },
+                "MONITORING_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITORING_COMPLETE"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "ROLLBACK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_IN_PROGRESS"
+                    }
+                },
+                "ROLLBACK_SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_SUCCESSFUL"
+                    }
+                },
+                "ROLLBACK_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK_FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentStatusList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceDeploymentStatus"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeployments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceDeployment"
+            }
+        },
+        "com.amazonaws.ecs#ServiceDeploymentsBrief": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceDeploymentBrief"
+            }
+        },
         "com.amazonaws.ecs#ServiceEvent": {
             "type": "structure",
             "members": {
@@ -10397,6 +11038,155 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details for the service registry.</p>\n         <p>Each service may be associated with one service registry. Multiple service registries\n\t\t\tfor each service are not supported.</p>\n         <p>When you add, update, or remove the service registries configuration, Amazon ECS starts a\n\t\t\tnew deployment. New tasks are registered and deregistered to the updated service\n\t\t\tregistry configuration.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevision": {
+            "type": "structure",
+            "members": {
+                "serviceRevisionArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service revision.</p>"
+                    }
+                },
+                "serviceArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service for the service revision.</p>"
+                    }
+                },
+                "clusterArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the cluster that hosts the service.</p>"
+                    }
+                },
+                "taskDefinition": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task definition the service revision uses.</p>"
+                    }
+                },
+                "capacityProviderStrategy": {
+                    "target": "com.amazonaws.ecs#CapacityProviderStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity provider strategy the service revision uses.</p>"
+                    }
+                },
+                "launchType": {
+                    "target": "com.amazonaws.ecs#LaunchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch type the service revision uses.</p>"
+                    }
+                },
+                "platformVersion": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the Fargate launch type, the platform version the service revision uses.</p>"
+                    }
+                },
+                "platformFamily": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform family the service revision uses.</p>"
+                    }
+                },
+                "loadBalancers": {
+                    "target": "com.amazonaws.ecs#LoadBalancers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The load balancers the service revision uses.</p>"
+                    }
+                },
+                "serviceRegistries": {
+                    "target": "com.amazonaws.ecs#ServiceRegistries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service registries (for Service Discovery) the service revision uses.</p>"
+                    }
+                },
+                "networkConfiguration": {
+                    "target": "com.amazonaws.ecs#NetworkConfiguration"
+                },
+                "containerImages": {
+                    "target": "com.amazonaws.ecs#ContainerImages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container images the service revision uses.</p>"
+                    }
+                },
+                "guardDutyEnabled": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether Runtime Monitoring is turned on.</p>"
+                    }
+                },
+                "serviceConnectConfiguration": {
+                    "target": "com.amazonaws.ecs#ServiceConnectConfiguration"
+                },
+                "volumeConfigurations": {
+                    "target": "com.amazonaws.ecs#ServiceVolumeConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volumes that are configured at deployment that the service revision uses.</p>"
+                    }
+                },
+                "fargateEphemeralStorage": {
+                    "target": "com.amazonaws.ecs#DeploymentEphemeralStorage"
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.ecs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the service revision was created. The format is yyyy-mm-dd HH:mm:ss.SSSSS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the service revision.</p>\n         <p>A service revision contains a record of the workload configuration Amazon ECS is attempting to deploy. Whenever you create or deploy a service, Amazon ECS automatically creates and captures the configuration that you're trying to deploy in the service revision. For information\n\t\t\tabout service revisions, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html\">Amazon ECS service revisions</a>\n\t\t\tin the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevisionSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the service revision.</p>"
+                    }
+                },
+                "requestedTaskCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of requested tasks for the service revision.</p>"
+                    }
+                },
+                "runningTaskCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of running tasks for the service revision.</p>"
+                    }
+                },
+                "pendingTaskCount": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of pending tasks for the service revision.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the number of requested, pending, and running tasks for a service revision.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevisions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceRevision"
+            }
+        },
+        "com.amazonaws.ecs#ServiceRevisionsSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceRevisionSummary"
             }
         },
         "com.amazonaws.ecs#ServiceVolumeConfiguration": {
@@ -11565,7 +12355,7 @@
                 "networkMode": {
                     "target": "com.amazonaws.ecs#NetworkMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n         <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n         <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n         <important>\n            <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n         </important>\n         <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_NetworkConfiguration.html\">NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>"
+                        "smithy.api#documentation": "<p>The Docker networking mode to use for the containers in the task. The valid values are\n                <code>none</code>, <code>bridge</code>, <code>awsvpc</code>, and <code>host</code>.\n            If no network mode is specified, the default is <code>bridge</code>.</p>\n         <p>For Amazon ECS tasks on Fargate, the <code>awsvpc</code> network mode is required. \n            For Amazon ECS tasks on Amazon EC2 Linux instances, any network mode can be used.  For Amazon ECS tasks on Amazon EC2 Windows instances, <code><default></code> or <code>awsvpc</code> can be used. If the network\n            mode is set to <code>none</code>, you cannot specify port mappings in your container\n            definitions, and the tasks containers do not have external connectivity. The\n                <code>host</code> and <code>awsvpc</code> network modes offer the highest networking\n            performance for containers because they use the EC2 network stack instead of the\n            virtualized network stack provided by the <code>bridge</code> mode.</p>\n         <p>With the <code>host</code> and <code>awsvpc</code> network modes, exposed container\n            ports are mapped directly to the corresponding host port (for the <code>host</code>\n            network mode) or the attached elastic network interface port (for the\n                <code>awsvpc</code> network mode), so you cannot take advantage of dynamic host port\n            mappings. </p>\n         <important>\n            <p>When using the <code>host</code> network mode, you should not run\n                            containers using the root user (UID 0). It is considered best practice\n                            to use a non-root user.</p>\n         </important>\n         <p>If the network mode is <code>awsvpc</code>, the task is allocated an elastic network\n            interface, and you must specify a <a>NetworkConfiguration</a> value when you create\n            a service or run a task with the task definition. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html\">Task Networking</a> in the\n                <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <p>If the network mode is <code>host</code>, you cannot run multiple instantiations of the\n            same task on a single container instance when port mappings are used.</p>\n         <p>For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#network-settings\">Network\n                settings</a> in the <i>Docker run reference</i>.</p>"
                     }
                 },
                 "revision": {
@@ -11638,13 +12428,13 @@
                 "pidMode": {
                     "target": "com.amazonaws.ecs#PidMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. The valid\n                            values are <code>host</code> or <code>task</code>. On Fargate for\n                            Linux containers, the only valid value is <code>task</code>. For\n                            example, monitoring sidecars might need <code>pidMode</code> to access\n                            information about other containers running in the same task.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks\n                            that specified the <code>host</code> PID mode on the same container\n                            instance share the same process namespace with the host Amazon EC2\n                            instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified\n                            task share the same process namespace.</p>\n         <p>If no value is specified, the\n                            default is a private namespace for each container.</p>\n         <p>If the <code>host</code> PID mode is used, there's a heightened risk\n                            of undesired process namespace exposure.</p>\n         <note>\n            <p>This parameter is not supported for Windows containers.</p>\n         </note>\n         <note>\n            <p>This parameter is only supported for tasks that are hosted on\n        Fargate if the tasks are using platform version <code>1.4.0</code> or later\n        (Linux). This isn't supported for Windows containers on\n        Fargate.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. The valid\n                            values are <code>host</code> or <code>task</code>. On Fargate for\n                            Linux containers, the only valid value is <code>task</code>. For\n                            example, monitoring sidecars might need <code>pidMode</code> to access\n                            information about other containers running in the same task.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks\n                            that specified the <code>host</code> PID mode on the same container\n                            instance share the same process namespace with the host Amazon EC2\n                            instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified\n                            task share the same process namespace.</p>\n         <p>If no value is specified, the\n                            default is a private namespace for each container. For more information,\n                            see <a href=\"https://docs.docker.com/engine/reference/run/#pid-settings---pid\">PID settings</a> in the <i>Docker run\n                                reference</i>.</p>\n         <p>If the <code>host</code> PID mode is used, there's a heightened risk\n                            of undesired process namespace exposure. For more information, see\n                                <a href=\"https://docs.docker.com/engine/security/security/\">Docker security</a>.</p>\n         <note>\n            <p>This parameter is not supported for Windows containers.</p>\n         </note>\n         <note>\n            <p>This parameter is only supported for tasks that are hosted on\n        Fargate if the tasks are using platform version <code>1.4.0</code> or later\n        (Linux). This isn't supported for Windows containers on\n        Fargate.</p>\n         </note>"
                     }
                 },
                 "ipcMode": {
                     "target": "com.amazonaws.ecs#IpcMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are\n                <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is\n            specified, then all containers within the tasks that specified the <code>host</code> IPC\n            mode on the same container instance share the same IPC resources with the host Amazon EC2\n            instance. If <code>task</code> is specified, all containers within the specified task\n            share the same IPC resources. If <code>none</code> is specified, then IPC resources\n            within the containers of a task are private and not shared with other containers in a\n            task or on the container instance. If no value is specified, then the IPC resource\n            namespace sharing depends on the Docker daemon setting on the container instance.</p>\n         <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of\n            undesired IPC namespace expose.</p>\n         <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for\n            the containers in the task, the following will apply to your IPC resource namespace. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System\n                Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> are not supported.</p>\n            </li>\n            <li>\n               <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> will apply to all containers within a\n                    task.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are\n                <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is\n            specified, then all containers within the tasks that specified the <code>host</code> IPC\n            mode on the same container instance share the same IPC resources with the host Amazon EC2\n            instance. If <code>task</code> is specified, all containers within the specified task\n            share the same IPC resources. If <code>none</code> is specified, then IPC resources\n            within the containers of a task are private and not shared with other containers in a\n            task or on the container instance. If no value is specified, then the IPC resource\n            namespace sharing depends on the Docker daemon setting on the container instance. For\n            more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC\n                settings</a> in the <i>Docker run reference</i>.</p>\n         <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of\n            undesired IPC namespace expose. For more information, see <a href=\"https://docs.docker.com/engine/security/security/\">Docker\n            security</a>.</p>\n         <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for\n            the containers in the task, the following will apply to your IPC resource namespace. For\n            more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System\n                Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> are not supported.</p>\n            </li>\n            <li>\n               <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related\n                        <code>systemControls</code> will apply to all containers within a\n                    task.</p>\n            </li>\n         </ul>\n         <note>\n            <p>This parameter is not supported for Windows containers or tasks run on Fargate.</p>\n         </note>"
                     }
                 },
                 "proxyConfiguration": {
@@ -11801,7 +12591,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify an Key Management Service key ID to encrypt the ephemeral storage for the\n\t\t\ttask.</p>"
+                        "smithy.api#documentation": "<p>Specify an Amazon Web Services Key Management Service key ID to encrypt the ephemeral storage for the\n\t\t\ttask.</p>"
                     }
                 }
             },
@@ -13105,7 +13895,7 @@
                 "deploymentConfiguration": {
                     "target": "com.amazonaws.ecs#DeploymentConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment\n\t\t\tand the ordering of stopping and starting tasks.</p>"
+                        "smithy.api#documentation": "<p>Optional deployment parameters that control how many tasks run during the deployment and the\n\t\t\tfailure detection methods.</p>"
                     }
                 },
                 "networkConfiguration": {

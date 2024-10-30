@@ -329,8 +329,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
+                    "min": 0,
+                    "max": 255
                 },
                 "smithy.api#sensitive": {}
             }
@@ -447,8 +447,8 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
+                    "min": 0,
+                    "max": 300
                 },
                 "smithy.api#sensitive": {}
             }
@@ -40511,7 +40511,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the identity of a user.</p>\n         <note>\n            <p>For Amazon Connect instances that are created with the <code>EXISTING_DIRECTORY</code>\n    identity management type, <code>FirstName</code>, <code>LastName</code>, and <code>Email</code>\n    cannot be updated from within Amazon Connect because they are managed by the\n    directory.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Contains information about the identity of a user.</p>\n         <note>\n            <p>For Amazon Connect instances that are created with the <code>EXISTING_DIRECTORY</code>\n    identity management type, <code>FirstName</code>, <code>LastName</code>, and <code>Email</code>\n    cannot be updated from within Amazon Connect because they are managed by the\n    directory.</p>\n         </note>\n         <important>\n            <p>The <code>FirstName</code> and <code>LastName</code> length constraints below apply only to\n    instances using SAML for identity management. If you are using Amazon Connect for identity\n    management, the length constraints are 1-255 for <code>FirstName</code>, and 1-256 for\n    <code>LastName</code>. </p>\n         </important>"
             }
         },
         "com.amazonaws.connect#UserIdentityInfoLite": {
