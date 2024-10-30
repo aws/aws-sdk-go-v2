@@ -32,7 +32,7 @@
         "com.amazonaws.ecs#AccessDeniedException": {
             "type": "structure",
             "members": {
-                "message": {
+                "Message": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p> Message that describes the cause of the exception.</p>"

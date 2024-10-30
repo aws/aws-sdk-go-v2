@@ -7823,7 +7823,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
-		case "message":
+		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
