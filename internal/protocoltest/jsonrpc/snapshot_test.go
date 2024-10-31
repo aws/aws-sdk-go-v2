@@ -170,6 +170,18 @@ func TestCheckSnapshot_JsonEnums(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_JsonIntEnums(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.JsonIntEnums(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "JsonIntEnums")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_JsonUnions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.JsonUnions(context.Background(), nil, func(o *Options) {
@@ -366,6 +378,18 @@ func TestUpdateSnapshot_JsonEnums(t *testing.T) {
 	_, err := svc.JsonEnums(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "JsonEnums")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_JsonIntEnums(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.JsonIntEnums(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "JsonIntEnums")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

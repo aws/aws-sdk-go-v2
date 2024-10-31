@@ -394,7 +394,7 @@ func TestClient_OperationWithDefaults_awsRestjson1Deserialize(t *testing.T) {
 					"b",
 				}),
 				DefaultNullDocument: document.NewLazyDocument("notNull"),
-				DefaultTimestamp:    ptr.Time(smithytime.ParseEpochSeconds(1)),
+				DefaultTimestamp:    ptr.Time(smithytime.ParseEpochSeconds(2)),
 				DefaultBlob:         []byte("hi"),
 				DefaultByte:         ptr.Int8(2),
 				DefaultShort:        ptr.Int16(2),

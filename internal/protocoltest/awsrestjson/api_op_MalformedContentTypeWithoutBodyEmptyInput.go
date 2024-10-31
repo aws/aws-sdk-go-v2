@@ -10,53 +10,47 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) SparseJsonLists(ctx context.Context, params *SparseJsonListsInput, optFns ...func(*Options)) (*SparseJsonListsOutput, error) {
+func (c *Client) MalformedContentTypeWithoutBodyEmptyInput(ctx context.Context, params *MalformedContentTypeWithoutBodyEmptyInputInput, optFns ...func(*Options)) (*MalformedContentTypeWithoutBodyEmptyInputOutput, error) {
 	if params == nil {
-		params = &SparseJsonListsInput{}
+		params = &MalformedContentTypeWithoutBodyEmptyInputInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SparseJsonLists", params, optFns, c.addOperationSparseJsonListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "MalformedContentTypeWithoutBodyEmptyInput", params, optFns, c.addOperationMalformedContentTypeWithoutBodyEmptyInputMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*SparseJsonListsOutput)
+	out := result.(*MalformedContentTypeWithoutBodyEmptyInputOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type SparseJsonListsInput struct {
-	SparseShortList []*int16
-
-	SparseStringList []*string
+type MalformedContentTypeWithoutBodyEmptyInputInput struct {
+	Header *string
 
 	noSmithyDocumentSerde
 }
 
-type SparseJsonListsOutput struct {
-	SparseShortList []*int16
-
-	SparseStringList []*string
-
+type MalformedContentTypeWithoutBodyEmptyInputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationMalformedContentTypeWithoutBodyEmptyInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSparseJsonLists{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedContentTypeWithoutBodyEmptyInput{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSparseJsonLists{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedContentTypeWithoutBodyEmptyInput{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseJsonLists"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedContentTypeWithoutBodyEmptyInput"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,7 +102,7 @@ func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSparseJsonLists(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedContentTypeWithoutBodyEmptyInput(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -141,10 +135,10 @@ func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opSparseJsonLists(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opMalformedContentTypeWithoutBodyEmptyInput(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "SparseJsonLists",
+		OperationName: "MalformedContentTypeWithoutBodyEmptyInput",
 	}
 }

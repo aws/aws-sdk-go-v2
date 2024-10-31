@@ -74,6 +74,8 @@
         "api_op_IgnoreQueryParamsInResponse_test.go",
         "api_op_InputAndOutputWithHeaders.go",
         "api_op_InputAndOutputWithHeaders_test.go",
+        "api_op_NestedXmlMapWithXmlName.go",
+        "api_op_NestedXmlMapWithXmlName_test.go",
         "api_op_NestedXmlMaps.go",
         "api_op_NestedXmlMaps_test.go",
         "api_op_NoInputAndNoOutput.go",

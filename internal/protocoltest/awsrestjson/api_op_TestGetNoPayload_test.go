@@ -8,6 +8,7 @@ import (
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
+	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	"io"
@@ -16,9 +17,9 @@ import (
 	"testing"
 )
 
-func TestClient_TestNoInputNoPayload_awsRestjson1Serialize(t *testing.T) {
+func TestClient_TestGetNoPayload_awsRestjson1Serialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *TestNoInputNoPayloadInput
+		Params        *TestGetNoPayloadInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -31,13 +32,31 @@ func TestClient_TestNoInputNoPayload_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes a GET request for an operation with no input, and therefore no
-		// modeled body
-		"RestJsonHttpWithNoInput": {
-			Params:        &TestNoInputNoPayloadInput{},
+		// Serializes a GET request with no modeled body
+		"RestJsonHttpGetWithNoModeledBody": {
+			Params:        &TestGetNoPayloadInput{},
 			ExpectMethod:  "GET",
-			ExpectURIPath: "/no_input_no_payload",
+			ExpectURIPath: "/no_payload",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ForbidHeader: []string{
+				"Content-Length",
+				"Content-Type",
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Serializes a GET request with header member but no modeled body
+		"RestJsonHttpGetWithHeaderMemberNoModeledBody": {
+			Params: &TestGetNoPayloadInput{
+				TestId: ptr.String("t-12345"),
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/no_payload",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-Amz-Test-Id": []string{"t-12345"},
+			},
 			ForbidHeader: []string{
 				"Content-Length",
 				"Content-Type",
@@ -78,7 +97,7 @@ func TestClient_TestNoInputNoPayload_awsRestjson1Serialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.TestNoInputNoPayload(context.Background(), c.Params, func(options *Options) {
+			result, err := client.TestGetNoPayload(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})

@@ -31,6 +31,8 @@
         "api_op_OperationWithNestedStructure.go",
         "api_op_OperationWithNestedStructure_test.go",
         "api_op_OperationWithRequiredMembers.go",
+        "api_op_OperationWithRequiredMembersWithDefaults.go",
+        "api_op_OperationWithRequiredMembersWithDefaults_test.go",
         "api_op_OperationWithRequiredMembers_test.go",
         "api_op_PutWithContentEncoding.go",
         "api_op_PutWithContentEncoding_test.go",

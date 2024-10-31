@@ -10,33 +10,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation has no input and serializes a request without an HTTP
-// body.
-//
-// These tests are to ensure we do not attach a body or related headers
-// (Content-Length, Content-Type) to operations that semantically cannot produce an
-// HTTP body.
-func (c *Client) TestNoInputNoPayload(ctx context.Context, params *TestNoInputNoPayloadInput, optFns ...func(*Options)) (*TestNoInputNoPayloadOutput, error) {
+func (c *Client) ResponseCodeRequired(ctx context.Context, params *ResponseCodeRequiredInput, optFns ...func(*Options)) (*ResponseCodeRequiredOutput, error) {
 	if params == nil {
-		params = &TestNoInputNoPayloadInput{}
+		params = &ResponseCodeRequiredInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TestNoInputNoPayload", params, optFns, c.addOperationTestNoInputNoPayloadMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResponseCodeRequired", params, optFns, c.addOperationResponseCodeRequiredMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*TestNoInputNoPayloadOutput)
+	out := result.(*ResponseCodeRequiredOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type TestNoInputNoPayloadInput struct {
+type ResponseCodeRequiredInput struct {
 	noSmithyDocumentSerde
 }
 
-type TestNoInputNoPayloadOutput struct {
-	TestId *string
+type ResponseCodeRequiredOutput struct {
+
+	// This member is required.
+	ResponseCode *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,19 +40,19 @@ type TestNoInputNoPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationTestNoInputNoPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResponseCodeRequiredMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestNoInputNoPayload{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpResponseCodeRequired{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestNoInputNoPayload{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResponseCodeRequired{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestNoInputNoPayload"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ResponseCodeRequired"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,7 +104,7 @@ func (c *Client) addOperationTestNoInputNoPayloadMiddlewares(stack *middleware.S
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestNoInputNoPayload(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResponseCodeRequired(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -141,10 +137,10 @@ func (c *Client) addOperationTestNoInputNoPayloadMiddlewares(stack *middleware.S
 	return nil
 }
 
-func newServiceMetadataMiddleware_opTestNoInputNoPayload(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opResponseCodeRequired(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "TestNoInputNoPayload",
+		OperationName: "ResponseCodeRequired",
 	}
 }
