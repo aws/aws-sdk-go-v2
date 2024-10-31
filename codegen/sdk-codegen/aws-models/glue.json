@@ -109,6 +109,9 @@
                     "target": "com.amazonaws.glue#CreateClassifier"
                 },
                 {
+                    "target": "com.amazonaws.glue#CreateColumnStatisticsTaskSettings"
+                },
+                {
                     "target": "com.amazonaws.glue#CreateConnection"
                 },
                 {
@@ -182,6 +185,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteColumnStatisticsForTable"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteColumnStatisticsTaskSettings"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteConnection"
@@ -281,6 +287,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#GetColumnStatisticsTaskRuns"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetColumnStatisticsTaskSettings"
                 },
                 {
                     "target": "com.amazonaws.glue#GetConnection"
@@ -580,6 +589,9 @@
                     "target": "com.amazonaws.glue#StartColumnStatisticsTaskRun"
                 },
                 {
+                    "target": "com.amazonaws.glue#StartColumnStatisticsTaskRunSchedule"
+                },
+                {
                     "target": "com.amazonaws.glue#StartCrawler"
                 },
                 {
@@ -616,6 +628,9 @@
                     "target": "com.amazonaws.glue#StopColumnStatisticsTaskRun"
                 },
                 {
+                    "target": "com.amazonaws.glue#StopColumnStatisticsTaskRunSchedule"
+                },
+                {
                     "target": "com.amazonaws.glue#StopCrawler"
                 },
                 {
@@ -650,6 +665,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateColumnStatisticsForTable"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateColumnStatisticsTaskSettings"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateConnection"
@@ -6306,6 +6324,12 @@
                         "smithy.api#documentation": "<p>The type of workers being used for generating stats. The default is <code>g.1x</code>.</p>"
                     }
                 },
+                "ComputationType": {
+                    "target": "com.amazonaws.glue#ComputationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of column statistics computation.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.glue#ColumnStatisticsState",
                     "traits": {
@@ -6385,6 +6409,63 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#ColumnStatisticsTaskRun"
+            }
+        },
+        "com.amazonaws.glue#ColumnStatisticsTaskSettings": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>"
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#TableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to generate column statistics.</p>"
+                    }
+                },
+                "Schedule": {
+                    "target": "com.amazonaws.glue#Schedule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A schedule for running the column statistics, specified in CRON syntax.</p>"
+                    }
+                },
+                "ColumnNameList": {
+                    "target": "com.amazonaws.glue#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of column names for which to run statistics.</p>"
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog in which the database resides.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.glue#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role used for running the column statistics.</p>"
+                    }
+                },
+                "SampleSize": {
+                    "target": "com.amazonaws.glue#SampleSizePercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of data to sample.</p>"
+                    }
+                },
+                "SecurityConfiguration": {
+                    "target": "com.amazonaws.glue#CrawlerSecurityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the security configuration that is used to encrypt CloudWatch logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for a column statistics task.</p>"
             }
         },
         "com.amazonaws.glue#ColumnStatisticsTaskStoppingException": {
@@ -6603,6 +6684,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "bzip2"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ComputationType": {
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
+                    }
+                },
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL"
                     }
                 }
             }
@@ -8277,6 +8375,114 @@
             }
         },
         "com.amazonaws.glue#CreateClassifierResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#CreateColumnStatisticsTaskSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateColumnStatisticsTaskSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateColumnStatisticsTaskSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ColumnStatisticsTaskRunningException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates settings for a column statistics task.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateColumnStatisticsTaskSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to generate column statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role used for running the column statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Schedule": {
+                    "target": "com.amazonaws.glue#CronExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A schedule for running the column statistics, specified in CRON syntax.</p>"
+                    }
+                },
+                "ColumnNameList": {
+                    "target": "com.amazonaws.glue#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of column names for which to run statistics.</p>"
+                    }
+                },
+                "SampleSize": {
+                    "target": "com.amazonaws.glue#SampleSizePercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of data to sample.</p>"
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog in which the database resides.</p>"
+                    }
+                },
+                "SecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the security configuration that is used to encrypt CloudWatch logs.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#CreateColumnStatisticsTaskSettingsResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -12591,6 +12797,58 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#DeleteColumnStatisticsTaskSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteColumnStatisticsTaskSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteColumnStatisticsTaskSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes settings for a column statistics task.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteColumnStatisticsTaskSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to delete column statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#DeleteColumnStatisticsTaskSettingsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#DeleteConnection": {
             "type": "operation",
             "input": {
@@ -16421,6 +16679,65 @@
                     "target": "com.amazonaws.glue#Token",
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, if not all task runs have yet been returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#GetColumnStatisticsTaskSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetColumnStatisticsTaskSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetColumnStatisticsTaskSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets settings for a column statistics task.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetColumnStatisticsTaskSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to retrieve column statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#GetColumnStatisticsTaskSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "ColumnStatisticsTaskSettings": {
+                    "target": "com.amazonaws.glue#ColumnStatisticsTaskSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>ColumnStatisticsTaskSettings</code> object representing the settings for the column statistics task.</p>"
                     }
                 }
             },
@@ -33438,6 +33755,61 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.glue#StartColumnStatisticsTaskRunSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#StartColumnStatisticsTaskRunScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#StartColumnStatisticsTaskRunScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a column statistics task run schedule.</p>"
+            }
+        },
+        "com.amazonaws.glue#StartColumnStatisticsTaskRunScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to start a column statistic task run schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#StartColumnStatisticsTaskRunScheduleResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.glue#StartCrawler": {
             "type": "operation",
             "input": {
@@ -34738,6 +35110,58 @@
             }
         },
         "com.amazonaws.glue#StopColumnStatisticsTaskRunResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#StopColumnStatisticsTaskRunSchedule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#StopColumnStatisticsTaskRunScheduleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#StopColumnStatisticsTaskRunScheduleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a column statistics task run schedule.</p>"
+            }
+        },
+        "com.amazonaws.glue#StopColumnStatisticsTaskRunScheduleRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to stop a column statistic task run schedule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#StopColumnStatisticsTaskRunScheduleResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -37513,6 +37937,101 @@
                     "min": 0,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.glue#UpdateColumnStatisticsTaskSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateColumnStatisticsTaskSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateColumnStatisticsTaskSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#VersionMismatchException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates settings for a column statistics task.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateColumnStatisticsTaskSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database where the table resides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the table for which to generate column statistics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role used for running the column statistics.</p>"
+                    }
+                },
+                "Schedule": {
+                    "target": "com.amazonaws.glue#CronExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A schedule for running the column statistics, specified in CRON syntax.</p>"
+                    }
+                },
+                "ColumnNameList": {
+                    "target": "com.amazonaws.glue#ColumnNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of column names for which to run statistics.</p>"
+                    }
+                },
+                "SampleSize": {
+                    "target": "com.amazonaws.glue#SampleSizePercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of data to sample.</p>"
+                    }
+                },
+                "CatalogID": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Data Catalog in which the database resides.</p>"
+                    }
+                },
+                "SecurityConfiguration": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the security configuration that is used to encrypt CloudWatch logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateColumnStatisticsTaskSettingsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.glue#UpdateConnection": {

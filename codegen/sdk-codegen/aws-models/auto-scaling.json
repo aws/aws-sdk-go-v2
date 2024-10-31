@@ -2309,6 +2309,15 @@
                 "target": "com.amazonaws.autoscaling#XmlStringMaxLen255"
             }
         },
+        "com.amazonaws.autoscaling#BakeTime": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 172800
+                }
+            }
+        },
         "com.amazonaws.autoscaling#BareMetal": {
             "type": "enum",
             "members": {
@@ -6448,7 +6457,7 @@
                 "Status": {
                     "target": "com.amazonaws.autoscaling#InstanceRefreshStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status for the instance refresh operation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Pending</code> - The request was created, but the instance refresh has\n                    not started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InProgress</code> - An instance refresh is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Successful</code> - An instance refresh completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - An instance refresh failed to complete. You can\n                    troubleshoot using the status reason and the scaling activities. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Cancelling</code> - An ongoing instance refresh is being\n                    cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Cancelled</code> - The instance refresh is cancelled. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RollbackInProgress</code> - An instance refresh is being rolled\n                    back.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RollbackFailed</code> - The rollback failed to complete. You can\n                    troubleshoot using the status reason and the scaling activities.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RollbackSuccessful</code> - The rollback completed successfully.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current status for the instance refresh operation:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Pending</code> - The request was created, but the instance refresh has\n                    not started.</p>\n            </li>\n            <li>\n               <p>\n                  <code>InProgress</code> - An instance refresh is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Successful</code> - An instance refresh completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failed</code> - An instance refresh failed to complete. You can\n                    troubleshoot using the status reason and the scaling activities. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Cancelling</code> - An ongoing instance refresh is being\n                    cancelled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Cancelled</code> - The instance refresh is cancelled. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RollbackInProgress</code> - An instance refresh is being rolled\n                    back.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RollbackFailed</code> - The rollback failed to complete. You can\n                    troubleshoot using the status reason and the scaling activities.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RollbackSuccessful</code> - The rollback completed successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Baking</code> - Waiting the specified bake time after an instance refresh has finished updating instances.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StatusReason": {
@@ -6628,6 +6637,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RollbackSuccessful"
+                    }
+                },
+                "Baking": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Baking"
                     }
                 }
             }
@@ -9315,6 +9330,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the maximum percentage of the group that can be in service and healthy, or\n            pending, to support your workload when replacing instances. The value is expressed as a\n            percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200.</p>\n         <p>If you specify <code>MaxHealthyPercentage</code>, you must also specify\n                <code>MinHealthyPercentage</code>, and the difference between them cannot be greater\n            than 100. A larger range increases the number of instances that can be replaced at the\n            same time.</p>\n         <p>If you do not specify this property, the default is 100 percent, or the percentage set\n            in the instance maintenance policy for the Auto Scaling group, if defined.</p>"
                     }
+                },
+                "BakeTime": {
+                    "target": "com.amazonaws.autoscaling#BakeTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The amount of time, in seconds, to wait at the end of an instance refresh before the instance refresh is considered complete.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -10278,7 +10299,7 @@
                 "Preferences": {
                     "target": "com.amazonaws.autoscaling#RefreshPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets your preferences for the instance refresh so that it performs as expected when\n            you start it. Includes the instance warmup time, the minimum and maximum healthy\n            percentages, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in\n                <code>Standby</code> state or protected from scale in are found. You can also choose\n            to enable additional features, such as the following:</p>\n         <ul>\n            <li>\n               <p>Auto rollback</p>\n            </li>\n            <li>\n               <p>Checkpoints</p>\n            </li>\n            <li>\n               <p>CloudWatch alarms</p>\n            </li>\n            <li>\n               <p>Skip matching</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Sets your preferences for the instance refresh so that it performs as expected when\n            you start it. Includes the instance warmup time, the minimum and maximum healthy\n            percentages, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in\n                <code>Standby</code> state or protected from scale in are found. You can also choose\n            to enable additional features, such as the following:</p>\n         <ul>\n            <li>\n               <p>Auto rollback</p>\n            </li>\n            <li>\n               <p>Checkpoints</p>\n            </li>\n            <li>\n               <p>CloudWatch alarms</p>\n            </li>\n            <li>\n               <p>Skip matching</p>\n            </li>\n            <li>\n               <p>Bake time</p>\n            </li>\n         </ul>"
                     }
                 }
             }

@@ -11768,6 +11768,12 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the template.</p>"
                     }
                 },
+                "TemplateContent": {
+                    "target": "com.amazonaws.sesv2#EmailTemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the template.</p>\n         <note>\n            <p>Amazon SES supports only simple substitions when you send email using the  \n                <code>SendEmail</code> or <code>SendBulkEmail</code> operations and \n                you provide the full template content in the request.</p>\n         </note>"
+                    }
+                },
                 "TemplateData": {
                     "target": "com.amazonaws.sesv2#EmailTemplateData",
                     "traits": {
@@ -11782,7 +11788,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that defines the email template to use for an email message, and the values\n            to use for any message variables in that template. An <i>email\n                template</i> is a type of message template that contains content that you\n            want to define, save, and reuse in email messages that you send.</p>"
+                "smithy.api#documentation": "<p>An object that defines the email template to use for an email message, and the values\n            to use for any message variables in that template. An <i>email\n                template</i> is a type of message template that contains content that you\n            want to reuse in email messages that you send. You can specifiy the email template by providing \n            the name or ARN of an <i>email template</i> \n            previously saved in your Amazon SES account or by providing the full template content.</p>"
             }
         },
         "com.amazonaws.sesv2#TemplateContent": {
