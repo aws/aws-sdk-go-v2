@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDeleteClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteClusterNodes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDescribeModelPackage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDescribeModelPackage(context.Background(), nil, func(o *Options) {
@@ -4110,6 +4122,18 @@ func TestUpdateSnapshot_AssociateTrialComponent(t *testing.T) {
 	_, err := svc.AssociateTrialComponent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateTrialComponent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteClusterNodes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteClusterNodes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteClusterNodes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

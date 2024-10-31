@@ -1410,6 +1410,9 @@ type ColumnStatisticsTaskRun struct {
 	// The identifier for the particular column statistics task run.
 	ColumnStatisticsTaskRunId *string
 
+	// The type of column statistics computation.
+	ComputationType ComputationType
+
 	// The time that this task was created.
 	CreationTime *time.Time
 
@@ -1457,6 +1460,36 @@ type ColumnStatisticsTaskRun struct {
 
 	// The type of workers being used for generating stats. The default is g.1x .
 	WorkerType *string
+
+	noSmithyDocumentSerde
+}
+
+// The settings for a column statistics task.
+type ColumnStatisticsTaskSettings struct {
+
+	// The ID of the Data Catalog in which the database resides.
+	CatalogID *string
+
+	// A list of column names for which to run statistics.
+	ColumnNameList []string
+
+	// The name of the database where the table resides.
+	DatabaseName *string
+
+	// The role used for running the column statistics.
+	Role *string
+
+	// The percentage of data to sample.
+	SampleSize float64
+
+	// A schedule for running the column statistics, specified in CRON syntax.
+	Schedule *Schedule
+
+	// Name of the security configuration that is used to encrypt CloudWatch logs.
+	SecurityConfiguration *string
+
+	// The name of the table for which to generate column statistics.
+	TableName *string
 
 	noSmithyDocumentSerde
 }

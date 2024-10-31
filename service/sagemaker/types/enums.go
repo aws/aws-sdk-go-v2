@@ -1202,6 +1202,28 @@ func (AwsManagedHumanLoopRequestSource) Values() []AwsManagedHumanLoopRequestSou
 	}
 }
 
+type BatchDeleteClusterNodesErrorCode string
+
+// Enum values for BatchDeleteClusterNodesErrorCode
+const (
+	BatchDeleteClusterNodesErrorCodeNodeIdNotFound    BatchDeleteClusterNodesErrorCode = "NodeIdNotFound"
+	BatchDeleteClusterNodesErrorCodeInvalidNodeStatus BatchDeleteClusterNodesErrorCode = "InvalidNodeStatus"
+	BatchDeleteClusterNodesErrorCodeNodeIdInUse       BatchDeleteClusterNodesErrorCode = "NodeIdInUse"
+)
+
+// Values returns all known values for BatchDeleteClusterNodesErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchDeleteClusterNodesErrorCode) Values() []BatchDeleteClusterNodesErrorCode {
+	return []BatchDeleteClusterNodesErrorCode{
+		"NodeIdNotFound",
+		"InvalidNodeStatus",
+		"NodeIdInUse",
+	}
+}
+
 type BatchStrategy string
 
 // Enum values for BatchStrategy
@@ -1612,6 +1634,25 @@ const (
 	ClusterInstanceTypeMlT3Large       ClusterInstanceType = "ml.t3.large"
 	ClusterInstanceTypeMlT3Xlarge      ClusterInstanceType = "ml.t3.xlarge"
 	ClusterInstanceTypeMlT32xlarge     ClusterInstanceType = "ml.t3.2xlarge"
+	ClusterInstanceTypeMlG6Xlarge      ClusterInstanceType = "ml.g6.xlarge"
+	ClusterInstanceTypeMlG62xlarge     ClusterInstanceType = "ml.g6.2xlarge"
+	ClusterInstanceTypeMlG64xlarge     ClusterInstanceType = "ml.g6.4xlarge"
+	ClusterInstanceTypeMlG68xlarge     ClusterInstanceType = "ml.g6.8xlarge"
+	ClusterInstanceTypeMlG616xlarge    ClusterInstanceType = "ml.g6.16xlarge"
+	ClusterInstanceTypeMlG612xlarge    ClusterInstanceType = "ml.g6.12xlarge"
+	ClusterInstanceTypeMlG624xlarge    ClusterInstanceType = "ml.g6.24xlarge"
+	ClusterInstanceTypeMlG648xlarge    ClusterInstanceType = "ml.g6.48xlarge"
+	ClusterInstanceTypeMlGr64xlarge    ClusterInstanceType = "ml.gr6.4xlarge"
+	ClusterInstanceTypeMlGr68xlarge    ClusterInstanceType = "ml.gr6.8xlarge"
+	ClusterInstanceTypeMlG6eXlarge     ClusterInstanceType = "ml.g6e.xlarge"
+	ClusterInstanceTypeMlG6e2xlarge    ClusterInstanceType = "ml.g6e.2xlarge"
+	ClusterInstanceTypeMlG6e4xlarge    ClusterInstanceType = "ml.g6e.4xlarge"
+	ClusterInstanceTypeMlG6e8xlarge    ClusterInstanceType = "ml.g6e.8xlarge"
+	ClusterInstanceTypeMlG6e16xlarge   ClusterInstanceType = "ml.g6e.16xlarge"
+	ClusterInstanceTypeMlG6e12xlarge   ClusterInstanceType = "ml.g6e.12xlarge"
+	ClusterInstanceTypeMlG6e24xlarge   ClusterInstanceType = "ml.g6e.24xlarge"
+	ClusterInstanceTypeMlG6e48xlarge   ClusterInstanceType = "ml.g6e.48xlarge"
+	ClusterInstanceTypeMlP5e48xlarge   ClusterInstanceType = "ml.p5e.48xlarge"
 )
 
 // Values returns all known values for ClusterInstanceType. Note that this can be
@@ -1658,6 +1699,25 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 		"ml.t3.large",
 		"ml.t3.xlarge",
 		"ml.t3.2xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.gr6.4xlarge",
+		"ml.gr6.8xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
+		"ml.p5e.48xlarge",
 	}
 }
 
@@ -7374,6 +7434,22 @@ const (
 	TrainingInstanceTypeMlG512xlarge    TrainingInstanceType = "ml.g5.12xlarge"
 	TrainingInstanceTypeMlG524xlarge    TrainingInstanceType = "ml.g5.24xlarge"
 	TrainingInstanceTypeMlG548xlarge    TrainingInstanceType = "ml.g5.48xlarge"
+	TrainingInstanceTypeMlG6Xlarge      TrainingInstanceType = "ml.g6.xlarge"
+	TrainingInstanceTypeMlG62xlarge     TrainingInstanceType = "ml.g6.2xlarge"
+	TrainingInstanceTypeMlG64xlarge     TrainingInstanceType = "ml.g6.4xlarge"
+	TrainingInstanceTypeMlG68xlarge     TrainingInstanceType = "ml.g6.8xlarge"
+	TrainingInstanceTypeMlG616xlarge    TrainingInstanceType = "ml.g6.16xlarge"
+	TrainingInstanceTypeMlG612xlarge    TrainingInstanceType = "ml.g6.12xlarge"
+	TrainingInstanceTypeMlG624xlarge    TrainingInstanceType = "ml.g6.24xlarge"
+	TrainingInstanceTypeMlG648xlarge    TrainingInstanceType = "ml.g6.48xlarge"
+	TrainingInstanceTypeMlG6eXlarge     TrainingInstanceType = "ml.g6e.xlarge"
+	TrainingInstanceTypeMlG6e2xlarge    TrainingInstanceType = "ml.g6e.2xlarge"
+	TrainingInstanceTypeMlG6e4xlarge    TrainingInstanceType = "ml.g6e.4xlarge"
+	TrainingInstanceTypeMlG6e8xlarge    TrainingInstanceType = "ml.g6e.8xlarge"
+	TrainingInstanceTypeMlG6e16xlarge   TrainingInstanceType = "ml.g6e.16xlarge"
+	TrainingInstanceTypeMlG6e12xlarge   TrainingInstanceType = "ml.g6e.12xlarge"
+	TrainingInstanceTypeMlG6e24xlarge   TrainingInstanceType = "ml.g6e.24xlarge"
+	TrainingInstanceTypeMlG6e48xlarge   TrainingInstanceType = "ml.g6e.48xlarge"
 	TrainingInstanceTypeMlTrn12xlarge   TrainingInstanceType = "ml.trn1.2xlarge"
 	TrainingInstanceTypeMlTrn132xlarge  TrainingInstanceType = "ml.trn1.32xlarge"
 	TrainingInstanceTypeMlTrn1n32xlarge TrainingInstanceType = "ml.trn1n.32xlarge"
@@ -7472,6 +7548,22 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.g5.12xlarge",
 		"ml.g5.24xlarge",
 		"ml.g5.48xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",

@@ -2402,6 +2402,32 @@ type BatchDataCaptureConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an error encountered when deleting a node from a SageMaker HyperPod
+// cluster.
+type BatchDeleteClusterNodesError struct {
+
+	// The error code associated with the error encountered when deleting a node.
+	//
+	// The code provides information about the specific issue encountered, such as the
+	// node not being found, the node's status being invalid for deletion, or the node
+	// ID being in use by another process.
+	//
+	// This member is required.
+	Code BatchDeleteClusterNodesErrorCode
+
+	// A message describing the error encountered when deleting a node.
+	//
+	// This member is required.
+	Message *string
+
+	// The ID of the node that encountered an error during the deletion process.
+	//
+	// This member is required.
+	NodeId *string
+
+	noSmithyDocumentSerde
+}
+
 // The error code and error description associated with the resource.
 type BatchDescribeModelPackageError struct {
 
@@ -18033,6 +18059,9 @@ type TrainingJobSummary struct {
 
 	//  Timestamp when the training job was last modified.
 	LastModifiedTime *time.Time
+
+	// The secondary status of the training job.
+	SecondaryStatus SecondaryStatus
 
 	// A timestamp that shows when the training job ended. This field is set only if
 	// the training job has one of the terminal statuses ( Completed , Failed , or

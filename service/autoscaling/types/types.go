@@ -888,6 +888,9 @@ type InstanceRefresh struct {
 	//   the status reason and the scaling activities.
 	//
 	//   - RollbackSuccessful - The rollback completed successfully.
+	//
+	//   - Baking - Waiting the specified bake time after an instance refresh has
+	//   finished updating instances.
 	Status InstanceRefreshStatus
 
 	// The explanation for the specific status assigned to this operation.
@@ -2528,6 +2531,10 @@ type RefreshPreferences struct {
 	//
 	// [Undo changes with a rollback]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-refresh-rollback.html
 	AutoRollback *bool
+
+	//  The amount of time, in seconds, to wait at the end of an instance refresh
+	// before the instance refresh is considered complete.
+	BakeTime *int32
 
 	// (Optional) The amount of time, in seconds, to wait after a checkpoint before
 	// continuing. This property is optional, but if you specify a value for it, you

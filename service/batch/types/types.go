@@ -1455,7 +1455,8 @@ type EcsProperties struct {
 	// An object that contains the properties for the Amazon ECS task definition of a
 	// job.
 	//
-	// This object is currently limited to one element.
+	// This object is currently limited to one task element. However, the task element
+	// can run up to 10 containers.
 	//
 	// This member is required.
 	TaskProperties []EcsTaskProperties
@@ -1704,6 +1705,9 @@ type EFSVolumeConfiguration struct {
 // Amazon EKS container runs.
 type EksAttemptContainerDetail struct {
 
+	// The ID for the container.
+	ContainerID *string
+
 	// The exit code returned for the job attempt. A non-zero exit code is considered
 	// failed.
 	ExitCode *int32
@@ -1736,6 +1740,9 @@ type EksAttemptDetail struct {
 
 	// The name of the pod for this job attempt.
 	PodName *string
+
+	// The namespace of the Amazon EKS cluster that the pod exists in.
+	PodNamespace *string
 
 	// The Unix timestamp (in milliseconds) for when the attempt was started (when the
 	// attempt transitioned from the STARTING state to the RUNNING state).
@@ -2205,6 +2212,8 @@ type EksMetadata struct {
 type EksPodProperties struct {
 
 	// The properties of the container that's used on the Amazon EKS pod.
+	//
+	// This object is limited to 10 elements.
 	Containers []EksContainer
 
 	// The DNS policy for the pod. The default value is ClusterFirst . If the
@@ -2240,7 +2249,7 @@ type EksPodProperties struct {
 	// registration information in the Kubernetes backend data store. For more
 	// information, see [Init Containers]in the Kubernetes documentation.
 	//
-	// This object is limited to 10 elements
+	// This object is limited to 10 elements.
 	//
 	// [Init Containers]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 	InitContainers []EksContainer
@@ -2354,14 +2363,12 @@ type EksPodPropertiesOverride struct {
 	// The overrides for the container that's used on the Amazon EKS pod.
 	Containers []EksContainerOverride
 
-	// The overrides for the conatainers defined in the Amazon EKS pod. These
+	// The overrides for the initContainers defined in the Amazon EKS pod. These
 	// containers run before application containers, always runs to completion, and
 	// must complete successfully before the next container starts. These containers
 	// are registered with the Amazon EKS Connector agent and persists the registration
 	// information in the Kubernetes backend data store. For more information, see [Init Containers]in
 	// the Kubernetes documentation.
-	//
-	// This object is limited to 10 elements
 	//
 	// [Init Containers]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 	InitContainers []EksContainerOverride

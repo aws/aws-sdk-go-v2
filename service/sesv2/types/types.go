@@ -2167,8 +2167,10 @@ type Tag struct {
 
 // An object that defines the email template to use for an email message, and the
 // values to use for any message variables in that template. An email template is a
-// type of message template that contains content that you want to define, save,
-// and reuse in email messages that you send.
+// type of message template that contains content that you want to reuse in email
+// messages that you send. You can specifiy the email template by providing the
+// name or ARN of an email template previously saved in your Amazon SES account or
+// by providing the full template content.
 type Template struct {
 
 	// The list of message headers that will be added to the email message.
@@ -2176,6 +2178,13 @@ type Template struct {
 
 	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string
+
+	// The content of the template.
+	//
+	// Amazon SES supports only simple substitions when you send email using the
+	// SendEmail or SendBulkEmail operations and you provide the full template content
+	// in the request.
+	TemplateContent *EmailTemplateContent
 
 	// An object that defines the values to use for message variables in the template.
 	// This object is a set of key-value pairs. Each key defines a message variable in

@@ -1,0 +1,8 @@
+{
+    "id": "75c49708-d2b9-40e9-93e7-b705b3cde08b",
+    "type": "feature",
+    "description": "Add schedule support for AWS Glue column statistics",
+    "modules": [
+        "service/glue"
+    ]
+}

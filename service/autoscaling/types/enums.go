@@ -210,6 +210,7 @@ const (
 	InstanceRefreshStatusRollbackInProgress InstanceRefreshStatus = "RollbackInProgress"
 	InstanceRefreshStatusRollbackFailed     InstanceRefreshStatus = "RollbackFailed"
 	InstanceRefreshStatusRollbackSuccessful InstanceRefreshStatus = "RollbackSuccessful"
+	InstanceRefreshStatusBaking             InstanceRefreshStatus = "Baking"
 )
 
 // Values returns all known values for InstanceRefreshStatus. Note that this can
@@ -227,6 +228,7 @@ func (InstanceRefreshStatus) Values() []InstanceRefreshStatus {
 		"RollbackInProgress",
 		"RollbackFailed",
 		"RollbackSuccessful",
+		"Baking",
 	}
 }
 

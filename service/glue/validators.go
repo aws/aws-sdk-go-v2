@@ -510,6 +510,26 @@ func (m *validateOpCreateClassifier) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateColumnStatisticsTaskSettings struct {
+}
+
+func (*validateOpCreateColumnStatisticsTaskSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateColumnStatisticsTaskSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateColumnStatisticsTaskSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateColumnStatisticsTaskSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConnection struct {
 }
 
@@ -1005,6 +1025,26 @@ func (m *validateOpDeleteColumnStatisticsForTable) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteColumnStatisticsForTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteColumnStatisticsTaskSettings struct {
+}
+
+func (*validateOpDeleteColumnStatisticsTaskSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteColumnStatisticsTaskSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteColumnStatisticsTaskSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteColumnStatisticsTaskSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1605,6 +1645,26 @@ func (m *validateOpGetColumnStatisticsTaskRuns) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetColumnStatisticsTaskRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetColumnStatisticsTaskSettings struct {
+}
+
+func (*validateOpGetColumnStatisticsTaskSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetColumnStatisticsTaskSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetColumnStatisticsTaskSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetColumnStatisticsTaskSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2990,6 +3050,26 @@ func (m *validateOpStartColumnStatisticsTaskRun) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartColumnStatisticsTaskRunSchedule struct {
+}
+
+func (*validateOpStartColumnStatisticsTaskRunSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartColumnStatisticsTaskRunSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartColumnStatisticsTaskRunScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartColumnStatisticsTaskRunScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartCrawler struct {
 }
 
@@ -3230,6 +3310,26 @@ func (m *validateOpStopColumnStatisticsTaskRun) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopColumnStatisticsTaskRunSchedule struct {
+}
+
+func (*validateOpStopColumnStatisticsTaskRunSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopColumnStatisticsTaskRunSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopColumnStatisticsTaskRunScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopColumnStatisticsTaskRunScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopCrawler struct {
 }
 
@@ -3465,6 +3565,26 @@ func (m *validateOpUpdateColumnStatisticsForTable) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateColumnStatisticsForTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateColumnStatisticsTaskSettings struct {
+}
+
+func (*validateOpUpdateColumnStatisticsTaskSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateColumnStatisticsTaskSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateColumnStatisticsTaskSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateColumnStatisticsTaskSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3910,6 +4030,10 @@ func addOpCreateClassifierValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateClassifier{}, middleware.After)
 }
 
+func addOpCreateColumnStatisticsTaskSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateColumnStatisticsTaskSettings{}, middleware.After)
+}
+
 func addOpCreateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnection{}, middleware.After)
 }
@@ -4008,6 +4132,10 @@ func addOpDeleteColumnStatisticsForPartitionValidationMiddleware(stack *middlewa
 
 func addOpDeleteColumnStatisticsForTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteColumnStatisticsForTable{}, middleware.After)
+}
+
+func addOpDeleteColumnStatisticsTaskSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteColumnStatisticsTaskSettings{}, middleware.After)
 }
 
 func addOpDeleteConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -4128,6 +4256,10 @@ func addOpGetColumnStatisticsTaskRunValidationMiddleware(stack *middleware.Stack
 
 func addOpGetColumnStatisticsTaskRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetColumnStatisticsTaskRuns{}, middleware.After)
+}
+
+func addOpGetColumnStatisticsTaskSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetColumnStatisticsTaskSettings{}, middleware.After)
 }
 
 func addOpGetConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -4406,6 +4538,10 @@ func addOpStartColumnStatisticsTaskRunValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpStartColumnStatisticsTaskRun{}, middleware.After)
 }
 
+func addOpStartColumnStatisticsTaskRunScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartColumnStatisticsTaskRunSchedule{}, middleware.After)
+}
+
 func addOpStartCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCrawler{}, middleware.After)
 }
@@ -4454,6 +4590,10 @@ func addOpStopColumnStatisticsTaskRunValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpStopColumnStatisticsTaskRun{}, middleware.After)
 }
 
+func addOpStopColumnStatisticsTaskRunScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopColumnStatisticsTaskRunSchedule{}, middleware.After)
+}
+
 func addOpStopCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopCrawler{}, middleware.After)
 }
@@ -4500,6 +4640,10 @@ func addOpUpdateColumnStatisticsForPartitionValidationMiddleware(stack *middlewa
 
 func addOpUpdateColumnStatisticsForTableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateColumnStatisticsForTable{}, middleware.After)
+}
+
+func addOpUpdateColumnStatisticsTaskSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateColumnStatisticsTaskSettings{}, middleware.After)
 }
 
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -8773,6 +8917,27 @@ func validateOpCreateClassifierInput(v *CreateClassifierInput) error {
 	}
 }
 
+func validateOpCreateColumnStatisticsTaskSettingsInput(v *CreateColumnStatisticsTaskSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateColumnStatisticsTaskSettingsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConnectionInput(v *CreateConnectionInput) error {
 	if v == nil {
 		return nil
@@ -9313,6 +9478,24 @@ func validateOpDeleteColumnStatisticsForTableInput(v *DeleteColumnStatisticsForT
 	}
 }
 
+func validateOpDeleteColumnStatisticsTaskSettingsInput(v *DeleteColumnStatisticsTaskSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteColumnStatisticsTaskSettingsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConnectionInput(v *DeleteConnectionInput) error {
 	if v == nil {
 		return nil
@@ -9807,6 +9990,24 @@ func validateOpGetColumnStatisticsTaskRunsInput(v *GetColumnStatisticsTaskRunsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetColumnStatisticsTaskRunsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetColumnStatisticsTaskSettingsInput(v *GetColumnStatisticsTaskSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetColumnStatisticsTaskSettingsInput"}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
@@ -11046,6 +11247,24 @@ func validateOpStartColumnStatisticsTaskRunInput(v *StartColumnStatisticsTaskRun
 	}
 }
 
+func validateOpStartColumnStatisticsTaskRunScheduleInput(v *StartColumnStatisticsTaskRunScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartColumnStatisticsTaskRunScheduleInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartCrawlerInput(v *StartCrawlerInput) error {
 	if v == nil {
 		return nil
@@ -11247,6 +11466,24 @@ func validateOpStopColumnStatisticsTaskRunInput(v *StopColumnStatisticsTaskRunIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StopColumnStatisticsTaskRunInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopColumnStatisticsTaskRunScheduleInput(v *StopColumnStatisticsTaskRunScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopColumnStatisticsTaskRunScheduleInput"}
 	if v.DatabaseName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
@@ -11486,6 +11723,24 @@ func validateOpUpdateColumnStatisticsForTableInput(v *UpdateColumnStatisticsForT
 		if err := validateUpdateColumnStatisticsList(v.ColumnStatisticsList); err != nil {
 			invalidParams.AddNested("ColumnStatisticsList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateColumnStatisticsTaskSettingsInput(v *UpdateColumnStatisticsTaskSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateColumnStatisticsTaskSettingsInput"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

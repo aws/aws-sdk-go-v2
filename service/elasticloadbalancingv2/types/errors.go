@@ -141,7 +141,7 @@ func (e *CertificateNotFoundException) ErrorCode() string {
 }
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified association cannot be within the same account.
+// The specified association can't be within the same account.
 type DeleteAssociationSameAccountException struct {
 	Message *string
 

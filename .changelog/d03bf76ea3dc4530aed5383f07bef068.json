@@ -1,0 +1,8 @@
+{
+    "id": "d03bf76e-a3dc-4530-aed5-383f07bef068",
+    "type": "feature",
+    "description": "Adds bake time for Auto Scaling group Instance Refresh",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

@@ -4200,6 +4200,11 @@ func awsAwsquery_serializeDocumentSubnetMapping(v *types.SubnetMapping, value qu
 		objectKey.String(*v.PrivateIPv4Address)
 	}
 
+	if v.SourceNatIpv6Prefix != nil {
+		objectKey := object.Key("SourceNatIpv6Prefix")
+		objectKey.String(*v.SourceNatIpv6Prefix)
+	}
+
 	if v.SubnetId != nil {
 		objectKey := object.Key("SubnetId")
 		objectKey.String(*v.SubnetId)
@@ -4546,6 +4551,11 @@ func awsAwsquery_serializeOpDocumentCreateLoadBalancerInput(v *CreateLoadBalance
 	if v.CustomerOwnedIpv4Pool != nil {
 		objectKey := object.Key("CustomerOwnedIpv4Pool")
 		objectKey.String(*v.CustomerOwnedIpv4Pool)
+	}
+
+	if len(v.EnablePrefixForIpv6SourceNat) > 0 {
+		objectKey := object.Key("EnablePrefixForIpv6SourceNat")
+		objectKey.String(string(v.EnablePrefixForIpv6SourceNat))
 	}
 
 	if len(v.IpAddressType) > 0 {
@@ -5615,6 +5625,11 @@ func awsAwsquery_serializeOpDocumentSetSecurityGroupsInput(v *SetSecurityGroupsI
 func awsAwsquery_serializeOpDocumentSetSubnetsInput(v *SetSubnetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if len(v.EnablePrefixForIpv6SourceNat) > 0 {
+		objectKey := object.Key("EnablePrefixForIpv6SourceNat")
+		objectKey.String(string(v.EnablePrefixForIpv6SourceNat))
+	}
 
 	if len(v.IpAddressType) > 0 {
 		objectKey := object.Key("IpAddressType")

@@ -15533,6 +15533,23 @@ func awsAwsquery_deserializeDocumentRefreshPreferences(v **types.RefreshPreferen
 				sv.AutoRollback = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("BakeTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.BakeTime = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("CheckpointDelay", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

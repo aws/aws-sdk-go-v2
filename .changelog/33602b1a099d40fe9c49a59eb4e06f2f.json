@@ -1,0 +1,8 @@
+{
+    "id": "33602b1a-099d-40fe-9c49-a59eb4e06f2f",
+    "type": "feature",
+    "description": "This release enables customers to provide the email template content in the SESv2 SendEmail and SendBulkEmail APIs instead of the name or the ARN of a stored email template.",
+    "modules": [
+        "service/sesv2"
+    ]
+}
