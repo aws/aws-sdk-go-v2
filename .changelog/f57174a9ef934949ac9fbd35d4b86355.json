@@ -1,8 +1,0 @@
-{
-    "id": "f57174a9-ef93-4949-ac9f-bd35d4b86355",
-    "type": "feature",
-    "description": "Add `podNamespace` to `EksAttemptDetail` and `containerID` to `EksAttemptContainerDetail`.",
-    "modules": [
-        "service/batch"
-    ]
-}

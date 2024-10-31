@@ -1,3 +1,7 @@
+# v1.30.0 (2024-10-31)
+
+* **Feature**: Added support for UpdateScraper API, to enable updating collector configuration in-place
+
 # v1.29.4 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

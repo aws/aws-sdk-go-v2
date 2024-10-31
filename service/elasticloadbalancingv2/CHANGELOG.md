@@ -1,3 +1,7 @@
+# v1.41.0 (2024-10-31)
+
+* **Feature**: Add UDP support for AWS PrivateLink and dual-stack Network Load Balancers
+
 # v1.40.1 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

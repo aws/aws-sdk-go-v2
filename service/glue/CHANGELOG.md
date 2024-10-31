@@ -1,3 +1,7 @@
+# v1.101.0 (2024-10-31)
+
+* **Feature**: Add schedule support for AWS Glue column statistics
+
 # v1.100.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

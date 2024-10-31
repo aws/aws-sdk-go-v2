@@ -1,8 +1,0 @@
-{
-    "id": "d44c7f3f-1cc4-4676-ba2d-9e615214a47c",
-    "type": "feature",
-    "description": "Add UDP support for AWS PrivateLink and dual-stack Network Load Balancers",
-    "modules": [
-        "service/elasticloadbalancingv2"
-    ]
-}

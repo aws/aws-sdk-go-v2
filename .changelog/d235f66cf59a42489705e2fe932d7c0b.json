@@ -1,8 +1,0 @@
-{
-    "id": "d235f66c-f59a-4248-9705-e2fe932d7c0b",
-    "type": "feature",
-    "description": "Added support for UpdateScraper API, to enable updating collector configuration in-place",
-    "modules": [
-        "service/amp"
-    ]
-}
