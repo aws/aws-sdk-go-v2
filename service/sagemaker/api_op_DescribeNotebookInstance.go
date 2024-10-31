@@ -45,11 +45,11 @@ type DescribeNotebookInstanceInput struct {
 
 type DescribeNotebookInstanceOutput struct {
 
-	// A list of the Elastic Inference (EI) instance types associated with this
-	// notebook instance. Currently only one EI instance type can be associated with a
-	// notebook instance. For more information, see [Using Elastic Inference in Amazon SageMaker].
+	// This parameter is no longer supported. Elastic Inference (EI) is no longer
+	// available.
 	//
-	// [Using Elastic Inference in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+	// This parameter was used to specify a list of the EI instance types associated
+	// with this notebook instance.
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories associated with the notebook instance.

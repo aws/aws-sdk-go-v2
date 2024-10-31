@@ -198,6 +198,25 @@ func (AnalysisType) Values() []AnalysisType {
 	}
 }
 
+type AnalyticsEngine string
+
+// Enum values for AnalyticsEngine
+const (
+	AnalyticsEngineSpark         AnalyticsEngine = "SPARK"
+	AnalyticsEngineCleanRoomsSql AnalyticsEngine = "CLEAN_ROOMS_SQL"
+)
+
+// Values returns all known values for AnalyticsEngine. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsEngine) Values() []AnalyticsEngine {
+	return []AnalyticsEngine{
+		"SPARK",
+		"CLEAN_ROOMS_SQL",
+	}
+}
+
 type CollaborationQueryLogStatus string
 
 // Enum values for CollaborationQueryLogStatus
@@ -483,6 +502,19 @@ const (
 	ParameterTypeTime            ParameterType = "TIME"
 	ParameterTypeTimetz          ParameterType = "TIMETZ"
 	ParameterTypeVarbyte         ParameterType = "VARBYTE"
+	ParameterTypeBinary          ParameterType = "BINARY"
+	ParameterTypeByte            ParameterType = "BYTE"
+	ParameterTypeCharacter       ParameterType = "CHARACTER"
+	ParameterTypeDouble          ParameterType = "DOUBLE"
+	ParameterTypeFloat           ParameterType = "FLOAT"
+	ParameterTypeInt             ParameterType = "INT"
+	ParameterTypeLong            ParameterType = "LONG"
+	ParameterTypeNumeric         ParameterType = "NUMERIC"
+	ParameterTypeShort           ParameterType = "SHORT"
+	ParameterTypeString          ParameterType = "STRING"
+	ParameterTypeTimestampLtz    ParameterType = "TIMESTAMP_LTZ"
+	ParameterTypeTimestampNtz    ParameterType = "TIMESTAMP_NTZ"
+	ParameterTypeTinyint         ParameterType = "TINYINT"
 )
 
 // Values returns all known values for ParameterType. Note that this can be
@@ -506,6 +538,19 @@ func (ParameterType) Values() []ParameterType {
 		"TIME",
 		"TIMETZ",
 		"VARBYTE",
+		"BINARY",
+		"BYTE",
+		"CHARACTER",
+		"DOUBLE",
+		"FLOAT",
+		"INT",
+		"LONG",
+		"NUMERIC",
+		"SHORT",
+		"STRING",
+		"TIMESTAMP_LTZ",
+		"TIMESTAMP_NTZ",
+		"TINYINT",
 	}
 }
 
@@ -826,5 +871,24 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_CONFIGURATION",
 		"INVALID_QUERY",
 		"IAM_SYNCHRONIZATION_DELAY",
+	}
+}
+
+type WorkerComputeType string
+
+// Enum values for WorkerComputeType
+const (
+	WorkerComputeTypeCr1x WorkerComputeType = "CR.1X"
+	WorkerComputeTypeCr4x WorkerComputeType = "CR.4X"
+)
+
+// Values returns all known values for WorkerComputeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkerComputeType) Values() []WorkerComputeType {
+	return []WorkerComputeType{
+		"CR.1X",
+		"CR.4X",
 	}
 }

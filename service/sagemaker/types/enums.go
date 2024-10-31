@@ -7355,6 +7355,7 @@ const (
 	TrainingInstanceTypeMlP4d24xlarge   TrainingInstanceType = "ml.p4d.24xlarge"
 	TrainingInstanceTypeMlP4de24xlarge  TrainingInstanceType = "ml.p4de.24xlarge"
 	TrainingInstanceTypeMlP548xlarge    TrainingInstanceType = "ml.p5.48xlarge"
+	TrainingInstanceTypeMlP5e48xlarge   TrainingInstanceType = "ml.p5e.48xlarge"
 	TrainingInstanceTypeMlC5Xlarge      TrainingInstanceType = "ml.c5.xlarge"
 	TrainingInstanceTypeMlC52xlarge     TrainingInstanceType = "ml.c5.2xlarge"
 	TrainingInstanceTypeMlC54xlarge     TrainingInstanceType = "ml.c5.4xlarge"
@@ -7452,6 +7453,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",
 		"ml.p5.48xlarge",
+		"ml.p5e.48xlarge",
 		"ml.c5.xlarge",
 		"ml.c5.2xlarge",
 		"ml.c5.4xlarge",

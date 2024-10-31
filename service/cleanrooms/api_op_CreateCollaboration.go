@@ -60,6 +60,9 @@ type CreateCollaborationInput struct {
 	// This member is required.
 	QueryLogStatus types.CollaborationQueryLogStatus
 
+	//  The analytics engine.
+	AnalyticsEngine types.AnalyticsEngine
+
 	// The collaboration creator's payment responsibilities set by the collaboration
 	// creator.
 	//

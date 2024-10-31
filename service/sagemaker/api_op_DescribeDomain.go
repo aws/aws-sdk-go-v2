@@ -61,7 +61,7 @@ type DescribeDomainOutput struct {
 	// The creation time.
 	CreationTime *time.Time
 
-	// The default settings used to create a space.
+	// The default settings for shared spaces that users create in the domain.
 	DefaultSpaceSettings *types.DefaultSpaceSettings
 
 	// Settings which are applied to UserProfiles in this domain if settings are not

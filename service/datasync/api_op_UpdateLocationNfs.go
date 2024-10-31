@@ -43,7 +43,8 @@ type UpdateLocationNfsInput struct {
 	// Specifies how DataSync can access a location using the NFS protocol.
 	MountOptions *types.NfsMountOptions
 
-	// The DataSync agents that are connecting to a Network File System (NFS) location.
+	// The DataSync agents that can connect to your Network File System (NFS) file
+	// server.
 	OnPremConfig *types.OnPremConfig
 
 	// Specifies the export path in your NFS file server that you want DataSync to

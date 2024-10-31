@@ -386,6 +386,18 @@ func TestCheckSnapshot_AssociateRouteTable(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateSecurityGroupVpc")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateSubnetCidrBlock(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateSubnetCidrBlock(context.Background(), nil, func(o *Options) {
@@ -3998,6 +4010,18 @@ func TestCheckSnapshot_DescribeSecurityGroups(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeSecurityGroupVpcAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityGroupVpcAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecurityGroupVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeSnapshotAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSnapshotAttribute(context.Background(), nil, func(o *Options) {
@@ -4975,6 +4999,18 @@ func TestCheckSnapshot_DisassociateRouteTable(t *testing.T) {
 	_, err := svc.DisassociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisassociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7986,6 +8022,18 @@ func TestUpdateSnapshot_AssociateRouteTable(t *testing.T) {
 	_, err := svc.AssociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11605,6 +11653,18 @@ func TestUpdateSnapshot_DescribeSecurityGroups(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeSecurityGroupVpcAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityGroupVpcAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecurityGroupVpcAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeSnapshotAttribute(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeSnapshotAttribute(context.Background(), nil, func(o *Options) {
@@ -12582,6 +12642,18 @@ func TestUpdateSnapshot_DisassociateRouteTable(t *testing.T) {
 	_, err := svc.DisassociateRouteTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateRouteTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateSecurityGroupVpc(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateSecurityGroupVpc(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateSecurityGroupVpc")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

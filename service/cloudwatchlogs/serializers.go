@@ -6671,6 +6671,11 @@ func awsAwsjson11_serializeOpDocumentUpdateAnomalyInput(v *UpdateAnomalyInput, v
 		ok.String(*v.AnomalyId)
 	}
 
+	if v.Baseline != nil {
+		ok := object.Key("baseline")
+		ok.Boolean(*v.Baseline)
+	}
+
 	if v.PatternId != nil {
 		ok := object.Key("patternId")
 		ok.String(*v.PatternId)

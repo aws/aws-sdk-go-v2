@@ -10176,6 +10176,24 @@ func validateModelInput(v *types.ModelInput) error {
 	}
 }
 
+func validateModelLifeCycle(v *types.ModelLifeCycle) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelLifeCycle"}
+	if v.Stage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stage"))
+	}
+	if v.StageStatus == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelMetadataFilter(v *types.ModelMetadataFilter) error {
 	if v == nil {
 		return nil
@@ -14381,6 +14399,11 @@ func validateOpCreateModelPackageInput(v *CreateModelPackageInput) error {
 			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ModelLifeCycle != nil {
+		if err := validateModelLifeCycle(v.ModelLifeCycle); err != nil {
+			invalidParams.AddNested("ModelLifeCycle", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -18274,6 +18297,11 @@ func validateOpUpdateModelPackageInput(v *UpdateModelPackageInput) error {
 	if v.InferenceSpecification != nil {
 		if err := validateInferenceSpecification(v.InferenceSpecification); err != nil {
 			invalidParams.AddNested("InferenceSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelLifeCycle != nil {
+		if err := validateModelLifeCycle(v.ModelLifeCycle); err != nil {
+			invalidParams.AddNested("ModelLifeCycle", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

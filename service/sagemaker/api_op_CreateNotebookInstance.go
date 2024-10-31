@@ -92,11 +92,11 @@ type CreateNotebookInstanceInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// A list of Elastic Inference (EI) instance types to associate with this notebook
-	// instance. Currently, only one instance type can be associated with a notebook
-	// instance. For more information, see [Using Elastic Inference in Amazon SageMaker].
+	// This parameter is no longer supported. Elastic Inference (EI) is no longer
+	// available.
 	//
-	// [Using Elastic Inference in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+	// This parameter was used to specify a list of EI instance types to associate
+	// with this notebook instance.
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories to associate with the notebook

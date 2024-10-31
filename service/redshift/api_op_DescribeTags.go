@@ -92,7 +92,7 @@ type DescribeTagsInput struct {
 	//
 	//   - Snapshot copy grant
 	//
-	//   - Integration (zero-ETL integration)
+	//   - Integration (zero-ETL integration or S3 event integration)
 	//
 	// To describe the tags associated with an integration , don't specify ResourceType
 	//   , instead specify the ResourceName of the integration.

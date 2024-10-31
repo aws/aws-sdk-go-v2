@@ -146,6 +146,18 @@ func TestCheckSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_CreateVpcEndpoint(t *testing.T) {
 	_, err := svc.CreateVpcEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateVpcEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -458,6 +482,18 @@ func TestCheckSnapshot_DissociatePackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCompatibleVersions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCompatibleVersions(context.Background(), nil, func(o *Options) {
@@ -523,6 +559,18 @@ func TestCheckSnapshot_GetUpgradeStatus(t *testing.T) {
 	_, err := svc.GetUpgradeStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetUpgradeStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -746,6 +794,18 @@ func TestCheckSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateDataSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateDataSource(context.Background(), nil, func(o *Options) {
@@ -901,6 +961,18 @@ func TestUpdateSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDomain(context.Background(), nil, func(o *Options) {
@@ -942,6 +1014,18 @@ func TestUpdateSnapshot_CreateVpcEndpoint(t *testing.T) {
 	_, err := svc.CreateVpcEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateVpcEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1213,6 +1297,18 @@ func TestUpdateSnapshot_DissociatePackage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCompatibleVersions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCompatibleVersions(context.Background(), nil, func(o *Options) {
@@ -1278,6 +1374,18 @@ func TestUpdateSnapshot_GetUpgradeStatus(t *testing.T) {
 	_, err := svc.GetUpgradeStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetUpgradeStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1494,6 +1602,18 @@ func TestUpdateSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 	_, err := svc.StartServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartServiceSoftwareUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

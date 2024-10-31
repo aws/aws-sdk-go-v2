@@ -7024,7 +7024,7 @@ type InstanceNetworkInterface struct {
 
 	// The type of network interface.
 	//
-	// Valid values: interface | efa | trunk
+	// Valid values: interface | efa | efa-only | trunk
 	InterfaceType *string
 
 	// The IPv4 delegated prefixes that are assigned to the network interface.
@@ -7177,7 +7177,10 @@ type InstanceNetworkInterfaceSpecification struct {
 
 	// The type of network interface.
 	//
-	// Valid values: interface | efa
+	// If you specify efa-only , do not assign any IP addresses to the network
+	// interface. EFA-only network interfaces do not support IP addresses.
+	//
+	// Valid values: interface | efa | efa-only
 	InterfaceType *string
 
 	// The number of IPv4 delegated prefixes to be automatically assigned to the
@@ -8318,7 +8321,8 @@ type InstanceTypeInfo struct {
 	// The supported root device types.
 	SupportedRootDeviceTypes []RootDeviceType
 
-	// Indicates whether the instance type is offered for spot or On-Demand.
+	// Indicates whether the instance type is offered for spot, On-Demand, or Capacity
+	// Blocks.
 	SupportedUsageClasses []UsageClassType
 
 	// The supported virtualization types.
@@ -10435,11 +10439,14 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	Groups []string
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA),
-	// specify efa . For more information, see [Elastic Fabric Adapter] in the Amazon EC2 User Guide.
+	// specify efa or efa . For more information, see [Elastic Fabric Adapter] in the Amazon EC2 User Guide.
 	//
 	// If you are not creating an EFA, specify interface or omit this parameter.
 	//
-	// Valid values: interface | efa
+	// If you specify efa-only , do not assign any IP addresses to the network
+	// interface. EFA-only network interfaces do not support IP addresses.
+	//
+	// Valid values: interface | efa | efa-only
 	//
 	// [Elastic Fabric Adapter]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
 	InterfaceType *string
@@ -14699,6 +14706,48 @@ type ResponseLaunchTemplateData struct {
 	noSmithyDocumentSerde
 }
 
+// A security group rule removed with [RevokeSecurityGroupEgress] or [RevokeSecurityGroupIngress].
+//
+// [RevokeSecurityGroupIngress]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupIngress.html
+// [RevokeSecurityGroupEgress]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RevokeSecurityGroupEgress.html
+type RevokedSecurityGroupRule struct {
+
+	// The IPv4 CIDR of the traffic source.
+	CidrIpv4 *string
+
+	// The IPv6 CIDR of the traffic source.
+	CidrIpv6 *string
+
+	// A description of the revoked security group rule.
+	Description *string
+
+	// The 'from' port number of the security group rule.
+	FromPort *int32
+
+	// A security group ID.
+	GroupId *string
+
+	// The security group rule's protocol.
+	IpProtocol *string
+
+	// Defines if a security group rule is an outbound rule.
+	IsEgress *bool
+
+	// The ID of a prefix list that's the traffic source.
+	PrefixListId *string
+
+	// The ID of a referenced security group.
+	ReferencedGroupId *string
+
+	// A security group rule ID.
+	SecurityGroupRuleId *string
+
+	// The 'to' port number of the security group rule.
+	ToPort *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes a route in a route table.
 type Route struct {
 
@@ -15321,6 +15370,9 @@ type SecurityGroup struct {
 	// The Amazon Web Services account ID of the owner of the security group.
 	OwnerId *string
 
+	// The ARN of the security group.
+	SecurityGroupArn *string
+
 	// Any tags assigned to the security group.
 	Tags []Tag
 
@@ -15428,6 +15480,9 @@ type SecurityGroupRule struct {
 	// Describes the security group that is referenced in the rule.
 	ReferencedGroupInfo *ReferencedSecurityGroup
 
+	// The ARN of the security group rule.
+	SecurityGroupRuleArn *string
+
 	// The ID of the security group rule.
 	SecurityGroupRuleId *string
 
@@ -15523,6 +15578,29 @@ type SecurityGroupRuleUpdate struct {
 
 	// Information about the security group rule.
 	SecurityGroupRule *SecurityGroupRuleRequest
+
+	noSmithyDocumentSerde
+}
+
+// A security group association with a VPC that you made with [AssociateSecurityGroupVpc].
+//
+// [AssociateSecurityGroupVpc]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html
+type SecurityGroupVpcAssociation struct {
+
+	// The association's security group ID.
+	GroupId *string
+
+	// The association's state.
+	State SecurityGroupVpcAssociationState
+
+	// The association's state reason.
+	StateReason *string
+
+	// The association's VPC ID.
+	VpcId *string
+
+	// The Amazon Web Services account ID of the owner of the VPC.
+	VpcOwnerId *string
 
 	noSmithyDocumentSerde
 }

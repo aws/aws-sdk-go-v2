@@ -20929,6 +20929,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "eu-south-2" : { },
           "eu-west-1" : {
             "variants" : [ {
               "hostname" : "textract.eu-west-1.api.aws",
@@ -27548,6 +27549,12 @@
             "deprecated" : true,
             "hostname" : "meetings-chime-fips.us-gov-west-1.amazonaws.com"
           }
+        }
+      },
+      "memory-db" : {
+        "endpoints" : {
+          "us-gov-east-1" : { },
+          "us-gov-west-1" : { }
         }
       },
       "metering.marketplace" : {

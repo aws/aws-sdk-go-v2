@@ -38,6 +38,15 @@ type UpdateTaskInput struct {
 
 	// Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for
 	// monitoring your task.
+	//
+	// For Enhanced mode tasks, you must use /aws/datasync as your log group name. For
+	// example:
+	//
+	//     arn:aws:logs:us-east-1:111222333444:log-group:/aws/datasync:*
+	//
+	// For more information, see [Monitoring data transfers with CloudWatch Logs].
+	//
+	// [Monitoring data transfers with CloudWatch Logs]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-logging.html
 	CloudWatchLogGroupArn *string
 
 	// Specifies exclude filters that define the files, objects, and folders in your

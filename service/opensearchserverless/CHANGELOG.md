@@ -1,3 +1,7 @@
+# v1.17.0 (2024-10-30)
+
+* **Feature**: Neo Integration via IAM Identity Center (IdC)
+
 # v1.16.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

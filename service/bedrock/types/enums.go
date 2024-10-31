@@ -406,6 +406,7 @@ type InferenceProfileType string
 // Enum values for InferenceProfileType
 const (
 	InferenceProfileTypeSystemDefined InferenceProfileType = "SYSTEM_DEFINED"
+	InferenceProfileTypeApplication   InferenceProfileType = "APPLICATION"
 )
 
 // Values returns all known values for InferenceProfileType. Note that this can be
@@ -415,6 +416,7 @@ const (
 func (InferenceProfileType) Values() []InferenceProfileType {
 	return []InferenceProfileType{
 		"SYSTEM_DEFINED",
+		"APPLICATION",
 	}
 }
 

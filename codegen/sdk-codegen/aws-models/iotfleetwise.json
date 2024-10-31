@@ -325,6 +325,9 @@
                     "target": "com.amazonaws.iotfleetwise#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.iotfleetwise#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.iotfleetwise#ThrottlingException"
                 },
                 {
@@ -8440,6 +8443,9 @@
                     "target": "com.amazonaws.iotfleetwise#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.iotfleetwise#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.iotfleetwise#ResourceNotFoundException"
                 },
                 {
@@ -9014,7 +9020,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -9243,7 +9250,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1
+                    "min": 1,
+                    "max": 10
                 }
             }
         },

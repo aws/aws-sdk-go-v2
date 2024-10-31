@@ -45,6 +45,9 @@ type StartProtectedQueryInput struct {
 	// This member is required.
 	Type types.ProtectedQueryType
 
+	//  The compute configuration for the protected query.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// The details needed to write the query results.
 	ResultConfiguration *types.ProtectedQueryResultConfiguration
 

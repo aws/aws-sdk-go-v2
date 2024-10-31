@@ -1,3 +1,7 @@
+# v1.51.0 (2024-10-30)
+
+* **Feature**: This release launches S3 event integrations to create and manage integrations from an Amazon S3 source into an Amazon Redshift database.
+
 # v1.50.1 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

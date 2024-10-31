@@ -96,6 +96,9 @@ type DescribeStatementOutput struct {
 	// also available in the query column of the STL_QUERY system view.
 	RedshiftQueryId int64
 
+	// The data format of the result of the SQL statement.
+	ResultFormat types.ResultFormatString
+
 	// Either the number of rows returned from the SQL statement or the number of rows
 	// affected. If result size is greater than zero, the result rows can be the number
 	// of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and

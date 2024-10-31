@@ -26746,6 +26746,28 @@ func awsAwsjson11_serializeDocumentModelLatencyThresholds(v []types.ModelLatency
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelLifeCycle(v *types.ModelLifeCycle, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Stage != nil {
+		ok := object.Key("Stage")
+		ok.String(*v.Stage)
+	}
+
+	if v.StageDescription != nil {
+		ok := object.Key("StageDescription")
+		ok.String(*v.StageDescription)
+	}
+
+	if v.StageStatus != nil {
+		ok := object.Key("StageStatus")
+		ok.String(*v.StageStatus)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelMetadataFilter(v *types.ModelMetadataFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -34038,6 +34060,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 	if v.ModelCard != nil {
 		ok := object.Key("ModelCard")
 		if err := awsAwsjson11_serializeDocumentModelPackageModelCard(v.ModelCard, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelLifeCycle != nil {
+		ok := object.Key("ModelLifeCycle")
+		if err := awsAwsjson11_serializeDocumentModelLifeCycle(v.ModelLifeCycle, ok); err != nil {
 			return err
 		}
 	}
@@ -41960,6 +41989,11 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 		ok.String(*v.ApprovalDescription)
 	}
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.CustomerMetadataProperties != nil {
 		ok := object.Key("CustomerMetadataProperties")
 		if err := awsAwsjson11_serializeDocumentCustomerMetadataMap(v.CustomerMetadataProperties, ok); err != nil {
@@ -41989,6 +42023,13 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 	if v.ModelCard != nil {
 		ok := object.Key("ModelCard")
 		if err := awsAwsjson11_serializeDocumentModelPackageModelCard(v.ModelCard, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelLifeCycle != nil {
+		ok := object.Key("ModelLifeCycle")
+		if err := awsAwsjson11_serializeDocumentModelLifeCycle(v.ModelLifeCycle, ok); err != nil {
 			return err
 		}
 	}

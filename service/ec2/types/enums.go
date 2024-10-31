@@ -7519,6 +7519,34 @@ func (SecurityGroupReferencingSupportValue) Values() []SecurityGroupReferencingS
 	}
 }
 
+type SecurityGroupVpcAssociationState string
+
+// Enum values for SecurityGroupVpcAssociationState
+const (
+	SecurityGroupVpcAssociationStateAssociating          SecurityGroupVpcAssociationState = "associating"
+	SecurityGroupVpcAssociationStateAssociated           SecurityGroupVpcAssociationState = "associated"
+	SecurityGroupVpcAssociationStateAssociationFailed    SecurityGroupVpcAssociationState = "association-failed"
+	SecurityGroupVpcAssociationStateDisassociating       SecurityGroupVpcAssociationState = "disassociating"
+	SecurityGroupVpcAssociationStateDisassociated        SecurityGroupVpcAssociationState = "disassociated"
+	SecurityGroupVpcAssociationStateDisassociationFailed SecurityGroupVpcAssociationState = "disassociation-failed"
+)
+
+// Values returns all known values for SecurityGroupVpcAssociationState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityGroupVpcAssociationState) Values() []SecurityGroupVpcAssociationState {
+	return []SecurityGroupVpcAssociationState{
+		"associating",
+		"associated",
+		"association-failed",
+		"disassociating",
+		"disassociated",
+		"disassociation-failed",
+	}
+}
+
 type SelfServicePortal string
 
 // Enum values for SelfServicePortal

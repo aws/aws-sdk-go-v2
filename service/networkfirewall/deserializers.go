@@ -6119,6 +6119,50 @@ func awsAwsjson10_deserializeDocumentFlags(v *[]types.TCPFlag, value interface{}
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentFlowTimeouts(v **types.FlowTimeouts, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FlowTimeouts
+	if *v == nil {
+		sv = &types.FlowTimeouts{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TcpIdleTimeoutSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TcpIdleTimeoutRangeBound to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TcpIdleTimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentHeader(v **types.Header, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8446,6 +8490,11 @@ func awsAwsjson10_deserializeDocumentStatefulEngineOptions(v **types.StatefulEng
 
 	for key, value := range shape {
 		switch key {
+		case "FlowTimeouts":
+			if err := awsAwsjson10_deserializeDocumentFlowTimeouts(&sv.FlowTimeouts, value); err != nil {
+				return err
+			}
+
 		case "RuleOrder":
 			if value != nil {
 				jtv, ok := value.(string)

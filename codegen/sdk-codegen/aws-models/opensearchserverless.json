@@ -1005,6 +1005,33 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#CreateIamIdentityCenterConfigOptions": {
+            "type": "structure",
+            "members": {
+                "instanceArn": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>.</p>"
+                    }
+                },
+                "groupAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes IAM Identity Center options for creating an OpenSearch Serverless security configuration in the form of a key-value map.</p>"
+            }
+        },
         "com.amazonaws.opensearchserverless#CreateLifecyclePolicy": {
             "type": "operation",
             "input": {
@@ -1143,6 +1170,12 @@
                     "target": "com.amazonaws.opensearchserverless#SamlConfigOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes SAML options in in the form of a key-value map. This field is required if\n            you specify <code>saml</code> for the <code>type</code> parameter.</p>"
+                    }
+                },
+                "iamIdentityCenterOptions": {
+                    "target": "com.amazonaws.opensearchserverless#CreateIamIdentityCenterConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map. This field is required if you specify iamidentitycenter for the type parameter.</p>"
                     }
                 },
                 "clientToken": {
@@ -2080,6 +2113,109 @@
                         "smithy.api#documentation": "<p>Details about the requested security policy.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.opensearchserverless#IamIdentityCenterApplicationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#IamIdentityCenterConfigOptions": {
+            "type": "structure",
+            "members": {
+                "instanceArn": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterInstanceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance used to integrate with OpenSearch Serverless.</p>"
+                    }
+                },
+                "applicationArn": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterApplicationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>"
+                    }
+                },
+                "applicationName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>"
+                    }
+                },
+                "applicationDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the IAM Identity Center application used to integrate with OpenSearch Serverless.</p>"
+                    }
+                },
+                "userAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>\n         </p>"
+                    }
+                },
+                "groupAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes IAM Identity Center options for an OpenSearch Serverless security configuration in the form of a key-value map.</p>"
+            }
+        },
+        "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "GroupId",
+                        "value": "GroupId",
+                        "documentation": "Group ID"
+                    },
+                    {
+                        "name": "GroupName",
+                        "value": "GroupName",
+                        "documentation": "Group Name"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.opensearchserverless#IamIdentityCenterInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+            }
+        },
+        "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "UserId",
+                        "value": "UserId",
+                        "documentation": "User ID"
+                    },
+                    {
+                        "name": "UserName",
+                        "value": "UserName",
+                        "documentation": "User Name"
+                    },
+                    {
+                        "name": "Email",
+                        "value": "Email",
+                        "documentation": "Email"
+                    }
+                ]
             }
         },
         "com.amazonaws.opensearchserverless#IndexingCapacityValue": {
@@ -3825,6 +3961,12 @@
                         "smithy.api#documentation": "<p>SAML options for the security configuration in the form of a key-value map.</p>"
                     }
                 },
+                "iamIdentityCenterOptions": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map.</p>"
+                    }
+                },
                 "createdDate": {
                     "target": "smithy.api#Long",
                     "traits": {
@@ -3923,6 +4065,11 @@
                         "name": "saml",
                         "value": "saml",
                         "documentation": "saml provider"
+                    },
+                    {
+                        "name": "iamidentitycenter",
+                        "value": "iamidentitycenter",
+                        "documentation": "iam identity center"
                     }
                 ]
             }
@@ -4603,6 +4750,26 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#UpdateIamIdentityCenterConfigOptions": {
+            "type": "structure",
+            "members": {
+                "userAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterUserAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user attribute for this IAM Identity Center integration. Defaults to <code>UserId</code>.</p>"
+                    }
+                },
+                "groupAttribute": {
+                    "target": "com.amazonaws.opensearchserverless#IamIdentityCenterGroupAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The group attribute for this IAM Identity Center integration. Defaults to <code>GroupId</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes IAM Identity Center options for updating an OpenSearch Serverless security configuration in the form of a key-value map.</p>"
+            }
+        },
         "com.amazonaws.opensearchserverless#UpdateLifecyclePolicy": {
             "type": "operation",
             "input": {
@@ -4750,6 +4917,12 @@
                     "target": "com.amazonaws.opensearchserverless#SamlConfigOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>SAML options in in the form of a key-value map.</p>"
+                    }
+                },
+                "iamIdentityCenterOptionsUpdates": {
+                    "target": "com.amazonaws.opensearchserverless#UpdateIamIdentityCenterConfigOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes IAM Identity Center options in the form of a key-value map.</p>"
                     }
                 },
                 "clientToken": {

@@ -11,21 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates an DataSync agent that you've deployed in your storage environment.
-// The activation process associates the agent with your Amazon Web Services
-// account.
+// Activates an DataSync agent that you deploy in your storage environment. The
+// activation process associates the agent with your Amazon Web Services account.
 //
-// If you haven't deployed an agent yet, see the following topics to learn more:
+// If you haven't deployed an agent yet, see [Do I need a DataSync agent?]
 //
-// [Agent requirements]
-//
-// [Create an agent]
-//
-// If you're transferring between Amazon Web Services storage services, you don't
-// need a DataSync agent.
-//
-// [Agent requirements]: https://docs.aws.amazon.com/datasync/latest/userguide/agent-requirements.html
-// [Create an agent]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-agent.html
+// [Do I need a DataSync agent?]: https://docs.aws.amazon.com/datasync/latest/userguide/do-i-need-datasync-agent.html
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -45,39 +36,37 @@ func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optF
 type CreateAgentInput struct {
 
 	// Specifies your DataSync agent's activation key. If you don't have an activation
-	// key, see [Activate your agent].
+	// key, see [Activating your agent].
 	//
-	// [Activate your agent]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
+	// [Activating your agent]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
 	//
 	// This member is required.
 	ActivationKey *string
 
-	// Specifies a name for your agent. You can see this name in the DataSync console.
+	// Specifies a name for your agent. We recommend specifying a name that you can
+	// remember.
 	AgentName *string
 
-	// Specifies the Amazon Resource Name (ARN) of the security group that protects
-	// your task's [network interfaces]when [using a virtual private cloud (VPC) endpoint]. You can only specify one ARN.
-	//
-	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
-	// [using a virtual private cloud (VPC) endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
+	// Specifies the Amazon Resource Name (ARN) of the security group that allows
+	// traffic between your agent and VPC service endpoint. You can only specify one
+	// ARN.
 	SecurityGroupArns []string
 
-	// Specifies the ARN of the subnet where you want to run your DataSync task when
-	// using a VPC endpoint. This is the subnet where DataSync creates and manages the [network interfaces]
-	// for your transfer. You can only specify one ARN.
-	//
-	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
+	// Specifies the ARN of the subnet where your VPC service endpoint is located. You
+	// can only specify one ARN.
 	SubnetArns []string
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon
 	// Web Services resources. We recommend creating at least one tag for your agent.
 	Tags []types.TagListEntry
 
-	// Specifies the ID of the VPC endpoint that you want your agent to connect to.
-	// For example, a VPC endpoint ID looks like vpce-01234d5aff67890e1 .
+	// Specifies the ID of the [VPC service endpoint] that you're using. For example, a VPC endpoint ID
+	// looks like vpce-01234d5aff67890e1 .
 	//
-	// The VPC endpoint you use must include the DataSync service name (for example,
-	// com.amazonaws.us-east-2.datasync ).
+	// The VPC service endpoint you use must include the DataSync service name (for
+	// example, com.amazonaws.us-east-2.datasync ).
+	//
+	// [VPC service endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#datasync-in-vpc
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde

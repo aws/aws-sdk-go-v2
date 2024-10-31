@@ -150,6 +150,26 @@ func (m *validateOpCancelServiceSoftwareUpdate) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateApplication struct {
+}
+
+func (*validateOpCreateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDomain struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpCreateVpcEndpoint) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVpcEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplication struct {
+}
+
+func (*validateOpDeleteApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -565,6 +605,26 @@ func (m *validateOpDissociatePackage) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDissociatePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetApplication struct {
+}
+
+func (*validateOpGetApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1030,26 @@ func (m *validateOpStartServiceSoftwareUpdate) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApplication struct {
+}
+
+func (*validateOpUpdateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataSource struct {
 }
 
@@ -1118,6 +1198,10 @@ func addOpCancelServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCancelServiceSoftwareUpdate{}, middleware.After)
 }
 
+func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
+}
+
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
@@ -1132,6 +1216,10 @@ func addOpCreatePackageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVpcEndpoint{}, middleware.After)
+}
+
+func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
 }
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1200,6 +1288,10 @@ func addOpDescribeVpcEndpointsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackage{}, middleware.After)
+}
+
+func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApplication{}, middleware.After)
 }
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1280,6 +1372,10 @@ func addOpStartDomainMaintenanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpStartServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartServiceSoftwareUpdate{}, middleware.After)
+}
+
+func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
 func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1587,9 +1683,6 @@ func validateOpAuthorizeVpcEndpointAccessInput(v *AuthorizeVpcEndpointAccessInpu
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.Account == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Account"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1619,6 +1712,26 @@ func validateOpCancelServiceSoftwareUpdateInput(v *CancelServiceSoftwareUpdateIn
 	invalidParams := smithy.InvalidParamsError{Context: "CancelServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TagList != nil {
+		if err := validateTagList(v.TagList); err != nil {
+			invalidParams.AddNested("TagList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1722,6 +1835,21 @@ func validateOpCreateVpcEndpointInput(v *CreateVpcEndpointInput) error {
 	}
 	if v.VpcOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcOptions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1986,6 +2114,21 @@ func validateOpDissociatePackageInput(v *DissociatePackageInput) error {
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetApplicationInput(v *GetApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2269,9 +2412,6 @@ func validateOpRevokeVpcEndpointAccessInput(v *RevokeVpcEndpointAccessInput) err
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.Account == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Account"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2304,6 +2444,21 @@ func validateOpStartServiceSoftwareUpdateInput(v *StartServiceSoftwareUpdateInpu
 	invalidParams := smithy.InvalidParamsError{Context: "StartServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

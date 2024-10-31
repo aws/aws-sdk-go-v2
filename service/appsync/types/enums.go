@@ -344,6 +344,31 @@ func (DefaultAction) Values() []DefaultAction {
 	}
 }
 
+type EventLogLevel string
+
+// Enum values for EventLogLevel
+const (
+	EventLogLevelNone  EventLogLevel = "NONE"
+	EventLogLevelError EventLogLevel = "ERROR"
+	EventLogLevelAll   EventLogLevel = "ALL"
+	EventLogLevelInfo  EventLogLevel = "INFO"
+	EventLogLevelDebug EventLogLevel = "DEBUG"
+)
+
+// Values returns all known values for EventLogLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventLogLevel) Values() []EventLogLevel {
+	return []EventLogLevel{
+		"NONE",
+		"ERROR",
+		"ALL",
+		"INFO",
+		"DEBUG",
+	}
+}
+
 type FieldLogLevel string
 
 // Enum values for FieldLogLevel

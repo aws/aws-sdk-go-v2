@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateSourceGraphqlApi(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateApiCache(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateApiCache(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_CreateApiKey(t *testing.T) {
 	_, err := svc.CreateApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -194,6 +218,18 @@ func TestCheckSnapshot_CreateType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteApiCache(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteApiCache(context.Background(), nil, func(o *Options) {
@@ -211,6 +247,18 @@ func TestCheckSnapshot_DeleteApiKey(t *testing.T) {
 	_, err := svc.DeleteApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +410,18 @@ func TestCheckSnapshot_FlushApiCache(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetApiAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApiAssociation(context.Background(), nil, func(o *Options) {
@@ -379,6 +439,18 @@ func TestCheckSnapshot_GetApiCache(t *testing.T) {
 	_, err := svc.GetApiCache(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetApiCache")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -523,6 +595,30 @@ func TestCheckSnapshot_ListApiKeys(t *testing.T) {
 	_, err := svc.ListApiKeys(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListApiKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListApis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListApis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListChannelNamespaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannelNamespaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChannelNamespaces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -722,6 +818,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateApiCache(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateApiCache(context.Background(), nil, func(o *Options) {
@@ -739,6 +847,18 @@ func TestCheckSnapshot_UpdateApiKey(t *testing.T) {
 	_, err := svc.UpdateApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -865,6 +985,18 @@ func TestUpdateSnapshot_AssociateSourceGraphqlApi(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateApiCache(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateApiCache(context.Background(), nil, func(o *Options) {
@@ -882,6 +1014,18 @@ func TestUpdateSnapshot_CreateApiKey(t *testing.T) {
 	_, err := svc.CreateApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -961,6 +1105,18 @@ func TestUpdateSnapshot_CreateType(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteApiCache(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteApiCache(context.Background(), nil, func(o *Options) {
@@ -978,6 +1134,18 @@ func TestUpdateSnapshot_DeleteApiKey(t *testing.T) {
 	_, err := svc.DeleteApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1129,6 +1297,18 @@ func TestUpdateSnapshot_FlushApiCache(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetApiAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetApiAssociation(context.Background(), nil, func(o *Options) {
@@ -1146,6 +1326,18 @@ func TestUpdateSnapshot_GetApiCache(t *testing.T) {
 	_, err := svc.GetApiCache(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetApiCache")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1290,6 +1482,30 @@ func TestUpdateSnapshot_ListApiKeys(t *testing.T) {
 	_, err := svc.ListApiKeys(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApiKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListApis(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListApis(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListApis")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListChannelNamespaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannelNamespaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChannelNamespaces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1489,6 +1705,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateApi(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApi(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateApi")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateApiCache(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateApiCache(context.Background(), nil, func(o *Options) {
@@ -1506,6 +1734,18 @@ func TestUpdateSnapshot_UpdateApiKey(t *testing.T) {
 	_, err := svc.UpdateApiKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateApiKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateChannelNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateChannelNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateChannelNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

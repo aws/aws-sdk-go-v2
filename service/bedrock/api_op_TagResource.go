@@ -14,7 +14,7 @@ import (
 // Associate tags with a resource. For more information, see [Tagging resources] in the [Amazon Bedrock User Guide].
 //
 // [Amazon Bedrock User Guide]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
-// [Tagging resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
+// [Tagging resources]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

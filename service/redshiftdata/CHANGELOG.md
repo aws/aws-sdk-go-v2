@@ -1,3 +1,7 @@
+# v1.31.0 (2024-10-29)
+
+* **Feature**: Adding a new API GetStatementResultV2 that supports CSV formatted results from ExecuteStatement and BatchExecuteStatement calls.
+
 # v1.30.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

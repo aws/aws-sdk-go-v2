@@ -17,9 +17,9 @@ import (
 // CreateKeyspace is an asynchronous operation. You can monitor the creation
 // status of the new keyspace by using the GetKeyspace operation.
 //
-// For more information, see [Creating keyspaces] in the Amazon Keyspaces Developer Guide.
+// For more information, see [Create a keyspace] in the Amazon Keyspaces Developer Guide.
 //
-// [Creating keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create
+// [Create a keyspace]: https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.keyspaces.html
 func (c *Client) CreateKeyspace(ctx context.Context, params *CreateKeyspaceInput, optFns ...func(*Options)) (*CreateKeyspaceOutput, error) {
 	if params == nil {
 		params = &CreateKeyspaceInput{}

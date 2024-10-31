@@ -1,3 +1,7 @@
+# v1.19.0 (2024-10-29)
+
+* **Feature**: This release adds the option for customers to configure analytics engine when creating a collaboration, and introduces the new SPARK analytics engine type in addition to maintaining the legacy CLEAN_ROOMS_SQL engine type.
+
 # v1.18.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,11 @@
+# v1.165.0 (2024-10-30)
+
+* **Feature**: Added support for Model Registry Staging construct. Users can define series of stages that models can progress through for model workflows and lifecycle. This simplifies tracking and managing models as they transition through development, testing, and production stages.
+
+# v1.164.0 (2024-10-29)
+
+* **Feature**: Adding `notebook-al2-v3` as allowed value to SageMaker NotebookInstance PlatformIdentifier attribute
+
 # v1.163.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -295,6 +295,27 @@ type EncryptionSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// A field definition consists out of a name and a type.
+type FieldDefinition struct {
+
+	//  The identifier.
+	//
+	// This member is required.
+	Name *string
+
+	//  Any supported Cassandra data type, including collections and other
+	// user-defined types that are contained in the same keyspace.
+	//
+	// For more information, see [Cassandra data type support] in the Amazon Keyspaces Developer Guide.
+	//
+	// [Cassandra data type support]: https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html#cassandra-data-type
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents the properties of a keyspace.
 type KeyspaceSummary struct {
 

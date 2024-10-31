@@ -1,3 +1,7 @@
+# v1.30.0 (2024-10-30)
+
+* **Feature**: This release adds support for Multi-Factor Authentication (MFA) and Personal Access Tokens through integration with AWS IAM Identity Center.
+
 # v1.29.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

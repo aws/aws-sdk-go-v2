@@ -880,6 +880,25 @@ func (TaskFilterName) Values() []TaskFilterName {
 	}
 }
 
+type TaskMode string
+
+// Enum values for TaskMode
+const (
+	TaskModeBasic    TaskMode = "BASIC"
+	TaskModeEnhanced TaskMode = "ENHANCED"
+)
+
+// Values returns all known values for TaskMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TaskMode) Values() []TaskMode {
+	return []TaskMode{
+		"BASIC",
+		"ENHANCED",
+	}
+}
+
 type TaskQueueing string
 
 // Enum values for TaskQueueing

@@ -36,11 +36,11 @@ type UpdateNotebookInstanceInput struct {
 	// This member is required.
 	NotebookInstanceName *string
 
-	// A list of the Elastic Inference (EI) instance types to associate with this
-	// notebook instance. Currently only one EI instance type can be associated with a
-	// notebook instance. For more information, see [Using Elastic Inference in Amazon SageMaker].
+	// This parameter is no longer supported. Elastic Inference (EI) is no longer
+	// available.
 	//
-	// [Using Elastic Inference in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
+	// This parameter was used to specify a list of the EI instance types to associate
+	// with this notebook instance.
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories to associate with the notebook
@@ -63,10 +63,11 @@ type UpdateNotebookInstanceInput struct {
 	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	DefaultCodeRepository *string
 
-	// A list of the Elastic Inference (EI) instance types to remove from this
-	// notebook instance. This operation is idempotent. If you specify an accelerator
-	// type that is not associated with the notebook instance when you call this
-	// method, it does not throw an error.
+	// This parameter is no longer supported. Elastic Inference (EI) is no longer
+	// available.
+	//
+	// This parameter was used to specify a list of the EI instance types to remove
+	// from this notebook instance.
 	DisassociateAcceleratorTypes *bool
 
 	// A list of names or URLs of the default Git repositories to remove from this

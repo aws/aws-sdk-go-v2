@@ -993,6 +993,12 @@
                         "smithy.api#documentation": "<p>The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.</p>"
                     }
                 },
+                "pricePerformanceTarget": {
+                    "target": "com.amazonaws.redshiftserverless#PerformanceTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the price performance target settings for the workgroup.</p>"
+                    }
+                },
                 "ipAddressType": {
                     "target": "com.amazonaws.redshiftserverless#IpAddressType",
                     "traits": {
@@ -3668,6 +3674,45 @@
         },
         "com.amazonaws.redshiftserverless#ParameterValue": {
             "type": "string"
+        },
+        "com.amazonaws.redshiftserverless#PerformanceTarget": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.redshiftserverless#PerformanceTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the price performance target is enabled for the workgroup.</p>"
+                    }
+                },
+                "level": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target price performance level for the workgroup. Valid values include 1, 25, 50, 75, and 100. These\n         correspond to the price performance levels LOW_COST, ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the price performance target settings for the workgroup.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#PerformanceTargetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
+            }
         },
         "com.amazonaws.redshiftserverless#PutResourcePolicy": {
             "type": "operation",
@@ -6566,6 +6611,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
                     }
+                },
+                "pricePerformanceTarget": {
+                    "target": "com.amazonaws.redshiftserverless#PerformanceTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the price performance target settings for the workgroup.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6946,6 +6997,12 @@
                     "target": "com.amazonaws.redshiftserverless#IpAddressType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type that the workgroup supports. Possible values are <code>ipv4</code> and <code>dualstack</code>.</p>"
+                    }
+                },
+                "pricePerformanceTarget": {
+                    "target": "com.amazonaws.redshiftserverless#PerformanceTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the price performance target settings for the workgroup.</p>"
                     }
                 }
             },

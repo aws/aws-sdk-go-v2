@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates a zero-ETL integration with Amazon Redshift.
+// Creates a zero-ETL integration or S3 event integration with Amazon Redshift.
 func (c *Client) CreateIntegration(ctx context.Context, params *CreateIntegrationInput, optFns ...func(*Options)) (*CreateIntegrationOutput, error) {
 	if params == nil {
 		params = &CreateIntegrationInput{}

@@ -50,6 +50,9 @@ type UpdateSecurityConfigInput struct {
 	// A description of the security configuration.
 	Description *string
 
+	// Describes IAM Identity Center options in the form of a key-value map.
+	IamIdentityCenterOptionsUpdates *types.UpdateIamIdentityCenterConfigOptions
+
 	// SAML options in in the form of a key-value map.
 	SamlOptions *types.SamlConfigOptions
 

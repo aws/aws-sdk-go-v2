@@ -90,6 +90,26 @@ func (m *validateOpCreateApiCache) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateApi struct {
+}
+
+func (*validateOpCreateApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateApiKey struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateApiKey) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateApiKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannelNamespace struct {
+}
+
+func (*validateOpCreateChannelNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannelNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelNamespaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +290,26 @@ func (m *validateOpDeleteApiCache) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteApi struct {
+}
+
+func (*validateOpDeleteApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteApiKey struct {
 }
 
@@ -265,6 +325,26 @@ func (m *validateOpDeleteApiKey) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteApiKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteChannelNamespace struct {
+}
+
+func (*validateOpDeleteChannelNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteChannelNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteChannelNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteChannelNamespaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +630,46 @@ func (m *validateOpGetApiCache) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetApi struct {
+}
+
+func (*validateOpGetApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetChannelNamespace struct {
+}
+
+func (*validateOpGetChannelNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannelNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDataSource struct {
 }
 
@@ -785,6 +905,26 @@ func (m *validateOpListApiKeys) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListApiKeysInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannelNamespaces struct {
+}
+
+func (*validateOpListChannelNamespaces) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannelNamespaces) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelNamespacesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelNamespacesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1090,6 +1230,26 @@ func (m *validateOpUpdateApiCache) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApi struct {
+}
+
+func (*validateOpUpdateApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateApiKey struct {
 }
 
@@ -1105,6 +1265,26 @@ func (m *validateOpUpdateApiKey) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateApiKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateChannelNamespace struct {
+}
+
+func (*validateOpUpdateChannelNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateChannelNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateChannelNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateChannelNamespaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1266,8 +1446,16 @@ func addOpCreateApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApiCache{}, middleware.After)
 }
 
+func addOpCreateApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApi{}, middleware.After)
+}
+
 func addOpCreateApiKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateApiKey{}, middleware.After)
+}
+
+func addOpCreateChannelNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannelNamespace{}, middleware.After)
 }
 
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1298,8 +1486,16 @@ func addOpDeleteApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApiCache{}, middleware.After)
 }
 
+func addOpDeleteApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApi{}, middleware.After)
+}
+
 func addOpDeleteApiKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteApiKey{}, middleware.After)
+}
+
+func addOpDeleteChannelNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteChannelNamespace{}, middleware.After)
 }
 
 func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1358,6 +1554,14 @@ func addOpGetApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetApiCache{}, middleware.After)
 }
 
+func addOpGetApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApi{}, middleware.After)
+}
+
+func addOpGetChannelNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannelNamespace{}, middleware.After)
+}
+
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataSource{}, middleware.After)
 }
@@ -1404,6 +1608,10 @@ func addOpGetTypeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListApiKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApiKeys{}, middleware.After)
+}
+
+func addOpListChannelNamespacesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannelNamespaces{}, middleware.After)
 }
 
 func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -1466,8 +1674,16 @@ func addOpUpdateApiCacheValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApiCache{}, middleware.After)
 }
 
+func addOpUpdateApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApi{}, middleware.After)
+}
+
 func addOpUpdateApiKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApiKey{}, middleware.After)
+}
+
+func addOpUpdateChannelNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateChannelNamespace{}, middleware.After)
 }
 
 func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1560,6 +1776,38 @@ func validateAppSyncRuntime(v *types.AppSyncRuntime) error {
 	}
 }
 
+func validateAuthMode(v *types.AuthMode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthMode"}
+	if len(v.AuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthModes(v []types.AuthMode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthModes"}
+	for i := range v {
+		if err := validateAuthMode(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAuthorizationConfig(v *types.AuthorizationConfig) error {
 	if v == nil {
 		return nil
@@ -1575,11 +1823,76 @@ func validateAuthorizationConfig(v *types.AuthorizationConfig) error {
 	}
 }
 
+func validateAuthProvider(v *types.AuthProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthProvider"}
+	if len(v.AuthType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthType"))
+	}
+	if v.CognitoConfig != nil {
+		if err := validateCognitoConfig(v.CognitoConfig); err != nil {
+			invalidParams.AddNested("CognitoConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenIDConnectConfig != nil {
+		if err := validateOpenIDConnectConfig(v.OpenIDConnectConfig); err != nil {
+			invalidParams.AddNested("OpenIDConnectConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaAuthorizerConfig != nil {
+		if err := validateLambdaAuthorizerConfig(v.LambdaAuthorizerConfig); err != nil {
+			invalidParams.AddNested("LambdaAuthorizerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthProviders(v []types.AuthProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthProviders"}
+	for i := range v {
+		if err := validateAuthProvider(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCachingConfig(v *types.CachingConfig) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CachingConfig"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCognitoConfig(v *types.CognitoConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CognitoConfig"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.AwsRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsRegion"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1669,6 +1982,69 @@ func validateEventBridgeDataSourceConfig(v *types.EventBridgeDataSourceConfig) e
 	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeDataSourceConfig"}
 	if v.EventBusArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventBusArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventConfig(v *types.EventConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventConfig"}
+	if v.AuthProviders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthProviders"))
+	} else if v.AuthProviders != nil {
+		if err := validateAuthProviders(v.AuthProviders); err != nil {
+			invalidParams.AddNested("AuthProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectionAuthModes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionAuthModes"))
+	} else if v.ConnectionAuthModes != nil {
+		if err := validateAuthModes(v.ConnectionAuthModes); err != nil {
+			invalidParams.AddNested("ConnectionAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultPublishAuthModes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultPublishAuthModes"))
+	} else if v.DefaultPublishAuthModes != nil {
+		if err := validateAuthModes(v.DefaultPublishAuthModes); err != nil {
+			invalidParams.AddNested("DefaultPublishAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultSubscribeAuthModes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultSubscribeAuthModes"))
+	} else if v.DefaultSubscribeAuthModes != nil {
+		if err := validateAuthModes(v.DefaultSubscribeAuthModes); err != nil {
+			invalidParams.AddNested("DefaultSubscribeAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogConfig != nil {
+		if err := validateEventLogConfig(v.LogConfig); err != nil {
+			invalidParams.AddNested("LogConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventLogConfig(v *types.EventLogConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventLogConfig"}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if v.CloudWatchLogsRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLogsRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1892,6 +2268,26 @@ func validateOpCreateApiCacheInput(v *CreateApiCacheInput) error {
 	}
 }
 
+func validateOpCreateApiInput(v *CreateApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApiInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EventConfig != nil {
+		if err := validateEventConfig(v.EventConfig); err != nil {
+			invalidParams.AddNested("EventConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateApiKeyInput(v *CreateApiKeyInput) error {
 	if v == nil {
 		return nil
@@ -1899,6 +2295,34 @@ func validateOpCreateApiKeyInput(v *CreateApiKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApiKeyInput"}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelNamespaceInput(v *CreateChannelNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelNamespaceInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SubscribeAuthModes != nil {
+		if err := validateAuthModes(v.SubscribeAuthModes); err != nil {
+			invalidParams.AddNested("SubscribeAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PublishAuthModes != nil {
+		if err := validateAuthModes(v.PublishAuthModes); err != nil {
+			invalidParams.AddNested("PublishAuthModes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2117,6 +2541,21 @@ func validateOpDeleteApiCacheInput(v *DeleteApiCacheInput) error {
 	}
 }
 
+func validateOpDeleteApiInput(v *DeleteApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApiInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteApiKeyInput(v *DeleteApiKeyInput) error {
 	if v == nil {
 		return nil
@@ -2127,6 +2566,24 @@ func validateOpDeleteApiKeyInput(v *DeleteApiKeyInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteChannelNamespaceInput(v *DeleteChannelNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelNamespaceInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2379,6 +2836,39 @@ func validateOpGetApiCacheInput(v *GetApiCacheInput) error {
 	}
 }
 
+func validateOpGetApiInput(v *GetApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApiInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetChannelNamespaceInput(v *GetChannelNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelNamespaceInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDataSourceInput(v *GetDataSourceInput) error {
 	if v == nil {
 		return nil
@@ -2573,6 +3063,21 @@ func validateOpListApiKeysInput(v *ListApiKeysInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListApiKeysInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelNamespacesInput(v *ListChannelNamespacesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelNamespacesInput"}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
 	}
@@ -2846,6 +3351,29 @@ func validateOpUpdateApiCacheInput(v *UpdateApiCacheInput) error {
 	}
 }
 
+func validateOpUpdateApiInput(v *UpdateApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApiInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.EventConfig != nil {
+		if err := validateEventConfig(v.EventConfig); err != nil {
+			invalidParams.AddNested("EventConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateApiKeyInput(v *UpdateApiKeyInput) error {
 	if v == nil {
 		return nil
@@ -2856,6 +3384,34 @@ func validateOpUpdateApiKeyInput(v *UpdateApiKeyInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateChannelNamespaceInput(v *UpdateChannelNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateChannelNamespaceInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SubscribeAuthModes != nil {
+		if err := validateAuthModes(v.SubscribeAuthModes); err != nil {
+			invalidParams.AddNested("SubscribeAuthModes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PublishAuthModes != nil {
+		if err := validateAuthModes(v.PublishAuthModes); err != nil {
+			invalidParams.AddNested("PublishAuthModes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2974,9 +3530,6 @@ func validateOpUpdateGraphqlApiInput(v *UpdateGraphqlApiInput) error {
 		if err := validateLogConfig(v.LogConfig); err != nil {
 			invalidParams.AddNested("LogConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if len(v.AuthenticationType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
 	}
 	if v.UserPoolConfig != nil {
 		if err := validateUserPoolConfig(v.UserPoolConfig); err != nil {

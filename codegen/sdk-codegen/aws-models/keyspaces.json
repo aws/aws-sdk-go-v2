@@ -320,7 +320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateKeyspace</code> operation adds a new keyspace to your account. In an Amazon Web Services account, keyspace names\n      must be unique within each Region.</p>\n         <p>\n            <code>CreateKeyspace</code> is an asynchronous operation. You can monitor the creation status of the new keyspace \n          by using the <code>GetKeyspace</code> operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create\">Creating keyspaces</a> in the <i>Amazon Keyspaces Developer\n             Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The <code>CreateKeyspace</code> operation adds a new keyspace to your account. In an Amazon Web Services account, keyspace names\n      must be unique within each Region.</p>\n         <p>\n            <code>CreateKeyspace</code> is an asynchronous operation. You can monitor the creation status of the new keyspace \n          by using the <code>GetKeyspace</code> operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.keyspaces.html\">Create a keyspace</a> in the <i>Amazon Keyspaces Developer\n             Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CreateKeyspaceRequest": {
@@ -388,7 +388,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateTable</code> operation adds a new table to the specified keyspace. Within a keyspace, table names\n         must be unique.</p>\n         <p>\n            <code>CreateTable</code> is an asynchronous operation. When the request is received, the status of the table is set to <code>CREATING</code>.\n         You can monitor the creation status of the new table by using the <code>GetTable</code> \n         operation, which returns the current <code>status</code> of the table. You can start using a table when the status is <code>ACTIVE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-tables.html#tables-create\">Creating tables</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The <code>CreateTable</code> operation adds a new table to the specified keyspace. Within a keyspace, table names\n         must be unique.</p>\n         <p>\n            <code>CreateTable</code> is an asynchronous operation. When the request is received, the status of the table is set to <code>CREATING</code>.\n         You can monitor the creation status of the new table by using the <code>GetTable</code> \n         operation, which returns the current <code>status</code> of the table. You can start using a table when the status is <code>ACTIVE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/getting-started.tables.html\">Create a table</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#CreateTableRequest": {
@@ -487,6 +487,89 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.keyspaces#CreateType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspaces#CreateTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspaces#CreateTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The <code>CreateType</code> operation creates a new user-defined type in the specified keyspace.\n      </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/udts.html\">User-defined types (UDTs)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>. </p>"
+            }
+        },
+        "com.amazonaws.keyspaces#CreateTypeRequest": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the keyspace.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.keyspaces#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the user-defined type.\n      </p>\n         <p>UDT names must contain 48 characters or less, must begin with an alphabetic character, and \n         can only contain alpha-numeric characters and underscores. Amazon Keyspaces converts upper case characters automatically\n         into lower case characters. </p>\n         <p>Alternatively, you can declare a UDT name in double quotes. When declaring a UDT name inside double quotes,\n         Amazon Keyspaces preserves upper casing and allows special characters.</p>\n         <p>You can also use double quotes as part of the \n         name when you create the UDT, but you must escape each double quote character with an additional \n         double quote character.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldDefinitions": {
+                    "target": "com.amazonaws.keyspaces#FieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The field definitions, consisting of names and types, that define this type. \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspaces#CreateTypeResponse": {
+            "type": "structure",
+            "members": {
+                "keyspaceArn": {
+                    "target": "com.amazonaws.keyspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace that contains the new type in the format of an Amazon Resource Name (ARN). \n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.keyspaces#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The formatted name of the user-defined type that was created. Note that Amazon Keyspaces requires the formatted name of the type for\n         other operations, for example <code>GetType</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.keyspaces#DefaultTimeToLive": {
@@ -601,6 +684,88 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.keyspaces#DeleteType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspaces#DeleteTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspaces#DeleteTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The <code>DeleteType</code> operation deletes a user-defined type (UDT). You can only delete a type that is not used in a table\n         or another UDT.\n      </p>"
+            }
+        },
+        "com.amazonaws.keyspaces#DeleteTypeRequest": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the keyspace of the to be deleted type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.keyspaces#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the type to be deleted.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspaces#DeleteTypeResponse": {
+            "type": "structure",
+            "members": {
+                "keyspaceArn": {
+                    "target": "com.amazonaws.keyspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace from which the type was deleted in the format of an Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.keyspaces#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the type that was deleted.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.keyspaces#Depth": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
+        },
         "com.amazonaws.keyspaces#DoubleObject": {
             "type": "double",
             "traits": {
@@ -641,6 +806,43 @@
                         "name": "AWS_OWNED_KMS_KEY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.keyspaces#FieldDefinition": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.keyspaces#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The identifier.\n      </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.keyspaces#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Any supported Cassandra data type, including collections and other user-defined types that are \n         contained in the same keyspace.\n      </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/cassandra-apis.html#cassandra-data-type\">Cassandra data type support</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         A field definition consists out of a name and a type.\n      </p>"
+            }
+        },
+        "com.amazonaws.keyspaces#FieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#FieldDefinition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.keyspaces#GenericString": {
@@ -745,7 +947,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the table, including the table's name and current status, the keyspace name, \n         configuration settings, and metadata.</p>\n         <p>To read table metadata using <code>GetTable</code>, <code>Select</code> action \n         permissions for the table and system tables are required to complete the operation.</p>"
+                "smithy.api#documentation": "<p>Returns information about the table, including the table's name and current status, the keyspace name, \n         configuration settings, and metadata.</p>\n         <p>To read table metadata using <code>GetTable</code>, the \n            IAM principal needs <code>Select</code> action \n         permissions for the table and the system keyspace.</p>"
             }
         },
         "com.amazonaws.keyspaces#GetTableAutoScalingSettings": {
@@ -951,6 +1153,123 @@
                 }
             }
         },
+        "com.amazonaws.keyspaces#GetType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspaces#GetTypeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspaces#GetTypeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The <code>GetType</code> operation returns information about the type, for example the field definitions, the timestamp when the type\n         was last modified, the level of nesting, the status, and details about if the type is used in other types and tables.\n      </p>\n         <p>To read keyspace metadata using <code>GetType</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace.</p>"
+            }
+        },
+        "com.amazonaws.keyspaces#GetTypeRequest": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the keyspace that contains this type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.keyspaces#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The formatted name of the type. For example, if the name of the type was created\n         without double quotes, Amazon Keyspaces saved the name in lower-case characters. If the name was\n         created in double quotes, you must use double quotes to specify the type name. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspaces#GetTypeResponse": {
+            "type": "structure",
+            "members": {
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the keyspace that contains this type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeName": {
+                    "target": "com.amazonaws.keyspaces#TypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the type.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldDefinitions": {
+                    "target": "com.amazonaws.keyspaces#FieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The names and types that define this type.\n      </p>"
+                    }
+                },
+                "lastModifiedTimestamp": {
+                    "target": "com.amazonaws.keyspaces#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The timestamp that shows when this type was last modified.\n      </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.keyspaces#TypeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status of this type.\n      </p>"
+                    }
+                },
+                "directReferringTables": {
+                    "target": "com.amazonaws.keyspaces#TableNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The tables that use this type.\n      </p>"
+                    }
+                },
+                "directParentTypes": {
+                    "target": "com.amazonaws.keyspaces#TypeNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The types that use this type.\n      </p>"
+                    }
+                },
+                "maxNestingDepth": {
+                    "target": "com.amazonaws.keyspaces#Depth",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The level of nesting implemented for this type.\n      </p>"
+                    }
+                },
+                "keyspaceArn": {
+                    "target": "com.amazonaws.keyspaces#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The unique identifier of the keyspace that contains this type in the format of an Amazon Resource Name (ARN).\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.keyspaces#IntegerObject": {
             "type": "integer",
             "traits": {
@@ -1039,10 +1358,16 @@
                     "target": "com.amazonaws.keyspaces#CreateTable"
                 },
                 {
+                    "target": "com.amazonaws.keyspaces#CreateType"
+                },
+                {
                     "target": "com.amazonaws.keyspaces#DeleteKeyspace"
                 },
                 {
                     "target": "com.amazonaws.keyspaces#DeleteTable"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#DeleteType"
                 },
                 {
                     "target": "com.amazonaws.keyspaces#GetKeyspace"
@@ -1054,6 +1379,9 @@
                     "target": "com.amazonaws.keyspaces#GetTableAutoScalingSettings"
                 },
                 {
+                    "target": "com.amazonaws.keyspaces#GetType"
+                },
+                {
                     "target": "com.amazonaws.keyspaces#ListKeyspaces"
                 },
                 {
@@ -1061,6 +1389,9 @@
                 },
                 {
                     "target": "com.amazonaws.keyspaces#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ListTypes"
                 },
                 {
                     "target": "com.amazonaws.keyspaces#RestoreTable"
@@ -2030,7 +2361,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of keyspaces.</p>",
+                "smithy.api#documentation": "<p>The <code>ListKeyspaces</code> operation returns a list of keyspaces.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2100,7 +2431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tables for a specified keyspace.</p>",
+                "smithy.api#documentation": "<p>The <code>ListTables</code> operation returns a list of tables for a specified keyspace.</p>\n         <p>To read keyspace metadata using <code>ListTables</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2176,7 +2507,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all tags associated with the specified Amazon Keyspaces resource.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all tags associated with the specified Amazon Keyspaces resource.</p>\n         <p>To read keyspace metadata using <code>ListTagsForResource</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the specified resource and the system keyspace.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2224,6 +2555,89 @@
                         "smithy.api#documentation": "<p>A list of tags.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.keyspaces#ListTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.keyspaces#ListTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.keyspaces#ListTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The <code>ListTypes</code> operation returns a list of types for a specified keyspace.\n      </p>\n         <p>To read keyspace metadata using <code>ListTypes</code>, the \n         IAM principal needs <code>Select</code> action \n         permissions for the system keyspace.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "types"
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#ListTypesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.keyspaces#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The pagination token. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.\n      </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.keyspaces#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The total number of types to return in the output. If the total number of types available is more than the value specified,\n         a <code>NextToken</code> is provided in the output. To resume pagination, provide the <code>NextToken</code> value as an \n         argument of a subsequent API invocation.\n      </p>"
+                    }
+                },
+                "keyspaceName": {
+                    "target": "com.amazonaws.keyspaces#KeyspaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The name of the keyspace that contains the listed types.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.keyspaces#ListTypesResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.keyspaces#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The pagination token. To resume pagination, provide the <code>NextToken</code> value as an argument of a subsequent API invocation.\n      </p>"
+                    }
+                },
+                "types": {
+                    "target": "com.amazonaws.keyspaces#TypeNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The list of types contained in the specified keyspace.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.keyspaces#MaxResults": {
@@ -2469,7 +2883,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN), for the resource not found.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier in the format of Amazon Resource Name (ARN) for the resource could't be found.</p>"
                     }
                 }
             },
@@ -2478,7 +2892,7 @@
                     "code": "ResourceNotFoundException",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p>The operation tried to access a keyspace or table that doesn't exist. The resource might not be specified correctly, or its status might not be <code>ACTIVE</code>.</p>",
+                "smithy.api#documentation": "<p>The operation tried to access a keyspace, table, or type that doesn't exist. The resource might not be specified correctly, \n         or its status might not be <code>ACTIVE</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2702,6 +3116,12 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"
             }
         },
+        "com.amazonaws.keyspaces#TableNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#TableName"
+            }
+        },
         "com.amazonaws.keyspaces#TableStatus": {
             "type": "string",
             "traits": {
@@ -2826,6 +3246,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.keyspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.keyspaces#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.keyspaces#InternalServerException"
@@ -2956,6 +3379,44 @@
         },
         "com.amazonaws.keyspaces#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.keyspaces#TypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 48
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#TypeNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#TypeName"
+            }
+        },
+        "com.amazonaws.keyspaces#TypeStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "RESTORING",
+                        "name": "RESTORING"
+                    }
+                ]
+            }
         },
         "com.amazonaws.keyspaces#UntagResource": {
             "type": "operation",

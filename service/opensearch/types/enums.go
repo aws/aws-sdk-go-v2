@@ -71,6 +71,50 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AppConfigType string
+
+// Enum values for AppConfigType
+const (
+	AppConfigTypeOpensearchDashboardAdminUsers  AppConfigType = "opensearchDashboards.dashboardAdmin.users"
+	AppConfigTypeOpensearchDashboardAdminGroups AppConfigType = "opensearchDashboards.dashboardAdmin.groups"
+)
+
+// Values returns all known values for AppConfigType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AppConfigType) Values() []AppConfigType {
+	return []AppConfigType{
+		"opensearchDashboards.dashboardAdmin.users",
+		"opensearchDashboards.dashboardAdmin.groups",
+	}
+}
+
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
+const (
+	ApplicationStatusCreating ApplicationStatus = "CREATING"
+	ApplicationStatusUpdating ApplicationStatus = "UPDATING"
+	ApplicationStatusDeleting ApplicationStatus = "DELETING"
+	ApplicationStatusActive   ApplicationStatus = "ACTIVE"
+	ApplicationStatusFailed   ApplicationStatus = "FAILED"
+)
+
+// Values returns all known values for ApplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationStatus) Values() []ApplicationStatus {
+	return []ApplicationStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"FAILED",
+	}
+}
+
 type AutoTuneDesiredState string
 
 // Enum values for AutoTuneDesiredState
@@ -137,6 +181,23 @@ const (
 func (AutoTuneType) Values() []AutoTuneType {
 	return []AutoTuneType{
 		"SCHEDULED_ACTION",
+	}
+}
+
+type AWSServicePrincipal string
+
+// Enum values for AWSServicePrincipal
+const (
+	AWSServicePrincipalApplicationOpensearchserviceAmazonawsCom AWSServicePrincipal = "application.opensearchservice.amazonaws.com"
+)
+
+// Values returns all known values for AWSServicePrincipal. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AWSServicePrincipal) Values() []AWSServicePrincipal {
+	return []AWSServicePrincipal{
+		"application.opensearchservice.amazonaws.com",
 	}
 }
 
@@ -1095,6 +1156,25 @@ func (ReservedInstancePaymentOption) Values() []ReservedInstancePaymentOption {
 	}
 }
 
+type RolesKeyIdCOption string
+
+// Enum values for RolesKeyIdCOption
+const (
+	RolesKeyIdCOptionGroupName RolesKeyIdCOption = "GroupName"
+	RolesKeyIdCOptionGroupId   RolesKeyIdCOption = "GroupId"
+)
+
+// Values returns all known values for RolesKeyIdCOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RolesKeyIdCOption) Values() []RolesKeyIdCOption {
+	return []RolesKeyIdCOption{
+		"GroupName",
+		"GroupId",
+	}
+}
+
 type RollbackOnDisable string
 
 // Enum values for RollbackOnDisable
@@ -1211,6 +1291,27 @@ func (SkipUnavailableStatus) Values() []SkipUnavailableStatus {
 	return []SkipUnavailableStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type SubjectKeyIdCOption string
+
+// Enum values for SubjectKeyIdCOption
+const (
+	SubjectKeyIdCOptionUserName SubjectKeyIdCOption = "UserName"
+	SubjectKeyIdCOptionUserId   SubjectKeyIdCOption = "UserId"
+	SubjectKeyIdCOptionEmail    SubjectKeyIdCOption = "Email"
+)
+
+// Values returns all known values for SubjectKeyIdCOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubjectKeyIdCOption) Values() []SubjectKeyIdCOption {
+	return []SubjectKeyIdCOption{
+		"UserName",
+		"UserId",
+		"Email",
 	}
 }
 

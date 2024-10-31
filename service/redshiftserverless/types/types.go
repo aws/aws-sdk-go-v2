@@ -205,6 +205,21 @@ type NetworkInterface struct {
 	noSmithyDocumentSerde
 }
 
+// An object that represents the price performance target settings for the
+// workgroup.
+type PerformanceTarget struct {
+
+	// The target price performance level for the workgroup. Valid values include 1,
+	// 25, 50, 75, and 100. These correspond to the price performance levels LOW_COST,
+	// ECONOMICAL, BALANCED, RESOURCEFUL, and HIGH_PERFORMANCE.
+	Level *int32
+
+	// Whether the price performance target is enabled for the workgroup.
+	Status PerformanceTargetStatus
+
+	noSmithyDocumentSerde
+}
+
 // The automatically created recovery point of a namespace. Recovery points are
 // created every 30 minutes and kept for 24 hours.
 type RecoveryPoint struct {
@@ -682,6 +697,10 @@ type Workgroup struct {
 	// The custom port to use when connecting to a workgroup. Valid port ranges are
 	// 5431-5455 and 8191-8215. The default is 5439.
 	Port *int32
+
+	// An object that represents the price performance target settings for the
+	// workgroup.
+	PricePerformanceTarget *PerformanceTarget
 
 	// A value that specifies whether the workgroup can be accessible from a public
 	// network.

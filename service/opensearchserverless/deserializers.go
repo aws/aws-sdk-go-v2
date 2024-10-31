@@ -5920,6 +5920,91 @@ func awsAwsjson10_deserializeDocumentEffectiveLifecyclePolicyErrorDetails(v *[]t
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIamIdentityCenterConfigOptions(v **types.IamIdentityCenterConfigOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IamIdentityCenterConfigOptions
+	if *v == nil {
+		sv = &types.IamIdentityCenterConfigOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamIdentityCenterApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.ApplicationArn = ptr.String(jtv)
+			}
+
+		case "applicationDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ApplicationDescription = ptr.String(jtv)
+			}
+
+		case "applicationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ApplicationName = ptr.String(jtv)
+			}
+
+		case "groupAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamIdentityCenterGroupAttribute to be of type string, got %T instead", value)
+				}
+				sv.GroupAttribute = types.IamIdentityCenterGroupAttribute(jtv)
+			}
+
+		case "instanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamIdentityCenterInstanceArn to be of type string, got %T instead", value)
+				}
+				sv.InstanceArn = ptr.String(jtv)
+			}
+
+		case "userAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamIdentityCenterUserAttribute to be of type string, got %T instead", value)
+				}
+				sv.UserAttribute = types.IamIdentityCenterUserAttribute(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6566,6 +6651,11 @@ func awsAwsjson10_deserializeDocumentSecurityConfigDetail(v **types.SecurityConf
 					return fmt.Errorf("expected ConfigDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "iamIdentityCenterOptions":
+			if err := awsAwsjson10_deserializeDocumentIamIdentityCenterConfigOptions(&sv.IamIdentityCenterOptions, value); err != nil {
+				return err
 			}
 
 		case "id":

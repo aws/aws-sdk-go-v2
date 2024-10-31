@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Modifies a zero-ETL integration with Amazon Redshift.
+// Modifies a zero-ETL integration or S3 event integration with Amazon Redshift.
 func (c *Client) ModifyIntegration(ctx context.Context, params *ModifyIntegrationInput, optFns ...func(*Options)) (*ModifyIntegrationOutput, error) {
 	if params == nil {
 		params = &ModifyIntegrationInput{}

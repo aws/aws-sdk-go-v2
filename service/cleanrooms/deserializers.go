@@ -9933,6 +9933,9 @@ func awsRestjson1_deserializeOpErrorPopulateIdMappingTable(response *smithyhttp.
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -14645,6 +14648,71 @@ func awsRestjson1_deserializeDocumentBatchGetSchemaErrorList(v *[]types.BatchGet
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentBilledResourceUtilization(v **types.BilledResourceUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BilledResourceUtilization
+	if *v == nil {
+		sv = &types.BilledResourceUtilization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "units":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Units = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Units = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCollaboration(v **types.Collaboration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14667,6 +14735,15 @@ func awsRestjson1_deserializeDocumentCollaboration(v **types.Collaboration, valu
 
 	for key, value := range shape {
 		switch key {
+		case "analyticsEngine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalyticsEngine to be of type string, got %T instead", value)
+				}
+				sv.AnalyticsEngine = types.AnalyticsEngine(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16227,6 +16304,15 @@ func awsRestjson1_deserializeDocumentCollaborationSummary(v **types.Collaboratio
 
 	for key, value := range shape {
 		switch key {
+		case "analyticsEngine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalyticsEngine to be of type string, got %T instead", value)
+				}
+				sv.AnalyticsEngine = types.AnalyticsEngine(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16454,6 +16540,46 @@ func awsRestjson1_deserializeDocumentColumnList(v *[]types.Column, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentComputeConfiguration(v *types.ComputeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ComputeConfiguration
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "worker":
+			var mv types.WorkerComputeConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWorkerComputeConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ComputeConfigurationMemberWorker{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -21355,6 +21481,11 @@ func awsRestjson1_deserializeDocumentProtectedQuery(v **types.ProtectedQuery, va
 
 	for key, value := range shape {
 		switch key {
+		case "computeConfiguration":
+			if err := awsRestjson1_deserializeDocumentComputeConfiguration(&sv.ComputeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "createTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -21828,6 +21959,15 @@ func awsRestjson1_deserializeDocumentProtectedQueryS3OutputConfiguration(v **typ
 				sv.ResultFormat = types.ResultFormat(jtv)
 			}
 
+		case "singleFileOutput":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SingleFileOutput = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -21953,6 +22093,11 @@ func awsRestjson1_deserializeDocumentProtectedQueryStatistics(v **types.Protecte
 
 	for key, value := range shape {
 		switch key {
+		case "billedResourceUtilization":
+			if err := awsRestjson1_deserializeDocumentBilledResourceUtilization(&sv.BilledResourceUtilization, value); err != nil {
+				return err
+			}
+
 		case "totalDurationInMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -23459,6 +23604,59 @@ func awsRestjson1_deserializeDocumentValidationExceptionFieldList(v *[]types.Val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkerComputeConfiguration(v **types.WorkerComputeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkerComputeConfiguration
+	if *v == nil {
+		sv = &types.WorkerComputeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "number":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Number = ptr.Int32(int32(i64))
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkerComputeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.WorkerComputeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -13,6 +13,9 @@ import (
 
 // Returns a list of all tags associated with the specified Amazon Keyspaces
 // resource.
+//
+// To read keyspace metadata using ListTagsForResource , the IAM principal needs
+// Select action permissions for the specified resource and the system keyspace.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
