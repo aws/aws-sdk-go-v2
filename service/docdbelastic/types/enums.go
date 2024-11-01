@@ -21,6 +21,29 @@ func (Auth) Values() []Auth {
 	}
 }
 
+type OptInType string
+
+// Enum values for OptInType
+const (
+	OptInTypeImmediate       OptInType = "IMMEDIATE"
+	OptInTypeNextMaintenance OptInType = "NEXT_MAINTENANCE"
+	OptInTypeApplyOn         OptInType = "APPLY_ON"
+	OptInTypeUndoOptIn       OptInType = "UNDO_OPT_IN"
+)
+
+// Values returns all known values for OptInType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OptInType) Values() []OptInType {
+	return []OptInType{
+		"IMMEDIATE",
+		"NEXT_MAINTENANCE",
+		"APPLY_ON",
+		"UNDO_OPT_IN",
+	}
+}
+
 type SnapshotType string
 
 // Enum values for SnapshotType
@@ -44,25 +67,27 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusCreating                    Status = "CREATING"
-	StatusActive                      Status = "ACTIVE"
-	StatusDeleting                    Status = "DELETING"
-	StatusUpdating                    Status = "UPDATING"
-	StatusVpcEndpointLimitExceeded    Status = "VPC_ENDPOINT_LIMIT_EXCEEDED"
-	StatusIpAddressLimitExceeded      Status = "IP_ADDRESS_LIMIT_EXCEEDED"
-	StatusInvalidSecurityGroupId      Status = "INVALID_SECURITY_GROUP_ID"
-	StatusInvalidSubnetId             Status = "INVALID_SUBNET_ID"
-	StatusInaccessibleEncryptionCreds Status = "INACCESSIBLE_ENCRYPTION_CREDS"
-	StatusInaccessibleSecretArn       Status = "INACCESSIBLE_SECRET_ARN"
-	StatusInaccessibleVpcEndpoint     Status = "INACCESSIBLE_VPC_ENDPOINT"
-	StatusIncompatibleNetwork         Status = "INCOMPATIBLE_NETWORK"
-	StatusMerging                     Status = "MERGING"
-	StatusModifying                   Status = "MODIFYING"
-	StatusSplitting                   Status = "SPLITTING"
-	StatusCopying                     Status = "COPYING"
-	StatusStarting                    Status = "STARTING"
-	StatusStopping                    Status = "STOPPING"
-	StatusStopped                     Status = "STOPPED"
+	StatusCreating                                     Status = "CREATING"
+	StatusActive                                       Status = "ACTIVE"
+	StatusDeleting                                     Status = "DELETING"
+	StatusUpdating                                     Status = "UPDATING"
+	StatusVpcEndpointLimitExceeded                     Status = "VPC_ENDPOINT_LIMIT_EXCEEDED"
+	StatusIpAddressLimitExceeded                       Status = "IP_ADDRESS_LIMIT_EXCEEDED"
+	StatusInvalidSecurityGroupId                       Status = "INVALID_SECURITY_GROUP_ID"
+	StatusInvalidSubnetId                              Status = "INVALID_SUBNET_ID"
+	StatusInaccessibleEncryptionCreds                  Status = "INACCESSIBLE_ENCRYPTION_CREDS"
+	StatusInaccessibleSecretArn                        Status = "INACCESSIBLE_SECRET_ARN"
+	StatusInaccessibleVpcEndpoint                      Status = "INACCESSIBLE_VPC_ENDPOINT"
+	StatusIncompatibleNetwork                          Status = "INCOMPATIBLE_NETWORK"
+	StatusMerging                                      Status = "MERGING"
+	StatusModifying                                    Status = "MODIFYING"
+	StatusSplitting                                    Status = "SPLITTING"
+	StatusCopying                                      Status = "COPYING"
+	StatusStarting                                     Status = "STARTING"
+	StatusStopping                                     Status = "STOPPING"
+	StatusStopped                                      Status = "STOPPED"
+	StatusMaintenance                                  Status = "MAINTENANCE"
+	StatusInaccessibleEncryptionCredentialsRecoverable Status = "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -90,6 +115,8 @@ func (Status) Values() []Status {
 		"STARTING",
 		"STOPPING",
 		"STOPPED",
+		"MAINTENANCE",
+		"INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE",
 	}
 }
 

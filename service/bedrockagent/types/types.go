@@ -3329,8 +3329,8 @@ type VectorIngestionConfiguration struct {
 // knowledge base.
 type VectorKnowledgeBaseConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the model used to create vector embeddings
-	// for the knowledge base.
+	// The Amazon Resource Name (ARN) of the model or inference profile used to create
+	// vector embeddings for the knowledge base.
 	//
 	// This member is required.
 	EmbeddingModelArn *string

@@ -201,7 +201,9 @@ type Address struct {
 	// you set a TRN in Brazil, use districtOrCounty for the neighborhood name.
 	DistrictOrCounty *string
 
-	// The state, region, or province that the address is located.
+	// The state, region, or province that the address is located. This field is only
+	// required for Canada, India, United Arab Emirates, Romania, and Brazil (CPF). It
+	// is optional for all other countries.
 	//
 	// If this is required for tax settings, use the same name as shown on the Tax
 	// Settings page.
@@ -280,9 +282,9 @@ type CanadaAdditionalInfo struct {
 	CanadaQuebecSalesTaxNumber *string
 
 	//  Manitoba Retail Sales Tax ID number. Customers purchasing Amazon Web Services
-	// for resale in Manitoba must provide a valid Retail Sales Tax ID number for
-	// Manitoba. Leave this blank if you do not have a Retail Sales Tax ID number in
-	// Manitoba or are not purchasing Amazon Web Services for resale.
+	// services for resale in Manitoba must provide a valid Retail Sales Tax ID number
+	// for Manitoba. Leave this blank if you do not have a Retail Sales Tax ID number
+	// in Manitoba or are not purchasing Amazon Web Services services for resale.
 	CanadaRetailSalesTaxNumber *string
 
 	//  The value for this parameter must be true if the provincialSalesTaxId value is
@@ -432,10 +434,42 @@ type KenyaAdditionalInfo struct {
 // Additional tax information associated with your TRN in Malaysia.
 type MalaysiaAdditionalInfo struct {
 
-	// List of service tax codes for your TRN in Malaysia.
+	// The tax registration number (TRN) in Malaysia.
 	//
-	// This member is required.
+	// For individual, you can specify the taxInformationNumber in
+	// MalaysiaAdditionalInfo with NRIC type, and a valid MyKad or NRIC number. For
+	// business, you must specify a businessRegistrationNumber in
+	// MalaysiaAdditionalInfo with a TIN type and tax identification number. For
+	// business resellers, you must specify a businessRegistrationNumber and
+	// taxInformationNumber in MalaysiaAdditionalInfo with a sales and service tax
+	// (SST) type and a valid SST number.
+	//
+	// For business resellers with service codes, you must specify
+	// businessRegistrationNumber , taxInformationNumber , and distinct serviceTaxCodes
+	// in MalaysiaAdditionalInfo with a SST type and valid sales and service tax (SST)
+	// number. By using this API operation, Amazon Web Services registers your
+	// self-declaration that you’re an authorized business reseller registered with the
+	// Royal Malaysia Customs Department (RMCD), and have a valid SST number.
+	BusinessRegistrationNumber *string
+
+	// List of service tax codes for your TRN in Malaysia.
 	ServiceTaxCodes []MalaysiaServiceTaxCode
+
+	// The tax information number in Malaysia.
+	//
+	// For individual, you can specify the taxInformationNumber in
+	// MalaysiaAdditionalInfo with NRIC type, and a valid MyKad or NRIC number. For
+	// business resellers, you must specify a businessRegistrationNumber and
+	// taxInformationNumber in MalaysiaAdditionalInfo with a sales and service tax
+	// (SST) type and a valid SST number.
+	//
+	// For business resellers with service codes, you must specify
+	// businessRegistrationNumber , taxInformationNumber , and distinct serviceTaxCodes
+	// in MalaysiaAdditionalInfo with a SST type and valid sales and service tax (SST)
+	// number. By using this API operation, Amazon Web Services registers your
+	// self-declaration that you’re an authorized business reseller registered with the
+	// Royal Malaysia Customs Department (RMCD), and have a valid SST number.
+	TaxInformationNumber *string
 
 	noSmithyDocumentSerde
 }
@@ -522,6 +556,70 @@ type SpainAdditionalInfo struct {
 	//
 	// This member is required.
 	RegistrationType RegistrationType
+
+	noSmithyDocumentSerde
+}
+
+// Supplemental TRN details.
+type SupplementalTaxRegistration struct {
+
+	//  The details of the address associated with the TRN information.
+	//
+	// This member is required.
+	Address *Address
+
+	//  Unique authority ID for the supplemental TRN.
+	//
+	// This member is required.
+	AuthorityId *string
+
+	//  The legal name associated with your TRN registration.
+	//
+	// This member is required.
+	LegalName *string
+
+	//  The supplemental TRN unique identifier.
+	//
+	// This member is required.
+	RegistrationId *string
+
+	//  Type of supplemental TRN. Currently, this can only be VAT.
+	//
+	// This member is required.
+	RegistrationType SupplementalTaxRegistrationType
+
+	//  The status of your TRN.
+	//
+	// This member is required.
+	Status TaxRegistrationStatus
+
+	noSmithyDocumentSerde
+}
+
+//	The supplemental TRN information to provide when adding or updating a
+//
+// supplemental TRN.
+type SupplementalTaxRegistrationEntry struct {
+
+	//  The details of the address associated with the TRN information.
+	//
+	// This member is required.
+	Address *Address
+
+	//  The legal name associated with your TRN registration.
+	//
+	// This member is required.
+	LegalName *string
+
+	//  The supplemental TRN unique identifier.
+	//
+	// This member is required.
+	RegistrationId *string
+
+	//  Type of supplemental TRN. Currently, this can only be VAT.
+	//
+	// This member is required.
+	RegistrationType SupplementalTaxRegistrationType
 
 	noSmithyDocumentSerde
 }

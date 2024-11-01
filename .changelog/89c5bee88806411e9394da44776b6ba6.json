@@ -1,0 +1,8 @@
+{
+    "id": "89c5bee8-8806-411e-9394-da44776b6ba6",
+    "type": "feature",
+    "description": "Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

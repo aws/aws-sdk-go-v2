@@ -1,0 +1,8 @@
+{
+    "id": "7a29a2dd-d020-438c-8302-7067f3a6846f",
+    "type": "feature",
+    "description": "Amazon DocumentDB Elastic Clusters adds support for pending maintenance actions feature with APIs GetPendingMaintenanceAction, ListPendingMaintenanceActions and ApplyPendingMaintenanceAction",
+    "modules": [
+        "service/docdbelastic"
+    ]
+}
