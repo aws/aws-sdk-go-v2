@@ -1,3 +1,7 @@
+# v1.6.0 (2024-11-01)
+
+* **Feature**: Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.
+
 # v1.5.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -59,7 +59,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/polly v1.45.3
 	github.com/aws/aws-sdk-go-v2/service/rds v1.89.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.51.0
-	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.3
+	github.com/aws/aws-sdk-go-v2/service/rekognition v1.45.4
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.46.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.33.1

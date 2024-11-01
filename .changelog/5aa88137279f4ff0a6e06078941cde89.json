@@ -1,8 +1,0 @@
-{
-    "id": "5aa88137-279f-4ff0-a6e0-6078941cde89",
-    "type": "feature",
-    "description": "This release introduces an improvement in PutLogEvents",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

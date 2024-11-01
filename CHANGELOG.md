@@ -1,3 +1,13 @@
+# Release (2024-11-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.26.0](service/bedrockagent/CHANGELOG.md#v1260-2024-11-01)
+  * **Feature**: Amazon Bedrock Knowledge Bases now supports using application inference profiles to increase throughput and improve resilience.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.14.0](service/docdbelastic/CHANGELOG.md#v1140-2024-11-01)
+  * **Feature**: Amazon DocumentDB Elastic Clusters adds support for pending maintenance actions feature with APIs GetPendingMaintenanceAction, ListPendingMaintenanceActions and ApplyPendingMaintenanceAction
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.6.0](service/taxsettings/CHANGELOG.md#v160-2024-11-01)
+  * **Feature**: Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.
+
 # Release (2024-10-31)
 
 ## Module Highlights
