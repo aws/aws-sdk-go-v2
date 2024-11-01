@@ -753,12 +753,12 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 		return nil, 0, func() {}, err
 	}
 
-	n, err := readFillBuf(u.in.Body, part)
+	n, err := readFillBuf(u.in.Body, *part)
 
 	cleanup := func() {
 		u.partPool.Put(part)
 	}
-	return bytes.NewReader(part[0:n]), n, cleanup, err
+	return bytes.NewReader((*part)[0:n]), n, cleanup, err
 }
 
 func readFillBuf(r io.Reader, b []byte) (offset int, err error) {

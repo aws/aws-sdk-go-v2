@@ -6,21 +6,22 @@ import (
 )
 
 type bytesBufferPool interface {
-	Get(context.Context) ([]byte, error)
-	Put([]byte)
+	Get(context.Context) (*[]byte, error)
+	Put(*[]byte)
 	Close()
 }
 
 type defaultSlicePool struct {
-	slices chan []byte
+	slices chan *[]byte
 }
 
 func newDefaultSlicePool(sliceSize int64, capacity int) *defaultSlicePool {
 	p := &defaultSlicePool{}
 
-	slices := make(chan []byte, capacity)
+	slices := make(chan *[]byte, capacity)
 	for i := 0; i < capacity; i++ {
-		slices <- make([]byte, sliceSize)
+		s := make([]byte, sliceSize)
+		slices <- &s
 	}
 
 	p.slices = slices
@@ -29,7 +30,7 @@ func newDefaultSlicePool(sliceSize int64, capacity int) *defaultSlicePool {
 
 var errZeroCapacity = fmt.Errorf("get called on zero capacity pool")
 
-func (p *defaultSlicePool) Get(ctx context.Context) ([]byte, error) {
+func (p *defaultSlicePool) Get(ctx context.Context) (*[]byte, error) {
 	select {
 	case <-ctx.Done():
 		return nil, ctx.Err()
@@ -50,7 +51,7 @@ func (p *defaultSlicePool) Get(ctx context.Context) ([]byte, error) {
 	}
 }
 
-func (p *defaultSlicePool) Put(bs []byte) {
+func (p *defaultSlicePool) Put(bs *[]byte) {
 	p.slices <- bs
 }
 
