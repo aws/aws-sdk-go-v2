@@ -10,33 +10,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) SparseJsonLists(ctx context.Context, params *SparseJsonListsInput, optFns ...func(*Options)) (*SparseJsonListsOutput, error) {
+// This example POST operation has no input and serializes a request without a
+// HTTP body.
+//
+// These tests are to ensure we do not attach a body or related headers
+// (Content-Type) to a POST operation with no modeled input.
+func (c *Client) TestPostNoInputNoPayload(ctx context.Context, params *TestPostNoInputNoPayloadInput, optFns ...func(*Options)) (*TestPostNoInputNoPayloadOutput, error) {
 	if params == nil {
-		params = &SparseJsonListsInput{}
+		params = &TestPostNoInputNoPayloadInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SparseJsonLists", params, optFns, c.addOperationSparseJsonListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TestPostNoInputNoPayload", params, optFns, c.addOperationTestPostNoInputNoPayloadMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*SparseJsonListsOutput)
+	out := result.(*TestPostNoInputNoPayloadOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type SparseJsonListsInput struct {
-	SparseShortList []*int16
-
-	SparseStringList []*string
-
+type TestPostNoInputNoPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
-type SparseJsonListsOutput struct {
-	SparseShortList []*int16
-
-	SparseStringList []*string
+type TestPostNoInputNoPayloadOutput struct {
+	TestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,19 +43,19 @@ type SparseJsonListsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationTestPostNoInputNoPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSparseJsonLists{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestPostNoInputNoPayload{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSparseJsonLists{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestPostNoInputNoPayload{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseJsonLists"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "TestPostNoInputNoPayload"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,7 +107,7 @@ func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSparseJsonLists(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestPostNoInputNoPayload(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -141,10 +140,10 @@ func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opSparseJsonLists(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTestPostNoInputNoPayload(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "SparseJsonLists",
+		OperationName: "TestPostNoInputNoPayload",
 	}
 }

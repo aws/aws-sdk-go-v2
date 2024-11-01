@@ -38,9 +38,6 @@ func TestClient_TestPayloadBlob_awsRestjson1Serialize(t *testing.T) {
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/blob_payload",
 			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/octet-stream"},
-			},
 			BodyMediaType: "application/octet-stream",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

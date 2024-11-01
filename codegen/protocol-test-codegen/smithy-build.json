@@ -8,6 +8,8 @@
           "args": {
             "services": ["aws.protocoltests.ec2#AwsEc2"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -24,6 +26,8 @@
           "args": {
             "services": ["aws.protocoltests.json#JsonProtocol"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -40,6 +44,8 @@
           "args": {
             "services": ["aws.protocoltests.json10#JsonRpc10"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -56,6 +62,8 @@
           "args": {
             "services": ["aws.protocoltests.query#AwsQuery"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -72,6 +80,8 @@
           "args": {
             "services": ["aws.protocoltests.restjson#RestJson"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -88,6 +98,8 @@
           "args": {
             "services": ["aws.protocoltests.restxml#RestXml"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -104,6 +116,8 @@
           "args": {
             "services": ["aws.protocoltests.restxml.xmlns#RestXmlWithNamespace"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {
@@ -120,6 +134,8 @@
           "args": {
             "services": ["smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"]
           }
+        },{
+          "name": "removeUnusedShapes"
         }
       ],
       "plugins": {

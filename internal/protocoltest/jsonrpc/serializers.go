@@ -540,6 +540,67 @@ func (m *awsAwsjson11_serializeOpJsonEnums) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpJsonIntEnums struct {
+}
+
+func (*awsAwsjson11_serializeOpJsonIntEnums) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpJsonIntEnums) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonIntEnumsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.JsonIntEnums")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentJsonIntEnumsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpJsonUnions struct {
 }
 
@@ -1503,6 +1564,39 @@ func awsAwsjson11_serializeDocumentGreetingStruct(v *types.GreetingStruct, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIntegerEnumList(v []types.IntegerEnum, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIntegerEnumMap(v map[string]types.IntegerEnum, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Integer(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIntegerEnumSet(v []types.IntegerEnum, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSparseStringList(v []*string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1615,6 +1709,49 @@ func awsAwsjson11_serializeOpDocumentJsonEnumsInput(v *JsonEnumsInput, value smi
 	if v.FooEnumSet != nil {
 		ok := object.Key("fooEnumSet")
 		if err := awsAwsjson11_serializeDocumentFooEnumSet(v.FooEnumSet, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentJsonIntEnumsInput(v *JsonIntEnumsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IntEnum1 != 0 {
+		ok := object.Key("intEnum1")
+		ok.Integer(v.IntEnum1)
+	}
+
+	if v.IntEnum2 != 0 {
+		ok := object.Key("intEnum2")
+		ok.Integer(v.IntEnum2)
+	}
+
+	if v.IntEnum3 != 0 {
+		ok := object.Key("intEnum3")
+		ok.Integer(v.IntEnum3)
+	}
+
+	if v.IntEnumList != nil {
+		ok := object.Key("intEnumList")
+		if err := awsAwsjson11_serializeDocumentIntegerEnumList(v.IntEnumList, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IntEnumMap != nil {
+		ok := object.Key("intEnumMap")
+		if err := awsAwsjson11_serializeDocumentIntegerEnumMap(v.IntEnumMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IntEnumSet != nil {
+		ok := object.Key("intEnumSet")
+		if err := awsAwsjson11_serializeDocumentIntegerEnumSet(v.IntEnumSet, ok); err != nil {
 			return err
 		}
 	}

@@ -10,53 +10,45 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) SparseJsonLists(ctx context.Context, params *SparseJsonListsInput, optFns ...func(*Options)) (*SparseJsonListsOutput, error) {
+func (c *Client) ResponseCodeHttpFallback(ctx context.Context, params *ResponseCodeHttpFallbackInput, optFns ...func(*Options)) (*ResponseCodeHttpFallbackOutput, error) {
 	if params == nil {
-		params = &SparseJsonListsInput{}
+		params = &ResponseCodeHttpFallbackInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "SparseJsonLists", params, optFns, c.addOperationSparseJsonListsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResponseCodeHttpFallback", params, optFns, c.addOperationResponseCodeHttpFallbackMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*SparseJsonListsOutput)
+	out := result.(*ResponseCodeHttpFallbackOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type SparseJsonListsInput struct {
-	SparseShortList []*int16
-
-	SparseStringList []*string
-
+type ResponseCodeHttpFallbackInput struct {
 	noSmithyDocumentSerde
 }
 
-type SparseJsonListsOutput struct {
-	SparseShortList []*int16
-
-	SparseStringList []*string
-
+type ResponseCodeHttpFallbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationResponseCodeHttpFallbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSparseJsonLists{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpResponseCodeHttpFallback{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSparseJsonLists{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResponseCodeHttpFallback{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseJsonLists"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ResponseCodeHttpFallback"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,7 +100,7 @@ func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack,
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSparseJsonLists(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResponseCodeHttpFallback(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -141,10 +133,10 @@ func (c *Client) addOperationSparseJsonListsMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opSparseJsonLists(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opResponseCodeHttpFallback(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "SparseJsonLists",
+		OperationName: "ResponseCodeHttpFallback",
 	}
 }

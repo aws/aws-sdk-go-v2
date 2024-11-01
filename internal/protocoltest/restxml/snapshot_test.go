@@ -470,6 +470,18 @@ func TestCheckSnapshot_NestedXmlMaps(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_NestedXmlMapWithXmlName(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.NestedXmlMapWithXmlName(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "NestedXmlMapWithXmlName")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_NoInputAndNoOutput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.NoInputAndNoOutput(context.Background(), nil, func(o *Options) {
@@ -1206,6 +1218,18 @@ func TestUpdateSnapshot_NestedXmlMaps(t *testing.T) {
 	_, err := svc.NestedXmlMaps(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "NestedXmlMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_NestedXmlMapWithXmlName(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.NestedXmlMapWithXmlName(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "NestedXmlMapWithXmlName")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
