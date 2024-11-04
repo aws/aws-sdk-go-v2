@@ -9,7 +9,7 @@ import (
 func TestDefaultSlicePool(t *testing.T) {
 	pool := newDefaultSlicePool(1, 2)
 
-	var bs *[]byte
+	var bs []byte
 	var err error
 	var wg sync.WaitGroup
 
@@ -17,8 +17,7 @@ func TestDefaultSlicePool(t *testing.T) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			bs := make([]byte, 1)
-			pool.Put(&bs)
+			pool.Put(make([]byte, 1))
 		}()
 	}
 	// wait for a slice to be put back
