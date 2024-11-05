@@ -56,7 +56,6 @@ func (p *defaultSlicePool) Put(bs []byte) {
 func (p *defaultSlicePool) Close() {
 	close(p.slices)
 	for range p.slices {
-		// drain the whole channel
 	}
 	p.slices = nil
 }
