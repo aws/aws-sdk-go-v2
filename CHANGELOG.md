@@ -1,3 +1,31 @@
+# Release (2024-11-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.26.0](service/bedrockagent/CHANGELOG.md#v1260-2024-11-01)
+  * **Feature**: Amazon Bedrock Knowledge Bases now supports using application inference profiles to increase throughput and improve resilience.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.14.0](service/docdbelastic/CHANGELOG.md#v1140-2024-11-01)
+  * **Feature**: Amazon DocumentDB Elastic Clusters adds support for pending maintenance actions feature with APIs GetPendingMaintenanceAction, ListPendingMaintenanceActions and ApplyPendingMaintenanceAction
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.6.0](service/taxsettings/CHANGELOG.md#v160-2024-11-01)
+  * **Feature**: Add support for supplemental tax registrations via these new APIs: PutSupplementalTaxRegistration, ListSupplementalTaxRegistrations, and DeleteSupplementalTaxRegistration.
+
+# Release (2024-10-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.30.0](service/amp/CHANGELOG.md#v1300-2024-10-31)
+  * **Feature**: Added support for UpdateScraper API, to enable updating collector configuration in-place
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.47.0](service/autoscaling/CHANGELOG.md#v1470-2024-10-31)
+  * **Feature**: Adds bake time for Auto Scaling group Instance Refresh
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.47.0](service/batch/CHANGELOG.md#v1470-2024-10-31)
+  * **Feature**: Add `podNamespace` to `EksAttemptDetail` and `containerID` to `EksAttemptContainerDetail`.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.41.0](service/elasticloadbalancingv2/CHANGELOG.md#v1410-2024-10-31)
+  * **Feature**: Add UDP support for AWS PrivateLink and dual-stack Network Load Balancers
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.101.0](service/glue/CHANGELOG.md#v11010-2024-10-31)
+  * **Feature**: Add schedule support for AWS Glue column statistics
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.166.0](service/sagemaker/CHANGELOG.md#v11660-2024-10-31)
+  * **Feature**: SageMaker HyperPod adds scale-down at instance level via BatchDeleteClusterNodes API and group level via UpdateCluster API. SageMaker Training exposes secondary job status in TrainingJobSummary from ListTrainingJobs API. SageMaker now supports G6, G6e, P5e instances for HyperPod and Training.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.38.0](service/sesv2/CHANGELOG.md#v1380-2024-10-31)
+  * **Feature**: This release enables customers to provide the email template content in the SESv2 SendEmail and SendBulkEmail APIs instead of the name or the ARN of a stored email template.
+
 # Release (2024-10-30)
 
 ## Module Highlights

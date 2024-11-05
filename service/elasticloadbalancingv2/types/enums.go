@@ -110,6 +110,26 @@ func (DescribeTargetHealthInputIncludeEnum) Values() []DescribeTargetHealthInput
 	}
 }
 
+type EnablePrefixForIpv6SourceNatEnum string
+
+// Enum values for EnablePrefixForIpv6SourceNatEnum
+const (
+	EnablePrefixForIpv6SourceNatEnumOn  EnablePrefixForIpv6SourceNatEnum = "on"
+	EnablePrefixForIpv6SourceNatEnumOff EnablePrefixForIpv6SourceNatEnum = "off"
+)
+
+// Values returns all known values for EnablePrefixForIpv6SourceNatEnum. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EnablePrefixForIpv6SourceNatEnum) Values() []EnablePrefixForIpv6SourceNatEnum {
+	return []EnablePrefixForIpv6SourceNatEnum{
+		"on",
+		"off",
+	}
+}
+
 type EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum string
 
 // Enum values for EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum

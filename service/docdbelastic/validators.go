@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpApplyPendingMaintenanceAction struct {
+}
+
+func (*validateOpApplyPendingMaintenanceAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpApplyPendingMaintenanceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ApplyPendingMaintenanceActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpApplyPendingMaintenanceActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCopyClusterSnapshot struct {
 }
 
@@ -144,6 +164,26 @@ func (m *validateOpGetClusterSnapshot) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetClusterSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPendingMaintenanceAction struct {
+}
+
+func (*validateOpGetPendingMaintenanceAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPendingMaintenanceAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPendingMaintenanceActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPendingMaintenanceActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -289,6 +329,10 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpApplyPendingMaintenanceActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpApplyPendingMaintenanceAction{}, middleware.After)
+}
+
 func addOpCopyClusterSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyClusterSnapshot{}, middleware.After)
 }
@@ -317,6 +361,10 @@ func addOpGetClusterSnapshotValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetClusterSnapshot{}, middleware.After)
 }
 
+func addOpGetPendingMaintenanceActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPendingMaintenanceAction{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -343,6 +391,27 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
+}
+
+func validateOpApplyPendingMaintenanceActionInput(v *ApplyPendingMaintenanceActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplyPendingMaintenanceActionInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.ApplyAction == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplyAction"))
+	}
+	if len(v.OptInType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OptInType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCopyClusterSnapshotInput(v *CopyClusterSnapshotInput) error {
@@ -463,6 +532,21 @@ func validateOpGetClusterSnapshotInput(v *GetClusterSnapshotInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetClusterSnapshotInput"}
 	if v.SnapshotArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPendingMaintenanceActionInput(v *GetPendingMaintenanceActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPendingMaintenanceActionInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

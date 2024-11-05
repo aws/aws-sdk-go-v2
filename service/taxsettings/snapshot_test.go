@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchPutTaxRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSupplementalTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTaxRegistration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTaxRegistration(context.Background(), nil, func(o *Options) {
@@ -122,11 +134,35 @@ func TestCheckSnapshot_GetTaxRegistrationDocument(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSupplementalTaxRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSupplementalTaxRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSupplementalTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTaxRegistrations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTaxRegistrations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutSupplementalTaxRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -162,6 +198,18 @@ func TestUpdateSnapshot_BatchPutTaxRegistration(t *testing.T) {
 	_, err := svc.BatchPutTaxRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchPutTaxRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSupplementalTaxRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -205,11 +253,35 @@ func TestUpdateSnapshot_GetTaxRegistrationDocument(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListSupplementalTaxRegistrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSupplementalTaxRegistrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSupplementalTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTaxRegistrations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTaxRegistrations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTaxRegistrations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutSupplementalTaxRegistration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutSupplementalTaxRegistration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutSupplementalTaxRegistration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

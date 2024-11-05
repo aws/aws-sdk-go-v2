@@ -224,6 +224,52 @@ type ClusterSnapshotInList struct {
 	noSmithyDocumentSerde
 }
 
+// Retrieves the details of maintenance actions that are pending.
+type PendingMaintenanceActionDetails struct {
+
+	// Displays the specific action of a pending maintenance action.
+	//
+	// This member is required.
+	Action *string
+
+	// Displays the date of the maintenance window when the action is applied. The
+	// maintenance action is applied to the resource during its first maintenance
+	// window after this date. If this date is specified, any NEXT_MAINTENANCE optInType
+	// requests are ignored.
+	AutoAppliedAfterDate *string
+
+	// Displays the effective date when the pending maintenance action is applied to
+	// the resource.
+	CurrentApplyDate *string
+
+	// Displays a description providing more detail about the maintenance action.
+	Description *string
+
+	// Displays the date when the maintenance action is automatically applied. The
+	// maintenance action is applied to the resource on this date regardless of the
+	// maintenance window for the resource. If this date is specified, any IMMEDIATE
+	// optInType requests are ignored.
+	ForcedApplyDate *string
+
+	// Displays the type of optInType request that has been received for the resource.
+	OptInStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a pending maintenance action for a resource.
+type ResourcePendingMaintenanceAction struct {
+
+	// Provides information about a pending maintenance action for a resource.
+	PendingMaintenanceActionDetails []PendingMaintenanceActionDetails
+
+	// The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to which the
+	// pending maintenance action applies.
+	ResourceArn *string
+
+	noSmithyDocumentSerde
+}
+
 // The name of the shard.
 type Shard struct {
 

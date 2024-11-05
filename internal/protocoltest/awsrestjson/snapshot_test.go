@@ -626,6 +626,18 @@ func TestCheckSnapshot_MalformedContentTypeWithoutBody(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_MalformedContentTypeWithoutBodyEmptyInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.MalformedContentTypeWithoutBodyEmptyInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "MalformedContentTypeWithoutBodyEmptyInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_MalformedContentTypeWithPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.MalformedContentTypeWithPayload(context.Background(), nil, func(o *Options) {
@@ -1094,6 +1106,30 @@ func TestCheckSnapshot_RecursiveShapes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ResponseCodeHttpFallback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResponseCodeHttpFallback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResponseCodeHttpFallback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ResponseCodeRequired(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResponseCodeRequired(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResponseCodeRequired")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
@@ -1178,11 +1214,11 @@ func TestCheckSnapshot_TestBodyStructure(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_TestNoInputNoPayload(t *testing.T) {
+func TestCheckSnapshot_TestGetNoInputNoPayload(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.TestNoInputNoPayload(context.Background(), nil, func(o *Options) {
+	_, err := svc.TestGetNoInputNoPayload(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "TestNoInputNoPayload")
+			return testSnapshot(stack, "TestGetNoInputNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1190,11 +1226,11 @@ func TestCheckSnapshot_TestNoInputNoPayload(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_TestNoPayload(t *testing.T) {
+func TestCheckSnapshot_TestGetNoPayload(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.TestNoPayload(context.Background(), nil, func(o *Options) {
+	_, err := svc.TestGetNoPayload(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "TestNoPayload")
+			return testSnapshot(stack, "TestGetNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1219,6 +1255,30 @@ func TestCheckSnapshot_TestPayloadStructure(t *testing.T) {
 	_, err := svc.TestPayloadStructure(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TestPayloadStructure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TestPostNoInputNoPayload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestPostNoInputNoPayload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TestPostNoInputNoPayload")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TestPostNoPayload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestPostNoPayload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TestPostNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1813,6 +1873,18 @@ func TestUpdateSnapshot_MalformedContentTypeWithoutBody(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_MalformedContentTypeWithoutBodyEmptyInput(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.MalformedContentTypeWithoutBodyEmptyInput(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "MalformedContentTypeWithoutBodyEmptyInput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_MalformedContentTypeWithPayload(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.MalformedContentTypeWithPayload(context.Background(), nil, func(o *Options) {
@@ -2281,6 +2353,30 @@ func TestUpdateSnapshot_RecursiveShapes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ResponseCodeHttpFallback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResponseCodeHttpFallback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResponseCodeHttpFallback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResponseCodeRequired(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResponseCodeRequired(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResponseCodeRequired")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SimpleScalarProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
@@ -2365,11 +2461,11 @@ func TestUpdateSnapshot_TestBodyStructure(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_TestNoInputNoPayload(t *testing.T) {
+func TestUpdateSnapshot_TestGetNoInputNoPayload(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.TestNoInputNoPayload(context.Background(), nil, func(o *Options) {
+	_, err := svc.TestGetNoInputNoPayload(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "TestNoInputNoPayload")
+			return updateSnapshot(stack, "TestGetNoInputNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2377,11 +2473,11 @@ func TestUpdateSnapshot_TestNoInputNoPayload(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_TestNoPayload(t *testing.T) {
+func TestUpdateSnapshot_TestGetNoPayload(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.TestNoPayload(context.Background(), nil, func(o *Options) {
+	_, err := svc.TestGetNoPayload(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "TestNoPayload")
+			return updateSnapshot(stack, "TestGetNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2406,6 +2502,30 @@ func TestUpdateSnapshot_TestPayloadStructure(t *testing.T) {
 	_, err := svc.TestPayloadStructure(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TestPayloadStructure")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TestPostNoInputNoPayload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestPostNoInputNoPayload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TestPostNoInputNoPayload")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TestPostNoPayload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TestPostNoPayload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TestPostNoPayload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

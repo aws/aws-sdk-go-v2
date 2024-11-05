@@ -42,6 +42,10 @@ func TestClient_SparseJsonLists_awsRestjson1Serialize(t *testing.T) {
 					nil,
 					ptr.String("hi"),
 				},
+				SparseShortList: []*int16{
+					nil,
+					ptr.Int16(2),
+				},
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/SparseJsonLists",
@@ -55,6 +59,10 @@ func TestClient_SparseJsonLists_awsRestjson1Serialize(t *testing.T) {
 			    "sparseStringList": [
 			        null,
 			        "hi"
+			    ],
+			    "sparseShortList": [
+			        null,
+			        2
 			    ]
 			}`))
 			},
@@ -143,12 +151,20 @@ func TestClient_SparseJsonLists_awsRestjson1Deserialize(t *testing.T) {
 			    "sparseStringList": [
 			        null,
 			        "hi"
+			    ],
+			    "sparseShortList": [
+			        null,
+			        2
 			    ]
 			}`),
 			ExpectResult: &SparseJsonListsOutput{
 				SparseStringList: []*string{
 					nil,
 					ptr.String("hi"),
+				},
+				SparseShortList: []*int16{
+					nil,
+					ptr.Int16(2),
 				},
 			},
 		},

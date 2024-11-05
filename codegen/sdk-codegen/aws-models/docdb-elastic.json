@@ -18,6 +18,94 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.docdbelastic#ApplyPendingMaintenanceAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#ApplyPendingMaintenanceActionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#ApplyPendingMaintenanceActionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>The type of pending maintenance action to be applied to the resource.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/pending-action"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ApplyPendingMaintenanceActionInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.docdbelastic#InputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to which the pending maintenance action applies.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applyAction": {
+                    "target": "com.amazonaws.docdbelastic#InputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pending maintenance action to apply to the resource.</p>\n         <p>Valid actions are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENGINE_UPDATE<i/>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENGINE_UPGRADE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SECURITY_UPDATE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OS_UPDATE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MASTER_USER_PASSWORD_UPDATE</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "optInType": {
+                    "target": "com.amazonaws.docdbelastic#OptInType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type <code>IMMEDIATE</code> can't be undone.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applyOn": {
+                    "target": "com.amazonaws.docdbelastic#InputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A specific date to apply the pending maintenance action. Required if opt-in-type is <code>APPLY_ON</code>. Format: <code>yyyy/MM/dd HH:mm-yyyy/MM/dd HH:mm</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ApplyPendingMaintenanceActionOutput": {
+            "type": "structure",
+            "members": {
+                "resourcePendingMaintenanceAction": {
+                    "target": "com.amazonaws.docdbelastic#ResourcePendingMaintenanceAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output of the pending maintenance action being applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.docdbelastic#Arn": {
             "type": "string",
             "traits": {
@@ -47,6 +135,9 @@
             "version": "2022-11-28",
             "operations": [
                 {
+                    "target": "com.amazonaws.docdbelastic#ApplyPendingMaintenanceAction"
+                },
+                {
                     "target": "com.amazonaws.docdbelastic#CopyClusterSnapshot"
                 },
                 {
@@ -68,10 +159,16 @@
                     "target": "com.amazonaws.docdbelastic#GetClusterSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.docdbelastic#GetPendingMaintenanceAction"
+                },
+                {
                     "target": "com.amazonaws.docdbelastic#ListClusters"
                 },
                 {
                     "target": "com.amazonaws.docdbelastic#ListClusterSnapshots"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ListPendingMaintenanceActions"
                 },
                 {
                     "target": "com.amazonaws.docdbelastic#ListTagsForResource"
@@ -1726,6 +1823,85 @@
                 }
             }
         },
+        "com.amazonaws.docdbelastic#GetPendingMaintenanceAction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#GetPendingMaintenanceActionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#GetPendingMaintenanceActionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves all maintenance actions that are pending.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/pending-action/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#GetPendingMaintenanceActionInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.docdbelastic#InputString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retrieves pending maintenance actions for a specific Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "resourceArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#GetPendingMaintenanceActionOutput": {
+            "type": "structure",
+            "members": {
+                "resourcePendingMaintenanceAction": {
+                    "target": "com.amazonaws.docdbelastic#ResourcePendingMaintenanceAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about a pending maintenance action for a resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#InputString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.docdbelastic#InternalServerException": {
             "type": "structure",
             "members": {
@@ -1915,6 +2091,92 @@
                 }
             }
         },
+        "com.amazonaws.docdbelastic#ListPendingMaintenanceActions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#ListPendingMaintenanceActionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#ListPendingMaintenanceActionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of all maintenance actions that are pending.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/pending-actions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "resourcePendingMaintenanceActions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ListPendingMaintenanceActionsInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.docdbelastic#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>maxResults</code>.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response. \n      If more records exist than the specified <code>maxResults</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ListPendingMaintenanceActionsOutput": {
+            "type": "structure",
+            "members": {
+                "resourcePendingMaintenanceActions": {
+                    "target": "com.amazonaws.docdbelastic#ResourcePendingMaintenanceActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about a pending maintenance action for a resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.docdbelastic#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is displayed, the responses will include only records beyond the marker, up to the value specified by <code>maxResults</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.docdbelastic#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -1970,16 +2232,90 @@
                 }
             }
         },
+        "com.amazonaws.docdbelastic#OptInType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IMMEDIATE",
+                        "name": "IMMEDIATE"
+                    },
+                    {
+                        "value": "NEXT_MAINTENANCE",
+                        "name": "NEXT_MAINTENANCE"
+                    },
+                    {
+                        "value": "APPLY_ON",
+                        "name": "APPLY_ON"
+                    },
+                    {
+                        "value": "UNDO_OPT_IN",
+                        "name": "UNDO_OPT_IN"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.docdbelastic#PaginationToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Token or cursor used in paginated operations.\n\nWhen this value is provided as operation input, the service returns results from where the previous response left off.\nWhen this value is present in operation output, it indicates that there are more results to retrieve.\n\nThis should be opaque to not expose implementation details and potentially versioned to allow evolution of pagination\nstrategy.\n"
+                "smithy.api#documentation": "    Token or cursor used in paginated operations.\n\n    When this value is provided as operation input, the service returns results from where the previous response left off.\n    When this value is present in operation output, it indicates that there are more results to retrieve.\n\n    This should be opaque to not expose implementation details and potentially versioned to allow evolution of pagination\n    strategy.\n"
             }
         },
         "com.amazonaws.docdbelastic#Password": {
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#PendingMaintenanceActionDetails": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the specific action of a pending maintenance action.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoAppliedAfterDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the date of the maintenance window when the action is applied. \n      The maintenance action is applied to the resource during its first maintenance window after this date. \n      If this date is specified, any <code>NEXT_MAINTENANCE</code>\n            <code>optInType</code> requests are ignored.</p>"
+                    }
+                },
+                "forcedApplyDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the date when the maintenance action is automatically applied. \n      The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource. \n      If this date is specified, any <code>IMMEDIATE</code>\n            <code>optInType</code> requests are ignored.</p>"
+                    }
+                },
+                "optInStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the type of <code>optInType</code> request that has been received for the resource.</p>"
+                    }
+                },
+                "currentApplyDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays the effective date when the pending maintenance action is applied to the resource.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays a description providing more detail about the maintenance action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of maintenance actions that are pending.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#PendingMaintenanceActionDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#PendingMaintenanceActionDetails"
             }
         },
         "com.amazonaws.docdbelastic#ResourceNotFoundException": {
@@ -2011,6 +2347,32 @@
                 "smithy.api#documentation": "<p>The specified resource could not be located.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.docdbelastic#ResourcePendingMaintenanceAction": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon DocumentDB Amazon Resource Name (ARN) of the resource to which the pending maintenance action applies.</p>"
+                    }
+                },
+                "pendingMaintenanceActionDetails": {
+                    "target": "com.amazonaws.docdbelastic#PendingMaintenanceActionDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about a pending maintenance action for a resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a pending maintenance action for a resource.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ResourcePendingMaintenanceActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#ResourcePendingMaintenanceAction"
             }
         },
         "com.amazonaws.docdbelastic#RestoreClusterFromSnapshot": {
@@ -2369,6 +2731,14 @@
                     {
                         "value": "STOPPED",
                         "name": "STOPPED"
+                    },
+                    {
+                        "value": "MAINTENANCE",
+                        "name": "MAINTENANCE"
+                    },
+                    {
+                        "value": "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE",
+                        "name": "INACCESSIBLE_ENCRYPTION_CREDENTIALS_RECOVERABLE"
                     }
                 ]
             }

@@ -49,7 +49,8 @@ type UpdateJobQueueInput struct {
 
 	// The set of actions that Batch perform on jobs that remain at the head of the
 	// job queue in the specified state longer than specified times. Batch will perform
-	// each action after maxTimeSeconds has passed.
+	// each action after maxTimeSeconds has passed. (Note: The minimum value for
+	// maxTimeSeconds is 600 (10 minutes) and its maximum value is 86,400 (24 hours).)
 	JobStateTimeLimitActions []types.JobStateTimeLimitAction
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher

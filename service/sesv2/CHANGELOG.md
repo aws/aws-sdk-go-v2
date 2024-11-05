@@ -1,3 +1,7 @@
+# v1.38.0 (2024-10-31)
+
+* **Feature**: This release enables customers to provide the email template content in the SESv2 SendEmail and SendBulkEmail APIs instead of the name or the ARN of a stored email template.
+
 # v1.37.1 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

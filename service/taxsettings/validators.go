@@ -50,6 +50,26 @@ func (m *validateOpBatchPutTaxRegistration) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSupplementalTaxRegistration struct {
+}
+
+func (*validateOpDeleteSupplementalTaxRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSupplementalTaxRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSupplementalTaxRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSupplementalTaxRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTaxRegistrationDocument struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpGetTaxRegistrationDocument) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetTaxRegistrationDocumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutSupplementalTaxRegistration struct {
+}
+
+func (*validateOpPutSupplementalTaxRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutSupplementalTaxRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutSupplementalTaxRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutSupplementalTaxRegistrationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -98,8 +138,16 @@ func addOpBatchPutTaxRegistrationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpBatchPutTaxRegistration{}, middleware.After)
 }
 
+func addOpDeleteSupplementalTaxRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSupplementalTaxRegistration{}, middleware.After)
+}
+
 func addOpGetTaxRegistrationDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTaxRegistrationDocument{}, middleware.After)
+}
+
+func addOpPutSupplementalTaxRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutSupplementalTaxRegistration{}, middleware.After)
 }
 
 func addOpPutTaxRegistrationValidationMiddleware(stack *middleware.Stack) error {
@@ -111,11 +159,6 @@ func validateAdditionalInfoRequest(v *types.AdditionalInfoRequest) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AdditionalInfoRequest"}
-	if v.MalaysiaAdditionalInfo != nil {
-		if err := validateMalaysiaAdditionalInfo(v.MalaysiaAdditionalInfo); err != nil {
-			invalidParams.AddNested("MalaysiaAdditionalInfo", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.IsraelAdditionalInfo != nil {
 		if err := validateIsraelAdditionalInfo(v.IsraelAdditionalInfo); err != nil {
 			invalidParams.AddNested("IsraelAdditionalInfo", err.(smithy.InvalidParamsError))
@@ -265,21 +308,6 @@ func validateKenyaAdditionalInfo(v *types.KenyaAdditionalInfo) error {
 	}
 }
 
-func validateMalaysiaAdditionalInfo(v *types.MalaysiaAdditionalInfo) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "MalaysiaAdditionalInfo"}
-	if v.ServiceTaxCodes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceTaxCodes"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRomaniaAdditionalInfo(v *types.RomaniaAdditionalInfo) error {
 	if v == nil {
 		return nil
@@ -341,6 +369,34 @@ func validateSpainAdditionalInfo(v *types.SpainAdditionalInfo) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SpainAdditionalInfo"}
 	if len(v.RegistrationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistrationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSupplementalTaxRegistrationEntry(v *types.SupplementalTaxRegistrationEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SupplementalTaxRegistrationEntry"}
+	if v.RegistrationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if len(v.RegistrationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationType"))
+	}
+	if v.LegalName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalName"))
+	}
+	if v.Address == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Address"))
+	} else if v.Address != nil {
+		if err := validateAddress(v.Address); err != nil {
+			invalidParams.AddNested("Address", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -505,6 +561,21 @@ func validateOpBatchPutTaxRegistrationInput(v *BatchPutTaxRegistrationInput) err
 	}
 }
 
+func validateOpDeleteSupplementalTaxRegistrationInput(v *DeleteSupplementalTaxRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSupplementalTaxRegistrationInput"}
+	if v.AuthorityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTaxRegistrationDocumentInput(v *GetTaxRegistrationDocumentInput) error {
 	if v == nil {
 		return nil
@@ -522,6 +593,25 @@ func validateOpGetTaxRegistrationDocumentInput(v *GetTaxRegistrationDocumentInpu
 	} else if v.TaxDocumentMetadata != nil {
 		if err := validateTaxDocumentMetadata(v.TaxDocumentMetadata); err != nil {
 			invalidParams.AddNested("TaxDocumentMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutSupplementalTaxRegistrationInput(v *PutSupplementalTaxRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutSupplementalTaxRegistrationInput"}
+	if v.TaxRegistrationEntry == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaxRegistrationEntry"))
+	} else if v.TaxRegistrationEntry != nil {
+		if err := validateSupplementalTaxRegistrationEntry(v.TaxRegistrationEntry); err != nil {
+			invalidParams.AddNested("TaxRegistrationEntry", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

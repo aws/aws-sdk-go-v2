@@ -56,6 +56,7 @@ func TestClient_RecursiveShapes_smithyRpcv2cborSerialize(t *testing.T) {
 			ExpectURIPath: "/service/RpcV2Protocol/operation/RecursiveShapes",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
 				"Content-Type":    []string{"application/cbor"},
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},

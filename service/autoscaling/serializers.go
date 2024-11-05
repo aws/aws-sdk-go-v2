@@ -5924,6 +5924,11 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 		objectKey.Boolean(*v.AutoRollback)
 	}
 
+	if v.BakeTime != nil {
+		objectKey := object.Key("BakeTime")
+		objectKey.Integer(*v.BakeTime)
+	}
+
 	if v.CheckpointDelay != nil {
 		objectKey := object.Key("CheckpointDelay")
 		objectKey.Integer(*v.CheckpointDelay)

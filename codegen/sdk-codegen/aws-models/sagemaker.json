@@ -4700,6 +4700,134 @@
                 "smithy.api#documentation": "<p>Configuration to control how SageMaker captures inference data for batch transform jobs.</p>"
             }
         },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes specific nodes within a SageMaker HyperPod cluster. <code>BatchDeleteClusterNodes</code>\n         accepts a cluster name and a list of node IDs.</p>\n         <important>\n            <ul>\n               <li>\n                  <p>To safeguard your work, back up your data to Amazon S3 or an FSx for\n                  Lustre file system before invoking the API on a worker node group. This will help\n                  prevent any potential data loss from the instance root volume. For more\n                  information about backup, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-operate-cli-command.html#sagemaker-hyperpod-operate-cli-command-update-cluster-software-backup\">Use the backup script provided by SageMaker HyperPod</a>. </p>\n               </li>\n               <li>\n                  <p>If you want to invoke this API on an existing cluster, you'll first need to\n                  patch the cluster by running the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateClusterSoftware.html\">UpdateClusterSoftware API</a>. For more information about patching a\n                  cluster, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-operate-cli-command.html#sagemaker-hyperpod-operate-cli-command-update-cluster-software\">Update the SageMaker HyperPod platform software of a cluster</a>.</p>\n               </li>\n            </ul>\n         </important>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodesError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodesErrorCode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The error code associated with the error encountered when deleting a node.</p>\n         <p>The code provides information about the specific issue encountered, such as the node not\n         being found, the node's status being invalid for deletion, or the node ID being in use by\n         another process.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A message describing the error encountered when deleting a node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the node that encountered an error during the deletion process.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an error encountered when deleting a node from a SageMaker HyperPod cluster.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodesErrorCode": {
+            "type": "enum",
+            "members": {
+                "NODE_ID_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeIdNotFound"
+                    }
+                },
+                "INVALID_NODE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidNodeStatus"
+                    }
+                },
+                "NODE_ID_IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeIdInUse"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodesErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodesError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 99
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodesRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterName": {
+                    "target": "com.amazonaws.sagemaker#ClusterNameOrArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the SageMaker HyperPod cluster from which to delete the specified nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeIds": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of node IDs to be deleted from the specified cluster.</p>\n         <note>\n            <p>For SageMaker HyperPod clusters using the Slurm workload manager, \n         you cannot remove instances that are configured as Slurm controller nodes.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#BatchDeleteClusterNodesResponse": {
+            "type": "structure",
+            "members": {
+                "Failed": {
+                    "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodesErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors encountered when deleting the specified nodes.</p>"
+                    }
+                },
+                "Successful": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of node IDs that were successfully deleted from the specified cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#BatchDescribeModelPackage": {
             "type": "operation",
             "input": {
@@ -6759,7 +6887,7 @@
                 "OnStartDeepHealthChecks": {
                     "target": "com.amazonaws.sagemaker#OnStartDeepHealthChecks",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster instance group is created or updated.</p>"
+                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster\n         instance group is created or updated.</p>"
                     }
                 }
             },
@@ -6841,7 +6969,7 @@
                 "OnStartDeepHealthChecks": {
                     "target": "com.amazonaws.sagemaker#OnStartDeepHealthChecks",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster instance group is created or updated.</p>"
+                        "smithy.api#documentation": "<p>A flag indicating whether deep health checks should be performed when the cluster\n         instance group is created or updated.</p>"
                     }
                 }
             },
@@ -7200,6 +7328,120 @@
                     "traits": {
                         "smithy.api#enumValue": "ml.t3.2xlarge"
                     }
+                },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_GR6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.gr6.4xlarge"
+                    }
+                },
+                "ML_GR6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.gr6.8xlarge"
+                    }
+                },
+                "ML_G6E_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.xlarge"
+                    }
+                },
+                "ML_G6E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.2xlarge"
+                    }
+                },
+                "ML_G6E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.4xlarge"
+                    }
+                },
+                "ML_G6E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.8xlarge"
+                    }
+                },
+                "ML_G6E_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.16xlarge"
+                    }
+                },
+                "ML_G6E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.12xlarge"
+                    }
+                },
+                "ML_G6E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.24xlarge"
+                    }
+                },
+                "ML_G6E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.48xlarge"
+                    }
+                },
+                "ML_P5E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.p5e.48xlarge"
+                    }
                 }
             }
         },
@@ -7341,6 +7583,18 @@
                 "smithy.api#pattern": "^i-[a-f0-9]{8}(?:[a-f0-9]{9})?$"
             }
         },
+        "com.amazonaws.sagemaker#ClusterNodeIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterNodeId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 99
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ClusterNodeRecovery": {
             "type": "enum",
             "members": {
@@ -7443,13 +7697,13 @@
                     "target": "com.amazonaws.sagemaker#EksClusterArn",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EKS cluster associated with the SageMaker HyperPod cluster.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EKS cluster associated with the SageMaker HyperPod\n         cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings for the Amazon EKS cluster used as the orchestrator for the SageMaker HyperPod cluster.</p>"
+                "smithy.api#documentation": "<p>The configuration settings for the Amazon EKS cluster used as the orchestrator for the\n         SageMaker HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterPrivateDnsHostname": {
@@ -57525,6 +57779,9 @@
                     "target": "com.amazonaws.sagemaker#AssociateTrialComponent"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#BatchDeleteClusterNodes"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#BatchDescribeModelPackage"
                 },
                 {
@@ -64783,6 +65040,102 @@
                         "smithy.api#enumValue": "ml.g5.48xlarge"
                     }
                 },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
+                "ML_G6E_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.xlarge"
+                    }
+                },
+                "ML_G6E_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.2xlarge"
+                    }
+                },
+                "ML_G6E_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.4xlarge"
+                    }
+                },
+                "ML_G6E_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.8xlarge"
+                    }
+                },
+                "ML_G6E_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.16xlarge"
+                    }
+                },
+                "ML_G6E_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.12xlarge"
+                    }
+                },
+                "ML_G6E_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.24xlarge"
+                    }
+                },
+                "ML_G6E_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6e.48xlarge"
+                    }
+                },
                 "ML_TRN1_2XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -65517,6 +65870,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The status of the training job.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "SecondaryStatus": {
+                    "target": "com.amazonaws.sagemaker#SecondaryStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secondary status of the training job.</p>"
                     }
                 },
                 "WarmPoolStatus": {
@@ -67939,7 +68298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the platform software of a SageMaker HyperPod cluster for security patching. To learn how to\n         use this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-operate.html#sagemaker-hyperpod-operate-cli-command-update-cluster-software\">Update the SageMaker HyperPod platform software of a cluster</a>.</p>"
+                "smithy.api#documentation": "<p>Updates the platform software of a SageMaker HyperPod cluster for security patching. To learn how to\n         use this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-operate.html#sagemaker-hyperpod-operate-cli-command-update-cluster-software\">Update the SageMaker HyperPod platform software of a cluster</a>.</p>\n         <important>\n            <p>The <code>UpgradeClusterSoftware</code> API call may impact your SageMaker HyperPod cluster\n            uptime and availability. Plan accordingly to mitigate potential disruptions to your\n            workloads.</p>\n         </important>"
             }
         },
         "com.amazonaws.sagemaker#UpdateClusterSoftwareRequest": {

@@ -26,12 +26,16 @@ func (c *Client) SparseJsonLists(ctx context.Context, params *SparseJsonListsInp
 }
 
 type SparseJsonListsInput struct {
+	SparseShortList []*int16
+
 	SparseStringList []*string
 
 	noSmithyDocumentSerde
 }
 
 type SparseJsonListsOutput struct {
+	SparseShortList []*int16
+
 	SparseStringList []*string
 
 	// Metadata pertaining to the operation's result.

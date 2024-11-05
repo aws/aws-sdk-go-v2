@@ -9115,6 +9115,13 @@ func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.
 		ok.String(*v.TemplateArn)
 	}
 
+	if v.TemplateContent != nil {
+		ok := object.Key("TemplateContent")
+		if err := awsRestjson1_serializeDocumentEmailTemplateContent(v.TemplateContent, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateData != nil {
 		ok := object.Key("TemplateData")
 		ok.String(*v.TemplateData)

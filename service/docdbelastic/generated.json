@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_ApplyPendingMaintenanceAction.go",
         "api_op_CopyClusterSnapshot.go",
         "api_op_CreateCluster.go",
         "api_op_CreateClusterSnapshot.go",
@@ -15,8 +16,10 @@
         "api_op_DeleteClusterSnapshot.go",
         "api_op_GetCluster.go",
         "api_op_GetClusterSnapshot.go",
+        "api_op_GetPendingMaintenanceAction.go",
         "api_op_ListClusterSnapshots.go",
         "api_op_ListClusters.go",
+        "api_op_ListPendingMaintenanceActions.go",
         "api_op_ListTagsForResource.go",
         "api_op_RestoreClusterFromSnapshot.go",
         "api_op_StartCluster.go",

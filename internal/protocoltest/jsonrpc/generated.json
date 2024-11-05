@@ -26,6 +26,8 @@
         "api_op_HostWithPathOperation_test.go",
         "api_op_JsonEnums.go",
         "api_op_JsonEnums_test.go",
+        "api_op_JsonIntEnums.go",
+        "api_op_JsonIntEnums_test.go",
         "api_op_JsonUnions.go",
         "api_op_JsonUnions_test.go",
         "api_op_KitchenSinkOperation.go",

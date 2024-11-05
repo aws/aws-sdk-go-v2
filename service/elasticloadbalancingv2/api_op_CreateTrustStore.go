@@ -41,7 +41,7 @@ type CreateTrustStoreInput struct {
 
 	// The name of the trust store.
 	//
-	// This name must be unique per region and cannot be changed after creation.
+	// This name must be unique per region and can't be changed after creation.
 	//
 	// This member is required.
 	Name *string

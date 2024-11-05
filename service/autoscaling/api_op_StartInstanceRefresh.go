@@ -91,6 +91,8 @@ type StartInstanceRefreshInput struct {
 	//   - CloudWatch alarms
 	//
 	//   - Skip matching
+	//
+	//   - Bake time
 	Preferences *types.RefreshPreferences
 
 	// The strategy to use for the instance refresh. The only valid value is Rolling .

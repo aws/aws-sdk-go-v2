@@ -11,8 +11,8 @@ import (
 )
 
 // Removes the specified tags from an Amazon Managed Service for Prometheus
-// resource. The only resources that can be tagged are workspaces and rule groups
-// namespaces.
+// resource. The only resources that can be tagged are rule groups namespaces,
+// scrapers, and workspaces.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,7 +30,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the workspace or rule groups namespace.
+	// The ARN of the resource from which to remove a tag.
 	//
 	// This member is required.
 	ResourceArn *string

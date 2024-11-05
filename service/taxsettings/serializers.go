@@ -188,6 +188,87 @@ func awsRestjson1_serializeOpDocumentBatchPutTaxRegistrationInput(v *BatchPutTax
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteSupplementalTaxRegistration struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteSupplementalTaxRegistration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteSupplementalTaxRegistration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteSupplementalTaxRegistrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DeleteSupplementalTaxRegistration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeleteSupplementalTaxRegistrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteSupplementalTaxRegistrationInput(v *DeleteSupplementalTaxRegistrationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeleteSupplementalTaxRegistrationInput(v *DeleteSupplementalTaxRegistrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorityId != nil {
+		ok := object.Key("authorityId")
+		ok.String(*v.AuthorityId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteTaxRegistration struct {
 }
 
@@ -440,6 +521,92 @@ func awsRestjson1_serializeOpDocumentGetTaxRegistrationDocumentInput(v *GetTaxRe
 	return nil
 }
 
+type awsRestjson1_serializeOpListSupplementalTaxRegistrations struct {
+}
+
+func (*awsRestjson1_serializeOpListSupplementalTaxRegistrations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListSupplementalTaxRegistrations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSupplementalTaxRegistrationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListSupplementalTaxRegistrations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListSupplementalTaxRegistrationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListSupplementalTaxRegistrationsInput(v *ListSupplementalTaxRegistrationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListSupplementalTaxRegistrationsInput(v *ListSupplementalTaxRegistrationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListTaxRegistrations struct {
 }
 
@@ -521,6 +688,89 @@ func awsRestjson1_serializeOpDocumentListTaxRegistrationsInput(v *ListTaxRegistr
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutSupplementalTaxRegistration struct {
+}
+
+func (*awsRestjson1_serializeOpPutSupplementalTaxRegistration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutSupplementalTaxRegistration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutSupplementalTaxRegistrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/PutSupplementalTaxRegistration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutSupplementalTaxRegistrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutSupplementalTaxRegistrationInput(v *PutSupplementalTaxRegistrationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutSupplementalTaxRegistrationInput(v *PutSupplementalTaxRegistrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TaxRegistrationEntry != nil {
+		ok := object.Key("taxRegistrationEntry")
+		if err := awsRestjson1_serializeDocumentSupplementalTaxRegistrationEntry(v.TaxRegistrationEntry, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -905,11 +1155,21 @@ func awsRestjson1_serializeDocumentMalaysiaAdditionalInfo(v *types.MalaysiaAddit
 	object := value.Object()
 	defer object.Close()
 
+	if v.BusinessRegistrationNumber != nil {
+		ok := object.Key("businessRegistrationNumber")
+		ok.String(*v.BusinessRegistrationNumber)
+	}
+
 	if v.ServiceTaxCodes != nil {
 		ok := object.Key("serviceTaxCodes")
 		if err := awsRestjson1_serializeDocumentMalaysiaServiceTaxCodesList(v.ServiceTaxCodes, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TaxInformationNumber != nil {
+		ok := object.Key("taxInformationNumber")
+		ok.String(*v.TaxInformationNumber)
 	}
 
 	return nil
@@ -1009,6 +1269,35 @@ func awsRestjson1_serializeDocumentSouthKoreaAdditionalInfo(v *types.SouthKoreaA
 func awsRestjson1_serializeDocumentSpainAdditionalInfo(v *types.SpainAdditionalInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.RegistrationType) > 0 {
+		ok := object.Key("registrationType")
+		ok.String(string(v.RegistrationType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSupplementalTaxRegistrationEntry(v *types.SupplementalTaxRegistrationEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Address != nil {
+		ok := object.Key("address")
+		if err := awsRestjson1_serializeDocumentAddress(v.Address, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LegalName != nil {
+		ok := object.Key("legalName")
+		ok.String(*v.LegalName)
+	}
+
+	if v.RegistrationId != nil {
+		ok := object.Key("registrationId")
+		ok.String(*v.RegistrationId)
+	}
 
 	if len(v.RegistrationType) > 0 {
 		ok := object.Key("registrationType")

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ApplyPendingMaintenanceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ApplyPendingMaintenanceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ApplyPendingMaintenanceAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CopyClusterSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CopyClusterSnapshot(context.Background(), nil, func(o *Options) {
@@ -146,6 +158,18 @@ func TestCheckSnapshot_GetClusterSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPendingMaintenanceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPendingMaintenanceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPendingMaintenanceAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListClusters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
@@ -163,6 +187,18 @@ func TestCheckSnapshot_ListClusterSnapshots(t *testing.T) {
 	_, err := svc.ListClusterSnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListClusterSnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPendingMaintenanceActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPendingMaintenanceActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPendingMaintenanceActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +289,18 @@ func TestCheckSnapshot_UpdateCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_ApplyPendingMaintenanceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ApplyPendingMaintenanceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ApplyPendingMaintenanceAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CopyClusterSnapshot(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CopyClusterSnapshot(context.Background(), nil, func(o *Options) {
@@ -337,6 +385,18 @@ func TestUpdateSnapshot_GetClusterSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPendingMaintenanceAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPendingMaintenanceAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPendingMaintenanceAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListClusters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListClusters(context.Background(), nil, func(o *Options) {
@@ -354,6 +414,18 @@ func TestUpdateSnapshot_ListClusterSnapshots(t *testing.T) {
 	_, err := svc.ListClusterSnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListClusterSnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPendingMaintenanceActions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPendingMaintenanceActions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPendingMaintenanceActions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

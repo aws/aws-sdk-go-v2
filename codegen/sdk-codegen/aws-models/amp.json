@@ -83,7 +83,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details of an alert manager definition. </p>"
+                "smithy.api#documentation": "<p>The details of an alert manager definition. It is the configuration for the\n            alert manager, including information about receivers for routing alerts.</p>"
             }
         },
         "com.amazonaws.amp#AlertManagerDefinitionStatus": {
@@ -1140,7 +1140,7 @@
                 "logGroupArn": {
                     "target": "com.amazonaws.amp#LogGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the CloudWatch log group to which the vended log data will be\n            published. This log group must exist prior to calling this API.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the CloudWatch log group to which the vended log data will be\n            published. This log group must exist prior to calling this operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1322,7 +1322,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CreateScraper</code> operation creates a scraper to collect metrics. A\n            scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS\n            cluster, and sends them to your Amazon Managed Service for Prometheus workspace. You can configure the\n            scraper to control what metrics are collected, and what transformations are applied\n            prior to sending them to your workspace.</p>\n         <p>If needed, an IAM role will be created for you that gives Amazon Managed Service for Prometheus access to the metrics in your cluster. For more information, see \n            <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/using-service-linked-roles.html#using-service-linked-roles-prom-scraper\">Using roles for scraping metrics from EKS</a> in the <i>Amazon Managed Service for Prometheus User \n                    Guide</i>.</p>\n         <p>You cannot update a scraper. If you want to change the configuration of the scraper,\n            create a new scraper and delete the old one.</p>\n         <p>The <code>scrapeConfiguration</code> parameter contains the base64-encoded version of\n            the YAML configuration file.</p>\n         <note>\n            <p>For more information about collectors, including what metrics are collected, and\n                how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector.html\">Amazon Web Services managed\n                    collectors</a> in the <i>Amazon Managed Service for Prometheus User \n                        Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>The <code>CreateScraper</code> operation creates a scraper to collect metrics. A\n            scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS\n            cluster, and sends them to your Amazon Managed Service for Prometheus workspace. Scrapers are \n            flexible, and can be configured to control what metrics are collected, the \n            frequency of collection, what transformations are applied to the metrics, and more.</p>\n         <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses \n            to access the metrics in your cluster. You must configure this role with a policy that\n            allows it to scrape metrics from your cluster. For more information, see \n            <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>\n         <p>The <code>scrapeConfiguration</code> parameter contains the base-64 encoded YAML \n            configuration for the scraper.</p>\n         <note>\n            <p>For more information about collectors, including what metrics are collected, and\n                how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an \n                    Amazon Web Services managed\n                    collector</a> in the <i>Amazon Managed Service for Prometheus User \n                        Guide</i>.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateScraper with optional alias input, optional clientToken input, and one set of tags",
@@ -1378,13 +1378,13 @@
                 "alias": {
                     "target": "com.amazonaws.amp#ScraperAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>(optional) a name to associate with the scraper. This is for your use, and does not\n            need to be unique.</p>"
+                        "smithy.api#documentation": "<p>(optional) An alias to associate with the scraper. This is for your use, and does not\n            need to be unique.</p>"
                     }
                 },
                 "scrapeConfiguration": {
                     "target": "com.amazonaws.amp#ScrapeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration file to use in the new scraper. For more information, see <a href=\"prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration\">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User \n                Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The configuration file to use in the new scraper. For more information, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration\">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User \n                Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2415,7 +2415,7 @@
                 "ampConfiguration": {
                     "target": "com.amazonaws.amp#AmpConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheusworkspace to send metrics to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Managed Service for Prometheus workspace to send metrics to.</p>"
                     }
                 }
             },
@@ -2951,7 +2951,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that are associated\n            with an Amazon Managed Service for Prometheus resource. Currently, the only resources that can be\n            tagged are workspaces and rule groups namespaces. </p>",
+                "smithy.api#documentation": "<p>The <code>ListTagsForResource</code> operation returns the tags that are associated\n            with an Amazon Managed Service for Prometheus resource. Currently, the only resources that can be\n            tagged are scrapers, workspaces, and rule groups namespaces. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}"
@@ -2965,7 +2965,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource to list tages for. Must be a workspace or rule groups\n            namespace resource.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource to list tages for. Must be a workspace, scraper, or rule groups\n            namespace resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3150,7 +3150,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the logging configuration. </p>"
+                "smithy.api#documentation": "<p>Contains information about the logging configuration for the workspace.</p>"
             }
         },
         "com.amazonaws.amp#LoggingConfigurationStatus": {
@@ -3481,7 +3481,7 @@
                 "aws.api#arn": {
                     "template": "rulegroupsnamespace/{workspaceId}/{name}"
                 },
-                "smithy.api#documentation": "<p>The definition of a rule group namespace in an Amazon Managed Service for Prometheus workspace.</p>"
+                "smithy.api#documentation": "<p>The definition of a rule groups namespace in an Amazon Managed Service for Prometheus workspace. \n            A rule groups namespace is associated with exactly one rules file. A\n            workspace can have multiple rule groups namespaces. For more information about\n            rules files, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-ruler-rulesfile.html\">Creating a rules \n            file</a>, in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>"
             }
         },
         "com.amazonaws.amp#RuleGroupsNamespaceArn": {
@@ -3507,7 +3507,7 @@
                 "arn": {
                     "target": "com.amazonaws.amp#RuleGroupsNamespaceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the rule groups namespace.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the rule groups namespace. For example, \n            <code>arn:aws:aps:&lt;region&gt;:123456789012:rulegroupsnamespace/ws-example1-1234-abcd-5678-ef90abcd1234/rulesfile1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3696,7 +3696,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A scrape configuration for a scraper, base 64 encoded. For more information, see <a href=\"prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration\">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User \n                Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A scrape configuration for a scraper, base 64 encoded. For more information, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-configuration\">Scraper configuration</a> in the <i>Amazon Managed Service for Prometheus User \n                Guide</i>.</p>"
             }
         },
         "com.amazonaws.amp#Scraper": {
@@ -3712,6 +3712,9 @@
             "read": {
                 "target": "com.amazonaws.amp#DescribeScraper"
             },
+            "update": {
+                "target": "com.amazonaws.amp#UpdateScraper"
+            },
             "delete": {
                 "target": "com.amazonaws.amp#DeleteScraper"
             },
@@ -3722,13 +3725,13 @@
                 "aws.api#arn": {
                     "template": "scraper/{scraperId}"
                 },
-                "smithy.api#documentation": "<p>A scraper is a logical and isolated Prometheus server dedicated to discovering and \n            collecting metrics and producing them to an Amazon Managed Service for Prometheus workspace.</p>"
+                "smithy.api#documentation": "<p>A scraper is a fully-managed agentless collector that discovers and \n            pulls metrics automatically. A\n            scraper pulls metrics from Prometheus-compatible sources within an Amazon EKS\n            cluster, and sends them to your Amazon Managed Service for Prometheus workspace. Scrapers are \n            flexible. You can configure the scraper to control what metrics are collected, the \n            frequency of collection, what transformations are applied to the metrics, and more.</p>\n         <p>An IAM role will be created for you that Amazon Managed Service for Prometheus uses \n            to access the metrics in your cluster. You must configure this role with a policy that\n            allows it to scrape metrics from your cluster. For more information, see \n            <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html#AMP-collector-eks-setup\">Configuring your Amazon EKS cluster</a> in the <i>Amazon Managed Service for Prometheus User Guide</i>.</p>\n         <p>The <code>scrapeConfiguration</code> parameter contains the YAML configuration for the \n            scraper.</p>\n         <note>\n            <p>For more information about collectors, including what metrics are collected, and\n                how to configure the scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an \n                    Amazon Web Services managed\n                    collector</a> in the <i>Amazon Managed Service for Prometheus User \n                        Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.amp#ScraperAlias": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A user-assigned scraper alias.</p>",
+                "smithy.api#documentation": "<p>An optional user-assigned scraper alias.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
@@ -3759,21 +3762,21 @@
                 "scraperId": {
                     "target": "com.amazonaws.amp#ScraperId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the scraper.</p>",
+                        "smithy.api#documentation": "<p>The ID of the scraper. For example, <code>s-example1-1234-abcd-5678-ef9012abcd34</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.amp#ScraperArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scraper.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scraper. For example, \n            <code>arn:aws:aps:&lt;region&gt;:123456798012:scraper/s-example1-1234-abcd-5678-ef9012abcd34</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "roleArn": {
                     "target": "com.amazonaws.amp#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides \n            permissions for the scraper to discover and collect metrics on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that provides \n            permissions for the scraper to discover and collect metrics on your behalf.</p>\n         <p>For example, <code>arn:aws:iam::123456789012:role/service-role/AmazonGrafanaServiceRole-12example</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3813,7 +3816,7 @@
                 "scrapeConfiguration": {
                     "target": "com.amazonaws.amp#ScrapeConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration file in use by the scraper.</p>",
+                        "smithy.api#documentation": "<p>The configuration in use by the scraper.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3900,6 +3903,11 @@
                         "documentation": "Scraper is being created. Deletion is disallowed until status is ACTIVE."
                     },
                     {
+                        "name": "UPDATING",
+                        "value": "UPDATING",
+                        "documentation": "Scraper is being updated. Deletion is disallowed until status is ACTIVE."
+                    },
+                    {
                         "name": "ACTIVE",
                         "value": "ACTIVE",
                         "documentation": "Scraper has been created and is usable."
@@ -3913,6 +3921,11 @@
                         "name": "CREATION_FAILED",
                         "value": "CREATION_FAILED",
                         "documentation": "Scraper creation failed."
+                    },
+                    {
+                        "name": "UPDATE_FAILED",
+                        "value": "UPDATE_FAILED",
+                        "documentation": "Scraper update failed."
                     },
                     {
                         "name": "DELETION_FAILED",
@@ -4156,7 +4169,7 @@
             "key": {
                 "target": "com.amazonaws.amp#TagKey",
                 "traits": {
-                    "smithy.api#documentation": "<p>The key of the tag. May not begin with <code>aws:</code>.</p>"
+                    "smithy.api#documentation": "<p>The key of the tag. Must not begin with <code>aws:</code>.</p>"
                 }
             },
             "value": {
@@ -4166,7 +4179,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of tags assigned to the resource.</p>",
+                "smithy.api#documentation": "<p>A tag associated with a resource.</p>",
                 "smithy.api#length": {
                     "max": 50
                 }
@@ -4198,7 +4211,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Service for Prometheus\n            resource. The only resources that can be tagged are workspaces and rule groups\n            namespaces. </p>\n         <p>If you specify a new tag key for the resource, this tag is appended to the list of\n            tags associated with the resource. If you specify a tag key that is already associated\n            with the resource, the new tag value that you specify replaces the previous value for\n            that tag.</p>",
+                "smithy.api#documentation": "<p>The <code>TagResource</code> operation associates tags with an Amazon Managed Service for Prometheus\n            resource. The only resources that can be tagged are rule groups namespaces, scrapers, \n            and workspaces.</p>\n         <p>If you specify a new tag key for the resource, this tag is appended to the list of\n            tags associated with the resource. If you specify a tag key that is already associated\n            with the resource, the new tag value that you specify replaces the previous value for\n            that tag. To remove a tag, use <code>UntagResource</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}"
@@ -4211,7 +4224,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the workspace or rule groups namespace to apply tags to.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource to apply tags to.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4219,7 +4232,7 @@
                 "tags": {
                     "target": "com.amazonaws.amp#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource.</p>\n         <p>Keys may not begin with <code>aws:</code>.</p>",
+                        "smithy.api#documentation": "<p>The list of tag keys and values to associate with the resource.</p>\n         <p>Keys must not begin with <code>aws:</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4302,7 +4315,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags from an Amazon Managed Service for Prometheus resource. The only resources\n            that can be tagged are workspaces and rule groups namespaces. </p>",
+                "smithy.api#documentation": "<p>Removes the specified tags from an Amazon Managed Service for Prometheus resource. The only resources\n            that can be tagged are rule groups namespaces, scrapers, and workspaces. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}"
@@ -4316,7 +4329,7 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the workspace or rule groups namespace.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource from which to remove a tag.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4413,6 +4426,151 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the output of an <code>UpdateLoggingConfiguration</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.amp#UpdateScraper": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#UpdateScraperRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#UpdateScraperResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing scraper.</p>\n         <p>You can't use this function to update the source from which the scraper is \n            collecting metrics. To change the source, delete the scraper and create a new\n            one.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateScraper with all optional parameters",
+                        "input": {
+                            "scraperId": "scraper-123",
+                            "alias": "alias-update",
+                            "scrapeConfiguration": {
+                                "configurationBlob": "blob-update"
+                            },
+                            "destination": {
+                                "ampConfiguration": {
+                                    "workspaceArn": "arn:aws:aps:us-west-2:123456789012:workspace/ws-ogh2u499-ce12-hg89-v6c7-123412341234-update"
+                                }
+                            },
+                            "clientToken": "token"
+                        },
+                        "output": {
+                            "scraperId": "scraper-123",
+                            "arn": "arn:aws:aps:us-west-2:123456789012:scraper/scraper-123",
+                            "status": {
+                                "statusCode": "UPDATING"
+                            },
+                            "tags": {
+                                "exampleTag": "exampleValue"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "PUT",
+                    "uri": "/scrapers/{scraperId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateScraperRequest": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the scraper to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "alias": {
+                    "target": "com.amazonaws.amp#ScraperAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new alias of the scraper.</p>"
+                    }
+                },
+                "scrapeConfiguration": {
+                    "target": "com.amazonaws.amp#ScrapeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the base-64 encoded YAML configuration for the scraper.</p>\n         <note>\n            <p>For more information about configuring a scraper, see <a href=\"https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector-how-to.html\">Using an \n                    Amazon Web Services managed collector</a> in the <i>Amazon Managed Service for Prometheus \n                        User Guide</i>.</p>\n         </note>"
+                    }
+                },
+                "destination": {
+                    "target": "com.amazonaws.amp#Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new Amazon Managed Service for Prometheus workspace to send metrics to.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.amp#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that you can provide to ensure the idempotency of the request.\n            Case-sensitive.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amp#UpdateScraperResponse": {
+            "type": "structure",
+            "members": {
+                "scraperId": {
+                    "target": "com.amazonaws.amp#ScraperId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the updated scraper.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.amp#ScraperArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated scraper.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amp#ScraperStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that displays the current status of the scraper.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys and values that are associated with the scraper.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amp#UpdateWorkspaceAlias": {
@@ -4647,20 +4805,20 @@
                 "workspaceId": {
                     "target": "com.amazonaws.amp#WorkspaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID for the workspace.</p>",
+                        "smithy.api#documentation": "<p>The unique ID for the workspace. For example, \n            <code>ws-example1-1234-abcd-5678-ef90abcd1234</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "alias": {
                     "target": "com.amazonaws.amp#WorkspaceAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alias that is assigned to this workspace to help identify it. It may not be\n            unique.</p>"
+                        "smithy.api#documentation": "<p>The alias that is assigned to this workspace to help identify it. It does not need\n            to be unique.</p>"
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.amp#WorkspaceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the workspace.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the workspace. For example, \n            <code>arn:aws:aps:&lt;region&gt;:123456789012:workspace/ws-example1-1234-abcd-5678-ef90abcd1234</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4674,7 +4832,7 @@
                 "prometheusEndpoint": {
                     "target": "com.amazonaws.amp#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Prometheus endpoint available for this workspace. </p>"
+                        "smithy.api#documentation": "<p>The Prometheus endpoint available for this workspace. For example,\n            <code>https://aps-workspaces.&lt;region&gt;.amazonaws.com/workspaces/ws-example1-1234-abcd-5678-ef90abcd1234/api/v1/</code>.</p>"
                     }
                 },
                 "createdAt": {
@@ -4778,7 +4936,7 @@
                 "alias": {
                     "target": "com.amazonaws.amp#WorkspaceAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alias that is assigned to this workspace to help identify it. It may not be\n            unique.</p>"
+                        "smithy.api#documentation": "<p>The alias that is assigned to this workspace to help identify it. It does not \n            need to be unique.</p>"
                     }
                 },
                 "arn": {

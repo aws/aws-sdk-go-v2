@@ -206,6 +206,18 @@ func TestCheckSnapshot_OperationWithRequiredMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_OperationWithRequiredMembersWithDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithRequiredMembersWithDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "OperationWithRequiredMembersWithDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutWithContentEncoding(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutWithContentEncoding(context.Background(), nil, func(o *Options) {
@@ -366,6 +378,18 @@ func TestUpdateSnapshot_OperationWithRequiredMembers(t *testing.T) {
 	_, err := svc.OperationWithRequiredMembers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "OperationWithRequiredMembers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_OperationWithRequiredMembersWithDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithRequiredMembersWithDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "OperationWithRequiredMembersWithDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

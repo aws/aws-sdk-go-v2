@@ -327,6 +327,25 @@ func (CompressionType) Values() []CompressionType {
 	}
 }
 
+type ComputationType string
+
+// Enum values for ComputationType
+const (
+	ComputationTypeFull        ComputationType = "FULL"
+	ComputationTypeIncremental ComputationType = "INCREMENTAL"
+)
+
+// Values returns all known values for ComputationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComputationType) Values() []ComputationType {
+	return []ComputationType{
+		"FULL",
+		"INCREMENTAL",
+	}
+}
+
 type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey

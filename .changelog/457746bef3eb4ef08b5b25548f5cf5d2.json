@@ -1,0 +1,8 @@
+{
+    "id": "457746be-f3eb-4ef0-8b5b-25548f5cf5d2",
+    "type": "feature",
+    "description": "Add Expires field to CookieOptions.",
+    "modules": [
+        "feature/cloudfront/sign"
+    ]
+}

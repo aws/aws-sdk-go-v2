@@ -24,6 +24,7 @@ type CookieOptions struct {
 	Domain   string
 	Secure   bool
 	SameSite http.SameSite
+	Expires  time.Time
 }
 
 // apply will integration the options provided into the base cookie options
@@ -219,16 +220,19 @@ func createCookies(p *Policy, keyID string, privKey *rsa.PrivateKey, opt CookieO
 		Name:     CookiePolicyName,
 		Value:    string(b64Policy),
 		HttpOnly: true,
+		Expires:  opt.Expires,
 	}
 	cSignature := &http.Cookie{
 		Name:     CookieSignatureName,
 		Value:    string(b64Sig),
 		HttpOnly: true,
+		Expires:  opt.Expires,
 	}
 	cKey := &http.Cookie{
 		Name:     CookieKeyIDName,
 		Value:    keyID,
 		HttpOnly: true,
+		Expires:  opt.Expires,
 	}
 
 	cookies := []*http.Cookie{cPolicy, cSignature, cKey}

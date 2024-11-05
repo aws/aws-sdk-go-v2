@@ -1,3 +1,7 @@
+# v1.47.0 (2024-10-31)
+
+* **Feature**: Add `podNamespace` to `EksAttemptDetail` and `containerID` to `EksAttemptContainerDetail`.
+
 # v1.46.3 (2024-10-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

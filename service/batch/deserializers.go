@@ -5685,6 +5685,15 @@ func awsRestjson1_deserializeDocumentEksAttemptContainerDetail(v **types.EksAtte
 
 	for key, value := range shape {
 		switch key {
+		case "containerID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContainerID = ptr.String(jtv)
+			}
+
 		case "exitCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5816,6 +5825,15 @@ func awsRestjson1_deserializeDocumentEksAttemptDetail(v **types.EksAttemptDetail
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PodName = ptr.String(jtv)
+			}
+
+		case "podNamespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PodNamespace = ptr.String(jtv)
 			}
 
 		case "startedAt":

@@ -32,7 +32,8 @@ func TestClient_NullAndEmptyHeadersClient_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Do not send null values, empty strings, or empty lists over the wire in headers
+		// Do not send null values, but do send empty strings and empty lists over the
+		// wire in headers
 		"RestJsonNullAndEmptyHeaders": {
 			Params: &NullAndEmptyHeadersClientInput{
 				A: nil,
@@ -42,10 +43,12 @@ func TestClient_NullAndEmptyHeadersClient_awsRestjson1Serialize(t *testing.T) {
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/NullAndEmptyHeadersClient",
 			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"X-B": []string{""},
+				"X-C": []string{""},
+			},
 			ForbidHeader: []string{
 				"X-A",
-				"X-B",
-				"X-C",
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
@@ -54,10 +57,6 @@ func TestClient_NullAndEmptyHeadersClient_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RestJsonNullAndEmptyHeaders" {
-				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#NullAndEmptyHeadersClient")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {

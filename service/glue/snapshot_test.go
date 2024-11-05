@@ -362,6 +362,18 @@ func TestCheckSnapshot_CreateClassifier(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateColumnStatisticsTaskSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConnection(context.Background(), nil, func(o *Options) {
@@ -655,6 +667,18 @@ func TestCheckSnapshot_DeleteColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsForTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteColumnStatisticsForTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteColumnStatisticsTaskSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1051,6 +1075,18 @@ func TestCheckSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskRuns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetColumnStatisticsTaskRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetColumnStatisticsTaskSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2246,6 +2282,18 @@ func TestCheckSnapshot_StartColumnStatisticsTaskRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartColumnStatisticsTaskRunSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartColumnStatisticsTaskRunSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartCrawler(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartCrawler(context.Background(), nil, func(o *Options) {
@@ -2390,6 +2438,18 @@ func TestCheckSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopColumnStatisticsTaskRunSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopColumnStatisticsTaskRunSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopCrawler(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCrawler(context.Background(), nil, func(o *Options) {
@@ -2527,6 +2587,18 @@ func TestCheckSnapshot_UpdateColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsForTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateColumnStatisticsForTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateColumnStatisticsTaskSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3061,6 +3133,18 @@ func TestUpdateSnapshot_CreateClassifier(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateColumnStatisticsTaskSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConnection(context.Background(), nil, func(o *Options) {
@@ -3354,6 +3438,18 @@ func TestUpdateSnapshot_DeleteColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.DeleteColumnStatisticsForTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteColumnStatisticsForTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteColumnStatisticsTaskSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3750,6 +3846,18 @@ func TestUpdateSnapshot_GetColumnStatisticsTaskRuns(t *testing.T) {
 	_, err := svc.GetColumnStatisticsTaskRuns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetColumnStatisticsTaskRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetColumnStatisticsTaskSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4945,6 +5053,18 @@ func TestUpdateSnapshot_StartColumnStatisticsTaskRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartColumnStatisticsTaskRunSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartColumnStatisticsTaskRunSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartColumnStatisticsTaskRunSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartCrawler(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartCrawler(context.Background(), nil, func(o *Options) {
@@ -5089,6 +5209,18 @@ func TestUpdateSnapshot_StopColumnStatisticsTaskRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StopColumnStatisticsTaskRunSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopColumnStatisticsTaskRunSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopColumnStatisticsTaskRunSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopCrawler(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCrawler(context.Background(), nil, func(o *Options) {
@@ -5226,6 +5358,18 @@ func TestUpdateSnapshot_UpdateColumnStatisticsForTable(t *testing.T) {
 	_, err := svc.UpdateColumnStatisticsForTable(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateColumnStatisticsForTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateColumnStatisticsTaskSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateColumnStatisticsTaskSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateColumnStatisticsTaskSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
