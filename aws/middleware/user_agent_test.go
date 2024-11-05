@@ -15,7 +15,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go#" + languageVersion + " md/GOOS#" + runtime.GOOS + " md/GOARCH#" + runtime.GOARCH
+var expectedAgent = aws.SDKName + "/" + aws.SDKVersion +
+	" os/" + getNormalizedOSName() +
+	" lang/go#" + strings.Map(rules, languageVersion) + // normalize as the user-agent builder will
+	" md/GOOS#" + runtime.GOOS +
+	" md/GOARCH#" + runtime.GOARCH
 
 func TestRequestUserAgent_HandleBuild(t *testing.T) {
 	cases := map[string]struct {
