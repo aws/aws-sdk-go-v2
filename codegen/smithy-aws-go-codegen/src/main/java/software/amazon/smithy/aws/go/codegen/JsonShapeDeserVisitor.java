@@ -39,6 +39,7 @@ import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
+import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
@@ -180,8 +181,21 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
             });
         });
 
+        boolean isErrorStructure = shape.hasTrait(ErrorTrait.class);
+        if (isErrorStructure) {
+            writer.write("var errorMessage string");
+        }
+
         // Iterate through the decoder. The member visitor will handle popping tokens.
         writer.openBlock("for key, value := range shape {", "}", () -> {
+            if (isErrorStructure) {
+                writer.write("keyLower := strings.ToLower(key)");
+                writer.write("if keyLower == \"message\" {");
+                writer.write("    errorMessage = value.(string)");
+                writer.write("    continue");
+                writer.write("}");
+            }
+
             writer.openBlock("switch key {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
                 for (MemberShape member : members) {
@@ -201,6 +215,12 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 });
             });
         });
+
+        if (isErrorStructure) {
+            writer.write("if errorMessage != \"\" {");
+            writer.write("    sv.Message = &errorMessage");
+            writer.write("}");
+        }
 
         writer.write("*v = sv");
         writer.write("return nil");
