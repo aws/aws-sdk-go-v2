@@ -27,7 +27,7 @@ func newDefaultSlicePool(sliceSize int64, capacity int) *defaultSlicePool {
 	return p
 }
 
-var errZeroCapacity = fmt.Errorf("get called on zero capacity pool")
+var zeroCapacityErr = fmt.Errorf("get called on zero capacity pool")
 
 func (p *defaultSlicePool) Get(ctx context.Context) ([]byte, error) {
 	select {
@@ -40,7 +40,7 @@ func (p *defaultSlicePool) Get(ctx context.Context) ([]byte, error) {
 		select {
 		case bs, ok := <-p.slices:
 			if !ok {
-				return nil, errZeroCapacity
+				return nil, zeroCapacityErr
 			}
 			return bs, nil
 		case <-ctx.Done():
