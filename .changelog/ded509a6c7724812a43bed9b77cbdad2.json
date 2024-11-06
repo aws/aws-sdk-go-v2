@@ -1,0 +1,8 @@
+{
+    "id": "ded509a6-c772-4812-a43b-ed9b77cbdad2",
+    "type": "feature",
+    "description": "Adding BatchGetPolicy API which supports the retrieval of multiple policies across multiple policy stores within a single request.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

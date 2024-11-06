@@ -32,6 +32,11 @@ type CreateSampleFindingsInput struct {
 
 	// The ID of the detector for which you need to create sample findings.
 	//
+	// To find the detectorId in the current Region, see the Settings page in the
+	// GuardDuty console, or run the [ListDetectors]API.
+	//
+	// [ListDetectors]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
+	//
 	// This member is required.
 	DetectorId *string
 

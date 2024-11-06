@@ -1,0 +1,8 @@
+{
+    "id": "0240285e-2009-40b4-b9dd-c7365f84bedc",
+    "type": "feature",
+    "description": "API changes for new named tag expressions feature.",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

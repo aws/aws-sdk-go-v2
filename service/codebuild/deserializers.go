@@ -7938,6 +7938,85 @@ func awsAwsjson11_deserializeDocumentCodeCoverages(v *[]types.CodeCoverage, valu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentComputeConfiguration(v **types.ComputeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComputeConfiguration
+	if *v == nil {
+		sv = &types.ComputeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "disk":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Disk = ptr.Int64(i64)
+			}
+
+		case "machineType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MachineType to be of type string, got %T instead", value)
+				}
+				sv.MachineType = types.MachineType(jtv)
+			}
+
+		case "memory":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Memory = ptr.Int64(i64)
+			}
+
+		case "vCpu":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WrapperLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VCpu = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentComputeTypesAllowed(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8552,6 +8631,11 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 					return err
 				}
 				sv.BaseCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "computeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentComputeConfiguration(&sv.ComputeConfiguration, value); err != nil {
+				return err
 			}
 
 		case "computeType":
@@ -10132,6 +10216,11 @@ func awsAwsjson11_deserializeDocumentProjectEnvironment(v **types.ProjectEnviron
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Certificate = ptr.String(jtv)
+			}
+
+		case "computeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentComputeConfiguration(&sv.ComputeConfiguration, value); err != nil {
+				return err
 			}
 
 		case "computeType":

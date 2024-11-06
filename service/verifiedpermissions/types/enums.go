@@ -2,6 +2,25 @@
 
 package types
 
+type BatchGetPolicyErrorCode string
+
+// Enum values for BatchGetPolicyErrorCode
+const (
+	BatchGetPolicyErrorCodePolicyStoreNotFound BatchGetPolicyErrorCode = "POLICY_STORE_NOT_FOUND"
+	BatchGetPolicyErrorCodePolicyNotFound      BatchGetPolicyErrorCode = "POLICY_NOT_FOUND"
+)
+
+// Values returns all known values for BatchGetPolicyErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetPolicyErrorCode) Values() []BatchGetPolicyErrorCode {
+	return []BatchGetPolicyErrorCode{
+		"POLICY_STORE_NOT_FOUND",
+		"POLICY_NOT_FOUND",
+	}
+}
+
 type Decision string
 
 // Enum values for Decision

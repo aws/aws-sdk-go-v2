@@ -16,6 +16,9 @@ import (
 // access Amazon S3. In order to vend such credentials, Lake Formation assumes the
 // role associated with a registered location, for example an Amazon S3 bucket,
 // with a scope down policy which restricts the access to a single prefix.
+//
+// To call this API, the role that the service assumes must have
+// lakeformation:GetDataAccess permission on the resource.
 func (c *Client) GetTemporaryGlueTableCredentials(ctx context.Context, params *GetTemporaryGlueTableCredentialsInput, optFns ...func(*Options)) (*GetTemporaryGlueTableCredentialsOutput, error) {
 	if params == nil {
 		params = &GetTemporaryGlueTableCredentialsInput{}

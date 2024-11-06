@@ -3158,6 +3158,33 @@ func awsAwsjson11_serializeDocumentCloudWatchLogsConfig(v *types.CloudWatchLogsC
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentComputeConfiguration(v *types.ComputeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Disk != nil {
+		ok := object.Key("disk")
+		ok.Long(*v.Disk)
+	}
+
+	if len(v.MachineType) > 0 {
+		ok := object.Key("machineType")
+		ok.String(string(v.MachineType))
+	}
+
+	if v.Memory != nil {
+		ok := object.Key("memory")
+		ok.Long(*v.Memory)
+	}
+
+	if v.VCpu != nil {
+		ok := object.Key("vCpu")
+		ok.Long(*v.VCpu)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentComputeTypesAllowed(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3471,6 +3498,13 @@ func awsAwsjson11_serializeDocumentProjectEnvironment(v *types.ProjectEnvironmen
 	if v.Certificate != nil {
 		ok := object.Key("certificate")
 		ok.String(*v.Certificate)
+	}
+
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsAwsjson11_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ComputeType) > 0 {
@@ -4177,6 +4211,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if v.BaseCapacity != nil {
 		ok := object.Key("baseCapacity")
 		ok.Integer(*v.BaseCapacity)
+	}
+
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsAwsjson11_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ComputeType) > 0 {
@@ -5510,6 +5551,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if v.BaseCapacity != nil {
 		ok := object.Key("baseCapacity")
 		ok.Integer(*v.BaseCapacity)
+	}
+
+	if v.ComputeConfiguration != nil {
+		ok := object.Key("computeConfiguration")
+		if err := awsAwsjson11_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ComputeType) > 0 {

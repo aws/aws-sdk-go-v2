@@ -23,7 +23,7 @@ import (
 // The following request registers a new location and gives Lake Formation
 // permission to use the service-linked role to access that location.
 //
-//	ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true
+//	ResourceArn = arn:aws:s3:::my-bucket/ UseServiceLinkedRole = true
 //
 // If UseServiceLinkedRole is not set to true, you must provide or set the RoleArn :
 //

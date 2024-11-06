@@ -43,7 +43,9 @@ type ActionIdentifier struct {
 // The following types satisfy this interface:
 //
 //	AttributeValueMemberBoolean
+//	AttributeValueMemberDecimal
 //	AttributeValueMemberEntityIdentifier
+//	AttributeValueMemberIpaddr
 //	AttributeValueMemberLong
 //	AttributeValueMemberRecord
 //	AttributeValueMemberSet
@@ -70,6 +72,19 @@ type AttributeValueMemberBoolean struct {
 
 func (*AttributeValueMemberBoolean) isAttributeValue() {}
 
+// An attribute value of [decimal] type.
+//
+// Example: {"decimal": "1.1"}
+//
+// [decimal]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-decimal
+type AttributeValueMemberDecimal struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberDecimal) isAttributeValue() {}
+
 // An attribute value of type [EntityIdentifier].
 //
 // Example: "entityIdentifier": { "entityId": "<id>", "entityType": "<entity
@@ -83,6 +98,19 @@ type AttributeValueMemberEntityIdentifier struct {
 }
 
 func (*AttributeValueMemberEntityIdentifier) isAttributeValue() {}
+
+// An attribute value of [ipaddr] type.
+//
+// Example: {"ip": "192.168.1.100"}
+//
+// [ipaddr]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#datatype-ipaddr
+type AttributeValueMemberIpaddr struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AttributeValueMemberIpaddr) isAttributeValue() {}
 
 // An attribute value of [Long] type.
 //
@@ -135,6 +163,91 @@ type AttributeValueMemberString struct {
 }
 
 func (*AttributeValueMemberString) isAttributeValue() {}
+
+// Contains the information about an error resulting from a BatchGetPolicy API
+// call.
+type BatchGetPolicyErrorItem struct {
+
+	// The error code that was returned.
+	//
+	// This member is required.
+	Code BatchGetPolicyErrorCode
+
+	// A detailed error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The identifier of the policy associated with the failed request.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The identifier of the policy store associated with the failed request.
+	//
+	// This member is required.
+	PolicyStoreId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a policy that you include in a BatchGetPolicy API request.
+type BatchGetPolicyInputItem struct {
+
+	// The identifier of the policy you want information about.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The identifier of the policy store where the policy you want information about
+	// is stored.
+	//
+	// This member is required.
+	PolicyStoreId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a policy returned from a BatchGetPolicy API request.
+type BatchGetPolicyOutputItem struct {
+
+	// The date and time the policy was created.
+	//
+	// This member is required.
+	CreatedDate *time.Time
+
+	// The policy definition of an item in the list of policies returned.
+	//
+	// This member is required.
+	Definition PolicyDefinitionDetail
+
+	// The date and time the policy was most recently updated.
+	//
+	// This member is required.
+	LastUpdatedDate *time.Time
+
+	// The identifier of the policy you want information about.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The identifier of the policy store where the policy you want information about
+	// is stored.
+	//
+	// This member is required.
+	PolicyStoreId *string
+
+	// The type of the policy. This is one of the following values:
+	//
+	//   - STATIC
+	//
+	//   - TEMPLATE_LINKED
+	//
+	// This member is required.
+	PolicyType PolicyType
+
+	noSmithyDocumentSerde
+}
 
 // An authorization request that you include in a BatchIsAuthorized API request.
 type BatchIsAuthorizedInputItem struct {
@@ -1528,7 +1641,7 @@ type PolicyItem struct {
 	// This member is required.
 	PolicyId *string
 
-	// The identifier of the PolicyStore where the policy you want information about
+	// The identifier of the policy store where the policy you want information about
 	// is stored.
 	//
 	// This member is required.

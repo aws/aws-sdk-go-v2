@@ -72,7 +72,7 @@ type BatchIsAuthorizedInput struct {
 type BatchIsAuthorizedOutput struct {
 
 	// A series of Allow or Deny decisions for each request, and the policies that
-	// produced them.
+	// produced them. These results are returned in the order they were requested.
 	//
 	// This member is required.
 	Results []types.BatchIsAuthorizedOutputItem

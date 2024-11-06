@@ -50,6 +50,66 @@ func (m *validateOpAssociateQAppWithUser) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchCreateCategory struct {
+}
+
+func (*validateOpBatchCreateCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchDeleteCategory struct {
+}
+
+func (*validateOpBatchDeleteCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateCategory struct {
+}
+
+func (*validateOpBatchUpdateCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLibraryItem struct {
 }
 
@@ -245,6 +305,26 @@ func (m *validateOpImportDocument) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpImportDocumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCategories struct {
+}
+
+func (*validateOpListCategories) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCategories) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCategoriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCategoriesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -498,6 +578,18 @@ func addOpAssociateQAppWithUserValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpAssociateQAppWithUser{}, middleware.After)
 }
 
+func addOpBatchCreateCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateCategory{}, middleware.After)
+}
+
+func addOpBatchDeleteCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteCategory{}, middleware.After)
+}
+
+func addOpBatchUpdateCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateCategory{}, middleware.After)
+}
+
 func addOpCreateLibraryItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLibraryItem{}, middleware.After)
 }
@@ -536,6 +628,10 @@ func addOpGetQAppSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpImportDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportDocument{}, middleware.After)
+}
+
+func addOpListCategoriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCategories{}, middleware.After)
 }
 
 func addOpListLibraryItemsValidationMiddleware(stack *middleware.Stack) error {
@@ -684,6 +780,38 @@ func validateAttributeFilters(v []types.AttributeFilter) error {
 	}
 }
 
+func validateBatchCreateCategoryInputCategory(v *types.BatchCreateCategoryInputCategory) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateCategoryInputCategory"}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchCreateCategoryInputCategoryList(v []types.BatchCreateCategoryInputCategory) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateCategoryInputCategoryList"}
+	for i := range v {
+		if err := validateBatchCreateCategoryInputCategory(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCardInput(v types.CardInput) error {
 	if v == nil {
 		return nil
@@ -760,6 +888,41 @@ func validateCardValueList(v []types.CardValue) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CardValueList"}
 	for i := range v {
 		if err := validateCardValue(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCategoryInput(v *types.CategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CategoryInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCategoryListInput(v []types.CategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CategoryListInput"}
+	for i := range v {
+		if err := validateCategoryInput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -976,6 +1139,68 @@ func validateOpAssociateQAppWithUserInput(v *AssociateQAppWithUserInput) error {
 	}
 }
 
+func validateOpBatchCreateCategoryInput(v *BatchCreateCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateCategoryInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
+	} else if v.Categories != nil {
+		if err := validateBatchCreateCategoryInputCategoryList(v.Categories); err != nil {
+			invalidParams.AddNested("Categories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteCategoryInput(v *BatchDeleteCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteCategoryInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateCategoryInput(v *BatchUpdateCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateCategoryInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
+	} else if v.Categories != nil {
+		if err := validateCategoryListInput(v.Categories); err != nil {
+			invalidParams.AddNested("Categories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLibraryItemInput(v *CreateLibraryItemInput) error {
 	if v == nil {
 		return nil
@@ -1173,6 +1398,21 @@ func validateOpImportDocumentInput(v *ImportDocumentInput) error {
 	}
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCategoriesInput(v *ListCategoriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCategoriesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "1d4f4656-8ff4-4d06-b295-5b13f48b3ea3",
+    "type": "feature",
+    "description": "Introduces category apis in AmazonQApps. Web experience users use Categories to tag and filter library items.",
+    "modules": [
+        "service/qapps"
+    ]
+}

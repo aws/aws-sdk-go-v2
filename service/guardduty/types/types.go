@@ -2670,7 +2670,7 @@ type RdsDbInstanceDetails struct {
 	// The version of the database engine that was involved in the finding.
 	EngineVersion *string
 
-	// Instance tag key-value pairs associated with the database instance ID.
+	// Information about the tag key-value pairs.
 	Tags []Tag
 
 	noSmithyDocumentSerde
@@ -2694,6 +2694,34 @@ type RdsDbUserDetails struct {
 
 	// The user name used in the anomalous login attempt.
 	User *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the resource type RDSLimitlessDB that is involved in
+// a GuardDuty finding.
+type RdsLimitlessDbDetails struct {
+
+	// The name of the database cluster that is a part of the Limitless Database.
+	DbClusterIdentifier *string
+
+	// The Amazon Resource Name (ARN) that identifies the DB shard group.
+	DbShardGroupArn *string
+
+	// The name associated with the Limitless DB shard group.
+	DbShardGroupIdentifier *string
+
+	// The resource identifier of the DB shard group within the Limitless Database.
+	DbShardGroupResourceId *string
+
+	// The database engine of the database instance involved in the finding.
+	Engine *string
+
+	// The version of the database engine.
+	EngineVersion *string
+
+	// Information about the tag-key value pair.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -2800,6 +2828,10 @@ type Resource struct {
 	// Contains information about the user details through which anomalous login
 	// attempt was made.
 	RdsDbUserDetails *RdsDbUserDetails
+
+	// Contains information about the RDS Limitless database that was involved in a
+	// GuardDuty finding.
+	RdsLimitlessDbDetails *RdsLimitlessDbDetails
 
 	// The type of Amazon Web Services resource.
 	ResourceType *string
@@ -3054,12 +3086,22 @@ type Scan struct {
 	// The unique detector ID of the administrator account that the request is
 	// associated with. If the account is an administrator, the AdminDetectorId will
 	// be the same as the one used for DetectorId .
+	//
+	// To find the detectorId in the current Region, see the Settings page in the
+	// GuardDuty console, or run the [ListDetectors]API.
+	//
+	// [ListDetectors]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
 	AdminDetectorId *string
 
 	// List of volumes that were attached to the original instance to be scanned.
 	AttachedVolumes []VolumeDetail
 
 	// The unique ID of the detector that the request is associated with.
+	//
+	// To find the detectorId in the current Region, see the Settings page in the
+	// GuardDuty console, or run the [ListDetectors]API.
+	//
+	// [ListDetectors]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html
 	DetectorId *string
 
 	// Represents the reason for FAILED scan status.
@@ -3363,13 +3405,13 @@ type SortCriteria struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a tag associated with the EC2 instance.
+// Contains information about a tag key-value pair.
 type Tag struct {
 
-	// The EC2 instance tag key.
+	// Describes the key associated with the tag.
 	Key *string
 
-	// The EC2 instance tag value.
+	// Describes the value associated with the tag key.
 	Value *string
 
 	noSmithyDocumentSerde

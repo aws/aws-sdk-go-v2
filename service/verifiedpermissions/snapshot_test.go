@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_BatchGetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchIsAuthorized(context.Background(), nil, func(o *Options) {
@@ -373,6 +385,18 @@ func TestCheckSnapshot_UpdatePolicyTemplate(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_BatchGetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchIsAuthorized(context.Background(), nil, func(o *Options) {

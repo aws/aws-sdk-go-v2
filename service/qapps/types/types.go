@@ -100,6 +100,25 @@ type AttributeFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The category object to be created.
+type BatchCreateCategoryInputCategory struct {
+
+	// The name of the category.
+	//
+	// This member is required.
+	Title *string
+
+	// The color to be associated with a category. The color must be a hexadecimal
+	// value of either 3 or 6 digits.
+	Color *string
+
+	// The unique identifier to be associated with a category. If you don't include a
+	// value, the category is automatically assigned a unique identifier.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // A card representing a component or step in an Amazon Q App's flow.
 //
 // The following types satisfy this interface:
@@ -240,6 +259,33 @@ type Category struct {
 	//
 	// This member is required.
 	Title *string
+
+	// The number of published Amazon Q Apps associated with a category
+	AppCount *int32
+
+	// The color of the category
+	Color *string
+
+	noSmithyDocumentSerde
+}
+
+// A label that web experience users associate with a library item. Web experience
+// users use Categories to tag and filter library items.
+type CategoryInput struct {
+
+	// The unique identifier of the category.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the category.
+	//
+	// This member is required.
+	Title *string
+
+	// The color of the category, represented as a hexadecimal value of either 3 or 6
+	// digits.
+	Color *string
 
 	noSmithyDocumentSerde
 }

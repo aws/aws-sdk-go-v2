@@ -20386,6 +20386,96 @@ func awsRestjson1_deserializeDocumentRdsDbUserDetails(v **types.RdsDbUserDetails
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRdsLimitlessDbDetails(v **types.RdsLimitlessDbDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RdsLimitlessDbDetails
+	if *v == nil {
+		sv = &types.RdsLimitlessDbDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dbClusterIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DbClusterIdentifier = ptr.String(jtv)
+			}
+
+		case "dbShardGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DbShardGroupArn = ptr.String(jtv)
+			}
+
+		case "dbShardGroupIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DbShardGroupIdentifier = ptr.String(jtv)
+			}
+
+		case "dbShardGroupResourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DbShardGroupResourceId = ptr.String(jtv)
+			}
+
+		case "engine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Engine = ptr.String(jtv)
+			}
+
+		case "engineVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EngineVersion = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRdsLoginAttemptAction(v **types.RdsLoginAttemptAction, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20667,6 +20757,11 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 
 		case "rdsDbUserDetails":
 			if err := awsRestjson1_deserializeDocumentRdsDbUserDetails(&sv.RdsDbUserDetails, value); err != nil {
+				return err
+			}
+
+		case "rdsLimitlessDbDetails":
+			if err := awsRestjson1_deserializeDocumentRdsLimitlessDbDetails(&sv.RdsLimitlessDbDetails, value); err != nil {
 				return err
 			}
 

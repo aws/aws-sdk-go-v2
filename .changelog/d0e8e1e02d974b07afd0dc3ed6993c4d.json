@@ -1,0 +1,8 @@
+{
+    "id": "d0e8e1e0-2d97-4b07-afd0-dc3ed6993c4d",
+    "type": "feature",
+    "description": "Fix ListStorageLensConfigurations and ListStorageLensGroups deserialization for Smithy SDKs.",
+    "modules": [
+        "service/s3control"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "db7999cc-d573-4778-a1ef-4e32943335f7",
+    "type": "feature",
+    "description": "AWS CodeBuild now adds additional compute types for reserved capacity fleet.",
+    "modules": [
+        "service/codebuild"
+    ]
+}
