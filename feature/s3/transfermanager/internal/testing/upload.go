@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"slices"
 	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -68,7 +69,7 @@ func (f httpDoFunc) Do(r *http.Request) (*http.Response, error) {
 }
 
 func (u *UploadLoggingClient) traceOperation(name string, params interface{}) {
-	if contains(u.ignoredOperations, name) {
+	if slices.Contains(u.ignoredOperations, name) {
 		return
 	}
 	u.Invocations = append(u.Invocations, name)
@@ -189,13 +190,4 @@ func NewUploadLoggingClient(ignoredOps []string) (*UploadLoggingClient, *[]strin
 	}
 
 	return c, &c.Invocations, &c.Params
-}
-
-func contains(src []string, s string) bool {
-	for _, v := range src {
-		if v == s {
-			return true
-		}
-	}
-	return false
 }

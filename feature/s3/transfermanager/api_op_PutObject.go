@@ -55,8 +55,6 @@ type multipartUploadError struct {
 
 // Error returns the string representation of the error.
 //
-// # See apierr.BaseError ErrorWithExtra for output format
-//
 // Satisfies the error interface.
 func (m *multipartUploadError) Error() string {
 	var extra string
@@ -936,7 +934,6 @@ func (u *multiUploader) seterr(e error) {
 	u.err = e
 }
 
-// fail will abort the multipart unless LeavePartsOnError is set to true.
 func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Options)) {
 	params := u.in.mapAbortMultipartUploadInput(u.uploadID)
 	_, err := u.options.S3.AbortMultipartUpload(ctx, params, clientOptions...)
