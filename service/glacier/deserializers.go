@@ -5847,7 +5847,13 @@ func awsRestjson1_deserializeDocumentInsufficientCapacityException(v **types.Ins
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -5880,6 +5886,9 @@ func awsRestjson1_deserializeDocumentInsufficientCapacityException(v **types.Ins
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5905,7 +5914,13 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -5938,6 +5953,9 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6073,7 +6091,13 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -6106,6 +6130,9 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6131,7 +6158,13 @@ func awsRestjson1_deserializeDocumentMissingParameterValueException(v **types.Mi
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -6164,6 +6197,9 @@ func awsRestjson1_deserializeDocumentMissingParameterValueException(v **types.Mi
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6380,7 +6416,13 @@ func awsRestjson1_deserializeDocumentPolicyEnforcedException(v **types.PolicyEnf
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -6413,6 +6455,9 @@ func awsRestjson1_deserializeDocumentPolicyEnforcedException(v **types.PolicyEnf
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6530,7 +6575,13 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -6563,6 +6614,9 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6588,7 +6642,13 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -6621,6 +6681,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6792,7 +6855,13 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "code":
 			if value != nil {
@@ -6825,6 +6894,9 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

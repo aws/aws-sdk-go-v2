@@ -9745,7 +9745,13 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -9760,6 +9766,9 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9785,7 +9794,13 @@ func awsAwsjson11_deserializeDocumentAccountHasOngoingImportException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -9800,6 +9815,9 @@ func awsAwsjson11_deserializeDocumentAccountHasOngoingImportException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9825,7 +9843,13 @@ func awsAwsjson11_deserializeDocumentAccountNotFoundException(v **types.AccountN
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -9840,6 +9864,9 @@ func awsAwsjson11_deserializeDocumentAccountNotFoundException(v **types.AccountN
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9865,7 +9892,13 @@ func awsAwsjson11_deserializeDocumentAccountNotRegisteredException(v **types.Acc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -9880,6 +9913,9 @@ func awsAwsjson11_deserializeDocumentAccountNotRegisteredException(v **types.Acc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9905,7 +9941,13 @@ func awsAwsjson11_deserializeDocumentAccountRegisteredException(v **types.Accoun
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -9920,6 +9962,9 @@ func awsAwsjson11_deserializeDocumentAccountRegisteredException(v **types.Accoun
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10128,7 +10173,13 @@ func awsAwsjson11_deserializeDocumentCannotDelegateManagementAccountException(v 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10143,6 +10194,9 @@ func awsAwsjson11_deserializeDocumentCannotDelegateManagementAccountException(v 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10217,7 +10271,13 @@ func awsAwsjson11_deserializeDocumentChannelAlreadyExistsException(v **types.Cha
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10232,6 +10292,9 @@ func awsAwsjson11_deserializeDocumentChannelAlreadyExistsException(v **types.Cha
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10257,7 +10320,13 @@ func awsAwsjson11_deserializeDocumentChannelARNInvalidException(v **types.Channe
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10272,6 +10341,9 @@ func awsAwsjson11_deserializeDocumentChannelARNInvalidException(v **types.Channe
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10297,7 +10369,13 @@ func awsAwsjson11_deserializeDocumentChannelExistsForEDSException(v **types.Chan
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10312,6 +10390,9 @@ func awsAwsjson11_deserializeDocumentChannelExistsForEDSException(v **types.Chan
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10337,7 +10418,13 @@ func awsAwsjson11_deserializeDocumentChannelMaxLimitExceededException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10352,6 +10439,9 @@ func awsAwsjson11_deserializeDocumentChannelMaxLimitExceededException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10377,7 +10467,13 @@ func awsAwsjson11_deserializeDocumentChannelNotFoundException(v **types.ChannelN
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10392,6 +10488,9 @@ func awsAwsjson11_deserializeDocumentChannelNotFoundException(v **types.ChannelN
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10451,7 +10550,13 @@ func awsAwsjson11_deserializeDocumentCloudTrailAccessNotEnabledException(v **typ
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10466,6 +10571,9 @@ func awsAwsjson11_deserializeDocumentCloudTrailAccessNotEnabledException(v **typ
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10491,7 +10599,13 @@ func awsAwsjson11_deserializeDocumentCloudTrailARNInvalidException(v **types.Clo
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10506,6 +10620,9 @@ func awsAwsjson11_deserializeDocumentCloudTrailARNInvalidException(v **types.Clo
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10531,7 +10648,13 @@ func awsAwsjson11_deserializeDocumentCloudTrailInvalidClientTokenIdException(v *
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10546,6 +10669,9 @@ func awsAwsjson11_deserializeDocumentCloudTrailInvalidClientTokenIdException(v *
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10571,7 +10697,13 @@ func awsAwsjson11_deserializeDocumentCloudWatchLogsDeliveryUnavailableException(
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10586,6 +10718,9 @@ func awsAwsjson11_deserializeDocumentCloudWatchLogsDeliveryUnavailableException(
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10611,7 +10746,13 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10626,6 +10767,9 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10651,7 +10795,13 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10666,6 +10816,9 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -10806,7 +10959,13 @@ func awsAwsjson11_deserializeDocumentDelegatedAdminAccountLimitExceededException
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -10821,6 +10980,9 @@ func awsAwsjson11_deserializeDocumentDelegatedAdminAccountLimitExceededException
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11179,7 +11341,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreAlreadyExistsException(v **ty
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11194,6 +11362,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreAlreadyExistsException(v **ty
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11219,7 +11390,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreARNInvalidException(v **types
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11234,6 +11411,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreARNInvalidException(v **types
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11259,7 +11439,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreFederationEnabledException(v 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11274,6 +11460,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreFederationEnabledException(v 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11299,7 +11488,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreHasOngoingImportException(v *
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11314,6 +11509,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreHasOngoingImportException(v *
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11339,7 +11537,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreMaxLimitExceededException(v *
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11354,6 +11558,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreMaxLimitExceededException(v *
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11379,7 +11586,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreNotFoundException(v **types.E
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11394,6 +11607,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreNotFoundException(v **types.E
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11453,7 +11669,13 @@ func awsAwsjson11_deserializeDocumentEventDataStoreTerminationProtectedException
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11468,6 +11690,9 @@ func awsAwsjson11_deserializeDocumentEventDataStoreTerminationProtectedException
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -11809,7 +12034,13 @@ func awsAwsjson11_deserializeDocumentImportNotFoundException(v **types.ImportNot
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -11824,6 +12055,9 @@ func awsAwsjson11_deserializeDocumentImportNotFoundException(v **types.ImportNot
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12101,7 +12335,13 @@ func awsAwsjson11_deserializeDocumentInactiveEventDataStoreException(v **types.I
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12116,6 +12356,9 @@ func awsAwsjson11_deserializeDocumentInactiveEventDataStoreException(v **types.I
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12141,7 +12384,13 @@ func awsAwsjson11_deserializeDocumentInactiveQueryException(v **types.InactiveQu
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12156,6 +12405,9 @@ func awsAwsjson11_deserializeDocumentInactiveQueryException(v **types.InactiveQu
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12271,7 +12523,13 @@ func awsAwsjson11_deserializeDocumentInsightNotEnabledException(v **types.Insigh
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12286,6 +12544,9 @@ func awsAwsjson11_deserializeDocumentInsightNotEnabledException(v **types.Insigh
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12446,7 +12707,13 @@ func awsAwsjson11_deserializeDocumentInsufficientDependencyServiceAccessPermissi
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12461,6 +12728,9 @@ func awsAwsjson11_deserializeDocumentInsufficientDependencyServiceAccessPermissi
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12486,7 +12756,13 @@ func awsAwsjson11_deserializeDocumentInsufficientEncryptionPolicyException(v **t
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12501,6 +12777,9 @@ func awsAwsjson11_deserializeDocumentInsufficientEncryptionPolicyException(v **t
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12526,7 +12805,13 @@ func awsAwsjson11_deserializeDocumentInsufficientS3BucketPolicyException(v **typ
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12541,6 +12826,9 @@ func awsAwsjson11_deserializeDocumentInsufficientS3BucketPolicyException(v **typ
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12566,7 +12854,13 @@ func awsAwsjson11_deserializeDocumentInsufficientSnsTopicPolicyException(v **typ
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12581,6 +12875,9 @@ func awsAwsjson11_deserializeDocumentInsufficientSnsTopicPolicyException(v **typ
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12606,7 +12903,13 @@ func awsAwsjson11_deserializeDocumentInvalidCloudWatchLogsLogGroupArnException(v
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12621,6 +12924,9 @@ func awsAwsjson11_deserializeDocumentInvalidCloudWatchLogsLogGroupArnException(v
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12646,7 +12952,13 @@ func awsAwsjson11_deserializeDocumentInvalidCloudWatchLogsRoleArnException(v **t
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12661,6 +12973,9 @@ func awsAwsjson11_deserializeDocumentInvalidCloudWatchLogsRoleArnException(v **t
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12686,7 +13001,13 @@ func awsAwsjson11_deserializeDocumentInvalidDateRangeException(v **types.Invalid
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12701,6 +13022,9 @@ func awsAwsjson11_deserializeDocumentInvalidDateRangeException(v **types.Invalid
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12726,7 +13050,13 @@ func awsAwsjson11_deserializeDocumentInvalidEventCategoryException(v **types.Inv
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12741,6 +13071,9 @@ func awsAwsjson11_deserializeDocumentInvalidEventCategoryException(v **types.Inv
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12766,7 +13099,13 @@ func awsAwsjson11_deserializeDocumentInvalidEventDataStoreCategoryException(v **
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12781,6 +13120,9 @@ func awsAwsjson11_deserializeDocumentInvalidEventDataStoreCategoryException(v **
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12806,7 +13148,13 @@ func awsAwsjson11_deserializeDocumentInvalidEventDataStoreStatusException(v **ty
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12821,6 +13169,9 @@ func awsAwsjson11_deserializeDocumentInvalidEventDataStoreStatusException(v **ty
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12846,7 +13197,13 @@ func awsAwsjson11_deserializeDocumentInvalidEventSelectorsException(v **types.In
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12861,6 +13218,9 @@ func awsAwsjson11_deserializeDocumentInvalidEventSelectorsException(v **types.In
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12886,7 +13246,13 @@ func awsAwsjson11_deserializeDocumentInvalidHomeRegionException(v **types.Invali
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12901,6 +13267,9 @@ func awsAwsjson11_deserializeDocumentInvalidHomeRegionException(v **types.Invali
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12926,7 +13295,13 @@ func awsAwsjson11_deserializeDocumentInvalidImportSourceException(v **types.Inva
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12941,6 +13316,9 @@ func awsAwsjson11_deserializeDocumentInvalidImportSourceException(v **types.Inva
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12966,7 +13344,13 @@ func awsAwsjson11_deserializeDocumentInvalidInsightSelectorsException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -12981,6 +13365,9 @@ func awsAwsjson11_deserializeDocumentInvalidInsightSelectorsException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13006,7 +13393,13 @@ func awsAwsjson11_deserializeDocumentInvalidKmsKeyIdException(v **types.InvalidK
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13021,6 +13414,9 @@ func awsAwsjson11_deserializeDocumentInvalidKmsKeyIdException(v **types.InvalidK
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13046,7 +13442,13 @@ func awsAwsjson11_deserializeDocumentInvalidLookupAttributesException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13061,6 +13463,9 @@ func awsAwsjson11_deserializeDocumentInvalidLookupAttributesException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13086,7 +13491,13 @@ func awsAwsjson11_deserializeDocumentInvalidMaxResultsException(v **types.Invali
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13101,6 +13512,9 @@ func awsAwsjson11_deserializeDocumentInvalidMaxResultsException(v **types.Invali
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13126,7 +13540,13 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13141,6 +13561,9 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13166,7 +13589,13 @@ func awsAwsjson11_deserializeDocumentInvalidParameterCombinationException(v **ty
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13181,6 +13610,9 @@ func awsAwsjson11_deserializeDocumentInvalidParameterCombinationException(v **ty
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13206,7 +13638,13 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13221,6 +13659,9 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13246,7 +13687,13 @@ func awsAwsjson11_deserializeDocumentInvalidQueryStatementException(v **types.In
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13261,6 +13708,9 @@ func awsAwsjson11_deserializeDocumentInvalidQueryStatementException(v **types.In
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13286,7 +13736,13 @@ func awsAwsjson11_deserializeDocumentInvalidQueryStatusException(v **types.Inval
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13301,6 +13757,9 @@ func awsAwsjson11_deserializeDocumentInvalidQueryStatusException(v **types.Inval
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13326,7 +13785,13 @@ func awsAwsjson11_deserializeDocumentInvalidS3BucketNameException(v **types.Inva
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13341,6 +13806,9 @@ func awsAwsjson11_deserializeDocumentInvalidS3BucketNameException(v **types.Inva
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13366,7 +13834,13 @@ func awsAwsjson11_deserializeDocumentInvalidS3PrefixException(v **types.InvalidS
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13381,6 +13855,9 @@ func awsAwsjson11_deserializeDocumentInvalidS3PrefixException(v **types.InvalidS
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13406,7 +13883,13 @@ func awsAwsjson11_deserializeDocumentInvalidSnsTopicNameException(v **types.Inva
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13421,6 +13904,9 @@ func awsAwsjson11_deserializeDocumentInvalidSnsTopicNameException(v **types.Inva
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13446,7 +13932,13 @@ func awsAwsjson11_deserializeDocumentInvalidSourceException(v **types.InvalidSou
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13461,6 +13953,9 @@ func awsAwsjson11_deserializeDocumentInvalidSourceException(v **types.InvalidSou
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13486,7 +13981,13 @@ func awsAwsjson11_deserializeDocumentInvalidTagParameterException(v **types.Inva
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13501,6 +14002,9 @@ func awsAwsjson11_deserializeDocumentInvalidTagParameterException(v **types.Inva
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13526,7 +14030,13 @@ func awsAwsjson11_deserializeDocumentInvalidTimeRangeException(v **types.Invalid
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13541,6 +14051,9 @@ func awsAwsjson11_deserializeDocumentInvalidTimeRangeException(v **types.Invalid
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13566,7 +14079,13 @@ func awsAwsjson11_deserializeDocumentInvalidTokenException(v **types.InvalidToke
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13581,6 +14100,9 @@ func awsAwsjson11_deserializeDocumentInvalidTokenException(v **types.InvalidToke
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13606,7 +14128,13 @@ func awsAwsjson11_deserializeDocumentInvalidTrailNameException(v **types.Invalid
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13621,6 +14149,9 @@ func awsAwsjson11_deserializeDocumentInvalidTrailNameException(v **types.Invalid
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13646,7 +14177,13 @@ func awsAwsjson11_deserializeDocumentKmsException(v **types.KmsException, value 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13661,6 +14198,9 @@ func awsAwsjson11_deserializeDocumentKmsException(v **types.KmsException, value 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13686,7 +14226,13 @@ func awsAwsjson11_deserializeDocumentKmsKeyDisabledException(v **types.KmsKeyDis
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13701,6 +14247,9 @@ func awsAwsjson11_deserializeDocumentKmsKeyDisabledException(v **types.KmsKeyDis
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13726,7 +14275,13 @@ func awsAwsjson11_deserializeDocumentKmsKeyNotFoundException(v **types.KmsKeyNot
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13741,6 +14296,9 @@ func awsAwsjson11_deserializeDocumentKmsKeyNotFoundException(v **types.KmsKeyNot
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13766,7 +14324,13 @@ func awsAwsjson11_deserializeDocumentMaxConcurrentQueriesException(v **types.Max
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13781,6 +14345,9 @@ func awsAwsjson11_deserializeDocumentMaxConcurrentQueriesException(v **types.Max
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13806,7 +14373,13 @@ func awsAwsjson11_deserializeDocumentMaximumNumberOfTrailsExceededException(v **
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13821,6 +14394,9 @@ func awsAwsjson11_deserializeDocumentMaximumNumberOfTrailsExceededException(v **
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13846,7 +14422,13 @@ func awsAwsjson11_deserializeDocumentNoManagementAccountSLRExistsException(v **t
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13861,6 +14443,9 @@ func awsAwsjson11_deserializeDocumentNoManagementAccountSLRExistsException(v **t
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13886,7 +14471,13 @@ func awsAwsjson11_deserializeDocumentNotOrganizationManagementAccountException(v
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13901,6 +14492,9 @@ func awsAwsjson11_deserializeDocumentNotOrganizationManagementAccountException(v
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13926,7 +14520,13 @@ func awsAwsjson11_deserializeDocumentNotOrganizationMasterAccountException(v **t
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13941,6 +14541,9 @@ func awsAwsjson11_deserializeDocumentNotOrganizationMasterAccountException(v **t
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -13966,7 +14569,13 @@ func awsAwsjson11_deserializeDocumentOperationNotPermittedException(v **types.Op
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -13981,6 +14590,9 @@ func awsAwsjson11_deserializeDocumentOperationNotPermittedException(v **types.Op
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14042,7 +14654,13 @@ func awsAwsjson11_deserializeDocumentOrganizationNotInAllFeaturesModeException(v
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14057,6 +14675,9 @@ func awsAwsjson11_deserializeDocumentOrganizationNotInAllFeaturesModeException(v
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14082,7 +14703,13 @@ func awsAwsjson11_deserializeDocumentOrganizationsNotInUseException(v **types.Or
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14097,6 +14724,9 @@ func awsAwsjson11_deserializeDocumentOrganizationsNotInUseException(v **types.Or
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14423,7 +15053,13 @@ func awsAwsjson11_deserializeDocumentQueryIdNotFoundException(v **types.QueryIdN
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14438,6 +15074,9 @@ func awsAwsjson11_deserializeDocumentQueryIdNotFoundException(v **types.QueryIdN
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14781,7 +15420,13 @@ func awsAwsjson11_deserializeDocumentResourceARNNotValidException(v **types.Reso
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14796,6 +15441,9 @@ func awsAwsjson11_deserializeDocumentResourceARNNotValidException(v **types.Reso
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14855,7 +15503,13 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14870,6 +15524,9 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14895,7 +15552,13 @@ func awsAwsjson11_deserializeDocumentResourcePolicyNotFoundException(v **types.R
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14910,6 +15573,9 @@ func awsAwsjson11_deserializeDocumentResourcePolicyNotFoundException(v **types.R
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -14935,7 +15601,13 @@ func awsAwsjson11_deserializeDocumentResourcePolicyNotValidException(v **types.R
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -14950,6 +15622,9 @@ func awsAwsjson11_deserializeDocumentResourcePolicyNotValidException(v **types.R
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15054,7 +15729,13 @@ func awsAwsjson11_deserializeDocumentResourceTypeNotSupportedException(v **types
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15069,6 +15750,9 @@ func awsAwsjson11_deserializeDocumentResourceTypeNotSupportedException(v **types
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15094,7 +15778,13 @@ func awsAwsjson11_deserializeDocumentS3BucketDoesNotExistException(v **types.S3B
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15109,6 +15799,9 @@ func awsAwsjson11_deserializeDocumentS3BucketDoesNotExistException(v **types.S3B
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15286,7 +15979,13 @@ func awsAwsjson11_deserializeDocumentTagsLimitExceededException(v **types.TagsLi
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15301,6 +16000,9 @@ func awsAwsjson11_deserializeDocumentTagsLimitExceededException(v **types.TagsLi
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15360,7 +16062,13 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15375,6 +16083,9 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15618,7 +16329,13 @@ func awsAwsjson11_deserializeDocumentTrailAlreadyExistsException(v **types.Trail
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15633,6 +16350,9 @@ func awsAwsjson11_deserializeDocumentTrailAlreadyExistsException(v **types.Trail
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15750,7 +16470,13 @@ func awsAwsjson11_deserializeDocumentTrailNotFoundException(v **types.TrailNotFo
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15765,6 +16491,9 @@ func awsAwsjson11_deserializeDocumentTrailNotFoundException(v **types.TrailNotFo
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15790,7 +16519,13 @@ func awsAwsjson11_deserializeDocumentTrailNotProvidedException(v **types.TrailNo
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15805,6 +16540,9 @@ func awsAwsjson11_deserializeDocumentTrailNotProvidedException(v **types.TrailNo
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -15864,7 +16602,13 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperationException(v **types.Uns
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -15879,6 +16623,9 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperationException(v **types.Uns
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

@@ -15358,7 +15358,13 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "ErrorDetails":
 			if err := awsRestjson1_deserializeDocumentErrorDetails(&sv.ErrorDetails, value); err != nil {
@@ -15378,6 +15384,9 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -17083,7 +17092,13 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "ErrorDetails":
 			if err := awsRestjson1_deserializeDocumentErrorDetails(&sv.ErrorDetails, value); err != nil {
@@ -17103,6 +17118,9 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

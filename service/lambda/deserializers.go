@@ -16123,7 +16123,13 @@ func awsRestjson1_deserializeDocumentCodeSigningConfigNotFoundException(v **type
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16147,6 +16153,9 @@ func awsRestjson1_deserializeDocumentCodeSigningConfigNotFoundException(v **type
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16212,7 +16221,13 @@ func awsRestjson1_deserializeDocumentCodeStorageExceededException(v **types.Code
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -16236,6 +16251,9 @@ func awsRestjson1_deserializeDocumentCodeStorageExceededException(v **types.Code
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16261,7 +16279,13 @@ func awsRestjson1_deserializeDocumentCodeVerificationFailedException(v **types.C
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16285,6 +16309,9 @@ func awsRestjson1_deserializeDocumentCodeVerificationFailedException(v **types.C
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16638,7 +16665,13 @@ func awsRestjson1_deserializeDocumentEC2AccessDeniedException(v **types.EC2Acces
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16662,6 +16695,9 @@ func awsRestjson1_deserializeDocumentEC2AccessDeniedException(v **types.EC2Acces
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16687,7 +16723,13 @@ func awsRestjson1_deserializeDocumentEC2ThrottledException(v **types.EC2Throttle
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16711,6 +16753,9 @@ func awsRestjson1_deserializeDocumentEC2ThrottledException(v **types.EC2Throttle
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16736,7 +16781,13 @@ func awsRestjson1_deserializeDocumentEC2UnexpectedException(v **types.EC2Unexpec
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "EC2ErrorCode":
 			if value != nil {
@@ -16770,6 +16821,9 @@ func awsRestjson1_deserializeDocumentEC2UnexpectedException(v **types.EC2Unexpec
 
 		}
 	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
+	}
 	*v = sv
 	return nil
 }
@@ -16794,7 +16848,13 @@ func awsRestjson1_deserializeDocumentEFSIOException(v **types.EFSIOException, va
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16818,6 +16878,9 @@ func awsRestjson1_deserializeDocumentEFSIOException(v **types.EFSIOException, va
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16843,7 +16906,13 @@ func awsRestjson1_deserializeDocumentEFSMountConnectivityException(v **types.EFS
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16867,6 +16936,9 @@ func awsRestjson1_deserializeDocumentEFSMountConnectivityException(v **types.EFS
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16892,7 +16964,13 @@ func awsRestjson1_deserializeDocumentEFSMountFailureException(v **types.EFSMount
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16916,6 +16994,9 @@ func awsRestjson1_deserializeDocumentEFSMountFailureException(v **types.EFSMount
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -16941,7 +17022,13 @@ func awsRestjson1_deserializeDocumentEFSMountTimeoutException(v **types.EFSMount
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -16965,6 +17052,9 @@ func awsRestjson1_deserializeDocumentEFSMountTimeoutException(v **types.EFSMount
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -17060,7 +17150,13 @@ func awsRestjson1_deserializeDocumentENILimitReachedException(v **types.ENILimit
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -17084,6 +17180,9 @@ func awsRestjson1_deserializeDocumentENILimitReachedException(v **types.ENILimit
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18759,7 +18858,13 @@ func awsRestjson1_deserializeDocumentInvalidCodeSignatureException(v **types.Inv
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -18783,6 +18888,9 @@ func awsRestjson1_deserializeDocumentInvalidCodeSignatureException(v **types.Inv
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18808,7 +18916,13 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -18832,6 +18946,9 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18857,7 +18974,13 @@ func awsRestjson1_deserializeDocumentInvalidRequestContentException(v **types.In
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -18881,6 +19004,9 @@ func awsRestjson1_deserializeDocumentInvalidRequestContentException(v **types.In
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18906,7 +19032,13 @@ func awsRestjson1_deserializeDocumentInvalidRuntimeException(v **types.InvalidRu
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -18930,6 +19062,9 @@ func awsRestjson1_deserializeDocumentInvalidRuntimeException(v **types.InvalidRu
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -18955,7 +19090,13 @@ func awsRestjson1_deserializeDocumentInvalidSecurityGroupIDException(v **types.I
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -18979,6 +19120,9 @@ func awsRestjson1_deserializeDocumentInvalidSecurityGroupIDException(v **types.I
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19004,7 +19148,13 @@ func awsRestjson1_deserializeDocumentInvalidSubnetIDException(v **types.InvalidS
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -19028,6 +19178,9 @@ func awsRestjson1_deserializeDocumentInvalidSubnetIDException(v **types.InvalidS
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19053,7 +19206,13 @@ func awsRestjson1_deserializeDocumentInvalidZipFileException(v **types.InvalidZi
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -19077,6 +19236,9 @@ func awsRestjson1_deserializeDocumentInvalidZipFileException(v **types.InvalidZi
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19102,7 +19264,13 @@ func awsRestjson1_deserializeDocumentKMSAccessDeniedException(v **types.KMSAcces
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -19126,6 +19294,9 @@ func awsRestjson1_deserializeDocumentKMSAccessDeniedException(v **types.KMSAcces
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19151,7 +19322,13 @@ func awsRestjson1_deserializeDocumentKMSDisabledException(v **types.KMSDisabledE
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -19175,6 +19352,9 @@ func awsRestjson1_deserializeDocumentKMSDisabledException(v **types.KMSDisabledE
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19200,7 +19380,13 @@ func awsRestjson1_deserializeDocumentKMSInvalidStateException(v **types.KMSInval
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -19224,6 +19410,9 @@ func awsRestjson1_deserializeDocumentKMSInvalidStateException(v **types.KMSInval
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19249,7 +19438,13 @@ func awsRestjson1_deserializeDocumentKMSNotFoundException(v **types.KMSNotFoundE
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -19273,6 +19468,9 @@ func awsRestjson1_deserializeDocumentKMSNotFoundException(v **types.KMSNotFoundE
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19842,7 +20040,13 @@ func awsRestjson1_deserializeDocumentPolicyLengthExceededException(v **types.Pol
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -19866,6 +20070,9 @@ func awsRestjson1_deserializeDocumentPolicyLengthExceededException(v **types.Pol
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -19891,7 +20098,13 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -19915,6 +20128,9 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20080,7 +20296,13 @@ func awsRestjson1_deserializeDocumentProvisionedConcurrencyConfigNotFoundExcepti
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -20104,6 +20326,9 @@ func awsRestjson1_deserializeDocumentProvisionedConcurrencyConfigNotFoundExcepti
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20165,7 +20390,13 @@ func awsRestjson1_deserializeDocumentRecursiveInvocationException(v **types.Recu
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20189,6 +20420,9 @@ func awsRestjson1_deserializeDocumentRecursiveInvocationException(v **types.Recu
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20214,7 +20448,13 @@ func awsRestjson1_deserializeDocumentRequestTooLargeException(v **types.RequestT
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -20238,6 +20478,9 @@ func awsRestjson1_deserializeDocumentRequestTooLargeException(v **types.RequestT
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20263,7 +20506,13 @@ func awsRestjson1_deserializeDocumentResourceConflictException(v **types.Resourc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -20287,6 +20536,9 @@ func awsRestjson1_deserializeDocumentResourceConflictException(v **types.Resourc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20312,7 +20564,13 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20336,6 +20594,9 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20361,7 +20622,13 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20385,6 +20652,9 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20410,7 +20680,13 @@ func awsRestjson1_deserializeDocumentResourceNotReadyException(v **types.Resourc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -20434,6 +20710,9 @@ func awsRestjson1_deserializeDocumentResourceNotReadyException(v **types.Resourc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20709,7 +20988,13 @@ func awsRestjson1_deserializeDocumentServiceException(v **types.ServiceException
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20733,6 +21018,9 @@ func awsRestjson1_deserializeDocumentServiceException(v **types.ServiceException
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20794,7 +21082,13 @@ func awsRestjson1_deserializeDocumentSnapStartException(v **types.SnapStartExcep
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20818,6 +21112,9 @@ func awsRestjson1_deserializeDocumentSnapStartException(v **types.SnapStartExcep
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20843,7 +21140,13 @@ func awsRestjson1_deserializeDocumentSnapStartNotReadyException(v **types.SnapSt
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20867,6 +21170,9 @@ func awsRestjson1_deserializeDocumentSnapStartNotReadyException(v **types.SnapSt
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -20941,7 +21247,13 @@ func awsRestjson1_deserializeDocumentSnapStartTimeoutException(v **types.SnapSta
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -20965,6 +21277,9 @@ func awsRestjson1_deserializeDocumentSnapStartTimeoutException(v **types.SnapSta
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -21145,7 +21460,13 @@ func awsRestjson1_deserializeDocumentSubnetIPAddressLimitReachedException(v **ty
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -21169,6 +21490,9 @@ func awsRestjson1_deserializeDocumentSubnetIPAddressLimitReachedException(v **ty
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -21279,7 +21603,13 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -21321,6 +21651,9 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -21422,7 +21755,13 @@ func awsRestjson1_deserializeDocumentUnsupportedMediaTypeException(v **types.Uns
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -21446,6 +21785,9 @@ func awsRestjson1_deserializeDocumentUnsupportedMediaTypeException(v **types.Uns
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

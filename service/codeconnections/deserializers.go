@@ -3893,7 +3893,13 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -3908,6 +3914,9 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3933,7 +3942,13 @@ func awsAwsjson10_deserializeDocumentConcurrentModificationException(v **types.C
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -3948,6 +3963,9 @@ func awsAwsjson10_deserializeDocumentConcurrentModificationException(v **types.C
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -3973,7 +3991,13 @@ func awsAwsjson10_deserializeDocumentConditionalCheckFailedException(v **types.C
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -3988,6 +4012,9 @@ func awsAwsjson10_deserializeDocumentConditionalCheckFailedException(v **types.C
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4013,7 +4040,13 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -4028,6 +4061,9 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4296,7 +4332,13 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -4311,6 +4353,9 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4336,7 +4381,13 @@ func awsAwsjson10_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -4351,6 +4402,9 @@ func awsAwsjson10_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4410,7 +4464,13 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -4425,6 +4485,9 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4848,7 +4911,13 @@ func awsAwsjson10_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -4863,6 +4932,9 @@ func awsAwsjson10_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4888,7 +4960,13 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -4903,6 +4981,9 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5116,7 +5197,13 @@ func awsAwsjson10_deserializeDocumentResourceUnavailableException(v **types.Reso
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -5131,6 +5218,9 @@ func awsAwsjson10_deserializeDocumentResourceUnavailableException(v **types.Reso
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5156,7 +5246,13 @@ func awsAwsjson10_deserializeDocumentRetryLatestCommitFailedException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -5171,6 +5267,9 @@ func awsAwsjson10_deserializeDocumentRetryLatestCommitFailedException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5549,7 +5648,13 @@ func awsAwsjson10_deserializeDocumentSyncBlockerDoesNotExistException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -5564,6 +5669,9 @@ func awsAwsjson10_deserializeDocumentSyncBlockerDoesNotExistException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5816,7 +5924,13 @@ func awsAwsjson10_deserializeDocumentSyncConfigurationStillExistsException(v **t
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -5831,6 +5945,9 @@ func awsAwsjson10_deserializeDocumentSyncConfigurationStillExistsException(v **t
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5939,7 +6056,13 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -5954,6 +6077,9 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5979,7 +6105,13 @@ func awsAwsjson10_deserializeDocumentUnsupportedOperationException(v **types.Uns
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -5994,6 +6126,9 @@ func awsAwsjson10_deserializeDocumentUnsupportedOperationException(v **types.Uns
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6019,7 +6154,13 @@ func awsAwsjson10_deserializeDocumentUnsupportedProviderTypeException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -6034,6 +6175,9 @@ func awsAwsjson10_deserializeDocumentUnsupportedProviderTypeException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6059,7 +6203,13 @@ func awsAwsjson10_deserializeDocumentUpdateOutOfSyncException(v **types.UpdateOu
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -6074,6 +6224,9 @@ func awsAwsjson10_deserializeDocumentUpdateOutOfSyncException(v **types.UpdateOu
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

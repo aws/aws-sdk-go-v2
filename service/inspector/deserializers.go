@@ -4714,7 +4714,13 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -4747,6 +4753,9 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -4992,7 +5001,13 @@ func awsAwsjson11_deserializeDocumentAgentsAlreadyRunningAssessmentException(v *
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "agents":
 			if err := awsAwsjson11_deserializeDocumentAgentAlreadyRunningAssessmentList(&sv.Agents, value); err != nil {
@@ -5030,6 +5045,9 @@ func awsAwsjson11_deserializeDocumentAgentsAlreadyRunningAssessmentException(v *
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -5469,7 +5487,13 @@ func awsAwsjson11_deserializeDocumentAssessmentRunInProgressException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "assessmentRunArns":
 			if err := awsAwsjson11_deserializeDocumentAssessmentRunInProgressArnList(&sv.AssessmentRunArns, value); err != nil {
@@ -5507,6 +5531,9 @@ func awsAwsjson11_deserializeDocumentAssessmentRunInProgressException(v **types.
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6981,7 +7008,13 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -7005,6 +7038,9 @@ func awsAwsjson11_deserializeDocumentInternalException(v **types.InternalExcepti
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7030,7 +7066,13 @@ func awsAwsjson11_deserializeDocumentInvalidCrossAccountRoleException(v **types.
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -7064,6 +7106,9 @@ func awsAwsjson11_deserializeDocumentInvalidCrossAccountRoleException(v **types.
 
 		}
 	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
+	}
 	*v = sv
 	return nil
 }
@@ -7088,7 +7133,13 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -7121,6 +7172,9 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7218,7 +7272,13 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -7251,6 +7311,9 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7455,7 +7518,13 @@ func awsAwsjson11_deserializeDocumentNoSuchEntityException(v **types.NoSuchEntit
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -7489,6 +7558,9 @@ func awsAwsjson11_deserializeDocumentNoSuchEntityException(v **types.NoSuchEntit
 
 		}
 	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
+	}
 	*v = sv
 	return nil
 }
@@ -7513,7 +7585,13 @@ func awsAwsjson11_deserializeDocumentPreviewGenerationInProgressException(v **ty
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -7528,6 +7606,9 @@ func awsAwsjson11_deserializeDocumentPreviewGenerationInProgressException(v **ty
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8090,7 +8171,13 @@ func awsAwsjson11_deserializeDocumentServiceTemporarilyUnavailableException(v **
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -8114,6 +8201,9 @@ func awsAwsjson11_deserializeDocumentServiceTemporarilyUnavailableException(v **
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8444,7 +8534,13 @@ func awsAwsjson11_deserializeDocumentUnsupportedFeatureException(v **types.Unsup
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "canRetry":
 			if value != nil {
@@ -8468,6 +8564,9 @@ func awsAwsjson11_deserializeDocumentUnsupportedFeatureException(v **types.Unsup
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

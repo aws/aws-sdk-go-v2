@@ -422,7 +422,13 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Code":
 			if value != nil {
@@ -446,6 +452,9 @@ func awsAwsjson10_deserializeDocumentBadRequestException(v **types.BadRequestExc
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -471,7 +480,13 @@ func awsAwsjson10_deserializeDocumentCapacityExceededException(v **types.Capacit
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -486,6 +501,9 @@ func awsAwsjson10_deserializeDocumentCapacityExceededException(v **types.Capacit
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -702,7 +720,13 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Code":
 			if value != nil {
@@ -726,6 +750,9 @@ func awsAwsjson10_deserializeDocumentInvalidSessionException(v **types.InvalidSe
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -808,7 +835,13 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -823,6 +856,9 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -848,7 +884,13 @@ func awsAwsjson10_deserializeDocumentOccConflictException(v **types.OccConflictE
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -863,6 +905,9 @@ func awsAwsjson10_deserializeDocumentOccConflictException(v **types.OccConflictE
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -933,7 +978,13 @@ func awsAwsjson10_deserializeDocumentRateExceededException(v **types.RateExceede
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -948,6 +999,9 @@ func awsAwsjson10_deserializeDocumentRateExceededException(v **types.RateExceede
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

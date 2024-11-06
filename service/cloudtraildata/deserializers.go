@@ -520,7 +520,13 @@ func awsRestjson1_deserializeDocumentChannelInsufficientPermission(v **types.Cha
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -535,6 +541,9 @@ func awsRestjson1_deserializeDocumentChannelInsufficientPermission(v **types.Cha
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -560,7 +569,13 @@ func awsRestjson1_deserializeDocumentChannelNotFound(v **types.ChannelNotFound, 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -575,6 +590,9 @@ func awsRestjson1_deserializeDocumentChannelNotFound(v **types.ChannelNotFound, 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -600,7 +618,13 @@ func awsRestjson1_deserializeDocumentChannelUnsupportedSchema(v **types.ChannelU
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -615,6 +639,9 @@ func awsRestjson1_deserializeDocumentChannelUnsupportedSchema(v **types.ChannelU
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -640,7 +667,13 @@ func awsRestjson1_deserializeDocumentDuplicatedAuditEventId(v **types.Duplicated
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -655,6 +688,9 @@ func awsRestjson1_deserializeDocumentDuplicatedAuditEventId(v **types.Duplicated
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -680,7 +716,13 @@ func awsRestjson1_deserializeDocumentInvalidChannelARN(v **types.InvalidChannelA
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -695,6 +737,9 @@ func awsRestjson1_deserializeDocumentInvalidChannelARN(v **types.InvalidChannelA
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -812,7 +857,13 @@ func awsRestjson1_deserializeDocumentUnsupportedOperationException(v **types.Uns
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -827,6 +878,9 @@ func awsRestjson1_deserializeDocumentUnsupportedOperationException(v **types.Uns
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

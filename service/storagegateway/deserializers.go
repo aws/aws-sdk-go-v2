@@ -12206,7 +12206,13 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "error":
 			if err := awsAwsjson11_deserializeDocumentStorageGatewayError(&sv.Error_, value); err != nil {
@@ -12226,6 +12232,9 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12251,7 +12260,13 @@ func awsAwsjson11_deserializeDocumentInvalidGatewayRequestException(v **types.In
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "error":
 			if err := awsAwsjson11_deserializeDocumentStorageGatewayError(&sv.Error_, value); err != nil {
@@ -12271,6 +12286,9 @@ func awsAwsjson11_deserializeDocumentInvalidGatewayRequestException(v **types.In
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -12862,7 +12880,13 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableError(v **types.ServiceUn
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "error":
 			if err := awsAwsjson11_deserializeDocumentStorageGatewayError(&sv.Error_, value); err != nil {
@@ -12882,6 +12906,9 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableError(v **types.ServiceUn
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

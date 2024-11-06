@@ -6204,7 +6204,13 @@ func awsAwsjson10_deserializeDocumentDefaultUndefinedFault(v **types.DefaultUnde
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -6219,6 +6225,9 @@ func awsAwsjson10_deserializeDocumentDefaultUndefinedFault(v **types.DefaultUnde
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6244,7 +6253,13 @@ func awsAwsjson10_deserializeDocumentDomainAlreadyExistsFault(v **types.DomainAl
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -6259,6 +6274,9 @@ func awsAwsjson10_deserializeDocumentDomainAlreadyExistsFault(v **types.DomainAl
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -6324,7 +6342,13 @@ func awsAwsjson10_deserializeDocumentDomainDeprecatedFault(v **types.DomainDepre
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -6339,6 +6363,9 @@ func awsAwsjson10_deserializeDocumentDomainDeprecatedFault(v **types.DomainDepre
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7329,7 +7356,13 @@ func awsAwsjson10_deserializeDocumentLimitExceededFault(v **types.LimitExceededF
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -7344,6 +7377,9 @@ func awsAwsjson10_deserializeDocumentLimitExceededFault(v **types.LimitExceededF
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -7431,7 +7467,13 @@ func awsAwsjson10_deserializeDocumentOperationNotPermittedFault(v **types.Operat
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -7446,6 +7488,9 @@ func awsAwsjson10_deserializeDocumentOperationNotPermittedFault(v **types.Operat
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8772,7 +8817,13 @@ func awsAwsjson10_deserializeDocumentTooManyTagsFault(v **types.TooManyTagsFault
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -8787,6 +8838,9 @@ func awsAwsjson10_deserializeDocumentTooManyTagsFault(v **types.TooManyTagsFault
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8812,7 +8866,13 @@ func awsAwsjson10_deserializeDocumentTypeAlreadyExistsFault(v **types.TypeAlread
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -8827,6 +8887,9 @@ func awsAwsjson10_deserializeDocumentTypeAlreadyExistsFault(v **types.TypeAlread
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8852,7 +8915,13 @@ func awsAwsjson10_deserializeDocumentTypeDeprecatedFault(v **types.TypeDeprecate
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -8867,6 +8936,9 @@ func awsAwsjson10_deserializeDocumentTypeDeprecatedFault(v **types.TypeDeprecate
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8892,7 +8964,13 @@ func awsAwsjson10_deserializeDocumentTypeNotDeprecatedFault(v **types.TypeNotDep
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -8907,6 +8985,9 @@ func awsAwsjson10_deserializeDocumentTypeNotDeprecatedFault(v **types.TypeNotDep
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -8932,7 +9013,13 @@ func awsAwsjson10_deserializeDocumentUnknownResourceFault(v **types.UnknownResou
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -8947,6 +9034,9 @@ func awsAwsjson10_deserializeDocumentUnknownResourceFault(v **types.UnknownResou
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -9021,7 +9111,13 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionAlreadyStartedFault(v **ty
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -9036,6 +9132,9 @@ func awsAwsjson10_deserializeDocumentWorkflowExecutionAlreadyStartedFault(v **ty
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

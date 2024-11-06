@@ -780,7 +780,13 @@ func awsRestjson1_deserializeDocumentAccessForbidden(v **types.AccessForbidden, 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -795,6 +801,9 @@ func awsRestjson1_deserializeDocumentAccessForbidden(v **types.AccessForbidden, 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1158,7 +1167,13 @@ func awsRestjson1_deserializeDocumentInternalFailure(v **types.InternalFailure, 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -1173,6 +1188,9 @@ func awsRestjson1_deserializeDocumentInternalFailure(v **types.InternalFailure, 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1268,7 +1286,13 @@ func awsRestjson1_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -1283,6 +1307,9 @@ func awsRestjson1_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1308,7 +1335,13 @@ func awsRestjson1_deserializeDocumentServiceUnavailable(v **types.ServiceUnavail
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -1323,6 +1356,9 @@ func awsRestjson1_deserializeDocumentServiceUnavailable(v **types.ServiceUnavail
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1382,7 +1418,13 @@ func awsRestjson1_deserializeDocumentValidationError(v **types.ValidationError, 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -1397,6 +1439,9 @@ func awsRestjson1_deserializeDocumentValidationError(v **types.ValidationError, 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

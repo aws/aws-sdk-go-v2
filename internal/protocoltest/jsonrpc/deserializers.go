@@ -2078,7 +2078,13 @@ func awsAwsjson11_deserializeDocumentComplexError(v **types.ComplexError, value 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Nested":
 			if err := awsAwsjson11_deserializeDocumentComplexNestedErrorData(&sv.Nested, value); err != nil {
@@ -2098,6 +2104,9 @@ func awsAwsjson11_deserializeDocumentComplexError(v **types.ComplexError, value 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2202,7 +2211,13 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Code":
 			if value != nil {
@@ -2264,6 +2279,9 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 
 		}
 	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
+	}
 	*v = sv
 	return nil
 }
@@ -2288,12 +2306,21 @@ func awsAwsjson11_deserializeDocumentErrorWithoutMembers(v **types.ErrorWithoutM
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2319,12 +2346,21 @@ func awsAwsjson11_deserializeDocumentFooError(v **types.FooError, value interfac
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		default:
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -2350,7 +2386,13 @@ func awsAwsjson11_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "Message":
 			if value != nil {
@@ -2365,6 +2407,9 @@ func awsAwsjson11_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil

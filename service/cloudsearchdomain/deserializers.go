@@ -756,7 +756,13 @@ func awsRestjson1_deserializeDocumentDocumentServiceException(v **types.Document
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -780,6 +786,9 @@ func awsRestjson1_deserializeDocumentDocumentServiceException(v **types.Document
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
@@ -1402,7 +1411,13 @@ func awsRestjson1_deserializeDocumentSearchException(v **types.SearchException, 
 		sv = *v
 	}
 
+	var errorMessage string
 	for key, value := range shape {
+		keyLower := strings.ToLower(key)
+		if keyLower == "message" {
+			errorMessage = value.(string)
+			continue
+		}
 		switch key {
 		case "message":
 			if value != nil {
@@ -1417,6 +1432,9 @@ func awsRestjson1_deserializeDocumentSearchException(v **types.SearchException, 
 			_, _ = key, value
 
 		}
+	}
+	if errorMessage != "" {
+		sv.Message = &errorMessage
 	}
 	*v = sv
 	return nil
