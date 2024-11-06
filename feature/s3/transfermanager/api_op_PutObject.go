@@ -76,7 +76,8 @@ func (m *multipartUploadError) UploadID() string {
 	return m.uploadID
 }
 
-// PutObjectInput represents a request to the PutObject() call.
+// PutObjectInput represents a request to the PutObject() call. It contains common fields
+// of s3 PutObject and CreateMultipartUpload input
 type PutObjectInput struct {
 	// Bucket the object is uploaded into
 	Bucket string
@@ -535,7 +536,8 @@ func (i *PutObjectInput) mapAbortMultipartUploadInput(uploadID *string) *s3.Abor
 	return input
 }
 
-// PutObjectOutput represents a response from the Upload() call.
+// PutObjectOutput represents a response from the Upload() call. It contains common fields
+// of s3 PutObject and CompleteMultipartUpload output
 type PutObjectOutput struct {
 	// The ID for a multipart upload to S3. In the case of an error the error
 	// can be cast to the MultiUploadFailure interface to extract the upload ID.
