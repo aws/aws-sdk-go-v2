@@ -183,6 +183,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -356,6 +357,7 @@ func awsRestjson1_deserializeOpDocumentPutDeploymentParameterOutput(v **PutDeplo
 				}
 				sv.AgreementId = ptr.String(jtv)
 			}
+
 		case "deploymentParameterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -364,6 +366,7 @@ func awsRestjson1_deserializeOpDocumentPutDeploymentParameterOutput(v **PutDeplo
 				}
 				sv.DeploymentParameterId = ptr.String(jtv)
 			}
+
 		case "resourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -372,10 +375,12 @@ func awsRestjson1_deserializeOpDocumentPutDeploymentParameterOutput(v **PutDeplo
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -873,6 +878,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -912,6 +918,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -920,6 +927,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -959,6 +967,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -998,6 +1007,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1037,6 +1047,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1148,6 +1159,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1187,6 +1199,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.FieldName = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1195,6 +1208,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

@@ -185,6 +185,7 @@ func awsRestjson1_deserializeOpDocumentBatchUpdateRecommendationResourceExclusio
 			if err := awsRestjson1_deserializeDocumentUpdateRecommendationResourceExclusionErrorList(&sv.BatchUpdateRecommendationResourceExclusionErrors, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -348,6 +349,7 @@ func awsRestjson1_deserializeOpDocumentGetOrganizationRecommendationOutput(v **G
 			if err := awsRestjson1_deserializeDocumentOrganizationRecommendation(&sv.OrganizationRecommendation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -511,6 +513,7 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationOutput(v **GetRecommenda
 			if err := awsRestjson1_deserializeDocumentRecommendation(&sv.Recommendation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -671,6 +674,7 @@ func awsRestjson1_deserializeOpDocumentListChecksOutput(v **ListChecksOutput, va
 			if err := awsRestjson1_deserializeDocumentCheckSummaryList(&sv.CheckSummaries, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -679,6 +683,7 @@ func awsRestjson1_deserializeOpDocumentListChecksOutput(v **ListChecksOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -842,6 +847,7 @@ func awsRestjson1_deserializeOpDocumentListOrganizationRecommendationAccountsOut
 			if err := awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummaryList(&sv.AccountRecommendationLifecycleSummaries, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -850,6 +856,7 @@ func awsRestjson1_deserializeOpDocumentListOrganizationRecommendationAccountsOut
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1017,10 +1024,12 @@ func awsRestjson1_deserializeOpDocumentListOrganizationRecommendationResourcesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "organizationRecommendationResourceSummaries":
 			if err := awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummaryList(&sv.OrganizationRecommendationResourceSummaries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1185,10 +1194,12 @@ func awsRestjson1_deserializeOpDocumentListOrganizationRecommendationsOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "organizationRecommendationSummaries":
 			if err := awsRestjson1_deserializeDocumentOrganizationRecommendationSummaryList(&sv.OrganizationRecommendationSummaries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1356,10 +1367,12 @@ func awsRestjson1_deserializeOpDocumentListRecommendationResourcesOutput(v **Lis
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "recommendationResourceSummaries":
 			if err := awsRestjson1_deserializeDocumentRecommendationResourceSummaryList(&sv.RecommendationResourceSummaries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1524,10 +1537,12 @@ func awsRestjson1_deserializeOpDocumentListRecommendationsOutput(v **ListRecomme
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "recommendationSummaries":
 			if err := awsRestjson1_deserializeDocumentRecommendationSummaryList(&sv.RecommendationSummaries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2001,6 +2016,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2040,6 +2056,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "accountRecommendationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2048,6 +2065,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.AccountRecommendationArn = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2060,6 +2078,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "lifecycleStage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2068,6 +2087,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.LifecycleStage = types.RecommendationLifecycleStage(jtv)
 			}
+
 		case "updatedOnBehalfOf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2076,6 +2096,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.UpdatedOnBehalfOf = ptr.String(jtv)
 			}
+
 		case "updatedOnBehalfOfJobTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2084,6 +2105,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.UpdatedOnBehalfOfJobTitle = ptr.String(jtv)
 			}
+
 		case "updateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2092,6 +2114,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.UpdateReason = ptr.String(jtv)
 			}
+
 		case "updateReasonCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2100,6 +2123,7 @@ func awsRestjson1_deserializeDocumentAccountRecommendationLifecycleSummary(v **t
 				}
 				sv.UpdateReasonCode = types.UpdateRecommendationLifecycleStageReasonCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2173,10 +2197,12 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsServices":
 			if err := awsRestjson1_deserializeDocumentRecommendationAwsServiceList(&sv.AwsServices, value); err != nil {
 				return err
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2185,6 +2211,7 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2193,10 +2220,12 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2205,10 +2234,12 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pillars":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarList(&sv.Pillars, value); err != nil {
 				return err
 			}
+
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2217,6 +2248,7 @@ func awsRestjson1_deserializeDocumentCheckSummary(v **types.CheckSummary, value 
 				}
 				sv.Source = types.RecommendationSource(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2290,6 +2322,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2329,6 +2362,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2368,10 +2402,12 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsServices":
 			if err := awsRestjson1_deserializeDocumentRecommendationAwsServiceList(&sv.AwsServices, value); err != nil {
 				return err
 			}
+
 		case "checkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2380,6 +2416,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.CheckArn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2392,6 +2429,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2400,6 +2438,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2408,6 +2447,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2416,6 +2456,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2428,6 +2469,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "lifecycleStage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2436,6 +2478,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.LifecycleStage = types.RecommendationLifecycleStage(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2444,14 +2487,17 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pillars":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarList(&sv.Pillars, value); err != nil {
 				return err
 			}
+
 		case "pillarSpecificAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarSpecificAggregates(&sv.PillarSpecificAggregates, value); err != nil {
 				return err
 			}
+
 		case "resolvedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2464,10 +2510,12 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.ResolvedAt = ptr.Time(t)
 			}
+
 		case "resourcesAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(&sv.ResourcesAggregates, value); err != nil {
 				return err
 			}
+
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2476,6 +2524,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Source = types.RecommendationSource(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2484,6 +2533,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Status = types.RecommendationStatus(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2492,6 +2542,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.Type = types.RecommendationType(jtv)
 			}
+
 		case "updatedOnBehalfOf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2500,6 +2551,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.UpdatedOnBehalfOf = ptr.String(jtv)
 			}
+
 		case "updatedOnBehalfOfJobTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2508,6 +2560,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.UpdatedOnBehalfOfJobTitle = ptr.String(jtv)
 			}
+
 		case "updateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2516,6 +2569,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.UpdateReason = ptr.String(jtv)
 			}
+
 		case "updateReasonCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2524,6 +2578,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendation(v **types.Organi
 				}
 				sv.UpdateReasonCode = types.UpdateRecommendationLifecycleStageReasonCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2563,6 +2618,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2571,6 +2627,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2579,6 +2636,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.AwsResourceId = ptr.String(jtv)
 			}
+
 		case "exclusionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2587,6 +2645,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.ExclusionStatus = types.ExclusionStatus(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2595,6 +2654,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2607,10 +2667,12 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "recommendationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2619,6 +2681,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.RecommendationArn = ptr.String(jtv)
 			}
+
 		case "regionCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2627,6 +2690,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.RegionCode = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2635,6 +2699,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationResourceSummary(v
 				}
 				sv.Status = types.ResourceStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2708,10 +2773,12 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsServices":
 			if err := awsRestjson1_deserializeDocumentRecommendationAwsServiceList(&sv.AwsServices, value); err != nil {
 				return err
 			}
+
 		case "checkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2720,6 +2787,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.CheckArn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2732,6 +2800,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2740,6 +2809,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2752,6 +2822,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "lifecycleStage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2760,6 +2831,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.LifecycleStage = types.RecommendationLifecycleStage(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2768,18 +2840,22 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pillars":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarList(&sv.Pillars, value); err != nil {
 				return err
 			}
+
 		case "pillarSpecificAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarSpecificAggregates(&sv.PillarSpecificAggregates, value); err != nil {
 				return err
 			}
+
 		case "resourcesAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(&sv.ResourcesAggregates, value); err != nil {
 				return err
 			}
+
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2788,6 +2864,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.Source = types.RecommendationSource(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2796,6 +2873,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.Status = types.RecommendationStatus(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2804,6 +2882,7 @@ func awsRestjson1_deserializeDocumentOrganizationRecommendationSummary(v **types
 				}
 				sv.Type = types.RecommendationType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2877,10 +2956,12 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsServices":
 			if err := awsRestjson1_deserializeDocumentRecommendationAwsServiceList(&sv.AwsServices, value); err != nil {
 				return err
 			}
+
 		case "checkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2889,6 +2970,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.CheckArn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2901,6 +2983,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2909,6 +2992,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2917,6 +3001,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2925,6 +3010,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2937,6 +3023,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "lifecycleStage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2945,6 +3032,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.LifecycleStage = types.RecommendationLifecycleStage(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2953,14 +3041,17 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pillars":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarList(&sv.Pillars, value); err != nil {
 				return err
 			}
+
 		case "pillarSpecificAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarSpecificAggregates(&sv.PillarSpecificAggregates, value); err != nil {
 				return err
 			}
+
 		case "resolvedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2973,10 +3064,12 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.ResolvedAt = ptr.Time(t)
 			}
+
 		case "resourcesAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(&sv.ResourcesAggregates, value); err != nil {
 				return err
 			}
+
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2985,6 +3078,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Source = types.RecommendationSource(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2993,6 +3087,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Status = types.RecommendationStatus(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3001,6 +3096,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.Type = types.RecommendationType(jtv)
 			}
+
 		case "updatedOnBehalfOf":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3009,6 +3105,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.UpdatedOnBehalfOf = ptr.String(jtv)
 			}
+
 		case "updatedOnBehalfOfJobTitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3017,6 +3114,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.UpdatedOnBehalfOfJobTitle = ptr.String(jtv)
 			}
+
 		case "updateReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3025,6 +3123,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.UpdateReason = ptr.String(jtv)
 			}
+
 		case "updateReasonCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3033,6 +3132,7 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.UpdateReasonCode = types.UpdateRecommendationLifecycleStageReasonCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3133,6 +3233,7 @@ func awsRestjson1_deserializeDocumentRecommendationCostOptimizingAggregates(v **
 
 				}
 			}
+
 		case "estimatedPercentMonthlySavings":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3166,6 +3267,7 @@ func awsRestjson1_deserializeDocumentRecommendationCostOptimizingAggregates(v **
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3237,6 +3339,7 @@ func awsRestjson1_deserializeDocumentRecommendationPillarSpecificAggregates(v **
 			if err := awsRestjson1_deserializeDocumentRecommendationCostOptimizingAggregates(&sv.CostOptimizing, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3280,6 +3383,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(v **types
 				}
 				sv.ErrorCount = ptr.Int64(i64)
 			}
+
 		case "okCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3292,6 +3396,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(v **types
 				}
 				sv.OkCount = ptr.Int64(i64)
 			}
+
 		case "warningCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3304,6 +3409,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(v **types
 				}
 				sv.WarningCount = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3343,6 +3449,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3351,6 +3458,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.AwsResourceId = ptr.String(jtv)
 			}
+
 		case "exclusionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3359,6 +3467,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.ExclusionStatus = types.ExclusionStatus(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3367,6 +3476,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3379,10 +3489,12 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "recommendationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3391,6 +3503,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.RecommendationArn = ptr.String(jtv)
 			}
+
 		case "regionCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3399,6 +3512,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.RegionCode = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3407,6 +3521,7 @@ func awsRestjson1_deserializeDocumentRecommendationResourceSummary(v **types.Rec
 				}
 				sv.Status = types.ResourceStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3480,10 +3595,12 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "awsServices":
 			if err := awsRestjson1_deserializeDocumentRecommendationAwsServiceList(&sv.AwsServices, value); err != nil {
 				return err
 			}
+
 		case "checkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3492,6 +3609,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.CheckArn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3504,6 +3622,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3512,6 +3631,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3524,6 +3644,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
+
 		case "lifecycleStage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3532,6 +3653,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.LifecycleStage = types.RecommendationLifecycleStage(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3540,18 +3662,22 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pillars":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarList(&sv.Pillars, value); err != nil {
 				return err
 			}
+
 		case "pillarSpecificAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationPillarSpecificAggregates(&sv.PillarSpecificAggregates, value); err != nil {
 				return err
 			}
+
 		case "resourcesAggregates":
 			if err := awsRestjson1_deserializeDocumentRecommendationResourcesAggregates(&sv.ResourcesAggregates, value); err != nil {
 				return err
 			}
+
 		case "source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3560,6 +3686,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.Source = types.RecommendationSource(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3568,6 +3695,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.Status = types.RecommendationStatus(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3576,6 +3704,7 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				}
 				sv.Type = types.RecommendationType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3649,6 +3778,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3724,6 +3854,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3763,6 +3894,7 @@ func awsRestjson1_deserializeDocumentUpdateRecommendationResourceExclusionError(
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "errorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3771,6 +3903,7 @@ func awsRestjson1_deserializeDocumentUpdateRecommendationResourceExclusionError(
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3779,6 +3912,7 @@ func awsRestjson1_deserializeDocumentUpdateRecommendationResourceExclusionError(
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3852,6 +3986,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

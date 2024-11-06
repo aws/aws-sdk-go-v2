@@ -5298,6 +5298,7 @@ func awsAwsjson11_deserializeDocumentAnomaly(v **types.Anomaly, value interface{
 				}
 				sv.AnomalyEndDate = ptr.String(jtv)
 			}
+
 		case "AnomalyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5306,10 +5307,12 @@ func awsAwsjson11_deserializeDocumentAnomaly(v **types.Anomaly, value interface{
 				}
 				sv.AnomalyId = ptr.String(jtv)
 			}
+
 		case "AnomalyScore":
 			if err := awsAwsjson11_deserializeDocumentAnomalyScore(&sv.AnomalyScore, value); err != nil {
 				return err
 			}
+
 		case "AnomalyStartDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5318,6 +5321,7 @@ func awsAwsjson11_deserializeDocumentAnomaly(v **types.Anomaly, value interface{
 				}
 				sv.AnomalyStartDate = ptr.String(jtv)
 			}
+
 		case "DimensionValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5326,6 +5330,7 @@ func awsAwsjson11_deserializeDocumentAnomaly(v **types.Anomaly, value interface{
 				}
 				sv.DimensionValue = ptr.String(jtv)
 			}
+
 		case "Feedback":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5334,10 +5339,12 @@ func awsAwsjson11_deserializeDocumentAnomaly(v **types.Anomaly, value interface{
 				}
 				sv.Feedback = types.AnomalyFeedbackType(jtv)
 			}
+
 		case "Impact":
 			if err := awsAwsjson11_deserializeDocumentImpact(&sv.Impact, value); err != nil {
 				return err
 			}
+
 		case "MonitorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5346,10 +5353,12 @@ func awsAwsjson11_deserializeDocumentAnomaly(v **types.Anomaly, value interface{
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		case "RootCauses":
 			if err := awsAwsjson11_deserializeDocumentRootCauses(&sv.RootCauses, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5389,6 +5398,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "DimensionalValueCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5401,6 +5411,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.DimensionalValueCount = int32(i64)
 			}
+
 		case "LastEvaluatedDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5409,6 +5420,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.LastEvaluatedDate = ptr.String(jtv)
 			}
+
 		case "LastUpdatedDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5417,6 +5429,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.LastUpdatedDate = ptr.String(jtv)
 			}
+
 		case "MonitorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5425,6 +5438,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		case "MonitorDimension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5433,6 +5447,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.MonitorDimension = types.MonitorDimension(jtv)
 			}
+
 		case "MonitorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5441,10 +5456,12 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.MonitorName = ptr.String(jtv)
 			}
+
 		case "MonitorSpecification":
 			if err := awsAwsjson11_deserializeDocumentExpression(&sv.MonitorSpecification, value); err != nil {
 				return err
 			}
+
 		case "MonitorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5453,6 +5470,7 @@ func awsAwsjson11_deserializeDocumentAnomalyMonitor(v **types.AnomalyMonitor, va
 				}
 				sv.MonitorType = types.MonitorType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5551,6 +5569,7 @@ func awsAwsjson11_deserializeDocumentAnomalyScore(v **types.AnomalyScore, value 
 
 				}
 			}
+
 		case "MaxScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5584,6 +5603,7 @@ func awsAwsjson11_deserializeDocumentAnomalyScore(v **types.AnomalyScore, value 
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5623,6 +5643,7 @@ func awsAwsjson11_deserializeDocumentAnomalySubscription(v **types.AnomalySubscr
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "Frequency":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5631,14 +5652,17 @@ func awsAwsjson11_deserializeDocumentAnomalySubscription(v **types.AnomalySubscr
 				}
 				sv.Frequency = types.AnomalySubscriptionFrequency(jtv)
 			}
+
 		case "MonitorArnList":
 			if err := awsAwsjson11_deserializeDocumentMonitorArnList(&sv.MonitorArnList, value); err != nil {
 				return err
 			}
+
 		case "Subscribers":
 			if err := awsAwsjson11_deserializeDocumentSubscribers(&sv.Subscribers, value); err != nil {
 				return err
 			}
+
 		case "SubscriptionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5647,6 +5671,7 @@ func awsAwsjson11_deserializeDocumentAnomalySubscription(v **types.AnomalySubscr
 				}
 				sv.SubscriptionArn = ptr.String(jtv)
 			}
+
 		case "SubscriptionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5655,6 +5680,7 @@ func awsAwsjson11_deserializeDocumentAnomalySubscription(v **types.AnomalySubscr
 				}
 				sv.SubscriptionName = ptr.String(jtv)
 			}
+
 		case "Threshold":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5688,10 +5714,12 @@ func awsAwsjson11_deserializeDocumentAnomalySubscription(v **types.AnomalySubscr
 
 				}
 			}
+
 		case "ThresholdExpression":
 			if err := awsAwsjson11_deserializeDocumentExpression(&sv.ThresholdExpression, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5841,6 +5869,7 @@ func awsAwsjson11_deserializeDocumentBackfillLimitExceededException(v **types.Ba
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5880,6 +5909,7 @@ func awsAwsjson11_deserializeDocumentBillExpirationException(v **types.BillExpir
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5919,6 +5949,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTag(v **types.CostAllocationT
 				}
 				sv.LastUpdatedDate = ptr.String(jtv)
 			}
+
 		case "LastUsedDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5927,6 +5958,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTag(v **types.CostAllocationT
 				}
 				sv.LastUsedDate = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5935,6 +5967,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTag(v **types.CostAllocationT
 				}
 				sv.Status = types.CostAllocationTagStatus(jtv)
 			}
+
 		case "TagKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5943,6 +5976,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTag(v **types.CostAllocationT
 				}
 				sv.TagKey = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5951,6 +5985,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTag(v **types.CostAllocationT
 				}
 				sv.Type = types.CostAllocationTagType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5990,6 +6025,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequest(v **types.
 				}
 				sv.BackfillFrom = ptr.String(jtv)
 			}
+
 		case "BackfillStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5998,6 +6034,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequest(v **types.
 				}
 				sv.BackfillStatus = types.CostAllocationTagBackfillStatus(jtv)
 			}
+
 		case "CompletedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6006,6 +6043,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequest(v **types.
 				}
 				sv.CompletedAt = ptr.String(jtv)
 			}
+
 		case "LastUpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6014,6 +6052,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequest(v **types.
 				}
 				sv.LastUpdatedAt = ptr.String(jtv)
 			}
+
 		case "RequestedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6022,6 +6061,7 @@ func awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequest(v **types.
 				}
 				sv.RequestedAt = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6129,6 +6169,7 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				}
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
+
 		case "DefaultValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6137,6 +6178,7 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				}
 				sv.DefaultValue = ptr.String(jtv)
 			}
+
 		case "EffectiveEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6145,6 +6187,7 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				}
 				sv.EffectiveEnd = ptr.String(jtv)
 			}
+
 		case "EffectiveStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6153,6 +6196,7 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				}
 				sv.EffectiveStart = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6161,14 +6205,17 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "ProcessingStatus":
 			if err := awsAwsjson11_deserializeDocumentCostCategoryProcessingStatusList(&sv.ProcessingStatus, value); err != nil {
 				return err
 			}
+
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentCostCategoryRulesList(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		case "RuleVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6177,10 +6224,12 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				}
 				sv.RuleVersion = types.CostCategoryRuleVersion(jtv)
 			}
+
 		case "SplitChargeRules":
 			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRulesList(&sv.SplitChargeRules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6220,6 +6269,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryInheritedValueDimension(v **typ
 				}
 				sv.DimensionKey = ptr.String(jtv)
 			}
+
 		case "DimensionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6228,6 +6278,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryInheritedValueDimension(v **typ
 				}
 				sv.DimensionName = types.CostCategoryInheritedValueDimensionName(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6303,6 +6354,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryProcessingStatus(v **types.Cost
 				}
 				sv.Component = types.CostCategoryStatusComponent(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6311,6 +6363,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryProcessingStatus(v **types.Cost
 				}
 				sv.Status = types.CostCategoryStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6384,6 +6437,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				}
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
+
 		case "DefaultValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6392,6 +6446,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				}
 				sv.DefaultValue = ptr.String(jtv)
 			}
+
 		case "EffectiveEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6400,6 +6455,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				}
 				sv.EffectiveEnd = ptr.String(jtv)
 			}
+
 		case "EffectiveStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6408,6 +6464,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				}
 				sv.EffectiveStart = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6416,6 +6473,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "NumberOfRules":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6428,14 +6486,17 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				}
 				sv.NumberOfRules = int32(i64)
 			}
+
 		case "ProcessingStatus":
 			if err := awsAwsjson11_deserializeDocumentCostCategoryProcessingStatusList(&sv.ProcessingStatus, value); err != nil {
 				return err
 			}
+
 		case "Values":
 			if err := awsAwsjson11_deserializeDocumentCostCategoryValuesList(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6505,10 +6566,12 @@ func awsAwsjson11_deserializeDocumentCostCategoryRule(v **types.CostCategoryRule
 			if err := awsAwsjson11_deserializeDocumentCostCategoryInheritedValueDimension(&sv.InheritedValue, value); err != nil {
 				return err
 			}
+
 		case "Rule":
 			if err := awsAwsjson11_deserializeDocumentExpression(&sv.Rule, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6517,6 +6580,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryRule(v **types.CostCategoryRule
 				}
 				sv.Type = types.CostCategoryRuleType(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6525,6 +6589,7 @@ func awsAwsjson11_deserializeDocumentCostCategoryRule(v **types.CostCategoryRule
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6598,10 +6663,12 @@ func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRule(v **types.CostC
 				}
 				sv.Method = types.CostCategorySplitChargeMethod(jtv)
 			}
+
 		case "Parameters":
 			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParametersList(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "Source":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6610,10 +6677,12 @@ func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRule(v **types.CostC
 				}
 				sv.Source = ptr.String(jtv)
 			}
+
 		case "Targets":
 			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleTargetsList(&sv.Targets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6653,10 +6722,12 @@ func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParameter(v **ty
 				}
 				sv.Type = types.CostCategorySplitChargeRuleParameterType(jtv)
 			}
+
 		case "Values":
 			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParameterValuesList(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6836,14 +6907,17 @@ func awsAwsjson11_deserializeDocumentCostCategoryValues(v **types.CostCategoryVa
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "MatchOptions":
 			if err := awsAwsjson11_deserializeDocumentMatchOptions(&sv.MatchOptions, value); err != nil {
 				return err
 			}
+
 		case "Values":
 			if err := awsAwsjson11_deserializeDocumentValues(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6915,14 +6989,17 @@ func awsAwsjson11_deserializeDocumentCoverage(v **types.Coverage, value interfac
 			if err := awsAwsjson11_deserializeDocumentCoverageCost(&sv.CoverageCost, value); err != nil {
 				return err
 			}
+
 		case "CoverageHours":
 			if err := awsAwsjson11_deserializeDocumentCoverageHours(&sv.CoverageHours, value); err != nil {
 				return err
 			}
+
 		case "CoverageNormalizedUnits":
 			if err := awsAwsjson11_deserializeDocumentCoverageNormalizedUnits(&sv.CoverageNormalizedUnits, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6958,14 +7035,17 @@ func awsAwsjson11_deserializeDocumentCoverageByTime(v **types.CoverageByTime, va
 			if err := awsAwsjson11_deserializeDocumentReservationCoverageGroups(&sv.Groups, value); err != nil {
 				return err
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentCoverage(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7005,6 +7085,7 @@ func awsAwsjson11_deserializeDocumentCoverageCost(v **types.CoverageCost, value 
 				}
 				sv.OnDemandCost = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7044,6 +7125,7 @@ func awsAwsjson11_deserializeDocumentCoverageHours(v **types.CoverageHours, valu
 				}
 				sv.CoverageHoursPercentage = ptr.String(jtv)
 			}
+
 		case "OnDemandHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7052,6 +7134,7 @@ func awsAwsjson11_deserializeDocumentCoverageHours(v **types.CoverageHours, valu
 				}
 				sv.OnDemandHours = ptr.String(jtv)
 			}
+
 		case "ReservedHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7060,6 +7143,7 @@ func awsAwsjson11_deserializeDocumentCoverageHours(v **types.CoverageHours, valu
 				}
 				sv.ReservedHours = ptr.String(jtv)
 			}
+
 		case "TotalRunningHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7068,6 +7152,7 @@ func awsAwsjson11_deserializeDocumentCoverageHours(v **types.CoverageHours, valu
 				}
 				sv.TotalRunningHours = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7107,6 +7192,7 @@ func awsAwsjson11_deserializeDocumentCoverageNormalizedUnits(v **types.CoverageN
 				}
 				sv.CoverageNormalizedUnitsPercentage = ptr.String(jtv)
 			}
+
 		case "OnDemandNormalizedUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7115,6 +7201,7 @@ func awsAwsjson11_deserializeDocumentCoverageNormalizedUnits(v **types.CoverageN
 				}
 				sv.OnDemandNormalizedUnits = ptr.String(jtv)
 			}
+
 		case "ReservedNormalizedUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7123,6 +7210,7 @@ func awsAwsjson11_deserializeDocumentCoverageNormalizedUnits(v **types.CoverageN
 				}
 				sv.ReservedNormalizedUnits = ptr.String(jtv)
 			}
+
 		case "TotalRunningNormalizedUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7131,6 +7219,7 @@ func awsAwsjson11_deserializeDocumentCoverageNormalizedUnits(v **types.CoverageN
 				}
 				sv.TotalRunningNormalizedUnits = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7204,6 +7293,7 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "InstanceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7212,6 +7302,7 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.InstanceName = ptr.String(jtv)
 			}
+
 		case "MonthlyCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7220,6 +7311,7 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.MonthlyCost = ptr.String(jtv)
 			}
+
 		case "OnDemandHoursInLookbackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7228,6 +7320,7 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.OnDemandHoursInLookbackPeriod = ptr.String(jtv)
 			}
+
 		case "ReservationCoveredHoursInLookbackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7236,10 +7329,12 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.ReservationCoveredHoursInLookbackPeriod = ptr.String(jtv)
 			}
+
 		case "ResourceDetails":
 			if err := awsAwsjson11_deserializeDocumentResourceDetails(&sv.ResourceDetails, value); err != nil {
 				return err
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7248,10 +7343,12 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceUtilization":
 			if err := awsAwsjson11_deserializeDocumentResourceUtilization(&sv.ResourceUtilization, value); err != nil {
 				return err
 			}
+
 		case "SavingsPlansCoveredHoursInLookbackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7260,10 +7357,12 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.SavingsPlansCoveredHoursInLookbackPeriod = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagValuesList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "TotalRunningHoursInLookbackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7272,6 +7371,7 @@ func awsAwsjson11_deserializeDocumentCurrentInstance(v **types.CurrentInstance, 
 				}
 				sv.TotalRunningHoursInLookbackPeriod = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7311,6 +7411,7 @@ func awsAwsjson11_deserializeDocumentDataUnavailableException(v **types.DataUnav
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7350,6 +7451,7 @@ func awsAwsjson11_deserializeDocumentDateInterval(v **types.DateInterval, value 
 				}
 				sv.End = ptr.String(jtv)
 			}
+
 		case "Start":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7358,6 +7460,7 @@ func awsAwsjson11_deserializeDocumentDateInterval(v **types.DateInterval, value 
 				}
 				sv.Start = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7397,14 +7500,17 @@ func awsAwsjson11_deserializeDocumentDimensionValues(v **types.DimensionValues, 
 				}
 				sv.Key = types.Dimension(jtv)
 			}
+
 		case "MatchOptions":
 			if err := awsAwsjson11_deserializeDocumentMatchOptions(&sv.MatchOptions, value); err != nil {
 				return err
 			}
+
 		case "Values":
 			if err := awsAwsjson11_deserializeDocumentValues(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7440,6 +7546,7 @@ func awsAwsjson11_deserializeDocumentDimensionValuesWithAttributes(v **types.Dim
 			if err := awsAwsjson11_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7448,6 +7555,7 @@ func awsAwsjson11_deserializeDocumentDimensionValuesWithAttributes(v **types.Dim
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7521,6 +7629,7 @@ func awsAwsjson11_deserializeDocumentDiskResourceUtilization(v **types.DiskResou
 				}
 				sv.DiskReadBytesPerSecond = ptr.String(jtv)
 			}
+
 		case "DiskReadOpsPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7529,6 +7638,7 @@ func awsAwsjson11_deserializeDocumentDiskResourceUtilization(v **types.DiskResou
 				}
 				sv.DiskReadOpsPerSecond = ptr.String(jtv)
 			}
+
 		case "DiskWriteBytesPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7537,6 +7647,7 @@ func awsAwsjson11_deserializeDocumentDiskResourceUtilization(v **types.DiskResou
 				}
 				sv.DiskWriteBytesPerSecond = ptr.String(jtv)
 			}
+
 		case "DiskWriteOpsPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7545,6 +7656,7 @@ func awsAwsjson11_deserializeDocumentDiskResourceUtilization(v **types.DiskResou
 				}
 				sv.DiskWriteOpsPerSecond = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7584,6 +7696,7 @@ func awsAwsjson11_deserializeDocumentDynamoDBCapacityDetails(v **types.DynamoDBC
 				}
 				sv.CapacityUnits = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7592,6 +7705,7 @@ func awsAwsjson11_deserializeDocumentDynamoDBCapacityDetails(v **types.DynamoDBC
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7631,6 +7745,7 @@ func awsAwsjson11_deserializeDocumentEBSResourceUtilization(v **types.EBSResourc
 				}
 				sv.EbsReadBytesPerSecond = ptr.String(jtv)
 			}
+
 		case "EbsReadOpsPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7639,6 +7754,7 @@ func awsAwsjson11_deserializeDocumentEBSResourceUtilization(v **types.EBSResourc
 				}
 				sv.EbsReadOpsPerSecond = ptr.String(jtv)
 			}
+
 		case "EbsWriteBytesPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7647,6 +7763,7 @@ func awsAwsjson11_deserializeDocumentEBSResourceUtilization(v **types.EBSResourc
 				}
 				sv.EbsWriteBytesPerSecond = ptr.String(jtv)
 			}
+
 		case "EbsWriteOpsPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7655,6 +7772,7 @@ func awsAwsjson11_deserializeDocumentEBSResourceUtilization(v **types.EBSResourc
 				}
 				sv.EbsWriteOpsPerSecond = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7694,6 +7812,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.AvailabilityZone = ptr.String(jtv)
 			}
+
 		case "CurrentGeneration":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7702,6 +7821,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.CurrentGeneration = jtv
 			}
+
 		case "Family":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7710,6 +7830,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.Family = ptr.String(jtv)
 			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7718,6 +7839,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
+
 		case "Platform":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7726,6 +7848,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.Platform = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7734,6 +7857,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SizeFlexEligible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7742,6 +7866,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.SizeFlexEligible = jtv
 			}
+
 		case "Tenancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7750,6 +7875,7 @@ func awsAwsjson11_deserializeDocumentEC2InstanceDetails(v **types.EC2InstanceDet
 				}
 				sv.Tenancy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7789,6 +7915,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.HourlyOnDemandRate = ptr.String(jtv)
 			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7797,6 +7924,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
+
 		case "Memory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7805,6 +7933,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.Memory = ptr.String(jtv)
 			}
+
 		case "NetworkPerformance":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7813,6 +7942,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.NetworkPerformance = ptr.String(jtv)
 			}
+
 		case "Platform":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7821,6 +7951,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.Platform = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7829,6 +7960,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "Sku":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7837,6 +7969,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.Sku = ptr.String(jtv)
 			}
+
 		case "Storage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7845,6 +7978,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.Storage = ptr.String(jtv)
 			}
+
 		case "Vcpu":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7853,6 +7987,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceDetails(v **types.EC2ResourceDet
 				}
 				sv.Vcpu = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7888,10 +8023,12 @@ func awsAwsjson11_deserializeDocumentEC2ResourceUtilization(v **types.EC2Resourc
 			if err := awsAwsjson11_deserializeDocumentDiskResourceUtilization(&sv.DiskResourceUtilization, value); err != nil {
 				return err
 			}
+
 		case "EBSResourceUtilization":
 			if err := awsAwsjson11_deserializeDocumentEBSResourceUtilization(&sv.EBSResourceUtilization, value); err != nil {
 				return err
 			}
+
 		case "MaxCpuUtilizationPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7900,6 +8037,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceUtilization(v **types.EC2Resourc
 				}
 				sv.MaxCpuUtilizationPercentage = ptr.String(jtv)
 			}
+
 		case "MaxMemoryUtilizationPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7908,6 +8046,7 @@ func awsAwsjson11_deserializeDocumentEC2ResourceUtilization(v **types.EC2Resourc
 				}
 				sv.MaxMemoryUtilizationPercentage = ptr.String(jtv)
 			}
+
 		case "MaxStorageUtilizationPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7916,10 +8055,12 @@ func awsAwsjson11_deserializeDocumentEC2ResourceUtilization(v **types.EC2Resourc
 				}
 				sv.MaxStorageUtilizationPercentage = ptr.String(jtv)
 			}
+
 		case "NetworkResourceUtilization":
 			if err := awsAwsjson11_deserializeDocumentNetworkResourceUtilization(&sv.NetworkResourceUtilization, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7959,6 +8100,7 @@ func awsAwsjson11_deserializeDocumentEC2Specification(v **types.EC2Specification
 				}
 				sv.OfferingClass = types.OfferingClass(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7998,6 +8140,7 @@ func awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(v **types.Elasti
 				}
 				sv.CurrentGeneration = jtv
 			}
+
 		case "Family":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8006,6 +8149,7 @@ func awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(v **types.Elasti
 				}
 				sv.Family = ptr.String(jtv)
 			}
+
 		case "NodeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8014,6 +8158,7 @@ func awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(v **types.Elasti
 				}
 				sv.NodeType = ptr.String(jtv)
 			}
+
 		case "ProductDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8022,6 +8167,7 @@ func awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(v **types.Elasti
 				}
 				sv.ProductDescription = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8030,6 +8176,7 @@ func awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(v **types.Elasti
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SizeFlexEligible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8038,6 +8185,7 @@ func awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(v **types.Elasti
 				}
 				sv.SizeFlexEligible = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8077,6 +8225,7 @@ func awsAwsjson11_deserializeDocumentESInstanceDetails(v **types.ESInstanceDetai
 				}
 				sv.CurrentGeneration = jtv
 			}
+
 		case "InstanceClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8085,6 +8234,7 @@ func awsAwsjson11_deserializeDocumentESInstanceDetails(v **types.ESInstanceDetai
 				}
 				sv.InstanceClass = ptr.String(jtv)
 			}
+
 		case "InstanceSize":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8093,6 +8243,7 @@ func awsAwsjson11_deserializeDocumentESInstanceDetails(v **types.ESInstanceDetai
 				}
 				sv.InstanceSize = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8101,6 +8252,7 @@ func awsAwsjson11_deserializeDocumentESInstanceDetails(v **types.ESInstanceDetai
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SizeFlexEligible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8109,6 +8261,7 @@ func awsAwsjson11_deserializeDocumentESInstanceDetails(v **types.ESInstanceDetai
 				}
 				sv.SizeFlexEligible = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8144,26 +8297,32 @@ func awsAwsjson11_deserializeDocumentExpression(v **types.Expression, value inte
 			if err := awsAwsjson11_deserializeDocumentExpressions(&sv.And, value); err != nil {
 				return err
 			}
+
 		case "CostCategories":
 			if err := awsAwsjson11_deserializeDocumentCostCategoryValues(&sv.CostCategories, value); err != nil {
 				return err
 			}
+
 		case "Dimensions":
 			if err := awsAwsjson11_deserializeDocumentDimensionValues(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		case "Not":
 			if err := awsAwsjson11_deserializeDocumentExpression(&sv.Not, value); err != nil {
 				return err
 			}
+
 		case "Or":
 			if err := awsAwsjson11_deserializeDocumentExpressions(&sv.Or, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagValues(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8273,6 +8432,7 @@ func awsAwsjson11_deserializeDocumentForecastResult(v **types.ForecastResult, va
 				}
 				sv.MeanValue = ptr.String(jtv)
 			}
+
 		case "PredictionIntervalLowerBound":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8281,6 +8441,7 @@ func awsAwsjson11_deserializeDocumentForecastResult(v **types.ForecastResult, va
 				}
 				sv.PredictionIntervalLowerBound = ptr.String(jtv)
 			}
+
 		case "PredictionIntervalUpperBound":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8289,10 +8450,12 @@ func awsAwsjson11_deserializeDocumentForecastResult(v **types.ForecastResult, va
 				}
 				sv.PredictionIntervalUpperBound = ptr.String(jtv)
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8366,6 +8529,7 @@ func awsAwsjson11_deserializeDocumentGenerationExistsException(v **types.Generat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8405,6 +8569,7 @@ func awsAwsjson11_deserializeDocumentGenerationSummary(v **types.GenerationSumma
 				}
 				sv.EstimatedCompletionTime = ptr.String(jtv)
 			}
+
 		case "GenerationCompletionTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8413,6 +8578,7 @@ func awsAwsjson11_deserializeDocumentGenerationSummary(v **types.GenerationSumma
 				}
 				sv.GenerationCompletionTime = ptr.String(jtv)
 			}
+
 		case "GenerationStartedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8421,6 +8587,7 @@ func awsAwsjson11_deserializeDocumentGenerationSummary(v **types.GenerationSumma
 				}
 				sv.GenerationStartedTime = ptr.String(jtv)
 			}
+
 		case "GenerationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8429,6 +8596,7 @@ func awsAwsjson11_deserializeDocumentGenerationSummary(v **types.GenerationSumma
 				}
 				sv.GenerationStatus = types.GenerationStatus(jtv)
 			}
+
 		case "RecommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8437,6 +8605,7 @@ func awsAwsjson11_deserializeDocumentGenerationSummary(v **types.GenerationSumma
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8506,10 +8675,12 @@ func awsAwsjson11_deserializeDocumentGroup(v **types.Group, value interface{}) e
 			if err := awsAwsjson11_deserializeDocumentKeys(&sv.Keys, value); err != nil {
 				return err
 			}
+
 		case "Metrics":
 			if err := awsAwsjson11_deserializeDocumentMetrics(&sv.Metrics, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8549,6 +8720,7 @@ func awsAwsjson11_deserializeDocumentGroupDefinition(v **types.GroupDefinition, 
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8557,6 +8729,7 @@ func awsAwsjson11_deserializeDocumentGroupDefinition(v **types.GroupDefinition, 
 				}
 				sv.Type = types.GroupDefinitionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8689,6 +8862,7 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 
 				}
 			}
+
 		case "TotalActualSpend":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8722,6 +8896,7 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 
 				}
 			}
+
 		case "TotalExpectedSpend":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8755,6 +8930,7 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 
 				}
 			}
+
 		case "TotalImpact":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8788,6 +8964,7 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 
 				}
 			}
+
 		case "TotalImpactPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8821,6 +8998,7 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8856,26 +9034,32 @@ func awsAwsjson11_deserializeDocumentInstanceDetails(v **types.InstanceDetails, 
 			if err := awsAwsjson11_deserializeDocumentEC2InstanceDetails(&sv.EC2InstanceDetails, value); err != nil {
 				return err
 			}
+
 		case "ElastiCacheInstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentElastiCacheInstanceDetails(&sv.ElastiCacheInstanceDetails, value); err != nil {
 				return err
 			}
+
 		case "ESInstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentESInstanceDetails(&sv.ESInstanceDetails, value); err != nil {
 				return err
 			}
+
 		case "MemoryDBInstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(&sv.MemoryDBInstanceDetails, value); err != nil {
 				return err
 			}
+
 		case "RDSInstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentRDSInstanceDetails(&sv.RDSInstanceDetails, value); err != nil {
 				return err
 			}
+
 		case "RedshiftInstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentRedshiftInstanceDetails(&sv.RedshiftInstanceDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8915,6 +9099,7 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8990,6 +9175,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9065,6 +9251,7 @@ func awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(v **types.MemoryDBI
 				}
 				sv.CurrentGeneration = jtv
 			}
+
 		case "Family":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9073,6 +9260,7 @@ func awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(v **types.MemoryDBI
 				}
 				sv.Family = ptr.String(jtv)
 			}
+
 		case "NodeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9081,6 +9269,7 @@ func awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(v **types.MemoryDBI
 				}
 				sv.NodeType = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9089,6 +9278,7 @@ func awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(v **types.MemoryDBI
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SizeFlexEligible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9097,6 +9287,7 @@ func awsAwsjson11_deserializeDocumentMemoryDBInstanceDetails(v **types.MemoryDBI
 				}
 				sv.SizeFlexEligible = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9205,6 +9396,7 @@ func awsAwsjson11_deserializeDocumentMetricValue(v **types.MetricValue, value in
 				}
 				sv.Amount = ptr.String(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9213,6 +9405,7 @@ func awsAwsjson11_deserializeDocumentMetricValue(v **types.MetricValue, value in
 				}
 				sv.Unit = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9248,6 +9441,7 @@ func awsAwsjson11_deserializeDocumentModifyRecommendationDetail(v **types.Modify
 			if err := awsAwsjson11_deserializeDocumentTargetInstancesList(&sv.TargetInstances, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9323,6 +9517,7 @@ func awsAwsjson11_deserializeDocumentNetworkResourceUtilization(v **types.Networ
 				}
 				sv.NetworkInBytesPerSecond = ptr.String(jtv)
 			}
+
 		case "NetworkOutBytesPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9331,6 +9526,7 @@ func awsAwsjson11_deserializeDocumentNetworkResourceUtilization(v **types.Networ
 				}
 				sv.NetworkOutBytesPerSecond = ptr.String(jtv)
 			}
+
 		case "NetworkPacketsInPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9339,6 +9535,7 @@ func awsAwsjson11_deserializeDocumentNetworkResourceUtilization(v **types.Networ
 				}
 				sv.NetworkPacketsInPerSecond = ptr.String(jtv)
 			}
+
 		case "NetworkPacketsOutPerSecond":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9347,6 +9544,7 @@ func awsAwsjson11_deserializeDocumentNetworkResourceUtilization(v **types.Networ
 				}
 				sv.NetworkPacketsOutPerSecond = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9422,6 +9620,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.CurrentGeneration = jtv
 			}
+
 		case "DatabaseEdition":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9430,6 +9629,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.DatabaseEdition = ptr.String(jtv)
 			}
+
 		case "DatabaseEngine":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9438,6 +9638,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.DatabaseEngine = ptr.String(jtv)
 			}
+
 		case "DeploymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9446,6 +9647,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.DeploymentOption = ptr.String(jtv)
 			}
+
 		case "Family":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9454,6 +9656,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.Family = ptr.String(jtv)
 			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9462,6 +9665,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.InstanceType = ptr.String(jtv)
 			}
+
 		case "LicenseModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9470,6 +9674,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.LicenseModel = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9478,6 +9683,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SizeFlexEligible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9486,6 +9692,7 @@ func awsAwsjson11_deserializeDocumentRDSInstanceDetails(v **types.RDSInstanceDet
 				}
 				sv.SizeFlexEligible = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9525,6 +9732,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "AccountScope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9533,6 +9741,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.AccountScope = types.AccountScope(jtv)
 			}
+
 		case "CurrencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9541,6 +9750,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "CurrentAverageCoverage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9549,6 +9759,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.CurrentAverageCoverage = ptr.String(jtv)
 			}
+
 		case "CurrentAverageHourlyOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9557,6 +9768,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.CurrentAverageHourlyOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "CurrentMaximumHourlyOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9565,6 +9777,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.CurrentMaximumHourlyOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "CurrentMinimumHourlyOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9573,6 +9786,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.CurrentMinimumHourlyOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "EstimatedAverageCoverage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9581,6 +9795,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedAverageCoverage = ptr.String(jtv)
 			}
+
 		case "EstimatedAverageUtilization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9589,6 +9804,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedAverageUtilization = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9597,6 +9813,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedMonthlySavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedOnDemandCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9605,6 +9822,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedOnDemandCost = ptr.String(jtv)
 			}
+
 		case "EstimatedOnDemandCostWithCurrentCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9613,6 +9831,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedOnDemandCostWithCurrentCommitment = ptr.String(jtv)
 			}
+
 		case "EstimatedROI":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9621,6 +9840,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedROI = ptr.String(jtv)
 			}
+
 		case "EstimatedSavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9629,6 +9849,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedSavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedSavingsPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9637,6 +9858,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedSavingsPercentage = ptr.String(jtv)
 			}
+
 		case "EstimatedSPCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9645,6 +9867,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.EstimatedSPCost = ptr.String(jtv)
 			}
+
 		case "ExistingHourlyCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9653,6 +9876,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.ExistingHourlyCommitment = ptr.String(jtv)
 			}
+
 		case "GenerationTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9661,6 +9885,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.GenerationTimestamp = ptr.String(jtv)
 			}
+
 		case "HourlyCommitmentToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9669,6 +9894,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.HourlyCommitmentToPurchase = ptr.String(jtv)
 			}
+
 		case "InstanceFamily":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9677,6 +9903,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.InstanceFamily = ptr.String(jtv)
 			}
+
 		case "LatestUsageTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9685,6 +9912,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.LatestUsageTimestamp = ptr.String(jtv)
 			}
+
 		case "LookbackPeriodInDays":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9693,10 +9921,12 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.LookbackPeriodInDays = types.LookbackPeriodInDays(jtv)
 			}
+
 		case "MetricsOverLookbackPeriod":
 			if err := awsAwsjson11_deserializeDocumentMetricsOverLookbackPeriod(&sv.MetricsOverLookbackPeriod, value); err != nil {
 				return err
 			}
+
 		case "OfferingId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9705,6 +9935,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.OfferingId = ptr.String(jtv)
 			}
+
 		case "PaymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9713,6 +9944,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.PaymentOption = types.PaymentOption(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9721,6 +9953,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SavingsPlansType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9729,6 +9962,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.SavingsPlansType = types.SupportedSavingsPlansType(jtv)
 			}
+
 		case "TermInYears":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9737,6 +9971,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.TermInYears = types.TermInYears(jtv)
 			}
+
 		case "UpfrontCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9745,6 +9980,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailData(v **types.Recommen
 				}
 				sv.UpfrontCost = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9784,6 +10020,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(v **types
 				}
 				sv.CurrentCoverage = ptr.String(jtv)
 			}
+
 		case "EstimatedCoverage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9792,6 +10029,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(v **types
 				}
 				sv.EstimatedCoverage = ptr.String(jtv)
 			}
+
 		case "EstimatedNewCommitmentUtilization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9800,6 +10038,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(v **types
 				}
 				sv.EstimatedNewCommitmentUtilization = ptr.String(jtv)
 			}
+
 		case "EstimatedOnDemandCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9808,6 +10047,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(v **types
 				}
 				sv.EstimatedOnDemandCost = ptr.String(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9816,6 +10056,7 @@ func awsAwsjson11_deserializeDocumentRecommendationDetailHourlyMetrics(v **types
 				}
 				sv.StartTime = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9855,6 +10096,7 @@ func awsAwsjson11_deserializeDocumentRedshiftInstanceDetails(v **types.RedshiftI
 				}
 				sv.CurrentGeneration = jtv
 			}
+
 		case "Family":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9863,6 +10105,7 @@ func awsAwsjson11_deserializeDocumentRedshiftInstanceDetails(v **types.RedshiftI
 				}
 				sv.Family = ptr.String(jtv)
 			}
+
 		case "NodeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9871,6 +10114,7 @@ func awsAwsjson11_deserializeDocumentRedshiftInstanceDetails(v **types.RedshiftI
 				}
 				sv.NodeType = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9879,6 +10123,7 @@ func awsAwsjson11_deserializeDocumentRedshiftInstanceDetails(v **types.RedshiftI
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "SizeFlexEligible":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9887,6 +10132,7 @@ func awsAwsjson11_deserializeDocumentRedshiftInstanceDetails(v **types.RedshiftI
 				}
 				sv.SizeFlexEligible = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9926,6 +10172,7 @@ func awsAwsjson11_deserializeDocumentRequestChangedException(v **types.RequestCh
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9965,6 +10212,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.AmortizedRecurringFee = ptr.String(jtv)
 			}
+
 		case "AmortizedUpfrontFee":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9973,6 +10221,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.AmortizedUpfrontFee = ptr.String(jtv)
 			}
+
 		case "NetRISavings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9981,6 +10230,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.NetRISavings = ptr.String(jtv)
 			}
+
 		case "OnDemandCostOfRIHoursUsed":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9989,6 +10239,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.OnDemandCostOfRIHoursUsed = ptr.String(jtv)
 			}
+
 		case "PurchasedHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9997,6 +10248,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.PurchasedHours = ptr.String(jtv)
 			}
+
 		case "PurchasedUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10005,6 +10257,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.PurchasedUnits = ptr.String(jtv)
 			}
+
 		case "RealizedSavings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10013,6 +10266,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.RealizedSavings = ptr.String(jtv)
 			}
+
 		case "RICostForUnusedHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10021,6 +10275,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.RICostForUnusedHours = ptr.String(jtv)
 			}
+
 		case "TotalActualHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10029,6 +10284,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.TotalActualHours = ptr.String(jtv)
 			}
+
 		case "TotalActualUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10037,6 +10293,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.TotalActualUnits = ptr.String(jtv)
 			}
+
 		case "TotalAmortizedFee":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10045,6 +10302,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.TotalAmortizedFee = ptr.String(jtv)
 			}
+
 		case "TotalPotentialRISavings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10053,6 +10311,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.TotalPotentialRISavings = ptr.String(jtv)
 			}
+
 		case "UnrealizedSavings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10061,6 +10320,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.UnrealizedSavings = ptr.String(jtv)
 			}
+
 		case "UnusedHours":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10069,6 +10329,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.UnusedHours = ptr.String(jtv)
 			}
+
 		case "UnusedUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10077,6 +10338,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.UnusedUnits = ptr.String(jtv)
 			}
+
 		case "UtilizationPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10085,6 +10347,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.UtilizationPercentage = ptr.String(jtv)
 			}
+
 		case "UtilizationPercentageInUnits":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10093,6 +10356,7 @@ func awsAwsjson11_deserializeDocumentReservationAggregates(v **types.Reservation
 				}
 				sv.UtilizationPercentageInUnits = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10128,10 +10392,12 @@ func awsAwsjson11_deserializeDocumentReservationCoverageGroup(v **types.Reservat
 			if err := awsAwsjson11_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "Coverage":
 			if err := awsAwsjson11_deserializeDocumentCoverage(&sv.Coverage, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10205,6 +10471,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendation(v **types
 				}
 				sv.AccountScope = types.AccountScope(jtv)
 			}
+
 		case "LookbackPeriodInDays":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10213,6 +10480,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendation(v **types
 				}
 				sv.LookbackPeriodInDays = types.LookbackPeriodInDays(jtv)
 			}
+
 		case "PaymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10221,18 +10489,22 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendation(v **types
 				}
 				sv.PaymentOption = types.PaymentOption(jtv)
 			}
+
 		case "RecommendationDetails":
 			if err := awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetails(&sv.RecommendationDetails, value); err != nil {
 				return err
 			}
+
 		case "RecommendationSummary":
 			if err := awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationSummary(&sv.RecommendationSummary, value); err != nil {
 				return err
 			}
+
 		case "ServiceSpecification":
 			if err := awsAwsjson11_deserializeDocumentServiceSpecification(&sv.ServiceSpecification, value); err != nil {
 				return err
 			}
+
 		case "TermInYears":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10241,6 +10513,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendation(v **types
 				}
 				sv.TermInYears = types.TermInYears(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10280,6 +10553,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "AverageNormalizedUnitsUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10288,6 +10562,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.AverageNormalizedUnitsUsedPerHour = ptr.String(jtv)
 			}
+
 		case "AverageNumberOfCapacityUnitsUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10296,6 +10571,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.AverageNumberOfCapacityUnitsUsedPerHour = ptr.String(jtv)
 			}
+
 		case "AverageNumberOfInstancesUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10304,6 +10580,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.AverageNumberOfInstancesUsedPerHour = ptr.String(jtv)
 			}
+
 		case "AverageUtilization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10312,6 +10589,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.AverageUtilization = ptr.String(jtv)
 			}
+
 		case "CurrencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10320,6 +10598,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "EstimatedBreakEvenInMonths":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10328,6 +10607,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.EstimatedBreakEvenInMonths = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlyOnDemandCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10336,6 +10616,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.EstimatedMonthlyOnDemandCost = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10344,6 +10625,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.EstimatedMonthlySavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavingsPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10352,6 +10634,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.EstimatedMonthlySavingsPercentage = ptr.String(jtv)
 			}
+
 		case "EstimatedReservationCostForLookbackPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10360,10 +10643,12 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.EstimatedReservationCostForLookbackPeriod = ptr.String(jtv)
 			}
+
 		case "InstanceDetails":
 			if err := awsAwsjson11_deserializeDocumentInstanceDetails(&sv.InstanceDetails, value); err != nil {
 				return err
 			}
+
 		case "MaximumNormalizedUnitsUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10372,6 +10657,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.MaximumNormalizedUnitsUsedPerHour = ptr.String(jtv)
 			}
+
 		case "MaximumNumberOfCapacityUnitsUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10380,6 +10666,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.MaximumNumberOfCapacityUnitsUsedPerHour = ptr.String(jtv)
 			}
+
 		case "MaximumNumberOfInstancesUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10388,6 +10675,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.MaximumNumberOfInstancesUsedPerHour = ptr.String(jtv)
 			}
+
 		case "MinimumNormalizedUnitsUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10396,6 +10684,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.MinimumNormalizedUnitsUsedPerHour = ptr.String(jtv)
 			}
+
 		case "MinimumNumberOfCapacityUnitsUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10404,6 +10693,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.MinimumNumberOfCapacityUnitsUsedPerHour = ptr.String(jtv)
 			}
+
 		case "MinimumNumberOfInstancesUsedPerHour":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10412,6 +10702,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.MinimumNumberOfInstancesUsedPerHour = ptr.String(jtv)
 			}
+
 		case "RecommendedNormalizedUnitsToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10420,6 +10711,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.RecommendedNormalizedUnitsToPurchase = ptr.String(jtv)
 			}
+
 		case "RecommendedNumberOfCapacityUnitsToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10428,6 +10720,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.RecommendedNumberOfCapacityUnitsToPurchase = ptr.String(jtv)
 			}
+
 		case "RecommendedNumberOfInstancesToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10436,6 +10729,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.RecommendedNumberOfInstancesToPurchase = ptr.String(jtv)
 			}
+
 		case "RecurringStandardMonthlyCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10444,10 +10738,12 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.RecurringStandardMonthlyCost = ptr.String(jtv)
 			}
+
 		case "ReservedCapacityDetails":
 			if err := awsAwsjson11_deserializeDocumentReservedCapacityDetails(&sv.ReservedCapacityDetails, value); err != nil {
 				return err
 			}
+
 		case "UpfrontCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10456,6 +10752,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationDetail(v *
 				}
 				sv.UpfrontCost = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10529,6 +10826,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationMetadata(v
 				}
 				sv.AdditionalMetadata = ptr.String(jtv)
 			}
+
 		case "GenerationTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10537,6 +10835,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationMetadata(v
 				}
 				sv.GenerationTimestamp = ptr.String(jtv)
 			}
+
 		case "RecommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10545,6 +10844,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationMetadata(v
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10618,6 +10918,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationSummary(v 
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "TotalEstimatedMonthlySavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10626,6 +10927,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationSummary(v 
 				}
 				sv.TotalEstimatedMonthlySavingsAmount = ptr.String(jtv)
 			}
+
 		case "TotalEstimatedMonthlySavingsPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10634,6 +10936,7 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationSummary(v 
 				}
 				sv.TotalEstimatedMonthlySavingsPercentage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10669,6 +10972,7 @@ func awsAwsjson11_deserializeDocumentReservationUtilizationGroup(v **types.Reser
 			if err := awsAwsjson11_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "Key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10677,10 +10981,12 @@ func awsAwsjson11_deserializeDocumentReservationUtilizationGroup(v **types.Reser
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Utilization":
 			if err := awsAwsjson11_deserializeDocumentReservationAggregates(&sv.Utilization, value); err != nil {
 				return err
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10689,6 +10995,7 @@ func awsAwsjson11_deserializeDocumentReservationUtilizationGroup(v **types.Reser
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10758,6 +11065,7 @@ func awsAwsjson11_deserializeDocumentReservedCapacityDetails(v **types.ReservedC
 			if err := awsAwsjson11_deserializeDocumentDynamoDBCapacityDetails(&sv.DynamoDBCapacityDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10793,6 +11101,7 @@ func awsAwsjson11_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 			if err := awsAwsjson11_deserializeDocumentEC2ResourceDetails(&sv.EC2ResourceDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10832,6 +11141,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10840,6 +11150,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10879,6 +11190,7 @@ func awsAwsjson11_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10887,6 +11199,7 @@ func awsAwsjson11_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10956,6 +11269,7 @@ func awsAwsjson11_deserializeDocumentResourceUtilization(v **types.ResourceUtili
 			if err := awsAwsjson11_deserializeDocumentEC2ResourceUtilization(&sv.EC2ResourceUtilization, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10995,18 +11309,22 @@ func awsAwsjson11_deserializeDocumentResultByTime(v **types.ResultByTime, value 
 				}
 				sv.Estimated = jtv
 			}
+
 		case "Groups":
 			if err := awsAwsjson11_deserializeDocumentGroups(&sv.Groups, value); err != nil {
 				return err
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentMetrics(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11080,18 +11398,22 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendation(v **types.Rightsi
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "CurrentInstance":
 			if err := awsAwsjson11_deserializeDocumentCurrentInstance(&sv.CurrentInstance, value); err != nil {
 				return err
 			}
+
 		case "FindingReasonCodes":
 			if err := awsAwsjson11_deserializeDocumentFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
 			}
+
 		case "ModifyRecommendationDetail":
 			if err := awsAwsjson11_deserializeDocumentModifyRecommendationDetail(&sv.ModifyRecommendationDetail, value); err != nil {
 				return err
 			}
+
 		case "RightsizingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11100,10 +11422,12 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendation(v **types.Rightsi
 				}
 				sv.RightsizingType = types.RightsizingType(jtv)
 			}
+
 		case "TerminateRecommendationDetail":
 			if err := awsAwsjson11_deserializeDocumentTerminateRecommendationDetail(&sv.TerminateRecommendationDetail, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11143,6 +11467,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationConfiguration(v **
 				}
 				sv.BenefitsConsidered = jtv
 			}
+
 		case "RecommendationTarget":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11151,6 +11476,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationConfiguration(v **
 				}
 				sv.RecommendationTarget = types.RecommendationTarget(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11224,6 +11550,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationMetadata(v **types
 				}
 				sv.AdditionalMetadata = ptr.String(jtv)
 			}
+
 		case "GenerationTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11232,6 +11559,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationMetadata(v **types
 				}
 				sv.GenerationTimestamp = ptr.String(jtv)
 			}
+
 		case "LookbackPeriodInDays":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11240,6 +11568,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationMetadata(v **types
 				}
 				sv.LookbackPeriodInDays = types.LookbackPeriodInDays(jtv)
 			}
+
 		case "RecommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11248,6 +11577,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationMetadata(v **types
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11287,6 +11617,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationSummary(v **types.
 				}
 				sv.EstimatedTotalMonthlySavingsAmount = ptr.String(jtv)
 			}
+
 		case "SavingsCurrencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11295,6 +11626,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationSummary(v **types.
 				}
 				sv.SavingsCurrencyCode = ptr.String(jtv)
 			}
+
 		case "SavingsPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11303,6 +11635,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationSummary(v **types.
 				}
 				sv.SavingsPercentage = ptr.String(jtv)
 			}
+
 		case "TotalRecommendationCount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11311,6 +11644,7 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendationSummary(v **types.
 				}
 				sv.TotalRecommendationCount = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11350,6 +11684,7 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 				}
 				sv.LinkedAccount = ptr.String(jtv)
 			}
+
 		case "LinkedAccountName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11358,6 +11693,7 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 				}
 				sv.LinkedAccountName = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11366,6 +11702,7 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "Service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11374,6 +11711,7 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 				}
 				sv.Service = ptr.String(jtv)
 			}
+
 		case "UsageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11382,6 +11720,7 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 				}
 				sv.UsageType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11455,6 +11794,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansAmortizedCommitment(v **types.S
 				}
 				sv.AmortizedRecurringCommitment = ptr.String(jtv)
 			}
+
 		case "AmortizedUpfrontCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11463,6 +11803,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansAmortizedCommitment(v **types.S
 				}
 				sv.AmortizedUpfrontCommitment = ptr.String(jtv)
 			}
+
 		case "TotalAmortizedCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11471,6 +11812,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansAmortizedCommitment(v **types.S
 				}
 				sv.TotalAmortizedCommitment = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11506,14 +11848,17 @@ func awsAwsjson11_deserializeDocumentSavingsPlansCoverage(v **types.SavingsPlans
 			if err := awsAwsjson11_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "Coverage":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansCoverageData(&sv.Coverage, value); err != nil {
 				return err
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11553,6 +11898,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansCoverageData(v **types.SavingsP
 				}
 				sv.CoveragePercentage = ptr.String(jtv)
 			}
+
 		case "OnDemandCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11561,6 +11907,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansCoverageData(v **types.SavingsP
 				}
 				sv.OnDemandCost = ptr.String(jtv)
 			}
+
 		case "SpendCoveredBySavingsPlans":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11569,6 +11916,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansCoverageData(v **types.SavingsP
 				}
 				sv.SpendCoveredBySavingsPlans = ptr.String(jtv)
 			}
+
 		case "TotalCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11577,6 +11925,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansCoverageData(v **types.SavingsP
 				}
 				sv.TotalCost = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11650,6 +11999,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansDetails(v **types.SavingsPlansD
 				}
 				sv.InstanceFamily = ptr.String(jtv)
 			}
+
 		case "OfferingId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11658,6 +12008,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansDetails(v **types.SavingsPlansD
 				}
 				sv.OfferingId = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11666,6 +12017,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansDetails(v **types.SavingsPlansD
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11705,6 +12057,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendation(v **type
 				}
 				sv.AccountScope = types.AccountScope(jtv)
 			}
+
 		case "LookbackPeriodInDays":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11713,6 +12066,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendation(v **type
 				}
 				sv.LookbackPeriodInDays = types.LookbackPeriodInDays(jtv)
 			}
+
 		case "PaymentOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11721,14 +12075,17 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendation(v **type
 				}
 				sv.PaymentOption = types.PaymentOption(jtv)
 			}
+
 		case "SavingsPlansPurchaseRecommendationDetails":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetailList(&sv.SavingsPlansPurchaseRecommendationDetails, value); err != nil {
 				return err
 			}
+
 		case "SavingsPlansPurchaseRecommendationSummary":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(&sv.SavingsPlansPurchaseRecommendationSummary, value); err != nil {
 				return err
 			}
+
 		case "SavingsPlansType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11737,6 +12094,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendation(v **type
 				}
 				sv.SavingsPlansType = types.SupportedSavingsPlansType(jtv)
 			}
+
 		case "TermInYears":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11745,6 +12103,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendation(v **type
 				}
 				sv.TermInYears = types.TermInYears(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11784,6 +12143,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "CurrencyCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11792,6 +12152,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "CurrentAverageHourlyOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11800,6 +12161,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.CurrentAverageHourlyOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "CurrentMaximumHourlyOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11808,6 +12170,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.CurrentMaximumHourlyOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "CurrentMinimumHourlyOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11816,6 +12179,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.CurrentMinimumHourlyOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "EstimatedAverageUtilization":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11824,6 +12188,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedAverageUtilization = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11832,6 +12197,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedMonthlySavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedOnDemandCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11840,6 +12206,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedOnDemandCost = ptr.String(jtv)
 			}
+
 		case "EstimatedOnDemandCostWithCurrentCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11848,6 +12215,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedOnDemandCostWithCurrentCommitment = ptr.String(jtv)
 			}
+
 		case "EstimatedROI":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11856,6 +12224,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedROI = ptr.String(jtv)
 			}
+
 		case "EstimatedSavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11864,6 +12233,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedSavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedSavingsPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11872,6 +12242,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedSavingsPercentage = ptr.String(jtv)
 			}
+
 		case "EstimatedSPCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11880,6 +12251,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.EstimatedSPCost = ptr.String(jtv)
 			}
+
 		case "HourlyCommitmentToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11888,6 +12260,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.HourlyCommitmentToPurchase = ptr.String(jtv)
 			}
+
 		case "RecommendationDetailId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11896,10 +12269,12 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.RecommendationDetailId = ptr.String(jtv)
 			}
+
 		case "SavingsPlansDetails":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansDetails(&sv.SavingsPlansDetails, value); err != nil {
 				return err
 			}
+
 		case "UpfrontCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11908,6 +12283,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationDetail(v 
 				}
 				sv.UpfrontCost = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11981,6 +12357,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationMetadata(
 				}
 				sv.AdditionalMetadata = ptr.String(jtv)
 			}
+
 		case "GenerationTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11989,6 +12366,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationMetadata(
 				}
 				sv.GenerationTimestamp = ptr.String(jtv)
 			}
+
 		case "RecommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11997,6 +12375,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationMetadata(
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12036,6 +12415,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "CurrentOnDemandSpend":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12044,6 +12424,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.CurrentOnDemandSpend = ptr.String(jtv)
 			}
+
 		case "DailyCommitmentToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12052,6 +12433,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.DailyCommitmentToPurchase = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12060,6 +12442,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.EstimatedMonthlySavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedOnDemandCostWithCurrentCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12068,6 +12451,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.EstimatedOnDemandCostWithCurrentCommitment = ptr.String(jtv)
 			}
+
 		case "EstimatedROI":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12076,6 +12460,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.EstimatedROI = ptr.String(jtv)
 			}
+
 		case "EstimatedSavingsAmount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12084,6 +12469,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.EstimatedSavingsAmount = ptr.String(jtv)
 			}
+
 		case "EstimatedSavingsPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12092,6 +12478,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.EstimatedSavingsPercentage = ptr.String(jtv)
 			}
+
 		case "EstimatedTotalCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12100,6 +12487,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.EstimatedTotalCost = ptr.String(jtv)
 			}
+
 		case "HourlyCommitmentToPurchase":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12108,6 +12496,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.HourlyCommitmentToPurchase = ptr.String(jtv)
 			}
+
 		case "TotalRecommendationCount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12116,6 +12505,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationSummary(v
 				}
 				sv.TotalRecommendationCount = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12155,6 +12545,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansSavings(v **types.SavingsPlansS
 				}
 				sv.NetSavings = ptr.String(jtv)
 			}
+
 		case "OnDemandCostEquivalent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12163,6 +12554,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansSavings(v **types.SavingsPlansS
 				}
 				sv.OnDemandCostEquivalent = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12202,6 +12594,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilization(v **types.SavingsPl
 				}
 				sv.TotalCommitment = ptr.String(jtv)
 			}
+
 		case "UnusedCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12210,6 +12603,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilization(v **types.SavingsPl
 				}
 				sv.UnusedCommitment = ptr.String(jtv)
 			}
+
 		case "UsedCommitment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12218,6 +12612,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilization(v **types.SavingsPl
 				}
 				sv.UsedCommitment = ptr.String(jtv)
 			}
+
 		case "UtilizationPercentage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12226,6 +12621,7 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilization(v **types.SavingsPl
 				}
 				sv.UtilizationPercentage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12261,14 +12657,17 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilizationAggregates(v **types
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansAmortizedCommitment(&sv.AmortizedCommitment, value); err != nil {
 				return err
 			}
+
 		case "Savings":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansSavings(&sv.Savings, value); err != nil {
 				return err
 			}
+
 		case "Utilization":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilization(&sv.Utilization, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12304,18 +12703,22 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilizationByTime(v **types.Sav
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansAmortizedCommitment(&sv.AmortizedCommitment, value); err != nil {
 				return err
 			}
+
 		case "Savings":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansSavings(&sv.Savings, value); err != nil {
 				return err
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		case "Utilization":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilization(&sv.Utilization, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12351,14 +12754,17 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilizationDetail(v **types.Sav
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansAmortizedCommitment(&sv.AmortizedCommitment, value); err != nil {
 				return err
 			}
+
 		case "Attributes":
 			if err := awsAwsjson11_deserializeDocumentAttributes(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "Savings":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansSavings(&sv.Savings, value); err != nil {
 				return err
 			}
+
 		case "SavingsPlanArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12367,10 +12773,12 @@ func awsAwsjson11_deserializeDocumentSavingsPlansUtilizationDetail(v **types.Sav
 				}
 				sv.SavingsPlanArn = ptr.String(jtv)
 			}
+
 		case "Utilization":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilization(&sv.Utilization, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12478,6 +12886,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12513,6 +12922,7 @@ func awsAwsjson11_deserializeDocumentServiceSpecification(v **types.ServiceSpeci
 			if err := awsAwsjson11_deserializeDocumentEC2Specification(&sv.EC2Specification, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12552,6 +12962,7 @@ func awsAwsjson11_deserializeDocumentSubscriber(v **types.Subscriber, value inte
 				}
 				sv.Address = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12560,6 +12971,7 @@ func awsAwsjson11_deserializeDocumentSubscriber(v **types.Subscriber, value inte
 				}
 				sv.Status = types.SubscriberStatus(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12568,6 +12980,7 @@ func awsAwsjson11_deserializeDocumentSubscriber(v **types.Subscriber, value inte
 				}
 				sv.Type = types.SubscriberType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12677,14 +13090,17 @@ func awsAwsjson11_deserializeDocumentTagValues(v **types.TagValues, value interf
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "MatchOptions":
 			if err := awsAwsjson11_deserializeDocumentMatchOptions(&sv.MatchOptions, value); err != nil {
 				return err
 			}
+
 		case "Values":
 			if err := awsAwsjson11_deserializeDocumentValues(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12758,6 +13174,7 @@ func awsAwsjson11_deserializeDocumentTargetInstance(v **types.TargetInstance, va
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "DefaultTargetInstance":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12766,6 +13183,7 @@ func awsAwsjson11_deserializeDocumentTargetInstance(v **types.TargetInstance, va
 				}
 				sv.DefaultTargetInstance = jtv
 			}
+
 		case "EstimatedMonthlyCost":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12774,6 +13192,7 @@ func awsAwsjson11_deserializeDocumentTargetInstance(v **types.TargetInstance, va
 				}
 				sv.EstimatedMonthlyCost = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12782,18 +13201,22 @@ func awsAwsjson11_deserializeDocumentTargetInstance(v **types.TargetInstance, va
 				}
 				sv.EstimatedMonthlySavings = ptr.String(jtv)
 			}
+
 		case "ExpectedResourceUtilization":
 			if err := awsAwsjson11_deserializeDocumentResourceUtilization(&sv.ExpectedResourceUtilization, value); err != nil {
 				return err
 			}
+
 		case "PlatformDifferences":
 			if err := awsAwsjson11_deserializeDocumentPlatformDifferences(&sv.PlatformDifferences, value); err != nil {
 				return err
 			}
+
 		case "ResourceDetails":
 			if err := awsAwsjson11_deserializeDocumentResourceDetails(&sv.ResourceDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12867,6 +13290,7 @@ func awsAwsjson11_deserializeDocumentTerminateRecommendationDetail(v **types.Ter
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "EstimatedMonthlySavings":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12875,6 +13299,7 @@ func awsAwsjson11_deserializeDocumentTerminateRecommendationDetail(v **types.Ter
 				}
 				sv.EstimatedMonthlySavings = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12914,6 +13339,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12922,6 +13348,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12961,6 +13388,7 @@ func awsAwsjson11_deserializeDocumentUnknownMonitorException(v **types.UnknownMo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13000,6 +13428,7 @@ func awsAwsjson11_deserializeDocumentUnknownSubscriptionException(v **types.Unkn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13039,6 +13468,7 @@ func awsAwsjson11_deserializeDocumentUnresolvableUsageUnitException(v **types.Un
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13078,6 +13508,7 @@ func awsAwsjson11_deserializeDocumentUpdateCostAllocationTagsStatusError(v **typ
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13086,6 +13517,7 @@ func awsAwsjson11_deserializeDocumentUpdateCostAllocationTagsStatusError(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "TagKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13094,6 +13526,7 @@ func awsAwsjson11_deserializeDocumentUpdateCostAllocationTagsStatusError(v **typ
 				}
 				sv.TagKey = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13163,14 +13596,17 @@ func awsAwsjson11_deserializeDocumentUtilizationByTime(v **types.UtilizationByTi
 			if err := awsAwsjson11_deserializeDocumentReservationUtilizationGroups(&sv.Groups, value); err != nil {
 				return err
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentReservationAggregates(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13280,6 +13716,7 @@ func awsAwsjson11_deserializeOpDocumentCreateAnomalyMonitorOutput(v **CreateAnom
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13319,6 +13756,7 @@ func awsAwsjson11_deserializeOpDocumentCreateAnomalySubscriptionOutput(v **Creat
 				}
 				sv.SubscriptionArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13358,6 +13796,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCostCategoryDefinitionOutput(v **Cr
 				}
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
+
 		case "EffectiveStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13366,6 +13805,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCostCategoryDefinitionOutput(v **Cr
 				}
 				sv.EffectiveStart = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13467,6 +13907,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteCostCategoryDefinitionOutput(v **De
 				}
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
+
 		case "EffectiveEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13475,6 +13916,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteCostCategoryDefinitionOutput(v **De
 				}
 				sv.EffectiveEnd = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13510,6 +13952,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCostCategoryDefinitionOutput(v **
 			if err := awsAwsjson11_deserializeDocumentCostCategory(&sv.CostCategory, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13545,6 +13988,7 @@ func awsAwsjson11_deserializeOpDocumentGetAnomaliesOutput(v **GetAnomaliesOutput
 			if err := awsAwsjson11_deserializeDocumentAnomalies(&sv.Anomalies, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13553,6 +13997,7 @@ func awsAwsjson11_deserializeOpDocumentGetAnomaliesOutput(v **GetAnomaliesOutput
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13588,6 +14033,7 @@ func awsAwsjson11_deserializeOpDocumentGetAnomalyMonitorsOutput(v **GetAnomalyMo
 			if err := awsAwsjson11_deserializeDocumentAnomalyMonitors(&sv.AnomalyMonitors, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13596,6 +14042,7 @@ func awsAwsjson11_deserializeOpDocumentGetAnomalyMonitorsOutput(v **GetAnomalyMo
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13631,6 +14078,7 @@ func awsAwsjson11_deserializeOpDocumentGetAnomalySubscriptionsOutput(v **GetAnom
 			if err := awsAwsjson11_deserializeDocumentAnomalySubscriptions(&sv.AnomalySubscriptions, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13639,6 +14087,7 @@ func awsAwsjson11_deserializeOpDocumentGetAnomalySubscriptionsOutput(v **GetAnom
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13674,10 +14123,12 @@ func awsAwsjson11_deserializeOpDocumentGetApproximateUsageRecordsOutput(v **GetA
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.LookbackPeriod, value); err != nil {
 				return err
 			}
+
 		case "Services":
 			if err := awsAwsjson11_deserializeDocumentApproximateUsageRecordsPerService(&sv.Services, value); err != nil {
 				return err
 			}
+
 		case "TotalRecords":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13690,6 +14141,7 @@ func awsAwsjson11_deserializeOpDocumentGetApproximateUsageRecordsOutput(v **GetA
 				}
 				sv.TotalRecords = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13725,10 +14177,12 @@ func awsAwsjson11_deserializeOpDocumentGetCostAndUsageOutput(v **GetCostAndUsage
 			if err := awsAwsjson11_deserializeDocumentDimensionValuesWithAttributesList(&sv.DimensionValueAttributes, value); err != nil {
 				return err
 			}
+
 		case "GroupDefinitions":
 			if err := awsAwsjson11_deserializeDocumentGroupDefinitions(&sv.GroupDefinitions, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13737,10 +14191,12 @@ func awsAwsjson11_deserializeOpDocumentGetCostAndUsageOutput(v **GetCostAndUsage
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "ResultsByTime":
 			if err := awsAwsjson11_deserializeDocumentResultsByTime(&sv.ResultsByTime, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13776,10 +14232,12 @@ func awsAwsjson11_deserializeOpDocumentGetCostAndUsageWithResourcesOutput(v **Ge
 			if err := awsAwsjson11_deserializeDocumentDimensionValuesWithAttributesList(&sv.DimensionValueAttributes, value); err != nil {
 				return err
 			}
+
 		case "GroupDefinitions":
 			if err := awsAwsjson11_deserializeDocumentGroupDefinitions(&sv.GroupDefinitions, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13788,10 +14246,12 @@ func awsAwsjson11_deserializeOpDocumentGetCostAndUsageWithResourcesOutput(v **Ge
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "ResultsByTime":
 			if err := awsAwsjson11_deserializeDocumentResultsByTime(&sv.ResultsByTime, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13827,10 +14287,12 @@ func awsAwsjson11_deserializeOpDocumentGetCostCategoriesOutput(v **GetCostCatego
 			if err := awsAwsjson11_deserializeDocumentCostCategoryNamesList(&sv.CostCategoryNames, value); err != nil {
 				return err
 			}
+
 		case "CostCategoryValues":
 			if err := awsAwsjson11_deserializeDocumentCostCategoryValuesList(&sv.CostCategoryValues, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13839,6 +14301,7 @@ func awsAwsjson11_deserializeOpDocumentGetCostCategoriesOutput(v **GetCostCatego
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "ReturnSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13851,6 +14314,7 @@ func awsAwsjson11_deserializeOpDocumentGetCostCategoriesOutput(v **GetCostCatego
 				}
 				sv.ReturnSize = ptr.Int32(int32(i64))
 			}
+
 		case "TotalSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13863,6 +14327,7 @@ func awsAwsjson11_deserializeOpDocumentGetCostCategoriesOutput(v **GetCostCatego
 				}
 				sv.TotalSize = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13898,10 +14363,12 @@ func awsAwsjson11_deserializeOpDocumentGetCostForecastOutput(v **GetCostForecast
 			if err := awsAwsjson11_deserializeDocumentForecastResultsByTime(&sv.ForecastResultsByTime, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentMetricValue(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13937,6 +14404,7 @@ func awsAwsjson11_deserializeOpDocumentGetDimensionValuesOutput(v **GetDimension
 			if err := awsAwsjson11_deserializeDocumentDimensionValuesWithAttributesList(&sv.DimensionValues, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13945,6 +14413,7 @@ func awsAwsjson11_deserializeOpDocumentGetDimensionValuesOutput(v **GetDimension
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "ReturnSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13957,6 +14426,7 @@ func awsAwsjson11_deserializeOpDocumentGetDimensionValuesOutput(v **GetDimension
 				}
 				sv.ReturnSize = ptr.Int32(int32(i64))
 			}
+
 		case "TotalSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13969,6 +14439,7 @@ func awsAwsjson11_deserializeOpDocumentGetDimensionValuesOutput(v **GetDimension
 				}
 				sv.TotalSize = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14004,6 +14475,7 @@ func awsAwsjson11_deserializeOpDocumentGetReservationCoverageOutput(v **GetReser
 			if err := awsAwsjson11_deserializeDocumentCoveragesByTime(&sv.CoveragesByTime, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14012,10 +14484,12 @@ func awsAwsjson11_deserializeOpDocumentGetReservationCoverageOutput(v **GetReser
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentCoverage(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14051,6 +14525,7 @@ func awsAwsjson11_deserializeOpDocumentGetReservationPurchaseRecommendationOutpu
 			if err := awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14059,10 +14534,12 @@ func awsAwsjson11_deserializeOpDocumentGetReservationPurchaseRecommendationOutpu
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "Recommendations":
 			if err := awsAwsjson11_deserializeDocumentReservationPurchaseRecommendations(&sv.Recommendations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14102,14 +14579,17 @@ func awsAwsjson11_deserializeOpDocumentGetReservationUtilizationOutput(v **GetRe
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentReservationAggregates(&sv.Total, value); err != nil {
 				return err
 			}
+
 		case "UtilizationsByTime":
 			if err := awsAwsjson11_deserializeDocumentUtilizationsByTime(&sv.UtilizationsByTime, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14145,10 +14625,12 @@ func awsAwsjson11_deserializeOpDocumentGetRightsizingRecommendationOutput(v **Ge
 			if err := awsAwsjson11_deserializeDocumentRightsizingRecommendationConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
+
 		case "Metadata":
 			if err := awsAwsjson11_deserializeDocumentRightsizingRecommendationMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14157,14 +14639,17 @@ func awsAwsjson11_deserializeOpDocumentGetRightsizingRecommendationOutput(v **Ge
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "RightsizingRecommendations":
 			if err := awsAwsjson11_deserializeDocumentRightsizingRecommendationList(&sv.RightsizingRecommendations, value); err != nil {
 				return err
 			}
+
 		case "Summary":
 			if err := awsAwsjson11_deserializeDocumentRightsizingRecommendationSummary(&sv.Summary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14200,6 +14685,7 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlanPurchaseRecommendationDetai
 			if err := awsAwsjson11_deserializeDocumentRecommendationDetailData(&sv.RecommendationDetailData, value); err != nil {
 				return err
 			}
+
 		case "RecommendationDetailId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14208,6 +14694,7 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlanPurchaseRecommendationDetai
 				}
 				sv.RecommendationDetailId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14247,10 +14734,12 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlansCoverageOutput(v **GetSavi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SavingsPlansCoverages":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansCoverages(&sv.SavingsPlansCoverages, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14286,6 +14775,7 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlansPurchaseRecommendationOutp
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendationMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14294,10 +14784,12 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlansPurchaseRecommendationOutp
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "SavingsPlansPurchaseRecommendation":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansPurchaseRecommendation(&sv.SavingsPlansPurchaseRecommendation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14337,18 +14829,22 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlansUtilizationDetailsOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SavingsPlansUtilizationDetails":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilizationDetails(&sv.SavingsPlansUtilizationDetails, value); err != nil {
 				return err
 			}
+
 		case "TimePeriod":
 			if err := awsAwsjson11_deserializeDocumentDateInterval(&sv.TimePeriod, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilizationAggregates(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14384,10 +14880,12 @@ func awsAwsjson11_deserializeOpDocumentGetSavingsPlansUtilizationOutput(v **GetS
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilizationsByTime(&sv.SavingsPlansUtilizationsByTime, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentSavingsPlansUtilizationAggregates(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14427,6 +14925,7 @@ func awsAwsjson11_deserializeOpDocumentGetTagsOutput(v **GetTagsOutput, value in
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		case "ReturnSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14439,10 +14938,12 @@ func awsAwsjson11_deserializeOpDocumentGetTagsOutput(v **GetTagsOutput, value in
 				}
 				sv.ReturnSize = ptr.Int32(int32(i64))
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "TotalSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14455,6 +14956,7 @@ func awsAwsjson11_deserializeOpDocumentGetTagsOutput(v **GetTagsOutput, value in
 				}
 				sv.TotalSize = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14490,10 +14992,12 @@ func awsAwsjson11_deserializeOpDocumentGetUsageForecastOutput(v **GetUsageForeca
 			if err := awsAwsjson11_deserializeDocumentForecastResultsByTime(&sv.ForecastResultsByTime, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if err := awsAwsjson11_deserializeDocumentMetricValue(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14529,6 +15033,7 @@ func awsAwsjson11_deserializeOpDocumentListCostAllocationTagBackfillHistoryOutpu
 			if err := awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequestList(&sv.BackfillRequests, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14537,6 +15042,7 @@ func awsAwsjson11_deserializeOpDocumentListCostAllocationTagBackfillHistoryOutpu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14572,6 +15078,7 @@ func awsAwsjson11_deserializeOpDocumentListCostAllocationTagsOutput(v **ListCost
 			if err := awsAwsjson11_deserializeDocumentCostAllocationTagList(&sv.CostAllocationTags, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14580,6 +15087,7 @@ func awsAwsjson11_deserializeOpDocumentListCostAllocationTagsOutput(v **ListCost
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14615,6 +15123,7 @@ func awsAwsjson11_deserializeOpDocumentListCostCategoryDefinitionsOutput(v **Lis
 			if err := awsAwsjson11_deserializeDocumentCostCategoryReferencesList(&sv.CostCategoryReferences, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14623,6 +15132,7 @@ func awsAwsjson11_deserializeOpDocumentListCostCategoryDefinitionsOutput(v **Lis
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14658,6 +15168,7 @@ func awsAwsjson11_deserializeOpDocumentListSavingsPlansPurchaseRecommendationGen
 			if err := awsAwsjson11_deserializeDocumentGenerationSummaryList(&sv.GenerationSummaryList, value); err != nil {
 				return err
 			}
+
 		case "NextPageToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14666,6 +15177,7 @@ func awsAwsjson11_deserializeOpDocumentListSavingsPlansPurchaseRecommendationGen
 				}
 				sv.NextPageToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14701,6 +15213,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentResourceTagList(&sv.ResourceTags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14740,6 +15253,7 @@ func awsAwsjson11_deserializeOpDocumentProvideAnomalyFeedbackOutput(v **ProvideA
 				}
 				sv.AnomalyId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14775,6 +15289,7 @@ func awsAwsjson11_deserializeOpDocumentStartCostAllocationTagBackfillOutput(v **
 			if err := awsAwsjson11_deserializeDocumentCostAllocationTagBackfillRequest(&sv.BackfillRequest, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14814,6 +15329,7 @@ func awsAwsjson11_deserializeOpDocumentStartSavingsPlansPurchaseRecommendationGe
 				}
 				sv.EstimatedCompletionTime = ptr.String(jtv)
 			}
+
 		case "GenerationStartedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14822,6 +15338,7 @@ func awsAwsjson11_deserializeOpDocumentStartSavingsPlansPurchaseRecommendationGe
 				}
 				sv.GenerationStartedTime = ptr.String(jtv)
 			}
+
 		case "RecommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14830,6 +15347,7 @@ func awsAwsjson11_deserializeOpDocumentStartSavingsPlansPurchaseRecommendationGe
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14931,6 +15449,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateAnomalyMonitorOutput(v **UpdateAnom
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14970,6 +15489,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateAnomalySubscriptionOutput(v **Updat
 				}
 				sv.SubscriptionArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15005,6 +15525,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCostAllocationTagsStatusOutput(v **
 			if err := awsAwsjson11_deserializeDocumentUpdateCostAllocationTagsStatusErrors(&sv.Errors, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15044,6 +15565,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCostCategoryDefinitionOutput(v **Up
 				}
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
+
 		case "EffectiveStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15052,6 +15574,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCostCategoryDefinitionOutput(v **Up
 				}
 				sv.EffectiveStart = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

@@ -5219,6 +5219,7 @@ func awsAwsjson11_deserializeDocumentAbsoluteTimeRange(v **types.AbsoluteTimeRan
 				}
 				sv.EndTime = ptr.Int64(i64)
 			}
+
 		case "First":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5231,6 +5232,7 @@ func awsAwsjson11_deserializeDocumentAbsoluteTimeRange(v **types.AbsoluteTimeRan
 				}
 				sv.First = ptr.Int64(i64)
 			}
+
 		case "Last":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5243,6 +5245,7 @@ func awsAwsjson11_deserializeDocumentAbsoluteTimeRange(v **types.AbsoluteTimeRan
 				}
 				sv.Last = ptr.Int64(i64)
 			}
+
 		case "StartTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5255,6 +5258,7 @@ func awsAwsjson11_deserializeDocumentAbsoluteTimeRange(v **types.AbsoluteTimeRan
 				}
 				sv.StartTime = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5294,6 +5298,7 @@ func awsAwsjson11_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5329,6 +5334,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJobDetails(&sv.CallAnalyticsJobDetails, value); err != nil {
 				return err
 			}
+
 		case "CallAnalyticsJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5337,6 +5343,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.CallAnalyticsJobName = ptr.String(jtv)
 			}
+
 		case "CallAnalyticsJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5345,10 +5352,12 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.CallAnalyticsJobStatus = types.CallAnalyticsJobStatus(jtv)
 			}
+
 		case "ChannelDefinitions":
 			if err := awsAwsjson11_deserializeDocumentChannelDefinitions(&sv.ChannelDefinitions, value); err != nil {
 				return err
 			}
+
 		case "CompletionTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5364,6 +5373,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 
 				}
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5379,6 +5389,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 
 				}
 			}
+
 		case "DataAccessRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5387,6 +5398,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5395,6 +5407,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "IdentifiedLanguageScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5428,6 +5441,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 
 				}
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5436,10 +5450,12 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "Media":
 			if err := awsAwsjson11_deserializeDocumentMedia(&sv.Media, value); err != nil {
 				return err
 			}
+
 		case "MediaFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5448,6 +5464,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.MediaFormat = types.MediaFormat(jtv)
 			}
+
 		case "MediaSampleRateHertz":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5460,10 +5477,12 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 				}
 				sv.MediaSampleRateHertz = ptr.Int32(int32(i64))
 			}
+
 		case "Settings":
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5479,10 +5498,12 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 
 				}
 			}
+
 		case "Transcript":
 			if err := awsAwsjson11_deserializeDocumentTranscript(&sv.Transcript, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5518,6 +5539,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobDetails(v **types.CallAnaly
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeatureList(&sv.Skipped, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5553,10 +5575,12 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 			if err := awsAwsjson11_deserializeDocumentContentRedaction(&sv.ContentRedaction, value); err != nil {
 				return err
 			}
+
 		case "LanguageIdSettings":
 			if err := awsAwsjson11_deserializeDocumentLanguageIdSettingsMap(&sv.LanguageIdSettings, value); err != nil {
 				return err
 			}
+
 		case "LanguageModelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5565,14 +5589,17 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 				}
 				sv.LanguageModelName = ptr.String(jtv)
 			}
+
 		case "LanguageOptions":
 			if err := awsAwsjson11_deserializeDocumentLanguageOptions(&sv.LanguageOptions, value); err != nil {
 				return err
 			}
+
 		case "Summarization":
 			if err := awsAwsjson11_deserializeDocumentSummarization(&sv.Summarization, value); err != nil {
 				return err
 			}
+
 		case "VocabularyFilterMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5581,6 +5608,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 				}
 				sv.VocabularyFilterMethod = types.VocabularyFilterMethod(jtv)
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5589,6 +5617,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5597,6 +5626,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnal
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5666,6 +5696,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJobDetails(&sv.CallAnalyticsJobDetails, value); err != nil {
 				return err
 			}
+
 		case "CallAnalyticsJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5674,6 +5705,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 				}
 				sv.CallAnalyticsJobName = ptr.String(jtv)
 			}
+
 		case "CallAnalyticsJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5682,6 +5714,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 				}
 				sv.CallAnalyticsJobStatus = types.CallAnalyticsJobStatus(jtv)
 			}
+
 		case "CompletionTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5697,6 +5730,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 
 				}
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5712,6 +5746,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5720,6 +5755,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5728,6 +5764,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5743,6 +5780,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5782,6 +5820,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeature(v **types.CallA
 				}
 				sv.Feature = types.CallAnalyticsFeature(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5790,6 +5829,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeature(v **types.CallA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ReasonCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5798,6 +5838,7 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeature(v **types.CallA
 				}
 				sv.ReasonCode = types.CallAnalyticsSkippedReasonCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5871,6 +5912,7 @@ func awsAwsjson11_deserializeDocumentCategoryProperties(v **types.CategoryProper
 				}
 				sv.CategoryName = ptr.String(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5886,6 +5928,7 @@ func awsAwsjson11_deserializeDocumentCategoryProperties(v **types.CategoryProper
 
 				}
 			}
+
 		case "InputType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5894,6 +5937,7 @@ func awsAwsjson11_deserializeDocumentCategoryProperties(v **types.CategoryProper
 				}
 				sv.InputType = types.InputType(jtv)
 			}
+
 		case "LastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5909,10 +5953,12 @@ func awsAwsjson11_deserializeDocumentCategoryProperties(v **types.CategoryProper
 
 				}
 			}
+
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentRuleList(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5990,6 +6036,7 @@ func awsAwsjson11_deserializeDocumentChannelDefinition(v **types.ChannelDefiniti
 				}
 				sv.ChannelId = int32(i64)
 			}
+
 		case "ParticipantRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5998,6 +6045,7 @@ func awsAwsjson11_deserializeDocumentChannelDefinition(v **types.ChannelDefiniti
 				}
 				sv.ParticipantRole = types.ParticipantRole(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6071,6 +6119,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6106,6 +6155,7 @@ func awsAwsjson11_deserializeDocumentContentRedaction(v **types.ContentRedaction
 			if err := awsAwsjson11_deserializeDocumentPiiEntityTypes(&sv.PiiEntityTypes, value); err != nil {
 				return err
 			}
+
 		case "RedactionOutput":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6114,6 +6164,7 @@ func awsAwsjson11_deserializeDocumentContentRedaction(v **types.ContentRedaction
 				}
 				sv.RedactionOutput = types.RedactionOutput(jtv)
 			}
+
 		case "RedactionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6122,6 +6173,7 @@ func awsAwsjson11_deserializeDocumentContentRedaction(v **types.ContentRedaction
 				}
 				sv.RedactionType = types.RedactionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6161,6 +6213,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6169,6 +6222,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
+
 		case "TuningDataS3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6177,6 +6231,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				}
 				sv.TuningDataS3Uri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6216,6 +6271,7 @@ func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6251,6 +6307,7 @@ func awsAwsjson11_deserializeDocumentInterruptionFilter(v **types.InterruptionFi
 			if err := awsAwsjson11_deserializeDocumentAbsoluteTimeRange(&sv.AbsoluteTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Negate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6259,6 +6316,7 @@ func awsAwsjson11_deserializeDocumentInterruptionFilter(v **types.InterruptionFi
 				}
 				sv.Negate = ptr.Bool(jtv)
 			}
+
 		case "ParticipantRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6267,10 +6325,12 @@ func awsAwsjson11_deserializeDocumentInterruptionFilter(v **types.InterruptionFi
 				}
 				sv.ParticipantRole = types.ParticipantRole(jtv)
 			}
+
 		case "RelativeTimeRange":
 			if err := awsAwsjson11_deserializeDocumentRelativeTimeRange(&sv.RelativeTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Threshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6283,6 +6343,7 @@ func awsAwsjson11_deserializeDocumentInterruptionFilter(v **types.InterruptionFi
 				}
 				sv.Threshold = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6322,6 +6383,7 @@ func awsAwsjson11_deserializeDocumentJobExecutionSettings(v **types.JobExecution
 				}
 				sv.AllowDeferredExecution = ptr.Bool(jtv)
 			}
+
 		case "DataAccessRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6330,6 +6392,7 @@ func awsAwsjson11_deserializeDocumentJobExecutionSettings(v **types.JobExecution
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6394,6 +6457,7 @@ func awsAwsjson11_deserializeDocumentLanguageCodeItem(v **types.LanguageCodeItem
 
 				}
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6402,6 +6466,7 @@ func awsAwsjson11_deserializeDocumentLanguageCodeItem(v **types.LanguageCodeItem
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6475,6 +6540,7 @@ func awsAwsjson11_deserializeDocumentLanguageIdSettings(v **types.LanguageIdSett
 				}
 				sv.LanguageModelName = ptr.String(jtv)
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6483,6 +6549,7 @@ func awsAwsjson11_deserializeDocumentLanguageIdSettings(v **types.LanguageIdSett
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6491,6 +6558,7 @@ func awsAwsjson11_deserializeDocumentLanguageIdSettings(v **types.LanguageIdSett
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6565,6 +6633,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				}
 				sv.BaseModelName = types.BaseModelName(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6580,6 +6649,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6588,10 +6658,12 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6600,6 +6672,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				}
 				sv.LanguageCode = types.CLMLanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6615,6 +6688,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 
 				}
 			}
+
 		case "ModelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6623,6 +6697,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				}
 				sv.ModelName = ptr.String(jtv)
 			}
+
 		case "ModelStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6631,6 +6706,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				}
 				sv.ModelStatus = types.ModelStatus(jtv)
 			}
+
 		case "UpgradeAvailability":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6639,6 +6715,7 @@ func awsAwsjson11_deserializeDocumentLanguageModel(v **types.LanguageModel, valu
 				}
 				sv.UpgradeAvailability = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6714,6 +6791,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6753,6 +6831,7 @@ func awsAwsjson11_deserializeDocumentMedia(v **types.Media, value interface{}) e
 				}
 				sv.MediaFileUri = ptr.String(jtv)
 			}
+
 		case "RedactedMediaFileUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6761,6 +6840,7 @@ func awsAwsjson11_deserializeDocumentMedia(v **types.Media, value interface{}) e
 				}
 				sv.RedactedMediaFileUri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6804,6 +6884,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeChannelDefinition(v **types.Me
 				}
 				sv.ChannelId = int32(i64)
 			}
+
 		case "ParticipantRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6812,6 +6893,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeChannelDefinition(v **types.Me
 				}
 				sv.ParticipantRole = types.MedicalScribeParticipantRole(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6881,6 +6963,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 			if err := awsAwsjson11_deserializeDocumentMedicalScribeChannelDefinitions(&sv.ChannelDefinitions, value); err != nil {
 				return err
 			}
+
 		case "CompletionTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6896,6 +6979,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 
 				}
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6911,6 +6995,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 
 				}
 			}
+
 		case "DataAccessRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6919,6 +7004,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6927,6 +7013,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6935,10 +7022,12 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 				}
 				sv.LanguageCode = types.MedicalScribeLanguageCode(jtv)
 			}
+
 		case "Media":
 			if err := awsAwsjson11_deserializeDocumentMedia(&sv.Media, value); err != nil {
 				return err
 			}
+
 		case "MedicalScribeJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6947,6 +7036,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 				}
 				sv.MedicalScribeJobName = ptr.String(jtv)
 			}
+
 		case "MedicalScribeJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6955,14 +7045,17 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 				}
 				sv.MedicalScribeJobStatus = types.MedicalScribeJobStatus(jtv)
 			}
+
 		case "MedicalScribeOutput":
 			if err := awsAwsjson11_deserializeDocumentMedicalScribeOutput(&sv.MedicalScribeOutput, value); err != nil {
 				return err
 			}
+
 		case "Settings":
 			if err := awsAwsjson11_deserializeDocumentMedicalScribeSettings(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6978,10 +7071,12 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJob(v **types.MedicalScribeJob
 
 				}
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7062,6 +7157,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 
 				}
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7077,6 +7173,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7085,6 +7182,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7093,6 +7191,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 				}
 				sv.LanguageCode = types.MedicalScribeLanguageCode(jtv)
 			}
+
 		case "MedicalScribeJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7101,6 +7200,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 				}
 				sv.MedicalScribeJobName = ptr.String(jtv)
 			}
+
 		case "MedicalScribeJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7109,6 +7209,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 				}
 				sv.MedicalScribeJobStatus = types.MedicalScribeJobStatus(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7124,6 +7225,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeJobSummary(v **types.MedicalSc
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7163,6 +7265,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeOutput(v **types.MedicalScribe
 				}
 				sv.ClinicalDocumentUri = ptr.String(jtv)
 			}
+
 		case "TranscriptFileUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7171,6 +7274,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeOutput(v **types.MedicalScribe
 				}
 				sv.TranscriptFileUri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7210,6 +7314,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 				}
 				sv.ChannelIdentification = ptr.Bool(jtv)
 			}
+
 		case "MaxSpeakerLabels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7222,6 +7327,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 				}
 				sv.MaxSpeakerLabels = ptr.Int32(int32(i64))
 			}
+
 		case "ShowSpeakerLabels":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7230,6 +7336,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 				}
 				sv.ShowSpeakerLabels = ptr.Bool(jtv)
 			}
+
 		case "VocabularyFilterMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7238,6 +7345,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 				}
 				sv.VocabularyFilterMethod = types.VocabularyFilterMethod(jtv)
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7246,6 +7354,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7254,6 +7363,7 @@ func awsAwsjson11_deserializeDocumentMedicalScribeSettings(v **types.MedicalScri
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7293,6 +7403,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscript(v **types.MedicalTranscri
 				}
 				sv.TranscriptFileUri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7339,6 +7450,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 
 				}
 			}
+
 		case "ContentIdentificationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7347,6 +7459,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.ContentIdentificationType = types.MedicalContentIdentificationType(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7362,6 +7475,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7370,6 +7484,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7378,10 +7493,12 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "Media":
 			if err := awsAwsjson11_deserializeDocumentMedia(&sv.Media, value); err != nil {
 				return err
 			}
+
 		case "MediaFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7390,6 +7507,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.MediaFormat = types.MediaFormat(jtv)
 			}
+
 		case "MediaSampleRateHertz":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7402,6 +7520,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.MediaSampleRateHertz = ptr.Int32(int32(i64))
 			}
+
 		case "MedicalTranscriptionJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7410,10 +7529,12 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.MedicalTranscriptionJobName = ptr.String(jtv)
 			}
+
 		case "Settings":
 			if err := awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		case "Specialty":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7422,6 +7543,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.Specialty = types.Specialty(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7437,14 +7559,17 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 
 				}
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "Transcript":
 			if err := awsAwsjson11_deserializeDocumentMedicalTranscript(&sv.Transcript, value); err != nil {
 				return err
 			}
+
 		case "TranscriptionJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7453,6 +7578,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.TranscriptionJobStatus = types.TranscriptionJobStatus(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7461,6 +7587,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				}
 				sv.Type = types.Type(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7541,6 +7668,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 
 				}
 			}
+
 		case "ContentIdentificationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7549,6 +7677,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.ContentIdentificationType = types.MedicalContentIdentificationType(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7564,6 +7693,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7572,6 +7702,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7580,6 +7711,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "MedicalTranscriptionJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7588,6 +7720,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.MedicalTranscriptionJobName = ptr.String(jtv)
 			}
+
 		case "OutputLocationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7596,6 +7729,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.OutputLocationType = types.OutputLocationType(jtv)
 			}
+
 		case "Specialty":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7604,6 +7738,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.Specialty = types.Specialty(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7619,6 +7754,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 
 				}
 			}
+
 		case "TranscriptionJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7627,6 +7763,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.TranscriptionJobStatus = types.TranscriptionJobStatus(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7635,6 +7772,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 				}
 				sv.Type = types.Type(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7674,6 +7812,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				}
 				sv.ChannelIdentification = ptr.Bool(jtv)
 			}
+
 		case "MaxAlternatives":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7686,6 +7825,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				}
 				sv.MaxAlternatives = ptr.Int32(int32(i64))
 			}
+
 		case "MaxSpeakerLabels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7698,6 +7838,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				}
 				sv.MaxSpeakerLabels = ptr.Int32(int32(i64))
 			}
+
 		case "ShowAlternatives":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7706,6 +7847,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				}
 				sv.ShowAlternatives = ptr.Bool(jtv)
 			}
+
 		case "ShowSpeakerLabels":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7714,6 +7856,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				}
 				sv.ShowSpeakerLabels = ptr.Bool(jtv)
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7722,6 +7865,7 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionSetting(v **types.Medic
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7795,6 +7939,7 @@ func awsAwsjson11_deserializeDocumentModelSettings(v **types.ModelSettings, valu
 				}
 				sv.LanguageModelName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7830,6 +7975,7 @@ func awsAwsjson11_deserializeDocumentNonTalkTimeFilter(v **types.NonTalkTimeFilt
 			if err := awsAwsjson11_deserializeDocumentAbsoluteTimeRange(&sv.AbsoluteTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Negate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7838,10 +7984,12 @@ func awsAwsjson11_deserializeDocumentNonTalkTimeFilter(v **types.NonTalkTimeFilt
 				}
 				sv.Negate = ptr.Bool(jtv)
 			}
+
 		case "RelativeTimeRange":
 			if err := awsAwsjson11_deserializeDocumentRelativeTimeRange(&sv.RelativeTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Threshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7854,6 +8002,7 @@ func awsAwsjson11_deserializeDocumentNonTalkTimeFilter(v **types.NonTalkTimeFilt
 				}
 				sv.Threshold = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7893,6 +8042,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7972,6 +8122,7 @@ func awsAwsjson11_deserializeDocumentRelativeTimeRange(v **types.RelativeTimeRan
 				}
 				sv.EndPercentage = ptr.Int32(int32(i64))
 			}
+
 		case "First":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7984,6 +8135,7 @@ func awsAwsjson11_deserializeDocumentRelativeTimeRange(v **types.RelativeTimeRan
 				}
 				sv.First = ptr.Int32(int32(i64))
 			}
+
 		case "Last":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7996,6 +8148,7 @@ func awsAwsjson11_deserializeDocumentRelativeTimeRange(v **types.RelativeTimeRan
 				}
 				sv.Last = ptr.Int32(int32(i64))
 			}
+
 		case "StartPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8008,6 +8161,7 @@ func awsAwsjson11_deserializeDocumentRelativeTimeRange(v **types.RelativeTimeRan
 				}
 				sv.StartPercentage = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8145,6 +8299,7 @@ func awsAwsjson11_deserializeDocumentSentimentFilter(v **types.SentimentFilter, 
 			if err := awsAwsjson11_deserializeDocumentAbsoluteTimeRange(&sv.AbsoluteTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Negate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8153,6 +8308,7 @@ func awsAwsjson11_deserializeDocumentSentimentFilter(v **types.SentimentFilter, 
 				}
 				sv.Negate = ptr.Bool(jtv)
 			}
+
 		case "ParticipantRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8161,14 +8317,17 @@ func awsAwsjson11_deserializeDocumentSentimentFilter(v **types.SentimentFilter, 
 				}
 				sv.ParticipantRole = types.ParticipantRole(jtv)
 			}
+
 		case "RelativeTimeRange":
 			if err := awsAwsjson11_deserializeDocumentRelativeTimeRange(&sv.RelativeTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Sentiments":
 			if err := awsAwsjson11_deserializeDocumentSentimentValueList(&sv.Sentiments, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8244,6 +8403,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.ChannelIdentification = ptr.Bool(jtv)
 			}
+
 		case "MaxAlternatives":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8256,6 +8416,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.MaxAlternatives = ptr.Int32(int32(i64))
 			}
+
 		case "MaxSpeakerLabels":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8268,6 +8429,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.MaxSpeakerLabels = ptr.Int32(int32(i64))
 			}
+
 		case "ShowAlternatives":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8276,6 +8438,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.ShowAlternatives = ptr.Bool(jtv)
 			}
+
 		case "ShowSpeakerLabels":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8284,6 +8447,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.ShowSpeakerLabels = ptr.Bool(jtv)
 			}
+
 		case "VocabularyFilterMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8292,6 +8456,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.VocabularyFilterMethod = types.VocabularyFilterMethod(jtv)
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8300,6 +8465,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8308,6 +8474,7 @@ func awsAwsjson11_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8451,6 +8618,7 @@ func awsAwsjson11_deserializeDocumentSubtitlesOutput(v **types.SubtitlesOutput, 
 			if err := awsAwsjson11_deserializeDocumentSubtitleFormats(&sv.Formats, value); err != nil {
 				return err
 			}
+
 		case "OutputStartIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8463,10 +8631,12 @@ func awsAwsjson11_deserializeDocumentSubtitlesOutput(v **types.SubtitlesOutput, 
 				}
 				sv.OutputStartIndex = ptr.Int32(int32(i64))
 			}
+
 		case "SubtitleFileUris":
 			if err := awsAwsjson11_deserializeDocumentSubtitleFileUris(&sv.SubtitleFileUris, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8506,6 +8676,7 @@ func awsAwsjson11_deserializeDocumentSummarization(v **types.Summarization, valu
 				}
 				sv.GenerateAbstractiveSummary = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8545,6 +8716,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8553,6 +8725,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8692,6 +8865,7 @@ func awsAwsjson11_deserializeDocumentToxicityDetectionSettings(v **types.Toxicit
 			if err := awsAwsjson11_deserializeDocumentToxicityCategories(&sv.ToxicityCategories, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8731,6 +8905,7 @@ func awsAwsjson11_deserializeDocumentTranscript(v **types.Transcript, value inte
 				}
 				sv.RedactedTranscriptFileUri = ptr.String(jtv)
 			}
+
 		case "TranscriptFileUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8739,6 +8914,7 @@ func awsAwsjson11_deserializeDocumentTranscript(v **types.Transcript, value inte
 				}
 				sv.TranscriptFileUri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8774,6 +8950,7 @@ func awsAwsjson11_deserializeDocumentTranscriptFilter(v **types.TranscriptFilter
 			if err := awsAwsjson11_deserializeDocumentAbsoluteTimeRange(&sv.AbsoluteTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Negate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8782,6 +8959,7 @@ func awsAwsjson11_deserializeDocumentTranscriptFilter(v **types.TranscriptFilter
 				}
 				sv.Negate = ptr.Bool(jtv)
 			}
+
 		case "ParticipantRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8790,14 +8968,17 @@ func awsAwsjson11_deserializeDocumentTranscriptFilter(v **types.TranscriptFilter
 				}
 				sv.ParticipantRole = types.ParticipantRole(jtv)
 			}
+
 		case "RelativeTimeRange":
 			if err := awsAwsjson11_deserializeDocumentRelativeTimeRange(&sv.RelativeTimeRange, value); err != nil {
 				return err
 			}
+
 		case "Targets":
 			if err := awsAwsjson11_deserializeDocumentStringTargetList(&sv.Targets, value); err != nil {
 				return err
 			}
+
 		case "TranscriptFilterType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8806,6 +8987,7 @@ func awsAwsjson11_deserializeDocumentTranscriptFilter(v **types.TranscriptFilter
 				}
 				sv.TranscriptFilterType = types.TranscriptFilterType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8852,10 +9034,12 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 
 				}
 			}
+
 		case "ContentRedaction":
 			if err := awsAwsjson11_deserializeDocumentContentRedaction(&sv.ContentRedaction, value); err != nil {
 				return err
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8871,6 +9055,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8879,6 +9064,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "IdentifiedLanguageScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8912,6 +9098,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 
 				}
 			}
+
 		case "IdentifyLanguage":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8920,6 +9107,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.IdentifyLanguage = ptr.Bool(jtv)
 			}
+
 		case "IdentifyMultipleLanguages":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8928,10 +9116,12 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.IdentifyMultipleLanguages = ptr.Bool(jtv)
 			}
+
 		case "JobExecutionSettings":
 			if err := awsAwsjson11_deserializeDocumentJobExecutionSettings(&sv.JobExecutionSettings, value); err != nil {
 				return err
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8940,22 +9130,27 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LanguageCodes":
 			if err := awsAwsjson11_deserializeDocumentLanguageCodeList(&sv.LanguageCodes, value); err != nil {
 				return err
 			}
+
 		case "LanguageIdSettings":
 			if err := awsAwsjson11_deserializeDocumentLanguageIdSettingsMap(&sv.LanguageIdSettings, value); err != nil {
 				return err
 			}
+
 		case "LanguageOptions":
 			if err := awsAwsjson11_deserializeDocumentLanguageOptions(&sv.LanguageOptions, value); err != nil {
 				return err
 			}
+
 		case "Media":
 			if err := awsAwsjson11_deserializeDocumentMedia(&sv.Media, value); err != nil {
 				return err
 			}
+
 		case "MediaFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8964,6 +9159,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.MediaFormat = types.MediaFormat(jtv)
 			}
+
 		case "MediaSampleRateHertz":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8976,14 +9172,17 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.MediaSampleRateHertz = ptr.Int32(int32(i64))
 			}
+
 		case "ModelSettings":
 			if err := awsAwsjson11_deserializeDocumentModelSettings(&sv.ModelSettings, value); err != nil {
 				return err
 			}
+
 		case "Settings":
 			if err := awsAwsjson11_deserializeDocumentSettings(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8999,22 +9198,27 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 
 				}
 			}
+
 		case "Subtitles":
 			if err := awsAwsjson11_deserializeDocumentSubtitlesOutput(&sv.Subtitles, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "ToxicityDetection":
 			if err := awsAwsjson11_deserializeDocumentToxicityDetection(&sv.ToxicityDetection, value); err != nil {
 				return err
 			}
+
 		case "Transcript":
 			if err := awsAwsjson11_deserializeDocumentTranscript(&sv.Transcript, value); err != nil {
 				return err
 			}
+
 		case "TranscriptionJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9023,6 +9227,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.TranscriptionJobName = ptr.String(jtv)
 			}
+
 		case "TranscriptionJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9031,6 +9236,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				}
 				sv.TranscriptionJobStatus = types.TranscriptionJobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9111,10 +9317,12 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 
 				}
 			}
+
 		case "ContentRedaction":
 			if err := awsAwsjson11_deserializeDocumentContentRedaction(&sv.ContentRedaction, value); err != nil {
 				return err
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9130,6 +9338,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 
 				}
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9138,6 +9347,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "IdentifiedLanguageScore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9171,6 +9381,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 
 				}
 			}
+
 		case "IdentifyLanguage":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9179,6 +9390,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.IdentifyLanguage = ptr.Bool(jtv)
 			}
+
 		case "IdentifyMultipleLanguages":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9187,6 +9399,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.IdentifyMultipleLanguages = ptr.Bool(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9195,14 +9408,17 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LanguageCodes":
 			if err := awsAwsjson11_deserializeDocumentLanguageCodeList(&sv.LanguageCodes, value); err != nil {
 				return err
 			}
+
 		case "ModelSettings":
 			if err := awsAwsjson11_deserializeDocumentModelSettings(&sv.ModelSettings, value); err != nil {
 				return err
 			}
+
 		case "OutputLocationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9211,6 +9427,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.OutputLocationType = types.OutputLocationType(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9226,10 +9443,12 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 
 				}
 			}
+
 		case "ToxicityDetection":
 			if err := awsAwsjson11_deserializeDocumentToxicityDetection(&sv.ToxicityDetection, value); err != nil {
 				return err
 			}
+
 		case "TranscriptionJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9238,6 +9457,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.TranscriptionJobName = ptr.String(jtv)
 			}
+
 		case "TranscriptionJobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9246,6 +9466,7 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 				}
 				sv.TranscriptionJobStatus = types.TranscriptionJobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9319,6 +9540,7 @@ func awsAwsjson11_deserializeDocumentVocabularyFilterInfo(v **types.VocabularyFi
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9334,6 +9556,7 @@ func awsAwsjson11_deserializeDocumentVocabularyFilterInfo(v **types.VocabularyFi
 
 				}
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9342,6 +9565,7 @@ func awsAwsjson11_deserializeDocumentVocabularyFilterInfo(v **types.VocabularyFi
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9415,6 +9639,7 @@ func awsAwsjson11_deserializeDocumentVocabularyInfo(v **types.VocabularyInfo, va
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9430,6 +9655,7 @@ func awsAwsjson11_deserializeDocumentVocabularyInfo(v **types.VocabularyInfo, va
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9438,6 +9664,7 @@ func awsAwsjson11_deserializeDocumentVocabularyInfo(v **types.VocabularyInfo, va
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9446,6 +9673,7 @@ func awsAwsjson11_deserializeDocumentVocabularyInfo(v **types.VocabularyInfo, va
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9481,6 +9709,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCallAnalyticsCategoryOutput(v **Cre
 			if err := awsAwsjson11_deserializeDocumentCategoryProperties(&sv.CategoryProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9520,10 +9749,12 @@ func awsAwsjson11_deserializeOpDocumentCreateLanguageModelOutput(v **CreateLangu
 				}
 				sv.BaseModelName = types.BaseModelName(jtv)
 			}
+
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9532,6 +9763,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLanguageModelOutput(v **CreateLangu
 				}
 				sv.LanguageCode = types.CLMLanguageCode(jtv)
 			}
+
 		case "ModelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9540,6 +9772,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLanguageModelOutput(v **CreateLangu
 				}
 				sv.ModelName = ptr.String(jtv)
 			}
+
 		case "ModelStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9548,6 +9781,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLanguageModelOutput(v **CreateLangu
 				}
 				sv.ModelStatus = types.ModelStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9587,6 +9821,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9595,6 +9830,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9610,6 +9846,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9618,6 +9855,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9626,6 +9864,7 @@ func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateM
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9665,6 +9904,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyFilterOutput(v **CreateVo
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9680,6 +9920,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyFilterOutput(v **CreateVo
 
 				}
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9688,6 +9929,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyFilterOutput(v **CreateVo
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9727,6 +9969,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9735,6 +9978,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9750,6 +9994,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9758,6 +10003,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9766,6 +10012,7 @@ func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabula
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9863,6 +10110,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeLanguageModelOutput(v **DescribeL
 			if err := awsAwsjson11_deserializeDocumentLanguageModel(&sv.LanguageModel, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9898,6 +10146,7 @@ func awsAwsjson11_deserializeOpDocumentGetCallAnalyticsCategoryOutput(v **GetCal
 			if err := awsAwsjson11_deserializeDocumentCategoryProperties(&sv.CategoryProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9933,6 +10182,7 @@ func awsAwsjson11_deserializeOpDocumentGetCallAnalyticsJobOutput(v **GetCallAnal
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJob(&sv.CallAnalyticsJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9968,6 +10218,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalScribeJobOutput(v **GetMedicalS
 			if err := awsAwsjson11_deserializeDocumentMedicalScribeJob(&sv.MedicalScribeJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10003,6 +10254,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalTranscriptionJobOutput(v **GetM
 			if err := awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(&sv.MedicalTranscriptionJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10042,6 +10294,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				}
 				sv.DownloadUri = ptr.String(jtv)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10050,6 +10303,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10058,6 +10312,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10073,6 +10328,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10081,6 +10337,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10089,6 +10346,7 @@ func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedical
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10124,6 +10382,7 @@ func awsAwsjson11_deserializeOpDocumentGetTranscriptionJobOutput(v **GetTranscri
 			if err := awsAwsjson11_deserializeDocumentTranscriptionJob(&sv.TranscriptionJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10163,6 +10422,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabula
 				}
 				sv.DownloadUri = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10171,6 +10431,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabula
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10186,6 +10447,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabula
 
 				}
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10194,6 +10456,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabula
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10233,6 +10496,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				}
 				sv.DownloadUri = ptr.String(jtv)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10241,6 +10505,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "LanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10249,6 +10514,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10264,6 +10530,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10272,6 +10539,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10280,6 +10548,7 @@ func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutp
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10315,6 +10584,7 @@ func awsAwsjson11_deserializeOpDocumentListCallAnalyticsCategoriesOutput(v **Lis
 			if err := awsAwsjson11_deserializeDocumentCategoryPropertiesList(&sv.Categories, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10323,6 +10593,7 @@ func awsAwsjson11_deserializeOpDocumentListCallAnalyticsCategoriesOutput(v **Lis
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10358,6 +10629,7 @@ func awsAwsjson11_deserializeOpDocumentListCallAnalyticsJobsOutput(v **ListCallA
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJobSummaries(&sv.CallAnalyticsJobSummaries, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10366,6 +10638,7 @@ func awsAwsjson11_deserializeOpDocumentListCallAnalyticsJobsOutput(v **ListCallA
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10374,6 +10647,7 @@ func awsAwsjson11_deserializeOpDocumentListCallAnalyticsJobsOutput(v **ListCallA
 				}
 				sv.Status = types.CallAnalyticsJobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10409,6 +10683,7 @@ func awsAwsjson11_deserializeOpDocumentListLanguageModelsOutput(v **ListLanguage
 			if err := awsAwsjson11_deserializeDocumentModels(&sv.Models, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10417,6 +10692,7 @@ func awsAwsjson11_deserializeOpDocumentListLanguageModelsOutput(v **ListLanguage
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10452,6 +10728,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalScribeJobsOutput(v **ListMedic
 			if err := awsAwsjson11_deserializeDocumentMedicalScribeJobSummaries(&sv.MedicalScribeJobSummaries, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10460,6 +10737,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalScribeJobsOutput(v **ListMedic
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10468,6 +10746,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalScribeJobsOutput(v **ListMedic
 				}
 				sv.Status = types.MedicalScribeJobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10503,6 +10782,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalTranscriptionJobsOutput(v **Li
 			if err := awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummaries(&sv.MedicalTranscriptionJobSummaries, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10511,6 +10791,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalTranscriptionJobsOutput(v **Li
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10519,6 +10800,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalTranscriptionJobsOutput(v **Li
 				}
 				sv.Status = types.TranscriptionJobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10558,6 +10840,7 @@ func awsAwsjson11_deserializeOpDocumentListMedicalVocabulariesOutput(v **ListMed
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10566,10 +10849,12 @@ func awsAwsjson11_deserializeOpDocumentListMedicalVocabulariesOutput(v **ListMed
 				}
 				sv.Status = types.VocabularyState(jtv)
 			}
+
 		case "Vocabularies":
 			if err := awsAwsjson11_deserializeDocumentVocabularies(&sv.Vocabularies, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10609,10 +10894,12 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10652,6 +10939,7 @@ func awsAwsjson11_deserializeOpDocumentListTranscriptionJobsOutput(v **ListTrans
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10660,10 +10948,12 @@ func awsAwsjson11_deserializeOpDocumentListTranscriptionJobsOutput(v **ListTrans
 				}
 				sv.Status = types.TranscriptionJobStatus(jtv)
 			}
+
 		case "TranscriptionJobSummaries":
 			if err := awsAwsjson11_deserializeDocumentTranscriptionJobSummaries(&sv.TranscriptionJobSummaries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10703,6 +10993,7 @@ func awsAwsjson11_deserializeOpDocumentListVocabulariesOutput(v **ListVocabulari
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10711,10 +11002,12 @@ func awsAwsjson11_deserializeOpDocumentListVocabulariesOutput(v **ListVocabulari
 				}
 				sv.Status = types.VocabularyState(jtv)
 			}
+
 		case "Vocabularies":
 			if err := awsAwsjson11_deserializeDocumentVocabularies(&sv.Vocabularies, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10754,10 +11047,12 @@ func awsAwsjson11_deserializeOpDocumentListVocabularyFiltersOutput(v **ListVocab
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "VocabularyFilters":
 			if err := awsAwsjson11_deserializeDocumentVocabularyFilters(&sv.VocabularyFilters, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10793,6 +11088,7 @@ func awsAwsjson11_deserializeOpDocumentStartCallAnalyticsJobOutput(v **StartCall
 			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJob(&sv.CallAnalyticsJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10828,6 +11124,7 @@ func awsAwsjson11_deserializeOpDocumentStartMedicalScribeJobOutput(v **StartMedi
 			if err := awsAwsjson11_deserializeDocumentMedicalScribeJob(&sv.MedicalScribeJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10863,6 +11160,7 @@ func awsAwsjson11_deserializeOpDocumentStartMedicalTranscriptionJobOutput(v **St
 			if err := awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(&sv.MedicalTranscriptionJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10898,6 +11196,7 @@ func awsAwsjson11_deserializeOpDocumentStartTranscriptionJobOutput(v **StartTran
 			if err := awsAwsjson11_deserializeDocumentTranscriptionJob(&sv.TranscriptionJob, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10995,6 +11294,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCallAnalyticsCategoryOutput(v **Upd
 			if err := awsAwsjson11_deserializeDocumentCategoryProperties(&sv.CategoryProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11034,6 +11334,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(v **UpdateM
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11049,6 +11350,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(v **UpdateM
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11057,6 +11359,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(v **UpdateM
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11065,6 +11368,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(v **UpdateM
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11104,6 +11408,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyFilterOutput(v **UpdateVo
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11119,6 +11424,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyFilterOutput(v **UpdateVo
 
 				}
 			}
+
 		case "VocabularyFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11127,6 +11433,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyFilterOutput(v **UpdateVo
 				}
 				sv.VocabularyFilterName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11166,6 +11473,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(v **UpdateVocabula
 				}
 				sv.LanguageCode = types.LanguageCode(jtv)
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11181,6 +11489,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(v **UpdateVocabula
 
 				}
 			}
+
 		case "VocabularyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11189,6 +11498,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(v **UpdateVocabula
 				}
 				sv.VocabularyName = ptr.String(jtv)
 			}
+
 		case "VocabularyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11197,6 +11507,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(v **UpdateVocabula
 				}
 				sv.VocabularyState = types.VocabularyState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

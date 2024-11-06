@@ -2889,10 +2889,12 @@ func awsAwsjson11_deserializeDocumentAppliedTerminology(v **types.AppliedTermino
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Terms":
 			if err := awsAwsjson11_deserializeDocumentTermList(&sv.Terms, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2966,6 +2968,7 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3005,6 +3008,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3044,6 +3048,7 @@ func awsAwsjson11_deserializeDocumentDetectedLanguageLowConfidenceException(v **
 				}
 				sv.DetectedLanguageCode = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3052,6 +3057,7 @@ func awsAwsjson11_deserializeDocumentDetectedLanguageLowConfidenceException(v **
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3091,6 +3097,7 @@ func awsAwsjson11_deserializeDocumentEncryptionKey(v **types.EncryptionKey, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3099,6 +3106,7 @@ func awsAwsjson11_deserializeDocumentEncryptionKey(v **types.EncryptionKey, valu
 				}
 				sv.Type = types.EncryptionKeyType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3138,6 +3146,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
+
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3146,6 +3155,7 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3185,6 +3195,7 @@ func awsAwsjson11_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3224,6 +3235,7 @@ func awsAwsjson11_deserializeDocumentInvalidFilterException(v **types.InvalidFil
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3263,6 +3275,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterValueException(v **types.In
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3302,6 +3315,7 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3345,6 +3359,7 @@ func awsAwsjson11_deserializeDocumentJobDetails(v **types.JobDetails, value inte
 				}
 				sv.DocumentsWithErrorsCount = ptr.Int32(int32(i64))
 			}
+
 		case "InputDocumentsCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3357,6 +3372,7 @@ func awsAwsjson11_deserializeDocumentJobDetails(v **types.JobDetails, value inte
 				}
 				sv.InputDocumentsCount = ptr.Int32(int32(i64))
 			}
+
 		case "TranslatedDocumentsCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3369,6 +3385,7 @@ func awsAwsjson11_deserializeDocumentJobDetails(v **types.JobDetails, value inte
 				}
 				sv.TranslatedDocumentsCount = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3408,6 +3425,7 @@ func awsAwsjson11_deserializeDocumentLanguage(v **types.Language, value interfac
 				}
 				sv.LanguageCode = ptr.String(jtv)
 			}
+
 		case "LanguageName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3416,6 +3434,7 @@ func awsAwsjson11_deserializeDocumentLanguage(v **types.Language, value interfac
 				}
 				sv.LanguageName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3525,6 +3544,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3560,6 +3580,7 @@ func awsAwsjson11_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 			if err := awsAwsjson11_deserializeDocumentEncryptionKey(&sv.EncryptionKey, value); err != nil {
 				return err
 			}
+
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3568,6 +3589,7 @@ func awsAwsjson11_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3607,6 +3629,7 @@ func awsAwsjson11_deserializeDocumentParallelDataConfig(v **types.ParallelDataCo
 				}
 				sv.Format = types.ParallelDataFormat(jtv)
 			}
+
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3615,6 +3638,7 @@ func awsAwsjson11_deserializeDocumentParallelDataConfig(v **types.ParallelDataCo
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3654,6 +3678,7 @@ func awsAwsjson11_deserializeDocumentParallelDataDataLocation(v **types.Parallel
 				}
 				sv.Location = ptr.String(jtv)
 			}
+
 		case "RepositoryType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3662,6 +3687,7 @@ func awsAwsjson11_deserializeDocumentParallelDataDataLocation(v **types.Parallel
 				}
 				sv.RepositoryType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3701,6 +3727,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3716,6 +3743,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3724,10 +3752,12 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "EncryptionKey":
 			if err := awsAwsjson11_deserializeDocumentEncryptionKey(&sv.EncryptionKey, value); err != nil {
 				return err
 			}
+
 		case "FailedRecordCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3740,6 +3770,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.FailedRecordCount = ptr.Int64(i64)
 			}
+
 		case "ImportedDataSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3752,6 +3783,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.ImportedDataSize = ptr.Int64(i64)
 			}
+
 		case "ImportedRecordCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3764,6 +3796,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.ImportedRecordCount = ptr.Int64(i64)
 			}
+
 		case "LastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3779,6 +3812,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 
 				}
 			}
+
 		case "LatestUpdateAttemptAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3794,6 +3828,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 
 				}
 			}
+
 		case "LatestUpdateAttemptStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3802,6 +3837,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.LatestUpdateAttemptStatus = types.ParallelDataStatus(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3810,6 +3846,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3818,10 +3855,12 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "ParallelDataConfig":
 			if err := awsAwsjson11_deserializeDocumentParallelDataConfig(&sv.ParallelDataConfig, value); err != nil {
 				return err
 			}
+
 		case "SkippedRecordCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3834,6 +3873,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.SkippedRecordCount = ptr.Int64(i64)
 			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3842,6 +3882,7 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.SourceLanguageCode = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3850,10 +3891,12 @@ func awsAwsjson11_deserializeDocumentParallelDataProperties(v **types.ParallelDa
 				}
 				sv.Status = types.ParallelDataStatus(jtv)
 			}
+
 		case "TargetLanguageCodes":
 			if err := awsAwsjson11_deserializeDocumentLanguageCodeStringList(&sv.TargetLanguageCodes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3963,6 +4006,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4002,6 +4046,7 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4041,6 +4086,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4049,6 +4095,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4158,6 +4205,7 @@ func awsAwsjson11_deserializeDocumentTerm(v **types.Term, value interface{}) err
 				}
 				sv.SourceText = ptr.String(jtv)
 			}
+
 		case "TargetText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4166,6 +4214,7 @@ func awsAwsjson11_deserializeDocumentTerm(v **types.Term, value interface{}) err
 				}
 				sv.TargetText = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4205,6 +4254,7 @@ func awsAwsjson11_deserializeDocumentTerminologyDataLocation(v **types.Terminolo
 				}
 				sv.Location = ptr.String(jtv)
 			}
+
 		case "RepositoryType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4213,6 +4263,7 @@ func awsAwsjson11_deserializeDocumentTerminologyDataLocation(v **types.Terminolo
 				}
 				sv.RepositoryType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4252,6 +4303,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4267,6 +4319,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4275,6 +4328,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Directionality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4283,10 +4337,12 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.Directionality = types.Directionality(jtv)
 			}
+
 		case "EncryptionKey":
 			if err := awsAwsjson11_deserializeDocumentEncryptionKey(&sv.EncryptionKey, value); err != nil {
 				return err
 			}
+
 		case "Format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4295,6 +4351,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.Format = types.TerminologyDataFormat(jtv)
 			}
+
 		case "LastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4310,6 +4367,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 
 				}
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4318,6 +4376,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4326,6 +4385,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SizeBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4338,6 +4398,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.SizeBytes = ptr.Int32(int32(i64))
 			}
+
 		case "SkippedTermCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4350,6 +4411,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.SkippedTermCount = ptr.Int32(int32(i64))
 			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4358,10 +4420,12 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.SourceLanguageCode = ptr.String(jtv)
 			}
+
 		case "TargetLanguageCodes":
 			if err := awsAwsjson11_deserializeDocumentLanguageCodeStringList(&sv.TargetLanguageCodes, value); err != nil {
 				return err
 			}
+
 		case "TermCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4374,6 +4438,7 @@ func awsAwsjson11_deserializeDocumentTerminologyProperties(v **types.Terminology
 				}
 				sv.TermCount = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4481,6 +4546,7 @@ func awsAwsjson11_deserializeDocumentTextSizeLimitExceededException(v **types.Te
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4520,6 +4586,7 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4535,14 +4602,17 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 
 				}
 			}
+
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "JobDetails":
 			if err := awsAwsjson11_deserializeDocumentJobDetails(&sv.JobDetails, value); err != nil {
 				return err
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4551,6 +4621,7 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4559,6 +4630,7 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				}
 				sv.JobName = ptr.String(jtv)
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4567,6 +4639,7 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4575,18 +4648,22 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "OutputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "ParallelDataNames":
 			if err := awsAwsjson11_deserializeDocumentResourceNameList(&sv.ParallelDataNames, value); err != nil {
 				return err
 			}
+
 		case "Settings":
 			if err := awsAwsjson11_deserializeDocumentTranslationSettings(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4595,6 +4672,7 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 				}
 				sv.SourceLanguageCode = ptr.String(jtv)
 			}
+
 		case "SubmittedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4610,14 +4688,17 @@ func awsAwsjson11_deserializeDocumentTextTranslationJobProperties(v **types.Text
 
 				}
 			}
+
 		case "TargetLanguageCodes":
 			if err := awsAwsjson11_deserializeDocumentTargetLanguageCodeStringList(&sv.TargetLanguageCodes, value); err != nil {
 				return err
 			}
+
 		case "TerminologyNames":
 			if err := awsAwsjson11_deserializeDocumentResourceNameList(&sv.TerminologyNames, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4691,6 +4772,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4730,6 +4812,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4738,6 +4821,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4781,6 +4865,7 @@ func awsAwsjson11_deserializeDocumentTranslatedDocument(v **types.TranslatedDocu
 				}
 				sv.Content = dv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4820,6 +4905,7 @@ func awsAwsjson11_deserializeDocumentTranslationSettings(v **types.TranslationSe
 				}
 				sv.Brevity = types.Brevity(jtv)
 			}
+
 		case "Formality":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4828,6 +4914,7 @@ func awsAwsjson11_deserializeDocumentTranslationSettings(v **types.TranslationSe
 				}
 				sv.Formality = types.Formality(jtv)
 			}
+
 		case "Profanity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4836,6 +4923,7 @@ func awsAwsjson11_deserializeDocumentTranslationSettings(v **types.TranslationSe
 				}
 				sv.Profanity = types.Profanity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4875,6 +4963,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedDisplayLanguageCodeException(v *
 				}
 				sv.DisplayLanguageCode = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4883,6 +4972,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedDisplayLanguageCodeException(v *
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4922,6 +5012,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedLanguagePairException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4930,6 +5021,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedLanguagePairException(v **types.
 				}
 				sv.SourceLanguageCode = ptr.String(jtv)
 			}
+
 		case "TargetLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4938,6 +5030,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedLanguagePairException(v **types.
 				}
 				sv.TargetLanguageCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4977,6 +5070,7 @@ func awsAwsjson11_deserializeOpDocumentCreateParallelDataOutput(v **CreateParall
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4985,6 +5079,7 @@ func awsAwsjson11_deserializeOpDocumentCreateParallelDataOutput(v **CreateParall
 				}
 				sv.Status = types.ParallelDataStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5024,6 +5119,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteParallelDataOutput(v **DeleteParall
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5032,6 +5128,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteParallelDataOutput(v **DeleteParall
 				}
 				sv.Status = types.ParallelDataStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5067,6 +5164,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeTextTranslationJobOutput(v **Desc
 			if err := awsAwsjson11_deserializeDocumentTextTranslationJobProperties(&sv.TextTranslationJobProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5102,18 +5200,22 @@ func awsAwsjson11_deserializeOpDocumentGetParallelDataOutput(v **GetParallelData
 			if err := awsAwsjson11_deserializeDocumentParallelDataDataLocation(&sv.AuxiliaryDataLocation, value); err != nil {
 				return err
 			}
+
 		case "DataLocation":
 			if err := awsAwsjson11_deserializeDocumentParallelDataDataLocation(&sv.DataLocation, value); err != nil {
 				return err
 			}
+
 		case "LatestUpdateAttemptAuxiliaryDataLocation":
 			if err := awsAwsjson11_deserializeDocumentParallelDataDataLocation(&sv.LatestUpdateAttemptAuxiliaryDataLocation, value); err != nil {
 				return err
 			}
+
 		case "ParallelDataProperties":
 			if err := awsAwsjson11_deserializeDocumentParallelDataProperties(&sv.ParallelDataProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5149,14 +5251,17 @@ func awsAwsjson11_deserializeOpDocumentGetTerminologyOutput(v **GetTerminologyOu
 			if err := awsAwsjson11_deserializeDocumentTerminologyDataLocation(&sv.AuxiliaryDataLocation, value); err != nil {
 				return err
 			}
+
 		case "TerminologyDataLocation":
 			if err := awsAwsjson11_deserializeDocumentTerminologyDataLocation(&sv.TerminologyDataLocation, value); err != nil {
 				return err
 			}
+
 		case "TerminologyProperties":
 			if err := awsAwsjson11_deserializeDocumentTerminologyProperties(&sv.TerminologyProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5192,10 +5297,12 @@ func awsAwsjson11_deserializeOpDocumentImportTerminologyOutput(v **ImportTermino
 			if err := awsAwsjson11_deserializeDocumentTerminologyDataLocation(&sv.AuxiliaryDataLocation, value); err != nil {
 				return err
 			}
+
 		case "TerminologyProperties":
 			if err := awsAwsjson11_deserializeDocumentTerminologyProperties(&sv.TerminologyProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5235,10 +5342,12 @@ func awsAwsjson11_deserializeOpDocumentListLanguagesOutput(v **ListLanguagesOutp
 				}
 				sv.DisplayLanguageCode = types.DisplayLanguageCode(jtv)
 			}
+
 		case "Languages":
 			if err := awsAwsjson11_deserializeDocumentLanguagesList(&sv.Languages, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5247,6 +5356,7 @@ func awsAwsjson11_deserializeOpDocumentListLanguagesOutput(v **ListLanguagesOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5286,10 +5396,12 @@ func awsAwsjson11_deserializeOpDocumentListParallelDataOutput(v **ListParallelDa
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ParallelDataPropertiesList":
 			if err := awsAwsjson11_deserializeDocumentParallelDataPropertiesList(&sv.ParallelDataPropertiesList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5325,6 +5437,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5364,10 +5477,12 @@ func awsAwsjson11_deserializeOpDocumentListTerminologiesOutput(v **ListTerminolo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TerminologyPropertiesList":
 			if err := awsAwsjson11_deserializeDocumentTerminologyPropertiesList(&sv.TerminologyPropertiesList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5407,10 +5522,12 @@ func awsAwsjson11_deserializeOpDocumentListTextTranslationJobsOutput(v **ListTex
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TextTranslationJobPropertiesList":
 			if err := awsAwsjson11_deserializeDocumentTextTranslationJobPropertiesList(&sv.TextTranslationJobPropertiesList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5450,6 +5567,7 @@ func awsAwsjson11_deserializeOpDocumentStartTextTranslationJobOutput(v **StartTe
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5458,6 +5576,7 @@ func awsAwsjson11_deserializeOpDocumentStartTextTranslationJobOutput(v **StartTe
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5497,6 +5616,7 @@ func awsAwsjson11_deserializeOpDocumentStopTextTranslationJobOutput(v **StopText
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5505,6 +5625,7 @@ func awsAwsjson11_deserializeOpDocumentStopTextTranslationJobOutput(v **StopText
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5571,10 +5692,12 @@ func awsAwsjson11_deserializeOpDocumentTranslateDocumentOutput(v **TranslateDocu
 			if err := awsAwsjson11_deserializeDocumentTranslationSettings(&sv.AppliedSettings, value); err != nil {
 				return err
 			}
+
 		case "AppliedTerminologies":
 			if err := awsAwsjson11_deserializeDocumentAppliedTerminologyList(&sv.AppliedTerminologies, value); err != nil {
 				return err
 			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5583,6 +5706,7 @@ func awsAwsjson11_deserializeOpDocumentTranslateDocumentOutput(v **TranslateDocu
 				}
 				sv.SourceLanguageCode = ptr.String(jtv)
 			}
+
 		case "TargetLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5591,10 +5715,12 @@ func awsAwsjson11_deserializeOpDocumentTranslateDocumentOutput(v **TranslateDocu
 				}
 				sv.TargetLanguageCode = ptr.String(jtv)
 			}
+
 		case "TranslatedDocument":
 			if err := awsAwsjson11_deserializeDocumentTranslatedDocument(&sv.TranslatedDocument, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5630,10 +5756,12 @@ func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutp
 			if err := awsAwsjson11_deserializeDocumentTranslationSettings(&sv.AppliedSettings, value); err != nil {
 				return err
 			}
+
 		case "AppliedTerminologies":
 			if err := awsAwsjson11_deserializeDocumentAppliedTerminologyList(&sv.AppliedTerminologies, value); err != nil {
 				return err
 			}
+
 		case "SourceLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5642,6 +5770,7 @@ func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutp
 				}
 				sv.SourceLanguageCode = ptr.String(jtv)
 			}
+
 		case "TargetLanguageCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5650,6 +5779,7 @@ func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutp
 				}
 				sv.TargetLanguageCode = ptr.String(jtv)
 			}
+
 		case "TranslatedText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5658,6 +5788,7 @@ func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutp
 				}
 				sv.TranslatedText = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5735,6 +5866,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateParallelDataOutput(v **UpdateParall
 
 				}
 			}
+
 		case "LatestUpdateAttemptStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5743,6 +5875,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateParallelDataOutput(v **UpdateParall
 				}
 				sv.LatestUpdateAttemptStatus = types.ParallelDataStatus(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5751,6 +5884,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateParallelDataOutput(v **UpdateParall
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5759,6 +5893,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateParallelDataOutput(v **UpdateParall
 				}
 				sv.Status = types.ParallelDataStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

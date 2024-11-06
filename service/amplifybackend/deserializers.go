@@ -185,6 +185,7 @@ func awsRestjson1_deserializeOpDocumentCloneBackendOutput(v **CloneBackendOutput
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -193,6 +194,7 @@ func awsRestjson1_deserializeOpDocumentCloneBackendOutput(v **CloneBackendOutput
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -201,6 +203,7 @@ func awsRestjson1_deserializeOpDocumentCloneBackendOutput(v **CloneBackendOutput
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -209,6 +212,7 @@ func awsRestjson1_deserializeOpDocumentCloneBackendOutput(v **CloneBackendOutput
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -217,6 +221,7 @@ func awsRestjson1_deserializeOpDocumentCloneBackendOutput(v **CloneBackendOutput
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -225,6 +230,7 @@ func awsRestjson1_deserializeOpDocumentCloneBackendOutput(v **CloneBackendOutput
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -389,6 +395,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendOutput(v **CreateBackendOutp
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -397,6 +404,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendOutput(v **CreateBackendOutp
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -405,6 +413,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendOutput(v **CreateBackendOutp
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -413,6 +422,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendOutput(v **CreateBackendOutp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -421,6 +431,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendOutput(v **CreateBackendOutp
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -429,6 +440,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendOutput(v **CreateBackendOutp
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -593,6 +605,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAPIOutput(v **CreateBackendA
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -601,6 +614,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAPIOutput(v **CreateBackendA
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -609,6 +623,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAPIOutput(v **CreateBackendA
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -617,6 +632,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAPIOutput(v **CreateBackendA
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -625,6 +641,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAPIOutput(v **CreateBackendA
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -633,6 +650,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAPIOutput(v **CreateBackendA
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -797,6 +815,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAuthOutput(v **CreateBackend
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -805,6 +824,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAuthOutput(v **CreateBackend
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -813,6 +833,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAuthOutput(v **CreateBackend
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -821,6 +842,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAuthOutput(v **CreateBackend
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -829,6 +851,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAuthOutput(v **CreateBackend
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -837,6 +860,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendAuthOutput(v **CreateBackend
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1001,6 +1025,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendConfigOutput(v **CreateBacke
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1009,6 +1034,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendConfigOutput(v **CreateBacke
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1017,6 +1043,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendConfigOutput(v **CreateBacke
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1025,6 +1052,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendConfigOutput(v **CreateBacke
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1189,6 +1217,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendStorageOutput(v **CreateBack
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1197,6 +1226,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendStorageOutput(v **CreateBack
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1205,6 +1235,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendStorageOutput(v **CreateBack
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1213,6 +1244,7 @@ func awsRestjson1_deserializeOpDocumentCreateBackendStorageOutput(v **CreateBack
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1377,6 +1409,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "challengeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1385,6 +1418,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.ChallengeCode = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1393,6 +1427,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "ttl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1401,6 +1436,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.Ttl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1565,6 +1601,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendOutput(v **DeleteBackendOutp
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1573,6 +1610,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendOutput(v **DeleteBackendOutp
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1581,6 +1619,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendOutput(v **DeleteBackendOutp
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1589,6 +1628,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendOutput(v **DeleteBackendOutp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1597,6 +1637,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendOutput(v **DeleteBackendOutp
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1605,6 +1646,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendOutput(v **DeleteBackendOutp
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1769,6 +1811,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAPIOutput(v **DeleteBackendA
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1777,6 +1820,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAPIOutput(v **DeleteBackendA
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1785,6 +1829,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAPIOutput(v **DeleteBackendA
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1793,6 +1838,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAPIOutput(v **DeleteBackendA
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1801,6 +1847,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAPIOutput(v **DeleteBackendA
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1809,6 +1856,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAPIOutput(v **DeleteBackendA
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1973,6 +2021,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAuthOutput(v **DeleteBackend
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1981,6 +2030,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAuthOutput(v **DeleteBackend
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1989,6 +2039,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAuthOutput(v **DeleteBackend
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1997,6 +2048,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAuthOutput(v **DeleteBackend
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2005,6 +2057,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAuthOutput(v **DeleteBackend
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2013,6 +2066,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendAuthOutput(v **DeleteBackend
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2177,6 +2231,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendStorageOutput(v **DeleteBack
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2185,6 +2240,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendStorageOutput(v **DeleteBack
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2193,6 +2249,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendStorageOutput(v **DeleteBack
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2201,6 +2258,7 @@ func awsRestjson1_deserializeOpDocumentDeleteBackendStorageOutput(v **DeleteBack
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2365,6 +2423,7 @@ func awsRestjson1_deserializeOpDocumentDeleteTokenOutput(v **DeleteTokenOutput, 
 				}
 				sv.IsSuccess = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2529,6 +2588,7 @@ func awsRestjson1_deserializeOpDocumentGenerateBackendAPIModelsOutput(v **Genera
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2537,6 +2597,7 @@ func awsRestjson1_deserializeOpDocumentGenerateBackendAPIModelsOutput(v **Genera
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2545,6 +2606,7 @@ func awsRestjson1_deserializeOpDocumentGenerateBackendAPIModelsOutput(v **Genera
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2553,6 +2615,7 @@ func awsRestjson1_deserializeOpDocumentGenerateBackendAPIModelsOutput(v **Genera
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2561,6 +2624,7 @@ func awsRestjson1_deserializeOpDocumentGenerateBackendAPIModelsOutput(v **Genera
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2569,6 +2633,7 @@ func awsRestjson1_deserializeOpDocumentGenerateBackendAPIModelsOutput(v **Genera
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2733,6 +2798,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 				}
 				sv.AmplifyFeatureFlags = ptr.String(jtv)
 			}
+
 		case "amplifyMetaConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2741,6 +2807,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 				}
 				sv.AmplifyMetaConfig = ptr.String(jtv)
 			}
+
 		case "appId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2749,6 +2816,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2757,10 +2825,12 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 				}
 				sv.AppName = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentList":
 			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.BackendEnvironmentList, value); err != nil {
 				return err
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2769,6 +2839,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2777,6 +2848,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendOutput(v **GetBackendOutput, va
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2941,6 +3013,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIOutput(v **GetBackendAPIOutp
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2949,6 +3022,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIOutput(v **GetBackendAPIOutp
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2957,10 +3031,12 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIOutput(v **GetBackendAPIOutp
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "resourceConfig":
 			if err := awsRestjson1_deserializeDocumentBackendAPIResourceConfig(&sv.ResourceConfig, value); err != nil {
 				return err
 			}
+
 		case "resourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2969,6 +3045,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIOutput(v **GetBackendAPIOutp
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3133,6 +3210,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIModelsOutput(v **GetBackendA
 				}
 				sv.ModelIntrospectionSchema = ptr.String(jtv)
 			}
+
 		case "models":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3141,6 +3219,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIModelsOutput(v **GetBackendA
 				}
 				sv.Models = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3149,6 +3228,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIModelsOutput(v **GetBackendA
 				}
 				sv.Status = types.Status(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3313,6 +3393,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAuthOutput(v **GetBackendAuthOu
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3321,6 +3402,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAuthOutput(v **GetBackendAuthOu
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3329,10 +3411,12 @@ func awsRestjson1_deserializeOpDocumentGetBackendAuthOutput(v **GetBackendAuthOu
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "resourceConfig":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthResourceConfig(&sv.ResourceConfig, value); err != nil {
 				return err
 			}
+
 		case "resourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3341,6 +3425,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendAuthOutput(v **GetBackendAuthOu
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3505,6 +3590,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3513,6 +3599,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "createTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3521,6 +3608,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3529,6 +3617,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3537,6 +3626,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3545,6 +3635,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3553,6 +3644,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3561,6 +3653,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendJobOutput(v **GetBackendJobOutp
 				}
 				sv.UpdateTime = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3725,6 +3818,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendStorageOutput(v **GetBackendSto
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3733,10 +3827,12 @@ func awsRestjson1_deserializeOpDocumentGetBackendStorageOutput(v **GetBackendSto
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "resourceConfig":
 			if err := awsRestjson1_deserializeDocumentGetBackendStorageResourceConfig(&sv.ResourceConfig, value); err != nil {
 				return err
 			}
+
 		case "resourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3745,6 +3841,7 @@ func awsRestjson1_deserializeOpDocumentGetBackendStorageOutput(v **GetBackendSto
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3909,6 +4006,7 @@ func awsRestjson1_deserializeOpDocumentGetTokenOutput(v **GetTokenOutput, value 
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "challengeCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3917,6 +4015,7 @@ func awsRestjson1_deserializeOpDocumentGetTokenOutput(v **GetTokenOutput, value 
 				}
 				sv.ChallengeCode = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3925,6 +4024,7 @@ func awsRestjson1_deserializeOpDocumentGetTokenOutput(v **GetTokenOutput, value 
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "ttl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3933,6 +4033,7 @@ func awsRestjson1_deserializeOpDocumentGetTokenOutput(v **GetTokenOutput, value 
 				}
 				sv.Ttl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4097,6 +4198,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendAuthOutput(v **ImportBackend
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4105,6 +4207,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendAuthOutput(v **ImportBackend
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4113,6 +4216,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendAuthOutput(v **ImportBackend
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4121,6 +4225,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendAuthOutput(v **ImportBackend
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4129,6 +4234,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendAuthOutput(v **ImportBackend
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4137,6 +4243,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendAuthOutput(v **ImportBackend
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4301,6 +4408,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendStorageOutput(v **ImportBack
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4309,6 +4417,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendStorageOutput(v **ImportBack
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4317,6 +4426,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendStorageOutput(v **ImportBack
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4325,6 +4435,7 @@ func awsRestjson1_deserializeOpDocumentImportBackendStorageOutput(v **ImportBack
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4485,6 +4596,7 @@ func awsRestjson1_deserializeOpDocumentListBackendJobsOutput(v **ListBackendJobs
 			if err := awsRestjson1_deserializeDocumentListOfBackendJobRespObj(&sv.Jobs, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4493,6 +4605,7 @@ func awsRestjson1_deserializeOpDocumentListBackendJobsOutput(v **ListBackendJobs
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4653,6 +4766,7 @@ func awsRestjson1_deserializeOpDocumentListS3BucketsOutput(v **ListS3BucketsOutp
 			if err := awsRestjson1_deserializeDocumentListOfS3BucketInfo(&sv.Buckets, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4661,6 +4775,7 @@ func awsRestjson1_deserializeOpDocumentListS3BucketsOutput(v **ListS3BucketsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4825,6 +4940,7 @@ func awsRestjson1_deserializeOpDocumentRemoveAllBackendsOutput(v **RemoveAllBack
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4833,6 +4949,7 @@ func awsRestjson1_deserializeOpDocumentRemoveAllBackendsOutput(v **RemoveAllBack
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4841,6 +4958,7 @@ func awsRestjson1_deserializeOpDocumentRemoveAllBackendsOutput(v **RemoveAllBack
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4849,6 +4967,7 @@ func awsRestjson1_deserializeOpDocumentRemoveAllBackendsOutput(v **RemoveAllBack
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4857,6 +4976,7 @@ func awsRestjson1_deserializeOpDocumentRemoveAllBackendsOutput(v **RemoveAllBack
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5021,6 +5141,7 @@ func awsRestjson1_deserializeOpDocumentRemoveBackendConfigOutput(v **RemoveBacke
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5185,6 +5306,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAPIOutput(v **UpdateBackendA
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5193,6 +5315,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAPIOutput(v **UpdateBackendA
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5201,6 +5324,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAPIOutput(v **UpdateBackendA
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5209,6 +5333,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAPIOutput(v **UpdateBackendA
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5217,6 +5342,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAPIOutput(v **UpdateBackendA
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5225,6 +5351,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAPIOutput(v **UpdateBackendA
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5389,6 +5516,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAuthOutput(v **UpdateBackend
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5397,6 +5525,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAuthOutput(v **UpdateBackend
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5405,6 +5534,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAuthOutput(v **UpdateBackend
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5413,6 +5543,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAuthOutput(v **UpdateBackend
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5421,6 +5552,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAuthOutput(v **UpdateBackend
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5429,6 +5561,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendAuthOutput(v **UpdateBackend
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5593,6 +5726,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendConfigOutput(v **UpdateBacke
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendManagerAppId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5601,6 +5735,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendConfigOutput(v **UpdateBacke
 				}
 				sv.BackendManagerAppId = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5609,10 +5744,12 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendConfigOutput(v **UpdateBacke
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "loginAuthConfig":
 			if err := awsRestjson1_deserializeDocumentLoginAuthConfigReqObj(&sv.LoginAuthConfig, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5777,6 +5914,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5785,6 +5923,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "createTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5793,6 +5932,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5801,6 +5941,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5809,6 +5950,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5817,6 +5959,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5825,6 +5968,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5833,6 +5977,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendJobOutput(v **UpdateBackendJ
 				}
 				sv.UpdateTime = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5997,6 +6142,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendStorageOutput(v **UpdateBack
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6005,6 +6151,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendStorageOutput(v **UpdateBack
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6013,6 +6160,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendStorageOutput(v **UpdateBack
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6021,6 +6169,7 @@ func awsRestjson1_deserializeOpDocumentUpdateBackendStorageOutput(v **UpdateBack
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6204,6 +6353,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.CognitoUserPoolId = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6212,6 +6362,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "expirationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6245,6 +6396,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 
 				}
 			}
+
 		case "openIDAuthTTL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6253,6 +6405,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.OpenIDAuthTTL = ptr.String(jtv)
 			}
+
 		case "openIDClientId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6261,6 +6414,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.OpenIDClientId = ptr.String(jtv)
 			}
+
 		case "openIDIatTTL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6269,6 +6423,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.OpenIDIatTTL = ptr.String(jtv)
 			}
+
 		case "openIDIssueURL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6277,6 +6432,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.OpenIDIssueURL = ptr.String(jtv)
 			}
+
 		case "openIDProviderName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6285,6 +6441,7 @@ func awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(v **types.Bac
 				}
 				sv.OpenIDProviderName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6324,10 +6481,12 @@ func awsRestjson1_deserializeDocumentBackendAPIAuthType(v **types.BackendAPIAuth
 				}
 				sv.Mode = types.Mode(jtv)
 			}
+
 		case "settings":
 			if err := awsRestjson1_deserializeDocumentBackendAPIAppSyncAuthSettings(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6367,6 +6526,7 @@ func awsRestjson1_deserializeDocumentBackendAPIConflictResolution(v **types.Back
 				}
 				sv.ResolutionStrategy = types.ResolutionStrategy(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6402,6 +6562,7 @@ func awsRestjson1_deserializeDocumentBackendAPIResourceConfig(v **types.BackendA
 			if err := awsRestjson1_deserializeDocumentListOfBackendAPIAuthType(&sv.AdditionalAuthTypes, value); err != nil {
 				return err
 			}
+
 		case "apiName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6410,14 +6571,17 @@ func awsRestjson1_deserializeDocumentBackendAPIResourceConfig(v **types.BackendA
 				}
 				sv.ApiName = ptr.String(jtv)
 			}
+
 		case "conflictResolution":
 			if err := awsRestjson1_deserializeDocumentBackendAPIConflictResolution(&sv.ConflictResolution, value); err != nil {
 				return err
 			}
+
 		case "defaultAuthType":
 			if err := awsRestjson1_deserializeDocumentBackendAPIAuthType(&sv.DefaultAuthType, value); err != nil {
 				return err
 			}
+
 		case "service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6426,6 +6590,7 @@ func awsRestjson1_deserializeDocumentBackendAPIResourceConfig(v **types.BackendA
 				}
 				sv.Service = ptr.String(jtv)
 			}
+
 		case "transformSchema":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6434,6 +6599,7 @@ func awsRestjson1_deserializeDocumentBackendAPIResourceConfig(v **types.BackendA
 				}
 				sv.TransformSchema = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6473,6 +6639,7 @@ func awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(v **types.Ba
 				}
 				sv.ClientId = ptr.String(jtv)
 			}
+
 		case "key_id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6481,6 +6648,7 @@ func awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(v **types.Ba
 				}
 				sv.KeyId = ptr.String(jtv)
 			}
+
 		case "private_key":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6489,6 +6657,7 @@ func awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(v **types.Ba
 				}
 				sv.PrivateKey = ptr.String(jtv)
 			}
+
 		case "team_id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6497,6 +6666,7 @@ func awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(v **types.Ba
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6536,6 +6706,7 @@ func awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(v **types.B
 				}
 				sv.ClientId = ptr.String(jtv)
 			}
+
 		case "client_secret":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6544,6 +6715,7 @@ func awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(v **types.B
 				}
 				sv.ClientSecret = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6583,6 +6755,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "backendEnvironmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6591,6 +6764,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.BackendEnvironmentName = ptr.String(jtv)
 			}
+
 		case "createTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6599,6 +6773,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6607,6 +6782,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.Error = ptr.String(jtv)
 			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6615,6 +6791,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "operation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6623,6 +6800,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.Operation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6631,6 +6809,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6639,6 +6818,7 @@ func awsRestjson1_deserializeDocumentBackendJobRespObj(v **types.BackendJobRespO
 				}
 				sv.UpdateTime = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6674,10 +6854,12 @@ func awsRestjson1_deserializeDocumentBackendStoragePermissions(v **types.Backend
 			if err := awsRestjson1_deserializeDocumentListOfAuthenticatedElement(&sv.Authenticated, value); err != nil {
 				return err
 			}
+
 		case "unAuthenticated":
 			if err := awsRestjson1_deserializeDocumentListOfUnAuthenticatedElement(&sv.UnAuthenticated, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6717,6 +6899,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6756,14 +6939,17 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthForgotPasswordConfig(v **t
 				}
 				sv.DeliveryMethod = types.DeliveryMethod(jtv)
 			}
+
 		case "emailSettings":
 			if err := awsRestjson1_deserializeDocumentEmailSettings(&sv.EmailSettings, value); err != nil {
 				return err
 			}
+
 		case "smsSettings":
 			if err := awsRestjson1_deserializeDocumentSmsSettings(&sv.SmsSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6803,6 +6989,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthIdentityPoolConfig(v **typ
 				}
 				sv.IdentityPoolName = ptr.String(jtv)
 			}
+
 		case "unauthenticatedLogin":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6811,6 +6998,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthIdentityPoolConfig(v **typ
 				}
 				sv.UnauthenticatedLogin = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6850,10 +7038,12 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthMFAConfig(v **types.Create
 				}
 				sv.MFAMode = types.MFAMode(jtv)
 			}
+
 		case "settings":
 			if err := awsRestjson1_deserializeDocumentSettings(&sv.Settings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6893,6 +7083,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthOAuthConfig(v **types.Crea
 				}
 				sv.DomainPrefix = ptr.String(jtv)
 			}
+
 		case "oAuthGrantType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6901,22 +7092,27 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthOAuthConfig(v **types.Crea
 				}
 				sv.OAuthGrantType = types.OAuthGrantType(jtv)
 			}
+
 		case "oAuthScopes":
 			if err := awsRestjson1_deserializeDocumentListOfOAuthScopesElement(&sv.OAuthScopes, value); err != nil {
 				return err
 			}
+
 		case "redirectSignInURIs":
 			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.RedirectSignInURIs, value); err != nil {
 				return err
 			}
+
 		case "redirectSignOutURIs":
 			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.RedirectSignOutURIs, value); err != nil {
 				return err
 			}
+
 		case "socialProviderSettings":
 			if err := awsRestjson1_deserializeDocumentSocialProviderSettings(&sv.SocialProviderSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6952,6 +7148,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthPasswordPolicyConfig(v **t
 			if err := awsRestjson1_deserializeDocumentListOfAdditionalConstraintsElement(&sv.AdditionalConstraints, value); err != nil {
 				return err
 			}
+
 		case "minimumLength":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6985,6 +7182,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthPasswordPolicyConfig(v **t
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7024,10 +7222,12 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthResourceConfig(v **types.C
 				}
 				sv.AuthResources = types.AuthResources(jtv)
 			}
+
 		case "identityPoolConfigs":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthIdentityPoolConfig(&sv.IdentityPoolConfigs, value); err != nil {
 				return err
 			}
+
 		case "service":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7036,10 +7236,12 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthResourceConfig(v **types.C
 				}
 				sv.Service = types.Service(jtv)
 			}
+
 		case "userPoolConfigs":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthUserPoolConfig(&sv.UserPoolConfigs, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7075,22 +7277,27 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthUserPoolConfig(v **types.C
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthForgotPasswordConfig(&sv.ForgotPassword, value); err != nil {
 				return err
 			}
+
 		case "mfa":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthMFAConfig(&sv.Mfa, value); err != nil {
 				return err
 			}
+
 		case "oAuth":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthOAuthConfig(&sv.OAuth, value); err != nil {
 				return err
 			}
+
 		case "passwordPolicy":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthPasswordPolicyConfig(&sv.PasswordPolicy, value); err != nil {
 				return err
 			}
+
 		case "requiredSignUpAttributes":
 			if err := awsRestjson1_deserializeDocumentListOfRequiredSignUpAttributesElement(&sv.RequiredSignUpAttributes, value); err != nil {
 				return err
 			}
+
 		case "signInMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7099,6 +7306,7 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthUserPoolConfig(v **types.C
 				}
 				sv.SignInMethod = types.SignInMethod(jtv)
 			}
+
 		case "userPoolName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7107,10 +7315,12 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthUserPoolConfig(v **types.C
 				}
 				sv.UserPoolName = ptr.String(jtv)
 			}
+
 		case "verificationMessage":
 			if err := awsRestjson1_deserializeDocumentCreateBackendAuthVerificationMessageConfig(&sv.VerificationMessage, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7150,14 +7360,17 @@ func awsRestjson1_deserializeDocumentCreateBackendAuthVerificationMessageConfig(
 				}
 				sv.DeliveryMethod = types.DeliveryMethod(jtv)
 			}
+
 		case "emailSettings":
 			if err := awsRestjson1_deserializeDocumentEmailSettings(&sv.EmailSettings, value); err != nil {
 				return err
 			}
+
 		case "smsSettings":
 			if err := awsRestjson1_deserializeDocumentSmsSettings(&sv.SmsSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7197,6 +7410,7 @@ func awsRestjson1_deserializeDocumentEmailSettings(v **types.EmailSettings, valu
 				}
 				sv.EmailMessage = ptr.String(jtv)
 			}
+
 		case "emailSubject":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7205,6 +7419,7 @@ func awsRestjson1_deserializeDocumentEmailSettings(v **types.EmailSettings, valu
 				}
 				sv.EmailSubject = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7244,6 +7459,7 @@ func awsRestjson1_deserializeDocumentGatewayTimeoutException(v **types.GatewayTi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7283,6 +7499,7 @@ func awsRestjson1_deserializeDocumentGetBackendStorageResourceConfig(v **types.G
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
+
 		case "imported":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7291,10 +7508,12 @@ func awsRestjson1_deserializeDocumentGetBackendStorageResourceConfig(v **types.G
 				}
 				sv.Imported = ptr.Bool(jtv)
 			}
+
 		case "permissions":
 			if err := awsRestjson1_deserializeDocumentBackendStoragePermissions(&sv.Permissions, value); err != nil {
 				return err
 			}
+
 		case "serviceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7303,6 +7522,7 @@ func awsRestjson1_deserializeDocumentGetBackendStorageResourceConfig(v **types.G
 				}
 				sv.ServiceName = types.ServiceName(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7696,6 +7916,7 @@ func awsRestjson1_deserializeDocumentLoginAuthConfigReqObj(v **types.LoginAuthCo
 				}
 				sv.AwsCognitoIdentityPoolId = ptr.String(jtv)
 			}
+
 		case "aws_cognito_region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7704,6 +7925,7 @@ func awsRestjson1_deserializeDocumentLoginAuthConfigReqObj(v **types.LoginAuthCo
 				}
 				sv.AwsCognitoRegion = ptr.String(jtv)
 			}
+
 		case "aws_user_pools_id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7712,6 +7934,7 @@ func awsRestjson1_deserializeDocumentLoginAuthConfigReqObj(v **types.LoginAuthCo
 				}
 				sv.AwsUserPoolsId = ptr.String(jtv)
 			}
+
 		case "aws_user_pools_web_client_id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7720,6 +7943,7 @@ func awsRestjson1_deserializeDocumentLoginAuthConfigReqObj(v **types.LoginAuthCo
 				}
 				sv.AwsUserPoolsWebClientId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7759,6 +7983,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7767,6 +7992,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7806,6 +8032,7 @@ func awsRestjson1_deserializeDocumentS3BucketInfo(v **types.S3BucketInfo, value 
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7814,6 +8041,7 @@ func awsRestjson1_deserializeDocumentS3BucketInfo(v **types.S3BucketInfo, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7849,6 +8077,7 @@ func awsRestjson1_deserializeDocumentSettings(v **types.Settings, value interfac
 			if err := awsRestjson1_deserializeDocumentListOfMfaTypesElement(&sv.MfaTypes, value); err != nil {
 				return err
 			}
+
 		case "smsMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7857,6 +8086,7 @@ func awsRestjson1_deserializeDocumentSettings(v **types.Settings, value interfac
 				}
 				sv.SmsMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7896,6 +8126,7 @@ func awsRestjson1_deserializeDocumentSmsSettings(v **types.SmsSettings, value in
 				}
 				sv.SmsMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7931,18 +8162,22 @@ func awsRestjson1_deserializeDocumentSocialProviderSettings(v **types.SocialProv
 			if err := awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(&sv.Facebook, value); err != nil {
 				return err
 			}
+
 		case "Google":
 			if err := awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(&sv.Google, value); err != nil {
 				return err
 			}
+
 		case "LoginWithAmazon":
 			if err := awsRestjson1_deserializeDocumentBackendAuthSocialProviderConfig(&sv.LoginWithAmazon, value); err != nil {
 				return err
 			}
+
 		case "SignInWithApple":
 			if err := awsRestjson1_deserializeDocumentBackendAuthAppleProviderConfig(&sv.SignInWithApple, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7982,6 +8217,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.LimitType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7990,6 +8226,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

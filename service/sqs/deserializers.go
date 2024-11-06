@@ -4020,6 +4020,7 @@ func awsAwsjson10_deserializeDocumentBatchEntryIdsNotDistinct(v **types.BatchEnt
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4059,6 +4060,7 @@ func awsAwsjson10_deserializeDocumentBatchRequestTooLong(v **types.BatchRequestT
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4098,6 +4100,7 @@ func awsAwsjson10_deserializeDocumentBatchResultErrorEntry(v **types.BatchResult
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4106,6 +4109,7 @@ func awsAwsjson10_deserializeDocumentBatchResultErrorEntry(v **types.BatchResult
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4114,6 +4118,7 @@ func awsAwsjson10_deserializeDocumentBatchResultErrorEntry(v **types.BatchResult
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "SenderFault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4122,6 +4127,7 @@ func awsAwsjson10_deserializeDocumentBatchResultErrorEntry(v **types.BatchResult
 				}
 				sv.SenderFault = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4235,6 +4241,7 @@ func awsAwsjson10_deserializeDocumentChangeMessageVisibilityBatchResultEntry(v *
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4308,6 +4315,7 @@ func awsAwsjson10_deserializeDocumentDeleteMessageBatchResultEntry(v **types.Del
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4381,6 +4389,7 @@ func awsAwsjson10_deserializeDocumentEmptyBatchRequest(v **types.EmptyBatchReque
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4420,6 +4429,7 @@ func awsAwsjson10_deserializeDocumentInvalidAddress(v **types.InvalidAddress, va
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4459,6 +4469,7 @@ func awsAwsjson10_deserializeDocumentInvalidAttributeName(v **types.InvalidAttri
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4498,6 +4509,7 @@ func awsAwsjson10_deserializeDocumentInvalidAttributeValue(v **types.InvalidAttr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4537,6 +4549,7 @@ func awsAwsjson10_deserializeDocumentInvalidBatchEntryId(v **types.InvalidBatchE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4607,6 +4620,7 @@ func awsAwsjson10_deserializeDocumentInvalidMessageContents(v **types.InvalidMes
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4646,6 +4660,7 @@ func awsAwsjson10_deserializeDocumentInvalidSecurity(v **types.InvalidSecurity, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4685,6 +4700,7 @@ func awsAwsjson10_deserializeDocumentKmsAccessDenied(v **types.KmsAccessDenied, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4724,6 +4740,7 @@ func awsAwsjson10_deserializeDocumentKmsDisabled(v **types.KmsDisabled, value in
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4763,6 +4780,7 @@ func awsAwsjson10_deserializeDocumentKmsInvalidKeyUsage(v **types.KmsInvalidKeyU
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4802,6 +4820,7 @@ func awsAwsjson10_deserializeDocumentKmsInvalidState(v **types.KmsInvalidState, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4841,6 +4860,7 @@ func awsAwsjson10_deserializeDocumentKmsNotFound(v **types.KmsNotFound, value in
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4880,6 +4900,7 @@ func awsAwsjson10_deserializeDocumentKmsOptInRequired(v **types.KmsOptInRequired
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4919,6 +4940,7 @@ func awsAwsjson10_deserializeDocumentKmsThrottled(v **types.KmsThrottled, value 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4962,6 +4984,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.ApproximateNumberOfMessagesMoved = i64
 			}
+
 		case "ApproximateNumberOfMessagesToMove":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4974,6 +4997,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.ApproximateNumberOfMessagesToMove = ptr.Int64(i64)
 			}
+
 		case "DestinationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4982,6 +5006,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.DestinationArn = ptr.String(jtv)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4990,6 +5015,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "MaxNumberOfMessagesPerSecond":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5002,6 +5028,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.MaxNumberOfMessagesPerSecond = ptr.Int32(int32(i64))
 			}
+
 		case "SourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5010,6 +5037,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
+
 		case "StartedTimestamp":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5022,6 +5050,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.StartedTimestamp = i64
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5030,6 +5059,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "TaskHandle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5038,6 +5068,7 @@ func awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntry(v **types.L
 				}
 				sv.TaskHandle = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5107,6 +5138,7 @@ func awsAwsjson10_deserializeDocumentMessage(v **types.Message, value interface{
 			if err := awsAwsjson10_deserializeDocumentMessageSystemAttributeMap(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "Body":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5115,6 +5147,7 @@ func awsAwsjson10_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.Body = ptr.String(jtv)
 			}
+
 		case "MD5OfBody":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5123,6 +5156,7 @@ func awsAwsjson10_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.MD5OfBody = ptr.String(jtv)
 			}
+
 		case "MD5OfMessageAttributes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5131,10 +5165,12 @@ func awsAwsjson10_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.MD5OfMessageAttributes = ptr.String(jtv)
 			}
+
 		case "MessageAttributes":
 			if err := awsAwsjson10_deserializeDocumentMessageBodyAttributeMap(&sv.MessageAttributes, value); err != nil {
 				return err
 			}
+
 		case "MessageId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5143,6 +5179,7 @@ func awsAwsjson10_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.MessageId = ptr.String(jtv)
 			}
+
 		case "ReceiptHandle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5151,6 +5188,7 @@ func awsAwsjson10_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.ReceiptHandle = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5186,6 +5224,7 @@ func awsAwsjson10_deserializeDocumentMessageAttributeValue(v **types.MessageAttr
 			if err := awsAwsjson10_deserializeDocumentBinaryList(&sv.BinaryListValues, value); err != nil {
 				return err
 			}
+
 		case "BinaryValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5198,6 +5237,7 @@ func awsAwsjson10_deserializeDocumentMessageAttributeValue(v **types.MessageAttr
 				}
 				sv.BinaryValue = dv
 			}
+
 		case "DataType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5206,10 +5246,12 @@ func awsAwsjson10_deserializeDocumentMessageAttributeValue(v **types.MessageAttr
 				}
 				sv.DataType = ptr.String(jtv)
 			}
+
 		case "StringListValues":
 			if err := awsAwsjson10_deserializeDocumentStringList(&sv.StringListValues, value); err != nil {
 				return err
 			}
+
 		case "StringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5218,6 +5260,7 @@ func awsAwsjson10_deserializeDocumentMessageAttributeValue(v **types.MessageAttr
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5393,6 +5436,7 @@ func awsAwsjson10_deserializeDocumentOverLimit(v **types.OverLimit, value interf
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5432,6 +5476,7 @@ func awsAwsjson10_deserializeDocumentPurgeQueueInProgress(v **types.PurgeQueueIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5507,6 +5552,7 @@ func awsAwsjson10_deserializeDocumentQueueDeletedRecently(v **types.QueueDeleted
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5546,6 +5592,7 @@ func awsAwsjson10_deserializeDocumentQueueDoesNotExist(v **types.QueueDoesNotExi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5585,6 +5632,7 @@ func awsAwsjson10_deserializeDocumentQueueNameExists(v **types.QueueNameExists, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5660,6 +5708,7 @@ func awsAwsjson10_deserializeDocumentReceiptHandleIsInvalid(v **types.ReceiptHan
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5699,6 +5748,7 @@ func awsAwsjson10_deserializeDocumentRequestThrottled(v **types.RequestThrottled
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5738,6 +5788,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5777,6 +5828,7 @@ func awsAwsjson10_deserializeDocumentSendMessageBatchResultEntry(v **types.SendM
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "MD5OfMessageAttributes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5785,6 +5837,7 @@ func awsAwsjson10_deserializeDocumentSendMessageBatchResultEntry(v **types.SendM
 				}
 				sv.MD5OfMessageAttributes = ptr.String(jtv)
 			}
+
 		case "MD5OfMessageBody":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5793,6 +5846,7 @@ func awsAwsjson10_deserializeDocumentSendMessageBatchResultEntry(v **types.SendM
 				}
 				sv.MD5OfMessageBody = ptr.String(jtv)
 			}
+
 		case "MD5OfMessageSystemAttributes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5801,6 +5855,7 @@ func awsAwsjson10_deserializeDocumentSendMessageBatchResultEntry(v **types.SendM
 				}
 				sv.MD5OfMessageSystemAttributes = ptr.String(jtv)
 			}
+
 		case "MessageId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5809,6 +5864,7 @@ func awsAwsjson10_deserializeDocumentSendMessageBatchResultEntry(v **types.SendM
 				}
 				sv.MessageId = ptr.String(jtv)
 			}
+
 		case "SequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5817,6 +5873,7 @@ func awsAwsjson10_deserializeDocumentSendMessageBatchResultEntry(v **types.SendM
 				}
 				sv.SequenceNumber = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5962,6 +6019,7 @@ func awsAwsjson10_deserializeDocumentTooManyEntriesInBatchRequest(v **types.TooM
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6001,6 +6059,7 @@ func awsAwsjson10_deserializeDocumentUnsupportedOperation(v **types.UnsupportedO
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6044,6 +6103,7 @@ func awsAwsjson10_deserializeOpDocumentCancelMessageMoveTaskOutput(v **CancelMes
 				}
 				sv.ApproximateNumberOfMessagesMoved = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6079,10 +6139,12 @@ func awsAwsjson10_deserializeOpDocumentChangeMessageVisibilityBatchOutput(v **Ch
 			if err := awsAwsjson10_deserializeDocumentBatchResultErrorEntryList(&sv.Failed, value); err != nil {
 				return err
 			}
+
 		case "Successful":
 			if err := awsAwsjson10_deserializeDocumentChangeMessageVisibilityBatchResultEntryList(&sv.Successful, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6122,6 +6184,7 @@ func awsAwsjson10_deserializeOpDocumentCreateQueueOutput(v **CreateQueueOutput, 
 				}
 				sv.QueueUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6157,10 +6220,12 @@ func awsAwsjson10_deserializeOpDocumentDeleteMessageBatchOutput(v **DeleteMessag
 			if err := awsAwsjson10_deserializeDocumentBatchResultErrorEntryList(&sv.Failed, value); err != nil {
 				return err
 			}
+
 		case "Successful":
 			if err := awsAwsjson10_deserializeDocumentDeleteMessageBatchResultEntryList(&sv.Successful, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6196,6 +6261,7 @@ func awsAwsjson10_deserializeOpDocumentGetQueueAttributesOutput(v **GetQueueAttr
 			if err := awsAwsjson10_deserializeDocumentQueueAttributeMap(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6235,6 +6301,7 @@ func awsAwsjson10_deserializeOpDocumentGetQueueUrlOutput(v **GetQueueUrlOutput, 
 				}
 				sv.QueueUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6274,10 +6341,12 @@ func awsAwsjson10_deserializeOpDocumentListDeadLetterSourceQueuesOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "queueUrls":
 			if err := awsAwsjson10_deserializeDocumentQueueUrlList(&sv.QueueUrls, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6313,6 +6382,7 @@ func awsAwsjson10_deserializeOpDocumentListMessageMoveTasksOutput(v **ListMessag
 			if err := awsAwsjson10_deserializeDocumentListMessageMoveTasksResultEntryList(&sv.Results, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6352,10 +6422,12 @@ func awsAwsjson10_deserializeOpDocumentListQueuesOutput(v **ListQueuesOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "QueueUrls":
 			if err := awsAwsjson10_deserializeDocumentQueueUrlList(&sv.QueueUrls, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6391,6 +6463,7 @@ func awsAwsjson10_deserializeOpDocumentListQueueTagsOutput(v **ListQueueTagsOutp
 			if err := awsAwsjson10_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6426,6 +6499,7 @@ func awsAwsjson10_deserializeOpDocumentReceiveMessageOutput(v **ReceiveMessageOu
 			if err := awsAwsjson10_deserializeDocumentMessageList(&sv.Messages, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6461,10 +6535,12 @@ func awsAwsjson10_deserializeOpDocumentSendMessageBatchOutput(v **SendMessageBat
 			if err := awsAwsjson10_deserializeDocumentBatchResultErrorEntryList(&sv.Failed, value); err != nil {
 				return err
 			}
+
 		case "Successful":
 			if err := awsAwsjson10_deserializeDocumentSendMessageBatchResultEntryList(&sv.Successful, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6504,6 +6580,7 @@ func awsAwsjson10_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				}
 				sv.MD5OfMessageAttributes = ptr.String(jtv)
 			}
+
 		case "MD5OfMessageBody":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6512,6 +6589,7 @@ func awsAwsjson10_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				}
 				sv.MD5OfMessageBody = ptr.String(jtv)
 			}
+
 		case "MD5OfMessageSystemAttributes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6520,6 +6598,7 @@ func awsAwsjson10_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				}
 				sv.MD5OfMessageSystemAttributes = ptr.String(jtv)
 			}
+
 		case "MessageId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6528,6 +6607,7 @@ func awsAwsjson10_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				}
 				sv.MessageId = ptr.String(jtv)
 			}
+
 		case "SequenceNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6536,6 +6616,7 @@ func awsAwsjson10_deserializeOpDocumentSendMessageOutput(v **SendMessageOutput, 
 				}
 				sv.SequenceNumber = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6575,6 +6656,7 @@ func awsAwsjson10_deserializeOpDocumentStartMessageMoveTaskOutput(v **StartMessa
 				}
 				sv.TaskHandle = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

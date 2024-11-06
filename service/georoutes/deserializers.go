@@ -202,6 +202,7 @@ func awsRestjson1_deserializeOpDocumentCalculateIsolinesOutput(v **CalculateIsol
 				}
 				sv.ArrivalTime = ptr.String(jtv)
 			}
+
 		case "DepartureTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -210,6 +211,7 @@ func awsRestjson1_deserializeOpDocumentCalculateIsolinesOutput(v **CalculateIsol
 				}
 				sv.DepartureTime = ptr.String(jtv)
 			}
+
 		case "IsolineGeometryFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -218,18 +220,22 @@ func awsRestjson1_deserializeOpDocumentCalculateIsolinesOutput(v **CalculateIsol
 				}
 				sv.IsolineGeometryFormat = types.GeometryFormat(jtv)
 			}
+
 		case "Isolines":
 			if err := awsRestjson1_deserializeDocumentIsolineList(&sv.Isolines, value); err != nil {
 				return err
 			}
+
 		case "SnappedDestination":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.SnappedDestination, value); err != nil {
 				return err
 			}
+
 		case "SnappedOrigin":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.SnappedOrigin, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -415,14 +421,17 @@ func awsRestjson1_deserializeOpDocumentCalculateRouteMatrixOutput(v **CalculateR
 				}
 				sv.ErrorCount = ptr.Int32(int32(i64))
 			}
+
 		case "RouteMatrix":
 			if err := awsRestjson1_deserializeDocumentRouteMatrix(&sv.RouteMatrix, value); err != nil {
 				return err
 			}
+
 		case "RoutingBoundary":
 			if err := awsRestjson1_deserializeDocumentRouteMatrixBoundary(&sv.RoutingBoundary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -604,14 +613,17 @@ func awsRestjson1_deserializeOpDocumentCalculateRoutesOutput(v **CalculateRoutes
 				}
 				sv.LegGeometryFormat = types.GeometryFormat(jtv)
 			}
+
 		case "Notices":
 			if err := awsRestjson1_deserializeDocumentRouteResponseNoticeList(&sv.Notices, value); err != nil {
 				return err
 			}
+
 		case "Routes":
 			if err := awsRestjson1_deserializeDocumentRouteList(&sv.Routes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -789,6 +801,7 @@ func awsRestjson1_deserializeOpDocumentOptimizeWaypointsOutput(v **OptimizeWaypo
 			if err := awsRestjson1_deserializeDocumentWaypointOptimizationConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -801,6 +814,7 @@ func awsRestjson1_deserializeOpDocumentOptimizeWaypointsOutput(v **OptimizeWaypo
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -813,18 +827,22 @@ func awsRestjson1_deserializeOpDocumentOptimizeWaypointsOutput(v **OptimizeWaypo
 				}
 				sv.Duration = i64
 			}
+
 		case "ImpedingWaypoints":
 			if err := awsRestjson1_deserializeDocumentWaypointOptimizationImpedingWaypointList(&sv.ImpedingWaypoints, value); err != nil {
 				return err
 			}
+
 		case "OptimizedWaypoints":
 			if err := awsRestjson1_deserializeDocumentWaypointOptimizationOptimizedWaypointList(&sv.OptimizedWaypoints, value); err != nil {
 				return err
 			}
+
 		case "TimeBreakdown":
 			if err := awsRestjson1_deserializeDocumentWaypointOptimizationTimeBreakdown(&sv.TimeBreakdown, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1002,10 +1020,12 @@ func awsRestjson1_deserializeOpDocumentSnapToRoadsOutput(v **SnapToRoadsOutput, 
 			if err := awsRestjson1_deserializeDocumentRoadSnapNoticeList(&sv.Notices, value); err != nil {
 				return err
 			}
+
 		case "SnappedGeometry":
 			if err := awsRestjson1_deserializeDocumentRoadSnapSnappedGeometry(&sv.SnappedGeometry, value); err != nil {
 				return err
 			}
+
 		case "SnappedGeometryFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1014,10 +1034,12 @@ func awsRestjson1_deserializeOpDocumentSnapToRoadsOutput(v **SnapToRoadsOutput, 
 				}
 				sv.SnappedGeometryFormat = types.GeometryFormat(jtv)
 			}
+
 		case "SnappedTracePoints":
 			if err := awsRestjson1_deserializeDocumentRoadSnapSnappedTracePointList(&sv.SnappedTracePoints, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1201,6 +1223,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1297,6 +1320,7 @@ func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{})
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Center, value); err != nil {
 				return err
 			}
+
 		case "Radius":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1330,6 +1354,7 @@ func awsRestjson1_deserializeDocumentCircle(v **types.Circle, value interface{})
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1409,6 +1434,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1444,6 +1470,7 @@ func awsRestjson1_deserializeDocumentIsoline(v **types.Isoline, value interface{
 			if err := awsRestjson1_deserializeDocumentIsolineConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
+
 		case "DistanceThreshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1456,10 +1483,12 @@ func awsRestjson1_deserializeDocumentIsoline(v **types.Isoline, value interface{
 				}
 				sv.DistanceThreshold = i64
 			}
+
 		case "Geometries":
 			if err := awsRestjson1_deserializeDocumentIsolineShapeGeometryList(&sv.Geometries, value); err != nil {
 				return err
 			}
+
 		case "TimeThreshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1472,6 +1501,7 @@ func awsRestjson1_deserializeDocumentIsoline(v **types.Isoline, value interface{
 				}
 				sv.TimeThreshold = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1515,10 +1545,12 @@ func awsRestjson1_deserializeDocumentIsolineConnection(v **types.IsolineConnecti
 				}
 				sv.FromPolygonIndex = ptr.Int32(int32(i64))
 			}
+
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentIsolineConnectionGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
+
 		case "ToPolygonIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1531,6 +1563,7 @@ func awsRestjson1_deserializeDocumentIsolineConnection(v **types.IsolineConnecti
 				}
 				sv.ToPolygonIndex = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1566,6 +1599,7 @@ func awsRestjson1_deserializeDocumentIsolineConnectionGeometry(v **types.Isoline
 			if err := awsRestjson1_deserializeDocumentLineString(&sv.LineString, value); err != nil {
 				return err
 			}
+
 		case "Polyline":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1574,6 +1608,7 @@ func awsRestjson1_deserializeDocumentIsolineConnectionGeometry(v **types.Isoline
 				}
 				sv.Polyline = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1677,10 +1712,12 @@ func awsRestjson1_deserializeDocumentIsolineShapeGeometry(v **types.IsolineShape
 			if err := awsRestjson1_deserializeDocumentLinearRings(&sv.Polygon, value); err != nil {
 				return err
 			}
+
 		case "PolylinePolygon":
 			if err := awsRestjson1_deserializeDocumentPolylineRingList(&sv.PolylinePolygon, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1850,6 +1887,7 @@ func awsRestjson1_deserializeDocumentLocalizedString(v **types.LocalizedString, 
 				}
 				sv.Language = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1858,6 +1896,7 @@ func awsRestjson1_deserializeDocumentLocalizedString(v **types.LocalizedString, 
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2089,6 +2128,7 @@ func awsRestjson1_deserializeDocumentRoadSnapNotice(v **types.RoadSnapNotice, va
 				}
 				sv.Code = types.RoadSnapNoticeCode(jtv)
 			}
+
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2097,10 +2137,12 @@ func awsRestjson1_deserializeDocumentRoadSnapNotice(v **types.RoadSnapNotice, va
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "TracePointIndexes":
 			if err := awsRestjson1_deserializeDocumentRoadSnapTracePointIndexList(&sv.TracePointIndexes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2170,6 +2212,7 @@ func awsRestjson1_deserializeDocumentRoadSnapSnappedGeometry(v **types.RoadSnapS
 			if err := awsRestjson1_deserializeDocumentLineString(&sv.LineString, value); err != nil {
 				return err
 			}
+
 		case "Polyline":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2178,6 +2221,7 @@ func awsRestjson1_deserializeDocumentRoadSnapSnappedGeometry(v **types.RoadSnapS
 				}
 				sv.Polyline = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2242,14 +2286,17 @@ func awsRestjson1_deserializeDocumentRoadSnapSnappedTracePoint(v **types.RoadSna
 
 				}
 			}
+
 		case "OriginalPosition":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.OriginalPosition, value); err != nil {
 				return err
 			}
+
 		case "SnappedPosition":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.SnappedPosition, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2359,14 +2406,17 @@ func awsRestjson1_deserializeDocumentRoute(v **types.Route, value interface{}) e
 			if err := awsRestjson1_deserializeDocumentRouteLegList(&sv.Legs, value); err != nil {
 				return err
 			}
+
 		case "MajorRoadLabels":
 			if err := awsRestjson1_deserializeDocumentRouteMajorRoadLabelList(&sv.MajorRoadLabels, value); err != nil {
 				return err
 			}
+
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentRouteSummary(&sv.Summary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2402,6 +2452,7 @@ func awsRestjson1_deserializeDocumentRouteContinueHighwayStepDetails(v **types.R
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2410,6 +2461,7 @@ func awsRestjson1_deserializeDocumentRouteContinueHighwayStepDetails(v **types.R
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2443,6 +2495,7 @@ func awsRestjson1_deserializeDocumentRouteContinueHighwayStepDetails(v **types.R
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2451,6 +2504,7 @@ func awsRestjson1_deserializeDocumentRouteContinueHighwayStepDetails(v **types.R
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2486,6 +2540,7 @@ func awsRestjson1_deserializeDocumentRouteContinueStepDetails(v **types.RouteCon
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2521,6 +2576,7 @@ func awsRestjson1_deserializeDocumentRouteEnterHighwayStepDetails(v **types.Rout
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2529,6 +2585,7 @@ func awsRestjson1_deserializeDocumentRouteEnterHighwayStepDetails(v **types.Rout
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2562,6 +2619,7 @@ func awsRestjson1_deserializeDocumentRouteEnterHighwayStepDetails(v **types.Rout
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2570,6 +2628,7 @@ func awsRestjson1_deserializeDocumentRouteEnterHighwayStepDetails(v **types.Rout
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2605,6 +2664,7 @@ func awsRestjson1_deserializeDocumentRouteExitStepDetails(v **types.RouteExitSte
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "RelativeExit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2617,6 +2677,7 @@ func awsRestjson1_deserializeDocumentRouteExitStepDetails(v **types.RouteExitSte
 				}
 				sv.RelativeExit = ptr.Int32(int32(i64))
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2625,6 +2686,7 @@ func awsRestjson1_deserializeDocumentRouteExitStepDetails(v **types.RouteExitSte
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2658,6 +2720,7 @@ func awsRestjson1_deserializeDocumentRouteExitStepDetails(v **types.RouteExitSte
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2666,6 +2729,7 @@ func awsRestjson1_deserializeDocumentRouteExitStepDetails(v **types.RouteExitSte
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2709,6 +2773,7 @@ func awsRestjson1_deserializeDocumentRouteFerryAfterTravelStep(v **types.RouteFe
 				}
 				sv.Duration = i64
 			}
+
 		case "Instruction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2717,6 +2782,7 @@ func awsRestjson1_deserializeDocumentRouteFerryAfterTravelStep(v **types.RouteFe
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2725,6 +2791,7 @@ func awsRestjson1_deserializeDocumentRouteFerryAfterTravelStep(v **types.RouteFe
 				}
 				sv.Type = types.RouteFerryAfterTravelStepType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2794,6 +2861,7 @@ func awsRestjson1_deserializeDocumentRouteFerryArrival(v **types.RouteFerryArriv
 			if err := awsRestjson1_deserializeDocumentRouteFerryPlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		case "Time":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2802,6 +2870,7 @@ func awsRestjson1_deserializeDocumentRouteFerryArrival(v **types.RouteFerryArriv
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2845,6 +2914,7 @@ func awsRestjson1_deserializeDocumentRouteFerryBeforeTravelStep(v **types.RouteF
 				}
 				sv.Duration = i64
 			}
+
 		case "Instruction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2853,6 +2923,7 @@ func awsRestjson1_deserializeDocumentRouteFerryBeforeTravelStep(v **types.RouteF
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2861,6 +2932,7 @@ func awsRestjson1_deserializeDocumentRouteFerryBeforeTravelStep(v **types.RouteF
 				}
 				sv.Type = types.RouteFerryBeforeTravelStepType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2930,6 +3002,7 @@ func awsRestjson1_deserializeDocumentRouteFerryDeparture(v **types.RouteFerryDep
 			if err := awsRestjson1_deserializeDocumentRouteFerryPlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		case "Time":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2938,6 +3011,7 @@ func awsRestjson1_deserializeDocumentRouteFerryDeparture(v **types.RouteFerryDep
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2973,26 +3047,32 @@ func awsRestjson1_deserializeDocumentRouteFerryLegDetails(v **types.RouteFerryLe
 			if err := awsRestjson1_deserializeDocumentRouteFerryAfterTravelStepList(&sv.AfterTravelSteps, value); err != nil {
 				return err
 			}
+
 		case "Arrival":
 			if err := awsRestjson1_deserializeDocumentRouteFerryArrival(&sv.Arrival, value); err != nil {
 				return err
 			}
+
 		case "BeforeTravelSteps":
 			if err := awsRestjson1_deserializeDocumentRouteFerryBeforeTravelStepList(&sv.BeforeTravelSteps, value); err != nil {
 				return err
 			}
+
 		case "Departure":
 			if err := awsRestjson1_deserializeDocumentRouteFerryDeparture(&sv.Departure, value); err != nil {
 				return err
 			}
+
 		case "Notices":
 			if err := awsRestjson1_deserializeDocumentRouteFerryNoticeList(&sv.Notices, value); err != nil {
 				return err
 			}
+
 		case "PassThroughWaypoints":
 			if err := awsRestjson1_deserializeDocumentRoutePassThroughWaypointList(&sv.PassThroughWaypoints, value); err != nil {
 				return err
 			}
+
 		case "RouteName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3001,18 +3081,22 @@ func awsRestjson1_deserializeDocumentRouteFerryLegDetails(v **types.RouteFerryLe
 				}
 				sv.RouteName = ptr.String(jtv)
 			}
+
 		case "Spans":
 			if err := awsRestjson1_deserializeDocumentRouteFerrySpanList(&sv.Spans, value); err != nil {
 				return err
 			}
+
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentRouteFerrySummary(&sv.Summary, value); err != nil {
 				return err
 			}
+
 		case "TravelSteps":
 			if err := awsRestjson1_deserializeDocumentRouteFerryTravelStepList(&sv.TravelSteps, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3052,6 +3136,7 @@ func awsRestjson1_deserializeDocumentRouteFerryNotice(v **types.RouteFerryNotice
 				}
 				sv.Code = types.RouteFerryNoticeCode(jtv)
 			}
+
 		case "Impact":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3060,6 +3145,7 @@ func awsRestjson1_deserializeDocumentRouteFerryNotice(v **types.RouteFerryNotice
 				}
 				sv.Impact = types.RouteNoticeImpact(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3137,6 +3223,7 @@ func awsRestjson1_deserializeDocumentRouteFerryOverviewSummary(v **types.RouteFe
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3149,6 +3236,7 @@ func awsRestjson1_deserializeDocumentRouteFerryOverviewSummary(v **types.RouteFe
 				}
 				sv.Duration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3188,14 +3276,17 @@ func awsRestjson1_deserializeDocumentRouteFerryPlace(v **types.RouteFerryPlace, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "OriginalPosition":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
 				return err
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
 				return err
 			}
+
 		case "WaypointIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3208,6 +3299,7 @@ func awsRestjson1_deserializeDocumentRouteFerryPlace(v **types.RouteFerryPlace, 
 				}
 				sv.WaypointIndex = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3247,6 +3339,7 @@ func awsRestjson1_deserializeDocumentRouteFerrySpan(v **types.RouteFerrySpan, va
 				}
 				sv.Country = ptr.String(jtv)
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3259,6 +3352,7 @@ func awsRestjson1_deserializeDocumentRouteFerrySpan(v **types.RouteFerrySpan, va
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3271,6 +3365,7 @@ func awsRestjson1_deserializeDocumentRouteFerrySpan(v **types.RouteFerrySpan, va
 				}
 				sv.Duration = i64
 			}
+
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3283,10 +3378,12 @@ func awsRestjson1_deserializeDocumentRouteFerrySpan(v **types.RouteFerrySpan, va
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Names":
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Names, value); err != nil {
 				return err
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3295,6 +3392,7 @@ func awsRestjson1_deserializeDocumentRouteFerrySpan(v **types.RouteFerrySpan, va
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3364,10 +3462,12 @@ func awsRestjson1_deserializeDocumentRouteFerrySummary(v **types.RouteFerrySumma
 			if err := awsRestjson1_deserializeDocumentRouteFerryOverviewSummary(&sv.Overview, value); err != nil {
 				return err
 			}
+
 		case "TravelOnly":
 			if err := awsRestjson1_deserializeDocumentRouteFerryTravelOnlySummary(&sv.TravelOnly, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3411,6 +3511,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelOnlySummary(v **types.Route
 				}
 				sv.Duration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3454,6 +3555,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelStep(v **types.RouteFerryTr
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3466,6 +3568,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelStep(v **types.RouteFerryTr
 				}
 				sv.Duration = i64
 			}
+
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3478,6 +3581,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelStep(v **types.RouteFerryTr
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Instruction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3486,6 +3590,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelStep(v **types.RouteFerryTr
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3494,6 +3599,7 @@ func awsRestjson1_deserializeDocumentRouteFerryTravelStep(v **types.RouteFerryTr
 				}
 				sv.Type = types.RouteFerryTravelStepType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3599,6 +3705,7 @@ func awsRestjson1_deserializeDocumentRouteKeepStepDetails(v **types.RouteKeepSte
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3607,6 +3714,7 @@ func awsRestjson1_deserializeDocumentRouteKeepStepDetails(v **types.RouteKeepSte
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3640,6 +3748,7 @@ func awsRestjson1_deserializeDocumentRouteKeepStepDetails(v **types.RouteKeepSte
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3648,6 +3757,7 @@ func awsRestjson1_deserializeDocumentRouteKeepStepDetails(v **types.RouteKeepSte
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3683,10 +3793,12 @@ func awsRestjson1_deserializeDocumentRouteLeg(v **types.RouteLeg, value interfac
 			if err := awsRestjson1_deserializeDocumentRouteFerryLegDetails(&sv.FerryLegDetails, value); err != nil {
 				return err
 			}
+
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentRouteLegGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
+
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3695,10 +3807,12 @@ func awsRestjson1_deserializeDocumentRouteLeg(v **types.RouteLeg, value interfac
 				}
 				sv.Language = ptr.String(jtv)
 			}
+
 		case "PedestrianLegDetails":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianLegDetails(&sv.PedestrianLegDetails, value); err != nil {
 				return err
 			}
+
 		case "TravelMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3707,6 +3821,7 @@ func awsRestjson1_deserializeDocumentRouteLeg(v **types.RouteLeg, value interfac
 				}
 				sv.TravelMode = types.RouteLegTravelMode(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3715,10 +3830,12 @@ func awsRestjson1_deserializeDocumentRouteLeg(v **types.RouteLeg, value interfac
 				}
 				sv.Type = types.RouteLegType(jtv)
 			}
+
 		case "VehicleLegDetails":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleLegDetails(&sv.VehicleLegDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3754,6 +3871,7 @@ func awsRestjson1_deserializeDocumentRouteLegGeometry(v **types.RouteLegGeometry
 			if err := awsRestjson1_deserializeDocumentLineString(&sv.LineString, value); err != nil {
 				return err
 			}
+
 		case "Polyline":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3762,6 +3880,7 @@ func awsRestjson1_deserializeDocumentRouteLegGeometry(v **types.RouteLegGeometry
 				}
 				sv.Polyline = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3865,10 +3984,12 @@ func awsRestjson1_deserializeDocumentRouteMajorRoadLabel(v **types.RouteMajorRoa
 			if err := awsRestjson1_deserializeDocumentLocalizedString(&sv.RoadName, value); err != nil {
 				return err
 			}
+
 		case "RouteNumber":
 			if err := awsRestjson1_deserializeDocumentRouteNumber(&sv.RouteNumber, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3978,6 +4099,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixAutoCircle(v **types.RouteMatrix
 				}
 				sv.Margin = i64
 			}
+
 		case "MaxRadius":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3990,6 +4112,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixAutoCircle(v **types.RouteMatrix
 				}
 				sv.MaxRadius = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4025,6 +4148,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixBoundary(v **types.RouteMatrixBo
 			if err := awsRestjson1_deserializeDocumentRouteMatrixBoundaryGeometry(&sv.Geometry, value); err != nil {
 				return err
 			}
+
 		case "Unbounded":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4033,6 +4157,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixBoundary(v **types.RouteMatrixBo
 				}
 				sv.Unbounded = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4068,18 +4193,22 @@ func awsRestjson1_deserializeDocumentRouteMatrixBoundaryGeometry(v **types.Route
 			if err := awsRestjson1_deserializeDocumentRouteMatrixAutoCircle(&sv.AutoCircle, value); err != nil {
 				return err
 			}
+
 		case "BoundingBox":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.BoundingBox, value); err != nil {
 				return err
 			}
+
 		case "Circle":
 			if err := awsRestjson1_deserializeDocumentCircle(&sv.Circle, value); err != nil {
 				return err
 			}
+
 		case "Polygon":
 			if err := awsRestjson1_deserializeDocumentLinearRings(&sv.Polygon, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4123,6 +4252,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4135,6 +4265,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 				}
 				sv.Duration = i64
 			}
+
 		case "Error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4143,6 +4274,7 @@ func awsRestjson1_deserializeDocumentRouteMatrixEntry(v **types.RouteMatrixEntry
 				}
 				sv.Error = types.RouteMatrixErrorCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4220,6 +4352,7 @@ func awsRestjson1_deserializeDocumentRouteNoticeDetailRange(v **types.RouteNotic
 				}
 				sv.Max = ptr.Int32(int32(i64))
 			}
+
 		case "Min":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4232,6 +4365,7 @@ func awsRestjson1_deserializeDocumentRouteNoticeDetailRange(v **types.RouteNotic
 				}
 				sv.Min = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4271,6 +4405,7 @@ func awsRestjson1_deserializeDocumentRouteNumber(v **types.RouteNumber, value in
 				}
 				sv.Direction = types.RouteDirection(jtv)
 			}
+
 		case "Language":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4279,6 +4414,7 @@ func awsRestjson1_deserializeDocumentRouteNumber(v **types.RouteNumber, value in
 				}
 				sv.Language = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4287,6 +4423,7 @@ func awsRestjson1_deserializeDocumentRouteNumber(v **types.RouteNumber, value in
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4356,10 +4493,12 @@ func awsRestjson1_deserializeDocumentRoutePassThroughPlace(v **types.RoutePassTh
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
 				return err
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
 				return err
 			}
+
 		case "WaypointIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4372,6 +4511,7 @@ func awsRestjson1_deserializeDocumentRoutePassThroughPlace(v **types.RoutePassTh
 				}
 				sv.WaypointIndex = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4415,10 +4555,12 @@ func awsRestjson1_deserializeDocumentRoutePassThroughWaypoint(v **types.RoutePas
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Place":
 			if err := awsRestjson1_deserializeDocumentRoutePassThroughPlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4488,6 +4630,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianArrival(v **types.RoutePedes
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianPlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		case "Time":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4496,6 +4639,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianArrival(v **types.RoutePedes
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4531,6 +4675,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianDeparture(v **types.RoutePed
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianPlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		case "Time":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4539,6 +4684,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianDeparture(v **types.RoutePed
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4574,30 +4720,37 @@ func awsRestjson1_deserializeDocumentRoutePedestrianLegDetails(v **types.RoutePe
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianArrival(&sv.Arrival, value); err != nil {
 				return err
 			}
+
 		case "Departure":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianDeparture(&sv.Departure, value); err != nil {
 				return err
 			}
+
 		case "Notices":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianNoticeList(&sv.Notices, value); err != nil {
 				return err
 			}
+
 		case "PassThroughWaypoints":
 			if err := awsRestjson1_deserializeDocumentRoutePassThroughWaypointList(&sv.PassThroughWaypoints, value); err != nil {
 				return err
 			}
+
 		case "Spans":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianSpanList(&sv.Spans, value); err != nil {
 				return err
 			}
+
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianSummary(&sv.Summary, value); err != nil {
 				return err
 			}
+
 		case "TravelSteps":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianTravelStepList(&sv.TravelSteps, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4637,6 +4790,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianNotice(v **types.RoutePedest
 				}
 				sv.Code = types.RoutePedestrianNoticeCode(jtv)
 			}
+
 		case "Impact":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4645,6 +4799,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianNotice(v **types.RoutePedest
 				}
 				sv.Impact = types.RouteNoticeImpact(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4722,6 +4877,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianOverviewSummary(v **types.Ro
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4734,6 +4890,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianOverviewSummary(v **types.Ro
 				}
 				sv.Duration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4773,14 +4930,17 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "OriginalPosition":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
 				return err
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
 				return err
 			}
+
 		case "SideOfStreet":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4789,6 +4949,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 				}
 				sv.SideOfStreet = types.RouteSideOfStreet(jtv)
 			}
+
 		case "WaypointIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4801,6 +4962,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianPlace(v **types.RoutePedestr
 				}
 				sv.WaypointIndex = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4844,6 +5006,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.BestCaseDuration = i64
 			}
+
 		case "Country":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4852,6 +5015,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.Country = ptr.String(jtv)
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4864,6 +5028,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4876,10 +5041,12 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.Duration = i64
 			}
+
 		case "DynamicSpeed":
 			if err := awsRestjson1_deserializeDocumentRouteSpanDynamicSpeedDetails(&sv.DynamicSpeed, value); err != nil {
 				return err
 			}
+
 		case "FunctionalClassification":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4892,6 +5059,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.FunctionalClassification = ptr.Int32(int32(i64))
 			}
+
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4904,18 +5072,22 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Incidents":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.Incidents, value); err != nil {
 				return err
 			}
+
 		case "Names":
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Names, value); err != nil {
 				return err
 			}
+
 		case "PedestrianAccess":
 			if err := awsRestjson1_deserializeDocumentRouteSpanPedestrianAccessAttributeList(&sv.PedestrianAccess, value); err != nil {
 				return err
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4924,18 +5096,22 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "RoadAttributes":
 			if err := awsRestjson1_deserializeDocumentRouteSpanRoadAttributeList(&sv.RoadAttributes, value); err != nil {
 				return err
 			}
+
 		case "RouteNumbers":
 			if err := awsRestjson1_deserializeDocumentRouteNumberList(&sv.RouteNumbers, value); err != nil {
 				return err
 			}
+
 		case "SpeedLimit":
 			if err := awsRestjson1_deserializeDocumentRouteSpanSpeedLimitDetails(&sv.SpeedLimit, value); err != nil {
 				return err
 			}
+
 		case "TypicalDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4948,6 +5124,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSpan(v **types.RoutePedestri
 				}
 				sv.TypicalDuration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5017,10 +5194,12 @@ func awsRestjson1_deserializeDocumentRoutePedestrianSummary(v **types.RoutePedes
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianOverviewSummary(&sv.Overview, value); err != nil {
 				return err
 			}
+
 		case "TravelOnly":
 			if err := awsRestjson1_deserializeDocumentRoutePedestrianTravelOnlySummary(&sv.TravelOnly, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5064,6 +5243,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelOnlySummary(v **types.
 				}
 				sv.Duration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5099,10 +5279,12 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 			if err := awsRestjson1_deserializeDocumentRouteContinueStepDetails(&sv.ContinueStepDetails, value); err != nil {
 				return err
 			}
+
 		case "CurrentRoad":
 			if err := awsRestjson1_deserializeDocumentRouteRoad(&sv.CurrentRoad, value); err != nil {
 				return err
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5115,6 +5297,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5127,10 +5310,12 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 				}
 				sv.Duration = i64
 			}
+
 		case "ExitNumber":
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.ExitNumber, value); err != nil {
 				return err
 			}
+
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5143,6 +5328,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Instruction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5151,34 +5337,42 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
+
 		case "KeepStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteKeepStepDetails(&sv.KeepStepDetails, value); err != nil {
 				return err
 			}
+
 		case "NextRoad":
 			if err := awsRestjson1_deserializeDocumentRouteRoad(&sv.NextRoad, value); err != nil {
 				return err
 			}
+
 		case "RoundaboutEnterStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(&sv.RoundaboutEnterStepDetails, value); err != nil {
 				return err
 			}
+
 		case "RoundaboutExitStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(&sv.RoundaboutExitStepDetails, value); err != nil {
 				return err
 			}
+
 		case "RoundaboutPassStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(&sv.RoundaboutPassStepDetails, value); err != nil {
 				return err
 			}
+
 		case "Signpost":
 			if err := awsRestjson1_deserializeDocumentRouteSignpost(&sv.Signpost, value); err != nil {
 				return err
 			}
+
 		case "TurnStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteTurnStepDetails(&sv.TurnStepDetails, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5187,6 +5381,7 @@ func awsRestjson1_deserializeDocumentRoutePedestrianTravelStep(v **types.RoutePe
 				}
 				sv.Type = types.RoutePedestrianTravelStepType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5256,6 +5451,7 @@ func awsRestjson1_deserializeDocumentRouteRampStepDetails(v **types.RouteRampSte
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5264,6 +5460,7 @@ func awsRestjson1_deserializeDocumentRouteRampStepDetails(v **types.RouteRampSte
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5297,6 +5494,7 @@ func awsRestjson1_deserializeDocumentRouteRampStepDetails(v **types.RouteRampSte
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5305,6 +5503,7 @@ func awsRestjson1_deserializeDocumentRouteRampStepDetails(v **types.RouteRampSte
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5344,6 +5543,7 @@ func awsRestjson1_deserializeDocumentRouteResponseNotice(v **types.RouteResponse
 				}
 				sv.Code = types.RouteResponseNoticeCode(jtv)
 			}
+
 		case "Impact":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5352,6 +5552,7 @@ func awsRestjson1_deserializeDocumentRouteResponseNotice(v **types.RouteResponse
 				}
 				sv.Impact = types.RouteNoticeImpact(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5421,14 +5622,17 @@ func awsRestjson1_deserializeDocumentRouteRoad(v **types.RouteRoad, value interf
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.RoadName, value); err != nil {
 				return err
 			}
+
 		case "RouteNumber":
 			if err := awsRestjson1_deserializeDocumentRouteNumberList(&sv.RouteNumber, value); err != nil {
 				return err
 			}
+
 		case "Towards":
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Towards, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5437,6 +5641,7 @@ func awsRestjson1_deserializeDocumentRouteRoad(v **types.RouteRoad, value interf
 				}
 				sv.Type = types.RouteRoadType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5472,6 +5677,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(v **types.R
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5480,6 +5686,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(v **types.R
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5513,6 +5720,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(v **types.R
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5521,6 +5729,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(v **types.R
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5556,6 +5765,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(v **types.Ro
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "RelativeExit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5568,6 +5778,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(v **types.Ro
 				}
 				sv.RelativeExit = ptr.Int32(int32(i64))
 			}
+
 		case "RoundaboutAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5601,6 +5812,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(v **types.Ro
 
 				}
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5609,6 +5821,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(v **types.Ro
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5644,6 +5857,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(v **types.Ro
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5652,6 +5866,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(v **types.Ro
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5685,6 +5900,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(v **types.Ro
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5693,6 +5909,7 @@ func awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(v **types.Ro
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5728,6 +5945,7 @@ func awsRestjson1_deserializeDocumentRouteSignpost(v **types.RouteSignpost, valu
 			if err := awsRestjson1_deserializeDocumentRouteSignpostLabelList(&sv.Labels, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5763,10 +5981,12 @@ func awsRestjson1_deserializeDocumentRouteSignpostLabel(v **types.RouteSignpostL
 			if err := awsRestjson1_deserializeDocumentRouteNumber(&sv.RouteNumber, value); err != nil {
 				return err
 			}
+
 		case "Text":
 			if err := awsRestjson1_deserializeDocumentLocalizedString(&sv.Text, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5901,6 +6121,7 @@ func awsRestjson1_deserializeDocumentRouteSpanDynamicSpeedDetails(v **types.Rout
 
 				}
 			}
+
 		case "TurnDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5913,6 +6134,7 @@ func awsRestjson1_deserializeDocumentRouteSpanDynamicSpeedDetails(v **types.Rout
 				}
 				sv.TurnDuration = i64
 			}
+
 		case "TypicalSpeed":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5946,6 +6168,7 @@ func awsRestjson1_deserializeDocumentRouteSpanDynamicSpeedDetails(v **types.Rout
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6118,6 +6341,7 @@ func awsRestjson1_deserializeDocumentRouteSpanSpeedLimitDetails(v **types.RouteS
 
 				}
 			}
+
 		case "Unlimited":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6126,6 +6350,7 @@ func awsRestjson1_deserializeDocumentRouteSpanSpeedLimitDetails(v **types.RouteS
 				}
 				sv.Unlimited = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6205,6 +6430,7 @@ func awsRestjson1_deserializeDocumentRouteSummary(v **types.RouteSummary, value 
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6217,10 +6443,12 @@ func awsRestjson1_deserializeDocumentRouteSummary(v **types.RouteSummary, value 
 				}
 				sv.Duration = i64
 			}
+
 		case "Tolls":
 			if err := awsRestjson1_deserializeDocumentRouteTollSummary(&sv.Tolls, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6260,18 +6488,22 @@ func awsRestjson1_deserializeDocumentRouteToll(v **types.RouteToll, value interf
 				}
 				sv.Country = ptr.String(jtv)
 			}
+
 		case "PaymentSites":
 			if err := awsRestjson1_deserializeDocumentRouteTollPaymentSiteList(&sv.PaymentSites, value); err != nil {
 				return err
 			}
+
 		case "Rates":
 			if err := awsRestjson1_deserializeDocumentRouteTollRateList(&sv.Rates, value); err != nil {
 				return err
 			}
+
 		case "Systems":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.Systems, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6345,6 +6577,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 				}
 				sv.IncludesReturnTrip = ptr.Bool(jtv)
 			}
+
 		case "SeniorPass":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6353,6 +6586,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 				}
 				sv.SeniorPass = ptr.Bool(jtv)
 			}
+
 		case "TransferCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6365,6 +6599,7 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 				}
 				sv.TransferCount = ptr.Int32(int32(i64))
 			}
+
 		case "TripCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6377,10 +6612,12 @@ func awsRestjson1_deserializeDocumentRouteTollPass(v **types.RouteTollPass, valu
 				}
 				sv.TripCount = ptr.Int32(int32(i64))
 			}
+
 		case "ValidityPeriod":
 			if err := awsRestjson1_deserializeDocumentRouteTollPassValidityPeriod(&sv.ValidityPeriod, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6420,6 +6657,7 @@ func awsRestjson1_deserializeDocumentRouteTollPassValidityPeriod(v **types.Route
 				}
 				sv.Period = types.RouteTollPassValidityPeriodType(jtv)
 			}
+
 		case "PeriodCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6432,6 +6670,7 @@ func awsRestjson1_deserializeDocumentRouteTollPassValidityPeriod(v **types.Route
 				}
 				sv.PeriodCount = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6507,10 +6746,12 @@ func awsRestjson1_deserializeDocumentRouteTollPaymentSite(v **types.RouteTollPay
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6584,6 +6825,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 				}
 				sv.Currency = ptr.String(jtv)
 			}
+
 		case "Estimate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6592,6 +6834,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 				}
 				sv.Estimate = ptr.Bool(jtv)
 			}
+
 		case "PerDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6604,6 +6847,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 				}
 				sv.PerDuration = i64
 			}
+
 		case "Range":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6612,10 +6856,12 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 				}
 				sv.Range = ptr.Bool(jtv)
 			}
+
 		case "RangeValue":
 			if err := awsRestjson1_deserializeDocumentRouteTollPriceValueRange(&sv.RangeValue, value); err != nil {
 				return err
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6649,6 +6895,7 @@ func awsRestjson1_deserializeDocumentRouteTollPrice(v **types.RouteTollPrice, va
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6688,6 +6935,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 				}
 				sv.Currency = ptr.String(jtv)
 			}
+
 		case "Estimate":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6696,6 +6944,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 				}
 				sv.Estimate = ptr.Bool(jtv)
 			}
+
 		case "Range":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6704,10 +6953,12 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 				}
 				sv.Range = ptr.Bool(jtv)
 			}
+
 		case "RangeValue":
 			if err := awsRestjson1_deserializeDocumentRouteTollPriceValueRange(&sv.RangeValue, value); err != nil {
 				return err
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6741,6 +6992,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceSummary(v **types.RouteTollPr
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6805,6 +7057,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceValueRange(v **types.RouteTol
 
 				}
 			}
+
 		case "Min":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6838,6 +7091,7 @@ func awsRestjson1_deserializeDocumentRouteTollPriceValueRange(v **types.RouteTol
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6877,10 +7131,12 @@ func awsRestjson1_deserializeDocumentRouteTollRate(v **types.RouteTollRate, valu
 				}
 				sv.ApplicableTimes = ptr.String(jtv)
 			}
+
 		case "ConvertedPrice":
 			if err := awsRestjson1_deserializeDocumentRouteTollPrice(&sv.ConvertedPrice, value); err != nil {
 				return err
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6889,10 +7145,12 @@ func awsRestjson1_deserializeDocumentRouteTollRate(v **types.RouteTollRate, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "LocalPrice":
 			if err := awsRestjson1_deserializeDocumentRouteTollPrice(&sv.LocalPrice, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6901,18 +7159,22 @@ func awsRestjson1_deserializeDocumentRouteTollRate(v **types.RouteTollRate, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Pass":
 			if err := awsRestjson1_deserializeDocumentRouteTollPass(&sv.Pass, value); err != nil {
 				return err
 			}
+
 		case "PaymentMethods":
 			if err := awsRestjson1_deserializeDocumentRouteTollPaymentMethodList(&sv.PaymentMethods, value); err != nil {
 				return err
 			}
+
 		case "Transponders":
 			if err := awsRestjson1_deserializeDocumentRouteTransponderList(&sv.Transponders, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6982,6 +7244,7 @@ func awsRestjson1_deserializeDocumentRouteTollSummary(v **types.RouteTollSummary
 			if err := awsRestjson1_deserializeDocumentRouteTollPriceSummary(&sv.Total, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7021,6 +7284,7 @@ func awsRestjson1_deserializeDocumentRouteTollSystem(v **types.RouteTollSystem, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7094,6 +7358,7 @@ func awsRestjson1_deserializeDocumentRouteTransponder(v **types.RouteTransponder
 				}
 				sv.SystemName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7163,6 +7428,7 @@ func awsRestjson1_deserializeDocumentRouteTurnStepDetails(v **types.RouteTurnSte
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7171,6 +7437,7 @@ func awsRestjson1_deserializeDocumentRouteTurnStepDetails(v **types.RouteTurnSte
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7204,6 +7471,7 @@ func awsRestjson1_deserializeDocumentRouteTurnStepDetails(v **types.RouteTurnSte
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7212,6 +7480,7 @@ func awsRestjson1_deserializeDocumentRouteTurnStepDetails(v **types.RouteTurnSte
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7247,6 +7516,7 @@ func awsRestjson1_deserializeDocumentRouteUTurnStepDetails(v **types.RouteUTurnS
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Intersection, value); err != nil {
 				return err
 			}
+
 		case "SteeringDirection":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7255,6 +7525,7 @@ func awsRestjson1_deserializeDocumentRouteUTurnStepDetails(v **types.RouteUTurnS
 				}
 				sv.SteeringDirection = types.RouteSteeringDirection(jtv)
 			}
+
 		case "TurnAngle":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7288,6 +7559,7 @@ func awsRestjson1_deserializeDocumentRouteUTurnStepDetails(v **types.RouteUTurnS
 
 				}
 			}
+
 		case "TurnIntensity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7296,6 +7568,7 @@ func awsRestjson1_deserializeDocumentRouteUTurnStepDetails(v **types.RouteUTurnS
 				}
 				sv.TurnIntensity = types.RouteTurnIntensity(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7331,6 +7604,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleArrival(v **types.RouteVehicleA
 			if err := awsRestjson1_deserializeDocumentRouteVehiclePlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		case "Time":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7339,6 +7613,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleArrival(v **types.RouteVehicleA
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7374,6 +7649,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleDeparture(v **types.RouteVehicl
 			if err := awsRestjson1_deserializeDocumentRouteVehiclePlace(&sv.Place, value); err != nil {
 				return err
 			}
+
 		case "Time":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7382,6 +7658,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleDeparture(v **types.RouteVehicl
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7421,6 +7698,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleIncident(v **types.RouteVehicle
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "EndTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7429,6 +7707,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleIncident(v **types.RouteVehicle
 				}
 				sv.EndTime = ptr.String(jtv)
 			}
+
 		case "Severity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7437,6 +7716,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleIncident(v **types.RouteVehicle
 				}
 				sv.Severity = types.RouteVehicleIncidentSeverity(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7445,6 +7725,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleIncident(v **types.RouteVehicle
 				}
 				sv.StartTime = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7453,6 +7734,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleIncident(v **types.RouteVehicle
 				}
 				sv.Type = types.RouteVehicleIncidentType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7522,50 +7804,62 @@ func awsRestjson1_deserializeDocumentRouteVehicleLegDetails(v **types.RouteVehic
 			if err := awsRestjson1_deserializeDocumentRouteVehicleArrival(&sv.Arrival, value); err != nil {
 				return err
 			}
+
 		case "Departure":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleDeparture(&sv.Departure, value); err != nil {
 				return err
 			}
+
 		case "Incidents":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleIncidentList(&sv.Incidents, value); err != nil {
 				return err
 			}
+
 		case "Notices":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleNoticeList(&sv.Notices, value); err != nil {
 				return err
 			}
+
 		case "PassThroughWaypoints":
 			if err := awsRestjson1_deserializeDocumentRoutePassThroughWaypointList(&sv.PassThroughWaypoints, value); err != nil {
 				return err
 			}
+
 		case "Spans":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleSpanList(&sv.Spans, value); err != nil {
 				return err
 			}
+
 		case "Summary":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleSummary(&sv.Summary, value); err != nil {
 				return err
 			}
+
 		case "Tolls":
 			if err := awsRestjson1_deserializeDocumentRouteTollList(&sv.Tolls, value); err != nil {
 				return err
 			}
+
 		case "TollSystems":
 			if err := awsRestjson1_deserializeDocumentRouteTollSystemList(&sv.TollSystems, value); err != nil {
 				return err
 			}
+
 		case "TravelSteps":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleTravelStepList(&sv.TravelSteps, value); err != nil {
 				return err
 			}
+
 		case "TruckRoadTypes":
 			if err := awsRestjson1_deserializeDocumentTruckRoadTypeList(&sv.TruckRoadTypes, value); err != nil {
 				return err
 			}
+
 		case "Zones":
 			if err := awsRestjson1_deserializeDocumentRouteZoneList(&sv.Zones, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7605,10 +7899,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleNotice(v **types.RouteVehicleNo
 				}
 				sv.Code = types.RouteVehicleNoticeCode(jtv)
 			}
+
 		case "Details":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleNoticeDetailList(&sv.Details, value); err != nil {
 				return err
 			}
+
 		case "Impact":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7617,6 +7913,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleNotice(v **types.RouteVehicleNo
 				}
 				sv.Impact = types.RouteNoticeImpact(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7656,10 +7953,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleNoticeDetail(v **types.RouteVeh
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "ViolatedConstraints":
 			if err := awsRestjson1_deserializeDocumentRouteViolatedConstraints(&sv.ViolatedConstraints, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7771,6 +8070,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleOverviewSummary(v **types.Route
 				}
 				sv.BestCaseDuration = i64
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7783,6 +8083,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleOverviewSummary(v **types.Route
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7795,6 +8096,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleOverviewSummary(v **types.Route
 				}
 				sv.Duration = i64
 			}
+
 		case "TypicalDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7807,6 +8109,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleOverviewSummary(v **types.Route
 				}
 				sv.TypicalDuration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7846,14 +8149,17 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "OriginalPosition":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.OriginalPosition, value); err != nil {
 				return err
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition23(&sv.Position, value); err != nil {
 				return err
 			}
+
 		case "SideOfStreet":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7862,6 +8168,7 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 				}
 				sv.SideOfStreet = types.RouteSideOfStreet(jtv)
 			}
+
 		case "WaypointIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7874,6 +8181,7 @@ func awsRestjson1_deserializeDocumentRouteVehiclePlace(v **types.RouteVehiclePla
 				}
 				sv.WaypointIndex = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7917,10 +8225,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.BestCaseDuration = i64
 			}
+
 		case "CarAccess":
 			if err := awsRestjson1_deserializeDocumentRouteSpanCarAccessAttributeList(&sv.CarAccess, value); err != nil {
 				return err
 			}
+
 		case "Country":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7929,6 +8239,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.Country = ptr.String(jtv)
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7941,6 +8252,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7953,10 +8265,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.Duration = i64
 			}
+
 		case "DynamicSpeed":
 			if err := awsRestjson1_deserializeDocumentRouteSpanDynamicSpeedDetails(&sv.DynamicSpeed, value); err != nil {
 				return err
 			}
+
 		case "FunctionalClassification":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7969,6 +8283,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.FunctionalClassification = ptr.Int32(int32(i64))
 			}
+
 		case "Gate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7977,6 +8292,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.Gate = types.RouteSpanGateAttribute(jtv)
 			}
+
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7989,18 +8305,22 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Incidents":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.Incidents, value); err != nil {
 				return err
 			}
+
 		case "Names":
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.Names, value); err != nil {
 				return err
 			}
+
 		case "Notices":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.Notices, value); err != nil {
 				return err
 			}
+
 		case "RailwayCrossing":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8009,6 +8329,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.RailwayCrossing = types.RouteSpanRailwayCrossingAttribute(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8017,34 +8338,42 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "RoadAttributes":
 			if err := awsRestjson1_deserializeDocumentRouteSpanRoadAttributeList(&sv.RoadAttributes, value); err != nil {
 				return err
 			}
+
 		case "RouteNumbers":
 			if err := awsRestjson1_deserializeDocumentRouteNumberList(&sv.RouteNumbers, value); err != nil {
 				return err
 			}
+
 		case "ScooterAccess":
 			if err := awsRestjson1_deserializeDocumentRouteSpanScooterAccessAttributeList(&sv.ScooterAccess, value); err != nil {
 				return err
 			}
+
 		case "SpeedLimit":
 			if err := awsRestjson1_deserializeDocumentRouteSpanSpeedLimitDetails(&sv.SpeedLimit, value); err != nil {
 				return err
 			}
+
 		case "TollSystems":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.TollSystems, value); err != nil {
 				return err
 			}
+
 		case "TruckAccess":
 			if err := awsRestjson1_deserializeDocumentRouteSpanTruckAccessAttributeList(&sv.TruckAccess, value); err != nil {
 				return err
 			}
+
 		case "TruckRoadTypes":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.TruckRoadTypes, value); err != nil {
 				return err
 			}
+
 		case "TypicalDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8057,10 +8386,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleSpan(v **types.RouteVehicleSpan
 				}
 				sv.TypicalDuration = i64
 			}
+
 		case "Zones":
 			if err := awsRestjson1_deserializeDocumentIndexList(&sv.Zones, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8130,10 +8461,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleSummary(v **types.RouteVehicleS
 			if err := awsRestjson1_deserializeDocumentRouteVehicleOverviewSummary(&sv.Overview, value); err != nil {
 				return err
 			}
+
 		case "TravelOnly":
 			if err := awsRestjson1_deserializeDocumentRouteVehicleTravelOnlySummary(&sv.TravelOnly, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8177,6 +8510,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelOnlySummary(v **types.Rou
 				}
 				sv.BestCaseDuration = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8189,6 +8523,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelOnlySummary(v **types.Rou
 				}
 				sv.Duration = i64
 			}
+
 		case "TypicalDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8201,6 +8536,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelOnlySummary(v **types.Rou
 				}
 				sv.TypicalDuration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8236,14 +8572,17 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 			if err := awsRestjson1_deserializeDocumentRouteContinueHighwayStepDetails(&sv.ContinueHighwayStepDetails, value); err != nil {
 				return err
 			}
+
 		case "ContinueStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteContinueStepDetails(&sv.ContinueStepDetails, value); err != nil {
 				return err
 			}
+
 		case "CurrentRoad":
 			if err := awsRestjson1_deserializeDocumentRouteRoad(&sv.CurrentRoad, value); err != nil {
 				return err
 			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8256,6 +8595,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 				}
 				sv.Distance = i64
 			}
+
 		case "Duration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8268,18 +8608,22 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 				}
 				sv.Duration = i64
 			}
+
 		case "EnterHighwayStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteEnterHighwayStepDetails(&sv.EnterHighwayStepDetails, value); err != nil {
 				return err
 			}
+
 		case "ExitNumber":
 			if err := awsRestjson1_deserializeDocumentLocalizedStringList(&sv.ExitNumber, value); err != nil {
 				return err
 			}
+
 		case "ExitStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteExitStepDetails(&sv.ExitStepDetails, value); err != nil {
 				return err
 			}
+
 		case "GeometryOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8292,6 +8636,7 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 				}
 				sv.GeometryOffset = ptr.Int32(int32(i64))
 			}
+
 		case "Instruction":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8300,38 +8645,47 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 				}
 				sv.Instruction = ptr.String(jtv)
 			}
+
 		case "KeepStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteKeepStepDetails(&sv.KeepStepDetails, value); err != nil {
 				return err
 			}
+
 		case "NextRoad":
 			if err := awsRestjson1_deserializeDocumentRouteRoad(&sv.NextRoad, value); err != nil {
 				return err
 			}
+
 		case "RampStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRampStepDetails(&sv.RampStepDetails, value); err != nil {
 				return err
 			}
+
 		case "RoundaboutEnterStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRoundaboutEnterStepDetails(&sv.RoundaboutEnterStepDetails, value); err != nil {
 				return err
 			}
+
 		case "RoundaboutExitStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRoundaboutExitStepDetails(&sv.RoundaboutExitStepDetails, value); err != nil {
 				return err
 			}
+
 		case "RoundaboutPassStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteRoundaboutPassStepDetails(&sv.RoundaboutPassStepDetails, value); err != nil {
 				return err
 			}
+
 		case "Signpost":
 			if err := awsRestjson1_deserializeDocumentRouteSignpost(&sv.Signpost, value); err != nil {
 				return err
 			}
+
 		case "TurnStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteTurnStepDetails(&sv.TurnStepDetails, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8340,10 +8694,12 @@ func awsRestjson1_deserializeDocumentRouteVehicleTravelStep(v **types.RouteVehic
 				}
 				sv.Type = types.RouteVehicleTravelStepType(jtv)
 			}
+
 		case "UTurnStepDetails":
 			if err := awsRestjson1_deserializeDocumentRouteUTurnStepDetails(&sv.UTurnStepDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8417,14 +8773,17 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.AllHazardsRestricted = ptr.Bool(jtv)
 			}
+
 		case "AxleCount":
 			if err := awsRestjson1_deserializeDocumentRouteNoticeDetailRange(&sv.AxleCount, value); err != nil {
 				return err
 			}
+
 		case "HazardousCargos":
 			if err := awsRestjson1_deserializeDocumentRouteHazardousCargoTypeList(&sv.HazardousCargos, value); err != nil {
 				return err
 			}
+
 		case "MaxHeight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8437,6 +8796,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.MaxHeight = i64
 			}
+
 		case "MaxKpraLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8449,6 +8809,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.MaxKpraLength = i64
 			}
+
 		case "MaxLength":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8461,6 +8822,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.MaxLength = i64
 			}
+
 		case "MaxPayloadCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8473,10 +8835,12 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.MaxPayloadCapacity = i64
 			}
+
 		case "MaxWeight":
 			if err := awsRestjson1_deserializeDocumentRouteWeightConstraint(&sv.MaxWeight, value); err != nil {
 				return err
 			}
+
 		case "MaxWeightPerAxle":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8489,10 +8853,12 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.MaxWeightPerAxle = i64
 			}
+
 		case "MaxWeightPerAxleGroup":
 			if err := awsRestjson1_deserializeDocumentWeightPerAxleGroup(&sv.MaxWeightPerAxleGroup, value); err != nil {
 				return err
 			}
+
 		case "MaxWidth":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8505,10 +8871,12 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.MaxWidth = i64
 			}
+
 		case "Occupancy":
 			if err := awsRestjson1_deserializeDocumentRouteNoticeDetailRange(&sv.Occupancy, value); err != nil {
 				return err
 			}
+
 		case "RestrictedTimes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8517,6 +8885,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.RestrictedTimes = ptr.String(jtv)
 			}
+
 		case "TimeDependent":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8525,10 +8894,12 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.TimeDependent = ptr.Bool(jtv)
 			}
+
 		case "TrailerCount":
 			if err := awsRestjson1_deserializeDocumentRouteNoticeDetailRange(&sv.TrailerCount, value); err != nil {
 				return err
 			}
+
 		case "TravelMode":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8537,6 +8908,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.TravelMode = ptr.Bool(jtv)
 			}
+
 		case "TruckRoadType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8545,6 +8917,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.TruckRoadType = ptr.String(jtv)
 			}
+
 		case "TruckType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8553,6 +8926,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.TruckType = types.RouteTruckType(jtv)
 			}
+
 		case "TunnelRestrictionCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8561,6 +8935,7 @@ func awsRestjson1_deserializeDocumentRouteViolatedConstraints(v **types.RouteVio
 				}
 				sv.TunnelRestrictionCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8600,6 +8975,7 @@ func awsRestjson1_deserializeDocumentRouteWeightConstraint(v **types.RouteWeight
 				}
 				sv.Type = types.RouteWeightConstraintType(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8612,6 +8988,7 @@ func awsRestjson1_deserializeDocumentRouteWeightConstraint(v **types.RouteWeight
 				}
 				sv.Value = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8651,6 +9028,7 @@ func awsRestjson1_deserializeDocumentRouteZone(v **types.RouteZone, value interf
 				}
 				sv.Category = types.RouteZoneCategory(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8659,6 +9037,7 @@ func awsRestjson1_deserializeDocumentRouteZone(v **types.RouteZone, value interf
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8732,6 +9111,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8803,6 +9183,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8811,6 +9192,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8819,6 +9201,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8858,6 +9241,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8866,6 +9250,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8943,6 +9328,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationConnection(v **types.Wa
 				}
 				sv.Distance = i64
 			}
+
 		case "From":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8951,6 +9337,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationConnection(v **types.Wa
 				}
 				sv.From = ptr.String(jtv)
 			}
+
 		case "RestDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8963,6 +9350,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationConnection(v **types.Wa
 				}
 				sv.RestDuration = i64
 			}
+
 		case "To":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8971,6 +9359,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationConnection(v **types.Wa
 				}
 				sv.To = ptr.String(jtv)
 			}
+
 		case "TravelDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8983,6 +9372,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationConnection(v **types.Wa
 				}
 				sv.TravelDuration = i64
 			}
+
 		case "WaitDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8995,6 +9385,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationConnection(v **types.Wa
 				}
 				sv.WaitDuration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9068,6 +9459,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationFailedConstraint(v **ty
 				}
 				sv.Constraint = types.WaypointOptimizationConstraint(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9076,6 +9468,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationFailedConstraint(v **ty
 				}
 				sv.Reason = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9145,6 +9538,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationImpedingWaypoint(v **ty
 			if err := awsRestjson1_deserializeDocumentWaypointOptimizationFailedConstraintList(&sv.FailedConstraints, value); err != nil {
 				return err
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9153,10 +9547,12 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationImpedingWaypoint(v **ty
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9230,6 +9626,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationOptimizedWaypoint(v **t
 				}
 				sv.ArrivalTime = ptr.String(jtv)
 			}
+
 		case "DepartureTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9238,6 +9635,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationOptimizedWaypoint(v **t
 				}
 				sv.DepartureTime = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9246,10 +9644,12 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationOptimizedWaypoint(v **t
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9327,6 +9727,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationTimeBreakdown(v **types
 				}
 				sv.RestDuration = i64
 			}
+
 		case "ServiceDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9339,6 +9740,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationTimeBreakdown(v **types
 				}
 				sv.ServiceDuration = i64
 			}
+
 		case "TravelDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9351,6 +9753,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationTimeBreakdown(v **types
 				}
 				sv.TravelDuration = i64
 			}
+
 		case "WaitDuration":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9363,6 +9766,7 @@ func awsRestjson1_deserializeDocumentWaypointOptimizationTimeBreakdown(v **types
 				}
 				sv.WaitDuration = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9406,6 +9810,7 @@ func awsRestjson1_deserializeDocumentWeightPerAxleGroup(v **types.WeightPerAxleG
 				}
 				sv.Quad = i64
 			}
+
 		case "Quint":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9418,6 +9823,7 @@ func awsRestjson1_deserializeDocumentWeightPerAxleGroup(v **types.WeightPerAxleG
 				}
 				sv.Quint = i64
 			}
+
 		case "Single":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9430,6 +9836,7 @@ func awsRestjson1_deserializeDocumentWeightPerAxleGroup(v **types.WeightPerAxleG
 				}
 				sv.Single = i64
 			}
+
 		case "Tandem":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9442,6 +9849,7 @@ func awsRestjson1_deserializeDocumentWeightPerAxleGroup(v **types.WeightPerAxleG
 				}
 				sv.Tandem = i64
 			}
+
 		case "Triple":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9454,6 +9862,7 @@ func awsRestjson1_deserializeDocumentWeightPerAxleGroup(v **types.WeightPerAxleG
 				}
 				sv.Triple = i64
 			}
+
 		default:
 			_, _ = key, value
 

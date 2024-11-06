@@ -282,6 +282,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.CustomerIdentifier = ptr.String(jtv)
 			}
+
 		case "Dimension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -290,6 +291,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.Dimension = ptr.String(jtv)
 			}
+
 		case "ExpirationDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -305,6 +307,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 
 				}
 			}
+
 		case "ProductCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -313,10 +316,12 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.ProductCode = ptr.String(jtv)
 			}
+
 		case "Value":
 			if err := awsAwsjson11_deserializeDocumentEntitlementValue(&sv.Value, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -390,6 +395,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				}
 				sv.BooleanValue = ptr.Bool(jtv)
 			}
+
 		case "DoubleValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -423,6 +429,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 
 				}
 			}
+
 		case "IntegerValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -435,6 +442,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				}
 				sv.IntegerValue = ptr.Int32(int32(i64))
 			}
+
 		case "StringValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -443,6 +451,7 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue
 				}
 				sv.StringValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -482,6 +491,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -521,6 +531,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -560,6 +571,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -595,6 +607,7 @@ func awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(v **GetEntitlements
 			if err := awsAwsjson11_deserializeDocumentEntitlementList(&sv.Entitlements, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -603,6 +616,7 @@ func awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(v **GetEntitlements
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

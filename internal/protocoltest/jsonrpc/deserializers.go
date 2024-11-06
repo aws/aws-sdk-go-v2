@@ -2084,6 +2084,7 @@ func awsAwsjson11_deserializeDocumentComplexError(v **types.ComplexError, value 
 			if err := awsAwsjson11_deserializeDocumentComplexNestedErrorData(&sv.Nested, value); err != nil {
 				return err
 			}
+
 		case "TopLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2092,6 +2093,7 @@ func awsAwsjson11_deserializeDocumentComplexError(v **types.ComplexError, value 
 				}
 				sv.TopLevel = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2131,6 +2133,7 @@ func awsAwsjson11_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 				}
 				sv.Foo = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2209,10 +2212,12 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "ComplexData":
 			if err := awsAwsjson11_deserializeDocumentKitchenSink(&sv.ComplexData, value); err != nil {
 				return err
 			}
+
 		case "IntegerField":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2225,14 +2230,17 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 				}
 				sv.IntegerField = ptr.Int32(int32(i64))
 			}
+
 		case "ListField":
 			if err := awsAwsjson11_deserializeDocumentListOfStrings(&sv.ListField, value); err != nil {
 				return err
 			}
+
 		case "MapField":
 			if err := awsAwsjson11_deserializeDocumentMapOfStrings(&sv.MapField, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2241,6 +2249,7 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "StringField":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2249,6 +2258,7 @@ func awsAwsjson11_deserializeDocumentErrorWithMembers(v **types.ErrorWithMembers
 				}
 				sv.StringField = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2350,6 +2360,7 @@ func awsAwsjson11_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2393,6 +2404,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.Blob = dv
 			}
+
 		case "Boolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2401,6 +2413,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.Boolean = ptr.Bool(jtv)
 			}
+
 		case "Double":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2434,10 +2447,12 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 
 				}
 			}
+
 		case "EmptyStruct":
 			if err := awsAwsjson11_deserializeDocumentEmptyStruct(&sv.EmptyStruct, value); err != nil {
 				return err
 			}
+
 		case "Float":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2471,6 +2486,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 
 				}
 			}
+
 		case "HttpdateTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2483,6 +2499,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.HttpdateTimestamp = ptr.Time(t)
 			}
+
 		case "Integer":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2495,6 +2512,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.Integer = ptr.Int32(int32(i64))
 			}
+
 		case "Iso8601Timestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2507,6 +2525,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.Iso8601Timestamp = ptr.Time(t)
 			}
+
 		case "JsonValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2515,22 +2534,27 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.JsonValue = ptr.String(jtv)
 			}
+
 		case "ListOfLists":
 			if err := awsAwsjson11_deserializeDocumentListOfListOfStrings(&sv.ListOfLists, value); err != nil {
 				return err
 			}
+
 		case "ListOfMapsOfStrings":
 			if err := awsAwsjson11_deserializeDocumentListOfMapsOfStrings(&sv.ListOfMapsOfStrings, value); err != nil {
 				return err
 			}
+
 		case "ListOfStrings":
 			if err := awsAwsjson11_deserializeDocumentListOfStrings(&sv.ListOfStrings, value); err != nil {
 				return err
 			}
+
 		case "ListOfStructs":
 			if err := awsAwsjson11_deserializeDocumentListOfStructs(&sv.ListOfStructs, value); err != nil {
 				return err
 			}
+
 		case "Long":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2543,38 +2567,47 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.Long = ptr.Int64(i64)
 			}
+
 		case "MapOfListsOfStrings":
 			if err := awsAwsjson11_deserializeDocumentMapOfListsOfStrings(&sv.MapOfListsOfStrings, value); err != nil {
 				return err
 			}
+
 		case "MapOfMaps":
 			if err := awsAwsjson11_deserializeDocumentMapOfMapOfStrings(&sv.MapOfMaps, value); err != nil {
 				return err
 			}
+
 		case "MapOfStrings":
 			if err := awsAwsjson11_deserializeDocumentMapOfStrings(&sv.MapOfStrings, value); err != nil {
 				return err
 			}
+
 		case "MapOfStructs":
 			if err := awsAwsjson11_deserializeDocumentMapOfStructs(&sv.MapOfStructs, value); err != nil {
 				return err
 			}
+
 		case "RecursiveList":
 			if err := awsAwsjson11_deserializeDocumentListOfKitchenSinks(&sv.RecursiveList, value); err != nil {
 				return err
 			}
+
 		case "RecursiveMap":
 			if err := awsAwsjson11_deserializeDocumentMapOfKitchenSinks(&sv.RecursiveMap, value); err != nil {
 				return err
 			}
+
 		case "RecursiveStruct":
 			if err := awsAwsjson11_deserializeDocumentKitchenSink(&sv.RecursiveStruct, value); err != nil {
 				return err
 			}
+
 		case "SimpleStruct":
 			if err := awsAwsjson11_deserializeDocumentSimpleStruct(&sv.SimpleStruct, value); err != nil {
 				return err
 			}
+
 		case "String":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2583,10 +2616,12 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 				}
 				sv.String_ = ptr.String(jtv)
 			}
+
 		case "StructWithJsonName":
 			if err := awsAwsjson11_deserializeDocumentStructWithJsonName(&sv.StructWithJsonName, value); err != nil {
 				return err
 			}
+
 		case "Timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2602,6 +2637,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 
 				}
 			}
+
 		case "UnixTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2617,6 +2653,7 @@ func awsAwsjson11_deserializeDocumentKitchenSink(v **types.KitchenSink, value in
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3141,6 +3178,7 @@ func awsAwsjson11_deserializeDocumentSimpleStruct(v **types.SimpleStruct, value 
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3180,6 +3218,7 @@ func awsAwsjson11_deserializeDocumentStructWithJsonName(v **types.StructWithJson
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3327,6 +3366,7 @@ func awsAwsjson11_deserializeDocumentGreetingStruct(v **types.GreetingStruct, va
 				}
 				sv.Hi = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3665,6 +3705,7 @@ func awsAwsjson11_deserializeOpDocumentDatetimeOffsetsOutput(v **DatetimeOffsets
 				}
 				sv.Datetime = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3708,6 +3749,7 @@ func awsAwsjson11_deserializeOpDocumentFractionalSecondsOutput(v **FractionalSec
 				}
 				sv.Datetime = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3747,6 +3789,7 @@ func awsAwsjson11_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWith
 				}
 				sv.Greeting = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3786,6 +3829,7 @@ func awsAwsjson11_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, valu
 				}
 				sv.FooEnum1 = types.FooEnum(jtv)
 			}
+
 		case "fooEnum2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3794,6 +3838,7 @@ func awsAwsjson11_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, valu
 				}
 				sv.FooEnum2 = types.FooEnum(jtv)
 			}
+
 		case "fooEnum3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3802,18 +3847,22 @@ func awsAwsjson11_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, valu
 				}
 				sv.FooEnum3 = types.FooEnum(jtv)
 			}
+
 		case "fooEnumList":
 			if err := awsAwsjson11_deserializeDocumentFooEnumList(&sv.FooEnumList, value); err != nil {
 				return err
 			}
+
 		case "fooEnumMap":
 			if err := awsAwsjson11_deserializeDocumentFooEnumMap(&sv.FooEnumMap, value); err != nil {
 				return err
 			}
+
 		case "fooEnumSet":
 			if err := awsAwsjson11_deserializeDocumentFooEnumSet(&sv.FooEnumSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3857,6 +3906,7 @@ func awsAwsjson11_deserializeOpDocumentJsonIntEnumsOutput(v **JsonIntEnumsOutput
 				}
 				sv.IntEnum1 = int32(i64)
 			}
+
 		case "intEnum2":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3869,6 +3919,7 @@ func awsAwsjson11_deserializeOpDocumentJsonIntEnumsOutput(v **JsonIntEnumsOutput
 				}
 				sv.IntEnum2 = int32(i64)
 			}
+
 		case "intEnum3":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3881,18 +3932,22 @@ func awsAwsjson11_deserializeOpDocumentJsonIntEnumsOutput(v **JsonIntEnumsOutput
 				}
 				sv.IntEnum3 = int32(i64)
 			}
+
 		case "intEnumList":
 			if err := awsAwsjson11_deserializeDocumentIntegerEnumList(&sv.IntEnumList, value); err != nil {
 				return err
 			}
+
 		case "intEnumMap":
 			if err := awsAwsjson11_deserializeDocumentIntegerEnumMap(&sv.IntEnumMap, value); err != nil {
 				return err
 			}
+
 		case "intEnumSet":
 			if err := awsAwsjson11_deserializeDocumentIntegerEnumSet(&sv.IntEnumSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3928,6 +3983,7 @@ func awsAwsjson11_deserializeOpDocumentJsonUnionsOutput(v **JsonUnionsOutput, va
 			if err := awsAwsjson11_deserializeDocumentMyUnion(&sv.Contents, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3971,6 +4027,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.Blob = dv
 			}
+
 		case "Boolean":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3979,6 +4036,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.Boolean = ptr.Bool(jtv)
 			}
+
 		case "Double":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4012,10 +4070,12 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 
 				}
 			}
+
 		case "EmptyStruct":
 			if err := awsAwsjson11_deserializeDocumentEmptyStruct(&sv.EmptyStruct, value); err != nil {
 				return err
 			}
+
 		case "Float":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4049,6 +4109,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 
 				}
 			}
+
 		case "HttpdateTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4061,6 +4122,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.HttpdateTimestamp = ptr.Time(t)
 			}
+
 		case "Integer":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4073,6 +4135,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.Integer = ptr.Int32(int32(i64))
 			}
+
 		case "Iso8601Timestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4085,6 +4148,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.Iso8601Timestamp = ptr.Time(t)
 			}
+
 		case "JsonValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4093,22 +4157,27 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.JsonValue = ptr.String(jtv)
 			}
+
 		case "ListOfLists":
 			if err := awsAwsjson11_deserializeDocumentListOfListOfStrings(&sv.ListOfLists, value); err != nil {
 				return err
 			}
+
 		case "ListOfMapsOfStrings":
 			if err := awsAwsjson11_deserializeDocumentListOfMapsOfStrings(&sv.ListOfMapsOfStrings, value); err != nil {
 				return err
 			}
+
 		case "ListOfStrings":
 			if err := awsAwsjson11_deserializeDocumentListOfStrings(&sv.ListOfStrings, value); err != nil {
 				return err
 			}
+
 		case "ListOfStructs":
 			if err := awsAwsjson11_deserializeDocumentListOfStructs(&sv.ListOfStructs, value); err != nil {
 				return err
 			}
+
 		case "Long":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4121,38 +4190,47 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.Long = ptr.Int64(i64)
 			}
+
 		case "MapOfListsOfStrings":
 			if err := awsAwsjson11_deserializeDocumentMapOfListsOfStrings(&sv.MapOfListsOfStrings, value); err != nil {
 				return err
 			}
+
 		case "MapOfMaps":
 			if err := awsAwsjson11_deserializeDocumentMapOfMapOfStrings(&sv.MapOfMaps, value); err != nil {
 				return err
 			}
+
 		case "MapOfStrings":
 			if err := awsAwsjson11_deserializeDocumentMapOfStrings(&sv.MapOfStrings, value); err != nil {
 				return err
 			}
+
 		case "MapOfStructs":
 			if err := awsAwsjson11_deserializeDocumentMapOfStructs(&sv.MapOfStructs, value); err != nil {
 				return err
 			}
+
 		case "RecursiveList":
 			if err := awsAwsjson11_deserializeDocumentListOfKitchenSinks(&sv.RecursiveList, value); err != nil {
 				return err
 			}
+
 		case "RecursiveMap":
 			if err := awsAwsjson11_deserializeDocumentMapOfKitchenSinks(&sv.RecursiveMap, value); err != nil {
 				return err
 			}
+
 		case "RecursiveStruct":
 			if err := awsAwsjson11_deserializeDocumentKitchenSink(&sv.RecursiveStruct, value); err != nil {
 				return err
 			}
+
 		case "SimpleStruct":
 			if err := awsAwsjson11_deserializeDocumentSimpleStruct(&sv.SimpleStruct, value); err != nil {
 				return err
 			}
+
 		case "String":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4161,10 +4239,12 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 				}
 				sv.String_ = ptr.String(jtv)
 			}
+
 		case "StructWithJsonName":
 			if err := awsAwsjson11_deserializeDocumentStructWithJsonName(&sv.StructWithJsonName, value); err != nil {
 				return err
 			}
+
 		case "Timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4180,6 +4260,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 
 				}
 			}
+
 		case "UnixTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4195,6 +4276,7 @@ func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSin
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4234,6 +4316,7 @@ func awsAwsjson11_deserializeOpDocumentNullOperationOutput(v **NullOperationOutp
 				}
 				sv.String_ = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4273,6 +4356,7 @@ func awsAwsjson11_deserializeOpDocumentOperationWithOptionalInputOutputOutput(v 
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4308,6 +4392,7 @@ func awsAwsjson11_deserializeOpDocumentPutAndGetInlineDocumentsOutput(v **PutAnd
 			if err := awsAwsjson11_deserializeDocumentDocument(&sv.InlineDocument, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4372,6 +4457,7 @@ func awsAwsjson11_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 
 				}
 			}
+
 		case "floatValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4405,6 +4491,7 @@ func awsAwsjson11_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleSc
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4440,10 +4527,12 @@ func awsAwsjson11_deserializeOpDocumentSparseNullsOperationOutput(v **SparseNull
 			if err := awsAwsjson11_deserializeDocumentSparseStringList(&sv.SparseStringList, value); err != nil {
 				return err
 			}
+
 		case "sparseStringMap":
 			if err := awsAwsjson11_deserializeDocumentSparseStringMap(&sv.SparseStringMap, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

@@ -194,6 +194,7 @@ func awsRestjson1_deserializeOpDocumentCreateMonitorOutput(v **CreateMonitorOutp
 				}
 				sv.AggregationPeriod = ptr.Int64(i64)
 			}
+
 		case "monitorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -202,6 +203,7 @@ func awsRestjson1_deserializeOpDocumentCreateMonitorOutput(v **CreateMonitorOutp
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		case "monitorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -210,6 +212,7 @@ func awsRestjson1_deserializeOpDocumentCreateMonitorOutput(v **CreateMonitorOutp
 				}
 				sv.MonitorName = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -218,10 +221,12 @@ func awsRestjson1_deserializeOpDocumentCreateMonitorOutput(v **CreateMonitorOutp
 				}
 				sv.State = types.MonitorState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -392,6 +397,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -407,6 +413,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 
 				}
 			}
+
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -415,6 +422,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.Destination = ptr.String(jtv)
 			}
+
 		case "destinationPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -427,6 +435,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.DestinationPort = ptr.Int32(int32(i64))
 			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -442,6 +451,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 
 				}
 			}
+
 		case "packetSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -454,6 +464,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.PacketSize = ptr.Int32(int32(i64))
 			}
+
 		case "probeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -462,6 +473,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.ProbeArn = ptr.String(jtv)
 			}
+
 		case "probeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -470,6 +482,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.ProbeId = ptr.String(jtv)
 			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -478,6 +491,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.Protocol = types.Protocol(jtv)
 			}
+
 		case "sourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -486,6 +500,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -494,10 +509,12 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.State = types.ProbeState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "vpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -506,6 +523,7 @@ func awsRestjson1_deserializeOpDocumentCreateProbeOutput(v **CreateProbeOutput, 
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -880,6 +898,7 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 				}
 				sv.AggregationPeriod = ptr.Int64(i64)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -895,6 +914,7 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 
 				}
 			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -910,6 +930,7 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 
 				}
 			}
+
 		case "monitorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -918,6 +939,7 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		case "monitorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -926,10 +948,12 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 				}
 				sv.MonitorName = ptr.String(jtv)
 			}
+
 		case "probes":
 			if err := awsRestjson1_deserializeDocumentProbeList(&sv.Probes, value); err != nil {
 				return err
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -938,10 +962,12 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 				}
 				sv.State = types.MonitorState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1109,6 +1135,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1124,6 +1151,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 
 				}
 			}
+
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1132,6 +1160,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.Destination = ptr.String(jtv)
 			}
+
 		case "destinationPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1144,6 +1173,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.DestinationPort = ptr.Int32(int32(i64))
 			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1159,6 +1189,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 
 				}
 			}
+
 		case "packetSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1171,6 +1202,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.PacketSize = ptr.Int32(int32(i64))
 			}
+
 		case "probeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1179,6 +1211,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.ProbeArn = ptr.String(jtv)
 			}
+
 		case "probeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1187,6 +1220,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.ProbeId = ptr.String(jtv)
 			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1195,6 +1229,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.Protocol = types.Protocol(jtv)
 			}
+
 		case "sourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1203,6 +1238,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1211,10 +1247,12 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.State = types.ProbeState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "vpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1223,6 +1261,7 @@ func awsRestjson1_deserializeOpDocumentGetProbeOutput(v **GetProbeOutput, value 
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1383,6 +1422,7 @@ func awsRestjson1_deserializeOpDocumentListMonitorsOutput(v **ListMonitorsOutput
 			if err := awsRestjson1_deserializeDocumentMonitorList(&sv.Monitors, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1391,6 +1431,7 @@ func awsRestjson1_deserializeOpDocumentListMonitorsOutput(v **ListMonitorsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1557,6 +1598,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1937,6 +1979,7 @@ func awsRestjson1_deserializeOpDocumentUpdateMonitorOutput(v **UpdateMonitorOutp
 				}
 				sv.AggregationPeriod = ptr.Int64(i64)
 			}
+
 		case "monitorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1945,6 +1988,7 @@ func awsRestjson1_deserializeOpDocumentUpdateMonitorOutput(v **UpdateMonitorOutp
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		case "monitorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1953,6 +1997,7 @@ func awsRestjson1_deserializeOpDocumentUpdateMonitorOutput(v **UpdateMonitorOutp
 				}
 				sv.MonitorName = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1961,10 +2006,12 @@ func awsRestjson1_deserializeOpDocumentUpdateMonitorOutput(v **UpdateMonitorOutp
 				}
 				sv.State = types.MonitorState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2135,6 +2182,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2150,6 +2198,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 
 				}
 			}
+
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2158,6 +2207,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.Destination = ptr.String(jtv)
 			}
+
 		case "destinationPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2170,6 +2220,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.DestinationPort = ptr.Int32(int32(i64))
 			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2185,6 +2236,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 
 				}
 			}
+
 		case "packetSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2197,6 +2249,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.PacketSize = ptr.Int32(int32(i64))
 			}
+
 		case "probeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2205,6 +2258,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.ProbeArn = ptr.String(jtv)
 			}
+
 		case "probeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2213,6 +2267,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.ProbeId = ptr.String(jtv)
 			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2221,6 +2276,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.Protocol = types.Protocol(jtv)
 			}
+
 		case "sourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2229,6 +2285,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2237,10 +2294,12 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.State = types.ProbeState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "vpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2249,6 +2308,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProbeOutput(v **UpdateProbeOutput, 
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2540,6 +2600,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2579,6 +2640,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2618,6 +2680,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2695,6 +2758,7 @@ func awsRestjson1_deserializeDocumentMonitorSummary(v **types.MonitorSummary, va
 				}
 				sv.AggregationPeriod = ptr.Int64(i64)
 			}
+
 		case "monitorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2703,6 +2767,7 @@ func awsRestjson1_deserializeDocumentMonitorSummary(v **types.MonitorSummary, va
 				}
 				sv.MonitorArn = ptr.String(jtv)
 			}
+
 		case "monitorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2711,6 +2776,7 @@ func awsRestjson1_deserializeDocumentMonitorSummary(v **types.MonitorSummary, va
 				}
 				sv.MonitorName = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2719,10 +2785,12 @@ func awsRestjson1_deserializeDocumentMonitorSummary(v **types.MonitorSummary, va
 				}
 				sv.State = types.MonitorState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2762,6 +2830,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.AddressFamily = types.AddressFamily(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2777,6 +2846,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 
 				}
 			}
+
 		case "destination":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2785,6 +2855,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.Destination = ptr.String(jtv)
 			}
+
 		case "destinationPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2797,6 +2868,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.DestinationPort = ptr.Int32(int32(i64))
 			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2812,6 +2884,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 
 				}
 			}
+
 		case "packetSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2824,6 +2897,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.PacketSize = ptr.Int32(int32(i64))
 			}
+
 		case "probeArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2832,6 +2906,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.ProbeArn = ptr.String(jtv)
 			}
+
 		case "probeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2840,6 +2915,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.ProbeId = ptr.String(jtv)
 			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2848,6 +2924,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.Protocol = types.Protocol(jtv)
 			}
+
 		case "sourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2856,6 +2933,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.SourceArn = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2864,10 +2942,12 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.State = types.ProbeState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "vpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2876,6 +2956,7 @@ func awsRestjson1_deserializeDocumentProbe(v **types.Probe, value interface{}) e
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2949,6 +3030,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2988,6 +3070,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3063,6 +3146,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3102,6 +3186,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

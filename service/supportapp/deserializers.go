@@ -569,6 +569,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountAliasOutput(v **GetAccountAlias
 				}
 				sv.AccountAlias = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -727,10 +728,12 @@ func awsRestjson1_deserializeOpDocumentListSlackChannelConfigurationsOutput(v **
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "slackChannelConfigurations":
 			if err := awsRestjson1_deserializeDocumentSlackChannelConfigurationList(&sv.SlackChannelConfigurations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -889,10 +892,12 @@ func awsRestjson1_deserializeOpDocumentListSlackWorkspaceConfigurationsOutput(v 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "slackWorkspaceConfigurations":
 			if err := awsRestjson1_deserializeDocumentSlackWorkspaceConfigurationList(&sv.SlackWorkspaceConfigurations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1154,6 +1159,7 @@ func awsRestjson1_deserializeOpDocumentRegisterSlackWorkspaceForOrganizationOutp
 				}
 				sv.AccountType = types.AccountType(jtv)
 			}
+
 		case "teamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1162,6 +1168,7 @@ func awsRestjson1_deserializeOpDocumentRegisterSlackWorkspaceForOrganizationOutp
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
+
 		case "teamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1170,6 +1177,7 @@ func awsRestjson1_deserializeOpDocumentRegisterSlackWorkspaceForOrganizationOutp
 				}
 				sv.TeamName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1337,6 +1345,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.ChannelId = ptr.String(jtv)
 			}
+
 		case "channelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1345,6 +1354,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
+
 		case "channelRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1353,6 +1363,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.ChannelRoleArn = ptr.String(jtv)
 			}
+
 		case "notifyOnAddCorrespondenceToCase":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1361,6 +1372,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.NotifyOnAddCorrespondenceToCase = ptr.Bool(jtv)
 			}
+
 		case "notifyOnCaseSeverity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1369,6 +1381,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.NotifyOnCaseSeverity = types.NotificationSeverityLevel(jtv)
 			}
+
 		case "notifyOnCreateOrReopenCase":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1377,6 +1390,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.NotifyOnCreateOrReopenCase = ptr.Bool(jtv)
 			}
+
 		case "notifyOnResolveCase":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1385,6 +1399,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.NotifyOnResolveCase = ptr.Bool(jtv)
 			}
+
 		case "teamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1393,6 +1408,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSlackChannelConfigurationOutput(v *
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1648,6 +1664,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1687,6 +1704,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1726,6 +1744,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1765,6 +1784,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1804,6 +1824,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1843,6 +1864,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.ChannelId = ptr.String(jtv)
 			}
+
 		case "channelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1851,6 +1873,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.ChannelName = ptr.String(jtv)
 			}
+
 		case "channelRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1859,6 +1882,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.ChannelRoleArn = ptr.String(jtv)
 			}
+
 		case "notifyOnAddCorrespondenceToCase":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1867,6 +1891,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.NotifyOnAddCorrespondenceToCase = ptr.Bool(jtv)
 			}
+
 		case "notifyOnCaseSeverity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1875,6 +1900,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.NotifyOnCaseSeverity = types.NotificationSeverityLevel(jtv)
 			}
+
 		case "notifyOnCreateOrReopenCase":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1883,6 +1909,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.NotifyOnCreateOrReopenCase = ptr.Bool(jtv)
 			}
+
 		case "notifyOnResolveCase":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1891,6 +1918,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.NotifyOnResolveCase = ptr.Bool(jtv)
 			}
+
 		case "teamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1899,6 +1927,7 @@ func awsRestjson1_deserializeDocumentSlackChannelConfiguration(v **types.SlackCh
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1972,6 +2001,7 @@ func awsRestjson1_deserializeDocumentSlackWorkspaceConfiguration(v **types.Slack
 				}
 				sv.AllowOrganizationMemberAccount = ptr.Bool(jtv)
 			}
+
 		case "teamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1980,6 +2010,7 @@ func awsRestjson1_deserializeDocumentSlackWorkspaceConfiguration(v **types.Slack
 				}
 				sv.TeamId = ptr.String(jtv)
 			}
+
 		case "teamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1988,6 +2019,7 @@ func awsRestjson1_deserializeDocumentSlackWorkspaceConfiguration(v **types.Slack
 				}
 				sv.TeamName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2061,6 +2093,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

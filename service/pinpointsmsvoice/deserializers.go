@@ -577,6 +577,7 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationSetEventDestinationsOutpu
 			if err := awsRestjson1_deserializeDocumentEventDestinations(&sv.EventDestinations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -734,6 +735,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfi
 			if err := awsRestjson1_deserializeDocumentConfigurationSets(&sv.ConfigurationSets, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -742,6 +744,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -903,6 +906,7 @@ func awsRestjson1_deserializeOpDocumentSendVoiceMessageOutput(v **SendVoiceMessa
 				}
 				sv.MessageId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1255,6 +1259,7 @@ func awsRestjson1_deserializeDocumentAlreadyExistsException(v **types.AlreadyExi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1294,6 +1299,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1333,6 +1339,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsDestination(v **types.CloudWa
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
+
 		case "LogGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1341,6 +1348,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsDestination(v **types.CloudWa
 				}
 				sv.LogGroupArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1412,6 +1420,7 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 			if err := awsRestjson1_deserializeDocumentCloudWatchLogsDestination(&sv.CloudWatchLogsDestination, value); err != nil {
 				return err
 			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1420,14 +1429,17 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "KinesisFirehoseDestination":
 			if err := awsRestjson1_deserializeDocumentKinesisFirehoseDestination(&sv.KinesisFirehoseDestination, value); err != nil {
 				return err
 			}
+
 		case "MatchingEventTypes":
 			if err := awsRestjson1_deserializeDocumentEventTypes(&sv.MatchingEventTypes, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1436,10 +1448,12 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SnsDestination":
 			if err := awsRestjson1_deserializeDocumentSnsDestination(&sv.SnsDestination, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1549,6 +1563,7 @@ func awsRestjson1_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1588,6 +1603,7 @@ func awsRestjson1_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesi
 				}
 				sv.DeliveryStreamArn = ptr.String(jtv)
 			}
+
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1596,6 +1612,7 @@ func awsRestjson1_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesi
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1635,6 +1652,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1674,6 +1692,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1713,6 +1732,7 @@ func awsRestjson1_deserializeDocumentSnsDestination(v **types.SnsDestination, va
 				}
 				sv.TopicArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1752,6 +1772,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

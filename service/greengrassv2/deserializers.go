@@ -182,6 +182,7 @@ func awsRestjson1_deserializeOpDocumentAssociateServiceRoleToAccountOutput(v **A
 				}
 				sv.AssociatedAt = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -345,6 +346,7 @@ func awsRestjson1_deserializeOpDocumentBatchAssociateClientDeviceWithCoreDeviceO
 			if err := awsRestjson1_deserializeDocumentAssociateClientDeviceWithCoreDeviceErrorList(&sv.ErrorEntries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -508,6 +510,7 @@ func awsRestjson1_deserializeOpDocumentBatchDisassociateClientDeviceFromCoreDevi
 			if err := awsRestjson1_deserializeDocumentDisassociateClientDeviceFromCoreDeviceErrorList(&sv.ErrorEntries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -678,6 +681,7 @@ func awsRestjson1_deserializeOpDocumentCancelDeploymentOutput(v **CancelDeployme
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -851,6 +855,7 @@ func awsRestjson1_deserializeOpDocumentCreateComponentVersionOutput(v **CreateCo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "componentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -859,6 +864,7 @@ func awsRestjson1_deserializeOpDocumentCreateComponentVersionOutput(v **CreateCo
 				}
 				sv.ComponentName = ptr.String(jtv)
 			}
+
 		case "componentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -867,6 +873,7 @@ func awsRestjson1_deserializeOpDocumentCreateComponentVersionOutput(v **CreateCo
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -882,10 +889,12 @@ func awsRestjson1_deserializeOpDocumentCreateComponentVersionOutput(v **CreateCo
 
 				}
 			}
+
 		case "status":
 			if err := awsRestjson1_deserializeDocumentCloudComponentStatus(&sv.Status, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1059,6 +1068,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeploymentOutput(v **CreateDeployme
 				}
 				sv.DeploymentId = ptr.String(jtv)
 			}
+
 		case "iotJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1067,6 +1077,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeploymentOutput(v **CreateDeployme
 				}
 				sv.IotJobArn = ptr.String(jtv)
 			}
+
 		case "iotJobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1075,6 +1086,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeploymentOutput(v **CreateDeployme
 				}
 				sv.IotJobId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1569,6 +1581,7 @@ func awsRestjson1_deserializeOpDocumentDescribeComponentOutput(v **DescribeCompo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "componentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1577,6 +1590,7 @@ func awsRestjson1_deserializeOpDocumentDescribeComponentOutput(v **DescribeCompo
 				}
 				sv.ComponentName = ptr.String(jtv)
 			}
+
 		case "componentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1585,6 +1599,7 @@ func awsRestjson1_deserializeOpDocumentDescribeComponentOutput(v **DescribeCompo
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1600,6 +1615,7 @@ func awsRestjson1_deserializeOpDocumentDescribeComponentOutput(v **DescribeCompo
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1608,10 +1624,12 @@ func awsRestjson1_deserializeOpDocumentDescribeComponentOutput(v **DescribeCompo
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "platforms":
 			if err := awsRestjson1_deserializeDocumentComponentPlatformList(&sv.Platforms, value); err != nil {
 				return err
 			}
+
 		case "publisher":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1620,14 +1638,17 @@ func awsRestjson1_deserializeOpDocumentDescribeComponentOutput(v **DescribeCompo
 				}
 				sv.Publisher = ptr.String(jtv)
 			}
+
 		case "status":
 			if err := awsRestjson1_deserializeDocumentCloudComponentStatus(&sv.Status, value); err != nil {
 				return err
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1783,6 +1804,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateServiceRoleFromAccountOutput(
 				}
 				sv.DisassociatedAt = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1954,6 +1976,7 @@ func awsRestjson1_deserializeOpDocumentGetComponentOutput(v **GetComponentOutput
 				}
 				sv.Recipe = dv
 			}
+
 		case "recipeOutputFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1962,10 +1985,12 @@ func awsRestjson1_deserializeOpDocumentGetComponentOutput(v **GetComponentOutput
 				}
 				sv.RecipeOutputFormat = types.RecipeOutputFormat(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2133,6 +2158,7 @@ func awsRestjson1_deserializeOpDocumentGetComponentVersionArtifactOutput(v **Get
 				}
 				sv.PreSignedUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2287,6 +2313,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectivityInfoOutput(v **GetConnecti
 			if err := awsRestjson1_deserializeDocumentConnectivityInfoList(&sv.ConnectivityInfo, value); err != nil {
 				return err
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2295,6 +2322,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectivityInfoOutput(v **GetConnecti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2462,6 +2490,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 				}
 				sv.Architecture = ptr.String(jtv)
 			}
+
 		case "coreDeviceThingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2470,6 +2499,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 				}
 				sv.CoreDeviceThingName = ptr.String(jtv)
 			}
+
 		case "coreVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2478,6 +2508,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 				}
 				sv.CoreVersion = ptr.String(jtv)
 			}
+
 		case "lastStatusUpdateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2493,6 +2524,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 
 				}
 			}
+
 		case "platform":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2501,6 +2533,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 				}
 				sv.Platform = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2509,10 +2542,12 @@ func awsRestjson1_deserializeOpDocumentGetCoreDeviceOutput(v **GetCoreDeviceOutp
 				}
 				sv.Status = types.CoreDeviceStatus(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2676,6 +2711,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 			if err := awsRestjson1_deserializeDocumentComponentDeploymentSpecifications(&sv.Components, value); err != nil {
 				return err
 			}
+
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2691,6 +2727,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 
 				}
 			}
+
 		case "deploymentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2699,6 +2736,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.DeploymentId = ptr.String(jtv)
 			}
+
 		case "deploymentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2707,10 +2745,12 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.DeploymentName = ptr.String(jtv)
 			}
+
 		case "deploymentPolicies":
 			if err := awsRestjson1_deserializeDocumentDeploymentPolicies(&sv.DeploymentPolicies, value); err != nil {
 				return err
 			}
+
 		case "deploymentStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2719,6 +2759,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.DeploymentStatus = types.DeploymentStatus(jtv)
 			}
+
 		case "iotJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2727,10 +2768,12 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.IotJobArn = ptr.String(jtv)
 			}
+
 		case "iotJobConfiguration":
 			if err := awsRestjson1_deserializeDocumentDeploymentIoTJobConfiguration(&sv.IotJobConfiguration, value); err != nil {
 				return err
 			}
+
 		case "iotJobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2739,6 +2782,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.IotJobId = ptr.String(jtv)
 			}
+
 		case "isLatestForTarget":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2747,6 +2791,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.IsLatestForTarget = jtv
 			}
+
 		case "parentTargetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2755,6 +2800,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.ParentTargetArn = ptr.String(jtv)
 			}
+
 		case "revisionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2763,10 +2809,12 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "targetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2775,6 +2823,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutp
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2930,6 +2979,7 @@ func awsRestjson1_deserializeOpDocumentGetServiceRoleForAccountOutput(v **GetSer
 				}
 				sv.AssociatedAt = ptr.String(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2938,6 +2988,7 @@ func awsRestjson1_deserializeOpDocumentGetServiceRoleForAccountOutput(v **GetSer
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3101,6 +3152,7 @@ func awsRestjson1_deserializeOpDocumentListClientDevicesAssociatedWithCoreDevice
 			if err := awsRestjson1_deserializeDocumentAssociatedClientDeviceList(&sv.AssociatedClientDevices, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3109,6 +3161,7 @@ func awsRestjson1_deserializeOpDocumentListClientDevicesAssociatedWithCoreDevice
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3272,6 +3325,7 @@ func awsRestjson1_deserializeOpDocumentListComponentsOutput(v **ListComponentsOu
 			if err := awsRestjson1_deserializeDocumentComponentList(&sv.Components, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3280,6 +3334,7 @@ func awsRestjson1_deserializeOpDocumentListComponentsOutput(v **ListComponentsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3443,6 +3498,7 @@ func awsRestjson1_deserializeOpDocumentListComponentVersionsOutput(v **ListCompo
 			if err := awsRestjson1_deserializeDocumentComponentVersionList(&sv.ComponentVersions, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3451,6 +3507,7 @@ func awsRestjson1_deserializeOpDocumentListComponentVersionsOutput(v **ListCompo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3611,6 +3668,7 @@ func awsRestjson1_deserializeOpDocumentListCoreDevicesOutput(v **ListCoreDevices
 			if err := awsRestjson1_deserializeDocumentCoreDevicesList(&sv.CoreDevices, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3619,6 +3677,7 @@ func awsRestjson1_deserializeOpDocumentListCoreDevicesOutput(v **ListCoreDevices
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3779,6 +3838,7 @@ func awsRestjson1_deserializeOpDocumentListDeploymentsOutput(v **ListDeployments
 			if err := awsRestjson1_deserializeDocumentDeploymentList(&sv.Deployments, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3787,6 +3847,7 @@ func awsRestjson1_deserializeOpDocumentListDeploymentsOutput(v **ListDeployments
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3950,6 +4011,7 @@ func awsRestjson1_deserializeOpDocumentListEffectiveDeploymentsOutput(v **ListEf
 			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentsList(&sv.EffectiveDeployments, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3958,6 +4020,7 @@ func awsRestjson1_deserializeOpDocumentListEffectiveDeploymentsOutput(v **ListEf
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4121,6 +4184,7 @@ func awsRestjson1_deserializeOpDocumentListInstalledComponentsOutput(v **ListIns
 			if err := awsRestjson1_deserializeDocumentInstalledComponentList(&sv.InstalledComponents, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4129,6 +4193,7 @@ func awsRestjson1_deserializeOpDocumentListInstalledComponentsOutput(v **ListIns
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4286,6 +4351,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4452,6 +4518,7 @@ func awsRestjson1_deserializeOpDocumentResolveComponentCandidatesOutput(v **Reso
 			if err := awsRestjson1_deserializeDocumentResolvedComponentVersionsList(&sv.ResolvedComponentVersions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4798,6 +4865,7 @@ func awsRestjson1_deserializeOpDocumentUpdateConnectivityInfoOutput(v **UpdateCo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4806,6 +4874,7 @@ func awsRestjson1_deserializeOpDocumentUpdateConnectivityInfoOutput(v **UpdateCo
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5173,6 +5242,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5212,6 +5282,7 @@ func awsRestjson1_deserializeDocumentAssociateClientDeviceWithCoreDeviceErrorEnt
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5220,6 +5291,7 @@ func awsRestjson1_deserializeDocumentAssociateClientDeviceWithCoreDeviceErrorEnt
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "thingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5228,6 +5300,7 @@ func awsRestjson1_deserializeDocumentAssociateClientDeviceWithCoreDeviceErrorEnt
 				}
 				sv.ThingName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5308,6 +5381,7 @@ func awsRestjson1_deserializeDocumentAssociatedClientDevice(v **types.Associated
 
 				}
 			}
+
 		case "thingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5316,6 +5390,7 @@ func awsRestjson1_deserializeDocumentAssociatedClientDevice(v **types.Associated
 				}
 				sv.ThingName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5389,10 +5464,12 @@ func awsRestjson1_deserializeDocumentCloudComponentStatus(v **types.CloudCompone
 				}
 				sv.ComponentState = types.CloudComponentState(jtv)
 			}
+
 		case "errors":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Errors, value); err != nil {
 				return err
 			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5401,6 +5478,7 @@ func awsRestjson1_deserializeDocumentCloudComponentStatus(v **types.CloudCompone
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "vendorGuidance":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5409,6 +5487,7 @@ func awsRestjson1_deserializeDocumentCloudComponentStatus(v **types.CloudCompone
 				}
 				sv.VendorGuidance = types.VendorGuidance(jtv)
 			}
+
 		case "vendorGuidanceMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5417,6 +5496,7 @@ func awsRestjson1_deserializeDocumentCloudComponentStatus(v **types.CloudCompone
 				}
 				sv.VendorGuidanceMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5456,6 +5536,7 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "componentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5464,10 +5545,12 @@ func awsRestjson1_deserializeDocumentComponent(v **types.Component, value interf
 				}
 				sv.ComponentName = ptr.String(jtv)
 			}
+
 		case "latestVersion":
 			if err := awsRestjson1_deserializeDocumentComponentLatestVersion(&sv.LatestVersion, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5543,10 +5626,12 @@ func awsRestjson1_deserializeDocumentComponentConfigurationUpdate(v **types.Comp
 				}
 				sv.Merge = ptr.String(jtv)
 			}
+
 		case "reset":
 			if err := awsRestjson1_deserializeDocumentComponentConfigurationPathList(&sv.Reset, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5586,14 +5671,17 @@ func awsRestjson1_deserializeDocumentComponentDeploymentSpecification(v **types.
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		case "configurationUpdate":
 			if err := awsRestjson1_deserializeDocumentComponentConfigurationUpdate(&sv.ConfigurationUpdate, value); err != nil {
 				return err
 			}
+
 		case "runWith":
 			if err := awsRestjson1_deserializeDocumentComponentRunWith(&sv.RunWith, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5668,6 +5756,7 @@ func awsRestjson1_deserializeDocumentComponentLatestVersion(v **types.ComponentL
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "componentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5676,6 +5765,7 @@ func awsRestjson1_deserializeDocumentComponentLatestVersion(v **types.ComponentL
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5691,6 +5781,7 @@ func awsRestjson1_deserializeDocumentComponentLatestVersion(v **types.ComponentL
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5699,10 +5790,12 @@ func awsRestjson1_deserializeDocumentComponentLatestVersion(v **types.ComponentL
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "platforms":
 			if err := awsRestjson1_deserializeDocumentComponentPlatformList(&sv.Platforms, value); err != nil {
 				return err
 			}
+
 		case "publisher":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5711,6 +5804,7 @@ func awsRestjson1_deserializeDocumentComponentLatestVersion(v **types.ComponentL
 				}
 				sv.Publisher = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5780,6 +5874,7 @@ func awsRestjson1_deserializeDocumentComponentPlatform(v **types.ComponentPlatfo
 			if err := awsRestjson1_deserializeDocumentPlatformAttributesMap(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5788,6 +5883,7 @@ func awsRestjson1_deserializeDocumentComponentPlatform(v **types.ComponentPlatfo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5861,10 +5957,12 @@ func awsRestjson1_deserializeDocumentComponentRunWith(v **types.ComponentRunWith
 				}
 				sv.PosixUser = ptr.String(jtv)
 			}
+
 		case "systemResourceLimits":
 			if err := awsRestjson1_deserializeDocumentSystemResourceLimits(&sv.SystemResourceLimits, value); err != nil {
 				return err
 			}
+
 		case "windowsUser":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5873,6 +5971,7 @@ func awsRestjson1_deserializeDocumentComponentRunWith(v **types.ComponentRunWith
 				}
 				sv.WindowsUser = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5946,6 +6045,7 @@ func awsRestjson1_deserializeDocumentComponentVersionListItem(v **types.Componen
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "componentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5954,6 +6054,7 @@ func awsRestjson1_deserializeDocumentComponentVersionListItem(v **types.Componen
 				}
 				sv.ComponentName = ptr.String(jtv)
 			}
+
 		case "componentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5962,6 +6063,7 @@ func awsRestjson1_deserializeDocumentComponentVersionListItem(v **types.Componen
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6001,6 +6103,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6009,6 +6112,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6017,6 +6121,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6056,6 +6161,7 @@ func awsRestjson1_deserializeDocumentConnectivityInfo(v **types.ConnectivityInfo
 				}
 				sv.HostAddress = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6064,6 +6170,7 @@ func awsRestjson1_deserializeDocumentConnectivityInfo(v **types.ConnectivityInfo
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Metadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6072,6 +6179,7 @@ func awsRestjson1_deserializeDocumentConnectivityInfo(v **types.ConnectivityInfo
 				}
 				sv.Metadata = ptr.String(jtv)
 			}
+
 		case "PortNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6084,6 +6192,7 @@ func awsRestjson1_deserializeDocumentConnectivityInfo(v **types.ConnectivityInfo
 				}
 				sv.PortNumber = int32(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6157,6 +6266,7 @@ func awsRestjson1_deserializeDocumentCoreDevice(v **types.CoreDevice, value inte
 				}
 				sv.CoreDeviceThingName = ptr.String(jtv)
 			}
+
 		case "lastStatusUpdateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6172,6 +6282,7 @@ func awsRestjson1_deserializeDocumentCoreDevice(v **types.CoreDevice, value inte
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6180,6 +6291,7 @@ func awsRestjson1_deserializeDocumentCoreDevice(v **types.CoreDevice, value inte
 				}
 				sv.Status = types.CoreDeviceStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6260,6 +6372,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 
 				}
 			}
+
 		case "deploymentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6268,6 +6381,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.DeploymentId = ptr.String(jtv)
 			}
+
 		case "deploymentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6276,6 +6390,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.DeploymentName = ptr.String(jtv)
 			}
+
 		case "deploymentStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6284,6 +6399,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.DeploymentStatus = types.DeploymentStatus(jtv)
 			}
+
 		case "isLatestForTarget":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6292,6 +6408,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.IsLatestForTarget = jtv
 			}
+
 		case "parentTargetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6300,6 +6417,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.ParentTargetArn = ptr.String(jtv)
 			}
+
 		case "revisionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6308,6 +6426,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.RevisionId = ptr.String(jtv)
 			}
+
 		case "targetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6316,6 +6435,7 @@ func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value inte
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6355,6 +6475,7 @@ func awsRestjson1_deserializeDocumentDeploymentComponentUpdatePolicy(v **types.D
 				}
 				sv.Action = types.DeploymentComponentUpdatePolicyAction(jtv)
 			}
+
 		case "timeoutInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6367,6 +6488,7 @@ func awsRestjson1_deserializeDocumentDeploymentComponentUpdatePolicy(v **types.D
 				}
 				sv.TimeoutInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6410,6 +6532,7 @@ func awsRestjson1_deserializeDocumentDeploymentConfigurationValidationPolicy(v *
 				}
 				sv.TimeoutInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6445,14 +6568,17 @@ func awsRestjson1_deserializeDocumentDeploymentIoTJobConfiguration(v **types.Dep
 			if err := awsRestjson1_deserializeDocumentIoTJobAbortConfig(&sv.AbortConfig, value); err != nil {
 				return err
 			}
+
 		case "jobExecutionsRolloutConfig":
 			if err := awsRestjson1_deserializeDocumentIoTJobExecutionsRolloutConfig(&sv.JobExecutionsRolloutConfig, value); err != nil {
 				return err
 			}
+
 		case "timeoutConfig":
 			if err := awsRestjson1_deserializeDocumentIoTJobTimeoutConfig(&sv.TimeoutConfig, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6522,10 +6648,12 @@ func awsRestjson1_deserializeDocumentDeploymentPolicies(v **types.DeploymentPoli
 			if err := awsRestjson1_deserializeDocumentDeploymentComponentUpdatePolicy(&sv.ComponentUpdatePolicy, value); err != nil {
 				return err
 			}
+
 		case "configurationValidationPolicy":
 			if err := awsRestjson1_deserializeDocumentDeploymentConfigurationValidationPolicy(&sv.ConfigurationValidationPolicy, value); err != nil {
 				return err
 			}
+
 		case "failureHandlingPolicy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6534,6 +6662,7 @@ func awsRestjson1_deserializeDocumentDeploymentPolicies(v **types.DeploymentPoli
 				}
 				sv.FailureHandlingPolicy = types.DeploymentFailureHandlingPolicy(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6573,6 +6702,7 @@ func awsRestjson1_deserializeDocumentDisassociateClientDeviceFromCoreDeviceError
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6581,6 +6711,7 @@ func awsRestjson1_deserializeDocumentDisassociateClientDeviceFromCoreDeviceError
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "thingName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6589,6 +6720,7 @@ func awsRestjson1_deserializeDocumentDisassociateClientDeviceFromCoreDeviceError
 				}
 				sv.ThingName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6662,6 +6794,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.CoreDeviceExecutionStatus = types.EffectiveDeploymentExecutionStatus(jtv)
 			}
+
 		case "creationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6677,6 +6810,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 
 				}
 			}
+
 		case "deploymentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6685,6 +6819,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.DeploymentId = ptr.String(jtv)
 			}
+
 		case "deploymentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6693,6 +6828,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.DeploymentName = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6701,6 +6837,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "iotJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6709,6 +6846,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.IotJobArn = ptr.String(jtv)
 			}
+
 		case "iotJobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6717,6 +6855,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.IotJobId = ptr.String(jtv)
 			}
+
 		case "modifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6732,6 +6871,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 
 				}
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6740,10 +6880,12 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.Reason = ptr.String(jtv)
 			}
+
 		case "statusDetails":
 			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentStatusDetails(&sv.StatusDetails, value); err != nil {
 				return err
 			}
+
 		case "targetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6752,6 +6894,7 @@ func awsRestjson1_deserializeDocumentEffectiveDeployment(v **types.EffectiveDepl
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6893,10 +7036,12 @@ func awsRestjson1_deserializeDocumentEffectiveDeploymentStatusDetails(v **types.
 			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentErrorStack(&sv.ErrorStack, value); err != nil {
 				return err
 			}
+
 		case "errorTypes":
 			if err := awsRestjson1_deserializeDocumentEffectiveDeploymentErrorTypeList(&sv.ErrorTypes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6936,6 +7081,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				}
 				sv.ComponentName = ptr.String(jtv)
 			}
+
 		case "componentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6944,6 +7090,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		case "isRoot":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6952,6 +7099,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				}
 				sv.IsRoot = jtv
 			}
+
 		case "lastInstallationSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6960,6 +7108,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				}
 				sv.LastInstallationSource = ptr.String(jtv)
 			}
+
 		case "lastReportedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6975,6 +7124,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 
 				}
 			}
+
 		case "lastStatusChangeTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6990,6 +7140,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 
 				}
 			}
+
 		case "lifecycleState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6998,6 +7149,7 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				}
 				sv.LifecycleState = types.InstalledComponentLifecycleState(jtv)
 			}
+
 		case "lifecycleStateDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7006,10 +7158,12 @@ func awsRestjson1_deserializeDocumentInstalledComponent(v **types.InstalledCompo
 				}
 				sv.LifecycleStateDetails = ptr.String(jtv)
 			}
+
 		case "lifecycleStatusCodes":
 			if err := awsRestjson1_deserializeDocumentInstalledComponentLifecycleStatusCodeList(&sv.LifecycleStatusCodes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7119,6 +7273,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7131,6 +7286,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = int32(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7166,6 +7322,7 @@ func awsRestjson1_deserializeDocumentIoTJobAbortConfig(v **types.IoTJobAbortConf
 			if err := awsRestjson1_deserializeDocumentIoTJobAbortCriteriaList(&sv.CriteriaList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7205,6 +7362,7 @@ func awsRestjson1_deserializeDocumentIoTJobAbortCriteria(v **types.IoTJobAbortCr
 				}
 				sv.Action = types.IoTJobAbortAction(jtv)
 			}
+
 		case "failureType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7213,6 +7371,7 @@ func awsRestjson1_deserializeDocumentIoTJobAbortCriteria(v **types.IoTJobAbortCr
 				}
 				sv.FailureType = types.IoTJobExecutionFailureType(jtv)
 			}
+
 		case "minNumberOfExecutedThings":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7225,6 +7384,7 @@ func awsRestjson1_deserializeDocumentIoTJobAbortCriteria(v **types.IoTJobAbortCr
 				}
 				sv.MinNumberOfExecutedThings = ptr.Int32(int32(i64))
 			}
+
 		case "thresholdPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7258,6 +7418,7 @@ func awsRestjson1_deserializeDocumentIoTJobAbortCriteria(v **types.IoTJobAbortCr
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7327,6 +7488,7 @@ func awsRestjson1_deserializeDocumentIoTJobExecutionsRolloutConfig(v **types.IoT
 			if err := awsRestjson1_deserializeDocumentIoTJobExponentialRolloutRate(&sv.ExponentialRate, value); err != nil {
 				return err
 			}
+
 		case "maximumPerMinute":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7339,6 +7501,7 @@ func awsRestjson1_deserializeDocumentIoTJobExecutionsRolloutConfig(v **types.IoT
 				}
 				sv.MaximumPerMinute = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7382,6 +7545,7 @@ func awsRestjson1_deserializeDocumentIoTJobExponentialRolloutRate(v **types.IoTJ
 				}
 				sv.BaseRatePerMinute = ptr.Int32(int32(i64))
 			}
+
 		case "incrementFactor":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7415,10 +7579,12 @@ func awsRestjson1_deserializeDocumentIoTJobExponentialRolloutRate(v **types.IoTJ
 
 				}
 			}
+
 		case "rateIncreaseCriteria":
 			if err := awsRestjson1_deserializeDocumentIoTJobRateIncreaseCriteria(&sv.RateIncreaseCriteria, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7462,6 +7628,7 @@ func awsRestjson1_deserializeDocumentIoTJobRateIncreaseCriteria(v **types.IoTJob
 				}
 				sv.NumberOfNotifiedThings = ptr.Int32(int32(i64))
 			}
+
 		case "numberOfSucceededThings":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7474,6 +7641,7 @@ func awsRestjson1_deserializeDocumentIoTJobRateIncreaseCriteria(v **types.IoTJob
 				}
 				sv.NumberOfSucceededThings = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7517,6 +7685,7 @@ func awsRestjson1_deserializeDocumentIoTJobTimeoutConfig(v **types.IoTJobTimeout
 				}
 				sv.InProgressTimeoutInMinutes = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7592,6 +7761,7 @@ func awsRestjson1_deserializeDocumentRequestAlreadyInProgressException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7631,6 +7801,7 @@ func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.Resolved
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "componentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7639,6 +7810,7 @@ func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.Resolved
 				}
 				sv.ComponentName = ptr.String(jtv)
 			}
+
 		case "componentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7647,6 +7819,7 @@ func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.Resolved
 				}
 				sv.ComponentVersion = ptr.String(jtv)
 			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7655,6 +7828,7 @@ func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.Resolved
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "recipe":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7667,6 +7841,7 @@ func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.Resolved
 				}
 				sv.Recipe = dv
 			}
+
 		case "vendorGuidance":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7675,6 +7850,7 @@ func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.Resolved
 				}
 				sv.VendorGuidance = types.VendorGuidance(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7748,6 +7924,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7756,6 +7933,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7764,6 +7942,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7803,6 +7982,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7811,6 +7991,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7819,6 +8000,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7827,6 +8009,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7835,6 +8018,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7935,6 +8119,7 @@ func awsRestjson1_deserializeDocumentSystemResourceLimits(v **types.SystemResour
 
 				}
 			}
+
 		case "memory":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7947,6 +8132,7 @@ func awsRestjson1_deserializeDocumentSystemResourceLimits(v **types.SystemResour
 				}
 				sv.Memory = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8022,6 +8208,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8030,6 +8217,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8042,6 +8230,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = int32(i64)
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8050,6 +8239,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8085,6 +8275,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8093,6 +8284,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8101,6 +8293,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8140,6 +8333,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8148,6 +8342,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

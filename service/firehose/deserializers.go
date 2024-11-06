@@ -1763,6 +1763,7 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessBufferingHints(v 
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1775,6 +1776,7 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessBufferingHints(v 
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1810,10 +1812,12 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessDestinationDescri
 			if err := awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "CollectionEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1822,6 +1826,7 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessDestinationDescri
 				}
 				sv.CollectionEndpoint = ptr.String(jtv)
 			}
+
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1830,14 +1835,17 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessDestinationDescri
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1846,6 +1854,7 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessDestinationDescri
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1854,14 +1863,17 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessDestinationDescri
 				}
 				sv.S3BackupMode = types.AmazonOpenSearchServerlessS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "VpcConfigurationDescription":
 			if err := awsAwsjson11_deserializeDocumentVpcConfigurationDescription(&sv.VpcConfigurationDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1905,6 +1917,7 @@ func awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessRetryOptions(v **
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1948,6 +1961,7 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceBufferingHints(v **t
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1960,6 +1974,7 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceBufferingHints(v **t
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1995,10 +2010,12 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 			if err := awsAwsjson11_deserializeDocumentAmazonopensearchserviceBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "ClusterEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2007,10 +2024,12 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.ClusterEndpoint = ptr.String(jtv)
 			}
+
 		case "DocumentIdOptions":
 			if err := awsAwsjson11_deserializeDocumentDocumentIdOptions(&sv.DocumentIdOptions, value); err != nil {
 				return err
 			}
+
 		case "DomainARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2019,6 +2038,7 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.DomainARN = ptr.String(jtv)
 			}
+
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2027,6 +2047,7 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
+
 		case "IndexRotationPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2035,14 +2056,17 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.IndexRotationPeriod = types.AmazonopensearchserviceIndexRotationPeriod(jtv)
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentAmazonopensearchserviceRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2051,6 +2075,7 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2059,10 +2084,12 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.S3BackupMode = types.AmazonopensearchserviceS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "TypeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2071,10 +2098,12 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescripti
 				}
 				sv.TypeName = ptr.String(jtv)
 			}
+
 		case "VpcConfigurationDescription":
 			if err := awsAwsjson11_deserializeDocumentVpcConfigurationDescription(&sv.VpcConfigurationDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2118,6 +2147,7 @@ func awsAwsjson11_deserializeDocumentAmazonopensearchserviceRetryOptions(v **typ
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2157,6 +2187,7 @@ func awsAwsjson11_deserializeDocumentAuthenticationConfiguration(v **types.Authe
 				}
 				sv.Connectivity = types.Connectivity(jtv)
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2165,6 +2196,7 @@ func awsAwsjson11_deserializeDocumentAuthenticationConfiguration(v **types.Authe
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2208,6 +2240,7 @@ func awsAwsjson11_deserializeDocumentBufferingHints(v **types.BufferingHints, va
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2220,6 +2253,7 @@ func awsAwsjson11_deserializeDocumentBufferingHints(v **types.BufferingHints, va
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2259,6 +2293,7 @@ func awsAwsjson11_deserializeDocumentCatalogConfiguration(v **types.CatalogConfi
 				}
 				sv.CatalogARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2298,6 +2333,7 @@ func awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(v **types.CloudWat
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "LogGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2306,6 +2342,7 @@ func awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(v **types.CloudWat
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
+
 		case "LogStreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2314,6 +2351,7 @@ func awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(v **types.CloudWat
 				}
 				sv.LogStreamName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2389,6 +2427,7 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2428,6 +2467,7 @@ func awsAwsjson11_deserializeDocumentCopyCommand(v **types.CopyCommand, value in
 				}
 				sv.CopyOptions = ptr.String(jtv)
 			}
+
 		case "DataTableColumns":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2436,6 +2476,7 @@ func awsAwsjson11_deserializeDocumentCopyCommand(v **types.CopyCommand, value in
 				}
 				sv.DataTableColumns = ptr.String(jtv)
 			}
+
 		case "DataTableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2444,6 +2485,7 @@ func awsAwsjson11_deserializeDocumentCopyCommand(v **types.CopyCommand, value in
 				}
 				sv.DataTableName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2483,18 +2525,22 @@ func awsAwsjson11_deserializeDocumentDataFormatConversionConfiguration(v **types
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "InputFormatConfiguration":
 			if err := awsAwsjson11_deserializeDocumentInputFormatConfiguration(&sv.InputFormatConfiguration, value); err != nil {
 				return err
 			}
+
 		case "OutputFormatConfiguration":
 			if err := awsAwsjson11_deserializeDocumentOutputFormatConfiguration(&sv.OutputFormatConfiguration, value); err != nil {
 				return err
 			}
+
 		case "SchemaConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSchemaConfiguration(&sv.SchemaConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2541,6 +2587,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 
 				}
 			}
+
 		case "DeliveryStreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2549,10 +2596,12 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 				}
 				sv.DeliveryStreamARN = ptr.String(jtv)
 			}
+
 		case "DeliveryStreamEncryptionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDeliveryStreamEncryptionConfiguration(&sv.DeliveryStreamEncryptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "DeliveryStreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2561,6 +2610,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 				}
 				sv.DeliveryStreamName = ptr.String(jtv)
 			}
+
 		case "DeliveryStreamStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2569,6 +2619,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 				}
 				sv.DeliveryStreamStatus = types.DeliveryStreamStatus(jtv)
 			}
+
 		case "DeliveryStreamType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2577,14 +2628,17 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 				}
 				sv.DeliveryStreamType = types.DeliveryStreamType(jtv)
 			}
+
 		case "Destinations":
 			if err := awsAwsjson11_deserializeDocumentDestinationDescriptionList(&sv.Destinations, value); err != nil {
 				return err
 			}
+
 		case "FailureDescription":
 			if err := awsAwsjson11_deserializeDocumentFailureDescription(&sv.FailureDescription, value); err != nil {
 				return err
 			}
+
 		case "HasMoreDestinations":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2593,6 +2647,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 				}
 				sv.HasMoreDestinations = ptr.Bool(jtv)
 			}
+
 		case "LastUpdateTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2608,10 +2663,12 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 
 				}
 			}
+
 		case "Source":
 			if err := awsAwsjson11_deserializeDocumentSourceDescription(&sv.Source, value); err != nil {
 				return err
 			}
+
 		case "VersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2620,6 +2677,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamDescription(v **types.Deliver
 				}
 				sv.VersionId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2655,6 +2713,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamEncryptionConfiguration(v **t
 			if err := awsAwsjson11_deserializeDocumentFailureDescription(&sv.FailureDescription, value); err != nil {
 				return err
 			}
+
 		case "KeyARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2663,6 +2722,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamEncryptionConfiguration(v **t
 				}
 				sv.KeyARN = ptr.String(jtv)
 			}
+
 		case "KeyType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2671,6 +2731,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamEncryptionConfiguration(v **t
 				}
 				sv.KeyType = types.KeyType(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2679,6 +2740,7 @@ func awsAwsjson11_deserializeDocumentDeliveryStreamEncryptionConfiguration(v **t
 				}
 				sv.Status = types.DeliveryStreamEncryptionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2750,10 +2812,12 @@ func awsAwsjson11_deserializeDocumentDeserializer(v **types.Deserializer, value 
 			if err := awsAwsjson11_deserializeDocumentHiveJsonSerDe(&sv.HiveJsonSerDe, value); err != nil {
 				return err
 			}
+
 		case "OpenXJsonSerDe":
 			if err := awsAwsjson11_deserializeDocumentOpenXJsonSerDe(&sv.OpenXJsonSerDe, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2789,10 +2853,12 @@ func awsAwsjson11_deserializeDocumentDestinationDescription(v **types.Destinatio
 			if err := awsAwsjson11_deserializeDocumentAmazonOpenSearchServerlessDestinationDescription(&sv.AmazonOpenSearchServerlessDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "AmazonopensearchserviceDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentAmazonopensearchserviceDestinationDescription(&sv.AmazonopensearchserviceDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "DestinationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2801,38 +2867,47 @@ func awsAwsjson11_deserializeDocumentDestinationDescription(v **types.Destinatio
 				}
 				sv.DestinationId = ptr.String(jtv)
 			}
+
 		case "ElasticsearchDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(&sv.ElasticsearchDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "ExtendedS3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(&sv.ExtendedS3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "HttpEndpointDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentHttpEndpointDestinationDescription(&sv.HttpEndpointDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "IcebergDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentIcebergDestinationDescription(&sv.IcebergDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "RedshiftDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(&sv.RedshiftDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "SnowflakeDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(&sv.SnowflakeDestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "SplunkDestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentSplunkDestinationDescription(&sv.SplunkDestinationDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2906,6 +2981,7 @@ func awsAwsjson11_deserializeDocumentDestinationTableConfiguration(v **types.Des
 				}
 				sv.DestinationDatabaseName = ptr.String(jtv)
 			}
+
 		case "DestinationTableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2914,6 +2990,7 @@ func awsAwsjson11_deserializeDocumentDestinationTableConfiguration(v **types.Des
 				}
 				sv.DestinationTableName = ptr.String(jtv)
 			}
+
 		case "S3ErrorOutputPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2922,10 +2999,12 @@ func awsAwsjson11_deserializeDocumentDestinationTableConfiguration(v **types.Des
 				}
 				sv.S3ErrorOutputPrefix = ptr.String(jtv)
 			}
+
 		case "UniqueKeys":
 			if err := awsAwsjson11_deserializeDocumentListOfNonEmptyStringsWithoutWhitespace(&sv.UniqueKeys, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2999,6 +3078,7 @@ func awsAwsjson11_deserializeDocumentDocumentIdOptions(v **types.DocumentIdOptio
 				}
 				sv.DefaultDocumentIdFormat = types.DefaultDocumentIdFormat(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3038,10 +3118,12 @@ func awsAwsjson11_deserializeDocumentDynamicPartitioningConfiguration(v **types.
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3085,6 +3167,7 @@ func awsAwsjson11_deserializeDocumentElasticsearchBufferingHints(v **types.Elast
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3097,6 +3180,7 @@ func awsAwsjson11_deserializeDocumentElasticsearchBufferingHints(v **types.Elast
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3132,10 +3216,12 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 			if err := awsAwsjson11_deserializeDocumentElasticsearchBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "ClusterEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3144,10 +3230,12 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.ClusterEndpoint = ptr.String(jtv)
 			}
+
 		case "DocumentIdOptions":
 			if err := awsAwsjson11_deserializeDocumentDocumentIdOptions(&sv.DocumentIdOptions, value); err != nil {
 				return err
 			}
+
 		case "DomainARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3156,6 +3244,7 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.DomainARN = ptr.String(jtv)
 			}
+
 		case "IndexName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3164,6 +3253,7 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.IndexName = ptr.String(jtv)
 			}
+
 		case "IndexRotationPeriod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3172,14 +3262,17 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.IndexRotationPeriod = types.ElasticsearchIndexRotationPeriod(jtv)
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentElasticsearchRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3188,6 +3281,7 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3196,10 +3290,12 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.S3BackupMode = types.ElasticsearchS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "TypeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3208,10 +3304,12 @@ func awsAwsjson11_deserializeDocumentElasticsearchDestinationDescription(v **typ
 				}
 				sv.TypeName = ptr.String(jtv)
 			}
+
 		case "VpcConfigurationDescription":
 			if err := awsAwsjson11_deserializeDocumentVpcConfigurationDescription(&sv.VpcConfigurationDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3255,6 +3353,7 @@ func awsAwsjson11_deserializeDocumentElasticsearchRetryOptions(v **types.Elastic
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3290,6 +3389,7 @@ func awsAwsjson11_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 			if err := awsAwsjson11_deserializeDocumentKMSEncryptionConfig(&sv.KMSEncryptionConfig, value); err != nil {
 				return err
 			}
+
 		case "NoEncryptionConfig":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3298,6 +3398,7 @@ func awsAwsjson11_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 				}
 				sv.NoEncryptionConfig = types.NoEncryptionConfig(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3337,14 +3438,17 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.BucketARN = ptr.String(jtv)
 			}
+
 		case "BufferingHints":
 			if err := awsAwsjson11_deserializeDocumentBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "CompressionFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3353,6 +3457,7 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.CompressionFormat = types.CompressionFormat(jtv)
 			}
+
 		case "CustomTimeZone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3361,18 +3466,22 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.CustomTimeZone = ptr.String(jtv)
 			}
+
 		case "DataFormatConversionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDataFormatConversionConfiguration(&sv.DataFormatConversionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "DynamicPartitioningConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDynamicPartitioningConfiguration(&sv.DynamicPartitioningConfiguration, value); err != nil {
 				return err
 			}
+
 		case "EncryptionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ErrorOutputPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3381,6 +3490,7 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.ErrorOutputPrefix = ptr.String(jtv)
 			}
+
 		case "FileExtension":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3389,6 +3499,7 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.FileExtension = ptr.String(jtv)
 			}
+
 		case "Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3397,10 +3508,12 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3409,10 +3522,12 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3BackupDescription, value); err != nil {
 				return err
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3421,6 +3536,7 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 				}
 				sv.S3BackupMode = types.S3BackupMode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3460,6 +3576,7 @@ func awsAwsjson11_deserializeDocumentFailureDescription(v **types.FailureDescrip
 				}
 				sv.Details = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3468,6 +3585,7 @@ func awsAwsjson11_deserializeDocumentFailureDescription(v **types.FailureDescrip
 				}
 				sv.Type = types.DeliveryStreamFailureType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3503,6 +3621,7 @@ func awsAwsjson11_deserializeDocumentHiveJsonSerDe(v **types.HiveJsonSerDe, valu
 			if err := awsAwsjson11_deserializeDocumentListOfNonEmptyStrings(&sv.TimestampFormats, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3546,6 +3665,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointBufferingHints(v **types.HttpEn
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3558,6 +3678,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointBufferingHints(v **types.HttpEn
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3597,6 +3718,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointCommonAttribute(v **types.HttpE
 				}
 				sv.AttributeName = ptr.String(jtv)
 			}
+
 		case "AttributeValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3605,6 +3727,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointCommonAttribute(v **types.HttpE
 				}
 				sv.AttributeValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3678,6 +3801,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointDescription(v **types.HttpEndpo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3686,6 +3810,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointDescription(v **types.HttpEndpo
 				}
 				sv.Url = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3721,26 +3846,32 @@ func awsAwsjson11_deserializeDocumentHttpEndpointDestinationDescription(v **type
 			if err := awsAwsjson11_deserializeDocumentHttpEndpointBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "EndpointConfiguration":
 			if err := awsAwsjson11_deserializeDocumentHttpEndpointDescription(&sv.EndpointConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RequestConfiguration":
 			if err := awsAwsjson11_deserializeDocumentHttpEndpointRequestConfiguration(&sv.RequestConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentHttpEndpointRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3749,6 +3880,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointDestinationDescription(v **type
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3757,14 +3889,17 @@ func awsAwsjson11_deserializeDocumentHttpEndpointDestinationDescription(v **type
 				}
 				sv.S3BackupMode = types.HttpEndpointS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "SecretsManagerConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3800,6 +3935,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointRequestConfiguration(v **types.
 			if err := awsAwsjson11_deserializeDocumentHttpEndpointCommonAttributesList(&sv.CommonAttributes, value); err != nil {
 				return err
 			}
+
 		case "ContentEncoding":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3808,6 +3944,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointRequestConfiguration(v **types.
 				}
 				sv.ContentEncoding = types.ContentEncoding(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3851,6 +3988,7 @@ func awsAwsjson11_deserializeDocumentHttpEndpointRetryOptions(v **types.HttpEndp
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3886,26 +4024,32 @@ func awsAwsjson11_deserializeDocumentIcebergDestinationDescription(v **types.Ice
 			if err := awsAwsjson11_deserializeDocumentBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CatalogConfiguration":
 			if err := awsAwsjson11_deserializeDocumentCatalogConfiguration(&sv.CatalogConfiguration, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "DestinationTableConfigurationList":
 			if err := awsAwsjson11_deserializeDocumentDestinationTableConfigurationList(&sv.DestinationTableConfigurationList, value); err != nil {
 				return err
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3914,6 +4058,7 @@ func awsAwsjson11_deserializeDocumentIcebergDestinationDescription(v **types.Ice
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3922,10 +4067,12 @@ func awsAwsjson11_deserializeDocumentIcebergDestinationDescription(v **types.Ice
 				}
 				sv.S3BackupMode = types.IcebergS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3961,6 +4108,7 @@ func awsAwsjson11_deserializeDocumentInputFormatConfiguration(v **types.InputFor
 			if err := awsAwsjson11_deserializeDocumentDeserializer(&sv.Deserializer, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4000,6 +4148,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4039,6 +4188,7 @@ func awsAwsjson11_deserializeDocumentInvalidKMSResourceException(v **types.Inval
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4047,6 +4197,7 @@ func awsAwsjson11_deserializeDocumentInvalidKMSResourceException(v **types.Inval
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4086,6 +4237,7 @@ func awsAwsjson11_deserializeDocumentInvalidSourceException(v **types.InvalidSou
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4094,6 +4246,7 @@ func awsAwsjson11_deserializeDocumentInvalidSourceException(v **types.InvalidSou
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4140,6 +4293,7 @@ func awsAwsjson11_deserializeDocumentKinesisStreamSourceDescription(v **types.Ki
 
 				}
 			}
+
 		case "KinesisStreamARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4148,6 +4302,7 @@ func awsAwsjson11_deserializeDocumentKinesisStreamSourceDescription(v **types.Ki
 				}
 				sv.KinesisStreamARN = ptr.String(jtv)
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4156,6 +4311,7 @@ func awsAwsjson11_deserializeDocumentKinesisStreamSourceDescription(v **types.Ki
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4195,6 +4351,7 @@ func awsAwsjson11_deserializeDocumentKMSEncryptionConfig(v **types.KMSEncryption
 				}
 				sv.AWSKMSKeyARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4234,6 +4391,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4375,6 +4533,7 @@ func awsAwsjson11_deserializeDocumentMSKSourceDescription(v **types.MSKSourceDes
 			if err := awsAwsjson11_deserializeDocumentAuthenticationConfiguration(&sv.AuthenticationConfiguration, value); err != nil {
 				return err
 			}
+
 		case "DeliveryStartTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4390,6 +4549,7 @@ func awsAwsjson11_deserializeDocumentMSKSourceDescription(v **types.MSKSourceDes
 
 				}
 			}
+
 		case "MSKClusterARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4398,6 +4558,7 @@ func awsAwsjson11_deserializeDocumentMSKSourceDescription(v **types.MSKSourceDes
 				}
 				sv.MSKClusterARN = ptr.String(jtv)
 			}
+
 		case "ReadFromTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4413,6 +4574,7 @@ func awsAwsjson11_deserializeDocumentMSKSourceDescription(v **types.MSKSourceDes
 
 				}
 			}
+
 		case "TopicName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4421,6 +4583,7 @@ func awsAwsjson11_deserializeDocumentMSKSourceDescription(v **types.MSKSourceDes
 				}
 				sv.TopicName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4460,10 +4623,12 @@ func awsAwsjson11_deserializeDocumentOpenXJsonSerDe(v **types.OpenXJsonSerDe, va
 				}
 				sv.CaseInsensitive = ptr.Bool(jtv)
 			}
+
 		case "ColumnToJsonKeyMappings":
 			if err := awsAwsjson11_deserializeDocumentColumnToJsonKeyMappings(&sv.ColumnToJsonKeyMappings, value); err != nil {
 				return err
 			}
+
 		case "ConvertDotsInJsonKeysToUnderscores":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4472,6 +4637,7 @@ func awsAwsjson11_deserializeDocumentOpenXJsonSerDe(v **types.OpenXJsonSerDe, va
 				}
 				sv.ConvertDotsInJsonKeysToUnderscores = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4515,10 +4681,12 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 				}
 				sv.BlockSizeBytes = ptr.Int32(int32(i64))
 			}
+
 		case "BloomFilterColumns":
 			if err := awsAwsjson11_deserializeDocumentListOfNonEmptyStringsWithoutWhitespace(&sv.BloomFilterColumns, value); err != nil {
 				return err
 			}
+
 		case "BloomFilterFalsePositiveProbability":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4552,6 +4720,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 
 				}
 			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4560,6 +4729,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 				}
 				sv.Compression = types.OrcCompression(jtv)
 			}
+
 		case "DictionaryKeyThreshold":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4593,6 +4763,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 
 				}
 			}
+
 		case "EnablePadding":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4601,6 +4772,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 				}
 				sv.EnablePadding = ptr.Bool(jtv)
 			}
+
 		case "FormatVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4609,6 +4781,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 				}
 				sv.FormatVersion = types.OrcFormatVersion(jtv)
 			}
+
 		case "PaddingTolerance":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4642,6 +4815,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 
 				}
 			}
+
 		case "RowIndexStride":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4654,6 +4828,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 				}
 				sv.RowIndexStride = ptr.Int32(int32(i64))
 			}
+
 		case "StripeSizeBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4666,6 +4841,7 @@ func awsAwsjson11_deserializeDocumentOrcSerDe(v **types.OrcSerDe, value interfac
 				}
 				sv.StripeSizeBytes = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4701,6 +4877,7 @@ func awsAwsjson11_deserializeDocumentOutputFormatConfiguration(v **types.OutputF
 			if err := awsAwsjson11_deserializeDocumentSerializer(&sv.Serializer, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4744,6 +4921,7 @@ func awsAwsjson11_deserializeDocumentParquetSerDe(v **types.ParquetSerDe, value 
 				}
 				sv.BlockSizeBytes = ptr.Int32(int32(i64))
 			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4752,6 +4930,7 @@ func awsAwsjson11_deserializeDocumentParquetSerDe(v **types.ParquetSerDe, value 
 				}
 				sv.Compression = types.ParquetCompression(jtv)
 			}
+
 		case "EnableDictionaryCompression":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4760,6 +4939,7 @@ func awsAwsjson11_deserializeDocumentParquetSerDe(v **types.ParquetSerDe, value 
 				}
 				sv.EnableDictionaryCompression = ptr.Bool(jtv)
 			}
+
 		case "MaxPaddingBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4772,6 +4952,7 @@ func awsAwsjson11_deserializeDocumentParquetSerDe(v **types.ParquetSerDe, value 
 				}
 				sv.MaxPaddingBytes = ptr.Int32(int32(i64))
 			}
+
 		case "PageSizeBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4784,6 +4965,7 @@ func awsAwsjson11_deserializeDocumentParquetSerDe(v **types.ParquetSerDe, value 
 				}
 				sv.PageSizeBytes = ptr.Int32(int32(i64))
 			}
+
 		case "WriterVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4792,6 +4974,7 @@ func awsAwsjson11_deserializeDocumentParquetSerDe(v **types.ParquetSerDe, value 
 				}
 				sv.WriterVersion = types.ParquetWriterVersion(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4831,10 +5014,12 @@ func awsAwsjson11_deserializeDocumentProcessingConfiguration(v **types.Processin
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "Processors":
 			if err := awsAwsjson11_deserializeDocumentProcessorList(&sv.Processors, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4870,6 +5055,7 @@ func awsAwsjson11_deserializeDocumentProcessor(v **types.Processor, value interf
 			if err := awsAwsjson11_deserializeDocumentProcessorParameterList(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4878,6 +5064,7 @@ func awsAwsjson11_deserializeDocumentProcessor(v **types.Processor, value interf
 				}
 				sv.Type = types.ProcessorType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4951,6 +5138,7 @@ func awsAwsjson11_deserializeDocumentProcessorParameter(v **types.ProcessorParam
 				}
 				sv.ParameterName = types.ProcessorParameterName(jtv)
 			}
+
 		case "ParameterValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4959,6 +5147,7 @@ func awsAwsjson11_deserializeDocumentProcessorParameter(v **types.ProcessorParam
 				}
 				sv.ParameterValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5032,6 +5221,7 @@ func awsAwsjson11_deserializeDocumentPutRecordBatchResponseEntry(v **types.PutRe
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5040,6 +5230,7 @@ func awsAwsjson11_deserializeDocumentPutRecordBatchResponseEntry(v **types.PutRe
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "RecordId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5048,6 +5239,7 @@ func awsAwsjson11_deserializeDocumentPutRecordBatchResponseEntry(v **types.PutRe
 				}
 				sv.RecordId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5117,6 +5309,7 @@ func awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(v **types.Re
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "ClusterJDBCURL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5125,18 +5318,22 @@ func awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(v **types.Re
 				}
 				sv.ClusterJDBCURL = ptr.String(jtv)
 			}
+
 		case "CopyCommand":
 			if err := awsAwsjson11_deserializeDocumentCopyCommand(&sv.CopyCommand, value); err != nil {
 				return err
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentRedshiftRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5145,10 +5342,12 @@ func awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(v **types.Re
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3BackupDescription, value); err != nil {
 				return err
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5157,14 +5356,17 @@ func awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(v **types.Re
 				}
 				sv.S3BackupMode = types.RedshiftS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "SecretsManagerConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
 				return err
 			}
+
 		case "Username":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5173,6 +5375,7 @@ func awsAwsjson11_deserializeDocumentRedshiftDestinationDescription(v **types.Re
 				}
 				sv.Username = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5216,6 +5419,7 @@ func awsAwsjson11_deserializeDocumentRedshiftRetryOptions(v **types.RedshiftRetr
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5255,6 +5459,7 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5294,6 +5499,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5337,6 +5543,7 @@ func awsAwsjson11_deserializeDocumentRetryOptions(v **types.RetryOptions, value 
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5376,14 +5583,17 @@ func awsAwsjson11_deserializeDocumentS3DestinationDescription(v **types.S3Destin
 				}
 				sv.BucketARN = ptr.String(jtv)
 			}
+
 		case "BufferingHints":
 			if err := awsAwsjson11_deserializeDocumentBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "CompressionFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5392,10 +5602,12 @@ func awsAwsjson11_deserializeDocumentS3DestinationDescription(v **types.S3Destin
 				}
 				sv.CompressionFormat = types.CompressionFormat(jtv)
 			}
+
 		case "EncryptionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ErrorOutputPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5404,6 +5616,7 @@ func awsAwsjson11_deserializeDocumentS3DestinationDescription(v **types.S3Destin
 				}
 				sv.ErrorOutputPrefix = ptr.String(jtv)
 			}
+
 		case "Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5412,6 +5625,7 @@ func awsAwsjson11_deserializeDocumentS3DestinationDescription(v **types.S3Destin
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5420,6 +5634,7 @@ func awsAwsjson11_deserializeDocumentS3DestinationDescription(v **types.S3Destin
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5459,6 +5674,7 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 				}
 				sv.CatalogId = ptr.String(jtv)
 			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5467,6 +5683,7 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5475,6 +5692,7 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5483,6 +5701,7 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "TableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5491,6 +5710,7 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 				}
 				sv.TableName = ptr.String(jtv)
 			}
+
 		case "VersionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5499,6 +5719,7 @@ func awsAwsjson11_deserializeDocumentSchemaConfiguration(v **types.SchemaConfigu
 				}
 				sv.VersionId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5538,6 +5759,7 @@ func awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(v **types.Secre
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5546,6 +5768,7 @@ func awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(v **types.Secre
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "SecretARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5554,6 +5777,7 @@ func awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(v **types.Secre
 				}
 				sv.SecretARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5625,10 +5849,12 @@ func awsAwsjson11_deserializeDocumentSerializer(v **types.Serializer, value inte
 			if err := awsAwsjson11_deserializeDocumentOrcSerDe(&sv.OrcSerDe, value); err != nil {
 				return err
 			}
+
 		case "ParquetSerDe":
 			if err := awsAwsjson11_deserializeDocumentParquetSerDe(&sv.ParquetSerDe, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5668,6 +5894,7 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5711,6 +5938,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeBufferingHints(v **types.Snowflake
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5723,6 +5951,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeBufferingHints(v **types.Snowflake
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5762,14 +5991,17 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.AccountUrl = ptr.String(jtv)
 			}
+
 		case "BufferingHints":
 			if err := awsAwsjson11_deserializeDocumentSnowflakeBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "ContentColumnName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5778,6 +6010,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.ContentColumnName = ptr.String(jtv)
 			}
+
 		case "Database":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5786,6 +6019,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.Database = ptr.String(jtv)
 			}
+
 		case "DataLoadingOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5794,6 +6028,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.DataLoadingOption = types.SnowflakeDataLoadingOption(jtv)
 			}
+
 		case "MetaDataColumnName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5802,14 +6037,17 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.MetaDataColumnName = ptr.String(jtv)
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentSnowflakeRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "RoleARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5818,6 +6056,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5826,10 +6065,12 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.S3BackupMode = types.SnowflakeS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "Schema":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5838,18 +6079,22 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.Schema = ptr.String(jtv)
 			}
+
 		case "SecretsManagerConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
 				return err
 			}
+
 		case "SnowflakeRoleConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSnowflakeRoleConfiguration(&sv.SnowflakeRoleConfiguration, value); err != nil {
 				return err
 			}
+
 		case "SnowflakeVpcConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSnowflakeVpcConfiguration(&sv.SnowflakeVpcConfiguration, value); err != nil {
 				return err
 			}
+
 		case "Table":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5858,6 +6103,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.Table = ptr.String(jtv)
 			}
+
 		case "User":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5866,6 +6112,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeDestinationDescription(v **types.S
 				}
 				sv.User = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5909,6 +6156,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeRetryOptions(v **types.SnowflakeRe
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5948,6 +6196,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeRoleConfiguration(v **types.Snowfl
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "SnowflakeRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5956,6 +6205,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeRoleConfiguration(v **types.Snowfl
 				}
 				sv.SnowflakeRole = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5995,6 +6245,7 @@ func awsAwsjson11_deserializeDocumentSnowflakeVpcConfiguration(v **types.Snowfla
 				}
 				sv.PrivateLinkVpceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6030,10 +6281,12 @@ func awsAwsjson11_deserializeDocumentSourceDescription(v **types.SourceDescripti
 			if err := awsAwsjson11_deserializeDocumentKinesisStreamSourceDescription(&sv.KinesisStreamSourceDescription, value); err != nil {
 				return err
 			}
+
 		case "MSKSourceDescription":
 			if err := awsAwsjson11_deserializeDocumentMSKSourceDescription(&sv.MSKSourceDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6077,6 +6330,7 @@ func awsAwsjson11_deserializeDocumentSplunkBufferingHints(v **types.SplunkBuffer
 				}
 				sv.IntervalInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "SizeInMBs":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6089,6 +6343,7 @@ func awsAwsjson11_deserializeDocumentSplunkBufferingHints(v **types.SplunkBuffer
 				}
 				sv.SizeInMBs = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6124,10 +6379,12 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 			if err := awsAwsjson11_deserializeDocumentSplunkBufferingHints(&sv.BufferingHints, value); err != nil {
 				return err
 			}
+
 		case "CloudWatchLoggingOptions":
 			if err := awsAwsjson11_deserializeDocumentCloudWatchLoggingOptions(&sv.CloudWatchLoggingOptions, value); err != nil {
 				return err
 			}
+
 		case "HECAcknowledgmentTimeoutInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6140,6 +6397,7 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 				}
 				sv.HECAcknowledgmentTimeoutInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "HECEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6148,6 +6406,7 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 				}
 				sv.HECEndpoint = ptr.String(jtv)
 			}
+
 		case "HECEndpointType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6156,6 +6415,7 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 				}
 				sv.HECEndpointType = types.HECEndpointType(jtv)
 			}
+
 		case "HECToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6164,14 +6424,17 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 				}
 				sv.HECToken = ptr.String(jtv)
 			}
+
 		case "ProcessingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProcessingConfiguration(&sv.ProcessingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetryOptions":
 			if err := awsAwsjson11_deserializeDocumentSplunkRetryOptions(&sv.RetryOptions, value); err != nil {
 				return err
 			}
+
 		case "S3BackupMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6180,14 +6443,17 @@ func awsAwsjson11_deserializeDocumentSplunkDestinationDescription(v **types.Splu
 				}
 				sv.S3BackupMode = types.SplunkS3BackupMode(jtv)
 			}
+
 		case "S3DestinationDescription":
 			if err := awsAwsjson11_deserializeDocumentS3DestinationDescription(&sv.S3DestinationDescription, value); err != nil {
 				return err
 			}
+
 		case "SecretsManagerConfiguration":
 			if err := awsAwsjson11_deserializeDocumentSecretsManagerConfiguration(&sv.SecretsManagerConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6231,6 +6497,7 @@ func awsAwsjson11_deserializeDocumentSplunkRetryOptions(v **types.SplunkRetryOpt
 				}
 				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6306,6 +6573,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6314,6 +6582,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6353,14 +6622,17 @@ func awsAwsjson11_deserializeDocumentVpcConfigurationDescription(v **types.VpcCo
 				}
 				sv.RoleARN = ptr.String(jtv)
 			}
+
 		case "SecurityGroupIds":
 			if err := awsAwsjson11_deserializeDocumentSecurityGroupIdList(&sv.SecurityGroupIds, value); err != nil {
 				return err
 			}
+
 		case "SubnetIds":
 			if err := awsAwsjson11_deserializeDocumentSubnetIdList(&sv.SubnetIds, value); err != nil {
 				return err
 			}
+
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6369,6 +6641,7 @@ func awsAwsjson11_deserializeDocumentVpcConfigurationDescription(v **types.VpcCo
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6408,6 +6681,7 @@ func awsAwsjson11_deserializeOpDocumentCreateDeliveryStreamOutput(v **CreateDeli
 				}
 				sv.DeliveryStreamARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6474,6 +6748,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDeliveryStreamOutput(v **Describe
 			if err := awsAwsjson11_deserializeDocumentDeliveryStreamDescription(&sv.DeliveryStreamDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6509,6 +6784,7 @@ func awsAwsjson11_deserializeOpDocumentListDeliveryStreamsOutput(v **ListDeliver
 			if err := awsAwsjson11_deserializeDocumentDeliveryStreamNameList(&sv.DeliveryStreamNames, value); err != nil {
 				return err
 			}
+
 		case "HasMoreDeliveryStreams":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6517,6 +6793,7 @@ func awsAwsjson11_deserializeOpDocumentListDeliveryStreamsOutput(v **ListDeliver
 				}
 				sv.HasMoreDeliveryStreams = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6556,10 +6833,12 @@ func awsAwsjson11_deserializeOpDocumentListTagsForDeliveryStreamOutput(v **ListT
 				}
 				sv.HasMoreTags = ptr.Bool(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentListTagsForDeliveryStreamOutputTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6599,6 +6878,7 @@ func awsAwsjson11_deserializeOpDocumentPutRecordBatchOutput(v **PutRecordBatchOu
 				}
 				sv.Encrypted = ptr.Bool(jtv)
 			}
+
 		case "FailedPutCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6611,10 +6891,12 @@ func awsAwsjson11_deserializeOpDocumentPutRecordBatchOutput(v **PutRecordBatchOu
 				}
 				sv.FailedPutCount = ptr.Int32(int32(i64))
 			}
+
 		case "RequestResponses":
 			if err := awsAwsjson11_deserializeDocumentPutRecordBatchResponseEntryList(&sv.RequestResponses, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6654,6 +6936,7 @@ func awsAwsjson11_deserializeOpDocumentPutRecordOutput(v **PutRecordOutput, valu
 				}
 				sv.Encrypted = ptr.Bool(jtv)
 			}
+
 		case "RecordId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6662,6 +6945,7 @@ func awsAwsjson11_deserializeOpDocumentPutRecordOutput(v **PutRecordOutput, valu
 				}
 				sv.RecordId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

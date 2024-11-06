@@ -335,6 +335,7 @@ func awsRestjson1_deserializeOpDocumentGetRetainedMessageOutput(v **GetRetainedM
 				}
 				sv.LastModifiedTime = i64
 			}
+
 		case "payload":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -347,6 +348,7 @@ func awsRestjson1_deserializeOpDocumentGetRetainedMessageOutput(v **GetRetainedM
 				}
 				sv.Payload = dv
 			}
+
 		case "qos":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -359,6 +361,7 @@ func awsRestjson1_deserializeOpDocumentGetRetainedMessageOutput(v **GetRetainedM
 				}
 				sv.Qos = int32(i64)
 			}
+
 		case "topic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -367,6 +370,7 @@ func awsRestjson1_deserializeOpDocumentGetRetainedMessageOutput(v **GetRetainedM
 				}
 				sv.Topic = ptr.String(jtv)
 			}
+
 		case "userProperties":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -379,6 +383,7 @@ func awsRestjson1_deserializeOpDocumentGetRetainedMessageOutput(v **GetRetainedM
 				}
 				sv.UserProperties = dv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -688,10 +693,12 @@ func awsRestjson1_deserializeOpDocumentListNamedShadowsForThingOutput(v **ListNa
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "results":
 			if err := awsRestjson1_deserializeDocumentNamedShadowList(&sv.Results, value); err != nil {
 				return err
 			}
+
 		case "timestamp":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -704,6 +711,7 @@ func awsRestjson1_deserializeOpDocumentListNamedShadowsForThingOutput(v **ListNa
 				}
 				sv.Timestamp = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -874,10 +882,12 @@ func awsRestjson1_deserializeOpDocumentListRetainedMessagesOutput(v **ListRetain
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "retainedTopics":
 			if err := awsRestjson1_deserializeDocumentRetainedMessageList(&sv.RetainedTopics, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1522,6 +1532,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1561,6 +1572,7 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1600,6 +1612,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1639,6 +1652,7 @@ func awsRestjson1_deserializeDocumentMethodNotAllowedException(v **types.MethodN
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1714,6 +1728,7 @@ func awsRestjson1_deserializeDocumentRequestEntityTooLargeException(v **types.Re
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1753,6 +1768,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1830,6 +1846,7 @@ func awsRestjson1_deserializeDocumentRetainedMessageSummary(v **types.RetainedMe
 				}
 				sv.LastModifiedTime = i64
 			}
+
 		case "payloadSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1842,6 +1859,7 @@ func awsRestjson1_deserializeDocumentRetainedMessageSummary(v **types.RetainedMe
 				}
 				sv.PayloadSize = i64
 			}
+
 		case "qos":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1854,6 +1872,7 @@ func awsRestjson1_deserializeDocumentRetainedMessageSummary(v **types.RetainedMe
 				}
 				sv.Qos = int32(i64)
 			}
+
 		case "topic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1862,6 +1881,7 @@ func awsRestjson1_deserializeDocumentRetainedMessageSummary(v **types.RetainedMe
 				}
 				sv.Topic = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1901,6 +1921,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1940,6 +1961,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1979,6 +2001,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2018,6 +2041,7 @@ func awsRestjson1_deserializeDocumentUnsupportedDocumentEncodingException(v **ty
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

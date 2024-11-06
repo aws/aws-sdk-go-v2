@@ -195,6 +195,7 @@ func awsRestjson1_deserializeOpDocumentAssumeRoleForPodIdentityOutput(v **Assume
 			if err := awsRestjson1_deserializeDocumentAssumedRoleUser(&sv.AssumedRoleUser, value); err != nil {
 				return err
 			}
+
 		case "audience":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -203,18 +204,22 @@ func awsRestjson1_deserializeOpDocumentAssumeRoleForPodIdentityOutput(v **Assume
 				}
 				sv.Audience = ptr.String(jtv)
 			}
+
 		case "credentials":
 			if err := awsRestjson1_deserializeDocumentCredentials(&sv.Credentials, value); err != nil {
 				return err
 			}
+
 		case "podIdentityAssociation":
 			if err := awsRestjson1_deserializeDocumentPodIdentityAssociation(&sv.PodIdentityAssociation, value); err != nil {
 				return err
 			}
+
 		case "subject":
 			if err := awsRestjson1_deserializeDocumentSubject(&sv.Subject, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -578,6 +583,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -617,6 +623,7 @@ func awsRestjson1_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "assumeRoleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -625,6 +632,7 @@ func awsRestjson1_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, 
 				}
 				sv.AssumeRoleId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -664,6 +672,7 @@ func awsRestjson1_deserializeDocumentCredentials(v **types.Credentials, value in
 				}
 				sv.AccessKeyId = ptr.String(jtv)
 			}
+
 		case "expiration":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -679,6 +688,7 @@ func awsRestjson1_deserializeDocumentCredentials(v **types.Credentials, value in
 
 				}
 			}
+
 		case "secretAccessKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -687,6 +697,7 @@ func awsRestjson1_deserializeDocumentCredentials(v **types.Credentials, value in
 				}
 				sv.SecretAccessKey = ptr.String(jtv)
 			}
+
 		case "sessionToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -695,6 +706,7 @@ func awsRestjson1_deserializeDocumentCredentials(v **types.Credentials, value in
 				}
 				sv.SessionToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -734,6 +746,7 @@ func awsRestjson1_deserializeDocumentExpiredTokenException(v **types.ExpiredToke
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -773,6 +786,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -812,6 +826,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -851,6 +866,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -890,6 +906,7 @@ func awsRestjson1_deserializeDocumentInvalidTokenException(v **types.InvalidToke
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -929,6 +946,7 @@ func awsRestjson1_deserializeDocumentPodIdentityAssociation(v **types.PodIdentit
 				}
 				sv.AssociationArn = ptr.String(jtv)
 			}
+
 		case "associationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -937,6 +955,7 @@ func awsRestjson1_deserializeDocumentPodIdentityAssociation(v **types.PodIdentit
 				}
 				sv.AssociationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -976,6 +995,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1015,6 +1035,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1054,6 +1075,7 @@ func awsRestjson1_deserializeDocumentSubject(v **types.Subject, value interface{
 				}
 				sv.Namespace = ptr.String(jtv)
 			}
+
 		case "serviceAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1062,6 +1084,7 @@ func awsRestjson1_deserializeDocumentSubject(v **types.Subject, value interface{
 				}
 				sv.ServiceAccount = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1101,6 +1124,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

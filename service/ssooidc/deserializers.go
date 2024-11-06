@@ -205,6 +205,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.AccessToken = ptr.String(jtv)
 			}
+
 		case "expiresIn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -217,6 +218,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.ExpiresIn = int32(i64)
 			}
+
 		case "idToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -225,6 +227,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.IdToken = ptr.String(jtv)
 			}
+
 		case "refreshToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -233,6 +236,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.RefreshToken = ptr.String(jtv)
 			}
+
 		case "tokenType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -241,6 +245,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.TokenType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -429,6 +434,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenWithIAMOutput(v **CreateTokenW
 				}
 				sv.AccessToken = ptr.String(jtv)
 			}
+
 		case "expiresIn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -441,6 +447,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenWithIAMOutput(v **CreateTokenW
 				}
 				sv.ExpiresIn = int32(i64)
 			}
+
 		case "idToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -449,6 +456,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenWithIAMOutput(v **CreateTokenW
 				}
 				sv.IdToken = ptr.String(jtv)
 			}
+
 		case "issuedTokenType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -457,6 +465,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenWithIAMOutput(v **CreateTokenW
 				}
 				sv.IssuedTokenType = ptr.String(jtv)
 			}
+
 		case "refreshToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -465,10 +474,12 @@ func awsRestjson1_deserializeOpDocumentCreateTokenWithIAMOutput(v **CreateTokenW
 				}
 				sv.RefreshToken = ptr.String(jtv)
 			}
+
 		case "scope":
 			if err := awsRestjson1_deserializeDocumentScopes(&sv.Scope, value); err != nil {
 				return err
 			}
+
 		case "tokenType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -477,6 +488,7 @@ func awsRestjson1_deserializeOpDocumentCreateTokenWithIAMOutput(v **CreateTokenW
 				}
 				sv.TokenType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -647,6 +659,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				}
 				sv.AuthorizationEndpoint = ptr.String(jtv)
 			}
+
 		case "clientId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -655,6 +668,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				}
 				sv.ClientId = ptr.String(jtv)
 			}
+
 		case "clientIdIssuedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -667,6 +681,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				}
 				sv.ClientIdIssuedAt = i64
 			}
+
 		case "clientSecret":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -675,6 +690,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				}
 				sv.ClientSecret = ptr.String(jtv)
 			}
+
 		case "clientSecretExpiresAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -687,6 +703,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				}
 				sv.ClientSecretExpiresAt = i64
 			}
+
 		case "tokenEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -695,6 +712,7 @@ func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOu
 				}
 				sv.TokenEndpoint = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -862,6 +880,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				}
 				sv.DeviceCode = ptr.String(jtv)
 			}
+
 		case "expiresIn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -874,6 +893,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				}
 				sv.ExpiresIn = int32(i64)
 			}
+
 		case "interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -886,6 +906,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				}
 				sv.Interval = int32(i64)
 			}
+
 		case "userCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -894,6 +915,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				}
 				sv.UserCode = ptr.String(jtv)
 			}
+
 		case "verificationUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -902,6 +924,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				}
 				sv.VerificationUri = ptr.String(jtv)
 			}
+
 		case "verificationUriComplete":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -910,6 +933,7 @@ func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartD
 				}
 				sv.VerificationUriComplete = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1453,6 +1477,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1461,6 +1486,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1500,6 +1526,7 @@ func awsRestjson1_deserializeDocumentAuthorizationPendingException(v **types.Aut
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1508,6 +1535,7 @@ func awsRestjson1_deserializeDocumentAuthorizationPendingException(v **types.Aut
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1547,6 +1575,7 @@ func awsRestjson1_deserializeDocumentExpiredTokenException(v **types.ExpiredToke
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1555,6 +1584,7 @@ func awsRestjson1_deserializeDocumentExpiredTokenException(v **types.ExpiredToke
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1594,6 +1624,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1602,6 +1633,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1641,6 +1673,7 @@ func awsRestjson1_deserializeDocumentInvalidClientException(v **types.InvalidCli
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1649,6 +1682,7 @@ func awsRestjson1_deserializeDocumentInvalidClientException(v **types.InvalidCli
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1688,6 +1722,7 @@ func awsRestjson1_deserializeDocumentInvalidClientMetadataException(v **types.In
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1696,6 +1731,7 @@ func awsRestjson1_deserializeDocumentInvalidClientMetadataException(v **types.In
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1735,6 +1771,7 @@ func awsRestjson1_deserializeDocumentInvalidGrantException(v **types.InvalidGran
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1743,6 +1780,7 @@ func awsRestjson1_deserializeDocumentInvalidGrantException(v **types.InvalidGran
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1782,6 +1820,7 @@ func awsRestjson1_deserializeDocumentInvalidRedirectUriException(v **types.Inval
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1790,6 +1829,7 @@ func awsRestjson1_deserializeDocumentInvalidRedirectUriException(v **types.Inval
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1829,6 +1869,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1837,6 +1878,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1876,6 +1918,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestRegionException(v **types.Inv
 				}
 				sv.Endpoint = ptr.String(jtv)
 			}
+
 		case "error":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1884,6 +1927,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestRegionException(v **types.Inv
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1892,6 +1936,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestRegionException(v **types.Inv
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		case "region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1900,6 +1945,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestRegionException(v **types.Inv
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1939,6 +1985,7 @@ func awsRestjson1_deserializeDocumentInvalidScopeException(v **types.InvalidScop
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1947,6 +1994,7 @@ func awsRestjson1_deserializeDocumentInvalidScopeException(v **types.InvalidScop
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2022,6 +2070,7 @@ func awsRestjson1_deserializeDocumentSlowDownException(v **types.SlowDownExcepti
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2030,6 +2079,7 @@ func awsRestjson1_deserializeDocumentSlowDownException(v **types.SlowDownExcepti
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2069,6 +2119,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2077,6 +2128,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedClientException(v **types.Unaut
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2116,6 +2168,7 @@ func awsRestjson1_deserializeDocumentUnsupportedGrantTypeException(v **types.Uns
 				}
 				sv.Error_ = ptr.String(jtv)
 			}
+
 		case "error_description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2124,6 +2177,7 @@ func awsRestjson1_deserializeDocumentUnsupportedGrantTypeException(v **types.Uns
 				}
 				sv.Error_description = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

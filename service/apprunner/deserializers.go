@@ -4578,6 +4578,7 @@ func awsAwsjson10_deserializeDocumentAuthenticationConfiguration(v **types.Authe
 				}
 				sv.AccessRoleArn = ptr.String(jtv)
 			}
+
 		case "ConnectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4586,6 +4587,7 @@ func awsAwsjson10_deserializeDocumentAuthenticationConfiguration(v **types.Authe
 				}
 				sv.ConnectionArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4625,6 +4627,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.AutoScalingConfigurationArn = ptr.String(jtv)
 			}
+
 		case "AutoScalingConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4633,6 +4636,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.AutoScalingConfigurationName = ptr.String(jtv)
 			}
+
 		case "AutoScalingConfigurationRevision":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4645,6 +4649,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.AutoScalingConfigurationRevision = ptr.Int32(int32(i64))
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4660,6 +4665,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 
 				}
 			}
+
 		case "DeletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4675,6 +4681,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 
 				}
 			}
+
 		case "HasAssociatedService":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4683,6 +4690,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.HasAssociatedService = ptr.Bool(jtv)
 			}
+
 		case "IsDefault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4691,6 +4699,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.IsDefault = ptr.Bool(jtv)
 			}
+
 		case "Latest":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4699,6 +4708,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.Latest = ptr.Bool(jtv)
 			}
+
 		case "MaxConcurrency":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4711,6 +4721,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.MaxConcurrency = ptr.Int32(int32(i64))
 			}
+
 		case "MaxSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4723,6 +4734,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.MaxSize = ptr.Int32(int32(i64))
 			}
+
 		case "MinSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4735,6 +4747,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.MinSize = ptr.Int32(int32(i64))
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4743,6 +4756,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfiguration(v **types.AutoScal
 				}
 				sv.Status = types.AutoScalingConfigurationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4782,6 +4796,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 				}
 				sv.AutoScalingConfigurationArn = ptr.String(jtv)
 			}
+
 		case "AutoScalingConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4790,6 +4805,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 				}
 				sv.AutoScalingConfigurationName = ptr.String(jtv)
 			}
+
 		case "AutoScalingConfigurationRevision":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4802,6 +4818,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 				}
 				sv.AutoScalingConfigurationRevision = int32(i64)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4817,6 +4834,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 
 				}
 			}
+
 		case "HasAssociatedService":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4825,6 +4843,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 				}
 				sv.HasAssociatedService = ptr.Bool(jtv)
 			}
+
 		case "IsDefault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4833,6 +4852,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 				}
 				sv.IsDefault = ptr.Bool(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4841,6 +4861,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(v **types.A
 				}
 				sv.Status = types.AutoScalingConfigurationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4914,6 +4935,7 @@ func awsAwsjson10_deserializeDocumentCertificateValidationRecord(v **types.Certi
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4922,6 +4944,7 @@ func awsAwsjson10_deserializeDocumentCertificateValidationRecord(v **types.Certi
 				}
 				sv.Status = types.CertificateValidationRecordStatus(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4930,6 +4953,7 @@ func awsAwsjson10_deserializeDocumentCertificateValidationRecord(v **types.Certi
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4938,6 +4962,7 @@ func awsAwsjson10_deserializeDocumentCertificateValidationRecord(v **types.Certi
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5007,6 +5032,7 @@ func awsAwsjson10_deserializeDocumentCodeConfiguration(v **types.CodeConfigurati
 			if err := awsAwsjson10_deserializeDocumentCodeConfigurationValues(&sv.CodeConfigurationValues, value); err != nil {
 				return err
 			}
+
 		case "ConfigurationSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5015,6 +5041,7 @@ func awsAwsjson10_deserializeDocumentCodeConfiguration(v **types.CodeConfigurati
 				}
 				sv.ConfigurationSource = types.ConfigurationSource(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5054,6 +5081,7 @@ func awsAwsjson10_deserializeDocumentCodeConfigurationValues(v **types.CodeConfi
 				}
 				sv.BuildCommand = ptr.String(jtv)
 			}
+
 		case "Port":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5062,6 +5090,7 @@ func awsAwsjson10_deserializeDocumentCodeConfigurationValues(v **types.CodeConfi
 				}
 				sv.Port = ptr.String(jtv)
 			}
+
 		case "Runtime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5070,14 +5099,17 @@ func awsAwsjson10_deserializeDocumentCodeConfigurationValues(v **types.CodeConfi
 				}
 				sv.Runtime = types.Runtime(jtv)
 			}
+
 		case "RuntimeEnvironmentSecrets":
 			if err := awsAwsjson10_deserializeDocumentRuntimeEnvironmentSecrets(&sv.RuntimeEnvironmentSecrets, value); err != nil {
 				return err
 			}
+
 		case "RuntimeEnvironmentVariables":
 			if err := awsAwsjson10_deserializeDocumentRuntimeEnvironmentVariables(&sv.RuntimeEnvironmentVariables, value); err != nil {
 				return err
 			}
+
 		case "StartCommand":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5086,6 +5118,7 @@ func awsAwsjson10_deserializeDocumentCodeConfigurationValues(v **types.CodeConfi
 				}
 				sv.StartCommand = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5121,6 +5154,7 @@ func awsAwsjson10_deserializeDocumentCodeRepository(v **types.CodeRepository, va
 			if err := awsAwsjson10_deserializeDocumentCodeConfiguration(&sv.CodeConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RepositoryUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5129,10 +5163,12 @@ func awsAwsjson10_deserializeDocumentCodeRepository(v **types.CodeRepository, va
 				}
 				sv.RepositoryUrl = ptr.String(jtv)
 			}
+
 		case "SourceCodeVersion":
 			if err := awsAwsjson10_deserializeDocumentSourceCodeVersion(&sv.SourceCodeVersion, value); err != nil {
 				return err
 			}
+
 		case "SourceDirectory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5141,6 +5177,7 @@ func awsAwsjson10_deserializeDocumentCodeRepository(v **types.CodeRepository, va
 				}
 				sv.SourceDirectory = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5180,6 +5217,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionArn = ptr.String(jtv)
 			}
+
 		case "ConnectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5188,6 +5226,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5203,6 +5242,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 
 				}
 			}
+
 		case "ProviderType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5211,6 +5251,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ProviderType = types.ProviderType(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5219,6 +5260,7 @@ func awsAwsjson10_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.Status = types.ConnectionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5258,6 +5300,7 @@ func awsAwsjson10_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 				}
 				sv.ConnectionArn = ptr.String(jtv)
 			}
+
 		case "ConnectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5266,6 +5309,7 @@ func awsAwsjson10_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 				}
 				sv.ConnectionName = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5281,6 +5325,7 @@ func awsAwsjson10_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 
 				}
 			}
+
 		case "ProviderType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5289,6 +5334,7 @@ func awsAwsjson10_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 				}
 				sv.ProviderType = types.ProviderType(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5297,6 +5343,7 @@ func awsAwsjson10_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 				}
 				sv.Status = types.ConnectionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5366,6 +5413,7 @@ func awsAwsjson10_deserializeDocumentCustomDomain(v **types.CustomDomain, value 
 			if err := awsAwsjson10_deserializeDocumentCertificateValidationRecordList(&sv.CertificateValidationRecords, value); err != nil {
 				return err
 			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5374,6 +5422,7 @@ func awsAwsjson10_deserializeDocumentCustomDomain(v **types.CustomDomain, value 
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
+
 		case "EnableWWWSubdomain":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5382,6 +5431,7 @@ func awsAwsjson10_deserializeDocumentCustomDomain(v **types.CustomDomain, value 
 				}
 				sv.EnableWWWSubdomain = ptr.Bool(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5390,6 +5440,7 @@ func awsAwsjson10_deserializeDocumentCustomDomain(v **types.CustomDomain, value 
 				}
 				sv.Status = types.CustomDomainAssociationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5463,6 +5514,7 @@ func awsAwsjson10_deserializeDocumentEgressConfiguration(v **types.EgressConfigu
 				}
 				sv.EgressType = types.EgressType(jtv)
 			}
+
 		case "VpcConnectorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5471,6 +5523,7 @@ func awsAwsjson10_deserializeDocumentEgressConfiguration(v **types.EgressConfigu
 				}
 				sv.VpcConnectorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5510,6 +5563,7 @@ func awsAwsjson10_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 				}
 				sv.KmsKey = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5553,6 +5607,7 @@ func awsAwsjson10_deserializeDocumentHealthCheckConfiguration(v **types.HealthCh
 				}
 				sv.HealthyThreshold = ptr.Int32(int32(i64))
 			}
+
 		case "Interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5565,6 +5620,7 @@ func awsAwsjson10_deserializeDocumentHealthCheckConfiguration(v **types.HealthCh
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5573,6 +5629,7 @@ func awsAwsjson10_deserializeDocumentHealthCheckConfiguration(v **types.HealthCh
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		case "Protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5581,6 +5638,7 @@ func awsAwsjson10_deserializeDocumentHealthCheckConfiguration(v **types.HealthCh
 				}
 				sv.Protocol = types.HealthCheckProtocol(jtv)
 			}
+
 		case "Timeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5593,6 +5651,7 @@ func awsAwsjson10_deserializeDocumentHealthCheckConfiguration(v **types.HealthCh
 				}
 				sv.Timeout = ptr.Int32(int32(i64))
 			}
+
 		case "UnhealthyThreshold":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5605,6 +5664,7 @@ func awsAwsjson10_deserializeDocumentHealthCheckConfiguration(v **types.HealthCh
 				}
 				sv.UnhealthyThreshold = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5644,14 +5704,17 @@ func awsAwsjson10_deserializeDocumentImageConfiguration(v **types.ImageConfigura
 				}
 				sv.Port = ptr.String(jtv)
 			}
+
 		case "RuntimeEnvironmentSecrets":
 			if err := awsAwsjson10_deserializeDocumentRuntimeEnvironmentSecrets(&sv.RuntimeEnvironmentSecrets, value); err != nil {
 				return err
 			}
+
 		case "RuntimeEnvironmentVariables":
 			if err := awsAwsjson10_deserializeDocumentRuntimeEnvironmentVariables(&sv.RuntimeEnvironmentVariables, value); err != nil {
 				return err
 			}
+
 		case "StartCommand":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5660,6 +5723,7 @@ func awsAwsjson10_deserializeDocumentImageConfiguration(v **types.ImageConfigura
 				}
 				sv.StartCommand = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5695,6 +5759,7 @@ func awsAwsjson10_deserializeDocumentImageRepository(v **types.ImageRepository, 
 			if err := awsAwsjson10_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ImageIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5703,6 +5768,7 @@ func awsAwsjson10_deserializeDocumentImageRepository(v **types.ImageRepository, 
 				}
 				sv.ImageIdentifier = ptr.String(jtv)
 			}
+
 		case "ImageRepositoryType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5711,6 +5777,7 @@ func awsAwsjson10_deserializeDocumentImageRepository(v **types.ImageRepository, 
 				}
 				sv.ImageRepositoryType = types.ImageRepositoryType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5750,6 +5817,7 @@ func awsAwsjson10_deserializeDocumentIngressConfiguration(v **types.IngressConfi
 				}
 				sv.IsPubliclyAccessible = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5789,6 +5857,7 @@ func awsAwsjson10_deserializeDocumentIngressVpcConfiguration(v **types.IngressVp
 				}
 				sv.VpcEndpointId = ptr.String(jtv)
 			}
+
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5797,6 +5866,7 @@ func awsAwsjson10_deserializeDocumentIngressVpcConfiguration(v **types.IngressVp
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5836,6 +5906,7 @@ func awsAwsjson10_deserializeDocumentInstanceConfiguration(v **types.InstanceCon
 				}
 				sv.Cpu = ptr.String(jtv)
 			}
+
 		case "InstanceRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5844,6 +5915,7 @@ func awsAwsjson10_deserializeDocumentInstanceConfiguration(v **types.InstanceCon
 				}
 				sv.InstanceRoleArn = ptr.String(jtv)
 			}
+
 		case "Memory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5852,6 +5924,7 @@ func awsAwsjson10_deserializeDocumentInstanceConfiguration(v **types.InstanceCon
 				}
 				sv.Memory = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5891,6 +5964,7 @@ func awsAwsjson10_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5930,6 +6004,7 @@ func awsAwsjson10_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5969,6 +6044,7 @@ func awsAwsjson10_deserializeDocumentInvalidStateException(v **types.InvalidStat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6004,10 +6080,12 @@ func awsAwsjson10_deserializeDocumentNetworkConfiguration(v **types.NetworkConfi
 			if err := awsAwsjson10_deserializeDocumentEgressConfiguration(&sv.EgressConfiguration, value); err != nil {
 				return err
 			}
+
 		case "IngressConfiguration":
 			if err := awsAwsjson10_deserializeDocumentIngressConfiguration(&sv.IngressConfiguration, value); err != nil {
 				return err
 			}
+
 		case "IpAddressType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6016,6 +6094,7 @@ func awsAwsjson10_deserializeDocumentNetworkConfiguration(v **types.NetworkConfi
 				}
 				sv.IpAddressType = types.IpAddressType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6062,6 +6141,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 
 				}
 			}
+
 		case "DeletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6077,6 +6157,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 
 				}
 			}
+
 		case "Latest":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6085,6 +6166,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 				}
 				sv.Latest = jtv
 			}
+
 		case "ObservabilityConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6093,6 +6175,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 				}
 				sv.ObservabilityConfigurationArn = ptr.String(jtv)
 			}
+
 		case "ObservabilityConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6101,6 +6184,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 				}
 				sv.ObservabilityConfigurationName = ptr.String(jtv)
 			}
+
 		case "ObservabilityConfigurationRevision":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6113,6 +6197,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 				}
 				sv.ObservabilityConfigurationRevision = int32(i64)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6121,10 +6206,12 @@ func awsAwsjson10_deserializeDocumentObservabilityConfiguration(v **types.Observ
 				}
 				sv.Status = types.ObservabilityConfigurationStatus(jtv)
 			}
+
 		case "TraceConfiguration":
 			if err := awsAwsjson10_deserializeDocumentTraceConfiguration(&sv.TraceConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6164,6 +6251,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfigurationSummary(v **types
 				}
 				sv.ObservabilityConfigurationArn = ptr.String(jtv)
 			}
+
 		case "ObservabilityConfigurationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6172,6 +6260,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfigurationSummary(v **types
 				}
 				sv.ObservabilityConfigurationName = ptr.String(jtv)
 			}
+
 		case "ObservabilityConfigurationRevision":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6184,6 +6273,7 @@ func awsAwsjson10_deserializeDocumentObservabilityConfigurationSummary(v **types
 				}
 				sv.ObservabilityConfigurationRevision = int32(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6264,6 +6354,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 
 				}
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6272,6 +6363,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "StartedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6287,6 +6379,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6295,6 +6388,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 				}
 				sv.Status = types.OperationStatus(jtv)
 			}
+
 		case "TargetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6303,6 +6397,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 				}
 				sv.TargetArn = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6311,6 +6406,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 				}
 				sv.Type = types.OperationType(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6326,6 +6422,7 @@ func awsAwsjson10_deserializeDocumentOperationSummary(v **types.OperationSummary
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6399,6 +6496,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6506,6 +6604,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 			if err := awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummary(&sv.AutoScalingConfigurationSummary, value); err != nil {
 				return err
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6521,6 +6620,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 
 				}
 			}
+
 		case "DeletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6536,26 +6636,32 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 
 				}
 			}
+
 		case "EncryptionConfiguration":
 			if err := awsAwsjson10_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "HealthCheckConfiguration":
 			if err := awsAwsjson10_deserializeDocumentHealthCheckConfiguration(&sv.HealthCheckConfiguration, value); err != nil {
 				return err
 			}
+
 		case "InstanceConfiguration":
 			if err := awsAwsjson10_deserializeDocumentInstanceConfiguration(&sv.InstanceConfiguration, value); err != nil {
 				return err
 			}
+
 		case "NetworkConfiguration":
 			if err := awsAwsjson10_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ObservabilityConfiguration":
 			if err := awsAwsjson10_deserializeDocumentServiceObservabilityConfiguration(&sv.ObservabilityConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ServiceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6564,6 +6670,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "ServiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6572,6 +6679,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 				}
 				sv.ServiceId = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6580,6 +6688,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		case "ServiceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6588,10 +6697,12 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 				}
 				sv.ServiceUrl = ptr.String(jtv)
 			}
+
 		case "SourceConfiguration":
 			if err := awsAwsjson10_deserializeDocumentSourceConfiguration(&sv.SourceConfiguration, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6600,6 +6711,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 				}
 				sv.Status = types.ServiceStatus(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6615,6 +6727,7 @@ func awsAwsjson10_deserializeDocumentService(v **types.Service, value interface{
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6690,6 +6803,7 @@ func awsAwsjson10_deserializeDocumentServiceObservabilityConfiguration(v **types
 				}
 				sv.ObservabilityConfigurationArn = ptr.String(jtv)
 			}
+
 		case "ObservabilityEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6698,6 +6812,7 @@ func awsAwsjson10_deserializeDocumentServiceObservabilityConfiguration(v **types
 				}
 				sv.ObservabilityEnabled = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6737,6 +6852,7 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6783,6 +6899,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 
 				}
 			}
+
 		case "ServiceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6791,6 +6908,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "ServiceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6799,6 +6917,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 				}
 				sv.ServiceId = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6807,6 +6926,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		case "ServiceUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6815,6 +6935,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 				}
 				sv.ServiceUrl = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6823,6 +6944,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 				}
 				sv.Status = types.ServiceStatus(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6838,6 +6960,7 @@ func awsAwsjson10_deserializeDocumentServiceSummary(v **types.ServiceSummary, va
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6911,6 +7034,7 @@ func awsAwsjson10_deserializeDocumentSourceCodeVersion(v **types.SourceCodeVersi
 				}
 				sv.Type = types.SourceCodeVersionType(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6919,6 +7043,7 @@ func awsAwsjson10_deserializeDocumentSourceCodeVersion(v **types.SourceCodeVersi
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6954,6 +7079,7 @@ func awsAwsjson10_deserializeDocumentSourceConfiguration(v **types.SourceConfigu
 			if err := awsAwsjson10_deserializeDocumentAuthenticationConfiguration(&sv.AuthenticationConfiguration, value); err != nil {
 				return err
 			}
+
 		case "AutoDeploymentsEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6962,14 +7088,17 @@ func awsAwsjson10_deserializeDocumentSourceConfiguration(v **types.SourceConfigu
 				}
 				sv.AutoDeploymentsEnabled = ptr.Bool(jtv)
 			}
+
 		case "CodeRepository":
 			if err := awsAwsjson10_deserializeDocumentCodeRepository(&sv.CodeRepository, value); err != nil {
 				return err
 			}
+
 		case "ImageRepository":
 			if err := awsAwsjson10_deserializeDocumentImageRepository(&sv.ImageRepository, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7045,6 +7174,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7053,6 +7183,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7126,6 +7257,7 @@ func awsAwsjson10_deserializeDocumentTraceConfiguration(v **types.TraceConfigura
 				}
 				sv.Vendor = types.TracingVendor(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7172,6 +7304,7 @@ func awsAwsjson10_deserializeDocumentVpcConnector(v **types.VpcConnector, value 
 
 				}
 			}
+
 		case "DeletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7187,10 +7320,12 @@ func awsAwsjson10_deserializeDocumentVpcConnector(v **types.VpcConnector, value 
 
 				}
 			}
+
 		case "SecurityGroups":
 			if err := awsAwsjson10_deserializeDocumentStringList(&sv.SecurityGroups, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7199,10 +7334,12 @@ func awsAwsjson10_deserializeDocumentVpcConnector(v **types.VpcConnector, value 
 				}
 				sv.Status = types.VpcConnectorStatus(jtv)
 			}
+
 		case "Subnets":
 			if err := awsAwsjson10_deserializeDocumentStringList(&sv.Subnets, value); err != nil {
 				return err
 			}
+
 		case "VpcConnectorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7211,6 +7348,7 @@ func awsAwsjson10_deserializeDocumentVpcConnector(v **types.VpcConnector, value 
 				}
 				sv.VpcConnectorArn = ptr.String(jtv)
 			}
+
 		case "VpcConnectorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7219,6 +7357,7 @@ func awsAwsjson10_deserializeDocumentVpcConnector(v **types.VpcConnector, value 
 				}
 				sv.VpcConnectorName = ptr.String(jtv)
 			}
+
 		case "VpcConnectorRevision":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7231,6 +7370,7 @@ func awsAwsjson10_deserializeDocumentVpcConnector(v **types.VpcConnector, value 
 				}
 				sv.VpcConnectorRevision = int32(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7304,6 +7444,7 @@ func awsAwsjson10_deserializeDocumentVpcDNSTarget(v **types.VpcDNSTarget, value 
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
+
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7312,6 +7453,7 @@ func awsAwsjson10_deserializeDocumentVpcDNSTarget(v **types.VpcDNSTarget, value 
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		case "VpcIngressConnectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7320,6 +7462,7 @@ func awsAwsjson10_deserializeDocumentVpcDNSTarget(v **types.VpcDNSTarget, value 
 				}
 				sv.VpcIngressConnectionArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7393,6 +7536,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7408,6 +7552,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 
 				}
 			}
+
 		case "DeletedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7423,6 +7568,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 
 				}
 			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7431,10 +7577,12 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
+
 		case "IngressVpcConfiguration":
 			if err := awsAwsjson10_deserializeDocumentIngressVpcConfiguration(&sv.IngressVpcConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ServiceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7443,6 +7591,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7451,6 +7600,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 				}
 				sv.Status = types.VpcIngressConnectionStatus(jtv)
 			}
+
 		case "VpcIngressConnectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7459,6 +7609,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 				}
 				sv.VpcIngressConnectionArn = ptr.String(jtv)
 			}
+
 		case "VpcIngressConnectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7467,6 +7618,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnection(v **types.VpcIngressCo
 				}
 				sv.VpcIngressConnectionName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7506,6 +7658,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnectionSummary(v **types.VpcIn
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "VpcIngressConnectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7514,6 +7667,7 @@ func awsAwsjson10_deserializeDocumentVpcIngressConnectionSummary(v **types.VpcIn
 				}
 				sv.VpcIngressConnectionArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7583,6 +7737,7 @@ func awsAwsjson10_deserializeOpDocumentAssociateCustomDomainOutput(v **Associate
 			if err := awsAwsjson10_deserializeDocumentCustomDomain(&sv.CustomDomain, value); err != nil {
 				return err
 			}
+
 		case "DNSTarget":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7591,6 +7746,7 @@ func awsAwsjson10_deserializeOpDocumentAssociateCustomDomainOutput(v **Associate
 				}
 				sv.DNSTarget = ptr.String(jtv)
 			}
+
 		case "ServiceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7599,10 +7755,12 @@ func awsAwsjson10_deserializeOpDocumentAssociateCustomDomainOutput(v **Associate
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "VpcDNSTargets":
 			if err := awsAwsjson10_deserializeDocumentVpcDNSTargetList(&sv.VpcDNSTargets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7638,6 +7796,7 @@ func awsAwsjson10_deserializeOpDocumentCreateAutoScalingConfigurationOutput(v **
 			if err := awsAwsjson10_deserializeDocumentAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7673,6 +7832,7 @@ func awsAwsjson10_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 			if err := awsAwsjson10_deserializeDocumentConnection(&sv.Connection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7708,6 +7868,7 @@ func awsAwsjson10_deserializeOpDocumentCreateObservabilityConfigurationOutput(v 
 			if err := awsAwsjson10_deserializeDocumentObservabilityConfiguration(&sv.ObservabilityConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7747,10 +7908,12 @@ func awsAwsjson10_deserializeOpDocumentCreateServiceOutput(v **CreateServiceOutp
 				}
 				sv.OperationId = ptr.String(jtv)
 			}
+
 		case "Service":
 			if err := awsAwsjson10_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7786,6 +7949,7 @@ func awsAwsjson10_deserializeOpDocumentCreateVpcConnectorOutput(v **CreateVpcCon
 			if err := awsAwsjson10_deserializeDocumentVpcConnector(&sv.VpcConnector, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7821,6 +7985,7 @@ func awsAwsjson10_deserializeOpDocumentCreateVpcIngressConnectionOutput(v **Crea
 			if err := awsAwsjson10_deserializeDocumentVpcIngressConnection(&sv.VpcIngressConnection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7856,6 +8021,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteAutoScalingConfigurationOutput(v **
 			if err := awsAwsjson10_deserializeDocumentAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7891,6 +8057,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 			if err := awsAwsjson10_deserializeDocumentConnection(&sv.Connection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7926,6 +8093,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteObservabilityConfigurationOutput(v 
 			if err := awsAwsjson10_deserializeDocumentObservabilityConfiguration(&sv.ObservabilityConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7965,10 +8133,12 @@ func awsAwsjson10_deserializeOpDocumentDeleteServiceOutput(v **DeleteServiceOutp
 				}
 				sv.OperationId = ptr.String(jtv)
 			}
+
 		case "Service":
 			if err := awsAwsjson10_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8004,6 +8174,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteVpcConnectorOutput(v **DeleteVpcCon
 			if err := awsAwsjson10_deserializeDocumentVpcConnector(&sv.VpcConnector, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8039,6 +8210,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteVpcIngressConnectionOutput(v **Dele
 			if err := awsAwsjson10_deserializeDocumentVpcIngressConnection(&sv.VpcIngressConnection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8074,6 +8246,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeAutoScalingConfigurationOutput(v 
 			if err := awsAwsjson10_deserializeDocumentAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8109,6 +8282,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeCustomDomainsOutput(v **DescribeC
 			if err := awsAwsjson10_deserializeDocumentCustomDomainList(&sv.CustomDomains, value); err != nil {
 				return err
 			}
+
 		case "DNSTarget":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8117,6 +8291,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeCustomDomainsOutput(v **DescribeC
 				}
 				sv.DNSTarget = ptr.String(jtv)
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8125,6 +8300,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeCustomDomainsOutput(v **DescribeC
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ServiceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8133,10 +8309,12 @@ func awsAwsjson10_deserializeOpDocumentDescribeCustomDomainsOutput(v **DescribeC
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "VpcDNSTargets":
 			if err := awsAwsjson10_deserializeDocumentVpcDNSTargetList(&sv.VpcDNSTargets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8172,6 +8350,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeObservabilityConfigurationOutput(
 			if err := awsAwsjson10_deserializeDocumentObservabilityConfiguration(&sv.ObservabilityConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8207,6 +8386,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeServiceOutput(v **DescribeService
 			if err := awsAwsjson10_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8242,6 +8422,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeVpcConnectorOutput(v **DescribeVp
 			if err := awsAwsjson10_deserializeDocumentVpcConnector(&sv.VpcConnector, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8277,6 +8458,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeVpcIngressConnectionOutput(v **De
 			if err := awsAwsjson10_deserializeDocumentVpcIngressConnection(&sv.VpcIngressConnection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8312,6 +8494,7 @@ func awsAwsjson10_deserializeOpDocumentDisassociateCustomDomainOutput(v **Disass
 			if err := awsAwsjson10_deserializeDocumentCustomDomain(&sv.CustomDomain, value); err != nil {
 				return err
 			}
+
 		case "DNSTarget":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8320,6 +8503,7 @@ func awsAwsjson10_deserializeOpDocumentDisassociateCustomDomainOutput(v **Disass
 				}
 				sv.DNSTarget = ptr.String(jtv)
 			}
+
 		case "ServiceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8328,10 +8512,12 @@ func awsAwsjson10_deserializeOpDocumentDisassociateCustomDomainOutput(v **Disass
 				}
 				sv.ServiceArn = ptr.String(jtv)
 			}
+
 		case "VpcDNSTargets":
 			if err := awsAwsjson10_deserializeDocumentVpcDNSTargetList(&sv.VpcDNSTargets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8367,6 +8553,7 @@ func awsAwsjson10_deserializeOpDocumentListAutoScalingConfigurationsOutput(v **L
 			if err := awsAwsjson10_deserializeDocumentAutoScalingConfigurationSummaryList(&sv.AutoScalingConfigurationSummaryList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8375,6 +8562,7 @@ func awsAwsjson10_deserializeOpDocumentListAutoScalingConfigurationsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8410,6 +8598,7 @@ func awsAwsjson10_deserializeOpDocumentListConnectionsOutput(v **ListConnections
 			if err := awsAwsjson10_deserializeDocumentConnectionSummaryList(&sv.ConnectionSummaryList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8418,6 +8607,7 @@ func awsAwsjson10_deserializeOpDocumentListConnectionsOutput(v **ListConnections
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8457,10 +8647,12 @@ func awsAwsjson10_deserializeOpDocumentListObservabilityConfigurationsOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ObservabilityConfigurationSummaryList":
 			if err := awsAwsjson10_deserializeDocumentObservabilityConfigurationSummaryList(&sv.ObservabilityConfigurationSummaryList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8500,10 +8692,12 @@ func awsAwsjson10_deserializeOpDocumentListOperationsOutput(v **ListOperationsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "OperationSummaryList":
 			if err := awsAwsjson10_deserializeDocumentOperationSummaryList(&sv.OperationSummaryList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8543,10 +8737,12 @@ func awsAwsjson10_deserializeOpDocumentListServicesForAutoScalingConfigurationOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ServiceArnList":
 			if err := awsAwsjson10_deserializeDocumentServiceArnList(&sv.ServiceArnList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8586,10 +8782,12 @@ func awsAwsjson10_deserializeOpDocumentListServicesOutput(v **ListServicesOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ServiceSummaryList":
 			if err := awsAwsjson10_deserializeDocumentServiceSummaryList(&sv.ServiceSummaryList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8625,6 +8823,7 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8664,10 +8863,12 @@ func awsAwsjson10_deserializeOpDocumentListVpcConnectorsOutput(v **ListVpcConnec
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "VpcConnectors":
 			if err := awsAwsjson10_deserializeDocumentVpcConnectors(&sv.VpcConnectors, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8707,10 +8908,12 @@ func awsAwsjson10_deserializeOpDocumentListVpcIngressConnectionsOutput(v **ListV
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "VpcIngressConnectionSummaryList":
 			if err := awsAwsjson10_deserializeDocumentVpcIngressConnectionSummaryList(&sv.VpcIngressConnectionSummaryList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8750,10 +8953,12 @@ func awsAwsjson10_deserializeOpDocumentPauseServiceOutput(v **PauseServiceOutput
 				}
 				sv.OperationId = ptr.String(jtv)
 			}
+
 		case "Service":
 			if err := awsAwsjson10_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8793,10 +8998,12 @@ func awsAwsjson10_deserializeOpDocumentResumeServiceOutput(v **ResumeServiceOutp
 				}
 				sv.OperationId = ptr.String(jtv)
 			}
+
 		case "Service":
 			if err := awsAwsjson10_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8836,6 +9043,7 @@ func awsAwsjson10_deserializeOpDocumentStartDeploymentOutput(v **StartDeployment
 				}
 				sv.OperationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8933,6 +9141,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateDefaultAutoScalingConfigurationOutp
 			if err := awsAwsjson10_deserializeDocumentAutoScalingConfiguration(&sv.AutoScalingConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8972,10 +9181,12 @@ func awsAwsjson10_deserializeOpDocumentUpdateServiceOutput(v **UpdateServiceOutp
 				}
 				sv.OperationId = ptr.String(jtv)
 			}
+
 		case "Service":
 			if err := awsAwsjson10_deserializeDocumentService(&sv.Service, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9011,6 +9222,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateVpcIngressConnectionOutput(v **Upda
 			if err := awsAwsjson10_deserializeDocumentVpcIngressConnection(&sv.VpcIngressConnection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

@@ -187,6 +187,7 @@ func awsRestjson1_deserializeOpDocumentApplyPendingMaintenanceActionOutput(v **A
 			if err := awsRestjson1_deserializeDocumentResourcePendingMaintenanceAction(&sv.ResourcePendingMaintenanceAction, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -356,6 +357,7 @@ func awsRestjson1_deserializeOpDocumentCopyClusterSnapshotOutput(v **CopyCluster
 			if err := awsRestjson1_deserializeDocumentClusterSnapshot(&sv.Snapshot, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -522,6 +524,7 @@ func awsRestjson1_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutp
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -691,6 +694,7 @@ func awsRestjson1_deserializeOpDocumentCreateClusterSnapshotOutput(v **CreateClu
 			if err := awsRestjson1_deserializeDocumentClusterSnapshot(&sv.Snapshot, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -857,6 +861,7 @@ func awsRestjson1_deserializeOpDocumentDeleteClusterOutput(v **DeleteClusterOutp
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1023,6 +1028,7 @@ func awsRestjson1_deserializeOpDocumentDeleteClusterSnapshotOutput(v **DeleteClu
 			if err := awsRestjson1_deserializeDocumentClusterSnapshot(&sv.Snapshot, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1186,6 +1192,7 @@ func awsRestjson1_deserializeOpDocumentGetClusterOutput(v **GetClusterOutput, va
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1349,6 +1356,7 @@ func awsRestjson1_deserializeOpDocumentGetClusterSnapshotOutput(v **GetClusterSn
 			if err := awsRestjson1_deserializeDocumentClusterSnapshot(&sv.Snapshot, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1515,6 +1523,7 @@ func awsRestjson1_deserializeOpDocumentGetPendingMaintenanceActionOutput(v **Get
 			if err := awsRestjson1_deserializeDocumentResourcePendingMaintenanceAction(&sv.ResourcePendingMaintenanceAction, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1675,6 +1684,7 @@ func awsRestjson1_deserializeOpDocumentListClustersOutput(v **ListClustersOutput
 			if err := awsRestjson1_deserializeDocumentClusterList(&sv.Clusters, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1683,6 +1693,7 @@ func awsRestjson1_deserializeOpDocumentListClustersOutput(v **ListClustersOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1847,10 +1858,12 @@ func awsRestjson1_deserializeOpDocumentListClusterSnapshotsOutput(v **ListCluste
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "snapshots":
 			if err := awsRestjson1_deserializeDocumentClusterSnapshotList(&sv.Snapshots, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2015,10 +2028,12 @@ func awsRestjson1_deserializeOpDocumentListPendingMaintenanceActionsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resourcePendingMaintenanceActions":
 			if err := awsRestjson1_deserializeDocumentResourcePendingMaintenanceActionList(&sv.ResourcePendingMaintenanceActions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2179,6 +2194,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2348,6 +2364,7 @@ func awsRestjson1_deserializeOpDocumentRestoreClusterFromSnapshotOutput(v **Rest
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2511,6 +2528,7 @@ func awsRestjson1_deserializeOpDocumentStartClusterOutput(v **StartClusterOutput
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2674,6 +2692,7 @@ func awsRestjson1_deserializeOpDocumentStopClusterOutput(v **StopClusterOutput, 
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3034,6 +3053,7 @@ func awsRestjson1_deserializeOpDocumentUpdateClusterOutput(v **UpdateClusterOutp
 			if err := awsRestjson1_deserializeDocumentCluster(&sv.Cluster, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3345,6 +3365,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3384,6 +3405,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.AdminUserName = ptr.String(jtv)
 			}
+
 		case "authType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3392,6 +3414,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.AuthType = types.Auth(jtv)
 			}
+
 		case "backupRetentionPeriod":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3404,6 +3427,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.BackupRetentionPeriod = ptr.Int32(int32(i64))
 			}
+
 		case "clusterArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3412,6 +3436,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ClusterArn = ptr.String(jtv)
 			}
+
 		case "clusterEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3420,6 +3445,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ClusterEndpoint = ptr.String(jtv)
 			}
+
 		case "clusterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3428,6 +3454,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ClusterName = ptr.String(jtv)
 			}
+
 		case "createTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3436,6 +3463,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3444,6 +3472,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
+
 		case "preferredBackupWindow":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3452,6 +3481,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.PreferredBackupWindow = ptr.String(jtv)
 			}
+
 		case "preferredMaintenanceWindow":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3460,6 +3490,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.PreferredMaintenanceWindow = ptr.String(jtv)
 			}
+
 		case "shardCapacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3472,6 +3503,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ShardCapacity = ptr.Int32(int32(i64))
 			}
+
 		case "shardCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3484,6 +3516,7 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ShardCount = ptr.Int32(int32(i64))
 			}
+
 		case "shardInstanceCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3496,10 +3529,12 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.ShardInstanceCount = ptr.Int32(int32(i64))
 			}
+
 		case "shards":
 			if err := awsRestjson1_deserializeDocumentShardList(&sv.Shards, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3508,14 +3543,17 @@ func awsRestjson1_deserializeDocumentCluster(v **types.Cluster, value interface{
 				}
 				sv.Status = types.Status(jtv)
 			}
+
 		case "subnetIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.SubnetIds, value); err != nil {
 				return err
 			}
+
 		case "vpcSecurityGroupIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.VpcSecurityGroupIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3555,6 +3593,7 @@ func awsRestjson1_deserializeDocumentClusterInList(v **types.ClusterInList, valu
 				}
 				sv.ClusterArn = ptr.String(jtv)
 			}
+
 		case "clusterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3563,6 +3602,7 @@ func awsRestjson1_deserializeDocumentClusterInList(v **types.ClusterInList, valu
 				}
 				sv.ClusterName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3571,6 +3611,7 @@ func awsRestjson1_deserializeDocumentClusterInList(v **types.ClusterInList, valu
 				}
 				sv.Status = types.Status(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3644,6 +3685,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.AdminUserName = ptr.String(jtv)
 			}
+
 		case "clusterArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3652,6 +3694,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.ClusterArn = ptr.String(jtv)
 			}
+
 		case "clusterCreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3660,6 +3703,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.ClusterCreationTime = ptr.String(jtv)
 			}
+
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3668,6 +3712,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
+
 		case "snapshotArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3676,6 +3721,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.SnapshotArn = ptr.String(jtv)
 			}
+
 		case "snapshotCreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3684,6 +3730,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.SnapshotCreationTime = ptr.String(jtv)
 			}
+
 		case "snapshotName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3692,6 +3739,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.SnapshotName = ptr.String(jtv)
 			}
+
 		case "snapshotType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3700,6 +3748,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.SnapshotType = types.SnapshotType(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3708,14 +3757,17 @@ func awsRestjson1_deserializeDocumentClusterSnapshot(v **types.ClusterSnapshot, 
 				}
 				sv.Status = types.Status(jtv)
 			}
+
 		case "subnetIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.SubnetIds, value); err != nil {
 				return err
 			}
+
 		case "vpcSecurityGroupIds":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.VpcSecurityGroupIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3755,6 +3807,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshotInList(v **types.ClusterSnap
 				}
 				sv.ClusterArn = ptr.String(jtv)
 			}
+
 		case "snapshotArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3763,6 +3816,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshotInList(v **types.ClusterSnap
 				}
 				sv.SnapshotArn = ptr.String(jtv)
 			}
+
 		case "snapshotCreationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3771,6 +3825,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshotInList(v **types.ClusterSnap
 				}
 				sv.SnapshotCreationTime = ptr.String(jtv)
 			}
+
 		case "snapshotName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3779,6 +3834,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshotInList(v **types.ClusterSnap
 				}
 				sv.SnapshotName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3787,6 +3843,7 @@ func awsRestjson1_deserializeDocumentClusterSnapshotInList(v **types.ClusterSnap
 				}
 				sv.Status = types.Status(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3860,6 +3917,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3868,6 +3926,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3876,6 +3935,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3915,6 +3975,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3954,6 +4015,7 @@ func awsRestjson1_deserializeDocumentPendingMaintenanceActionDetails(v **types.P
 				}
 				sv.Action = ptr.String(jtv)
 			}
+
 		case "autoAppliedAfterDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3962,6 +4024,7 @@ func awsRestjson1_deserializeDocumentPendingMaintenanceActionDetails(v **types.P
 				}
 				sv.AutoAppliedAfterDate = ptr.String(jtv)
 			}
+
 		case "currentApplyDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3970,6 +4033,7 @@ func awsRestjson1_deserializeDocumentPendingMaintenanceActionDetails(v **types.P
 				}
 				sv.CurrentApplyDate = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3978,6 +4042,7 @@ func awsRestjson1_deserializeDocumentPendingMaintenanceActionDetails(v **types.P
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "forcedApplyDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3986,6 +4051,7 @@ func awsRestjson1_deserializeDocumentPendingMaintenanceActionDetails(v **types.P
 				}
 				sv.ForcedApplyDate = ptr.String(jtv)
 			}
+
 		case "optInStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3994,6 +4060,7 @@ func awsRestjson1_deserializeDocumentPendingMaintenanceActionDetails(v **types.P
 				}
 				sv.OptInStatus = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4067,6 +4134,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4075,6 +4143,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4083,6 +4152,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4118,6 +4188,7 @@ func awsRestjson1_deserializeDocumentResourcePendingMaintenanceAction(v **types.
 			if err := awsRestjson1_deserializeDocumentPendingMaintenanceActionDetailsList(&sv.PendingMaintenanceActionDetails, value); err != nil {
 				return err
 			}
+
 		case "resourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4126,6 +4197,7 @@ func awsRestjson1_deserializeDocumentResourcePendingMaintenanceAction(v **types.
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4199,6 +4271,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4238,6 +4311,7 @@ func awsRestjson1_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "shardId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4246,6 +4320,7 @@ func awsRestjson1_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.ShardId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4254,6 +4329,7 @@ func awsRestjson1_deserializeDocumentShard(v **types.Shard, value interface{}) e
 				}
 				sv.Status = types.Status(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4399,6 +4475,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4411,6 +4488,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4446,6 +4524,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4454,6 +4533,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4462,6 +4542,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4501,6 +4582,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4509,6 +4591,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

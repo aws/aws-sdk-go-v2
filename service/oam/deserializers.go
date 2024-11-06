@@ -187,6 +187,7 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -195,6 +196,7 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -203,6 +205,7 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 				}
 				sv.Label = ptr.String(jtv)
 			}
+
 		case "LabelTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -211,14 +214,17 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 				}
 				sv.LabelTemplate = ptr.String(jtv)
 			}
+
 		case "LinkConfiguration":
 			if err := awsRestjson1_deserializeDocumentLinkConfiguration(&sv.LinkConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypesOutput(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		case "SinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -227,10 +233,12 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 				}
 				sv.SinkArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMapOutput(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -398,6 +406,7 @@ func awsRestjson1_deserializeOpDocumentCreateSinkOutput(v **CreateSinkOutput, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -406,6 +415,7 @@ func awsRestjson1_deserializeOpDocumentCreateSinkOutput(v **CreateSinkOutput, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -414,10 +424,12 @@ func awsRestjson1_deserializeOpDocumentCreateSinkOutput(v **CreateSinkOutput, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMapOutput(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -779,6 +791,7 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -787,6 +800,7 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -795,6 +809,7 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 				}
 				sv.Label = ptr.String(jtv)
 			}
+
 		case "LabelTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -803,14 +818,17 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 				}
 				sv.LabelTemplate = ptr.String(jtv)
 			}
+
 		case "LinkConfiguration":
 			if err := awsRestjson1_deserializeDocumentLinkConfiguration(&sv.LinkConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypesOutput(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		case "SinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -819,10 +837,12 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 				}
 				sv.SinkArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMapOutput(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -987,6 +1007,7 @@ func awsRestjson1_deserializeOpDocumentGetSinkOutput(v **GetSinkOutput, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -995,6 +1016,7 @@ func awsRestjson1_deserializeOpDocumentGetSinkOutput(v **GetSinkOutput, value in
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1003,10 +1025,12 @@ func awsRestjson1_deserializeOpDocumentGetSinkOutput(v **GetSinkOutput, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMapOutput(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1171,6 +1195,7 @@ func awsRestjson1_deserializeOpDocumentGetSinkPolicyOutput(v **GetSinkPolicyOutp
 				}
 				sv.Policy = ptr.String(jtv)
 			}
+
 		case "SinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1179,6 +1204,7 @@ func awsRestjson1_deserializeOpDocumentGetSinkPolicyOutput(v **GetSinkPolicyOutp
 				}
 				sv.SinkArn = ptr.String(jtv)
 			}
+
 		case "SinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1187,6 +1213,7 @@ func awsRestjson1_deserializeOpDocumentGetSinkPolicyOutput(v **GetSinkPolicyOutp
 				}
 				sv.SinkId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1347,6 +1374,7 @@ func awsRestjson1_deserializeOpDocumentListAttachedLinksOutput(v **ListAttachedL
 			if err := awsRestjson1_deserializeDocumentListAttachedLinksItems(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1355,6 +1383,7 @@ func awsRestjson1_deserializeOpDocumentListAttachedLinksOutput(v **ListAttachedL
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1512,6 +1541,7 @@ func awsRestjson1_deserializeOpDocumentListLinksOutput(v **ListLinksOutput, valu
 			if err := awsRestjson1_deserializeDocumentListLinksItems(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1520,6 +1550,7 @@ func awsRestjson1_deserializeOpDocumentListLinksOutput(v **ListLinksOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1677,6 +1708,7 @@ func awsRestjson1_deserializeOpDocumentListSinksOutput(v **ListSinksOutput, valu
 			if err := awsRestjson1_deserializeDocumentListSinksItems(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1685,6 +1717,7 @@ func awsRestjson1_deserializeOpDocumentListSinksOutput(v **ListSinksOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1839,6 +1872,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMapOutput(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2003,6 +2037,7 @@ func awsRestjson1_deserializeOpDocumentPutSinkPolicyOutput(v **PutSinkPolicyOutp
 				}
 				sv.Policy = ptr.String(jtv)
 			}
+
 		case "SinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2011,6 +2046,7 @@ func awsRestjson1_deserializeOpDocumentPutSinkPolicyOutput(v **PutSinkPolicyOutp
 				}
 				sv.SinkArn = ptr.String(jtv)
 			}
+
 		case "SinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2019,6 +2055,7 @@ func awsRestjson1_deserializeOpDocumentPutSinkPolicyOutput(v **PutSinkPolicyOutp
 				}
 				sv.SinkId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2368,6 +2405,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLinkOutput(v **UpdateLinkOutput, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2376,6 +2414,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLinkOutput(v **UpdateLinkOutput, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2384,6 +2423,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLinkOutput(v **UpdateLinkOutput, va
 				}
 				sv.Label = ptr.String(jtv)
 			}
+
 		case "LabelTemplate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2392,14 +2432,17 @@ func awsRestjson1_deserializeOpDocumentUpdateLinkOutput(v **UpdateLinkOutput, va
 				}
 				sv.LabelTemplate = ptr.String(jtv)
 			}
+
 		case "LinkConfiguration":
 			if err := awsRestjson1_deserializeDocumentLinkConfiguration(&sv.LinkConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypesOutput(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		case "SinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2408,10 +2451,12 @@ func awsRestjson1_deserializeOpDocumentUpdateLinkOutput(v **UpdateLinkOutput, va
 				}
 				sv.SinkArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMapOutput(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2835,6 +2880,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.AmznErrorType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2843,6 +2889,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2882,6 +2929,7 @@ func awsRestjson1_deserializeDocumentInternalServiceFault(v **types.InternalServ
 				}
 				sv.AmznErrorType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2890,6 +2938,7 @@ func awsRestjson1_deserializeDocumentInternalServiceFault(v **types.InternalServ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2929,6 +2978,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.AmznErrorType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2937,6 +2987,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2972,10 +3023,12 @@ func awsRestjson1_deserializeDocumentLinkConfiguration(v **types.LinkConfigurati
 			if err := awsRestjson1_deserializeDocumentLogGroupConfiguration(&sv.LogGroupConfiguration, value); err != nil {
 				return err
 			}
+
 		case "MetricConfiguration":
 			if err := awsRestjson1_deserializeDocumentMetricConfiguration(&sv.MetricConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3015,6 +3068,7 @@ func awsRestjson1_deserializeDocumentListAttachedLinksItem(v **types.ListAttache
 				}
 				sv.Label = ptr.String(jtv)
 			}
+
 		case "LinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3023,10 +3077,12 @@ func awsRestjson1_deserializeDocumentListAttachedLinksItem(v **types.ListAttache
 				}
 				sv.LinkArn = ptr.String(jtv)
 			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypesOutput(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3100,6 +3156,7 @@ func awsRestjson1_deserializeDocumentListLinksItem(v **types.ListLinksItem, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3108,6 +3165,7 @@ func awsRestjson1_deserializeDocumentListLinksItem(v **types.ListLinksItem, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Label":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3116,10 +3174,12 @@ func awsRestjson1_deserializeDocumentListLinksItem(v **types.ListLinksItem, valu
 				}
 				sv.Label = ptr.String(jtv)
 			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypesOutput(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		case "SinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3128,6 +3188,7 @@ func awsRestjson1_deserializeDocumentListLinksItem(v **types.ListLinksItem, valu
 				}
 				sv.SinkArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3201,6 +3262,7 @@ func awsRestjson1_deserializeDocumentListSinksItem(v **types.ListSinksItem, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3209,6 +3271,7 @@ func awsRestjson1_deserializeDocumentListSinksItem(v **types.ListSinksItem, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3217,6 +3280,7 @@ func awsRestjson1_deserializeDocumentListSinksItem(v **types.ListSinksItem, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3290,6 +3354,7 @@ func awsRestjson1_deserializeDocumentLogGroupConfiguration(v **types.LogGroupCon
 				}
 				sv.Filter = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3329,6 +3394,7 @@ func awsRestjson1_deserializeDocumentMetricConfiguration(v **types.MetricConfigu
 				}
 				sv.Filter = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3368,6 +3434,7 @@ func awsRestjson1_deserializeDocumentMissingRequiredParameterException(v **types
 				}
 				sv.AmznErrorType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3376,6 +3443,7 @@ func awsRestjson1_deserializeDocumentMissingRequiredParameterException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3415,6 +3483,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.AmznErrorType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3423,6 +3492,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3498,6 +3568,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.AmznErrorType = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3506,6 +3577,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3581,6 +3653,7 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3620,6 +3693,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

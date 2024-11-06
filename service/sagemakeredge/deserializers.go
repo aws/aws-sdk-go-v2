@@ -172,6 +172,7 @@ func awsRestjson1_deserializeOpDocumentGetDeploymentsOutput(v **GetDeploymentsOu
 			if err := awsRestjson1_deserializeDocumentEdgeDeployments(&sv.Deployments, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -327,6 +328,7 @@ func awsRestjson1_deserializeOpDocumentGetDeviceRegistrationOutput(v **GetDevice
 				}
 				sv.CacheTTL = ptr.String(jtv)
 			}
+
 		case "DeviceRegistration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -335,6 +337,7 @@ func awsRestjson1_deserializeOpDocumentGetDeviceRegistrationOutput(v **GetDevice
 				}
 				sv.DeviceRegistration = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -504,6 +507,7 @@ func awsRestjson1_deserializeDocumentChecksum(v **types.Checksum, value interfac
 				}
 				sv.Sum = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -512,6 +516,7 @@ func awsRestjson1_deserializeDocumentChecksum(v **types.Checksum, value interfac
 				}
 				sv.Type = types.ChecksumType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -547,6 +552,7 @@ func awsRestjson1_deserializeDocumentDefinition(v **types.Definition, value inte
 			if err := awsRestjson1_deserializeDocumentChecksum(&sv.Checksum, value); err != nil {
 				return err
 			}
+
 		case "ModelHandle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -555,6 +561,7 @@ func awsRestjson1_deserializeDocumentDefinition(v **types.Definition, value inte
 				}
 				sv.ModelHandle = ptr.String(jtv)
 			}
+
 		case "S3Url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -563,6 +570,7 @@ func awsRestjson1_deserializeDocumentDefinition(v **types.Definition, value inte
 				}
 				sv.S3Url = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -571,6 +579,7 @@ func awsRestjson1_deserializeDocumentDefinition(v **types.Definition, value inte
 				}
 				sv.State = types.ModelState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -640,6 +649,7 @@ func awsRestjson1_deserializeDocumentEdgeDeployment(v **types.EdgeDeployment, va
 			if err := awsRestjson1_deserializeDocumentDefinitions(&sv.Definitions, value); err != nil {
 				return err
 			}
+
 		case "DeploymentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -648,6 +658,7 @@ func awsRestjson1_deserializeDocumentEdgeDeployment(v **types.EdgeDeployment, va
 				}
 				sv.DeploymentName = ptr.String(jtv)
 			}
+
 		case "FailureHandlingPolicy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -656,6 +667,7 @@ func awsRestjson1_deserializeDocumentEdgeDeployment(v **types.EdgeDeployment, va
 				}
 				sv.FailureHandlingPolicy = types.FailureHandlingPolicy(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -664,6 +676,7 @@ func awsRestjson1_deserializeDocumentEdgeDeployment(v **types.EdgeDeployment, va
 				}
 				sv.Type = types.DeploymentType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -737,6 +750,7 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

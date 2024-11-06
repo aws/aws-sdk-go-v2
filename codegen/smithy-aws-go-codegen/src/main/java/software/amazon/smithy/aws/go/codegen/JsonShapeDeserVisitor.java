@@ -193,15 +193,18 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                     String memberName = symbolProvider.toMemberName(member);
                     String serializedMemberName = getSerializedMemberName(member);
 
+                    // The 'message' field in JSON protocol errors is known to not always match its over-the-wire casing with what is modeled.
+                    // See https://github.com/aws/aws-sdk-go-v2/issues/2859
                     boolean isErrorStructure = shape.hasTrait(ErrorTrait.class);
 
-                    if(isErrorStructure && memberName.equals("Message")){
+                    if(isErrorStructure && memberName.equalsIgnoreCase("Message")){
                         writer.write("case \"message\", \"Message\":");
                     } else {
                         writer.write("case $S:",serializedMemberName);
                     }
                     String dest = "sv." + memberName;
                     context.getModel().expectShape(member.getTarget()).accept(getMemberDeserVisitor(member, dest));
+                    writer.write("");
                 }
 
                 writer.openBlock("default:", "", () -> {
@@ -209,7 +212,6 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 });
             });
         });
-
 
         writer.write("*v = sv");
         writer.write("return nil");

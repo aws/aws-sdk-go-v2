@@ -484,6 +484,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Domain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -492,14 +493,17 @@ func awsRestjson1_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 				sv.Domain = ptr.String(jtv)
 			}
+
 		case "EndpointInfo":
 			if err := awsRestjson1_deserializeDocumentSimulationAppEndpointInfo(&sv.EndpointInfo, value); err != nil {
 				return err
 			}
+
 		case "LaunchOverrides":
 			if err := awsRestjson1_deserializeDocumentLaunchOverrides(&sv.LaunchOverrides, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -508,6 +512,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Simulation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -516,6 +521,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 				sv.Simulation = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -524,6 +530,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 				sv.Status = types.SimulationAppStatus(jtv)
 			}
+
 		case "TargetStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -532,6 +539,7 @@ func awsRestjson1_deserializeOpDocumentDescribeAppOutput(v **DescribeAppOutput, 
 				}
 				sv.TargetStatus = types.SimulationAppTargetStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -696,6 +704,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -711,6 +720,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -719,6 +729,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "ExecutionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -727,14 +738,17 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.ExecutionId = ptr.String(jtv)
 			}
+
 		case "LiveSimulationState":
 			if err := awsRestjson1_deserializeDocumentLiveSimulationState(&sv.LiveSimulationState, value); err != nil {
 				return err
 			}
+
 		case "LoggingConfiguration":
 			if err := awsRestjson1_deserializeDocumentLoggingConfiguration(&sv.LoggingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "MaximumDuration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -743,6 +757,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.MaximumDuration = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -751,6 +766,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -759,6 +775,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		case "SchemaError":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -767,14 +784,17 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.SchemaError = ptr.String(jtv)
 			}
+
 		case "SchemaS3Location":
 			if err := awsRestjson1_deserializeDocumentS3Location(&sv.SchemaS3Location, value); err != nil {
 				return err
 			}
+
 		case "SnapshotS3Location":
 			if err := awsRestjson1_deserializeDocumentS3Location(&sv.SnapshotS3Location, value); err != nil {
 				return err
 			}
+
 		case "StartError":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -783,6 +803,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.StartError = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -791,6 +812,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.Status = types.SimulationStatus(jtv)
 			}
+
 		case "TargetStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -799,6 +821,7 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationOutput(v **DescribeSimu
 				}
 				sv.TargetStatus = types.SimulationTargetStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -959,6 +982,7 @@ func awsRestjson1_deserializeOpDocumentListAppsOutput(v **ListAppsOutput, value 
 			if err := awsRestjson1_deserializeDocumentSimulationAppList(&sv.Apps, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -967,6 +991,7 @@ func awsRestjson1_deserializeOpDocumentListAppsOutput(v **ListAppsOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1128,10 +1153,12 @@ func awsRestjson1_deserializeOpDocumentListSimulationsOutput(v **ListSimulations
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Simulations":
 			if err := awsRestjson1_deserializeDocumentSimulationList(&sv.Simulations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1286,6 +1313,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1453,6 +1481,7 @@ func awsRestjson1_deserializeOpDocumentStartAppOutput(v **StartAppOutput, value 
 				}
 				sv.Domain = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1461,6 +1490,7 @@ func awsRestjson1_deserializeOpDocumentStartAppOutput(v **StartAppOutput, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Simulation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1469,6 +1499,7 @@ func awsRestjson1_deserializeOpDocumentStartAppOutput(v **StartAppOutput, value 
 				}
 				sv.Simulation = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1736,6 +1767,7 @@ func awsRestjson1_deserializeOpDocumentStartSimulationOutput(v **StartSimulation
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1751,6 +1783,7 @@ func awsRestjson1_deserializeOpDocumentStartSimulationOutput(v **StartSimulation
 
 				}
 			}
+
 		case "ExecutionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1759,6 +1792,7 @@ func awsRestjson1_deserializeOpDocumentStartSimulationOutput(v **StartSimulation
 				}
 				sv.ExecutionId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2535,6 +2569,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2608,6 +2643,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLogsLogGroup(v **types.CloudWatch
 				}
 				sv.LogGroupArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2647,6 +2683,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2686,6 +2723,7 @@ func awsRestjson1_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.Lifecycle = types.LifecycleManagementStrategy(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2694,6 +2732,7 @@ func awsRestjson1_deserializeDocumentDomain(v **types.Domain, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2767,6 +2806,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2838,6 +2878,7 @@ func awsRestjson1_deserializeDocumentLaunchOverrides(v **types.LaunchOverrides, 
 			if err := awsRestjson1_deserializeDocumentLaunchCommandList(&sv.LaunchCommands, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2873,10 +2914,12 @@ func awsRestjson1_deserializeDocumentLiveSimulationState(v **types.LiveSimulatio
 			if err := awsRestjson1_deserializeDocumentSimulationClockList(&sv.Clocks, value); err != nil {
 				return err
 			}
+
 		case "Domains":
 			if err := awsRestjson1_deserializeDocumentDomainList(&sv.Domains, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2912,6 +2955,7 @@ func awsRestjson1_deserializeDocumentLogDestination(v **types.LogDestination, va
 			if err := awsRestjson1_deserializeDocumentCloudWatchLogsLogGroup(&sv.CloudWatchLogsLogGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2981,6 +3025,7 @@ func awsRestjson1_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 			if err := awsRestjson1_deserializeDocumentLogDestinations(&sv.Destinations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3020,6 +3065,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3059,6 +3105,7 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
+
 		case "ObjectKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3067,6 +3114,7 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.ObjectKey = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3106,6 +3154,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3145,10 +3194,12 @@ func awsRestjson1_deserializeDocumentSimulationAppEndpointInfo(v **types.Simulat
 				}
 				sv.Address = ptr.String(jtv)
 			}
+
 		case "IngressPortMappings":
 			if err := awsRestjson1_deserializeDocumentAppPortMappings(&sv.IngressPortMappings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3222,6 +3273,7 @@ func awsRestjson1_deserializeDocumentSimulationAppMetadata(v **types.SimulationA
 				}
 				sv.Domain = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3230,6 +3282,7 @@ func awsRestjson1_deserializeDocumentSimulationAppMetadata(v **types.SimulationA
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Simulation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3238,6 +3291,7 @@ func awsRestjson1_deserializeDocumentSimulationAppMetadata(v **types.SimulationA
 				}
 				sv.Simulation = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3246,6 +3300,7 @@ func awsRestjson1_deserializeDocumentSimulationAppMetadata(v **types.SimulationA
 				}
 				sv.Status = types.SimulationAppStatus(jtv)
 			}
+
 		case "TargetStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3254,6 +3309,7 @@ func awsRestjson1_deserializeDocumentSimulationAppMetadata(v **types.SimulationA
 				}
 				sv.TargetStatus = types.SimulationAppTargetStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3297,6 +3353,7 @@ func awsRestjson1_deserializeDocumentSimulationAppPortMapping(v **types.Simulati
 				}
 				sv.Actual = ptr.Int32(int32(i64))
 			}
+
 		case "Declared":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3309,6 +3366,7 @@ func awsRestjson1_deserializeDocumentSimulationAppPortMapping(v **types.Simulati
 				}
 				sv.Declared = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3348,6 +3406,7 @@ func awsRestjson1_deserializeDocumentSimulationClock(v **types.SimulationClock, 
 				}
 				sv.Status = types.ClockStatus(jtv)
 			}
+
 		case "TargetStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3356,6 +3415,7 @@ func awsRestjson1_deserializeDocumentSimulationClock(v **types.SimulationClock, 
 				}
 				sv.TargetStatus = types.ClockTargetStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3463,6 +3523,7 @@ func awsRestjson1_deserializeDocumentSimulationMetadata(v **types.SimulationMeta
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3478,6 +3539,7 @@ func awsRestjson1_deserializeDocumentSimulationMetadata(v **types.SimulationMeta
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3486,6 +3548,7 @@ func awsRestjson1_deserializeDocumentSimulationMetadata(v **types.SimulationMeta
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3494,6 +3557,7 @@ func awsRestjson1_deserializeDocumentSimulationMetadata(v **types.SimulationMeta
 				}
 				sv.Status = types.SimulationStatus(jtv)
 			}
+
 		case "TargetStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3502,6 +3566,7 @@ func awsRestjson1_deserializeDocumentSimulationMetadata(v **types.SimulationMeta
 				}
 				sv.TargetStatus = types.SimulationTargetStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3577,6 +3642,7 @@ func awsRestjson1_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3616,6 +3682,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

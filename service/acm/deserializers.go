@@ -2269,6 +2269,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2308,6 +2309,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
+
 		case "CertificateAuthorityArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2316,6 +2318,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.CertificateAuthorityArn = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2331,6 +2334,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 
 				}
 			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2339,14 +2343,17 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
+
 		case "DomainValidationOptions":
 			if err := awsAwsjson11_deserializeDocumentDomainValidationList(&sv.DomainValidationOptions, value); err != nil {
 				return err
 			}
+
 		case "ExtendedKeyUsages":
 			if err := awsAwsjson11_deserializeDocumentExtendedKeyUsageList(&sv.ExtendedKeyUsages, value); err != nil {
 				return err
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2355,6 +2362,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.FailureReason = types.FailureReason(jtv)
 			}
+
 		case "ImportedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2370,10 +2378,12 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 
 				}
 			}
+
 		case "InUseBy":
 			if err := awsAwsjson11_deserializeDocumentInUseList(&sv.InUseBy, value); err != nil {
 				return err
 			}
+
 		case "IssuedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2389,6 +2399,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 
 				}
 			}
+
 		case "Issuer":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2397,6 +2408,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.Issuer = ptr.String(jtv)
 			}
+
 		case "KeyAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2405,10 +2417,12 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.KeyAlgorithm = types.KeyAlgorithm(jtv)
 			}
+
 		case "KeyUsages":
 			if err := awsAwsjson11_deserializeDocumentKeyUsageList(&sv.KeyUsages, value); err != nil {
 				return err
 			}
+
 		case "NotAfter":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2424,6 +2438,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 
 				}
 			}
+
 		case "NotBefore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2439,10 +2454,12 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 
 				}
 			}
+
 		case "Options":
 			if err := awsAwsjson11_deserializeDocumentCertificateOptions(&sv.Options, value); err != nil {
 				return err
 			}
+
 		case "RenewalEligibility":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2451,10 +2468,12 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.RenewalEligibility = types.RenewalEligibility(jtv)
 			}
+
 		case "RenewalSummary":
 			if err := awsAwsjson11_deserializeDocumentRenewalSummary(&sv.RenewalSummary, value); err != nil {
 				return err
 			}
+
 		case "RevocationReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2463,6 +2482,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.RevocationReason = types.RevocationReason(jtv)
 			}
+
 		case "RevokedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2478,6 +2498,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 
 				}
 			}
+
 		case "Serial":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2486,6 +2507,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.Serial = ptr.String(jtv)
 			}
+
 		case "SignatureAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2494,6 +2516,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.SignatureAlgorithm = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2502,6 +2525,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.Status = types.CertificateStatus(jtv)
 			}
+
 		case "Subject":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2510,10 +2534,12 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.Subject = ptr.String(jtv)
 			}
+
 		case "SubjectAlternativeNames":
 			if err := awsAwsjson11_deserializeDocumentDomainList(&sv.SubjectAlternativeNames, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2522,6 +2548,7 @@ func awsAwsjson11_deserializeDocumentCertificateDetail(v **types.CertificateDeta
 				}
 				sv.Type = types.CertificateType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2561,6 +2588,7 @@ func awsAwsjson11_deserializeDocumentCertificateOptions(v **types.CertificateOpt
 				}
 				sv.CertificateTransparencyLoggingPreference = types.CertificateTransparencyLoggingPreference(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2600,6 +2628,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2615,6 +2644,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 
 				}
 			}
+
 		case "DomainName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2623,6 +2653,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
+
 		case "Exported":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2631,10 +2662,12 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.Exported = ptr.Bool(jtv)
 			}
+
 		case "ExtendedKeyUsages":
 			if err := awsAwsjson11_deserializeDocumentExtendedKeyUsageNames(&sv.ExtendedKeyUsages, value); err != nil {
 				return err
 			}
+
 		case "HasAdditionalSubjectAlternativeNames":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2643,6 +2676,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.HasAdditionalSubjectAlternativeNames = ptr.Bool(jtv)
 			}
+
 		case "ImportedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2658,6 +2692,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 
 				}
 			}
+
 		case "InUse":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2666,6 +2701,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.InUse = ptr.Bool(jtv)
 			}
+
 		case "IssuedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2681,6 +2717,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 
 				}
 			}
+
 		case "KeyAlgorithm":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2689,10 +2726,12 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.KeyAlgorithm = types.KeyAlgorithm(jtv)
 			}
+
 		case "KeyUsages":
 			if err := awsAwsjson11_deserializeDocumentKeyUsageNames(&sv.KeyUsages, value); err != nil {
 				return err
 			}
+
 		case "NotAfter":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2708,6 +2747,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 
 				}
 			}
+
 		case "NotBefore":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2723,6 +2763,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 
 				}
 			}
+
 		case "RenewalEligibility":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2731,6 +2772,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.RenewalEligibility = types.RenewalEligibility(jtv)
 			}
+
 		case "RevokedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2746,6 +2788,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2754,10 +2797,12 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.Status = types.CertificateStatus(jtv)
 			}
+
 		case "SubjectAlternativeNameSummaries":
 			if err := awsAwsjson11_deserializeDocumentDomainList(&sv.SubjectAlternativeNameSummaries, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2766,6 +2811,7 @@ func awsAwsjson11_deserializeDocumentCertificateSummary(v **types.CertificateSum
 				}
 				sv.Type = types.CertificateType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2839,6 +2885,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2914,10 +2961,12 @@ func awsAwsjson11_deserializeDocumentDomainValidation(v **types.DomainValidation
 				}
 				sv.DomainName = ptr.String(jtv)
 			}
+
 		case "ResourceRecord":
 			if err := awsAwsjson11_deserializeDocumentResourceRecord(&sv.ResourceRecord, value); err != nil {
 				return err
 			}
+
 		case "ValidationDomain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2926,10 +2975,12 @@ func awsAwsjson11_deserializeDocumentDomainValidation(v **types.DomainValidation
 				}
 				sv.ValidationDomain = ptr.String(jtv)
 			}
+
 		case "ValidationEmails":
 			if err := awsAwsjson11_deserializeDocumentValidationEmailList(&sv.ValidationEmails, value); err != nil {
 				return err
 			}
+
 		case "ValidationMethod":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2938,6 +2989,7 @@ func awsAwsjson11_deserializeDocumentDomainValidation(v **types.DomainValidation
 				}
 				sv.ValidationMethod = types.ValidationMethod(jtv)
 			}
+
 		case "ValidationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2946,6 +2998,7 @@ func awsAwsjson11_deserializeDocumentDomainValidation(v **types.DomainValidation
 				}
 				sv.ValidationStatus = types.DomainStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3023,6 +3076,7 @@ func awsAwsjson11_deserializeDocumentExpiryEventsConfiguration(v **types.ExpiryE
 				}
 				sv.DaysBeforeExpiry = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3062,6 +3116,7 @@ func awsAwsjson11_deserializeDocumentExtendedKeyUsage(v **types.ExtendedKeyUsage
 				}
 				sv.Name = types.ExtendedKeyUsageName(jtv)
 			}
+
 		case "OID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3070,6 +3125,7 @@ func awsAwsjson11_deserializeDocumentExtendedKeyUsage(v **types.ExtendedKeyUsage
 				}
 				sv.OID = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3215,6 +3271,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgsException(v **types.InvalidArgsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3254,6 +3311,7 @@ func awsAwsjson11_deserializeDocumentInvalidArnException(v **types.InvalidArnExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3293,6 +3351,7 @@ func awsAwsjson11_deserializeDocumentInvalidDomainValidationOptionsException(v *
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3332,6 +3391,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3371,6 +3431,7 @@ func awsAwsjson11_deserializeDocumentInvalidStateException(v **types.InvalidStat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3410,6 +3471,7 @@ func awsAwsjson11_deserializeDocumentInvalidTagException(v **types.InvalidTagExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3449,6 +3511,7 @@ func awsAwsjson11_deserializeDocumentKeyUsage(v **types.KeyUsage, value interfac
 				}
 				sv.Name = types.KeyUsageName(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3558,6 +3621,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3593,6 +3657,7 @@ func awsAwsjson11_deserializeDocumentRenewalSummary(v **types.RenewalSummary, va
 			if err := awsAwsjson11_deserializeDocumentDomainValidationList(&sv.DomainValidationOptions, value); err != nil {
 				return err
 			}
+
 		case "RenewalStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3601,6 +3666,7 @@ func awsAwsjson11_deserializeDocumentRenewalSummary(v **types.RenewalSummary, va
 				}
 				sv.RenewalStatus = types.RenewalStatus(jtv)
 			}
+
 		case "RenewalStatusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3609,6 +3675,7 @@ func awsAwsjson11_deserializeDocumentRenewalSummary(v **types.RenewalSummary, va
 				}
 				sv.RenewalStatusReason = types.FailureReason(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3624,6 +3691,7 @@ func awsAwsjson11_deserializeDocumentRenewalSummary(v **types.RenewalSummary, va
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3663,6 +3731,7 @@ func awsAwsjson11_deserializeDocumentRequestInProgressException(v **types.Reques
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3702,6 +3771,7 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3741,6 +3811,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3780,6 +3851,7 @@ func awsAwsjson11_deserializeDocumentResourceRecord(v **types.ResourceRecord, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3788,6 +3860,7 @@ func awsAwsjson11_deserializeDocumentResourceRecord(v **types.ResourceRecord, va
 				}
 				sv.Type = types.RecordType(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3796,6 +3869,7 @@ func awsAwsjson11_deserializeDocumentResourceRecord(v **types.ResourceRecord, va
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3835,6 +3909,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3843,6 +3918,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3916,6 +3992,7 @@ func awsAwsjson11_deserializeDocumentTagPolicyException(v **types.TagPolicyExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3955,6 +4032,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3994,6 +4072,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4069,6 +4148,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4104,6 +4184,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCertificateOutput(v **DescribeCer
 			if err := awsAwsjson11_deserializeDocumentCertificateDetail(&sv.Certificate, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4143,6 +4224,7 @@ func awsAwsjson11_deserializeOpDocumentExportCertificateOutput(v **ExportCertifi
 				}
 				sv.Certificate = ptr.String(jtv)
 			}
+
 		case "CertificateChain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4151,6 +4233,7 @@ func awsAwsjson11_deserializeOpDocumentExportCertificateOutput(v **ExportCertifi
 				}
 				sv.CertificateChain = ptr.String(jtv)
 			}
+
 		case "PrivateKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4159,6 +4242,7 @@ func awsAwsjson11_deserializeOpDocumentExportCertificateOutput(v **ExportCertifi
 				}
 				sv.PrivateKey = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4194,6 +4278,7 @@ func awsAwsjson11_deserializeOpDocumentGetAccountConfigurationOutput(v **GetAcco
 			if err := awsAwsjson11_deserializeDocumentExpiryEventsConfiguration(&sv.ExpiryEvents, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4233,6 +4318,7 @@ func awsAwsjson11_deserializeOpDocumentGetCertificateOutput(v **GetCertificateOu
 				}
 				sv.Certificate = ptr.String(jtv)
 			}
+
 		case "CertificateChain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4241,6 +4327,7 @@ func awsAwsjson11_deserializeOpDocumentGetCertificateOutput(v **GetCertificateOu
 				}
 				sv.CertificateChain = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4280,6 +4367,7 @@ func awsAwsjson11_deserializeOpDocumentImportCertificateOutput(v **ImportCertifi
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4315,6 +4403,7 @@ func awsAwsjson11_deserializeOpDocumentListCertificatesOutput(v **ListCertificat
 			if err := awsAwsjson11_deserializeDocumentCertificateSummaryList(&sv.CertificateSummaryList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4323,6 +4412,7 @@ func awsAwsjson11_deserializeOpDocumentListCertificatesOutput(v **ListCertificat
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4358,6 +4448,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForCertificateOutput(v **ListTags
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4397,6 +4488,7 @@ func awsAwsjson11_deserializeOpDocumentRequestCertificateOutput(v **RequestCerti
 				}
 				sv.CertificateArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

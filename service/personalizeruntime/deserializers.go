@@ -175,6 +175,7 @@ func awsRestjson1_deserializeOpDocumentGetActionRecommendationsOutput(v **GetAct
 			if err := awsRestjson1_deserializeDocumentActionList(&sv.ActionList, value); err != nil {
 				return err
 			}
+
 		case "recommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -183,6 +184,7 @@ func awsRestjson1_deserializeOpDocumentGetActionRecommendationsOutput(v **GetAct
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -337,6 +339,7 @@ func awsRestjson1_deserializeOpDocumentGetPersonalizedRankingOutput(v **GetPerso
 			if err := awsRestjson1_deserializeDocumentItemList(&sv.PersonalizedRanking, value); err != nil {
 				return err
 			}
+
 		case "recommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -345,6 +348,7 @@ func awsRestjson1_deserializeOpDocumentGetPersonalizedRankingOutput(v **GetPerso
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -499,6 +503,7 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommend
 			if err := awsRestjson1_deserializeDocumentItemList(&sv.ItemList, value); err != nil {
 				return err
 			}
+
 		case "recommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -507,6 +512,7 @@ func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommend
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -652,6 +658,7 @@ func awsRestjson1_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -761,6 +768,7 @@ func awsRestjson1_deserializeDocumentPredictedAction(v **types.PredictedAction, 
 				}
 				sv.ActionId = ptr.String(jtv)
 			}
+
 		case "score":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -794,6 +802,7 @@ func awsRestjson1_deserializeDocumentPredictedAction(v **types.PredictedAction, 
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -833,10 +842,12 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 				}
 				sv.ItemId = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "promotionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -845,10 +856,12 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 				}
 				sv.PromotionName = ptr.String(jtv)
 			}
+
 		case "reason":
 			if err := awsRestjson1_deserializeDocumentReasonList(&sv.Reason, value); err != nil {
 				return err
 			}
+
 		case "score":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -882,6 +895,7 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -957,6 +971,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

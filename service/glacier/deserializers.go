@@ -1252,6 +1252,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.Action = types.ActionCode(jtv)
 			}
+
 		case "ArchiveId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1260,6 +1261,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.ArchiveId = ptr.String(jtv)
 			}
+
 		case "ArchiveSHA256TreeHash":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1268,6 +1270,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.ArchiveSHA256TreeHash = ptr.String(jtv)
 			}
+
 		case "ArchiveSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1280,6 +1283,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.ArchiveSizeInBytes = ptr.Int64(i64)
 			}
+
 		case "Completed":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1288,6 +1292,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.Completed = jtv
 			}
+
 		case "CompletionDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1296,6 +1301,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.CompletionDate = ptr.String(jtv)
 			}
+
 		case "CreationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1304,10 +1310,12 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "InventoryRetrievalParameters":
 			if err := awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(&sv.InventoryRetrievalParameters, value); err != nil {
 				return err
 			}
+
 		case "InventorySizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1320,6 +1328,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.InventorySizeInBytes = ptr.Int64(i64)
 			}
+
 		case "JobDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1328,6 +1337,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.JobDescription = ptr.String(jtv)
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1336,6 +1346,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobOutputPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1344,10 +1355,12 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.JobOutputPath = ptr.String(jtv)
 			}
+
 		case "OutputLocation":
 			if err := awsRestjson1_deserializeDocumentOutputLocation(&sv.OutputLocation, value); err != nil {
 				return err
 			}
+
 		case "RetrievalByteRange":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1356,10 +1369,12 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.RetrievalByteRange = ptr.String(jtv)
 			}
+
 		case "SelectParameters":
 			if err := awsRestjson1_deserializeDocumentSelectParameters(&sv.SelectParameters, value); err != nil {
 				return err
 			}
+
 		case "SHA256TreeHash":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1368,6 +1383,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.SHA256TreeHash = ptr.String(jtv)
 			}
+
 		case "SNSTopic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1376,6 +1392,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.SNSTopic = ptr.String(jtv)
 			}
+
 		case "StatusCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1384,6 +1401,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.StatusCode = types.StatusCode(jtv)
 			}
+
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1392,6 +1410,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "Tier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1400,6 +1419,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.Tier = ptr.String(jtv)
 			}
+
 		case "VaultARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1408,6 +1428,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, 
 				}
 				sv.VaultARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1572,6 +1593,7 @@ func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutp
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "LastInventoryDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1580,6 +1602,7 @@ func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutp
 				}
 				sv.LastInventoryDate = ptr.String(jtv)
 			}
+
 		case "NumberOfArchives":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1592,6 +1615,7 @@ func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutp
 				}
 				sv.NumberOfArchives = i64
 			}
+
 		case "SizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1604,6 +1628,7 @@ func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutp
 				}
 				sv.SizeInBytes = i64
 			}
+
 		case "VaultARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1612,6 +1637,7 @@ func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutp
 				}
 				sv.VaultARN = ptr.String(jtv)
 			}
+
 		case "VaultName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1620,6 +1646,7 @@ func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutp
 				}
 				sv.VaultName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1777,6 +1804,7 @@ func awsRestjson1_deserializeOpDocumentGetDataRetrievalPolicyOutput(v **GetDataR
 			if err := awsRestjson1_deserializeDocumentDataRetrievalPolicy(&sv.Policy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2087,6 +2115,7 @@ func awsRestjson1_deserializeOpDocumentGetVaultAccessPolicyOutput(v **GetVaultAc
 			if err := awsRestjson1_deserializeDocumentVaultAccessPolicy(&sv.Policy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2251,6 +2280,7 @@ func awsRestjson1_deserializeOpDocumentGetVaultLockOutput(v **GetVaultLockOutput
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "ExpirationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2259,6 +2289,7 @@ func awsRestjson1_deserializeOpDocumentGetVaultLockOutput(v **GetVaultLockOutput
 				}
 				sv.ExpirationDate = ptr.String(jtv)
 			}
+
 		case "Policy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2267,6 +2298,7 @@ func awsRestjson1_deserializeOpDocumentGetVaultLockOutput(v **GetVaultLockOutput
 				}
 				sv.Policy = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2275,6 +2307,7 @@ func awsRestjson1_deserializeOpDocumentGetVaultLockOutput(v **GetVaultLockOutput
 				}
 				sv.State = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2435,6 +2468,7 @@ func awsRestjson1_deserializeOpDocumentGetVaultNotificationsOutput(v **GetVaultN
 			if err := awsRestjson1_deserializeDocumentVaultNotificationConfig(&sv.VaultNotificationConfig, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2961,6 +2995,7 @@ func awsRestjson1_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, value 
 			if err := awsRestjson1_deserializeDocumentJobList(&sv.JobList, value); err != nil {
 				return err
 			}
+
 		case "Marker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2969,6 +3004,7 @@ func awsRestjson1_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, value 
 				}
 				sv.Marker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3133,10 +3169,12 @@ func awsRestjson1_deserializeOpDocumentListMultipartUploadsOutput(v **ListMultip
 				}
 				sv.Marker = ptr.String(jtv)
 			}
+
 		case "UploadsList":
 			if err := awsRestjson1_deserializeDocumentUploadsList(&sv.UploadsList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3301,6 +3339,7 @@ func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, valu
 				}
 				sv.ArchiveDescription = ptr.String(jtv)
 			}
+
 		case "CreationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3309,6 +3348,7 @@ func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, valu
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "Marker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3317,6 +3357,7 @@ func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, valu
 				}
 				sv.Marker = ptr.String(jtv)
 			}
+
 		case "MultipartUploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3325,10 +3366,12 @@ func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, valu
 				}
 				sv.MultipartUploadId = ptr.String(jtv)
 			}
+
 		case "Parts":
 			if err := awsRestjson1_deserializeDocumentPartList(&sv.Parts, value); err != nil {
 				return err
 			}
+
 		case "PartSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3341,6 +3384,7 @@ func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, valu
 				}
 				sv.PartSizeInBytes = i64
 			}
+
 		case "VaultARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3349,6 +3393,7 @@ func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, valu
 				}
 				sv.VaultARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3506,6 +3551,7 @@ func awsRestjson1_deserializeOpDocumentListProvisionedCapacityOutput(v **ListPro
 			if err := awsRestjson1_deserializeDocumentProvisionedCapacityList(&sv.ProvisionedCapacityList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3666,6 +3712,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForVaultOutput(v **ListTagsForVau
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3830,10 +3877,12 @@ func awsRestjson1_deserializeOpDocumentListVaultsOutput(v **ListVaultsOutput, va
 				}
 				sv.Marker = ptr.String(jtv)
 			}
+
 		case "VaultList":
 			if err := awsRestjson1_deserializeDocumentVaultList(&sv.VaultList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4964,6 +5013,7 @@ func awsRestjson1_deserializeDocumentCSVInput(v **types.CSVInput, value interfac
 				}
 				sv.Comments = ptr.String(jtv)
 			}
+
 		case "FieldDelimiter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4972,6 +5022,7 @@ func awsRestjson1_deserializeDocumentCSVInput(v **types.CSVInput, value interfac
 				}
 				sv.FieldDelimiter = ptr.String(jtv)
 			}
+
 		case "FileHeaderInfo":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4980,6 +5031,7 @@ func awsRestjson1_deserializeDocumentCSVInput(v **types.CSVInput, value interfac
 				}
 				sv.FileHeaderInfo = types.FileHeaderInfo(jtv)
 			}
+
 		case "QuoteCharacter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4988,6 +5040,7 @@ func awsRestjson1_deserializeDocumentCSVInput(v **types.CSVInput, value interfac
 				}
 				sv.QuoteCharacter = ptr.String(jtv)
 			}
+
 		case "QuoteEscapeCharacter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4996,6 +5049,7 @@ func awsRestjson1_deserializeDocumentCSVInput(v **types.CSVInput, value interfac
 				}
 				sv.QuoteEscapeCharacter = ptr.String(jtv)
 			}
+
 		case "RecordDelimiter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5004,6 +5058,7 @@ func awsRestjson1_deserializeDocumentCSVInput(v **types.CSVInput, value interfac
 				}
 				sv.RecordDelimiter = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5043,6 +5098,7 @@ func awsRestjson1_deserializeDocumentCSVOutput(v **types.CSVOutput, value interf
 				}
 				sv.FieldDelimiter = ptr.String(jtv)
 			}
+
 		case "QuoteCharacter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5051,6 +5107,7 @@ func awsRestjson1_deserializeDocumentCSVOutput(v **types.CSVOutput, value interf
 				}
 				sv.QuoteCharacter = ptr.String(jtv)
 			}
+
 		case "QuoteEscapeCharacter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5059,6 +5116,7 @@ func awsRestjson1_deserializeDocumentCSVOutput(v **types.CSVOutput, value interf
 				}
 				sv.QuoteEscapeCharacter = ptr.String(jtv)
 			}
+
 		case "QuoteFields":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5067,6 +5125,7 @@ func awsRestjson1_deserializeDocumentCSVOutput(v **types.CSVOutput, value interf
 				}
 				sv.QuoteFields = types.QuoteFields(jtv)
 			}
+
 		case "RecordDelimiter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5075,6 +5134,7 @@ func awsRestjson1_deserializeDocumentCSVOutput(v **types.CSVOutput, value interf
 				}
 				sv.RecordDelimiter = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5110,6 +5170,7 @@ func awsRestjson1_deserializeDocumentDataRetrievalPolicy(v **types.DataRetrieval
 			if err := awsRestjson1_deserializeDocumentDataRetrievalRulesList(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5153,6 +5214,7 @@ func awsRestjson1_deserializeDocumentDataRetrievalRule(v **types.DataRetrievalRu
 				}
 				sv.BytesPerHour = ptr.Int64(i64)
 			}
+
 		case "Strategy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5161,6 +5223,7 @@ func awsRestjson1_deserializeDocumentDataRetrievalRule(v **types.DataRetrievalRu
 				}
 				sv.Strategy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5234,6 +5297,7 @@ func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **types.DescribeVault
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "LastInventoryDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5242,6 +5306,7 @@ func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **types.DescribeVault
 				}
 				sv.LastInventoryDate = ptr.String(jtv)
 			}
+
 		case "NumberOfArchives":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5254,6 +5319,7 @@ func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **types.DescribeVault
 				}
 				sv.NumberOfArchives = i64
 			}
+
 		case "SizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5266,6 +5332,7 @@ func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **types.DescribeVault
 				}
 				sv.SizeInBytes = i64
 			}
+
 		case "VaultARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5274,6 +5341,7 @@ func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **types.DescribeVault
 				}
 				sv.VaultARN = ptr.String(jtv)
 			}
+
 		case "VaultName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5282,6 +5350,7 @@ func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **types.DescribeVault
 				}
 				sv.VaultName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5321,6 +5390,7 @@ func awsRestjson1_deserializeDocumentEncryption(v **types.Encryption, value inte
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
+
 		case "KMSContext":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5329,6 +5399,7 @@ func awsRestjson1_deserializeDocumentEncryption(v **types.Encryption, value inte
 				}
 				sv.KMSContext = ptr.String(jtv)
 			}
+
 		case "KMSKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5337,6 +5408,7 @@ func awsRestjson1_deserializeDocumentEncryption(v **types.Encryption, value inte
 				}
 				sv.KMSKeyId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5376,6 +5448,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.Action = types.ActionCode(jtv)
 			}
+
 		case "ArchiveId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5384,6 +5457,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.ArchiveId = ptr.String(jtv)
 			}
+
 		case "ArchiveSHA256TreeHash":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5392,6 +5466,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.ArchiveSHA256TreeHash = ptr.String(jtv)
 			}
+
 		case "ArchiveSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5404,6 +5479,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.ArchiveSizeInBytes = ptr.Int64(i64)
 			}
+
 		case "Completed":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5412,6 +5488,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.Completed = jtv
 			}
+
 		case "CompletionDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5420,6 +5497,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.CompletionDate = ptr.String(jtv)
 			}
+
 		case "CreationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5428,10 +5506,12 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "InventoryRetrievalParameters":
 			if err := awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(&sv.InventoryRetrievalParameters, value); err != nil {
 				return err
 			}
+
 		case "InventorySizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5444,6 +5524,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.InventorySizeInBytes = ptr.Int64(i64)
 			}
+
 		case "JobDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5452,6 +5533,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.JobDescription = ptr.String(jtv)
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5460,6 +5542,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobOutputPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5468,10 +5551,12 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.JobOutputPath = ptr.String(jtv)
 			}
+
 		case "OutputLocation":
 			if err := awsRestjson1_deserializeDocumentOutputLocation(&sv.OutputLocation, value); err != nil {
 				return err
 			}
+
 		case "RetrievalByteRange":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5480,10 +5565,12 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.RetrievalByteRange = ptr.String(jtv)
 			}
+
 		case "SelectParameters":
 			if err := awsRestjson1_deserializeDocumentSelectParameters(&sv.SelectParameters, value); err != nil {
 				return err
 			}
+
 		case "SHA256TreeHash":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5492,6 +5579,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.SHA256TreeHash = ptr.String(jtv)
 			}
+
 		case "SNSTopic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5500,6 +5588,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.SNSTopic = ptr.String(jtv)
 			}
+
 		case "StatusCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5508,6 +5597,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.StatusCode = types.StatusCode(jtv)
 			}
+
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5516,6 +5606,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "Tier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5524,6 +5615,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.Tier = ptr.String(jtv)
 			}
+
 		case "VaultARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5532,6 +5624,7 @@ func awsRestjson1_deserializeDocumentGlacierJobDescription(v **types.GlacierJobD
 				}
 				sv.VaultARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5567,6 +5660,7 @@ func awsRestjson1_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 			if err := awsRestjson1_deserializeDocumentGrantee(&sv.Grantee, value); err != nil {
 				return err
 			}
+
 		case "Permission":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5575,6 +5669,7 @@ func awsRestjson1_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.Permission = types.Permission(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5614,6 +5709,7 @@ func awsRestjson1_deserializeDocumentGrantee(v **types.Grantee, value interface{
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "EmailAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5622,6 +5718,7 @@ func awsRestjson1_deserializeDocumentGrantee(v **types.Grantee, value interface{
 				}
 				sv.EmailAddress = ptr.String(jtv)
 			}
+
 		case "ID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5630,6 +5727,7 @@ func awsRestjson1_deserializeDocumentGrantee(v **types.Grantee, value interface{
 				}
 				sv.ID = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5638,6 +5736,7 @@ func awsRestjson1_deserializeDocumentGrantee(v **types.Grantee, value interface{
 				}
 				sv.Type = types.Type(jtv)
 			}
+
 		case "URI":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5646,6 +5745,7 @@ func awsRestjson1_deserializeDocumentGrantee(v **types.Grantee, value interface{
 				}
 				sv.URI = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5717,6 +5817,7 @@ func awsRestjson1_deserializeDocumentInputSerialization(v **types.InputSerializa
 			if err := awsRestjson1_deserializeDocumentCSVInput(&sv.Csv, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5756,6 +5857,7 @@ func awsRestjson1_deserializeDocumentInsufficientCapacityException(v **types.Ins
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5764,6 +5866,7 @@ func awsRestjson1_deserializeDocumentInsufficientCapacityException(v **types.Ins
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5772,6 +5875,7 @@ func awsRestjson1_deserializeDocumentInsufficientCapacityException(v **types.Ins
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5811,6 +5915,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5819,6 +5924,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5827,6 +5933,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterValueException(v **types.In
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5866,6 +5973,7 @@ func awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(v **types.
 				}
 				sv.EndDate = ptr.String(jtv)
 			}
+
 		case "Format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5874,6 +5982,7 @@ func awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(v **types.
 				}
 				sv.Format = ptr.String(jtv)
 			}
+
 		case "Limit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5882,6 +5991,7 @@ func awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(v **types.
 				}
 				sv.Limit = ptr.String(jtv)
 			}
+
 		case "Marker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5890,6 +6000,7 @@ func awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(v **types.
 				}
 				sv.Marker = ptr.String(jtv)
 			}
+
 		case "StartDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5898,6 +6009,7 @@ func awsRestjson1_deserializeDocumentInventoryRetrievalJobDescription(v **types.
 				}
 				sv.StartDate = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5971,6 +6083,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5979,6 +6092,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5987,6 +6101,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6026,6 +6141,7 @@ func awsRestjson1_deserializeDocumentMissingParameterValueException(v **types.Mi
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6034,6 +6150,7 @@ func awsRestjson1_deserializeDocumentMissingParameterValueException(v **types.Mi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6042,6 +6159,7 @@ func awsRestjson1_deserializeDocumentMissingParameterValueException(v **types.Mi
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6113,6 +6231,7 @@ func awsRestjson1_deserializeDocumentOutputLocation(v **types.OutputLocation, va
 			if err := awsRestjson1_deserializeDocumentS3Location(&sv.S3, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6148,6 +6267,7 @@ func awsRestjson1_deserializeDocumentOutputSerialization(v **types.OutputSeriali
 			if err := awsRestjson1_deserializeDocumentCSVOutput(&sv.Csv, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6221,6 +6341,7 @@ func awsRestjson1_deserializeDocumentPartListElement(v **types.PartListElement, 
 				}
 				sv.RangeInBytes = ptr.String(jtv)
 			}
+
 		case "SHA256TreeHash":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6229,6 +6350,7 @@ func awsRestjson1_deserializeDocumentPartListElement(v **types.PartListElement, 
 				}
 				sv.SHA256TreeHash = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6268,6 +6390,7 @@ func awsRestjson1_deserializeDocumentPolicyEnforcedException(v **types.PolicyEnf
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6276,6 +6399,7 @@ func awsRestjson1_deserializeDocumentPolicyEnforcedException(v **types.PolicyEnf
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6284,6 +6408,7 @@ func awsRestjson1_deserializeDocumentPolicyEnforcedException(v **types.PolicyEnf
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6323,6 +6448,7 @@ func awsRestjson1_deserializeDocumentProvisionedCapacityDescription(v **types.Pr
 				}
 				sv.CapacityId = ptr.String(jtv)
 			}
+
 		case "ExpirationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6331,6 +6457,7 @@ func awsRestjson1_deserializeDocumentProvisionedCapacityDescription(v **types.Pr
 				}
 				sv.ExpirationDate = ptr.String(jtv)
 			}
+
 		case "StartDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6339,6 +6466,7 @@ func awsRestjson1_deserializeDocumentProvisionedCapacityDescription(v **types.Pr
 				}
 				sv.StartDate = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6412,6 +6540,7 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6420,6 +6549,7 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6428,6 +6558,7 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6467,6 +6598,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6475,6 +6607,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6483,6 +6616,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6518,6 +6652,7 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 			if err := awsRestjson1_deserializeDocumentAccessControlPolicyList(&sv.AccessControlList, value); err != nil {
 				return err
 			}
+
 		case "BucketName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6526,6 +6661,7 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
+
 		case "CannedACL":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6534,10 +6670,12 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.CannedACL = types.CannedACL(jtv)
 			}
+
 		case "Encryption":
 			if err := awsRestjson1_deserializeDocumentEncryption(&sv.Encryption, value); err != nil {
 				return err
 			}
+
 		case "Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6546,6 +6684,7 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
+
 		case "StorageClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6554,14 +6693,17 @@ func awsRestjson1_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.StorageClass = types.StorageClass(jtv)
 			}
+
 		case "Tagging":
 			if err := awsRestjson1_deserializeDocumentHashmap(&sv.Tagging, value); err != nil {
 				return err
 			}
+
 		case "UserMetadata":
 			if err := awsRestjson1_deserializeDocumentHashmap(&sv.UserMetadata, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6601,6 +6743,7 @@ func awsRestjson1_deserializeDocumentSelectParameters(v **types.SelectParameters
 				}
 				sv.Expression = ptr.String(jtv)
 			}
+
 		case "ExpressionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6609,14 +6752,17 @@ func awsRestjson1_deserializeDocumentSelectParameters(v **types.SelectParameters
 				}
 				sv.ExpressionType = types.ExpressionType(jtv)
 			}
+
 		case "InputSerialization":
 			if err := awsRestjson1_deserializeDocumentInputSerialization(&sv.InputSerialization, value); err != nil {
 				return err
 			}
+
 		case "OutputSerialization":
 			if err := awsRestjson1_deserializeDocumentOutputSerialization(&sv.OutputSerialization, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6656,6 +6802,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6664,6 +6811,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6672,6 +6820,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6747,6 +6896,7 @@ func awsRestjson1_deserializeDocumentUploadListElement(v **types.UploadListEleme
 				}
 				sv.ArchiveDescription = ptr.String(jtv)
 			}
+
 		case "CreationDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6755,6 +6905,7 @@ func awsRestjson1_deserializeDocumentUploadListElement(v **types.UploadListEleme
 				}
 				sv.CreationDate = ptr.String(jtv)
 			}
+
 		case "MultipartUploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6763,6 +6914,7 @@ func awsRestjson1_deserializeDocumentUploadListElement(v **types.UploadListEleme
 				}
 				sv.MultipartUploadId = ptr.String(jtv)
 			}
+
 		case "PartSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6775,6 +6927,7 @@ func awsRestjson1_deserializeDocumentUploadListElement(v **types.UploadListEleme
 				}
 				sv.PartSizeInBytes = i64
 			}
+
 		case "VaultARN":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6783,6 +6936,7 @@ func awsRestjson1_deserializeDocumentUploadListElement(v **types.UploadListEleme
 				}
 				sv.VaultARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6856,6 +7010,7 @@ func awsRestjson1_deserializeDocumentVaultAccessPolicy(v **types.VaultAccessPoli
 				}
 				sv.Policy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6925,6 +7080,7 @@ func awsRestjson1_deserializeDocumentVaultNotificationConfig(v **types.VaultNoti
 			if err := awsRestjson1_deserializeDocumentNotificationEventList(&sv.Events, value); err != nil {
 				return err
 			}
+
 		case "SNSTopic":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6933,6 +7089,7 @@ func awsRestjson1_deserializeDocumentVaultNotificationConfig(v **types.VaultNoti
 				}
 				sv.SNSTopic = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

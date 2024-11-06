@@ -190,6 +190,7 @@ func awsRestjson1_deserializeOpDocumentCreateEnvironmentOutput(v **CreateEnviron
 			if err := awsRestjson1_deserializeDocumentEnvironmentSummary(&sv.Environment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -662,6 +663,7 @@ func awsRestjson1_deserializeOpDocumentGetDeviceOutput(v **GetDeviceOutput, valu
 			if err := awsRestjson1_deserializeDocumentDevice(&sv.Device, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -825,6 +827,7 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentOutput(v **GetEnvironmentOu
 			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -988,6 +991,7 @@ func awsRestjson1_deserializeOpDocumentGetSoftwareSetOutput(v **GetSoftwareSetOu
 			if err := awsRestjson1_deserializeDocumentSoftwareSet(&sv.SoftwareSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1148,6 +1152,7 @@ func awsRestjson1_deserializeOpDocumentListDevicesOutput(v **ListDevicesOutput, 
 			if err := awsRestjson1_deserializeDocumentDeviceList(&sv.Devices, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1156,6 +1161,7 @@ func awsRestjson1_deserializeOpDocumentListDevicesOutput(v **ListDevicesOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1316,6 +1322,7 @@ func awsRestjson1_deserializeOpDocumentListEnvironmentsOutput(v **ListEnvironmen
 			if err := awsRestjson1_deserializeDocumentEnvironmentList(&sv.Environments, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1324,6 +1331,7 @@ func awsRestjson1_deserializeOpDocumentListEnvironmentsOutput(v **ListEnvironmen
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1488,10 +1496,12 @@ func awsRestjson1_deserializeOpDocumentListSoftwareSetsOutput(v **ListSoftwareSe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "softwareSets":
 			if err := awsRestjson1_deserializeDocumentSoftwareSetList(&sv.SoftwareSets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1655,6 +1665,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2024,6 +2035,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDeviceOutput(v **UpdateDeviceOutput
 			if err := awsRestjson1_deserializeDocumentDeviceSummary(&sv.Device, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2187,6 +2199,7 @@ func awsRestjson1_deserializeOpDocumentUpdateEnvironmentOutput(v **UpdateEnviron
 			if err := awsRestjson1_deserializeDocumentEnvironmentSummary(&sv.Environment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2618,6 +2631,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2657,6 +2671,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2665,6 +2680,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2673,6 +2689,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2748,6 +2765,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2763,6 +2781,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 
 				}
 			}
+
 		case "currentSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2771,6 +2790,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.CurrentSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "currentSoftwareSetVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2779,6 +2799,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.CurrentSoftwareSetVersion = ptr.String(jtv)
 			}
+
 		case "desiredSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2787,6 +2808,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.DesiredSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2795,6 +2817,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2803,6 +2826,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2811,6 +2835,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		case "lastConnectedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2826,6 +2851,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 
 				}
 			}
+
 		case "lastPostureAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2841,6 +2867,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 
 				}
 			}
+
 		case "model":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2849,6 +2876,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Model = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2857,6 +2885,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pendingSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2865,6 +2894,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.PendingSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "pendingSoftwareSetVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2873,6 +2903,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.PendingSoftwareSetVersion = ptr.String(jtv)
 			}
+
 		case "serialNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2881,6 +2912,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.SerialNumber = ptr.String(jtv)
 			}
+
 		case "softwareSetComplianceStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2889,6 +2921,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.SoftwareSetComplianceStatus = types.DeviceSoftwareSetComplianceStatus(jtv)
 			}
+
 		case "softwareSetUpdateSchedule":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2897,6 +2930,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.SoftwareSetUpdateSchedule = types.SoftwareSetUpdateSchedule(jtv)
 			}
+
 		case "softwareSetUpdateStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2905,6 +2939,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.SoftwareSetUpdateStatus = types.SoftwareSetUpdateStatus(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2913,10 +2948,12 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Status = types.DeviceStatus(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2932,6 +2969,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3041,6 +3079,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3056,6 +3095,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 
 				}
 			}
+
 		case "currentSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3064,6 +3104,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.CurrentSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "desiredSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3072,6 +3113,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.DesiredSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "environmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3080,6 +3122,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.EnvironmentId = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3088,6 +3131,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastConnectedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3103,6 +3147,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 
 				}
 			}
+
 		case "lastPostureAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3118,6 +3163,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 
 				}
 			}
+
 		case "model":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3126,6 +3172,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.Model = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3134,6 +3181,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pendingSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3142,6 +3190,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.PendingSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "serialNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3150,6 +3199,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.SerialNumber = ptr.String(jtv)
 			}
+
 		case "softwareSetUpdateSchedule":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3158,6 +3208,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.SoftwareSetUpdateSchedule = types.SoftwareSetUpdateSchedule(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3166,6 +3217,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				}
 				sv.Status = types.DeviceStatus(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3181,6 +3233,7 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3220,6 +3273,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.ActivationCode = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3228,6 +3282,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3243,6 +3298,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 
 				}
 			}
+
 		case "desiredSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3251,6 +3307,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.DesiredSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "desktopArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3259,6 +3316,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.DesktopArn = ptr.String(jtv)
 			}
+
 		case "desktopEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3267,6 +3325,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.DesktopEndpoint = ptr.String(jtv)
 			}
+
 		case "desktopType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3275,10 +3334,12 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.DesktopType = types.DesktopType(jtv)
 			}
+
 		case "deviceCreationTags":
 			if err := awsRestjson1_deserializeDocumentDeviceCreationTagsMap(&sv.DeviceCreationTags, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3287,6 +3348,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "kmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3295,10 +3357,12 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		case "maintenanceWindow":
 			if err := awsRestjson1_deserializeDocumentMaintenanceWindow(&sv.MaintenanceWindow, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3307,6 +3371,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pendingSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3315,6 +3380,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.PendingSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "pendingSoftwareSetVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3323,6 +3389,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.PendingSoftwareSetVersion = ptr.String(jtv)
 			}
+
 		case "registeredDevicesCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3335,6 +3402,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.RegisteredDevicesCount = ptr.Int32(int32(i64))
 			}
+
 		case "softwareSetComplianceStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3343,6 +3411,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.SoftwareSetComplianceStatus = types.EnvironmentSoftwareSetComplianceStatus(jtv)
 			}
+
 		case "softwareSetUpdateMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3351,6 +3420,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.SoftwareSetUpdateMode = types.SoftwareSetUpdateMode(jtv)
 			}
+
 		case "softwareSetUpdateSchedule":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3359,10 +3429,12 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				}
 				sv.SoftwareSetUpdateSchedule = types.SoftwareSetUpdateSchedule(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3378,6 +3450,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3451,6 +3524,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.ActivationCode = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3459,6 +3533,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3474,6 +3549,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 
 				}
 			}
+
 		case "desiredSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3482,6 +3558,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.DesiredSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "desktopArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3490,6 +3567,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.DesktopArn = ptr.String(jtv)
 			}
+
 		case "desktopEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3498,6 +3576,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.DesktopEndpoint = ptr.String(jtv)
 			}
+
 		case "desktopType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3506,6 +3585,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.DesktopType = types.DesktopType(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3514,10 +3594,12 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "maintenanceWindow":
 			if err := awsRestjson1_deserializeDocumentMaintenanceWindow(&sv.MaintenanceWindow, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3526,6 +3608,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "pendingSoftwareSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3534,6 +3617,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.PendingSoftwareSetId = ptr.String(jtv)
 			}
+
 		case "softwareSetUpdateMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3542,6 +3626,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.SoftwareSetUpdateMode = types.SoftwareSetUpdateMode(jtv)
 			}
+
 		case "softwareSetUpdateSchedule":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3550,6 +3635,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				}
 				sv.SoftwareSetUpdateSchedule = types.SoftwareSetUpdateSchedule(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3565,6 +3651,7 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3604,6 +3691,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3616,6 +3704,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3655,10 +3744,12 @@ func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWind
 				}
 				sv.ApplyTimeOf = types.ApplyTimeOf(jtv)
 			}
+
 		case "daysOfTheWeek":
 			if err := awsRestjson1_deserializeDocumentDayOfWeekList(&sv.DaysOfTheWeek, value); err != nil {
 				return err
 			}
+
 		case "endTimeHour":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3671,6 +3762,7 @@ func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWind
 				}
 				sv.EndTimeHour = ptr.Int32(int32(i64))
 			}
+
 		case "endTimeMinute":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3683,6 +3775,7 @@ func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWind
 				}
 				sv.EndTimeMinute = ptr.Int32(int32(i64))
 			}
+
 		case "startTimeHour":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3695,6 +3788,7 @@ func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWind
 				}
 				sv.StartTimeHour = ptr.Int32(int32(i64))
 			}
+
 		case "startTimeMinute":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3707,6 +3801,7 @@ func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWind
 				}
 				sv.StartTimeMinute = ptr.Int32(int32(i64))
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3715,6 +3810,7 @@ func awsRestjson1_deserializeDocumentMaintenanceWindow(v **types.MaintenanceWind
 				}
 				sv.Type = types.MaintenanceWindowType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3754,6 +3850,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3762,6 +3859,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3770,6 +3868,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3809,6 +3908,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3817,6 +3917,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3825,6 +3926,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3833,6 +3935,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3841,6 +3944,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3880,6 +3984,7 @@ func awsRestjson1_deserializeDocumentSoftware(v **types.Software, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3888,6 +3993,7 @@ func awsRestjson1_deserializeDocumentSoftware(v **types.Software, value interfac
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3961,6 +4067,7 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3969,6 +4076,7 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "releasedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3984,10 +4092,12 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 
 				}
 			}
+
 		case "software":
 			if err := awsRestjson1_deserializeDocumentSoftwareList(&sv.Software, value); err != nil {
 				return err
 			}
+
 		case "supportedUntil":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4003,10 +4113,12 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 
 				}
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "validationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4015,6 +4127,7 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 				}
 				sv.ValidationStatus = types.SoftwareSetValidationStatus(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4023,6 +4136,7 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4096,6 +4210,7 @@ func awsRestjson1_deserializeDocumentSoftwareSetSummary(v **types.SoftwareSetSum
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4104,6 +4219,7 @@ func awsRestjson1_deserializeDocumentSoftwareSetSummary(v **types.SoftwareSetSum
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "releasedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4119,6 +4235,7 @@ func awsRestjson1_deserializeDocumentSoftwareSetSummary(v **types.SoftwareSetSum
 
 				}
 			}
+
 		case "supportedUntil":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4134,6 +4251,7 @@ func awsRestjson1_deserializeDocumentSoftwareSetSummary(v **types.SoftwareSetSum
 
 				}
 			}
+
 		case "validationStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4142,6 +4260,7 @@ func awsRestjson1_deserializeDocumentSoftwareSetSummary(v **types.SoftwareSetSum
 				}
 				sv.ValidationStatus = types.SoftwareSetValidationStatus(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4150,6 +4269,7 @@ func awsRestjson1_deserializeDocumentSoftwareSetSummary(v **types.SoftwareSetSum
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4225,6 +4345,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4233,6 +4354,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4245,6 +4367,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4253,6 +4376,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4288,6 +4412,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4296,6 +4421,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4304,6 +4430,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4343,6 +4470,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4351,6 +4479,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

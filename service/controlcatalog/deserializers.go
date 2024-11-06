@@ -187,6 +187,7 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Behavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -195,6 +196,7 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				}
 				sv.Behavior = types.ControlBehavior(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -203,6 +205,7 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -211,10 +214,12 @@ func awsRestjson1_deserializeOpDocumentGetControlOutput(v **GetControlOutput, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RegionConfiguration":
 			if err := awsRestjson1_deserializeDocumentRegionConfiguration(&sv.RegionConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -375,6 +380,7 @@ func awsRestjson1_deserializeOpDocumentListCommonControlsOutput(v **ListCommonCo
 			if err := awsRestjson1_deserializeDocumentCommonControlSummaryList(&sv.CommonControls, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -383,6 +389,7 @@ func awsRestjson1_deserializeOpDocumentListCommonControlsOutput(v **ListCommonCo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -543,6 +550,7 @@ func awsRestjson1_deserializeOpDocumentListControlsOutput(v **ListControlsOutput
 			if err := awsRestjson1_deserializeDocumentControls(&sv.Controls, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -551,6 +559,7 @@ func awsRestjson1_deserializeOpDocumentListControlsOutput(v **ListControlsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -711,6 +720,7 @@ func awsRestjson1_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, 
 			if err := awsRestjson1_deserializeDocumentDomainSummaryList(&sv.Domains, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -719,6 +729,7 @@ func awsRestjson1_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -883,10 +894,12 @@ func awsRestjson1_deserializeOpDocumentListObjectivesOutput(v **ListObjectivesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Objectives":
 			if err := awsRestjson1_deserializeDocumentObjectiveSummaryList(&sv.Objectives, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1106,6 +1119,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1145,6 +1159,7 @@ func awsRestjson1_deserializeDocumentAssociatedDomainSummary(v **types.Associate
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1153,6 +1168,7 @@ func awsRestjson1_deserializeDocumentAssociatedDomainSummary(v **types.Associate
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1192,6 +1208,7 @@ func awsRestjson1_deserializeDocumentAssociatedObjectiveSummary(v **types.Associ
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1200,6 +1217,7 @@ func awsRestjson1_deserializeDocumentAssociatedObjectiveSummary(v **types.Associ
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1239,6 +1257,7 @@ func awsRestjson1_deserializeDocumentCommonControlSummary(v **types.CommonContro
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1254,6 +1273,7 @@ func awsRestjson1_deserializeDocumentCommonControlSummary(v **types.CommonContro
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1262,10 +1282,12 @@ func awsRestjson1_deserializeDocumentCommonControlSummary(v **types.CommonContro
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Domain":
 			if err := awsRestjson1_deserializeDocumentAssociatedDomainSummary(&sv.Domain, value); err != nil {
 				return err
 			}
+
 		case "LastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1281,6 +1303,7 @@ func awsRestjson1_deserializeDocumentCommonControlSummary(v **types.CommonContro
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1289,10 +1312,12 @@ func awsRestjson1_deserializeDocumentCommonControlSummary(v **types.CommonContro
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Objective":
 			if err := awsRestjson1_deserializeDocumentAssociatedObjectiveSummary(&sv.Objective, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1400,6 +1425,7 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1408,6 +1434,7 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1416,6 +1443,7 @@ func awsRestjson1_deserializeDocumentControlSummary(v **types.ControlSummary, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1491,6 +1519,7 @@ func awsRestjson1_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1506,6 +1535,7 @@ func awsRestjson1_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1514,6 +1544,7 @@ func awsRestjson1_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "LastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1529,6 +1560,7 @@ func awsRestjson1_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1537,6 +1569,7 @@ func awsRestjson1_deserializeDocumentDomainSummary(v **types.DomainSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1610,6 +1643,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1649,6 +1683,7 @@ func awsRestjson1_deserializeDocumentObjectiveSummary(v **types.ObjectiveSummary
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1664,6 +1699,7 @@ func awsRestjson1_deserializeDocumentObjectiveSummary(v **types.ObjectiveSummary
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1672,10 +1708,12 @@ func awsRestjson1_deserializeDocumentObjectiveSummary(v **types.ObjectiveSummary
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Domain":
 			if err := awsRestjson1_deserializeDocumentAssociatedDomainSummary(&sv.Domain, value); err != nil {
 				return err
 			}
+
 		case "LastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1691,6 +1729,7 @@ func awsRestjson1_deserializeDocumentObjectiveSummary(v **types.ObjectiveSummary
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1699,6 +1738,7 @@ func awsRestjson1_deserializeDocumentObjectiveSummary(v **types.ObjectiveSummary
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1768,6 +1808,7 @@ func awsRestjson1_deserializeDocumentRegionConfiguration(v **types.RegionConfigu
 			if err := awsRestjson1_deserializeDocumentDeployableRegions(&sv.DeployableRegions, value); err != nil {
 				return err
 			}
+
 		case "Scope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1776,6 +1817,7 @@ func awsRestjson1_deserializeDocumentRegionConfiguration(v **types.RegionConfigu
 				}
 				sv.Scope = types.ControlScope(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1815,6 +1857,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1854,6 +1897,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1893,6 +1937,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

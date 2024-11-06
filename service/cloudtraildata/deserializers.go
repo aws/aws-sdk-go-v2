@@ -186,10 +186,12 @@ func awsRestjson1_deserializeOpDocumentPutAuditEventsOutput(v **PutAuditEventsOu
 			if err := awsRestjson1_deserializeDocumentResultErrorEntries(&sv.Failed, value); err != nil {
 				return err
 			}
+
 		case "successful":
 			if err := awsRestjson1_deserializeDocumentAuditEventResultEntries(&sv.Successful, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -479,6 +481,7 @@ func awsRestjson1_deserializeDocumentAuditEventResultEntry(v **types.AuditEventR
 				}
 				sv.EventID = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -487,6 +490,7 @@ func awsRestjson1_deserializeDocumentAuditEventResultEntry(v **types.AuditEventR
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -526,6 +530,7 @@ func awsRestjson1_deserializeDocumentChannelInsufficientPermission(v **types.Cha
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -565,6 +570,7 @@ func awsRestjson1_deserializeDocumentChannelNotFound(v **types.ChannelNotFound, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -604,6 +610,7 @@ func awsRestjson1_deserializeDocumentChannelUnsupportedSchema(v **types.ChannelU
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -643,6 +650,7 @@ func awsRestjson1_deserializeDocumentDuplicatedAuditEventId(v **types.Duplicated
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -682,6 +690,7 @@ func awsRestjson1_deserializeDocumentInvalidChannelARN(v **types.InvalidChannelA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -755,6 +764,7 @@ func awsRestjson1_deserializeDocumentResultErrorEntry(v **types.ResultErrorEntry
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "errorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -763,6 +773,7 @@ func awsRestjson1_deserializeDocumentResultErrorEntry(v **types.ResultErrorEntry
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -771,6 +782,7 @@ func awsRestjson1_deserializeDocumentResultErrorEntry(v **types.ResultErrorEntry
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -810,6 +822,7 @@ func awsRestjson1_deserializeDocumentUnsupportedOperationException(v **types.Uns
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

@@ -190,6 +190,7 @@ func awsRestjson1_deserializeOpDocumentCreateNotificationRuleOutput(v **CreateNo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -351,6 +352,7 @@ func awsRestjson1_deserializeOpDocumentDeleteNotificationRuleOutput(v **DeleteNo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -597,6 +599,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -605,6 +608,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "CreatedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -620,6 +624,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 
 				}
 			}
+
 		case "DetailType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -628,10 +633,12 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				}
 				sv.DetailType = types.DetailType(jtv)
 			}
+
 		case "EventTypes":
 			if err := awsRestjson1_deserializeDocumentEventTypeBatch(&sv.EventTypes, value); err != nil {
 				return err
 			}
+
 		case "LastModifiedTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -647,6 +654,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -655,6 +663,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Resource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -663,6 +672,7 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				}
 				sv.Resource = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -671,14 +681,17 @@ func awsRestjson1_deserializeOpDocumentDescribeNotificationRuleOutput(v **Descri
 				}
 				sv.Status = types.NotificationRuleStatus(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "Targets":
 			if err := awsRestjson1_deserializeDocumentTargetsBatch(&sv.Targets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -833,6 +846,7 @@ func awsRestjson1_deserializeOpDocumentListEventTypesOutput(v **ListEventTypesOu
 			if err := awsRestjson1_deserializeDocumentEventTypeBatch(&sv.EventTypes, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -841,6 +855,7 @@ func awsRestjson1_deserializeOpDocumentListEventTypesOutput(v **ListEventTypesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -999,10 +1014,12 @@ func awsRestjson1_deserializeOpDocumentListNotificationRulesOutput(v **ListNotif
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "NotificationRules":
 			if err := awsRestjson1_deserializeDocumentNotificationRuleBatch(&sv.NotificationRules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1157,6 +1174,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1315,10 +1333,12 @@ func awsRestjson1_deserializeOpDocumentListTargetsOutput(v **ListTargetsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Targets":
 			if err := awsRestjson1_deserializeDocumentTargetsBatch(&sv.Targets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1480,6 +1500,7 @@ func awsRestjson1_deserializeOpDocumentSubscribeOutput(v **SubscribeOutput, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1640,6 +1661,7 @@ func awsRestjson1_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, 
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1795,6 +1817,7 @@ func awsRestjson1_deserializeOpDocumentUnsubscribeOutput(v **UnsubscribeOutput, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2313,6 +2336,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2352,6 +2376,7 @@ func awsRestjson1_deserializeDocumentConcurrentModificationException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2391,6 +2416,7 @@ func awsRestjson1_deserializeDocumentConfigurationException(v **types.Configurat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2464,6 +2490,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				}
 				sv.EventTypeId = ptr.String(jtv)
 			}
+
 		case "EventTypeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2472,6 +2499,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				}
 				sv.EventTypeName = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2480,6 +2508,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2488,6 +2517,7 @@ func awsRestjson1_deserializeDocumentEventTypeSummary(v **types.EventTypeSummary
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2527,6 +2557,7 @@ func awsRestjson1_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2566,6 +2597,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2639,6 +2671,7 @@ func awsRestjson1_deserializeDocumentNotificationRuleSummary(v **types.Notificat
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2647,6 +2680,7 @@ func awsRestjson1_deserializeDocumentNotificationRuleSummary(v **types.Notificat
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2686,6 +2720,7 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2725,6 +2760,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2834,6 +2870,7 @@ func awsRestjson1_deserializeDocumentTargetSummary(v **types.TargetSummary, valu
 				}
 				sv.TargetAddress = ptr.String(jtv)
 			}
+
 		case "TargetStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2842,6 +2879,7 @@ func awsRestjson1_deserializeDocumentTargetSummary(v **types.TargetSummary, valu
 				}
 				sv.TargetStatus = types.TargetStatus(jtv)
 			}
+
 		case "TargetType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2850,6 +2888,7 @@ func awsRestjson1_deserializeDocumentTargetSummary(v **types.TargetSummary, valu
 				}
 				sv.TargetType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2889,6 +2928,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

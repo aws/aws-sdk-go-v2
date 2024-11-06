@@ -1747,6 +1747,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 				}
 				sv.AnalysisReportId = ptr.String(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1762,6 +1763,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 
 				}
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1777,6 +1779,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 
 				}
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1785,10 +1788,12 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "Insights":
 			if err := awsAwsjson11_deserializeDocumentInsightList(&sv.Insights, value); err != nil {
 				return err
 			}
+
 		case "ServiceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1797,6 +1802,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 				}
 				sv.ServiceType = types.ServiceType(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1812,6 +1818,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1820,6 +1827,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReport(v **types.AnalysisReport, va
 				}
 				sv.Status = types.AnalysisStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1859,6 +1867,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReportSummary(v **types.AnalysisRep
 				}
 				sv.AnalysisReportId = ptr.String(jtv)
 			}
+
 		case "CreateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1874,6 +1883,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReportSummary(v **types.AnalysisRep
 
 				}
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1889,6 +1899,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReportSummary(v **types.AnalysisRep
 
 				}
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1904,6 +1915,7 @@ func awsAwsjson11_deserializeDocumentAnalysisReportSummary(v **types.AnalysisRep
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1912,10 +1924,12 @@ func awsAwsjson11_deserializeDocumentAnalysisReportSummary(v **types.AnalysisRep
 				}
 				sv.Status = types.AnalysisStatus(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1985,6 +1999,7 @@ func awsAwsjson11_deserializeDocumentData(v **types.Data, value interface{}) err
 			if err := awsAwsjson11_deserializeDocumentPerformanceInsightsMetric(&sv.PerformanceInsightsMetric, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2065,6 +2080,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 
 				}
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2098,6 +2114,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2207,6 +2224,7 @@ func awsAwsjson11_deserializeDocumentDimensionDetail(v **types.DimensionDetail, 
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2276,6 +2294,7 @@ func awsAwsjson11_deserializeDocumentDimensionGroupDetail(v **types.DimensionGro
 			if err := awsAwsjson11_deserializeDocumentDimensionDetailList(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		case "Group":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2284,6 +2303,7 @@ func awsAwsjson11_deserializeDocumentDimensionGroupDetail(v **types.DimensionGro
 				}
 				sv.Group = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2353,14 +2373,17 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDescription(v **types.Dimension
 			if err := awsAwsjson11_deserializeDocumentAdditionalMetricsMap(&sv.AdditionalMetrics, value); err != nil {
 				return err
 			}
+
 		case "Dimensions":
 			if err := awsAwsjson11_deserializeDocumentDimensionMap(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		case "Partitions":
 			if err := awsAwsjson11_deserializeDocumentMetricValuesList(&sv.Partitions, value); err != nil {
 				return err
 			}
+
 		case "Total":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2394,6 +2417,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDescription(v **types.Dimension
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2467,6 +2491,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDetail(v **types.DimensionKeyDe
 				}
 				sv.Dimension = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2475,6 +2500,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDetail(v **types.DimensionKeyDe
 				}
 				sv.Status = types.DetailStatus(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2483,6 +2509,7 @@ func awsAwsjson11_deserializeDocumentDimensionKeyDetail(v **types.DimensionKeyDe
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2592,6 +2619,7 @@ func awsAwsjson11_deserializeDocumentFeatureMetadata(v **types.FeatureMetadata, 
 				}
 				sv.Status = types.FeatureStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2662,6 +2690,7 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 			if err := awsAwsjson11_deserializeDocumentDataList(&sv.BaselineData, value); err != nil {
 				return err
 			}
+
 		case "Context":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2670,6 +2699,7 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 				}
 				sv.Context = types.ContextType(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2678,6 +2708,7 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2693,10 +2724,12 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 
 				}
 			}
+
 		case "InsightData":
 			if err := awsAwsjson11_deserializeDocumentDataList(&sv.InsightData, value); err != nil {
 				return err
 			}
+
 		case "InsightId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2705,6 +2738,7 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 				}
 				sv.InsightId = ptr.String(jtv)
 			}
+
 		case "InsightType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2713,10 +2747,12 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 				}
 				sv.InsightType = ptr.String(jtv)
 			}
+
 		case "Recommendations":
 			if err := awsAwsjson11_deserializeDocumentRecommendationList(&sv.Recommendations, value); err != nil {
 				return err
 			}
+
 		case "Severity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2725,6 +2761,7 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 				}
 				sv.Severity = types.Severity(jtv)
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2740,10 +2777,12 @@ func awsAwsjson11_deserializeDocumentInsight(v **types.Insight, value interface{
 
 				}
 			}
+
 		case "SupportingInsights":
 			if err := awsAwsjson11_deserializeDocumentInsightList(&sv.SupportingInsights, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2817,6 +2856,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceError(v **types.InternalServ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2856,6 +2896,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2891,6 +2932,7 @@ func awsAwsjson11_deserializeDocumentMetricDimensionGroups(v **types.MetricDimen
 			if err := awsAwsjson11_deserializeDocumentDimensionGroupDetailList(&sv.Groups, value); err != nil {
 				return err
 			}
+
 		case "Metric":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2899,6 +2941,7 @@ func awsAwsjson11_deserializeDocumentMetricDimensionGroups(v **types.MetricDimen
 				}
 				sv.Metric = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2968,10 +3011,12 @@ func awsAwsjson11_deserializeDocumentMetricKeyDataPoints(v **types.MetricKeyData
 			if err := awsAwsjson11_deserializeDocumentDataPointsList(&sv.DataPoints, value); err != nil {
 				return err
 			}
+
 		case "Key":
 			if err := awsAwsjson11_deserializeDocumentResponseResourceMetricKey(&sv.Key, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3106,6 +3151,7 @@ func awsAwsjson11_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3141,6 +3187,7 @@ func awsAwsjson11_deserializeDocumentPerformanceInsightsMetric(v **types.Perform
 			if err := awsAwsjson11_deserializeDocumentDescriptiveMap(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		case "DisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3149,6 +3196,7 @@ func awsAwsjson11_deserializeDocumentPerformanceInsightsMetric(v **types.Perform
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "Metric":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3157,6 +3205,7 @@ func awsAwsjson11_deserializeDocumentPerformanceInsightsMetric(v **types.Perform
 				}
 				sv.Metric = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3190,6 +3239,7 @@ func awsAwsjson11_deserializeDocumentPerformanceInsightsMetric(v **types.Perform
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3229,6 +3279,7 @@ func awsAwsjson11_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.RecommendationDescription = ptr.String(jtv)
 			}
+
 		case "RecommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3237,6 +3288,7 @@ func awsAwsjson11_deserializeDocumentRecommendation(v **types.Recommendation, va
 				}
 				sv.RecommendationId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3306,6 +3358,7 @@ func awsAwsjson11_deserializeDocumentResponsePartitionKey(v **types.ResponsePart
 			if err := awsAwsjson11_deserializeDocumentDimensionMap(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3379,6 +3432,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetric(v **types.ResponseRe
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Metric":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3387,6 +3441,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetric(v **types.ResponseRe
 				}
 				sv.Metric = ptr.String(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3395,6 +3450,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetric(v **types.ResponseRe
 				}
 				sv.Unit = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3430,6 +3486,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetricKey(v **types.Respons
 			if err := awsAwsjson11_deserializeDocumentDimensionMap(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		case "Metric":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3438,6 +3495,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetricKey(v **types.Respons
 				}
 				sv.Metric = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3511,6 +3569,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3519,6 +3578,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3592,6 +3652,7 @@ func awsAwsjson11_deserializeOpDocumentCreatePerformanceAnalysisReportOutput(v *
 				}
 				sv.AnalysisReportId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3669,6 +3730,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeDimensionKeysOutput(v **DescribeD
 
 				}
 			}
+
 		case "AlignedStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3684,10 +3746,12 @@ func awsAwsjson11_deserializeOpDocumentDescribeDimensionKeysOutput(v **DescribeD
 
 				}
 			}
+
 		case "Keys":
 			if err := awsAwsjson11_deserializeDocumentDimensionKeyDescriptionList(&sv.Keys, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3696,10 +3760,12 @@ func awsAwsjson11_deserializeOpDocumentDescribeDimensionKeysOutput(v **DescribeD
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PartitionKeys":
 			if err := awsAwsjson11_deserializeDocumentResponsePartitionKeyList(&sv.PartitionKeys, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3735,6 +3801,7 @@ func awsAwsjson11_deserializeOpDocumentGetDimensionKeyDetailsOutput(v **GetDimen
 			if err := awsAwsjson11_deserializeDocumentDimensionKeyDetailList(&sv.Dimensions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3770,6 +3837,7 @@ func awsAwsjson11_deserializeOpDocumentGetPerformanceAnalysisReportOutput(v **Ge
 			if err := awsAwsjson11_deserializeDocumentAnalysisReport(&sv.AnalysisReport, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3805,6 +3873,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetadataOutput(v **GetResource
 			if err := awsAwsjson11_deserializeDocumentFeatureMetadataMap(&sv.Features, value); err != nil {
 				return err
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3813,6 +3882,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetadataOutput(v **GetResource
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3859,6 +3929,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceM
 
 				}
 			}
+
 		case "AlignedStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3874,6 +3945,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceM
 
 				}
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3882,10 +3954,12 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceM
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "MetricList":
 			if err := awsAwsjson11_deserializeDocumentMetricKeyDataPointsList(&sv.MetricList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3894,6 +3968,7 @@ func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceM
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3929,6 +4004,7 @@ func awsAwsjson11_deserializeOpDocumentListAvailableResourceDimensionsOutput(v *
 			if err := awsAwsjson11_deserializeDocumentMetricDimensionsList(&sv.MetricDimensions, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3937,6 +4013,7 @@ func awsAwsjson11_deserializeOpDocumentListAvailableResourceDimensionsOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3972,6 +4049,7 @@ func awsAwsjson11_deserializeOpDocumentListAvailableResourceMetricsOutput(v **Li
 			if err := awsAwsjson11_deserializeDocumentResponseResourceMetricList(&sv.Metrics, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3980,6 +4058,7 @@ func awsAwsjson11_deserializeOpDocumentListAvailableResourceMetricsOutput(v **Li
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4015,6 +4094,7 @@ func awsAwsjson11_deserializeOpDocumentListPerformanceAnalysisReportsOutput(v **
 			if err := awsAwsjson11_deserializeDocumentAnalysisReportSummaryList(&sv.AnalysisReports, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4023,6 +4103,7 @@ func awsAwsjson11_deserializeOpDocumentListPerformanceAnalysisReportsOutput(v **
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4058,6 +4139,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

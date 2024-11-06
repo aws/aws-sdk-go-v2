@@ -184,10 +184,12 @@ func awsRestjson1_deserializeOpDocumentGetBuyerDashboardOutput(v **GetBuyerDashb
 				}
 				sv.DashboardIdentifier = ptr.String(jtv)
 			}
+
 		case "embeddingDomains":
 			if err := awsRestjson1_deserializeDocumentEmbeddingDomains(&sv.EmbeddingDomains, value); err != nil {
 				return err
 			}
+
 		case "embedUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -196,6 +198,7 @@ func awsRestjson1_deserializeOpDocumentGetBuyerDashboardOutput(v **GetBuyerDashb
 				}
 				sv.EmbedUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -379,6 +382,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -418,6 +422,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -493,6 +498,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -532,6 +538,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

@@ -503,6 +503,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeliverabilityTestReportOutput(v **
 				}
 				sv.DeliverabilityTestStatus = types.DeliverabilityTestStatus(jtv)
 			}
+
 		case "ReportId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -511,6 +512,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeliverabilityTestReportOutput(v **
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -671,6 +673,7 @@ func awsRestjson1_deserializeOpDocumentCreateEmailIdentityOutput(v **CreateEmail
 			if err := awsRestjson1_deserializeDocumentDkimAttributes(&sv.DkimAttributes, value); err != nil {
 				return err
 			}
+
 		case "IdentityType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -679,6 +682,7 @@ func awsRestjson1_deserializeOpDocumentCreateEmailIdentityOutput(v **CreateEmail
 				}
 				sv.IdentityType = types.IdentityType(jtv)
 			}
+
 		case "VerifiedForSendingStatus":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -687,6 +691,7 @@ func awsRestjson1_deserializeOpDocumentCreateEmailIdentityOutput(v **CreateEmail
 				}
 				sv.VerifiedForSendingStatus = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1230,6 +1235,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountOutput(v **GetAccountOutput, va
 				}
 				sv.DedicatedIpAutoWarmupEnabled = jtv
 			}
+
 		case "EnforcementStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1238,6 +1244,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountOutput(v **GetAccountOutput, va
 				}
 				sv.EnforcementStatus = ptr.String(jtv)
 			}
+
 		case "ProductionAccessEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1246,6 +1253,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountOutput(v **GetAccountOutput, va
 				}
 				sv.ProductionAccessEnabled = jtv
 			}
+
 		case "SendingEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1254,10 +1262,12 @@ func awsRestjson1_deserializeOpDocumentGetAccountOutput(v **GetAccountOutput, va
 				}
 				sv.SendingEnabled = jtv
 			}
+
 		case "SendQuota":
 			if err := awsRestjson1_deserializeDocumentSendQuota(&sv.SendQuota, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1415,6 +1425,7 @@ func awsRestjson1_deserializeOpDocumentGetBlacklistReportsOutput(v **GetBlacklis
 			if err := awsRestjson1_deserializeDocumentBlacklistReport(&sv.BlacklistReport, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1576,26 +1587,32 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationSetOutput(v **GetConfigur
 				}
 				sv.ConfigurationSetName = ptr.String(jtv)
 			}
+
 		case "DeliveryOptions":
 			if err := awsRestjson1_deserializeDocumentDeliveryOptions(&sv.DeliveryOptions, value); err != nil {
 				return err
 			}
+
 		case "ReputationOptions":
 			if err := awsRestjson1_deserializeDocumentReputationOptions(&sv.ReputationOptions, value); err != nil {
 				return err
 			}
+
 		case "SendingOptions":
 			if err := awsRestjson1_deserializeDocumentSendingOptions(&sv.SendingOptions, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "TrackingOptions":
 			if err := awsRestjson1_deserializeDocumentTrackingOptions(&sv.TrackingOptions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1753,6 +1770,7 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationSetEventDestinationsOutpu
 			if err := awsRestjson1_deserializeDocumentEventDestinations(&sv.EventDestinations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1910,6 +1928,7 @@ func awsRestjson1_deserializeOpDocumentGetDedicatedIpOutput(v **GetDedicatedIpOu
 			if err := awsRestjson1_deserializeDocumentDedicatedIp(&sv.DedicatedIp, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2067,6 +2086,7 @@ func awsRestjson1_deserializeOpDocumentGetDedicatedIpsOutput(v **GetDedicatedIps
 			if err := awsRestjson1_deserializeDocumentDedicatedIpList(&sv.DedicatedIps, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2075,6 +2095,7 @@ func awsRestjson1_deserializeOpDocumentGetDedicatedIpsOutput(v **GetDedicatedIps
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2236,10 +2257,12 @@ func awsRestjson1_deserializeOpDocumentGetDeliverabilityDashboardOptionsOutput(v
 				}
 				sv.AccountStatus = types.DeliverabilityDashboardAccountStatus(jtv)
 			}
+
 		case "ActiveSubscribedDomains":
 			if err := awsRestjson1_deserializeDocumentDomainDeliverabilityTrackingOptions(&sv.ActiveSubscribedDomains, value); err != nil {
 				return err
 			}
+
 		case "DashboardEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2248,10 +2271,12 @@ func awsRestjson1_deserializeOpDocumentGetDeliverabilityDashboardOptionsOutput(v
 				}
 				sv.DashboardEnabled = jtv
 			}
+
 		case "PendingExpirationSubscribedDomains":
 			if err := awsRestjson1_deserializeDocumentDomainDeliverabilityTrackingOptions(&sv.PendingExpirationSubscribedDomains, value); err != nil {
 				return err
 			}
+
 		case "SubscriptionExpiryDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2267,6 +2292,7 @@ func awsRestjson1_deserializeOpDocumentGetDeliverabilityDashboardOptionsOutput(v
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2424,10 +2450,12 @@ func awsRestjson1_deserializeOpDocumentGetDeliverabilityTestReportOutput(v **Get
 			if err := awsRestjson1_deserializeDocumentDeliverabilityTestReport(&sv.DeliverabilityTestReport, value); err != nil {
 				return err
 			}
+
 		case "IspPlacements":
 			if err := awsRestjson1_deserializeDocumentIspPlacements(&sv.IspPlacements, value); err != nil {
 				return err
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2436,14 +2464,17 @@ func awsRestjson1_deserializeOpDocumentGetDeliverabilityTestReportOutput(v **Get
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "OverallPlacement":
 			if err := awsRestjson1_deserializeDocumentPlacementStatistics(&sv.OverallPlacement, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2601,6 +2632,7 @@ func awsRestjson1_deserializeOpDocumentGetDomainDeliverabilityCampaignOutput(v *
 			if err := awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(&sv.DomainDeliverabilityCampaign, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2758,10 +2790,12 @@ func awsRestjson1_deserializeOpDocumentGetDomainStatisticsReportOutput(v **GetDo
 			if err := awsRestjson1_deserializeDocumentDailyVolumes(&sv.DailyVolumes, value); err != nil {
 				return err
 			}
+
 		case "OverallVolume":
 			if err := awsRestjson1_deserializeDocumentOverallVolume(&sv.OverallVolume, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2919,6 +2953,7 @@ func awsRestjson1_deserializeOpDocumentGetEmailIdentityOutput(v **GetEmailIdenti
 			if err := awsRestjson1_deserializeDocumentDkimAttributes(&sv.DkimAttributes, value); err != nil {
 				return err
 			}
+
 		case "FeedbackForwardingStatus":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2927,6 +2962,7 @@ func awsRestjson1_deserializeOpDocumentGetEmailIdentityOutput(v **GetEmailIdenti
 				}
 				sv.FeedbackForwardingStatus = jtv
 			}
+
 		case "IdentityType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2935,14 +2971,17 @@ func awsRestjson1_deserializeOpDocumentGetEmailIdentityOutput(v **GetEmailIdenti
 				}
 				sv.IdentityType = types.IdentityType(jtv)
 			}
+
 		case "MailFromAttributes":
 			if err := awsRestjson1_deserializeDocumentMailFromAttributes(&sv.MailFromAttributes, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "VerifiedForSendingStatus":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2951,6 +2990,7 @@ func awsRestjson1_deserializeOpDocumentGetEmailIdentityOutput(v **GetEmailIdenti
 				}
 				sv.VerifiedForSendingStatus = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3105,6 +3145,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfi
 			if err := awsRestjson1_deserializeDocumentConfigurationSetNameList(&sv.ConfigurationSets, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3113,6 +3154,7 @@ func awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3267,6 +3309,7 @@ func awsRestjson1_deserializeOpDocumentListDedicatedIpPoolsOutput(v **ListDedica
 			if err := awsRestjson1_deserializeDocumentListOfDedicatedIpPools(&sv.DedicatedIpPools, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3275,6 +3318,7 @@ func awsRestjson1_deserializeOpDocumentListDedicatedIpPoolsOutput(v **ListDedica
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3432,6 +3476,7 @@ func awsRestjson1_deserializeOpDocumentListDeliverabilityTestReportsOutput(v **L
 			if err := awsRestjson1_deserializeDocumentDeliverabilityTestReports(&sv.DeliverabilityTestReports, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3440,6 +3485,7 @@ func awsRestjson1_deserializeOpDocumentListDeliverabilityTestReportsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3597,6 +3643,7 @@ func awsRestjson1_deserializeOpDocumentListDomainDeliverabilityCampaignsOutput(v
 			if err := awsRestjson1_deserializeDocumentDomainDeliverabilityCampaignList(&sv.DomainDeliverabilityCampaigns, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3605,6 +3652,7 @@ func awsRestjson1_deserializeOpDocumentListDomainDeliverabilityCampaignsOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3759,6 +3807,7 @@ func awsRestjson1_deserializeOpDocumentListEmailIdentitiesOutput(v **ListEmailId
 			if err := awsRestjson1_deserializeDocumentIdentityInfoList(&sv.EmailIdentities, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3767,6 +3816,7 @@ func awsRestjson1_deserializeOpDocumentListEmailIdentitiesOutput(v **ListEmailId
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3924,6 +3974,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5228,6 +5279,7 @@ func awsRestjson1_deserializeOpDocumentSendEmailOutput(v **SendEmailOutput, valu
 				}
 				sv.MessageId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5915,6 +5967,7 @@ func awsRestjson1_deserializeDocumentAccountSuspendedException(v **types.Account
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5954,6 +6007,7 @@ func awsRestjson1_deserializeDocumentAlreadyExistsException(v **types.AlreadyExi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5993,6 +6047,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6066,6 +6121,7 @@ func awsRestjson1_deserializeDocumentBlacklistEntry(v **types.BlacklistEntry, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "ListingTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6081,6 +6137,7 @@ func awsRestjson1_deserializeDocumentBlacklistEntry(v **types.BlacklistEntry, va
 
 				}
 			}
+
 		case "RblName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6089,6 +6146,7 @@ func awsRestjson1_deserializeDocumentBlacklistEntry(v **types.BlacklistEntry, va
 				}
 				sv.RblName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6158,6 +6216,7 @@ func awsRestjson1_deserializeDocumentCloudWatchDestination(v **types.CloudWatchD
 			if err := awsRestjson1_deserializeDocumentCloudWatchDimensionConfigurations(&sv.DimensionConfigurations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6197,6 +6256,7 @@ func awsRestjson1_deserializeDocumentCloudWatchDimensionConfiguration(v **types.
 				}
 				sv.DefaultDimensionValue = ptr.String(jtv)
 			}
+
 		case "DimensionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6205,6 +6265,7 @@ func awsRestjson1_deserializeDocumentCloudWatchDimensionConfiguration(v **types.
 				}
 				sv.DimensionName = ptr.String(jtv)
 			}
+
 		case "DimensionValueSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6213,6 +6274,7 @@ func awsRestjson1_deserializeDocumentCloudWatchDimensionConfiguration(v **types.
 				}
 				sv.DimensionValueSource = types.DimensionValueSource(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6286,6 +6348,7 @@ func awsRestjson1_deserializeDocumentConcurrentModificationException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6357,6 +6420,7 @@ func awsRestjson1_deserializeDocumentDailyVolume(v **types.DailyVolume, value in
 			if err := awsRestjson1_deserializeDocumentDomainIspPlacements(&sv.DomainIspPlacements, value); err != nil {
 				return err
 			}
+
 		case "StartDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6372,10 +6436,12 @@ func awsRestjson1_deserializeDocumentDailyVolume(v **types.DailyVolume, value in
 
 				}
 			}
+
 		case "VolumeStatistics":
 			if err := awsRestjson1_deserializeDocumentVolumeStatistics(&sv.VolumeStatistics, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6449,6 +6515,7 @@ func awsRestjson1_deserializeDocumentDedicatedIp(v **types.DedicatedIp, value in
 				}
 				sv.Ip = ptr.String(jtv)
 			}
+
 		case "PoolName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6457,6 +6524,7 @@ func awsRestjson1_deserializeDocumentDedicatedIp(v **types.DedicatedIp, value in
 				}
 				sv.PoolName = ptr.String(jtv)
 			}
+
 		case "WarmupPercentage":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6469,6 +6537,7 @@ func awsRestjson1_deserializeDocumentDedicatedIp(v **types.DedicatedIp, value in
 				}
 				sv.WarmupPercentage = ptr.Int32(int32(i64))
 			}
+
 		case "WarmupStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6477,6 +6546,7 @@ func awsRestjson1_deserializeDocumentDedicatedIp(v **types.DedicatedIp, value in
 				}
 				sv.WarmupStatus = types.WarmupStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6557,6 +6627,7 @@ func awsRestjson1_deserializeDocumentDeliverabilityTestReport(v **types.Delivera
 
 				}
 			}
+
 		case "DeliverabilityTestStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6565,6 +6636,7 @@ func awsRestjson1_deserializeDocumentDeliverabilityTestReport(v **types.Delivera
 				}
 				sv.DeliverabilityTestStatus = types.DeliverabilityTestStatus(jtv)
 			}
+
 		case "FromEmailAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6573,6 +6645,7 @@ func awsRestjson1_deserializeDocumentDeliverabilityTestReport(v **types.Delivera
 				}
 				sv.FromEmailAddress = ptr.String(jtv)
 			}
+
 		case "ReportId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6581,6 +6654,7 @@ func awsRestjson1_deserializeDocumentDeliverabilityTestReport(v **types.Delivera
 				}
 				sv.ReportId = ptr.String(jtv)
 			}
+
 		case "ReportName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6589,6 +6663,7 @@ func awsRestjson1_deserializeDocumentDeliverabilityTestReport(v **types.Delivera
 				}
 				sv.ReportName = ptr.String(jtv)
 			}
+
 		case "Subject":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6597,6 +6672,7 @@ func awsRestjson1_deserializeDocumentDeliverabilityTestReport(v **types.Delivera
 				}
 				sv.Subject = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6670,6 +6746,7 @@ func awsRestjson1_deserializeDocumentDeliveryOptions(v **types.DeliveryOptions, 
 				}
 				sv.SendingPoolName = ptr.String(jtv)
 			}
+
 		case "TlsPolicy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6678,6 +6755,7 @@ func awsRestjson1_deserializeDocumentDeliveryOptions(v **types.DeliveryOptions, 
 				}
 				sv.TlsPolicy = types.TlsPolicy(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6717,6 +6795,7 @@ func awsRestjson1_deserializeDocumentDkimAttributes(v **types.DkimAttributes, va
 				}
 				sv.SigningEnabled = jtv
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6725,10 +6804,12 @@ func awsRestjson1_deserializeDocumentDkimAttributes(v **types.DkimAttributes, va
 				}
 				sv.Status = types.DkimStatus(jtv)
 			}
+
 		case "Tokens":
 			if err := awsRestjson1_deserializeDocumentDnsTokenList(&sv.Tokens, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6804,6 +6885,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.CampaignId = ptr.String(jtv)
 			}
+
 		case "DeleteRate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6837,10 +6919,12 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 
 				}
 			}
+
 		case "Esps":
 			if err := awsRestjson1_deserializeDocumentEsps(&sv.Esps, value); err != nil {
 				return err
 			}
+
 		case "FirstSeenDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6856,6 +6940,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 
 				}
 			}
+
 		case "FromAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6864,6 +6949,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.FromAddress = ptr.String(jtv)
 			}
+
 		case "ImageUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6872,6 +6958,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.ImageUrl = ptr.String(jtv)
 			}
+
 		case "InboxCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6884,6 +6971,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.InboxCount = ptr.Int64(i64)
 			}
+
 		case "LastSeenDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6899,6 +6987,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 
 				}
 			}
+
 		case "ProjectedVolume":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6911,6 +7000,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.ProjectedVolume = ptr.Int64(i64)
 			}
+
 		case "ReadDeleteRate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6944,6 +7034,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 
 				}
 			}
+
 		case "ReadRate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6977,10 +7068,12 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 
 				}
 			}
+
 		case "SendingIps":
 			if err := awsRestjson1_deserializeDocumentIpList(&sv.SendingIps, value); err != nil {
 				return err
 			}
+
 		case "SpamCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6993,6 +7086,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.SpamCount = ptr.Int64(i64)
 			}
+
 		case "Subject":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7001,6 +7095,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityCampaign(v **types.Doma
 				}
 				sv.Subject = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7074,10 +7169,12 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityTrackingOption(v **type
 				}
 				sv.Domain = ptr.String(jtv)
 			}
+
 		case "InboxPlacementTrackingOption":
 			if err := awsRestjson1_deserializeDocumentInboxPlacementTrackingOption(&sv.InboxPlacementTrackingOption, value); err != nil {
 				return err
 			}
+
 		case "SubscriptionStartDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7093,6 +7190,7 @@ func awsRestjson1_deserializeDocumentDomainDeliverabilityTrackingOption(v **type
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7191,6 +7289,7 @@ func awsRestjson1_deserializeDocumentDomainIspPlacement(v **types.DomainIspPlace
 
 				}
 			}
+
 		case "InboxRawCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7203,6 +7302,7 @@ func awsRestjson1_deserializeDocumentDomainIspPlacement(v **types.DomainIspPlace
 				}
 				sv.InboxRawCount = ptr.Int64(i64)
 			}
+
 		case "IspName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7211,6 +7311,7 @@ func awsRestjson1_deserializeDocumentDomainIspPlacement(v **types.DomainIspPlace
 				}
 				sv.IspName = ptr.String(jtv)
 			}
+
 		case "SpamPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7244,6 +7345,7 @@ func awsRestjson1_deserializeDocumentDomainIspPlacement(v **types.DomainIspPlace
 
 				}
 			}
+
 		case "SpamRawCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7256,6 +7358,7 @@ func awsRestjson1_deserializeDocumentDomainIspPlacement(v **types.DomainIspPlace
 				}
 				sv.SpamRawCount = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7361,6 +7464,7 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 			if err := awsRestjson1_deserializeDocumentCloudWatchDestination(&sv.CloudWatchDestination, value); err != nil {
 				return err
 			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7369,14 +7473,17 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				}
 				sv.Enabled = jtv
 			}
+
 		case "KinesisFirehoseDestination":
 			if err := awsRestjson1_deserializeDocumentKinesisFirehoseDestination(&sv.KinesisFirehoseDestination, value); err != nil {
 				return err
 			}
+
 		case "MatchingEventTypes":
 			if err := awsRestjson1_deserializeDocumentEventTypes(&sv.MatchingEventTypes, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7385,14 +7492,17 @@ func awsRestjson1_deserializeDocumentEventDestination(v **types.EventDestination
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "PinpointDestination":
 			if err := awsRestjson1_deserializeDocumentPinpointDestination(&sv.PinpointDestination, value); err != nil {
 				return err
 			}
+
 		case "SnsDestination":
 			if err := awsRestjson1_deserializeDocumentSnsDestination(&sv.SnsDestination, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7502,6 +7612,7 @@ func awsRestjson1_deserializeDocumentIdentityInfo(v **types.IdentityInfo, value 
 				}
 				sv.IdentityName = ptr.String(jtv)
 			}
+
 		case "IdentityType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7510,6 +7621,7 @@ func awsRestjson1_deserializeDocumentIdentityInfo(v **types.IdentityInfo, value 
 				}
 				sv.IdentityType = types.IdentityType(jtv)
 			}
+
 		case "SendingEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7518,6 +7630,7 @@ func awsRestjson1_deserializeDocumentIdentityInfo(v **types.IdentityInfo, value 
 				}
 				sv.SendingEnabled = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7591,10 +7704,12 @@ func awsRestjson1_deserializeDocumentInboxPlacementTrackingOption(v **types.Inbo
 				}
 				sv.Global = jtv
 			}
+
 		case "TrackedIsps":
 			if err := awsRestjson1_deserializeDocumentIspNameList(&sv.TrackedIsps, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7706,10 +7821,12 @@ func awsRestjson1_deserializeDocumentIspPlacement(v **types.IspPlacement, value 
 				}
 				sv.IspName = ptr.String(jtv)
 			}
+
 		case "PlacementStatistics":
 			if err := awsRestjson1_deserializeDocumentPlacementStatistics(&sv.PlacementStatistics, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7783,6 +7900,7 @@ func awsRestjson1_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesi
 				}
 				sv.DeliveryStreamArn = ptr.String(jtv)
 			}
+
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7791,6 +7909,7 @@ func awsRestjson1_deserializeDocumentKinesisFirehoseDestination(v **types.Kinesi
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7830,6 +7949,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7905,6 +8025,7 @@ func awsRestjson1_deserializeDocumentMailFromAttributes(v **types.MailFromAttrib
 				}
 				sv.BehaviorOnMxFailure = types.BehaviorOnMxFailure(jtv)
 			}
+
 		case "MailFromDomain":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7913,6 +8034,7 @@ func awsRestjson1_deserializeDocumentMailFromAttributes(v **types.MailFromAttrib
 				}
 				sv.MailFromDomain = ptr.String(jtv)
 			}
+
 		case "MailFromDomainStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7921,6 +8043,7 @@ func awsRestjson1_deserializeDocumentMailFromAttributes(v **types.MailFromAttrib
 				}
 				sv.MailFromDomainStatus = types.MailFromDomainStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7960,6 +8083,7 @@ func awsRestjson1_deserializeDocumentMailFromDomainNotVerifiedException(v **type
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7999,6 +8123,7 @@ func awsRestjson1_deserializeDocumentMessageRejected(v **types.MessageRejected, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8038,6 +8163,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8073,6 +8199,7 @@ func awsRestjson1_deserializeDocumentOverallVolume(v **types.OverallVolume, valu
 			if err := awsRestjson1_deserializeDocumentDomainIspPlacements(&sv.DomainIspPlacements, value); err != nil {
 				return err
 			}
+
 		case "ReadRatePercent":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8106,10 +8233,12 @@ func awsRestjson1_deserializeDocumentOverallVolume(v **types.OverallVolume, valu
 
 				}
 			}
+
 		case "VolumeStatistics":
 			if err := awsRestjson1_deserializeDocumentVolumeStatistics(&sv.VolumeStatistics, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8149,6 +8278,7 @@ func awsRestjson1_deserializeDocumentPinpointDestination(v **types.PinpointDesti
 				}
 				sv.ApplicationArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8213,6 +8343,7 @@ func awsRestjson1_deserializeDocumentPlacementStatistics(v **types.PlacementStat
 
 				}
 			}
+
 		case "InboxPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8246,6 +8377,7 @@ func awsRestjson1_deserializeDocumentPlacementStatistics(v **types.PlacementStat
 
 				}
 			}
+
 		case "MissingPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8279,6 +8411,7 @@ func awsRestjson1_deserializeDocumentPlacementStatistics(v **types.PlacementStat
 
 				}
 			}
+
 		case "SpamPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8312,6 +8445,7 @@ func awsRestjson1_deserializeDocumentPlacementStatistics(v **types.PlacementStat
 
 				}
 			}
+
 		case "SpfPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8345,6 +8479,7 @@ func awsRestjson1_deserializeDocumentPlacementStatistics(v **types.PlacementStat
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8391,6 +8526,7 @@ func awsRestjson1_deserializeDocumentReputationOptions(v **types.ReputationOptio
 
 				}
 			}
+
 		case "ReputationMetricsEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8399,6 +8535,7 @@ func awsRestjson1_deserializeDocumentReputationOptions(v **types.ReputationOptio
 				}
 				sv.ReputationMetricsEnabled = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8438,6 +8575,7 @@ func awsRestjson1_deserializeDocumentSendingOptions(v **types.SendingOptions, va
 				}
 				sv.SendingEnabled = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8477,6 +8615,7 @@ func awsRestjson1_deserializeDocumentSendingPausedException(v **types.SendingPau
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8541,6 +8680,7 @@ func awsRestjson1_deserializeDocumentSendQuota(v **types.SendQuota, value interf
 
 				}
 			}
+
 		case "MaxSendRate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8574,6 +8714,7 @@ func awsRestjson1_deserializeDocumentSendQuota(v **types.SendQuota, value interf
 
 				}
 			}
+
 		case "SentLast24Hours":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8607,6 +8748,7 @@ func awsRestjson1_deserializeDocumentSendQuota(v **types.SendQuota, value interf
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8646,6 +8788,7 @@ func awsRestjson1_deserializeDocumentSnsDestination(v **types.SnsDestination, va
 				}
 				sv.TopicArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8685,6 +8828,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8693,6 +8837,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8766,6 +8911,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8805,6 +8951,7 @@ func awsRestjson1_deserializeDocumentTrackingOptions(v **types.TrackingOptions, 
 				}
 				sv.CustomRedirectDomain = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8848,6 +8995,7 @@ func awsRestjson1_deserializeDocumentVolumeStatistics(v **types.VolumeStatistics
 				}
 				sv.InboxRawCount = ptr.Int64(i64)
 			}
+
 		case "ProjectedInbox":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8860,6 +9008,7 @@ func awsRestjson1_deserializeDocumentVolumeStatistics(v **types.VolumeStatistics
 				}
 				sv.ProjectedInbox = ptr.Int64(i64)
 			}
+
 		case "ProjectedSpam":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8872,6 +9021,7 @@ func awsRestjson1_deserializeDocumentVolumeStatistics(v **types.VolumeStatistics
 				}
 				sv.ProjectedSpam = ptr.Int64(i64)
 			}
+
 		case "SpamRawCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8884,6 +9034,7 @@ func awsRestjson1_deserializeDocumentVolumeStatistics(v **types.VolumeStatistics
 				}
 				sv.SpamRawCount = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 

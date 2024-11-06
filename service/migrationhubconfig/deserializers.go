@@ -764,6 +764,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -803,6 +804,7 @@ func awsAwsjson11_deserializeDocumentDryRunOperation(v **types.DryRunOperation, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -842,6 +844,7 @@ func awsAwsjson11_deserializeDocumentHomeRegionControl(v **types.HomeRegionContr
 				}
 				sv.ControlId = ptr.String(jtv)
 			}
+
 		case "HomeRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -850,6 +853,7 @@ func awsAwsjson11_deserializeDocumentHomeRegionControl(v **types.HomeRegionContr
 				}
 				sv.HomeRegion = ptr.String(jtv)
 			}
+
 		case "RequestedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -865,10 +869,12 @@ func awsAwsjson11_deserializeDocumentHomeRegionControl(v **types.HomeRegionContr
 
 				}
 			}
+
 		case "Target":
 			if err := awsAwsjson11_deserializeDocumentTarget(&sv.Target, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -942,6 +948,7 @@ func awsAwsjson11_deserializeDocumentInternalServerError(v **types.InternalServe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -981,6 +988,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1020,6 +1028,7 @@ func awsAwsjson11_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1059,6 +1068,7 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1067,6 +1077,7 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 				}
 				sv.Type = types.TargetType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1106,6 +1117,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "RetryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1118,6 +1130,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = int32(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1153,6 +1166,7 @@ func awsAwsjson11_deserializeOpDocumentCreateHomeRegionControlOutput(v **CreateH
 			if err := awsAwsjson11_deserializeDocumentHomeRegionControl(&sv.HomeRegionControl, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1219,6 +1233,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeHomeRegionControlsOutput(v **Desc
 			if err := awsAwsjson11_deserializeDocumentHomeRegionControls(&sv.HomeRegionControls, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1227,6 +1242,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeHomeRegionControlsOutput(v **Desc
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1266,6 +1282,7 @@ func awsAwsjson11_deserializeOpDocumentGetHomeRegionOutput(v **GetHomeRegionOutp
 				}
 				sv.HomeRegion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

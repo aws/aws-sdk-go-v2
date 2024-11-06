@@ -345,6 +345,7 @@ func awsRestjson1_deserializeOpDocumentStartConfigurationSessionOutput(v **Start
 				}
 				sv.InitialConfigurationToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -562,6 +563,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 			if err := awsRestjson1_deserializeDocumentBadRequestDetails(&sv.Details, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -570,6 +572,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -578,6 +581,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Reason = types.BadRequestReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -617,6 +621,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -656,6 +661,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterDetail(v **types.InvalidPar
 				}
 				sv.Problem = types.InvalidParameterProblem(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -730,10 +736,12 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ReferencedBy":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.ReferencedBy, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -742,6 +750,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -817,6 +826,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

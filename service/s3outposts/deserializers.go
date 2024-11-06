@@ -194,6 +194,7 @@ func awsRestjson1_deserializeOpDocumentCreateEndpointOutput(v **CreateEndpointOu
 				}
 				sv.EndpointArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -466,6 +467,7 @@ func awsRestjson1_deserializeOpDocumentListEndpointsOutput(v **ListEndpointsOutp
 			if err := awsRestjson1_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -474,6 +476,7 @@ func awsRestjson1_deserializeOpDocumentListEndpointsOutput(v **ListEndpointsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -638,10 +641,12 @@ func awsRestjson1_deserializeOpDocumentListOutpostsWithS3Output(v **ListOutposts
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Outposts":
 			if err := awsRestjson1_deserializeDocumentOutposts(&sv.Outposts, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -805,6 +810,7 @@ func awsRestjson1_deserializeOpDocumentListSharedEndpointsOutput(v **ListSharedE
 			if err := awsRestjson1_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -813,6 +819,7 @@ func awsRestjson1_deserializeOpDocumentListSharedEndpointsOutput(v **ListSharedE
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1104,6 +1111,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1143,6 +1151,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1182,6 +1191,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.AccessType = types.EndpointAccessType(jtv)
 			}
+
 		case "CidrBlock":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1190,6 +1200,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.CidrBlock = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1205,6 +1216,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 
 				}
 			}
+
 		case "CustomerOwnedIpv4Pool":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1213,6 +1225,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.CustomerOwnedIpv4Pool = ptr.String(jtv)
 			}
+
 		case "EndpointArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1221,14 +1234,17 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.EndpointArn = ptr.String(jtv)
 			}
+
 		case "FailedReason":
 			if err := awsRestjson1_deserializeDocumentFailedReason(&sv.FailedReason, value); err != nil {
 				return err
 			}
+
 		case "NetworkInterfaces":
 			if err := awsRestjson1_deserializeDocumentNetworkInterfaces(&sv.NetworkInterfaces, value); err != nil {
 				return err
 			}
+
 		case "OutpostsId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1237,6 +1253,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.OutpostsId = ptr.String(jtv)
 			}
+
 		case "SecurityGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1245,6 +1262,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.SecurityGroupId = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1253,6 +1271,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.Status = types.EndpointStatus(jtv)
 			}
+
 		case "SubnetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1261,6 +1280,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.SubnetId = ptr.String(jtv)
 			}
+
 		case "VpcId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1269,6 +1289,7 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.VpcId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1342,6 +1363,7 @@ func awsRestjson1_deserializeDocumentFailedReason(v **types.FailedReason, value 
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1350,6 +1372,7 @@ func awsRestjson1_deserializeDocumentFailedReason(v **types.FailedReason, value 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1389,6 +1412,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1428,6 +1452,7 @@ func awsRestjson1_deserializeDocumentNetworkInterface(v **types.NetworkInterface
 				}
 				sv.NetworkInterfaceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1505,6 +1530,7 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				}
 				sv.CapacityInBytes = i64
 			}
+
 		case "OutpostArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1513,6 +1539,7 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				}
 				sv.OutpostArn = ptr.String(jtv)
 			}
+
 		case "OutpostId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1521,6 +1548,7 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				}
 				sv.OutpostId = ptr.String(jtv)
 			}
+
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1529,6 +1557,7 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				}
 				sv.OwnerId = ptr.String(jtv)
 			}
+
 		case "S3OutpostArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1537,6 +1566,7 @@ func awsRestjson1_deserializeDocumentOutpost(v **types.Outpost, value interface{
 				}
 				sv.S3OutpostArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1576,6 +1606,7 @@ func awsRestjson1_deserializeDocumentOutpostOfflineException(v **types.OutpostOf
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1649,6 +1680,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1688,6 +1720,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1727,6 +1760,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

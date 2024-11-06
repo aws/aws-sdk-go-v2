@@ -285,6 +285,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
+
 		case "FailureCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -293,6 +294,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.FailureCode = ptr.String(jtv)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -301,6 +303,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "FlowDefinitionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -309,6 +312,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.FlowDefinitionArn = ptr.String(jtv)
 			}
+
 		case "HumanLoopArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -317,6 +321,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.HumanLoopArn = ptr.String(jtv)
 			}
+
 		case "HumanLoopName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -325,10 +330,12 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.HumanLoopName = ptr.String(jtv)
 			}
+
 		case "HumanLoopOutput":
 			if err := awsRestjson1_deserializeDocumentHumanLoopOutput(&sv.HumanLoopOutput, value); err != nil {
 				return err
 			}
+
 		case "HumanLoopStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -337,6 +344,7 @@ func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHuman
 				}
 				sv.HumanLoopStatus = types.HumanLoopStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -497,6 +505,7 @@ func awsRestjson1_deserializeOpDocumentListHumanLoopsOutput(v **ListHumanLoopsOu
 			if err := awsRestjson1_deserializeDocumentHumanLoopSummaries(&sv.HumanLoopSummaries, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -505,6 +514,7 @@ func awsRestjson1_deserializeOpDocumentListHumanLoopsOutput(v **ListHumanLoopsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -672,6 +682,7 @@ func awsRestjson1_deserializeOpDocumentStartHumanLoopOutput(v **StartHumanLoopOu
 				}
 				sv.HumanLoopArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1024,6 +1035,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1063,6 +1075,7 @@ func awsRestjson1_deserializeDocumentHumanLoopOutput(v **types.HumanLoopOutput, 
 				}
 				sv.OutputS3Uri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1140,6 +1153,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				}
 				sv.CreationTime = ptr.Time(t)
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1148,6 +1162,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "FlowDefinitionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1156,6 +1171,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				}
 				sv.FlowDefinitionArn = ptr.String(jtv)
 			}
+
 		case "HumanLoopName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1164,6 +1180,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				}
 				sv.HumanLoopName = ptr.String(jtv)
 			}
+
 		case "HumanLoopStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1172,6 +1189,7 @@ func awsRestjson1_deserializeDocumentHumanLoopSummary(v **types.HumanLoopSummary
 				}
 				sv.HumanLoopStatus = types.HumanLoopStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1211,6 +1229,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1250,6 +1269,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1289,6 +1309,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1328,6 +1349,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1367,6 +1389,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

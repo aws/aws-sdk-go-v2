@@ -409,6 +409,7 @@ func awsRestjson1_deserializeDocumentClientLimitExceededException(v **types.Clie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -448,6 +449,7 @@ func awsRestjson1_deserializeDocumentConnectionLimitExceededException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -487,6 +489,7 @@ func awsRestjson1_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -526,6 +529,7 @@ func awsRestjson1_deserializeDocumentInvalidEndpointException(v **types.InvalidE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -565,6 +569,7 @@ func awsRestjson1_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -604,6 +609,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

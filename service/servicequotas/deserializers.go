@@ -3097,6 +3097,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3136,6 +3137,7 @@ func awsAwsjson11_deserializeDocumentAWSServiceAccessNotEnabledException(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3175,6 +3177,7 @@ func awsAwsjson11_deserializeDocumentDependencyAccessDeniedException(v **types.D
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3214,6 +3217,7 @@ func awsAwsjson11_deserializeDocumentErrorReason(v **types.ErrorReason, value in
 				}
 				sv.ErrorCode = types.ErrorCode(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3222,6 +3226,7 @@ func awsAwsjson11_deserializeDocumentErrorReason(v **types.ErrorReason, value in
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3261,6 +3266,7 @@ func awsAwsjson11_deserializeDocumentIllegalArgumentException(v **types.IllegalA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3300,6 +3306,7 @@ func awsAwsjson11_deserializeDocumentInvalidPaginationTokenException(v **types.I
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3339,6 +3346,7 @@ func awsAwsjson11_deserializeDocumentInvalidResourceStateException(v **types.Inv
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3410,6 +3418,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 			if err := awsAwsjson11_deserializeDocumentMetricDimensionsMapDefinition(&sv.MetricDimensions, value); err != nil {
 				return err
 			}
+
 		case "MetricName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3418,6 +3427,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
+
 		case "MetricNamespace":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3426,6 +3436,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 				}
 				sv.MetricNamespace = ptr.String(jtv)
 			}
+
 		case "MetricStatisticRecommendation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3434,6 +3445,7 @@ func awsAwsjson11_deserializeDocumentMetricInfo(v **types.MetricInfo, value inte
 				}
 				sv.MetricStatisticRecommendation = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3473,6 +3485,7 @@ func awsAwsjson11_deserializeDocumentNoAvailableOrganizationException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3512,6 +3525,7 @@ func awsAwsjson11_deserializeDocumentNoSuchResourceException(v **types.NoSuchRes
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3551,6 +3565,7 @@ func awsAwsjson11_deserializeDocumentOrganizationNotInAllFeaturesModeException(v
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3624,6 +3639,7 @@ func awsAwsjson11_deserializeDocumentQuotaContextInfo(v **types.QuotaContextInfo
 				}
 				sv.ContextId = ptr.String(jtv)
 			}
+
 		case "ContextScope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3632,6 +3648,7 @@ func awsAwsjson11_deserializeDocumentQuotaContextInfo(v **types.QuotaContextInfo
 				}
 				sv.ContextScope = types.QuotaContextScope(jtv)
 			}
+
 		case "ContextScopeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3640,6 +3657,7 @@ func awsAwsjson11_deserializeDocumentQuotaContextInfo(v **types.QuotaContextInfo
 				}
 				sv.ContextScopeType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3679,6 +3697,7 @@ func awsAwsjson11_deserializeDocumentQuotaExceededException(v **types.QuotaExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3718,6 +3737,7 @@ func awsAwsjson11_deserializeDocumentQuotaPeriod(v **types.QuotaPeriod, value in
 				}
 				sv.PeriodUnit = types.PeriodUnit(jtv)
 			}
+
 		case "PeriodValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3730,6 +3750,7 @@ func awsAwsjson11_deserializeDocumentQuotaPeriod(v **types.QuotaPeriod, value in
 				}
 				sv.PeriodValue = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3769,6 +3790,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.CaseId = ptr.String(jtv)
 			}
+
 		case "Created":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3784,6 +3806,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 
 				}
 			}
+
 		case "DesiredValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3817,6 +3840,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 
 				}
 			}
+
 		case "GlobalQuota":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3825,6 +3849,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.GlobalQuota = jtv
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3833,6 +3858,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "LastUpdated":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3848,6 +3874,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 
 				}
 			}
+
 		case "QuotaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3856,6 +3883,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.QuotaArn = ptr.String(jtv)
 			}
+
 		case "QuotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3864,10 +3892,12 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "QuotaContext":
 			if err := awsAwsjson11_deserializeDocumentQuotaContextInfo(&sv.QuotaContext, value); err != nil {
 				return err
 			}
+
 		case "QuotaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3876,6 +3906,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.QuotaName = ptr.String(jtv)
 			}
+
 		case "QuotaRequestedAtLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3884,6 +3915,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.QuotaRequestedAtLevel = types.AppliedLevelEnum(jtv)
 			}
+
 		case "Requester":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3892,6 +3924,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.Requester = ptr.String(jtv)
 			}
+
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3900,6 +3933,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3908,6 +3942,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3916,6 +3951,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.Status = types.RequestStatus(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3924,6 +3960,7 @@ func awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(v **types.Reque
 				}
 				sv.Unit = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3997,6 +4034,7 @@ func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4036,6 +4074,7 @@ func awsAwsjson11_deserializeDocumentServiceException(v **types.ServiceException
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4075,6 +4114,7 @@ func awsAwsjson11_deserializeDocumentServiceInfo(v **types.ServiceInfo, value in
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4083,6 +4123,7 @@ func awsAwsjson11_deserializeDocumentServiceInfo(v **types.ServiceInfo, value in
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4156,10 +4197,12 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.Adjustable = jtv
 			}
+
 		case "ErrorReason":
 			if err := awsAwsjson11_deserializeDocumentErrorReason(&sv.ErrorReason, value); err != nil {
 				return err
 			}
+
 		case "GlobalQuota":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4168,10 +4211,12 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.GlobalQuota = jtv
 			}
+
 		case "Period":
 			if err := awsAwsjson11_deserializeDocumentQuotaPeriod(&sv.Period, value); err != nil {
 				return err
 			}
+
 		case "QuotaAppliedAtLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4180,6 +4225,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.QuotaAppliedAtLevel = types.AppliedLevelEnum(jtv)
 			}
+
 		case "QuotaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4188,6 +4234,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.QuotaArn = ptr.String(jtv)
 			}
+
 		case "QuotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4196,10 +4243,12 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "QuotaContext":
 			if err := awsAwsjson11_deserializeDocumentQuotaContextInfo(&sv.QuotaContext, value); err != nil {
 				return err
 			}
+
 		case "QuotaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4208,6 +4257,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.QuotaName = ptr.String(jtv)
 			}
+
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4216,6 +4266,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4224,6 +4275,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4232,10 +4284,12 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 				}
 				sv.Unit = ptr.String(jtv)
 			}
+
 		case "UsageMetric":
 			if err := awsAwsjson11_deserializeDocumentMetricInfo(&sv.UsageMetric, value); err != nil {
 				return err
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4269,6 +4323,7 @@ func awsAwsjson11_deserializeDocumentServiceQuota(v **types.ServiceQuota, value 
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4308,6 +4363,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.AwsRegion = ptr.String(jtv)
 			}
+
 		case "DesiredValue":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4341,6 +4397,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 
 				}
 			}
+
 		case "GlobalQuota":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4349,6 +4406,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.GlobalQuota = jtv
 			}
+
 		case "QuotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4357,6 +4415,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "QuotaName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4365,6 +4424,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.QuotaName = ptr.String(jtv)
 			}
+
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4373,6 +4433,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		case "ServiceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4381,6 +4442,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4389,6 +4451,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(v **t
 				}
 				sv.Unit = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4496,6 +4559,7 @@ func awsAwsjson11_deserializeDocumentServiceQuotaTemplateNotInUseException(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4535,6 +4599,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4543,6 +4608,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4582,6 +4648,7 @@ func awsAwsjson11_deserializeDocumentTagPolicyViolationException(v **types.TagPo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4621,6 +4688,7 @@ func awsAwsjson11_deserializeDocumentTemplatesNotAvailableInRegionException(v **
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4660,6 +4728,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4699,6 +4768,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4831,6 +4901,7 @@ func awsAwsjson11_deserializeOpDocumentGetAssociationForServiceQuotaTemplateOutp
 				}
 				sv.ServiceQuotaTemplateAssociationStatus = types.ServiceQuotaTemplateAssociationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4866,6 +4937,7 @@ func awsAwsjson11_deserializeOpDocumentGetAWSDefaultServiceQuotaOutput(v **GetAW
 			if err := awsAwsjson11_deserializeDocumentServiceQuota(&sv.Quota, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4901,6 +4973,7 @@ func awsAwsjson11_deserializeOpDocumentGetRequestedServiceQuotaChangeOutput(v **
 			if err := awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(&sv.RequestedQuota, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4936,6 +5009,7 @@ func awsAwsjson11_deserializeOpDocumentGetServiceQuotaIncreaseRequestFromTemplat
 			if err := awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(&sv.ServiceQuotaIncreaseRequestInTemplate, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4971,6 +5045,7 @@ func awsAwsjson11_deserializeOpDocumentGetServiceQuotaOutput(v **GetServiceQuota
 			if err := awsAwsjson11_deserializeDocumentServiceQuota(&sv.Quota, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5010,10 +5085,12 @@ func awsAwsjson11_deserializeOpDocumentListAWSDefaultServiceQuotasOutput(v **Lis
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Quotas":
 			if err := awsAwsjson11_deserializeDocumentServiceQuotaListDefinition(&sv.Quotas, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5053,10 +5130,12 @@ func awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryByQ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "RequestedQuotas":
 			if err := awsAwsjson11_deserializeDocumentRequestedServiceQuotaChangeHistoryListDefinition(&sv.RequestedQuotas, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5096,10 +5175,12 @@ func awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryOut
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "RequestedQuotas":
 			if err := awsAwsjson11_deserializeDocumentRequestedServiceQuotaChangeHistoryListDefinition(&sv.RequestedQuotas, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5139,10 +5220,12 @@ func awsAwsjson11_deserializeOpDocumentListServiceQuotaIncreaseRequestsInTemplat
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ServiceQuotaIncreaseRequestInTemplateList":
 			if err := awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplateList(&sv.ServiceQuotaIncreaseRequestInTemplateList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5182,10 +5265,12 @@ func awsAwsjson11_deserializeOpDocumentListServiceQuotasOutput(v **ListServiceQu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Quotas":
 			if err := awsAwsjson11_deserializeDocumentServiceQuotaListDefinition(&sv.Quotas, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5225,10 +5310,12 @@ func awsAwsjson11_deserializeOpDocumentListServicesOutput(v **ListServicesOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Services":
 			if err := awsAwsjson11_deserializeDocumentServiceInfoListDefinition(&sv.Services, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5264,6 +5351,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentOutputTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5299,6 +5387,7 @@ func awsAwsjson11_deserializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplat
 			if err := awsAwsjson11_deserializeDocumentServiceQuotaIncreaseRequestInTemplate(&sv.ServiceQuotaIncreaseRequestInTemplate, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5334,6 +5423,7 @@ func awsAwsjson11_deserializeOpDocumentRequestServiceQuotaIncreaseOutput(v **Req
 			if err := awsAwsjson11_deserializeDocumentRequestedServiceQuotaChange(&sv.RequestedQuota, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

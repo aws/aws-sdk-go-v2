@@ -183,6 +183,7 @@ func awsRestjson1_deserializeOpDocumentCreateTemplateOutput(v **CreateTemplateOu
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "templateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -191,6 +192,7 @@ func awsRestjson1_deserializeOpDocumentCreateTemplateOutput(v **CreateTemplateOu
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -199,6 +201,7 @@ func awsRestjson1_deserializeOpDocumentCreateTemplateOutput(v **CreateTemplateOu
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -363,6 +366,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.AdsApplicationConfigurationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -371,6 +375,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -386,6 +391,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -394,6 +400,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -402,6 +409,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -410,6 +418,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -418,14 +427,17 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		case "stepTargets":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.StepTargets, value); err != nil {
 				return err
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -434,10 +446,12 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowOutput(v **CreateWorkflowOu
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		case "workflowInputs":
 			if err := awsRestjson1_deserializeDocumentStepInputParameters(&sv.WorkflowInputs, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -602,6 +616,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepOutput(v **CreateWorkfl
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -610,6 +625,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepOutput(v **CreateWorkfl
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "stepGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -618,6 +634,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepOutput(v **CreateWorkfl
 				}
 				sv.StepGroupId = ptr.String(jtv)
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -626,6 +643,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepOutput(v **CreateWorkfl
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -797,6 +815,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepGroupOutput(v **CreateW
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -805,6 +824,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepGroupOutput(v **CreateW
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -813,6 +833,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepGroupOutput(v **CreateW
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -821,18 +842,22 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepGroupOutput(v **CreateW
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "tools":
 			if err := awsRestjson1_deserializeDocumentToolsList(&sv.Tools, value); err != nil {
 				return err
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -841,6 +866,7 @@ func awsRestjson1_deserializeOpDocumentCreateWorkflowStepGroupOutput(v **CreateW
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1108,6 +1134,7 @@ func awsRestjson1_deserializeOpDocumentDeleteWorkflowOutput(v **DeleteWorkflowOu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1116,6 +1143,7 @@ func awsRestjson1_deserializeOpDocumentDeleteWorkflowOutput(v **DeleteWorkflowOu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1124,6 +1152,7 @@ func awsRestjson1_deserializeOpDocumentDeleteWorkflowOutput(v **DeleteWorkflowOu
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1495,6 +1524,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1503,6 +1533,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1511,10 +1542,12 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "inputs":
 			if err := awsRestjson1_deserializeDocumentTemplateInputList(&sv.Inputs, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1523,6 +1556,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1531,6 +1565,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.Owner = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1539,6 +1574,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.Status = types.TemplateStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1547,10 +1583,12 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "templateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1559,6 +1597,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
+
 		case "templateClass":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1567,10 +1606,12 @@ func awsRestjson1_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, 
 				}
 				sv.TemplateClass = ptr.String(jtv)
 			}
+
 		case "tools":
 			if err := awsRestjson1_deserializeDocumentToolsList(&sv.Tools, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1738,6 +1779,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.CreationTime = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1746,6 +1788,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1754,6 +1797,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1762,18 +1806,22 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "outputs":
 			if err := awsRestjson1_deserializeDocumentStepOutputList(&sv.Outputs, value); err != nil {
 				return err
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "stepActionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1782,10 +1830,12 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.StepActionType = types.StepActionType(jtv)
 			}
+
 		case "stepAutomationConfiguration":
 			if err := awsRestjson1_deserializeDocumentStepAutomationConfiguration(&sv.StepAutomationConfiguration, value); err != nil {
 				return err
 			}
+
 		case "stepGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1794,6 +1844,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.StepGroupId = ptr.String(jtv)
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1802,6 +1853,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepOutput(v **GetTemplateStep
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1976,6 +2028,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1984,6 +2037,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1992,6 +2046,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2007,6 +2062,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2015,14 +2071,17 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2031,6 +2090,7 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 				}
 				sv.Status = types.StepGroupStatus(jtv)
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2039,10 +2099,12 @@ func awsRestjson1_deserializeOpDocumentGetTemplateStepGroupOutput(v **GetTemplat
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		case "tools":
 			if err := awsRestjson1_deserializeDocumentToolsList(&sv.Tools, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2210,6 +2272,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.AdsApplicationConfigurationId = ptr.String(jtv)
 			}
+
 		case "adsApplicationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2218,6 +2281,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.AdsApplicationName = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2226,6 +2290,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "completedSteps":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2238,6 +2303,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.CompletedSteps = ptr.Int32(int32(i64))
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2253,6 +2319,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2261,6 +2328,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2276,6 +2344,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 
 				}
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2284,6 +2353,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2299,6 +2369,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 
 				}
 			}
+
 		case "lastStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2314,6 +2385,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 
 				}
 			}
+
 		case "lastStopTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2329,6 +2401,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2337,6 +2410,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2345,6 +2419,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2353,10 +2428,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2365,10 +2442,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		case "tools":
 			if err := awsRestjson1_deserializeDocumentToolsList(&sv.Tools, value); err != nil {
 				return err
 			}
+
 		case "totalSteps":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2381,6 +2460,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.TotalSteps = ptr.Int32(int32(i64))
 			}
+
 		case "workflowBucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2389,10 +2469,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.WorkflowBucket = ptr.String(jtv)
 			}
+
 		case "workflowInputs":
 			if err := awsRestjson1_deserializeDocumentStepInputParameters(&sv.WorkflowInputs, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2564,6 +2646,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2572,6 +2655,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2587,6 +2671,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 
 				}
 			}
+
 		case "lastStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2602,6 +2687,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2610,10 +2696,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "noOfSrvCompleted":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2626,6 +2714,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.NoOfSrvCompleted = ptr.Int32(int32(i64))
 			}
+
 		case "noOfSrvFailed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2638,10 +2727,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.NoOfSrvFailed = ptr.Int32(int32(i64))
 			}
+
 		case "outputs":
 			if err := awsRestjson1_deserializeDocumentWorkflowStepOutputList(&sv.Outputs, value); err != nil {
 				return err
 			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2650,10 +2741,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.Owner = types.Owner(jtv)
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "scriptOutputLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2662,6 +2755,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.ScriptOutputLocation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2670,6 +2764,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.Status = types.StepStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2678,6 +2773,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "stepActionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2686,6 +2782,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.StepActionType = types.StepActionType(jtv)
 			}
+
 		case "stepGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2694,6 +2791,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.StepGroupId = ptr.String(jtv)
 			}
+
 		case "stepId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2702,10 +2800,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.StepId = ptr.String(jtv)
 			}
+
 		case "stepTarget":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.StepTarget, value); err != nil {
 				return err
 			}
+
 		case "totalNoOfSrv":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2718,6 +2818,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.TotalNoOfSrv = ptr.Int32(int32(i64))
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2726,10 +2827,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepOutput(v **GetWorkflowStep
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		case "workflowStepAutomationConfiguration":
 			if err := awsRestjson1_deserializeDocumentWorkflowStepAutomationConfiguration(&sv.WorkflowStepAutomationConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2904,6 +3007,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2912,6 +3016,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2927,6 +3032,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 
 				}
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2935,6 +3041,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2950,6 +3057,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2958,10 +3066,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2970,10 +3080,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 				}
 				sv.Owner = types.Owner(jtv)
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2982,10 +3094,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 				}
 				sv.Status = types.StepGroupStatus(jtv)
 			}
+
 		case "tools":
 			if err := awsRestjson1_deserializeDocumentToolsList(&sv.Tools, value); err != nil {
 				return err
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2994,6 +3108,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowStepGroupOutput(v **GetWorkflo
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3155,10 +3270,12 @@ func awsRestjson1_deserializeOpDocumentListPluginsOutput(v **ListPluginsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "plugins":
 			if err := awsRestjson1_deserializeDocumentPluginSummaries(&sv.Plugins, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3313,6 +3430,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3474,10 +3592,12 @@ func awsRestjson1_deserializeOpDocumentListTemplatesOutput(v **ListTemplatesOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "templateSummary":
 			if err := awsRestjson1_deserializeDocumentTemplateSummaryList(&sv.TemplateSummary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3642,10 +3762,12 @@ func awsRestjson1_deserializeOpDocumentListTemplateStepGroupsOutput(v **ListTemp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "templateStepGroupSummary":
 			if err := awsRestjson1_deserializeDocumentTemplateStepGroupSummaryList(&sv.TemplateStepGroupSummary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3813,10 +3935,12 @@ func awsRestjson1_deserializeOpDocumentListTemplateStepsOutput(v **ListTemplateS
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "templateStepSummaryList":
 			if err := awsRestjson1_deserializeDocumentTemplateStepSummaryList(&sv.TemplateStepSummaryList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3980,6 +4104,7 @@ func awsRestjson1_deserializeOpDocumentListWorkflowsOutput(v **ListWorkflowsOutp
 			if err := awsRestjson1_deserializeDocumentMigrationWorkflowSummaryList(&sv.MigrationWorkflowSummary, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3988,6 +4113,7 @@ func awsRestjson1_deserializeOpDocumentListWorkflowsOutput(v **ListWorkflowsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4155,10 +4281,12 @@ func awsRestjson1_deserializeOpDocumentListWorkflowStepGroupsOutput(v **ListWork
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "workflowStepGroupsSummary":
 			if err := awsRestjson1_deserializeDocumentWorkflowStepGroupsSummaryList(&sv.WorkflowStepGroupsSummary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4323,10 +4451,12 @@ func awsRestjson1_deserializeOpDocumentListWorkflowStepsOutput(v **ListWorkflowS
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "workflowStepsSummary":
 			if err := awsRestjson1_deserializeDocumentWorkflowStepsSummaryList(&sv.WorkflowStepsSummary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4491,6 +4621,7 @@ func awsRestjson1_deserializeOpDocumentRetryWorkflowStepOutput(v **RetryWorkflow
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4499,6 +4630,7 @@ func awsRestjson1_deserializeOpDocumentRetryWorkflowStepOutput(v **RetryWorkflow
 				}
 				sv.Status = types.StepStatus(jtv)
 			}
+
 		case "stepGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4507,6 +4639,7 @@ func awsRestjson1_deserializeOpDocumentRetryWorkflowStepOutput(v **RetryWorkflow
 				}
 				sv.StepGroupId = ptr.String(jtv)
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4515,6 +4648,7 @@ func awsRestjson1_deserializeOpDocumentRetryWorkflowStepOutput(v **RetryWorkflow
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4682,6 +4816,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowOutput(v **StartWorkflowOutp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4690,6 +4825,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowOutput(v **StartWorkflowOutp
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4705,6 +4841,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowOutput(v **StartWorkflowOutp
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4713,6 +4850,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowOutput(v **StartWorkflowOutp
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4721,6 +4859,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowOutput(v **StartWorkflowOutp
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4888,6 +5027,7 @@ func awsRestjson1_deserializeOpDocumentStopWorkflowOutput(v **StopWorkflowOutput
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4896,6 +5036,7 @@ func awsRestjson1_deserializeOpDocumentStopWorkflowOutput(v **StopWorkflowOutput
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastStopTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4911,6 +5052,7 @@ func awsRestjson1_deserializeOpDocumentStopWorkflowOutput(v **StopWorkflowOutput
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4919,6 +5061,7 @@ func awsRestjson1_deserializeOpDocumentStopWorkflowOutput(v **StopWorkflowOutput
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4927,6 +5070,7 @@ func awsRestjson1_deserializeOpDocumentStopWorkflowOutput(v **StopWorkflowOutput
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5272,6 +5416,7 @@ func awsRestjson1_deserializeOpDocumentUpdateTemplateOutput(v **UpdateTemplateOu
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "templateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5280,6 +5425,7 @@ func awsRestjson1_deserializeOpDocumentUpdateTemplateOutput(v **UpdateTemplateOu
 				}
 				sv.TemplateArn = ptr.String(jtv)
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5288,6 +5434,7 @@ func awsRestjson1_deserializeOpDocumentUpdateTemplateOutput(v **UpdateTemplateOu
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5455,6 +5602,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.AdsApplicationConfigurationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5463,6 +5611,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5478,6 +5627,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5486,6 +5636,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5494,6 +5645,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5509,6 +5661,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5517,6 +5670,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5525,14 +5679,17 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		case "stepTargets":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.StepTargets, value); err != nil {
 				return err
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5541,10 +5698,12 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowOutput(v **UpdateWorkflowOu
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		case "workflowInputs":
 			if err := awsRestjson1_deserializeDocumentStepInputParameters(&sv.WorkflowInputs, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5709,6 +5868,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepOutput(v **UpdateWorkfl
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5717,6 +5877,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepOutput(v **UpdateWorkfl
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "stepGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5725,6 +5886,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepOutput(v **UpdateWorkfl
 				}
 				sv.StepGroupId = ptr.String(jtv)
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5733,6 +5895,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepOutput(v **UpdateWorkfl
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5900,6 +6063,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepGroupOutput(v **UpdateW
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5908,6 +6072,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepGroupOutput(v **UpdateW
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5923,6 +6088,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepGroupOutput(v **UpdateW
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5931,18 +6097,22 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepGroupOutput(v **UpdateW
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "tools":
 			if err := awsRestjson1_deserializeDocumentToolsList(&sv.Tools, value); err != nil {
 				return err
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5951,6 +6121,7 @@ func awsRestjson1_deserializeOpDocumentUpdateWorkflowStepGroupOutput(v **UpdateW
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6206,6 +6377,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6245,6 +6417,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6284,6 +6457,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6359,6 +6533,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.AdsApplicationConfigurationName = ptr.String(jtv)
 			}
+
 		case "completedSteps":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6371,6 +6546,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.CompletedSteps = ptr.Int32(int32(i64))
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6386,6 +6562,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 
 				}
 			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6401,6 +6578,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 
 				}
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6409,6 +6587,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6417,6 +6596,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6425,6 +6605,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.Status = types.MigrationWorkflowStatusEnum(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6433,6 +6614,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6441,6 +6623,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		case "totalSteps":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6453,6 +6636,7 @@ func awsRestjson1_deserializeDocumentMigrationWorkflowSummary(v **types.Migratio
 				}
 				sv.TotalSteps = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6526,6 +6710,7 @@ func awsRestjson1_deserializeDocumentPlatformCommand(v **types.PlatformCommand, 
 				}
 				sv.Linux = ptr.String(jtv)
 			}
+
 		case "windows":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6534,6 +6719,7 @@ func awsRestjson1_deserializeDocumentPlatformCommand(v **types.PlatformCommand, 
 				}
 				sv.Windows = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6573,6 +6759,7 @@ func awsRestjson1_deserializeDocumentPlatformScriptKey(v **types.PlatformScriptK
 				}
 				sv.Linux = ptr.String(jtv)
 			}
+
 		case "windows":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6581,6 +6768,7 @@ func awsRestjson1_deserializeDocumentPlatformScriptKey(v **types.PlatformScriptK
 				}
 				sv.Windows = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6654,6 +6842,7 @@ func awsRestjson1_deserializeDocumentPluginSummary(v **types.PluginSummary, valu
 				}
 				sv.Hostname = ptr.String(jtv)
 			}
+
 		case "ipAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6662,6 +6851,7 @@ func awsRestjson1_deserializeDocumentPluginSummary(v **types.PluginSummary, valu
 				}
 				sv.IpAddress = ptr.String(jtv)
 			}
+
 		case "pluginId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6670,6 +6860,7 @@ func awsRestjson1_deserializeDocumentPluginSummary(v **types.PluginSummary, valu
 				}
 				sv.PluginId = ptr.String(jtv)
 			}
+
 		case "registeredTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6678,6 +6869,7 @@ func awsRestjson1_deserializeDocumentPluginSummary(v **types.PluginSummary, valu
 				}
 				sv.RegisteredTime = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6686,6 +6878,7 @@ func awsRestjson1_deserializeDocumentPluginSummary(v **types.PluginSummary, valu
 				}
 				sv.Status = types.PluginHealth(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6694,6 +6887,7 @@ func awsRestjson1_deserializeDocumentPluginSummary(v **types.PluginSummary, valu
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6733,6 +6927,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6768,6 +6963,7 @@ func awsRestjson1_deserializeDocumentStepAutomationConfiguration(v **types.StepA
 			if err := awsRestjson1_deserializeDocumentPlatformCommand(&sv.Command, value); err != nil {
 				return err
 			}
+
 		case "runEnvironment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6776,6 +6972,7 @@ func awsRestjson1_deserializeDocumentStepAutomationConfiguration(v **types.StepA
 				}
 				sv.RunEnvironment = types.RunEnvironment(jtv)
 			}
+
 		case "scriptLocationS3Bucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6784,10 +6981,12 @@ func awsRestjson1_deserializeDocumentStepAutomationConfiguration(v **types.StepA
 				}
 				sv.ScriptLocationS3Bucket = ptr.String(jtv)
 			}
+
 		case "scriptLocationS3Key":
 			if err := awsRestjson1_deserializeDocumentPlatformScriptKey(&sv.ScriptLocationS3Key, value); err != nil {
 				return err
 			}
+
 		case "targetType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6796,6 +6995,7 @@ func awsRestjson1_deserializeDocumentStepAutomationConfiguration(v **types.StepA
 				}
 				sv.TargetType = types.TargetType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6943,6 +7143,7 @@ func awsRestjson1_deserializeDocumentStepOutput(v **types.StepOutput, value inte
 				}
 				sv.DataType = types.DataType(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6951,6 +7152,7 @@ func awsRestjson1_deserializeDocumentStepOutput(v **types.StepOutput, value inte
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "required":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6959,6 +7161,7 @@ func awsRestjson1_deserializeDocumentStepOutput(v **types.StepOutput, value inte
 				}
 				sv.Required = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7140,6 +7343,7 @@ func awsRestjson1_deserializeDocumentTemplateInput(v **types.TemplateInput, valu
 				}
 				sv.DataType = types.DataType(jtv)
 			}
+
 		case "inputName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7148,6 +7352,7 @@ func awsRestjson1_deserializeDocumentTemplateInput(v **types.TemplateInput, valu
 				}
 				sv.InputName = ptr.String(jtv)
 			}
+
 		case "required":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7156,6 +7361,7 @@ func awsRestjson1_deserializeDocumentTemplateInput(v **types.TemplateInput, valu
 				}
 				sv.Required = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7229,6 +7435,7 @@ func awsRestjson1_deserializeDocumentTemplateStepGroupSummary(v **types.Template
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7237,14 +7444,17 @@ func awsRestjson1_deserializeDocumentTemplateStepGroupSummary(v **types.Template
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7318,6 +7528,7 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7326,10 +7537,12 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7338,10 +7551,12 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.Owner = types.Owner(jtv)
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "stepActionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7350,6 +7565,7 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.StepActionType = types.StepActionType(jtv)
 			}
+
 		case "stepGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7358,6 +7574,7 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.StepGroupId = ptr.String(jtv)
 			}
+
 		case "targetType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7366,6 +7583,7 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.TargetType = types.TargetType(jtv)
 			}
+
 		case "templateId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7374,6 +7592,7 @@ func awsRestjson1_deserializeDocumentTemplateStepSummary(v **types.TemplateStepS
 				}
 				sv.TemplateId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7447,6 +7666,7 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7455,6 +7675,7 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7463,6 +7684,7 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7471,6 +7693,7 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7544,6 +7767,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7583,6 +7807,7 @@ func awsRestjson1_deserializeDocumentTool(v **types.Tool, value interface{}) err
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7591,6 +7816,7 @@ func awsRestjson1_deserializeDocumentTool(v **types.Tool, value interface{}) err
 				}
 				sv.Url = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7664,6 +7890,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7699,6 +7926,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepAutomationConfiguration(v **typ
 			if err := awsRestjson1_deserializeDocumentPlatformCommand(&sv.Command, value); err != nil {
 				return err
 			}
+
 		case "runEnvironment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7707,6 +7935,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepAutomationConfiguration(v **typ
 				}
 				sv.RunEnvironment = types.RunEnvironment(jtv)
 			}
+
 		case "scriptLocationS3Bucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7715,10 +7944,12 @@ func awsRestjson1_deserializeDocumentWorkflowStepAutomationConfiguration(v **typ
 				}
 				sv.ScriptLocationS3Bucket = ptr.String(jtv)
 			}
+
 		case "scriptLocationS3Key":
 			if err := awsRestjson1_deserializeDocumentPlatformScriptKey(&sv.ScriptLocationS3Key, value); err != nil {
 				return err
 			}
+
 		case "targetType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7727,6 +7958,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepAutomationConfiguration(v **typ
 				}
 				sv.TargetType = types.TargetType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7800,6 +8032,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepGroupSummary(v **types.Workflow
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7808,10 +8041,12 @@ func awsRestjson1_deserializeDocumentWorkflowStepGroupSummary(v **types.Workflow
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7820,10 +8055,12 @@ func awsRestjson1_deserializeDocumentWorkflowStepGroupSummary(v **types.Workflow
 				}
 				sv.Owner = types.Owner(jtv)
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7832,6 +8069,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepGroupSummary(v **types.Workflow
 				}
 				sv.Status = types.StepGroupStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7871,6 +8109,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepOutput(v **types.WorkflowStepOu
 				}
 				sv.DataType = types.DataType(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7879,6 +8118,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepOutput(v **types.WorkflowStepOu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "required":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7887,10 +8127,12 @@ func awsRestjson1_deserializeDocumentWorkflowStepOutput(v **types.WorkflowStepOu
 				}
 				sv.Required = ptr.Bool(jtv)
 			}
+
 		case "value":
 			if err := awsRestjson1_deserializeDocumentWorkflowStepOutputUnion(&sv.Value, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8064,6 +8306,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8072,10 +8315,12 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "next":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Next, value); err != nil {
 				return err
 			}
+
 		case "noOfSrvCompleted":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8088,6 +8333,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.NoOfSrvCompleted = ptr.Int32(int32(i64))
 			}
+
 		case "noOfSrvFailed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8100,6 +8346,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.NoOfSrvFailed = ptr.Int32(int32(i64))
 			}
+
 		case "owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8108,10 +8355,12 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.Owner = types.Owner(jtv)
 			}
+
 		case "previous":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.Previous, value); err != nil {
 				return err
 			}
+
 		case "scriptLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8120,6 +8369,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.ScriptLocation = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8128,6 +8378,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.Status = types.StepStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8136,6 +8387,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "stepActionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8144,6 +8396,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.StepActionType = types.StepActionType(jtv)
 			}
+
 		case "stepId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8152,6 +8405,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.StepId = ptr.String(jtv)
 			}
+
 		case "totalNoOfSrv":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8164,6 +8418,7 @@ func awsRestjson1_deserializeDocumentWorkflowStepSummary(v **types.WorkflowStepS
 				}
 				sv.TotalNoOfSrv = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 

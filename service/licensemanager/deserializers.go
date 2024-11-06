@@ -7038,6 +7038,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7149,6 +7150,7 @@ func awsAwsjson11_deserializeDocumentAuthorizationException(v **types.Authorizat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7195,6 +7197,7 @@ func awsAwsjson11_deserializeDocumentAutomatedDiscoveryInformation(v **types.Aut
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7234,6 +7237,7 @@ func awsAwsjson11_deserializeDocumentBorrowConfiguration(v **types.BorrowConfigu
 				}
 				sv.AllowEarlyCheckIn = ptr.Bool(jtv)
 			}
+
 		case "MaxTimeToLiveInMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7246,6 +7250,7 @@ func awsAwsjson11_deserializeDocumentBorrowConfiguration(v **types.BorrowConfigu
 				}
 				sv.MaxTimeToLiveInMinutes = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7285,6 +7290,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7328,6 +7334,7 @@ func awsAwsjson11_deserializeDocumentConsumedLicenseSummary(v **types.ConsumedLi
 				}
 				sv.ConsumedLicenses = ptr.Int64(i64)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7336,6 +7343,7 @@ func awsAwsjson11_deserializeDocumentConsumedLicenseSummary(v **types.ConsumedLi
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7405,10 +7413,12 @@ func awsAwsjson11_deserializeDocumentConsumptionConfiguration(v **types.Consumpt
 			if err := awsAwsjson11_deserializeDocumentBorrowConfiguration(&sv.BorrowConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ProvisionalConfiguration":
 			if err := awsAwsjson11_deserializeDocumentProvisionalConfiguration(&sv.ProvisionalConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RenewType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7417,6 +7427,7 @@ func awsAwsjson11_deserializeDocumentConsumptionConfiguration(v **types.Consumpt
 				}
 				sv.RenewType = types.RenewType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7456,6 +7467,7 @@ func awsAwsjson11_deserializeDocumentDatetimeRange(v **types.DatetimeRange, valu
 				}
 				sv.Begin = ptr.String(jtv)
 			}
+
 		case "End":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7464,6 +7476,7 @@ func awsAwsjson11_deserializeDocumentDatetimeRange(v **types.DatetimeRange, valu
 				}
 				sv.End = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7503,6 +7516,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.AllowCheckIn = ptr.Bool(jtv)
 			}
+
 		case "MaxCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7515,6 +7529,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.MaxCount = ptr.Int64(i64)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7523,6 +7538,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Overage":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7531,6 +7547,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.Overage = ptr.Bool(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7539,6 +7556,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.Unit = types.EntitlementUnit(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7547,6 +7565,7 @@ func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value in
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7586,6 +7605,7 @@ func awsAwsjson11_deserializeDocumentEntitlementData(v **types.EntitlementData, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7594,6 +7614,7 @@ func awsAwsjson11_deserializeDocumentEntitlementData(v **types.EntitlementData, 
 				}
 				sv.Unit = types.EntitlementDataUnit(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7602,6 +7623,7 @@ func awsAwsjson11_deserializeDocumentEntitlementData(v **types.EntitlementData, 
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7709,6 +7731,7 @@ func awsAwsjson11_deserializeDocumentEntitlementNotAllowedException(v **types.En
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7748,6 +7771,7 @@ func awsAwsjson11_deserializeDocumentEntitlementUsage(v **types.EntitlementUsage
 				}
 				sv.ConsumedValue = ptr.String(jtv)
 			}
+
 		case "MaxCount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7756,6 +7780,7 @@ func awsAwsjson11_deserializeDocumentEntitlementUsage(v **types.EntitlementUsage
 				}
 				sv.MaxCount = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7764,6 +7789,7 @@ func awsAwsjson11_deserializeDocumentEntitlementUsage(v **types.EntitlementUsage
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Unit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7772,6 +7798,7 @@ func awsAwsjson11_deserializeDocumentEntitlementUsage(v **types.EntitlementUsage
 				}
 				sv.Unit = types.EntitlementDataUnit(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7845,6 +7872,7 @@ func awsAwsjson11_deserializeDocumentFailedDependencyException(v **types.FailedD
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7853,6 +7881,7 @@ func awsAwsjson11_deserializeDocumentFailedDependencyException(v **types.FailedD
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7892,6 +7921,7 @@ func awsAwsjson11_deserializeDocumentFilterLimitExceededException(v **types.Filt
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7931,10 +7961,12 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.GrantArn = ptr.String(jtv)
 			}
+
 		case "GrantedOperations":
 			if err := awsAwsjson11_deserializeDocumentAllowedOperationList(&sv.GrantedOperations, value); err != nil {
 				return err
 			}
+
 		case "GranteePrincipalArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7943,6 +7975,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.GranteePrincipalArn = ptr.String(jtv)
 			}
+
 		case "GrantName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7951,6 +7984,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.GrantName = ptr.String(jtv)
 			}
+
 		case "GrantStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7959,6 +7993,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.GrantStatus = types.GrantStatus(jtv)
 			}
+
 		case "HomeRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7967,6 +8002,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.HomeRegion = ptr.String(jtv)
 			}
+
 		case "LicenseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7975,10 +8011,12 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "Options":
 			if err := awsAwsjson11_deserializeDocumentOptions(&sv.Options, value); err != nil {
 				return err
 			}
+
 		case "ParentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7987,6 +8025,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.ParentArn = ptr.String(jtv)
 			}
+
 		case "StatusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7995,6 +8034,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8003,6 +8043,7 @@ func awsAwsjson11_deserializeDocumentGrant(v **types.Grant, value interface{}) e
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8042,10 +8083,12 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.Beneficiary = ptr.String(jtv)
 			}
+
 		case "ConsumptionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentConsumptionConfiguration(&sv.ConsumptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8054,10 +8097,12 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "Entitlements":
 			if err := awsAwsjson11_deserializeDocumentEntitlementList(&sv.Entitlements, value); err != nil {
 				return err
 			}
+
 		case "HomeRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8066,10 +8111,12 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.HomeRegion = ptr.String(jtv)
 			}
+
 		case "Issuer":
 			if err := awsAwsjson11_deserializeDocumentIssuerDetails(&sv.Issuer, value); err != nil {
 				return err
 			}
+
 		case "LicenseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8078,10 +8125,12 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "LicenseMetadata":
 			if err := awsAwsjson11_deserializeDocumentMetadataList(&sv.LicenseMetadata, value); err != nil {
 				return err
 			}
+
 		case "LicenseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8090,6 +8139,7 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.LicenseName = ptr.String(jtv)
 			}
+
 		case "ProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8098,6 +8148,7 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.ProductName = ptr.String(jtv)
 			}
+
 		case "ProductSKU":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8106,10 +8157,12 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.ProductSKU = ptr.String(jtv)
 			}
+
 		case "ReceivedMetadata":
 			if err := awsAwsjson11_deserializeDocumentReceivedMetadata(&sv.ReceivedMetadata, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8118,10 +8171,12 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.Status = types.LicenseStatus(jtv)
 			}
+
 		case "Validity":
 			if err := awsAwsjson11_deserializeDocumentDatetimeRange(&sv.Validity, value); err != nil {
 				return err
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8130,6 +8185,7 @@ func awsAwsjson11_deserializeDocumentGrantedLicense(v **types.GrantedLicense, va
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8237,6 +8293,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterValueException(v **types.In
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8276,6 +8333,7 @@ func awsAwsjson11_deserializeDocumentInvalidResourceStateException(v **types.Inv
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8315,6 +8373,7 @@ func awsAwsjson11_deserializeDocumentIssuerDetails(v **types.IssuerDetails, valu
 				}
 				sv.KeyFingerprint = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8323,6 +8382,7 @@ func awsAwsjson11_deserializeDocumentIssuerDetails(v **types.IssuerDetails, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SignKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8331,6 +8391,7 @@ func awsAwsjson11_deserializeDocumentIssuerDetails(v **types.IssuerDetails, valu
 				}
 				sv.SignKey = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8370,10 +8431,12 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.Beneficiary = ptr.String(jtv)
 			}
+
 		case "ConsumptionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentConsumptionConfiguration(&sv.ConsumptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "CreateTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8382,10 +8445,12 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "Entitlements":
 			if err := awsAwsjson11_deserializeDocumentEntitlementList(&sv.Entitlements, value); err != nil {
 				return err
 			}
+
 		case "HomeRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8394,10 +8459,12 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.HomeRegion = ptr.String(jtv)
 			}
+
 		case "Issuer":
 			if err := awsAwsjson11_deserializeDocumentIssuerDetails(&sv.Issuer, value); err != nil {
 				return err
 			}
+
 		case "LicenseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8406,10 +8473,12 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "LicenseMetadata":
 			if err := awsAwsjson11_deserializeDocumentMetadataList(&sv.LicenseMetadata, value); err != nil {
 				return err
 			}
+
 		case "LicenseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8418,6 +8487,7 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.LicenseName = ptr.String(jtv)
 			}
+
 		case "ProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8426,6 +8496,7 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.ProductName = ptr.String(jtv)
 			}
+
 		case "ProductSKU":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8434,6 +8505,7 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.ProductSKU = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8442,10 +8514,12 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.Status = types.LicenseStatus(jtv)
 			}
+
 		case "Validity":
 			if err := awsAwsjson11_deserializeDocumentDatetimeRange(&sv.Validity, value); err != nil {
 				return err
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8454,6 +8528,7 @@ func awsAwsjson11_deserializeDocumentLicense(v **types.License, value interface{
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8489,6 +8564,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 			if err := awsAwsjson11_deserializeDocumentAutomatedDiscoveryInformation(&sv.AutomatedDiscoveryInformation, value); err != nil {
 				return err
 			}
+
 		case "ConsumedLicenses":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8501,10 +8577,12 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.ConsumedLicenses = ptr.Int64(i64)
 			}
+
 		case "ConsumedLicenseSummaryList":
 			if err := awsAwsjson11_deserializeDocumentConsumedLicenseSummaryList(&sv.ConsumedLicenseSummaryList, value); err != nil {
 				return err
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8513,6 +8591,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "DisassociateWhenNotFound":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8521,6 +8600,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.DisassociateWhenNotFound = ptr.Bool(jtv)
 			}
+
 		case "LicenseConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8529,6 +8609,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseConfigurationArn = ptr.String(jtv)
 			}
+
 		case "LicenseConfigurationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8537,6 +8618,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseConfigurationId = ptr.String(jtv)
 			}
+
 		case "LicenseCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8549,6 +8631,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseCount = ptr.Int64(i64)
 			}
+
 		case "LicenseCountHardLimit":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8557,6 +8640,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseCountHardLimit = ptr.Bool(jtv)
 			}
+
 		case "LicenseCountingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8565,14 +8649,17 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.LicenseCountingType = types.LicenseCountingType(jtv)
 			}
+
 		case "LicenseRules":
 			if err := awsAwsjson11_deserializeDocumentStringList(&sv.LicenseRules, value); err != nil {
 				return err
 			}
+
 		case "ManagedResourceSummaryList":
 			if err := awsAwsjson11_deserializeDocumentManagedResourceSummaryList(&sv.ManagedResourceSummaryList, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8581,6 +8668,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8589,10 +8677,12 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
+
 		case "ProductInformationList":
 			if err := awsAwsjson11_deserializeDocumentProductInformationList(&sv.ProductInformationList, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8601,6 +8691,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfiguration(v **types.LicenseConfi
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8640,6 +8731,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationAssociation(v **types.L
 				}
 				sv.AmiAssociationScope = ptr.String(jtv)
 			}
+
 		case "AssociationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8655,6 +8747,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationAssociation(v **types.L
 
 				}
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8663,6 +8756,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationAssociation(v **types.L
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceOwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8671,6 +8765,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationAssociation(v **types.L
 				}
 				sv.ResourceOwnerId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8679,6 +8774,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationAssociation(v **types.L
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8793,6 +8889,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationUsage(v **types.License
 
 				}
 			}
+
 		case "ConsumedLicenses":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8805,6 +8902,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationUsage(v **types.License
 				}
 				sv.ConsumedLicenses = ptr.Int64(i64)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8813,6 +8911,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationUsage(v **types.License
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceOwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8821,6 +8920,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationUsage(v **types.License
 				}
 				sv.ResourceOwnerId = ptr.String(jtv)
 			}
+
 		case "ResourceStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8829,6 +8929,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationUsage(v **types.License
 				}
 				sv.ResourceStatus = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8837,6 +8938,7 @@ func awsAwsjson11_deserializeDocumentLicenseConfigurationUsage(v **types.License
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8910,6 +9012,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionContext(v **types.LicenseC
 				}
 				sv.UsageOperation = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8945,6 +9048,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 			if err := awsAwsjson11_deserializeDocumentLicenseConversionContext(&sv.DestinationLicenseContext, value); err != nil {
 				return err
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8960,6 +9064,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 
 				}
 			}
+
 		case "LicenseConversionTaskId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8968,6 +9073,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 				}
 				sv.LicenseConversionTaskId = ptr.String(jtv)
 			}
+
 		case "LicenseConversionTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8983,6 +9089,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 
 				}
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8991,10 +9098,12 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "SourceLicenseContext":
 			if err := awsAwsjson11_deserializeDocumentLicenseConversionContext(&sv.SourceLicenseContext, value); err != nil {
 				return err
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9010,6 +9119,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9018,6 +9128,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 				}
 				sv.Status = types.LicenseConversionTaskStatus(jtv)
 			}
+
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9026,6 +9137,7 @@ func awsAwsjson11_deserializeDocumentLicenseConversionTask(v **types.LicenseConv
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9133,6 +9245,7 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "FailureTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9148,10 +9261,12 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 
 				}
 			}
+
 		case "MetadataList":
 			if err := awsAwsjson11_deserializeDocumentMetadataList(&sv.MetadataList, value); err != nil {
 				return err
 			}
+
 		case "OperationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9160,6 +9275,7 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 				}
 				sv.OperationName = ptr.String(jtv)
 			}
+
 		case "OperationRequestedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9168,6 +9284,7 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 				}
 				sv.OperationRequestedBy = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9176,6 +9293,7 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceOwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9184,6 +9302,7 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 				}
 				sv.ResourceOwnerId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9192,6 +9311,7 @@ func awsAwsjson11_deserializeDocumentLicenseOperationFailure(v **types.LicenseOp
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9265,6 +9385,7 @@ func awsAwsjson11_deserializeDocumentLicenseSpecification(v **types.LicenseSpeci
 				}
 				sv.AmiAssociationScope = ptr.String(jtv)
 			}
+
 		case "LicenseConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9273,6 +9394,7 @@ func awsAwsjson11_deserializeDocumentLicenseSpecification(v **types.LicenseSpeci
 				}
 				sv.LicenseConfigurationArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9342,6 +9464,7 @@ func awsAwsjson11_deserializeDocumentLicenseUsage(v **types.LicenseUsage, value 
 			if err := awsAwsjson11_deserializeDocumentEntitlementUsageList(&sv.EntitlementUsages, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9381,6 +9504,7 @@ func awsAwsjson11_deserializeDocumentLicenseUsageException(v **types.LicenseUsag
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9424,6 +9548,7 @@ func awsAwsjson11_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 				}
 				sv.AssociationCount = ptr.Int64(i64)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9432,6 +9557,7 @@ func awsAwsjson11_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9541,6 +9667,7 @@ func awsAwsjson11_deserializeDocumentMetadata(v **types.Metadata, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9549,6 +9676,7 @@ func awsAwsjson11_deserializeDocumentMetadata(v **types.Metadata, value interfac
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9622,6 +9750,7 @@ func awsAwsjson11_deserializeDocumentNoEntitlementsAllowedException(v **types.No
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9661,6 +9790,7 @@ func awsAwsjson11_deserializeDocumentOptions(v **types.Options, value interface{
 				}
 				sv.ActivationOverrideBehavior = types.ActivationOverrideBehavior(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9700,6 +9830,7 @@ func awsAwsjson11_deserializeDocumentOrganizationConfiguration(v **types.Organiz
 				}
 				sv.EnableIntegration = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9735,6 +9866,7 @@ func awsAwsjson11_deserializeDocumentProductInformation(v **types.ProductInforma
 			if err := awsAwsjson11_deserializeDocumentProductInformationFilterList(&sv.ProductInformationFilterList, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9743,6 +9875,7 @@ func awsAwsjson11_deserializeDocumentProductInformation(v **types.ProductInforma
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9782,6 +9915,7 @@ func awsAwsjson11_deserializeDocumentProductInformationFilter(v **types.ProductI
 				}
 				sv.ProductInformationFilterComparator = ptr.String(jtv)
 			}
+
 		case "ProductInformationFilterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9790,10 +9924,12 @@ func awsAwsjson11_deserializeDocumentProductInformationFilter(v **types.ProductI
 				}
 				sv.ProductInformationFilterName = ptr.String(jtv)
 			}
+
 		case "ProductInformationFilterValue":
 			if err := awsAwsjson11_deserializeDocumentStringList(&sv.ProductInformationFilterValue, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9905,6 +10041,7 @@ func awsAwsjson11_deserializeDocumentProvisionalConfiguration(v **types.Provisio
 				}
 				sv.MaxTimeToLiveInMinutes = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9944,6 +10081,7 @@ func awsAwsjson11_deserializeDocumentRateLimitExceededException(v **types.RateLi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9979,6 +10117,7 @@ func awsAwsjson11_deserializeDocumentReceivedMetadata(v **types.ReceivedMetadata
 			if err := awsAwsjson11_deserializeDocumentAllowedOperationList(&sv.AllowedOperations, value); err != nil {
 				return err
 			}
+
 		case "ReceivedStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9987,6 +10126,7 @@ func awsAwsjson11_deserializeDocumentReceivedMetadata(v **types.ReceivedMetadata
 				}
 				sv.ReceivedStatus = types.ReceivedStatus(jtv)
 			}
+
 		case "ReceivedStatusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9995,6 +10135,7 @@ func awsAwsjson11_deserializeDocumentReceivedMetadata(v **types.ReceivedMetadata
 				}
 				sv.ReceivedStatusReason = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10034,6 +10175,7 @@ func awsAwsjson11_deserializeDocumentRedirectException(v **types.RedirectExcepti
 				}
 				sv.Location = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10042,6 +10184,7 @@ func awsAwsjson11_deserializeDocumentRedirectException(v **types.RedirectExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10077,6 +10220,7 @@ func awsAwsjson11_deserializeDocumentReportContext(v **types.ReportContext, valu
 			if err := awsAwsjson11_deserializeDocumentArnList(&sv.LicenseConfigurationArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10116,6 +10260,7 @@ func awsAwsjson11_deserializeDocumentReportFrequency(v **types.ReportFrequency, 
 				}
 				sv.Period = types.ReportFrequencyType(jtv)
 			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10128,6 +10273,7 @@ func awsAwsjson11_deserializeDocumentReportFrequency(v **types.ReportFrequency, 
 				}
 				sv.Value = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10167,6 +10313,7 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.CreateTime = ptr.String(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10175,6 +10322,7 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "LastReportGenerationTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10183,6 +10331,7 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.LastReportGenerationTime = ptr.String(jtv)
 			}
+
 		case "LastRunFailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10191,6 +10340,7 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.LastRunFailureReason = ptr.String(jtv)
 			}
+
 		case "LastRunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10199,6 +10349,7 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.LastRunStatus = ptr.String(jtv)
 			}
+
 		case "LicenseManagerReportGeneratorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10207,10 +10358,12 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.LicenseManagerReportGeneratorArn = ptr.String(jtv)
 			}
+
 		case "ReportContext":
 			if err := awsAwsjson11_deserializeDocumentReportContext(&sv.ReportContext, value); err != nil {
 				return err
 			}
+
 		case "ReportCreatorAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10219,10 +10372,12 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.ReportCreatorAccount = ptr.String(jtv)
 			}
+
 		case "ReportFrequency":
 			if err := awsAwsjson11_deserializeDocumentReportFrequency(&sv.ReportFrequency, value); err != nil {
 				return err
 			}
+
 		case "ReportGeneratorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10231,18 +10386,22 @@ func awsAwsjson11_deserializeDocumentReportGenerator(v **types.ReportGenerator, 
 				}
 				sv.ReportGeneratorName = ptr.String(jtv)
 			}
+
 		case "ReportType":
 			if err := awsAwsjson11_deserializeDocumentReportTypeList(&sv.ReportType, value); err != nil {
 				return err
 			}
+
 		case "S3Location":
 			if err := awsAwsjson11_deserializeDocumentS3Location(&sv.S3Location, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10352,6 +10511,7 @@ func awsAwsjson11_deserializeDocumentResourceInventory(v **types.ResourceInvento
 				}
 				sv.Platform = ptr.String(jtv)
 			}
+
 		case "PlatformVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10360,6 +10520,7 @@ func awsAwsjson11_deserializeDocumentResourceInventory(v **types.ResourceInvento
 				}
 				sv.PlatformVersion = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10368,6 +10529,7 @@ func awsAwsjson11_deserializeDocumentResourceInventory(v **types.ResourceInvento
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10376,6 +10538,7 @@ func awsAwsjson11_deserializeDocumentResourceInventory(v **types.ResourceInvento
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceOwningAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10384,6 +10547,7 @@ func awsAwsjson11_deserializeDocumentResourceInventory(v **types.ResourceInvento
 				}
 				sv.ResourceOwningAccountId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10392,6 +10556,7 @@ func awsAwsjson11_deserializeDocumentResourceInventory(v **types.ResourceInvento
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10465,6 +10630,7 @@ func awsAwsjson11_deserializeDocumentResourceLimitExceededException(v **types.Re
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10504,6 +10670,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10543,6 +10710,7 @@ func awsAwsjson11_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.Bucket = ptr.String(jtv)
 			}
+
 		case "keyPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10551,6 +10719,7 @@ func awsAwsjson11_deserializeDocumentS3Location(v **types.S3Location, value inte
 				}
 				sv.KeyPrefix = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10590,6 +10759,7 @@ func awsAwsjson11_deserializeDocumentServerInternalException(v **types.ServerInt
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10665,6 +10835,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10673,6 +10844,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10746,6 +10918,7 @@ func awsAwsjson11_deserializeDocumentTokenData(v **types.TokenData, value interf
 				}
 				sv.ExpirationTime = ptr.String(jtv)
 			}
+
 		case "LicenseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10754,10 +10927,12 @@ func awsAwsjson11_deserializeDocumentTokenData(v **types.TokenData, value interf
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "RoleArns":
 			if err := awsAwsjson11_deserializeDocumentArnList(&sv.RoleArns, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10766,6 +10941,7 @@ func awsAwsjson11_deserializeDocumentTokenData(v **types.TokenData, value interf
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "TokenId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10774,10 +10950,12 @@ func awsAwsjson11_deserializeDocumentTokenData(v **types.TokenData, value interf
 				}
 				sv.TokenId = ptr.String(jtv)
 			}
+
 		case "TokenProperties":
 			if err := awsAwsjson11_deserializeDocumentMaxSize3StringList(&sv.TokenProperties, value); err != nil {
 				return err
 			}
+
 		case "TokenType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10786,6 +10964,7 @@ func awsAwsjson11_deserializeDocumentTokenData(v **types.TokenData, value interf
 				}
 				sv.TokenType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10859,6 +11038,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedDigitalSignatureMethodException(
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10898,6 +11078,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10937,6 +11118,7 @@ func awsAwsjson11_deserializeOpDocumentAcceptGrantOutput(v **AcceptGrantOutput, 
 				}
 				sv.GrantArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10945,6 +11127,7 @@ func awsAwsjson11_deserializeOpDocumentAcceptGrantOutput(v **AcceptGrantOutput, 
 				}
 				sv.Status = types.GrantStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10953,6 +11136,7 @@ func awsAwsjson11_deserializeOpDocumentAcceptGrantOutput(v **AcceptGrantOutput, 
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11019,10 +11203,12 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 			if err := awsAwsjson11_deserializeDocumentMetadataList(&sv.CheckoutMetadata, value); err != nil {
 				return err
 			}
+
 		case "EntitlementsAllowed":
 			if err := awsAwsjson11_deserializeDocumentEntitlementDataList(&sv.EntitlementsAllowed, value); err != nil {
 				return err
 			}
+
 		case "Expiration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11031,6 +11217,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 				}
 				sv.Expiration = ptr.String(jtv)
 			}
+
 		case "IssuedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11039,6 +11226,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 				}
 				sv.IssuedAt = ptr.String(jtv)
 			}
+
 		case "LicenseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11047,6 +11235,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "LicenseConsumptionToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11055,6 +11244,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 				}
 				sv.LicenseConsumptionToken = ptr.String(jtv)
 			}
+
 		case "NodeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11063,6 +11253,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 				}
 				sv.NodeId = ptr.String(jtv)
 			}
+
 		case "SignedToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11071,6 +11262,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutBorrowLicenseOutput(v **CheckoutB
 				}
 				sv.SignedToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11110,10 +11302,12 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.CheckoutType = types.CheckoutType(jtv)
 			}
+
 		case "EntitlementsAllowed":
 			if err := awsAwsjson11_deserializeDocumentEntitlementDataList(&sv.EntitlementsAllowed, value); err != nil {
 				return err
 			}
+
 		case "Expiration":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11122,6 +11316,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.Expiration = ptr.String(jtv)
 			}
+
 		case "IssuedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11130,6 +11325,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.IssuedAt = ptr.String(jtv)
 			}
+
 		case "LicenseArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11138,6 +11334,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "LicenseConsumptionToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11146,6 +11343,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.LicenseConsumptionToken = ptr.String(jtv)
 			}
+
 		case "NodeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11154,6 +11352,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.NodeId = ptr.String(jtv)
 			}
+
 		case "SignedToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11162,6 +11361,7 @@ func awsAwsjson11_deserializeOpDocumentCheckoutLicenseOutput(v **CheckoutLicense
 				}
 				sv.SignedToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11201,6 +11401,7 @@ func awsAwsjson11_deserializeOpDocumentCreateGrantOutput(v **CreateGrantOutput, 
 				}
 				sv.GrantArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11209,6 +11410,7 @@ func awsAwsjson11_deserializeOpDocumentCreateGrantOutput(v **CreateGrantOutput, 
 				}
 				sv.Status = types.GrantStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11217,6 +11419,7 @@ func awsAwsjson11_deserializeOpDocumentCreateGrantOutput(v **CreateGrantOutput, 
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11256,6 +11459,7 @@ func awsAwsjson11_deserializeOpDocumentCreateGrantVersionOutput(v **CreateGrantV
 				}
 				sv.GrantArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11264,6 +11468,7 @@ func awsAwsjson11_deserializeOpDocumentCreateGrantVersionOutput(v **CreateGrantV
 				}
 				sv.Status = types.GrantStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11272,6 +11477,7 @@ func awsAwsjson11_deserializeOpDocumentCreateGrantVersionOutput(v **CreateGrantV
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11311,6 +11517,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseConfigurationOutput(v **Crea
 				}
 				sv.LicenseConfigurationArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11350,6 +11557,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseConversionTaskForResourceOut
 				}
 				sv.LicenseConversionTaskId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11389,6 +11597,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseManagerReportGeneratorOutput
 				}
 				sv.LicenseManagerReportGeneratorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11428,6 +11637,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseOutput(v **CreateLicenseOutp
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11436,6 +11646,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseOutput(v **CreateLicenseOutp
 				}
 				sv.Status = types.LicenseStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11444,6 +11655,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseOutput(v **CreateLicenseOutp
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11483,6 +11695,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseVersionOutput(v **CreateLice
 				}
 				sv.LicenseArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11491,6 +11704,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseVersionOutput(v **CreateLice
 				}
 				sv.Status = types.LicenseStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11499,6 +11713,7 @@ func awsAwsjson11_deserializeOpDocumentCreateLicenseVersionOutput(v **CreateLice
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11538,6 +11753,7 @@ func awsAwsjson11_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.Token = ptr.String(jtv)
 			}
+
 		case "TokenId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11546,6 +11762,7 @@ func awsAwsjson11_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.TokenId = ptr.String(jtv)
 			}
+
 		case "TokenType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11554,6 +11771,7 @@ func awsAwsjson11_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, 
 				}
 				sv.TokenType = types.TokenType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11593,6 +11811,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteGrantOutput(v **DeleteGrantOutput, 
 				}
 				sv.GrantArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11601,6 +11820,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteGrantOutput(v **DeleteGrantOutput, 
 				}
 				sv.Status = types.GrantStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11609,6 +11829,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteGrantOutput(v **DeleteGrantOutput, 
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11710,6 +11931,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLicenseOutput(v **DeleteLicenseOutp
 				}
 				sv.DeletionDate = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11718,6 +11940,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteLicenseOutput(v **DeleteLicenseOutp
 				}
 				sv.Status = types.LicenseDeletionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11788,6 +12011,7 @@ func awsAwsjson11_deserializeOpDocumentExtendLicenseConsumptionOutput(v **Extend
 				}
 				sv.Expiration = ptr.String(jtv)
 			}
+
 		case "LicenseConsumptionToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11796,6 +12020,7 @@ func awsAwsjson11_deserializeOpDocumentExtendLicenseConsumptionOutput(v **Extend
 				}
 				sv.LicenseConsumptionToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11835,6 +12060,7 @@ func awsAwsjson11_deserializeOpDocumentGetAccessTokenOutput(v **GetAccessTokenOu
 				}
 				sv.AccessToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11870,6 +12096,7 @@ func awsAwsjson11_deserializeOpDocumentGetGrantOutput(v **GetGrantOutput, value 
 			if err := awsAwsjson11_deserializeDocumentGrant(&sv.Grant, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11905,6 +12132,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 			if err := awsAwsjson11_deserializeDocumentAutomatedDiscoveryInformation(&sv.AutomatedDiscoveryInformation, value); err != nil {
 				return err
 			}
+
 		case "ConsumedLicenses":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11917,10 +12145,12 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.ConsumedLicenses = ptr.Int64(i64)
 			}
+
 		case "ConsumedLicenseSummaryList":
 			if err := awsAwsjson11_deserializeDocumentConsumedLicenseSummaryList(&sv.ConsumedLicenseSummaryList, value); err != nil {
 				return err
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11929,6 +12159,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "DisassociateWhenNotFound":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11937,6 +12168,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.DisassociateWhenNotFound = ptr.Bool(jtv)
 			}
+
 		case "LicenseConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11945,6 +12177,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.LicenseConfigurationArn = ptr.String(jtv)
 			}
+
 		case "LicenseConfigurationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11953,6 +12186,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.LicenseConfigurationId = ptr.String(jtv)
 			}
+
 		case "LicenseCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11965,6 +12199,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.LicenseCount = ptr.Int64(i64)
 			}
+
 		case "LicenseCountHardLimit":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11973,6 +12208,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.LicenseCountHardLimit = ptr.Bool(jtv)
 			}
+
 		case "LicenseCountingType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11981,14 +12217,17 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.LicenseCountingType = types.LicenseCountingType(jtv)
 			}
+
 		case "LicenseRules":
 			if err := awsAwsjson11_deserializeDocumentStringList(&sv.LicenseRules, value); err != nil {
 				return err
 			}
+
 		case "ManagedResourceSummaryList":
 			if err := awsAwsjson11_deserializeDocumentManagedResourceSummaryList(&sv.ManagedResourceSummaryList, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11997,6 +12236,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12005,10 +12245,12 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
+
 		case "ProductInformationList":
 			if err := awsAwsjson11_deserializeDocumentProductInformationList(&sv.ProductInformationList, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12017,10 +12259,12 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLice
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12056,6 +12300,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 			if err := awsAwsjson11_deserializeDocumentLicenseConversionContext(&sv.DestinationLicenseContext, value); err != nil {
 				return err
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12071,6 +12316,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 
 				}
 			}
+
 		case "LicenseConversionTaskId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12079,6 +12325,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 				}
 				sv.LicenseConversionTaskId = ptr.String(jtv)
 			}
+
 		case "LicenseConversionTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12094,6 +12341,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 
 				}
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12102,10 +12350,12 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "SourceLicenseContext":
 			if err := awsAwsjson11_deserializeDocumentLicenseConversionContext(&sv.SourceLicenseContext, value); err != nil {
 				return err
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12121,6 +12371,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12129,6 +12380,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 				}
 				sv.Status = types.LicenseConversionTaskStatus(jtv)
 			}
+
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12137,6 +12389,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseConversionTaskOutput(v **GetLic
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12172,6 +12425,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseManagerReportGeneratorOutput(v 
 			if err := awsAwsjson11_deserializeDocumentReportGenerator(&sv.ReportGenerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12207,6 +12461,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseOutput(v **GetLicenseOutput, va
 			if err := awsAwsjson11_deserializeDocumentLicense(&sv.License, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12242,6 +12497,7 @@ func awsAwsjson11_deserializeOpDocumentGetLicenseUsageOutput(v **GetLicenseUsage
 			if err := awsAwsjson11_deserializeDocumentLicenseUsage(&sv.LicenseUsage, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12281,6 +12537,7 @@ func awsAwsjson11_deserializeOpDocumentGetServiceSettingsOutput(v **GetServiceSe
 				}
 				sv.EnableCrossAccountsDiscovery = ptr.Bool(jtv)
 			}
+
 		case "LicenseManagerResourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12289,10 +12546,12 @@ func awsAwsjson11_deserializeOpDocumentGetServiceSettingsOutput(v **GetServiceSe
 				}
 				sv.LicenseManagerResourceShareArn = ptr.String(jtv)
 			}
+
 		case "OrganizationConfiguration":
 			if err := awsAwsjson11_deserializeDocumentOrganizationConfiguration(&sv.OrganizationConfiguration, value); err != nil {
 				return err
 			}
+
 		case "S3BucketArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12301,6 +12560,7 @@ func awsAwsjson11_deserializeOpDocumentGetServiceSettingsOutput(v **GetServiceSe
 				}
 				sv.S3BucketArn = ptr.String(jtv)
 			}
+
 		case "SnsTopicArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12309,6 +12569,7 @@ func awsAwsjson11_deserializeOpDocumentGetServiceSettingsOutput(v **GetServiceSe
 				}
 				sv.SnsTopicArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12344,6 +12605,7 @@ func awsAwsjson11_deserializeOpDocumentListAssociationsForLicenseConfigurationOu
 			if err := awsAwsjson11_deserializeDocumentLicenseConfigurationAssociations(&sv.LicenseConfigurationAssociations, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12352,6 +12614,7 @@ func awsAwsjson11_deserializeOpDocumentListAssociationsForLicenseConfigurationOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12387,6 +12650,7 @@ func awsAwsjson11_deserializeOpDocumentListDistributedGrantsOutput(v **ListDistr
 			if err := awsAwsjson11_deserializeDocumentGrantList(&sv.Grants, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12395,6 +12659,7 @@ func awsAwsjson11_deserializeOpDocumentListDistributedGrantsOutput(v **ListDistr
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12430,6 +12695,7 @@ func awsAwsjson11_deserializeOpDocumentListFailuresForLicenseConfigurationOperat
 			if err := awsAwsjson11_deserializeDocumentLicenseOperationFailureList(&sv.LicenseOperationFailureList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12438,6 +12704,7 @@ func awsAwsjson11_deserializeOpDocumentListFailuresForLicenseConfigurationOperat
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12473,6 +12740,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseConfigurationsOutput(v **ListL
 			if err := awsAwsjson11_deserializeDocumentLicenseConfigurations(&sv.LicenseConfigurations, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12481,6 +12749,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseConfigurationsOutput(v **ListL
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12516,6 +12785,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseConversionTasksOutput(v **List
 			if err := awsAwsjson11_deserializeDocumentLicenseConversionTasks(&sv.LicenseConversionTasks, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12524,6 +12794,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseConversionTasksOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12563,10 +12834,12 @@ func awsAwsjson11_deserializeOpDocumentListLicenseManagerReportGeneratorsOutput(
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ReportGenerators":
 			if err := awsAwsjson11_deserializeDocumentReportGeneratorList(&sv.ReportGenerators, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12602,6 +12875,7 @@ func awsAwsjson11_deserializeOpDocumentListLicensesOutput(v **ListLicensesOutput
 			if err := awsAwsjson11_deserializeDocumentLicenseList(&sv.Licenses, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12610,6 +12884,7 @@ func awsAwsjson11_deserializeOpDocumentListLicensesOutput(v **ListLicensesOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12645,6 +12920,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseSpecificationsForResourceOutpu
 			if err := awsAwsjson11_deserializeDocumentLicenseSpecifications(&sv.LicenseSpecifications, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12653,6 +12929,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseSpecificationsForResourceOutpu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12688,6 +12965,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseVersionsOutput(v **ListLicense
 			if err := awsAwsjson11_deserializeDocumentLicenseList(&sv.Licenses, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12696,6 +12974,7 @@ func awsAwsjson11_deserializeOpDocumentListLicenseVersionsOutput(v **ListLicense
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12731,6 +13010,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedGrantsForOrganizationOutput(v
 			if err := awsAwsjson11_deserializeDocumentGrantList(&sv.Grants, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12739,6 +13019,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedGrantsForOrganizationOutput(v
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12774,6 +13055,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedGrantsOutput(v **ListReceived
 			if err := awsAwsjson11_deserializeDocumentGrantList(&sv.Grants, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12782,6 +13064,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedGrantsOutput(v **ListReceived
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12817,6 +13100,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedLicensesForOrganizationOutput
 			if err := awsAwsjson11_deserializeDocumentGrantedLicenseList(&sv.Licenses, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12825,6 +13109,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedLicensesForOrganizationOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12860,6 +13145,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedLicensesOutput(v **ListReceiv
 			if err := awsAwsjson11_deserializeDocumentGrantedLicenseList(&sv.Licenses, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12868,6 +13154,7 @@ func awsAwsjson11_deserializeOpDocumentListReceivedLicensesOutput(v **ListReceiv
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12907,10 +13194,12 @@ func awsAwsjson11_deserializeOpDocumentListResourceInventoryOutput(v **ListResou
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ResourceInventoryList":
 			if err := awsAwsjson11_deserializeDocumentResourceInventoryList(&sv.ResourceInventoryList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12946,6 +13235,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12985,10 +13275,12 @@ func awsAwsjson11_deserializeOpDocumentListTokensOutput(v **ListTokensOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Tokens":
 			if err := awsAwsjson11_deserializeDocumentTokenList(&sv.Tokens, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13024,6 +13316,7 @@ func awsAwsjson11_deserializeOpDocumentListUsageForLicenseConfigurationOutput(v 
 			if err := awsAwsjson11_deserializeDocumentLicenseConfigurationUsageList(&sv.LicenseConfigurationUsageList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13032,6 +13325,7 @@ func awsAwsjson11_deserializeOpDocumentListUsageForLicenseConfigurationOutput(v 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13071,6 +13365,7 @@ func awsAwsjson11_deserializeOpDocumentRejectGrantOutput(v **RejectGrantOutput, 
 				}
 				sv.GrantArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13079,6 +13374,7 @@ func awsAwsjson11_deserializeOpDocumentRejectGrantOutput(v **RejectGrantOutput, 
 				}
 				sv.Status = types.GrantStatus(jtv)
 			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13087,6 +13383,7 @@ func awsAwsjson11_deserializeOpDocumentRejectGrantOutput(v **RejectGrantOutput, 
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

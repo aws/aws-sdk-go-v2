@@ -3293,6 +3293,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3301,6 +3302,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3344,10 +3346,12 @@ func awsAwsjson10_deserializeDocumentBandwidthRateLimitInterval(v **types.Bandwi
 				}
 				sv.AverageUploadRateLimitInBitsPerSec = ptr.Int64(i64)
 			}
+
 		case "DaysOfWeek":
 			if err := awsAwsjson10_deserializeDocumentDaysOfWeek(&sv.DaysOfWeek, value); err != nil {
 				return err
 			}
+
 		case "EndHourOfDay":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3360,6 +3364,7 @@ func awsAwsjson10_deserializeDocumentBandwidthRateLimitInterval(v **types.Bandwi
 				}
 				sv.EndHourOfDay = ptr.Int32(int32(i64))
 			}
+
 		case "EndMinuteOfHour":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3372,6 +3377,7 @@ func awsAwsjson10_deserializeDocumentBandwidthRateLimitInterval(v **types.Bandwi
 				}
 				sv.EndMinuteOfHour = ptr.Int32(int32(i64))
 			}
+
 		case "StartHourOfDay":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3384,6 +3390,7 @@ func awsAwsjson10_deserializeDocumentBandwidthRateLimitInterval(v **types.Bandwi
 				}
 				sv.StartHourOfDay = ptr.Int32(int32(i64))
 			}
+
 		case "StartMinuteOfHour":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3396,6 +3403,7 @@ func awsAwsjson10_deserializeDocumentBandwidthRateLimitInterval(v **types.Bandwi
 				}
 				sv.StartMinuteOfHour = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3469,6 +3477,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3477,6 +3486,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3556,6 +3566,7 @@ func awsAwsjson10_deserializeDocumentGateway(v **types.Gateway, value interface{
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		case "GatewayDisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3564,6 +3575,7 @@ func awsAwsjson10_deserializeDocumentGateway(v **types.Gateway, value interface{
 				}
 				sv.GatewayDisplayName = ptr.String(jtv)
 			}
+
 		case "GatewayType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3572,6 +3584,7 @@ func awsAwsjson10_deserializeDocumentGateway(v **types.Gateway, value interface{
 				}
 				sv.GatewayType = types.GatewayType(jtv)
 			}
+
 		case "HypervisorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3580,6 +3593,7 @@ func awsAwsjson10_deserializeDocumentGateway(v **types.Gateway, value interface{
 				}
 				sv.HypervisorId = ptr.String(jtv)
 			}
+
 		case "LastSeenTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3595,6 +3609,7 @@ func awsAwsjson10_deserializeDocumentGateway(v **types.Gateway, value interface{
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3634,6 +3649,7 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		case "GatewayDisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3642,6 +3658,7 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 				}
 				sv.GatewayDisplayName = ptr.String(jtv)
 			}
+
 		case "GatewayType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3650,6 +3667,7 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 				}
 				sv.GatewayType = types.GatewayType(jtv)
 			}
+
 		case "HypervisorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3658,6 +3676,7 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 				}
 				sv.HypervisorId = ptr.String(jtv)
 			}
+
 		case "LastSeenTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3673,10 +3692,12 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 
 				}
 			}
+
 		case "MaintenanceStartTime":
 			if err := awsAwsjson10_deserializeDocumentMaintenanceStartTime(&sv.MaintenanceStartTime, value); err != nil {
 				return err
 			}
+
 		case "NextUpdateAvailabilityTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3692,6 +3713,7 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 
 				}
 			}
+
 		case "VpcEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3700,6 +3722,7 @@ func awsAwsjson10_deserializeDocumentGatewayDetails(v **types.GatewayDetails, va
 				}
 				sv.VpcEndpoint = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3773,6 +3796,7 @@ func awsAwsjson10_deserializeDocumentHypervisor(v **types.Hypervisor, value inte
 				}
 				sv.Host = ptr.String(jtv)
 			}
+
 		case "HypervisorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3781,6 +3805,7 @@ func awsAwsjson10_deserializeDocumentHypervisor(v **types.Hypervisor, value inte
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		case "KmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3789,6 +3814,7 @@ func awsAwsjson10_deserializeDocumentHypervisor(v **types.Hypervisor, value inte
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3797,6 +3823,7 @@ func awsAwsjson10_deserializeDocumentHypervisor(v **types.Hypervisor, value inte
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3805,6 +3832,7 @@ func awsAwsjson10_deserializeDocumentHypervisor(v **types.Hypervisor, value inte
 				}
 				sv.State = types.HypervisorState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3844,6 +3872,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.Host = ptr.String(jtv)
 			}
+
 		case "HypervisorArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3852,6 +3881,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		case "KmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3860,6 +3890,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		case "LastSuccessfulMetadataSyncTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3875,6 +3906,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 
 				}
 			}
+
 		case "LatestMetadataSyncStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3883,6 +3915,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.LatestMetadataSyncStatus = types.SyncMetadataStatus(jtv)
 			}
+
 		case "LatestMetadataSyncStatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3891,6 +3924,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.LatestMetadataSyncStatusMessage = ptr.String(jtv)
 			}
+
 		case "LogGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3899,6 +3933,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.LogGroupArn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3907,6 +3942,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3915,6 +3951,7 @@ func awsAwsjson10_deserializeDocumentHypervisorDetails(v **types.HypervisorDetai
 				}
 				sv.State = types.HypervisorState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3988,6 +4025,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3996,6 +4034,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4039,6 +4078,7 @@ func awsAwsjson10_deserializeDocumentMaintenanceStartTime(v **types.MaintenanceS
 				}
 				sv.DayOfMonth = ptr.Int32(int32(i64))
 			}
+
 		case "DayOfWeek":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4051,6 +4091,7 @@ func awsAwsjson10_deserializeDocumentMaintenanceStartTime(v **types.MaintenanceS
 				}
 				sv.DayOfWeek = ptr.Int32(int32(i64))
 			}
+
 		case "HourOfDay":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4063,6 +4104,7 @@ func awsAwsjson10_deserializeDocumentMaintenanceStartTime(v **types.MaintenanceS
 				}
 				sv.HourOfDay = ptr.Int32(int32(i64))
 			}
+
 		case "MinuteOfHour":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4075,6 +4117,7 @@ func awsAwsjson10_deserializeDocumentMaintenanceStartTime(v **types.MaintenanceS
 				}
 				sv.MinuteOfHour = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4114,6 +4157,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4122,6 +4166,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4161,6 +4206,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4169,6 +4215,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4242,6 +4289,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4250,6 +4298,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4289,6 +4338,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4297,6 +4347,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4336,6 +4387,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 				}
 				sv.HostName = ptr.String(jtv)
 			}
+
 		case "HypervisorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4344,6 +4396,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 				}
 				sv.HypervisorId = ptr.String(jtv)
 			}
+
 		case "LastBackupDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4359,6 +4412,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4367,6 +4421,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4375,6 +4430,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4383,6 +4439,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachine(v **types.VirtualMachine, va
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4422,6 +4479,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMach
 				}
 				sv.HostName = ptr.String(jtv)
 			}
+
 		case "HypervisorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4430,6 +4488,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMach
 				}
 				sv.HypervisorId = ptr.String(jtv)
 			}
+
 		case "LastBackupDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4445,6 +4504,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMach
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4453,6 +4513,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMach
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4461,6 +4522,7 @@ func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMach
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4469,10 +4531,12 @@ func awsAwsjson10_deserializeDocumentVirtualMachineDetails(v **types.VirtualMach
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "VmwareTags":
 			if err := awsAwsjson10_deserializeDocumentVmwareTags(&sv.VmwareTags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4546,6 +4610,7 @@ func awsAwsjson10_deserializeDocumentVmwareTag(v **types.VmwareTag, value interf
 				}
 				sv.VmwareCategory = ptr.String(jtv)
 			}
+
 		case "VmwareTagDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4554,6 +4619,7 @@ func awsAwsjson10_deserializeDocumentVmwareTag(v **types.VmwareTag, value interf
 				}
 				sv.VmwareTagDescription = ptr.String(jtv)
 			}
+
 		case "VmwareTagName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4562,6 +4628,7 @@ func awsAwsjson10_deserializeDocumentVmwareTag(v **types.VmwareTag, value interf
 				}
 				sv.VmwareTagName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4635,6 +4702,7 @@ func awsAwsjson10_deserializeDocumentVmwareToAwsTagMapping(v **types.VmwareToAws
 				}
 				sv.AwsTagKey = ptr.String(jtv)
 			}
+
 		case "AwsTagValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4643,6 +4711,7 @@ func awsAwsjson10_deserializeDocumentVmwareToAwsTagMapping(v **types.VmwareToAws
 				}
 				sv.AwsTagValue = ptr.String(jtv)
 			}
+
 		case "VmwareCategory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4651,6 +4720,7 @@ func awsAwsjson10_deserializeDocumentVmwareToAwsTagMapping(v **types.VmwareToAws
 				}
 				sv.VmwareCategory = ptr.String(jtv)
 			}
+
 		case "VmwareTagName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4659,6 +4729,7 @@ func awsAwsjson10_deserializeDocumentVmwareToAwsTagMapping(v **types.VmwareToAws
 				}
 				sv.VmwareTagName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4732,6 +4803,7 @@ func awsAwsjson10_deserializeOpDocumentAssociateGatewayToServerOutput(v **Associ
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4771,6 +4843,7 @@ func awsAwsjson10_deserializeOpDocumentCreateGatewayOutput(v **CreateGatewayOutp
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4810,6 +4883,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteGatewayOutput(v **DeleteGatewayOutp
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4849,6 +4923,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteHypervisorOutput(v **DeleteHypervis
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4888,6 +4963,7 @@ func awsAwsjson10_deserializeOpDocumentDisassociateGatewayFromServerOutput(v **D
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4923,6 +4999,7 @@ func awsAwsjson10_deserializeOpDocumentGetBandwidthRateLimitScheduleOutput(v **G
 			if err := awsAwsjson10_deserializeDocumentBandwidthRateLimitIntervals(&sv.BandwidthRateLimitIntervals, value); err != nil {
 				return err
 			}
+
 		case "GatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4931,6 +5008,7 @@ func awsAwsjson10_deserializeOpDocumentGetBandwidthRateLimitScheduleOutput(v **G
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4966,6 +5044,7 @@ func awsAwsjson10_deserializeOpDocumentGetGatewayOutput(v **GetGatewayOutput, va
 			if err := awsAwsjson10_deserializeDocumentGatewayDetails(&sv.Gateway, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5001,6 +5080,7 @@ func awsAwsjson10_deserializeOpDocumentGetHypervisorOutput(v **GetHypervisorOutp
 			if err := awsAwsjson10_deserializeDocumentHypervisorDetails(&sv.Hypervisor, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5040,6 +5120,7 @@ func awsAwsjson10_deserializeOpDocumentGetHypervisorPropertyMappingsOutput(v **G
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		case "IamRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5048,10 +5129,12 @@ func awsAwsjson10_deserializeOpDocumentGetHypervisorPropertyMappingsOutput(v **G
 				}
 				sv.IamRoleArn = ptr.String(jtv)
 			}
+
 		case "VmwareToAwsTagMappings":
 			if err := awsAwsjson10_deserializeDocumentVmwareToAwsTagMappings(&sv.VmwareToAwsTagMappings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5087,6 +5170,7 @@ func awsAwsjson10_deserializeOpDocumentGetVirtualMachineOutput(v **GetVirtualMac
 			if err := awsAwsjson10_deserializeDocumentVirtualMachineDetails(&sv.VirtualMachine, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5126,6 +5210,7 @@ func awsAwsjson10_deserializeOpDocumentImportHypervisorConfigurationOutput(v **I
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5161,6 +5246,7 @@ func awsAwsjson10_deserializeOpDocumentListGatewaysOutput(v **ListGatewaysOutput
 			if err := awsAwsjson10_deserializeDocumentGateways(&sv.Gateways, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5169,6 +5255,7 @@ func awsAwsjson10_deserializeOpDocumentListGatewaysOutput(v **ListGatewaysOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5204,6 +5291,7 @@ func awsAwsjson10_deserializeOpDocumentListHypervisorsOutput(v **ListHypervisors
 			if err := awsAwsjson10_deserializeDocumentHypervisors(&sv.Hypervisors, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5212,6 +5300,7 @@ func awsAwsjson10_deserializeOpDocumentListHypervisorsOutput(v **ListHypervisors
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5251,10 +5340,12 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson10_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5294,10 +5385,12 @@ func awsAwsjson10_deserializeOpDocumentListVirtualMachinesOutput(v **ListVirtual
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "VirtualMachines":
 			if err := awsAwsjson10_deserializeDocumentVirtualMachines(&sv.VirtualMachines, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5337,6 +5430,7 @@ func awsAwsjson10_deserializeOpDocumentPutBandwidthRateLimitScheduleOutput(v **P
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5376,6 +5470,7 @@ func awsAwsjson10_deserializeOpDocumentPutHypervisorPropertyMappingsOutput(v **P
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5415,6 +5510,7 @@ func awsAwsjson10_deserializeOpDocumentPutMaintenanceStartTimeOutput(v **PutMain
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5454,6 +5550,7 @@ func awsAwsjson10_deserializeOpDocumentStartVirtualMachinesMetadataSyncOutput(v 
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5493,6 +5590,7 @@ func awsAwsjson10_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, 
 				}
 				sv.ResourceARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5563,6 +5661,7 @@ func awsAwsjson10_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutp
 				}
 				sv.ResourceARN = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5602,6 +5701,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateGatewayInformationOutput(v **Update
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5641,6 +5741,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateGatewaySoftwareNowOutput(v **Update
 				}
 				sv.GatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5680,6 +5781,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateHypervisorOutput(v **UpdateHypervis
 				}
 				sv.HypervisorArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

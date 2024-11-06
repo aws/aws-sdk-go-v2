@@ -169,6 +169,7 @@ func awsRestjson1_deserializeOpDocumentBatchGetMetricsOutput(v **BatchGetMetrics
 			if err := awsRestjson1_deserializeDocumentMetricQueryResultList(&sv.MetricQueryResults, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -317,6 +318,7 @@ func awsRestjson1_deserializeOpDocumentBatchPutMetricsOutput(v **BatchPutMetrics
 			if err := awsRestjson1_deserializeDocumentBatchPutMetricsErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -356,6 +358,7 @@ func awsRestjson1_deserializeDocumentBatchPutMetricsError(v **types.BatchPutMetr
 				}
 				sv.Code = types.PutMetricsErrorCode(jtv)
 			}
+
 		case "MetricIndex":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -368,6 +371,7 @@ func awsRestjson1_deserializeDocumentBatchPutMetricsError(v **types.BatchPutMetr
 				}
 				sv.MetricIndex = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -441,10 +445,12 @@ func awsRestjson1_deserializeDocumentMetricQueryResult(v **types.MetricQueryResu
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "MetricValues":
 			if err := awsRestjson1_deserializeDocumentMetricValues(&sv.MetricValues, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -453,10 +459,12 @@ func awsRestjson1_deserializeDocumentMetricQueryResult(v **types.MetricQueryResu
 				}
 				sv.Status = types.MetricQueryResultStatus(jtv)
 			}
+
 		case "XAxisValues":
 			if err := awsRestjson1_deserializeDocumentXAxisValues(&sv.XAxisValues, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

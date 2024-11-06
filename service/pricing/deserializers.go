@@ -975,6 +975,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1050,6 +1051,7 @@ func awsAwsjson11_deserializeDocumentAttributeValue(v **types.AttributeValue, va
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1123,6 +1125,7 @@ func awsAwsjson11_deserializeDocumentExpiredNextTokenException(v **types.Expired
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1198,6 +1201,7 @@ func awsAwsjson11_deserializeDocumentInternalErrorException(v **types.InternalEr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1237,6 +1241,7 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1276,6 +1281,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1315,6 +1321,7 @@ func awsAwsjson11_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1354,10 +1361,12 @@ func awsAwsjson11_deserializeDocumentPriceList(v **types.PriceList, value interf
 				}
 				sv.CurrencyCode = ptr.String(jtv)
 			}
+
 		case "FileFormats":
 			if err := awsAwsjson11_deserializeDocumentFileFormats(&sv.FileFormats, value); err != nil {
 				return err
 			}
+
 		case "PriceListArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1366,6 +1375,7 @@ func awsAwsjson11_deserializeDocumentPriceList(v **types.PriceList, value interf
 				}
 				sv.PriceListArn = ptr.String(jtv)
 			}
+
 		case "RegionCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1374,6 +1384,7 @@ func awsAwsjson11_deserializeDocumentPriceList(v **types.PriceList, value interf
 				}
 				sv.RegionCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1483,6 +1494,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1518,6 +1530,7 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 			if err := awsAwsjson11_deserializeDocumentAttributeNameList(&sv.AttributeNames, value); err != nil {
 				return err
 			}
+
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1526,6 +1539,7 @@ func awsAwsjson11_deserializeDocumentService(v **types.Service, value interface{
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1599,6 +1613,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1638,6 +1653,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeServicesOutput(v **DescribeServic
 				}
 				sv.FormatVersion = ptr.String(jtv)
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1646,10 +1662,12 @@ func awsAwsjson11_deserializeOpDocumentDescribeServicesOutput(v **DescribeServic
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Services":
 			if err := awsAwsjson11_deserializeDocumentServiceList(&sv.Services, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1685,6 +1703,7 @@ func awsAwsjson11_deserializeOpDocumentGetAttributeValuesOutput(v **GetAttribute
 			if err := awsAwsjson11_deserializeDocumentAttributeValueList(&sv.AttributeValues, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1693,6 +1712,7 @@ func awsAwsjson11_deserializeOpDocumentGetAttributeValuesOutput(v **GetAttribute
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1732,6 +1752,7 @@ func awsAwsjson11_deserializeOpDocumentGetPriceListFileUrlOutput(v **GetPriceLis
 				}
 				sv.Url = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1771,6 +1792,7 @@ func awsAwsjson11_deserializeOpDocumentGetProductsOutput(v **GetProductsOutput, 
 				}
 				sv.FormatVersion = ptr.String(jtv)
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1779,10 +1801,12 @@ func awsAwsjson11_deserializeOpDocumentGetProductsOutput(v **GetProductsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PriceList":
 			if err := awsAwsjson11_deserializeDocumentPriceListJsonItems(&sv.PriceList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1822,10 +1846,12 @@ func awsAwsjson11_deserializeOpDocumentListPriceListsOutput(v **ListPriceListsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PriceLists":
 			if err := awsAwsjson11_deserializeDocumentPriceLists(&sv.PriceLists, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

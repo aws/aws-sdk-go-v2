@@ -372,6 +372,7 @@ func awsRestjson1_deserializeOpDocumentInvokeEndpointAsyncOutput(v **InvokeEndpo
 				}
 				sv.InferenceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -699,6 +700,7 @@ func awsRestjson1_deserializeDocumentInternalStreamFailure(v **types.InternalStr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -738,6 +740,7 @@ func awsRestjson1_deserializeDocumentModelStreamError(v **types.ModelStreamError
 				}
 				sv.ErrorCode_ = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -746,6 +749,7 @@ func awsRestjson1_deserializeDocumentModelStreamError(v **types.ModelStreamError
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1073,6 +1077,7 @@ func awsRestjson1_deserializeDocumentInternalDependencyException(v **types.Inter
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1112,6 +1117,7 @@ func awsRestjson1_deserializeDocumentInternalFailure(v **types.InternalFailure, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1151,6 +1157,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				}
 				sv.LogStreamArn = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1159,6 +1166,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "OriginalMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1167,6 +1175,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				}
 				sv.OriginalMessage = ptr.String(jtv)
 			}
+
 		case "OriginalStatusCode":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1179,6 +1188,7 @@ func awsRestjson1_deserializeDocumentModelError(v **types.ModelError, value inte
 				}
 				sv.OriginalStatusCode = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1218,6 +1228,7 @@ func awsRestjson1_deserializeDocumentModelNotReadyException(v **types.ModelNotRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1257,6 +1268,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailable(v **types.ServiceUnavail
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1296,6 +1308,7 @@ func awsRestjson1_deserializeDocumentValidationError(v **types.ValidationError, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

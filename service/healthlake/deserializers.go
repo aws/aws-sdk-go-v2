@@ -1827,6 +1827,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1866,6 +1867,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1912,6 +1914,7 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 
 				}
 			}
+
 		case "DatastoreArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1920,6 +1923,7 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreArn = ptr.String(jtv)
 			}
+
 		case "DatastoreEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1928,6 +1932,7 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreEndpoint = ptr.String(jtv)
 			}
+
 		case "DatastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1936,6 +1941,7 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "DatastoreName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1944,6 +1950,7 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreName = ptr.String(jtv)
 			}
+
 		case "DatastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1952,6 +1959,7 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
+
 		case "DatastoreTypeVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1960,22 +1968,27 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				}
 				sv.DatastoreTypeVersion = types.FHIRVersion(jtv)
 			}
+
 		case "ErrorCause":
 			if err := awsAwsjson10_deserializeDocumentErrorCause(&sv.ErrorCause, value); err != nil {
 				return err
 			}
+
 		case "IdentityProviderConfiguration":
 			if err := awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(&sv.IdentityProviderConfiguration, value); err != nil {
 				return err
 			}
+
 		case "PreloadDataConfig":
 			if err := awsAwsjson10_deserializeDocumentPreloadDataConfig(&sv.PreloadDataConfig, value); err != nil {
 				return err
 			}
+
 		case "SseConfiguration":
 			if err := awsAwsjson10_deserializeDocumentSseConfiguration(&sv.SseConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2049,6 +2062,7 @@ func awsAwsjson10_deserializeDocumentErrorCause(v **types.ErrorCause, value inte
 				}
 				sv.ErrorCategory = types.ErrorCategory(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2057,6 +2071,7 @@ func awsAwsjson10_deserializeDocumentErrorCause(v **types.ErrorCause, value inte
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2096,6 +2111,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		case "DatastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2104,6 +2120,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2119,6 +2136,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 
 				}
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2127,6 +2145,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2135,6 +2154,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 				}
 				sv.JobName = ptr.String(jtv)
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2143,6 +2163,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2151,10 +2172,12 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "OutputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "SubmitTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2170,6 +2193,7 @@ func awsAwsjson10_deserializeDocumentExportJobProperties(v **types.ExportJobProp
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2243,6 +2267,7 @@ func awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(v **types.Ide
 				}
 				sv.AuthorizationStrategy = types.AuthorizationStrategy(jtv)
 			}
+
 		case "FineGrainedAuthorizationEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2251,6 +2276,7 @@ func awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(v **types.Ide
 				}
 				sv.FineGrainedAuthorizationEnabled = jtv
 			}
+
 		case "IdpLambdaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2259,6 +2285,7 @@ func awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(v **types.Ide
 				}
 				sv.IdpLambdaArn = ptr.String(jtv)
 			}
+
 		case "Metadata":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2267,6 +2294,7 @@ func awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(v **types.Ide
 				}
 				sv.Metadata = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2306,6 +2334,7 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 				}
 				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
+
 		case "DatastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2314,6 +2343,7 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "EndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2329,10 +2359,12 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 
 				}
 			}
+
 		case "InputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2341,6 +2373,7 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2349,14 +2382,17 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 				}
 				sv.JobName = ptr.String(jtv)
 			}
+
 		case "JobOutputDataConfig":
 			if err := awsAwsjson10_deserializeDocumentOutputDataConfig(&sv.JobOutputDataConfig, value); err != nil {
 				return err
 			}
+
 		case "JobProgressReport":
 			if err := awsAwsjson10_deserializeDocumentJobProgressReport(&sv.JobProgressReport, value); err != nil {
 				return err
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2365,6 +2401,7 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2373,6 +2410,7 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "SubmitTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2388,6 +2426,7 @@ func awsAwsjson10_deserializeDocumentImportJobProperties(v **types.ImportJobProp
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2503,6 +2542,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2567,6 +2607,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 
 				}
 			}
+
 		case "TotalNumberOfFilesReadWithCustomerError":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2579,6 +2620,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 				}
 				sv.TotalNumberOfFilesReadWithCustomerError = ptr.Int64(i64)
 			}
+
 		case "TotalNumberOfImportedFiles":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2591,6 +2633,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 				}
 				sv.TotalNumberOfImportedFiles = ptr.Int64(i64)
 			}
+
 		case "TotalNumberOfResourcesImported":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2603,6 +2646,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 				}
 				sv.TotalNumberOfResourcesImported = ptr.Int64(i64)
 			}
+
 		case "TotalNumberOfResourcesScanned":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2615,6 +2659,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 				}
 				sv.TotalNumberOfResourcesScanned = ptr.Int64(i64)
 			}
+
 		case "TotalNumberOfResourcesWithCustomerError":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2627,6 +2672,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 				}
 				sv.TotalNumberOfResourcesWithCustomerError = ptr.Int64(i64)
 			}
+
 		case "TotalNumberOfScannedFiles":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2639,6 +2685,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 				}
 				sv.TotalNumberOfScannedFiles = ptr.Int64(i64)
 			}
+
 		case "TotalSizeOfScannedFilesInMB":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2672,6 +2719,7 @@ func awsAwsjson10_deserializeDocumentJobProgressReport(v **types.JobProgressRepo
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2711,6 +2759,7 @@ func awsAwsjson10_deserializeDocumentKmsEncryptionConfig(v **types.KmsEncryption
 				}
 				sv.CmkType = types.CmkType(jtv)
 			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2719,6 +2768,7 @@ func awsAwsjson10_deserializeDocumentKmsEncryptionConfig(v **types.KmsEncryption
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2798,6 +2848,7 @@ func awsAwsjson10_deserializeDocumentPreloadDataConfig(v **types.PreloadDataConf
 				}
 				sv.PreloadDataType = types.PreloadDataType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2837,6 +2888,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2876,6 +2928,7 @@ func awsAwsjson10_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
+
 		case "S3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2884,6 +2937,7 @@ func awsAwsjson10_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2919,6 +2973,7 @@ func awsAwsjson10_deserializeDocumentSseConfiguration(v **types.SseConfiguration
 			if err := awsAwsjson10_deserializeDocumentKmsEncryptionConfig(&sv.KmsEncryptionConfig, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2958,6 +3013,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2966,6 +3022,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3039,6 +3096,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3078,6 +3136,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3117,6 +3176,7 @@ func awsAwsjson10_deserializeOpDocumentCreateFHIRDatastoreOutput(v **CreateFHIRD
 				}
 				sv.DatastoreArn = ptr.String(jtv)
 			}
+
 		case "DatastoreEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3125,6 +3185,7 @@ func awsAwsjson10_deserializeOpDocumentCreateFHIRDatastoreOutput(v **CreateFHIRD
 				}
 				sv.DatastoreEndpoint = ptr.String(jtv)
 			}
+
 		case "DatastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3133,6 +3194,7 @@ func awsAwsjson10_deserializeOpDocumentCreateFHIRDatastoreOutput(v **CreateFHIRD
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "DatastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3141,6 +3203,7 @@ func awsAwsjson10_deserializeOpDocumentCreateFHIRDatastoreOutput(v **CreateFHIRD
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3180,6 +3243,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteFHIRDatastoreOutput(v **DeleteFHIRD
 				}
 				sv.DatastoreArn = ptr.String(jtv)
 			}
+
 		case "DatastoreEndpoint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3188,6 +3252,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteFHIRDatastoreOutput(v **DeleteFHIRD
 				}
 				sv.DatastoreEndpoint = ptr.String(jtv)
 			}
+
 		case "DatastoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3196,6 +3261,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteFHIRDatastoreOutput(v **DeleteFHIRD
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "DatastoreStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3204,6 +3270,7 @@ func awsAwsjson10_deserializeOpDocumentDeleteFHIRDatastoreOutput(v **DeleteFHIRD
 				}
 				sv.DatastoreStatus = types.DatastoreStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3239,6 +3306,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeFHIRDatastoreOutput(v **DescribeF
 			if err := awsAwsjson10_deserializeDocumentDatastoreProperties(&sv.DatastoreProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3274,6 +3342,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeFHIRExportJobOutput(v **DescribeF
 			if err := awsAwsjson10_deserializeDocumentExportJobProperties(&sv.ExportJobProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3309,6 +3378,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeFHIRImportJobOutput(v **DescribeF
 			if err := awsAwsjson10_deserializeDocumentImportJobProperties(&sv.ImportJobProperties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3344,6 +3414,7 @@ func awsAwsjson10_deserializeOpDocumentListFHIRDatastoresOutput(v **ListFHIRData
 			if err := awsAwsjson10_deserializeDocumentDatastorePropertiesList(&sv.DatastorePropertiesList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3352,6 +3423,7 @@ func awsAwsjson10_deserializeOpDocumentListFHIRDatastoresOutput(v **ListFHIRData
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3387,6 +3459,7 @@ func awsAwsjson10_deserializeOpDocumentListFHIRExportJobsOutput(v **ListFHIRExpo
 			if err := awsAwsjson10_deserializeDocumentExportJobPropertiesList(&sv.ExportJobPropertiesList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3395,6 +3468,7 @@ func awsAwsjson10_deserializeOpDocumentListFHIRExportJobsOutput(v **ListFHIRExpo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3430,6 +3504,7 @@ func awsAwsjson10_deserializeOpDocumentListFHIRImportJobsOutput(v **ListFHIRImpo
 			if err := awsAwsjson10_deserializeDocumentImportJobPropertiesList(&sv.ImportJobPropertiesList, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3438,6 +3513,7 @@ func awsAwsjson10_deserializeOpDocumentListFHIRImportJobsOutput(v **ListFHIRImpo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3473,6 +3549,7 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3512,6 +3589,7 @@ func awsAwsjson10_deserializeOpDocumentStartFHIRExportJobOutput(v **StartFHIRExp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3520,6 +3598,7 @@ func awsAwsjson10_deserializeOpDocumentStartFHIRExportJobOutput(v **StartFHIRExp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3528,6 +3607,7 @@ func awsAwsjson10_deserializeOpDocumentStartFHIRExportJobOutput(v **StartFHIRExp
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3567,6 +3647,7 @@ func awsAwsjson10_deserializeOpDocumentStartFHIRImportJobOutput(v **StartFHIRImp
 				}
 				sv.DatastoreId = ptr.String(jtv)
 			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3575,6 +3656,7 @@ func awsAwsjson10_deserializeOpDocumentStartFHIRImportJobOutput(v **StartFHIRImp
 				}
 				sv.JobId = ptr.String(jtv)
 			}
+
 		case "JobStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3583,6 +3665,7 @@ func awsAwsjson10_deserializeOpDocumentStartFHIRImportJobOutput(v **StartFHIRImp
 				}
 				sv.JobStatus = types.JobStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

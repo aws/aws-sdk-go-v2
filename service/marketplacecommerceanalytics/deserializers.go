@@ -316,6 +316,7 @@ func awsAwsjson11_deserializeDocumentMarketplaceCommerceAnalyticsException(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -355,6 +356,7 @@ func awsAwsjson11_deserializeOpDocumentGenerateDataSetOutput(v **GenerateDataSet
 				}
 				sv.DataSetRequestId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -394,6 +396,7 @@ func awsAwsjson11_deserializeOpDocumentStartSupportDataExportOutput(v **StartSup
 				}
 				sv.DataSetRequestId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

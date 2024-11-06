@@ -481,6 +481,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 				}
 				sv.Timestamp = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -514,6 +515,7 @@ func awsAwsjson11_deserializeDocumentDataPoint(v **types.DataPoint, value interf
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -549,6 +551,7 @@ func awsAwsjson11_deserializeDocumentForecast(v **types.Forecast, value interfac
 			if err := awsAwsjson11_deserializeDocumentPredictions(&sv.Predictions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -588,6 +591,7 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -627,6 +631,7 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -666,6 +671,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -739,6 +745,7 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -778,6 +785,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -847,6 +855,7 @@ func awsAwsjson11_deserializeOpDocumentQueryForecastOutput(v **QueryForecastOutp
 			if err := awsAwsjson11_deserializeDocumentForecast(&sv.Forecast, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -882,6 +891,7 @@ func awsAwsjson11_deserializeOpDocumentQueryWhatIfForecastOutput(v **QueryWhatIf
 			if err := awsAwsjson11_deserializeDocumentForecast(&sv.Forecast, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

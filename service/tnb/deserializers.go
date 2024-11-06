@@ -296,6 +296,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolFunctionPackageOutput(v **Create
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -304,6 +305,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolFunctionPackageOutput(v **Create
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "onboardingState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -312,6 +314,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolFunctionPackageOutput(v **Create
 				}
 				sv.OnboardingState = types.OnboardingState(jtv)
 			}
+
 		case "operationalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -320,10 +323,12 @@ func awsRestjson1_deserializeOpDocumentCreateSolFunctionPackageOutput(v **Create
 				}
 				sv.OperationalState = types.OperationalState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "usageState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -332,6 +337,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolFunctionPackageOutput(v **Create
 				}
 				sv.UsageState = types.UsageState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -502,6 +508,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkInstanceOutput(v **Create
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -510,6 +517,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkInstanceOutput(v **Create
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "nsdInfoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -518,6 +526,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkInstanceOutput(v **Create
 				}
 				sv.NsdInfoId = ptr.String(jtv)
 			}
+
 		case "nsInstanceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -526,10 +535,12 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkInstanceOutput(v **Create
 				}
 				sv.NsInstanceName = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -697,6 +708,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkPackageOutput(v **CreateS
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -705,6 +717,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkPackageOutput(v **CreateS
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "nsdOnboardingState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -713,6 +726,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkPackageOutput(v **CreateS
 				}
 				sv.NsdOnboardingState = types.NsdOnboardingState(jtv)
 			}
+
 		case "nsdOperationalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -721,6 +735,7 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkPackageOutput(v **CreateS
 				}
 				sv.NsdOperationalState = types.NsdOperationalState(jtv)
 			}
+
 		case "nsdUsageState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -729,10 +744,12 @@ func awsRestjson1_deserializeOpDocumentCreateSolNetworkPackageOutput(v **CreateS
 				}
 				sv.NsdUsageState = types.NsdUsageState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1218,6 +1235,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1226,10 +1244,12 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "instantiatedVnfInfo":
 			if err := awsRestjson1_deserializeDocumentGetSolVnfInfo(&sv.InstantiatedVnfInfo, value); err != nil {
 				return err
 			}
+
 		case "instantiationState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1238,10 +1258,12 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.InstantiationState = types.VnfInstantiationState(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentGetSolFunctionInstanceMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1250,10 +1272,12 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.NsInstanceId = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "vnfdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1262,6 +1286,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.VnfdId = ptr.String(jtv)
 			}
+
 		case "vnfdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1270,6 +1295,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.VnfdVersion = ptr.String(jtv)
 			}
+
 		case "vnfPkgId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1278,6 +1304,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.VnfPkgId = ptr.String(jtv)
 			}
+
 		case "vnfProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1286,6 +1313,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.VnfProductName = ptr.String(jtv)
 			}
+
 		case "vnfProvider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1294,6 +1322,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionInstanceOutput(v **GetSolFu
 				}
 				sv.VnfProvider = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1461,6 +1490,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1469,10 +1499,12 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentGetSolFunctionPackageMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "onboardingState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1481,6 +1513,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.OnboardingState = types.OnboardingState(jtv)
 			}
+
 		case "operationalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1489,10 +1522,12 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.OperationalState = types.OperationalState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "usageState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1501,6 +1536,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.UsageState = types.UsageState(jtv)
 			}
+
 		case "vnfdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1509,6 +1545,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.VnfdId = ptr.String(jtv)
 			}
+
 		case "vnfdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1517,6 +1554,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.VnfdVersion = ptr.String(jtv)
 			}
+
 		case "vnfProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1525,6 +1563,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.VnfProductName = ptr.String(jtv)
 			}
+
 		case "vnfProvider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1533,6 +1572,7 @@ func awsRestjson1_deserializeOpDocumentGetSolFunctionPackageOutput(v **GetSolFun
 				}
 				sv.VnfProvider = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1988,6 +2028,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1996,14 +2037,17 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lcmOpInfo":
 			if err := awsRestjson1_deserializeDocumentLcmOperationInfo(&sv.LcmOpInfo, value); err != nil {
 				return err
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentGetSolNetworkInstanceMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2012,6 +2056,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.NsdId = ptr.String(jtv)
 			}
+
 		case "nsdInfoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2020,6 +2065,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.NsdInfoId = ptr.String(jtv)
 			}
+
 		case "nsInstanceDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2028,6 +2074,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.NsInstanceDescription = ptr.String(jtv)
 			}
+
 		case "nsInstanceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2036,6 +2083,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.NsInstanceName = ptr.String(jtv)
 			}
+
 		case "nsState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2044,10 +2092,12 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkInstanceOutput(v **GetSolNet
 				}
 				sv.NsState = types.NsState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2215,10 +2265,12 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "error":
 			if err := awsRestjson1_deserializeDocumentProblemDetails(&sv.Error, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2227,6 +2279,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lcmOperationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2235,10 +2288,12 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 				}
 				sv.LcmOperationType = types.LcmOperationType(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentGetSolNetworkOperationMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2247,6 +2302,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 				}
 				sv.NsInstanceId = ptr.String(jtv)
 			}
+
 		case "operationState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2255,14 +2311,17 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 				}
 				sv.OperationState = types.NsLcmOperationState(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "tasks":
 			if err := awsRestjson1_deserializeDocumentGetSolNetworkOperationTasksList(&sv.Tasks, value); err != nil {
 				return err
 			}
+
 		case "updateType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2271,6 +2330,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkOperationOutput(v **GetSolNe
 				}
 				sv.UpdateType = types.UpdateSolNetworkType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2438,6 +2498,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2446,10 +2507,12 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentGetSolNetworkPackageMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2458,6 +2521,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.NsdId = ptr.String(jtv)
 			}
+
 		case "nsdName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2466,6 +2530,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.NsdName = ptr.String(jtv)
 			}
+
 		case "nsdOnboardingState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2474,6 +2539,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.NsdOnboardingState = types.NsdOnboardingState(jtv)
 			}
+
 		case "nsdOperationalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2482,6 +2548,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.NsdOperationalState = types.NsdOperationalState(jtv)
 			}
+
 		case "nsdUsageState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2490,6 +2557,7 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.NsdUsageState = types.NsdUsageState(jtv)
 			}
+
 		case "nsdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2498,14 +2566,17 @@ func awsRestjson1_deserializeOpDocumentGetSolNetworkPackageOutput(v **GetSolNetw
 				}
 				sv.NsdVersion = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "vnfPkgIds":
 			if err := awsRestjson1_deserializeDocumentVnfPkgIdList(&sv.VnfPkgIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2964,10 +3035,12 @@ func awsRestjson1_deserializeOpDocumentInstantiateSolNetworkInstanceOutput(v **I
 				}
 				sv.NsLcmOpOccId = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3128,6 +3201,7 @@ func awsRestjson1_deserializeOpDocumentListSolFunctionInstancesOutput(v **ListSo
 			if err := awsRestjson1_deserializeDocumentListSolFunctionInstanceResources(&sv.FunctionInstances, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3136,6 +3210,7 @@ func awsRestjson1_deserializeOpDocumentListSolFunctionInstancesOutput(v **ListSo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3296,6 +3371,7 @@ func awsRestjson1_deserializeOpDocumentListSolFunctionPackagesOutput(v **ListSol
 			if err := awsRestjson1_deserializeDocumentListSolFunctionPackageResources(&sv.FunctionPackages, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3304,6 +3380,7 @@ func awsRestjson1_deserializeOpDocumentListSolFunctionPackagesOutput(v **ListSol
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3464,6 +3541,7 @@ func awsRestjson1_deserializeOpDocumentListSolNetworkInstancesOutput(v **ListSol
 			if err := awsRestjson1_deserializeDocumentListSolNetworkInstanceResources(&sv.NetworkInstances, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3472,6 +3550,7 @@ func awsRestjson1_deserializeOpDocumentListSolNetworkInstancesOutput(v **ListSol
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3632,6 +3711,7 @@ func awsRestjson1_deserializeOpDocumentListSolNetworkOperationsOutput(v **ListSo
 			if err := awsRestjson1_deserializeDocumentListSolNetworkOperationsResources(&sv.NetworkOperations, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3640,6 +3720,7 @@ func awsRestjson1_deserializeOpDocumentListSolNetworkOperationsOutput(v **ListSo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3800,6 +3881,7 @@ func awsRestjson1_deserializeOpDocumentListSolNetworkPackagesOutput(v **ListSolN
 			if err := awsRestjson1_deserializeDocumentListSolNetworkPackageResources(&sv.NetworkPackages, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3808,6 +3890,7 @@ func awsRestjson1_deserializeOpDocumentListSolNetworkPackagesOutput(v **ListSolN
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3971,6 +4054,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4138,10 +4222,12 @@ func awsRestjson1_deserializeOpDocumentPutSolFunctionPackageContentOutput(v **Pu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentPutSolFunctionPackageContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "vnfdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4150,6 +4236,7 @@ func awsRestjson1_deserializeOpDocumentPutSolFunctionPackageContentOutput(v **Pu
 				}
 				sv.VnfdId = ptr.String(jtv)
 			}
+
 		case "vnfdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4158,6 +4245,7 @@ func awsRestjson1_deserializeOpDocumentPutSolFunctionPackageContentOutput(v **Pu
 				}
 				sv.VnfdVersion = ptr.String(jtv)
 			}
+
 		case "vnfProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4166,6 +4254,7 @@ func awsRestjson1_deserializeOpDocumentPutSolFunctionPackageContentOutput(v **Pu
 				}
 				sv.VnfProductName = ptr.String(jtv)
 			}
+
 		case "vnfProvider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4174,6 +4263,7 @@ func awsRestjson1_deserializeOpDocumentPutSolFunctionPackageContentOutput(v **Pu
 				}
 				sv.VnfProvider = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4341,6 +4431,7 @@ func awsRestjson1_deserializeOpDocumentPutSolNetworkPackageContentOutput(v **Put
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4349,10 +4440,12 @@ func awsRestjson1_deserializeOpDocumentPutSolNetworkPackageContentOutput(v **Put
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentPutSolNetworkPackageContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4361,6 +4454,7 @@ func awsRestjson1_deserializeOpDocumentPutSolNetworkPackageContentOutput(v **Put
 				}
 				sv.NsdId = ptr.String(jtv)
 			}
+
 		case "nsdName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4369,6 +4463,7 @@ func awsRestjson1_deserializeOpDocumentPutSolNetworkPackageContentOutput(v **Put
 				}
 				sv.NsdName = ptr.String(jtv)
 			}
+
 		case "nsdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4377,10 +4472,12 @@ func awsRestjson1_deserializeOpDocumentPutSolNetworkPackageContentOutput(v **Put
 				}
 				sv.NsdVersion = ptr.String(jtv)
 			}
+
 		case "vnfPkgIds":
 			if err := awsRestjson1_deserializeDocumentVnfPkgIdList(&sv.VnfPkgIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4651,10 +4748,12 @@ func awsRestjson1_deserializeOpDocumentTerminateSolNetworkInstanceOutput(v **Ter
 				}
 				sv.NsLcmOpOccId = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4922,6 +5021,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSolFunctionPackageOutput(v **Update
 				}
 				sv.OperationalState = types.OperationalState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5092,10 +5192,12 @@ func awsRestjson1_deserializeOpDocumentUpdateSolNetworkInstanceOutput(v **Update
 				}
 				sv.NsLcmOpOccId = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5263,6 +5365,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSolNetworkPackageOutput(v **UpdateS
 				}
 				sv.NsdOperationalState = types.NsdOperationalState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5430,10 +5533,12 @@ func awsRestjson1_deserializeOpDocumentValidateSolFunctionPackageContentOutput(v
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentValidateSolFunctionPackageContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "vnfdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5442,6 +5547,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolFunctionPackageContentOutput(v
 				}
 				sv.VnfdId = ptr.String(jtv)
 			}
+
 		case "vnfdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5450,6 +5556,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolFunctionPackageContentOutput(v
 				}
 				sv.VnfdVersion = ptr.String(jtv)
 			}
+
 		case "vnfProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5458,6 +5565,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolFunctionPackageContentOutput(v
 				}
 				sv.VnfProductName = ptr.String(jtv)
 			}
+
 		case "vnfProvider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5466,6 +5574,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolFunctionPackageContentOutput(v
 				}
 				sv.VnfProvider = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5633,6 +5742,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolNetworkPackageContentOutput(v 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5641,10 +5751,12 @@ func awsRestjson1_deserializeOpDocumentValidateSolNetworkPackageContentOutput(v 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentValidateSolNetworkPackageContentMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5653,6 +5765,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolNetworkPackageContentOutput(v 
 				}
 				sv.NsdId = ptr.String(jtv)
 			}
+
 		case "nsdName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5661,6 +5774,7 @@ func awsRestjson1_deserializeOpDocumentValidateSolNetworkPackageContentOutput(v 
 				}
 				sv.NsdName = ptr.String(jtv)
 			}
+
 		case "nsdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5669,10 +5783,12 @@ func awsRestjson1_deserializeOpDocumentValidateSolNetworkPackageContentOutput(v 
 				}
 				sv.NsdVersion = ptr.String(jtv)
 			}
+
 		case "vnfPkgIds":
 			if err := awsRestjson1_deserializeDocumentVnfPkgIdList(&sv.VnfPkgIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5928,6 +6044,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5967,6 +6084,7 @@ func awsRestjson1_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 				}
 				sv.Cause = ptr.String(jtv)
 			}
+
 		case "details":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5975,6 +6093,7 @@ func awsRestjson1_deserializeDocumentErrorInfo(v **types.ErrorInfo, value interf
 				}
 				sv.Details = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6010,6 +6129,7 @@ func awsRestjson1_deserializeDocumentFunctionArtifactMeta(v **types.FunctionArti
 			if err := awsRestjson1_deserializeDocumentOverrideList(&sv.Overrides, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6053,6 +6173,7 @@ func awsRestjson1_deserializeDocumentGetSolFunctionInstanceMetadata(v **types.Ge
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6065,6 +6186,7 @@ func awsRestjson1_deserializeDocumentGetSolFunctionInstanceMetadata(v **types.Ge
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6108,6 +6230,7 @@ func awsRestjson1_deserializeDocumentGetSolFunctionPackageMetadata(v **types.Get
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6120,10 +6243,12 @@ func awsRestjson1_deserializeDocumentGetSolFunctionPackageMetadata(v **types.Get
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		case "vnfd":
 			if err := awsRestjson1_deserializeDocumentFunctionArtifactMeta(&sv.Vnfd, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6163,6 +6288,7 @@ func awsRestjson1_deserializeDocumentGetSolInstantiatedVnfInfo(v **types.GetSolI
 				}
 				sv.VnfState = types.VnfOperationalState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6206,6 +6332,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkInstanceMetadata(v **types.Get
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6218,6 +6345,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkInstanceMetadata(v **types.Get
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6261,10 +6389,12 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationMetadata(v **types.Ge
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "instantiateMetadata":
 			if err := awsRestjson1_deserializeDocumentInstantiateMetadata(&sv.InstantiateMetadata, value); err != nil {
 				return err
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6277,14 +6407,17 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationMetadata(v **types.Ge
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		case "modifyVnfInfoMetadata":
 			if err := awsRestjson1_deserializeDocumentModifyVnfInfoMetadata(&sv.ModifyVnfInfoMetadata, value); err != nil {
 				return err
 			}
+
 		case "updateNsMetadata":
 			if err := awsRestjson1_deserializeDocumentUpdateNsMetadata(&sv.UpdateNsMetadata, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6320,6 +6453,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationTaskDetails(v **types
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.TaskContext, value); err != nil {
 				return err
 			}
+
 		case "taskEndTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6332,10 +6466,12 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationTaskDetails(v **types
 				}
 				sv.TaskEndTime = ptr.Time(t)
 			}
+
 		case "taskErrorDetails":
 			if err := awsRestjson1_deserializeDocumentErrorInfo(&sv.TaskErrorDetails, value); err != nil {
 				return err
 			}
+
 		case "taskName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6344,6 +6480,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationTaskDetails(v **types
 				}
 				sv.TaskName = ptr.String(jtv)
 			}
+
 		case "taskStartTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6356,6 +6493,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationTaskDetails(v **types
 				}
 				sv.TaskStartTime = ptr.Time(t)
 			}
+
 		case "taskStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6364,6 +6502,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkOperationTaskDetails(v **types
 				}
 				sv.TaskStatus = types.TaskStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6441,6 +6580,7 @@ func awsRestjson1_deserializeDocumentGetSolNetworkPackageMetadata(v **types.GetS
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6453,10 +6593,12 @@ func awsRestjson1_deserializeDocumentGetSolNetworkPackageMetadata(v **types.GetS
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		case "nsd":
 			if err := awsRestjson1_deserializeDocumentNetworkArtifactMeta(&sv.Nsd, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6492,6 +6634,7 @@ func awsRestjson1_deserializeDocumentGetSolVnfcResourceInfo(v **types.GetSolVnfc
 			if err := awsRestjson1_deserializeDocumentGetSolVnfcResourceInfoMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6565,6 +6708,7 @@ func awsRestjson1_deserializeDocumentGetSolVnfcResourceInfoMetadata(v **types.Ge
 				}
 				sv.Cluster = ptr.String(jtv)
 			}
+
 		case "helmChart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6573,6 +6717,7 @@ func awsRestjson1_deserializeDocumentGetSolVnfcResourceInfoMetadata(v **types.Ge
 				}
 				sv.HelmChart = ptr.String(jtv)
 			}
+
 		case "nodeGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6581,6 +6726,7 @@ func awsRestjson1_deserializeDocumentGetSolVnfcResourceInfoMetadata(v **types.Ge
 				}
 				sv.NodeGroup = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6616,6 +6762,7 @@ func awsRestjson1_deserializeDocumentGetSolVnfInfo(v **types.GetSolVnfInfo, valu
 			if err := awsRestjson1_deserializeDocumentGetSolVnfcResourceInfoList(&sv.VnfcResourceInfo, value); err != nil {
 				return err
 			}
+
 		case "vnfState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6624,6 +6771,7 @@ func awsRestjson1_deserializeDocumentGetSolVnfInfo(v **types.GetSolVnfInfo, valu
 				}
 				sv.VnfState = types.VnfOperationalState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6659,6 +6807,7 @@ func awsRestjson1_deserializeDocumentInstantiateMetadata(v **types.InstantiateMe
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalParamsForNs, value); err != nil {
 				return err
 			}
+
 		case "nsdInfoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6667,6 +6816,7 @@ func awsRestjson1_deserializeDocumentInstantiateMetadata(v **types.InstantiateMe
 				}
 				sv.NsdInfoId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6706,6 +6856,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6745,6 +6896,7 @@ func awsRestjson1_deserializeDocumentLcmOperationInfo(v **types.LcmOperationInfo
 				}
 				sv.NsLcmOpOccId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6784,6 +6936,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceInfo(v **types.ListS
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6792,10 +6945,12 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceInfo(v **types.ListS
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "instantiatedVnfInfo":
 			if err := awsRestjson1_deserializeDocumentGetSolInstantiatedVnfInfo(&sv.InstantiatedVnfInfo, value); err != nil {
 				return err
 			}
+
 		case "instantiationState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6804,10 +6959,12 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceInfo(v **types.ListS
 				}
 				sv.InstantiationState = types.VnfInstantiationState(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentListSolFunctionInstanceMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6816,6 +6973,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceInfo(v **types.ListS
 				}
 				sv.NsInstanceId = ptr.String(jtv)
 			}
+
 		case "vnfPkgId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6824,6 +6982,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceInfo(v **types.ListS
 				}
 				sv.VnfPkgId = ptr.String(jtv)
 			}
+
 		case "vnfPkgName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6832,6 +6991,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceInfo(v **types.ListS
 				}
 				sv.VnfPkgName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6875,6 +7035,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceMetadata(v **types.L
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6887,6 +7048,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionInstanceMetadata(v **types.L
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6960,6 +7122,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6968,10 +7131,12 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentListSolFunctionPackageMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "onboardingState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6980,6 +7145,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.OnboardingState = types.OnboardingState(jtv)
 			}
+
 		case "operationalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6988,6 +7154,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.OperationalState = types.OperationalState(jtv)
 			}
+
 		case "usageState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6996,6 +7163,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.UsageState = types.UsageState(jtv)
 			}
+
 		case "vnfdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7004,6 +7172,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.VnfdId = ptr.String(jtv)
 			}
+
 		case "vnfdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7012,6 +7181,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.VnfdVersion = ptr.String(jtv)
 			}
+
 		case "vnfProductName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7020,6 +7190,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.VnfProductName = ptr.String(jtv)
 			}
+
 		case "vnfProvider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7028,6 +7199,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageInfo(v **types.ListSo
 				}
 				sv.VnfProvider = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7071,6 +7243,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageMetadata(v **types.Li
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7083,6 +7256,7 @@ func awsRestjson1_deserializeDocumentListSolFunctionPackageMetadata(v **types.Li
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7156,6 +7330,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7164,10 +7339,12 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentListSolNetworkInstanceMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7176,6 +7353,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.NsdId = ptr.String(jtv)
 			}
+
 		case "nsdInfoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7184,6 +7362,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.NsdInfoId = ptr.String(jtv)
 			}
+
 		case "nsInstanceDescription":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7192,6 +7371,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.NsInstanceDescription = ptr.String(jtv)
 			}
+
 		case "nsInstanceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7200,6 +7380,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.NsInstanceName = ptr.String(jtv)
 			}
+
 		case "nsState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7208,6 +7389,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceInfo(v **types.ListSo
 				}
 				sv.NsState = types.NsState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7251,6 +7433,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceMetadata(v **types.Li
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7263,6 +7446,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkInstanceMetadata(v **types.Li
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7336,10 +7520,12 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "error":
 			if err := awsRestjson1_deserializeDocumentProblemDetails(&sv.Error, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7348,6 +7534,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lcmOperationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7356,10 +7543,12 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				}
 				sv.LcmOperationType = types.LcmOperationType(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentListSolNetworkOperationsMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7368,6 +7557,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				}
 				sv.NsInstanceId = ptr.String(jtv)
 			}
+
 		case "operationState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7376,6 +7566,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				}
 				sv.OperationState = types.NsLcmOperationState(jtv)
 			}
+
 		case "updateType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7384,6 +7575,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsInfo(v **types.List
 				}
 				sv.UpdateType = types.UpdateSolNetworkType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7427,6 +7619,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsMetadata(v **types.
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7439,6 +7632,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsMetadata(v **types.
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		case "nsdInfoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7447,6 +7641,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsMetadata(v **types.
 				}
 				sv.NsdInfoId = ptr.String(jtv)
 			}
+
 		case "vnfInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7455,6 +7650,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkOperationsMetadata(v **types.
 				}
 				sv.VnfInstanceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7528,6 +7724,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7536,10 +7733,12 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "metadata":
 			if err := awsRestjson1_deserializeDocumentListSolNetworkPackageMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "nsdDesigner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7548,6 +7747,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdDesigner = ptr.String(jtv)
 			}
+
 		case "nsdId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7556,6 +7756,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdId = ptr.String(jtv)
 			}
+
 		case "nsdInvariantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7564,6 +7765,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdInvariantId = ptr.String(jtv)
 			}
+
 		case "nsdName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7572,6 +7774,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdName = ptr.String(jtv)
 			}
+
 		case "nsdOnboardingState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7580,6 +7783,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdOnboardingState = types.NsdOnboardingState(jtv)
 			}
+
 		case "nsdOperationalState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7588,6 +7792,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdOperationalState = types.NsdOperationalState(jtv)
 			}
+
 		case "nsdUsageState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7596,6 +7801,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdUsageState = types.NsdUsageState(jtv)
 			}
+
 		case "nsdVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7604,10 +7810,12 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageInfo(v **types.ListSol
 				}
 				sv.NsdVersion = ptr.String(jtv)
 			}
+
 		case "vnfPkgIds":
 			if err := awsRestjson1_deserializeDocumentVnfPkgIdList(&sv.VnfPkgIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7651,6 +7859,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageMetadata(v **types.Lis
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "lastModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7663,6 +7872,7 @@ func awsRestjson1_deserializeDocumentListSolNetworkPackageMetadata(v **types.Lis
 				}
 				sv.LastModified = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7732,6 +7942,7 @@ func awsRestjson1_deserializeDocumentModifyVnfInfoMetadata(v **types.ModifyVnfIn
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.VnfConfigurableProperties, value); err != nil {
 				return err
 			}
+
 		case "vnfInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7740,6 +7951,7 @@ func awsRestjson1_deserializeDocumentModifyVnfInfoMetadata(v **types.ModifyVnfIn
 				}
 				sv.VnfInstanceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7775,6 +7987,7 @@ func awsRestjson1_deserializeDocumentNetworkArtifactMeta(v **types.NetworkArtifa
 			if err := awsRestjson1_deserializeDocumentOverrideList(&sv.Overrides, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7848,6 +8061,7 @@ func awsRestjson1_deserializeDocumentProblemDetails(v **types.ProblemDetails, va
 				}
 				sv.Detail = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7856,6 +8070,7 @@ func awsRestjson1_deserializeDocumentProblemDetails(v **types.ProblemDetails, va
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7891,6 +8106,7 @@ func awsRestjson1_deserializeDocumentPutSolFunctionPackageContentMetadata(v **ty
 			if err := awsRestjson1_deserializeDocumentFunctionArtifactMeta(&sv.Vnfd, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7926,6 +8142,7 @@ func awsRestjson1_deserializeDocumentPutSolNetworkPackageContentMetadata(v **typ
 			if err := awsRestjson1_deserializeDocumentNetworkArtifactMeta(&sv.Nsd, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7965,6 +8182,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8004,6 +8222,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8115,6 +8334,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8154,6 +8374,7 @@ func awsRestjson1_deserializeDocumentToscaOverride(v **types.ToscaOverride, valu
 				}
 				sv.DefaultValue = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8162,6 +8383,7 @@ func awsRestjson1_deserializeDocumentToscaOverride(v **types.ToscaOverride, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8197,6 +8419,7 @@ func awsRestjson1_deserializeDocumentUpdateNsMetadata(v **types.UpdateNsMetadata
 			if err := awsRestjson1_deserializeDocumentDocument(&sv.AdditionalParamsForNs, value); err != nil {
 				return err
 			}
+
 		case "nsdInfoId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8205,6 +8428,7 @@ func awsRestjson1_deserializeDocumentUpdateNsMetadata(v **types.UpdateNsMetadata
 				}
 				sv.NsdInfoId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8240,6 +8464,7 @@ func awsRestjson1_deserializeDocumentValidateSolFunctionPackageContentMetadata(v
 			if err := awsRestjson1_deserializeDocumentFunctionArtifactMeta(&sv.Vnfd, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8275,6 +8500,7 @@ func awsRestjson1_deserializeDocumentValidateSolNetworkPackageContentMetadata(v 
 			if err := awsRestjson1_deserializeDocumentNetworkArtifactMeta(&sv.Nsd, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8314,6 +8540,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

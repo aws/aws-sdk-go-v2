@@ -190,6 +190,7 @@ func awsRestjson1_deserializeOpDocumentCreateAccessTokenOutput(v **CreateAccessT
 				}
 				sv.AccessTokenId = ptr.String(jtv)
 			}
+
 		case "expiresTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -202,6 +203,7 @@ func awsRestjson1_deserializeOpDocumentCreateAccessTokenOutput(v **CreateAccessT
 				}
 				sv.ExpiresTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -210,6 +212,7 @@ func awsRestjson1_deserializeOpDocumentCreateAccessTokenOutput(v **CreateAccessT
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "secret":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -218,6 +221,7 @@ func awsRestjson1_deserializeOpDocumentCreateAccessTokenOutput(v **CreateAccessT
 				}
 				sv.Secret = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -388,6 +392,7 @@ func awsRestjson1_deserializeOpDocumentCreateDevEnvironmentOutput(v **CreateDevE
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -396,6 +401,7 @@ func awsRestjson1_deserializeOpDocumentCreateDevEnvironmentOutput(v **CreateDevE
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -404,6 +410,7 @@ func awsRestjson1_deserializeOpDocumentCreateDevEnvironmentOutput(v **CreateDevE
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "vpcConnectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -412,6 +419,7 @@ func awsRestjson1_deserializeOpDocumentCreateDevEnvironmentOutput(v **CreateDevE
 				}
 				sv.VpcConnectionName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -582,6 +590,7 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -590,6 +599,7 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -598,6 +608,7 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -606,6 +617,7 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -776,6 +788,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryOutput(v **CreateSo
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -784,6 +797,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryOutput(v **CreateSo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -792,6 +806,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryOutput(v **CreateSo
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -800,6 +815,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryOutput(v **CreateSo
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -970,6 +986,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryBranchOutput(v **Cr
 				}
 				sv.HeadCommitId = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -982,6 +999,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryBranchOutput(v **Cr
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -990,6 +1008,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryBranchOutput(v **Cr
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "ref":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -998,6 +1017,7 @@ func awsRestjson1_deserializeOpDocumentCreateSourceRepositoryBranchOutput(v **Cr
 				}
 				sv.Ref = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1271,6 +1291,7 @@ func awsRestjson1_deserializeOpDocumentDeleteDevEnvironmentOutput(v **DeleteDevE
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1279,6 +1300,7 @@ func awsRestjson1_deserializeOpDocumentDeleteDevEnvironmentOutput(v **DeleteDevE
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1287,6 +1309,7 @@ func awsRestjson1_deserializeOpDocumentDeleteDevEnvironmentOutput(v **DeleteDevE
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1457,6 +1480,7 @@ func awsRestjson1_deserializeOpDocumentDeleteProjectOutput(v **DeleteProjectOutp
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1465,6 +1489,7 @@ func awsRestjson1_deserializeOpDocumentDeleteProjectOutput(v **DeleteProjectOutp
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1473,6 +1498,7 @@ func awsRestjson1_deserializeOpDocumentDeleteProjectOutput(v **DeleteProjectOutp
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1643,6 +1669,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSourceRepositoryOutput(v **DeleteSo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1651,6 +1678,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSourceRepositoryOutput(v **DeleteSo
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1659,6 +1687,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSourceRepositoryOutput(v **DeleteSo
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1829,6 +1858,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSpaceOutput(v **DeleteSpaceOutput, 
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1837,6 +1867,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSpaceOutput(v **DeleteSpaceOutput, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2007,6 +2038,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.Alias = ptr.String(jtv)
 			}
+
 		case "creatorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2015,6 +2047,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.CreatorId = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2023,10 +2056,12 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "ides":
 			if err := awsRestjson1_deserializeDocumentIdes(&sv.Ides, value); err != nil {
 				return err
 			}
+
 		case "inactivityTimeoutMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2039,6 +2074,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.InactivityTimeoutMinutes = int32(i64)
 			}
+
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2047,6 +2083,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.InstanceType = types.InstanceType(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2059,10 +2096,12 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "persistentStorage":
 			if err := awsRestjson1_deserializeDocumentPersistentStorage(&sv.PersistentStorage, value); err != nil {
 				return err
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2071,10 +2110,12 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "repositories":
 			if err := awsRestjson1_deserializeDocumentDevEnvironmentRepositorySummaries(&sv.Repositories, value); err != nil {
 				return err
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2083,6 +2124,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2091,6 +2133,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.Status = types.DevEnvironmentStatus(jtv)
 			}
+
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2099,6 +2142,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
+
 		case "vpcConnectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2107,6 +2151,7 @@ func awsRestjson1_deserializeOpDocumentGetDevEnvironmentOutput(v **GetDevEnviron
 				}
 				sv.VpcConnectionName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2277,6 +2322,7 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2285,6 +2331,7 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2293,6 +2340,7 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2301,6 +2349,7 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2475,6 +2524,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryOutput(v **GetSourceRe
 				}
 				sv.CreatedTime = ptr.Time(t)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2483,6 +2533,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryOutput(v **GetSourceRe
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2495,6 +2546,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryOutput(v **GetSourceRe
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2503,6 +2555,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryOutput(v **GetSourceRe
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2511,6 +2564,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryOutput(v **GetSourceRe
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2519,6 +2573,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryOutput(v **GetSourceRe
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2689,6 +2744,7 @@ func awsRestjson1_deserializeOpDocumentGetSourceRepositoryCloneUrlsOutput(v **Ge
 				}
 				sv.Https = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2859,6 +2915,7 @@ func awsRestjson1_deserializeOpDocumentGetSpaceOutput(v **GetSpaceOutput, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2867,6 +2924,7 @@ func awsRestjson1_deserializeOpDocumentGetSpaceOutput(v **GetSpaceOutput, value 
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2875,6 +2933,7 @@ func awsRestjson1_deserializeOpDocumentGetSpaceOutput(v **GetSpaceOutput, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "regionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2883,6 +2942,7 @@ func awsRestjson1_deserializeOpDocumentGetSpaceOutput(v **GetSpaceOutput, value 
 				}
 				sv.RegionName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3053,6 +3113,7 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionOutput(v **GetSubscription
 				}
 				sv.AwsAccountName = ptr.String(jtv)
 			}
+
 		case "pendingSubscriptionStartTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3065,6 +3126,7 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionOutput(v **GetSubscription
 				}
 				sv.PendingSubscriptionStartTime = ptr.Time(t)
 			}
+
 		case "pendingSubscriptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3073,6 +3135,7 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionOutput(v **GetSubscription
 				}
 				sv.PendingSubscriptionType = ptr.String(jtv)
 			}
+
 		case "subscriptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3081,6 +3144,7 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionOutput(v **GetSubscription
 				}
 				sv.SubscriptionType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3251,10 +3315,12 @@ func awsRestjson1_deserializeOpDocumentGetUserDetailsOutput(v **GetUserDetailsOu
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "primaryEmail":
 			if err := awsRestjson1_deserializeDocumentEmailAddress(&sv.PrimaryEmail, value); err != nil {
 				return err
 			}
+
 		case "userId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3263,6 +3329,7 @@ func awsRestjson1_deserializeOpDocumentGetUserDetailsOutput(v **GetUserDetailsOu
 				}
 				sv.UserId = ptr.String(jtv)
 			}
+
 		case "userName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3271,6 +3338,7 @@ func awsRestjson1_deserializeOpDocumentGetUserDetailsOutput(v **GetUserDetailsOu
 				}
 				sv.UserName = ptr.String(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3279,6 +3347,7 @@ func awsRestjson1_deserializeOpDocumentGetUserDetailsOutput(v **GetUserDetailsOu
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3453,10 +3522,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.CreatedTime = ptr.Time(t)
 			}
+
 		case "definition":
 			if err := awsRestjson1_deserializeDocumentWorkflowDefinition(&sv.Definition, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3465,6 +3536,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3477,6 +3549,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3485,6 +3558,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3493,6 +3567,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "runMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3501,6 +3576,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.RunMode = types.WorkflowRunMode(jtv)
 			}
+
 		case "sourceBranchName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3509,6 +3585,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.SourceBranchName = ptr.String(jtv)
 			}
+
 		case "sourceRepositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3517,6 +3594,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.SourceRepositoryName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3525,6 +3603,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3533,6 +3612,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowOutput(v **GetWorkflowOutput, 
 				}
 				sv.Status = types.WorkflowStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3707,6 +3787,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.EndTime = ptr.Time(t)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3715,6 +3796,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3727,6 +3809,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3735,6 +3818,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3743,6 +3827,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3755,6 +3840,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.StartTime = ptr.Time(t)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3763,10 +3849,12 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.Status = types.WorkflowRunStatus(jtv)
 			}
+
 		case "statusReasons":
 			if err := awsRestjson1_deserializeDocumentWorkflowRunStatusReasons(&sv.StatusReasons, value); err != nil {
 				return err
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3775,6 +3863,7 @@ func awsRestjson1_deserializeOpDocumentGetWorkflowRunOutput(v **GetWorkflowRunOu
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3941,6 +4030,7 @@ func awsRestjson1_deserializeOpDocumentListAccessTokensOutput(v **ListAccessToke
 			if err := awsRestjson1_deserializeDocumentAccessTokenSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3949,6 +4039,7 @@ func awsRestjson1_deserializeOpDocumentListAccessTokensOutput(v **ListAccessToke
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4115,6 +4206,7 @@ func awsRestjson1_deserializeOpDocumentListDevEnvironmentsOutput(v **ListDevEnvi
 			if err := awsRestjson1_deserializeDocumentDevEnvironmentSummaryList(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4123,6 +4215,7 @@ func awsRestjson1_deserializeOpDocumentListDevEnvironmentsOutput(v **ListDevEnvi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4289,6 +4382,7 @@ func awsRestjson1_deserializeOpDocumentListDevEnvironmentSessionsOutput(v **List
 			if err := awsRestjson1_deserializeDocumentDevEnvironmentSessionsSummaryList(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4297,6 +4391,7 @@ func awsRestjson1_deserializeOpDocumentListDevEnvironmentSessionsOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4463,6 +4558,7 @@ func awsRestjson1_deserializeOpDocumentListEventLogsOutput(v **ListEventLogsOutp
 			if err := awsRestjson1_deserializeDocumentEventLogEntries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4471,6 +4567,7 @@ func awsRestjson1_deserializeOpDocumentListEventLogsOutput(v **ListEventLogsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4637,6 +4734,7 @@ func awsRestjson1_deserializeOpDocumentListProjectsOutput(v **ListProjectsOutput
 			if err := awsRestjson1_deserializeDocumentProjectSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4645,6 +4743,7 @@ func awsRestjson1_deserializeOpDocumentListProjectsOutput(v **ListProjectsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4811,6 +4910,7 @@ func awsRestjson1_deserializeOpDocumentListSourceRepositoriesOutput(v **ListSour
 			if err := awsRestjson1_deserializeDocumentListSourceRepositoriesItems(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4819,6 +4919,7 @@ func awsRestjson1_deserializeOpDocumentListSourceRepositoriesOutput(v **ListSour
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4985,6 +5086,7 @@ func awsRestjson1_deserializeOpDocumentListSourceRepositoryBranchesOutput(v **Li
 			if err := awsRestjson1_deserializeDocumentListSourceRepositoryBranchesItems(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4993,6 +5095,7 @@ func awsRestjson1_deserializeOpDocumentListSourceRepositoryBranchesOutput(v **Li
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5159,6 +5262,7 @@ func awsRestjson1_deserializeOpDocumentListSpacesOutput(v **ListSpacesOutput, va
 			if err := awsRestjson1_deserializeDocumentSpaceSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5167,6 +5271,7 @@ func awsRestjson1_deserializeOpDocumentListSpacesOutput(v **ListSpacesOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5333,6 +5438,7 @@ func awsRestjson1_deserializeOpDocumentListWorkflowRunsOutput(v **ListWorkflowRu
 			if err := awsRestjson1_deserializeDocumentWorkflowRunSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5341,6 +5447,7 @@ func awsRestjson1_deserializeOpDocumentListWorkflowRunsOutput(v **ListWorkflowRu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5507,6 +5614,7 @@ func awsRestjson1_deserializeOpDocumentListWorkflowsOutput(v **ListWorkflowsOutp
 			if err := awsRestjson1_deserializeDocumentWorkflowSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5515,6 +5623,7 @@ func awsRestjson1_deserializeOpDocumentListWorkflowsOutput(v **ListWorkflowsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5685,6 +5794,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentOutput(v **StartDevEnv
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5693,6 +5803,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentOutput(v **StartDevEnv
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5701,6 +5812,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentOutput(v **StartDevEnv
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5709,6 +5821,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentOutput(v **StartDevEnv
 				}
 				sv.Status = types.DevEnvironmentStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5875,6 +5988,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentSessionOutput(v **Star
 			if err := awsRestjson1_deserializeDocumentDevEnvironmentAccessDetails(&sv.AccessDetails, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5883,6 +5997,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentSessionOutput(v **Star
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5891,6 +6006,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentSessionOutput(v **Star
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5899,6 +6015,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentSessionOutput(v **Star
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5907,6 +6024,7 @@ func awsRestjson1_deserializeOpDocumentStartDevEnvironmentSessionOutput(v **Star
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6077,6 +6195,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowRunOutput(v **StartWorkflowR
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6085,6 +6204,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowRunOutput(v **StartWorkflowR
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6093,6 +6213,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowRunOutput(v **StartWorkflowR
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6101,6 +6222,7 @@ func awsRestjson1_deserializeOpDocumentStartWorkflowRunOutput(v **StartWorkflowR
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6271,6 +6393,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentOutput(v **StopDevEnvir
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6279,6 +6402,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentOutput(v **StopDevEnvir
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6287,6 +6411,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentOutput(v **StopDevEnvir
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6295,6 +6420,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentOutput(v **StopDevEnvir
 				}
 				sv.Status = types.DevEnvironmentStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6465,6 +6591,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentSessionOutput(v **StopD
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6473,6 +6600,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentSessionOutput(v **StopD
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6481,6 +6609,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentSessionOutput(v **StopD
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6489,6 +6618,7 @@ func awsRestjson1_deserializeOpDocumentStopDevEnvironmentSessionOutput(v **StopD
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6659,6 +6789,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.Alias = ptr.String(jtv)
 			}
+
 		case "clientToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6667,6 +6798,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6675,10 +6807,12 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "ides":
 			if err := awsRestjson1_deserializeDocumentIdeConfigurationList(&sv.Ides, value); err != nil {
 				return err
 			}
+
 		case "inactivityTimeoutMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6691,6 +6825,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.InactivityTimeoutMinutes = int32(i64)
 			}
+
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6699,6 +6834,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.InstanceType = types.InstanceType(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6707,6 +6843,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6715,6 +6852,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDevEnvironmentOutput(v **UpdateDevE
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6885,6 +7023,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6893,6 +7032,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6901,6 +7041,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6909,6 +7050,7 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7079,6 +7221,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSpaceOutput(v **UpdateSpaceOutput, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7087,6 +7230,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSpaceOutput(v **UpdateSpaceOutput, 
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7095,6 +7239,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSpaceOutput(v **UpdateSpaceOutput, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7265,6 +7410,7 @@ func awsRestjson1_deserializeOpDocumentVerifySessionOutput(v **VerifySessionOutp
 				}
 				sv.Identity = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7520,6 +7666,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7597,6 +7744,7 @@ func awsRestjson1_deserializeDocumentAccessTokenSummary(v **types.AccessTokenSum
 				}
 				sv.ExpiresTime = ptr.Time(t)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7605,6 +7753,7 @@ func awsRestjson1_deserializeDocumentAccessTokenSummary(v **types.AccessTokenSum
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7613,6 +7762,7 @@ func awsRestjson1_deserializeDocumentAccessTokenSummary(v **types.AccessTokenSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7652,6 +7802,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7691,6 +7842,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentAccessDetails(v **types.DevEn
 				}
 				sv.StreamUrl = ptr.String(jtv)
 			}
+
 		case "tokenValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7699,6 +7851,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentAccessDetails(v **types.DevEn
 				}
 				sv.TokenValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7772,6 +7925,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentRepositorySummary(v **types.D
 				}
 				sv.BranchName = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7780,6 +7934,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentRepositorySummary(v **types.D
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7853,6 +8008,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSessionSummary(v **types.DevE
 				}
 				sv.DevEnvironmentId = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7861,6 +8017,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSessionSummary(v **types.DevE
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7869,6 +8026,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSessionSummary(v **types.DevE
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7877,6 +8035,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSessionSummary(v **types.DevE
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "startedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7889,6 +8048,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSessionSummary(v **types.DevE
 				}
 				sv.StartedTime = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7928,6 +8088,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.Alias = ptr.String(jtv)
 			}
+
 		case "creatorId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7936,6 +8097,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.CreatorId = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7944,10 +8106,12 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "ides":
 			if err := awsRestjson1_deserializeDocumentIdes(&sv.Ides, value); err != nil {
 				return err
 			}
+
 		case "inactivityTimeoutMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7960,6 +8124,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.InactivityTimeoutMinutes = int32(i64)
 			}
+
 		case "instanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7968,6 +8133,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.InstanceType = types.InstanceType(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7980,10 +8146,12 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "persistentStorage":
 			if err := awsRestjson1_deserializeDocumentPersistentStorage(&sv.PersistentStorage, value); err != nil {
 				return err
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7992,10 +8160,12 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "repositories":
 			if err := awsRestjson1_deserializeDocumentDevEnvironmentRepositorySummaries(&sv.Repositories, value); err != nil {
 				return err
 			}
+
 		case "spaceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8004,6 +8174,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.SpaceName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8012,6 +8183,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.Status = types.DevEnvironmentStatus(jtv)
 			}
+
 		case "statusReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8020,6 +8192,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.StatusReason = ptr.String(jtv)
 			}
+
 		case "vpcConnectionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8028,6 +8201,7 @@ func awsRestjson1_deserializeDocumentDevEnvironmentSummary(v **types.DevEnvironm
 				}
 				sv.VpcConnectionName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8101,6 +8275,7 @@ func awsRestjson1_deserializeDocumentEmailAddress(v **types.EmailAddress, value 
 				}
 				sv.Email = ptr.String(jtv)
 			}
+
 		case "verified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8109,6 +8284,7 @@ func awsRestjson1_deserializeDocumentEmailAddress(v **types.EmailAddress, value 
 				}
 				sv.Verified = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8182,6 +8358,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "eventCategory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8190,6 +8367,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.EventCategory = ptr.String(jtv)
 			}
+
 		case "eventName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8198,6 +8376,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.EventName = ptr.String(jtv)
 			}
+
 		case "eventSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8206,6 +8385,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.EventSource = ptr.String(jtv)
 			}
+
 		case "eventTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8218,6 +8398,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.EventTime = ptr.Time(t)
 			}
+
 		case "eventType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8226,6 +8407,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.EventType = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8234,6 +8416,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "operationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8242,10 +8425,12 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.OperationType = types.OperationType(jtv)
 			}
+
 		case "projectInformation":
 			if err := awsRestjson1_deserializeDocumentProjectInformation(&sv.ProjectInformation, value); err != nil {
 				return err
 			}
+
 		case "requestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8254,14 +8439,17 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
+
 		case "requestPayload":
 			if err := awsRestjson1_deserializeDocumentEventPayload(&sv.RequestPayload, value); err != nil {
 				return err
 			}
+
 		case "responsePayload":
 			if err := awsRestjson1_deserializeDocumentEventPayload(&sv.ResponsePayload, value); err != nil {
 				return err
 			}
+
 		case "sourceIpAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8270,6 +8458,7 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.SourceIpAddress = ptr.String(jtv)
 			}
+
 		case "userAgent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8278,10 +8467,12 @@ func awsRestjson1_deserializeDocumentEventLogEntry(v **types.EventLogEntry, valu
 				}
 				sv.UserAgent = ptr.String(jtv)
 			}
+
 		case "userIdentity":
 			if err := awsRestjson1_deserializeDocumentUserIdentity(&sv.UserIdentity, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8321,6 +8512,7 @@ func awsRestjson1_deserializeDocumentEventPayload(v **types.EventPayload, value 
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
+
 		case "data":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8329,6 +8521,7 @@ func awsRestjson1_deserializeDocumentEventPayload(v **types.EventPayload, value 
 				}
 				sv.Data = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8368,6 +8561,7 @@ func awsRestjson1_deserializeDocumentIde(v **types.Ide, value interface{}) error
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "runtime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8376,6 +8570,7 @@ func awsRestjson1_deserializeDocumentIde(v **types.Ide, value interface{}) error
 				}
 				sv.Runtime = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8415,6 +8610,7 @@ func awsRestjson1_deserializeDocumentIdeConfiguration(v **types.IdeConfiguration
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "runtime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8423,6 +8619,7 @@ func awsRestjson1_deserializeDocumentIdeConfiguration(v **types.IdeConfiguration
 				}
 				sv.Runtime = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8534,6 +8731,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoriesItem(v **types.ListSo
 				}
 				sv.CreatedTime = ptr.Time(t)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8542,6 +8740,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoriesItem(v **types.ListSo
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8550,6 +8749,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoriesItem(v **types.ListSo
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8562,6 +8762,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoriesItem(v **types.ListSo
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8570,6 +8771,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoriesItem(v **types.ListSo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8643,6 +8845,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoryBranchesItem(v **types.
 				}
 				sv.HeadCommitId = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8655,6 +8858,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoryBranchesItem(v **types.
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8663,6 +8867,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoryBranchesItem(v **types.
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "ref":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8671,6 +8876,7 @@ func awsRestjson1_deserializeDocumentListSourceRepositoryBranchesItem(v **types.
 				}
 				sv.Ref = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8748,6 +8954,7 @@ func awsRestjson1_deserializeDocumentPersistentStorage(v **types.PersistentStora
 				}
 				sv.SizeInGiB = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8787,6 +8994,7 @@ func awsRestjson1_deserializeDocumentProjectInformation(v **types.ProjectInforma
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "projectId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8795,6 +9003,7 @@ func awsRestjson1_deserializeDocumentProjectInformation(v **types.ProjectInforma
 				}
 				sv.ProjectId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8868,6 +9077,7 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8876,6 +9086,7 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8884,6 +9095,7 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8923,6 +9135,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8962,6 +9175,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9035,6 +9249,7 @@ func awsRestjson1_deserializeDocumentSpaceSummary(v **types.SpaceSummary, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9043,6 +9258,7 @@ func awsRestjson1_deserializeDocumentSpaceSummary(v **types.SpaceSummary, value 
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9051,6 +9267,7 @@ func awsRestjson1_deserializeDocumentSpaceSummary(v **types.SpaceSummary, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "regionName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9059,6 +9276,7 @@ func awsRestjson1_deserializeDocumentSpaceSummary(v **types.SpaceSummary, value 
 				}
 				sv.RegionName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9098,6 +9316,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9137,6 +9356,7 @@ func awsRestjson1_deserializeDocumentUserIdentity(v **types.UserIdentity, value 
 				}
 				sv.AwsAccountId = ptr.String(jtv)
 			}
+
 		case "principalId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9145,6 +9365,7 @@ func awsRestjson1_deserializeDocumentUserIdentity(v **types.UserIdentity, value 
 				}
 				sv.PrincipalId = ptr.String(jtv)
 			}
+
 		case "userName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9153,6 +9374,7 @@ func awsRestjson1_deserializeDocumentUserIdentity(v **types.UserIdentity, value 
 				}
 				sv.UserName = ptr.String(jtv)
 			}
+
 		case "userType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9161,6 +9383,7 @@ func awsRestjson1_deserializeDocumentUserIdentity(v **types.UserIdentity, value 
 				}
 				sv.UserType = types.UserType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9200,6 +9423,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9239,6 +9463,7 @@ func awsRestjson1_deserializeDocumentWorkflowDefinition(v **types.WorkflowDefini
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9278,6 +9503,7 @@ func awsRestjson1_deserializeDocumentWorkflowDefinitionSummary(v **types.Workflo
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9420,6 +9646,7 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.EndTime = ptr.Time(t)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9428,6 +9655,7 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9440,6 +9668,7 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "startTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9452,6 +9681,7 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.StartTime = ptr.Time(t)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9460,10 +9690,12 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.Status = types.WorkflowRunStatus(jtv)
 			}
+
 		case "statusReasons":
 			if err := awsRestjson1_deserializeDocumentWorkflowRunStatusReasons(&sv.StatusReasons, value); err != nil {
 				return err
 			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9472,6 +9704,7 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.WorkflowId = ptr.String(jtv)
 			}
+
 		case "workflowName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9480,6 +9713,7 @@ func awsRestjson1_deserializeDocumentWorkflowRunSummary(v **types.WorkflowRunSum
 				}
 				sv.WorkflowName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9557,10 +9791,12 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.CreatedTime = ptr.Time(t)
 			}
+
 		case "definition":
 			if err := awsRestjson1_deserializeDocumentWorkflowDefinitionSummary(&sv.Definition, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9569,6 +9805,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9581,6 +9818,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.LastUpdatedTime = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9589,6 +9827,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "runMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9597,6 +9836,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.RunMode = types.WorkflowRunMode(jtv)
 			}
+
 		case "sourceBranchName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9605,6 +9845,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.SourceBranchName = ptr.String(jtv)
 			}
+
 		case "sourceRepositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9613,6 +9854,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.SourceRepositoryName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9621,6 +9863,7 @@ func awsRestjson1_deserializeDocumentWorkflowSummary(v **types.WorkflowSummary, 
 				}
 				sv.Status = types.WorkflowStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

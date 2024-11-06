@@ -659,6 +659,7 @@ func awsRestjson1_deserializeOpDocumentDescribePlacementOutput(v **DescribePlace
 			if err := awsRestjson1_deserializeDocumentPlacementDescription(&sv.Placement, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -816,6 +817,7 @@ func awsRestjson1_deserializeOpDocumentDescribeProjectOutput(v **DescribeProject
 			if err := awsRestjson1_deserializeDocumentProjectDescription(&sv.Project, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1070,6 +1072,7 @@ func awsRestjson1_deserializeOpDocumentGetDevicesInPlacementOutput(v **GetDevice
 			if err := awsRestjson1_deserializeDocumentDeviceMap(&sv.Devices, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1231,10 +1234,12 @@ func awsRestjson1_deserializeOpDocumentListPlacementsOutput(v **ListPlacementsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "placements":
 			if err := awsRestjson1_deserializeDocumentPlacementSummaryList(&sv.Placements, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1393,10 +1398,12 @@ func awsRestjson1_deserializeOpDocumentListProjectsOutput(v **ListProjectsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "projects":
 			if err := awsRestjson1_deserializeDocumentProjectSummaryList(&sv.Projects, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1554,6 +1561,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2259,6 +2267,7 @@ func awsRestjson1_deserializeDocumentDeviceTemplate(v **types.DeviceTemplate, va
 			if err := awsRestjson1_deserializeDocumentDeviceCallbackOverrideMap(&sv.CallbackOverrides, value); err != nil {
 				return err
 			}
+
 		case "deviceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2267,6 +2276,7 @@ func awsRestjson1_deserializeDocumentDeviceTemplate(v **types.DeviceTemplate, va
 				}
 				sv.DeviceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2341,6 +2351,7 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2349,6 +2360,7 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2388,6 +2400,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2396,6 +2409,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2467,6 +2481,7 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 			if err := awsRestjson1_deserializeDocumentPlacementAttributeMap(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "createdDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2482,6 +2497,7 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 
 				}
 			}
+
 		case "placementName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2490,6 +2506,7 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 				}
 				sv.PlacementName = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2498,6 +2515,7 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "updatedDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2513,6 +2531,7 @@ func awsRestjson1_deserializeDocumentPlacementDescription(v **types.PlacementDes
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2559,6 +2578,7 @@ func awsRestjson1_deserializeDocumentPlacementSummary(v **types.PlacementSummary
 
 				}
 			}
+
 		case "placementName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2567,6 +2587,7 @@ func awsRestjson1_deserializeDocumentPlacementSummary(v **types.PlacementSummary
 				}
 				sv.PlacementName = ptr.String(jtv)
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2575,6 +2596,7 @@ func awsRestjson1_deserializeDocumentPlacementSummary(v **types.PlacementSummary
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "updatedDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2590,6 +2612,7 @@ func awsRestjson1_deserializeDocumentPlacementSummary(v **types.PlacementSummary
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2659,10 +2682,12 @@ func awsRestjson1_deserializeDocumentPlacementTemplate(v **types.PlacementTempla
 			if err := awsRestjson1_deserializeDocumentDefaultPlacementAttributeMap(&sv.DefaultAttributes, value); err != nil {
 				return err
 			}
+
 		case "deviceTemplates":
 			if err := awsRestjson1_deserializeDocumentDeviceTemplateMap(&sv.DeviceTemplates, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2702,6 +2727,7 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2717,6 +2743,7 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 
 				}
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2725,10 +2752,12 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "placementTemplate":
 			if err := awsRestjson1_deserializeDocumentPlacementTemplate(&sv.PlacementTemplate, value); err != nil {
 				return err
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2737,10 +2766,12 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "updatedDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2756,6 +2787,7 @@ func awsRestjson1_deserializeDocumentProjectDescription(v **types.ProjectDescrip
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2795,6 +2827,7 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2810,6 +2843,7 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 
 				}
 			}
+
 		case "projectName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2818,10 +2852,12 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 				}
 				sv.ProjectName = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "updatedDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2837,6 +2873,7 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2910,6 +2947,7 @@ func awsRestjson1_deserializeDocumentResourceConflictException(v **types.Resourc
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2918,6 +2956,7 @@ func awsRestjson1_deserializeDocumentResourceConflictException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2957,6 +2996,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2965,6 +3005,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3040,6 +3081,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3048,6 +3090,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

@@ -202,10 +202,12 @@ func awsRestjson1_deserializeOpDocumentAcceptResourceShareInvitationOutput(v **A
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "resourceShareInvitation":
 			if err := awsRestjson1_deserializeDocumentResourceShareInvitation(&sv.ResourceShareInvitation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -391,10 +393,12 @@ func awsRestjson1_deserializeOpDocumentAssociateResourceShareOutput(v **Associat
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "resourceShareAssociations":
 			if err := awsRestjson1_deserializeDocumentResourceShareAssociationList(&sv.ResourceShareAssociations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -568,6 +572,7 @@ func awsRestjson1_deserializeOpDocumentAssociateResourceSharePermissionOutput(v 
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "returnValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -576,6 +581,7 @@ func awsRestjson1_deserializeOpDocumentAssociateResourceSharePermissionOutput(v 
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -758,10 +764,12 @@ func awsRestjson1_deserializeOpDocumentCreatePermissionOutput(v **CreatePermissi
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "permission":
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionSummary(&sv.Permission, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -944,10 +952,12 @@ func awsRestjson1_deserializeOpDocumentCreatePermissionVersionOutput(v **CreateP
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "permission":
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionDetail(&sv.Permission, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1136,10 +1146,12 @@ func awsRestjson1_deserializeOpDocumentCreateResourceShareOutput(v **CreateResou
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "resourceShare":
 			if err := awsRestjson1_deserializeDocumentResourceShare(&sv.ResourceShare, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1313,6 +1325,7 @@ func awsRestjson1_deserializeOpDocumentDeletePermissionOutput(v **DeletePermissi
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "permissionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1321,6 +1334,7 @@ func awsRestjson1_deserializeOpDocumentDeletePermissionOutput(v **DeletePermissi
 				}
 				sv.PermissionStatus = types.PermissionStatus(jtv)
 			}
+
 		case "returnValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1329,6 +1343,7 @@ func awsRestjson1_deserializeOpDocumentDeletePermissionOutput(v **DeletePermissi
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1505,6 +1520,7 @@ func awsRestjson1_deserializeOpDocumentDeletePermissionVersionOutput(v **DeleteP
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "permissionStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1513,6 +1529,7 @@ func awsRestjson1_deserializeOpDocumentDeletePermissionVersionOutput(v **DeleteP
 				}
 				sv.PermissionStatus = types.PermissionStatus(jtv)
 			}
+
 		case "returnValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1521,6 +1538,7 @@ func awsRestjson1_deserializeOpDocumentDeletePermissionVersionOutput(v **DeleteP
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1700,6 +1718,7 @@ func awsRestjson1_deserializeOpDocumentDeleteResourceShareOutput(v **DeleteResou
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "returnValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1708,6 +1727,7 @@ func awsRestjson1_deserializeOpDocumentDeleteResourceShareOutput(v **DeleteResou
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1890,10 +1910,12 @@ func awsRestjson1_deserializeOpDocumentDisassociateResourceShareOutput(v **Disas
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "resourceShareAssociations":
 			if err := awsRestjson1_deserializeDocumentResourceShareAssociationList(&sv.ResourceShareAssociations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2070,6 +2092,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateResourceSharePermissionOutput
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "returnValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2078,6 +2101,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateResourceSharePermissionOutput
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2239,6 +2263,7 @@ func awsRestjson1_deserializeOpDocumentEnableSharingWithAwsOrganizationOutput(v 
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2405,6 +2430,7 @@ func awsRestjson1_deserializeOpDocumentGetPermissionOutput(v **GetPermissionOutp
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionDetail(&sv.Permission, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2575,10 +2601,12 @@ func awsRestjson1_deserializeOpDocumentGetResourcePoliciesOutput(v **GetResource
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "policies":
 			if err := awsRestjson1_deserializeDocumentPolicyList(&sv.Policies, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2752,10 +2780,12 @@ func awsRestjson1_deserializeOpDocumentGetResourceShareAssociationsOutput(v **Ge
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resourceShareAssociations":
 			if err := awsRestjson1_deserializeDocumentResourceShareAssociationList(&sv.ResourceShareAssociations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2932,10 +2962,12 @@ func awsRestjson1_deserializeOpDocumentGetResourceShareInvitationsOutput(v **Get
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resourceShareInvitations":
 			if err := awsRestjson1_deserializeDocumentResourceShareInvitationList(&sv.ResourceShareInvitations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3106,10 +3138,12 @@ func awsRestjson1_deserializeOpDocumentGetResourceSharesOutput(v **GetResourceSh
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resourceShares":
 			if err := awsRestjson1_deserializeDocumentResourceShareList(&sv.ResourceShares, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3289,10 +3323,12 @@ func awsRestjson1_deserializeOpDocumentListPendingInvitationResourcesOutput(v **
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resources":
 			if err := awsRestjson1_deserializeDocumentResourceList(&sv.Resources, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3460,10 +3496,12 @@ func awsRestjson1_deserializeOpDocumentListPermissionAssociationsOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "permissions":
 			if err := awsRestjson1_deserializeDocumentAssociatedPermissionList(&sv.Permissions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3631,10 +3669,12 @@ func awsRestjson1_deserializeOpDocumentListPermissionsOutput(v **ListPermissions
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "permissions":
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionList(&sv.Permissions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3808,10 +3848,12 @@ func awsRestjson1_deserializeOpDocumentListPermissionVersionsOutput(v **ListPerm
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "permissions":
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionList(&sv.Permissions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3982,10 +4024,12 @@ func awsRestjson1_deserializeOpDocumentListPrincipalsOutput(v **ListPrincipalsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "principals":
 			if err := awsRestjson1_deserializeDocumentPrincipalList(&sv.Principals, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4150,10 +4194,12 @@ func awsRestjson1_deserializeOpDocumentListReplacePermissionAssociationsWorkOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "replacePermissionAssociationsWorks":
 			if err := awsRestjson1_deserializeDocumentReplacePermissionAssociationsWorkList(&sv.ReplacePermissionAssociationsWorks, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4327,10 +4373,12 @@ func awsRestjson1_deserializeOpDocumentListResourcesOutput(v **ListResourcesOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resources":
 			if err := awsRestjson1_deserializeDocumentResourceList(&sv.Resources, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4504,10 +4552,12 @@ func awsRestjson1_deserializeOpDocumentListResourceSharePermissionsOutput(v **Li
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "permissions":
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionList(&sv.Permissions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4672,10 +4722,12 @@ func awsRestjson1_deserializeOpDocumentListResourceTypesOutput(v **ListResourceT
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "resourceTypes":
 			if err := awsRestjson1_deserializeDocumentServiceNameAndResourceTypeList(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4849,10 +4901,12 @@ func awsRestjson1_deserializeOpDocumentPromotePermissionCreatedFromPolicyOutput(
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "permission":
 			if err := awsRestjson1_deserializeDocumentResourceSharePermissionSummary(&sv.Permission, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5035,6 +5089,7 @@ func awsRestjson1_deserializeOpDocumentPromoteResourceShareCreatedFromPolicyOutp
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5217,10 +5272,12 @@ func awsRestjson1_deserializeOpDocumentRejectResourceShareInvitationOutput(v **R
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "resourceShareInvitation":
 			if err := awsRestjson1_deserializeDocumentResourceShareInvitation(&sv.ResourceShareInvitation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5397,10 +5454,12 @@ func awsRestjson1_deserializeOpDocumentReplacePermissionAssociationsOutput(v **R
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "replacePermissionAssociationsWork":
 			if err := awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(&sv.ReplacePermissionAssociationsWork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5574,6 +5633,7 @@ func awsRestjson1_deserializeOpDocumentSetDefaultPermissionVersionOutput(v **Set
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "returnValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5582,6 +5642,7 @@ func awsRestjson1_deserializeOpDocumentSetDefaultPermissionVersionOutput(v **Set
 				}
 				sv.ReturnValue = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5970,10 +6031,12 @@ func awsRestjson1_deserializeOpDocumentUpdateResourceShareOutput(v **UpdateResou
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "resourceShare":
 			if err := awsRestjson1_deserializeDocumentResourceShare(&sv.ResourceShare, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7021,6 +7084,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "defaultVersion":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7029,6 +7093,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.DefaultVersion = ptr.Bool(jtv)
 			}
+
 		case "featureSet":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7037,6 +7102,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.FeatureSet = types.PermissionFeatureSet(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7052,6 +7118,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 
 				}
 			}
+
 		case "permissionVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7060,6 +7127,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.PermissionVersion = ptr.String(jtv)
 			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7068,6 +7136,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7076,6 +7145,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7084,6 +7154,7 @@ func awsRestjson1_deserializeDocumentAssociatedPermission(v **types.AssociatedPe
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7157,6 +7228,7 @@ func awsRestjson1_deserializeDocumentIdempotentParameterMismatchException(v **ty
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7196,6 +7268,7 @@ func awsRestjson1_deserializeDocumentInvalidClientTokenException(v **types.Inval
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7235,6 +7308,7 @@ func awsRestjson1_deserializeDocumentInvalidMaxResultsException(v **types.Invali
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7274,6 +7348,7 @@ func awsRestjson1_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7313,6 +7388,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7352,6 +7428,7 @@ func awsRestjson1_deserializeDocumentInvalidPolicyException(v **types.InvalidPol
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7391,6 +7468,7 @@ func awsRestjson1_deserializeDocumentInvalidResourceTypeException(v **types.Inva
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7430,6 +7508,7 @@ func awsRestjson1_deserializeDocumentInvalidStateTransitionException(v **types.I
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7469,6 +7548,7 @@ func awsRestjson1_deserializeDocumentMalformedArnException(v **types.MalformedAr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7508,6 +7588,7 @@ func awsRestjson1_deserializeDocumentMalformedPolicyTemplateException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7547,6 +7628,7 @@ func awsRestjson1_deserializeDocumentMissingRequiredParameterException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7586,6 +7668,7 @@ func awsRestjson1_deserializeDocumentOperationNotPermittedException(v **types.Op
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7625,6 +7708,7 @@ func awsRestjson1_deserializeDocumentPermissionAlreadyExistsException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7664,6 +7748,7 @@ func awsRestjson1_deserializeDocumentPermissionLimitExceededException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7703,6 +7788,7 @@ func awsRestjson1_deserializeDocumentPermissionVersionsLimitExceededException(v 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7785,6 +7871,7 @@ func awsRestjson1_deserializeDocumentPrincipal(v **types.Principal, value interf
 
 				}
 			}
+
 		case "external":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7793,6 +7880,7 @@ func awsRestjson1_deserializeDocumentPrincipal(v **types.Principal, value interf
 				}
 				sv.External = ptr.Bool(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7801,6 +7889,7 @@ func awsRestjson1_deserializeDocumentPrincipal(v **types.Principal, value interf
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7816,6 +7905,7 @@ func awsRestjson1_deserializeDocumentPrincipal(v **types.Principal, value interf
 
 				}
 			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7824,6 +7914,7 @@ func awsRestjson1_deserializeDocumentPrincipal(v **types.Principal, value interf
 				}
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7904,6 +7995,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 
 				}
 			}
+
 		case "fromPermissionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7912,6 +8004,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.FromPermissionArn = ptr.String(jtv)
 			}
+
 		case "fromPermissionVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7920,6 +8013,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.FromPermissionVersion = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7928,6 +8022,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7943,6 +8038,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7951,6 +8047,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.Status = types.ReplacePermissionAssociationsWorkStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7959,6 +8056,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "toPermissionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7967,6 +8065,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.ToPermissionArn = ptr.String(jtv)
 			}
+
 		case "toPermissionVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7975,6 +8074,7 @@ func awsRestjson1_deserializeDocumentReplacePermissionAssociationsWork(v **types
 				}
 				sv.ToPermissionVersion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8048,6 +8148,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8063,6 +8164,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 
 				}
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8078,6 +8180,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 
 				}
 			}
+
 		case "resourceGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8086,6 +8189,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.ResourceGroupArn = ptr.String(jtv)
 			}
+
 		case "resourceRegionScope":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8094,6 +8198,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.ResourceRegionScope = types.ResourceRegionScope(jtv)
 			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8102,6 +8207,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8110,6 +8216,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Status = types.ResourceStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8118,6 +8225,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8126,6 +8234,7 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8165,6 +8274,7 @@ func awsRestjson1_deserializeDocumentResourceArnNotFoundException(v **types.Reso
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8238,6 +8348,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.AllowExternalPrincipals = ptr.Bool(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8253,6 +8364,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 
 				}
 			}
+
 		case "featureSet":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8261,6 +8373,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.FeatureSet = types.ResourceShareFeatureSet(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8276,6 +8389,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8284,6 +8398,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "owningAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8292,6 +8407,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.OwningAccountId = ptr.String(jtv)
 			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8300,6 +8416,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8308,6 +8425,7 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.Status = types.ResourceShareStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8316,10 +8434,12 @@ func awsRestjson1_deserializeDocumentResourceShare(v **types.ResourceShare, valu
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8359,6 +8479,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.AssociatedEntity = ptr.String(jtv)
 			}
+
 		case "associationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8367,6 +8488,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.AssociationType = types.ResourceShareAssociationType(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8382,6 +8504,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 
 				}
 			}
+
 		case "external":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8390,6 +8513,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.External = ptr.Bool(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8405,6 +8529,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 
 				}
 			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8413,6 +8538,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
+
 		case "resourceShareName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8421,6 +8547,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.ResourceShareName = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8429,6 +8556,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.Status = types.ResourceShareAssociationStatus(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8437,6 +8565,7 @@ func awsRestjson1_deserializeDocumentResourceShareAssociation(v **types.Resource
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8517,6 +8646,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 
 				}
 			}
+
 		case "receiverAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8525,6 +8655,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.ReceiverAccountId = ptr.String(jtv)
 			}
+
 		case "receiverArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8533,6 +8664,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.ReceiverArn = ptr.String(jtv)
 			}
+
 		case "resourceShareArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8541,10 +8673,12 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.ResourceShareArn = ptr.String(jtv)
 			}
+
 		case "resourceShareAssociations":
 			if err := awsRestjson1_deserializeDocumentResourceShareAssociationList(&sv.ResourceShareAssociations, value); err != nil {
 				return err
 			}
+
 		case "resourceShareInvitationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8553,6 +8687,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.ResourceShareInvitationArn = ptr.String(jtv)
 			}
+
 		case "resourceShareName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8561,6 +8696,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.ResourceShareName = ptr.String(jtv)
 			}
+
 		case "senderAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8569,6 +8705,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.SenderAccountId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8577,6 +8714,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitation(v **types.ResourceS
 				}
 				sv.Status = types.ResourceShareInvitationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8616,6 +8754,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitationAlreadyAcceptedExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8655,6 +8794,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitationAlreadyRejectedExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8694,6 +8834,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitationArnNotFoundException
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8733,6 +8874,7 @@ func awsRestjson1_deserializeDocumentResourceShareInvitationExpiredException(v *
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8806,6 +8948,7 @@ func awsRestjson1_deserializeDocumentResourceShareLimitExceededException(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8879,6 +9022,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8894,6 +9038,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 
 				}
 			}
+
 		case "defaultVersion":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8902,6 +9047,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.DefaultVersion = ptr.Bool(jtv)
 			}
+
 		case "featureSet":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8910,6 +9056,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.FeatureSet = types.PermissionFeatureSet(jtv)
 			}
+
 		case "isResourceTypeDefault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8918,6 +9065,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.IsResourceTypeDefault = ptr.Bool(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8933,6 +9081,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8941,6 +9090,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "permission":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8949,6 +9099,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.Permission = ptr.String(jtv)
 			}
+
 		case "permissionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8957,6 +9108,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.PermissionType = types.PermissionType(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8965,6 +9117,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8973,10 +9126,12 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.Status = types.PermissionStatus(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8985,6 +9140,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionDetail(v **types.Res
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9058,6 +9214,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9073,6 +9230,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 
 				}
 			}
+
 		case "defaultVersion":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9081,6 +9239,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.DefaultVersion = ptr.Bool(jtv)
 			}
+
 		case "featureSet":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9089,6 +9248,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.FeatureSet = types.PermissionFeatureSet(jtv)
 			}
+
 		case "isResourceTypeDefault":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9097,6 +9257,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.IsResourceTypeDefault = ptr.Bool(jtv)
 			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9112,6 +9273,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 
 				}
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9120,6 +9282,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "permissionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9128,6 +9291,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.PermissionType = types.PermissionType(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9136,6 +9300,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9144,10 +9309,12 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9156,6 +9323,7 @@ func awsRestjson1_deserializeDocumentResourceSharePermissionSummary(v **types.Re
 				}
 				sv.Version = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9195,6 +9363,7 @@ func awsRestjson1_deserializeDocumentServerInternalException(v **types.ServerInt
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9234,6 +9403,7 @@ func awsRestjson1_deserializeDocumentServiceNameAndResourceType(v **types.Servic
 				}
 				sv.ResourceRegionScope = types.ResourceRegionScope(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9242,6 +9412,7 @@ func awsRestjson1_deserializeDocumentServiceNameAndResourceType(v **types.Servic
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "serviceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9250,6 +9421,7 @@ func awsRestjson1_deserializeDocumentServiceNameAndResourceType(v **types.Servic
 				}
 				sv.ServiceName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9323,6 +9495,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9362,6 +9535,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9370,6 +9544,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9409,6 +9584,7 @@ func awsRestjson1_deserializeDocumentTagLimitExceededException(v **types.TagLimi
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9482,6 +9658,7 @@ func awsRestjson1_deserializeDocumentTagPolicyViolationException(v **types.TagPo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9521,6 +9698,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9560,6 +9738,7 @@ func awsRestjson1_deserializeDocumentUnknownResourceException(v **types.UnknownR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9599,6 +9778,7 @@ func awsRestjson1_deserializeDocumentUnmatchedPolicyPermissionException(v **type
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

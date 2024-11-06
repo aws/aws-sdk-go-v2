@@ -194,6 +194,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.BotAliasId = ptr.String(jtv)
 			}
+
 		case "botId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -202,6 +203,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.BotId = ptr.String(jtv)
 			}
+
 		case "localeId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -210,6 +212,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.LocaleId = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -218,6 +221,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutp
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -381,10 +385,12 @@ func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, va
 			if err := awsRestjson1_deserializeDocumentInterpretations(&sv.Interpretations, value); err != nil {
 				return err
 			}
+
 		case "messages":
 			if err := awsRestjson1_deserializeDocumentMessages(&sv.Messages, value); err != nil {
 				return err
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -393,10 +399,12 @@ func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, va
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "sessionState":
 			if err := awsRestjson1_deserializeDocumentSessionState(&sv.SessionState, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -729,18 +737,22 @@ func awsRestjson1_deserializeOpDocumentRecognizeTextOutput(v **RecognizeTextOutp
 			if err := awsRestjson1_deserializeDocumentInterpretations(&sv.Interpretations, value); err != nil {
 				return err
 			}
+
 		case "messages":
 			if err := awsRestjson1_deserializeDocumentMessages(&sv.Messages, value); err != nil {
 				return err
 			}
+
 		case "recognizedBotMember":
 			if err := awsRestjson1_deserializeDocumentRecognizedBotMember(&sv.RecognizedBotMember, value); err != nil {
 				return err
 			}
+
 		case "requestAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.RequestAttributes, value); err != nil {
 				return err
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -749,10 +761,12 @@ func awsRestjson1_deserializeOpDocumentRecognizeTextOutput(v **RecognizeTextOutp
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "sessionState":
 			if err := awsRestjson1_deserializeDocumentSessionState(&sv.SessionState, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1709,6 +1723,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1744,6 +1759,7 @@ func awsRestjson1_deserializeDocumentActiveContext(v **types.ActiveContext, valu
 			if err := awsRestjson1_deserializeDocumentActiveContextParametersMap(&sv.ContextAttributes, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1752,10 +1768,12 @@ func awsRestjson1_deserializeDocumentActiveContext(v **types.ActiveContext, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "timeToLive":
 			if err := awsRestjson1_deserializeDocumentActiveContextTimeToLive(&sv.TimeToLive, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1869,6 +1887,7 @@ func awsRestjson1_deserializeDocumentActiveContextTimeToLive(v **types.ActiveCon
 				}
 				sv.TimeToLiveInSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "turnsToLive":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1881,6 +1900,7 @@ func awsRestjson1_deserializeDocumentActiveContextTimeToLive(v **types.ActiveCon
 				}
 				sv.TurnsToLive = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1924,6 +1944,7 @@ func awsRestjson1_deserializeDocumentAudioResponseEvent(v **types.AudioResponseE
 				}
 				sv.AudioChunk = dv
 			}
+
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1932,6 +1953,7 @@ func awsRestjson1_deserializeDocumentAudioResponseEvent(v **types.AudioResponseE
 				}
 				sv.ContentType = ptr.String(jtv)
 			}
+
 		case "eventId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1940,6 +1962,7 @@ func awsRestjson1_deserializeDocumentAudioResponseEvent(v **types.AudioResponseE
 				}
 				sv.EventId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1979,6 +2002,7 @@ func awsRestjson1_deserializeDocumentBadGatewayException(v **types.BadGatewayExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2018,6 +2042,7 @@ func awsRestjson1_deserializeDocumentButton(v **types.Button, value interface{})
 				}
 				sv.Text = ptr.String(jtv)
 			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2026,6 +2051,7 @@ func awsRestjson1_deserializeDocumentButton(v **types.Button, value interface{})
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2124,6 +2150,7 @@ func awsRestjson1_deserializeDocumentConfidenceScore(v **types.ConfidenceScore, 
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2163,6 +2190,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2202,6 +2230,7 @@ func awsRestjson1_deserializeDocumentDependencyFailedException(v **types.Depende
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2241,6 +2270,7 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.SlotElicitationStyle = types.StyleType(jtv)
 			}
+
 		case "slotToElicit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2249,10 +2279,12 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.SlotToElicit = ptr.String(jtv)
 			}
+
 		case "subSlotToElicit":
 			if err := awsRestjson1_deserializeDocumentElicitSubSlot(&sv.SubSlotToElicit, value); err != nil {
 				return err
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2261,6 +2293,7 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, value 
 				}
 				sv.Type = types.DialogActionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2300,10 +2333,12 @@ func awsRestjson1_deserializeDocumentElicitSubSlot(v **types.ElicitSubSlot, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "subSlotToElicit":
 			if err := awsRestjson1_deserializeDocumentElicitSubSlot(&sv.SubSlotToElicit, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2343,6 +2378,7 @@ func awsRestjson1_deserializeDocumentHeartbeatEvent(v **types.HeartbeatEvent, va
 				}
 				sv.EventId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2378,6 +2414,7 @@ func awsRestjson1_deserializeDocumentImageResponseCard(v **types.ImageResponseCa
 			if err := awsRestjson1_deserializeDocumentButtonsList(&sv.Buttons, value); err != nil {
 				return err
 			}
+
 		case "imageUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2386,6 +2423,7 @@ func awsRestjson1_deserializeDocumentImageResponseCard(v **types.ImageResponseCa
 				}
 				sv.ImageUrl = ptr.String(jtv)
 			}
+
 		case "subtitle":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2394,6 +2432,7 @@ func awsRestjson1_deserializeDocumentImageResponseCard(v **types.ImageResponseCa
 				}
 				sv.Subtitle = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2402,6 +2441,7 @@ func awsRestjson1_deserializeDocumentImageResponseCard(v **types.ImageResponseCa
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2441,6 +2481,7 @@ func awsRestjson1_deserializeDocumentIntent(v **types.Intent, value interface{})
 				}
 				sv.ConfirmationState = types.ConfirmationState(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2449,10 +2490,12 @@ func awsRestjson1_deserializeDocumentIntent(v **types.Intent, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "slots":
 			if err := awsRestjson1_deserializeDocumentSlots(&sv.Slots, value); err != nil {
 				return err
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2461,6 +2504,7 @@ func awsRestjson1_deserializeDocumentIntent(v **types.Intent, value interface{})
 				}
 				sv.State = types.IntentState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2500,6 +2544,7 @@ func awsRestjson1_deserializeDocumentIntentResultEvent(v **types.IntentResultEve
 				}
 				sv.EventId = ptr.String(jtv)
 			}
+
 		case "inputMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2508,18 +2553,22 @@ func awsRestjson1_deserializeDocumentIntentResultEvent(v **types.IntentResultEve
 				}
 				sv.InputMode = types.InputMode(jtv)
 			}
+
 		case "interpretations":
 			if err := awsRestjson1_deserializeDocumentInterpretations(&sv.Interpretations, value); err != nil {
 				return err
 			}
+
 		case "recognizedBotMember":
 			if err := awsRestjson1_deserializeDocumentRecognizedBotMember(&sv.RecognizedBotMember, value); err != nil {
 				return err
 			}
+
 		case "requestAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.RequestAttributes, value); err != nil {
 				return err
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2528,10 +2577,12 @@ func awsRestjson1_deserializeDocumentIntentResultEvent(v **types.IntentResultEve
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "sessionState":
 			if err := awsRestjson1_deserializeDocumentSessionState(&sv.SessionState, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2571,6 +2622,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2606,6 +2658,7 @@ func awsRestjson1_deserializeDocumentInterpretation(v **types.Interpretation, va
 			if err := awsRestjson1_deserializeDocumentIntent(&sv.Intent, value); err != nil {
 				return err
 			}
+
 		case "interpretationSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2614,14 +2667,17 @@ func awsRestjson1_deserializeDocumentInterpretation(v **types.Interpretation, va
 				}
 				sv.InterpretationSource = types.InterpretationSource(jtv)
 			}
+
 		case "nluConfidence":
 			if err := awsRestjson1_deserializeDocumentConfidenceScore(&sv.NluConfidence, value); err != nil {
 				return err
 			}
+
 		case "sentimentResponse":
 			if err := awsRestjson1_deserializeDocumentSentimentResponse(&sv.SentimentResponse, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2695,6 +2751,7 @@ func awsRestjson1_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.Content = ptr.String(jtv)
 			}
+
 		case "contentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2703,10 +2760,12 @@ func awsRestjson1_deserializeDocumentMessage(v **types.Message, value interface{
 				}
 				sv.ContentType = types.MessageContentType(jtv)
 			}
+
 		case "imageResponseCard":
 			if err := awsRestjson1_deserializeDocumentImageResponseCard(&sv.ImageResponseCard, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2780,6 +2839,7 @@ func awsRestjson1_deserializeDocumentPlaybackInterruptionEvent(v **types.Playbac
 				}
 				sv.CausedByEventId = ptr.String(jtv)
 			}
+
 		case "eventId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2788,6 +2848,7 @@ func awsRestjson1_deserializeDocumentPlaybackInterruptionEvent(v **types.Playbac
 				}
 				sv.EventId = ptr.String(jtv)
 			}
+
 		case "eventReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2796,6 +2857,7 @@ func awsRestjson1_deserializeDocumentPlaybackInterruptionEvent(v **types.Playbac
 				}
 				sv.EventReason = types.PlaybackInterruptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2835,6 +2897,7 @@ func awsRestjson1_deserializeDocumentRecognizedBotMember(v **types.RecognizedBot
 				}
 				sv.BotId = ptr.String(jtv)
 			}
+
 		case "botName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2843,6 +2906,7 @@ func awsRestjson1_deserializeDocumentRecognizedBotMember(v **types.RecognizedBot
 				}
 				sv.BotName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2882,6 +2946,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2917,10 +2982,12 @@ func awsRestjson1_deserializeDocumentRuntimeHintDetails(v **types.RuntimeHintDet
 			if err := awsRestjson1_deserializeDocumentRuntimeHintValuesList(&sv.RuntimeHintValues, value); err != nil {
 				return err
 			}
+
 		case "subSlotHints":
 			if err := awsRestjson1_deserializeDocumentSlotHintsSlotMap(&sv.SubSlotHints, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2956,6 +3023,7 @@ func awsRestjson1_deserializeDocumentRuntimeHints(v **types.RuntimeHints, value 
 			if err := awsRestjson1_deserializeDocumentSlotHintsIntentMap(&sv.SlotHints, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2995,6 +3063,7 @@ func awsRestjson1_deserializeDocumentRuntimeHintValue(v **types.RuntimeHintValue
 				}
 				sv.Phrase = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3068,10 +3137,12 @@ func awsRestjson1_deserializeDocumentSentimentResponse(v **types.SentimentRespon
 				}
 				sv.Sentiment = types.SentimentType(jtv)
 			}
+
 		case "sentimentScore":
 			if err := awsRestjson1_deserializeDocumentSentimentScore(&sv.SentimentScore, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3136,6 +3207,7 @@ func awsRestjson1_deserializeDocumentSentimentScore(v **types.SentimentScore, va
 
 				}
 			}
+
 		case "negative":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3169,6 +3241,7 @@ func awsRestjson1_deserializeDocumentSentimentScore(v **types.SentimentScore, va
 
 				}
 			}
+
 		case "neutral":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3202,6 +3275,7 @@ func awsRestjson1_deserializeDocumentSentimentScore(v **types.SentimentScore, va
 
 				}
 			}
+
 		case "positive":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3235,6 +3309,7 @@ func awsRestjson1_deserializeDocumentSentimentScore(v **types.SentimentScore, va
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3270,14 +3345,17 @@ func awsRestjson1_deserializeDocumentSessionState(v **types.SessionState, value 
 			if err := awsRestjson1_deserializeDocumentActiveContextsList(&sv.ActiveContexts, value); err != nil {
 				return err
 			}
+
 		case "dialogAction":
 			if err := awsRestjson1_deserializeDocumentDialogAction(&sv.DialogAction, value); err != nil {
 				return err
 			}
+
 		case "intent":
 			if err := awsRestjson1_deserializeDocumentIntent(&sv.Intent, value); err != nil {
 				return err
 			}
+
 		case "originatingRequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3286,14 +3364,17 @@ func awsRestjson1_deserializeDocumentSessionState(v **types.SessionState, value 
 				}
 				sv.OriginatingRequestId = ptr.String(jtv)
 			}
+
 		case "runtimeHints":
 			if err := awsRestjson1_deserializeDocumentRuntimeHints(&sv.RuntimeHints, value); err != nil {
 				return err
 			}
+
 		case "sessionAttributes":
 			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3333,18 +3414,22 @@ func awsRestjson1_deserializeDocumentSlot(v **types.Slot, value interface{}) err
 				}
 				sv.Shape = types.Shape(jtv)
 			}
+
 		case "subSlots":
 			if err := awsRestjson1_deserializeDocumentSlots(&sv.SubSlots, value); err != nil {
 				return err
 			}
+
 		case "value":
 			if err := awsRestjson1_deserializeDocumentValue(&sv.Value, value); err != nil {
 				return err
 			}
+
 		case "values":
 			if err := awsRestjson1_deserializeDocumentValues(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3560,10 +3645,12 @@ func awsRestjson1_deserializeDocumentTextResponseEvent(v **types.TextResponseEve
 				}
 				sv.EventId = ptr.String(jtv)
 			}
+
 		case "messages":
 			if err := awsRestjson1_deserializeDocumentMessages(&sv.Messages, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3603,6 +3690,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3642,6 +3730,7 @@ func awsRestjson1_deserializeDocumentTranscriptEvent(v **types.TranscriptEvent, 
 				}
 				sv.EventId = ptr.String(jtv)
 			}
+
 		case "transcript":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3650,6 +3739,7 @@ func awsRestjson1_deserializeDocumentTranscriptEvent(v **types.TranscriptEvent, 
 				}
 				sv.Transcript = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3689,6 +3779,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3728,6 +3819,7 @@ func awsRestjson1_deserializeDocumentValue(v **types.Value, value interface{}) e
 				}
 				sv.InterpretedValue = ptr.String(jtv)
 			}
+
 		case "originalValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3736,10 +3828,12 @@ func awsRestjson1_deserializeDocumentValue(v **types.Value, value interface{}) e
 				}
 				sv.OriginalValue = ptr.String(jtv)
 			}
+
 		case "resolvedValues":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.ResolvedValues, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

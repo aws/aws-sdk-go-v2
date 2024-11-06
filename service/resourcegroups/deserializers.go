@@ -293,18 +293,22 @@ func awsRestjson1_deserializeOpDocumentCreateGroupOutput(v **CreateGroupOutput, 
 			if err := awsRestjson1_deserializeDocumentGroup(&sv.Group, value); err != nil {
 				return err
 			}
+
 		case "GroupConfiguration":
 			if err := awsRestjson1_deserializeDocumentGroupConfiguration(&sv.GroupConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ResourceQuery":
 			if err := awsRestjson1_deserializeDocumentResourceQuery(&sv.ResourceQuery, value); err != nil {
 				return err
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -471,6 +475,7 @@ func awsRestjson1_deserializeOpDocumentDeleteGroupOutput(v **DeleteGroupOutput, 
 			if err := awsRestjson1_deserializeDocumentGroup(&sv.Group, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -634,6 +639,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountSettingsOutput(v **GetAccountSe
 			if err := awsRestjson1_deserializeDocumentAccountSettings(&sv.AccountSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -800,6 +806,7 @@ func awsRestjson1_deserializeOpDocumentGetGroupOutput(v **GetGroupOutput, value 
 			if err := awsRestjson1_deserializeDocumentGroup(&sv.Group, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -966,6 +973,7 @@ func awsRestjson1_deserializeOpDocumentGetGroupConfigurationOutput(v **GetGroupC
 			if err := awsRestjson1_deserializeDocumentGroupConfiguration(&sv.GroupConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1132,6 +1140,7 @@ func awsRestjson1_deserializeOpDocumentGetGroupQueryOutput(v **GetGroupQueryOutp
 			if err := awsRestjson1_deserializeDocumentGroupQuery(&sv.GroupQuery, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1302,10 +1311,12 @@ func awsRestjson1_deserializeOpDocumentGetTagsOutput(v **GetTagsOutput, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1486,6 +1497,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 
 				}
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1494,6 +1506,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "GroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1502,6 +1515,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.GroupArn = ptr.String(jtv)
 			}
+
 		case "GroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1510,6 +1524,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.GroupName = ptr.String(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1518,6 +1533,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1526,6 +1542,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.Status = types.TagSyncTaskStatus(jtv)
 			}
+
 		case "TagKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1534,6 +1551,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.TagKey = ptr.String(jtv)
 			}
+
 		case "TagValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1542,6 +1560,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.TagValue = ptr.String(jtv)
 			}
+
 		case "TaskArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1550,6 +1569,7 @@ func awsRestjson1_deserializeOpDocumentGetTagSyncTaskOutput(v **GetTagSyncTaskOu
 				}
 				sv.TaskArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1716,14 +1736,17 @@ func awsRestjson1_deserializeOpDocumentGroupResourcesOutput(v **GroupResourcesOu
 			if err := awsRestjson1_deserializeDocumentFailedResourceList(&sv.Failed, value); err != nil {
 				return err
 			}
+
 		case "Pending":
 			if err := awsRestjson1_deserializeDocumentPendingResourceList(&sv.Pending, value); err != nil {
 				return err
 			}
+
 		case "Succeeded":
 			if err := awsRestjson1_deserializeDocumentResourceArnList(&sv.Succeeded, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1891,10 +1914,12 @@ func awsRestjson1_deserializeOpDocumentListGroupingStatusesOutput(v **ListGroupi
 				}
 				sv.Group = ptr.String(jtv)
 			}
+
 		case "GroupingStatuses":
 			if err := awsRestjson1_deserializeDocumentGroupingStatusesList(&sv.GroupingStatuses, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1903,6 +1928,7 @@ func awsRestjson1_deserializeOpDocumentListGroupingStatusesOutput(v **ListGroupi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2076,18 +2102,22 @@ func awsRestjson1_deserializeOpDocumentListGroupResourcesOutput(v **ListGroupRes
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "QueryErrors":
 			if err := awsRestjson1_deserializeDocumentQueryErrorList(&sv.QueryErrors, value); err != nil {
 				return err
 			}
+
 		case "ResourceIdentifiers":
 			if err := awsRestjson1_deserializeDocumentResourceIdentifierList(&sv.ResourceIdentifiers, value); err != nil {
 				return err
 			}
+
 		case "Resources":
 			if err := awsRestjson1_deserializeDocumentListGroupResourcesItemList(&sv.Resources, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2251,10 +2281,12 @@ func awsRestjson1_deserializeOpDocumentListGroupsOutput(v **ListGroupsOutput, va
 			if err := awsRestjson1_deserializeDocumentGroupIdentifierList(&sv.GroupIdentifiers, value); err != nil {
 				return err
 			}
+
 		case "Groups":
 			if err := awsRestjson1_deserializeDocumentGroupList(&sv.Groups, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2263,6 +2295,7 @@ func awsRestjson1_deserializeOpDocumentListGroupsOutput(v **ListGroupsOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2433,10 +2466,12 @@ func awsRestjson1_deserializeOpDocumentListTagSyncTasksOutput(v **ListTagSyncTas
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TagSyncTasks":
 			if err := awsRestjson1_deserializeDocumentTagSyncTaskList(&sv.TagSyncTasks, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2710,14 +2745,17 @@ func awsRestjson1_deserializeOpDocumentSearchResourcesOutput(v **SearchResources
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "QueryErrors":
 			if err := awsRestjson1_deserializeDocumentQueryErrorList(&sv.QueryErrors, value); err != nil {
 				return err
 			}
+
 		case "ResourceIdentifiers":
 			if err := awsRestjson1_deserializeDocumentResourceIdentifierList(&sv.ResourceIdentifiers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2891,6 +2929,7 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 				}
 				sv.GroupArn = ptr.String(jtv)
 			}
+
 		case "GroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2899,6 +2938,7 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 				}
 				sv.GroupName = ptr.String(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2907,6 +2947,7 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		case "TagKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2915,6 +2956,7 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 				}
 				sv.TagKey = ptr.String(jtv)
 			}
+
 		case "TagValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2923,6 +2965,7 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 				}
 				sv.TagValue = ptr.String(jtv)
 			}
+
 		case "TaskArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2931,6 +2974,7 @@ func awsRestjson1_deserializeOpDocumentStartTagSyncTaskOutput(v **StartTagSyncTa
 				}
 				sv.TaskArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3101,10 +3145,12 @@ func awsRestjson1_deserializeOpDocumentTagOutput(v **TagOutput, value interface{
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3271,14 +3317,17 @@ func awsRestjson1_deserializeOpDocumentUngroupResourcesOutput(v **UngroupResourc
 			if err := awsRestjson1_deserializeDocumentFailedResourceList(&sv.Failed, value); err != nil {
 				return err
 			}
+
 		case "Pending":
 			if err := awsRestjson1_deserializeDocumentPendingResourceList(&sv.Pending, value); err != nil {
 				return err
 			}
+
 		case "Succeeded":
 			if err := awsRestjson1_deserializeDocumentResourceArnList(&sv.Succeeded, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3449,10 +3498,12 @@ func awsRestjson1_deserializeOpDocumentUntagOutput(v **UntagOutput, value interf
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Keys":
 			if err := awsRestjson1_deserializeDocumentTagKeyList(&sv.Keys, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3616,6 +3667,7 @@ func awsRestjson1_deserializeOpDocumentUpdateAccountSettingsOutput(v **UpdateAcc
 			if err := awsRestjson1_deserializeDocumentAccountSettings(&sv.AccountSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3782,6 +3834,7 @@ func awsRestjson1_deserializeOpDocumentUpdateGroupOutput(v **UpdateGroupOutput, 
 			if err := awsRestjson1_deserializeDocumentGroup(&sv.Group, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3948,6 +4001,7 @@ func awsRestjson1_deserializeOpDocumentUpdateGroupQueryOutput(v **UpdateGroupQue
 			if err := awsRestjson1_deserializeDocumentGroupQuery(&sv.GroupQuery, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4239,6 +4293,7 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 				}
 				sv.GroupLifecycleEventsDesiredStatus = types.GroupLifecycleEventsDesiredStatus(jtv)
 			}
+
 		case "GroupLifecycleEventsStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4247,6 +4302,7 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 				}
 				sv.GroupLifecycleEventsStatus = types.GroupLifecycleEventsStatus(jtv)
 			}
+
 		case "GroupLifecycleEventsStatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4255,6 +4311,7 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 				}
 				sv.GroupLifecycleEventsStatusMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4330,6 +4387,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4369,6 +4427,7 @@ func awsRestjson1_deserializeDocumentFailedResource(v **types.FailedResource, va
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4377,6 +4436,7 @@ func awsRestjson1_deserializeDocumentFailedResource(v **types.FailedResource, va
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4385,6 +4445,7 @@ func awsRestjson1_deserializeDocumentFailedResource(v **types.FailedResource, va
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4458,6 +4519,7 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4493,6 +4555,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 			if err := awsRestjson1_deserializeDocumentApplicationTag(&sv.ApplicationTag, value); err != nil {
 				return err
 			}
+
 		case "Criticality":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4505,6 +4568,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.Criticality = ptr.Int32(int32(i64))
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4513,6 +4577,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "DisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4521,6 +4586,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "GroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4529,6 +4595,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.GroupArn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4537,6 +4604,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4545,6 +4613,7 @@ func awsRestjson1_deserializeDocumentGroup(v **types.Group, value interface{}) e
 				}
 				sv.Owner = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4580,6 +4649,7 @@ func awsRestjson1_deserializeDocumentGroupConfiguration(v **types.GroupConfigura
 			if err := awsRestjson1_deserializeDocumentGroupConfigurationList(&sv.Configuration, value); err != nil {
 				return err
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4588,10 +4658,12 @@ func awsRestjson1_deserializeDocumentGroupConfiguration(v **types.GroupConfigura
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "ProposedConfiguration":
 			if err := awsRestjson1_deserializeDocumentGroupConfigurationList(&sv.ProposedConfiguration, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4600,6 +4672,7 @@ func awsRestjson1_deserializeDocumentGroupConfiguration(v **types.GroupConfigura
 				}
 				sv.Status = types.GroupConfigurationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4635,6 +4708,7 @@ func awsRestjson1_deserializeDocumentGroupConfigurationItem(v **types.GroupConfi
 			if err := awsRestjson1_deserializeDocumentGroupParameterList(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4643,6 +4717,7 @@ func awsRestjson1_deserializeDocumentGroupConfigurationItem(v **types.GroupConfi
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4716,10 +4791,12 @@ func awsRestjson1_deserializeDocumentGroupConfigurationParameter(v **types.Group
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Values":
 			if err := awsRestjson1_deserializeDocumentGroupConfigurationParameterValueList(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4799,6 +4876,7 @@ func awsRestjson1_deserializeDocumentGroupIdentifier(v **types.GroupIdentifier, 
 				}
 				sv.Criticality = ptr.Int32(int32(i64))
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4807,6 +4885,7 @@ func awsRestjson1_deserializeDocumentGroupIdentifier(v **types.GroupIdentifier, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "DisplayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4815,6 +4894,7 @@ func awsRestjson1_deserializeDocumentGroupIdentifier(v **types.GroupIdentifier, 
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		case "GroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4823,6 +4903,7 @@ func awsRestjson1_deserializeDocumentGroupIdentifier(v **types.GroupIdentifier, 
 				}
 				sv.GroupArn = ptr.String(jtv)
 			}
+
 		case "GroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4831,6 +4912,7 @@ func awsRestjson1_deserializeDocumentGroupIdentifier(v **types.GroupIdentifier, 
 				}
 				sv.GroupName = ptr.String(jtv)
 			}
+
 		case "Owner":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4839,6 +4921,7 @@ func awsRestjson1_deserializeDocumentGroupIdentifier(v **types.GroupIdentifier, 
 				}
 				sv.Owner = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4912,6 +4995,7 @@ func awsRestjson1_deserializeDocumentGroupingStatusesItem(v **types.GroupingStat
 				}
 				sv.Action = types.GroupingType(jtv)
 			}
+
 		case "ErrorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4920,6 +5004,7 @@ func awsRestjson1_deserializeDocumentGroupingStatusesItem(v **types.GroupingStat
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4928,6 +5013,7 @@ func awsRestjson1_deserializeDocumentGroupingStatusesItem(v **types.GroupingStat
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4936,6 +5022,7 @@ func awsRestjson1_deserializeDocumentGroupingStatusesItem(v **types.GroupingStat
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4944,6 +5031,7 @@ func awsRestjson1_deserializeDocumentGroupingStatusesItem(v **types.GroupingStat
 				}
 				sv.Status = types.GroupingStatus(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4959,6 +5047,7 @@ func awsRestjson1_deserializeDocumentGroupingStatusesItem(v **types.GroupingStat
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5100,10 +5189,12 @@ func awsRestjson1_deserializeDocumentGroupQuery(v **types.GroupQuery, value inte
 				}
 				sv.GroupName = ptr.String(jtv)
 			}
+
 		case "ResourceQuery":
 			if err := awsRestjson1_deserializeDocumentResourceQuery(&sv.ResourceQuery, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5143,6 +5234,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5178,10 +5270,12 @@ func awsRestjson1_deserializeDocumentListGroupResourcesItem(v **types.ListGroupR
 			if err := awsRestjson1_deserializeDocumentResourceIdentifier(&sv.Identifier, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if err := awsRestjson1_deserializeDocumentResourceStatus(&sv.Status, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5255,6 +5349,7 @@ func awsRestjson1_deserializeDocumentMethodNotAllowedException(v **types.MethodN
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5294,6 +5389,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5333,6 +5429,7 @@ func awsRestjson1_deserializeDocumentPendingResource(v **types.PendingResource, 
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5406,6 +5503,7 @@ func awsRestjson1_deserializeDocumentQueryError(v **types.QueryError, value inte
 				}
 				sv.ErrorCode = types.QueryErrorCode(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5414,6 +5512,7 @@ func awsRestjson1_deserializeDocumentQueryError(v **types.QueryError, value inte
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5523,6 +5622,7 @@ func awsRestjson1_deserializeDocumentResourceIdentifier(v **types.ResourceIdenti
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5531,6 +5631,7 @@ func awsRestjson1_deserializeDocumentResourceIdentifier(v **types.ResourceIdenti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5604,6 +5705,7 @@ func awsRestjson1_deserializeDocumentResourceQuery(v **types.ResourceQuery, valu
 				}
 				sv.Query = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5612,6 +5714,7 @@ func awsRestjson1_deserializeDocumentResourceQuery(v **types.ResourceQuery, valu
 				}
 				sv.Type = types.QueryType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5651,6 +5754,7 @@ func awsRestjson1_deserializeDocumentResourceStatus(v **types.ResourceStatus, va
 				}
 				sv.Name = types.ResourceStatusValue(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5769,6 +5873,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 
 				}
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5777,6 +5882,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "GroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5785,6 +5891,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.GroupArn = ptr.String(jtv)
 			}
+
 		case "GroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5793,6 +5900,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.GroupName = ptr.String(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5801,6 +5909,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5809,6 +5918,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.Status = types.TagSyncTaskStatus(jtv)
 			}
+
 		case "TagKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5817,6 +5927,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.TagKey = ptr.String(jtv)
 			}
+
 		case "TagValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5825,6 +5936,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.TagValue = ptr.String(jtv)
 			}
+
 		case "TaskArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5833,6 +5945,7 @@ func awsRestjson1_deserializeDocumentTagSyncTaskItem(v **types.TagSyncTaskItem, 
 				}
 				sv.TaskArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5906,6 +6019,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5945,6 +6059,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

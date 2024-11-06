@@ -172,18 +172,22 @@ func awsRestjson1_deserializeOpDocumentSearchOutput(v **SearchOutput, value inte
 			if err := awsRestjson1_deserializeDocumentFacets(&sv.Facets, value); err != nil {
 				return err
 			}
+
 		case "hits":
 			if err := awsRestjson1_deserializeDocumentHits(&sv.Hits, value); err != nil {
 				return err
 			}
+
 		case "stats":
 			if err := awsRestjson1_deserializeDocumentStats(&sv.Stats, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if err := awsRestjson1_deserializeDocumentSearchStatus(&sv.Status, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -335,10 +339,12 @@ func awsRestjson1_deserializeOpDocumentSuggestOutput(v **SuggestOutput, value in
 			if err := awsRestjson1_deserializeDocumentSuggestStatus(&sv.Status, value); err != nil {
 				return err
 			}
+
 		case "suggest":
 			if err := awsRestjson1_deserializeDocumentSuggestModel(&sv.Suggest, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -498,6 +504,7 @@ func awsRestjson1_deserializeOpDocumentUploadDocumentsOutput(v **UploadDocuments
 				}
 				sv.Adds = i64
 			}
+
 		case "deletes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -510,6 +517,7 @@ func awsRestjson1_deserializeOpDocumentUploadDocumentsOutput(v **UploadDocuments
 				}
 				sv.Deletes = i64
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -518,10 +526,12 @@ func awsRestjson1_deserializeOpDocumentUploadDocumentsOutput(v **UploadDocuments
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "warnings":
 			if err := awsRestjson1_deserializeDocumentDocumentServiceWarnings(&sv.Warnings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -637,6 +647,7 @@ func awsRestjson1_deserializeDocumentBucket(v **types.Bucket, value interface{})
 				}
 				sv.Count = i64
 			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -645,6 +656,7 @@ func awsRestjson1_deserializeDocumentBucket(v **types.Bucket, value interface{})
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -680,6 +692,7 @@ func awsRestjson1_deserializeDocumentBucketInfo(v **types.BucketInfo, value inte
 			if err := awsRestjson1_deserializeDocumentBucketList(&sv.Buckets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -753,6 +766,7 @@ func awsRestjson1_deserializeDocumentDocumentServiceException(v **types.Document
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -761,6 +775,7 @@ func awsRestjson1_deserializeDocumentDocumentServiceException(v **types.Document
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -800,6 +815,7 @@ func awsRestjson1_deserializeDocumentDocumentServiceWarning(v **types.DocumentSe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -982,6 +998,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 				}
 				sv.Count = i64
 			}
+
 		case "max":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -990,6 +1007,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 				}
 				sv.Max = ptr.String(jtv)
 			}
+
 		case "mean":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -998,6 +1016,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 				}
 				sv.Mean = ptr.String(jtv)
 			}
+
 		case "min":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1006,6 +1025,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 				}
 				sv.Min = ptr.String(jtv)
 			}
+
 		case "missing":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1018,6 +1038,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 				}
 				sv.Missing = i64
 			}
+
 		case "stddev":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1051,6 +1072,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 
 				}
 			}
+
 		case "sum":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1084,6 +1106,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 
 				}
 			}
+
 		case "sumOfSquares":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1117,6 +1140,7 @@ func awsRestjson1_deserializeDocumentFieldStats(v **types.FieldStats, value inte
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1224,14 +1248,17 @@ func awsRestjson1_deserializeDocumentHit(v **types.Hit, value interface{}) error
 			if err := awsRestjson1_deserializeDocumentExprs(&sv.Exprs, value); err != nil {
 				return err
 			}
+
 		case "fields":
 			if err := awsRestjson1_deserializeDocumentFields(&sv.Fields, value); err != nil {
 				return err
 			}
+
 		case "highlights":
 			if err := awsRestjson1_deserializeDocumentHighlights(&sv.Highlights, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1240,6 +1267,7 @@ func awsRestjson1_deserializeDocumentHit(v **types.Hit, value interface{}) error
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1313,6 +1341,7 @@ func awsRestjson1_deserializeDocumentHits(v **types.Hits, value interface{}) err
 				}
 				sv.Cursor = ptr.String(jtv)
 			}
+
 		case "found":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1325,10 +1354,12 @@ func awsRestjson1_deserializeDocumentHits(v **types.Hits, value interface{}) err
 				}
 				sv.Found = i64
 			}
+
 		case "hit":
 			if err := awsRestjson1_deserializeDocumentHitList(&sv.Hit, value); err != nil {
 				return err
 			}
+
 		case "start":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1341,6 +1372,7 @@ func awsRestjson1_deserializeDocumentHits(v **types.Hits, value interface{}) err
 				}
 				sv.Start = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1380,6 +1412,7 @@ func awsRestjson1_deserializeDocumentSearchException(v **types.SearchException, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1419,6 +1452,7 @@ func awsRestjson1_deserializeDocumentSearchStatus(v **types.SearchStatus, value 
 				}
 				sv.Rid = ptr.String(jtv)
 			}
+
 		case "timems":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1431,6 +1465,7 @@ func awsRestjson1_deserializeDocumentSearchStatus(v **types.SearchStatus, value 
 				}
 				sv.Timems = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1505,6 +1540,7 @@ func awsRestjson1_deserializeDocumentSuggestionMatch(v **types.SuggestionMatch, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "score":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1517,6 +1553,7 @@ func awsRestjson1_deserializeDocumentSuggestionMatch(v **types.SuggestionMatch, 
 				}
 				sv.Score = i64
 			}
+
 		case "suggestion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1525,6 +1562,7 @@ func awsRestjson1_deserializeDocumentSuggestionMatch(v **types.SuggestionMatch, 
 				}
 				sv.Suggestion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1602,6 +1640,7 @@ func awsRestjson1_deserializeDocumentSuggestModel(v **types.SuggestModel, value 
 				}
 				sv.Found = i64
 			}
+
 		case "query":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1610,10 +1649,12 @@ func awsRestjson1_deserializeDocumentSuggestModel(v **types.SuggestModel, value 
 				}
 				sv.Query = ptr.String(jtv)
 			}
+
 		case "suggestions":
 			if err := awsRestjson1_deserializeDocumentSuggestions(&sv.Suggestions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1653,6 +1694,7 @@ func awsRestjson1_deserializeDocumentSuggestStatus(v **types.SuggestStatus, valu
 				}
 				sv.Rid = ptr.String(jtv)
 			}
+
 		case "timems":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1665,6 +1707,7 @@ func awsRestjson1_deserializeDocumentSuggestStatus(v **types.SuggestStatus, valu
 				}
 				sv.Timems = i64
 			}
+
 		default:
 			_, _ = key, value
 

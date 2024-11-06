@@ -1083,6 +1083,7 @@ func awsAwsjson11_deserializeDocumentDuplicateReportNameException(v **types.Dupl
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1122,6 +1123,7 @@ func awsAwsjson11_deserializeDocumentInternalErrorException(v **types.InternalEr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1157,10 +1159,12 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 			if err := awsAwsjson11_deserializeDocumentAdditionalArtifactList(&sv.AdditionalArtifacts, value); err != nil {
 				return err
 			}
+
 		case "AdditionalSchemaElements":
 			if err := awsAwsjson11_deserializeDocumentSchemaElementList(&sv.AdditionalSchemaElements, value); err != nil {
 				return err
 			}
+
 		case "BillingViewArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1169,6 +1173,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.BillingViewArn = ptr.String(jtv)
 			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1177,6 +1182,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.Compression = types.CompressionFormat(jtv)
 			}
+
 		case "Format":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1185,6 +1191,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.Format = types.ReportFormat(jtv)
 			}
+
 		case "RefreshClosedReports":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1193,6 +1200,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.RefreshClosedReports = ptr.Bool(jtv)
 			}
+
 		case "ReportName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1201,10 +1209,12 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.ReportName = ptr.String(jtv)
 			}
+
 		case "ReportStatus":
 			if err := awsAwsjson11_deserializeDocumentReportStatus(&sv.ReportStatus, value); err != nil {
 				return err
 			}
+
 		case "ReportVersioning":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1213,6 +1223,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.ReportVersioning = types.ReportVersioning(jtv)
 			}
+
 		case "S3Bucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1221,6 +1232,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.S3Bucket = ptr.String(jtv)
 			}
+
 		case "S3Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1229,6 +1241,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.S3Prefix = ptr.String(jtv)
 			}
+
 		case "S3Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1237,6 +1250,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.S3Region = types.AWSRegion(jtv)
 			}
+
 		case "TimeUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1245,6 +1259,7 @@ func awsAwsjson11_deserializeDocumentReportDefinition(v **types.ReportDefinition
 				}
 				sv.TimeUnit = types.TimeUnit(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1318,6 +1333,7 @@ func awsAwsjson11_deserializeDocumentReportLimitReachedException(v **types.Repor
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1357,6 +1373,7 @@ func awsAwsjson11_deserializeDocumentReportStatus(v **types.ReportStatus, value 
 				}
 				sv.LastDelivery = ptr.String(jtv)
 			}
+
 		case "lastStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1365,6 +1382,7 @@ func awsAwsjson11_deserializeDocumentReportStatus(v **types.ReportStatus, value 
 				}
 				sv.LastStatus = types.LastStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1404,6 +1422,7 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1479,6 +1498,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1487,6 +1507,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1560,6 +1581,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1599,6 +1621,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteReportDefinitionOutput(v **DeleteRe
 				}
 				sv.ResponseMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1638,10 +1661,12 @@ func awsAwsjson11_deserializeOpDocumentDescribeReportDefinitionsOutput(v **Descr
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ReportDefinitions":
 			if err := awsAwsjson11_deserializeDocumentReportDefinitionList(&sv.ReportDefinitions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1677,6 +1702,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

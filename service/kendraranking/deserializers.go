@@ -1416,6 +1416,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1459,6 +1460,7 @@ func awsAwsjson10_deserializeDocumentCapacityUnitsConfiguration(v **types.Capaci
 				}
 				sv.RescoreCapacityUnits = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1498,6 +1500,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1537,6 +1540,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1583,6 +1587,7 @@ func awsAwsjson10_deserializeDocumentRescoreExecutionPlanSummary(v **types.Resco
 
 				}
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1591,6 +1596,7 @@ func awsAwsjson10_deserializeDocumentRescoreExecutionPlanSummary(v **types.Resco
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1599,6 +1605,7 @@ func awsAwsjson10_deserializeDocumentRescoreExecutionPlanSummary(v **types.Resco
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1607,6 +1614,7 @@ func awsAwsjson10_deserializeDocumentRescoreExecutionPlanSummary(v **types.Resco
 				}
 				sv.Status = types.RescoreExecutionPlanStatus(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1622,6 +1630,7 @@ func awsAwsjson10_deserializeDocumentRescoreExecutionPlanSummary(v **types.Resco
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1695,6 +1704,7 @@ func awsAwsjson10_deserializeDocumentRescoreResultItem(v **types.RescoreResultIt
 				}
 				sv.DocumentId = ptr.String(jtv)
 			}
+
 		case "Score":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1728,6 +1738,7 @@ func awsAwsjson10_deserializeDocumentRescoreResultItem(v **types.RescoreResultIt
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1801,6 +1812,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1840,6 +1852,7 @@ func awsAwsjson10_deserializeDocumentResourceUnavailableException(v **types.Reso
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1879,6 +1892,7 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1918,6 +1932,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1926,6 +1941,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1999,6 +2015,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2038,6 +2055,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2077,6 +2095,7 @@ func awsAwsjson10_deserializeOpDocumentCreateRescoreExecutionPlanOutput(v **Crea
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2085,6 +2104,7 @@ func awsAwsjson10_deserializeOpDocumentCreateRescoreExecutionPlanOutput(v **Crea
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2124,10 +2144,12 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CapacityUnits":
 			if err := awsAwsjson10_deserializeDocumentCapacityUnitsConfiguration(&sv.CapacityUnits, value); err != nil {
 				return err
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2143,6 +2165,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2151,6 +2174,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2159,6 +2183,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2167,6 +2192,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2175,6 +2201,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2183,6 +2210,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 				}
 				sv.Status = types.RescoreExecutionPlanStatus(jtv)
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2198,6 +2226,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeRescoreExecutionPlanOutput(v **De
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2237,10 +2266,12 @@ func awsAwsjson10_deserializeOpDocumentListRescoreExecutionPlansOutput(v **ListR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SummaryItems":
 			if err := awsAwsjson10_deserializeDocumentRescoreExecutionPlanSummaryList(&sv.SummaryItems, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2276,6 +2307,7 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2315,10 +2347,12 @@ func awsAwsjson10_deserializeOpDocumentRescoreOutput(v **RescoreOutput, value in
 				}
 				sv.RescoreId = ptr.String(jtv)
 			}
+
 		case "ResultItems":
 			if err := awsAwsjson10_deserializeDocumentRescoreResultItemList(&sv.ResultItems, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

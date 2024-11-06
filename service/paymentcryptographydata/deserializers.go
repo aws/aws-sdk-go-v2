@@ -187,6 +187,7 @@ func awsRestjson1_deserializeOpDocumentDecryptDataOutput(v **DecryptDataOutput, 
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -195,6 +196,7 @@ func awsRestjson1_deserializeOpDocumentDecryptDataOutput(v **DecryptDataOutput, 
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		case "PlainText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -203,6 +205,7 @@ func awsRestjson1_deserializeOpDocumentDecryptDataOutput(v **DecryptDataOutput, 
 				}
 				sv.PlainText = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -370,6 +373,7 @@ func awsRestjson1_deserializeOpDocumentEncryptDataOutput(v **EncryptDataOutput, 
 				}
 				sv.CipherText = ptr.String(jtv)
 			}
+
 		case "KeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -378,6 +382,7 @@ func awsRestjson1_deserializeOpDocumentEncryptDataOutput(v **EncryptDataOutput, 
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -386,6 +391,7 @@ func awsRestjson1_deserializeOpDocumentEncryptDataOutput(v **EncryptDataOutput, 
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -553,6 +559,7 @@ func awsRestjson1_deserializeOpDocumentGenerateCardValidationDataOutput(v **Gene
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -561,6 +568,7 @@ func awsRestjson1_deserializeOpDocumentGenerateCardValidationDataOutput(v **Gene
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		case "ValidationData":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -569,6 +577,7 @@ func awsRestjson1_deserializeOpDocumentGenerateCardValidationDataOutput(v **Gene
 				}
 				sv.ValidationData = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -736,6 +745,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacOutput(v **GenerateMacOutput, 
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -744,6 +754,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacOutput(v **GenerateMacOutput, 
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		case "Mac":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -752,6 +763,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacOutput(v **GenerateMacOutput, 
 				}
 				sv.Mac = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -919,6 +931,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.EncryptedPinBlock = ptr.String(jtv)
 			}
+
 		case "Mac":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -927,6 +940,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.Mac = ptr.String(jtv)
 			}
+
 		case "NewPinPekArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -935,6 +949,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.NewPinPekArn = ptr.String(jtv)
 			}
+
 		case "NewPinPekKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -943,6 +958,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.NewPinPekKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "SecureMessagingConfidentialityKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -951,6 +967,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.SecureMessagingConfidentialityKeyArn = ptr.String(jtv)
 			}
+
 		case "SecureMessagingConfidentialityKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -959,6 +976,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.SecureMessagingConfidentialityKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "SecureMessagingIntegrityKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -967,6 +985,7 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.SecureMessagingIntegrityKeyArn = ptr.String(jtv)
 			}
+
 		case "SecureMessagingIntegrityKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -975,10 +994,12 @@ func awsRestjson1_deserializeOpDocumentGenerateMacEmvPinChangeOutput(v **Generat
 				}
 				sv.SecureMessagingIntegrityKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "VisaAmexDerivationOutputs":
 			if err := awsRestjson1_deserializeDocumentVisaAmexDerivationOutputs(&sv.VisaAmexDerivationOutputs, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1146,6 +1167,7 @@ func awsRestjson1_deserializeOpDocumentGeneratePinDataOutput(v **GeneratePinData
 				}
 				sv.EncryptedPinBlock = ptr.String(jtv)
 			}
+
 		case "EncryptionKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1154,6 +1176,7 @@ func awsRestjson1_deserializeOpDocumentGeneratePinDataOutput(v **GeneratePinData
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
+
 		case "EncryptionKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1162,6 +1185,7 @@ func awsRestjson1_deserializeOpDocumentGeneratePinDataOutput(v **GeneratePinData
 				}
 				sv.EncryptionKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "GenerationKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1170,6 +1194,7 @@ func awsRestjson1_deserializeOpDocumentGeneratePinDataOutput(v **GeneratePinData
 				}
 				sv.GenerationKeyArn = ptr.String(jtv)
 			}
+
 		case "GenerationKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1178,10 +1203,12 @@ func awsRestjson1_deserializeOpDocumentGeneratePinDataOutput(v **GeneratePinData
 				}
 				sv.GenerationKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "PinData":
 			if err := awsRestjson1_deserializeDocumentPinData(&sv.PinData, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1349,6 +1376,7 @@ func awsRestjson1_deserializeOpDocumentReEncryptDataOutput(v **ReEncryptDataOutp
 				}
 				sv.CipherText = ptr.String(jtv)
 			}
+
 		case "KeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1357,6 +1385,7 @@ func awsRestjson1_deserializeOpDocumentReEncryptDataOutput(v **ReEncryptDataOutp
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1365,6 +1394,7 @@ func awsRestjson1_deserializeOpDocumentReEncryptDataOutput(v **ReEncryptDataOutp
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1532,6 +1562,7 @@ func awsRestjson1_deserializeOpDocumentTranslatePinDataOutput(v **TranslatePinDa
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1540,6 +1571,7 @@ func awsRestjson1_deserializeOpDocumentTranslatePinDataOutput(v **TranslatePinDa
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		case "PinBlock":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1548,6 +1580,7 @@ func awsRestjson1_deserializeOpDocumentTranslatePinDataOutput(v **TranslatePinDa
 				}
 				sv.PinBlock = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1718,6 +1751,7 @@ func awsRestjson1_deserializeOpDocumentVerifyAuthRequestCryptogramOutput(v **Ver
 				}
 				sv.AuthResponseValue = ptr.String(jtv)
 			}
+
 		case "KeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1726,6 +1760,7 @@ func awsRestjson1_deserializeOpDocumentVerifyAuthRequestCryptogramOutput(v **Ver
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1734,6 +1769,7 @@ func awsRestjson1_deserializeOpDocumentVerifyAuthRequestCryptogramOutput(v **Ver
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1904,6 +1940,7 @@ func awsRestjson1_deserializeOpDocumentVerifyCardValidationDataOutput(v **Verify
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1912,6 +1949,7 @@ func awsRestjson1_deserializeOpDocumentVerifyCardValidationDataOutput(v **Verify
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2082,6 +2120,7 @@ func awsRestjson1_deserializeOpDocumentVerifyMacOutput(v **VerifyMacOutput, valu
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		case "KeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2090,6 +2129,7 @@ func awsRestjson1_deserializeOpDocumentVerifyMacOutput(v **VerifyMacOutput, valu
 				}
 				sv.KeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2260,6 +2300,7 @@ func awsRestjson1_deserializeOpDocumentVerifyPinDataOutput(v **VerifyPinDataOutp
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
+
 		case "EncryptionKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2268,6 +2309,7 @@ func awsRestjson1_deserializeOpDocumentVerifyPinDataOutput(v **VerifyPinDataOutp
 				}
 				sv.EncryptionKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "VerificationKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2276,6 +2318,7 @@ func awsRestjson1_deserializeOpDocumentVerifyPinDataOutput(v **VerifyPinDataOutp
 				}
 				sv.VerificationKeyArn = ptr.String(jtv)
 			}
+
 		case "VerificationKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2284,6 +2327,7 @@ func awsRestjson1_deserializeOpDocumentVerifyPinDataOutput(v **VerifyPinDataOutp
 				}
 				sv.VerificationKeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2539,6 +2583,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2578,6 +2623,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2671,6 +2717,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2710,6 +2757,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2745,6 +2793,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2753,6 +2802,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2792,6 +2842,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2800,6 +2851,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2873,6 +2925,7 @@ func awsRestjson1_deserializeDocumentVerificationFailedException(v **types.Verif
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2881,6 +2934,7 @@ func awsRestjson1_deserializeDocumentVerificationFailedException(v **types.Verif
 				}
 				sv.Reason = types.VerificationFailedReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2920,6 +2974,7 @@ func awsRestjson1_deserializeDocumentVisaAmexDerivationOutputs(v **types.VisaAme
 				}
 				sv.AuthorizationRequestKeyArn = ptr.String(jtv)
 			}
+
 		case "AuthorizationRequestKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2928,6 +2983,7 @@ func awsRestjson1_deserializeDocumentVisaAmexDerivationOutputs(v **types.VisaAme
 				}
 				sv.AuthorizationRequestKeyCheckValue = ptr.String(jtv)
 			}
+
 		case "CurrentPinPekArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2936,6 +2992,7 @@ func awsRestjson1_deserializeDocumentVisaAmexDerivationOutputs(v **types.VisaAme
 				}
 				sv.CurrentPinPekArn = ptr.String(jtv)
 			}
+
 		case "CurrentPinPekKeyCheckValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2944,6 +3001,7 @@ func awsRestjson1_deserializeDocumentVisaAmexDerivationOutputs(v **types.VisaAme
 				}
 				sv.CurrentPinPekKeyCheckValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

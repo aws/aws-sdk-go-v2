@@ -10683,14 +10683,17 @@ func awsAwsjson11_deserializeDocumentActivatedRule(v **types.ActivatedRule, valu
 			if err := awsAwsjson11_deserializeDocumentWafAction(&sv.Action, value); err != nil {
 				return err
 			}
+
 		case "ExcludedRules":
 			if err := awsAwsjson11_deserializeDocumentExcludedRules(&sv.ExcludedRules, value); err != nil {
 				return err
 			}
+
 		case "OverrideAction":
 			if err := awsAwsjson11_deserializeDocumentWafOverrideAction(&sv.OverrideAction, value); err != nil {
 				return err
 			}
+
 		case "Priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10703,6 +10706,7 @@ func awsAwsjson11_deserializeDocumentActivatedRule(v **types.ActivatedRule, valu
 				}
 				sv.Priority = ptr.Int32(int32(i64))
 			}
+
 		case "RuleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10711,6 +10715,7 @@ func awsAwsjson11_deserializeDocumentActivatedRule(v **types.ActivatedRule, valu
 				}
 				sv.RuleId = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10719,6 +10724,7 @@ func awsAwsjson11_deserializeDocumentActivatedRule(v **types.ActivatedRule, valu
 				}
 				sv.Type = types.WafRuleType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10792,10 +10798,12 @@ func awsAwsjson11_deserializeDocumentByteMatchSet(v **types.ByteMatchSet, value 
 				}
 				sv.ByteMatchSetId = ptr.String(jtv)
 			}
+
 		case "ByteMatchTuples":
 			if err := awsAwsjson11_deserializeDocumentByteMatchTuples(&sv.ByteMatchTuples, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10804,6 +10812,7 @@ func awsAwsjson11_deserializeDocumentByteMatchSet(v **types.ByteMatchSet, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10877,6 +10886,7 @@ func awsAwsjson11_deserializeDocumentByteMatchSetSummary(v **types.ByteMatchSetS
 				}
 				sv.ByteMatchSetId = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10885,6 +10895,7 @@ func awsAwsjson11_deserializeDocumentByteMatchSetSummary(v **types.ByteMatchSetS
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10920,6 +10931,7 @@ func awsAwsjson11_deserializeDocumentByteMatchTuple(v **types.ByteMatchTuple, va
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
 				return err
 			}
+
 		case "PositionalConstraint":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10928,6 +10940,7 @@ func awsAwsjson11_deserializeDocumentByteMatchTuple(v **types.ByteMatchTuple, va
 				}
 				sv.PositionalConstraint = types.PositionalConstraint(jtv)
 			}
+
 		case "TargetString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10940,6 +10953,7 @@ func awsAwsjson11_deserializeDocumentByteMatchTuple(v **types.ByteMatchTuple, va
 				}
 				sv.TargetString = dv
 			}
+
 		case "TextTransformation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10948,6 +10962,7 @@ func awsAwsjson11_deserializeDocumentByteMatchTuple(v **types.ByteMatchTuple, va
 				}
 				sv.TextTransformation = types.TextTransformation(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11021,6 +11036,7 @@ func awsAwsjson11_deserializeDocumentExcludedRule(v **types.ExcludedRule, value 
 				}
 				sv.RuleId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11094,6 +11110,7 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 				}
 				sv.Data = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11102,6 +11119,7 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 				}
 				sv.Type = types.MatchFieldType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11141,6 +11159,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchConstraint(v **types.GeoMatchConstr
 				}
 				sv.Type = types.GeoMatchConstraintType(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11149,6 +11168,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchConstraint(v **types.GeoMatchConstr
 				}
 				sv.Value = types.GeoMatchConstraintValue(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11218,6 +11238,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchSet(v **types.GeoMatchSet, value in
 			if err := awsAwsjson11_deserializeDocumentGeoMatchConstraints(&sv.GeoMatchConstraints, value); err != nil {
 				return err
 			}
+
 		case "GeoMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11226,6 +11247,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchSet(v **types.GeoMatchSet, value in
 				}
 				sv.GeoMatchSetId = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11234,6 +11256,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchSet(v **types.GeoMatchSet, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11307,6 +11330,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchSetSummary(v **types.GeoMatchSetSum
 				}
 				sv.GeoMatchSetId = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11315,6 +11339,7 @@ func awsAwsjson11_deserializeDocumentGeoMatchSetSummary(v **types.GeoMatchSetSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11354,6 +11379,7 @@ func awsAwsjson11_deserializeDocumentHTTPHeader(v **types.HTTPHeader, value inte
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11362,6 +11388,7 @@ func awsAwsjson11_deserializeDocumentHTTPHeader(v **types.HTTPHeader, value inte
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11435,6 +11462,7 @@ func awsAwsjson11_deserializeDocumentHTTPRequest(v **types.HTTPRequest, value in
 				}
 				sv.ClientIP = ptr.String(jtv)
 			}
+
 		case "Country":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11443,10 +11471,12 @@ func awsAwsjson11_deserializeDocumentHTTPRequest(v **types.HTTPRequest, value in
 				}
 				sv.Country = ptr.String(jtv)
 			}
+
 		case "Headers":
 			if err := awsAwsjson11_deserializeDocumentHTTPHeaders(&sv.Headers, value); err != nil {
 				return err
 			}
+
 		case "HTTPVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11455,6 +11485,7 @@ func awsAwsjson11_deserializeDocumentHTTPRequest(v **types.HTTPRequest, value in
 				}
 				sv.HTTPVersion = ptr.String(jtv)
 			}
+
 		case "Method":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11463,6 +11494,7 @@ func awsAwsjson11_deserializeDocumentHTTPRequest(v **types.HTTPRequest, value in
 				}
 				sv.Method = ptr.String(jtv)
 			}
+
 		case "URI":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11471,6 +11503,7 @@ func awsAwsjson11_deserializeDocumentHTTPRequest(v **types.HTTPRequest, value in
 				}
 				sv.URI = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11506,6 +11539,7 @@ func awsAwsjson11_deserializeDocumentIPSet(v **types.IPSet, value interface{}) e
 			if err := awsAwsjson11_deserializeDocumentIPSetDescriptors(&sv.IPSetDescriptors, value); err != nil {
 				return err
 			}
+
 		case "IPSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11514,6 +11548,7 @@ func awsAwsjson11_deserializeDocumentIPSet(v **types.IPSet, value interface{}) e
 				}
 				sv.IPSetId = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11522,6 +11557,7 @@ func awsAwsjson11_deserializeDocumentIPSet(v **types.IPSet, value interface{}) e
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11561,6 +11597,7 @@ func awsAwsjson11_deserializeDocumentIPSetDescriptor(v **types.IPSetDescriptor, 
 				}
 				sv.Type = types.IPSetDescriptorType(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11569,6 +11606,7 @@ func awsAwsjson11_deserializeDocumentIPSetDescriptor(v **types.IPSetDescriptor, 
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11676,6 +11714,7 @@ func awsAwsjson11_deserializeDocumentIPSetSummary(v **types.IPSetSummary, value 
 				}
 				sv.IPSetId = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11684,6 +11723,7 @@ func awsAwsjson11_deserializeDocumentIPSetSummary(v **types.IPSetSummary, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11755,10 +11795,12 @@ func awsAwsjson11_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 			if err := awsAwsjson11_deserializeDocumentLogDestinationConfigs(&sv.LogDestinationConfigs, value); err != nil {
 				return err
 			}
+
 		case "RedactedFields":
 			if err := awsAwsjson11_deserializeDocumentRedactedFields(&sv.RedactedFields, value); err != nil {
 				return err
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11767,6 +11809,7 @@ func awsAwsjson11_deserializeDocumentLoggingConfiguration(v **types.LoggingConfi
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11876,6 +11919,7 @@ func awsAwsjson11_deserializeDocumentPredicate(v **types.Predicate, value interf
 				}
 				sv.DataId = ptr.String(jtv)
 			}
+
 		case "Negated":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11884,6 +11928,7 @@ func awsAwsjson11_deserializeDocumentPredicate(v **types.Predicate, value interf
 				}
 				sv.Negated = ptr.Bool(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11892,6 +11937,7 @@ func awsAwsjson11_deserializeDocumentPredicate(v **types.Predicate, value interf
 				}
 				sv.Type = types.PredicateType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11961,6 +12007,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 			if err := awsAwsjson11_deserializeDocumentPredicates(&sv.MatchPredicates, value); err != nil {
 				return err
 			}
+
 		case "MetricName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11969,6 +12016,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11977,6 +12025,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RateKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11985,6 +12034,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 				}
 				sv.RateKey = types.RateKey(jtv)
 			}
+
 		case "RateLimit":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -11997,6 +12047,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 				}
 				sv.RateLimit = ptr.Int64(i64)
 			}
+
 		case "RuleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12005,6 +12056,7 @@ func awsAwsjson11_deserializeDocumentRateBasedRule(v **types.RateBasedRule, valu
 				}
 				sv.RuleId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12078,6 +12130,7 @@ func awsAwsjson11_deserializeDocumentRegexMatchSet(v **types.RegexMatchSet, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RegexMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12086,10 +12139,12 @@ func awsAwsjson11_deserializeDocumentRegexMatchSet(v **types.RegexMatchSet, valu
 				}
 				sv.RegexMatchSetId = ptr.String(jtv)
 			}
+
 		case "RegexMatchTuples":
 			if err := awsAwsjson11_deserializeDocumentRegexMatchTuples(&sv.RegexMatchTuples, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12163,6 +12218,7 @@ func awsAwsjson11_deserializeDocumentRegexMatchSetSummary(v **types.RegexMatchSe
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RegexMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12171,6 +12227,7 @@ func awsAwsjson11_deserializeDocumentRegexMatchSetSummary(v **types.RegexMatchSe
 				}
 				sv.RegexMatchSetId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12206,6 +12263,7 @@ func awsAwsjson11_deserializeDocumentRegexMatchTuple(v **types.RegexMatchTuple, 
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
 				return err
 			}
+
 		case "RegexPatternSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12214,6 +12272,7 @@ func awsAwsjson11_deserializeDocumentRegexMatchTuple(v **types.RegexMatchTuple, 
 				}
 				sv.RegexPatternSetId = ptr.String(jtv)
 			}
+
 		case "TextTransformation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12222,6 +12281,7 @@ func awsAwsjson11_deserializeDocumentRegexMatchTuple(v **types.RegexMatchTuple, 
 				}
 				sv.TextTransformation = types.TextTransformation(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12295,6 +12355,7 @@ func awsAwsjson11_deserializeDocumentRegexPatternSet(v **types.RegexPatternSet, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RegexPatternSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12303,10 +12364,12 @@ func awsAwsjson11_deserializeDocumentRegexPatternSet(v **types.RegexPatternSet, 
 				}
 				sv.RegexPatternSetId = ptr.String(jtv)
 			}
+
 		case "RegexPatternStrings":
 			if err := awsAwsjson11_deserializeDocumentRegexPatternStrings(&sv.RegexPatternStrings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12380,6 +12443,7 @@ func awsAwsjson11_deserializeDocumentRegexPatternSetSummary(v **types.RegexPatte
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RegexPatternSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12388,6 +12452,7 @@ func awsAwsjson11_deserializeDocumentRegexPatternSetSummary(v **types.RegexPatte
 				}
 				sv.RegexPatternSetId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12499,6 +12564,7 @@ func awsAwsjson11_deserializeDocumentRule(v **types.Rule, value interface{}) err
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12507,10 +12573,12 @@ func awsAwsjson11_deserializeDocumentRule(v **types.Rule, value interface{}) err
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Predicates":
 			if err := awsAwsjson11_deserializeDocumentPredicates(&sv.Predicates, value); err != nil {
 				return err
 			}
+
 		case "RuleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12519,6 +12587,7 @@ func awsAwsjson11_deserializeDocumentRule(v **types.Rule, value interface{}) err
 				}
 				sv.RuleId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12558,6 +12627,7 @@ func awsAwsjson11_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12566,6 +12636,7 @@ func awsAwsjson11_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RuleGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12574,6 +12645,7 @@ func awsAwsjson11_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 				}
 				sv.RuleGroupId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12647,6 +12719,7 @@ func awsAwsjson11_deserializeDocumentRuleGroupSummary(v **types.RuleGroupSummary
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RuleGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12655,6 +12728,7 @@ func awsAwsjson11_deserializeDocumentRuleGroupSummary(v **types.RuleGroupSummary
 				}
 				sv.RuleGroupId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12728,6 +12802,7 @@ func awsAwsjson11_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RuleId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12736,6 +12811,7 @@ func awsAwsjson11_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 				}
 				sv.RuleId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12775,10 +12851,12 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 				}
 				sv.Action = ptr.String(jtv)
 			}
+
 		case "Request":
 			if err := awsAwsjson11_deserializeDocumentHTTPRequest(&sv.Request, value); err != nil {
 				return err
 			}
+
 		case "RuleWithinRuleGroup":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12787,6 +12865,7 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 				}
 				sv.RuleWithinRuleGroup = ptr.String(jtv)
 			}
+
 		case "Timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12802,6 +12881,7 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 
 				}
 			}
+
 		case "Weight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12814,6 +12894,7 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 				}
 				sv.Weight = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12887,10 +12968,12 @@ func awsAwsjson11_deserializeDocumentSizeConstraint(v **types.SizeConstraint, va
 				}
 				sv.ComparisonOperator = types.ComparisonOperator(jtv)
 			}
+
 		case "FieldToMatch":
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
 				return err
 			}
+
 		case "Size":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12903,6 +12986,7 @@ func awsAwsjson11_deserializeDocumentSizeConstraint(v **types.SizeConstraint, va
 				}
 				sv.Size = i64
 			}
+
 		case "TextTransformation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12911,6 +12995,7 @@ func awsAwsjson11_deserializeDocumentSizeConstraint(v **types.SizeConstraint, va
 				}
 				sv.TextTransformation = types.TextTransformation(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12984,10 +13069,12 @@ func awsAwsjson11_deserializeDocumentSizeConstraintSet(v **types.SizeConstraintS
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SizeConstraints":
 			if err := awsAwsjson11_deserializeDocumentSizeConstraints(&sv.SizeConstraints, value); err != nil {
 				return err
 			}
+
 		case "SizeConstraintSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12996,6 +13083,7 @@ func awsAwsjson11_deserializeDocumentSizeConstraintSet(v **types.SizeConstraintS
 				}
 				sv.SizeConstraintSetId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13069,6 +13157,7 @@ func awsAwsjson11_deserializeDocumentSizeConstraintSetSummary(v **types.SizeCons
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SizeConstraintSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13077,6 +13166,7 @@ func awsAwsjson11_deserializeDocumentSizeConstraintSetSummary(v **types.SizeCons
 				}
 				sv.SizeConstraintSetId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13116,6 +13206,7 @@ func awsAwsjson11_deserializeDocumentSqlInjectionMatchSet(v **types.SqlInjection
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SqlInjectionMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13124,10 +13215,12 @@ func awsAwsjson11_deserializeDocumentSqlInjectionMatchSet(v **types.SqlInjection
 				}
 				sv.SqlInjectionMatchSetId = ptr.String(jtv)
 			}
+
 		case "SqlInjectionMatchTuples":
 			if err := awsAwsjson11_deserializeDocumentSqlInjectionMatchTuples(&sv.SqlInjectionMatchTuples, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13201,6 +13294,7 @@ func awsAwsjson11_deserializeDocumentSqlInjectionMatchSetSummary(v **types.SqlIn
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SqlInjectionMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13209,6 +13303,7 @@ func awsAwsjson11_deserializeDocumentSqlInjectionMatchSetSummary(v **types.SqlIn
 				}
 				sv.SqlInjectionMatchSetId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13244,6 +13339,7 @@ func awsAwsjson11_deserializeDocumentSqlInjectionMatchTuple(v **types.SqlInjecti
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
 				return err
 			}
+
 		case "TextTransformation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13252,6 +13348,7 @@ func awsAwsjson11_deserializeDocumentSqlInjectionMatchTuple(v **types.SqlInjecti
 				}
 				sv.TextTransformation = types.TextTransformation(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13359,6 +13456,7 @@ func awsAwsjson11_deserializeDocumentSubscribedRuleGroupSummary(v **types.Subscr
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13367,6 +13465,7 @@ func awsAwsjson11_deserializeDocumentSubscribedRuleGroupSummary(v **types.Subscr
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RuleGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13375,6 +13474,7 @@ func awsAwsjson11_deserializeDocumentSubscribedRuleGroupSummary(v **types.Subscr
 				}
 				sv.RuleGroupId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13414,6 +13514,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13422,6 +13523,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13461,10 +13563,12 @@ func awsAwsjson11_deserializeDocumentTagInfoForResource(v **types.TagInfoForReso
 				}
 				sv.ResourceARN = ptr.String(jtv)
 			}
+
 		case "TagList":
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.TagList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13545,6 +13649,7 @@ func awsAwsjson11_deserializeDocumentTimeWindow(v **types.TimeWindow, value inte
 
 				}
 			}
+
 		case "StartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -13560,6 +13665,7 @@ func awsAwsjson11_deserializeDocumentTimeWindow(v **types.TimeWindow, value inte
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13599,6 +13705,7 @@ func awsAwsjson11_deserializeDocumentWafAction(v **types.WafAction, value interf
 				}
 				sv.Type = types.WafActionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13638,6 +13745,7 @@ func awsAwsjson11_deserializeDocumentWAFBadRequestException(v **types.WAFBadRequ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13677,6 +13785,7 @@ func awsAwsjson11_deserializeDocumentWAFDisallowedNameException(v **types.WAFDis
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13716,6 +13825,7 @@ func awsAwsjson11_deserializeDocumentWAFEntityMigrationException(v **types.WAFEn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "MigrationErrorReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13724,6 +13834,7 @@ func awsAwsjson11_deserializeDocumentWAFEntityMigrationException(v **types.WAFEn
 				}
 				sv.MigrationErrorReason = ptr.String(jtv)
 			}
+
 		case "MigrationErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13732,6 +13843,7 @@ func awsAwsjson11_deserializeDocumentWAFEntityMigrationException(v **types.WAFEn
 				}
 				sv.MigrationErrorType = types.MigrationErrorType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13771,6 +13883,7 @@ func awsAwsjson11_deserializeDocumentWAFInternalErrorException(v **types.WAFInte
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13841,6 +13954,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidOperationException(v **types.WAFI
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13880,6 +13994,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidParameterException(v **types.WAFI
 				}
 				sv.Field = types.ParameterExceptionField(jtv)
 			}
+
 		case "parameter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13888,6 +14003,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidParameterException(v **types.WAFI
 				}
 				sv.Parameter = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13896,6 +14012,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidParameterException(v **types.WAFI
 				}
 				sv.Reason = types.ParameterExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13935,6 +14052,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidPermissionPolicyException(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13974,6 +14092,7 @@ func awsAwsjson11_deserializeDocumentWAFInvalidRegexPatternException(v **types.W
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14013,6 +14132,7 @@ func awsAwsjson11_deserializeDocumentWAFLimitsExceededException(v **types.WAFLim
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14052,6 +14172,7 @@ func awsAwsjson11_deserializeDocumentWAFNonEmptyEntityException(v **types.WAFNon
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14091,6 +14212,7 @@ func awsAwsjson11_deserializeDocumentWAFNonexistentContainerException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14130,6 +14252,7 @@ func awsAwsjson11_deserializeDocumentWAFNonexistentItemException(v **types.WAFNo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14169,6 +14292,7 @@ func awsAwsjson11_deserializeDocumentWafOverrideAction(v **types.WafOverrideActi
 				}
 				sv.Type = types.WafOverrideActionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14208,6 +14332,7 @@ func awsAwsjson11_deserializeDocumentWAFReferencedItemException(v **types.WAFRef
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14247,6 +14372,7 @@ func awsAwsjson11_deserializeDocumentWAFServiceLinkedRoleErrorException(v **type
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14286,6 +14412,7 @@ func awsAwsjson11_deserializeDocumentWAFStaleDataException(v **types.WAFStaleDat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14325,6 +14452,7 @@ func awsAwsjson11_deserializeDocumentWAFSubscriptionNotFoundException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14364,6 +14492,7 @@ func awsAwsjson11_deserializeDocumentWAFTagOperationException(v **types.WAFTagOp
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14403,6 +14532,7 @@ func awsAwsjson11_deserializeDocumentWAFTagOperationInternalErrorException(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14442,6 +14572,7 @@ func awsAwsjson11_deserializeDocumentWAFUnavailableEntityException(v **types.WAF
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14477,6 +14608,7 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 			if err := awsAwsjson11_deserializeDocumentWafAction(&sv.DefaultAction, value); err != nil {
 				return err
 			}
+
 		case "MetricName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14485,6 +14617,7 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 				}
 				sv.MetricName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14493,10 +14626,12 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentActivatedRules(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		case "WebACLArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14505,6 +14640,7 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 				}
 				sv.WebACLArn = ptr.String(jtv)
 			}
+
 		case "WebACLId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14513,6 +14649,7 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 				}
 				sv.WebACLId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14586,6 +14723,7 @@ func awsAwsjson11_deserializeDocumentWebACLSummary(v **types.WebACLSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "WebACLId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14594,6 +14732,7 @@ func awsAwsjson11_deserializeDocumentWebACLSummary(v **types.WebACLSummary, valu
 				}
 				sv.WebACLId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14633,6 +14772,7 @@ func awsAwsjson11_deserializeDocumentXssMatchSet(v **types.XssMatchSet, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "XssMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14641,10 +14781,12 @@ func awsAwsjson11_deserializeDocumentXssMatchSet(v **types.XssMatchSet, value in
 				}
 				sv.XssMatchSetId = ptr.String(jtv)
 			}
+
 		case "XssMatchTuples":
 			if err := awsAwsjson11_deserializeDocumentXssMatchTuples(&sv.XssMatchTuples, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14718,6 +14860,7 @@ func awsAwsjson11_deserializeDocumentXssMatchSetSummary(v **types.XssMatchSetSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "XssMatchSetId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14726,6 +14869,7 @@ func awsAwsjson11_deserializeDocumentXssMatchSetSummary(v **types.XssMatchSetSum
 				}
 				sv.XssMatchSetId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14761,6 +14905,7 @@ func awsAwsjson11_deserializeDocumentXssMatchTuple(v **types.XssMatchTuple, valu
 			if err := awsAwsjson11_deserializeDocumentFieldToMatch(&sv.FieldToMatch, value); err != nil {
 				return err
 			}
+
 		case "TextTransformation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14769,6 +14914,7 @@ func awsAwsjson11_deserializeDocumentXssMatchTuple(v **types.XssMatchTuple, valu
 				}
 				sv.TextTransformation = types.TextTransformation(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14869,6 +15015,7 @@ func awsAwsjson11_deserializeOpDocumentCreateByteMatchSetOutput(v **CreateByteMa
 			if err := awsAwsjson11_deserializeDocumentByteMatchSet(&sv.ByteMatchSet, value); err != nil {
 				return err
 			}
+
 		case "ChangeToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14877,6 +15024,7 @@ func awsAwsjson11_deserializeOpDocumentCreateByteMatchSetOutput(v **CreateByteMa
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14916,10 +15064,12 @@ func awsAwsjson11_deserializeOpDocumentCreateGeoMatchSetOutput(v **CreateGeoMatc
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "GeoMatchSet":
 			if err := awsAwsjson11_deserializeDocumentGeoMatchSet(&sv.GeoMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14959,10 +15109,12 @@ func awsAwsjson11_deserializeOpDocumentCreateIPSetOutput(v **CreateIPSetOutput, 
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "IPSet":
 			if err := awsAwsjson11_deserializeDocumentIPSet(&sv.IPSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15002,10 +15154,12 @@ func awsAwsjson11_deserializeOpDocumentCreateRateBasedRuleOutput(v **CreateRateB
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "Rule":
 			if err := awsAwsjson11_deserializeDocumentRateBasedRule(&sv.Rule, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15045,10 +15199,12 @@ func awsAwsjson11_deserializeOpDocumentCreateRegexMatchSetOutput(v **CreateRegex
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "RegexMatchSet":
 			if err := awsAwsjson11_deserializeDocumentRegexMatchSet(&sv.RegexMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15088,10 +15244,12 @@ func awsAwsjson11_deserializeOpDocumentCreateRegexPatternSetOutput(v **CreateReg
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "RegexPatternSet":
 			if err := awsAwsjson11_deserializeDocumentRegexPatternSet(&sv.RegexPatternSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15131,10 +15289,12 @@ func awsAwsjson11_deserializeOpDocumentCreateRuleGroupOutput(v **CreateRuleGroup
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "RuleGroup":
 			if err := awsAwsjson11_deserializeDocumentRuleGroup(&sv.RuleGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15174,10 +15334,12 @@ func awsAwsjson11_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "Rule":
 			if err := awsAwsjson11_deserializeDocumentRule(&sv.Rule, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15217,10 +15379,12 @@ func awsAwsjson11_deserializeOpDocumentCreateSizeConstraintSetOutput(v **CreateS
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "SizeConstraintSet":
 			if err := awsAwsjson11_deserializeDocumentSizeConstraintSet(&sv.SizeConstraintSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15260,10 +15424,12 @@ func awsAwsjson11_deserializeOpDocumentCreateSqlInjectionMatchSetOutput(v **Crea
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "SqlInjectionMatchSet":
 			if err := awsAwsjson11_deserializeDocumentSqlInjectionMatchSet(&sv.SqlInjectionMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15303,6 +15469,7 @@ func awsAwsjson11_deserializeOpDocumentCreateWebACLMigrationStackOutput(v **Crea
 				}
 				sv.S3ObjectUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15342,10 +15509,12 @@ func awsAwsjson11_deserializeOpDocumentCreateWebACLOutput(v **CreateWebACLOutput
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "WebACL":
 			if err := awsAwsjson11_deserializeDocumentWebACL(&sv.WebACL, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15385,10 +15554,12 @@ func awsAwsjson11_deserializeOpDocumentCreateXssMatchSetOutput(v **CreateXssMatc
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		case "XssMatchSet":
 			if err := awsAwsjson11_deserializeDocumentXssMatchSet(&sv.XssMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15428,6 +15599,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteByteMatchSetOutput(v **DeleteByteMa
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15467,6 +15639,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteGeoMatchSetOutput(v **DeleteGeoMatc
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15506,6 +15679,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteIPSetOutput(v **DeleteIPSetOutput, 
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15607,6 +15781,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRateBasedRuleOutput(v **DeleteRateB
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15646,6 +15821,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRegexMatchSetOutput(v **DeleteRegex
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15685,6 +15861,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRegexPatternSetOutput(v **DeleteReg
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15724,6 +15901,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRuleGroupOutput(v **DeleteRuleGroup
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15763,6 +15941,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRuleOutput(v **DeleteRuleOutput, va
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15802,6 +15981,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteSizeConstraintSetOutput(v **DeleteS
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15841,6 +16021,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteSqlInjectionMatchSetOutput(v **Dele
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15880,6 +16061,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteWebACLOutput(v **DeleteWebACLOutput
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15919,6 +16101,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteXssMatchSetOutput(v **DeleteXssMatc
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15985,6 +16168,7 @@ func awsAwsjson11_deserializeOpDocumentGetByteMatchSetOutput(v **GetByteMatchSet
 			if err := awsAwsjson11_deserializeDocumentByteMatchSet(&sv.ByteMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16024,6 +16208,7 @@ func awsAwsjson11_deserializeOpDocumentGetChangeTokenOutput(v **GetChangeTokenOu
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16063,6 +16248,7 @@ func awsAwsjson11_deserializeOpDocumentGetChangeTokenStatusOutput(v **GetChangeT
 				}
 				sv.ChangeTokenStatus = types.ChangeTokenStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16098,6 +16284,7 @@ func awsAwsjson11_deserializeOpDocumentGetGeoMatchSetOutput(v **GetGeoMatchSetOu
 			if err := awsAwsjson11_deserializeDocumentGeoMatchSet(&sv.GeoMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16133,6 +16320,7 @@ func awsAwsjson11_deserializeOpDocumentGetIPSetOutput(v **GetIPSetOutput, value 
 			if err := awsAwsjson11_deserializeDocumentIPSet(&sv.IPSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16168,6 +16356,7 @@ func awsAwsjson11_deserializeOpDocumentGetLoggingConfigurationOutput(v **GetLogg
 			if err := awsAwsjson11_deserializeDocumentLoggingConfiguration(&sv.LoggingConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16207,6 +16396,7 @@ func awsAwsjson11_deserializeOpDocumentGetPermissionPolicyOutput(v **GetPermissi
 				}
 				sv.Policy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16242,6 +16432,7 @@ func awsAwsjson11_deserializeOpDocumentGetRateBasedRuleManagedKeysOutput(v **Get
 			if err := awsAwsjson11_deserializeDocumentManagedKeys(&sv.ManagedKeys, value); err != nil {
 				return err
 			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16250,6 +16441,7 @@ func awsAwsjson11_deserializeOpDocumentGetRateBasedRuleManagedKeysOutput(v **Get
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16285,6 +16477,7 @@ func awsAwsjson11_deserializeOpDocumentGetRateBasedRuleOutput(v **GetRateBasedRu
 			if err := awsAwsjson11_deserializeDocumentRateBasedRule(&sv.Rule, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16320,6 +16513,7 @@ func awsAwsjson11_deserializeOpDocumentGetRegexMatchSetOutput(v **GetRegexMatchS
 			if err := awsAwsjson11_deserializeDocumentRegexMatchSet(&sv.RegexMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16355,6 +16549,7 @@ func awsAwsjson11_deserializeOpDocumentGetRegexPatternSetOutput(v **GetRegexPatt
 			if err := awsAwsjson11_deserializeDocumentRegexPatternSet(&sv.RegexPatternSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16390,6 +16585,7 @@ func awsAwsjson11_deserializeOpDocumentGetRuleGroupOutput(v **GetRuleGroupOutput
 			if err := awsAwsjson11_deserializeDocumentRuleGroup(&sv.RuleGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16425,6 +16621,7 @@ func awsAwsjson11_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 			if err := awsAwsjson11_deserializeDocumentRule(&sv.Rule, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16468,14 +16665,17 @@ func awsAwsjson11_deserializeOpDocumentGetSampledRequestsOutput(v **GetSampledRe
 				}
 				sv.PopulationSize = i64
 			}
+
 		case "SampledRequests":
 			if err := awsAwsjson11_deserializeDocumentSampledHTTPRequests(&sv.SampledRequests, value); err != nil {
 				return err
 			}
+
 		case "TimeWindow":
 			if err := awsAwsjson11_deserializeDocumentTimeWindow(&sv.TimeWindow, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16511,6 +16711,7 @@ func awsAwsjson11_deserializeOpDocumentGetSizeConstraintSetOutput(v **GetSizeCon
 			if err := awsAwsjson11_deserializeDocumentSizeConstraintSet(&sv.SizeConstraintSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16546,6 +16747,7 @@ func awsAwsjson11_deserializeOpDocumentGetSqlInjectionMatchSetOutput(v **GetSqlI
 			if err := awsAwsjson11_deserializeDocumentSqlInjectionMatchSet(&sv.SqlInjectionMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16581,6 +16783,7 @@ func awsAwsjson11_deserializeOpDocumentGetWebACLForResourceOutput(v **GetWebACLF
 			if err := awsAwsjson11_deserializeDocumentWebACLSummary(&sv.WebACLSummary, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16616,6 +16819,7 @@ func awsAwsjson11_deserializeOpDocumentGetWebACLOutput(v **GetWebACLOutput, valu
 			if err := awsAwsjson11_deserializeDocumentWebACL(&sv.WebACL, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16651,6 +16855,7 @@ func awsAwsjson11_deserializeOpDocumentGetXssMatchSetOutput(v **GetXssMatchSetOu
 			if err := awsAwsjson11_deserializeDocumentXssMatchSet(&sv.XssMatchSet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16686,6 +16891,7 @@ func awsAwsjson11_deserializeOpDocumentListActivatedRulesInRuleGroupOutput(v **L
 			if err := awsAwsjson11_deserializeDocumentActivatedRules(&sv.ActivatedRules, value); err != nil {
 				return err
 			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16694,6 +16900,7 @@ func awsAwsjson11_deserializeOpDocumentListActivatedRulesInRuleGroupOutput(v **L
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16729,6 +16936,7 @@ func awsAwsjson11_deserializeOpDocumentListByteMatchSetsOutput(v **ListByteMatch
 			if err := awsAwsjson11_deserializeDocumentByteMatchSetSummaries(&sv.ByteMatchSets, value); err != nil {
 				return err
 			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16737,6 +16945,7 @@ func awsAwsjson11_deserializeOpDocumentListByteMatchSetsOutput(v **ListByteMatch
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16772,6 +16981,7 @@ func awsAwsjson11_deserializeOpDocumentListGeoMatchSetsOutput(v **ListGeoMatchSe
 			if err := awsAwsjson11_deserializeDocumentGeoMatchSetSummaries(&sv.GeoMatchSets, value); err != nil {
 				return err
 			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16780,6 +16990,7 @@ func awsAwsjson11_deserializeOpDocumentListGeoMatchSetsOutput(v **ListGeoMatchSe
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16815,6 +17026,7 @@ func awsAwsjson11_deserializeOpDocumentListIPSetsOutput(v **ListIPSetsOutput, va
 			if err := awsAwsjson11_deserializeDocumentIPSetSummaries(&sv.IPSets, value); err != nil {
 				return err
 			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16823,6 +17035,7 @@ func awsAwsjson11_deserializeOpDocumentListIPSetsOutput(v **ListIPSetsOutput, va
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16858,6 +17071,7 @@ func awsAwsjson11_deserializeOpDocumentListLoggingConfigurationsOutput(v **ListL
 			if err := awsAwsjson11_deserializeDocumentLoggingConfigurations(&sv.LoggingConfigurations, value); err != nil {
 				return err
 			}
+
 		case "NextMarker":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16866,6 +17080,7 @@ func awsAwsjson11_deserializeOpDocumentListLoggingConfigurationsOutput(v **ListL
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16905,10 +17120,12 @@ func awsAwsjson11_deserializeOpDocumentListRateBasedRulesOutput(v **ListRateBase
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentRuleSummaries(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16948,10 +17165,12 @@ func awsAwsjson11_deserializeOpDocumentListRegexMatchSetsOutput(v **ListRegexMat
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "RegexMatchSets":
 			if err := awsAwsjson11_deserializeDocumentRegexMatchSetSummaries(&sv.RegexMatchSets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16991,10 +17210,12 @@ func awsAwsjson11_deserializeOpDocumentListRegexPatternSetsOutput(v **ListRegexP
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "RegexPatternSets":
 			if err := awsAwsjson11_deserializeDocumentRegexPatternSetSummaries(&sv.RegexPatternSets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17030,6 +17251,7 @@ func awsAwsjson11_deserializeOpDocumentListResourcesForWebACLOutput(v **ListReso
 			if err := awsAwsjson11_deserializeDocumentResourceArns(&sv.ResourceArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17069,10 +17291,12 @@ func awsAwsjson11_deserializeOpDocumentListRuleGroupsOutput(v **ListRuleGroupsOu
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "RuleGroups":
 			if err := awsAwsjson11_deserializeDocumentRuleGroupSummaries(&sv.RuleGroups, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17112,10 +17336,12 @@ func awsAwsjson11_deserializeOpDocumentListRulesOutput(v **ListRulesOutput, valu
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "Rules":
 			if err := awsAwsjson11_deserializeDocumentRuleSummaries(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17155,10 +17381,12 @@ func awsAwsjson11_deserializeOpDocumentListSizeConstraintSetsOutput(v **ListSize
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "SizeConstraintSets":
 			if err := awsAwsjson11_deserializeDocumentSizeConstraintSetSummaries(&sv.SizeConstraintSets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17198,10 +17426,12 @@ func awsAwsjson11_deserializeOpDocumentListSqlInjectionMatchSetsOutput(v **ListS
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "SqlInjectionMatchSets":
 			if err := awsAwsjson11_deserializeDocumentSqlInjectionMatchSetSummaries(&sv.SqlInjectionMatchSets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17241,10 +17471,12 @@ func awsAwsjson11_deserializeOpDocumentListSubscribedRuleGroupsOutput(v **ListSu
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "RuleGroups":
 			if err := awsAwsjson11_deserializeDocumentSubscribedRuleGroupSummaries(&sv.RuleGroups, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17284,10 +17516,12 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "TagInfoForResource":
 			if err := awsAwsjson11_deserializeDocumentTagInfoForResource(&sv.TagInfoForResource, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17327,10 +17561,12 @@ func awsAwsjson11_deserializeOpDocumentListWebACLsOutput(v **ListWebACLsOutput, 
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "WebACLs":
 			if err := awsAwsjson11_deserializeDocumentWebACLSummaries(&sv.WebACLs, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17370,10 +17606,12 @@ func awsAwsjson11_deserializeOpDocumentListXssMatchSetsOutput(v **ListXssMatchSe
 				}
 				sv.NextMarker = ptr.String(jtv)
 			}
+
 		case "XssMatchSets":
 			if err := awsAwsjson11_deserializeDocumentXssMatchSetSummaries(&sv.XssMatchSets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17409,6 +17647,7 @@ func awsAwsjson11_deserializeOpDocumentPutLoggingConfigurationOutput(v **PutLogg
 			if err := awsAwsjson11_deserializeDocumentLoggingConfiguration(&sv.LoggingConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17541,6 +17780,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateByteMatchSetOutput(v **UpdateByteMa
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17580,6 +17820,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateGeoMatchSetOutput(v **UpdateGeoMatc
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17619,6 +17860,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateIPSetOutput(v **UpdateIPSetOutput, 
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17658,6 +17900,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateRateBasedRuleOutput(v **UpdateRateB
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17697,6 +17940,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateRegexMatchSetOutput(v **UpdateRegex
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17736,6 +17980,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateRegexPatternSetOutput(v **UpdateReg
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17775,6 +18020,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateRuleGroupOutput(v **UpdateRuleGroup
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17814,6 +18060,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17853,6 +18100,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateSizeConstraintSetOutput(v **UpdateS
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17892,6 +18140,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateSqlInjectionMatchSetOutput(v **Upda
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17931,6 +18180,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateWebACLOutput(v **UpdateWebACLOutput
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17970,6 +18220,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateXssMatchSetOutput(v **UpdateXssMatc
 				}
 				sv.ChangeToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

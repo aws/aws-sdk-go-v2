@@ -7314,6 +7314,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.AcceleratorArn = ptr.String(jtv)
 			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7329,6 +7330,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 
 				}
 			}
+
 		case "DnsName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7337,6 +7339,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.DnsName = ptr.String(jtv)
 			}
+
 		case "DualStackDnsName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7345,6 +7348,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.DualStackDnsName = ptr.String(jtv)
 			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7353,10 +7357,12 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "Events":
 			if err := awsAwsjson11_deserializeDocumentAcceleratorEvents(&sv.Events, value); err != nil {
 				return err
 			}
+
 		case "IpAddressType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7365,10 +7371,12 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.IpAddressType = types.IpAddressType(jtv)
 			}
+
 		case "IpSets":
 			if err := awsAwsjson11_deserializeDocumentIpSets(&sv.IpSets, value); err != nil {
 				return err
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7384,6 +7392,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7392,6 +7401,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7400,6 +7410,7 @@ func awsAwsjson11_deserializeDocumentAccelerator(v **types.Accelerator, value in
 				}
 				sv.Status = types.AcceleratorStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7439,6 +7450,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorAttributes(v **types.Accelerator
 				}
 				sv.FlowLogsEnabled = ptr.Bool(jtv)
 			}
+
 		case "FlowLogsS3Bucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7447,6 +7459,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorAttributes(v **types.Accelerator
 				}
 				sv.FlowLogsS3Bucket = ptr.String(jtv)
 			}
+
 		case "FlowLogsS3Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7455,6 +7468,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorAttributes(v **types.Accelerator
 				}
 				sv.FlowLogsS3Prefix = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7494,6 +7508,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorEvent(v **types.AcceleratorEvent
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7509,6 +7524,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorEvent(v **types.AcceleratorEvent
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7582,6 +7598,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorNotDisabledException(v **types.A
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7621,6 +7638,7 @@ func awsAwsjson11_deserializeDocumentAcceleratorNotFoundException(v **types.Acce
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7694,6 +7712,7 @@ func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7733,6 +7752,7 @@ func awsAwsjson11_deserializeDocumentAssociatedEndpointGroupFoundException(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7772,6 +7792,7 @@ func awsAwsjson11_deserializeDocumentAssociatedListenerFoundException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7811,6 +7832,7 @@ func awsAwsjson11_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.AttachmentArn = ptr.String(jtv)
 			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7826,6 +7848,7 @@ func awsAwsjson11_deserializeDocumentAttachment(v **types.Attachment, value inte
 
 				}
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -7841,6 +7864,7 @@ func awsAwsjson11_deserializeDocumentAttachment(v **types.Attachment, value inte
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7849,14 +7873,17 @@ func awsAwsjson11_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Principals":
 			if err := awsAwsjson11_deserializeDocumentPrincipals(&sv.Principals, value); err != nil {
 				return err
 			}
+
 		case "Resources":
 			if err := awsAwsjson11_deserializeDocumentResources(&sv.Resources, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7896,6 +7923,7 @@ func awsAwsjson11_deserializeDocumentAttachmentNotFoundException(v **types.Attac
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8005,10 +8033,12 @@ func awsAwsjson11_deserializeDocumentByoipCidr(v **types.ByoipCidr, value interf
 				}
 				sv.Cidr = ptr.String(jtv)
 			}
+
 		case "Events":
 			if err := awsAwsjson11_deserializeDocumentByoipCidrEvents(&sv.Events, value); err != nil {
 				return err
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8017,6 +8047,7 @@ func awsAwsjson11_deserializeDocumentByoipCidr(v **types.ByoipCidr, value interf
 				}
 				sv.State = types.ByoipCidrState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8056,6 +8087,7 @@ func awsAwsjson11_deserializeDocumentByoipCidrEvent(v **types.ByoipCidrEvent, va
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8071,6 +8103,7 @@ func awsAwsjson11_deserializeDocumentByoipCidrEvent(v **types.ByoipCidrEvent, va
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8144,6 +8177,7 @@ func awsAwsjson11_deserializeDocumentByoipCidrNotFoundException(v **types.ByoipC
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8217,6 +8251,7 @@ func awsAwsjson11_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8256,6 +8291,7 @@ func awsAwsjson11_deserializeDocumentCrossAccountResource(v **types.CrossAccount
 				}
 				sv.AttachmentArn = ptr.String(jtv)
 			}
+
 		case "Cidr":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8264,6 +8300,7 @@ func awsAwsjson11_deserializeDocumentCrossAccountResource(v **types.CrossAccount
 				}
 				sv.Cidr = ptr.String(jtv)
 			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8272,6 +8309,7 @@ func awsAwsjson11_deserializeDocumentCrossAccountResource(v **types.CrossAccount
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8345,6 +8383,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 				}
 				sv.AcceleratorArn = ptr.String(jtv)
 			}
+
 		case "CreatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8360,6 +8399,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 
 				}
 			}
+
 		case "DnsName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8368,6 +8408,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 				}
 				sv.DnsName = ptr.String(jtv)
 			}
+
 		case "Enabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8376,6 +8417,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "IpAddressType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8384,10 +8426,12 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 				}
 				sv.IpAddressType = types.IpAddressType(jtv)
 			}
+
 		case "IpSets":
 			if err := awsAwsjson11_deserializeDocumentIpSets(&sv.IpSets, value); err != nil {
 				return err
 			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8403,6 +8447,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8411,6 +8456,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8419,6 +8465,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(v **types.CustomRo
 				}
 				sv.Status = types.CustomRoutingAcceleratorStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8458,6 +8505,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAcceleratorAttributes(v **type
 				}
 				sv.FlowLogsEnabled = ptr.Bool(jtv)
 			}
+
 		case "FlowLogsS3Bucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8466,6 +8514,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAcceleratorAttributes(v **type
 				}
 				sv.FlowLogsS3Bucket = ptr.String(jtv)
 			}
+
 		case "FlowLogsS3Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8474,6 +8523,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingAcceleratorAttributes(v **type
 				}
 				sv.FlowLogsS3Prefix = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8551,10 +8601,12 @@ func awsAwsjson11_deserializeDocumentCustomRoutingDestinationDescription(v **typ
 				}
 				sv.FromPort = ptr.Int32(int32(i64))
 			}
+
 		case "Protocols":
 			if err := awsAwsjson11_deserializeDocumentProtocols(&sv.Protocols, value); err != nil {
 				return err
 			}
+
 		case "ToPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8567,6 +8619,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingDestinationDescription(v **typ
 				}
 				sv.ToPort = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8640,6 +8693,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingEndpointDescription(v **types.
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8709,10 +8763,12 @@ func awsAwsjson11_deserializeDocumentCustomRoutingEndpointGroup(v **types.Custom
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingDestinationDescriptions(&sv.DestinationDescriptions, value); err != nil {
 				return err
 			}
+
 		case "EndpointDescriptions":
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingEndpointDescriptions(&sv.EndpointDescriptions, value); err != nil {
 				return err
 			}
+
 		case "EndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8721,6 +8777,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingEndpointGroup(v **types.Custom
 				}
 				sv.EndpointGroupArn = ptr.String(jtv)
 			}
+
 		case "EndpointGroupRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8729,6 +8786,7 @@ func awsAwsjson11_deserializeDocumentCustomRoutingEndpointGroup(v **types.Custom
 				}
 				sv.EndpointGroupRegion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8802,10 +8860,12 @@ func awsAwsjson11_deserializeDocumentCustomRoutingListener(v **types.CustomRouti
 				}
 				sv.ListenerArn = ptr.String(jtv)
 			}
+
 		case "PortRanges":
 			if err := awsAwsjson11_deserializeDocumentPortRanges(&sv.PortRanges, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8915,14 +8975,17 @@ func awsAwsjson11_deserializeDocumentDestinationPortMapping(v **types.Destinatio
 				}
 				sv.AcceleratorArn = ptr.String(jtv)
 			}
+
 		case "AcceleratorSocketAddresses":
 			if err := awsAwsjson11_deserializeDocumentSocketAddresses(&sv.AcceleratorSocketAddresses, value); err != nil {
 				return err
 			}
+
 		case "DestinationSocketAddress":
 			if err := awsAwsjson11_deserializeDocumentSocketAddress(&sv.DestinationSocketAddress, value); err != nil {
 				return err
 			}
+
 		case "DestinationTrafficState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8931,6 +8994,7 @@ func awsAwsjson11_deserializeDocumentDestinationPortMapping(v **types.Destinatio
 				}
 				sv.DestinationTrafficState = types.CustomRoutingDestinationTrafficState(jtv)
 			}
+
 		case "EndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8939,6 +9003,7 @@ func awsAwsjson11_deserializeDocumentDestinationPortMapping(v **types.Destinatio
 				}
 				sv.EndpointGroupArn = ptr.String(jtv)
 			}
+
 		case "EndpointGroupRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8947,6 +9012,7 @@ func awsAwsjson11_deserializeDocumentDestinationPortMapping(v **types.Destinatio
 				}
 				sv.EndpointGroupRegion = ptr.String(jtv)
 			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8955,6 +9021,7 @@ func awsAwsjson11_deserializeDocumentDestinationPortMapping(v **types.Destinatio
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
+
 		case "IpAddressType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8963,6 +9030,7 @@ func awsAwsjson11_deserializeDocumentDestinationPortMapping(v **types.Destinatio
 				}
 				sv.IpAddressType = types.IpAddressType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9036,6 +9104,7 @@ func awsAwsjson11_deserializeDocumentEndpointAlreadyExistsException(v **types.En
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9075,6 +9144,7 @@ func awsAwsjson11_deserializeDocumentEndpointDescription(v **types.EndpointDescr
 				}
 				sv.ClientIPPreservationEnabled = ptr.Bool(jtv)
 			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9083,6 +9153,7 @@ func awsAwsjson11_deserializeDocumentEndpointDescription(v **types.EndpointDescr
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
+
 		case "HealthReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9091,6 +9162,7 @@ func awsAwsjson11_deserializeDocumentEndpointDescription(v **types.EndpointDescr
 				}
 				sv.HealthReason = ptr.String(jtv)
 			}
+
 		case "HealthState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9099,6 +9171,7 @@ func awsAwsjson11_deserializeDocumentEndpointDescription(v **types.EndpointDescr
 				}
 				sv.HealthState = types.HealthState(jtv)
 			}
+
 		case "Weight":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9111,6 +9184,7 @@ func awsAwsjson11_deserializeDocumentEndpointDescription(v **types.EndpointDescr
 				}
 				sv.Weight = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9180,6 +9254,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 			if err := awsAwsjson11_deserializeDocumentEndpointDescriptions(&sv.EndpointDescriptions, value); err != nil {
 				return err
 			}
+
 		case "EndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9188,6 +9263,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.EndpointGroupArn = ptr.String(jtv)
 			}
+
 		case "EndpointGroupRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9196,6 +9272,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.EndpointGroupRegion = ptr.String(jtv)
 			}
+
 		case "HealthCheckIntervalSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9208,6 +9285,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.HealthCheckIntervalSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "HealthCheckPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9216,6 +9294,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.HealthCheckPath = ptr.String(jtv)
 			}
+
 		case "HealthCheckPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9228,6 +9307,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.HealthCheckPort = ptr.Int32(int32(i64))
 			}
+
 		case "HealthCheckProtocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9236,10 +9316,12 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.HealthCheckProtocol = types.HealthCheckProtocol(jtv)
 			}
+
 		case "PortOverrides":
 			if err := awsAwsjson11_deserializeDocumentPortOverrides(&sv.PortOverrides, value); err != nil {
 				return err
 			}
+
 		case "ThresholdCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -9252,6 +9334,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 				}
 				sv.ThresholdCount = ptr.Int32(int32(i64))
 			}
+
 		case "TrafficDialPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9285,6 +9368,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroup(v **types.EndpointGroup, valu
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9324,6 +9408,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroupAlreadyExistsException(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9363,6 +9448,7 @@ func awsAwsjson11_deserializeDocumentEndpointGroupNotFoundException(v **types.En
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9436,6 +9522,7 @@ func awsAwsjson11_deserializeDocumentEndpointNotFoundException(v **types.Endpoin
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9475,6 +9562,7 @@ func awsAwsjson11_deserializeDocumentIncorrectCidrStateException(v **types.Incor
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9514,6 +9602,7 @@ func awsAwsjson11_deserializeDocumentInternalServiceErrorException(v **types.Int
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9553,6 +9642,7 @@ func awsAwsjson11_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9592,6 +9682,7 @@ func awsAwsjson11_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9631,6 +9722,7 @@ func awsAwsjson11_deserializeDocumentInvalidPortRangeException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9702,6 +9794,7 @@ func awsAwsjson11_deserializeDocumentIpSet(v **types.IpSet, value interface{}) e
 			if err := awsAwsjson11_deserializeDocumentIpAddresses(&sv.IpAddresses, value); err != nil {
 				return err
 			}
+
 		case "IpAddressFamily":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9710,6 +9803,7 @@ func awsAwsjson11_deserializeDocumentIpSet(v **types.IpSet, value interface{}) e
 				}
 				sv.IpAddressFamily = types.IpAddressFamily(jtv)
 			}
+
 		case "IpFamily":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9718,6 +9812,7 @@ func awsAwsjson11_deserializeDocumentIpSet(v **types.IpSet, value interface{}) e
 				}
 				sv.IpFamily = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9791,6 +9886,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9830,6 +9926,7 @@ func awsAwsjson11_deserializeDocumentListener(v **types.Listener, value interfac
 				}
 				sv.ClientAffinity = types.ClientAffinity(jtv)
 			}
+
 		case "ListenerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9838,10 +9935,12 @@ func awsAwsjson11_deserializeDocumentListener(v **types.Listener, value interfac
 				}
 				sv.ListenerArn = ptr.String(jtv)
 			}
+
 		case "PortRanges":
 			if err := awsAwsjson11_deserializeDocumentPortRanges(&sv.PortRanges, value); err != nil {
 				return err
 			}
+
 		case "Protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9850,6 +9949,7 @@ func awsAwsjson11_deserializeDocumentListener(v **types.Listener, value interfac
 				}
 				sv.Protocol = types.Protocol(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9889,6 +9989,7 @@ func awsAwsjson11_deserializeDocumentListenerNotFoundException(v **types.Listene
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9966,10 +10067,12 @@ func awsAwsjson11_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				}
 				sv.AcceleratorPort = ptr.Int32(int32(i64))
 			}
+
 		case "DestinationSocketAddress":
 			if err := awsAwsjson11_deserializeDocumentSocketAddress(&sv.DestinationSocketAddress, value); err != nil {
 				return err
 			}
+
 		case "DestinationTrafficState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9978,6 +10081,7 @@ func awsAwsjson11_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				}
 				sv.DestinationTrafficState = types.CustomRoutingDestinationTrafficState(jtv)
 			}
+
 		case "EndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9986,6 +10090,7 @@ func awsAwsjson11_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				}
 				sv.EndpointGroupArn = ptr.String(jtv)
 			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9994,10 +10099,12 @@ func awsAwsjson11_deserializeDocumentPortMapping(v **types.PortMapping, value in
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
+
 		case "Protocols":
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingProtocols(&sv.Protocols, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10075,6 +10182,7 @@ func awsAwsjson11_deserializeDocumentPortOverride(v **types.PortOverride, value 
 				}
 				sv.EndpointPort = ptr.Int32(int32(i64))
 			}
+
 		case "ListenerPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10087,6 +10195,7 @@ func awsAwsjson11_deserializeDocumentPortOverride(v **types.PortOverride, value 
 				}
 				sv.ListenerPort = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10164,6 +10273,7 @@ func awsAwsjson11_deserializeDocumentPortRange(v **types.PortRange, value interf
 				}
 				sv.FromPort = ptr.Int32(int32(i64))
 			}
+
 		case "ToPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10176,6 +10286,7 @@ func awsAwsjson11_deserializeDocumentPortRange(v **types.PortRange, value interf
 				}
 				sv.ToPort = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10321,6 +10432,7 @@ func awsAwsjson11_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Cidr = ptr.String(jtv)
 			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10329,6 +10441,7 @@ func awsAwsjson11_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10337,6 +10450,7 @@ func awsAwsjson11_deserializeDocumentResource(v **types.Resource, value interfac
 				}
 				sv.Region = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10410,6 +10524,7 @@ func awsAwsjson11_deserializeDocumentSocketAddress(v **types.SocketAddress, valu
 				}
 				sv.IpAddress = ptr.String(jtv)
 			}
+
 		case "Port":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10422,6 +10537,7 @@ func awsAwsjson11_deserializeDocumentSocketAddress(v **types.SocketAddress, valu
 				}
 				sv.Port = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10495,6 +10611,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10503,6 +10620,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10576,6 +10694,7 @@ func awsAwsjson11_deserializeDocumentTransactionInProgressException(v **types.Tr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10611,6 +10730,7 @@ func awsAwsjson11_deserializeOpDocumentAddCustomRoutingEndpointsOutput(v **AddCu
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingEndpointDescriptions(&sv.EndpointDescriptions, value); err != nil {
 				return err
 			}
+
 		case "EndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10619,6 +10739,7 @@ func awsAwsjson11_deserializeOpDocumentAddCustomRoutingEndpointsOutput(v **AddCu
 				}
 				sv.EndpointGroupArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10654,6 +10775,7 @@ func awsAwsjson11_deserializeOpDocumentAddEndpointsOutput(v **AddEndpointsOutput
 			if err := awsAwsjson11_deserializeDocumentEndpointDescriptions(&sv.EndpointDescriptions, value); err != nil {
 				return err
 			}
+
 		case "EndpointGroupArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10662,6 +10784,7 @@ func awsAwsjson11_deserializeOpDocumentAddEndpointsOutput(v **AddEndpointsOutput
 				}
 				sv.EndpointGroupArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10697,6 +10820,7 @@ func awsAwsjson11_deserializeOpDocumentAdvertiseByoipCidrOutput(v **AdvertiseByo
 			if err := awsAwsjson11_deserializeDocumentByoipCidr(&sv.ByoipCidr, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10732,6 +10856,7 @@ func awsAwsjson11_deserializeOpDocumentCreateAcceleratorOutput(v **CreateAcceler
 			if err := awsAwsjson11_deserializeDocumentAccelerator(&sv.Accelerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10767,6 +10892,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCrossAccountAttachmentOutput(v **Cr
 			if err := awsAwsjson11_deserializeDocumentAttachment(&sv.CrossAccountAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10802,6 +10928,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCustomRoutingAcceleratorOutput(v **
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(&sv.Accelerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10837,6 +10964,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCustomRoutingEndpointGroupOutput(v 
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingEndpointGroup(&sv.EndpointGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10872,6 +11000,7 @@ func awsAwsjson11_deserializeOpDocumentCreateCustomRoutingListenerOutput(v **Cre
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingListener(&sv.Listener, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10907,6 +11036,7 @@ func awsAwsjson11_deserializeOpDocumentCreateEndpointGroupOutput(v **CreateEndpo
 			if err := awsAwsjson11_deserializeDocumentEndpointGroup(&sv.EndpointGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10942,6 +11072,7 @@ func awsAwsjson11_deserializeOpDocumentCreateListenerOutput(v **CreateListenerOu
 			if err := awsAwsjson11_deserializeDocumentListener(&sv.Listener, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10977,6 +11108,7 @@ func awsAwsjson11_deserializeOpDocumentDeprovisionByoipCidrOutput(v **Deprovisio
 			if err := awsAwsjson11_deserializeDocumentByoipCidr(&sv.ByoipCidr, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11012,6 +11144,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAcceleratorAttributesOutput(v **D
 			if err := awsAwsjson11_deserializeDocumentAcceleratorAttributes(&sv.AcceleratorAttributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11047,6 +11180,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeAcceleratorOutput(v **DescribeAcc
 			if err := awsAwsjson11_deserializeDocumentAccelerator(&sv.Accelerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11082,6 +11216,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCrossAccountAttachmentOutput(v **
 			if err := awsAwsjson11_deserializeDocumentAttachment(&sv.CrossAccountAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11117,6 +11252,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCustomRoutingAcceleratorAttribute
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingAcceleratorAttributes(&sv.AcceleratorAttributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11152,6 +11288,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCustomRoutingAcceleratorOutput(v 
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(&sv.Accelerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11187,6 +11324,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCustomRoutingEndpointGroupOutput(
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingEndpointGroup(&sv.EndpointGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11222,6 +11360,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeCustomRoutingListenerOutput(v **D
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingListener(&sv.Listener, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11257,6 +11396,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeEndpointGroupOutput(v **DescribeE
 			if err := awsAwsjson11_deserializeDocumentEndpointGroup(&sv.EndpointGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11292,6 +11432,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeListenerOutput(v **DescribeListen
 			if err := awsAwsjson11_deserializeDocumentListener(&sv.Listener, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11327,6 +11468,7 @@ func awsAwsjson11_deserializeOpDocumentListAcceleratorsOutput(v **ListAccelerato
 			if err := awsAwsjson11_deserializeDocumentAccelerators(&sv.Accelerators, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11335,6 +11477,7 @@ func awsAwsjson11_deserializeOpDocumentListAcceleratorsOutput(v **ListAccelerato
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11370,6 +11513,7 @@ func awsAwsjson11_deserializeOpDocumentListByoipCidrsOutput(v **ListByoipCidrsOu
 			if err := awsAwsjson11_deserializeDocumentByoipCidrs(&sv.ByoipCidrs, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11378,6 +11522,7 @@ func awsAwsjson11_deserializeOpDocumentListByoipCidrsOutput(v **ListByoipCidrsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11413,6 +11558,7 @@ func awsAwsjson11_deserializeOpDocumentListCrossAccountAttachmentsOutput(v **Lis
 			if err := awsAwsjson11_deserializeDocumentAttachments(&sv.CrossAccountAttachments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11421,6 +11567,7 @@ func awsAwsjson11_deserializeOpDocumentListCrossAccountAttachmentsOutput(v **Lis
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11456,6 +11603,7 @@ func awsAwsjson11_deserializeOpDocumentListCrossAccountResourceAccountsOutput(v 
 			if err := awsAwsjson11_deserializeDocumentAwsAccountIds(&sv.ResourceOwnerAwsAccountIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11491,6 +11639,7 @@ func awsAwsjson11_deserializeOpDocumentListCrossAccountResourcesOutput(v **ListC
 			if err := awsAwsjson11_deserializeDocumentCrossAccountResources(&sv.CrossAccountResources, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11499,6 +11648,7 @@ func awsAwsjson11_deserializeOpDocumentListCrossAccountResourcesOutput(v **ListC
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11534,6 +11684,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingAcceleratorsOutput(v **L
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingAccelerators(&sv.Accelerators, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11542,6 +11693,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingAcceleratorsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11577,6 +11729,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingEndpointGroupsOutput(v *
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingEndpointGroups(&sv.EndpointGroups, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11585,6 +11738,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingEndpointGroupsOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11620,6 +11774,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingListenersOutput(v **List
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingListeners(&sv.Listeners, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11628,6 +11783,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingListenersOutput(v **List
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11663,6 +11819,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingPortMappingsByDestinatio
 			if err := awsAwsjson11_deserializeDocumentDestinationPortMappings(&sv.DestinationPortMappings, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11671,6 +11828,7 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingPortMappingsByDestinatio
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11710,10 +11868,12 @@ func awsAwsjson11_deserializeOpDocumentListCustomRoutingPortMappingsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PortMappings":
 			if err := awsAwsjson11_deserializeDocumentPortMappings(&sv.PortMappings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11749,6 +11909,7 @@ func awsAwsjson11_deserializeOpDocumentListEndpointGroupsOutput(v **ListEndpoint
 			if err := awsAwsjson11_deserializeDocumentEndpointGroups(&sv.EndpointGroups, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11757,6 +11918,7 @@ func awsAwsjson11_deserializeOpDocumentListEndpointGroupsOutput(v **ListEndpoint
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11792,6 +11954,7 @@ func awsAwsjson11_deserializeOpDocumentListListenersOutput(v **ListListenersOutp
 			if err := awsAwsjson11_deserializeDocumentListeners(&sv.Listeners, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11800,6 +11963,7 @@ func awsAwsjson11_deserializeOpDocumentListListenersOutput(v **ListListenersOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11835,6 +11999,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11870,6 +12035,7 @@ func awsAwsjson11_deserializeOpDocumentProvisionByoipCidrOutput(v **ProvisionByo
 			if err := awsAwsjson11_deserializeDocumentByoipCidr(&sv.ByoipCidr, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11967,6 +12133,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateAcceleratorAttributesOutput(v **Upd
 			if err := awsAwsjson11_deserializeDocumentAcceleratorAttributes(&sv.AcceleratorAttributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12002,6 +12169,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateAcceleratorOutput(v **UpdateAcceler
 			if err := awsAwsjson11_deserializeDocumentAccelerator(&sv.Accelerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12037,6 +12205,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCrossAccountAttachmentOutput(v **Up
 			if err := awsAwsjson11_deserializeDocumentAttachment(&sv.CrossAccountAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12072,6 +12241,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCustomRoutingAcceleratorAttributesO
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingAcceleratorAttributes(&sv.AcceleratorAttributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12107,6 +12277,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCustomRoutingAcceleratorOutput(v **
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingAccelerator(&sv.Accelerator, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12142,6 +12313,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateCustomRoutingListenerOutput(v **Upd
 			if err := awsAwsjson11_deserializeDocumentCustomRoutingListener(&sv.Listener, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12177,6 +12349,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateEndpointGroupOutput(v **UpdateEndpo
 			if err := awsAwsjson11_deserializeDocumentEndpointGroup(&sv.EndpointGroup, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12212,6 +12385,7 @@ func awsAwsjson11_deserializeOpDocumentUpdateListenerOutput(v **UpdateListenerOu
 			if err := awsAwsjson11_deserializeDocumentListener(&sv.Listener, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12247,6 +12421,7 @@ func awsAwsjson11_deserializeOpDocumentWithdrawByoipCidrOutput(v **WithdrawByoip
 			if err := awsAwsjson11_deserializeDocumentByoipCidr(&sv.ByoipCidr, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

@@ -186,6 +186,7 @@ func awsRestjson1_deserializeOpDocumentGetIceServerConfigOutput(v **GetIceServer
 			if err := awsRestjson1_deserializeDocumentIceServerList(&sv.IceServerList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -350,6 +351,7 @@ func awsRestjson1_deserializeOpDocumentSendAlexaOfferToMasterOutput(v **SendAlex
 				}
 				sv.Answer = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -605,6 +607,7 @@ func awsRestjson1_deserializeDocumentClientLimitExceededException(v **types.Clie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -644,6 +647,7 @@ func awsRestjson1_deserializeDocumentIceServer(v **types.IceServer, value interf
 				}
 				sv.Password = ptr.String(jtv)
 			}
+
 		case "Ttl":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -656,10 +660,12 @@ func awsRestjson1_deserializeDocumentIceServer(v **types.IceServer, value interf
 				}
 				sv.Ttl = ptr.Int32(int32(i64))
 			}
+
 		case "Uris":
 			if err := awsRestjson1_deserializeDocumentUris(&sv.Uris, value); err != nil {
 				return err
 			}
+
 		case "Username":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -668,6 +674,7 @@ func awsRestjson1_deserializeDocumentIceServer(v **types.IceServer, value interf
 				}
 				sv.Username = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -741,6 +748,7 @@ func awsRestjson1_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -780,6 +788,7 @@ func awsRestjson1_deserializeDocumentInvalidClientException(v **types.InvalidCli
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -819,6 +828,7 @@ func awsRestjson1_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -858,6 +868,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -897,6 +908,7 @@ func awsRestjson1_deserializeDocumentSessionExpiredException(v **types.SessionEx
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

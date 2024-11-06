@@ -191,6 +191,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "comment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -199,6 +200,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 				}
 				sv.Comment = ptr.String(jtv)
 			}
+
 		case "expiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -214,6 +216,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 
 				}
 			}
+
 		case "resourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -222,6 +225,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -237,6 +241,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -245,6 +250,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 				}
 				sv.Status = types.ZonalShiftStatus(jtv)
 			}
+
 		case "zonalShiftId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -253,6 +259,7 @@ func awsRestjson1_deserializeOpDocumentCancelZonalShiftOutput(v **CancelZonalShi
 				}
 				sv.ZonalShiftId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -423,6 +430,7 @@ func awsRestjson1_deserializeOpDocumentCreatePracticeRunConfigurationOutput(v **
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -431,10 +439,12 @@ func awsRestjson1_deserializeOpDocumentCreatePracticeRunConfigurationOutput(v **
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "practiceRunConfiguration":
 			if err := awsRestjson1_deserializeDocumentPracticeRunConfiguration(&sv.PracticeRunConfiguration, value); err != nil {
 				return err
 			}
+
 		case "zonalAutoshiftStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -443,6 +453,7 @@ func awsRestjson1_deserializeOpDocumentCreatePracticeRunConfigurationOutput(v **
 				}
 				sv.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -613,6 +624,7 @@ func awsRestjson1_deserializeOpDocumentDeletePracticeRunConfigurationOutput(v **
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -621,6 +633,7 @@ func awsRestjson1_deserializeOpDocumentDeletePracticeRunConfigurationOutput(v **
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "zonalAutoshiftStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -629,6 +642,7 @@ func awsRestjson1_deserializeOpDocumentDeletePracticeRunConfigurationOutput(v **
 				}
 				sv.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -790,6 +804,7 @@ func awsRestjson1_deserializeOpDocumentGetAutoshiftObserverNotificationStatusOut
 				}
 				sv.Status = types.AutoshiftObserverNotificationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -953,6 +968,7 @@ func awsRestjson1_deserializeOpDocumentGetManagedResourceOutput(v **GetManagedRe
 			if err := awsRestjson1_deserializeDocumentAppliedWeights(&sv.AppliedWeights, value); err != nil {
 				return err
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -961,10 +977,12 @@ func awsRestjson1_deserializeOpDocumentGetManagedResourceOutput(v **GetManagedRe
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "autoshifts":
 			if err := awsRestjson1_deserializeDocumentAutoshiftsInResource(&sv.Autoshifts, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -973,10 +991,12 @@ func awsRestjson1_deserializeOpDocumentGetManagedResourceOutput(v **GetManagedRe
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "practiceRunConfiguration":
 			if err := awsRestjson1_deserializeDocumentPracticeRunConfiguration(&sv.PracticeRunConfiguration, value); err != nil {
 				return err
 			}
+
 		case "zonalAutoshiftStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -985,10 +1005,12 @@ func awsRestjson1_deserializeOpDocumentGetManagedResourceOutput(v **GetManagedRe
 				}
 				sv.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		case "zonalShifts":
 			if err := awsRestjson1_deserializeDocumentZonalShiftsInResource(&sv.ZonalShifts, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1149,6 +1171,7 @@ func awsRestjson1_deserializeOpDocumentListAutoshiftsOutput(v **ListAutoshiftsOu
 			if err := awsRestjson1_deserializeDocumentAutoshiftSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1157,6 +1180,7 @@ func awsRestjson1_deserializeOpDocumentListAutoshiftsOutput(v **ListAutoshiftsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1317,6 +1341,7 @@ func awsRestjson1_deserializeOpDocumentListManagedResourcesOutput(v **ListManage
 			if err := awsRestjson1_deserializeDocumentManagedResourceSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1325,6 +1350,7 @@ func awsRestjson1_deserializeOpDocumentListManagedResourcesOutput(v **ListManage
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1485,6 +1511,7 @@ func awsRestjson1_deserializeOpDocumentListZonalShiftsOutput(v **ListZonalShifts
 			if err := awsRestjson1_deserializeDocumentZonalShiftSummaries(&sv.Items, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1493,6 +1520,7 @@ func awsRestjson1_deserializeOpDocumentListZonalShiftsOutput(v **ListZonalShifts
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1663,6 +1691,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "comment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1671,6 +1700,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 				}
 				sv.Comment = ptr.String(jtv)
 			}
+
 		case "expiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1686,6 +1716,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 
 				}
 			}
+
 		case "resourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1694,6 +1725,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1709,6 +1741,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1717,6 +1750,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 				}
 				sv.Status = types.ZonalShiftStatus(jtv)
 			}
+
 		case "zonalShiftId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1725,6 +1759,7 @@ func awsRestjson1_deserializeOpDocumentStartZonalShiftOutput(v **StartZonalShift
 				}
 				sv.ZonalShiftId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1889,6 +1924,7 @@ func awsRestjson1_deserializeOpDocumentUpdateAutoshiftObserverNotificationStatus
 				}
 				sv.Status = types.AutoshiftObserverNotificationStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2059,6 +2095,7 @@ func awsRestjson1_deserializeOpDocumentUpdatePracticeRunConfigurationOutput(v **
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2067,10 +2104,12 @@ func awsRestjson1_deserializeOpDocumentUpdatePracticeRunConfigurationOutput(v **
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "practiceRunConfiguration":
 			if err := awsRestjson1_deserializeDocumentPracticeRunConfiguration(&sv.PracticeRunConfiguration, value); err != nil {
 				return err
 			}
+
 		case "zonalAutoshiftStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2079,6 +2118,7 @@ func awsRestjson1_deserializeOpDocumentUpdatePracticeRunConfigurationOutput(v **
 				}
 				sv.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2249,6 +2289,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalAutoshiftConfigurationOutput(v
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
+
 		case "zonalAutoshiftStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2257,6 +2298,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalAutoshiftConfigurationOutput(v
 				}
 				sv.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2427,6 +2469,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "comment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2435,6 +2478,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 				}
 				sv.Comment = ptr.String(jtv)
 			}
+
 		case "expiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2450,6 +2494,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 
 				}
 			}
+
 		case "resourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2458,6 +2503,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2473,6 +2519,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2481,6 +2528,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 				}
 				sv.Status = types.ZonalShiftStatus(jtv)
 			}
+
 		case "zonalShiftId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2489,6 +2537,7 @@ func awsRestjson1_deserializeOpDocumentUpdateZonalShiftOutput(v **UpdateZonalShi
 				}
 				sv.ZonalShiftId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2744,6 +2793,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2844,6 +2894,7 @@ func awsRestjson1_deserializeDocumentAutoshiftInResource(v **types.AutoshiftInRe
 				}
 				sv.AppliedStatus = types.AutoshiftAppliedStatus(jtv)
 			}
+
 		case "awayFrom":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2852,6 +2903,7 @@ func awsRestjson1_deserializeDocumentAutoshiftInResource(v **types.AutoshiftInRe
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2867,6 +2919,7 @@ func awsRestjson1_deserializeDocumentAutoshiftInResource(v **types.AutoshiftInRe
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2974,6 +3027,7 @@ func awsRestjson1_deserializeDocumentAutoshiftSummary(v **types.AutoshiftSummary
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "endTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2989,6 +3043,7 @@ func awsRestjson1_deserializeDocumentAutoshiftSummary(v **types.AutoshiftSummary
 
 				}
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3004,6 +3059,7 @@ func awsRestjson1_deserializeDocumentAutoshiftSummary(v **types.AutoshiftSummary
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3012,6 +3068,7 @@ func awsRestjson1_deserializeDocumentAutoshiftSummary(v **types.AutoshiftSummary
 				}
 				sv.Status = types.AutoshiftExecutionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3159,6 +3216,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3167,6 +3225,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Reason = types.ConflictExceptionReason(jtv)
 			}
+
 		case "zonalShiftId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3175,6 +3234,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ZonalShiftId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3214,6 +3274,7 @@ func awsRestjson1_deserializeDocumentControlCondition(v **types.ControlCondition
 				}
 				sv.AlarmIdentifier = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3222,6 +3283,7 @@ func awsRestjson1_deserializeDocumentControlCondition(v **types.ControlCondition
 				}
 				sv.Type = types.ControlConditionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3295,6 +3357,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3364,6 +3427,7 @@ func awsRestjson1_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 			if err := awsRestjson1_deserializeDocumentAppliedWeights(&sv.AppliedWeights, value); err != nil {
 				return err
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3372,14 +3436,17 @@ func awsRestjson1_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "autoshifts":
 			if err := awsRestjson1_deserializeDocumentAutoshiftsInResource(&sv.Autoshifts, value); err != nil {
 				return err
 			}
+
 		case "availabilityZones":
 			if err := awsRestjson1_deserializeDocumentAvailabilityZones(&sv.AvailabilityZones, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3388,6 +3455,7 @@ func awsRestjson1_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "practiceRunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3396,6 +3464,7 @@ func awsRestjson1_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 				}
 				sv.PracticeRunStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		case "zonalAutoshiftStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3404,10 +3473,12 @@ func awsRestjson1_deserializeDocumentManagedResourceSummary(v **types.ManagedRes
 				}
 				sv.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(jtv)
 			}
+
 		case "zonalShifts":
 			if err := awsRestjson1_deserializeDocumentZonalShiftsInResource(&sv.ZonalShifts, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3443,18 +3514,22 @@ func awsRestjson1_deserializeDocumentPracticeRunConfiguration(v **types.Practice
 			if err := awsRestjson1_deserializeDocumentBlockedDates(&sv.BlockedDates, value); err != nil {
 				return err
 			}
+
 		case "blockedWindows":
 			if err := awsRestjson1_deserializeDocumentBlockedWindows(&sv.BlockedWindows, value); err != nil {
 				return err
 			}
+
 		case "blockingAlarms":
 			if err := awsRestjson1_deserializeDocumentControlConditions(&sv.BlockingAlarms, value); err != nil {
 				return err
 			}
+
 		case "outcomeAlarms":
 			if err := awsRestjson1_deserializeDocumentControlConditions(&sv.OutcomeAlarms, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3494,6 +3569,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3533,6 +3609,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3572,6 +3649,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3580,6 +3658,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3619,6 +3698,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				}
 				sv.AppliedStatus = types.AppliedStatus(jtv)
 			}
+
 		case "awayFrom":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3627,6 +3707,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "comment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3635,6 +3716,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				}
 				sv.Comment = ptr.String(jtv)
 			}
+
 		case "expiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3650,6 +3732,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 
 				}
 			}
+
 		case "practiceRunOutcome":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3658,6 +3741,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				}
 				sv.PracticeRunOutcome = types.PracticeRunOutcome(jtv)
 			}
+
 		case "resourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3666,6 +3750,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3681,6 +3766,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 
 				}
 			}
+
 		case "zonalShiftId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3689,6 +3775,7 @@ func awsRestjson1_deserializeDocumentZonalShiftInResource(v **types.ZonalShiftIn
 				}
 				sv.ZonalShiftId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3796,6 +3883,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 				}
 				sv.AwayFrom = ptr.String(jtv)
 			}
+
 		case "comment":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3804,6 +3892,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 				}
 				sv.Comment = ptr.String(jtv)
 			}
+
 		case "expiryTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3819,6 +3908,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 
 				}
 			}
+
 		case "practiceRunOutcome":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3827,6 +3917,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 				}
 				sv.PracticeRunOutcome = types.PracticeRunOutcome(jtv)
 			}
+
 		case "resourceIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3835,6 +3926,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 				}
 				sv.ResourceIdentifier = ptr.String(jtv)
 			}
+
 		case "startTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3850,6 +3942,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 
 				}
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3858,6 +3951,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 				}
 				sv.Status = types.ZonalShiftStatus(jtv)
 			}
+
 		case "zonalShiftId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3866,6 +3960,7 @@ func awsRestjson1_deserializeDocumentZonalShiftSummary(v **types.ZonalShiftSumma
 				}
 				sv.ZonalShiftId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

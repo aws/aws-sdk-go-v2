@@ -181,14 +181,17 @@ func awsRestjson1_deserializeOpDocumentBatchGetRecordOutput(v **BatchGetRecordOu
 			if err := awsRestjson1_deserializeDocumentBatchGetRecordErrors(&sv.Errors, value); err != nil {
 				return err
 			}
+
 		case "Records":
 			if err := awsRestjson1_deserializeDocumentBatchGetRecordResultDetails(&sv.Records, value); err != nil {
 				return err
 			}
+
 		case "UnprocessedIdentifiers":
 			if err := awsRestjson1_deserializeDocumentUnprocessedIdentifiers(&sv.UnprocessedIdentifiers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -459,10 +462,12 @@ func awsRestjson1_deserializeOpDocumentGetRecordOutput(v **GetRecordOutput, valu
 				}
 				sv.ExpiresAt = ptr.String(jtv)
 			}
+
 		case "Record":
 			if err := awsRestjson1_deserializeDocumentRecord(&sv.Record, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -785,6 +790,7 @@ func awsRestjson1_deserializeDocumentAccessForbidden(v **types.AccessForbidden, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -824,6 +830,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordError(v **types.BatchGetRecor
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "ErrorMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -832,6 +839,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordError(v **types.BatchGetRecor
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
+
 		case "FeatureGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -840,6 +848,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordError(v **types.BatchGetRecor
 				}
 				sv.FeatureGroupName = ptr.String(jtv)
 			}
+
 		case "RecordIdentifierValueAsString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -848,6 +857,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordError(v **types.BatchGetRecor
 				}
 				sv.RecordIdentifierValueAsString = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -921,14 +931,17 @@ func awsRestjson1_deserializeDocumentBatchGetRecordIdentifier(v **types.BatchGet
 				}
 				sv.FeatureGroupName = ptr.String(jtv)
 			}
+
 		case "FeatureNames":
 			if err := awsRestjson1_deserializeDocumentFeatureNames(&sv.FeatureNames, value); err != nil {
 				return err
 			}
+
 		case "RecordIdentifiersValueAsString":
 			if err := awsRestjson1_deserializeDocumentRecordIdentifiers(&sv.RecordIdentifiersValueAsString, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -968,6 +981,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordResultDetail(v **types.BatchG
 				}
 				sv.ExpiresAt = ptr.String(jtv)
 			}
+
 		case "FeatureGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -976,10 +990,12 @@ func awsRestjson1_deserializeDocumentBatchGetRecordResultDetail(v **types.BatchG
 				}
 				sv.FeatureGroupName = ptr.String(jtv)
 			}
+
 		case "Record":
 			if err := awsRestjson1_deserializeDocumentRecord(&sv.Record, value); err != nil {
 				return err
 			}
+
 		case "RecordIdentifierValueAsString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -988,6 +1004,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordResultDetail(v **types.BatchG
 				}
 				sv.RecordIdentifierValueAsString = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1097,6 +1114,7 @@ func awsRestjson1_deserializeDocumentFeatureValue(v **types.FeatureValue, value 
 				}
 				sv.FeatureName = ptr.String(jtv)
 			}
+
 		case "ValueAsString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1105,10 +1123,12 @@ func awsRestjson1_deserializeDocumentFeatureValue(v **types.FeatureValue, value 
 				}
 				sv.ValueAsString = ptr.String(jtv)
 			}
+
 		case "ValueAsStringList":
 			if err := awsRestjson1_deserializeDocumentValueAsStringList(&sv.ValueAsStringList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1148,6 +1168,7 @@ func awsRestjson1_deserializeDocumentInternalFailure(v **types.InternalFailure, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1257,6 +1278,7 @@ func awsRestjson1_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1296,6 +1318,7 @@ func awsRestjson1_deserializeDocumentServiceUnavailable(v **types.ServiceUnavail
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1369,6 +1392,7 @@ func awsRestjson1_deserializeDocumentValidationError(v **types.ValidationError, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

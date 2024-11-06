@@ -182,6 +182,7 @@ func awsRestjson1_deserializeOpDocumentCancelJobRunOutput(v **CancelJobRunOutput
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "jobRunId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -190,6 +191,7 @@ func awsRestjson1_deserializeOpDocumentCancelJobRunOutput(v **CancelJobRunOutput
 				}
 				sv.JobRunId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -354,6 +356,7 @@ func awsRestjson1_deserializeOpDocumentCreateApplicationOutput(v **CreateApplica
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -362,6 +365,7 @@ func awsRestjson1_deserializeOpDocumentCreateApplicationOutput(v **CreateApplica
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -370,6 +374,7 @@ func awsRestjson1_deserializeOpDocumentCreateApplicationOutput(v **CreateApplica
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -621,6 +626,7 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 			if err := awsRestjson1_deserializeDocumentApplication(&sv.Application, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -782,6 +788,7 @@ func awsRestjson1_deserializeOpDocumentGetDashboardForJobRunOutput(v **GetDashbo
 				}
 				sv.Url = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -939,6 +946,7 @@ func awsRestjson1_deserializeOpDocumentGetJobRunOutput(v **GetJobRunOutput, valu
 			if err := awsRestjson1_deserializeDocumentJobRun(&sv.JobRun, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1093,6 +1101,7 @@ func awsRestjson1_deserializeOpDocumentListApplicationsOutput(v **ListApplicatio
 			if err := awsRestjson1_deserializeDocumentApplicationList(&sv.Applications, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1101,6 +1110,7 @@ func awsRestjson1_deserializeOpDocumentListApplicationsOutput(v **ListApplicatio
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1258,6 +1268,7 @@ func awsRestjson1_deserializeOpDocumentListJobRunAttemptsOutput(v **ListJobRunAt
 			if err := awsRestjson1_deserializeDocumentJobRunAttempts(&sv.JobRunAttempts, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1266,6 +1277,7 @@ func awsRestjson1_deserializeOpDocumentListJobRunAttemptsOutput(v **ListJobRunAt
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1420,6 +1432,7 @@ func awsRestjson1_deserializeOpDocumentListJobRunsOutput(v **ListJobRunsOutput, 
 			if err := awsRestjson1_deserializeDocumentJobRuns(&sv.JobRuns, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1428,6 +1441,7 @@ func awsRestjson1_deserializeOpDocumentListJobRunsOutput(v **ListJobRunsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1585,6 +1599,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1846,6 +1861,7 @@ func awsRestjson1_deserializeOpDocumentStartJobRunOutput(v **StartJobRunOutput, 
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1854,6 +1870,7 @@ func awsRestjson1_deserializeOpDocumentStartJobRunOutput(v **StartJobRunOutput, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "jobRunId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1862,6 +1879,7 @@ func awsRestjson1_deserializeOpDocumentStartJobRunOutput(v **StartJobRunOutput, 
 				}
 				sv.JobRunId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2301,6 +2319,7 @@ func awsRestjson1_deserializeOpDocumentUpdateApplicationOutput(v **UpdateApplica
 			if err := awsRestjson1_deserializeDocumentApplication(&sv.Application, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2520,6 +2539,7 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "architecture":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2528,6 +2548,7 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.Architecture = types.Architecture(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2536,14 +2557,17 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "autoStartConfiguration":
 			if err := awsRestjson1_deserializeDocumentAutoStartConfig(&sv.AutoStartConfiguration, value); err != nil {
 				return err
 			}
+
 		case "autoStopConfiguration":
 			if err := awsRestjson1_deserializeDocumentAutoStopConfig(&sv.AutoStopConfiguration, value); err != nil {
 				return err
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2559,26 +2583,32 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 
 				}
 			}
+
 		case "imageConfiguration":
 			if err := awsRestjson1_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
 				return err
 			}
+
 		case "initialCapacity":
 			if err := awsRestjson1_deserializeDocumentInitialCapacityConfigMap(&sv.InitialCapacity, value); err != nil {
 				return err
 			}
+
 		case "interactiveConfiguration":
 			if err := awsRestjson1_deserializeDocumentInteractiveConfiguration(&sv.InteractiveConfiguration, value); err != nil {
 				return err
 			}
+
 		case "maximumCapacity":
 			if err := awsRestjson1_deserializeDocumentMaximumAllowedResources(&sv.MaximumCapacity, value); err != nil {
 				return err
 			}
+
 		case "monitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentMonitoringConfiguration(&sv.MonitoringConfiguration, value); err != nil {
 				return err
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2587,10 +2617,12 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "networkConfiguration":
 			if err := awsRestjson1_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
 				return err
 			}
+
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2599,14 +2631,17 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
+
 		case "runtimeConfiguration":
 			if err := awsRestjson1_deserializeDocumentConfigurationList(&sv.RuntimeConfiguration, value); err != nil {
 				return err
 			}
+
 		case "schedulerConfiguration":
 			if err := awsRestjson1_deserializeDocumentSchedulerConfiguration(&sv.SchedulerConfiguration, value); err != nil {
 				return err
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2615,6 +2650,7 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.State = types.ApplicationState(jtv)
 			}
+
 		case "stateDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2623,10 +2659,12 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.StateDetails = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2635,6 +2673,7 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2650,10 +2689,12 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 
 				}
 			}
+
 		case "workerTypeSpecifications":
 			if err := awsRestjson1_deserializeDocumentWorkerTypeSpecificationMap(&sv.WorkerTypeSpecifications, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2727,6 +2768,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.Architecture = types.Architecture(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2735,6 +2777,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2750,6 +2793,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 
 				}
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2758,6 +2802,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2766,6 +2811,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2774,6 +2820,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2782,6 +2829,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.State = types.ApplicationState(jtv)
 			}
+
 		case "stateDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2790,6 +2838,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.StateDetails = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2798,6 +2847,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2813,6 +2863,7 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2852,6 +2903,7 @@ func awsRestjson1_deserializeDocumentAutoStartConfig(v **types.AutoStartConfig, 
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2891,6 +2943,7 @@ func awsRestjson1_deserializeDocumentAutoStopConfig(v **types.AutoStopConfig, va
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "idleTimeoutMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2903,6 +2956,7 @@ func awsRestjson1_deserializeDocumentAutoStopConfig(v **types.AutoStopConfig, va
 				}
 				sv.IdleTimeoutMinutes = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2942,6 +2996,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(v **types.Cl
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "encryptionKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2950,6 +3005,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(v **types.Cl
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
+
 		case "logGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2958,6 +3014,7 @@ func awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(v **types.Cl
 				}
 				sv.LogGroupName = ptr.String(jtv)
 			}
+
 		case "logStreamNamePrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2966,10 +3023,12 @@ func awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(v **types.Cl
 				}
 				sv.LogStreamNamePrefix = ptr.String(jtv)
 			}
+
 		case "logTypes":
 			if err := awsRestjson1_deserializeDocumentLogTypeMap(&sv.LogTypes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3009,14 +3068,17 @@ func awsRestjson1_deserializeDocumentConfiguration(v **types.Configuration, valu
 				}
 				sv.Classification = ptr.String(jtv)
 			}
+
 		case "configurations":
 			if err := awsRestjson1_deserializeDocumentConfigurationList(&sv.Configurations, value); err != nil {
 				return err
 			}
+
 		case "properties":
 			if err := awsRestjson1_deserializeDocumentSensitivePropertiesMap(&sv.Properties, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3086,10 +3148,12 @@ func awsRestjson1_deserializeDocumentConfigurationOverrides(v **types.Configurat
 			if err := awsRestjson1_deserializeDocumentConfigurationList(&sv.ApplicationConfiguration, value); err != nil {
 				return err
 			}
+
 		case "monitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentMonitoringConfiguration(&sv.MonitoringConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3129,6 +3193,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3204,6 +3269,7 @@ func awsRestjson1_deserializeDocumentHive(v **types.Hive, value interface{}) err
 				}
 				sv.InitQueryFile = ptr.String(jtv)
 			}
+
 		case "parameters":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3212,6 +3278,7 @@ func awsRestjson1_deserializeDocumentHive(v **types.Hive, value interface{}) err
 				}
 				sv.Parameters = ptr.String(jtv)
 			}
+
 		case "query":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3220,6 +3287,7 @@ func awsRestjson1_deserializeDocumentHive(v **types.Hive, value interface{}) err
 				}
 				sv.Query = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3259,6 +3327,7 @@ func awsRestjson1_deserializeDocumentImageConfiguration(v **types.ImageConfigura
 				}
 				sv.ImageUri = ptr.String(jtv)
 			}
+
 		case "resolvedImageDigest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3267,6 +3336,7 @@ func awsRestjson1_deserializeDocumentImageConfiguration(v **types.ImageConfigura
 				}
 				sv.ResolvedImageDigest = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3302,6 +3372,7 @@ func awsRestjson1_deserializeDocumentInitialCapacityConfig(v **types.InitialCapa
 			if err := awsRestjson1_deserializeDocumentWorkerResourceConfig(&sv.WorkerConfiguration, value); err != nil {
 				return err
 			}
+
 		case "workerCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3314,6 +3385,7 @@ func awsRestjson1_deserializeDocumentInitialCapacityConfig(v **types.InitialCapa
 				}
 				sv.WorkerCount = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3388,6 +3460,7 @@ func awsRestjson1_deserializeDocumentInteractiveConfiguration(v **types.Interact
 				}
 				sv.LivyEndpointEnabled = ptr.Bool(jtv)
 			}
+
 		case "studioEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3396,6 +3469,7 @@ func awsRestjson1_deserializeDocumentInteractiveConfiguration(v **types.Interact
 				}
 				sv.StudioEnabled = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3435,6 +3509,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3524,6 +3599,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3532,6 +3608,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "attempt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3544,6 +3621,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.Attempt = ptr.Int32(int32(i64))
 			}
+
 		case "attemptCreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3559,6 +3637,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 
 				}
 			}
+
 		case "attemptUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3574,14 +3653,17 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 
 				}
 			}
+
 		case "billedResourceUtilization":
 			if err := awsRestjson1_deserializeDocumentResourceUtilization(&sv.BilledResourceUtilization, value); err != nil {
 				return err
 			}
+
 		case "configurationOverrides":
 			if err := awsRestjson1_deserializeDocumentConfigurationOverrides(&sv.ConfigurationOverrides, value); err != nil {
 				return err
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3597,6 +3679,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 
 				}
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3605,6 +3688,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "endedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3620,6 +3704,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 
 				}
 			}
+
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3628,6 +3713,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
+
 		case "executionTimeoutMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3640,10 +3726,12 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.ExecutionTimeoutMinutes = ptr.Int64(i64)
 			}
+
 		case "jobDriver":
 			if err := awsRestjson1_deserializeDocumentJobDriver(&sv.JobDriver, value); err != nil {
 				return err
 			}
+
 		case "jobRunId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3652,6 +3740,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.JobRunId = ptr.String(jtv)
 			}
+
 		case "mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3660,6 +3749,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.Mode = types.JobRunMode(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3668,10 +3758,12 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "networkConfiguration":
 			if err := awsRestjson1_deserializeDocumentNetworkConfiguration(&sv.NetworkConfiguration, value); err != nil {
 				return err
 			}
+
 		case "queuedDurationMilliseconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3684,6 +3776,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.QueuedDurationMilliseconds = ptr.Int64(i64)
 			}
+
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3692,10 +3785,12 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
+
 		case "retryPolicy":
 			if err := awsRestjson1_deserializeDocumentRetryPolicy(&sv.RetryPolicy, value); err != nil {
 				return err
 			}
+
 		case "startedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3711,6 +3806,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 
 				}
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3719,6 +3815,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.State = types.JobRunState(jtv)
 			}
+
 		case "stateDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3727,10 +3824,12 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.StateDetails = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "totalExecutionDurationSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3743,10 +3842,12 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				}
 				sv.TotalExecutionDurationSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "totalResourceUtilization":
 			if err := awsRestjson1_deserializeDocumentTotalResourceUtilization(&sv.TotalResourceUtilization, value); err != nil {
 				return err
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3762,6 +3863,7 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3835,6 +3937,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3843,6 +3946,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "attempt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3855,6 +3959,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.Attempt = ptr.Int32(int32(i64))
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3870,6 +3975,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 
 				}
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3878,6 +3984,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3886,6 +3993,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3894,6 +4002,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "jobCreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3909,6 +4018,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 
 				}
 			}
+
 		case "mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3917,6 +4027,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.Mode = types.JobRunMode(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3925,6 +4036,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3933,6 +4045,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3941,6 +4054,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.State = types.JobRunState(jtv)
 			}
+
 		case "stateDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3949,6 +4063,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.StateDetails = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3957,6 +4072,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3972,6 +4088,7 @@ func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemp
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4045,6 +4162,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.ApplicationId = ptr.String(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4053,6 +4171,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "attempt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4065,6 +4184,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.Attempt = ptr.Int32(int32(i64))
 			}
+
 		case "attemptCreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4080,6 +4200,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 
 				}
 			}
+
 		case "attemptUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4095,6 +4216,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 
 				}
 			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4110,6 +4232,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 
 				}
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4118,6 +4241,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "executionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4126,6 +4250,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.ExecutionRole = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4134,6 +4259,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4142,6 +4268,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.Mode = types.JobRunMode(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4150,6 +4277,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "releaseLabel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4158,6 +4286,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4166,6 +4295,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.State = types.JobRunState(jtv)
 			}
+
 		case "stateDetails":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4174,6 +4304,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.StateDetails = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4182,6 +4313,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4197,6 +4329,7 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4306,6 +4439,7 @@ func awsRestjson1_deserializeDocumentManagedPersistenceMonitoringConfiguration(v
 				}
 				sv.Enabled = ptr.Bool(jtv)
 			}
+
 		case "encryptionKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4314,6 +4448,7 @@ func awsRestjson1_deserializeDocumentManagedPersistenceMonitoringConfiguration(v
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4353,6 +4488,7 @@ func awsRestjson1_deserializeDocumentMaximumAllowedResources(v **types.MaximumAl
 				}
 				sv.Cpu = ptr.String(jtv)
 			}
+
 		case "disk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4361,6 +4497,7 @@ func awsRestjson1_deserializeDocumentMaximumAllowedResources(v **types.MaximumAl
 				}
 				sv.Disk = ptr.String(jtv)
 			}
+
 		case "memory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4369,6 +4506,7 @@ func awsRestjson1_deserializeDocumentMaximumAllowedResources(v **types.MaximumAl
 				}
 				sv.Memory = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4404,18 +4542,22 @@ func awsRestjson1_deserializeDocumentMonitoringConfiguration(v **types.Monitorin
 			if err := awsRestjson1_deserializeDocumentCloudWatchLoggingConfiguration(&sv.CloudWatchLoggingConfiguration, value); err != nil {
 				return err
 			}
+
 		case "managedPersistenceMonitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentManagedPersistenceMonitoringConfiguration(&sv.ManagedPersistenceMonitoringConfiguration, value); err != nil {
 				return err
 			}
+
 		case "prometheusMonitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentPrometheusMonitoringConfiguration(&sv.PrometheusMonitoringConfiguration, value); err != nil {
 				return err
 			}
+
 		case "s3MonitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentS3MonitoringConfiguration(&sv.S3MonitoringConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4451,10 +4593,12 @@ func awsRestjson1_deserializeDocumentNetworkConfiguration(v **types.NetworkConfi
 			if err := awsRestjson1_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
 				return err
 			}
+
 		case "subnetIds":
 			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4494,6 +4638,7 @@ func awsRestjson1_deserializeDocumentPrometheusMonitoringConfiguration(v **types
 				}
 				sv.RemoteWriteUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4533,6 +4678,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4597,6 +4743,7 @@ func awsRestjson1_deserializeDocumentResourceUtilization(v **types.ResourceUtili
 
 				}
 			}
+
 		case "storageGBHour":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4630,6 +4777,7 @@ func awsRestjson1_deserializeDocumentResourceUtilization(v **types.ResourceUtili
 
 				}
 			}
+
 		case "vCPUHour":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4663,6 +4811,7 @@ func awsRestjson1_deserializeDocumentResourceUtilization(v **types.ResourceUtili
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4706,6 +4855,7 @@ func awsRestjson1_deserializeDocumentRetryPolicy(v **types.RetryPolicy, value in
 				}
 				sv.MaxAttempts = ptr.Int32(int32(i64))
 			}
+
 		case "maxFailedAttemptsPerHour":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4718,6 +4868,7 @@ func awsRestjson1_deserializeDocumentRetryPolicy(v **types.RetryPolicy, value in
 				}
 				sv.MaxFailedAttemptsPerHour = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4757,6 +4908,7 @@ func awsRestjson1_deserializeDocumentS3MonitoringConfiguration(v **types.S3Monit
 				}
 				sv.EncryptionKeyArn = ptr.String(jtv)
 			}
+
 		case "logUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4765,6 +4917,7 @@ func awsRestjson1_deserializeDocumentS3MonitoringConfiguration(v **types.S3Monit
 				}
 				sv.LogUri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4808,6 +4961,7 @@ func awsRestjson1_deserializeDocumentSchedulerConfiguration(v **types.SchedulerC
 				}
 				sv.MaxConcurrentRuns = ptr.Int32(int32(i64))
 			}
+
 		case "queueTimeoutMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4820,6 +4974,7 @@ func awsRestjson1_deserializeDocumentSchedulerConfiguration(v **types.SchedulerC
 				}
 				sv.QueueTimeoutMinutes = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4931,6 +5086,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4970,10 +5126,12 @@ func awsRestjson1_deserializeDocumentSparkSubmit(v **types.SparkSubmit, value in
 				}
 				sv.EntryPoint = ptr.String(jtv)
 			}
+
 		case "entryPointArguments":
 			if err := awsRestjson1_deserializeDocumentEntryPointArguments(&sv.EntryPointArguments, value); err != nil {
 				return err
 			}
+
 		case "sparkSubmitParameters":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4982,6 +5140,7 @@ func awsRestjson1_deserializeDocumentSparkSubmit(v **types.SparkSubmit, value in
 				}
 				sv.SparkSubmitParameters = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5118,6 +5277,7 @@ func awsRestjson1_deserializeDocumentTotalResourceUtilization(v **types.TotalRes
 
 				}
 			}
+
 		case "storageGBHour":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5151,6 +5311,7 @@ func awsRestjson1_deserializeDocumentTotalResourceUtilization(v **types.TotalRes
 
 				}
 			}
+
 		case "vCPUHour":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5184,6 +5345,7 @@ func awsRestjson1_deserializeDocumentTotalResourceUtilization(v **types.TotalRes
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5223,6 +5385,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5262,6 +5425,7 @@ func awsRestjson1_deserializeDocumentWorkerResourceConfig(v **types.WorkerResour
 				}
 				sv.Cpu = ptr.String(jtv)
 			}
+
 		case "disk":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5270,6 +5434,7 @@ func awsRestjson1_deserializeDocumentWorkerResourceConfig(v **types.WorkerResour
 				}
 				sv.Disk = ptr.String(jtv)
 			}
+
 		case "diskType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5278,6 +5443,7 @@ func awsRestjson1_deserializeDocumentWorkerResourceConfig(v **types.WorkerResour
 				}
 				sv.DiskType = ptr.String(jtv)
 			}
+
 		case "memory":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5286,6 +5452,7 @@ func awsRestjson1_deserializeDocumentWorkerResourceConfig(v **types.WorkerResour
 				}
 				sv.Memory = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5321,6 +5488,7 @@ func awsRestjson1_deserializeDocumentWorkerTypeSpecification(v **types.WorkerTyp
 			if err := awsRestjson1_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

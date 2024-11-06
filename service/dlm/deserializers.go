@@ -181,6 +181,7 @@ func awsRestjson1_deserializeOpDocumentCreateLifecyclePolicyOutput(v **CreateLif
 				}
 				sv.PolicyId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -435,6 +436,7 @@ func awsRestjson1_deserializeOpDocumentGetLifecyclePoliciesOutput(v **GetLifecyc
 			if err := awsRestjson1_deserializeDocumentLifecyclePolicySummaryList(&sv.Policies, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -592,6 +594,7 @@ func awsRestjson1_deserializeOpDocumentGetLifecyclePolicyOutput(v **GetLifecycle
 			if err := awsRestjson1_deserializeDocumentLifecyclePolicy(&sv.Policy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -749,6 +752,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1213,6 +1217,7 @@ func awsRestjson1_deserializeDocumentAction(v **types.Action, value interface{})
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyActionList(&sv.CrossRegionCopy, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1221,6 +1226,7 @@ func awsRestjson1_deserializeDocumentAction(v **types.Action, value interface{})
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1290,6 +1296,7 @@ func awsRestjson1_deserializeDocumentArchiveRetainRule(v **types.ArchiveRetainRu
 			if err := awsRestjson1_deserializeDocumentRetentionArchiveTier(&sv.RetentionArchiveTier, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1325,6 +1332,7 @@ func awsRestjson1_deserializeDocumentArchiveRule(v **types.ArchiveRule, value in
 			if err := awsRestjson1_deserializeDocumentArchiveRetainRule(&sv.RetainRule, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1400,6 +1408,7 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				}
 				sv.CronExpression = ptr.String(jtv)
 			}
+
 		case "Interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1412,6 +1421,7 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1420,6 +1430,7 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				}
 				sv.IntervalUnit = types.IntervalUnitValues(jtv)
 			}
+
 		case "Location":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1428,14 +1439,17 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				}
 				sv.Location = types.LocationValues(jtv)
 			}
+
 		case "Scripts":
 			if err := awsRestjson1_deserializeDocumentScriptsList(&sv.Scripts, value); err != nil {
 				return err
 			}
+
 		case "Times":
 			if err := awsRestjson1_deserializeDocumentTimesList(&sv.Times, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1471,10 +1485,12 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyAction(v **types.CrossRegion
 			if err := awsRestjson1_deserializeDocumentEncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "RetainRule":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(&sv.RetainRule, value); err != nil {
 				return err
 			}
+
 		case "Target":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1483,6 +1499,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyAction(v **types.CrossRegion
 				}
 				sv.Target = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1560,6 +1577,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyDeprecateRule(v **types.Cros
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1568,6 +1586,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyDeprecateRule(v **types.Cros
 				}
 				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1611,6 +1630,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(v **types.CrossRe
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1619,6 +1639,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(v **types.CrossRe
 				}
 				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1658,6 +1679,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				}
 				sv.CmkArn = ptr.String(jtv)
 			}
+
 		case "CopyTags":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1666,10 +1688,12 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				}
 				sv.CopyTags = ptr.Bool(jtv)
 			}
+
 		case "DeprecateRule":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyDeprecateRule(&sv.DeprecateRule, value); err != nil {
 				return err
 			}
+
 		case "Encrypted":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1678,10 +1702,12 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				}
 				sv.Encrypted = ptr.Bool(jtv)
 			}
+
 		case "RetainRule":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(&sv.RetainRule, value); err != nil {
 				return err
 			}
+
 		case "Target":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1690,6 +1716,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				}
 				sv.Target = ptr.String(jtv)
 			}
+
 		case "TargetRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1698,6 +1725,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				}
 				sv.TargetRegion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1771,6 +1799,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyTarget(v **types.CrossRegion
 				}
 				sv.TargetRegion = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1848,6 +1877,7 @@ func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, valu
 				}
 				sv.Count = ptr.Int32(int32(i64))
 			}
+
 		case "Interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1860,6 +1890,7 @@ func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, valu
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1868,6 +1899,7 @@ func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, valu
 				}
 				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1907,6 +1939,7 @@ func awsRestjson1_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 				}
 				sv.CmkArn = ptr.String(jtv)
 			}
+
 		case "Encrypted":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1915,6 +1948,7 @@ func awsRestjson1_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 				}
 				sv.Encrypted = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1954,6 +1988,7 @@ func awsRestjson1_deserializeDocumentEventParameters(v **types.EventParameters, 
 				}
 				sv.DescriptionRegex = ptr.String(jtv)
 			}
+
 		case "EventType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1962,10 +1997,12 @@ func awsRestjson1_deserializeDocumentEventParameters(v **types.EventParameters, 
 				}
 				sv.EventType = types.EventTypeValues(jtv)
 			}
+
 		case "SnapshotOwner":
 			if err := awsRestjson1_deserializeDocumentSnapshotOwnerList(&sv.SnapshotOwner, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2001,6 +2038,7 @@ func awsRestjson1_deserializeDocumentEventSource(v **types.EventSource, value in
 			if err := awsRestjson1_deserializeDocumentEventParameters(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2009,6 +2047,7 @@ func awsRestjson1_deserializeDocumentEventSource(v **types.EventSource, value in
 				}
 				sv.Type = types.EventSourceValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2152,14 +2191,17 @@ func awsRestjson1_deserializeDocumentExclusions(v **types.Exclusions, value inte
 				}
 				sv.ExcludeBootVolumes = ptr.Bool(jtv)
 			}
+
 		case "ExcludeTags":
 			if err := awsRestjson1_deserializeDocumentExcludeTagsList(&sv.ExcludeTags, value); err != nil {
 				return err
 			}
+
 		case "ExcludeVolumeTypes":
 			if err := awsRestjson1_deserializeDocumentExcludeVolumeTypesList(&sv.ExcludeVolumeTypes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2195,6 +2237,7 @@ func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, 
 			if err := awsRestjson1_deserializeDocumentAvailabilityZoneList(&sv.AvailabilityZones, value); err != nil {
 				return err
 			}
+
 		case "Count":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2207,6 +2250,7 @@ func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, 
 				}
 				sv.Count = ptr.Int32(int32(i64))
 			}
+
 		case "Interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2219,6 +2263,7 @@ func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, 
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2227,6 +2272,7 @@ func awsRestjson1_deserializeDocumentFastRestoreRule(v **types.FastRestoreRule, 
 				}
 				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2266,6 +2312,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2274,6 +2321,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2313,6 +2361,7 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2321,14 +2370,17 @@ func awsRestjson1_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "MutuallyExclusiveParameters":
 			if err := awsRestjson1_deserializeDocumentParameterList(&sv.MutuallyExclusiveParameters, value); err != nil {
 				return err
 			}
+
 		case "RequiredParameters":
 			if err := awsRestjson1_deserializeDocumentParameterList(&sv.RequiredParameters, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2372,6 +2424,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.DateCreated = ptr.Time(t)
 			}
+
 		case "DateModified":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2384,6 +2437,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.DateModified = ptr.Time(t)
 			}
+
 		case "DefaultPolicy":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2392,6 +2446,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.DefaultPolicy = ptr.Bool(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2400,6 +2455,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "ExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2408,6 +2464,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
+
 		case "PolicyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2416,10 +2473,12 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.PolicyArn = ptr.String(jtv)
 			}
+
 		case "PolicyDetails":
 			if err := awsRestjson1_deserializeDocumentPolicyDetails(&sv.PolicyDetails, value); err != nil {
 				return err
 			}
+
 		case "PolicyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2428,6 +2487,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.PolicyId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2436,6 +2496,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.State = types.GettablePolicyStateValues(jtv)
 			}
+
 		case "StatusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2444,10 +2505,12 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2487,6 +2550,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 				}
 				sv.DefaultPolicy = ptr.Bool(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2495,6 +2559,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "PolicyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2503,6 +2568,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 				}
 				sv.PolicyId = ptr.String(jtv)
 			}
+
 		case "PolicyType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2511,6 +2577,7 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 				}
 				sv.PolicyType = types.PolicyTypeValues(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2519,10 +2586,12 @@ func awsRestjson1_deserializeDocumentLifecyclePolicySummary(v **types.LifecycleP
 				}
 				sv.State = types.GettablePolicyStateValues(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2596,6 +2665,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2604,6 +2674,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2612,6 +2683,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2687,10 +2759,12 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 				}
 				sv.ExcludeBootVolume = ptr.Bool(jtv)
 			}
+
 		case "ExcludeDataVolumeTags":
 			if err := awsRestjson1_deserializeDocumentExcludeDataVolumeTagList(&sv.ExcludeDataVolumeTags, value); err != nil {
 				return err
 			}
+
 		case "NoReboot":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2699,6 +2773,7 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 				}
 				sv.NoReboot = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2734,6 +2809,7 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 			if err := awsRestjson1_deserializeDocumentActionList(&sv.Actions, value); err != nil {
 				return err
 			}
+
 		case "CopyTags":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2742,6 +2818,7 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.CopyTags = ptr.Bool(jtv)
 			}
+
 		case "CreateInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2754,18 +2831,22 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.CreateInterval = ptr.Int32(int32(i64))
 			}
+
 		case "CrossRegionCopyTargets":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyTargetList(&sv.CrossRegionCopyTargets, value); err != nil {
 				return err
 			}
+
 		case "EventSource":
 			if err := awsRestjson1_deserializeDocumentEventSource(&sv.EventSource, value); err != nil {
 				return err
 			}
+
 		case "Exclusions":
 			if err := awsRestjson1_deserializeDocumentExclusions(&sv.Exclusions, value); err != nil {
 				return err
 			}
+
 		case "ExtendDeletion":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2774,10 +2855,12 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.ExtendDeletion = ptr.Bool(jtv)
 			}
+
 		case "Parameters":
 			if err := awsRestjson1_deserializeDocumentParameters(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "PolicyLanguage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2786,6 +2869,7 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.PolicyLanguage = types.PolicyLanguageValues(jtv)
 			}
+
 		case "PolicyType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2794,10 +2878,12 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.PolicyType = types.PolicyTypeValues(jtv)
 			}
+
 		case "ResourceLocations":
 			if err := awsRestjson1_deserializeDocumentResourceLocationList(&sv.ResourceLocations, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2806,10 +2892,12 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.ResourceType = types.ResourceTypeValues(jtv)
 			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypeValuesList(&sv.ResourceTypes, value); err != nil {
 				return err
 			}
+
 		case "RetainInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2822,14 +2910,17 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				}
 				sv.RetainInterval = ptr.Int32(int32(i64))
 			}
+
 		case "Schedules":
 			if err := awsRestjson1_deserializeDocumentScheduleList(&sv.Schedules, value); err != nil {
 				return err
 			}
+
 		case "TargetTags":
 			if err := awsRestjson1_deserializeDocumentTargetTagList(&sv.TargetTags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2941,6 +3032,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Code = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2949,10 +3041,12 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceIds":
 			if err := awsRestjson1_deserializeDocumentPolicyIdList(&sv.ResourceIds, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2961,6 +3055,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3040,6 +3135,7 @@ func awsRestjson1_deserializeDocumentRetainRule(v **types.RetainRule, value inte
 				}
 				sv.Count = ptr.Int32(int32(i64))
 			}
+
 		case "Interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3052,6 +3148,7 @@ func awsRestjson1_deserializeDocumentRetainRule(v **types.RetainRule, value inte
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3060,6 +3157,7 @@ func awsRestjson1_deserializeDocumentRetainRule(v **types.RetainRule, value inte
 				}
 				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3103,6 +3201,7 @@ func awsRestjson1_deserializeDocumentRetentionArchiveTier(v **types.RetentionArc
 				}
 				sv.Count = ptr.Int32(int32(i64))
 			}
+
 		case "Interval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3115,6 +3214,7 @@ func awsRestjson1_deserializeDocumentRetentionArchiveTier(v **types.RetentionArc
 				}
 				sv.Interval = ptr.Int32(int32(i64))
 			}
+
 		case "IntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3123,6 +3223,7 @@ func awsRestjson1_deserializeDocumentRetentionArchiveTier(v **types.RetentionArc
 				}
 				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3158,6 +3259,7 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 			if err := awsRestjson1_deserializeDocumentArchiveRule(&sv.ArchiveRule, value); err != nil {
 				return err
 			}
+
 		case "CopyTags":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3166,22 +3268,27 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 				}
 				sv.CopyTags = ptr.Bool(jtv)
 			}
+
 		case "CreateRule":
 			if err := awsRestjson1_deserializeDocumentCreateRule(&sv.CreateRule, value); err != nil {
 				return err
 			}
+
 		case "CrossRegionCopyRules":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyRules(&sv.CrossRegionCopyRules, value); err != nil {
 				return err
 			}
+
 		case "DeprecateRule":
 			if err := awsRestjson1_deserializeDocumentDeprecateRule(&sv.DeprecateRule, value); err != nil {
 				return err
 			}
+
 		case "FastRestoreRule":
 			if err := awsRestjson1_deserializeDocumentFastRestoreRule(&sv.FastRestoreRule, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3190,22 +3297,27 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RetainRule":
 			if err := awsRestjson1_deserializeDocumentRetainRule(&sv.RetainRule, value); err != nil {
 				return err
 			}
+
 		case "ShareRules":
 			if err := awsRestjson1_deserializeDocumentShareRules(&sv.ShareRules, value); err != nil {
 				return err
 			}
+
 		case "TagsToAdd":
 			if err := awsRestjson1_deserializeDocumentTagsToAddList(&sv.TagsToAdd, value); err != nil {
 				return err
 			}
+
 		case "VariableTags":
 			if err := awsRestjson1_deserializeDocumentVariableTagsList(&sv.VariableTags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3279,6 +3391,7 @@ func awsRestjson1_deserializeDocumentScript(v **types.Script, value interface{})
 				}
 				sv.ExecuteOperationOnScriptFailure = ptr.Bool(jtv)
 			}
+
 		case "ExecutionHandler":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3287,6 +3400,7 @@ func awsRestjson1_deserializeDocumentScript(v **types.Script, value interface{})
 				}
 				sv.ExecutionHandler = ptr.String(jtv)
 			}
+
 		case "ExecutionHandlerService":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3295,6 +3409,7 @@ func awsRestjson1_deserializeDocumentScript(v **types.Script, value interface{})
 				}
 				sv.ExecutionHandlerService = types.ExecutionHandlerServiceValues(jtv)
 			}
+
 		case "ExecutionTimeout":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3307,6 +3422,7 @@ func awsRestjson1_deserializeDocumentScript(v **types.Script, value interface{})
 				}
 				sv.ExecutionTimeout = ptr.Int32(int32(i64))
 			}
+
 		case "MaximumRetryCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3319,10 +3435,12 @@ func awsRestjson1_deserializeDocumentScript(v **types.Script, value interface{})
 				}
 				sv.MaximumRetryCount = ptr.Int32(int32(i64))
 			}
+
 		case "Stages":
 			if err := awsRestjson1_deserializeDocumentStagesList(&sv.Stages, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3392,6 +3510,7 @@ func awsRestjson1_deserializeDocumentShareRule(v **types.ShareRule, value interf
 			if err := awsRestjson1_deserializeDocumentShareTargetAccountList(&sv.TargetAccounts, value); err != nil {
 				return err
 			}
+
 		case "UnshareInterval":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3404,6 +3523,7 @@ func awsRestjson1_deserializeDocumentShareRule(v **types.ShareRule, value interf
 				}
 				sv.UnshareInterval = ptr.Int32(int32(i64))
 			}
+
 		case "UnshareIntervalUnit":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3412,6 +3532,7 @@ func awsRestjson1_deserializeDocumentShareRule(v **types.ShareRule, value interf
 				}
 				sv.UnshareIntervalUnit = types.RetentionIntervalUnitValues(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3593,6 +3714,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3601,6 +3723,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

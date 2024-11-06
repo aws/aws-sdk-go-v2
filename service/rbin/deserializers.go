@@ -181,6 +181,7 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -189,10 +190,12 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "LockConfiguration":
 			if err := awsRestjson1_deserializeDocumentLockConfiguration(&sv.LockConfiguration, value); err != nil {
 				return err
 			}
+
 		case "LockState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -201,10 +204,12 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.LockState = types.LockState(jtv)
 			}
+
 		case "ResourceTags":
 			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -213,10 +218,12 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
 			}
+
 		case "RuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -225,6 +232,7 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.RuleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -233,10 +241,12 @@ func awsRestjson1_deserializeOpDocumentCreateRuleOutput(v **CreateRuleOutput, va
 				}
 				sv.Status = types.RuleStatus(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -495,6 +505,7 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -503,10 +514,12 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "LockConfiguration":
 			if err := awsRestjson1_deserializeDocumentLockConfiguration(&sv.LockConfiguration, value); err != nil {
 				return err
 			}
+
 		case "LockEndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -522,6 +535,7 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 
 				}
 			}
+
 		case "LockState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -530,10 +544,12 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 				}
 				sv.LockState = types.LockState(jtv)
 			}
+
 		case "ResourceTags":
 			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -542,10 +558,12 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
 			}
+
 		case "RuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -554,6 +572,7 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 				}
 				sv.RuleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -562,6 +581,7 @@ func awsRestjson1_deserializeOpDocumentGetRuleOutput(v **GetRuleOutput, value in
 				}
 				sv.Status = types.RuleStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -720,10 +740,12 @@ func awsRestjson1_deserializeOpDocumentListRulesOutput(v **ListRulesOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Rules":
 			if err := awsRestjson1_deserializeDocumentRuleSummaryList(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -881,6 +903,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1045,6 +1068,7 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1053,10 +1077,12 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "LockConfiguration":
 			if err := awsRestjson1_deserializeDocumentLockConfiguration(&sv.LockConfiguration, value); err != nil {
 				return err
 			}
+
 		case "LockState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1065,10 +1091,12 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				}
 				sv.LockState = types.LockState(jtv)
 			}
+
 		case "ResourceTags":
 			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1077,10 +1105,12 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
 			}
+
 		case "RuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1089,6 +1119,7 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				}
 				sv.RuleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1097,6 +1128,7 @@ func awsRestjson1_deserializeOpDocumentLockRuleOutput(v **LockRuleOutput, value 
 				}
 				sv.Status = types.RuleStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1358,6 +1390,7 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1366,10 +1399,12 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "LockConfiguration":
 			if err := awsRestjson1_deserializeDocumentLockConfiguration(&sv.LockConfiguration, value); err != nil {
 				return err
 			}
+
 		case "LockEndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1385,6 +1420,7 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 
 				}
 			}
+
 		case "LockState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1393,10 +1429,12 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				}
 				sv.LockState = types.LockState(jtv)
 			}
+
 		case "ResourceTags":
 			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1405,10 +1443,12 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
 			}
+
 		case "RuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1417,6 +1457,7 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				}
 				sv.RuleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1425,6 +1466,7 @@ func awsRestjson1_deserializeOpDocumentUnlockRuleOutput(v **UnlockRuleOutput, va
 				}
 				sv.Status = types.RuleStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1686,6 +1728,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1694,6 +1737,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "LockEndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1709,6 +1753,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 
 				}
 			}
+
 		case "LockState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1717,10 +1762,12 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.LockState = types.LockState(jtv)
 			}
+
 		case "ResourceTags":
 			if err := awsRestjson1_deserializeDocumentResourceTags(&sv.ResourceTags, value); err != nil {
 				return err
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1729,10 +1776,12 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.ResourceType = types.ResourceType(jtv)
 			}
+
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
 			}
+
 		case "RuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1741,6 +1790,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.RuleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1749,6 +1799,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRuleOutput(v **UpdateRuleOutput, va
 				}
 				sv.Status = types.RuleStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1968,6 +2019,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1976,6 +2028,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Reason = types.ConflictExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2015,6 +2068,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2050,6 +2104,7 @@ func awsRestjson1_deserializeDocumentLockConfiguration(v **types.LockConfigurati
 			if err := awsRestjson1_deserializeDocumentUnlockDelay(&sv.UnlockDelay, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2089,6 +2144,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2097,6 +2153,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Reason = types.ResourceNotFoundExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2136,6 +2193,7 @@ func awsRestjson1_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				}
 				sv.ResourceTagKey = ptr.String(jtv)
 			}
+
 		case "ResourceTagValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2144,6 +2202,7 @@ func awsRestjson1_deserializeDocumentResourceTag(v **types.ResourceTag, value in
 				}
 				sv.ResourceTagValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2217,6 +2276,7 @@ func awsRestjson1_deserializeDocumentRetentionPeriod(v **types.RetentionPeriod, 
 				}
 				sv.RetentionPeriodUnit = types.RetentionPeriodUnit(jtv)
 			}
+
 		case "RetentionPeriodValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2229,6 +2289,7 @@ func awsRestjson1_deserializeDocumentRetentionPeriod(v **types.RetentionPeriod, 
 				}
 				sv.RetentionPeriodValue = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2268,6 +2329,7 @@ func awsRestjson1_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2276,6 +2338,7 @@ func awsRestjson1_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "LockState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2284,10 +2347,12 @@ func awsRestjson1_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 				}
 				sv.LockState = types.LockState(jtv)
 			}
+
 		case "RetentionPeriod":
 			if err := awsRestjson1_deserializeDocumentRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
 				return err
 			}
+
 		case "RuleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2296,6 +2361,7 @@ func awsRestjson1_deserializeDocumentRuleSummary(v **types.RuleSummary, value in
 				}
 				sv.RuleArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2369,6 +2435,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2377,6 +2444,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Reason = types.ServiceQuotaExceededExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2416,6 +2484,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2424,6 +2493,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2497,6 +2567,7 @@ func awsRestjson1_deserializeDocumentUnlockDelay(v **types.UnlockDelay, value in
 				}
 				sv.UnlockDelayUnit = types.UnlockDelayUnit(jtv)
 			}
+
 		case "UnlockDelayValue":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2509,6 +2580,7 @@ func awsRestjson1_deserializeDocumentUnlockDelay(v **types.UnlockDelay, value in
 				}
 				sv.UnlockDelayValue = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2548,6 +2620,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2556,6 +2629,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

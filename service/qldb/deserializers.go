@@ -183,6 +183,7 @@ func awsRestjson1_deserializeOpDocumentCancelJournalKinesisStreamOutput(v **Canc
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -347,6 +348,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -362,6 +364,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 
 				}
 			}
+
 		case "DeletionProtection":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -370,6 +373,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				}
 				sv.DeletionProtection = ptr.Bool(jtv)
 			}
+
 		case "KmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -378,6 +382,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -386,6 +391,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "PermissionsMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -394,6 +400,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				}
 				sv.PermissionsMode = types.PermissionsMode(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -402,6 +409,7 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				}
 				sv.State = types.LedgerState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -662,6 +670,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJournalKinesisStreamOutput(v **De
 			if err := awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(&sv.Stream, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -813,6 +822,7 @@ func awsRestjson1_deserializeOpDocumentDescribeJournalS3ExportOutput(v **Describ
 			if err := awsRestjson1_deserializeDocumentJournalS3ExportDescription(&sv.ExportDescription, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -971,6 +981,7 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -986,6 +997,7 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 
 				}
 			}
+
 		case "DeletionProtection":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -994,10 +1006,12 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 				}
 				sv.DeletionProtection = ptr.Bool(jtv)
 			}
+
 		case "EncryptionDescription":
 			if err := awsRestjson1_deserializeDocumentLedgerEncryptionDescription(&sv.EncryptionDescription, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1006,6 +1020,7 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "PermissionsMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1014,6 +1029,7 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 				}
 				sv.PermissionsMode = types.PermissionsMode(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1022,6 +1038,7 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 				}
 				sv.State = types.LedgerState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1180,6 +1197,7 @@ func awsRestjson1_deserializeOpDocumentExportJournalToS3Output(v **ExportJournal
 				}
 				sv.ExportId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1337,10 +1355,12 @@ func awsRestjson1_deserializeOpDocumentGetBlockOutput(v **GetBlockOutput, value 
 			if err := awsRestjson1_deserializeDocumentValueHolder(&sv.Block, value); err != nil {
 				return err
 			}
+
 		case "Proof":
 			if err := awsRestjson1_deserializeDocumentValueHolder(&sv.Proof, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1506,10 +1526,12 @@ func awsRestjson1_deserializeOpDocumentGetDigestOutput(v **GetDigestOutput, valu
 				}
 				sv.Digest = dv
 			}
+
 		case "DigestTipAddress":
 			if err := awsRestjson1_deserializeDocumentValueHolder(&sv.DigestTipAddress, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1667,10 +1689,12 @@ func awsRestjson1_deserializeOpDocumentGetRevisionOutput(v **GetRevisionOutput, 
 			if err := awsRestjson1_deserializeDocumentValueHolder(&sv.Proof, value); err != nil {
 				return err
 			}
+
 		case "Revision":
 			if err := awsRestjson1_deserializeDocumentValueHolder(&sv.Revision, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1832,10 +1856,12 @@ func awsRestjson1_deserializeOpDocumentListJournalKinesisStreamsForLedgerOutput(
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Streams":
 			if err := awsRestjson1_deserializeDocumentJournalKinesisStreamDescriptionList(&sv.Streams, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1984,6 +2010,7 @@ func awsRestjson1_deserializeOpDocumentListJournalS3ExportsOutput(v **ListJourna
 			if err := awsRestjson1_deserializeDocumentJournalS3ExportList(&sv.JournalS3Exports, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1992,6 +2019,7 @@ func awsRestjson1_deserializeOpDocumentListJournalS3ExportsOutput(v **ListJourna
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2140,6 +2168,7 @@ func awsRestjson1_deserializeOpDocumentListJournalS3ExportsForLedgerOutput(v **L
 			if err := awsRestjson1_deserializeDocumentJournalS3ExportList(&sv.JournalS3Exports, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2148,6 +2177,7 @@ func awsRestjson1_deserializeOpDocumentListJournalS3ExportsForLedgerOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2296,6 +2326,7 @@ func awsRestjson1_deserializeOpDocumentListLedgersOutput(v **ListLedgersOutput, 
 			if err := awsRestjson1_deserializeDocumentLedgerList(&sv.Ledgers, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2304,6 +2335,7 @@ func awsRestjson1_deserializeOpDocumentListLedgersOutput(v **ListLedgersOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2458,6 +2490,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2619,6 +2652,7 @@ func awsRestjson1_deserializeOpDocumentStreamJournalToKinesisOutput(v **StreamJo
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2959,6 +2993,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerOutput(v **UpdateLedgerOutput
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2974,6 +3009,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerOutput(v **UpdateLedgerOutput
 
 				}
 			}
+
 		case "DeletionProtection":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2982,10 +3018,12 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerOutput(v **UpdateLedgerOutput
 				}
 				sv.DeletionProtection = ptr.Bool(jtv)
 			}
+
 		case "EncryptionDescription":
 			if err := awsRestjson1_deserializeDocumentLedgerEncryptionDescription(&sv.EncryptionDescription, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2994,6 +3032,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerOutput(v **UpdateLedgerOutput
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3002,6 +3041,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerOutput(v **UpdateLedgerOutput
 				}
 				sv.State = types.LedgerState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3160,6 +3200,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerPermissionsModeOutput(v **Upd
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3168,6 +3209,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerPermissionsModeOutput(v **Upd
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "PermissionsMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3176,6 +3218,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerPermissionsModeOutput(v **Upd
 				}
 				sv.PermissionsMode = types.PermissionsMode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3431,6 +3474,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ParameterName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3439,6 +3483,7 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.ParameterName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3478,6 +3523,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3493,6 +3539,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 
 				}
 			}
+
 		case "ErrorCause":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3501,6 +3548,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.ErrorCause = types.ErrorCause(jtv)
 			}
+
 		case "ExclusiveEndTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3516,6 +3564,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 
 				}
 			}
+
 		case "InclusiveStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3531,10 +3580,12 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 
 				}
 			}
+
 		case "KinesisConfiguration":
 			if err := awsRestjson1_deserializeDocumentKinesisConfiguration(&sv.KinesisConfiguration, value); err != nil {
 				return err
 			}
+
 		case "LedgerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3543,6 +3594,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.LedgerName = ptr.String(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3551,6 +3603,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3559,6 +3612,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.Status = types.StreamStatus(jtv)
 			}
+
 		case "StreamId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3567,6 +3621,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.StreamId = ptr.String(jtv)
 			}
+
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3575,6 +3630,7 @@ func awsRestjson1_deserializeDocumentJournalKinesisStreamDescription(v **types.J
 				}
 				sv.StreamName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3655,6 +3711,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 
 				}
 			}
+
 		case "ExportCreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3670,6 +3727,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 
 				}
 			}
+
 		case "ExportId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3678,6 +3736,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 				}
 				sv.ExportId = ptr.String(jtv)
 			}
+
 		case "InclusiveStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3693,6 +3752,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 
 				}
 			}
+
 		case "LedgerName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3701,6 +3761,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 				}
 				sv.LedgerName = ptr.String(jtv)
 			}
+
 		case "OutputFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3709,6 +3770,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 				}
 				sv.OutputFormat = types.OutputFormat(jtv)
 			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3717,10 +3779,12 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 				}
 				sv.RoleArn = ptr.String(jtv)
 			}
+
 		case "S3ExportConfiguration":
 			if err := awsRestjson1_deserializeDocumentS3ExportConfiguration(&sv.S3ExportConfiguration, value); err != nil {
 				return err
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3729,6 +3793,7 @@ func awsRestjson1_deserializeDocumentJournalS3ExportDescription(v **types.Journa
 				}
 				sv.Status = types.ExportStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3802,6 +3867,7 @@ func awsRestjson1_deserializeDocumentKinesisConfiguration(v **types.KinesisConfi
 				}
 				sv.AggregationEnabled = ptr.Bool(jtv)
 			}
+
 		case "StreamArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3810,6 +3876,7 @@ func awsRestjson1_deserializeDocumentKinesisConfiguration(v **types.KinesisConfi
 				}
 				sv.StreamArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3849,6 +3916,7 @@ func awsRestjson1_deserializeDocumentLedgerEncryptionDescription(v **types.Ledge
 				}
 				sv.EncryptionStatus = types.EncryptionStatus(jtv)
 			}
+
 		case "InaccessibleKmsKeyDateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3864,6 +3932,7 @@ func awsRestjson1_deserializeDocumentLedgerEncryptionDescription(v **types.Ledge
 
 				}
 			}
+
 		case "KmsKeyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3872,6 +3941,7 @@ func awsRestjson1_deserializeDocumentLedgerEncryptionDescription(v **types.Ledge
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3952,6 +4022,7 @@ func awsRestjson1_deserializeDocumentLedgerSummary(v **types.LedgerSummary, valu
 
 				}
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3960,6 +4031,7 @@ func awsRestjson1_deserializeDocumentLedgerSummary(v **types.LedgerSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3968,6 +4040,7 @@ func awsRestjson1_deserializeDocumentLedgerSummary(v **types.LedgerSummary, valu
 				}
 				sv.State = types.LedgerState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4007,6 +4080,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4015,6 +4089,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4054,6 +4129,7 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4062,6 +4138,7 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4070,6 +4147,7 @@ func awsRestjson1_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4109,6 +4187,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4117,6 +4196,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4125,6 +4205,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4164,6 +4245,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4172,6 +4254,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4180,6 +4263,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4219,6 +4303,7 @@ func awsRestjson1_deserializeDocumentResourcePreconditionNotMetException(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4227,6 +4312,7 @@ func awsRestjson1_deserializeDocumentResourcePreconditionNotMetException(v **typ
 				}
 				sv.ResourceName = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4235,6 +4321,7 @@ func awsRestjson1_deserializeDocumentResourcePreconditionNotMetException(v **typ
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4274,6 +4361,7 @@ func awsRestjson1_deserializeDocumentS3EncryptionConfiguration(v **types.S3Encry
 				}
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
+
 		case "ObjectEncryptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4282,6 +4370,7 @@ func awsRestjson1_deserializeDocumentS3EncryptionConfiguration(v **types.S3Encry
 				}
 				sv.ObjectEncryptionType = types.S3ObjectEncryptionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4321,10 +4410,12 @@ func awsRestjson1_deserializeDocumentS3ExportConfiguration(v **types.S3ExportCon
 				}
 				sv.Bucket = ptr.String(jtv)
 			}
+
 		case "EncryptionConfiguration":
 			if err := awsRestjson1_deserializeDocumentS3EncryptionConfiguration(&sv.EncryptionConfiguration, value); err != nil {
 				return err
 			}
+
 		case "Prefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4333,6 +4424,7 @@ func awsRestjson1_deserializeDocumentS3ExportConfiguration(v **types.S3ExportCon
 				}
 				sv.Prefix = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4408,6 +4500,7 @@ func awsRestjson1_deserializeDocumentValueHolder(v **types.ValueHolder, value in
 				}
 				sv.IonText = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

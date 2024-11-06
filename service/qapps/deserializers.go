@@ -426,6 +426,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -434,6 +435,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "isVerified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -442,6 +444,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.IsVerified = ptr.Bool(jtv)
 			}
+
 		case "libraryItemId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -450,6 +453,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.LibraryItemId = ptr.String(jtv)
 			}
+
 		case "ratingCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -462,6 +466,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.RatingCount = ptr.Int32(int32(i64))
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -470,6 +475,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -482,6 +488,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -490,6 +497,7 @@ func awsRestjson1_deserializeOpDocumentCreateLibraryItemOutput(v **CreateLibrary
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -666,6 +674,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.AppArn = ptr.String(jtv)
 			}
+
 		case "appId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -674,6 +683,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -686,6 +696,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.AppVersion = ptr.Int32(int32(i64))
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -698,6 +709,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -706,6 +718,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -714,6 +727,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "initialPrompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -722,10 +736,12 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.InitialPrompt = ptr.String(jtv)
 			}
+
 		case "requiredCapabilities":
 			if err := awsRestjson1_deserializeDocumentAppRequiredCapabilities(&sv.RequiredCapabilities, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -734,6 +750,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.Status = types.AppStatus(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -742,6 +759,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -754,6 +772,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -762,6 +781,7 @@ func awsRestjson1_deserializeOpDocumentCreateQAppOutput(v **CreateQAppOutput, va
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1377,6 +1397,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1389,10 +1410,12 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.AppVersion = ptr.Int32(int32(i64))
 			}
+
 		case "categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1405,6 +1428,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1413,6 +1437,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "isRatedByUser":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1421,6 +1446,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.IsRatedByUser = ptr.Bool(jtv)
 			}
+
 		case "isVerified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1429,6 +1455,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.IsVerified = ptr.Bool(jtv)
 			}
+
 		case "libraryItemId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1437,6 +1464,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.LibraryItemId = ptr.String(jtv)
 			}
+
 		case "ratingCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1449,6 +1477,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.RatingCount = ptr.Int32(int32(i64))
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1457,6 +1486,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1469,6 +1499,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1477,6 +1508,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		case "userCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1489,6 +1521,7 @@ func awsRestjson1_deserializeOpDocumentGetLibraryItemOutput(v **GetLibraryItemOu
 				}
 				sv.UserCount = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1659,10 +1692,12 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.AppArn = ptr.String(jtv)
 			}
+
 		case "appDefinition":
 			if err := awsRestjson1_deserializeDocumentAppDefinition(&sv.AppDefinition, value); err != nil {
 				return err
 			}
+
 		case "appId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1671,6 +1706,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1683,6 +1719,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.AppVersion = ptr.Int32(int32(i64))
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1695,6 +1732,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1703,6 +1741,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1711,6 +1750,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "initialPrompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1719,10 +1759,12 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.InitialPrompt = ptr.String(jtv)
 			}
+
 		case "requiredCapabilities":
 			if err := awsRestjson1_deserializeDocumentAppRequiredCapabilities(&sv.RequiredCapabilities, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1731,6 +1773,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.Status = types.AppStatus(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1739,6 +1782,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1751,6 +1795,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1759,6 +1804,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppOutput(v **GetQAppOutput, value in
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1928,6 +1974,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppSessionOutput(v **GetQAppSessionOu
 			if err := awsRestjson1_deserializeDocumentCardStatusMap(&sv.CardStatus, value); err != nil {
 				return err
 			}
+
 		case "sessionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1936,6 +1983,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppSessionOutput(v **GetQAppSessionOu
 				}
 				sv.SessionArn = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1944,6 +1992,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppSessionOutput(v **GetQAppSessionOu
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1952,6 +2001,7 @@ func awsRestjson1_deserializeOpDocumentGetQAppSessionOutput(v **GetQAppSessionOu
 				}
 				sv.Status = types.ExecutionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2128,6 +2178,7 @@ func awsRestjson1_deserializeOpDocumentImportDocumentOutput(v **ImportDocumentOu
 				}
 				sv.FileId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2294,6 +2345,7 @@ func awsRestjson1_deserializeOpDocumentListLibraryItemsOutput(v **ListLibraryIte
 			if err := awsRestjson1_deserializeDocumentLibraryItemList(&sv.LibraryItems, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2302,6 +2354,7 @@ func awsRestjson1_deserializeOpDocumentListLibraryItemsOutput(v **ListLibraryIte
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2465,6 +2518,7 @@ func awsRestjson1_deserializeOpDocumentListQAppsOutput(v **ListQAppsOutput, valu
 			if err := awsRestjson1_deserializeDocumentUserAppsList(&sv.Apps, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2473,6 +2527,7 @@ func awsRestjson1_deserializeOpDocumentListQAppsOutput(v **ListQAppsOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2636,6 +2691,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2799,6 +2855,7 @@ func awsRestjson1_deserializeOpDocumentPredictQAppOutput(v **PredictQAppOutput, 
 			if err := awsRestjson1_deserializeDocumentPredictAppDefinition(&sv.App, value); err != nil {
 				return err
 			}
+
 		case "problemStatement":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2807,6 +2864,7 @@ func awsRestjson1_deserializeOpDocumentPredictQAppOutput(v **PredictQAppOutput, 
 				}
 				sv.ProblemStatement = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2980,6 +3038,7 @@ func awsRestjson1_deserializeOpDocumentStartQAppSessionOutput(v **StartQAppSessi
 				}
 				sv.SessionArn = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2988,6 +3047,7 @@ func awsRestjson1_deserializeOpDocumentStartQAppSessionOutput(v **StartQAppSessi
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3476,6 +3536,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3488,10 +3549,12 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.AppVersion = ptr.Int32(int32(i64))
 			}
+
 		case "categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3504,6 +3567,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3512,6 +3576,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "isRatedByUser":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3520,6 +3585,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.IsRatedByUser = ptr.Bool(jtv)
 			}
+
 		case "isVerified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3528,6 +3594,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.IsVerified = ptr.Bool(jtv)
 			}
+
 		case "libraryItemId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3536,6 +3603,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.LibraryItemId = ptr.String(jtv)
 			}
+
 		case "ratingCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3548,6 +3616,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.RatingCount = ptr.Int32(int32(i64))
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3556,6 +3625,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3568,6 +3638,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3576,6 +3647,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		case "userCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3588,6 +3660,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLibraryItemOutput(v **UpdateLibrary
 				}
 				sv.UserCount = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3873,6 +3946,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.AppArn = ptr.String(jtv)
 			}
+
 		case "appId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3881,6 +3955,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3893,6 +3968,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.AppVersion = ptr.Int32(int32(i64))
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3905,6 +3981,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3913,6 +3990,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3921,6 +3999,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "initialPrompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3929,10 +4008,12 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.InitialPrompt = ptr.String(jtv)
 			}
+
 		case "requiredCapabilities":
 			if err := awsRestjson1_deserializeDocumentAppRequiredCapabilities(&sv.RequiredCapabilities, value); err != nil {
 				return err
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3941,6 +4022,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.Status = types.AppStatus(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3949,6 +4031,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3961,6 +4044,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3969,6 +4053,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppOutput(v **UpdateQAppOutput, va
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4142,6 +4227,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppSessionOutput(v **UpdateQAppSes
 				}
 				sv.SessionArn = ptr.String(jtv)
 			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4150,6 +4236,7 @@ func awsRestjson1_deserializeOpDocumentUpdateQAppSessionOutput(v **UpdateQAppSes
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4553,6 +4640,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4592,6 +4680,7 @@ func awsRestjson1_deserializeDocumentAppDefinition(v **types.AppDefinition, valu
 				}
 				sv.AppDefinitionVersion = ptr.String(jtv)
 			}
+
 		case "canEdit":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -4600,10 +4689,12 @@ func awsRestjson1_deserializeDocumentAppDefinition(v **types.AppDefinition, valu
 				}
 				sv.CanEdit = ptr.Bool(jtv)
 			}
+
 		case "cards":
 			if err := awsRestjson1_deserializeDocumentCardModelList(&sv.Cards, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4639,6 +4730,7 @@ func awsRestjson1_deserializeDocumentAppDefinitionInput(v **types.AppDefinitionI
 			if err := awsRestjson1_deserializeDocumentCardList(&sv.Cards, value); err != nil {
 				return err
 			}
+
 		case "initialPrompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4647,6 +4739,7 @@ func awsRestjson1_deserializeDocumentAppDefinitionInput(v **types.AppDefinitionI
 				}
 				sv.InitialPrompt = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4718,42 +4811,52 @@ func awsRestjson1_deserializeDocumentAttributeFilter(v **types.AttributeFilter, 
 			if err := awsRestjson1_deserializeDocumentAttributeFilters(&sv.AndAllFilters, value); err != nil {
 				return err
 			}
+
 		case "containsAll":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.ContainsAll, value); err != nil {
 				return err
 			}
+
 		case "containsAny":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.ContainsAny, value); err != nil {
 				return err
 			}
+
 		case "equalsTo":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.EqualsTo, value); err != nil {
 				return err
 			}
+
 		case "greaterThan":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.GreaterThan, value); err != nil {
 				return err
 			}
+
 		case "greaterThanOrEquals":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.GreaterThanOrEquals, value); err != nil {
 				return err
 			}
+
 		case "lessThan":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.LessThan, value); err != nil {
 				return err
 			}
+
 		case "lessThanOrEquals":
 			if err := awsRestjson1_deserializeDocumentDocumentAttribute(&sv.LessThanOrEquals, value); err != nil {
 				return err
 			}
+
 		case "notFilter":
 			if err := awsRestjson1_deserializeDocumentAttributeFilter(&sv.NotFilter, value); err != nil {
 				return err
 			}
+
 		case "orAllFilters":
 			if err := awsRestjson1_deserializeDocumentAttributeFilters(&sv.OrAllFilters, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5031,6 +5134,7 @@ func awsRestjson1_deserializeDocumentCardStatus(v **types.CardStatus, value inte
 				}
 				sv.CurrentState = types.ExecutionStatus(jtv)
 			}
+
 		case "currentValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5039,6 +5143,7 @@ func awsRestjson1_deserializeDocumentCardStatus(v **types.CardStatus, value inte
 				}
 				sv.CurrentValue = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5113,6 +5218,7 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5121,6 +5227,7 @@ func awsRestjson1_deserializeDocumentCategory(v **types.Category, value interfac
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5194,6 +5301,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5202,6 +5310,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5210,6 +5319,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5249,6 +5359,7 @@ func awsRestjson1_deserializeDocumentContentTooLargeException(v **types.ContentT
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5257,6 +5368,7 @@ func awsRestjson1_deserializeDocumentContentTooLargeException(v **types.ContentT
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5265,6 +5377,7 @@ func awsRestjson1_deserializeDocumentContentTooLargeException(v **types.ContentT
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5340,10 +5453,12 @@ func awsRestjson1_deserializeDocumentDocumentAttribute(v **types.DocumentAttribu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "value":
 			if err := awsRestjson1_deserializeDocumentDocumentAttributeValue(&sv.Value, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5504,10 +5619,12 @@ func awsRestjson1_deserializeDocumentFileUploadCard(v **types.FileUploadCard, va
 				}
 				sv.AllowOverride = ptr.Bool(jtv)
 			}
+
 		case "dependencies":
 			if err := awsRestjson1_deserializeDocumentDependencyList(&sv.Dependencies, value); err != nil {
 				return err
 			}
+
 		case "fileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5516,6 +5633,7 @@ func awsRestjson1_deserializeDocumentFileUploadCard(v **types.FileUploadCard, va
 				}
 				sv.FileId = ptr.String(jtv)
 			}
+
 		case "filename":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5524,6 +5642,7 @@ func awsRestjson1_deserializeDocumentFileUploadCard(v **types.FileUploadCard, va
 				}
 				sv.Filename = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5532,6 +5651,7 @@ func awsRestjson1_deserializeDocumentFileUploadCard(v **types.FileUploadCard, va
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5540,6 +5660,7 @@ func awsRestjson1_deserializeDocumentFileUploadCard(v **types.FileUploadCard, va
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5548,6 +5669,7 @@ func awsRestjson1_deserializeDocumentFileUploadCard(v **types.FileUploadCard, va
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5587,6 +5709,7 @@ func awsRestjson1_deserializeDocumentFileUploadCardInput(v **types.FileUploadCar
 				}
 				sv.AllowOverride = ptr.Bool(jtv)
 			}
+
 		case "fileId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5595,6 +5718,7 @@ func awsRestjson1_deserializeDocumentFileUploadCardInput(v **types.FileUploadCar
 				}
 				sv.FileId = ptr.String(jtv)
 			}
+
 		case "filename":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5603,6 +5727,7 @@ func awsRestjson1_deserializeDocumentFileUploadCardInput(v **types.FileUploadCar
 				}
 				sv.Filename = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5611,6 +5736,7 @@ func awsRestjson1_deserializeDocumentFileUploadCardInput(v **types.FileUploadCar
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5619,6 +5745,7 @@ func awsRestjson1_deserializeDocumentFileUploadCardInput(v **types.FileUploadCar
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5627,6 +5754,7 @@ func awsRestjson1_deserializeDocumentFileUploadCardInput(v **types.FileUploadCar
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5666,6 +5794,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5678,6 +5807,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5751,6 +5881,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "appVersion":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5763,10 +5894,12 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.AppVersion = ptr.Int32(int32(i64))
 			}
+
 		case "categories":
 			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.Categories, value); err != nil {
 				return err
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5779,6 +5912,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5787,6 +5921,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.CreatedBy = ptr.String(jtv)
 			}
+
 		case "isRatedByUser":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5795,6 +5930,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.IsRatedByUser = ptr.Bool(jtv)
 			}
+
 		case "isVerified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5803,6 +5939,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.IsVerified = ptr.Bool(jtv)
 			}
+
 		case "libraryItemId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5811,6 +5948,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.LibraryItemId = ptr.String(jtv)
 			}
+
 		case "ratingCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5823,6 +5961,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.RatingCount = ptr.Int32(int32(i64))
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5831,6 +5970,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5843,6 +5983,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.UpdatedAt = ptr.Time(t)
 			}
+
 		case "updatedBy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5851,6 +5992,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.UpdatedBy = ptr.String(jtv)
 			}
+
 		case "userCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5863,6 +6005,7 @@ func awsRestjson1_deserializeDocumentLibraryItemMember(v **types.LibraryItemMemb
 				}
 				sv.UserCount = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5898,6 +6041,7 @@ func awsRestjson1_deserializeDocumentPredictAppDefinition(v **types.PredictAppDe
 			if err := awsRestjson1_deserializeDocumentAppDefinitionInput(&sv.AppDefinition, value); err != nil {
 				return err
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5906,6 +6050,7 @@ func awsRestjson1_deserializeDocumentPredictAppDefinition(v **types.PredictAppDe
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5914,6 +6059,7 @@ func awsRestjson1_deserializeDocumentPredictAppDefinition(v **types.PredictAppDe
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5949,6 +6095,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 			if err := awsRestjson1_deserializeDocumentDependencyList(&sv.Dependencies, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5957,6 +6104,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "pluginId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5965,6 +6113,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 				}
 				sv.PluginId = ptr.String(jtv)
 			}
+
 		case "pluginType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5973,6 +6122,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 				}
 				sv.PluginType = types.PluginType(jtv)
 			}
+
 		case "prompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5981,6 +6131,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 				}
 				sv.Prompt = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5989,6 +6140,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5997,6 +6149,7 @@ func awsRestjson1_deserializeDocumentQPluginCard(v **types.QPluginCard, value in
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6036,6 +6189,7 @@ func awsRestjson1_deserializeDocumentQPluginCardInput(v **types.QPluginCardInput
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "pluginId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6044,6 +6198,7 @@ func awsRestjson1_deserializeDocumentQPluginCardInput(v **types.QPluginCardInput
 				}
 				sv.PluginId = ptr.String(jtv)
 			}
+
 		case "prompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6052,6 +6207,7 @@ func awsRestjson1_deserializeDocumentQPluginCardInput(v **types.QPluginCardInput
 				}
 				sv.Prompt = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6060,6 +6216,7 @@ func awsRestjson1_deserializeDocumentQPluginCardInput(v **types.QPluginCardInput
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6068,6 +6225,7 @@ func awsRestjson1_deserializeDocumentQPluginCardInput(v **types.QPluginCardInput
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6103,10 +6261,12 @@ func awsRestjson1_deserializeDocumentQQueryCard(v **types.QQueryCard, value inte
 			if err := awsRestjson1_deserializeDocumentAttributeFilter(&sv.AttributeFilter, value); err != nil {
 				return err
 			}
+
 		case "dependencies":
 			if err := awsRestjson1_deserializeDocumentDependencyList(&sv.Dependencies, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6115,6 +6275,7 @@ func awsRestjson1_deserializeDocumentQQueryCard(v **types.QQueryCard, value inte
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "outputSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6123,6 +6284,7 @@ func awsRestjson1_deserializeDocumentQQueryCard(v **types.QQueryCard, value inte
 				}
 				sv.OutputSource = types.CardOutputSource(jtv)
 			}
+
 		case "prompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6131,6 +6293,7 @@ func awsRestjson1_deserializeDocumentQQueryCard(v **types.QQueryCard, value inte
 				}
 				sv.Prompt = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6139,6 +6302,7 @@ func awsRestjson1_deserializeDocumentQQueryCard(v **types.QQueryCard, value inte
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6147,6 +6311,7 @@ func awsRestjson1_deserializeDocumentQQueryCard(v **types.QQueryCard, value inte
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6182,6 +6347,7 @@ func awsRestjson1_deserializeDocumentQQueryCardInput(v **types.QQueryCardInput, 
 			if err := awsRestjson1_deserializeDocumentAttributeFilter(&sv.AttributeFilter, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6190,6 +6356,7 @@ func awsRestjson1_deserializeDocumentQQueryCardInput(v **types.QQueryCardInput, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "outputSource":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6198,6 +6365,7 @@ func awsRestjson1_deserializeDocumentQQueryCardInput(v **types.QQueryCardInput, 
 				}
 				sv.OutputSource = types.CardOutputSource(jtv)
 			}
+
 		case "prompt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6206,6 +6374,7 @@ func awsRestjson1_deserializeDocumentQQueryCardInput(v **types.QQueryCardInput, 
 				}
 				sv.Prompt = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6214,6 +6383,7 @@ func awsRestjson1_deserializeDocumentQQueryCardInput(v **types.QQueryCardInput, 
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6222,6 +6392,7 @@ func awsRestjson1_deserializeDocumentQQueryCardInput(v **types.QQueryCardInput, 
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6261,6 +6432,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6269,6 +6441,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6277,6 +6450,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6316,6 +6490,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6324,6 +6499,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6332,6 +6508,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6340,6 +6517,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6348,6 +6526,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6423,10 +6602,12 @@ func awsRestjson1_deserializeDocumentTextInputCard(v **types.TextInputCard, valu
 				}
 				sv.DefaultValue = ptr.String(jtv)
 			}
+
 		case "dependencies":
 			if err := awsRestjson1_deserializeDocumentDependencyList(&sv.Dependencies, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6435,6 +6616,7 @@ func awsRestjson1_deserializeDocumentTextInputCard(v **types.TextInputCard, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "placeholder":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6443,6 +6625,7 @@ func awsRestjson1_deserializeDocumentTextInputCard(v **types.TextInputCard, valu
 				}
 				sv.Placeholder = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6451,6 +6634,7 @@ func awsRestjson1_deserializeDocumentTextInputCard(v **types.TextInputCard, valu
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6459,6 +6643,7 @@ func awsRestjson1_deserializeDocumentTextInputCard(v **types.TextInputCard, valu
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6498,6 +6683,7 @@ func awsRestjson1_deserializeDocumentTextInputCardInput(v **types.TextInputCardI
 				}
 				sv.DefaultValue = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6506,6 +6692,7 @@ func awsRestjson1_deserializeDocumentTextInputCardInput(v **types.TextInputCardI
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "placeholder":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6514,6 +6701,7 @@ func awsRestjson1_deserializeDocumentTextInputCardInput(v **types.TextInputCardI
 				}
 				sv.Placeholder = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6522,6 +6710,7 @@ func awsRestjson1_deserializeDocumentTextInputCardInput(v **types.TextInputCardI
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6530,6 +6719,7 @@ func awsRestjson1_deserializeDocumentTextInputCardInput(v **types.TextInputCardI
 				}
 				sv.Type = types.CardType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6569,6 +6759,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6577,6 +6768,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6589,6 +6781,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6597,6 +6790,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6636,6 +6830,7 @@ func awsRestjson1_deserializeDocumentUnauthorizedException(v **types.Unauthorize
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6675,6 +6870,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.AppArn = ptr.String(jtv)
 			}
+
 		case "appId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6683,6 +6879,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.AppId = ptr.String(jtv)
 			}
+
 		case "canEdit":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6691,6 +6888,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.CanEdit = ptr.Bool(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6703,6 +6901,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6711,6 +6910,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "isVerified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6719,6 +6919,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.IsVerified = jtv
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6727,6 +6928,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.Status = ptr.String(jtv)
 			}
+
 		case "title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6735,6 +6937,7 @@ func awsRestjson1_deserializeDocumentUserAppItem(v **types.UserAppItem, value in
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6808,6 +7011,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

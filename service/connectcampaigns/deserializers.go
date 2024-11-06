@@ -195,6 +195,7 @@ func awsRestjson1_deserializeOpDocumentCreateCampaignOutput(v **CreateCampaignOu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -203,10 +204,12 @@ func awsRestjson1_deserializeOpDocumentCreateCampaignOutput(v **CreateCampaignOu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -685,6 +688,7 @@ func awsRestjson1_deserializeOpDocumentDescribeCampaignOutput(v **DescribeCampai
 			if err := awsRestjson1_deserializeDocumentCampaign(&sv.Campaign, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -852,6 +856,7 @@ func awsRestjson1_deserializeOpDocumentGetCampaignStateOutput(v **GetCampaignSta
 				}
 				sv.State = types.CampaignState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1012,10 +1017,12 @@ func awsRestjson1_deserializeOpDocumentGetCampaignStateBatchOutput(v **GetCampai
 			if err := awsRestjson1_deserializeDocumentFailedCampaignStateResponseList(&sv.FailedRequests, value); err != nil {
 				return err
 			}
+
 		case "successfulRequests":
 			if err := awsRestjson1_deserializeDocumentSuccessfulCampaignStateResponseList(&sv.SuccessfulRequests, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1176,6 +1183,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectInstanceConfigOutput(v **GetCon
 			if err := awsRestjson1_deserializeDocumentInstanceConfig(&sv.ConnectInstanceConfig, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1336,6 +1344,7 @@ func awsRestjson1_deserializeOpDocumentGetInstanceOnboardingJobStatusOutput(v **
 			if err := awsRestjson1_deserializeDocumentInstanceOnboardingJobStatus(&sv.ConnectInstanceOnboardingJobStatus, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1493,6 +1502,7 @@ func awsRestjson1_deserializeOpDocumentListCampaignsOutput(v **ListCampaignsOutp
 			if err := awsRestjson1_deserializeDocumentCampaignSummaryList(&sv.CampaignSummaryList, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1501,6 +1511,7 @@ func awsRestjson1_deserializeOpDocumentListCampaignsOutput(v **ListCampaignsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1664,6 +1675,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1945,10 +1957,12 @@ func awsRestjson1_deserializeOpDocumentPutDialRequestBatchOutput(v **PutDialRequ
 			if err := awsRestjson1_deserializeDocumentFailedRequestList(&sv.FailedRequests, value); err != nil {
 				return err
 			}
+
 		case "successfulRequests":
 			if err := awsRestjson1_deserializeDocumentSuccessfulRequestList(&sv.SuccessfulRequests, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2339,6 +2353,7 @@ func awsRestjson1_deserializeOpDocumentStartInstanceOnboardingJobOutput(v **Star
 			if err := awsRestjson1_deserializeDocumentInstanceOnboardingJobStatus(&sv.ConnectInstanceOnboardingJobStatus, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3491,6 +3506,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3499,6 +3515,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3563,6 +3580,7 @@ func awsRestjson1_deserializeDocumentAgentlessDialerConfig(v **types.AgentlessDi
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3602,6 +3620,7 @@ func awsRestjson1_deserializeDocumentAnswerMachineDetectionConfig(v **types.Answ
 				}
 				sv.AwaitAnswerMachinePrompt = ptr.Bool(jtv)
 			}
+
 		case "enableAnswerMachineDetection":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -3610,6 +3629,7 @@ func awsRestjson1_deserializeDocumentAnswerMachineDetectionConfig(v **types.Answ
 				}
 				sv.EnableAnswerMachineDetection = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3649,6 +3669,7 @@ func awsRestjson1_deserializeDocumentCampaign(v **types.Campaign, value interfac
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "connectInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3657,10 +3678,12 @@ func awsRestjson1_deserializeDocumentCampaign(v **types.Campaign, value interfac
 				}
 				sv.ConnectInstanceId = ptr.String(jtv)
 			}
+
 		case "dialerConfig":
 			if err := awsRestjson1_deserializeDocumentDialerConfig(&sv.DialerConfig, value); err != nil {
 				return err
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3669,6 +3692,7 @@ func awsRestjson1_deserializeDocumentCampaign(v **types.Campaign, value interfac
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3677,14 +3701,17 @@ func awsRestjson1_deserializeDocumentCampaign(v **types.Campaign, value interfac
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "outboundCallConfig":
 			if err := awsRestjson1_deserializeDocumentOutboundCallConfig(&sv.OutboundCallConfig, value); err != nil {
 				return err
 			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3724,6 +3751,7 @@ func awsRestjson1_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "connectInstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3732,6 +3760,7 @@ func awsRestjson1_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 				}
 				sv.ConnectInstanceId = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3740,6 +3769,7 @@ func awsRestjson1_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3748,6 +3778,7 @@ func awsRestjson1_deserializeDocumentCampaignSummary(v **types.CampaignSummary, 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3821,6 +3852,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3829,6 +3861,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3928,6 +3961,7 @@ func awsRestjson1_deserializeDocumentEncryptionConfig(v **types.EncryptionConfig
 				}
 				sv.Enabled = jtv
 			}
+
 		case "encryptionType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3936,6 +3970,7 @@ func awsRestjson1_deserializeDocumentEncryptionConfig(v **types.EncryptionConfig
 				}
 				sv.EncryptionType = types.EncryptionType(jtv)
 			}
+
 		case "keyArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3944,6 +3979,7 @@ func awsRestjson1_deserializeDocumentEncryptionConfig(v **types.EncryptionConfig
 				}
 				sv.KeyArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3983,6 +4019,7 @@ func awsRestjson1_deserializeDocumentFailedCampaignStateResponse(v **types.Faile
 				}
 				sv.CampaignId = ptr.String(jtv)
 			}
+
 		case "failureCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3991,6 +4028,7 @@ func awsRestjson1_deserializeDocumentFailedCampaignStateResponse(v **types.Faile
 				}
 				sv.FailureCode = types.GetCampaignStateBatchFailureCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4064,6 +4102,7 @@ func awsRestjson1_deserializeDocumentFailedRequest(v **types.FailedRequest, valu
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "failureCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4072,6 +4111,7 @@ func awsRestjson1_deserializeDocumentFailedRequest(v **types.FailedRequest, valu
 				}
 				sv.FailureCode = types.FailureCode(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4080,6 +4120,7 @@ func awsRestjson1_deserializeDocumentFailedRequest(v **types.FailedRequest, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4153,10 +4194,12 @@ func awsRestjson1_deserializeDocumentInstanceConfig(v **types.InstanceConfig, va
 				}
 				sv.ConnectInstanceId = ptr.String(jtv)
 			}
+
 		case "encryptionConfig":
 			if err := awsRestjson1_deserializeDocumentEncryptionConfig(&sv.EncryptionConfig, value); err != nil {
 				return err
 			}
+
 		case "serviceLinkedRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4165,6 +4208,7 @@ func awsRestjson1_deserializeDocumentInstanceConfig(v **types.InstanceConfig, va
 				}
 				sv.ServiceLinkedRoleArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4204,6 +4248,7 @@ func awsRestjson1_deserializeDocumentInstanceOnboardingJobStatus(v **types.Insta
 				}
 				sv.ConnectInstanceId = ptr.String(jtv)
 			}
+
 		case "failureCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4212,6 +4257,7 @@ func awsRestjson1_deserializeDocumentInstanceOnboardingJobStatus(v **types.Insta
 				}
 				sv.FailureCode = types.InstanceOnboardingJobFailureCode(jtv)
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4220,6 +4266,7 @@ func awsRestjson1_deserializeDocumentInstanceOnboardingJobStatus(v **types.Insta
 				}
 				sv.Status = types.InstanceOnboardingJobStatusCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4259,6 +4306,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4267,6 +4315,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4306,6 +4355,7 @@ func awsRestjson1_deserializeDocumentInvalidCampaignStateException(v **types.Inv
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4314,6 +4364,7 @@ func awsRestjson1_deserializeDocumentInvalidCampaignStateException(v **types.Inv
 				}
 				sv.State = types.CampaignState(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4322,6 +4373,7 @@ func awsRestjson1_deserializeDocumentInvalidCampaignStateException(v **types.Inv
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4361,6 +4413,7 @@ func awsRestjson1_deserializeDocumentInvalidStateException(v **types.InvalidStat
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4369,6 +4422,7 @@ func awsRestjson1_deserializeDocumentInvalidStateException(v **types.InvalidStat
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4404,6 +4458,7 @@ func awsRestjson1_deserializeDocumentOutboundCallConfig(v **types.OutboundCallCo
 			if err := awsRestjson1_deserializeDocumentAnswerMachineDetectionConfig(&sv.AnswerMachineDetectionConfig, value); err != nil {
 				return err
 			}
+
 		case "connectContactFlowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4412,6 +4467,7 @@ func awsRestjson1_deserializeDocumentOutboundCallConfig(v **types.OutboundCallCo
 				}
 				sv.ConnectContactFlowId = ptr.String(jtv)
 			}
+
 		case "connectQueueId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4420,6 +4476,7 @@ func awsRestjson1_deserializeDocumentOutboundCallConfig(v **types.OutboundCallCo
 				}
 				sv.ConnectQueueId = ptr.String(jtv)
 			}
+
 		case "connectSourcePhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4428,6 +4485,7 @@ func awsRestjson1_deserializeDocumentOutboundCallConfig(v **types.OutboundCallCo
 				}
 				sv.ConnectSourcePhoneNumber = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4492,6 +4550,7 @@ func awsRestjson1_deserializeDocumentPredictiveDialerConfig(v **types.Predictive
 
 				}
 			}
+
 		case "dialingCapacity":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4525,6 +4584,7 @@ func awsRestjson1_deserializeDocumentPredictiveDialerConfig(v **types.Predictive
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4589,6 +4649,7 @@ func awsRestjson1_deserializeDocumentProgressiveDialerConfig(v **types.Progressi
 
 				}
 			}
+
 		case "dialingCapacity":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4622,6 +4683,7 @@ func awsRestjson1_deserializeDocumentProgressiveDialerConfig(v **types.Progressi
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4661,6 +4723,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4669,6 +4732,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4708,6 +4772,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4716,6 +4781,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4755,6 +4821,7 @@ func awsRestjson1_deserializeDocumentSuccessfulCampaignStateResponse(v **types.S
 				}
 				sv.CampaignId = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4763,6 +4830,7 @@ func awsRestjson1_deserializeDocumentSuccessfulCampaignStateResponse(v **types.S
 				}
 				sv.State = types.CampaignState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4836,6 +4904,7 @@ func awsRestjson1_deserializeDocumentSuccessfulRequest(v **types.SuccessfulReque
 				}
 				sv.ClientToken = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4844,6 +4913,7 @@ func awsRestjson1_deserializeDocumentSuccessfulRequest(v **types.SuccessfulReque
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4953,6 +5023,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4961,6 +5032,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5000,6 +5072,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "xAmzErrorType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5008,6 +5081,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.XAmzErrorType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

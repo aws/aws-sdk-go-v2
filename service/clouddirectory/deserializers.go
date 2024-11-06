@@ -313,6 +313,7 @@ func awsRestjson1_deserializeOpDocumentApplySchemaOutput(v **ApplySchemaOutput, 
 				}
 				sv.AppliedSchemaArn = ptr.String(jtv)
 			}
+
 		case "DirectoryArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -321,6 +322,7 @@ func awsRestjson1_deserializeOpDocumentApplySchemaOutput(v **ApplySchemaOutput, 
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -506,6 +508,7 @@ func awsRestjson1_deserializeOpDocumentAttachObjectOutput(v **AttachObjectOutput
 				}
 				sv.AttachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -806,6 +809,7 @@ func awsRestjson1_deserializeOpDocumentAttachToIndexOutput(v **AttachToIndexOutp
 				}
 				sv.AttachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -984,6 +988,7 @@ func awsRestjson1_deserializeOpDocumentAttachTypedLinkOutput(v **AttachTypedLink
 			if err := awsRestjson1_deserializeDocumentTypedLinkSpecifier(&sv.TypedLinkSpecifier, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1153,6 +1158,7 @@ func awsRestjson1_deserializeOpDocumentBatchReadOutput(v **BatchReadOutput, valu
 			if err := awsRestjson1_deserializeDocumentBatchReadOperationResponseList(&sv.Responses, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1325,6 +1331,7 @@ func awsRestjson1_deserializeOpDocumentBatchWriteOutput(v **BatchWriteOutput, va
 			if err := awsRestjson1_deserializeDocumentBatchWriteOperationResponseList(&sv.Responses, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1501,6 +1508,7 @@ func awsRestjson1_deserializeOpDocumentCreateDirectoryOutput(v **CreateDirectory
 				}
 				sv.AppliedSchemaArn = ptr.String(jtv)
 			}
+
 		case "DirectoryArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1509,6 +1517,7 @@ func awsRestjson1_deserializeOpDocumentCreateDirectoryOutput(v **CreateDirectory
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1517,6 +1526,7 @@ func awsRestjson1_deserializeOpDocumentCreateDirectoryOutput(v **CreateDirectory
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "ObjectIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1525,6 +1535,7 @@ func awsRestjson1_deserializeOpDocumentCreateDirectoryOutput(v **CreateDirectory
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1825,6 +1836,7 @@ func awsRestjson1_deserializeOpDocumentCreateIndexOutput(v **CreateIndexOutput, 
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2010,6 +2022,7 @@ func awsRestjson1_deserializeOpDocumentCreateObjectOutput(v **CreateObjectOutput
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2183,6 +2196,7 @@ func awsRestjson1_deserializeOpDocumentCreateSchemaOutput(v **CreateSchemaOutput
 				}
 				sv.SchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2477,6 +2491,7 @@ func awsRestjson1_deserializeOpDocumentDeleteDirectoryOutput(v **DeleteDirectory
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2877,6 +2892,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSchemaOutput(v **DeleteSchemaOutput
 				}
 				sv.SchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3168,6 +3184,7 @@ func awsRestjson1_deserializeOpDocumentDetachFromIndexOutput(v **DetachFromIndex
 				}
 				sv.DetachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3347,6 +3364,7 @@ func awsRestjson1_deserializeOpDocumentDetachObjectOutput(v **DetachObjectOutput
 				}
 				sv.DetachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3753,6 +3771,7 @@ func awsRestjson1_deserializeOpDocumentDisableDirectoryOutput(v **DisableDirecto
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3929,6 +3948,7 @@ func awsRestjson1_deserializeOpDocumentEnableDirectoryOutput(v **EnableDirectory
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4102,6 +4122,7 @@ func awsRestjson1_deserializeOpDocumentGetAppliedSchemaVersionOutput(v **GetAppl
 				}
 				sv.AppliedSchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4268,6 +4289,7 @@ func awsRestjson1_deserializeOpDocumentGetDirectoryOutput(v **GetDirectoryOutput
 			if err := awsRestjson1_deserializeDocumentDirectory(&sv.Directory, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4440,6 +4462,7 @@ func awsRestjson1_deserializeOpDocumentGetFacetOutput(v **GetFacetOutput, value 
 			if err := awsRestjson1_deserializeDocumentFacet(&sv.Facet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4615,6 +4638,7 @@ func awsRestjson1_deserializeOpDocumentGetLinkAttributesOutput(v **GetLinkAttrib
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4790,6 +4814,7 @@ func awsRestjson1_deserializeOpDocumentGetObjectAttributesOutput(v **GetObjectAt
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4966,10 +4991,12 @@ func awsRestjson1_deserializeOpDocumentGetObjectInformationOutput(v **GetObjectI
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		case "SchemaFacets":
 			if err := awsRestjson1_deserializeDocumentSchemaFacetList(&sv.SchemaFacets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5143,6 +5170,7 @@ func awsRestjson1_deserializeOpDocumentGetSchemaAsJsonOutput(v **GetSchemaAsJson
 				}
 				sv.Document = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5151,6 +5179,7 @@ func awsRestjson1_deserializeOpDocumentGetSchemaAsJsonOutput(v **GetSchemaAsJson
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5326,6 +5355,7 @@ func awsRestjson1_deserializeOpDocumentGetTypedLinkFacetInformationOutput(v **Ge
 			if err := awsRestjson1_deserializeDocumentAttributeNameList(&sv.IdentityAttributeOrder, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5502,10 +5532,12 @@ func awsRestjson1_deserializeOpDocumentListAppliedSchemaArnsOutput(v **ListAppli
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SchemaArns":
 			if err := awsRestjson1_deserializeDocumentArns(&sv.SchemaArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5678,6 +5710,7 @@ func awsRestjson1_deserializeOpDocumentListAttachedIndicesOutput(v **ListAttache
 			if err := awsRestjson1_deserializeDocumentIndexAttachmentList(&sv.IndexAttachments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5686,6 +5719,7 @@ func awsRestjson1_deserializeOpDocumentListAttachedIndicesOutput(v **ListAttache
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5862,10 +5896,12 @@ func awsRestjson1_deserializeOpDocumentListDevelopmentSchemaArnsOutput(v **ListD
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SchemaArns":
 			if err := awsRestjson1_deserializeDocumentArns(&sv.SchemaArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6035,6 +6071,7 @@ func awsRestjson1_deserializeOpDocumentListDirectoriesOutput(v **ListDirectories
 			if err := awsRestjson1_deserializeDocumentDirectoryList(&sv.Directories, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6043,6 +6080,7 @@ func awsRestjson1_deserializeOpDocumentListDirectoriesOutput(v **ListDirectories
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6218,6 +6256,7 @@ func awsRestjson1_deserializeOpDocumentListFacetAttributesOutput(v **ListFacetAt
 			if err := awsRestjson1_deserializeDocumentFacetAttributeList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6226,6 +6265,7 @@ func awsRestjson1_deserializeOpDocumentListFacetAttributesOutput(v **ListFacetAt
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6398,6 +6438,7 @@ func awsRestjson1_deserializeOpDocumentListFacetNamesOutput(v **ListFacetNamesOu
 			if err := awsRestjson1_deserializeDocumentFacetNameList(&sv.FacetNames, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6406,6 +6447,7 @@ func awsRestjson1_deserializeOpDocumentListFacetNamesOutput(v **ListFacetNamesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6584,6 +6626,7 @@ func awsRestjson1_deserializeOpDocumentListIncomingTypedLinksOutput(v **ListInco
 			if err := awsRestjson1_deserializeDocumentTypedLinkSpecifierList(&sv.LinkSpecifiers, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6592,6 +6635,7 @@ func awsRestjson1_deserializeOpDocumentListIncomingTypedLinksOutput(v **ListInco
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6773,6 +6817,7 @@ func awsRestjson1_deserializeOpDocumentListIndexOutput(v **ListIndexOutput, valu
 			if err := awsRestjson1_deserializeDocumentIndexAttachmentList(&sv.IndexAttachments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6781,6 +6826,7 @@ func awsRestjson1_deserializeOpDocumentListIndexOutput(v **ListIndexOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6951,10 +6997,12 @@ func awsRestjson1_deserializeOpDocumentListManagedSchemaArnsOutput(v **ListManag
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SchemaArns":
 			if err := awsRestjson1_deserializeDocumentArns(&sv.SchemaArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7133,6 +7181,7 @@ func awsRestjson1_deserializeOpDocumentListObjectAttributesOutput(v **ListObject
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7141,6 +7190,7 @@ func awsRestjson1_deserializeOpDocumentListObjectAttributesOutput(v **ListObject
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7319,6 +7369,7 @@ func awsRestjson1_deserializeOpDocumentListObjectChildrenOutput(v **ListObjectCh
 			if err := awsRestjson1_deserializeDocumentLinkNameToObjectIdentifierMap(&sv.Children, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7327,6 +7378,7 @@ func awsRestjson1_deserializeOpDocumentListObjectChildrenOutput(v **ListObjectCh
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7506,10 +7558,12 @@ func awsRestjson1_deserializeOpDocumentListObjectParentPathsOutput(v **ListObjec
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PathToObjectIdentifiersList":
 			if err := awsRestjson1_deserializeDocumentPathToObjectIdentifiersList(&sv.PathToObjectIdentifiersList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7692,14 +7746,17 @@ func awsRestjson1_deserializeOpDocumentListObjectParentsOutput(v **ListObjectPar
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ParentLinks":
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierAndLinkNameList(&sv.ParentLinks, value); err != nil {
 				return err
 			}
+
 		case "Parents":
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierToLinkNameMap(&sv.Parents, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7875,6 +7932,7 @@ func awsRestjson1_deserializeOpDocumentListObjectPoliciesOutput(v **ListObjectPo
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierList(&sv.AttachedPolicyIds, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7883,6 +7941,7 @@ func awsRestjson1_deserializeOpDocumentListObjectPoliciesOutput(v **ListObjectPo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8065,10 +8124,12 @@ func awsRestjson1_deserializeOpDocumentListOutgoingTypedLinksOutput(v **ListOutg
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TypedLinkSpecifiers":
 			if err := awsRestjson1_deserializeDocumentTypedLinkSpecifierList(&sv.TypedLinkSpecifiers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8251,10 +8312,12 @@ func awsRestjson1_deserializeOpDocumentListPolicyAttachmentsOutput(v **ListPolic
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ObjectIdentifiers":
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierList(&sv.ObjectIdentifiers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8431,10 +8494,12 @@ func awsRestjson1_deserializeOpDocumentListPublishedSchemaArnsOutput(v **ListPub
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "SchemaArns":
 			if err := awsRestjson1_deserializeDocumentArns(&sv.SchemaArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8611,10 +8676,12 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8790,6 +8857,7 @@ func awsRestjson1_deserializeOpDocumentListTypedLinkFacetAttributesOutput(v **Li
 			if err := awsRestjson1_deserializeDocumentTypedLinkAttributeDefinitionList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8798,6 +8866,7 @@ func awsRestjson1_deserializeOpDocumentListTypedLinkFacetAttributesOutput(v **Li
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8970,6 +9039,7 @@ func awsRestjson1_deserializeOpDocumentListTypedLinkFacetNamesOutput(v **ListTyp
 			if err := awsRestjson1_deserializeDocumentTypedLinkNameList(&sv.FacetNames, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8978,6 +9048,7 @@ func awsRestjson1_deserializeOpDocumentListTypedLinkFacetNamesOutput(v **ListTyp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9157,10 +9228,12 @@ func awsRestjson1_deserializeOpDocumentLookupPolicyOutput(v **LookupPolicyOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PolicyToPathList":
 			if err := awsRestjson1_deserializeDocumentPolicyToPathList(&sv.PolicyToPathList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9337,6 +9410,7 @@ func awsRestjson1_deserializeOpDocumentPublishSchemaOutput(v **PublishSchemaOutp
 				}
 				sv.PublishedSchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9513,6 +9587,7 @@ func awsRestjson1_deserializeOpDocumentPutSchemaFromJsonOutput(v **PutSchemaFrom
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10255,6 +10330,7 @@ func awsRestjson1_deserializeOpDocumentUpdateObjectAttributesOutput(v **UpdateOb
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10428,6 +10504,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSchemaOutput(v **UpdateSchemaOutput
 				}
 				sv.SchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10725,6 +10802,7 @@ func awsRestjson1_deserializeOpDocumentUpgradeAppliedSchemaOutput(v **UpgradeApp
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		case "UpgradedSchemaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10733,6 +10811,7 @@ func awsRestjson1_deserializeOpDocumentUpgradeAppliedSchemaOutput(v **UpgradeApp
 				}
 				sv.UpgradedSchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10912,6 +10991,7 @@ func awsRestjson1_deserializeOpDocumentUpgradePublishedSchemaOutput(v **UpgradeP
 				}
 				sv.UpgradedSchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12211,6 +12291,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12286,6 +12367,7 @@ func awsRestjson1_deserializeDocumentAttributeKey(v **types.AttributeKey, value 
 				}
 				sv.FacetName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12294,6 +12376,7 @@ func awsRestjson1_deserializeDocumentAttributeKey(v **types.AttributeKey, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SchemaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12302,6 +12385,7 @@ func awsRestjson1_deserializeDocumentAttributeKey(v **types.AttributeKey, value 
 				}
 				sv.SchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12337,10 +12421,12 @@ func awsRestjson1_deserializeDocumentAttributeKeyAndValue(v **types.AttributeKey
 			if err := awsRestjson1_deserializeDocumentAttributeKey(&sv.Key, value); err != nil {
 				return err
 			}
+
 		case "Value":
 			if err := awsRestjson1_deserializeDocumentTypedAttributeValue(&sv.Value, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12414,10 +12500,12 @@ func awsRestjson1_deserializeDocumentAttributeNameAndValue(v **types.AttributeNa
 				}
 				sv.AttributeName = ptr.String(jtv)
 			}
+
 		case "Value":
 			if err := awsRestjson1_deserializeDocumentTypedAttributeValue(&sv.Value, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12558,6 +12646,7 @@ func awsRestjson1_deserializeDocumentBatchAttachObjectResponse(v **types.BatchAt
 				}
 				sv.AttachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12628,6 +12717,7 @@ func awsRestjson1_deserializeDocumentBatchAttachToIndexResponse(v **types.BatchA
 				}
 				sv.AttachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12663,6 +12753,7 @@ func awsRestjson1_deserializeDocumentBatchAttachTypedLinkResponse(v **types.Batc
 			if err := awsRestjson1_deserializeDocumentTypedLinkSpecifier(&sv.TypedLinkSpecifier, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12702,6 +12793,7 @@ func awsRestjson1_deserializeDocumentBatchCreateIndexResponse(v **types.BatchCre
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12741,6 +12833,7 @@ func awsRestjson1_deserializeDocumentBatchCreateObjectResponse(v **types.BatchCr
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12811,6 +12904,7 @@ func awsRestjson1_deserializeDocumentBatchDetachFromIndexResponse(v **types.Batc
 				}
 				sv.DetachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12850,6 +12944,7 @@ func awsRestjson1_deserializeDocumentBatchDetachObjectResponse(v **types.BatchDe
 				}
 				sv.DetachedObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12947,6 +13042,7 @@ func awsRestjson1_deserializeDocumentBatchGetLinkAttributesResponse(v **types.Ba
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12982,6 +13078,7 @@ func awsRestjson1_deserializeDocumentBatchGetObjectAttributesResponse(v **types.
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13021,10 +13118,12 @@ func awsRestjson1_deserializeDocumentBatchGetObjectInformationResponse(v **types
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		case "SchemaFacets":
 			if err := awsRestjson1_deserializeDocumentSchemaFacetList(&sv.SchemaFacets, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13060,6 +13159,7 @@ func awsRestjson1_deserializeDocumentBatchListAttachedIndicesResponse(v **types.
 			if err := awsRestjson1_deserializeDocumentIndexAttachmentList(&sv.IndexAttachments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13068,6 +13168,7 @@ func awsRestjson1_deserializeDocumentBatchListAttachedIndicesResponse(v **types.
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13103,6 +13204,7 @@ func awsRestjson1_deserializeDocumentBatchListIncomingTypedLinksResponse(v **typ
 			if err := awsRestjson1_deserializeDocumentTypedLinkSpecifierList(&sv.LinkSpecifiers, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13111,6 +13213,7 @@ func awsRestjson1_deserializeDocumentBatchListIncomingTypedLinksResponse(v **typ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13146,6 +13249,7 @@ func awsRestjson1_deserializeDocumentBatchListIndexResponse(v **types.BatchListI
 			if err := awsRestjson1_deserializeDocumentIndexAttachmentList(&sv.IndexAttachments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13154,6 +13258,7 @@ func awsRestjson1_deserializeDocumentBatchListIndexResponse(v **types.BatchListI
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13189,6 +13294,7 @@ func awsRestjson1_deserializeDocumentBatchListObjectAttributesResponse(v **types
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.Attributes, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13197,6 +13303,7 @@ func awsRestjson1_deserializeDocumentBatchListObjectAttributesResponse(v **types
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13232,6 +13339,7 @@ func awsRestjson1_deserializeDocumentBatchListObjectChildrenResponse(v **types.B
 			if err := awsRestjson1_deserializeDocumentLinkNameToObjectIdentifierMap(&sv.Children, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13240,6 +13348,7 @@ func awsRestjson1_deserializeDocumentBatchListObjectChildrenResponse(v **types.B
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13279,10 +13388,12 @@ func awsRestjson1_deserializeDocumentBatchListObjectParentPathsResponse(v **type
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PathToObjectIdentifiersList":
 			if err := awsRestjson1_deserializeDocumentPathToObjectIdentifiersList(&sv.PathToObjectIdentifiersList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13322,10 +13433,12 @@ func awsRestjson1_deserializeDocumentBatchListObjectParentsResponse(v **types.Ba
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ParentLinks":
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierAndLinkNameList(&sv.ParentLinks, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13361,6 +13474,7 @@ func awsRestjson1_deserializeDocumentBatchListObjectPoliciesResponse(v **types.B
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierList(&sv.AttachedPolicyIds, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13369,6 +13483,7 @@ func awsRestjson1_deserializeDocumentBatchListObjectPoliciesResponse(v **types.B
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13408,10 +13523,12 @@ func awsRestjson1_deserializeDocumentBatchListOutgoingTypedLinksResponse(v **typ
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TypedLinkSpecifiers":
 			if err := awsRestjson1_deserializeDocumentTypedLinkSpecifierList(&sv.TypedLinkSpecifiers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13451,10 +13568,12 @@ func awsRestjson1_deserializeDocumentBatchListPolicyAttachmentsResponse(v **type
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ObjectIdentifiers":
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierList(&sv.ObjectIdentifiers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13494,10 +13613,12 @@ func awsRestjson1_deserializeDocumentBatchLookupPolicyResponse(v **types.BatchLo
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "PolicyToPathList":
 			if err := awsRestjson1_deserializeDocumentPolicyToPathList(&sv.PolicyToPathList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13537,6 +13658,7 @@ func awsRestjson1_deserializeDocumentBatchReadException(v **types.BatchReadExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13545,6 +13667,7 @@ func awsRestjson1_deserializeDocumentBatchReadException(v **types.BatchReadExcep
 				}
 				sv.Type = types.BatchReadExceptionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13580,10 +13703,12 @@ func awsRestjson1_deserializeDocumentBatchReadOperationResponse(v **types.BatchR
 			if err := awsRestjson1_deserializeDocumentBatchReadException(&sv.ExceptionResponse, value); err != nil {
 				return err
 			}
+
 		case "SuccessfulResponse":
 			if err := awsRestjson1_deserializeDocumentBatchReadSuccessfulResponse(&sv.SuccessfulResponse, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13653,58 +13778,72 @@ func awsRestjson1_deserializeDocumentBatchReadSuccessfulResponse(v **types.Batch
 			if err := awsRestjson1_deserializeDocumentBatchGetLinkAttributesResponse(&sv.GetLinkAttributes, value); err != nil {
 				return err
 			}
+
 		case "GetObjectAttributes":
 			if err := awsRestjson1_deserializeDocumentBatchGetObjectAttributesResponse(&sv.GetObjectAttributes, value); err != nil {
 				return err
 			}
+
 		case "GetObjectInformation":
 			if err := awsRestjson1_deserializeDocumentBatchGetObjectInformationResponse(&sv.GetObjectInformation, value); err != nil {
 				return err
 			}
+
 		case "ListAttachedIndices":
 			if err := awsRestjson1_deserializeDocumentBatchListAttachedIndicesResponse(&sv.ListAttachedIndices, value); err != nil {
 				return err
 			}
+
 		case "ListIncomingTypedLinks":
 			if err := awsRestjson1_deserializeDocumentBatchListIncomingTypedLinksResponse(&sv.ListIncomingTypedLinks, value); err != nil {
 				return err
 			}
+
 		case "ListIndex":
 			if err := awsRestjson1_deserializeDocumentBatchListIndexResponse(&sv.ListIndex, value); err != nil {
 				return err
 			}
+
 		case "ListObjectAttributes":
 			if err := awsRestjson1_deserializeDocumentBatchListObjectAttributesResponse(&sv.ListObjectAttributes, value); err != nil {
 				return err
 			}
+
 		case "ListObjectChildren":
 			if err := awsRestjson1_deserializeDocumentBatchListObjectChildrenResponse(&sv.ListObjectChildren, value); err != nil {
 				return err
 			}
+
 		case "ListObjectParentPaths":
 			if err := awsRestjson1_deserializeDocumentBatchListObjectParentPathsResponse(&sv.ListObjectParentPaths, value); err != nil {
 				return err
 			}
+
 		case "ListObjectParents":
 			if err := awsRestjson1_deserializeDocumentBatchListObjectParentsResponse(&sv.ListObjectParents, value); err != nil {
 				return err
 			}
+
 		case "ListObjectPolicies":
 			if err := awsRestjson1_deserializeDocumentBatchListObjectPoliciesResponse(&sv.ListObjectPolicies, value); err != nil {
 				return err
 			}
+
 		case "ListOutgoingTypedLinks":
 			if err := awsRestjson1_deserializeDocumentBatchListOutgoingTypedLinksResponse(&sv.ListOutgoingTypedLinks, value); err != nil {
 				return err
 			}
+
 		case "ListPolicyAttachments":
 			if err := awsRestjson1_deserializeDocumentBatchListPolicyAttachmentsResponse(&sv.ListPolicyAttachments, value); err != nil {
 				return err
 			}
+
 		case "LookupPolicy":
 			if err := awsRestjson1_deserializeDocumentBatchLookupPolicyResponse(&sv.LookupPolicy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13806,6 +13945,7 @@ func awsRestjson1_deserializeDocumentBatchUpdateObjectAttributesResponse(v **typ
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13849,6 +13989,7 @@ func awsRestjson1_deserializeDocumentBatchWriteException(v **types.BatchWriteExc
 				}
 				sv.Index = int32(i64)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13857,6 +13998,7 @@ func awsRestjson1_deserializeDocumentBatchWriteException(v **types.BatchWriteExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13865,6 +14007,7 @@ func awsRestjson1_deserializeDocumentBatchWriteException(v **types.BatchWriteExc
 				}
 				sv.Type = types.BatchWriteExceptionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13900,62 +14043,77 @@ func awsRestjson1_deserializeDocumentBatchWriteOperationResponse(v **types.Batch
 			if err := awsRestjson1_deserializeDocumentBatchAddFacetToObjectResponse(&sv.AddFacetToObject, value); err != nil {
 				return err
 			}
+
 		case "AttachObject":
 			if err := awsRestjson1_deserializeDocumentBatchAttachObjectResponse(&sv.AttachObject, value); err != nil {
 				return err
 			}
+
 		case "AttachPolicy":
 			if err := awsRestjson1_deserializeDocumentBatchAttachPolicyResponse(&sv.AttachPolicy, value); err != nil {
 				return err
 			}
+
 		case "AttachToIndex":
 			if err := awsRestjson1_deserializeDocumentBatchAttachToIndexResponse(&sv.AttachToIndex, value); err != nil {
 				return err
 			}
+
 		case "AttachTypedLink":
 			if err := awsRestjson1_deserializeDocumentBatchAttachTypedLinkResponse(&sv.AttachTypedLink, value); err != nil {
 				return err
 			}
+
 		case "CreateIndex":
 			if err := awsRestjson1_deserializeDocumentBatchCreateIndexResponse(&sv.CreateIndex, value); err != nil {
 				return err
 			}
+
 		case "CreateObject":
 			if err := awsRestjson1_deserializeDocumentBatchCreateObjectResponse(&sv.CreateObject, value); err != nil {
 				return err
 			}
+
 		case "DeleteObject":
 			if err := awsRestjson1_deserializeDocumentBatchDeleteObjectResponse(&sv.DeleteObject, value); err != nil {
 				return err
 			}
+
 		case "DetachFromIndex":
 			if err := awsRestjson1_deserializeDocumentBatchDetachFromIndexResponse(&sv.DetachFromIndex, value); err != nil {
 				return err
 			}
+
 		case "DetachObject":
 			if err := awsRestjson1_deserializeDocumentBatchDetachObjectResponse(&sv.DetachObject, value); err != nil {
 				return err
 			}
+
 		case "DetachPolicy":
 			if err := awsRestjson1_deserializeDocumentBatchDetachPolicyResponse(&sv.DetachPolicy, value); err != nil {
 				return err
 			}
+
 		case "DetachTypedLink":
 			if err := awsRestjson1_deserializeDocumentBatchDetachTypedLinkResponse(&sv.DetachTypedLink, value); err != nil {
 				return err
 			}
+
 		case "RemoveFacetFromObject":
 			if err := awsRestjson1_deserializeDocumentBatchRemoveFacetFromObjectResponse(&sv.RemoveFacetFromObject, value); err != nil {
 				return err
 			}
+
 		case "UpdateLinkAttributes":
 			if err := awsRestjson1_deserializeDocumentBatchUpdateLinkAttributesResponse(&sv.UpdateLinkAttributes, value); err != nil {
 				return err
 			}
+
 		case "UpdateObjectAttributes":
 			if err := awsRestjson1_deserializeDocumentBatchUpdateObjectAttributesResponse(&sv.UpdateObjectAttributes, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14029,6 +14187,7 @@ func awsRestjson1_deserializeDocumentCannotListParentOfRootException(v **types.C
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14075,6 +14234,7 @@ func awsRestjson1_deserializeDocumentDirectory(v **types.Directory, value interf
 
 				}
 			}
+
 		case "DirectoryArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14083,6 +14243,7 @@ func awsRestjson1_deserializeDocumentDirectory(v **types.Directory, value interf
 				}
 				sv.DirectoryArn = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14091,6 +14252,7 @@ func awsRestjson1_deserializeDocumentDirectory(v **types.Directory, value interf
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14099,6 +14261,7 @@ func awsRestjson1_deserializeDocumentDirectory(v **types.Directory, value interf
 				}
 				sv.State = types.DirectoryState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14138,6 +14301,7 @@ func awsRestjson1_deserializeDocumentDirectoryAlreadyExistsException(v **types.D
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14177,6 +14341,7 @@ func awsRestjson1_deserializeDocumentDirectoryDeletedException(v **types.Directo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14250,6 +14415,7 @@ func awsRestjson1_deserializeDocumentDirectoryNotDisabledException(v **types.Dir
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14289,6 +14455,7 @@ func awsRestjson1_deserializeDocumentDirectoryNotEnabledException(v **types.Dire
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14328,6 +14495,7 @@ func awsRestjson1_deserializeDocumentFacet(v **types.Facet, value interface{}) e
 				}
 				sv.FacetStyle = types.FacetStyle(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14336,6 +14504,7 @@ func awsRestjson1_deserializeDocumentFacet(v **types.Facet, value interface{}) e
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "ObjectType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14344,6 +14513,7 @@ func awsRestjson1_deserializeDocumentFacet(v **types.Facet, value interface{}) e
 				}
 				sv.ObjectType = types.ObjectType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14383,6 +14553,7 @@ func awsRestjson1_deserializeDocumentFacetAlreadyExistsException(v **types.Facet
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14418,10 +14589,12 @@ func awsRestjson1_deserializeDocumentFacetAttribute(v **types.FacetAttribute, va
 			if err := awsRestjson1_deserializeDocumentFacetAttributeDefinition(&sv.AttributeDefinition, value); err != nil {
 				return err
 			}
+
 		case "AttributeReference":
 			if err := awsRestjson1_deserializeDocumentFacetAttributeReference(&sv.AttributeReference, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14430,6 +14603,7 @@ func awsRestjson1_deserializeDocumentFacetAttribute(v **types.FacetAttribute, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RequiredBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14438,6 +14612,7 @@ func awsRestjson1_deserializeDocumentFacetAttribute(v **types.FacetAttribute, va
 				}
 				sv.RequiredBehavior = types.RequiredAttributeBehavior(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14473,6 +14648,7 @@ func awsRestjson1_deserializeDocumentFacetAttributeDefinition(v **types.FacetAtt
 			if err := awsRestjson1_deserializeDocumentTypedAttributeValue(&sv.DefaultValue, value); err != nil {
 				return err
 			}
+
 		case "IsImmutable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -14481,10 +14657,12 @@ func awsRestjson1_deserializeDocumentFacetAttributeDefinition(v **types.FacetAtt
 				}
 				sv.IsImmutable = jtv
 			}
+
 		case "Rules":
 			if err := awsRestjson1_deserializeDocumentRuleMap(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14493,6 +14671,7 @@ func awsRestjson1_deserializeDocumentFacetAttributeDefinition(v **types.FacetAtt
 				}
 				sv.Type = types.FacetAttributeType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14566,6 +14745,7 @@ func awsRestjson1_deserializeDocumentFacetAttributeReference(v **types.FacetAttr
 				}
 				sv.TargetAttributeName = ptr.String(jtv)
 			}
+
 		case "TargetFacetName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14574,6 +14754,7 @@ func awsRestjson1_deserializeDocumentFacetAttributeReference(v **types.FacetAttr
 				}
 				sv.TargetFacetName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14613,6 +14794,7 @@ func awsRestjson1_deserializeDocumentFacetInUseException(v **types.FacetInUseExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14688,6 +14870,7 @@ func awsRestjson1_deserializeDocumentFacetNotFoundException(v **types.FacetNotFo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14727,6 +14910,7 @@ func awsRestjson1_deserializeDocumentFacetValidationException(v **types.FacetVal
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14766,6 +14950,7 @@ func awsRestjson1_deserializeDocumentIncompatibleSchemaException(v **types.Incom
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14801,6 +14986,7 @@ func awsRestjson1_deserializeDocumentIndexAttachment(v **types.IndexAttachment, 
 			if err := awsRestjson1_deserializeDocumentAttributeKeyAndValueList(&sv.IndexedAttributes, value); err != nil {
 				return err
 			}
+
 		case "ObjectIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14809,6 +14995,7 @@ func awsRestjson1_deserializeDocumentIndexAttachment(v **types.IndexAttachment, 
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14882,6 +15069,7 @@ func awsRestjson1_deserializeDocumentIndexedAttributeMissingException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14921,6 +15109,7 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14960,6 +15149,7 @@ func awsRestjson1_deserializeDocumentInvalidArnException(v **types.InvalidArnExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14999,6 +15189,7 @@ func awsRestjson1_deserializeDocumentInvalidAttachmentException(v **types.Invali
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15038,6 +15229,7 @@ func awsRestjson1_deserializeDocumentInvalidFacetUpdateException(v **types.Inval
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15077,6 +15269,7 @@ func awsRestjson1_deserializeDocumentInvalidNextTokenException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15116,6 +15309,7 @@ func awsRestjson1_deserializeDocumentInvalidRuleException(v **types.InvalidRuleE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15155,6 +15349,7 @@ func awsRestjson1_deserializeDocumentInvalidSchemaDocException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15194,6 +15389,7 @@ func awsRestjson1_deserializeDocumentInvalidTaggingRequestException(v **types.In
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15233,6 +15429,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15272,6 +15469,7 @@ func awsRestjson1_deserializeDocumentLinkNameAlreadyInUseException(v **types.Lin
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15347,6 +15545,7 @@ func awsRestjson1_deserializeDocumentNotIndexException(v **types.NotIndexExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15386,6 +15585,7 @@ func awsRestjson1_deserializeDocumentNotNodeException(v **types.NotNodeException
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15425,6 +15625,7 @@ func awsRestjson1_deserializeDocumentNotPolicyException(v **types.NotPolicyExcep
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15464,6 +15665,7 @@ func awsRestjson1_deserializeDocumentObjectAlreadyDetachedException(v **types.Ob
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15537,6 +15739,7 @@ func awsRestjson1_deserializeDocumentObjectIdentifierAndLinkNameTuple(v **types.
 				}
 				sv.LinkName = ptr.String(jtv)
 			}
+
 		case "ObjectIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15545,6 +15748,7 @@ func awsRestjson1_deserializeDocumentObjectIdentifierAndLinkNameTuple(v **types.
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15656,6 +15860,7 @@ func awsRestjson1_deserializeDocumentObjectNotDetachedException(v **types.Object
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15695,6 +15900,7 @@ func awsRestjson1_deserializeDocumentObjectReference(v **types.ObjectReference, 
 				}
 				sv.Selector = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15730,6 +15936,7 @@ func awsRestjson1_deserializeDocumentPathToObjectIdentifiers(v **types.PathToObj
 			if err := awsRestjson1_deserializeDocumentObjectIdentifierList(&sv.ObjectIdentifiers, value); err != nil {
 				return err
 			}
+
 		case "Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15738,6 +15945,7 @@ func awsRestjson1_deserializeDocumentPathToObjectIdentifiers(v **types.PathToObj
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15811,6 +16019,7 @@ func awsRestjson1_deserializeDocumentPolicyAttachment(v **types.PolicyAttachment
 				}
 				sv.ObjectIdentifier = ptr.String(jtv)
 			}
+
 		case "PolicyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15819,6 +16028,7 @@ func awsRestjson1_deserializeDocumentPolicyAttachment(v **types.PolicyAttachment
 				}
 				sv.PolicyId = ptr.String(jtv)
 			}
+
 		case "PolicyType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15827,6 +16037,7 @@ func awsRestjson1_deserializeDocumentPolicyAttachment(v **types.PolicyAttachment
 				}
 				sv.PolicyType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15900,10 +16111,12 @@ func awsRestjson1_deserializeDocumentPolicyToPath(v **types.PolicyToPath, value 
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		case "Policies":
 			if err := awsRestjson1_deserializeDocumentPolicyAttachmentList(&sv.Policies, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15977,6 +16190,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16016,6 +16230,7 @@ func awsRestjson1_deserializeDocumentRetryableConflictException(v **types.Retrya
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16051,6 +16266,7 @@ func awsRestjson1_deserializeDocumentRule(v **types.Rule, value interface{}) err
 			if err := awsRestjson1_deserializeDocumentRuleParameterMap(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16059,6 +16275,7 @@ func awsRestjson1_deserializeDocumentRule(v **types.Rule, value interface{}) err
 				}
 				sv.Type = types.RuleType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16169,6 +16386,7 @@ func awsRestjson1_deserializeDocumentSchemaAlreadyExistsException(v **types.Sche
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16208,6 +16426,7 @@ func awsRestjson1_deserializeDocumentSchemaAlreadyPublishedException(v **types.S
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16247,6 +16466,7 @@ func awsRestjson1_deserializeDocumentSchemaFacet(v **types.SchemaFacet, value in
 				}
 				sv.FacetName = ptr.String(jtv)
 			}
+
 		case "SchemaArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16255,6 +16475,7 @@ func awsRestjson1_deserializeDocumentSchemaFacet(v **types.SchemaFacet, value in
 				}
 				sv.SchemaArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16328,6 +16549,7 @@ func awsRestjson1_deserializeDocumentStillContainsLinksException(v **types.Still
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16367,6 +16589,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16375,6 +16598,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16545,6 +16769,7 @@ func awsRestjson1_deserializeDocumentTypedLinkAttributeDefinition(v **types.Type
 			if err := awsRestjson1_deserializeDocumentTypedAttributeValue(&sv.DefaultValue, value); err != nil {
 				return err
 			}
+
 		case "IsImmutable":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -16553,6 +16778,7 @@ func awsRestjson1_deserializeDocumentTypedLinkAttributeDefinition(v **types.Type
 				}
 				sv.IsImmutable = jtv
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16561,6 +16787,7 @@ func awsRestjson1_deserializeDocumentTypedLinkAttributeDefinition(v **types.Type
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "RequiredBehavior":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16569,10 +16796,12 @@ func awsRestjson1_deserializeDocumentTypedLinkAttributeDefinition(v **types.Type
 				}
 				sv.RequiredBehavior = types.RequiredAttributeBehavior(jtv)
 			}
+
 		case "Rules":
 			if err := awsRestjson1_deserializeDocumentRuleMap(&sv.Rules, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16581,6 +16810,7 @@ func awsRestjson1_deserializeDocumentTypedLinkAttributeDefinition(v **types.Type
 				}
 				sv.Type = types.FacetAttributeType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16690,6 +16920,7 @@ func awsRestjson1_deserializeDocumentTypedLinkSchemaAndFacetName(v **types.Typed
 				}
 				sv.SchemaArn = ptr.String(jtv)
 			}
+
 		case "TypedLinkName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16698,6 +16929,7 @@ func awsRestjson1_deserializeDocumentTypedLinkSchemaAndFacetName(v **types.Typed
 				}
 				sv.TypedLinkName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16733,18 +16965,22 @@ func awsRestjson1_deserializeDocumentTypedLinkSpecifier(v **types.TypedLinkSpeci
 			if err := awsRestjson1_deserializeDocumentAttributeNameAndValueList(&sv.IdentityAttributeValues, value); err != nil {
 				return err
 			}
+
 		case "SourceObjectReference":
 			if err := awsRestjson1_deserializeDocumentObjectReference(&sv.SourceObjectReference, value); err != nil {
 				return err
 			}
+
 		case "TargetObjectReference":
 			if err := awsRestjson1_deserializeDocumentObjectReference(&sv.TargetObjectReference, value); err != nil {
 				return err
 			}
+
 		case "TypedLinkFacet":
 			if err := awsRestjson1_deserializeDocumentTypedLinkSchemaAndFacetName(&sv.TypedLinkFacet, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16818,6 +17054,7 @@ func awsRestjson1_deserializeDocumentUnsupportedIndexTypeException(v **types.Uns
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16857,6 +17094,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

@@ -2164,6 +2164,7 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2203,10 +2204,12 @@ func awsAwsjson10_deserializeDocumentColumnInfo(v **types.ColumnInfo, value inte
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Type":
 			if err := awsAwsjson10_deserializeDocumentType(&sv.Type, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2280,6 +2283,7 @@ func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2315,6 +2319,7 @@ func awsAwsjson10_deserializeDocumentDatum(v **types.Datum, value interface{}) e
 			if err := awsAwsjson10_deserializeDocumentDatumList(&sv.ArrayValue, value); err != nil {
 				return err
 			}
+
 		case "NullValue":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -2323,10 +2328,12 @@ func awsAwsjson10_deserializeDocumentDatum(v **types.Datum, value interface{}) e
 				}
 				sv.NullValue = ptr.Bool(jtv)
 			}
+
 		case "RowValue":
 			if err := awsAwsjson10_deserializeDocumentRow(&sv.RowValue, value); err != nil {
 				return err
 			}
+
 		case "ScalarValue":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2335,10 +2342,12 @@ func awsAwsjson10_deserializeDocumentDatum(v **types.Datum, value interface{}) e
 				}
 				sv.ScalarValue = ptr.String(jtv)
 			}
+
 		case "TimeSeriesValue":
 			if err := awsAwsjson10_deserializeDocumentTimeSeriesDataPointList(&sv.TimeSeriesValue, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2412,6 +2421,7 @@ func awsAwsjson10_deserializeDocumentDimensionMapping(v **types.DimensionMapping
 				}
 				sv.DimensionValueType = types.DimensionValueType(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2420,6 +2430,7 @@ func awsAwsjson10_deserializeDocumentDimensionMapping(v **types.DimensionMapping
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2493,6 +2504,7 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.Address = ptr.String(jtv)
 			}
+
 		case "CachePeriodInMinutes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2505,6 +2517,7 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 				sv.CachePeriodInMinutes = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2574,6 +2587,7 @@ func awsAwsjson10_deserializeDocumentErrorReportConfiguration(v **types.ErrorRep
 			if err := awsAwsjson10_deserializeDocumentS3Configuration(&sv.S3Configuration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2609,6 +2623,7 @@ func awsAwsjson10_deserializeDocumentErrorReportLocation(v **types.ErrorReportLo
 			if err := awsAwsjson10_deserializeDocumentS3ReportLocation(&sv.S3ReportLocation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2652,6 +2667,7 @@ func awsAwsjson10_deserializeDocumentExecutionStats(v **types.ExecutionStats, va
 				}
 				sv.BytesMetered = i64
 			}
+
 		case "CumulativeBytesScanned":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2664,6 +2680,7 @@ func awsAwsjson10_deserializeDocumentExecutionStats(v **types.ExecutionStats, va
 				}
 				sv.CumulativeBytesScanned = i64
 			}
+
 		case "DataWrites":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2676,6 +2693,7 @@ func awsAwsjson10_deserializeDocumentExecutionStats(v **types.ExecutionStats, va
 				}
 				sv.DataWrites = i64
 			}
+
 		case "ExecutionTimeInMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2688,6 +2706,7 @@ func awsAwsjson10_deserializeDocumentExecutionStats(v **types.ExecutionStats, va
 				}
 				sv.ExecutionTimeInMillis = i64
 			}
+
 		case "QueryResultRows":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2700,6 +2719,7 @@ func awsAwsjson10_deserializeDocumentExecutionStats(v **types.ExecutionStats, va
 				}
 				sv.QueryResultRows = i64
 			}
+
 		case "RecordsIngested":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2712,6 +2732,7 @@ func awsAwsjson10_deserializeDocumentExecutionStats(v **types.ExecutionStats, va
 				}
 				sv.RecordsIngested = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2751,6 +2772,7 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2790,6 +2812,7 @@ func awsAwsjson10_deserializeDocumentInvalidEndpointException(v **types.InvalidE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2829,6 +2852,7 @@ func awsAwsjson10_deserializeDocumentMixedMeasureMapping(v **types.MixedMeasureM
 				}
 				sv.MeasureName = ptr.String(jtv)
 			}
+
 		case "MeasureValueType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2837,10 +2861,12 @@ func awsAwsjson10_deserializeDocumentMixedMeasureMapping(v **types.MixedMeasureM
 				}
 				sv.MeasureValueType = types.MeasureValueType(jtv)
 			}
+
 		case "MultiMeasureAttributeMappings":
 			if err := awsAwsjson10_deserializeDocumentMultiMeasureAttributeMappingList(&sv.MultiMeasureAttributeMappings, value); err != nil {
 				return err
 			}
+
 		case "SourceColumn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2849,6 +2875,7 @@ func awsAwsjson10_deserializeDocumentMixedMeasureMapping(v **types.MixedMeasureM
 				}
 				sv.SourceColumn = ptr.String(jtv)
 			}
+
 		case "TargetMeasureName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2857,6 +2884,7 @@ func awsAwsjson10_deserializeDocumentMixedMeasureMapping(v **types.MixedMeasureM
 				}
 				sv.TargetMeasureName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2930,6 +2958,7 @@ func awsAwsjson10_deserializeDocumentMultiMeasureAttributeMapping(v **types.Mult
 				}
 				sv.MeasureValueType = types.ScalarMeasureValueType(jtv)
 			}
+
 		case "SourceColumn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2938,6 +2967,7 @@ func awsAwsjson10_deserializeDocumentMultiMeasureAttributeMapping(v **types.Mult
 				}
 				sv.SourceColumn = ptr.String(jtv)
 			}
+
 		case "TargetMultiMeasureAttributeName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2946,6 +2976,7 @@ func awsAwsjson10_deserializeDocumentMultiMeasureAttributeMapping(v **types.Mult
 				}
 				sv.TargetMultiMeasureAttributeName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3015,6 +3046,7 @@ func awsAwsjson10_deserializeDocumentMultiMeasureMappings(v **types.MultiMeasure
 			if err := awsAwsjson10_deserializeDocumentMultiMeasureAttributeMappingList(&sv.MultiMeasureAttributeMappings, value); err != nil {
 				return err
 			}
+
 		case "TargetMultiMeasureName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3023,6 +3055,7 @@ func awsAwsjson10_deserializeDocumentMultiMeasureMappings(v **types.MultiMeasure
 				}
 				sv.TargetMultiMeasureName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3058,6 +3091,7 @@ func awsAwsjson10_deserializeDocumentNotificationConfiguration(v **types.Notific
 			if err := awsAwsjson10_deserializeDocumentSnsConfiguration(&sv.SnsConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3097,10 +3131,12 @@ func awsAwsjson10_deserializeDocumentParameterMapping(v **types.ParameterMapping
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Type":
 			if err := awsAwsjson10_deserializeDocumentType(&sv.Type, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3210,6 +3246,7 @@ func awsAwsjson10_deserializeDocumentQueryExecutionException(v **types.QueryExec
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3253,6 +3290,7 @@ func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsigh
 				}
 				sv.OutputBytes = ptr.Int64(i64)
 			}
+
 		case "OutputRows":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3265,10 +3303,12 @@ func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsigh
 				}
 				sv.OutputRows = ptr.Int64(i64)
 			}
+
 		case "QuerySpatialCoverage":
 			if err := awsAwsjson10_deserializeDocumentQuerySpatialCoverage(&sv.QuerySpatialCoverage, value); err != nil {
 				return err
 			}
+
 		case "QueryTableCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3281,10 +3321,12 @@ func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsigh
 				}
 				sv.QueryTableCount = ptr.Int64(i64)
 			}
+
 		case "QueryTemporalRange":
 			if err := awsAwsjson10_deserializeDocumentQueryTemporalRange(&sv.QueryTemporalRange, value); err != nil {
 				return err
 			}
+
 		case "UnloadPartitionCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3297,6 +3339,7 @@ func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsigh
 				}
 				sv.UnloadPartitionCount = ptr.Int64(i64)
 			}
+
 		case "UnloadWrittenBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3309,6 +3352,7 @@ func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsigh
 				}
 				sv.UnloadWrittenBytes = ptr.Int64(i64)
 			}
+
 		case "UnloadWrittenRows":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3321,6 +3365,7 @@ func awsAwsjson10_deserializeDocumentQueryInsightsResponse(v **types.QueryInsigh
 				}
 				sv.UnloadWrittenRows = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3356,6 +3401,7 @@ func awsAwsjson10_deserializeDocumentQuerySpatialCoverage(v **types.QuerySpatial
 			if err := awsAwsjson10_deserializeDocumentQuerySpatialCoverageMax(&sv.Max, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3391,6 +3437,7 @@ func awsAwsjson10_deserializeDocumentQuerySpatialCoverageMax(v **types.QuerySpat
 			if err := awsAwsjson10_deserializeDocumentPartitionKeyList(&sv.PartitionKey, value); err != nil {
 				return err
 			}
+
 		case "TableArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3399,6 +3446,7 @@ func awsAwsjson10_deserializeDocumentQuerySpatialCoverageMax(v **types.QuerySpat
 				}
 				sv.TableArn = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3432,6 +3480,7 @@ func awsAwsjson10_deserializeDocumentQuerySpatialCoverageMax(v **types.QuerySpat
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3475,6 +3524,7 @@ func awsAwsjson10_deserializeDocumentQueryStatus(v **types.QueryStatus, value in
 				}
 				sv.CumulativeBytesMetered = i64
 			}
+
 		case "CumulativeBytesScanned":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3487,6 +3537,7 @@ func awsAwsjson10_deserializeDocumentQueryStatus(v **types.QueryStatus, value in
 				}
 				sv.CumulativeBytesScanned = i64
 			}
+
 		case "ProgressPercentage":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3520,6 +3571,7 @@ func awsAwsjson10_deserializeDocumentQueryStatus(v **types.QueryStatus, value in
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3555,6 +3607,7 @@ func awsAwsjson10_deserializeDocumentQueryTemporalRange(v **types.QueryTemporalR
 			if err := awsAwsjson10_deserializeDocumentQueryTemporalRangeMax(&sv.Max, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3594,6 +3647,7 @@ func awsAwsjson10_deserializeDocumentQueryTemporalRangeMax(v **types.QueryTempor
 				}
 				sv.TableArn = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3606,6 +3660,7 @@ func awsAwsjson10_deserializeDocumentQueryTemporalRangeMax(v **types.QueryTempor
 				}
 				sv.Value = i64
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3645,6 +3700,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ScheduledQueryArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3653,6 +3709,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ScheduledQueryArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3688,6 +3745,7 @@ func awsAwsjson10_deserializeDocumentRow(v **types.Row, value interface{}) error
 			if err := awsAwsjson10_deserializeDocumentDatumList(&sv.Data, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3761,6 +3819,7 @@ func awsAwsjson10_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
+
 		case "EncryptionOption":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3769,6 +3828,7 @@ func awsAwsjson10_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 				}
 				sv.EncryptionOption = types.S3EncryptionOption(jtv)
 			}
+
 		case "ObjectKeyPrefix":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3777,6 +3837,7 @@ func awsAwsjson10_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 				}
 				sv.ObjectKeyPrefix = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3816,6 +3877,7 @@ func awsAwsjson10_deserializeDocumentS3ReportLocation(v **types.S3ReportLocation
 				}
 				sv.BucketName = ptr.String(jtv)
 			}
+
 		case "ObjectKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3824,6 +3886,7 @@ func awsAwsjson10_deserializeDocumentS3ReportLocation(v **types.S3ReportLocation
 				}
 				sv.ObjectKey = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3863,6 +3926,7 @@ func awsAwsjson10_deserializeDocumentScheduleConfiguration(v **types.ScheduleCon
 				}
 				sv.ScheduleExpression = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3902,6 +3966,7 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3917,10 +3982,12 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 
 				}
 			}
+
 		case "ErrorReportConfiguration":
 			if err := awsAwsjson10_deserializeDocumentErrorReportConfiguration(&sv.ErrorReportConfiguration, value); err != nil {
 				return err
 			}
+
 		case "LastRunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3929,6 +3996,7 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 				}
 				sv.LastRunStatus = types.ScheduledQueryRunStatus(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3937,6 +4005,7 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "NextInvocationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3952,6 +4021,7 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 
 				}
 			}
+
 		case "PreviousInvocationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3967,6 +4037,7 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 
 				}
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3975,10 +4046,12 @@ func awsAwsjson10_deserializeDocumentScheduledQuery(v **types.ScheduledQuery, va
 				}
 				sv.State = types.ScheduledQueryState(jtv)
 			}
+
 		case "TargetDestination":
 			if err := awsAwsjson10_deserializeDocumentTargetDestination(&sv.TargetDestination, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4018,6 +4091,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4033,10 +4107,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 
 				}
 			}
+
 		case "ErrorReportConfiguration":
 			if err := awsAwsjson10_deserializeDocumentErrorReportConfiguration(&sv.ErrorReportConfiguration, value); err != nil {
 				return err
 			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4045,10 +4121,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 				}
 				sv.KmsKeyId = ptr.String(jtv)
 			}
+
 		case "LastRunSummary":
 			if err := awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(&sv.LastRunSummary, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4057,6 +4135,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "NextInvocationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4072,10 +4151,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 
 				}
 			}
+
 		case "NotificationConfiguration":
 			if err := awsAwsjson10_deserializeDocumentNotificationConfiguration(&sv.NotificationConfiguration, value); err != nil {
 				return err
 			}
+
 		case "PreviousInvocationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4091,6 +4172,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 
 				}
 			}
+
 		case "QueryString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4099,14 +4181,17 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 				}
 				sv.QueryString = ptr.String(jtv)
 			}
+
 		case "RecentlyFailedRuns":
 			if err := awsAwsjson10_deserializeDocumentScheduledQueryRunSummaryList(&sv.RecentlyFailedRuns, value); err != nil {
 				return err
 			}
+
 		case "ScheduleConfiguration":
 			if err := awsAwsjson10_deserializeDocumentScheduleConfiguration(&sv.ScheduleConfiguration, value); err != nil {
 				return err
 			}
+
 		case "ScheduledQueryExecutionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4115,6 +4200,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 				}
 				sv.ScheduledQueryExecutionRoleArn = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4123,10 +4209,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryDescription(v **types.Schedul
 				}
 				sv.State = types.ScheduledQueryState(jtv)
 			}
+
 		case "TargetConfiguration":
 			if err := awsAwsjson10_deserializeDocumentTargetConfiguration(&sv.TargetConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4170,6 +4258,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryInsightsResponse(v **types.Sc
 				}
 				sv.OutputBytes = ptr.Int64(i64)
 			}
+
 		case "OutputRows":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4182,10 +4271,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryInsightsResponse(v **types.Sc
 				}
 				sv.OutputRows = ptr.Int64(i64)
 			}
+
 		case "QuerySpatialCoverage":
 			if err := awsAwsjson10_deserializeDocumentQuerySpatialCoverage(&sv.QuerySpatialCoverage, value); err != nil {
 				return err
 			}
+
 		case "QueryTableCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4198,10 +4289,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryInsightsResponse(v **types.Sc
 				}
 				sv.QueryTableCount = ptr.Int64(i64)
 			}
+
 		case "QueryTemporalRange":
 			if err := awsAwsjson10_deserializeDocumentQueryTemporalRange(&sv.QueryTemporalRange, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4271,10 +4364,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(v **types.Schedule
 			if err := awsAwsjson10_deserializeDocumentErrorReportLocation(&sv.ErrorReportLocation, value); err != nil {
 				return err
 			}
+
 		case "ExecutionStats":
 			if err := awsAwsjson10_deserializeDocumentExecutionStats(&sv.ExecutionStats, value); err != nil {
 				return err
 			}
+
 		case "FailureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4283,6 +4378,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(v **types.Schedule
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "InvocationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4298,10 +4394,12 @@ func awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(v **types.Schedule
 
 				}
 			}
+
 		case "QueryInsightsResponse":
 			if err := awsAwsjson10_deserializeDocumentScheduledQueryInsightsResponse(&sv.QueryInsightsResponse, value); err != nil {
 				return err
 			}
+
 		case "RunStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4310,6 +4408,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(v **types.Schedule
 				}
 				sv.RunStatus = types.ScheduledQueryRunStatus(jtv)
 			}
+
 		case "TriggerTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4325,6 +4424,7 @@ func awsAwsjson10_deserializeDocumentScheduledQueryRunSummary(v **types.Schedule
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4398,6 +4498,7 @@ func awsAwsjson10_deserializeDocumentSelectColumn(v **types.SelectColumn, value 
 				}
 				sv.Aliased = ptr.Bool(jtv)
 			}
+
 		case "DatabaseName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4406,6 +4507,7 @@ func awsAwsjson10_deserializeDocumentSelectColumn(v **types.SelectColumn, value 
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4414,6 +4516,7 @@ func awsAwsjson10_deserializeDocumentSelectColumn(v **types.SelectColumn, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "TableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4422,10 +4525,12 @@ func awsAwsjson10_deserializeDocumentSelectColumn(v **types.SelectColumn, value 
 				}
 				sv.TableName = ptr.String(jtv)
 			}
+
 		case "Type":
 			if err := awsAwsjson10_deserializeDocumentType(&sv.Type, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4499,6 +4604,7 @@ func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4538,6 +4644,7 @@ func awsAwsjson10_deserializeDocumentSnsConfiguration(v **types.SnsConfiguration
 				}
 				sv.TopicArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4577,6 +4684,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4585,6 +4693,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4654,6 +4763,7 @@ func awsAwsjson10_deserializeDocumentTargetConfiguration(v **types.TargetConfigu
 			if err := awsAwsjson10_deserializeDocumentTimestreamConfiguration(&sv.TimestreamConfiguration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4689,6 +4799,7 @@ func awsAwsjson10_deserializeDocumentTargetDestination(v **types.TargetDestinati
 			if err := awsAwsjson10_deserializeDocumentTimestreamDestination(&sv.TimestreamDestination, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4728,6 +4839,7 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4767,10 +4879,12 @@ func awsAwsjson10_deserializeDocumentTimeSeriesDataPoint(v **types.TimeSeriesDat
 				}
 				sv.Time = ptr.String(jtv)
 			}
+
 		case "Value":
 			if err := awsAwsjson10_deserializeDocumentDatum(&sv.Value, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4844,10 +4958,12 @@ func awsAwsjson10_deserializeDocumentTimestreamConfiguration(v **types.Timestrea
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
+
 		case "DimensionMappings":
 			if err := awsAwsjson10_deserializeDocumentDimensionMappingList(&sv.DimensionMappings, value); err != nil {
 				return err
 			}
+
 		case "MeasureNameColumn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4856,14 +4972,17 @@ func awsAwsjson10_deserializeDocumentTimestreamConfiguration(v **types.Timestrea
 				}
 				sv.MeasureNameColumn = ptr.String(jtv)
 			}
+
 		case "MixedMeasureMappings":
 			if err := awsAwsjson10_deserializeDocumentMixedMeasureMappingList(&sv.MixedMeasureMappings, value); err != nil {
 				return err
 			}
+
 		case "MultiMeasureMappings":
 			if err := awsAwsjson10_deserializeDocumentMultiMeasureMappings(&sv.MultiMeasureMappings, value); err != nil {
 				return err
 			}
+
 		case "TableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4872,6 +4991,7 @@ func awsAwsjson10_deserializeDocumentTimestreamConfiguration(v **types.Timestrea
 				}
 				sv.TableName = ptr.String(jtv)
 			}
+
 		case "TimeColumn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4880,6 +5000,7 @@ func awsAwsjson10_deserializeDocumentTimestreamConfiguration(v **types.Timestrea
 				}
 				sv.TimeColumn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4919,6 +5040,7 @@ func awsAwsjson10_deserializeDocumentTimestreamDestination(v **types.TimestreamD
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
+
 		case "TableName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4927,6 +5049,7 @@ func awsAwsjson10_deserializeDocumentTimestreamDestination(v **types.TimestreamD
 				}
 				sv.TableName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4962,10 +5085,12 @@ func awsAwsjson10_deserializeDocumentType(v **types.Type, value interface{}) err
 			if err := awsAwsjson10_deserializeDocumentColumnInfo(&sv.ArrayColumnInfo, value); err != nil {
 				return err
 			}
+
 		case "RowColumnInfo":
 			if err := awsAwsjson10_deserializeDocumentColumnInfoList(&sv.RowColumnInfo, value); err != nil {
 				return err
 			}
+
 		case "ScalarType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4974,10 +5099,12 @@ func awsAwsjson10_deserializeDocumentType(v **types.Type, value interface{}) err
 				}
 				sv.ScalarType = types.ScalarType(jtv)
 			}
+
 		case "TimeSeriesMeasureValueColumnInfo":
 			if err := awsAwsjson10_deserializeDocumentColumnInfo(&sv.TimeSeriesMeasureValueColumnInfo, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5017,6 +5144,7 @@ func awsAwsjson10_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5056,6 +5184,7 @@ func awsAwsjson10_deserializeOpDocumentCancelQueryOutput(v **CancelQueryOutput, 
 				}
 				sv.CancellationMessage = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5095,6 +5224,7 @@ func awsAwsjson10_deserializeOpDocumentCreateScheduledQueryOutput(v **CreateSche
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5138,6 +5268,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeAccountSettingsOutput(v **Describ
 				}
 				sv.MaxQueryTCU = ptr.Int32(int32(i64))
 			}
+
 		case "QueryPricingModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5146,6 +5277,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeAccountSettingsOutput(v **Describ
 				}
 				sv.QueryPricingModel = types.QueryPricingModel(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5181,6 +5313,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeEndpointsOutput(v **DescribeEndpo
 			if err := awsAwsjson10_deserializeDocumentEndpoints(&sv.Endpoints, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5216,6 +5349,7 @@ func awsAwsjson10_deserializeOpDocumentDescribeScheduledQueryOutput(v **Describe
 			if err := awsAwsjson10_deserializeDocumentScheduledQueryDescription(&sv.ScheduledQuery, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5255,10 +5389,12 @@ func awsAwsjson10_deserializeOpDocumentListScheduledQueriesOutput(v **ListSchedu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "ScheduledQueries":
 			if err := awsAwsjson10_deserializeDocumentScheduledQueryList(&sv.ScheduledQueries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5298,10 +5434,12 @@ func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5337,10 +5475,12 @@ func awsAwsjson10_deserializeOpDocumentPrepareQueryOutput(v **PrepareQueryOutput
 			if err := awsAwsjson10_deserializeDocumentSelectColumnList(&sv.Columns, value); err != nil {
 				return err
 			}
+
 		case "Parameters":
 			if err := awsAwsjson10_deserializeDocumentParameterMappingList(&sv.Parameters, value); err != nil {
 				return err
 			}
+
 		case "QueryString":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5349,6 +5489,7 @@ func awsAwsjson10_deserializeOpDocumentPrepareQueryOutput(v **PrepareQueryOutput
 				}
 				sv.QueryString = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5384,6 +5525,7 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 			if err := awsAwsjson10_deserializeDocumentColumnInfoList(&sv.ColumnInfo, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5392,6 +5534,7 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "QueryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5400,18 +5543,22 @@ func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, value interf
 				}
 				sv.QueryId = ptr.String(jtv)
 			}
+
 		case "QueryInsightsResponse":
 			if err := awsAwsjson10_deserializeDocumentQueryInsightsResponse(&sv.QueryInsightsResponse, value); err != nil {
 				return err
 			}
+
 		case "QueryStatus":
 			if err := awsAwsjson10_deserializeDocumentQueryStatus(&sv.QueryStatus, value); err != nil {
 				return err
 			}
+
 		case "Rows":
 			if err := awsAwsjson10_deserializeDocumentRowList(&sv.Rows, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5517,6 +5664,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateAccountSettingsOutput(v **UpdateAcc
 				}
 				sv.MaxQueryTCU = ptr.Int32(int32(i64))
 			}
+
 		case "QueryPricingModel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5525,6 +5673,7 @@ func awsAwsjson10_deserializeOpDocumentUpdateAccountSettingsOutput(v **UpdateAcc
 				}
 				sv.QueryPricingModel = types.QueryPricingModel(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

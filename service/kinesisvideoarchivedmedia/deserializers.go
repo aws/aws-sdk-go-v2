@@ -339,6 +339,7 @@ func awsRestjson1_deserializeOpDocumentGetDASHStreamingSessionURLOutput(v **GetD
 				}
 				sv.DASHStreamingSessionURL = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -515,6 +516,7 @@ func awsRestjson1_deserializeOpDocumentGetHLSStreamingSessionURLOutput(v **GetHL
 				}
 				sv.HLSStreamingSessionURL = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -678,6 +680,7 @@ func awsRestjson1_deserializeOpDocumentGetImagesOutput(v **GetImagesOutput, valu
 			if err := awsRestjson1_deserializeDocumentImages(&sv.Images, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -686,6 +689,7 @@ func awsRestjson1_deserializeOpDocumentGetImagesOutput(v **GetImagesOutput, valu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -974,6 +978,7 @@ func awsRestjson1_deserializeOpDocumentListFragmentsOutput(v **ListFragmentsOutp
 			if err := awsRestjson1_deserializeDocumentFragmentList(&sv.Fragments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -982,6 +987,7 @@ func awsRestjson1_deserializeOpDocumentListFragmentsOutput(v **ListFragmentsOutp
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1345,6 +1351,7 @@ func awsRestjson1_deserializeDocumentClientLimitExceededException(v **types.Clie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1388,6 +1395,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 				}
 				sv.FragmentLengthInMilliseconds = i64
 			}
+
 		case "FragmentNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1396,6 +1404,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 				}
 				sv.FragmentNumber = ptr.String(jtv)
 			}
+
 		case "FragmentSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1408,6 +1417,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 				}
 				sv.FragmentSizeInBytes = i64
 			}
+
 		case "ProducerTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1423,6 +1433,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 
 				}
 			}
+
 		case "ServerTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1438,6 +1449,7 @@ func awsRestjson1_deserializeDocumentFragment(v **types.Fragment, value interfac
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1511,6 +1523,7 @@ func awsRestjson1_deserializeDocumentImage(v **types.Image, value interface{}) e
 				}
 				sv.Error = types.ImageError(jtv)
 			}
+
 		case "ImageContent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1519,6 +1532,7 @@ func awsRestjson1_deserializeDocumentImage(v **types.Image, value interface{}) e
 				}
 				sv.ImageContent = ptr.String(jtv)
 			}
+
 		case "TimeStamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1534,6 +1548,7 @@ func awsRestjson1_deserializeDocumentImage(v **types.Image, value interface{}) e
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1607,6 +1622,7 @@ func awsRestjson1_deserializeDocumentInvalidArgumentException(v **types.InvalidA
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1646,6 +1662,7 @@ func awsRestjson1_deserializeDocumentInvalidCodecPrivateDataException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1685,6 +1702,7 @@ func awsRestjson1_deserializeDocumentInvalidMediaFrameException(v **types.Invali
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1724,6 +1742,7 @@ func awsRestjson1_deserializeDocumentMissingCodecPrivateDataException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1763,6 +1782,7 @@ func awsRestjson1_deserializeDocumentNoDataRetentionException(v **types.NoDataRe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1802,6 +1822,7 @@ func awsRestjson1_deserializeDocumentNotAuthorizedException(v **types.NotAuthori
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1841,6 +1862,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1880,6 +1902,7 @@ func awsRestjson1_deserializeDocumentUnsupportedStreamMediaTypeException(v **typ
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

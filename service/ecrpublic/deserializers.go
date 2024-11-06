@@ -3773,6 +3773,7 @@ func awsAwsjson11_deserializeDocumentAuthorizationData(v **types.AuthorizationDa
 				}
 				sv.AuthorizationToken = ptr.String(jtv)
 			}
+
 		case "expiresAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3788,6 +3789,7 @@ func awsAwsjson11_deserializeDocumentAuthorizationData(v **types.AuthorizationDa
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3827,6 +3829,7 @@ func awsAwsjson11_deserializeDocumentEmptyUploadException(v **types.EmptyUploadE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3862,6 +3865,7 @@ func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) e
 			if err := awsAwsjson11_deserializeDocumentImageIdentifier(&sv.ImageId, value); err != nil {
 				return err
 			}
+
 		case "imageManifest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3870,6 +3874,7 @@ func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) e
 				}
 				sv.ImageManifest = ptr.String(jtv)
 			}
+
 		case "imageManifestMediaType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3878,6 +3883,7 @@ func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) e
 				}
 				sv.ImageManifestMediaType = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3886,6 +3892,7 @@ func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) e
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3894,6 +3901,7 @@ func awsAwsjson11_deserializeDocumentImage(v **types.Image, value interface{}) e
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3933,6 +3941,7 @@ func awsAwsjson11_deserializeDocumentImageAlreadyExistsException(v **types.Image
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3972,6 +3981,7 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 				}
 				sv.ArtifactMediaType = ptr.String(jtv)
 			}
+
 		case "imageDigest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3980,6 +3990,7 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 				}
 				sv.ImageDigest = ptr.String(jtv)
 			}
+
 		case "imageManifestMediaType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3988,6 +3999,7 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 				}
 				sv.ImageManifestMediaType = ptr.String(jtv)
 			}
+
 		case "imagePushedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4003,6 +4015,7 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 
 				}
 			}
+
 		case "imageSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4015,10 +4028,12 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 				}
 				sv.ImageSizeInBytes = ptr.Int64(i64)
 			}
+
 		case "imageTags":
 			if err := awsAwsjson11_deserializeDocumentImageTagList(&sv.ImageTags, value); err != nil {
 				return err
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4027,6 +4042,7 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4035,6 +4051,7 @@ func awsAwsjson11_deserializeDocumentImageDetail(v **types.ImageDetail, value in
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4108,6 +4125,7 @@ func awsAwsjson11_deserializeDocumentImageDigestDoesNotMatchException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4147,6 +4165,7 @@ func awsAwsjson11_deserializeDocumentImageFailure(v **types.ImageFailure, value 
 				}
 				sv.FailureCode = types.ImageFailureCode(jtv)
 			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4155,10 +4174,12 @@ func awsAwsjson11_deserializeDocumentImageFailure(v **types.ImageFailure, value 
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "imageId":
 			if err := awsAwsjson11_deserializeDocumentImageIdentifier(&sv.ImageId, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4232,6 +4253,7 @@ func awsAwsjson11_deserializeDocumentImageIdentifier(v **types.ImageIdentifier, 
 				}
 				sv.ImageDigest = ptr.String(jtv)
 			}
+
 		case "imageTag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4240,6 +4262,7 @@ func awsAwsjson11_deserializeDocumentImageIdentifier(v **types.ImageIdentifier, 
 				}
 				sv.ImageTag = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4313,6 +4336,7 @@ func awsAwsjson11_deserializeDocumentImageNotFoundException(v **types.ImageNotFo
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4352,6 +4376,7 @@ func awsAwsjson11_deserializeDocumentImageTagAlreadyExistsException(v **types.Im
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4398,10 +4423,12 @@ func awsAwsjson11_deserializeDocumentImageTagDetail(v **types.ImageTagDetail, va
 
 				}
 			}
+
 		case "imageDetail":
 			if err := awsAwsjson11_deserializeDocumentReferencedImageDetail(&sv.ImageDetail, value); err != nil {
 				return err
 			}
+
 		case "imageTag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4410,6 +4437,7 @@ func awsAwsjson11_deserializeDocumentImageTagDetail(v **types.ImageTagDetail, va
 				}
 				sv.ImageTag = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4519,6 +4547,7 @@ func awsAwsjson11_deserializeDocumentInvalidLayerException(v **types.InvalidLaye
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4562,6 +4591,7 @@ func awsAwsjson11_deserializeDocumentInvalidLayerPartException(v **types.Invalid
 				}
 				sv.LastValidByteReceived = ptr.Int64(i64)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4570,6 +4600,7 @@ func awsAwsjson11_deserializeDocumentInvalidLayerPartException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4578,6 +4609,7 @@ func awsAwsjson11_deserializeDocumentInvalidLayerPartException(v **types.Invalid
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4586,6 +4618,7 @@ func awsAwsjson11_deserializeDocumentInvalidLayerPartException(v **types.Invalid
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4594,6 +4627,7 @@ func awsAwsjson11_deserializeDocumentInvalidLayerPartException(v **types.Invalid
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4633,6 +4667,7 @@ func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.Invalid
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4672,6 +4707,7 @@ func awsAwsjson11_deserializeDocumentInvalidTagParameterException(v **types.Inva
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4711,6 +4747,7 @@ func awsAwsjson11_deserializeDocumentLayer(v **types.Layer, value interface{}) e
 				}
 				sv.LayerAvailability = types.LayerAvailability(jtv)
 			}
+
 		case "layerDigest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4719,6 +4756,7 @@ func awsAwsjson11_deserializeDocumentLayer(v **types.Layer, value interface{}) e
 				}
 				sv.LayerDigest = ptr.String(jtv)
 			}
+
 		case "layerSize":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4731,6 +4769,7 @@ func awsAwsjson11_deserializeDocumentLayer(v **types.Layer, value interface{}) e
 				}
 				sv.LayerSize = ptr.Int64(i64)
 			}
+
 		case "mediaType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4739,6 +4778,7 @@ func awsAwsjson11_deserializeDocumentLayer(v **types.Layer, value interface{}) e
 				}
 				sv.MediaType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4778,6 +4818,7 @@ func awsAwsjson11_deserializeDocumentLayerAlreadyExistsException(v **types.Layer
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4817,6 +4858,7 @@ func awsAwsjson11_deserializeDocumentLayerFailure(v **types.LayerFailure, value 
 				}
 				sv.FailureCode = types.LayerFailureCode(jtv)
 			}
+
 		case "failureReason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4825,6 +4867,7 @@ func awsAwsjson11_deserializeDocumentLayerFailure(v **types.LayerFailure, value 
 				}
 				sv.FailureReason = ptr.String(jtv)
 			}
+
 		case "layerDigest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4833,6 +4876,7 @@ func awsAwsjson11_deserializeDocumentLayerFailure(v **types.LayerFailure, value 
 				}
 				sv.LayerDigest = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4940,6 +4984,7 @@ func awsAwsjson11_deserializeDocumentLayerPartTooSmallException(v **types.LayerP
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4979,6 +5024,7 @@ func awsAwsjson11_deserializeDocumentLayersNotFoundException(v **types.LayersNot
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5018,6 +5064,7 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5093,6 +5140,7 @@ func awsAwsjson11_deserializeDocumentReferencedImageDetail(v **types.ReferencedI
 				}
 				sv.ArtifactMediaType = ptr.String(jtv)
 			}
+
 		case "imageDigest":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5101,6 +5149,7 @@ func awsAwsjson11_deserializeDocumentReferencedImageDetail(v **types.ReferencedI
 				}
 				sv.ImageDigest = ptr.String(jtv)
 			}
+
 		case "imageManifestMediaType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5109,6 +5158,7 @@ func awsAwsjson11_deserializeDocumentReferencedImageDetail(v **types.ReferencedI
 				}
 				sv.ImageManifestMediaType = ptr.String(jtv)
 			}
+
 		case "imagePushedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5124,6 +5174,7 @@ func awsAwsjson11_deserializeDocumentReferencedImageDetail(v **types.ReferencedI
 
 				}
 			}
+
 		case "imageSizeInBytes":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5136,6 +5187,7 @@ func awsAwsjson11_deserializeDocumentReferencedImageDetail(v **types.ReferencedI
 				}
 				sv.ImageSizeInBytes = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5175,6 +5227,7 @@ func awsAwsjson11_deserializeDocumentReferencedImagesNotFoundException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5210,6 +5263,7 @@ func awsAwsjson11_deserializeDocumentRegistry(v **types.Registry, value interfac
 			if err := awsAwsjson11_deserializeDocumentRegistryAliasList(&sv.Aliases, value); err != nil {
 				return err
 			}
+
 		case "registryArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5218,6 +5272,7 @@ func awsAwsjson11_deserializeDocumentRegistry(v **types.Registry, value interfac
 				}
 				sv.RegistryArn = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5226,6 +5281,7 @@ func awsAwsjson11_deserializeDocumentRegistry(v **types.Registry, value interfac
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "registryUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5234,6 +5290,7 @@ func awsAwsjson11_deserializeDocumentRegistry(v **types.Registry, value interfac
 				}
 				sv.RegistryUri = ptr.String(jtv)
 			}
+
 		case "verified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5242,6 +5299,7 @@ func awsAwsjson11_deserializeDocumentRegistry(v **types.Registry, value interfac
 				}
 				sv.Verified = ptr.Bool(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5281,6 +5339,7 @@ func awsAwsjson11_deserializeDocumentRegistryAlias(v **types.RegistryAlias, valu
 				}
 				sv.DefaultRegistryAlias = jtv
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5289,6 +5348,7 @@ func awsAwsjson11_deserializeDocumentRegistryAlias(v **types.RegistryAlias, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "primaryRegistryAlias":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5297,6 +5357,7 @@ func awsAwsjson11_deserializeDocumentRegistryAlias(v **types.RegistryAlias, valu
 				}
 				sv.PrimaryRegistryAlias = jtv
 			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5305,6 +5366,7 @@ func awsAwsjson11_deserializeDocumentRegistryAlias(v **types.RegistryAlias, valu
 				}
 				sv.Status = types.RegistryAliasStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5378,6 +5440,7 @@ func awsAwsjson11_deserializeDocumentRegistryCatalogData(v **types.RegistryCatal
 				}
 				sv.DisplayName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5451,6 +5514,7 @@ func awsAwsjson11_deserializeDocumentRegistryNotFoundException(v **types.Registr
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5497,6 +5561,7 @@ func awsAwsjson11_deserializeDocumentRepository(v **types.Repository, value inte
 
 				}
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5505,6 +5570,7 @@ func awsAwsjson11_deserializeDocumentRepository(v **types.Repository, value inte
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5513,6 +5579,7 @@ func awsAwsjson11_deserializeDocumentRepository(v **types.Repository, value inte
 				}
 				sv.RepositoryArn = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5521,6 +5588,7 @@ func awsAwsjson11_deserializeDocumentRepository(v **types.Repository, value inte
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		case "repositoryUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5529,6 +5597,7 @@ func awsAwsjson11_deserializeDocumentRepository(v **types.Repository, value inte
 				}
 				sv.RepositoryUri = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5568,6 +5637,7 @@ func awsAwsjson11_deserializeDocumentRepositoryAlreadyExistsException(v **types.
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5607,10 +5677,12 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogData(v **types.RepositoryC
 				}
 				sv.AboutText = ptr.String(jtv)
 			}
+
 		case "architectures":
 			if err := awsAwsjson11_deserializeDocumentArchitectureList(&sv.Architectures, value); err != nil {
 				return err
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5619,6 +5691,7 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogData(v **types.RepositoryC
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "logoUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5627,6 +5700,7 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogData(v **types.RepositoryC
 				}
 				sv.LogoUrl = ptr.String(jtv)
 			}
+
 		case "marketplaceCertified":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -5635,10 +5709,12 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogData(v **types.RepositoryC
 				}
 				sv.MarketplaceCertified = ptr.Bool(jtv)
 			}
+
 		case "operatingSystems":
 			if err := awsAwsjson11_deserializeDocumentOperatingSystemList(&sv.OperatingSystems, value); err != nil {
 				return err
 			}
+
 		case "usageText":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5647,6 +5723,7 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogData(v **types.RepositoryC
 				}
 				sv.UsageText = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5686,6 +5763,7 @@ func awsAwsjson11_deserializeDocumentRepositoryCatalogDataNotFoundException(v **
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5759,6 +5837,7 @@ func awsAwsjson11_deserializeDocumentRepositoryNotEmptyException(v **types.Repos
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5798,6 +5877,7 @@ func awsAwsjson11_deserializeDocumentRepositoryNotFoundException(v **types.Repos
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5837,6 +5917,7 @@ func awsAwsjson11_deserializeDocumentRepositoryPolicyNotFoundException(v **types
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5876,6 +5957,7 @@ func awsAwsjson11_deserializeDocumentServerException(v **types.ServerException, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5915,6 +5997,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5923,6 +6006,7 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5996,6 +6080,7 @@ func awsAwsjson11_deserializeDocumentTooManyTagsException(v **types.TooManyTagsE
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6035,6 +6120,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedCommandException(v **types.Unsup
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6074,6 +6160,7 @@ func awsAwsjson11_deserializeDocumentUploadNotFoundException(v **types.UploadNot
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6109,10 +6196,12 @@ func awsAwsjson11_deserializeOpDocumentBatchCheckLayerAvailabilityOutput(v **Bat
 			if err := awsAwsjson11_deserializeDocumentLayerFailureList(&sv.Failures, value); err != nil {
 				return err
 			}
+
 		case "layers":
 			if err := awsAwsjson11_deserializeDocumentLayerList(&sv.Layers, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6148,10 +6237,12 @@ func awsAwsjson11_deserializeOpDocumentBatchDeleteImageOutput(v **BatchDeleteIma
 			if err := awsAwsjson11_deserializeDocumentImageFailureList(&sv.Failures, value); err != nil {
 				return err
 			}
+
 		case "imageIds":
 			if err := awsAwsjson11_deserializeDocumentImageIdentifierList(&sv.ImageIds, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6191,6 +6282,7 @@ func awsAwsjson11_deserializeOpDocumentCompleteLayerUploadOutput(v **CompleteLay
 				}
 				sv.LayerDigest = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6199,6 +6291,7 @@ func awsAwsjson11_deserializeOpDocumentCompleteLayerUploadOutput(v **CompleteLay
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6207,6 +6300,7 @@ func awsAwsjson11_deserializeOpDocumentCompleteLayerUploadOutput(v **CompleteLay
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6215,6 +6309,7 @@ func awsAwsjson11_deserializeOpDocumentCompleteLayerUploadOutput(v **CompleteLay
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6250,10 +6345,12 @@ func awsAwsjson11_deserializeOpDocumentCreateRepositoryOutput(v **CreateReposito
 			if err := awsAwsjson11_deserializeDocumentRepositoryCatalogData(&sv.CatalogData, value); err != nil {
 				return err
 			}
+
 		case "repository":
 			if err := awsAwsjson11_deserializeDocumentRepository(&sv.Repository, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6289,6 +6386,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRepositoryOutput(v **DeleteReposito
 			if err := awsAwsjson11_deserializeDocumentRepository(&sv.Repository, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6328,6 +6426,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRepositoryPolicyOutput(v **DeleteRe
 				}
 				sv.PolicyText = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6336,6 +6435,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRepositoryPolicyOutput(v **DeleteRe
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6344,6 +6444,7 @@ func awsAwsjson11_deserializeOpDocumentDeleteRepositoryPolicyOutput(v **DeleteRe
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6379,6 +6480,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeImagesOutput(v **DescribeImagesOu
 			if err := awsAwsjson11_deserializeDocumentImageDetailList(&sv.ImageDetails, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6387,6 +6489,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeImagesOutput(v **DescribeImagesOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6422,6 +6525,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeImageTagsOutput(v **DescribeImage
 			if err := awsAwsjson11_deserializeDocumentImageTagDetailList(&sv.ImageTagDetails, value); err != nil {
 				return err
 			}
+
 		case "nextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6430,6 +6534,7 @@ func awsAwsjson11_deserializeOpDocumentDescribeImageTagsOutput(v **DescribeImage
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6469,10 +6574,12 @@ func awsAwsjson11_deserializeOpDocumentDescribeRegistriesOutput(v **DescribeRegi
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "registries":
 			if err := awsAwsjson11_deserializeDocumentRegistryList(&sv.Registries, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6512,10 +6619,12 @@ func awsAwsjson11_deserializeOpDocumentDescribeRepositoriesOutput(v **DescribeRe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "repositories":
 			if err := awsAwsjson11_deserializeDocumentRepositoryList(&sv.Repositories, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6551,6 +6660,7 @@ func awsAwsjson11_deserializeOpDocumentGetAuthorizationTokenOutput(v **GetAuthor
 			if err := awsAwsjson11_deserializeDocumentAuthorizationData(&sv.AuthorizationData, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6586,6 +6696,7 @@ func awsAwsjson11_deserializeOpDocumentGetRegistryCatalogDataOutput(v **GetRegis
 			if err := awsAwsjson11_deserializeDocumentRegistryCatalogData(&sv.RegistryCatalogData, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6621,6 +6732,7 @@ func awsAwsjson11_deserializeOpDocumentGetRepositoryCatalogDataOutput(v **GetRep
 			if err := awsAwsjson11_deserializeDocumentRepositoryCatalogData(&sv.CatalogData, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6660,6 +6772,7 @@ func awsAwsjson11_deserializeOpDocumentGetRepositoryPolicyOutput(v **GetReposito
 				}
 				sv.PolicyText = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6668,6 +6781,7 @@ func awsAwsjson11_deserializeOpDocumentGetRepositoryPolicyOutput(v **GetReposito
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6676,6 +6790,7 @@ func awsAwsjson11_deserializeOpDocumentGetRepositoryPolicyOutput(v **GetReposito
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6719,6 +6834,7 @@ func awsAwsjson11_deserializeOpDocumentInitiateLayerUploadOutput(v **InitiateLay
 				}
 				sv.PartSize = ptr.Int64(i64)
 			}
+
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6727,6 +6843,7 @@ func awsAwsjson11_deserializeOpDocumentInitiateLayerUploadOutput(v **InitiateLay
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6762,6 +6879,7 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6797,6 +6915,7 @@ func awsAwsjson11_deserializeOpDocumentPutImageOutput(v **PutImageOutput, value 
 			if err := awsAwsjson11_deserializeDocumentImage(&sv.Image, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6832,6 +6951,7 @@ func awsAwsjson11_deserializeOpDocumentPutRegistryCatalogDataOutput(v **PutRegis
 			if err := awsAwsjson11_deserializeDocumentRegistryCatalogData(&sv.RegistryCatalogData, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6867,6 +6987,7 @@ func awsAwsjson11_deserializeOpDocumentPutRepositoryCatalogDataOutput(v **PutRep
 			if err := awsAwsjson11_deserializeDocumentRepositoryCatalogData(&sv.CatalogData, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6906,6 +7027,7 @@ func awsAwsjson11_deserializeOpDocumentSetRepositoryPolicyOutput(v **SetReposito
 				}
 				sv.PolicyText = ptr.String(jtv)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6914,6 +7036,7 @@ func awsAwsjson11_deserializeOpDocumentSetRepositoryPolicyOutput(v **SetReposito
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6922,6 +7045,7 @@ func awsAwsjson11_deserializeOpDocumentSetRepositoryPolicyOutput(v **SetReposito
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7027,6 +7151,7 @@ func awsAwsjson11_deserializeOpDocumentUploadLayerPartOutput(v **UploadLayerPart
 				}
 				sv.LastByteReceived = ptr.Int64(i64)
 			}
+
 		case "registryId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7035,6 +7160,7 @@ func awsAwsjson11_deserializeOpDocumentUploadLayerPartOutput(v **UploadLayerPart
 				}
 				sv.RegistryId = ptr.String(jtv)
 			}
+
 		case "repositoryName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7043,6 +7169,7 @@ func awsAwsjson11_deserializeOpDocumentUploadLayerPartOutput(v **UploadLayerPart
 				}
 				sv.RepositoryName = ptr.String(jtv)
 			}
+
 		case "uploadId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7051,6 +7178,7 @@ func awsAwsjson11_deserializeOpDocumentUploadLayerPartOutput(v **UploadLayerPart
 				}
 				sv.UploadId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

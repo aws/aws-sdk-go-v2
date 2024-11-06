@@ -187,6 +187,7 @@ func awsRestjson1_deserializeOpDocumentAcceptAttachmentOutput(v **AcceptAttachme
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -356,6 +357,7 @@ func awsRestjson1_deserializeOpDocumentAssociateConnectPeerOutput(v **AssociateC
 			if err := awsRestjson1_deserializeDocumentConnectPeerAssociation(&sv.ConnectPeerAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -525,6 +527,7 @@ func awsRestjson1_deserializeOpDocumentAssociateCustomerGatewayOutput(v **Associ
 			if err := awsRestjson1_deserializeDocumentCustomerGatewayAssociation(&sv.CustomerGatewayAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -694,6 +697,7 @@ func awsRestjson1_deserializeOpDocumentAssociateLinkOutput(v **AssociateLinkOutp
 			if err := awsRestjson1_deserializeDocumentLinkAssociation(&sv.LinkAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -863,6 +867,7 @@ func awsRestjson1_deserializeOpDocumentAssociateTransitGatewayConnectPeerOutput(
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(&sv.TransitGatewayConnectPeerAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1029,6 +1034,7 @@ func awsRestjson1_deserializeOpDocumentCreateConnectAttachmentOutput(v **CreateC
 			if err := awsRestjson1_deserializeDocumentConnectAttachment(&sv.ConnectAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1195,6 +1201,7 @@ func awsRestjson1_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 			if err := awsRestjson1_deserializeDocumentConnection(&sv.Connection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1361,6 +1368,7 @@ func awsRestjson1_deserializeOpDocumentCreateConnectPeerOutput(v **CreateConnect
 			if err := awsRestjson1_deserializeDocumentConnectPeer(&sv.ConnectPeer, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1530,6 +1538,7 @@ func awsRestjson1_deserializeOpDocumentCreateCoreNetworkOutput(v **CreateCoreNet
 			if err := awsRestjson1_deserializeDocumentCoreNetwork(&sv.CoreNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1699,6 +1708,7 @@ func awsRestjson1_deserializeOpDocumentCreateDeviceOutput(v **CreateDeviceOutput
 			if err := awsRestjson1_deserializeDocumentDevice(&sv.Device, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1865,6 +1875,7 @@ func awsRestjson1_deserializeOpDocumentCreateGlobalNetworkOutput(v **CreateGloba
 			if err := awsRestjson1_deserializeDocumentGlobalNetwork(&sv.GlobalNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2034,6 +2045,7 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 			if err := awsRestjson1_deserializeDocumentLink(&sv.Link, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2203,6 +2215,7 @@ func awsRestjson1_deserializeOpDocumentCreateSiteOutput(v **CreateSiteOutput, va
 			if err := awsRestjson1_deserializeDocumentSite(&sv.Site, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2369,6 +2382,7 @@ func awsRestjson1_deserializeOpDocumentCreateSiteToSiteVpnAttachmentOutput(v **C
 			if err := awsRestjson1_deserializeDocumentSiteToSiteVpnAttachment(&sv.SiteToSiteVpnAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2535,6 +2549,7 @@ func awsRestjson1_deserializeOpDocumentCreateTransitGatewayPeeringOutput(v **Cre
 			if err := awsRestjson1_deserializeDocumentTransitGatewayPeering(&sv.TransitGatewayPeering, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2701,6 +2716,7 @@ func awsRestjson1_deserializeOpDocumentCreateTransitGatewayRouteTableAttachmentO
 			if err := awsRestjson1_deserializeDocumentTransitGatewayRouteTableAttachment(&sv.TransitGatewayRouteTableAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2867,6 +2883,7 @@ func awsRestjson1_deserializeOpDocumentCreateVpcAttachmentOutput(v **CreateVpcAt
 			if err := awsRestjson1_deserializeDocumentVpcAttachment(&sv.VpcAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3033,6 +3050,7 @@ func awsRestjson1_deserializeOpDocumentDeleteAttachmentOutput(v **DeleteAttachme
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3199,6 +3217,7 @@ func awsRestjson1_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 			if err := awsRestjson1_deserializeDocumentConnection(&sv.Connection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3365,6 +3384,7 @@ func awsRestjson1_deserializeOpDocumentDeleteConnectPeerOutput(v **DeleteConnect
 			if err := awsRestjson1_deserializeDocumentConnectPeer(&sv.ConnectPeer, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3531,6 +3551,7 @@ func awsRestjson1_deserializeOpDocumentDeleteCoreNetworkOutput(v **DeleteCoreNet
 			if err := awsRestjson1_deserializeDocumentCoreNetwork(&sv.CoreNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3697,6 +3718,7 @@ func awsRestjson1_deserializeOpDocumentDeleteCoreNetworkPolicyVersionOutput(v **
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicy(&sv.CoreNetworkPolicy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -3863,6 +3885,7 @@ func awsRestjson1_deserializeOpDocumentDeleteDeviceOutput(v **DeleteDeviceOutput
 			if err := awsRestjson1_deserializeDocumentDevice(&sv.Device, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4029,6 +4052,7 @@ func awsRestjson1_deserializeOpDocumentDeleteGlobalNetworkOutput(v **DeleteGloba
 			if err := awsRestjson1_deserializeDocumentGlobalNetwork(&sv.GlobalNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4195,6 +4219,7 @@ func awsRestjson1_deserializeOpDocumentDeleteLinkOutput(v **DeleteLinkOutput, va
 			if err := awsRestjson1_deserializeDocumentLink(&sv.Link, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4361,6 +4386,7 @@ func awsRestjson1_deserializeOpDocumentDeletePeeringOutput(v **DeletePeeringOutp
 			if err := awsRestjson1_deserializeDocumentPeering(&sv.Peering, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4627,6 +4653,7 @@ func awsRestjson1_deserializeOpDocumentDeleteSiteOutput(v **DeleteSiteOutput, va
 			if err := awsRestjson1_deserializeDocumentSite(&sv.Site, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4793,6 +4820,7 @@ func awsRestjson1_deserializeOpDocumentDeregisterTransitGatewayOutput(v **Deregi
 			if err := awsRestjson1_deserializeDocumentTransitGatewayRegistration(&sv.TransitGatewayRegistration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -4956,6 +4984,7 @@ func awsRestjson1_deserializeOpDocumentDescribeGlobalNetworksOutput(v **Describe
 			if err := awsRestjson1_deserializeDocumentGlobalNetworkList(&sv.GlobalNetworks, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4964,6 +4993,7 @@ func awsRestjson1_deserializeOpDocumentDescribeGlobalNetworksOutput(v **Describe
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5130,6 +5160,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateConnectPeerOutput(v **Disasso
 			if err := awsRestjson1_deserializeDocumentConnectPeerAssociation(&sv.ConnectPeerAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5296,6 +5327,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateCustomerGatewayOutput(v **Dis
 			if err := awsRestjson1_deserializeDocumentCustomerGatewayAssociation(&sv.CustomerGatewayAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5462,6 +5494,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateLinkOutput(v **DisassociateLi
 			if err := awsRestjson1_deserializeDocumentLinkAssociation(&sv.LinkAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5628,6 +5661,7 @@ func awsRestjson1_deserializeOpDocumentDisassociateTransitGatewayConnectPeerOutp
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(&sv.TransitGatewayConnectPeerAssociation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -5894,6 +5928,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectAttachmentOutput(v **GetConnect
 			if err := awsRestjson1_deserializeDocumentConnectAttachment(&sv.ConnectAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6057,6 +6092,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectionsOutput(v **GetConnectionsOu
 			if err := awsRestjson1_deserializeDocumentConnectionList(&sv.Connections, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6065,6 +6101,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectionsOutput(v **GetConnectionsOu
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6228,6 +6265,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectPeerOutput(v **GetConnectPeerOu
 			if err := awsRestjson1_deserializeDocumentConnectPeer(&sv.ConnectPeer, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6394,6 +6432,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectPeerAssociationsOutput(v **GetC
 			if err := awsRestjson1_deserializeDocumentConnectPeerAssociationList(&sv.ConnectPeerAssociations, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6402,6 +6441,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectPeerAssociationsOutput(v **GetC
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6565,6 +6605,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreNetworkOutput(v **GetCoreNetworkOu
 			if err := awsRestjson1_deserializeDocumentCoreNetwork(&sv.CoreNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6728,6 +6769,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreNetworkChangeEventsOutput(v **GetC
 			if err := awsRestjson1_deserializeDocumentCoreNetworkChangeEventList(&sv.CoreNetworkChangeEvents, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6736,6 +6778,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreNetworkChangeEventsOutput(v **GetC
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -6899,6 +6942,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreNetworkChangeSetOutput(v **GetCore
 			if err := awsRestjson1_deserializeDocumentCoreNetworkChangeList(&sv.CoreNetworkChanges, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6907,6 +6951,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreNetworkChangeSetOutput(v **GetCore
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7070,6 +7115,7 @@ func awsRestjson1_deserializeOpDocumentGetCoreNetworkPolicyOutput(v **GetCoreNet
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicy(&sv.CoreNetworkPolicy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7236,6 +7282,7 @@ func awsRestjson1_deserializeOpDocumentGetCustomerGatewayAssociationsOutput(v **
 			if err := awsRestjson1_deserializeDocumentCustomerGatewayAssociationList(&sv.CustomerGatewayAssociations, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7244,6 +7291,7 @@ func awsRestjson1_deserializeOpDocumentGetCustomerGatewayAssociationsOutput(v **
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7407,6 +7455,7 @@ func awsRestjson1_deserializeOpDocumentGetDevicesOutput(v **GetDevicesOutput, va
 			if err := awsRestjson1_deserializeDocumentDeviceList(&sv.Devices, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7415,6 +7464,7 @@ func awsRestjson1_deserializeOpDocumentGetDevicesOutput(v **GetDevicesOutput, va
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7578,6 +7628,7 @@ func awsRestjson1_deserializeOpDocumentGetLinkAssociationsOutput(v **GetLinkAsso
 			if err := awsRestjson1_deserializeDocumentLinkAssociationList(&sv.LinkAssociations, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7586,6 +7637,7 @@ func awsRestjson1_deserializeOpDocumentGetLinkAssociationsOutput(v **GetLinkAsso
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7749,6 +7801,7 @@ func awsRestjson1_deserializeOpDocumentGetLinksOutput(v **GetLinksOutput, value 
 			if err := awsRestjson1_deserializeDocumentLinkList(&sv.Links, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7757,6 +7810,7 @@ func awsRestjson1_deserializeOpDocumentGetLinksOutput(v **GetLinksOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -7917,6 +7971,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkResourceCountsOutput(v **GetNet
 			if err := awsRestjson1_deserializeDocumentNetworkResourceCountList(&sv.NetworkResourceCounts, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7925,6 +7980,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkResourceCountsOutput(v **GetNet
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8092,10 +8148,12 @@ func awsRestjson1_deserializeOpDocumentGetNetworkResourceRelationshipsOutput(v *
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Relationships":
 			if err := awsRestjson1_deserializeDocumentRelationshipList(&sv.Relationships, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8259,6 +8317,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkResourcesOutput(v **GetNetworkR
 			if err := awsRestjson1_deserializeDocumentNetworkResourceList(&sv.NetworkResources, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8267,6 +8326,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkResourcesOutput(v **GetNetworkR
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8430,10 +8490,12 @@ func awsRestjson1_deserializeOpDocumentGetNetworkRoutesOutput(v **GetNetworkRout
 			if err := awsRestjson1_deserializeDocumentCoreNetworkSegmentEdgeIdentifier(&sv.CoreNetworkSegmentEdge, value); err != nil {
 				return err
 			}
+
 		case "NetworkRoutes":
 			if err := awsRestjson1_deserializeDocumentNetworkRouteList(&sv.NetworkRoutes, value); err != nil {
 				return err
 			}
+
 		case "RouteTableArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8442,6 +8504,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkRoutesOutput(v **GetNetworkRout
 				}
 				sv.RouteTableArn = ptr.String(jtv)
 			}
+
 		case "RouteTableTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8457,6 +8520,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkRoutesOutput(v **GetNetworkRout
 
 				}
 			}
+
 		case "RouteTableType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8465,6 +8529,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkRoutesOutput(v **GetNetworkRout
 				}
 				sv.RouteTableType = types.RouteTableType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8628,6 +8693,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkTelemetryOutput(v **GetNetworkT
 			if err := awsRestjson1_deserializeDocumentNetworkTelemetryList(&sv.NetworkTelemetry, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8636,6 +8702,7 @@ func awsRestjson1_deserializeOpDocumentGetNetworkTelemetryOutput(v **GetNetworkT
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8800,6 +8867,7 @@ func awsRestjson1_deserializeOpDocumentGetResourcePolicyOutput(v **GetResourcePo
 				}
 				sv.PolicyDocument = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -8963,6 +9031,7 @@ func awsRestjson1_deserializeOpDocumentGetRouteAnalysisOutput(v **GetRouteAnalys
 			if err := awsRestjson1_deserializeDocumentRouteAnalysis(&sv.RouteAnalysis, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9130,10 +9199,12 @@ func awsRestjson1_deserializeOpDocumentGetSitesOutput(v **GetSitesOutput, value 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Sites":
 			if err := awsRestjson1_deserializeDocumentSiteList(&sv.Sites, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9297,6 +9368,7 @@ func awsRestjson1_deserializeOpDocumentGetSiteToSiteVpnAttachmentOutput(v **GetS
 			if err := awsRestjson1_deserializeDocumentSiteToSiteVpnAttachment(&sv.SiteToSiteVpnAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9467,10 +9539,12 @@ func awsRestjson1_deserializeOpDocumentGetTransitGatewayConnectPeerAssociationsO
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TransitGatewayConnectPeerAssociations":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociationList(&sv.TransitGatewayConnectPeerAssociations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9634,6 +9708,7 @@ func awsRestjson1_deserializeOpDocumentGetTransitGatewayPeeringOutput(v **GetTra
 			if err := awsRestjson1_deserializeDocumentTransitGatewayPeering(&sv.TransitGatewayPeering, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9801,10 +9876,12 @@ func awsRestjson1_deserializeOpDocumentGetTransitGatewayRegistrationsOutput(v **
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "TransitGatewayRegistrations":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayRegistrationList(&sv.TransitGatewayRegistrations, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -9968,6 +10045,7 @@ func awsRestjson1_deserializeOpDocumentGetTransitGatewayRouteTableAttachmentOutp
 			if err := awsRestjson1_deserializeDocumentTransitGatewayRouteTableAttachment(&sv.TransitGatewayRouteTableAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10131,6 +10209,7 @@ func awsRestjson1_deserializeOpDocumentGetVpcAttachmentOutput(v **GetVpcAttachme
 			if err := awsRestjson1_deserializeDocumentVpcAttachment(&sv.VpcAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10291,6 +10370,7 @@ func awsRestjson1_deserializeOpDocumentListAttachmentsOutput(v **ListAttachments
 			if err := awsRestjson1_deserializeDocumentAttachmentList(&sv.Attachments, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10299,6 +10379,7 @@ func awsRestjson1_deserializeOpDocumentListAttachmentsOutput(v **ListAttachments
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10459,6 +10540,7 @@ func awsRestjson1_deserializeOpDocumentListConnectPeersOutput(v **ListConnectPee
 			if err := awsRestjson1_deserializeDocumentConnectPeerSummaryList(&sv.ConnectPeers, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10467,6 +10549,7 @@ func awsRestjson1_deserializeOpDocumentListConnectPeersOutput(v **ListConnectPee
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10630,6 +10713,7 @@ func awsRestjson1_deserializeOpDocumentListCoreNetworkPolicyVersionsOutput(v **L
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicyVersionList(&sv.CoreNetworkPolicyVersions, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10638,6 +10722,7 @@ func awsRestjson1_deserializeOpDocumentListCoreNetworkPolicyVersionsOutput(v **L
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10798,6 +10883,7 @@ func awsRestjson1_deserializeOpDocumentListCoreNetworksOutput(v **ListCoreNetwor
 			if err := awsRestjson1_deserializeDocumentCoreNetworkSummaryList(&sv.CoreNetworks, value); err != nil {
 				return err
 			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10806,6 +10892,7 @@ func awsRestjson1_deserializeOpDocumentListCoreNetworksOutput(v **ListCoreNetwor
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -10958,10 +11045,12 @@ func awsRestjson1_deserializeOpDocumentListOrganizationServiceAccessStatusOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "OrganizationStatus":
 			if err := awsRestjson1_deserializeDocumentOrganizationStatus(&sv.OrganizationStatus, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11126,10 +11215,12 @@ func awsRestjson1_deserializeOpDocumentListPeeringsOutput(v **ListPeeringsOutput
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Peerings":
 			if err := awsRestjson1_deserializeDocumentPeeringList(&sv.Peerings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11293,6 +11384,7 @@ func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.TagList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11462,6 +11554,7 @@ func awsRestjson1_deserializeOpDocumentPutCoreNetworkPolicyOutput(v **PutCoreNet
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicy(&sv.CoreNetworkPolicy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11731,6 +11824,7 @@ func awsRestjson1_deserializeOpDocumentRegisterTransitGatewayOutput(v **Register
 			if err := awsRestjson1_deserializeDocumentTransitGatewayRegistration(&sv.TransitGatewayRegistration, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -11897,6 +11991,7 @@ func awsRestjson1_deserializeOpDocumentRejectAttachmentOutput(v **RejectAttachme
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12063,6 +12158,7 @@ func awsRestjson1_deserializeOpDocumentRestoreCoreNetworkPolicyVersionOutput(v *
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicy(&sv.CoreNetworkPolicy, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12229,6 +12325,7 @@ func awsRestjson1_deserializeOpDocumentStartOrganizationServiceAccessUpdateOutpu
 			if err := awsRestjson1_deserializeDocumentOrganizationStatus(&sv.OrganizationStatus, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12395,6 +12492,7 @@ func awsRestjson1_deserializeOpDocumentStartRouteAnalysisOutput(v **StartRouteAn
 			if err := awsRestjson1_deserializeDocumentRouteAnalysis(&sv.RouteAnalysis, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12770,6 +12868,7 @@ func awsRestjson1_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 			if err := awsRestjson1_deserializeDocumentConnection(&sv.Connection, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -12936,6 +13035,7 @@ func awsRestjson1_deserializeOpDocumentUpdateCoreNetworkOutput(v **UpdateCoreNet
 			if err := awsRestjson1_deserializeDocumentCoreNetwork(&sv.CoreNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13102,6 +13202,7 @@ func awsRestjson1_deserializeOpDocumentUpdateDeviceOutput(v **UpdateDeviceOutput
 			if err := awsRestjson1_deserializeDocumentDevice(&sv.Device, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13268,6 +13369,7 @@ func awsRestjson1_deserializeOpDocumentUpdateGlobalNetworkOutput(v **UpdateGloba
 			if err := awsRestjson1_deserializeDocumentGlobalNetwork(&sv.GlobalNetwork, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13437,6 +13539,7 @@ func awsRestjson1_deserializeOpDocumentUpdateLinkOutput(v **UpdateLinkOutput, va
 			if err := awsRestjson1_deserializeDocumentLink(&sv.Link, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13603,6 +13706,7 @@ func awsRestjson1_deserializeOpDocumentUpdateNetworkResourceMetadataOutput(v **U
 			if err := awsRestjson1_deserializeDocumentNetworkResourceMetadataMap(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13611,6 +13715,7 @@ func awsRestjson1_deserializeOpDocumentUpdateNetworkResourceMetadataOutput(v **U
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13777,6 +13882,7 @@ func awsRestjson1_deserializeOpDocumentUpdateSiteOutput(v **UpdateSiteOutput, va
 			if err := awsRestjson1_deserializeDocumentSite(&sv.Site, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -13943,6 +14049,7 @@ func awsRestjson1_deserializeOpDocumentUpdateVpcAttachmentOutput(v **UpdateVpcAt
 			if err := awsRestjson1_deserializeDocumentVpcAttachment(&sv.VpcAttachment, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14310,6 +14417,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14349,6 +14457,7 @@ func awsRestjson1_deserializeDocumentAccountStatus(v **types.AccountStatus, valu
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "SLRDeploymentStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14357,6 +14466,7 @@ func awsRestjson1_deserializeDocumentAccountStatus(v **types.AccountStatus, valu
 				}
 				sv.SLRDeploymentStatus = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14430,6 +14540,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.AttachmentId = ptr.String(jtv)
 			}
+
 		case "AttachmentPolicyRuleNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14442,6 +14553,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.AttachmentPolicyRuleNumber = ptr.Int32(int32(i64))
 			}
+
 		case "AttachmentType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14450,6 +14562,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.AttachmentType = types.AttachmentType(jtv)
 			}
+
 		case "CoreNetworkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14458,6 +14571,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.CoreNetworkArn = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14466,6 +14580,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14481,6 +14596,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 
 				}
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14489,10 +14605,12 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "LastModificationErrors":
 			if err := awsRestjson1_deserializeDocumentAttachmentErrorList(&sv.LastModificationErrors, value); err != nil {
 				return err
 			}
+
 		case "NetworkFunctionGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14501,6 +14619,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14509,14 +14628,17 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
+
 		case "ProposedNetworkFunctionGroupChange":
 			if err := awsRestjson1_deserializeDocumentProposedNetworkFunctionGroupChange(&sv.ProposedNetworkFunctionGroupChange, value); err != nil {
 				return err
 			}
+
 		case "ProposedSegmentChange":
 			if err := awsRestjson1_deserializeDocumentProposedSegmentChange(&sv.ProposedSegmentChange, value); err != nil {
 				return err
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14525,6 +14647,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14533,6 +14656,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.SegmentName = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14541,10 +14665,12 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 				}
 				sv.State = types.AttachmentState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "UpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14560,6 +14686,7 @@ func awsRestjson1_deserializeDocumentAttachment(v **types.Attachment, value inte
 
 				}
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14599,6 +14726,7 @@ func awsRestjson1_deserializeDocumentAttachmentError(v **types.AttachmentError, 
 				}
 				sv.Code = types.AttachmentErrorCode(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14607,6 +14735,7 @@ func awsRestjson1_deserializeDocumentAttachmentError(v **types.AttachmentError, 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "RequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14615,6 +14744,7 @@ func awsRestjson1_deserializeDocumentAttachmentError(v **types.AttachmentError, 
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14623,6 +14753,7 @@ func awsRestjson1_deserializeDocumentAttachmentError(v **types.AttachmentError, 
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14730,6 +14861,7 @@ func awsRestjson1_deserializeDocumentAWSLocation(v **types.AWSLocation, value in
 				}
 				sv.SubnetArn = ptr.String(jtv)
 			}
+
 		case "Zone":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14738,6 +14870,7 @@ func awsRestjson1_deserializeDocumentAWSLocation(v **types.AWSLocation, value in
 				}
 				sv.Zone = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14781,6 +14914,7 @@ func awsRestjson1_deserializeDocumentBandwidth(v **types.Bandwidth, value interf
 				}
 				sv.DownloadSpeed = ptr.Int32(int32(i64))
 			}
+
 		case "UploadSpeed":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14793,6 +14927,7 @@ func awsRestjson1_deserializeDocumentBandwidth(v **types.Bandwidth, value interf
 				}
 				sv.UploadSpeed = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14832,6 +14967,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14840,6 +14976,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14848,6 +14985,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14883,10 +15021,12 @@ func awsRestjson1_deserializeDocumentConnectAttachment(v **types.ConnectAttachme
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		case "Options":
 			if err := awsRestjson1_deserializeDocumentConnectAttachmentOptions(&sv.Options, value); err != nil {
 				return err
 			}
+
 		case "TransportAttachmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14895,6 +15035,7 @@ func awsRestjson1_deserializeDocumentConnectAttachment(v **types.ConnectAttachme
 				}
 				sv.TransportAttachmentId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14934,6 +15075,7 @@ func awsRestjson1_deserializeDocumentConnectAttachmentOptions(v **types.ConnectA
 				}
 				sv.Protocol = types.TunnelProtocol(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -14973,6 +15115,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectedDeviceId = ptr.String(jtv)
 			}
+
 		case "ConnectedLinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14981,6 +15124,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectedLinkId = ptr.String(jtv)
 			}
+
 		case "ConnectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14989,6 +15133,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionArn = ptr.String(jtv)
 			}
+
 		case "ConnectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14997,6 +15142,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.ConnectionId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15012,6 +15158,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15020,6 +15167,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15028,6 +15176,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15036,6 +15185,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "LinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15044,6 +15194,7 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.LinkId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15052,10 +15203,12 @@ func awsRestjson1_deserializeDocumentConnection(v **types.Connection, value inte
 				}
 				sv.State = types.ConnectionState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15095,6 +15248,7 @@ func awsRestjson1_deserializeDocumentConnectionHealth(v **types.ConnectionHealth
 				}
 				sv.Status = types.ConnectionStatus(jtv)
 			}
+
 		case "Timestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15110,6 +15264,7 @@ func awsRestjson1_deserializeDocumentConnectionHealth(v **types.ConnectionHealth
 
 				}
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15118,6 +15273,7 @@ func awsRestjson1_deserializeDocumentConnectionHealth(v **types.ConnectionHealth
 				}
 				sv.Type = types.ConnectionType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15187,6 +15343,7 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 			if err := awsRestjson1_deserializeDocumentConnectPeerConfiguration(&sv.Configuration, value); err != nil {
 				return err
 			}
+
 		case "ConnectAttachmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15195,6 +15352,7 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				}
 				sv.ConnectAttachmentId = ptr.String(jtv)
 			}
+
 		case "ConnectPeerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15203,6 +15361,7 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				}
 				sv.ConnectPeerId = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15211,6 +15370,7 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15226,6 +15386,7 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 
 				}
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15234,10 +15395,12 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "LastModificationErrors":
 			if err := awsRestjson1_deserializeDocumentConnectPeerErrorList(&sv.LastModificationErrors, value); err != nil {
 				return err
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15246,6 +15409,7 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				}
 				sv.State = types.ConnectPeerState(jtv)
 			}
+
 		case "SubnetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15254,10 +15418,12 @@ func awsRestjson1_deserializeDocumentConnectPeer(v **types.ConnectPeer, value in
 				}
 				sv.SubnetArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15297,6 +15463,7 @@ func awsRestjson1_deserializeDocumentConnectPeerAssociation(v **types.ConnectPee
 				}
 				sv.ConnectPeerId = ptr.String(jtv)
 			}
+
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15305,6 +15472,7 @@ func awsRestjson1_deserializeDocumentConnectPeerAssociation(v **types.ConnectPee
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15313,6 +15481,7 @@ func awsRestjson1_deserializeDocumentConnectPeerAssociation(v **types.ConnectPee
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "LinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15321,6 +15490,7 @@ func awsRestjson1_deserializeDocumentConnectPeerAssociation(v **types.ConnectPee
 				}
 				sv.LinkId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15329,6 +15499,7 @@ func awsRestjson1_deserializeDocumentConnectPeerAssociation(v **types.ConnectPee
 				}
 				sv.State = types.ConnectPeerAssociationState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15402,6 +15573,7 @@ func awsRestjson1_deserializeDocumentConnectPeerBgpConfiguration(v **types.Conne
 				}
 				sv.CoreNetworkAddress = ptr.String(jtv)
 			}
+
 		case "CoreNetworkAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15414,6 +15586,7 @@ func awsRestjson1_deserializeDocumentConnectPeerBgpConfiguration(v **types.Conne
 				}
 				sv.CoreNetworkAsn = ptr.Int64(i64)
 			}
+
 		case "PeerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15422,6 +15595,7 @@ func awsRestjson1_deserializeDocumentConnectPeerBgpConfiguration(v **types.Conne
 				}
 				sv.PeerAddress = ptr.String(jtv)
 			}
+
 		case "PeerAsn":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -15434,6 +15608,7 @@ func awsRestjson1_deserializeDocumentConnectPeerBgpConfiguration(v **types.Conne
 				}
 				sv.PeerAsn = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15503,6 +15678,7 @@ func awsRestjson1_deserializeDocumentConnectPeerConfiguration(v **types.ConnectP
 			if err := awsRestjson1_deserializeDocumentConnectPeerBgpConfigurationList(&sv.BgpConfigurations, value); err != nil {
 				return err
 			}
+
 		case "CoreNetworkAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15511,10 +15687,12 @@ func awsRestjson1_deserializeDocumentConnectPeerConfiguration(v **types.ConnectP
 				}
 				sv.CoreNetworkAddress = ptr.String(jtv)
 			}
+
 		case "InsideCidrBlocks":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.InsideCidrBlocks, value); err != nil {
 				return err
 			}
+
 		case "PeerAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15523,6 +15701,7 @@ func awsRestjson1_deserializeDocumentConnectPeerConfiguration(v **types.ConnectP
 				}
 				sv.PeerAddress = ptr.String(jtv)
 			}
+
 		case "Protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15531,6 +15710,7 @@ func awsRestjson1_deserializeDocumentConnectPeerConfiguration(v **types.ConnectP
 				}
 				sv.Protocol = types.TunnelProtocol(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15570,6 +15750,7 @@ func awsRestjson1_deserializeDocumentConnectPeerError(v **types.ConnectPeerError
 				}
 				sv.Code = types.ConnectPeerErrorCode(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15578,6 +15759,7 @@ func awsRestjson1_deserializeDocumentConnectPeerError(v **types.ConnectPeerError
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "RequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15586,6 +15768,7 @@ func awsRestjson1_deserializeDocumentConnectPeerError(v **types.ConnectPeerError
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15594,6 +15777,7 @@ func awsRestjson1_deserializeDocumentConnectPeerError(v **types.ConnectPeerError
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15667,6 +15851,7 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 				}
 				sv.ConnectAttachmentId = ptr.String(jtv)
 			}
+
 		case "ConnectPeerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15675,6 +15860,7 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 				}
 				sv.ConnectPeerId = ptr.String(jtv)
 			}
+
 		case "ConnectPeerState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15683,6 +15869,7 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 				}
 				sv.ConnectPeerState = types.ConnectPeerState(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15691,6 +15878,7 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15706,6 +15894,7 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 
 				}
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15714,6 +15903,7 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "SubnetArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15722,10 +15912,12 @@ func awsRestjson1_deserializeDocumentConnectPeerSummary(v **types.ConnectPeerSum
 				}
 				sv.SubnetArn = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15835,6 +16027,7 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 				}
 				sv.CoreNetworkArn = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15843,6 +16036,7 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -15858,6 +16052,7 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15866,10 +16061,12 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "Edges":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkEdgeList(&sv.Edges, value); err != nil {
 				return err
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15878,14 +16075,17 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "NetworkFunctionGroups":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroupList(&sv.NetworkFunctionGroups, value); err != nil {
 				return err
 			}
+
 		case "Segments":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkSegmentList(&sv.Segments, value); err != nil {
 				return err
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15894,10 +16094,12 @@ func awsRestjson1_deserializeDocumentCoreNetwork(v **types.CoreNetwork, value in
 				}
 				sv.State = types.CoreNetworkState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -15937,6 +16139,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChange(v **types.CoreNetworkChan
 				}
 				sv.Action = types.ChangeAction(jtv)
 			}
+
 		case "Identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15945,6 +16148,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChange(v **types.CoreNetworkChan
 				}
 				sv.Identifier = ptr.String(jtv)
 			}
+
 		case "IdentifierPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15953,14 +16157,17 @@ func awsRestjson1_deserializeDocumentCoreNetworkChange(v **types.CoreNetworkChan
 				}
 				sv.IdentifierPath = ptr.String(jtv)
 			}
+
 		case "NewValues":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkChangeValues(&sv.NewValues, value); err != nil {
 				return err
 			}
+
 		case "PreviousValues":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkChangeValues(&sv.PreviousValues, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15969,6 +16176,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChange(v **types.CoreNetworkChan
 				}
 				sv.Type = types.ChangeType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16008,6 +16216,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEvent(v **types.CoreNetwor
 				}
 				sv.Action = types.ChangeAction(jtv)
 			}
+
 		case "EventTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16023,6 +16232,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEvent(v **types.CoreNetwor
 
 				}
 			}
+
 		case "IdentifierPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16031,6 +16241,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEvent(v **types.CoreNetwor
 				}
 				sv.IdentifierPath = ptr.String(jtv)
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16039,6 +16250,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEvent(v **types.CoreNetwor
 				}
 				sv.Status = types.ChangeStatus(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16047,10 +16259,12 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEvent(v **types.CoreNetwor
 				}
 				sv.Type = types.ChangeType(jtv)
 			}
+
 		case "Values":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(&sv.Values, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16124,6 +16338,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(v **types.Core
 				}
 				sv.AttachmentId = ptr.String(jtv)
 			}
+
 		case "Cidr":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16132,6 +16347,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(v **types.Core
 				}
 				sv.Cidr = ptr.String(jtv)
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16140,6 +16356,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(v **types.Core
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "NetworkFunctionGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16148,6 +16365,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(v **types.Core
 				}
 				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16156,6 +16374,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeEventValues(v **types.Core
 				}
 				sv.SegmentName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16233,6 +16452,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				}
 				sv.Asn = ptr.Int64(i64)
 			}
+
 		case "Cidr":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16241,6 +16461,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				}
 				sv.Cidr = ptr.String(jtv)
 			}
+
 		case "DestinationIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16249,14 +16470,17 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				}
 				sv.DestinationIdentifier = ptr.String(jtv)
 			}
+
 		case "EdgeLocations":
 			if err := awsRestjson1_deserializeDocumentExternalRegionCodeList(&sv.EdgeLocations, value); err != nil {
 				return err
 			}
+
 		case "InsideCidrBlocks":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.InsideCidrBlocks, value); err != nil {
 				return err
 			}
+
 		case "NetworkFunctionGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16265,6 +16489,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				}
 				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16273,14 +16498,17 @@ func awsRestjson1_deserializeDocumentCoreNetworkChangeValues(v **types.CoreNetwo
 				}
 				sv.SegmentName = ptr.String(jtv)
 			}
+
 		case "ServiceInsertionActions":
 			if err := awsRestjson1_deserializeDocumentServiceInsertionActionList(&sv.ServiceInsertionActions, value); err != nil {
 				return err
 			}
+
 		case "SharedSegments":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SharedSegments, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16324,6 +16552,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkEdge(v **types.CoreNetworkEdge, 
 				}
 				sv.Asn = ptr.Int64(i64)
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16332,10 +16561,12 @@ func awsRestjson1_deserializeDocumentCoreNetworkEdge(v **types.CoreNetworkEdge, 
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "InsideCidrBlocks":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.InsideCidrBlocks, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16405,6 +16636,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroup(v **types.C
 			if err := awsRestjson1_deserializeDocumentExternalRegionCodeList(&sv.EdgeLocations, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16413,10 +16645,12 @@ func awsRestjson1_deserializeDocumentCoreNetworkNetworkFunctionGroup(v **types.C
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "Segments":
 			if err := awsRestjson1_deserializeDocumentServiceInsertionSegments(&sv.Segments, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16490,6 +16724,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 				}
 				sv.Alias = types.CoreNetworkPolicyAlias(jtv)
 			}
+
 		case "ChangeSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16498,6 +16733,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 				}
 				sv.ChangeSetState = types.ChangeSetState(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16506,6 +16742,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16521,6 +16758,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16529,6 +16767,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "PolicyDocument":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16537,10 +16776,12 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 				}
 				sv.PolicyDocument = ptr.String(jtv)
 			}
+
 		case "PolicyErrors":
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicyErrorList(&sv.PolicyErrors, value); err != nil {
 				return err
 			}
+
 		case "PolicyVersionId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16553,6 +16794,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicy(v **types.CoreNetworkPoli
 				}
 				sv.PolicyVersionId = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16592,6 +16834,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyError(v **types.CoreNetwor
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16600,6 +16843,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyError(v **types.CoreNetwor
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Path":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16608,6 +16852,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyError(v **types.CoreNetwor
 				}
 				sv.Path = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16677,6 +16922,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyException(v **types.CoreNe
 			if err := awsRestjson1_deserializeDocumentCoreNetworkPolicyErrorList(&sv.Errors, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16685,6 +16931,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyException(v **types.CoreNe
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16724,6 +16971,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyVersion(v **types.CoreNetw
 				}
 				sv.Alias = types.CoreNetworkPolicyAlias(jtv)
 			}
+
 		case "ChangeSetState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16732,6 +16980,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyVersion(v **types.CoreNetw
 				}
 				sv.ChangeSetState = types.ChangeSetState(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16740,6 +16989,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyVersion(v **types.CoreNetw
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -16755,6 +17005,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyVersion(v **types.CoreNetw
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16763,6 +17014,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyVersion(v **types.CoreNetw
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "PolicyVersionId":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -16775,6 +17027,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkPolicyVersion(v **types.CoreNetw
 				}
 				sv.PolicyVersionId = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16844,6 +17097,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSegment(v **types.CoreNetworkSeg
 			if err := awsRestjson1_deserializeDocumentExternalRegionCodeList(&sv.EdgeLocations, value); err != nil {
 				return err
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16852,10 +17106,12 @@ func awsRestjson1_deserializeDocumentCoreNetworkSegment(v **types.CoreNetworkSeg
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "SharedSegments":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SharedSegments, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16895,6 +17151,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSegmentEdgeIdentifier(v **types.
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16903,6 +17160,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSegmentEdgeIdentifier(v **types.
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16911,6 +17169,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSegmentEdgeIdentifier(v **types.
 				}
 				sv.SegmentName = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -16984,6 +17243,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSummary(v **types.CoreNetworkSum
 				}
 				sv.CoreNetworkArn = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16992,6 +17252,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSummary(v **types.CoreNetworkSum
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17000,6 +17261,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSummary(v **types.CoreNetworkSum
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17008,6 +17270,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSummary(v **types.CoreNetworkSum
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17016,6 +17279,7 @@ func awsRestjson1_deserializeDocumentCoreNetworkSummary(v **types.CoreNetworkSum
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17024,10 +17288,12 @@ func awsRestjson1_deserializeDocumentCoreNetworkSummary(v **types.CoreNetworkSum
 				}
 				sv.State = types.CoreNetworkState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17101,6 +17367,7 @@ func awsRestjson1_deserializeDocumentCustomerGatewayAssociation(v **types.Custom
 				}
 				sv.CustomerGatewayArn = ptr.String(jtv)
 			}
+
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17109,6 +17376,7 @@ func awsRestjson1_deserializeDocumentCustomerGatewayAssociation(v **types.Custom
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17117,6 +17385,7 @@ func awsRestjson1_deserializeDocumentCustomerGatewayAssociation(v **types.Custom
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "LinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17125,6 +17394,7 @@ func awsRestjson1_deserializeDocumentCustomerGatewayAssociation(v **types.Custom
 				}
 				sv.LinkId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17133,6 +17403,7 @@ func awsRestjson1_deserializeDocumentCustomerGatewayAssociation(v **types.Custom
 				}
 				sv.State = types.CustomerGatewayAssociationState(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17202,6 +17473,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 			if err := awsRestjson1_deserializeDocumentAWSLocation(&sv.AWSLocation, value); err != nil {
 				return err
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17217,6 +17489,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17225,6 +17498,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "DeviceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17233,6 +17507,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.DeviceArn = ptr.String(jtv)
 			}
+
 		case "DeviceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17241,6 +17516,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17249,10 +17525,12 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "Location":
 			if err := awsRestjson1_deserializeDocumentLocation(&sv.Location, value); err != nil {
 				return err
 			}
+
 		case "Model":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17261,6 +17539,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Model = ptr.String(jtv)
 			}
+
 		case "SerialNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17269,6 +17548,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.SerialNumber = ptr.String(jtv)
 			}
+
 		case "SiteId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17277,6 +17557,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.SiteId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17285,10 +17566,12 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.State = types.DeviceState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17297,6 +17580,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		case "Vendor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17305,6 +17589,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 				}
 				sv.Vendor = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17374,6 +17659,7 @@ func awsRestjson1_deserializeDocumentEdgeOverride(v **types.EdgeOverride, value 
 			if err := awsRestjson1_deserializeDocumentEdgeSetList(&sv.EdgeSets, value); err != nil {
 				return err
 			}
+
 		case "UseEdge":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17382,6 +17668,7 @@ func awsRestjson1_deserializeDocumentEdgeOverride(v **types.EdgeOverride, value 
 				}
 				sv.UseEdge = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17568,6 +17855,7 @@ func awsRestjson1_deserializeDocumentGlobalNetwork(v **types.GlobalNetwork, valu
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17576,6 +17864,7 @@ func awsRestjson1_deserializeDocumentGlobalNetwork(v **types.GlobalNetwork, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17584,6 +17873,7 @@ func awsRestjson1_deserializeDocumentGlobalNetwork(v **types.GlobalNetwork, valu
 				}
 				sv.GlobalNetworkArn = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17592,6 +17882,7 @@ func awsRestjson1_deserializeDocumentGlobalNetwork(v **types.GlobalNetwork, valu
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17600,10 +17891,12 @@ func awsRestjson1_deserializeDocumentGlobalNetwork(v **types.GlobalNetwork, valu
 				}
 				sv.State = types.GlobalNetworkState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17677,6 +17970,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "RetryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -17689,6 +17983,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17724,6 +18019,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 			if err := awsRestjson1_deserializeDocumentBandwidth(&sv.Bandwidth, value); err != nil {
 				return err
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -17739,6 +18035,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17747,6 +18044,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17755,6 +18053,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "LinkArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17763,6 +18062,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.LinkArn = ptr.String(jtv)
 			}
+
 		case "LinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17771,6 +18071,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.LinkId = ptr.String(jtv)
 			}
+
 		case "Provider":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17779,6 +18080,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.Provider = ptr.String(jtv)
 			}
+
 		case "SiteId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17787,6 +18089,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.SiteId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17795,10 +18098,12 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.State = types.LinkState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17807,6 +18112,7 @@ func awsRestjson1_deserializeDocumentLink(v **types.Link, value interface{}) err
 				}
 				sv.Type = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17846,6 +18152,7 @@ func awsRestjson1_deserializeDocumentLinkAssociation(v **types.LinkAssociation, 
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17854,6 +18161,7 @@ func awsRestjson1_deserializeDocumentLinkAssociation(v **types.LinkAssociation, 
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "LinkAssociationState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17862,6 +18170,7 @@ func awsRestjson1_deserializeDocumentLinkAssociation(v **types.LinkAssociation, 
 				}
 				sv.LinkAssociationState = types.LinkAssociationState(jtv)
 			}
+
 		case "LinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17870,6 +18179,7 @@ func awsRestjson1_deserializeDocumentLinkAssociation(v **types.LinkAssociation, 
 				}
 				sv.LinkId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -17977,6 +18287,7 @@ func awsRestjson1_deserializeDocumentLocation(v **types.Location, value interfac
 				}
 				sv.Address = ptr.String(jtv)
 			}
+
 		case "Latitude":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17985,6 +18296,7 @@ func awsRestjson1_deserializeDocumentLocation(v **types.Location, value interfac
 				}
 				sv.Latitude = ptr.String(jtv)
 			}
+
 		case "Longitude":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17993,6 +18305,7 @@ func awsRestjson1_deserializeDocumentLocation(v **types.Location, value interfac
 				}
 				sv.Longitude = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18032,6 +18345,7 @@ func awsRestjson1_deserializeDocumentNetworkFunctionGroup(v **types.NetworkFunct
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18105,6 +18419,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "AwsRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18113,6 +18428,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.AwsRegion = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18121,6 +18437,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "Definition":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18129,6 +18446,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.Definition = ptr.String(jtv)
 			}
+
 		case "DefinitionTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -18144,10 +18462,12 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 
 				}
 			}
+
 		case "Metadata":
 			if err := awsRestjson1_deserializeDocumentNetworkResourceMetadataMap(&sv.Metadata, value); err != nil {
 				return err
 			}
+
 		case "RegisteredGatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18156,6 +18476,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.RegisteredGatewayArn = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18164,6 +18485,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18172,6 +18494,7 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18180,10 +18503,12 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18227,6 +18552,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceCount(v **types.NetworkResou
 				}
 				sv.Count = ptr.Int32(int32(i64))
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18235,6 +18561,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceCount(v **types.NetworkResou
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18378,6 +18705,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceSummary(v **types.NetworkRes
 				}
 				sv.Definition = ptr.String(jtv)
 			}
+
 		case "IsMiddlebox":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -18386,6 +18714,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceSummary(v **types.NetworkRes
 				}
 				sv.IsMiddlebox = jtv
 			}
+
 		case "NameTag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18394,6 +18723,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceSummary(v **types.NetworkRes
 				}
 				sv.NameTag = ptr.String(jtv)
 			}
+
 		case "RegisteredGatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18402,6 +18732,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceSummary(v **types.NetworkRes
 				}
 				sv.RegisteredGatewayArn = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18410,6 +18741,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceSummary(v **types.NetworkRes
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18418,6 +18750,7 @@ func awsRestjson1_deserializeDocumentNetworkResourceSummary(v **types.NetworkRes
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18457,10 +18790,12 @@ func awsRestjson1_deserializeDocumentNetworkRoute(v **types.NetworkRoute, value 
 				}
 				sv.DestinationCidrBlock = ptr.String(jtv)
 			}
+
 		case "Destinations":
 			if err := awsRestjson1_deserializeDocumentNetworkRouteDestinationList(&sv.Destinations, value); err != nil {
 				return err
 			}
+
 		case "PrefixListId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18469,6 +18804,7 @@ func awsRestjson1_deserializeDocumentNetworkRoute(v **types.NetworkRoute, value 
 				}
 				sv.PrefixListId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18477,6 +18813,7 @@ func awsRestjson1_deserializeDocumentNetworkRoute(v **types.NetworkRoute, value 
 				}
 				sv.State = types.RouteState(jtv)
 			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18485,6 +18822,7 @@ func awsRestjson1_deserializeDocumentNetworkRoute(v **types.NetworkRoute, value 
 				}
 				sv.Type = types.RouteType(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18524,6 +18862,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.CoreNetworkAttachmentId = ptr.String(jtv)
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18532,6 +18871,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "NetworkFunctionGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18540,6 +18880,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18548,6 +18889,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18556,6 +18898,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18564,6 +18907,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.SegmentName = ptr.String(jtv)
 			}
+
 		case "TransitGatewayAttachmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18572,6 +18916,7 @@ func awsRestjson1_deserializeDocumentNetworkRouteDestination(v **types.NetworkRo
 				}
 				sv.TransitGatewayAttachmentId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18679,6 +19024,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.AccountId = ptr.String(jtv)
 			}
+
 		case "Address":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18687,6 +19033,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.Address = ptr.String(jtv)
 			}
+
 		case "AwsRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18695,6 +19042,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.AwsRegion = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18703,10 +19051,12 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "Health":
 			if err := awsRestjson1_deserializeDocumentConnectionHealth(&sv.Health, value); err != nil {
 				return err
 			}
+
 		case "RegisteredGatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18715,6 +19065,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.RegisteredGatewayArn = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18723,6 +19074,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18731,6 +19083,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18739,6 +19092,7 @@ func awsRestjson1_deserializeDocumentNetworkTelemetry(v **types.NetworkTelemetry
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18808,6 +19162,7 @@ func awsRestjson1_deserializeDocumentOrganizationStatus(v **types.OrganizationSt
 			if err := awsRestjson1_deserializeDocumentAccountStatusList(&sv.AccountStatusList, value); err != nil {
 				return err
 			}
+
 		case "OrganizationAwsServiceAccessStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18816,6 +19171,7 @@ func awsRestjson1_deserializeDocumentOrganizationStatus(v **types.OrganizationSt
 				}
 				sv.OrganizationAwsServiceAccessStatus = ptr.String(jtv)
 			}
+
 		case "OrganizationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18824,6 +19180,7 @@ func awsRestjson1_deserializeDocumentOrganizationStatus(v **types.OrganizationSt
 				}
 				sv.OrganizationId = ptr.String(jtv)
 			}
+
 		case "SLRDeploymentStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18832,6 +19189,7 @@ func awsRestjson1_deserializeDocumentOrganizationStatus(v **types.OrganizationSt
 				}
 				sv.SLRDeploymentStatus = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18871,10 +19229,12 @@ func awsRestjson1_deserializeDocumentPathComponent(v **types.PathComponent, valu
 				}
 				sv.DestinationCidrBlock = ptr.String(jtv)
 			}
+
 		case "Resource":
 			if err := awsRestjson1_deserializeDocumentNetworkResourceSummary(&sv.Resource, value); err != nil {
 				return err
 			}
+
 		case "Sequence":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18887,6 +19247,7 @@ func awsRestjson1_deserializeDocumentPathComponent(v **types.PathComponent, valu
 				}
 				sv.Sequence = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -18960,6 +19321,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.CoreNetworkArn = ptr.String(jtv)
 			}
+
 		case "CoreNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18968,6 +19330,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.CoreNetworkId = ptr.String(jtv)
 			}
+
 		case "CreatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -18983,6 +19346,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 
 				}
 			}
+
 		case "EdgeLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18991,10 +19355,12 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.EdgeLocation = ptr.String(jtv)
 			}
+
 		case "LastModificationErrors":
 			if err := awsRestjson1_deserializeDocumentPeeringErrorList(&sv.LastModificationErrors, value); err != nil {
 				return err
 			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19003,6 +19369,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
+
 		case "PeeringId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19011,6 +19378,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.PeeringId = ptr.String(jtv)
 			}
+
 		case "PeeringType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19019,6 +19387,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.PeeringType = types.PeeringType(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19027,6 +19396,7 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19035,10 +19405,12 @@ func awsRestjson1_deserializeDocumentPeering(v **types.Peering, value interface{
 				}
 				sv.State = types.PeeringState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19078,6 +19450,7 @@ func awsRestjson1_deserializeDocumentPeeringError(v **types.PeeringError, value 
 				}
 				sv.Code = types.PeeringErrorCode(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19086,10 +19459,12 @@ func awsRestjson1_deserializeDocumentPeeringError(v **types.PeeringError, value 
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "MissingPermissionsContext":
 			if err := awsRestjson1_deserializeDocumentPermissionsErrorContext(&sv.MissingPermissionsContext, value); err != nil {
 				return err
 			}
+
 		case "RequestId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19098,6 +19473,7 @@ func awsRestjson1_deserializeDocumentPeeringError(v **types.PeeringError, value 
 				}
 				sv.RequestId = ptr.String(jtv)
 			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19106,6 +19482,7 @@ func awsRestjson1_deserializeDocumentPeeringError(v **types.PeeringError, value 
 				}
 				sv.ResourceArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19213,6 +19590,7 @@ func awsRestjson1_deserializeDocumentPermissionsErrorContext(v **types.Permissio
 				}
 				sv.MissingPermission = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19256,6 +19634,7 @@ func awsRestjson1_deserializeDocumentProposedNetworkFunctionGroupChange(v **type
 				}
 				sv.AttachmentPolicyRuleNumber = ptr.Int32(int32(i64))
 			}
+
 		case "NetworkFunctionGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19264,10 +19643,12 @@ func awsRestjson1_deserializeDocumentProposedNetworkFunctionGroupChange(v **type
 				}
 				sv.NetworkFunctionGroupName = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19311,6 +19692,7 @@ func awsRestjson1_deserializeDocumentProposedSegmentChange(v **types.ProposedSeg
 				}
 				sv.AttachmentPolicyRuleNumber = ptr.Int32(int32(i64))
 			}
+
 		case "SegmentName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19319,10 +19701,12 @@ func awsRestjson1_deserializeDocumentProposedSegmentChange(v **types.ProposedSeg
 				}
 				sv.SegmentName = ptr.String(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19398,6 +19782,7 @@ func awsRestjson1_deserializeDocumentRelationship(v **types.Relationship, value 
 				}
 				sv.From = ptr.String(jtv)
 			}
+
 		case "To":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19406,6 +19791,7 @@ func awsRestjson1_deserializeDocumentRelationship(v **types.Relationship, value 
 				}
 				sv.To = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19475,6 +19861,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			if err := awsRestjson1_deserializeDocumentExceptionContextMap(&sv.Context, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19483,6 +19870,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19491,6 +19879,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19499,6 +19888,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19534,10 +19924,12 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 			if err := awsRestjson1_deserializeDocumentRouteAnalysisEndpointOptions(&sv.Destination, value); err != nil {
 				return err
 			}
+
 		case "ForwardPath":
 			if err := awsRestjson1_deserializeDocumentRouteAnalysisPath(&sv.ForwardPath, value); err != nil {
 				return err
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19546,6 +19938,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "IncludeReturnPath":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -19554,6 +19947,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 				}
 				sv.IncludeReturnPath = jtv
 			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19562,10 +19956,12 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 				}
 				sv.OwnerAccountId = ptr.String(jtv)
 			}
+
 		case "ReturnPath":
 			if err := awsRestjson1_deserializeDocumentRouteAnalysisPath(&sv.ReturnPath, value); err != nil {
 				return err
 			}
+
 		case "RouteAnalysisId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19574,10 +19970,12 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 				}
 				sv.RouteAnalysisId = ptr.String(jtv)
 			}
+
 		case "Source":
 			if err := awsRestjson1_deserializeDocumentRouteAnalysisEndpointOptions(&sv.Source, value); err != nil {
 				return err
 			}
+
 		case "StartTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -19593,6 +19991,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 
 				}
 			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19601,6 +20000,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 				}
 				sv.Status = types.RouteAnalysisStatus(jtv)
 			}
+
 		case "UseMiddleboxes":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -19609,6 +20009,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysis(v **types.RouteAnalysis, valu
 				}
 				sv.UseMiddleboxes = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19648,10 +20049,12 @@ func awsRestjson1_deserializeDocumentRouteAnalysisCompletion(v **types.RouteAnal
 				}
 				sv.ReasonCode = types.RouteAnalysisCompletionReasonCode(jtv)
 			}
+
 		case "ReasonContext":
 			if err := awsRestjson1_deserializeDocumentReasonContextMap(&sv.ReasonContext, value); err != nil {
 				return err
 			}
+
 		case "ResultCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19660,6 +20063,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysisCompletion(v **types.RouteAnal
 				}
 				sv.ResultCode = types.RouteAnalysisCompletionResultCode(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19699,6 +20103,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysisEndpointOptions(v **types.Rout
 				}
 				sv.IpAddress = ptr.String(jtv)
 			}
+
 		case "TransitGatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19707,6 +20112,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysisEndpointOptions(v **types.Rout
 				}
 				sv.TransitGatewayArn = ptr.String(jtv)
 			}
+
 		case "TransitGatewayAttachmentArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19715,6 +20121,7 @@ func awsRestjson1_deserializeDocumentRouteAnalysisEndpointOptions(v **types.Rout
 				}
 				sv.TransitGatewayAttachmentArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19750,10 +20157,12 @@ func awsRestjson1_deserializeDocumentRouteAnalysisPath(v **types.RouteAnalysisPa
 			if err := awsRestjson1_deserializeDocumentRouteAnalysisCompletion(&sv.CompletionStatus, value); err != nil {
 				return err
 			}
+
 		case "Path":
 			if err := awsRestjson1_deserializeDocumentPathComponentList(&sv.Path, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19793,6 +20202,7 @@ func awsRestjson1_deserializeDocumentServiceInsertionAction(v **types.ServiceIns
 				}
 				sv.Action = types.SegmentActionServiceInsertion(jtv)
 			}
+
 		case "Mode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19801,14 +20211,17 @@ func awsRestjson1_deserializeDocumentServiceInsertionAction(v **types.ServiceIns
 				}
 				sv.Mode = types.SendViaMode(jtv)
 			}
+
 		case "Via":
 			if err := awsRestjson1_deserializeDocumentVia(&sv.Via, value); err != nil {
 				return err
 			}
+
 		case "WhenSentTo":
 			if err := awsRestjson1_deserializeDocumentWhenSentTo(&sv.WhenSentTo, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19878,10 +20291,12 @@ func awsRestjson1_deserializeDocumentServiceInsertionSegments(v **types.ServiceI
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SendTo, value); err != nil {
 				return err
 			}
+
 		case "SendVia":
 			if err := awsRestjson1_deserializeDocumentConstrainedStringList(&sv.SendVia, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19921,6 +20336,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.LimitCode = ptr.String(jtv)
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19929,6 +20345,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "ResourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19937,6 +20354,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "ResourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19945,6 +20363,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "ServiceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19953,6 +20372,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -19999,6 +20419,7 @@ func awsRestjson1_deserializeDocumentSite(v **types.Site, value interface{}) err
 
 				}
 			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20007,6 +20428,7 @@ func awsRestjson1_deserializeDocumentSite(v **types.Site, value interface{}) err
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20015,10 +20437,12 @@ func awsRestjson1_deserializeDocumentSite(v **types.Site, value interface{}) err
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "Location":
 			if err := awsRestjson1_deserializeDocumentLocation(&sv.Location, value); err != nil {
 				return err
 			}
+
 		case "SiteArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20027,6 +20451,7 @@ func awsRestjson1_deserializeDocumentSite(v **types.Site, value interface{}) err
 				}
 				sv.SiteArn = ptr.String(jtv)
 			}
+
 		case "SiteId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20035,6 +20460,7 @@ func awsRestjson1_deserializeDocumentSite(v **types.Site, value interface{}) err
 				}
 				sv.SiteId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20043,10 +20469,12 @@ func awsRestjson1_deserializeDocumentSite(v **types.Site, value interface{}) err
 				}
 				sv.State = types.SiteState(jtv)
 			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20116,6 +20544,7 @@ func awsRestjson1_deserializeDocumentSiteToSiteVpnAttachment(v **types.SiteToSit
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		case "VpnConnectionArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20124,6 +20553,7 @@ func awsRestjson1_deserializeDocumentSiteToSiteVpnAttachment(v **types.SiteToSit
 				}
 				sv.VpnConnectionArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20199,6 +20629,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Key = ptr.String(jtv)
 			}
+
 		case "Value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20207,6 +20638,7 @@ func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error
 				}
 				sv.Value = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20280,6 +20712,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "RetryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20292,6 +20725,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20331,6 +20765,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(v **ty
 				}
 				sv.DeviceId = ptr.String(jtv)
 			}
+
 		case "GlobalNetworkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20339,6 +20774,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(v **ty
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "LinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20347,6 +20783,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(v **ty
 				}
 				sv.LinkId = ptr.String(jtv)
 			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20355,6 +20792,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(v **ty
 				}
 				sv.State = types.TransitGatewayConnectPeerAssociationState(jtv)
 			}
+
 		case "TransitGatewayConnectPeerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20363,6 +20801,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayConnectPeerAssociation(v **ty
 				}
 				sv.TransitGatewayConnectPeerArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20432,6 +20871,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayPeering(v **types.TransitGate
 			if err := awsRestjson1_deserializeDocumentPeering(&sv.Peering, value); err != nil {
 				return err
 			}
+
 		case "TransitGatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20440,6 +20880,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayPeering(v **types.TransitGate
 				}
 				sv.TransitGatewayArn = ptr.String(jtv)
 			}
+
 		case "TransitGatewayPeeringAttachmentId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20448,6 +20889,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayPeering(v **types.TransitGate
 				}
 				sv.TransitGatewayPeeringAttachmentId = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20487,10 +20929,12 @@ func awsRestjson1_deserializeDocumentTransitGatewayRegistration(v **types.Transi
 				}
 				sv.GlobalNetworkId = ptr.String(jtv)
 			}
+
 		case "State":
 			if err := awsRestjson1_deserializeDocumentTransitGatewayRegistrationStateReason(&sv.State, value); err != nil {
 				return err
 			}
+
 		case "TransitGatewayArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20499,6 +20943,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayRegistration(v **types.Transi
 				}
 				sv.TransitGatewayArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20572,6 +21017,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayRegistrationStateReason(v **t
 				}
 				sv.Code = types.TransitGatewayRegistrationState(jtv)
 			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20580,6 +21026,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayRegistrationStateReason(v **t
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20615,6 +21062,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayRouteTableAttachment(v **type
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		case "PeeringId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20623,6 +21071,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayRouteTableAttachment(v **type
 				}
 				sv.PeeringId = ptr.String(jtv)
 			}
+
 		case "TransitGatewayRouteTableArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20631,6 +21080,7 @@ func awsRestjson1_deserializeDocumentTransitGatewayRouteTableAttachment(v **type
 				}
 				sv.TransitGatewayRouteTableArn = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20666,6 +21116,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.Fields, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20674,6 +21125,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20682,6 +21134,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20721,6 +21174,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20729,6 +21183,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20798,10 +21253,12 @@ func awsRestjson1_deserializeDocumentVia(v **types.Via, value interface{}) error
 			if err := awsRestjson1_deserializeDocumentNetworkFunctionGroupList(&sv.NetworkFunctionGroups, value); err != nil {
 				return err
 			}
+
 		case "WithEdgeOverrides":
 			if err := awsRestjson1_deserializeDocumentWithEdgeOverridesList(&sv.WithEdgeOverrides, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20837,14 +21294,17 @@ func awsRestjson1_deserializeDocumentVpcAttachment(v **types.VpcAttachment, valu
 			if err := awsRestjson1_deserializeDocumentAttachment(&sv.Attachment, value); err != nil {
 				return err
 			}
+
 		case "Options":
 			if err := awsRestjson1_deserializeDocumentVpcOptions(&sv.Options, value); err != nil {
 				return err
 			}
+
 		case "SubnetArns":
 			if err := awsRestjson1_deserializeDocumentSubnetArnList(&sv.SubnetArns, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20884,6 +21344,7 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				}
 				sv.ApplianceModeSupport = jtv
 			}
+
 		case "Ipv6Support":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -20892,6 +21353,7 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 				}
 				sv.Ipv6Support = jtv
 			}
+
 		default:
 			_, _ = key, value
 
@@ -20927,6 +21389,7 @@ func awsRestjson1_deserializeDocumentWhenSentTo(v **types.WhenSentTo, value inte
 			if err := awsRestjson1_deserializeDocumentWhenSentToSegmentsList(&sv.WhenSentToSegmentsList, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 

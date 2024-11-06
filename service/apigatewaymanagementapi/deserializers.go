@@ -286,10 +286,12 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 				}
 				sv.ConnectedAt = ptr.Time(t)
 			}
+
 		case "identity":
 			if err := awsRestjson1_deserializeDocumentIdentity(&sv.Identity, value); err != nil {
 				return err
 			}
+
 		case "lastActiveAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -302,6 +304,7 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 				}
 				sv.LastActiveAt = ptr.Time(t)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -557,6 +560,7 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 				}
 				sv.SourceIp = ptr.String(jtv)
 			}
+
 		case "userAgent":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -565,6 +569,7 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 				}
 				sv.UserAgent = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -635,6 +640,7 @@ func awsRestjson1_deserializeDocumentPayloadTooLargeException(v **types.PayloadT
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

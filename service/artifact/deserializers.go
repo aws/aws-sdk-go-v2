@@ -190,6 +190,7 @@ func awsRestjson1_deserializeOpDocumentGetAccountSettingsOutput(v **GetAccountSe
 			if err := awsRestjson1_deserializeDocumentAccountSettings(&sv.AccountSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -363,6 +364,7 @@ func awsRestjson1_deserializeOpDocumentGetReportOutput(v **GetReportOutput, valu
 				}
 				sv.DocumentPresignedUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -529,6 +531,7 @@ func awsRestjson1_deserializeOpDocumentGetReportMetadataOutput(v **GetReportMeta
 			if err := awsRestjson1_deserializeDocumentReportDetail(&sv.ReportDetails, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -702,6 +705,7 @@ func awsRestjson1_deserializeOpDocumentGetTermForReportOutput(v **GetTermForRepo
 				}
 				sv.DocumentPresignedUrl = ptr.String(jtv)
 			}
+
 		case "termToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -710,6 +714,7 @@ func awsRestjson1_deserializeOpDocumentGetTermForReportOutput(v **GetTermForRepo
 				}
 				sv.TermToken = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -880,10 +885,12 @@ func awsRestjson1_deserializeOpDocumentListReportsOutput(v **ListReportsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "reports":
 			if err := awsRestjson1_deserializeDocumentReportsList(&sv.Reports, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1053,6 +1060,7 @@ func awsRestjson1_deserializeOpDocumentPutAccountSettingsOutput(v **PutAccountSe
 			if err := awsRestjson1_deserializeDocumentAccountSettings(&sv.AccountSettings, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1384,6 +1392,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1423,6 +1432,7 @@ func awsRestjson1_deserializeDocumentAccountSettings(v **types.AccountSettings, 
 				}
 				sv.NotificationSubscriptionStatus = types.NotificationSubscriptionStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1462,6 +1472,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1470,6 +1481,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1478,6 +1490,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1517,6 +1530,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1529,6 +1543,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1568,6 +1583,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.AcceptanceType = types.AcceptanceType(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1576,6 +1592,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "category":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1584,6 +1601,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Category = ptr.String(jtv)
 			}
+
 		case "companyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1592,6 +1610,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.CompanyName = ptr.String(jtv)
 			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1604,6 +1623,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.CreatedAt = ptr.Time(t)
 			}
+
 		case "deletedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1616,6 +1636,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.DeletedAt = ptr.Time(t)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1624,6 +1645,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1632,6 +1654,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "lastModifiedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1644,6 +1667,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.LastModifiedAt = ptr.Time(t)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1652,6 +1676,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "periodEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1664,6 +1689,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.PeriodEnd = ptr.Time(t)
 			}
+
 		case "periodStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1676,6 +1702,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.PeriodStart = ptr.Time(t)
 			}
+
 		case "productName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1684,6 +1711,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.ProductName = ptr.String(jtv)
 			}
+
 		case "sequenceNumber":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1696,6 +1724,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.SequenceNumber = ptr.Int64(i64)
 			}
+
 		case "series":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1704,6 +1733,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Series = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1712,6 +1742,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.State = types.PublishedState(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1720,6 +1751,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "termArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1728,6 +1760,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.TermArn = ptr.String(jtv)
 			}
+
 		case "uploadState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1736,6 +1769,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.UploadState = types.UploadState(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1748,6 +1782,7 @@ func awsRestjson1_deserializeDocumentReportDetail(v **types.ReportDetail, value 
 				}
 				sv.Version = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1821,6 +1856,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.AcceptanceType = types.AcceptanceType(jtv)
 			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1829,6 +1865,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Arn = ptr.String(jtv)
 			}
+
 		case "category":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1837,6 +1874,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Category = ptr.String(jtv)
 			}
+
 		case "companyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1845,6 +1883,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.CompanyName = ptr.String(jtv)
 			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1853,6 +1892,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Description = ptr.String(jtv)
 			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1861,6 +1901,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Id = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1869,6 +1910,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "periodEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1881,6 +1923,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.PeriodEnd = ptr.Time(t)
 			}
+
 		case "periodStart":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1893,6 +1936,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.PeriodStart = ptr.Time(t)
 			}
+
 		case "productName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1901,6 +1945,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.ProductName = ptr.String(jtv)
 			}
+
 		case "series":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1909,6 +1954,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Series = ptr.String(jtv)
 			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1917,6 +1963,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.State = types.PublishedState(jtv)
 			}
+
 		case "statusMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1925,6 +1972,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.StatusMessage = ptr.String(jtv)
 			}
+
 		case "uploadState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1933,6 +1981,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.UploadState = types.UploadState(jtv)
 			}
+
 		case "version":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -1945,6 +1994,7 @@ func awsRestjson1_deserializeDocumentReportSummary(v **types.ReportSummary, valu
 				}
 				sv.Version = ptr.Int64(i64)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1984,6 +2034,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1992,6 +2043,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2000,6 +2052,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2039,6 +2092,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2047,6 +2101,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2055,6 +2110,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceId = ptr.String(jtv)
 			}
+
 		case "resourceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2063,6 +2119,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ResourceType = ptr.String(jtv)
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2071,6 +2128,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2110,6 +2168,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "quotaCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2118,6 +2177,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.QuotaCode = ptr.String(jtv)
 			}
+
 		case "retryAfterSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2130,6 +2190,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
 			}
+
 		case "serviceCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2138,6 +2199,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 				}
 				sv.ServiceCode = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2173,6 +2235,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2181,6 +2244,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2189,6 +2253,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2228,6 +2293,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2236,6 +2302,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 

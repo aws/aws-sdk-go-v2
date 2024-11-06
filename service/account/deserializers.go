@@ -191,6 +191,7 @@ func awsRestjson1_deserializeOpDocumentAcceptPrimaryEmailUpdateOutput(v **Accept
 				}
 				sv.Status = types.PrimaryEmailUpdateStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -672,6 +673,7 @@ func awsRestjson1_deserializeOpDocumentGetAlternateContactOutput(v **GetAlternat
 			if err := awsRestjson1_deserializeDocumentAlternateContact(&sv.AlternateContact, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -835,6 +837,7 @@ func awsRestjson1_deserializeOpDocumentGetContactInformationOutput(v **GetContac
 			if err := awsRestjson1_deserializeDocumentContactInformation(&sv.ContactInformation, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1002,6 +1005,7 @@ func awsRestjson1_deserializeOpDocumentGetPrimaryEmailOutput(v **GetPrimaryEmail
 				}
 				sv.PrimaryEmail = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1166,6 +1170,7 @@ func awsRestjson1_deserializeOpDocumentGetRegionOptStatusOutput(v **GetRegionOpt
 				}
 				sv.RegionName = ptr.String(jtv)
 			}
+
 		case "RegionOptStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1174,6 +1179,7 @@ func awsRestjson1_deserializeOpDocumentGetRegionOptStatusOutput(v **GetRegionOpt
 				}
 				sv.RegionOptStatus = types.RegionOptStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1338,10 +1344,12 @@ func awsRestjson1_deserializeOpDocumentListRegionsOutput(v **ListRegionsOutput, 
 				}
 				sv.NextToken = ptr.String(jtv)
 			}
+
 		case "Regions":
 			if err := awsRestjson1_deserializeDocumentRegionOptList(&sv.Regions, value); err != nil {
 				return err
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1718,6 +1726,7 @@ func awsRestjson1_deserializeOpDocumentStartPrimaryEmailUpdateOutput(v **StartPr
 				}
 				sv.Status = types.PrimaryEmailUpdateStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -1973,6 +1982,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2012,6 +2022,7 @@ func awsRestjson1_deserializeDocumentAlternateContact(v **types.AlternateContact
 				}
 				sv.AlternateContactType = types.AlternateContactType(jtv)
 			}
+
 		case "EmailAddress":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2020,6 +2031,7 @@ func awsRestjson1_deserializeDocumentAlternateContact(v **types.AlternateContact
 				}
 				sv.EmailAddress = ptr.String(jtv)
 			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2028,6 +2040,7 @@ func awsRestjson1_deserializeDocumentAlternateContact(v **types.AlternateContact
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		case "PhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2036,6 +2049,7 @@ func awsRestjson1_deserializeDocumentAlternateContact(v **types.AlternateContact
 				}
 				sv.PhoneNumber = ptr.String(jtv)
 			}
+
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2044,6 +2058,7 @@ func awsRestjson1_deserializeDocumentAlternateContact(v **types.AlternateContact
 				}
 				sv.Title = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2083,6 +2098,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2122,6 +2138,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.AddressLine1 = ptr.String(jtv)
 			}
+
 		case "AddressLine2":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2130,6 +2147,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.AddressLine2 = ptr.String(jtv)
 			}
+
 		case "AddressLine3":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2138,6 +2156,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.AddressLine3 = ptr.String(jtv)
 			}
+
 		case "City":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2146,6 +2165,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.City = ptr.String(jtv)
 			}
+
 		case "CompanyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2154,6 +2174,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.CompanyName = ptr.String(jtv)
 			}
+
 		case "CountryCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2162,6 +2183,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.CountryCode = ptr.String(jtv)
 			}
+
 		case "DistrictOrCounty":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2170,6 +2192,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.DistrictOrCounty = ptr.String(jtv)
 			}
+
 		case "FullName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2178,6 +2201,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.FullName = ptr.String(jtv)
 			}
+
 		case "PhoneNumber":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2186,6 +2210,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.PhoneNumber = ptr.String(jtv)
 			}
+
 		case "PostalCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2194,6 +2219,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.PostalCode = ptr.String(jtv)
 			}
+
 		case "StateOrRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2202,6 +2228,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.StateOrRegion = ptr.String(jtv)
 			}
+
 		case "WebsiteUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2210,6 +2237,7 @@ func awsRestjson1_deserializeDocumentContactInformation(v **types.ContactInforma
 				}
 				sv.WebsiteUrl = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2249,6 +2277,7 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2288,6 +2317,7 @@ func awsRestjson1_deserializeDocumentRegion(v **types.Region, value interface{})
 				}
 				sv.RegionName = ptr.String(jtv)
 			}
+
 		case "RegionOptStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2296,6 +2326,7 @@ func awsRestjson1_deserializeDocumentRegion(v **types.Region, value interface{})
 				}
 				sv.RegionOptStatus = types.RegionOptStatus(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2369,6 +2400,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2408,6 +2440,7 @@ func awsRestjson1_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2443,6 +2476,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if err := awsRestjson1_deserializeDocumentValidationExceptionFieldList(&sv.FieldList, value); err != nil {
 				return err
 			}
+
 		case "message", "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2451,6 +2485,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2459,6 +2494,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 				}
 				sv.Reason = types.ValidationExceptionReason(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
@@ -2498,6 +2534,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Message = ptr.String(jtv)
 			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2506,6 +2543,7 @@ func awsRestjson1_deserializeDocumentValidationExceptionField(v **types.Validati
 				}
 				sv.Name = ptr.String(jtv)
 			}
+
 		default:
 			_, _ = key, value
 
