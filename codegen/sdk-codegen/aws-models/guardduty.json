@@ -130,7 +130,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -742,7 +742,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      archive.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      archive.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -1916,7 +1916,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detector ID associated with the GuardDuty account for which you want to create a filter.</p>",
+                        "smithy.api#documentation": "<p>The detector ID associated with the GuardDuty account for which you want to create a filter.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -2029,7 +2029,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create an IPSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create an IPSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -2233,7 +2233,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to associate member\n      accounts.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to associate member\n      accounts.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -2316,7 +2316,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the GuardDuty detector associated with the publishing destination.</p>",
+                        "smithy.api#documentation": "<p>The ID of the GuardDuty detector associated with the publishing destination.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -2423,7 +2423,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector for which you need to create sample findings.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector for which you need to create sample findings.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -2479,7 +2479,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create a\n      <code>ThreatIntelSet</code>.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account for which you want to create a\n      <code>ThreatIntelSet</code>.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3001,7 +3001,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that you want to delete.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that you want to delete.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3050,7 +3050,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the filter.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the filter.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3108,7 +3108,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the IPSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the IPSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3273,7 +3273,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account whose members you want to\n      delete.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account whose members you want to\n      delete.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3341,7 +3341,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the publishing destination to delete.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the publishing destination to delete.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3399,7 +3399,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the threatIntelSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the threatIntelSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3463,7 +3463,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that the request is associated with.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that the request is associated with.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3562,7 +3562,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detector ID of the delegated administrator for which you need to retrieve the information.</p>",
+                        "smithy.api#documentation": "<p>The detector ID of the delegated administrator for which you need to retrieve the information.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -3678,7 +3678,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the publishing destination to\n      retrieve.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the publishing destination to\n      retrieve.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -5610,7 +5610,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the GuardDuty detector.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -5683,7 +5683,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that you want to get.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that you want to get.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -5796,7 +5796,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with this filter.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with this filter.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -5903,7 +5903,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      retrieve.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      retrieve.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -5978,7 +5978,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector whose findings statistics you\n      want to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector whose findings statistics you\n      want to retrieve.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6082,7 +6082,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the IPSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the IPSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6343,7 +6343,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with this scan.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with this scan.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6410,7 +6410,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6475,7 +6475,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detector ID for the administrator account.</p>",
+                        "smithy.api#documentation": "<p>The detector ID for the administrator account.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6552,7 +6552,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account whose members you want to\n      retrieve.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account whose members you want to\n      retrieve.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6669,7 +6669,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty member account.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6740,7 +6740,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the threatIntelSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the threatIntelSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -6847,7 +6847,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose usage statistics you\n      want to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose usage statistics you\n      want to retrieve.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -8551,7 +8551,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account with which you want to invite members.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty account with which you want to invite members.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -9363,7 +9363,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector whose coverage details you want to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector whose coverage details you want to retrieve.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -9542,7 +9542,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the filter.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the filter.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -9630,7 +9630,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      list.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector that specifies the GuardDuty service whose findings you want to\n      list.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -9730,7 +9730,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with IPSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with IPSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -9961,7 +9961,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the member.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the member.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -10131,7 +10131,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detector ID for which you want to retrieve the publishing destination.</p>",
+                        "smithy.api#documentation": "<p>The detector ID for which you want to retrieve the publishing destination.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -10279,7 +10279,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the threatIntelSet.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that is associated with the threatIntelSet.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -12242,7 +12242,7 @@
                 "Tags": {
                     "target": "com.amazonaws.guardduty#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Instance tag key-value pairs associated with the database instance ID.</p>",
+                        "smithy.api#documentation": "<p>Information about the tag key-value pairs.</p>",
                         "smithy.api#jsonName": "tags"
                     }
                 }
@@ -12292,6 +12292,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the user and authentication details for a database instance\n      involved in the finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#RdsLimitlessDbDetails": {
+            "type": "structure",
+            "members": {
+                "DbShardGroupIdentifier": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name associated with the Limitless DB shard group.</p>",
+                        "smithy.api#jsonName": "dbShardGroupIdentifier"
+                    }
+                },
+                "DbShardGroupResourceId": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource identifier of the DB shard group within the Limitless Database.</p>",
+                        "smithy.api#jsonName": "dbShardGroupResourceId"
+                    }
+                },
+                "DbShardGroupArn": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the DB shard group.</p>",
+                        "smithy.api#jsonName": "dbShardGroupArn"
+                    }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database engine of the database instance involved in the finding.</p>",
+                        "smithy.api#jsonName": "engine"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the database engine.</p>",
+                        "smithy.api#jsonName": "engineVersion"
+                    }
+                },
+                "DbClusterIdentifier": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database cluster that is a part of the Limitless Database.</p>",
+                        "smithy.api#jsonName": "dbClusterIdentifier"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.guardduty#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the tag-key value pair.</p>",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the resource type <code>RDSLimitlessDB</code> that is involved in a GuardDuty\n    finding.</p>"
             }
         },
         "com.amazonaws.guardduty#RdsLoginAttemptAction": {
@@ -12478,6 +12535,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the database instance to which an anomalous login attempt was\n      made.</p>",
                         "smithy.api#jsonName": "rdsDbInstanceDetails"
+                    }
+                },
+                "RdsLimitlessDbDetails": {
+                    "target": "com.amazonaws.guardduty#RdsLimitlessDbDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the RDS Limitless database that was involved in a GuardDuty finding.</p>",
+                        "smithy.api#jsonName": "rdsLimitlessDbDetails"
                     }
                 },
                 "RdsDbUserDetails": {
@@ -12987,14 +13051,14 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that the request is associated with.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that the request is associated with.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#jsonName": "detectorId"
                     }
                 },
                 "AdminDetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique detector ID of the administrator account that the request is associated with.\n      If the account is an administrator, the <code>AdminDetectorId</code> will be the same as the one used for \n      <code>DetectorId</code>.</p>",
+                        "smithy.api#documentation": "<p>The unique detector ID of the administrator account that the request is associated with.\n      If the account is an administrator, the <code>AdminDetectorId</code> will be the same as the one used for \n      <code>DetectorId</code>.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#jsonName": "adminDetectorId"
                     }
                 },
@@ -13798,7 +13862,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty administrator account associated with the\n      member accounts to monitor.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector of the GuardDuty administrator account associated with the\n      member accounts to monitor.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -13866,7 +13930,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the GuardDuty administrator account that is\n      monitoring member accounts.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector associated with the GuardDuty administrator account that is\n      monitoring member accounts.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -13918,20 +13982,20 @@
                 "Key": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance tag key.</p>",
+                        "smithy.api#documentation": "<p>Describes the key associated with the tag.</p>",
                         "smithy.api#jsonName": "key"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance tag value.</p>",
+                        "smithy.api#documentation": "<p>Describes the value associated with the tag key.</p>",
                         "smithy.api#jsonName": "value"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a tag associated with the EC2 instance.</p>"
+                "smithy.api#documentation": "<p>Contains information about a tag key-value pair.</p>"
             }
         },
         "com.amazonaws.guardduty#TagKey": {
@@ -14364,7 +14428,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector associated with the findings to unarchive.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector associated with the findings to unarchive.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -14536,7 +14600,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector to update.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector to update.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -14616,7 +14680,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that specifies the GuardDuty service where you want to\n      update a filter.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that specifies the GuardDuty service where you want to\n      update a filter.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -14712,7 +14776,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector that is associated with the findings for which you want to update \n      the feedback.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector that is associated with the findings for which you want to update \n      the feedback.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -14786,7 +14850,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detectorID that specifies the GuardDuty service whose IPSet you want to update.</p>",
+                        "smithy.api#documentation": "<p>The detectorID that specifies the GuardDuty service whose IPSet you want to update.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -14934,7 +14998,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of the detector that specifies the GuardDuty service where you want to\n      update scan settings.</p>",
+                        "smithy.api#documentation": "<p>The unique ID of the detector that specifies the GuardDuty service where you want to\n      update scan settings.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -14997,7 +15061,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detector ID of the administrator account.</p>",
+                        "smithy.api#documentation": "<p>The detector ID of the administrator account.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -15082,7 +15146,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector that configures the delegated administrator.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector that configures the delegated administrator.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -15180,7 +15244,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the detector associated with the publishing destinations to update.</p>",
+                        "smithy.api#documentation": "<p>The ID of the detector associated with the publishing destinations to update.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}
@@ -15260,7 +15324,7 @@
                 "DetectorId": {
                     "target": "com.amazonaws.guardduty#DetectorId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to\n      update.</p>",
+                        "smithy.api#documentation": "<p>The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to\n      update.</p>\n         <p>To find the <code>detectorId</code> in the current Region, see the\nSettings page in the GuardDuty console, or run the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html\">ListDetectors</a> API.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#jsonName": "detectorId",
                         "smithy.api#required": {}

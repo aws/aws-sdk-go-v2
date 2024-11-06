@@ -180,7 +180,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a rating or review for a library item with the user submitting \n      the request. This increments the rating count for the specified library item.</p>",
+                "smithy.api#documentation": "<p>Associates a rating or review for a library item with the user submitting\n      the request. This increments the rating count for the specified library item.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Increase the rating counter by 1 for the related app for this user",
@@ -362,6 +362,287 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qapps#AttributeFilter"
+            }
+        },
+        "com.amazonaws.qapps#BatchCreateCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#BatchCreateCategoryInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates Categories for the Amazon Q Business application environment instance. Web experience users use Categories to tag and filter library items. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html\">Custom labels for Amazon Q Apps</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Creates the categories for the library",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "categories": [
+                                {
+                                    "id": "549abfe0-f5c4-45a2-bb9b-c05987a49c6d",
+                                    "title": "HR"
+                                },
+                                {
+                                    "id": "18cbebaa-196a-4aa5-a840-88d548e07f8f",
+                                    "title": "Marketing"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/catalog.createCategories"
+                }
+            }
+        },
+        "com.amazonaws.qapps#BatchCreateCategoryInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "categories": {
+                    "target": "com.amazonaws.qapps#BatchCreateCategoryInputCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of category objects to be created</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#BatchCreateCategoryInputCategory": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier to be associated with a category. If you don't include a value, the category is automatically assigned a unique identifier.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the category.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "color": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color to be associated with a category. The color must be a hexadecimal value of either 3 or 6 digits.</p>",
+                        "smithy.api#length": {
+                            "min": 4,
+                            "max": 7
+                        },
+                        "smithy.api#pattern": "^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The category object to be created.</p>"
+            }
+        },
+        "com.amazonaws.qapps#BatchCreateCategoryInputCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#BatchCreateCategoryInputCategory"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.qapps#BatchDeleteCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#BatchDeleteCategoryInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes Categories for the Amazon Q Business application environment instance. Web experience users use Categories to tag and filter library items. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html\">Custom labels for Amazon Q Apps</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Deletes the categories in the library",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "categories": [
+                                "9c871ed4-1c41-4065-aefe-321cd4b61cf8"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/catalog.deleteCategories"
+                }
+            }
+        },
+        "com.amazonaws.qapps#BatchDeleteCategoryInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "categories": {
+                    "target": "com.amazonaws.qapps#DeleteCategoryInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of IDs of the categories to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#BatchUpdateCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#BatchUpdateCategoryInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates Categories for the Amazon Q Business application environment instance. Web experience users use Categories to tag and filter library items. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html\">Custom labels for Amazon Q Apps</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Updates the categories in the library",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f",
+                            "categories": [
+                                {
+                                    "id": "549abfe0-f5c4-45a2-bb9b-c05987a49c6d",
+                                    "title": "HR Management"
+                                },
+                                {
+                                    "id": "18cbebaa-196a-4aa5-a840-88d548e07f8f",
+                                    "title": "Sales"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/catalog.updateCategories"
+                }
+            }
+        },
+        "com.amazonaws.qapps#BatchUpdateCategoryInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "categories": {
+                    "target": "com.amazonaws.qapps#CategoryListInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of categories to be updated with their new values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.qapps#Card": {
@@ -563,6 +844,17 @@
                 }
             }
         },
+        "com.amazonaws.qapps#CategoriesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#Category"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.qapps#Category": {
             "type": "structure",
             "members": {
@@ -578,6 +870,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The title or name of the category.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "color": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color of the category</p>"
+                    }
+                },
+                "appCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of published Amazon Q Apps associated with a category</p>"
                     }
                 }
             },
@@ -596,6 +900,44 @@
                 }
             }
         },
+        "com.amazonaws.qapps#CategoryInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.qapps#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the category.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the category.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 30
+                        },
+                        "smithy.api#pattern": "^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "color": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color of the category, represented as a hexadecimal value of either 3 or 6 digits.</p>",
+                        "smithy.api#length": {
+                            "min": 4,
+                            "max": 7
+                        },
+                        "smithy.api#pattern": "^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A label that web experience users associate with a library item. Web experience users use Categories to tag and filter library items.</p>"
+            }
+        },
         "com.amazonaws.qapps#CategoryList": {
             "type": "list",
             "member": {
@@ -604,6 +946,17 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 3
+                }
+            }
+        },
+        "com.amazonaws.qapps#CategoryListInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#CategoryInput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
                 }
             }
         },
@@ -632,7 +985,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation could not be completed due to a \n      conflict with the current state of the resource.</p>",
+                "smithy.api#documentation": "<p>The requested operation could not be completed due to a\n      conflict with the current state of the resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -662,7 +1015,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation could not be completed because \n      the content exceeds the maximum allowed size.</p>",
+                "smithy.api#documentation": "<p>The requested operation could not be completed because\n      the content exceeds the maximum allowed size.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 413
             }
@@ -724,7 +1077,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new library item for an Amazon Q App, allowing it to be discovered and \n      used by other allowed users. </p>",
+                "smithy.api#documentation": "<p>Creates a new library item for an Amazon Q App, allowing it to be discovered and\n      used by other allowed users. </p>",
                 "smithy.api#examples": [
                     {
                         "title": "Create a Library Item",
@@ -1077,6 +1430,17 @@
                 }
             }
         },
+        "com.amazonaws.qapps#DeleteCategoryInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qapps#UUID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.qapps#DeleteLibraryItem": {
             "type": "operation",
             "input": {
@@ -1109,7 +1473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a library item for an Amazon Q App, removing it from the library \n      so it can no longer be discovered or used by other users.</p>",
+                "smithy.api#documentation": "<p>Deletes a library item for an Amazon Q App, removing it from the library\n      so it can no longer be discovered or used by other users.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Delete a library item",
@@ -1594,7 +1958,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a file upload card. It can optionally \n      receive a <code>filename</code> and <code>fileId</code> to set a \n      default file.  If not received, the user must provide the file \n      when the Q App runs.</p>"
+                "smithy.api#documentation": "<p>Represents a file upload card. It can optionally\n      receive a <code>filename</code> and <code>fileId</code> to set a\n      default file.  If not received, the user must provide the file\n      when the Q App runs.</p>"
             }
         },
         "com.amazonaws.qapps#Filename": {
@@ -1634,7 +1998,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves details about a library item for an Amazon Q App, including its metadata, \n      categories, ratings, and usage statistics.</p>",
+                "smithy.api#documentation": "<p>Retrieves details about a library item for an Amazon Q App, including its metadata,\n      categories, ratings, and usage statistics.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Retrieve a library item",
@@ -2053,11 +2417,11 @@
                             "cardStatus": {
                                 "6fb5b404-3b7b-48a4-8a8b-56406922a606": {
                                     "currentState": "COMPLETED",
-                                    "currentValue": "What is the circumference of Earth?"
+                                    "currentValue": ""
                                 },
                                 "1e6caeac-b481-45ff-a082-8b9a4a0b72e8": {
                                     "currentState": "COMPLETED",
-                                    "currentValue": "Earth's circumference is 24,901 miles"
+                                    "currentValue": "Based on the responses, the most popular color is red, with 1 vote from the user \"user1\"."
                                 }
                             }
                         }
@@ -2165,7 +2529,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads a file that can then be used either as a default in a \n      <code>FileUploadCard</code> from Q App definition or as a file that \n      is used inside a single Q App run. The purpose of the document is \n      determined by a scope parameter that indicates whether it is at the \n      app definition level or at the app session level.</p>",
+                "smithy.api#documentation": "<p>Uploads a file that can then be used either as a default in a\n      <code>FileUploadCard</code> from Q App definition or as a file that\n      is used inside a single Q App run. The purpose of the document is\n      determined by a scope parameter that indicates whether it is at the\n      app definition level or at the app session level.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "Upload a file to a specific session",
@@ -2406,7 +2770,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A library item is a snapshot of an Amazon Q App \n      that can be published so the users in their Amazon Q Apps library \n      can discover it, clone it, and run it.</p>"
+                "smithy.api#documentation": "<p>A library item is a snapshot of an Amazon Q App\n      that can be published so the users in their Amazon Q Apps library\n      can discover it, clone it, and run it.</p>"
             }
         },
         "com.amazonaws.qapps#LibraryItemStatus": {
@@ -2424,6 +2788,97 @@
                         "smithy.api#enumValue": "DISABLED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.qapps#ListCategories": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qapps#ListCategoriesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.qapps#ListCategoriesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qapps#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#UnauthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the categories of a Amazon Q Business application environment instance. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/qapps-custom-labels.html\">Custom labels for Amazon Q Apps</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List categories available for the library items in this instance",
+                        "input": {
+                            "instanceId": "0b95c9c4-89cc-4aa8-9aae-aa91cbec699f"
+                        },
+                        "output": {
+                            "categories": [
+                                {
+                                    "id": "549abfe0-f5c4-45a2-bb9b-c05987a49c6d",
+                                    "title": "HR",
+                                    "color": "#FF6600",
+                                    "appCount": 10
+                                },
+                                {
+                                    "id": "18cbebaa-196a-4aa5-a840-88d548e07f8f",
+                                    "title": "Marketing",
+                                    "color": "#FFFF00",
+                                    "appCount": 11
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/catalog.listCategories"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.qapps#ListCategoriesInput": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.qapps#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Q Business application environment instance.</p>",
+                        "smithy.api#httpHeader": "instance-id",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qapps#ListCategoriesOutput": {
+            "type": "structure",
+            "members": {
+                "categories": {
+                    "target": "com.amazonaws.qapps#CategoriesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The categories of a Amazon Q Business application environment instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.qapps#ListLibraryItems": {
@@ -2630,7 +3085,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Q Apps owned by or associated with the user either because \n      they created it or because they used it from the library in the past. The user \n      identity is extracted from the credentials used to invoke this operation..</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Q Apps owned by or associated with the user either because\n      they created it or because they used it from the library in the past. The user\n      identity is extracted from the credentials used to invoke this operation..</p>",
                 "smithy.api#examples": [
                     {
                         "title": "List at most 3 Amazon Q Apps in an Q Business application",
@@ -2968,7 +3423,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The definition of an Amazon Q App generated based on input such as a conversation \n      or problem statement.</p>"
+                "smithy.api#documentation": "<p>The definition of an Amazon Q App generated based on input such as a conversation\n      or problem statement.</p>"
             }
         },
         "com.amazonaws.qapps#PredictQApp": {
@@ -2997,7 +3452,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates an Amazon Q App definition based on either a conversation or \n      a problem statement provided as input.The resulting app definition\n      can be used to call <code>CreateQApp</code>. This API doesn't create \n      Amazon Q Apps directly.</p>",
+                "smithy.api#documentation": "<p>Generates an Amazon Q App definition based on either a conversation or\n      a problem statement provided as input.The resulting app definition\n      can be used to call <code>CreateQApp</code>. This API doesn't create\n      Amazon Q Apps directly.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps.predictQApp"
@@ -3097,6 +3552,15 @@
                     "target": "com.amazonaws.qapps#AssociateQAppWithUser"
                 },
                 {
+                    "target": "com.amazonaws.qapps#BatchCreateCategory"
+                },
+                {
+                    "target": "com.amazonaws.qapps#BatchDeleteCategory"
+                },
+                {
+                    "target": "com.amazonaws.qapps#BatchUpdateCategory"
+                },
+                {
                     "target": "com.amazonaws.qapps#CreateLibraryItem"
                 },
                 {
@@ -3125,6 +3589,9 @@
                 },
                 {
                     "target": "com.amazonaws.qapps#ImportDocument"
+                },
+                {
+                    "target": "com.amazonaws.qapps#ListCategories"
                 },
                 {
                     "target": "com.amazonaws.qapps#ListLibraryItems"
@@ -3173,7 +3640,7 @@
                     "name": "qapps"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Q Apps feature capability within Amazon Q Business allows web experience \n      users to create lightweight, purpose-built AI apps to fulfill specific tasks from \n      within their web experience. For example, users can create a Q App that exclusively \n      generates marketing-related content to improve your marketing team's productivity or a \n      Q App for writing customer emails and creating promotional content using a certain \n      style of voice, tone, and branding. For more information on the capabilities, see \n      <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html#q-apps-actions\">Amazon Q Apps capabilities</a> in the <i>Amazon Q Business User Guide</i>. \n      </p>\n         <p>For an overview of the Amazon Q App APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_Operations_QApps.html\">Overview of \n      Amazon Q Apps API operations</a>.</p>\n         <p>For information about the IAM access control permissions you need to\n      use the Amazon Q Apps API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html\">\n        IAM role for the Amazon Q Business web experience including Amazon Q Apps</a> in the\n      <i>Amazon Q Business User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The Amazon Q Apps feature capability within Amazon Q Business allows web experience\n      users to create lightweight, purpose-built AI apps to fulfill specific tasks from\n      within their web experience. For example, users can create a Q App that exclusively\n      generates marketing-related content to improve your marketing team's productivity or a\n      Q App for writing customer emails and creating promotional content using a certain\n      style of voice, tone, and branding. For more information on the capabilities, see\n      <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html#q-apps-actions\">Amazon Q Apps capabilities</a> in the <i>Amazon Q Business User Guide</i>.\n      </p>\n         <p>For an overview of the Amazon Q App APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/api-reference/API_Operations_QApps.html\">Overview of\n      Amazon Q Apps API operations</a>.</p>\n         <p>For information about the IAM access control permissions you need to\n      use the Amazon Q Apps API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/deploy-experience-iam-role.html\">\n        IAM role for the Amazon Q Business web experience including Amazon Q Apps</a> in the\n      <i>Amazon Q Business User Guide</i>.</p>",
                 "smithy.api#title": "QApps",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4001,7 +4468,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A card in a Amazon Q App that generates a response \n      based on the Amazon Q Business service.</p>"
+                "smithy.api#documentation": "<p>A card in a Amazon Q App that generates a response\n      based on the Amazon Q Business service.</p>"
             }
         },
         "com.amazonaws.qapps#QQueryCardInput": {
@@ -4140,7 +4607,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation could not be completed because \n      it would exceed the service's quota or limit.</p>",
+                "smithy.api#documentation": "<p>The requested operation could not be completed because\n      it would exceed the service's quota or limit.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -4177,7 +4644,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new session for an Amazon Q App, allowing inputs to be provided \n      and the app to be run.</p>\n         <note>\n            <p>Each Q App session will be condensed into a single conversation \n      in the web experience.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Starts a new session for an Amazon Q App, allowing inputs to be provided\n      and the app to be run.</p>\n         <note>\n            <p>Each Q App session will be condensed into a single conversation\n      in the web experience.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "Start a session for an Amazon Q App using version 1, passing in initial values for one card",
@@ -4300,7 +4767,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an active session for an Amazon Q App.This deletes all data \n      related to the session and makes it invalid for future uses. The \n      results of the session will be persisted as part of the conversation.</p>",
+                "smithy.api#documentation": "<p>Stops an active session for an Amazon Q App.This deletes all data\n      related to the session and makes it invalid for future uses. The\n      results of the session will be persisted as part of the conversation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/runtime.deleteMiniAppRun"
@@ -4582,7 +5049,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The requested operation could not be completed because too many \n      requests were sent at once. Wait a bit and try again later.</p>",
+                "smithy.api#documentation": "<p>The requested operation could not be completed because too many\n      requests were sent at once. Wait a bit and try again later.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
@@ -4605,7 +5072,7 @@
         "com.amazonaws.qapps#UUID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[\\da-f]{8}-[\\da-f]{4}-4[\\da-f]{3}-[89ABab][\\da-f]{3}-[\\da-f]{12}$"
+                "smithy.api#pattern": "^[\\da-f]{8}-[\\da-f]{4}-[45][\\da-f]{3}-[89ABab][\\da-f]{3}-[\\da-f]{12}$"
             }
         },
         "com.amazonaws.qapps#UnauthorizedException": {
@@ -5244,7 +5711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the session for a given Q App <code>sessionId</code>. This is only \n      valid when at least one card of the session is in the <code>WAITING</code> state. \n      Data for each <code>WAITING</code> card can be provided as input. If inputs \n      are not provided, the call will be accepted but session will not move forward. \n      Inputs for cards that are not in the <code>WAITING</code> status will be ignored.</p>",
+                "smithy.api#documentation": "<p>Updates the session for a given Q App <code>sessionId</code>. This is only\n      valid when at least one card of the session is in the <code>WAITING</code> state.\n      Data for each <code>WAITING</code> card can be provided as input. If inputs\n      are not provided, the call will be accepted but session will not move forward.\n      Inputs for cards that are not in the <code>WAITING</code> status will be ignored.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/runtime.updateQAppSession"

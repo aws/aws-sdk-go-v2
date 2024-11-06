@@ -64,6 +64,9 @@
                     "target": "com.amazonaws.lakeformation#CreateLFTag"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#CreateLFTagExpression"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#DeleteDataCellsFilter"
                 },
                 {
@@ -74,6 +77,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DeleteLFTag"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#DeleteLFTagExpression"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#DeleteObjectsOnCancel"
@@ -109,6 +115,9 @@
                     "target": "com.amazonaws.lakeformation#GetLFTag"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#GetLFTagExpression"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#GetQueryState"
                 },
                 {
@@ -140,6 +149,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListLakeFormationOptIns"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ListLFTagExpressions"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#ListLFTags"
@@ -188,6 +200,9 @@
                 },
                 {
                     "target": "com.amazonaws.lakeformation#UpdateLFTag"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#UpdateLFTagExpression"
                 },
                 {
                     "target": "com.amazonaws.lakeformation#UpdateResource"
@@ -2085,6 +2100,84 @@
                 }
             }
         },
+        "com.amazonaws.lakeformation#CreateLFTagExpression": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#CreateLFTagExpressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#CreateLFTagExpressionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new LF-Tag expression with the provided name, description, catalog ID, and\n      expression body. This call fails if a LF-Tag expression with the same name already exists in\n      the caller’s account or if the underlying LF-Tags don't exist. To call this API operation,\n      caller needs the following Lake Formation permissions:</p>\n         <p>\n            <code>CREATE_LF_TAG_EXPRESSION</code> on the root catalog resource.</p>\n         <p>\n            <code>GRANT_WITH_LF_TAG_EXPRESSION</code> on all underlying LF-Tag key:value pairs\n      included in the expression. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateLFTagExpression",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#CreateLFTagExpressionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lakeformation#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description with information about the LF-Tag expression.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.lakeformation#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of LF-Tag conditions (key-value pairs).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#CreateLFTagExpressionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#CreateLFTagRequest": {
             "type": "structure",
             "members": {
@@ -2459,6 +2552,12 @@
                     "traits": {
                         "smithy.api#enumValue": "LF_TAG_POLICY_TABLE"
                     }
+                },
+                "LF_NAMED_TAG_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LF_NAMED_TAG_EXPRESSION"
+                    }
                 }
             }
         },
@@ -2689,6 +2788,68 @@
                     "uri": "/DeleteLFTag",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteLFTagExpression": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#DeleteLFTagExpressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#DeleteLFTagExpressionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the LF-Tag expression. The caller must be a data lake admin or have <code>DROP</code> permissions on the LF-Tag expression.\n      Deleting a LF-Tag expression will also delete all <code>LFTagPolicy</code> permissions referencing the LF-Tag expression.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteLFTagExpression",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteLFTagExpressionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the LF-Tag expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID in which the LF-Tag expression is saved. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#DeleteLFTagExpressionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lakeformation#DeleteLFTagRequest": {
@@ -3824,6 +3985,93 @@
                 }
             }
         },
+        "com.amazonaws.lakeformation#GetLFTagExpression": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetLFTagExpressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetLFTagExpressionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details about the LF-Tag expression. The caller must be a data lake admin or must have <code>DESCRIBE</code> permission on the LF-Tag expression resource.\n     </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetLFTagExpression",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetLFTagExpressionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the LF-Tag expression</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#GetLFTagExpressionResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the LF-Tag expression. </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lakeformation#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description with information about the LF-Tag expression.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID in which the LF-Tag expression is saved.</p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.lakeformation#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the LF-Tag expression. It is composed of one or more LF-Tag key-value pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#GetLFTagRequest": {
             "type": "structure",
             "members": {
@@ -4395,7 +4643,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows a caller in a secure environment to assume a role with permission to access Amazon S3. In order to vend such credentials, Lake Formation assumes the role associated with a registered location, for example an Amazon S3 bucket, with a scope down policy which restricts the access to a single prefix.</p>",
+                "smithy.api#documentation": "<p>Allows a caller in a secure environment to assume a role with permission to access Amazon S3. In order to vend such credentials, Lake Formation assumes the role associated with a registered location, for example an Amazon S3 bucket, with a scope down policy which restricts the access to a single prefix.</p>\n         <p>To call this API, the role that the service assumes must have <code>lakeformation:GetDataAccess</code> permission on the resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetTemporaryGlueTableCredentials",
@@ -4920,6 +5168,65 @@
                 "target": "com.amazonaws.lakeformation#LFTagError"
             }
         },
+        "com.amazonaws.lakeformation#LFTagExpression": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for saved the LF-Tag expression.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lakeformation#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information about the LF-Tag expression.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. </p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.lakeformation#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A logical expression composed of one or more LF-Tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure consists LF-Tag expression name and catalog ID.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#LFTagExpressionResource": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the LF-Tag expression to grant permissions on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing a LF-Tag expression (keys and values).</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#LFTagExpressionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lakeformation#LFTagExpression"
+            }
+        },
         "com.amazonaws.lakeformation#LFTagKey": {
             "type": "string",
             "traits": {
@@ -5005,13 +5312,20 @@
                 "Expression": {
                     "target": "com.amazonaws.lakeformation#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of LF-tag conditions that apply to the resource's LF-tag policy.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>A list of LF-tag conditions or a saved expression that apply to the resource's LF-tag policy.</p>"
+                    }
+                },
+                "ExpressionName": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, permissions are granted to the Data Catalog resources whose assigned LF-Tags\n      match the expression body of the saved expression under the provided\n        <code>ExpressionName</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure containing a list of LF-tag conditions that apply to a resource's LF-tag policy.</p>"
+                "smithy.api#documentation": "<p>A structure containing a list of LF-tag conditions or saved LF-Tag expressions that apply to a resource's LF-tag policy.</p>"
             }
         },
         "com.amazonaws.lakeformation#LFTagValue": {
@@ -5147,6 +5461,92 @@
                     "target": "com.amazonaws.lakeformation#Token",
                     "traits": {
                         "smithy.api#documentation": "<p>A continuation token, if not all requested data cell filters have been returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListLFTagExpressions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#ListLFTagExpressionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#ListLFTagExpressionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the LF-Tag expressions in caller’s account filtered based on caller's permissions. Data Lake and read only admins implicitly can see all tag expressions in their account, else caller needs DESCRIBE permissions on tag expression.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLFTagExpressions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "LFTagExpressions",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#ListLFTagExpressionsRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lakeformation#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#ListLFTagExpressionsResponse": {
+            "type": "structure",
+            "members": {
+                "LFTagExpressions": {
+                    "target": "com.amazonaws.lakeformation#LFTagExpressionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Logical expressions composed of one more LF-Tag key-value pairs.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lakeformation#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
                     }
                 }
             },
@@ -5959,6 +6359,12 @@
                     "traits": {
                         "smithy.api#enumValue": "GRANT_WITH_LF_TAG_EXPRESSION"
                     }
+                },
+                "CREATE_LF_TAG_EXPRESSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_LF_TAG_EXPRESSION"
+                    }
                 }
             }
         },
@@ -6373,7 +6779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers the resource as managed by the Data Catalog.</p>\n         <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>\n         <p>The following request registers a new location and gives Lake Formation permission to use the service-linked role to access that location.</p>\n         <p>\n            <code>ResourceArn = arn:aws:s3:::my-bucket\nUseServiceLinkedRole = true</code>\n         </p>\n         <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p>\n         <p>\n            <code>arn:aws:iam::12345:role/my-data-access-role</code>\n         </p>",
+                "smithy.api#documentation": "<p>Registers the resource as managed by the Data Catalog.</p>\n         <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>\n         <p>The following request registers a new location and gives Lake Formation permission to use the service-linked role to access that location.</p>\n         <p>\n            <code>ResourceArn = arn:aws:s3:::my-bucket/\nUseServiceLinkedRole = true</code>\n         </p>\n         <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p>\n         <p>\n            <code>arn:aws:iam::12345:role/my-data-access-role</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/RegisterResource",
@@ -6557,7 +6963,13 @@
                 "LFTagPolicy": {
                     "target": "com.amazonaws.lakeformation#LFTagPolicyResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of LF-tag conditions that define a resource's LF-tag policy.</p>"
+                        "smithy.api#documentation": "<p>A list of LF-tag conditions or saved LF-Tag expressions that define a resource's LF-tag policy.</p>"
+                    }
+                },
+                "LFTagExpression": {
+                    "target": "com.amazonaws.lakeformation#LFTagExpressionResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>LF-Tag expression resource. A logical expression composed of one or more LF-Tag key:value pairs.</p>"
                     }
                 }
             },
@@ -7765,6 +8177,84 @@
                 }
             }
         },
+        "com.amazonaws.lakeformation#UpdateLFTagExpression": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#UpdateLFTagExpressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#UpdateLFTagExpressionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the name of the LF-Tag expression to the new description and expression body provided.\n      Updating a LF-Tag expression immediately changes the permission boundaries of all existing <code>LFTagPolicy</code> permission grants that reference the given LF-Tag expression.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateLFTagExpression",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateLFTagExpressionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.lakeformation#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the LF-Tag expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.lakeformation#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description with information about the saved LF-Tag expression.</p>"
+                    }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.lakeformation#CatalogIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. </p>"
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.lakeformation#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LF-Tag expression body composed of one more LF-Tag key-value pairs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#UpdateLFTagExpressionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lakeformation#UpdateLFTagRequest": {
             "type": "structure",
             "members": {
@@ -8104,7 +8594,7 @@
                 "StorageOptimizerConfig": {
                     "target": "com.amazonaws.lakeformation#StorageOptimizerConfigMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the table for which to enable the storage optimizer.</p>",
+                        "smithy.api#documentation": "<p>Name of the configuration for the storage optimizer.</p>",
                         "smithy.api#required": {}
                     }
                 }

@@ -6669,7 +6669,7 @@
                 "VpcConfiguration": {
                     "target": "com.amazonaws.s3control#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The virtual private cloud (VPC) configuration for this access point, if one exists.</p>\n         <note>\n            <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other\n               Amazon Web Servicesservices.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The virtual private cloud (VPC) configuration for this access point, if one exists.</p>\n         <note>\n            <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other\n               Amazon Web Services services.</p>\n         </note>"
                     }
                 },
                 "Bucket": {
@@ -10888,7 +10888,7 @@
                 "VpcConfiguration": {
                     "target": "com.amazonaws.s3control#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the virtual private cloud (VPC) configuration for the specified access point.</p>\n         <note>\n            <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other\n               Amazon Web Servicesservices.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Contains the virtual private cloud (VPC) configuration for the specified access point.</p>\n         <note>\n            <p>This element is empty if this access point is an Amazon S3 on Outposts access point that is used by other\n               Amazon Web Services services.</p>\n         </note>"
                     }
                 },
                 "PublicAccessBlockConfiguration": {
@@ -14436,12 +14436,14 @@
                     "target": "com.amazonaws.s3control#StorageLensConfigurationList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of S3 Storage Lens configurations.</p>",
-                        "smithy.api#xmlFlattened": {}
+                        "smithy.api#xmlFlattened": {},
+                        "smithy.api#xmlName": "StorageLensConfiguration"
                     }
                 }
             },
             "traits": {
-                "smithy.api#output": {}
+                "smithy.api#output": {},
+                "smithy.api#xmlName": "ListStorageLensConfigurationResult"
             }
         },
         "com.amazonaws.s3control#ListStorageLensGroupEntry": {
@@ -14542,7 +14544,8 @@
                     "target": "com.amazonaws.s3control#StorageLensGroupList",
                     "traits": {
                         "smithy.api#documentation": "<p>\nThe list of Storage Lens groups that exist in the specified home Region.\n</p>",
-                        "smithy.api#xmlFlattened": {}
+                        "smithy.api#xmlFlattened": {},
+                        "smithy.api#xmlName": "StorageLensGroup"
                     }
                 }
             },
@@ -15732,7 +15735,7 @@
                     "target": "com.amazonaws.s3control#Setting",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this\n         account. Setting this element to <code>TRUE</code> restricts access to buckets with public\n         policies to only Amazon Web Servicesservice principals and authorized users within this\n         account.</p>\n         <p>Enabling this setting doesn't affect previously stored bucket policies, except that\n         public and cross-account access within any public bucket policy, including non-public\n         delegation to specific accounts, is blocked.</p>\n         <p>This property is not supported for Amazon S3 on Outposts.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this\n         account. Setting this element to <code>TRUE</code> restricts access to buckets with public\n         policies to only Amazon Web Services service principals and authorized users within this\n         account.</p>\n         <p>Enabling this setting doesn't affect previously stored bucket policies, except that\n         public and cross-account access within any public bucket policy, including non-public\n         delegation to specific accounts, is blocked.</p>\n         <p>This property is not supported for Amazon S3 on Outposts.</p>",
                         "smithy.api#xmlName": "RestrictPublicBuckets"
                     }
                 }
